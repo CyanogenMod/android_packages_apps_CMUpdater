@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="cmupdater.ui" android:versionName="1.0" android:versionCode="1">
+	
+	<uses-sdk minSdkVersion="2" />
+	
+	<application android:label="@string/app_name" android:icon="@drawable/icon">
+	 	<meta-data android:name="org.openintents.metadata.COMMENTS"
+                       android:value="@string/about_comments" />
+        <meta-data android:name="org.openintents.metadata.COPYRIGHT"
+                       android:value="@string/about_copyright" />
+        <meta-data android:name="org.openintents.metadata.AUTHORS"
+                       android:resource="@array/about_authors" />
+        <meta-data android:name="org.openintents.metadata.DOCUMENTERS"
+                       android:resource="@array/about_documenters" />
+        <meta-data android:name="org.openintents.metadata.TRANSLATORS"
+                       android:resource="@array/about_translators" />
+        <meta-data android:name="org.openintents.metadata.ARTISTS"
+                       android:resource="@array/about_artists" />
+        <meta-data android:name="org.openintents.metadata.WEBSITE_LABEL"
+                       android:value="@string/about_website_label" />
+        <meta-data android:name="org.openintents.metadata.WEBSITE_URL"
+                       android:value="@string/about_website_url" />
+        <meta-data android:name="org.openintents.metadata.LICENSE"
+                       android:resource="@raw/license_short" />
+        <meta-data android:name="org.openintents.metadata.EMAIL"
+                       android:value="@string/about_email" />
+	
+		<activity android:name=".UpdateProcessInfo" android:launchMode="singleTask">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.settings.SYSTEM_UPDATE_SETTINGS" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		
+		<activity android:name=".ConfigActivity" />
+		<activity android:name=".ApplyUploadActivity" />
+		<receiver android:name="cmupdater.utils.StartupReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED"></action>
+				<category android:name="android.intent.category.HOME"></category>
+			</intent-filter>
+		</receiver>
+		
+		<service android:name="cmupdater.service.UpdateCheckerService"></service>
+		<service android:name="cmupdater.service.UpdateDownloaderService"></service>
+	</application>
+	
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> 
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+</manifest> 
