@@ -45,9 +45,9 @@
     <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
     <string name="apply_trying_to_get_root_access">Trying to get root access to reboot in recovery mode</string>
     
-    <string name="available_updates_text">Please select the update to Download:</string>
+    <string name="available_updates_text">Please select the ROM to download:</string>
     <string name="choose_available_update_text">Download</string>
-    <string name="no_updates_found_instructions">No updates found.\nPress \'Check now\' to manually check for new updates</string>
+    <string name="no_updates_found_instructions">No ROMs found.\nPress \'Check now\' to manually check for new updates</string>
     <string name="downloaded_update_found_text">An update.zip file has been found. Would you like to verify and apply it?</string>
     <string name="checking_for_updates">Checking for updates</string>
     <string name="downloading_update">Downloading update</string>
@@ -57,11 +57,9 @@
     <string name="current_version_text">Running Version: {0}</string>
     
     <string name="apply_update_dialog_title">Confirmation</string>
-    <string name="apply_update_dialog_text">You are about to upgrade to {0}.
-\nIf you press update, the phone will restart itself in recovery mode to apply the update.
-\nIt's recomended to perform a full system backup using nandroid before applying this update.</string>
+    <string name="apply_update_dialog_text">You are about to upgrade to {0}.\nIf you press update, the phone will restart itself in recovery mode to apply the update.</string>
 	<string name="apply_update_dialog_update_button">Update</string>
-	<string name="apply_update_dialog_backup_and_update_button">Backup &amp; Update</string>
+	<string name="apply_update_dialog_backup_and_update_button">Backup &amp; Apply</string>
 	<string name="apply_update_dialog_cancel_button">Cancel</string>
 	
 	<string name="no_updates_no_mod_text">Your system is running an unsupported OS mod (Version {0}).</string>
@@ -79,9 +77,9 @@
     <string name="verify_and_apply_dialog_message">Verifying update.zip MD5 sum</string>
     
     <!-- .service.* Strings -->
-    <string name="no_updates_found">No CM OS updates found</string>
+    <string name="no_updates_found">No CM updates found</string>
     <string name="not_new_updates_found_ticker">New CM updates found!</string>
-    <string name="not_new_updates_found_title">New CM OS updates found</string>
+    <string name="not_new_updates_found_title">New CM updates found</string>
     <string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} found</string>
     <string name="exception_while_updating">An error occurred while trying to contact CM Update Server</string>
     <string name="exception_while_downloading">An error occurred while trying to download a CM Update</string>
