@@ -36,15 +36,15 @@
     <string name="conf_update_file_name">update.zip</string>
     
     <!-- .ui.* Strings -->
-    <string name="apply_now_button_text">Apply now</string>
-    <string name="apply_later_button_text">Apply later</string>
-    <string name="apply_update_button_text">Verify and apply</string>
+    <string name="apply_now_button_text">Apply Now</string>
+    <string name="apply_later_button_text">Apply Later</string>
+    <string name="apply_update_button_text">Verify &amp; Apply</string>
     <string name="apply_title_textview_text">{0} is ready to be applied</string>
     <string name="apply_subtitle_textview_text">Release notes:</string>
     <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
     <string name="apply_trying_to_get_root_access">Trying to get root access to reboot in recovery mode</string>
     
-    <string name="available_updates_text">Please select the update to download:</string>
+    <string name="available_updates_text">Please select the update to Download:</string>
     <string name="choose_available_update_text">Download</string>
     <string name="no_updates_found_instructions">No updates found.\nPress \'Check now\' to manually check for new updates</string>
     <string name="downloaded_update_found_text">An update.zip file has been found. Would you like to verify and apply it?</string>
@@ -93,8 +93,8 @@
     <string name="not_update_download_error_title">An error occurred while downloading the update</string>
     <string name="not_update_download_error_body">Please try again later.</string>
     
-    <string name="not_update_downloaded_ticker">CM update downloaded</string>
-    <string name="not_update_downloaded_title">CM OS update downloaded</string>
+    <string name="not_update_downloaded_ticker">CyanogenMod update downloaded</string>
+    <string name="not_update_downloaded_title">CyanogenMod update downloaded</string>
     <string name="not_update_downloaded_body">{0} is ready to install</string>
     
     <!-- Preferences keys -->
@@ -113,11 +113,11 @@
     <string name="p_updates_mod_version_title">System Mod Version</string>
     <string name="p_updates_mod_version_summary">Set up which mod version do you want to receive updates of</string>
     
-    <string name="p_display_older_mod_versions_title">Display downgrades</string>
-    <string name="p_display_older_mod_versions_summary">Display updates to an older version (so you can downgrade)</string>
+    <string name="p_display_older_mod_versions_title">Display Downgrades</string>
+    <string name="p_display_older_mod_versions_summary">Display updates of older versions (so you can downgrade)</string>
     
-    <string name="p_display_allow_experimental_versions_title">Display Experimentals</string>
-    <string name="p_display_allow_experimental_versions_summary">Display updates that are Experimental (Not stable)</string>
+    <string name="p_display_allow_experimental_versions_title">Experimental Builds</string>
+    <string name="p_display_allow_experimental_versions_summary">Display updates that are Experimental (non-stable)</string>
     
     <string name="p_notification_ringtone_title">Notification Ringtone</string>
     <string name="p_notification_ringtone_summary">Choose a ringtone for CM Updater alerts</string>
