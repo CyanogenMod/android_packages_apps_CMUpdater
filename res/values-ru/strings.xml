@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  CM Updater: Auto-updater for modified Android OS
+ 
+  Copyright (c) 2009 Sergi Vélez
+ 
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+ 
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+  for more details.
+ 
+  You should have received a copy of the GNU General Public License along
+  with this program; if not, write to the Free Software Foundation, Inc.,
+  59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ 
+-->
+<resources>
+    
+    <string name="app_name">Обновитель Прошивки CM</string>
+    
+    
+    <!-- About Strings -->
+    <string name="about_comments">Автоматический Обновитель Прошивки CyanogenMod для Android ОС.</string>
+    <string name="about_credits">Спасибо Sergi Vélez за оригинал программы JFUpdater. Так-же благодарности garok89, prash, willmav5000, tuxfoo, matt_stang, DirectMatrix, amarkow2, FireFart из форума XDA-Developers.\n\nОгромное спасибо Cyanogen за его работу над прошивкой!\n\nsenab - Chris Banes</string>
+    <string name="about_copyright">Авторские права © 2009 Sergi Vélez</string><!-- Add your name here, separated with comma's, if you helped out --> 
+    <string name="about_website_label">CM Updater на сайте Google Code</string> 
+    <string name="about_website_url">http://code.google.com/p/cyanogen-updater/</string>
+    <string name="about_email">http://forum.xda-developers.com/forumdisplay.php?f=448</string>
+        
+    <!-- Config Strings -->
+    <string name="conf_update_server_url">http://cyanogen-updater.googlecode.com/files/updates.json</string>
+    <string name="conf_update_file_name">update.zip</string>
+    
+    <!-- .ui.* Strings -->
+    <string name="apply_now_button_text">Прошить Сейчас</string>
+    <string name="apply_later_button_text">Прошить Позже</string>
+    <string name="apply_update_button_text">Проверить и Прошить</string>
+    <string name="apply_title_textview_text">{0} готов к прошивке</string>
+    <string name="apply_subtitle_textview_text">Примечания к выпуску:</string>
+    <string name="apply_unable_to_reboot_toast">Перезагрузка в режим восстановки не удалась</string>
+    <string name="apply_trying_to_get_root_access">Попытка получить административный доступ для перезагрузки</string>
+    
+    <string name="available_updates_text">Пожалучста выберите прошивку:</string>
+    <string name="choose_available_update_text">Скачать</string>
+    <string name="no_updates_found_instructions">Прошивок не найдено.\nНажмите \'Проверить сечйас\' чтобы вручную проверить наличие новых версий</string>
+    <string name="downloaded_update_found_text">Файл \'update.zip\' был найден. Проверить его и прошить?</string>
+    <string name="checking_for_updates">Проверяется наличие новой версии</string>
+    <string name="downloading_update">Скачать версию</string>
+    <string name="sdcard_is_not_present_dialog_body">Требуется карта SD с доступом писания</string>
+    <string name="sdcard_is_not_present_dialog_title">Карта SD не найдена</string>
+    <string name="sdcard_is_not_present_dialog_ok_button">Да</string>
+    <string name="current_version_text">Текущая Версия: {0}</string>
+    
+    <string name="apply_update_dialog_title">Подтверждение</string>
+    <string name="apply_update_dialog_text">Внимание, обнавляемся на {0}.\nЕсли вы нажмете \'Прошить\', телефон перезагрузится в режим восстановки чтоб обновить прошивку.</string>
+	<string name="apply_update_dialog_update_button">Прошить</string>
+	<string name="apply_update_dialog_backup_and_update_button">Сохранить резерв и Прошить</string>
+	<string name="apply_update_dialog_cancel_button">Отменить</string>
+	
+	<string name="no_updates_no_mod_text">Текущая версия системы вашего телефона не подлагается обнавлению ({0}).</string>
+	<string name="check_now_button_text">Проверить</string>
+	
+	<string name="menu_check_now">Проверить</string>
+    <string name="menu_config">Конфигурация</string><string name="menu_about">О Программе</string>
+    <string name="cancel_download_buton_text">Отменить Загрузку</string>
+    <string name="confirm_download_cancelation_dialog_message">Пожалуйста подтвердите отмену загрузки</string>
+    <string name="confirm_download_cancelation_dialog_yes">Отменить</string>
+    <string name="confirm_download_cancelation_dialog_no">Продолжить</string>
+    <string name="download_canceled_toast_message">Загрузка отменена</string>
+    
+    <string name="verify_and_apply_dialog_title">Проверка</string>
+    <string name="verify_and_apply_dialog_message">Проверяется MD5 подпись файла \'update.zip\'</string>
+    
+    <!-- .service.* Strings -->
+    <string name="no_updates_found">Новых версий прошивки не найдено.</string>
+    <string name="not_new_updates_found_ticker">Найдена новая версия!</string>
+    <string name="not_new_updates_found_title">Найдена новая версия</string>
+    <string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} найдено</string>
+    <string name="exception_while_updating">Ошибка в связи с сервером обновления</string>
+    <string name="exception_while_downloading">Ошибка при загрузке файла</string>
+    
+    <string name="not_update_check_error_ticker">Ошибка при проверке новых версий</string>
+    <string name="not_update_check_error_title">Ошибка при проверке новых версий CM ОС</string>
+    <string name="not_update_check_error_body">Попробуйте по позже.</string>
+    
+    <string name="not_update_download_error_ticker">Ошибка при скачивании файла обновления прошивки</string>
+    <string name="not_update_download_error_title">Ошибка при скачивании файла обновления прошивки</string>
+    <string name="not_update_download_error_body">Попробуйте по позже.</string>
+    
+    <string name="not_update_downloaded_ticker">Файл обновления загружен</string>
+    <string name="not_update_downloaded_title">Файл обновления загружен</string>
+    <string name="not_update_downloaded_body">{0} готов к прошивке</string>
+    
+    <!-- Preferences keys -->
+    <string name="p_key_update_check_freq">prefUpdateCheckFrequency</string>
+    <string name="p_key_configured_updates_mod_version">updatesModVersion</string>
+    <string name="p_update_check_freq_def_value">-1</string>
+    <string name="p_display_older_mod_versions">displayOlderModVersins</string>
+    <string name="p_display_allow_experimental_versions">displayExperimentalVersions</string>
+    <string name="p_do_nandroid_backup">doNandroidBackup</string>
+    <string name="p_display_older_mod_versions_def_value">false</string>
+    <string name="p_key_notification_ringtone">prefNotificationRingtone</string>
+    
+    <!-- Preferences Strings -->
+    <string name="p_update_check_freq_title">Частота Проверок</string>
+    <string name="p_update_check_freq_summary">Как часто проверять наличие новых версий</string>
+    
+    <string name="p_updates_mod_version_title">Версия Системы</string>
+    <string name="p_updates_mod_version_summary">За какой весрией следить</string>
+    
+    <string name="p_display_older_mod_versions_title">Показывать Старые Версии</string>
+    <string name="p_display_older_mod_versions_summary">Быдуд показаны все предыдущие весрии</string>
+    
+    <string name="p_display_allow_experimental_versions_title">Экспериментальные Версии</string>
+    <string name="p_display_allow_experimental_versions_summary">Следить за нестабильными экспериментальными версиями</string>
+    
+    <string name="p_do_nandroid_backup_title">Nandroid Резервный Запас</string>
+    <string name="p_do_nandroid_backup_summary">Сохранить резервный запас системы про помощи программы Nandroid перед обновлением</string>
+    
+    <string name="p_notification_ringtone_title">Звонок Уведомления</string>
+    <string name="p_notification_ringtone_summary">Выбрать звонок уведомления о новой версии</string>
+    
+    
+</resources>
