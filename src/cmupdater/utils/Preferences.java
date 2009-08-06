@@ -118,6 +118,9 @@ public class Preferences {
 		return mPrefs.getBoolean(mRes.getString(R.string.p_display_older_mod_versions), false);
 	}
 	
+	public boolean allowExperimental() {
+		return mPrefs.getBoolean(mRes.getString(R.string.p_display_allow_experimental_versions), false);
+	}
 
 	private String getSystemModString() {
 		

@@ -16,7 +16,7 @@ public class SysUtils {
 
 	private static final String TAG = "SysUtils";
 	private static final String SYS_PROP_MOD_VERSION = "ro.modversion";
-	private static final int PROP_MOD_VERSION_SKIP_CHARS = 13;
+	private static final int PROP_MOD_VERSION_SKIP_CHARS = 12;
 	private static final int[] MIN_NANDROID_AVAILABLE_JF_VERSION = {9, 99}; //Unknown at this time
 
 	/**

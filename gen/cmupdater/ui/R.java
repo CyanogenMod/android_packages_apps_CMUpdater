@@ -140,24 +140,27 @@ public final class R {
         public static final int not_update_downloaded_body=0x7f060038;
         public static final int not_update_downloaded_ticker=0x7f060036;
         public static final int not_update_downloaded_title=0x7f060037;
+        public static final int p_display_allow_experimental_versions=0x7f06003d;
+        public static final int p_display_allow_experimental_versions_summary=0x7f060047;
+        public static final int p_display_allow_experimental_versions_title=0x7f060046;
         public static final int p_display_older_mod_versions=0x7f06003c;
-        public static final int p_display_older_mod_versions_def_value=0x7f06003d;
-        public static final int p_display_older_mod_versions_summary=0x7f060044;
-        public static final int p_display_older_mod_versions_title=0x7f060043;
+        public static final int p_display_older_mod_versions_def_value=0x7f06003e;
+        public static final int p_display_older_mod_versions_summary=0x7f060045;
+        public static final int p_display_older_mod_versions_title=0x7f060044;
         public static final int p_key_configured_updates_mod_version=0x7f06003a;
-        public static final int p_key_notification_ringtone=0x7f06003e;
+        public static final int p_key_notification_ringtone=0x7f06003f;
         /**  Preferences keys 
          */
         public static final int p_key_update_check_freq=0x7f060039;
-        public static final int p_notification_ringtone_summary=0x7f060046;
-        public static final int p_notification_ringtone_title=0x7f060045;
+        public static final int p_notification_ringtone_summary=0x7f060049;
+        public static final int p_notification_ringtone_title=0x7f060048;
         public static final int p_update_check_freq_def_value=0x7f06003b;
-        public static final int p_update_check_freq_summary=0x7f060040;
+        public static final int p_update_check_freq_summary=0x7f060041;
         /**  Preferences Strings 
          */
-        public static final int p_update_check_freq_title=0x7f06003f;
-        public static final int p_updates_mod_version_summary=0x7f060042;
-        public static final int p_updates_mod_version_title=0x7f060041;
+        public static final int p_update_check_freq_title=0x7f060040;
+        public static final int p_updates_mod_version_summary=0x7f060043;
+        public static final int p_updates_mod_version_title=0x7f060042;
         public static final int sdcard_is_not_present_dialog_body=0x7f060015;
         public static final int sdcard_is_not_present_dialog_ok_button=0x7f060017;
         public static final int sdcard_is_not_present_dialog_title=0x7f060016;

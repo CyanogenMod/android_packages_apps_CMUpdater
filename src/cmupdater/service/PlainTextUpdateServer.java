@@ -26,7 +26,7 @@ import android.util.Log;
 public class PlainTextUpdateServer implements IUpdateServer {
 	
 	private static final int MOD = 0;
-	private static final int VERSION_CODE= 1;
+	private static final int BRANCH_CODE= 1;
 	private static final int DISPLAY_VERSION = 2;
 	private static final int DISPLAY_NAME = 3;
 	private static final int MD5SUM = 4;
@@ -77,8 +77,13 @@ public class PlainTextUpdateServer implements IUpdateServer {
 					2 * 1024);
 
 			while ((line = lineReader.readLine()) != null) {
-				if (line.trim().charAt(0) == '#')
+				if (line.trim().length() == 0) {
 					continue;
+				}
+				else {
+					if (line.trim().charAt(0) == '#')
+						continue;
+				}
 
 				ui = parseLine(line);
 				if(ui == null) {
@@ -88,12 +93,14 @@ public class PlainTextUpdateServer implements IUpdateServer {
 
 				if (modMatches(ui, systemMod)) {
 					if(mPreferences.showDowngrades() || updateIsNewer(ui, true)) {
-						retValue.add(ui);
+						if (branchMatches(ui, mPreferences.allowExperimental())) {
+							retValue.add(ui);
+						}
 					} else {
-						Log.d(TAG, "Discarting " + ui.displayName + " (older version)");
+						Log.d(TAG, "Discarding " + ui.displayName + " (older version)");
 					}
 				} else {
-					Log.d(TAG, "Discarting " + ui.displayName + " (mod mismatch)");
+					Log.d(TAG, "Discarding " + ui.displayName + " (mod mismatch)");
 				}
 			}
 
@@ -117,13 +124,7 @@ public class PlainTextUpdateServer implements IUpdateServer {
 		}
 
 		ui.mod = p[MOD];
-		try {
-			ui.versionCode = Integer.parseInt(p[VERSION_CODE]);
-		} catch (NumberFormatException ex) {
-			Log.w(TAG, "Unable to parse versionCode string (" + p[VERSION_CODE]
-					+ "). Ignoring this update", ex);
-			return null;
-		}
+		ui.branchCode = p[BRANCH_CODE];
 		ui.displayVersion = p[DISPLAY_VERSION];
 		ui.displayName = p[DISPLAY_NAME];
 		ui.md5 = p[MD5SUM];
@@ -145,10 +146,28 @@ public class PlainTextUpdateServer implements IUpdateServer {
 		return ui;
 	}
 
+	private boolean branchMatches(UpdateInfo ui, boolean experimentalAllowed ) {
+		if(ui == null) return false;
+		
+		Log.d(TAG, "Update Mod:" + ui.branchCode + "; Experimental Allowed:" + experimentalAllowed);
+		
+		boolean allow = false;
+		
+		if (ui.branchCode.charAt(0) == 'X') {
+			if (experimentalAllowed == true)
+				allow = true;
+		}
+		else {
+			allow = true;
+		}
+		
+		return allow;
+	}
+	
 	private boolean modMatches(UpdateInfo ui, String systemMod) {
 		if(ui == null) return false;
 		
-		Log.d(TAG, "Update Mod:" + ui.mod + "; System Mod:" + systemMod);
+		Log.d(TAG, "Update Branch:" + ui.mod + "; System Mod:" + systemMod);
 		
 		if(ui.mod.equals("*") || systemMod.equals("*")) return true;
 		

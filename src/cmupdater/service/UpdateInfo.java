@@ -30,7 +30,7 @@ public class UpdateInfo implements Serializable {
 	
 	public boolean needsWipe;
 	public String displayVersion;
-	public int versionCode;
+	public String branchCode;
 	public String mod;
 	public String displayName;
 	public String md5;

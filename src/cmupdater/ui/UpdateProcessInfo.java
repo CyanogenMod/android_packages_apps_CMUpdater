@@ -86,7 +86,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	public static final String KEY_REQUEST = "cmupdater.keyRequest";
 	public static final String KEY_UPDATE_LIST = "cmupdater.updateList";
 	
-	private static final int[] MIN_SUPPORTED_MOD_VERSION = new int[]{1,41};
+	private static final int[] MIN_SUPPORTED_MOD_VERSION = new int[]{3,2,0};
 	
 	
 	private Spinner mUpdatesSpinner;
