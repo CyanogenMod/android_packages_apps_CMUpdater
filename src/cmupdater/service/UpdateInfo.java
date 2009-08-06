@@ -29,14 +29,17 @@ public class UpdateInfo implements Serializable {
 	private static final long serialVersionUID = 8671456102755862106L;
 	
 	public boolean needsWipe;
-	public String displayVersion;
-	public String branchCode;
 	public String mod;
-	public String displayName;
+	public String name;
+	public String displayVersion;
+	public String type;
+	public String branchCode;
+	public String description;
 	public String md5;
+	
 	public List<URI> updateFileUris;
 	@Override
 	public String toString() {
-		return displayName;
+		return name;
 	}
 }

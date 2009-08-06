@@ -454,7 +454,7 @@ public class UpdateDownloaderService extends Service {
 												res.getString(R.string.not_update_downloaded_ticker),
 												System.currentTimeMillis());
 			String notificationBody = MessageFormat.format(res.getString(R.string.not_update_downloaded_body),
-												ui.displayName);
+												ui.name);
 			notification.setLatestEventInfo(this, res.getString(R.string.not_update_downloaded_title), notificationBody, contentIntent);
 			Uri notificationRingtone = Preferences.getPreferences(this).getConfiguredRingtone();
 			if(notificationRingtone == null) {

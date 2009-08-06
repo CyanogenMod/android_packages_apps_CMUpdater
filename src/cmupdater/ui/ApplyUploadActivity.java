@@ -55,7 +55,7 @@ public class ApplyUploadActivity extends Activity {
 		public void onClick(View v) {
 			String dialogBody = MessageFormat.format(
 									getResources().getString(R.string.apply_update_dialog_text),
-									mUpdateInfo.displayName);
+									mUpdateInfo.name);
 			
 			AlertDialog dialog = new AlertDialog.Builder(ApplyUploadActivity.this)
 				.setTitle(R.string.apply_update_dialog_title)
@@ -142,6 +142,6 @@ public class ApplyUploadActivity extends Activity {
 		mUpdateInfo = (UpdateInfo) getIntent().getExtras().getSerializable(KEY_UPDATE_INFO);
 		//Resources res = getResources();
         String template = getResources().getString(R.string.apply_title_textview_text);
-        mTitle.setText(MessageFormat.format(template, mUpdateInfo.displayName));
+        mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
 	}
 }

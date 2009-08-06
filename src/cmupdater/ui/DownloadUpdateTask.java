@@ -153,7 +153,7 @@ public class DownloadUpdateTask extends UserTask<UpdateInfo, Integer, File>{
 												res.getString(R.string.not_update_downloaded_ticker),
 												System.currentTimeMillis());
 			String notificationBody = MessageFormat.format(res.getString(R.string.not_update_downloaded_ticker),
-												ui.displayName, ui.displayVersion);
+												ui.name, ui.displayVersion);
 			notification.setLatestEventInfo(upi, res.getString(R.string.not_update_downloaded_title), notificationBody, contentIntent);
 			Uri notificationRingtone = Preferences.getPreferences(upi).getConfiguredRingtone();
 			if(notificationRingtone == null) {
