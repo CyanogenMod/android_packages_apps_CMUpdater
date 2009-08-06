@@ -47,6 +47,12 @@
         android:entries="@array/updates_mod_types"
         android:entryValues="@array/updates_mod_types_values" />
 -->
+
+    <CheckBoxPreference  
+        android:key="@string/p_do_nandroid_backup"  
+        android:title="@string/p_do_nandroid_backup_title"  
+        android:summary="@string/p_do_nandroid_backup_summary"
+        android:defaultValue="true" />
         
     <CheckBoxPreference  
         android:key="@string/p_display_older_mod_versions"  

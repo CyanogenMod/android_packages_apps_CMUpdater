@@ -121,6 +121,10 @@ public class Preferences {
 	public boolean allowExperimental() {
 		return mPrefs.getBoolean(mRes.getString(R.string.p_display_allow_experimental_versions), false);
 	}
+	
+	public boolean doNandroidBackup() {
+		return mPrefs.getBoolean(mRes.getString(R.string.p_do_nandroid_backup), true);
+	}
 
 	private String getSystemModString() {
 		

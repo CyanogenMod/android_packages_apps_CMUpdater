@@ -27,6 +27,7 @@ import java.text.MessageFormat;
 import cmupdater.ui.R;
 
 import cmupdater.service.UpdateInfo;
+import cmupdater.utils.Preferences;
 import cmupdater.utils.SysUtils;
 
 import android.app.Activity;
@@ -64,29 +65,24 @@ public class ApplyUploadActivity extends Activity {
 				.setTitle(R.string.apply_update_dialog_title)
 				.setMessage(dialogBody)
 				//.setPositiveButton(R.string.apply_update_dialog_backup_and_update_button, mBackupAndApplyUpdateListener)
-				.setNeutralButton(R.string.apply_update_dialog_update_button, mApplyUpdateListener)
+				.setNeutralButton(R.string.apply_update_dialog_update_button, mBackupAndApplyUpdateListener)
 				.setNegativeButton(R.string.apply_update_dialog_cancel_button, new DialogInterface.OnClickListener(){
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
 					}
 				}).create();
-				
-			if(SysUtils.isNandroidAvailable()) {
-				dialog.setButton(getResources().getString(R.string.apply_update_dialog_backup_and_update_button), mBackupAndApplyUpdateListener);
-			}
 			
 			dialog.show();
 		}
 	};
-	private final DialogInterface.OnClickListener mApplyUpdateListener = new ApplyUpdateListener(false, this);
-	private final DialogInterface.OnClickListener mBackupAndApplyUpdateListener = new ApplyUpdateListener(true, this);
+	private final DialogInterface.OnClickListener mBackupAndApplyUpdateListener = new ApplyUpdateListener(this);
 	private static class ApplyUpdateListener implements DialogInterface.OnClickListener {
 		
 		private boolean mBackup;
 		private Context mCtx;
 		
-		public ApplyUpdateListener(boolean backup, Context ctx) {
-			mBackup = backup;
+		public ApplyUpdateListener(Context ctx) {
+			mBackup = Preferences.getPreferences(ctx).doNandroidBackup();
 			mCtx = ctx;
 		}
 		

@@ -104,6 +104,7 @@
     <string name="p_update_check_freq_def_value">-1</string>
     <string name="p_display_older_mod_versions">displayOlderModVersins</string>
     <string name="p_display_allow_experimental_versions">displayExperimentalVersions</string>
+    <string name="p_do_nandroid_backup">doNandroidBackup</string>
     <string name="p_display_older_mod_versions_def_value">false</string>
     <string name="p_key_notification_ringtone">prefNotificationRingtone</string>
     
@@ -119,6 +120,9 @@
     
     <string name="p_display_allow_experimental_versions_title">Experimental Builds</string>
     <string name="p_display_allow_experimental_versions_summary">Display updates that are Experimental (non-stable)</string>
+    
+    <string name="p_do_nandroid_backup_title">Nandroid Backup</string>
+    <string name="p_do_nandroid_backup_summary">Create Nandroid backup before applying update?</string>
     
     <string name="p_notification_ringtone_title">Notification Ringtone</string>
     <string name="p_notification_ringtone_summary">Choose a ringtone for CM Updater alerts</string>
