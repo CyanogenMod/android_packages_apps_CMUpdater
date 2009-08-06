@@ -149,25 +149,23 @@ public class PlainTextUpdateServer implements IUpdateServer {
 	private boolean branchMatches(UpdateInfo ui, boolean experimentalAllowed ) {
 		if(ui == null) return false;
 		
-		Log.d(TAG, "Update Mod:" + ui.branchCode + "; Experimental Allowed:" + experimentalAllowed);
-		
 		boolean allow = false;
 		
 		if (ui.branchCode.charAt(0) == 'X') {
 			if (experimentalAllowed == true)
 				allow = true;
-		}
-		else {
+		} else {
 			allow = true;
 		}
 		
+		Log.d(TAG, "Update Branch:" + ui.branchCode + "; Experimental Allowed:" + experimentalAllowed);
 		return allow;
 	}
 	
 	private boolean modMatches(UpdateInfo ui, String systemMod) {
 		if(ui == null) return false;
 		
-		Log.d(TAG, "Update Branch:" + ui.mod + "; System Mod:" + systemMod);
+		Log.d(TAG, "Update Mod:" + ui.mod + "; System Mod:" + systemMod);
 		
 		if(ui.mod.equals("*") || systemMod.equals("*")) return true;
 		
