@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CM Updater: Auto-updater for modified Android OS
+ 
+  Copyright (c) 2009 Sergi Vélez
+ 
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+ 
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+  for more details.
+ 
+  You should have received a copy of the GNU General Public License along
+  with this program; if not, write to the Free Software Foundation, Inc.,
+  59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ 
+-->
+<resources>
+    
+    <string name="app_name">CM Updater</string>
+    
+    
+    <!-- About Strings -->
+    <string name="about_comments">Auto-updater für CyanogenMod Android OS.</string>
+    <string name="about_credits">Thanks to Sergi Vélez for the original JFUpdater. Then thanksto garok89, prash, willmav5000, tuxfoo, matt_stang, DirectMatrix, amarkow2, FireFart from XDA-Developers.\n\nBig thanks to Cyanogen for his superb builds!\n\nsenab - Chris Banes</string>
+    <string name="about_copyright">Copyright © 2009 Sergi Vélez</string><!-- Add your name here, separated with comma's, if you helped out --> 
+    <string name="about_website_label">CM Updater at Google Code</string> 
+    <string name="about_website_url">http://code.google.com/p/cyanogen-updater/</string>
+    <string name="about_email">http://forum.xda-developers.com/forumdisplay.php?f=448</string>
+        
+    <!-- Config Strings -->
+    <string name="conf_update_server_url">http://cyanogen-updater.googlecode.com/files/up.txt</string>
+    <string name="conf_update_file_name">update.zip</string>
+    
+    <!-- .ui.* Strings -->
+    <string name="apply_now_button_text">Jetzt anwenden</string>
+    <string name="apply_later_button_text">Später anwenden</string>
+    <string name="apply_update_button_text">Update Prüfen &amp; Installieren</string>
+    <string name="apply_title_textview_text">{0} ist bereit um installiert zu werden</string>
+    <string name="apply_subtitle_textview_text">Release notes:</string>
+    <string name="apply_unable_to_reboot_toast">Fehler beim rebooten in den recovery modus</string>
+    <string name="apply_trying_to_get_root_access">Versuche root Rechte zu bekommen, um in den recovery modus zu booten</string>
+    
+    <string name="available_updates_text">Bitte einen ROM zum Download auswählen:</string>
+    <string name="choose_available_update_text">Download</string>
+    <string name="no_updates_found_instructions">Keine ROMs gefunden.\nDrücken sie \'Jetzt prüfen\' um manuell nach neuen Updates zu suchen.</string>
+    <string name="downloaded_update_found_text">Eine update.zip Datei wurde gefunden. Wollen sie diese jetzt überprüfen und installieren?</string>
+    <string name="checking_for_updates">Überprüfe auf neue Updates</string>
+    <string name="downloading_update">Downloade Update</string>
+    <string name="sdcard_is_not_present_dialog_body">Sie brauchen eine beschreibbare SDKarte um das Update downzuloaden.</string>
+    <string name="sdcard_is_not_present_dialog_title">Keine SDKarte gefunden</string>
+    <string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
+    <string name="current_version_text">Derzeitige Version: {0}</string>
+    
+    <string name="apply_update_dialog_title">Bestätigung</string>
+    <string name="apply_update_dialog_text">Sie sind dabei auf {0} zu aktualisieren.\nWenn sie Update drücken, wird das Telefon automatisch in den recovery Modus rebooten um das Update zu installieren.</string>
+	<string name="apply_update_dialog_update_button">Update</string>
+	<string name="apply_update_dialog_backup_and_update_button">Backup &amp; Installieren</string>
+	<string name="apply_update_dialog_cancel_button">Abbrechen</string>
+	
+	<string name="no_updates_no_mod_text">Ihr System läuft auf einer nicht unterstützen Version (Version {0}).</string>
+	<string name="check_now_button_text">Jetzt Prüfen</string>
+	
+	<string name="menu_check_now">Jetzt Prüfen</string>
+    <string name="menu_config">Konfiguration</string><string name="menu_about">About</string>
+    <string name="cancel_download_buton_text">Download Abbrechen</string>
+    <string name="confirm_download_cancelation_dialog_message">Wollen sie den derzeitigen Download wirklich abbrechen?</string>
+    <string name="confirm_download_cancelation_dialog_yes">Ja</string>
+    <string name="confirm_download_cancelation_dialog_no">Nein</string>
+    <string name="download_canceled_toast_message">Download abgebrochen</string>
+    
+    <string name="verify_and_apply_dialog_title">Überprüfen</string>
+    <string name="verify_and_apply_dialog_message">Überprüfe update.zip MD5 Checksumme</string>
+    
+    <!-- .service.* Strings -->
+    <string name="no_updates_found">Keine CM Updates gefunden</string>
+    <string name="not_new_updates_found_ticker">Neue CM Updates gefunden!</string>
+    <string name="not_new_updates_found_title">Neue CM Updates gefunden</string>
+    <string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} found</string>
+    <string name="exception_while_updating">Ein Fehler ist aufgetreten, als versucht wurde den CM Update Server zu kontaktieren</string>
+    <string name="exception_while_downloading">Ein Fehler ist beim Download eines CM Update aufgetreten</string>
+    
+    <string name="not_update_check_error_ticker">Fehler beim Überprüfen auf CM updates</string>
+    <string name="not_update_check_error_title">Derzeit nicht möglich auf neue CM OS Updates zu überprüfen</string>
+    <string name="not_update_check_error_body">Bitte probieren sie es später noch einmal.</string>
+    
+    <string name="not_update_download_error_ticker">Es ist ein Fehler beim Downloaden des Updates aufgetreten</string>
+    <string name="not_update_download_error_title">Es ist ein Fehler beim Downloaden des Updates aufgetreten</string>
+    <string name="not_update_download_error_body">Bitte probieren sie es später noch einmal.</string>
+    
+    <string name="not_update_downloaded_ticker">CyanogenMod Update heruntergeladen</string>
+    <string name="not_update_downloaded_title">CyanogenMod Update heruntergeladen</string>
+    <string name="not_update_downloaded_body">{0} ist bereit zur Installation</string>
+    
+    <!-- Preferences keys -->
+    <string name="p_key_update_check_freq">prefUpdateCheckFrequency</string>
+    <string name="p_key_configured_updates_mod_version">updatesModVersion</string>
+    <string name="p_update_check_freq_def_value">-1</string>
+    <string name="p_display_older_mod_versions">displayOlderModVersins</string>
+    <string name="p_display_allow_experimental_versions">displayExperimentalVersions</string>
+    <string name="p_do_nandroid_backup">doNandroidBackup</string>
+    <string name="p_display_older_mod_versions_def_value">false</string>
+    <string name="p_key_notification_ringtone">prefNotificationRingtone</string>
+    
+    <!-- Preferences Strings -->
+    <string name="p_update_check_freq_title">Updateprüfungs Intervall</string>
+    <string name="p_update_check_freq_summary">Stellt das Intervall ein, in dem nach neuen Updates gesucht werden soll</string>
+    
+    <string name="p_updates_mod_version_title">System Mod Version</string>
+    <string name="p_updates_mod_version_summary">Zu welcher mod version wollen sie Updates erhalten?</string>
+    
+    <string name="p_display_older_mod_versions_title">Downgrades anzeigen</string>
+    <string name="p_display_older_mod_versions_summary">Updates von älteren Versionen anzeigen (Nötig um Downzugraden)</string>
+    
+    <string name="p_display_allow_experimental_versions_title">Experimental Builds</string>
+    <string name="p_display_allow_experimental_versions_summary">Entwickler Versionen anzeigen (non-stable)</string>
+    
+    <string name="p_do_nandroid_backup_title">Nandroid Backup</string>
+    <string name="p_do_nandroid_backup_summary">Nandroid backup vor Update durchführen?</string>
+    
+    <string name="p_notification_ringtone_title">Benachrichtigungston</string>
+    <string name="p_notification_ringtone_summary">Wählen sie einen Rufton der abgespielt werden soll, wenn neue Updates verfügbar sind</string>
+    
+    
+</resources>
