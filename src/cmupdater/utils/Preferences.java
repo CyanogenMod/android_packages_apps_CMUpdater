@@ -21,22 +21,22 @@ public class Preferences {
 	private static final String TAG = "Preferences";
 
 	// getprop keys
-	private static final String PROP_PRODUCT_MODEL = "ro.product.model";
-	private static final String PROP_COUNTRY_CODE = "ro.product.locale.region";
+	//private static final String PROP_PRODUCT_MODEL = "ro.product.model";
+	//private static final String PROP_COUNTRY_CODE = "ro.product.locale.region";
 	
 	// values returned by getprop
-	private static final String PROP_PRODUCT_MODEL_ADP1_VALUE = "Android Dev Phone 1";
-	private static final String PROP_PRODUCT_MODEL_US_VALUE = "T-Mobile G1";
-	private static final String PROP_PRODUCT_MODEL_UK_VALUE = "T-Mobile G1";
+	//private static final String PROP_PRODUCT_MODEL_ADP1_VALUE = "Android Dev Phone 1";
+	//private static final String PROP_PRODUCT_MODEL_US_VALUE = "T-Mobile G1";
+	//private static final String PROP_PRODUCT_MODEL_UK_VALUE = "T-Mobile G1";
 	
 	//private static final String PROP_COUNTRY_CODE_ADP1_VALUE = "US";
-	private static final String PROP_COUNTRY_CODE_US_VALUE = "US";
-	private static final String PROP_COUNTRY_CODE_UK_VALUE = "GB";
+	//private static final String PROP_COUNTRY_CODE_US_VALUE = "US";
+	//private static final String PROP_COUNTRY_CODE_UK_VALUE = "GB";
 	
 	//Keys used in update file
 	private static final String MOD_VERSION_ADP1 = "ADP1";
-	private static final String MOD_VERSION_US = "US";
-	private static final String MOD_VERSION_UK = "UK";
+	//private static final String MOD_VERSION_US = "US";
+	//private static final String MOD_VERSION_UK = "UK";
 	
 	private static final String KEY_FIRST_RUN = "firstRun";
 	private static final String KEY_LAST_UPDATE_CHECK = "lastUpdateCheck";
