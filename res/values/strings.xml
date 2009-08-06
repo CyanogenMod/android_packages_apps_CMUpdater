@@ -49,7 +49,7 @@
     <string name="no_updates_found_instructions">No updates found.\nPress \'Check now\' to manually check for new updates</string>
     <string name="downloaded_update_found_text">An update.zip file has been found. Would you like to verify and apply it?</string>
     <string name="checking_for_updates">Checking for updates</string>
-    <string name="downloading_update">Downloading the update</string>
+    <string name="downloading_update">Downloading update</string>
     <string name="sdcard_is_not_present_dialog_body">You will need a writable SD card to download this update</string>
     <string name="sdcard_is_not_present_dialog_title">No SDCard found</string>
     <string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
@@ -81,7 +81,7 @@
     <string name="no_updates_found">No CM OS updates found</string>
     <string name="not_new_updates_found_ticker">New CM updates found!</string>
     <string name="not_new_updates_found_title">New CM OS updates found</string>
-    <string name="not_new_updates_found_body">{0,choice,0#updates|1#one update|1&lt;{0, number} updates} found</string>
+    <string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} found</string>
     <string name="exception_while_updating">An error occurred while trying to contact CM Update Server</string>
     <string name="exception_while_downloading">An error occurred while trying to download a CM Update</string>
     
