@@ -63,21 +63,31 @@ public class PlainTextUpdateServer implements IUpdateServer {
 
 		LinkedList<UpdateInfo> retValue = new LinkedList<UpdateInfo>();
 		HttpEntity responseEntity = response.getEntity();
-		String line;
+		
 
 		try {
+			
+			/**
+			 * Read Entity into BufferedReader and eventually into a StringBuffer
+			 */
+			
 			BufferedReader lineReader = new BufferedReader(
 					new InputStreamReader(responseEntity.getContent()),
 					2 * 1024);
-
-
+			
 			StringBuffer buf = new StringBuffer();
+			String line;
 
 			while ((line = lineReader.readLine()) != null) {
 				buf.append(line);
 			}
 
 			lineReader.close();
+			
+			
+			/**
+			 * Parse StringBuffer (JSON Document)
+			 */
 
 			LinkedList<UpdateInfo> updateInfos = parseJSON(buf);
 			for (int i = 0, max = updateInfos.size() ; i < max ; i++) {
