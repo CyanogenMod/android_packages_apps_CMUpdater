@@ -23,7 +23,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
+    android:background="@drawable/background">
 	<LinearLayout
 	    android:orientation="horizontal"
 	    android:layout_width="fill_parent"
@@ -80,4 +80,5 @@
 		android:text="@string/cancel_download_buton_text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"  />
+<TableLayout android:id="@+id/TableLayout01" android:layout_width="wrap_content" android:layout_height="wrap_content"></TableLayout>
 </LinearLayout>
