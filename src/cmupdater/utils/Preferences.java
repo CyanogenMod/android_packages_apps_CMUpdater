@@ -124,11 +124,13 @@ public class Preferences {
 
 	private String getSystemModString() {
 		
+		/**
+		
 		String prodMod = SysUtils.getSystemProperty(PROP_PRODUCT_MODEL);
 		String country = SysUtils.getSystemProperty(PROP_COUNTRY_CODE);
 		
 		if(PROP_PRODUCT_MODEL_ADP1_VALUE.equalsIgnoreCase(prodMod)) {
-			return MOD_VERSION_ADP1;
+			
 		}
 		
 		if(PROP_PRODUCT_MODEL_UK_VALUE.equalsIgnoreCase(prodMod) &&
@@ -140,10 +142,17 @@ public class Preferences {
 				PROP_COUNTRY_CODE_US_VALUE.equalsIgnoreCase(country)) {
 			return MOD_VERSION_US;
 		}
+		
+		*/
+		
+		return MOD_VERSION_ADP1;
 
-
+		/**
+		
 		Log.e(TAG, "Unable to determine system mod. " +
 				"Please report these values: Product model:" + prodMod + "; country:" + country);
 		return "*";
+		
+		*/
 	}
 }
