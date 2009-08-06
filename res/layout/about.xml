@@ -23,8 +23,7 @@
 android:layout_width="fill_parent"
 android:layout_height="fill_parent"
 android:orientation="vertical"
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:background="@drawable/background">
+xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
     	android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
@@ -41,6 +40,19 @@ android:background="@drawable/background">
 		android:layout_height="wrap_content"
 		android:padding="4dip"
 		android:text="@string/about_comments"/>
+		
+	<TextView
+    	android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:padding="4dip"
+		android:text="@string/about_credits"/>
+		
+	<TextView
+    	android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:padding="4dip"
+		android:text="@string/about_website_url"/>
+
 
 </LinearLayout>
 		
