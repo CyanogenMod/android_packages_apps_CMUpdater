@@ -17,7 +17,6 @@ public class SysUtils {
 	private static final String TAG = "SysUtils";
 	private static final String SYS_PROP_MOD_VERSION = "ro.modversion";
 	private static final int PROP_MOD_VERSION_SKIP_CHARS = 12;
-	private static final int[] MIN_NANDROID_AVAILABLE_JF_VERSION = {3, 20}; //Unknown at this time
 
 	/**
 	 * Returns (if available) a human-readable string containing current mod version
@@ -73,10 +72,6 @@ public class SysUtils {
 		}
 
 		return retValue;
-	}
-	
-	public static boolean isNandroidAvailable() {
-		return VERSION_COMPARATOR.compare(getSystemModVersion(), MIN_NANDROID_AVAILABLE_JF_VERSION) >= 0;
 	}
 		
 	/**
