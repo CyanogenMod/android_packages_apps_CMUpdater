@@ -224,9 +224,11 @@ public class UpdateDownloaderService extends Service {
 		return mConnectivityManager.getActiveNetworkInfo().isConnected();
 	}
 	
+	/**
 	private boolean isWifiNetwork() {
 		return mConnectivityManager.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
 	}
+	*/
 
 	@Override
 	public void onDestroy() {

@@ -24,12 +24,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.MessageFormat;
 
-import cmupdater.ui.R;
-
-import cmupdater.service.UpdateInfo;
-import cmupdater.utils.Preferences;
-import cmupdater.utils.SysUtils;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -40,6 +34,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import cmupdater.service.UpdateInfo;
+import cmupdater.utils.Preferences;
 
 public class ApplyUploadActivity extends Activity {
 	

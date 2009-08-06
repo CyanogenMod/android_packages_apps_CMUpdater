@@ -26,7 +26,7 @@ import android.util.Log;
 public class PlainTextUpdateServer implements IUpdateServer {
 	
 	private static final int MOD = 0;
-	private static final int BRANCH_CODE= 1;
+	private static final int BRANCH_CODE = 1;
 	private static final int DISPLAY_VERSION = 2;
 	private static final int DISPLAY_NAME = 3;
 	private static final int MD5SUM = 4;
@@ -38,7 +38,6 @@ public class PlainTextUpdateServer implements IUpdateServer {
 	private HttpClient httpClient;
 	private URI mUpdateServerUri;
 	private Preferences mPreferences;
-	//private String mSystemMod;
 
 	public PlainTextUpdateServer(URI updateServerUri, Context ctx) {
 		httpClient = new DefaultHttpClient();
@@ -77,7 +76,8 @@ public class PlainTextUpdateServer implements IUpdateServer {
 					2 * 1024);
 
 			while ((line = lineReader.readLine()) != null) {
-				if (line.trim().length() == 0) {
+				
+				if (line.trim().length() < 1) {
 					continue;
 				}
 				else {
