@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  CM Updater: Auto-updater for modified Android OS
+ 
+  Copyright (c) 2009 Sergi Vélez
+ 
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+ 
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+  for more details.
+ 
+  You should have received a copy of the GNU General Public License along
+  with this program; if not, write to the Free Software Foundation, Inc.,
+  59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ 
+-->
+<resources>
+    
+    <string name="app_name">CM Updater</string>
+    
+    
+    <!-- About Strings -->
+    <string name="about_comments">Auto-updater for modified Android OS.</string>
+    <string name="about_copyright">Copyright © 2009 Sergi Vélez</string><!-- Add your name here, separated with comma's, if you helped out --> 
+    <string name="about_website_label">CMupdater at Google Code</string> 
+    <string name="about_website_url">http://code.google.com/p/cyanogen-updater/</string>
+    <string name="about_email">http://forum.xda-developers.com/forumdisplay.php?f=448</string>
+        
+    <!-- Config Strings -->
+    <string name="conf_update_server_url">http://cyanogen-updater.googlecode.com/files/upv3.txt</string>
+    <string name="conf_update_file_name">update.zip</string>
+    
+    
+    <!-- .ui.* Strings -->
+    <string name="apply_now_button_text">Apply now</string>
+    <string name="apply_later_button_text">Apply later</string>
+    <string name="apply_update_button_text">Verify and apply</string>
+    <string name="apply_title_textview_text">{0} is ready to be applied</string>
+    <string name="apply_subtitle_textview_text">Release notes:</string>
+    <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
+    <string name="apply_trying_to_get_root_access">Trying to get root access to reboot in recovery mode</string>
+    
+    <string name="available_updates_text">Please select the update to download:</string>
+    <string name="choose_available_update_text">Download</string>
+    <string name="no_updates_found_instructions">No updates found.\nPress \'Check now\' to manually check for new updates</string>
+    <string name="downloaded_update_found_text">An update.zip file has been found. Would you like to verify and apply it?</string>
+    <string name="checking_for_updates">Checking for updates</string>
+    <string name="downloading_update">Downloading the update</string>
+    <string name="sdcard_is_not_present_dialog_body">You will need a writable sdcard to download this update</string>
+    <string name="sdcard_is_not_present_dialog_title">No SDCard found</string>
+    <string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
+    <string name="current_version_text">Running Version: {0}</string>
+    
+    <string name="apply_update_dialog_title">Confirmation</string>
+    <string name="apply_update_dialog_text">You are about to upgrade to {0}.
+\nIf you press update, the phone will restart itself in recovery mode to apply the update.
+\nIt's recomended to perform a full system backup using nandroid before aplying this update.</string>
+	<string name="apply_update_dialog_update_button">Update</string>
+	<string name="apply_update_dialog_backup_and_update_button">Backup &amp; Update</string>
+	<string name="apply_update_dialog_cancel_button">Cancel</string>
+	
+	<string name="no_updates_no_mod_text">Your system is running and unsupported OS mod (Version {0}).
+Please manually upgrade to CM v.1.41 or later and try again</string>
+	<string name="check_now_button_text">Check now</string>
+	
+	<string name="menu_check_now">Check now</string>
+    <string name="menu_config">Configuration</string><string name="menu_about">About</string>
+    <string name="cancel_download_buton_text">Cancel Download</string>
+    <string name="confirm_download_cancelation_dialog_message">Are you sure you want to cancel the current download?</string>
+    <string name="confirm_download_cancelation_dialog_yes">Yes</string>
+    <string name="confirm_download_cancelation_dialog_no">No</string>
+    <string name="download_canceled_toast_message">Download canceled</string>
+    
+    <string name="verify_and_apply_dialog_title">Verifying</string>
+    <string name="verify_and_apply_dialog_message">Verifying update.zip MD5 sum</string>
+    
+    <!-- .service.* Strings -->
+    <string name="no_updates_found">No CM OS updates found</string>
+    <string name="not_new_updates_found_ticker">New CM updates found!</string>
+    <string name="not_new_updates_found_title">New CM OS updates found</string>
+    <string name="not_new_updates_found_body">{0,choice,0#updates|1#one update|1&lt;{0, number} updates} found</string>
+    <string name="exception_while_updating">An error occurred while trying to contact CM Update Server</string>
+    <string name="exception_while_downloading">An error occurred while trying to download a CM Update</string>
+    
+    <string name="not_update_check_error_ticker">Check for CM updates failed</string>
+    <string name="not_update_check_error_title">Unable to check for new CM OS updates</string>
+    <string name="not_update_check_error_body">Please try again later.</string>
+    
+    <string name="not_update_download_error_ticker">An error occured while downloading the update</string>
+    <string name="not_update_download_error_title">An error occured while downloading the update</string>
+    <string name="not_update_download_error_body">Please try again later.</string>
+    
+    <string name="not_update_downloaded_ticker">CM update downloaded</string>
+    <string name="not_update_downloaded_title">CM OS update downloaded</string>
+    <string name="not_update_downloaded_body">{0} is ready to install</string>
+    
+    <!-- Preferences keys -->
+    <string name="p_key_update_check_freq">prefUpdateCheckFrequency</string>
+    <string name="p_key_configured_updates_mod_version">updatesModVersion</string>
+    <string name="p_update_check_freq_def_value">-1</string>
+    <string name="p_display_older_mod_versions">displayOlderModVersins</string>
+    <string name="p_display_older_mod_versions_def_value">false</string>
+    <string name="p_key_notification_ringtone">prefNotificationRingtone</string>
+    
+    <!-- Preferences Strings -->
+    <string name="p_update_check_freq_title">Update Checking frequency</string>
+    <string name="p_update_check_freq_summary">Set update checking frequency</string>
+    
+    <string name="p_updates_mod_version_title">System Mod Version</string>
+    <string name="p_updates_mod_version_summary">Set up which mod version do you want to receive updates of</string>
+    
+    <string name="p_display_older_mod_versions_title">Display downgrades</string>
+    <string name="p_display_older_mod_versions_summary">Display updates to an older version (so you can downgrade)</string>
+    
+    <string name="p_notification_ringtone_title">Notification Ringtone</string>
+    <string name="p_notification_ringtone_summary">Choose a ringtone for CM Updater alerts</string>
+    
+    
+</resources>
