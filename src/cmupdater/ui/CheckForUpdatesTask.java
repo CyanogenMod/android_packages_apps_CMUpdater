@@ -6,12 +6,6 @@ import java.text.MessageFormat;
 import java.util.Date;
 import java.util.List;
 
-import cmupdater.ui.R;
-
-import cmupdater.service.IUpdateServer;
-import cmupdater.service.UpdateInfo;
-import cmupdater.utils.Preferences;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -21,6 +15,9 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
+import cmupdater.service.IUpdateServer;
+import cmupdater.service.UpdateInfo;
+import cmupdater.utils.Preferences;
 
 public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo>>{
 	
