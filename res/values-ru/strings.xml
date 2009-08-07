@@ -111,8 +111,8 @@
     <string name="p_update_check_freq_title">Частота Проверок</string>
     <string name="p_update_check_freq_summary">Как часто проверять наличие новых версий</string>
     
-    <string name="p_update_file_url_title">Update File</string>
-    <string name="p_update_file_url_summary">Set the URL of the update file</string>
+    <string name="p_update_file_url_title">Файл Обновления</string>
+    <string name="p_update_file_url_summary">Интернет адрес для загрузки файла обновления</string>
     
     <string name="p_updates_mod_version_title">Версия Системы</string>
     <string name="p_updates_mod_version_summary">За какой весрией следить</string>
@@ -121,7 +121,7 @@
     <string name="p_display_older_mod_versions_summary">Быдуд показаны все предыдущие весрии</string>
     
     <string name="p_display_allow_experimental_versions_title">Экспериментальные Версии</string>
-    <string name="p_display_allow_experimental_versions_summary">Следить за нестабильными экспериментальными версиями</string>
+    <string name="p_display_allow_experimental_versions_summary">Следить за экспериментальными (не стабильными) версиями</string>
     
     <string name="p_do_nandroid_backup_title">Nandroid Резервный Запас</string>
     <string name="p_do_nandroid_backup_summary">Сохранить резервный запас системы про помощи программы Nandroid перед обновлением</string>
