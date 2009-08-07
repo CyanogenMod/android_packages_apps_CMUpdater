@@ -117,7 +117,8 @@ public class UpdateCheckerService extends Service {
         
         mServiceLooper = thread.getLooper();
         mServiceHandler = new ServiceHandler(mServiceLooper);
-		URI uri = URI.create(getResources().getString(R.string.conf_update_server_url));
+        Preferences prefs = Preferences.getPreferences(this);
+		URI uri = URI.create(prefs.getUpdateFileURL());
         mUpdateServer = new PlainTextUpdateServer(uri, this);
 		
 		INSTANCE = this;

@@ -119,6 +119,10 @@ public class Preferences {
 		return mPrefs.getBoolean(mRes.getString(R.string.p_display_older_mod_versions), false);
 	}
 	
+	public String getUpdateFileURL() {
+		return mPrefs.getString(mRes.getString(R.string.p_update_file_url),  mRes.getString(R.string.conf_update_server_url_def));
+	}
+	
 	public boolean allowExperimental() {
 		return mPrefs.getBoolean(mRes.getString(R.string.p_display_allow_experimental_versions), false);
 	}

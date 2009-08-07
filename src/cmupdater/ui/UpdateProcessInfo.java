@@ -281,7 +281,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
         		break;
         }
         
-        URI uri = URI.create(getResources().getString(R.string.conf_update_server_url));
+        URI uri = URI.create(prefs.getUpdateFileURL());
         mUpdateServer = new PlainTextUpdateServer(uri, this);
         
         String destFileName = getResources().getString(R.string.conf_update_file_name);

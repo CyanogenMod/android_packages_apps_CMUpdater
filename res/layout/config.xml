@@ -65,4 +65,11 @@
         android:title="@string/p_display_allow_experimental_versions_title"  
         android:summary="@string/p_display_allow_experimental_versions_summary"
         android:defaultValue="false" />
+        
+    <EditTextPreference android:key="@string/p_update_file_url"
+        android:title="@string/p_update_file_url_title"
+        android:summary="@string/p_update_file_url_summary"
+        android:dialogTitle="@string/p_update_file_url_title"
+        android:defaultValue="@string/conf_update_server_url_def"
+        android:singleLine="false" />
 </PreferenceScreen>
