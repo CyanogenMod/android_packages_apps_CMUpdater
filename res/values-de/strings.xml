@@ -33,7 +33,7 @@
     <string name="about_email">http://forum.xda-developers.com/forumdisplay.php?f=448</string>
         
     <!-- Config Strings -->
-    <string name="conf_update_server_url">http://cyanogen-updater.googlecode.com/files/updates.json</string>
+    <string name="conf_update_server_url_def">http://cyanogen-updater.googlecode.com/files/updates.json</string>
     <string name="conf_update_file_name">update.zip</string>
     
     <!-- .ui.* Strings -->
@@ -105,10 +105,14 @@
     <string name="p_do_nandroid_backup">doNandroidBackup</string>
     <string name="p_display_older_mod_versions_def_value">false</string>
     <string name="p_key_notification_ringtone">prefNotificationRingtone</string>
+    <string name="p_update_file_url">prefUpdateFileURL</string>
     
     <!-- Preferences Strings -->
     <string name="p_update_check_freq_title">Updateprüfungs Intervall</string>
     <string name="p_update_check_freq_summary">Stellt das Intervall ein, in dem nach neuen Updates gesucht werden soll</string>
+    
+    <string name="p_update_file_url_title">Update Datei</string>
+    <string name="p_update_file_url_summary">URL für die Metadatendatei einstellen</string>
     
     <string name="p_updates_mod_version_title">System Mod Version</string>
     <string name="p_updates_mod_version_summary">Zu welcher mod version wollen sie Updates erhalten?</string>

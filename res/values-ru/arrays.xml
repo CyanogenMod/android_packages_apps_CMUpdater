@@ -41,6 +41,7 @@
     
 	<!-- Frequency times, in seconds -->
     <string-array name="update_frequency">
+        <item>Manual</item>
         <item>При загрузке</item>
         <item>Раз в час</item>
         <item>Раз в день</item>
@@ -49,6 +50,7 @@
     
     <!-- Frequency times, in seconds -->
     <string-array name="update_frequency_values">
+        <item>-2</item>
         <item>-1</item>
         <item>3600</item>
         <item>86400</item>
