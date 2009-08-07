@@ -210,9 +210,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		@Override
 		public UpdateInfo doInBackground(File... params) {
 			try {
-				String calculatedMD5 = IOUtils.calculateMD5(params[0]);
-				for(UpdateInfo ui : mUpdates) {
-					if(ui.md5.equalsIgnoreCase(calculatedMD5)) return ui;
+				if (params[0].exists() && params[0].canRead()) {
+					String calculatedMD5 = IOUtils.calculateMD5(params[0]);
+					for(UpdateInfo ui : mUpdates) {
+						if(ui.md5.equalsIgnoreCase(calculatedMD5)) return ui;
+					}
 				}
 			} catch (IOException e) {
 				Log.e(TAG, "IOEx while checking MD5 sum", e);
