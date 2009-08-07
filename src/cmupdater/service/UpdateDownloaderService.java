@@ -21,7 +21,6 @@
 package cmupdater.service;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -33,20 +32,12 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Random;
 
-import cmupdater.ui.R;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
-
-import cmupdater.ui.ApplyUploadActivity;
-import cmupdater.ui.IUpdateProcessInfo;
-import cmupdater.ui.UpdateProcessInfo;
-import cmupdater.utils.IOUtils;
-import cmupdater.utils.Preferences;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -72,6 +63,12 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
+import cmupdater.ui.ApplyUploadActivity;
+import cmupdater.ui.IUpdateProcessInfo;
+import cmupdater.ui.R;
+import cmupdater.ui.UpdateProcessInfo;
+import cmupdater.utils.IOUtils;
+import cmupdater.utils.Preferences;
 
 
 public class UpdateDownloaderService extends Service {
@@ -120,6 +117,7 @@ public class UpdateDownloaderService extends Service {
 	private NotificationManager mNM;
 	private boolean mWaitingForDataConnection = false;
 	private File mDestinationFile;
+	private File mDestinationMD5File;
 	//private TelephonyManager mTelephonyManager;
 	private DefaultHttpClient mHttpClient;
 	private DefaultHttpClient mMD5HttpClient;
@@ -127,7 +125,7 @@ public class UpdateDownloaderService extends Service {
 	private boolean mMirrorNameUpdated;
 	private String mMirrorName;
 	private String mFileName;
-	private File mDestinationMD5File;
+	
 	private boolean mDownloading = false;
 	private UpdateInfo mCurrentUpdate;
 	private ConnectivityManager mConnectivityManager;
@@ -337,18 +335,13 @@ public class UpdateDownloaderService extends Service {
 	}
 	
 	private File downloadFile(UpdateInfo updateInfo) {
-		//mDestinationFile = new File(Environment.getExternalStorageDirectory(), updateInfo.fileName);
-		//mDestinationMD5File = new File(Environment.getExternalStorageDirectory(), updateInfo.fileName + ".md5sum");
 		
-		File destinationFile = null;
-		File MD5File = null;
 		HttpClient httpClient = mHttpClient;
 		HttpClient MD5httpClient = mMD5HttpClient;
 		
-		HttpUriRequest req;
-		HttpUriRequest md5req;
-		HttpResponse response;
-		HttpResponse md5response;
+		HttpUriRequest req, md5req;
+		HttpResponse response, md5response;
+		
 		List<URI> updateMirrors = updateInfo.updateFileUris;
 		int size = updateMirrors.size();
 		int start = mRandom.nextInt(size);
@@ -357,30 +350,44 @@ public class UpdateDownloaderService extends Service {
 		for(int i = 0; i < size; i++) {
 			updateURI = updateMirrors.get((start + i)% size);
 			mMirrorName = updateURI.getHost();
+			
 			String[] tempStringArray = updateURI.toString().split("/"); 
-			mFileName = tempStringArray[tempStringArray.length-1];
-			mDestinationFile = new File(Environment.getExternalStorageDirectory(), mFileName);
-			mDestinationMD5File = new File(Environment.getExternalStorageDirectory(), mFileName + ".md5sum");
-			destinationFile = mDestinationFile;
-			MD5File = mDestinationMD5File;
-			Log.d(TAG, "mFileName: "+mFileName);
+			if (tempStringArray.length > 0) {
+				mFileName = tempStringArray[tempStringArray.length-1];
+			} else {
+				mFileName = "update.zip";
+			}
+			updateInfo.fileName = mFileName;
+			Log.d(TAG, "mFileName: " + mFileName);
+			
 			mMirrorNameUpdated = false;
 			//mUpdateProcessInfo.updateDownloadMirror(updateURI.getHost());
 			try {
 				req = new HttpGet(updateURI);
 				md5req = new HttpGet(updateURI+".md5sum");
-				Log.e(TAG, "Trying to Download update.zip.md5sum from " + md5req.getURI().toString());
+				
+				Log.e(TAG, "Trying to download md5sum file from " + md5req.getURI());
 				md5response = MD5httpClient.execute(md5req);
-				Log.e(TAG, "Trying to Download update.zip from " + req.getURI().toString());
+				
+				Log.e(TAG, "Trying to download update zip from " + req.getURI());
 				response = httpClient.execute(req);
+				
 				int serverResponse = response.getStatusLine().getStatusCode();
 				int md5serverResponse = md5response.getStatusLine().getStatusCode();
+				
 				if (serverResponse == 404 || md5serverResponse == 404) {
 					Log.e(TAG, "File not found on Server. Trying next one.");
 				} else if(serverResponse != 200 || md5serverResponse != 200) {
-					Log.e(TAG, "Server returned status code " + serverResponse + " for update.zip trying next mirror");
-					Log.e(TAG, "Server returned status code " + md5serverResponse + " for update.zip trying next mirror");
+					Log.e(TAG, "Server returned status code " + serverResponse + " for update zip trying next mirror");
+					Log.e(TAG, "Server returned status code " + md5serverResponse + " for update zip md5sum trying next mirror");
 				} else {
+
+					mDestinationFile = new File(Environment.getExternalStorageDirectory(), mFileName);
+					mDestinationMD5File = new File(Environment.getExternalStorageDirectory(), mFileName + ".md5sum");
+					
+					if(mDestinationFile.exists()) mDestinationFile.delete();
+					if(mDestinationMD5File.exists()) mDestinationMD5File.delete();
+					
 					//getContent can only be Called once. So I have to write the MD5 by hand.
 					//dumpFile(md5response.getEntity(), MD5File);
 					try
@@ -390,52 +397,49 @@ public class UpdateDownloaderService extends Service {
 						InputStreamReader isr = new InputStreamReader(temp.getContent());
 						BufferedReader br = new BufferedReader(isr);
 						updateInfo.md5 = br.readLine().split("  ")[0];
+						Log.d(TAG,"MD5: " + updateInfo.md5);
 						br.close();
 						isr.close();
-						//Write the String in a .md5 File
-						if (updateInfo.md5 != null || updateInfo.md5 != "")
-						{
-							FileWriter fw = new FileWriter(MD5File);
-							BufferedWriter out = new BufferedWriter(fw);
-							out.write(updateInfo.md5);
-							out.close();
-						}
+						
 						if (temp != null)
 							temp.consumeContent();
+						
+						//Write the String in a .md5 File
+						if (updateInfo.md5 != null || !updateInfo.md5.equals(""))	{
+							writeMD5(mDestinationMD5File, updateInfo.md5);
+						}
 					}
 					catch (Exception e)
 					{
 						Log.e(TAG, "Exception while reading MD5 response: "+e.getMessage());
 						throw new IOException("MD5 Response cannot be read");
 					}
+
+					// Download Update ZIP if md5sum went ok
 					
 					HttpEntity entity = response.getEntity();
-					dumpFile(entity, destinationFile);
+					dumpFile(entity, mDestinationFile);
 					if (entity != null)
 						entity.consumeContent();
 					
 					Log.i(TAG, "Update download finished. Performing MD5 verification");
-					if(!IOUtils.checkMD5(updateInfo.md5, destinationFile)) {
+					if(!IOUtils.checkMD5(updateInfo.md5, mDestinationFile)) {
 						throw new IOException("MD5 verification failed");
 					}
 					
-					writeMD5(updateInfo.md5);
-					
 					//If we reach here, download & MD5 check went fine :)
-					return destinationFile;
+					return mDestinationFile;
 				}
 			} catch (Exception ex) {
-				if(!Thread.currentThread().isInterrupted()) {
-					Log.w(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
-				}
+				Log.w(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
 			}
 			if(Thread.currentThread().isInterrupted()) break;
 		}
 		
 		Log.e(TAG, "Unable to download the update file from any mirror");
 		
-		if(destinationFile != null && destinationFile.exists()) destinationFile.delete();
-		if(MD5File != null && MD5File.exists()) mDestinationMD5File.delete();
+		if(mDestinationFile.exists()) mDestinationFile.delete();
+		if(mDestinationMD5File.exists()) mDestinationMD5File.delete();
 		
 		return null;
 	}
@@ -471,10 +475,10 @@ public class UpdateDownloaderService extends Service {
 		}
 	}
 
-	private void writeMD5(String md5) throws IOException {
+	private void writeMD5(File md5File, String md5) throws IOException {
 		
 		Log.d(TAG, "Writing the calculated MD5 to disk");
-		FileWriter fw = new FileWriter(mDestinationMD5File);
+		FileWriter fw = new FileWriter(md5File);
 		try {
 			fw.write(md5);
 			fw.flush();
@@ -482,7 +486,7 @@ public class UpdateDownloaderService extends Service {
 			fw.close();
 		}
 	}
-	
+
 	private void onProgressUpdate(int downloaded, int total) {
 		if(UPDATE_PROCESS_INFO == null) return;
 		
