@@ -416,7 +416,6 @@ public class UpdateDownloaderService extends Service {
 					}
 
 					// Download Update ZIP if md5sum went ok
-					
 					HttpEntity entity = response.getEntity();
 					dumpFile(entity, mDestinationFile);
 					if (entity != null)
@@ -428,7 +427,7 @@ public class UpdateDownloaderService extends Service {
 					}
 					
 					//If we reach here, download & MD5 check went fine :)
-					return mDestinationFile;
+				return mDestinationFile;
 				}
 			} catch (Exception ex) {
 				Log.w(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
