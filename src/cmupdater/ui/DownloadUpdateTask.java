@@ -96,7 +96,12 @@ public class DownloadUpdateTask extends UserTask<UpdateInfo, Integer, File>{
 				if(serverResponse != 200) {
 					Log.e(TAG, "Server returned status code " + serverResponse + " trying next mirror");
 				} else {
-					dumpFile(response.getEntity(), destinationFile);
+					
+					HttpEntity entity = response.getEntity();
+					dumpFile(entity, destinationFile);
+					
+					if (entity != null)
+						entity.consumeContent();
 					
 					Log.i(TAG, "Update download finished. Performing MD5 verification");
 					if(!IOUtils.checkMD5(mUpdateInfo, destinationFile)) {
