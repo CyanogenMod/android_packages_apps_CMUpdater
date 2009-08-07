@@ -363,6 +363,10 @@ public class UpdateDownloaderService extends Service {
 				req = new HttpGet(updateURI);
 				md5req = new HttpGet(updateURI+".md5sum");
 				
+				// Add no-cache Header, so the File gets downloaded each time
+				req.addHeader("Cache-Control", "no-cache");
+				md5req.addHeader("Cache-Control", "no-cache");
+				
 				Log.e(TAG, "Trying to download md5sum file from " + md5req.getURI());
 				md5response = MD5httpClient.execute(md5req);
 				
