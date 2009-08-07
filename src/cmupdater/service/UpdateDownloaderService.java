@@ -340,8 +340,8 @@ public class UpdateDownloaderService extends Service {
 		//mDestinationFile = new File(Environment.getExternalStorageDirectory(), updateInfo.fileName);
 		//mDestinationMD5File = new File(Environment.getExternalStorageDirectory(), updateInfo.fileName + ".md5sum");
 		
-		File destinationFile = mDestinationFile;
-		File MD5File = mDestinationMD5File;
+		File destinationFile = null;
+		File MD5File = null;
 		HttpClient httpClient = mHttpClient;
 		HttpClient MD5httpClient = mMD5HttpClient;
 		
@@ -359,8 +359,10 @@ public class UpdateDownloaderService extends Service {
 			mMirrorName = updateURI.getHost();
 			String[] tempStringArray = updateURI.toString().split("/"); 
 			mFileName = tempStringArray[tempStringArray.length-1];
-			destinationFile = new File(Environment.getExternalStorageDirectory(), mFileName);
-			MD5File = new File(Environment.getExternalStorageDirectory(), mFileName + ".md5sum");
+			mDestinationFile = new File(Environment.getExternalStorageDirectory(), mFileName);
+			mDestinationMD5File = new File(Environment.getExternalStorageDirectory(), mFileName + ".md5sum");
+			destinationFile = mDestinationFile;
+			MD5File = mDestinationMD5File;
 			Log.d(TAG, "mFileName: "+mFileName);
 			mMirrorNameUpdated = false;
 			//mUpdateProcessInfo.updateDownloadMirror(updateURI.getHost());
@@ -432,8 +434,8 @@ public class UpdateDownloaderService extends Service {
 		
 		Log.e(TAG, "Unable to download the update file from any mirror");
 		
-		if(destinationFile.exists()) destinationFile.delete();
-		if(mDestinationMD5File.exists()) mDestinationMD5File.delete();
+		if(destinationFile != null && destinationFile.exists()) destinationFile.delete();
+		if(MD5File != null && MD5File.exists()) mDestinationMD5File.delete();
 		
 		return null;
 	}
