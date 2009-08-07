@@ -351,13 +351,10 @@ public class UpdateDownloaderService extends Service {
 			updateURI = updateMirrors.get((start + i)% size);
 			mMirrorName = updateURI.getHost();
 			
-			String[] tempStringArray = updateURI.toString().split("/"); 
-			if (tempStringArray.length > 0) {
-				mFileName = tempStringArray[tempStringArray.length-1];
-			} else {
+			mFileName = updateInfo.fileName; 
+			if (null == mFileName || mFileName.length() < 1) {
 				mFileName = "update.zip";
 			}
-			updateInfo.fileName = mFileName;
 			Log.d(TAG, "mFileName: " + mFileName);
 			
 			mMirrorNameUpdated = false;

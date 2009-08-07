@@ -111,7 +111,7 @@
     <string name="p_update_check_freq_title">Update Checking frequency</string>
     <string name="p_update_check_freq_summary">Set update checking frequency</string>
     
-    <string name="p_update_file_url_title">Update File</string>
+    <string name="p_update_file_url_title">Update Server</string>
     <string name="p_update_file_url_summary">Set the URL of the update file</string>
     
     <string name="p_updates_mod_version_title">System Mod Version</string>

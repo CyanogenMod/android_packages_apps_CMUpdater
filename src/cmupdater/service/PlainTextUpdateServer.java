@@ -119,10 +119,11 @@ public class PlainTextUpdateServer implements IUpdateServer {
 		JSONObject mainJSONObject;
 		try {
 			mainJSONObject = new JSONObject(buf.toString());
+			JSONArray mirrorList = mainJSONObject.getJSONArray("MirrorList");
 			JSONArray updateList = mainJSONObject.getJSONArray("UpdateList");
 
 			for (int i = 0, max = updateList.length() ; i < max ; i++) {
-				uis.add(parseUpdateJSONObject(updateList.getJSONObject(i)));
+				uis.add(parseUpdateJSONObject(updateList.getJSONObject(i),mirrorList));
 			}
 
 		} catch (JSONException e) {
@@ -133,24 +134,25 @@ public class PlainTextUpdateServer implements IUpdateServer {
 		return uis;
 	}
 
-	private UpdateInfo parseUpdateJSONObject(JSONObject obj) {
+	private UpdateInfo parseUpdateJSONObject(JSONObject obj, JSONArray mirrorList) {
 		UpdateInfo ui = new UpdateInfo();
 
 		try {
 			ui.mod = obj.getString("mod");
-			ui.branchCode = obj.getString("branch");
-			ui.displayVersion = obj.getString("version");
-			ui.name = obj.getString("name");
-			ui.description = obj.getString("description");
 			ui.type = obj.getString("type");
+			ui.name = obj.getString("name");
+			ui.displayVersion = obj.getString("version");
+			ui.description = obj.getString("description");
+			ui.branchCode = obj.getString("branch");
+			ui.fileName = obj.getString("filename");
+			
 			ui.updateFileUris = new LinkedList<URI>();
-			JSONArray mirrors = obj.getJSONArray("mirrors");
 
-			for (int i = 0, max = mirrors.length() ; i < max ; i++) {
+			for (int i = 0, max = mirrorList.length() ; i < max ; i++) {
 				try {
-					ui.updateFileUris.add(new URI(mirrors.getString(i)));
+					ui.updateFileUris.add(new URI(mirrorList.getString(i) + ui.fileName));
 				} catch (URISyntaxException e) {
-					Log.w(TAG, "Unable to parse mirror url (" + mirrors.getString(i)
+					Log.w(TAG, "Unable to parse mirror url (" + mirrorList.getString(i) + ui.fileName
 							+ "). Ignoring this mirror", e);
 				}
 			}
