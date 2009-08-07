@@ -38,51 +38,51 @@ import cmupdater.service.UpdateInfo;
 import cmupdater.utils.Preferences;
 
 public class ApplyUploadActivity extends Activity {
-	
+
 	private static final String TAG = "ApplyUploadActivity";
 
 	public static final String KEY_UPDATE_INFO = "cmupdater.updateInfo";
-	
-	
+
+
 	private UpdateInfo mUpdateInfo;
 	private TextView mTitle;
 	//private TextView mSubtitle;
 	//private EditText mReleaseNotes;
 	private Button mApplyButton;
 	private Button mPostponeButton;
-	
+
 	private final View.OnClickListener mApplyButtonListener = new View.OnClickListener() {
 		public void onClick(View v) {
 			String dialogBody = MessageFormat.format(
-									getResources().getString(R.string.apply_update_dialog_text),
-									mUpdateInfo.name);
-			
+					getResources().getString(R.string.apply_update_dialog_text),
+					mUpdateInfo.name);
+
 			AlertDialog dialog = new AlertDialog.Builder(ApplyUploadActivity.this)
-				.setTitle(R.string.apply_update_dialog_title)
-				.setMessage(dialogBody)
-				//.setPositiveButton(R.string.apply_update_dialog_backup_and_update_button, mBackupAndApplyUpdateListener)
-				.setNeutralButton(R.string.apply_update_dialog_update_button, mBackupAndApplyUpdateListener)
-				.setNegativeButton(R.string.apply_update_dialog_cancel_button, new DialogInterface.OnClickListener(){
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				}).create();
-			
+			.setTitle(R.string.apply_update_dialog_title)
+			.setMessage(dialogBody)
+			//.setPositiveButton(R.string.apply_update_dialog_backup_and_update_button, mBackupAndApplyUpdateListener)
+			.setNeutralButton(R.string.apply_update_dialog_update_button, mBackupAndApplyUpdateListener)
+			.setNegativeButton(R.string.apply_update_dialog_cancel_button, new DialogInterface.OnClickListener(){
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			}).create();
+
 			dialog.show();
 		}
 	};
 	private final DialogInterface.OnClickListener mBackupAndApplyUpdateListener = new ApplyUpdateListener(this);
 	private class ApplyUpdateListener implements DialogInterface.OnClickListener {
-		
+
 		private boolean mBackup;
 		private Context mCtx;
-		private String mFileName = mUpdateInfo.fileName;
-		
+
 		public ApplyUpdateListener(Context ctx) {
 			mBackup = Preferences.getPreferences(ctx).doNandroidBackup();
 			mCtx = ctx;
+			//mFileName = mUpdateInfo.fileName;
 		}
-		
+
 		public void onClick(DialogInterface dialog, int which) {
 			/*
 			 * Should perform the following steps.
@@ -100,10 +100,11 @@ public class ApplyUploadActivity extends Activity {
 				os.write("mkdir -p /cache/recovery/\n".getBytes());
 				os.write("echo 'boot-recovery' >/cache/recovery/command\n".getBytes());
 				if(mBackup) os.write("echo '--nandroid'  >> /cache/recovery/command\n".getBytes());
-				String cmd = "echo '--update_package=SDCARD:" + mFileName +"' >> /cache/recovery/command\n";
+				String cmd = "echo '--update_package=SDCARD:" + mUpdateInfo.fileName +"' >> /cache/recovery/command\n";
+				Log.d(TAG,cmd);
 				os.write(cmd.getBytes());
 				os.write("reboot recovery\n".getBytes());
-				
+
 				os.flush();
 
 				Toast.makeText(mCtx, R.string.apply_trying_to_get_root_access, Toast.LENGTH_LONG).show();
@@ -113,7 +114,7 @@ public class ApplyUploadActivity extends Activity {
 			}
 		}
 	};
-	
+
 	private final View.OnClickListener mPostponeButtonListener = new View.OnClickListener() {
 		public void onClick(View v) {
 			finish();
@@ -121,29 +122,30 @@ public class ApplyUploadActivity extends Activity {
 	};
 
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.apply_upload);
-        
-        
-        mTitle = (TextView) findViewById(R.id.apply_title_textview);
-		
-        //mSubtitle = (TextView) findViewById(R.id.apply_subtitle_textview);
-        //mReleaseNotes = (EditText) findViewById(R.id.apply_release_notes);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.apply_upload);
 
-        mApplyButton = (Button) findViewById(R.id.apply_now_button);
-        mApplyButton.setOnClickListener(mApplyButtonListener);
-        
-        mPostponeButton = (Button) findViewById(R.id.apply_later_button);
-        mPostponeButton.setOnClickListener(mPostponeButtonListener);
-    }
+
+		mTitle = (TextView) findViewById(R.id.apply_title_textview);
+
+		//mSubtitle = (TextView) findViewById(R.id.apply_subtitle_textview);
+		//mReleaseNotes = (EditText) findViewById(R.id.apply_release_notes);
+
+		mApplyButton = (Button) findViewById(R.id.apply_now_button);
+		mApplyButton.setOnClickListener(mApplyButtonListener);
+
+		mPostponeButton = (Button) findViewById(R.id.apply_later_button);
+		mPostponeButton.setOnClickListener(mPostponeButtonListener);
+	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
 		mUpdateInfo = (UpdateInfo) getIntent().getExtras().getSerializable(KEY_UPDATE_INFO);
+		Log.d(TAG, "Has Extra: "+getIntent().hasExtra(KEY_UPDATE_INFO));
 		//Resources res = getResources();
-        String template = getResources().getString(R.string.apply_title_textview_text);
-        mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
+		String template = getResources().getString(R.string.apply_title_textview_text);
+		mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
 	}
 }
