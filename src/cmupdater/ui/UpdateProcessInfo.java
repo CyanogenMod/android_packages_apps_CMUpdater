@@ -104,6 +104,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	private UpdateDownloaderService mUpdateDownloaderService;
 	private Intent mUpdateDownloaderServiceIntent;
 	
+	private File mUploadFolder;
+	
 	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection(){
 
 		public void onServiceConnected(ComponentName className, IBinder service) {
@@ -141,6 +143,26 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			UpdateInfo ui = (UpdateInfo) mUpdatesSpinner.getSelectedItem(); //(UpdateInfo) checkedRB.getTag();
 			downloadRequestedUpdate(ui);
 			//UpdateProcessInfo.this.finish();
+		}
+	};
+	
+	private final View.OnClickListener mDeleteUpdatesButtonListener = new View.OnClickListener() {
+		public void onClick(View v) {
+			
+			if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+				new AlertDialog.Builder(UpdateProcessInfo.this)
+					.setTitle(R.string.sdcard_is_not_present_dialog_title)
+					.setMessage(R.string.sdcard_is_not_present_dialog_body)
+					.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener(){
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					})
+					.show();
+				return;
+			}
+			//Delete Updates here
+			deleteOldUpdates();
 		}
 	};
 	
@@ -290,6 +312,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
         String destFileName = getResources().getString(R.string.conf_update_file_name);
 		mDestinationFile = new File(Environment.getExternalStorageDirectory(), destFileName);
 
+		mUploadFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
+		
 		mUpdateDownloaderServiceIntent = new Intent(this, UpdateDownloaderService.class);
     }
     
@@ -589,6 +613,16 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			downloadedUpdateText.setVisibility(View.GONE);
 		}
 		
+		//Delete Old Versions, do not show Button if Folder is not present
+		Button deleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
+		
+		if (mUploadFolder.exists() && mUploadFolder.isDirectory()) {
+			deleteOldUpdatesButton.setOnClickListener(mDeleteUpdatesButtonListener);
+		}
+		else {
+			deleteOldUpdatesButton.setVisibility(View.GONE);
+		}
+		
 		TextView currentVersion = (TextView) findViewById(R.id.up_chooser_current_version);
 		String pattern = getResources().getString(R.string.current_version_text);
 		currentVersion.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
@@ -669,4 +703,36 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		startService(mUpdateDownloaderServiceIntent);
 		Toast.makeText(this, R.string.downloading_update, Toast.LENGTH_SHORT).show();
 	}
+	
+	private boolean deleteOldUpdates() {
+		boolean success = false;
+		if (mUploadFolder.exists() && mUploadFolder.isDirectory()) {
+	        deleteDir(mUploadFolder);
+	        success=true;
+			Toast.makeText(this, R.string.delete_updates_success_message, Toast.LENGTH_LONG).show();
+		}
+		else if (!mUploadFolder.exists())
+		{
+			Toast.makeText(this, R.string.delete_updates_noFolder_message, Toast.LENGTH_LONG).show();
+		}
+		else
+		{
+			Toast.makeText(this, R.string.delete_updates_failure_message, Toast.LENGTH_LONG).show();
+		}
+		return success;
+	}
+	
+	public static boolean deleteDir(File dir) {
+        if (dir.isDirectory()) { 	
+            String[] children = dir.list();
+            for (int i=0; i<children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+        // The directory is now empty so delete it
+        return dir.delete();
+    }
 }

@@ -85,7 +85,15 @@
 		android:text="@string/apply_update_button_text"
 	    android:drawableLeft="@drawable/verify_and_apply"
 	    style="@style/TextAppearance.Button" />
-	    
+	
+	<Button
+    	android:id="@+id/delete_updates_button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/delete_updates_text"
+	    style="@style/TextAppearance.Button"
+	    android:drawableLeft="@drawable/check_now" />
+	    	    
 	<TextView
     	android:id="@+id/up_chooser_current_version"
 		android:layout_width="wrap_content"
@@ -93,5 +101,6 @@
 		android:layout_marginTop="10px"
 		android:layout_marginRight="10px"
 		android:layout_gravity="bottom|right" />
+
 </LinearLayout>
 </ScrollView>
