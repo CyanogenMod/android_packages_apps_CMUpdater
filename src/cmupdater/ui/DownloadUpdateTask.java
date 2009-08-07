@@ -75,7 +75,7 @@ public class DownloadUpdateTask extends UserTask<UpdateInfo, Integer, File>{
 		HttpUriRequest md5req;
 		HttpResponse response;
 		HttpResponse md5response;
-		List<URI> updateMirrors = updateInfo[0].updateFileUris;
+		List<URI> updateMirrors = mUpdateInfo.updateFileUris;
 		int size = updateMirrors.size();
 		int start = mRandom.nextInt(size);
 		URI updateURI;
@@ -158,7 +158,8 @@ public class DownloadUpdateTask extends UserTask<UpdateInfo, Integer, File>{
 				Log.w(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
 			} finally {
 					updateInfo[0].md5 = mUpdateInfo.md5;
-				}
+					updateInfo[0].fileName = mFileName;
+			}
 			if(Thread.currentThread().isInterrupted()) break;
 		}
 		

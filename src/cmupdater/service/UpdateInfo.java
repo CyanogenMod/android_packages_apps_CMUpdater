@@ -36,6 +36,7 @@ public class UpdateInfo implements Serializable {
 	public String branchCode;
 	public String description;
 	public String md5;
+	public String fileName;
 	
 	public List<URI> updateFileUris;
 	@Override

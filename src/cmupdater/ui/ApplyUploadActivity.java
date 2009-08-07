@@ -72,10 +72,11 @@ public class ApplyUploadActivity extends Activity {
 		}
 	};
 	private final DialogInterface.OnClickListener mBackupAndApplyUpdateListener = new ApplyUpdateListener(this);
-	private static class ApplyUpdateListener implements DialogInterface.OnClickListener {
+	private class ApplyUpdateListener implements DialogInterface.OnClickListener {
 		
 		private boolean mBackup;
 		private Context mCtx;
+		private String mFileName = mUpdateInfo.fileName;
 		
 		public ApplyUpdateListener(Context ctx) {
 			mBackup = Preferences.getPreferences(ctx).doNandroidBackup();
@@ -99,7 +100,8 @@ public class ApplyUploadActivity extends Activity {
 				os.write("mkdir -p /cache/recovery/\n".getBytes());
 				os.write("echo 'boot-recovery' >/cache/recovery/command\n".getBytes());
 				if(mBackup) os.write("echo '--nandroid'  >> /cache/recovery/command\n".getBytes());
-				os.write("echo '--update_package=SDCARD:update.zip' >> /cache/recovery/command\n".getBytes());
+				String cmd = "echo '--update_package=SDCARD:" + mFileName +"' >> /cache/recovery/command\n";
+				os.write(cmd.getBytes());
 				os.write("reboot recovery\n".getBytes());
 				
 				os.flush();
