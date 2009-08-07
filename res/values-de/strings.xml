@@ -35,6 +35,7 @@
     <!-- Config Strings -->
     <string name="conf_update_server_url_def">http://cyanogen-updater.googlecode.com/files/updates.json</string>
     <string name="conf_update_file_name">update.zip</string>
+    <string name="conf_update_folder">cm-updates</string>
     
     <!-- .ui.* Strings -->
     <string name="apply_now_button_text">Jetzt anwenden</string>
@@ -55,6 +56,10 @@
     <string name="sdcard_is_not_present_dialog_title">Keine SDKarte gefunden</string>
     <string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
     <string name="current_version_text">Derzeitige Version: {0}</string>
+    <string name="delete_updates_text">Alle Updates im Update Verzeichnis löschen</string>
+    <string name="delete_updates_success_message">Update Verzeichnis gelöscht</string>
+    <string name="delete_updates_failure_message">Fehler beim Löschen des Update Verzeichnisses</string>
+    <string name="delete_updates_noFolder_message">Update Verzeichnis nicht gefunden</string>
     
     <string name="apply_update_dialog_title">Bestätigung</string>
     <string name="apply_update_dialog_text">Sie sind dabei auf {0} zu aktualisieren.\nWenn sie Update drücken, wird das Telefon automatisch in den recovery Modus rebooten um das Update zu installieren.</string>
