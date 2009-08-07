@@ -57,7 +57,7 @@
     <string name="sdcard_is_not_present_dialog_title">No SDCard found</string>
     <string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
     <string name="current_version_text">Running Version: {0}</string>
-    <string name="delete_updates_text">Delete all Updates in Update Folder</string>
+    <string name="delete_updates_text">Delete updates</string>
     <string name="delete_updates_success_message">Update Folder deleted</string>
     <string name="delete_updates_failure_message">There was an error deleting the Update Folder</string>
     <string name="delete_updates_noFolder_message">Update Folder not found</string>
