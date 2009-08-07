@@ -26,10 +26,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.InvalidParameterException;
 
-import cmupdater.service.UpdateInfo;
-import cmupdater.utils.md5.MD5;
-
 import android.util.Log;
+import cmupdater.utils.md5.MD5;
 
 public class IOUtils {
     
