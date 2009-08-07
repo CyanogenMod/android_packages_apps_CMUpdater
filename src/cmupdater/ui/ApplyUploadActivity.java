@@ -80,7 +80,6 @@ public class ApplyUploadActivity extends Activity {
 		public ApplyUpdateListener(Context ctx) {
 			mBackup = Preferences.getPreferences(ctx).doNandroidBackup();
 			mCtx = ctx;
-			//mFileName = mUpdateInfo.fileName;
 		}
 
 		public void onClick(DialogInterface dialog, int which) {
@@ -100,8 +99,7 @@ public class ApplyUploadActivity extends Activity {
 				os.write("mkdir -p /cache/recovery/\n".getBytes());
 				os.write("echo 'boot-recovery' >/cache/recovery/command\n".getBytes());
 				if(mBackup) os.write("echo '--nandroid'  >> /cache/recovery/command\n".getBytes());
-				String cmd = "echo '--update_package=SDCARD:" + mUpdateInfo.fileName +"' >> /cache/recovery/command\n";
-				Log.d(TAG,cmd);
+				String cmd = "echo '--update_package=SDCARD:" + mUpdateInfo.fileName + "' >> /cache/recovery/command\n";
 				os.write(cmd.getBytes());
 				os.write("reboot recovery\n".getBytes());
 
@@ -143,7 +141,6 @@ public class ApplyUploadActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 		mUpdateInfo = (UpdateInfo) getIntent().getExtras().getSerializable(KEY_UPDATE_INFO);
-		Log.d(TAG, "Has Extra: "+getIntent().hasExtra(KEY_UPDATE_INFO));
 		//Resources res = getResources();
 		String template = getResources().getString(R.string.apply_title_textview_text);
 		mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
