@@ -356,6 +356,7 @@ public class UpdateDownloaderService extends Service {
 			mMirrorName = updateURI.getHost();
 			String[] tempStringArray = updateURI.toString().split("/"); 
 			mFileName = tempStringArray[tempStringArray.length-1];
+			Log.d(TAG, "mFileName: "+mFileName);
 			mMirrorNameUpdated = false;
 			//mUpdateProcessInfo.updateDownloadMirror(updateURI.getHost());
 			try {
