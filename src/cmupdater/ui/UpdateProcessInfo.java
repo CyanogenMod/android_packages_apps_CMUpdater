@@ -363,8 +363,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			Log.w(TAG, "Unable to save state", e);
 		}
 		
+		Log.d(TAG, "Cancel the download");
+		mUpdateDownloaderService.cancelDownload();
 		unbindService(mUpdateDownloaderServiceConnection);
 		UpdateDownloaderService.setUpdateProcessInfo(null);
+		
 	}
 
 	private void saveState() throws IOException {
