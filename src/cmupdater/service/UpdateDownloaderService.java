@@ -137,6 +137,8 @@ public class UpdateDownloaderService extends Service {
 	private WifiLock mWifiLock;
 	private WifiManager mWifiManager;
 	
+	private String mUpdateFolder;
+	
 	 public class LocalBinder extends Binder {
         public UpdateDownloaderService getService() {
             return UpdateDownloaderService.this;
@@ -202,6 +204,8 @@ public class UpdateDownloaderService extends Service {
 		
 		mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
 		mWifiLock = mWifiManager.createWifiLock("JF Updater");
+		
+		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
 	}
 
 	@Override
@@ -382,9 +386,15 @@ public class UpdateDownloaderService extends Service {
 					Log.e(TAG, "Server returned status code " + serverResponse + " for update zip trying next mirror");
 					Log.e(TAG, "Server returned status code " + md5serverResponse + " for update zip md5sum trying next mirror");
 				} else {
-
-					mDestinationFile = new File(Environment.getExternalStorageDirectory(), mFileName);
-					mDestinationMD5File = new File(Environment.getExternalStorageDirectory(), mFileName + ".md5sum");
+					//If directory not exists, create it
+					File directory = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder);
+					if (!directory.exists()) {
+						directory.mkdirs();
+						Log.d(TAG, "UpdateFolder created");
+					}
+					
+					mDestinationFile = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder, mFileName);
+					mDestinationMD5File = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder, mFileName + ".md5sum");
 					
 					if(mDestinationFile.exists()) mDestinationFile.delete();
 					if(mDestinationMD5File.exists()) mDestinationMD5File.delete();
@@ -455,7 +465,6 @@ public class UpdateDownloaderService extends Service {
 		int totalDownloaded = 0;
 		FileOutputStream fos = new FileOutputStream(destinationFile);
 		InputStream is = entity.getContent();
-		
 		try {
 			while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0) {
 				fos.write(buff, 0, read);

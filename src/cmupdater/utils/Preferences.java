@@ -130,6 +130,10 @@ public class Preferences {
 	public boolean doNandroidBackup() {
 		return mPrefs.getBoolean(mRes.getString(R.string.p_do_nandroid_backup), true);
 	}
+	
+	public String getUpdateFolder() {
+		return mPrefs.getString(mRes.getString(R.string.conf_update_folder), mRes.getString(R.string.conf_update_folder));
+	}
 
 	private String getSystemModString() {
 		

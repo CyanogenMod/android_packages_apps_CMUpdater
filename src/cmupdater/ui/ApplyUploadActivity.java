@@ -45,6 +45,8 @@ public class ApplyUploadActivity extends Activity {
 
 
 	private UpdateInfo mUpdateInfo;
+	private String mUpdateFolder;
+	
 	private TextView mTitle;
 	//private TextView mSubtitle;
 	//private EditText mReleaseNotes;
@@ -99,7 +101,7 @@ public class ApplyUploadActivity extends Activity {
 				os.write("mkdir -p /cache/recovery/\n".getBytes());
 				os.write("echo 'boot-recovery' >/cache/recovery/command\n".getBytes());
 				if(mBackup) os.write("echo '--nandroid'  >> /cache/recovery/command\n".getBytes());
-				String cmd = "echo '--update_package=SDCARD:" + mUpdateInfo.fileName + "' >> /cache/recovery/command\n";
+				String cmd = "echo '--update_package=SDCARD:" + mUpdateFolder + "/" + mUpdateInfo.fileName + "' >> /cache/recovery/command\n";
 				os.write(cmd.getBytes());
 				os.write("reboot recovery\n".getBytes());
 
@@ -144,5 +146,6 @@ public class ApplyUploadActivity extends Activity {
 		//Resources res = getResources();
 		String template = getResources().getString(R.string.apply_title_textview_text);
 		mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
+		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
 	}
 }
