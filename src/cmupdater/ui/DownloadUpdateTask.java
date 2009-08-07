@@ -83,7 +83,8 @@ public class DownloadUpdateTask extends UserTask<UpdateInfo, Integer, File>{
 		for(int i = 0; i < size; i++) {
 			updateURI = updateMirrors.get((start + i)% size);
 			mMirrorName = updateURI.getHost();
-			mFileName = updateURI.toString().split("/")[0];
+			String[] tempStringArray = updateURI.toString().split("/"); 
+			mFileName = tempStringArray[tempStringArray.length-1];
 			Log.d(TAG, "mFileName: "+mFileName);
 			mMirrorNameUpdated = false;
 			//mUpdateProcessInfo.updateDownloadMirror(updateURI.getHost());
