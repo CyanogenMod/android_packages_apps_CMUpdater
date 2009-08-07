@@ -52,8 +52,10 @@ public class StartupReceiver extends BroadcastReceiver {
 			
 			Log.i(TAG, "Asking UpdateService to check for updates...");
 			ctx.startService(i);
-		} else {
+		} else if(!(updateFreq == Preferences.UPDATE_FREQ_NONE)) {
 			scheduleUpdateService(ctx, updateFreq * 1000);
+		} else {
+			// User selected no updates
 		}
 	}
 	

@@ -14,6 +14,7 @@ import android.util.Log;
 public class Preferences {
 	
 	public static final int UPDATE_FREQ_AT_BOOT = -1;
+	public static final int UPDATE_FREQ_NONE = -2;
 	/*public static final int UPDATE_FREQ_EVERY_HOUR = 3600;
 	public static final int UPDATE_FREQ_EVERY_DAY =  86400;
 	public static final int UPDATE_FREQ_EVERY_WEEK = 604800;*/
