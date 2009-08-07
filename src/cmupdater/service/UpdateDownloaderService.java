@@ -193,11 +193,11 @@ public class UpdateDownloaderService extends Service {
 		mHandlerThread.start();
         mServiceLooper = mHandlerThread.getLooper();
         mServiceHandler = new ServiceHandler(mServiceLooper);
-        Resources res = getResources();
+        //Resources res = getResources();
 		
-		String destFileName = res.getString(R.string.conf_update_file_name);
-		mDestinationFile = new File(Environment.getExternalStorageDirectory(), destFileName);
-		mDestinationMD5File = new File(Environment.getExternalStorageDirectory(), destFileName + ".md5sum");
+		//String destFileName = res.getString(R.string.conf_update_file_name);
+		//mDestinationFile = new File(Environment.getExternalStorageDirectory(), destFileName);
+		//mDestinationMD5File = new File(Environment.getExternalStorageDirectory(), destFileName + ".md5sum");
 		mHttpClient = new DefaultHttpClient();
 		mMD5HttpClient = new DefaultHttpClient();
 		mRandom = new Random();
@@ -337,6 +337,9 @@ public class UpdateDownloaderService extends Service {
 	}
 	
 	private File downloadFile(UpdateInfo updateInfo) {
+		//mDestinationFile = new File(Environment.getExternalStorageDirectory(), updateInfo.fileName);
+		//mDestinationMD5File = new File(Environment.getExternalStorageDirectory(), updateInfo.fileName + ".md5sum");
+		
 		File destinationFile = mDestinationFile;
 		File MD5File = mDestinationMD5File;
 		HttpClient httpClient = mHttpClient;
@@ -356,6 +359,8 @@ public class UpdateDownloaderService extends Service {
 			mMirrorName = updateURI.getHost();
 			String[] tempStringArray = updateURI.toString().split("/"); 
 			mFileName = tempStringArray[tempStringArray.length-1];
+			destinationFile = new File(Environment.getExternalStorageDirectory(), mFileName);
+			MD5File = new File(Environment.getExternalStorageDirectory(), mFileName + ".md5sum");
 			Log.d(TAG, "mFileName: "+mFileName);
 			mMirrorNameUpdated = false;
 			//mUpdateProcessInfo.updateDownloadMirror(updateURI.getHost());
