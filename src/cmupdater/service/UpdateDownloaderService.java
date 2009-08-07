@@ -354,7 +354,8 @@ public class UpdateDownloaderService extends Service {
 		for(int i = 0; i < size; i++) {
 			updateURI = updateMirrors.get((start + i)% size);
 			mMirrorName = updateURI.getHost();
-			mFileName = updateURI.getQuery();
+			mFileName = updateURI.toString().split("/")[0];
+			Log.d(TAG, "mFileName: "+mFileName);
 			mMirrorNameUpdated = false;
 			//mUpdateProcessInfo.updateDownloadMirror(updateURI.getHost());
 			try {
