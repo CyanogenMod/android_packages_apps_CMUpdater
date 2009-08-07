@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.text.MessageFormat;
 import java.util.Arrays;
@@ -94,10 +95,12 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	private ProgressBar mProgressBar;
 	private TextView mDownloadedBytesTextView;
 	private TextView mDownloadMirrorTextView;
+	private TextView mDownloadFilenameTextView;
 	private List<UpdateInfo> mAvailableUpdates;
 	//private UpdateInfo mDownloadingUpdate;
 	private File mDestinationFile;
 	private String mMirrorName;
+	private String mFileName;
 	private UpdateDownloaderService mUpdateDownloaderService;
 	private Intent mUpdateDownloaderServiceIntent;
 	
@@ -504,13 +507,23 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	@Override
 	public void switchToDownloadingLayout(UpdateInfo downloadingUpdate) {
 		setContentView(R.layout.update_download_info);
+		try {
+			String[] temp = downloadingUpdate.updateFileUris.get(0).toURL().getFile().split("/");
+			mFileName = temp[temp.length-1];
+		} catch (MalformedURLException e) {
+			mFileName = "Unable to get Filename";
+			e.printStackTrace();
+		}
 		mProgressBar = (ProgressBar) findViewById(R.id.download_progress_bar);
 		mDownloadedBytesTextView = (TextView) findViewById(R.id.bytes_downloaded_text_view);
 		
 		mDownloadMirrorTextView = (TextView) findViewById(R.id.mirror_text_view);
+		
+		mDownloadFilenameTextView = (TextView) findViewById(R.id.filename_text_view);
 		if(mMirrorName != null)
 			mDownloadMirrorTextView.setText(mMirrorName);
-		
+		if(mFileName != null)
+			mDownloadFilenameTextView.setText(mFileName);
 		((Button)findViewById(R.id.cancel_download_buton)).setOnClickListener(mCancelDownloadListener);
 	}/*
 
@@ -607,9 +620,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		mDownloadMirrorTextView.post(new Runnable(){
 			public void run() {
 				mDownloadMirrorTextView.setText(mirror);
+				//mDownloadFilenameTextView.setText(Filename);
 				mMirrorName = mirror;
 			}
-			
 		});
 	}
 

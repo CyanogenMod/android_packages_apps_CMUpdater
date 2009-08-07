@@ -109,14 +109,13 @@ public class IOUtils {
     }
     
     
-    public static boolean checkMD5(UpdateInfo ui, File updateFile) throws IOException {
-    	
+    public static boolean checkMD5(String md5, File updateFile) throws IOException {
     	String calculatedDigest = calculateMD5(updateFile);
     	
     	Log.d(TAG, "Calculated digest: " + calculatedDigest);
-		Log.d(TAG, "Provided digest: " + ui.md5);
+		Log.d(TAG, "Provided digest: " + md5);
 		
-		return calculatedDigest.equalsIgnoreCase(ui.md5);
+		return calculatedDigest.equalsIgnoreCase(md5);
 		/*
     	
     	String calculatedDigest = calculateMD5(updateFile);
