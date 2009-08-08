@@ -26,7 +26,7 @@ public abstract class IUpdateProcessInfo extends Activity {
 	
 	public abstract void switchToDownloadingLayout(UpdateInfo downloadingUpdate);
 	
-	public abstract void updateDownloadProgress(int downloaded, int total);
+	public abstract void updateDownloadProgress(int downloaded, int total, long StartTime);
 	
 	public abstract void updateDownloadMirror(String mirror);
 }

@@ -96,6 +96,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	private TextView mDownloadedBytesTextView;
 	private TextView mDownloadMirrorTextView;
 	private TextView mDownloadFilenameTextView;
+	private TextView mDownloadSpeedTextView;
+	private TextView mRemainingTimeTextView;
 	private List<UpdateInfo> mAvailableUpdates;
 	//private UpdateInfo mDownloadingUpdate;
 	private File mDestinationFile;
@@ -549,6 +551,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		mDownloadMirrorTextView = (TextView) findViewById(R.id.mirror_text_view);
 		
 		mDownloadFilenameTextView = (TextView) findViewById(R.id.filename_text_view);
+		
+		mDownloadSpeedTextView = (TextView) findViewById(R.id.speed_text_view);
+		mRemainingTimeTextView = (TextView) findViewById(R.id.remaining_time_text_view);
+		
 		if(mMirrorName != null)
 			mDownloadMirrorTextView.setText(mMirrorName);
 		if(mFileName != null)
@@ -634,7 +640,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	}
 	
 	@Override
-	public void updateDownloadProgress(final int downloaded, final int total) {
+	public void updateDownloadProgress(final int downloaded, final int total, final long StartTime) {
 		final ProgressBar pb = mProgressBar;
 		if(pb ==null)return;
 		
@@ -647,7 +653,18 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 					pb.setMax(total);
 				}
 				pb.setProgress(downloaded);
+				
+				//ints: bytes
+				//Time: millseconds
+				//long Time = System.currentTimeMillis() - StartTime;
+				//int Speed = (downloaded/(int)Time)/1024;
+				//if (Speed == 0)
+				//	Speed = 1;
+				//long RemainingTime = ((total - downloaded)/Speed)/1024;
+				
 				mDownloadedBytesTextView.setText((downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB");
+				//mDownloadSpeedTextView.setText(Integer.toString(Speed) + " kb/s");
+				//mRemainingTimeTextView.setText(Long.toString(RemainingTime) + " seconds");
 			}
 		});
 	}

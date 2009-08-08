@@ -101,6 +101,12 @@
     <string name="not_update_downloaded_title">CyanogenMod update downloaded</string>
     <string name="not_update_downloaded_body">{0} is ready to install</string>
     
+    <string name="download_info_filename">Filename: </string>
+    <string name="download_info_mirror">Mirror: </string>
+    <string name="download_info_downloading">Downloading...</string>
+    <string name="download_info_speed">Speed: </string>
+    <string name="download_info_remaining_time">Remaining Time: </string>
+    
     <!-- Preferences keys -->
     <string name="p_key_update_check_freq">prefUpdateCheckFrequency</string>
     <string name="p_key_configured_updates_mod_version">updatesModVersion</string>

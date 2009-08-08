@@ -459,7 +459,6 @@ public class UpdateDownloaderService extends Service {
 		if(contentLength < 0) Log.w(TAG, "unable to determine the update file size");
 		else Log.i(TAG, "Update size: " + (contentLength/1024) + "KB" );
 		
-		
 		byte[] buff = new byte[64 * 1024];
 		int read = 0;
 		int totalDownloaded = 0;
@@ -469,7 +468,7 @@ public class UpdateDownloaderService extends Service {
 			while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0) {
 				fos.write(buff, 0, read);
 				totalDownloaded += read;
-				onProgressUpdate(totalDownloaded, (int)contentLength);
+				onProgressUpdate(totalDownloaded, (int)contentLength, System.currentTimeMillis());
 			}
 			
 			if(read > 0) {
@@ -496,14 +495,14 @@ public class UpdateDownloaderService extends Service {
 		}
 	}
 
-	private void onProgressUpdate(int downloaded, int total) {
+	private void onProgressUpdate(int downloaded, int total, long StartTime) {
 		if(UPDATE_PROCESS_INFO == null) return;
 		
 		if(!mMirrorNameUpdated) {
 			UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
 			mMirrorNameUpdated = true;
 		}
-		UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, total);
+		UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, total, StartTime);
 	}
 
 	private void notifyUser(UpdateInfo ui, File downloadedUpdate) {
