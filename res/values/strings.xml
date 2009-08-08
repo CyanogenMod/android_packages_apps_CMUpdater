@@ -81,6 +81,8 @@
     <string name="verify_and_apply_dialog_title">Verifying</string>
     <string name="verify_and_apply_dialog_message">Verifying update.zip MD5 sum</string>
     
+    <string name="apply_existing_update_md5error_message">Error. MD5 checksum missmatch</string>
+    
     <!-- .service.* Strings -->
     <string name="no_updates_found">No CM updates found</string>
     <string name="not_new_updates_found_ticker">New CM updates found!</string>

@@ -20,8 +20,10 @@
 
 package cmupdater.ui;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -100,8 +102,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	private TextView mDownloadSpeedTextView;
 	private TextView mRemainingTimeTextView;
 	private List<UpdateInfo> mAvailableUpdates;
-	//private UpdateInfo mDownloadingUpdate;
-	private File mDestinationFile;
 	private String mMirrorName;
 	private String mFileName;
 	private UpdateDownloaderService mUpdateDownloaderService;
@@ -184,19 +184,31 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		}
 	};
 	
-	private final class VerifyAndApplyUpdateButtonListener implements View.OnClickListener {
-		
-		private UserTask<File, Void, UpdateInfo> mBgTask;
+	//To Apply Existing Update
+	private final class mApplyExistingButtonListener implements View.OnClickListener
+	{
 		private ProgressDialog mDialog;
-		private File mFile;
-		private List<UpdateInfo> mUpdates;
-		
-		public VerifyAndApplyUpdateButtonListener(File file, List<UpdateInfo> updates) {
-			mFile = file;
-			mUpdates = updates;
-		}
-
-		public void onClick(View v) {
+		private UserTask<File, Void, Boolean> mBgTask;
+		public void onClick(View v)
+		{	
+			if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
+			{
+				new AlertDialog.Builder(UpdateProcessInfo.this)
+					.setTitle(R.string.sdcard_is_not_present_dialog_title)
+					.setMessage(R.string.sdcard_is_not_present_dialog_body)
+					.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener(){
+						public void onClick(DialogInterface dialog, int which)
+						{
+							dialog.dismiss();
+						}
+					})
+					.show();
+				return;
+			}
+			
+			String filename = (String) mUpdatesSpinner.getSelectedItem();
+			File Update = new File(mUpdateFolder + "/" +filename);
+			
 			Resources r = getResources();
 			mDialog = ProgressDialog.show(
 						UpdateProcessInfo.this,
@@ -204,63 +216,92 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 						r.getString(R.string.verify_and_apply_dialog_message),
 						true,
 						true,
-						new DialogInterface.OnCancelListener() {
-							public void onCancel(DialogInterface arg0) {
+						new DialogInterface.OnCancelListener()
+						{
+							public void onCancel(DialogInterface arg0)
+							{
 								mBgTask.cancel(true);
 							}
 						}
 					);
 
-			mBgTask = new MD5CheckerTask(mDialog, mUpdates).execute(mFile);
+			mBgTask = new MD5CheckerTask(mDialog, filename).execute(Update);
 		}
 	}
 	
-	private final class MD5CheckerTask extends UserTask<File, Void, UpdateInfo> {
-		
-		private ProgressDialog mDialog;
-		private List<UpdateInfo> mUpdates;
-		
-		public MD5CheckerTask(ProgressDialog dialog, List<UpdateInfo> updates) {
-			mDialog = dialog;
-			mUpdates = updates;
-		}
+		private final class MD5CheckerTask extends UserTask<File, Void, Boolean>
+		{	
+			private ProgressDialog mDialog;
+			private String mFilename;
+			
+			public MD5CheckerTask(ProgressDialog dialog, String filename)
+			{
+				mDialog = dialog;
+				mFilename = filename;
+			}
 
-		@Override
-		public UpdateInfo doInBackground(File... params) {
-			try {
-				if (params[0].exists() && params[0].canRead()) {
-					String calculatedMD5 = IOUtils.calculateMD5(params[0]);
-					for(UpdateInfo ui : mUpdates) {
-						if(ui.md5.equalsIgnoreCase(calculatedMD5)) return ui;
+			@Override
+			public Boolean doInBackground(File... params)
+			{
+				boolean returnvalue = false;
+				try
+				{
+					File MD5 = new File(params[0]+".md5sum");
+					if (params[0].exists() && params[0].canRead() && MD5.exists() && MD5.canRead())
+					{
+						//Calculate MD5 of Existing Update
+						String calculatedMD5 = IOUtils.calculateMD5(params[0]);
+						//Read the existing MD5SUM
+						FileReader input = new FileReader(MD5);
+						BufferedReader bufRead = new BufferedReader(input);
+						String firstLine = bufRead.readLine();
+						bufRead.close();
+						input.close();
+						//If the content of the File is not empty, compare it
+						if (firstLine != null)
+						{
+							String[] SplittedString = firstLine.split("  ");
+							if(SplittedString[0].equalsIgnoreCase(calculatedMD5))
+								returnvalue = true;
+						}
+						else
+							returnvalue = false;
 					}
 				}
-			} catch (IOException e) {
-				Log.e(TAG, "IOEx while checking MD5 sum", e);
-				return null;
-			}
-			
-			return null;
-		}
-
-		@Override
-		public void onPostExecute(UpdateInfo result) {
-			if(result != null) {
-				Intent i = new Intent(UpdateProcessInfo.this, ApplyUploadActivity.class)
-							.putExtra(ApplyUploadActivity.KEY_UPDATE_INFO, result);
-				startActivity(i);
-			} else {
-				//TODO
-				Toast.makeText(UpdateProcessInfo.this, "Unable to determine the version of update.zip", Toast.LENGTH_LONG).show();
+				catch (IOException e)
+				{
+					Log.e(TAG, "IOEx while checking MD5 sum", e);
+					returnvalue = false;
+				}
+				return returnvalue;
 			}
 
-			mDialog.dismiss();
-		}
+			@Override
+			public void onPostExecute(Boolean result)
+			{
+				UpdateInfo ui = new UpdateInfo();
+				ui.name = "Existing Update";
+				ui.fileName = mFilename;
+				if(result == true)
+				{
+					Intent i = new Intent(UpdateProcessInfo.this, ApplyUploadActivity.class)
+								.putExtra(ApplyUploadActivity.KEY_UPDATE_INFO, ui);
+					startActivity(i);
+				}
+				else
+				{
+					Toast.makeText(UpdateProcessInfo.this, R.string.apply_existing_update_md5error_message, Toast.LENGTH_LONG).show();
+				}
 
-		@Override
-		public void onCancelled() {
-			//TODO cancel MD% check
-		}
-	};
+				mDialog.dismiss();
+			}
+
+			@Override
+			public void onCancelled()
+			{
+				//TODO cancel MD% check
+			}
+		};
 	
 	private final View.OnClickListener mCancelDownloadListener = new View.OnClickListener() {
 
@@ -329,8 +370,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
         URI uri = URI.create(prefs.getUpdateFileURL());
         mUpdateServer = new PlainTextUpdateServer(uri, this);
         
-        String destFileName = getResources().getString(R.string.conf_update_file_name);
-		mDestinationFile = new File(Environment.getExternalStorageDirectory(), destFileName);
+        //String destFileName = getResources().getString(R.string.conf_update_file_name);
+		//mDestinationFile = new File(Environment.getExternalStorageDirectory(), destFileName);
 
 		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
 		
@@ -654,7 +695,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 					filenames);
 			localUpdates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spFoundUpdates.setAdapter(localUpdates);
-			applyUpdateButton.setOnClickListener(new VerifyAndApplyUpdateButtonListener(mDestinationFile, mAvailableUpdates));
+			//applyUpdateButton.setOnClickListener(new VerifyAndApplyUpdateButtonListener(mDestinationFile, mAvailableUpdates));
+			applyUpdateButton.setOnClickListener(new mApplyExistingButtonListener());
 			deleteOldUpdatesButton.setOnClickListener(mDeleteUpdatesButtonListener);
 		}
 		else
