@@ -669,17 +669,12 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 				}
 				pb.setProgress(downloaded);
 				
-				//ints: bytes
-				//Time: millseconds
-				//long Time = System.currentTimeMillis() - StartTime;
-				//int Speed = (downloaded/(int)Time)/1024;
-				//if (Speed == 0)
-				//	Speed = 1;
-				//long RemainingTime = ((total - downloaded)/Speed)/1024;
+				int Speed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
+				long RemainingTime = ((total - downloaded)/Speed)/1000;
 				
 				mDownloadedBytesTextView.setText((downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB");
-				//mDownloadSpeedTextView.setText(Integer.toString(Speed) + " kb/s");
-				//mRemainingTimeTextView.setText(Long.toString(RemainingTime) + " seconds");
+				mDownloadSpeedTextView.setText(Integer.toString(Speed) + " kb/s");
+				mRemainingTimeTextView.setText(Long.toString(RemainingTime) + " seconds");
 			}
 		});
 	}

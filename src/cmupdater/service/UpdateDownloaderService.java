@@ -371,10 +371,9 @@ public class UpdateDownloaderService extends Service {
 				req.addHeader("Cache-Control", "no-cache");
 				md5req.addHeader("Cache-Control", "no-cache");
 				
-				Log.e(TAG, "Trying to download md5sum file from " + md5req.getURI());
+				Log.i(TAG, "Trying to download md5sum file from " + md5req.getURI());
 				md5response = MD5httpClient.execute(md5req);
-				
-				Log.e(TAG, "Trying to download update zip from " + req.getURI());
+				Log.i(TAG, "Trying to download update zip from " + req.getURI());
 				response = httpClient.execute(req);
 				
 				int serverResponse = response.getStatusLine().getStatusCode();
@@ -403,7 +402,7 @@ public class UpdateDownloaderService extends Service {
 					//dumpFile(md5response.getEntity(), MD5File);
 					try
 					{
-						Log.e(TAG, "Trying to Read MD5 hash from response");
+						Log.i(TAG, "Trying to Read MD5 hash from response");
 						HttpEntity temp = md5response.getEntity();
 						InputStreamReader isr = new InputStreamReader(temp.getContent());
 						BufferedReader br = new BufferedReader(isr);
@@ -459,6 +458,8 @@ public class UpdateDownloaderService extends Service {
 		if(contentLength < 0) Log.w(TAG, "unable to determine the update file size");
 		else Log.i(TAG, "Update size: " + (contentLength/1024) + "KB" );
 		
+		long StartTime = System.currentTimeMillis(); 
+		
 		byte[] buff = new byte[64 * 1024];
 		int read = 0;
 		int totalDownloaded = 0;
@@ -468,7 +469,7 @@ public class UpdateDownloaderService extends Service {
 			while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0) {
 				fos.write(buff, 0, read);
 				totalDownloaded += read;
-				onProgressUpdate(totalDownloaded, (int)contentLength, System.currentTimeMillis());
+				onProgressUpdate(totalDownloaded, (int)contentLength, StartTime);
 			}
 			
 			if(read > 0) {
