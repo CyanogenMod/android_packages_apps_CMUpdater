@@ -120,6 +120,7 @@ public class Preferences {
 	}
 	
 	public String getUpdateFileURL() {
+		Log.d(TAG, mPrefs.getString(mRes.getString(R.string.p_update_file_url),  mRes.getString(R.string.conf_update_server_url_def)));
 		return mPrefs.getString(mRes.getString(R.string.p_update_file_url),  mRes.getString(R.string.conf_update_server_url_def));
 	}
 	
