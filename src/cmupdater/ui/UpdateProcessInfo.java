@@ -108,6 +108,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	private Intent mUpdateDownloaderServiceIntent;
 	
 	private File mUpdateFolder;
+	private Spinner mExistingUpdatesSpinner;
 	
 	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection(){
 
@@ -206,7 +207,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 				return;
 			}
 			
-			String filename = (String) mUpdatesSpinner.getSelectedItem();
+			String filename = (String) mExistingUpdatesSpinner.getSelectedItem();
 			File Update = new File(mUpdateFolder + "/" +filename);
 			
 			Resources r = getResources();
@@ -671,7 +672,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		}*/
 		
 		TextView downloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
-		Spinner spFoundUpdates = mUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
+		Spinner spFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
 		Button deleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
 		Button applyUpdateButton = (Button) findViewById(R.id.apply_update_button);
 		View separator = findViewById(R.id.downloaded_update_found_separator);
