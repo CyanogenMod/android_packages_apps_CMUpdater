@@ -163,8 +163,23 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 					.show();
 				return;
 			}
-			//Delete Updates here
-			deleteOldUpdates();
+			else
+			{
+				new AlertDialog.Builder(UpdateProcessInfo.this)
+				.setMessage(R.string.confirm_delete_update_folder_dialog_message)
+				.setPositiveButton(R.string.confirm_delete_update_folder_dialog_yes, new DialogInterface.OnClickListener(){
+					public void onClick(DialogInterface dialog, int which) {
+						//Delete Updates here
+						deleteOldUpdates();
+					}
+				})
+				.setNegativeButton(R.string.confirm_delete_update_folder_dialog_no, new DialogInterface.OnClickListener(){
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				})
+				.show();
+			}
 		}
 	};
 	
