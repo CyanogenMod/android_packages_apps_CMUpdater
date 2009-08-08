@@ -22,6 +22,7 @@ package cmupdater.ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -106,7 +107,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	private UpdateDownloaderService mUpdateDownloaderService;
 	private Intent mUpdateDownloaderServiceIntent;
 	
-	private File mUploadFolder;
+	private File mUpdateFolder;
 	
 	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection(){
 
@@ -331,7 +332,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
         String destFileName = getResources().getString(R.string.conf_update_file_name);
 		mDestinationFile = new File(Environment.getExternalStorageDirectory(), destFileName);
 
-		mUploadFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
+		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
 		
 		mUpdateDownloaderServiceIntent = new Intent(this, UpdateDownloaderService.class);
     }
@@ -629,23 +630,39 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		}*/
 		
 		TextView downloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
+		Spinner spFoundUpdates = mUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
+		Button deleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
 		Button applyUpdateButton = (Button) findViewById(R.id.apply_update_button);
 		View separator = findViewById(R.id.downloaded_update_found_separator);
-		if(mDestinationFile.exists()) {
+		
+		//Outside the if to prevent a empty spinnercontrol
+		FilenameFilter f = new UpdateFilter();
+		File[] files = mUpdateFolder.listFiles(f);
+		//If Folder Exists and Updates are present(with md5files)
+		//TODO: Only show older Versions in the Spinner when Downgrades are enabled
+		if(mUpdateFolder.exists() && mUpdateFolder.isDirectory() && files != null && files.length>0)
+		{
+			//To show only the Filename. Otherwise the whole Path with /sdcard/cm-updates will be shown
+			String[] filenames = new String[files.length];
+			for (int i=0;i<files.length;i++)
+			{
+				filenames[i] = files[i].getName();
+			}
+			ArrayAdapter<String> localUpdates = new ArrayAdapter<String>(
+					this,
+					android.R.layout.simple_spinner_item,
+					filenames);
+			localUpdates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			spFoundUpdates.setAdapter(localUpdates);
 			applyUpdateButton.setOnClickListener(new VerifyAndApplyUpdateButtonListener(mDestinationFile, mAvailableUpdates));
-		} else {
-			separator.setVisibility(View.GONE);
-			applyUpdateButton.setVisibility(View.GONE);
-			downloadedUpdateText.setVisibility(View.GONE);
-		}
-		
-		//Delete Old Versions, do not show Button if Folder is not present
-		Button deleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
-		
-		if (mUploadFolder.exists() && mUploadFolder.isDirectory()) {
 			deleteOldUpdatesButton.setOnClickListener(mDeleteUpdatesButtonListener);
 		}
-		else {
+		else
+		{
+			separator.setVisibility(View.GONE);
+			spFoundUpdates.setVisibility(View.GONE);
+			applyUpdateButton.setVisibility(View.GONE);
+			downloadedUpdateText.setVisibility(View.GONE);
 			deleteOldUpdatesButton.setVisibility(View.GONE);
 		}
 		
@@ -738,12 +755,12 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	
 	private boolean deleteOldUpdates() {
 		boolean success = false;
-		if (mUploadFolder.exists() && mUploadFolder.isDirectory()) {
-	        deleteDir(mUploadFolder);
+		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory()) {
+	        deleteDir(mUpdateFolder);
 	        success=true;
 			Toast.makeText(this, R.string.delete_updates_success_message, Toast.LENGTH_LONG).show();
 		}
-		else if (!mUploadFolder.exists())
+		else if (!mUpdateFolder.exists())
 		{
 			Toast.makeText(this, R.string.delete_updates_noFolder_message, Toast.LENGTH_LONG).show();
 		}
@@ -766,5 +783,18 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
         }
         // The directory is now empty so delete it
         return dir.delete();
+    }
+}
+
+//Class for Checking existing Updates
+class UpdateFilter implements FilenameFilter
+{
+    public boolean accept(File dir, String name)
+    {
+    	boolean status = false;
+    	File MD5 = new File(dir + "/" + name + ".md5sum");
+    	if (MD5.exists() && name.endsWith(".zip"))
+    		status = true;
+    	return status;
     }
 }

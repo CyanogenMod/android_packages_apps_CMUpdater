@@ -78,6 +78,20 @@
 		android:layout_marginBottom="10px"
     	style="@style/TextAppearance.Text" />
 
+	<ScrollView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="15sp"
+		android:layout_marginBottom="15sp">
+		<Spinner
+			android:id="@+id/found_updates_list"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingLeft="10sp"
+			android:layout_gravity="center_horizontal">
+		</Spinner>
+	</ScrollView>
+
 	<Button
     	android:id="@+id/apply_update_button"
 		android:layout_width="wrap_content"
