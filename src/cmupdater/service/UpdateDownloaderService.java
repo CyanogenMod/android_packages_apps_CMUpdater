@@ -138,6 +138,7 @@ public class UpdateDownloaderService extends Service {
 	private WifiManager mWifiManager;
 	
 	private String mUpdateFolder;
+	private String mDownlaodedMD5;
 	
 	 public class LocalBinder extends Binder {
         public UpdateDownloaderService getService() {
@@ -406,8 +407,8 @@ public class UpdateDownloaderService extends Service {
 						HttpEntity temp = md5response.getEntity();
 						InputStreamReader isr = new InputStreamReader(temp.getContent());
 						BufferedReader br = new BufferedReader(isr);
-						updateInfo.md5 = br.readLine().split("  ")[0];
-						Log.d(TAG,"MD5: " + updateInfo.md5);
+						mDownlaodedMD5 = br.readLine().split("  ")[0];
+						Log.d(TAG,"MD5: " + mDownlaodedMD5);
 						br.close();
 						isr.close();
 						
@@ -415,8 +416,8 @@ public class UpdateDownloaderService extends Service {
 							temp.consumeContent();
 						
 						//Write the String in a .md5 File
-						if (updateInfo.md5 != null || !updateInfo.md5.equals(""))	{
-							writeMD5(mDestinationMD5File, updateInfo.md5);
+						if (mDownlaodedMD5 != null || !mDownlaodedMD5.equals(""))	{
+							writeMD5(mDestinationMD5File, mDownlaodedMD5);
 						}
 					}
 					catch (Exception e)
@@ -432,7 +433,7 @@ public class UpdateDownloaderService extends Service {
 						entity.consumeContent();
 					
 					Log.i(TAG, "Update download finished. Performing MD5 verification");
-					if(!IOUtils.checkMD5(updateInfo.md5, mDestinationFile)) {
+					if(!IOUtils.checkMD5(mDownlaodedMD5, mDestinationFile)) {
 						throw new IOException("MD5 verification failed");
 					}
 					
