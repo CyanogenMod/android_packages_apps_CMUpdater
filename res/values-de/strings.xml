@@ -44,7 +44,7 @@
     <string name="available_updates_text">Bitte einen ROM zum Download auswählen:</string>
     <string name="choose_available_update_text">Download</string>
     <string name="no_updates_found_instructions">Keine ROMs gefunden.\nDrücken sie \'Jetzt prüfen\' um manuell nach neuen Updates zu suchen.</string>
-    <string name="downloaded_update_found_text">Eine update.zip Datei wurde gefunden. Wollen sie diese jetzt überprüfen und installieren?</string>
+    <string name="downloaded_update_found_text">Updates im Update Verzeichnis:</string>
     <string name="checking_for_updates">Überprüfe auf neue Updates</string>
     <string name="downloading_update">Downloade Update</string>
     <string name="sdcard_is_not_present_dialog_body">Sie brauchen eine beschreibbare SDKarte um das Update downzuloaden.</string>
@@ -76,6 +76,8 @@
     <string name="verify_and_apply_dialog_title">Überprüfen</string>
     <string name="verify_and_apply_dialog_message">Überprüfe update.zip MD5 Checksumme</string>
     
+    <string name="apply_existing_update_md5error_message">Fehler. MD5 Checksumme falsch</string>
+    
     <!-- .service.* Strings -->
     <string name="no_updates_found">Keine CM Updates gefunden</string>
     <string name="not_new_updates_found_ticker">Neue CM Updates gefunden!</string>
@@ -95,6 +97,16 @@
     <string name="not_update_downloaded_ticker">CyanogenMod Update heruntergeladen</string>
     <string name="not_update_downloaded_title">CyanogenMod Update heruntergeladen</string>
     <string name="not_update_downloaded_body">{0} ist bereit zur Installation</string>
+    
+    <string name="download_info_filename">Dateiname: </string>
+    <string name="download_info_mirror">Mirror: </string>
+    <string name="download_info_downloading">Downloade...</string>
+    <string name="download_info_speed">Geschwindigkeit: </string>
+    <string name="download_info_remaining_time">Verbleibende Zeit: </string>
+    
+    <string name="confirm_delete_update_folder_dialog_message">Update Folder löschen?</string>
+    <string name="confirm_delete_update_folder_dialog_yes">Löschen</string>
+    <string name="confirm_delete_update_folder_dialog_no">Abbrechen</string>
     
     <!-- Preferences Strings -->
     <string name="p_update_check_freq_title">Updateprüfungs Intervall</string>
