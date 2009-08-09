@@ -78,6 +78,9 @@
     
     <string name="apply_existing_update_md5error_message">Fehler. MD5 Checksumme falsch</string>
     
+    <string name="apply_upload_info_message">Diese Version von CM-Updater hat eine reboot Option. When sie auf Update drücken, wird ihr System automatisch neu gestartet.
+Wenn sie ein Backup erstellen wollen, booten sie bitte vorher manuell in den Recovery Modus</string>
+    
     <!-- .service.* Strings -->
     <string name="no_updates_found">Keine CM Updates gefunden</string>
     <string name="not_new_updates_found_ticker">Neue CM Updates gefunden!</string>
