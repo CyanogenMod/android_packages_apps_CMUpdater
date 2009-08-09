@@ -21,8 +21,8 @@
 -->
 <resources>
     <!-- .ui.* Strings -->
-    <string name="apply_now_button_text">Прошить Сейчас</string>
-    <string name="apply_later_button_text">Прошить Позже</string>
+    <string name="apply_now_button_text">Прошить</string>
+    <string name="apply_later_button_text">Позже</string>
     <string name="apply_update_button_text">Проверить и Прошить</string>
     <string name="apply_title_textview_text">{0} готов к прошивке</string>
     <string name="apply_subtitle_textview_text">Примечания к выпуску:</string>
@@ -30,18 +30,22 @@
     <string name="apply_trying_to_get_root_access">Попытка получить административный доступ для перезагрузки</string>
     
     <string name="available_updates_text">Пожалучста выберите прошивку:</string>
-    <string name="choose_available_update_text">Скачать</string>
-    <string name="no_updates_found_instructions">Прошивок не найдено.\nНажмите \'Проверить сечйас\' чтобы вручную проверить наличие новых версий</string>
-    <string name="downloaded_update_found_text">Файл \'update.zip\' был найден. Проверить его и прошить?</string>
+    <string name="choose_available_update_text">Загрузить</string>
+    <string name="no_updates_found_instructions">Прошивок не найдено.\nНажмите \'Проверить\' чтобы вручную проверить наличие новых версий</string>
+    <string name="downloaded_update_found_text">Найден файл \'update.zip\'. Проверить его и прошить?</string>
     <string name="checking_for_updates">Проверяется наличие новой версии</string>
-    <string name="downloading_update">Скачать версию</string>
+    <string name="downloading_update">Загрузка</string>
     <string name="sdcard_is_not_present_dialog_body">Требуется карта SD с доступом писания</string>
     <string name="sdcard_is_not_present_dialog_title">Карта SD не найдена</string>
     <string name="sdcard_is_not_present_dialog_ok_button">Да</string>
     <string name="current_version_text">Текущая Версия: {0}</string>
+    <string name="delete_updates_text">Удалить прошивки</string>
+    <string name="delete_updates_success_message">Папка с прошивками удалена</string>
+    <string name="delete_updates_failure_message">Ошибка при удалении папки прошивок</string>
+    <string name="delete_updates_noFolder_message">Папки с прошивками не существует</string>
     
     <string name="apply_update_dialog_title">Подтверждение</string>
-    <string name="apply_update_dialog_text">Внимание, обнавляемся на {0}.\nЕсли вы нажмете \'Прошить\', телефон перезагрузится в режим восстановки чтоб обновить прошивку.</string>
+    <string name="apply_update_dialog_text">Внимание, обнавляемся на {0}.\nПри нажатии кнопки \'Прошить\', телефон перезагрузится в режим восстановки для обновления прошивки.</string>
 	<string name="apply_update_dialog_update_button">Прошить</string>
 	<string name="apply_update_dialog_backup_and_update_button">Сохранить резерв и Прошить</string>
 	<string name="apply_update_dialog_cancel_button">Отменить</string>
@@ -50,7 +54,8 @@
 	<string name="check_now_button_text">Проверить</string>
 	
 	<string name="menu_check_now">Проверить</string>
-    <string name="menu_config">Конфигурация</string><string name="menu_about">О Программе</string>
+    <string name="menu_config">Конфигурация</string>
+	<string name="menu_about">О Программе</string>
     <string name="cancel_download_buton_text">Отменить Загрузку</string>
     <string name="confirm_download_cancelation_dialog_message">Пожалуйста подтвердите отмену загрузки</string>
     <string name="confirm_download_cancelation_dialog_yes">Отменить</string>
@@ -59,27 +64,42 @@
     
     <string name="verify_and_apply_dialog_title">Проверка</string>
     <string name="verify_and_apply_dialog_message">Проверяется MD5 подпись файла \'update.zip\'</string>
-    
+
+    <string name="apply_existing_update_md5error_message">Ошибка: MD5 подпись загруженного файла не соответствует с серверной</string>
+
+	<string name="apply_upload_info_message">ВНИМАНИЕ! ОПЦИЯ ПЕРЕЗАГРУЗКИ ВКЛЮЧЕНА ПО УМОЛЧАНИЮ. НАЖАТИЕ КНОПКИ \'ПРОШИТЬ\' ПЕРЕЗАГРУЗИТ ТЕЛЕФОН И НАЧНЕТ ОПЕРАЦИЮ АВТОМАТИЧЕСКИ.
+ПОЖАЛУЙСТА ПЕРЕГРУЗИТЕСЬ ВРУЧНУЮ В РЕЖИМ ВОССТАНОВЛЕНИЯ, ЕСЛИ НЕОБХОДИМО СОХРАНИТЬ РЕЗЕРВНЫЙ ЗАПАС.</string>
+	
     <!-- .service.* Strings -->
     <string name="no_updates_found">Новых версий прошивки не найдено.</string>
     <string name="not_new_updates_found_ticker">Найдена новая версия!</string>
     <string name="not_new_updates_found_title">Найдена новая версия</string>
-    <string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} найдено</string>
+    <string name="not_new_updates_found_body">{0,choice,0#версий найдено|1#Одна версия найдена|1&lt;{0, number} версий найдено}</string>
     <string name="exception_while_updating">Ошибка в связи с сервером обновления</string>
     <string name="exception_while_downloading">Ошибка при загрузке файла</string>
-    
+	
     <string name="not_update_check_error_ticker">Ошибка при проверке новых версий</string>
     <string name="not_update_check_error_title">Ошибка при проверке новых версий CM ОС</string>
     <string name="not_update_check_error_body">Попробуйте по позже.</string>
     
     <string name="not_update_download_error_ticker">Ошибка при скачивании файла обновления прошивки</string>
     <string name="not_update_download_error_title">Ошибка при скачивании файла обновления прошивки</string>
-    <string name="not_update_download_error_body">Попробуйте по позже.</string>
+    <string name="not_update_download_error_body">Попробуйте позже.</string>
     
     <string name="not_update_downloaded_ticker">Файл обновления загружен</string>
     <string name="not_update_downloaded_title">Файл обновления загружен</string>
     <string name="not_update_downloaded_body">{0} готов к прошивке</string>
+
+    <string name="download_info_filename">Имя файла: </string>
+    <string name="download_info_mirror">Адрес: </string>
+    <string name="download_info_downloading">Загрузка...</string>
+    <string name="download_info_speed">Скорость: </string>
+    <string name="download_info_remaining_time">Осталось: </string>
     
+    <string name="confirm_delete_update_folder_dialog_message">Вытереть Папку Загрузок?</string>
+    <string name="confirm_delete_update_folder_dialog_yes">Вытереть</string>
+    <string name="confirm_delete_update_folder_dialog_no">Отменить</string>
+
     <!-- Preferences Strings -->
     <string name="p_update_check_freq_title">Частота Проверок</string>
     <string name="p_update_check_freq_summary">Как часто проверять наличие новых версий</string>
@@ -90,17 +110,15 @@
     <string name="p_updates_mod_version_title">Версия Системы</string>
     <string name="p_updates_mod_version_summary">За какой весрией следить</string>
     
-    <string name="p_display_older_mod_versions_title">Показывать Старые Версии</string>
-    <string name="p_display_older_mod_versions_summary">Быдуд показаны все предыдущие весрии</string>
+    <string name="p_display_older_mod_versions_title">Все Версии</string>
+    <string name="p_display_older_mod_versions_summary">Быдут показаны все предыдущие весрии (даже старые)</string>
     
-    <string name="p_display_allow_experimental_versions_title">Экспериментальные Версии</string>
+    <string name="p_display_allow_experimental_versions_title">Экспериментальные</string>
     <string name="p_display_allow_experimental_versions_summary">Следить за экспериментальными (не стабильными) версиями</string>
     
-    <string name="p_do_nandroid_backup_title">Nandroid Резервный Запас</string>
+    <string name="p_do_nandroid_backup_title">Резервный Запас</string>
     <string name="p_do_nandroid_backup_summary">Сохранить резервный запас системы про помощи программы Nandroid перед обновлением</string>
     
     <string name="p_notification_ringtone_title">Звонок Уведомления</string>
     <string name="p_notification_ringtone_summary">Выбрать звонок уведомления о новой версии</string>
-    
-    
 </resources>
