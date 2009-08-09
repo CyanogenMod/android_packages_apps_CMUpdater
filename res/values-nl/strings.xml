@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  CM Updater: Auto-updater for modified Android OS
+ 
+  Copyright (c) 2009 Sergi Vélez
+ 
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+ 
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+  for more details.
+ 
+  You should have received a copy of the GNU General Public License along
+  with this program; if not, write to the Free Software Foundation, Inc.,
+  59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ 
+-->
+<resources>
+    
+    <string name="app_name">CM Updater</string>
+    
+    
+    <!-- About Strings -->
+    <string name="about_comments">Auto-updater voor de CyanogenMod Android OS.</string>
+    <string name="about_credits">Dank aan Sergi Vélez voor de orginele JFUpdater. Daarnaast ook dank aan garok89, prash, willmav5000, tuxfoo, matt_stang, DirectMatrix, amarkow2, FireFart van XDA-Developers.\n\nVeel dank aan Cyanogen voor zijn fantastische builds!\n\nsenab - Chris Banes</string>
+    <string name="about_copyright">Copyright © 2009 Sergi Vélez</string><!-- Add your name here, separated with comma's, if you helped out --> 
+    <string name="about_website_label">CM Updater op Google Code</string> 
+    <string name="about_website_url">http://code.google.com/p/cyanogen-updater/</string>
+    <string name="about_email">http://forum.xda-developers.com/forumdisplay.php?f=448</string>
+
+    <!-- .ui.* Strings -->
+    <string name="apply_now_button_text">Nu toepassen</string>
+    <string name="apply_later_button_text">Later toepassen</string>
+    <string name="apply_update_button_text">Verifiëren &amp; Toepassen</string>
+    <string name="apply_title_textview_text">{0} is klaar om toegepast te worden</string>
+    <string name="apply_subtitle_textview_text">Release notes:</string>
+    <string name="apply_unable_to_reboot_toast">Onmogelijk om in Recovery te herstarten</string>
+    <string name="apply_trying_to_get_root_access">Bezig om root access te krijgen in te herstarten in recovery mode</string>
+    
+    <string name="available_updates_text">Selecteer alstublieft de ROM om te downloaden:</string>
+    <string name="choose_available_update_text">Download</string>
+    <string name="no_updates_found_instructions">Geen ROMs gevonden.\nDruk \'Controleer nu\' om handmatig voor updates te zoeken.</string>
+    <string name="downloaded_update_found_text">Updates gevonden in de Update Folder:</string>
+    <string name="checking_for_updates">Bezig met controleren voor updates</string>
+    <string name="downloading_update">Bezig met downloaden van update</string>
+    <string name="sdcard_is_not_present_dialog_body">Je moet een beschrijfbare SD kaart hebben om deze update te downloaden</string>
+    <string name="sdcard_is_not_present_dialog_title">Geen SDCard gevonden</string>
+    <string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
+    <string name="current_version_text">Huidige versie: {0}</string>
+    <string name="delete_updates_text">Verwijder updates</string>
+    <string name="delete_updates_success_message">Update Folder verwijderd</string>
+    <string name="delete_updates_failure_message">Er is een fout opgetreden tijdens het verwijderen van de Update Folder</string>
+    <string name="delete_updates_noFolder_message">Update Folder kon niet gevonden worden</string>
+    
+    <string name="apply_update_dialog_title">Confirmatie</string>
+    <string name="apply_update_dialog_text">Je staat op het punt om te upgraden naar {0}.\nAls je op update drukt, zal de telefoon herstarten in recovery modus om de update toe te passen.</string>
+	<string name="apply_update_dialog_update_button">Update</string>
+	<string name="apply_update_dialog_backup_and_update_button">Backup &amp; Toepassen</string>
+	<string name="apply_update_dialog_cancel_button">Annuleren</string>
+	
+	<string name="no_updates_no_mod_text">Jouw systeem draait een niet ondersteunde OS mod (Versie {0}).</string>
+	<string name="check_now_button_text">Controleer nu</string>
+	
+	<string name="menu_check_now">Controleer nu</string>
+    <string name="menu_config">Configuratie</string><string name="menu_about">Info</string>
+    <string name="cancel_download_buton_text">Annuleer Download</string>
+    <string name="confirm_download_cancelation_dialog_message">Weet je zeker dat je de huidige download wilt annuleren?</string>
+    <string name="confirm_download_cancelation_dialog_yes">Ja</string>
+    <string name="confirm_download_cancelation_dialog_no">Nee</string>
+    <string name="download_canceled_toast_message">Download geannuleerd</string>
+    
+    <string name="verify_and_apply_dialog_title">Verifiëren</string>
+    <string name="verify_and_apply_dialog_message">Bezig met Verifiëren van update.zip MD5 sum</string>
+    
+    <string name="apply_existing_update_md5error_message">Fout. MD5 checksum komt niet overeen</string>
+    
+    <!-- .service.* Strings -->
+    <string name="no_updates_found">Geen CM updates gevonden</string>
+    <string name="not_new_updates_found_ticker">Nieuwe CM updates gevonden!</string>
+    <string name="not_new_updates_found_title">Nieuwe CM updates gevonden</string>
+    <string name="not_new_updates_found_body">{0,choice,0#updates|1#Een update|1&lt;{0, number} updates} gevonden</string>
+    <string name="exception_while_updating">Een fout is opgetreden bij het verbinden naar de CM Update Server</string>
+    <string name="exception_while_downloading">Een fout is opgetreden bij het downloaden van een CM Update</string>
+    
+    <string name="not_update_check_error_ticker">Controle voor CM updates is mislukt</string>
+    <string name="not_update_check_error_title">Niet mogelijk om te controleren voor nieuwe CM OS updates</string>
+    <string name="not_update_check_error_body">Probeer het a.u.b later nog een keer.</string>
+    
+    <string name="not_update_download_error_ticker">Er is een fout opgetreden tijdens het downloaden van de update</string>
+    <string name="not_update_download_error_title">Er is een fout opgetreden tijdens het downloaden van de update</string>
+    <string name="not_update_download_error_body">Probeer het a.u.b later nog een keer.</string>
+    
+    <string name="not_update_downloaded_ticker">CyanogenMod update gedownload</string>
+    <string name="not_update_downloaded_title">CyanogenMod update gedownload</string>
+    <string name="not_update_downloaded_body">{0} is klaar voor installatie</string>
+    
+    <string name="download_info_filename">Bestandsnaam: </string>
+    <string name="download_info_mirror">Alternatief: </string>
+    <string name="download_info_downloading">Bezig met downloaden...</string>
+    <string name="download_info_speed">Snelheid: </string>
+    <string name="download_info_remaining_time">Resterende tijd: </string>
+    
+    <string name="confirm_delete_update_folder_dialog_message">Verwijder de Update Folder?</string>
+    <string name="confirm_delete_update_folder_dialog_yes">Verwijder</string>
+    <string name="confirm_delete_update_folder_dialog_no">Annuleer</string>
+    
+    <!-- Preferences Strings -->
+    <string name="p_update_check_freq_title">Update controle frequentie</string>
+    <string name="p_update_check_freq_summary">Stel de update controle freqentie in</string>
+    
+    <string name="p_update_file_url_title">Update Server</string>
+    <string name="p_update_file_url_summary">Stel de URL van de update file in</string>
+    
+    <string name="p_updates_mod_version_title">System Mod Versie</string>
+    <string name="p_updates_mod_version_summary">Stel de mod versie in waarvoor je updates wilt ontvangen</string>
+    
+    <string name="p_display_older_mod_versions_title">Alle Updates weergeven</string>
+    <string name="p_display_older_mod_versions_summary">Geef alle updates weer, inclusief oude versies</string>
+    
+    <string name="p_display_allow_experimental_versions_title">Experimentele Builds</string>
+    <string name="p_display_allow_experimental_versions_summary">Geef alle updates weer die experimenteel zijn (niet-stabiel)</string>
+    
+    <string name="p_do_nandroid_backup_title">Nandroid Backup</string>
+    <string name="p_do_nandroid_backup_summary">Wil je een Nandroid backup maken?</string>
+    
+    <string name="p_notification_ringtone_title">Notificatie Ringtone</string>
+    <string name="p_notification_ringtone_summary">Kies een ringtone voor CM Updater notificaties</string>
+</resources>
