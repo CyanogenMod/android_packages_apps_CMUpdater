@@ -27,18 +27,12 @@ import java.io.InputStreamReader;
 import java.security.InvalidParameterException;
 
 import android.util.Log;
-import cmupdater.utils.md5.MD5;
 
 public class IOUtils {
     
     private static final char[] TABLE = {'0','1','2','3','4','5','6','7','8','9', 'A','B','C','D','E','F'};
     private static final String TAG = "IOUtils";
-    private static final boolean MD5_NATIVE = true;
     private static final String MD5_COMMAND = "md5sum";
-    
-	static {
-		if(!MD5_NATIVE) MD5.initNativeLibrary(true);
-	}
     
     //Non instantiable class
     private IOUtils() {
@@ -114,87 +108,32 @@ public class IOUtils {
 		Log.d(TAG, "Provided digest: " + md5);
 		
 		return calculatedDigest.equalsIgnoreCase(md5);
-		/*
-    	
-    	String calculatedDigest = calculateMD5(updateFile);
-    	
-    	Log.d(TAG, "Calculated digest: " + calculatedDigest);
-		Log.d(TAG, "Provided digest: " + ui.displayName);
-		
-		return calculatedDigest.equalsIgnoreCase(ui.md5);
-    	/*
-		byte[] buff = new byte[64 * 1024];
-		//FileInputStream fis = new FileInputStream(updateFile);
-		MessageDigest md;
-		try {
-			md = (MessageDigest) mDigest.clone();
-		} catch (CloneNotSupportedException e) {
-			Log.e(TAG, "Unable to clone digest instance.", e);
-			throw new IOException("Unable to perform MD5 verification");
-		}
-		
-		DigestInputStream dis = new DigestInputStream(new FileInputStream(updateFile), md);
-		try {
-			while(  dis.read(buff) > 0 );
-		} finally {
-			dis.close();
-		}
-		
-		String calculatedDigest = new String(IOUtils.toCharArray(md.digest()));
-		
-		Log.d(TAG, "Calculated digest: " + calculatedDigest);
-		Log.d(TAG, "Provided digest: " + ui.md5);
-		
-		return calculatedDigest.equalsIgnoreCase(ui.md5);
-		*/
 	}
 	
     public static String calculateMD5(File updateFile) throws IOException {
     	String calculatedDigest;
-    	if (MD5_NATIVE) {
-	    	Process process = Runtime.getRuntime().exec(new String[]{
-	    			MD5_COMMAND,
-	    			updateFile.getAbsolutePath()
-	    	});
-	    	
-	    	try {
-		    	process.getOutputStream().close();
-		    	BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()), 1024);
-		    	calculatedDigest = br.readLine();
-		    	if(calculatedDigest == null || calculatedDigest.length() < 32) throw new IOException("Returned String is not a MD5 sum: " + calculatedDigest);
-		    	
-		    	calculatedDigest = calculatedDigest.substring(0, 32);
-	    	} finally {
-	    		process.destroy();
-	    	}
-	    	try {
-				process.waitFor();
-		    	Log.d(TAG, MD5_COMMAND + " exit value:" + process.exitValue());
-			} catch (InterruptedException e) {	}
-    	}
-		else {
-			// use java MD5 calculation
-			//MD5 fileMD5 = new MD5();
-			calculatedDigest = MD5.asHex((MD5.getHash(updateFile)));
+		Process process = Runtime.getRuntime().exec(
+				new String[] { MD5_COMMAND, updateFile.getAbsolutePath() });
+
+		try {
+			process.getOutputStream().close();
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					process.getInputStream()), 1024);
+			calculatedDigest = br.readLine();
+			if (calculatedDigest == null || calculatedDigest.length() < 32)
+				throw new IOException("Returned String is not a MD5 sum: "
+						+ calculatedDigest);
+
+			calculatedDigest = calculatedDigest.substring(0, 32);
+		} finally {
+			process.destroy();
+		}
+		try {
+			process.waitFor();
+			Log.d(TAG, MD5_COMMAND + " exit value:" + process.exitValue());
+		} catch (InterruptedException e) {
 		}
        	
     	return calculatedDigest;
-    	/*
-    	Log.i(TAG, "Calculating MD5 for " + updateFile.getAbsolutePath());
-		MessageDigest digest = mDigest;
-		byte[] buff = new byte[256 * 1024];
-		FileInputStream fis = new FileInputStream(updateFile);
-		int read;
-		
-		try {
-			while( (read = fis.read(buff)) > 0 ) {
-				digest.update(buff, 0, read);
-			}
-		} finally {
-			fis.close();
-		}
-
-		return new String(IOUtils.toCharArray(digest.digest()));
-		*/
 	}
 }
