@@ -47,8 +47,7 @@
 		android:layout_margin="10px"
 		android:editable="false"
 		android:scrollbars="vertical" 
-		android:text="THIS VERSION OF CM UPDATER HAS THE REBOOT OPTION ENABLED, SO CLICKING ON APPLY NOW WILL ACTUALLY DO SO.
-PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT TO PERFORM A BACKUP"/>
+		android:text="@string/apply_upload_info_message"/>
     <LinearLayout
     	android:orientation="horizontal"
 	    android:layout_width="fill_parent"

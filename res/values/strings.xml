@@ -82,6 +82,9 @@
     
     <string name="apply_existing_update_md5error_message">Error. MD5 checksum missmatch</string>
     
+    <string name="apply_upload_info_message">THIS VERSION OF CM UPDATER HAS THE REBOOT OPTION ENABLED, SO CLICKING ON APPLY NOW WILL ACTUALLY DO SO.
+PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT TO PERFORM A BACKUP</string>
+    
     <!-- .service.* Strings -->
     <string name="no_updates_found">No CM updates found</string>
     <string name="not_new_updates_found_ticker">New CM updates found!</string>
