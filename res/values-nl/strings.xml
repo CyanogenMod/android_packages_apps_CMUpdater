@@ -20,18 +20,6 @@
  
 -->
 <resources>
-    
-    <string name="app_name">CM Updater</string>
-    
-    
-    <!-- About Strings -->
-    <string name="about_comments">Auto-updater voor de CyanogenMod Android OS.</string>
-    <string name="about_credits">Dank aan Sergi Vélez voor de orginele JFUpdater. Daarnaast ook dank aan garok89, prash, willmav5000, tuxfoo, matt_stang, DirectMatrix, amarkow2, FireFart van XDA-Developers.\n\nVeel dank aan Cyanogen voor zijn fantastische builds!\n\nsenab - Chris Banes</string>
-    <string name="about_copyright">Copyright © 2009 Sergi Vélez</string><!-- Add your name here, separated with comma's, if you helped out --> 
-    <string name="about_website_label">CM Updater op Google Code</string> 
-    <string name="about_website_url">http://code.google.com/p/cyanogen-updater/</string>
-    <string name="about_email">http://forum.xda-developers.com/forumdisplay.php?f=448</string>
-
     <!-- .ui.* Strings -->
     <string name="apply_now_button_text">Nu toepassen</string>
     <string name="apply_later_button_text">Later toepassen</string>

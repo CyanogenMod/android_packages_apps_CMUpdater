@@ -20,18 +20,6 @@
  
 -->
 <resources>
-    
-    <string name="app_name">Обновитель Прошивки CM</string>
-    
-    
-    <!-- About Strings -->
-    <string name="about_comments">Автоматический Обновитель Прошивки CyanogenMod для Android ОС.</string>
-    <string name="about_credits">Спасибо Sergi Vélez за оригинал программы JFUpdater. Так-же благодарности garok89, prash, willmav5000, tuxfoo, matt_stang, DirectMatrix, amarkow2, FireFart из форума XDA-Developers.\n\nОгромное спасибо Cyanogen за его работу над прошивкой!\n\nsenab - Chris Banes</string>
-    <string name="about_copyright">Авторские права © 2009 Sergi Vélez</string><!-- Add your name here, separated with comma's, if you helped out --> 
-    <string name="about_website_label">CM Updater на сайте Google Code</string> 
-    <string name="about_website_url">http://code.google.com/p/cyanogen-updater/</string>
-    <string name="about_email">http://forum.xda-developers.com/forumdisplay.php?f=448</string>
-
     <!-- .ui.* Strings -->
     <string name="apply_now_button_text">Прошить Сейчас</string>
     <string name="apply_later_button_text">Прошить Позже</string>

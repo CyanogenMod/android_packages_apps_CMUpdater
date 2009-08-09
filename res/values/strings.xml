@@ -26,7 +26,7 @@
     
     <!-- About Strings -->
     <string name="about_comments">Auto-updater for the CyanogenMod Android OS.</string>
-    <string name="about_credits">Thanks to Sergi Vélez for the original JFUpdater. Then thanksto garok89, prash, willmav5000, tuxfoo, matt_stang, DirectMatrix, amarkow2, FireFart from XDA-Developers.\n\nBig thanks to Cyanogen for his superb builds!\n\nsenab - Chris Banes</string>
+    <string name="about_credits">Thanks to Sergi Vélez for the original JFUpdater.\nThread Starter: garok89 - Ross McAusland\nProgrammer: FireFart - Christian Mehlmauer\nProgrammer: senab - Chris Banes\nGraphics: prash\nGraphics: matt_stang\nBeta-Testers: willmav5000, tuxfoo, DirectMatrix, amarkow2\nAnd big thanks to all the guys @ XDA for the translations and other stuff ;)\n\nBig thanks to Cyanogen for his superb builds!\n\n</string>
     <string name="about_copyright">Copyright © 2009 Sergi Vélez</string><!-- Add your name here, separated with comma's, if you helped out --> 
     <string name="about_website_label">CM Updater at Google Code</string> 
     <string name="about_website_url">http://code.google.com/p/cyanogen-updater/</string>
