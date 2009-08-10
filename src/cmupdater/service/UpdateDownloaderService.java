@@ -471,7 +471,8 @@ public class UpdateDownloaderService extends Service {
 		int totalDownloaded = 0;
 		FileOutputStream fos = new FileOutputStream(destinationFile);
 		InputStream is = entity.getContent();
-		try {
+		try
+		{
 			while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0) {
 				fos.write(buff, 0, read);
 				totalDownloaded += read;
@@ -483,10 +484,17 @@ public class UpdateDownloaderService extends Service {
 			}
 
 			fos.flush();
-		} finally {
+			fos.close();
+		}
+		catch(Exception e)
+		{
+			fos.close();
+			destinationFile.delete();
+		}
+		finally
+		{
 			//is.close();
 			buff = null;
-			fos.close();
 		}
 	}
 
@@ -515,6 +523,9 @@ public class UpdateDownloaderService extends Service {
 	private void notifyUser(UpdateInfo ui, File downloadedUpdate) {
 		if(downloadedUpdate == null) {
 			Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_LONG).show();
+			mHandlerThread.interrupt();
+			UpdateProcessInfo upi = new UpdateProcessInfo();
+			upi.switchToUpdateChooserLayout(null);
 			return;
 		}
 		
