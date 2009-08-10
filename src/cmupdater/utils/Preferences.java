@@ -129,7 +129,7 @@ public class Preferences {
 	}
 	
 	public boolean doNandroidBackup() {
-		return mPrefs.getBoolean(mRes.getString(R.string.p_do_nandroid_backup), true);
+		return mPrefs.getBoolean(mRes.getString(R.string.p_do_nandroid_backup), false);
 	}
 	
 	public String getUpdateFolder() {
