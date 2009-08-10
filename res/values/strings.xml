@@ -39,7 +39,7 @@
     <!-- .ui.* Strings -->
     <string name="apply_now_button_text">Apply Now</string>
     <string name="apply_later_button_text">Apply Later</string>
-    <string name="apply_update_button_text">Verify &amp; Apply</string>
+    <string name="apply_update_button_text">Apply Update</string>
     <string name="apply_title_textview_text">{0} is ready to be applied</string>
     <string name="apply_subtitle_textview_text">Release notes:</string>
     <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
