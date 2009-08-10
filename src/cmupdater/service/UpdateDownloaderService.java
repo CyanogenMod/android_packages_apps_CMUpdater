@@ -508,7 +508,14 @@ public class UpdateDownloaderService extends Service {
 		catch(Exception e)
 		{
 			fos.close();
-			destinationFile.delete();
+			try
+			{
+				destinationFile.delete();
+			}
+			catch (Exception ex)
+			{
+				Log.e(TAG, "Unable to delete downlaoded File. Continue anyway. Message: "+ ex.getMessage());
+			}
 		}
 		finally
 		{
@@ -542,9 +549,9 @@ public class UpdateDownloaderService extends Service {
 	private void notifyUser(UpdateInfo ui, File downloadedUpdate) {
 		if(downloadedUpdate == null) {
 			Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_LONG).show();
-			mHandlerThread.interrupt();
-			UpdateProcessInfo upi = new UpdateProcessInfo();
-			upi.switchToUpdateChooserLayout(null);
+//			mHandlerThread.interrupt();
+//			UpdateProcessInfo upi = new UpdateProcessInfo();
+//			upi.switchToUpdateChooserLayout(null);
 			return;
 		}
 
