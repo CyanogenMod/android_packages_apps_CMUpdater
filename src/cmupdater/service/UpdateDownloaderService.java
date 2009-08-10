@@ -480,7 +480,7 @@ public class UpdateDownloaderService extends Service {
 			fos.flush();
 		} finally {
 			//is.close();
-			//entity.consumeContent();
+			buff = null;
 			fos.close();
 		}
 	}
