@@ -456,7 +456,11 @@ public class UpdateDownloaderService extends Service {
 
 	private void dumpFile(HttpEntity entity, File destinationFile) throws IOException {
 		long contentLength = entity.getContentLength();
-		if(contentLength < 0) Log.w(TAG, "unable to determine the update file size");
+		if(contentLength <= 0)
+		{
+			Log.w(TAG, "unable to determine the update file size, Set ContentLength to 1024");
+			contentLength = 1024;
+		}
 		else Log.i(TAG, "Update size: " + (contentLength/1024) + "KB" );
 		
 		long StartTime = System.currentTimeMillis(); 
