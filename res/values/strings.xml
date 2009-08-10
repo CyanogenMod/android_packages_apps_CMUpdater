@@ -124,7 +124,10 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     <string name="p_do_nandroid_backup">doNandroidBackup</string>
     <string name="p_display_older_mod_versions_def_value">false</string>
     <string name="p_key_notification_ringtone">prefNotificationRingtone</string>
+    <string name="p_update_file_url_screen">prefUpdateFileURLScreen</string>
     <string name="p_update_file_url">prefUpdateFileURL</string>
+    <string name="p_update_file_url_qr">prefUpdateFileURLQr</string>
+    <string name="p_update_file_url_def">prefUpdateFileURLDef</string>
     
     <!-- Preferences Strings -->
     <string name="p_update_check_freq_title">Update Checking frequency</string>
@@ -147,6 +150,15 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     
     <string name="p_notification_ringtone_title">Notification Ringtone</string>
     <string name="p_notification_ringtone_summary">Choose a ringtone for CM Updater alerts</string>
+    
+    <string name="p_update_file_url_screen_title">Update Server</string>
+    <string name="p_update_file_url_screen_summary">Change the Update Server</string>
+    
+    <string name="p_update_file_url_def_title">Reset Update Server</string>
+    <string name="p_update_file_url_def_summary">Reset the location of the Update Server back to default</string>
+    
+    <string name="p_update_file_url_qr_title">Scan Barcode</string>
+    <string name="p_update_file_url_qr_summary">Scan QR Code for Update File URL</string>
     
     
 </resources>

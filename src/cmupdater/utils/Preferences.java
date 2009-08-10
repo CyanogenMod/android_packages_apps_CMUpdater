@@ -124,6 +124,12 @@ public class Preferences {
 		return mPrefs.getString(mRes.getString(R.string.p_update_file_url),  mRes.getString(R.string.conf_update_server_url_def));
 	}
 	
+	public void setUpdateFileURL(String updateFileURL) {
+		Editor editor = mPrefs.edit();
+		editor.putString(mRes.getString(R.string.p_update_file_url), updateFileURL);
+		if(!editor.commit()) Log.e(TAG, "Unable to write Update File URL");
+	}
+	
 	public boolean allowExperimental() {
 		return mPrefs.getBoolean(mRes.getString(R.string.p_display_allow_experimental_versions), false);
 	}

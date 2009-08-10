@@ -1,79 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  JF Updater: Auto-updater for modified Android OS
- 
-  Copyright (c) 2009 Sergi Vélez
- 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or
-  (at your option) any later version.
- 
-  This program is distributed in the hope that it will be useful, but
-  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
-  for more details.
- 
-  You should have received a copy of the GNU General Public License along
-  with this program; if not, write to the Free Software Foundation, Inc.,
-  59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
- 
--->
-<PreferenceScreen  
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-	
-    <ListPreference  
-        android:key="@string/p_key_update_check_freq"  
-        android:title="@string/p_update_check_freq_title"  
-        android:summary="@string/p_update_check_freq_summary"
-        android:entries="@array/update_frequency"
-        android:entryValues="@array/update_frequency_values"
-        android:defaultValue="@string/p_update_check_freq_def_value" />
-        
-    <RingtonePreference
-        android:key="@string/p_key_notification_ringtone"  
-        android:title="@string/p_notification_ringtone_title"  
-        android:summary="@string/p_notification_ringtone_summary" 
-        android:ringtoneType="notification"/>
-	
-<!--
-	<ListPreference  
-        android:key="@string/p_key_configured_updates_mod_version"  
-        android:title="@string/p_updates_mod_version_title"  
-        android:summary="@string/p_updates_mod_version_summary"
-        android:entries="@array/updates_mod_types"
-        android:entryValues="@array/updates_mod_types_values" />
--->
+	<!--
+		JF Updater: Auto-updater for modified Android OS Copyright (c) 2009
+		Sergi Vélez This program is free software; you can redistribute it
+		and/or modify it under the terms of the GNU General Public License as
+		published by the Free Software Foundation; either version 2 of the
+		License, or (at your option) any later version. This program is
+		distributed in the hope that it will be useful, but WITHOUT ANY
+		WARRANTY; without even the implied warranty of MERCHANTABILITY or
+		FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+		for more details. You should have received a copy of the GNU General
+		Public License along with this program; if not, write to the Free
+		Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+		02111-1307 USA
+	-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
 
-<!--
+	<ListPreference android:key="@string/p_key_update_check_freq"
+		android:title="@string/p_update_check_freq_title" android:summary="@string/p_update_check_freq_summary"
+		android:entries="@array/update_frequency" android:entryValues="@array/update_frequency_values"
+		android:defaultValue="@string/p_update_check_freq_def_value" />
 
-    <CheckBoxPreference  
-        android:key="@string/p_do_nandroid_backup"  
-        android:title="@string/p_do_nandroid_backup_title"  
-        android:summary="@string/p_do_nandroid_backup_summary"
-        android:defaultValue="true" />
+	<RingtonePreference android:key="@string/p_key_notification_ringtone"
+		android:title="@string/p_notification_ringtone_title" android:summary="@string/p_notification_ringtone_summary"
+		android:ringtoneType="notification" />
 
--->
-        
-    <CheckBoxPreference  
-        android:key="@string/p_display_older_mod_versions"  
-        android:title="@string/p_display_older_mod_versions_title"  
-        android:summary="@string/p_display_older_mod_versions_summary"
-        android:defaultValue="@string/p_display_older_mod_versions_def_value" />
-        
-    <CheckBoxPreference  
-        android:key="@string/p_display_allow_experimental_versions"  
-        android:title="@string/p_display_allow_experimental_versions_title"  
-        android:summary="@string/p_display_allow_experimental_versions_summary"
-        android:defaultValue="false" />
-        
-    <EditTextPreference android:key="@string/p_update_file_url"
-        android:title="@string/p_update_file_url_title"
-        android:summary="@string/p_update_file_url_summary"
-        android:dialogTitle="@string/p_update_file_url_title"
-        android:defaultValue="@string/conf_update_server_url_def"
-        android:singleLine="false" />
+	<!--
+		<ListPreference
+		android:key="@string/p_key_configured_updates_mod_version"
+		android:title="@string/p_updates_mod_version_title"
+		android:summary="@string/p_updates_mod_version_summary"
+		android:entries="@array/updates_mod_types"
+		android:entryValues="@array/updates_mod_types_values" />
+	-->
+
+	<!--
+
+		<CheckBoxPreference android:key="@string/p_do_nandroid_backup"
+		android:title="@string/p_do_nandroid_backup_title"
+		android:summary="@string/p_do_nandroid_backup_summary"
+		android:defaultValue="true" />
+	-->
+
+	<CheckBoxPreference android:key="@string/p_display_older_mod_versions"
+		android:title="@string/p_display_older_mod_versions_title"
+		android:summary="@string/p_display_older_mod_versions_summary"
+		android:defaultValue="@string/p_display_older_mod_versions_def_value" />
+
+	<CheckBoxPreference android:key="@string/p_display_allow_experimental_versions"
+		android:title="@string/p_display_allow_experimental_versions_title"
+		android:summary="@string/p_display_allow_experimental_versions_summary"
+		android:defaultValue="false" />
+
+	<PreferenceScreen android:key="@string/p_update_file_url_screen"
+		android:title="@string/p_update_file_url_screen_title"
+		android:summary="@string/p_update_file_url_screen_summary">
+		<PreferenceCategory android:title="@string/p_update_file_url_screen">
+			<EditTextPreference android:key="@string/p_update_file_url"
+				android:title="@string/p_update_file_url_title" android:summary="@string/p_update_file_url_summary"
+				android:dialogTitle="@string/p_update_file_url_title"
+				android:defaultValue="@string/conf_update_server_url_def"
+				android:singleLine="false" />
+
+			<Preference android:key="@string/p_update_file_url_qr"
+				android:title="@string/p_update_file_url_qr_title" android:summary="@string/p_update_file_url_qr_summary" />
+
+			<Preference android:key="@string/p_update_file_url_def"
+				android:title="@string/p_update_file_url_def_title" android:summary="@string/p_update_file_url_def_summary" />
+		</PreferenceCategory>
+	</PreferenceScreen>
 </PreferenceScreen>
