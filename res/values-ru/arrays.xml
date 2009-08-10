@@ -20,25 +20,6 @@
  
 -->
 <resources>
-	<!-- About dialog -->
-	<string-array name="about_authors">
-        <item>Sergi Vélez http://code.google.com/p/jfupdater</item>
-        <item>Darkrift http://android-dls.com</item>
-        <item>Dan Poulsen</item>
-    </string-array>
-    
-    <string-array name="about_documenters">
-    <!--    <item>Dorothy Documenter</item> -->
-    </string-array>
-    
-    <string-array name="about_translators">
-        <item>Дмитрий Брискин</item>
-    </string-array>
-    
-    <string-array name="about_artists">
-    	<item>mrnote8</item>
-    </string-array>
-    
 	<!-- Frequency times, in seconds -->
     <string-array name="update_frequency">
         <item>Вручную</item>

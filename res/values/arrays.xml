@@ -25,6 +25,8 @@
         <item>Sergi Vélez http://code.google.com/p/jfupdater</item>
         <item>Darkrift http://android-dls.com</item>
         <item>Dan Poulsen</item>
+	<item>FireFart</item>
+	<item>senab</item>
     </string-array>
     
     <string-array name="about_documenters">
@@ -32,11 +34,18 @@
     </string-array>
     
     <string-array name="about_translators">
-    <!--    <item>Tim Translator</item> -->
+	<item>FireFart</item>
+	<item>DavidChill</item>
+	<item>Moksha</item>
+	<item>Gamempire</item>
+	<item>Wiebbe</item>
+	<item>Chahk</item>
+	<item>Offcina</item>
     </string-array>
     
     <string-array name="about_artists">
-    	<item>mrnote8</item>
+    	<item>prash</item>
+	<item>matt_stang</item>
     </string-array>
     
 	<!-- Frequency times, in seconds -->
