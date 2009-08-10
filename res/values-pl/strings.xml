@@ -47,14 +47,15 @@
     <string name="apply_update_dialog_title">Potwierdzenie</string>
     <string name="apply_update_dialog_text">Za chwilę dokonasz aktualizacji do {0}.\nKontynuując Twój telefon automatycznie uruchomi się w trybie recovery, aby dokonać aktualizacji.</string>
 	<string name="apply_update_dialog_update_button">Aktualizuj</string>
-	<string name="apply_update_dialog_backup_and_update_button">Backup & inst.; Instaluj</string>
+	<string name="apply_update_dialog_backup_and_update_button">Backup &amp; inst.; Instaluj</string>
 	<string name="apply_update_dialog_cancel_button">Anuluj</string>
 	
 	<string name="no_updates_no_mod_text">Twój obecny system (Version {0}) nie jest wspierany przez ten program.</string>
 	<string name="check_now_button_text">Sprawdź teraz</string>
 	
 	<string name="menu_check_now">Sprawdź teraz</string>
-    <string name="menu_config">Ustawienia</string><string name="menu_about">O programie</string>
+	<string name="menu_config">Ustawienia</string>
+	<string name="menu_about">O programie</string>
     <string name="cancel_download_buton_text">Anuluj pobieranie</string>
     <string name="confirm_download_cancelation_dialog_message">Jesteś pewien, że chcesz anulować bieżące pobieranie pliku?</string>
     <string name="confirm_download_cancelation_dialog_yes">Tak</string>
