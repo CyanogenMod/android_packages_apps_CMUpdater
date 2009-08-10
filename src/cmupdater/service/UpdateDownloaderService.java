@@ -86,7 +86,7 @@ public class UpdateDownloaderService extends Service {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			NetworkInfo netInfo = (NetworkInfo) intent.getSerializableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
-			if(netInfo.isConnected()) {
+			if(netInfo != null && netInfo.isConnected()) {
 				synchronized (mConnectivityManager) {
 					mConnectivityManager.notifyAll();
 					mWaitingForDataConnection = false;
@@ -229,7 +229,14 @@ public class UpdateDownloaderService extends Service {
 	
 	
 	private boolean isDataConnected() {
-		return mConnectivityManager.getActiveNetworkInfo().isConnected();
+		if (mConnectivityManager.getActiveNetworkInfo() == null)
+		{
+			return false;
+		}
+		else
+		{
+			return mConnectivityManager.getActiveNetworkInfo().isConnected();
+		}
 	}
 	
 	/**
