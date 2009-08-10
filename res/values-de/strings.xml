@@ -121,5 +121,13 @@ Wenn sie ein Backup erstellen wollen, booten sie bitte vorher manuell in den Rec
     <string name="p_notification_ringtone_title">Benachrichtigungston</string>
     <string name="p_notification_ringtone_summary">Wählen sie einen Rufton der abgespielt werden soll, wenn neue Updates verfügbar sind</string>
     
+    <string name="p_update_file_url_screen_title">Update Server</string>
+    <string name="p_update_file_url_screen_summary">Den Update Server ändern</string>
+    
+    <string name="p_update_file_url_def_title">Update Server URL Zurücksetzen</string>
+    <string name="p_update_file_url_def_summary">Setzt die URL auf die Standardeinstellung zurück</string>
+    
+    <string name="p_update_file_url_qr_title">Barcode scannen</string>
+    <string name="p_update_file_url_qr_summary">QR Code für Update URL scannen</string>
     
 </resources>
