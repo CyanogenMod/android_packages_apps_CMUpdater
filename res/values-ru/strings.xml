@@ -29,7 +29,7 @@
     <string name="apply_unable_to_reboot_toast">Перезагрузка в режим восстановки не удалась</string>
     <string name="apply_trying_to_get_root_access">Попытка получить административный доступ для перезагрузки</string>
     
-    <string name="available_updates_text">Пожалучста выберите прошивку:</string>
+    <string name="available_updates_text">Пожалуйста выберите прошивку:</string>
     <string name="choose_available_update_text">Загрузить</string>
     <string name="no_updates_found_instructions">Прошивок не найдено.\nНажмите \'Проверить\' чтобы вручную проверить наличие новых версий</string>
     <string name="downloaded_update_found_text">Найден файл \'update.zip\'. Проверить его и прошить?</string>
@@ -96,8 +96,8 @@
     <string name="download_info_speed">Скорость: </string>
     <string name="download_info_remaining_time">Осталось: </string>
     
-    <string name="confirm_delete_update_folder_dialog_message">Вытереть Папку Загрузок?</string>
-    <string name="confirm_delete_update_folder_dialog_yes">Вытереть</string>
+    <string name="confirm_delete_update_folder_dialog_message">Удалить Папку Загрузок?</string>
+    <string name="confirm_delete_update_folder_dialog_yes">Удалить</string>
     <string name="confirm_delete_update_folder_dialog_no">Отменить</string>
 
     <!-- Preferences Strings -->
@@ -121,4 +121,13 @@
     
     <string name="p_notification_ringtone_title">Звонок Уведомления</string>
     <string name="p_notification_ringtone_summary">Выбрать звонок уведомления о новой версии</string>
+    
+    <string name="p_update_file_url_screen_title">Сервер Обновления</string>
+    <string name="p_update_file_url_screen_summary">Установить адрес сервера где хранятся файлы обновления</string>
+    
+    <string name="p_update_file_url_def_title">Сброс Адреса</string>
+    <string name="p_update_file_url_def_summary">Сбросить адрес сервера на оригинальный</string>
+    
+    <string name="p_update_file_url_qr_title">Сканировка Кода</string>
+    <string name="p_update_file_url_qr_summary">Сканировать штриховой код содержащий адрес сервера обновления</string>
 </resources>

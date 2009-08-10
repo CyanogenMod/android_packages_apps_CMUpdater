@@ -17,7 +17,6 @@
   You should have received a copy of the GNU General Public License along
   with this program; if not, write to the Free Software Foundation, Inc.,
   59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
- 
 -->
 <resources>
 	<!-- Frequency times, in seconds -->
@@ -37,19 +36,4 @@
         <item>86400</item>
         <item>604800</item>
     </string-array>    
-    
-    <!-- Mod Versions -->
-    <!--<string-array name="updates_mod_types">
-        <item>АДП 1</item>
-        <item>T-Mobile G1 (США)</item>
-        <item>T-Mobile G1 (ВБ)</item>
-        <item>Все версии</item>
-    </string-array>-->
-    <!--<string-array name="updates_mod_types_values">
-        <item>ADP1</item>
-        <item>US</item>
-        <item>UK</item>
-        <item>*</item>
-    </string-array>-->    
-    
 </resources>
