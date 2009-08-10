@@ -484,8 +484,7 @@ public class UpdateDownloaderService extends Service {
 
 		long StartTime = System.currentTimeMillis(); 
 
-		//byte[] buff = new byte[64 * 1024];
-		byte[] buff = new byte[(int) contentLength];
+		byte[] buff = new byte[64 * 1024];
 		int read = 0;
 		int totalDownloaded = 0;
 		FileOutputStream fos = new FileOutputStream(destinationFile);
