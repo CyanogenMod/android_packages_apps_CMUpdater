@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  CM Updater: Auto-updater for modified Android OS
+ 
+  Copyright (c) 2009 Sergi Vélez
+ 
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+ 
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+  for more details.
+ 
+  You should have received a copy of the GNU General Public License along
+  with this program; if not, write to the Free Software Foundation, Inc.,
+  59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ 
+-->
+<resources>
+    <string name="apply_later_button_text">以后更新</string>
+    <string name="apply_update_button_text">确认 &amp; 更新</string>
+    <string name="apply_title_textview_text">{0}已经准备好更新</string>
+    <string name="apply_subtitle_textview_text">发行说明：</string>
+    <string name="apply_unable_to_reboot_toast">不能重启动到Recovery模式下</string>
+    <string name="apply_trying_to_get_root_access">尝试获得root权限以重启动至Recovery模式下</string>
+    
+    <string name="available_updates_text">请选择您需要下载的ROM：</string>
+    <string name="choose_available_update_text">下载</string>
+    <string name="no_updates_found_instructions">没有找到ROM。\n点击\'现在检查\' 来手动更新ROM列表</string>
+    <string name="downloaded_update_found_text">在更新文件夹中找到更新包：</string>
+    <string name="checking_for_updates">检查更新文件</string>
+    <string name="downloading_update">下载更新文件中</string>
+    <string name="sdcard_is_not_present_dialog_body">您需要准备一个可写入的SD卡来下载此更新</string>
+    <string name="sdcard_is_not_present_dialog_title">没有找到SD卡</string>
+    <string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
+    <string name="current_version_text">当前版本： {0}</string>
+    <string name="delete_updates_text">删除更新</string>
+    <string name="delete_updates_success_message">更新文件夹已被删除</string>
+    <string name="delete_updates_failure_message">删除更新文件夹时遇到错误</string>
+    <string name="delete_updates_noFolder_message">未找到更新文件夹</string>
+    
+    <string name="apply_update_dialog_title">确认信息</string>
+    <string name="apply_update_dialog_text">您即将更新到： {0}.\n如果您点击更新按钮，电话将会自动重启至Recovery模式下进行更新。</string>
+	<string name="apply_update_dialog_update_button">更新</string>
+	<string name="apply_update_dialog_backup_and_update_button">备份 &amp; 确认</string>
+	<string name="apply_update_dialog_cancel_button">取消</string>
+	
+	<string name="no_updates_no_mod_text">您正在使用系统版本不被此软件支持(Version {0}).</string>
+	<string name="check_now_button_text">现在检查更新</string>
+	
+	<string name="menu_check_now">现在检查更新</string>
+    <string name="menu_config">Configuration</string><string name="menu_about">关于</string>
+    <string name="cancel_download_buton_text">取消下载</string>
+    <string name="confirm_download_cancelation_dialog_message">您确认你试图取消当前下载吗？</string>
+    <string name="confirm_download_cancelation_dialog_yes">是</string>
+    <string name="confirm_download_cancelation_dialog_no">否</string>
+    <string name="download_canceled_toast_message">下载已取消</string>
+    
+    <string name="verify_and_apply_dialog_title">正在验证下载</string>
+    <string name="verify_and_apply_dialog_message">正在对update.zip进行MD5验证</string>
+    
+    <string name="apply_existing_update_md5error_message">错误，无法通过MD5验证</string>
+    
+    <!-- .service.* Strings -->
+    <string name="no_updates_found">没有找到CM的更新包</string>
+    <string name="not_new_updates_found_ticker">CM的已经有新的更新包！</string>
+    <string name="not_new_updates_found_title">找到CM的更新包</string>
+    <string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} 已找到</string>
+    <string name="exception_while_updating">在试图连接CM更新服务器是出现错误</string>
+    <string name="exception_while_downloading">An error occurred while trying to download a CM Update</string>
+    
+    <string name="not_update_check_error_ticker">检查CM更新失败</string>
+    <string name="not_update_check_error_title">无法检查CM更新</string>
+    <string name="not_update_check_error_body">请稍后重试</string>
+    
+    <string name="not_update_download_error_ticker">在试图下载更新包时出现错误</string>
+    <string name="not_update_download_error_title">尝试下载更新包时出现错误</string>
+    <string name="not_update_download_error_body">请稍后重试</string>
+    
+    <string name="not_update_downloaded_ticker">CyanogenMod更新已下载</string>
+    <string name="not_update_downloaded_title">CyanogenMod更新已下载</string>
+    <string name="not_update_downloaded_body">{0}已经准备好安装</string>
+    
+    <string name="download_info_filename">文件名: </string>
+    <string name="download_info_mirror">下载站点: </string>
+    <string name="download_info_downloading">正在下载...</string>
+    <string name="download_info_speed">下载速度: </string>
+    <string name="download_info_remaining_time">剩余时间: </string>
+    
+    <string name="confirm_delete_update_folder_dialog_message">删除此更新包？</string>
+    <string name="confirm_delete_update_folder_dialog_yes">删除</string>
+    <string name="confirm_delete_update_folder_dialog_no">取消</string>
+    
+    <!-- Preferences Strings -->
+    <string name="p_update_check_freq_title">检查更新的频率</string>
+    <string name="p_update_check_freq_summary">设定多久检查一次更新y</string>
+    
+    <string name="p_update_file_url_title">更新服务器</string>
+    <string name="p_update_file_url_summary">设定更新服务器</string>
+    
+    <string name="p_updates_mod_version_title">ROM版本</string>
+    <string name="p_updates_mod_version_summary">设定你需要更新哪种ROM</string>
+    
+    <string name="p_display_older_mod_versions_title">显示全部更新</string>
+    <string name="p_display_older_mod_versions_summary">显示全部更新包，包含旧版本更新包</string>
+    
+    <string name="p_display_allow_experimental_versions_title">实验性更新</string>
+    <string name="p_display_allow_experimental_versions_summary">显示实验性的更新（不稳定）</string>
+    
+    <string name="p_do_nandroid_backup_title">Nandroid备份</string>
+    <string name="p_do_nandroid_backup_summary">是否在应用更新前创建Nandroid备份?</string>
+    
+    <string name="p_notification_ringtone_title">通知提示音</string>
+    <string name="p_notification_ringtone_summary">为CM Updater选择一个提示音</string>
+</resources>
