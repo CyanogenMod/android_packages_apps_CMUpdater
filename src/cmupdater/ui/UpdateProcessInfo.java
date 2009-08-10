@@ -94,7 +94,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	public static final String KEY_REQUEST = "cmupdater.keyRequest";
 	public static final String KEY_UPDATE_LIST = "cmupdater.updateList";
 
-	private static final int[] MIN_SUPPORTED_MOD_VERSION = new int[]{3,2,0};
+	//private static final int[] MIN_SUPPORTED_MOD_VERSION = new int[]{3,2,0};
 
 
 	private Spinner mUpdatesSpinner;
@@ -533,12 +533,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		boolean superReturn = super.onPrepareOptionsMenu(menu);
 
+		/**
 		if(SysUtils.VERSION_COMPARATOR.compare(
 				SysUtils.getSystemModVersion(),
 				MIN_SUPPORTED_MOD_VERSION) < 0) {
 			//No supported mod
 			return false;
 		}
+		*/
 
 		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading()) {
 			//Download in progress
@@ -815,7 +817,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			dialog.show();
 		}			
 	}
-
 
 	private void scanQRURL() {
 		IntentIntegrator.initiateScan(this);
