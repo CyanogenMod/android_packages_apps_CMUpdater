@@ -70,6 +70,7 @@
 	<string name="check_now_button_text">Check now</string>
 	
 	<string name="menu_check_now">Check now</string>
+	<string name="menu_qr_code">Scan QR URL</string>
     <string name="menu_config">Configuration</string><string name="menu_about">About</string>
     <string name="cancel_download_buton_text">Cancel Download</string>
     <string name="confirm_download_cancelation_dialog_message">Are you sure you want to cancel the current download?</string>

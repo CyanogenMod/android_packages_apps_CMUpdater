@@ -94,17 +94,20 @@ public class ConfigActivity extends PreferenceActivity {
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-		if (scanResult != null) {
+		if (null != scanResult) {
 			String result = scanResult.getContents();
-			if (!result.equals("") && result != null ) {
+			if (null != result && !result.equals("") ) {
 				prefs.setUpdateFileURL(result);
 				Toast.makeText(getBaseContext(), "Update File URL: " + result, Toast.LENGTH_SHORT).show();
 				Log.d(TAG, "Scanned QR Code: " + scanResult.getContents());
 				ConfigActivity.this.finish();
+			} else {
+				Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
 			}
+			
 		}
 		else {
-			Toast.makeText(getBaseContext(), "No result was received. Try Again.", Toast.LENGTH_LONG).show();
+			Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
 		}
 		// else continue with any other code you need in the method
 

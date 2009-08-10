@@ -56,7 +56,7 @@
 	<PreferenceScreen android:key="@string/p_update_file_url_screen_title"
 		android:title="@string/p_update_file_url_screen_title"
 		android:summary="@string/p_update_file_url_screen_summary">
-		<PreferenceCategory android:title="@string/p_update_file_url_screen">
+		<PreferenceCategory android:title="@string/p_update_file_url_screen_title">
 			<EditTextPreference android:key="@string/p_update_file_url"
 				android:title="@string/p_update_file_url_title" android:summary="@string/p_update_file_url_summary"
 				android:dialogTitle="@string/p_update_file_url_title"
