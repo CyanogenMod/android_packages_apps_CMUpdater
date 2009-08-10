@@ -110,6 +110,12 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	private File mUpdateFolder;
 	private Spinner mExistingUpdatesSpinner;
 	
+	TextView mdownloadedUpdateText;
+	Spinner mspFoundUpdates;
+	Button mdeleteOldUpdatesButton;
+	Button mapplyUpdateButton;
+	View mseparator;
+	
 	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection(){
 
 		public void onServiceConnected(ComponentName className, IBinder service) {
@@ -173,6 +179,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 					public void onClick(DialogInterface dialog, int which) {
 						//Delete Updates here
 						deleteOldUpdates();
+						mseparator.setVisibility(View.GONE);
+						mspFoundUpdates.setVisibility(View.GONE);
+						mapplyUpdateButton.setVisibility(View.GONE);
+						mdownloadedUpdateText.setVisibility(View.GONE);
+						mdeleteOldUpdatesButton.setVisibility(View.GONE);
 					}
 				})
 				.setNegativeButton(R.string.confirm_delete_update_folder_dialog_no, new DialogInterface.OnClickListener(){
@@ -671,12 +682,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			rg.addView(rb);
 		}*/
 		
-		TextView downloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
-		Spinner spFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
-		Button deleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
-		Button applyUpdateButton = (Button) findViewById(R.id.apply_update_button);
-		View separator = findViewById(R.id.downloaded_update_found_separator);
-		
+		mdownloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
+		mspFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
+		mdeleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
+		mapplyUpdateButton = (Button) findViewById(R.id.apply_update_button);
+		mseparator = findViewById(R.id.downloaded_update_found_separator);
 		//Outside the if to prevent a empty spinnercontrol
 		FilenameFilter f = new UpdateFilter();
 		File[] files = mUpdateFolder.listFiles(f);
@@ -695,18 +705,18 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 					android.R.layout.simple_spinner_item,
 					filenames);
 			localUpdates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			spFoundUpdates.setAdapter(localUpdates);
+			mspFoundUpdates.setAdapter(localUpdates);
 			//applyUpdateButton.setOnClickListener(new VerifyAndApplyUpdateButtonListener(mDestinationFile, mAvailableUpdates));
-			applyUpdateButton.setOnClickListener(new mApplyExistingButtonListener());
-			deleteOldUpdatesButton.setOnClickListener(mDeleteUpdatesButtonListener);
+			mapplyUpdateButton.setOnClickListener(new mApplyExistingButtonListener());
+			mdeleteOldUpdatesButton.setOnClickListener(mDeleteUpdatesButtonListener);
 		}
 		else
 		{
-			separator.setVisibility(View.GONE);
-			spFoundUpdates.setVisibility(View.GONE);
-			applyUpdateButton.setVisibility(View.GONE);
-			downloadedUpdateText.setVisibility(View.GONE);
-			deleteOldUpdatesButton.setVisibility(View.GONE);
+			mseparator.setVisibility(View.GONE);
+			mspFoundUpdates.setVisibility(View.GONE);
+			mapplyUpdateButton.setVisibility(View.GONE);
+			mdownloadedUpdateText.setVisibility(View.GONE);
+			mdeleteOldUpdatesButton.setVisibility(View.GONE);
 		}
 		
 		TextView currentVersion = (TextView) findViewById(R.id.up_chooser_current_version);
