@@ -53,7 +53,7 @@
 		android:summary="@string/p_display_allow_experimental_versions_summary"
 		android:defaultValue="false" />
 
-	<PreferenceScreen android:key="@string/p_update_file_url_screen"
+	<PreferenceScreen android:key="@string/p_update_file_url_screen_title"
 		android:title="@string/p_update_file_url_screen_title"
 		android:summary="@string/p_update_file_url_screen_summary">
 		<PreferenceCategory android:title="@string/p_update_file_url_screen">
