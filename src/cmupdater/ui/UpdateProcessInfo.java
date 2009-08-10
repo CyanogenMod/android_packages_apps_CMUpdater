@@ -761,7 +761,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 				pb.setProgress(downloaded);
 
 				int Speed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
-				Speed = (Speed > 0) ? 1 : Speed;
+				Speed = (Speed > 0) ? Speed : 1;
 				long RemainingTime = ((total - downloaded)/Speed)/1000;
 
 				mDownloadedBytesTextView.setText((downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB");
