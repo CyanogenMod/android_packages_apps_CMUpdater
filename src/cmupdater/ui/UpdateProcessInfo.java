@@ -33,14 +33,10 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -73,6 +69,9 @@ import cmupdater.service.UpdateInfo;
 import cmupdater.utils.IOUtils;
 import cmupdater.utils.Preferences;
 import cmupdater.utils.SysUtils;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class UpdateProcessInfo extends IUpdateProcessInfo {
 
@@ -588,11 +587,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		}
 
 		setContentView(R.layout.no_updates);
-		int[] sysVer = SysUtils.getSystemModVersion();
 		LinearLayout checkForUpdatesLayout = (LinearLayout) findViewById(R.id.no_updates_chec_for_updates_layout);
 		LinearLayout noModLayout = (LinearLayout) findViewById(R.id.no_updates_no_mod_layout);
 
-		if(SysUtils.VERSION_COMPARATOR.compare(sysVer, MIN_SUPPORTED_MOD_VERSION) >= 0) {
+		//if(SysUtils.VERSION_COMPARATOR.compare(sysVer, MIN_SUPPORTED_MOD_VERSION) >= 0) {
 			noModLayout.setVisibility(View.GONE);
 			checkForUpdatesLayout.setVisibility(View.VISIBLE);
 			((Button)findViewById(R.id.check_now_button)).setOnClickListener(new View.OnClickListener() {
@@ -604,15 +602,15 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			TextView currentVersion = (TextView) findViewById(R.id.no_updates_current_version);
 			String pattern = getResources().getString(R.string.current_version_text);
 			currentVersion.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
-		} else {
-			Log.w(TAG, "Mod version not supported. Mod Version:" + Arrays.toString(sysVer) +
-					"; Min suported version:" + Arrays.toString(MIN_SUPPORTED_MOD_VERSION));
-			checkForUpdatesLayout.setVisibility(View.GONE);
-			noModLayout.setVisibility(View.VISIBLE);
-			TextView tv = (TextView) findViewById(R.id.no_updates_no_mod_text_view);
-			String text = getResources().getString(R.string.no_updates_no_mod_text);
-			tv.setText(MessageFormat.format(text, SysUtils.getReadableModVersion()));
-		}
+		//} else {
+		//	Log.w(TAG, "Mod version not supported. Mod Version:" + Arrays.toString(sysVer) +
+		//			"; Min suported version:" + Arrays.toString(MIN_SUPPORTED_MOD_VERSION));
+		//	checkForUpdatesLayout.setVisibility(View.GONE);
+		//	noModLayout.setVisibility(View.VISIBLE);
+		//	TextView tv = (TextView) findViewById(R.id.no_updates_no_mod_text_view);
+		//	String text = getResources().getString(R.string.no_updates_no_mod_text);
+		//	tv.setText(MessageFormat.format(text, SysUtils.getReadableModVersion()));
+		//}
 	}
 
 	@Override

@@ -85,6 +85,7 @@ public class ApplyUploadActivity extends Activity {
 		}
 
 		public void onClick(DialogInterface dialog, int which) {
+			
 			/*
 			 * Should perform the following steps.
 			 * 0.- Ask the user for a confirmation (already done when we reach here)
