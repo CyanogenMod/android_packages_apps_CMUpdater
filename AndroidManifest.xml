@@ -30,7 +30,7 @@
 	<meta-data android:name="com.a0soft.gphone.aTrackDog.dlURL"
         	       android:value="http://code.google.com/p/cyanogen-updater/downloads/list" />
 
-		<activity android:name=".UpdateProcessInfo" android:launchMode="singleTask">
+		<activity android:name=".UpdateProcessInfo" android:launchMode="singleTask" android:configChanges="orientation|keyboardHidden">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />

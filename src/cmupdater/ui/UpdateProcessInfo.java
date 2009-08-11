@@ -48,6 +48,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
@@ -431,24 +432,32 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		UpdateDownloaderService.setUpdateProcessInfo(UpdateProcessInfo.this);
 	}
 
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) { 
+        super.onConfigurationChanged(newConfig); 
+        Log.i(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
+    }
+	
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onStop()
 	 */
 	@Override
 	protected void onStop() {
 		super.onStop();
-
-		try {
-			saveState();
-		} catch (IOException e) {
-			Log.w(TAG, "Unable to save state", e);
+		if (mUpdateDownloaderService != null)
+		{
+			try {
+				saveState();
+			} catch (IOException e) {
+				Log.w(TAG, "Unable to save state", e);
+			}
+			Log.d(TAG, "Cancel the download");
+			mUpdateDownloaderService.cancelDownload();
+			unbindService(mUpdateDownloaderServiceConnection);
+			UpdateDownloaderService.setUpdateProcessInfo(null);
 		}
-
-		Log.d(TAG, "Cancel the download");
-		mUpdateDownloaderService.cancelDownload();
-		unbindService(mUpdateDownloaderServiceConnection);
-		UpdateDownloaderService.setUpdateProcessInfo(null);
-
+		else
+			Log.e(TAG, "mUpdateDownloaderService is NULL");
 	}
 
 	private void saveState() throws IOException {
