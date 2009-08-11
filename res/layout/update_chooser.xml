@@ -29,6 +29,7 @@
     android:gravity="center_horizontal"
     android:background="@drawable/background">
     <TextView
+    	android:id="@+id/available_updates_text"
     	android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:text="@string/available_updates_text"

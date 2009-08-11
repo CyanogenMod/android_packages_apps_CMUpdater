@@ -118,6 +118,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	private int mSpeed;
 	private long mRemainingTime;
 	
+	private String[] mfilenames;
+	
 	TextView mdownloadedUpdateText;
 	Spinner mspFoundUpdates;
 	Button mdeleteOldUpdatesButton;
@@ -188,11 +190,20 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 					public void onClick(DialogInterface dialog, int which) {
 						//Delete Updates here
 						deleteOldUpdates();
-						mseparator.setVisibility(View.GONE);
-						mspFoundUpdates.setVisibility(View.GONE);
-						mapplyUpdateButton.setVisibility(View.GONE);
-						mdownloadedUpdateText.setVisibility(View.GONE);
-						mdeleteOldUpdatesButton.setVisibility(View.GONE);
+						//If Updates are cached or Present, stay on this View, but do not Show the Buttons
+						if(mAvailableUpdates != null)
+						{
+							mseparator.setVisibility(View.GONE);
+							mspFoundUpdates.setVisibility(View.GONE);
+							mapplyUpdateButton.setVisibility(View.GONE);
+							mdownloadedUpdateText.setVisibility(View.GONE);
+							mdeleteOldUpdatesButton.setVisibility(View.GONE);
+						}
+						//Otherwise go to No Updates Available(or it would stay on a blank layout;) )
+						else
+						{
+							switchToNoUpdatesAvailable();
+						}
 					}
 				})
 				.setNegativeButton(R.string.confirm_delete_update_folder_dialog_no, new DialogInterface.OnClickListener(){
@@ -422,9 +433,24 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
         	switchToDownloadingLayout(mDownloadingUpdate);
         	downloadUpdateTask.setIUpdateProcessInfo(this);
         } else*/
+		
+		//Outside the if to prevent a empty spinnercontrol
+		FilenameFilter f = new UpdateFilter();
+		File[] files = mUpdateFolder.listFiles(f);
+		//If Folder Exists and Updates are present(with md5files)
+		if(mUpdateFolder.exists() && mUpdateFolder.isDirectory() && files != null && files.length>0)
+		{
+			//To show only the Filename. Otherwise the whole Path with /sdcard/cm-updates will be shown
+			mfilenames = new String[files.length];
+			for (int i=0;i<files.length;i++)
+			{
+				mfilenames[i] = files[i].getName();
+			}
+		}
+		files = null;
 		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading()) {
 			switchToDownloadingLayout(mUpdateDownloaderService.getCurrentUpdate());
-		} else if (mAvailableUpdates != null) {
+		} else if (mAvailableUpdates != null || (mfilenames != null && mfilenames.length > 0)) {
 			switchToUpdateChooserLayout(mAvailableUpdates);
 		} else {
 			switchToNoUpdatesAvailable();
@@ -666,28 +692,47 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		 * If availableUpdates is null, use the cached value.
 		 * If not, cache the value for future uses
 		 */
-		if(availableUpdates == null) {
-			if (null == mAvailableUpdates) {
-				switchToNoUpdatesAvailable();
-				return;
+		if(availableUpdates == null)
+		{
+			if (null == mAvailableUpdates)
+			{
+				if (mfilenames == null || mfilenames.length <= 0)
+				{
+					//No Updates and nothing downloaded
+					switchToNoUpdatesAvailable();
+					return;
+				}
 			}
-			availableUpdates = mAvailableUpdates;
-		} else {
+			else
+			{
+				availableUpdates = mAvailableUpdates;
+			}
+		}
+		else
+		{
 			mAvailableUpdates = availableUpdates;
 		}
 
-		if(availableUpdates != null) {
-
-			setContentView(R.layout.update_chooser);
-			((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).cancel(R.string.not_new_updates_found_title);
-
-
-			final Button selectUploadButton = (Button) findViewById(R.id.download_update_button);
-			//selectUploadButton.setEnabled(false);
+		setContentView(R.layout.update_chooser);
+		((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).cancel(R.string.not_new_updates_found_title);
+		
+		TextView currentVersion = (TextView) findViewById(R.id.up_chooser_current_version);
+		String pattern = getResources().getString(R.string.current_version_text);
+		currentVersion.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
+		
+		mdownloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
+		mspFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
+		mdeleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
+		mapplyUpdateButton = (Button) findViewById(R.id.apply_update_button);
+		mseparator = findViewById(R.id.downloaded_update_found_separator);
+		
+		final Button selectUploadButton = (Button) findViewById(R.id.download_update_button);
+		Spinner sp = mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
+		TextView DownloadText = (TextView) findViewById(R.id.available_updates_text);
+		
+		if(availableUpdates != null)
+		{
 			selectUploadButton.setOnClickListener(mSelectUpdateButtonListener);
-
-
-			Spinner sp = mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
 
 			ArrayAdapter<UpdateInfo> spAdapter = new ArrayAdapter<UpdateInfo>(
 					this,
@@ -696,64 +741,35 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			spAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			sp.setAdapter(spAdapter);
 
-			/*CompoundButton.OnCheckedChangeListener rbListener = new CompoundButton.OnCheckedChangeListener(){
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				selectUploadButton.setEnabled(true);
-			}
-		};*/
-			/*
-		for(UpdateInfo u: availableUpdates) {
-			RadioButton rb = new RadioButton(this);
-			rb.setTag(u);
-			rb.setText(u.displayName);
-			rb.setOnCheckedChangeListener(rbListener);
-			rg.addView(rb);
-		}*/
-
-			mdownloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
-			mspFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
-			mdeleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
-			mapplyUpdateButton = (Button) findViewById(R.id.apply_update_button);
-			mseparator = findViewById(R.id.downloaded_update_found_separator);
-
-			//Outside the if to prevent a empty spinnercontrol
-			FilenameFilter f = new UpdateFilter();
-			File[] files = mUpdateFolder.listFiles(f);
-			//If Folder Exists and Updates are present(with md5files)
-			//TODO: Only show older Versions in the Spinner when Downgrades are enabled
-			if(mUpdateFolder.exists() && mUpdateFolder.isDirectory() && files != null && files.length>0)
-			{
-				//To show only the Filename. Otherwise the whole Path with /sdcard/cm-updates will be shown
-				String[] filenames = new String[files.length];
-				for (int i=0;i<files.length;i++)
-				{
-					filenames[i] = files[i].getName();
-				}
+		}
+		else
+		{
+			selectUploadButton.setVisibility(View.GONE);
+			sp.setVisibility(View.GONE);
+			DownloadText.setVisibility(View.GONE);
+		}
+		
+		if (mfilenames != null && mfilenames.length > 0)
+		{
 				ArrayAdapter<String> localUpdates = new ArrayAdapter<String>(
 						this,
 						android.R.layout.simple_spinner_item,
-						filenames);
+						mfilenames);
 				localUpdates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				mspFoundUpdates.setAdapter(localUpdates);
-				//applyUpdateButton.setOnClickListener(new VerifyAndApplyUpdateButtonListener(mDestinationFile, mAvailableUpdates));
-				mapplyUpdateButton.setOnClickListener(new mApplyExistingButtonListener());
+		  		mapplyUpdateButton.setOnClickListener(new mApplyExistingButtonListener());
 				mdeleteOldUpdatesButton.setOnClickListener(mDeleteUpdatesButtonListener);
-			}
-			else
-			{
-				mseparator.setVisibility(View.GONE);
-				mspFoundUpdates.setVisibility(View.GONE);
-				mapplyUpdateButton.setVisibility(View.GONE);
-				mdownloadedUpdateText.setVisibility(View.GONE);
-				mdeleteOldUpdatesButton.setVisibility(View.GONE);
-			}
-
-			TextView currentVersion = (TextView) findViewById(R.id.up_chooser_current_version);
-			String pattern = getResources().getString(R.string.current_version_text);
-			currentVersion.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
 		}
-		else 
+		else
+		{
+			mseparator.setVisibility(View.GONE);
+			mspFoundUpdates.setVisibility(View.GONE);
+			mapplyUpdateButton.setVisibility(View.GONE);
+			mdownloadedUpdateText.setVisibility(View.GONE);
+			mdeleteOldUpdatesButton.setVisibility(View.GONE);
+		}
+		
+		if (availableUpdates == null && (mfilenames == null || mfilenames.length <= 0))
 			switchToNoUpdatesAvailable();
 	}
 
