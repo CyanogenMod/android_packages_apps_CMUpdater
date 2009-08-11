@@ -114,6 +114,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	private File mUpdateFolder;
 	private Spinner mExistingUpdatesSpinner;
 	
+	private int mSpeed;
+	private long mRemainingTime;
+	
 	TextView mdownloadedUpdateText;
 	Spinner mspFoundUpdates;
 	Button mdeleteOldUpdatesButton;
@@ -747,26 +750,26 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 
 	@Override
 	public void updateDownloadProgress(final int downloaded, final int total, final long StartTime) {
-		final ProgressBar pb = mProgressBar;
-		if(pb ==null)return;
+		//final ProgressBar pb = mProgressBar;
+		if(mProgressBar ==null)return;
 
-		pb.post(new Runnable(){
+		mProgressBar.post(new Runnable(){
 			public void run() {
 				if(total < 0) {
-					pb.setIndeterminate(true);
+					mProgressBar.setIndeterminate(true);
 				} else {
-					pb.setIndeterminate(false);
-					pb.setMax(total);
+					mProgressBar.setIndeterminate(false);
+					mProgressBar.setMax(total);
 				}
-				pb.setProgress(downloaded);
+				mProgressBar.setProgress(downloaded);
 
-				int Speed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
-				Speed = (Speed > 0) ? Speed : 1;
-				long RemainingTime = ((total - downloaded)/Speed)/1000;
+				mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
+				mSpeed = (mSpeed > 0) ? mSpeed : 1;
+				mRemainingTime = ((total - downloaded)/mSpeed)/1000;
 
 				mDownloadedBytesTextView.setText((downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB");
-				mDownloadSpeedTextView.setText(Integer.toString(Speed) + " kb/s");
-				mRemainingTimeTextView.setText(Long.toString(RemainingTime) + " seconds");
+				mDownloadSpeedTextView.setText(Integer.toString(mSpeed) + " kb/s");
+				mRemainingTimeTextView.setText(Long.toString(mRemainingTime) + " seconds");
 			}
 		});
 	}
