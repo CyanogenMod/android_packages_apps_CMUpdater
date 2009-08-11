@@ -20,13 +20,13 @@
  
 -->
 <resources>
-        <!-- Frequency times, in seconds -->
+	<!-- Frequency times, in seconds -->
     <string-array name="update_frequency">
-        <item>Manual</item>
-        <item>Cada arranque</item>
-        <item>Cada hora</item>
-        <item>Cada dia</item>
-        <item>Cada semana</item>
+        <item>Manualmente</item>
+        <item>A cada arranque</item>
+        <item>A cada hora</item>
+        <item>Diariamente</item>
+        <item>Semanalmente</item>
     </string-array>
     
     <!-- Frequency times, in seconds -->
@@ -37,19 +37,4 @@
         <item>86400</item>
         <item>604800</item>
     </string-array>    
-    
-    <!-- Mod Versions -->
-    <!--<string-array name="updates_mod_types">
-        <item>ADP 1</item>
-        <item>T-Mobile G1 (US)</item>
-        <item>T-Mobile G1 (UK)</item>
-        <item>All the updates</item>
-    </string-array>-->
-    <!--<string-array name="updates_mod_types_values">
-        <item>ADP1</item>
-        <item>US</item>
-        <item>UK</item>
-        <item>*</item>
-    </string-array>-->    
-    
 </resources>

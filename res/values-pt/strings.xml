@@ -31,9 +31,9 @@
     
     <string name="available_updates_text">Escolha a ROM a descarregar:</string>
     <string name="choose_available_update_text">Descarregar</string>
-    <string name="no_updates_found_instructions">Não encontrou ROMs.\nPress \'Verificar agora\' procurar manualmente por actualizações</string>
+    <string name="no_updates_found_instructions">Não encontrou ROMs.\nPress \'Verificar agora\' procurar manualmente por actualizações>
     <string name="downloaded_update_found_text">Actualizações encontradas:</string>
-    <string name="checking_for_updates">Procurar por actualizações</string>
+    <string name="checking_for_updates">A procurar actualizações</string>
     <string name="downloading_update">A descarregar actualizações</string>
     <string name="sdcard_is_not_present_dialog_body">Precisa de um cartão SD para descarregar esta actualização</string>
     <string name="sdcard_is_not_present_dialog_title">Sem cartão SD</string>
@@ -42,7 +42,7 @@
     <string name="delete_updates_text">Apagar actualizações</string>
     <string name="delete_updates_success_message">Pasta de actualizações apagada</string>
     <string name="delete_updates_failure_message">Ocorreu um erro ao apagar a pasta</string>
-    <string name="delete_updates_noFolder_message">Pasta de actualizações não encontrada</string>
+    <string name="delete_updates_noFolder_message">Pasta de actualizações não encontrada/string>
     
     <string name="apply_update_dialog_title">Confirmaçãon</string>
     <string name="apply_update_dialog_text">Esta pretes a actualizar para to {0}.\nSe premir Actualizar, o telefone vai reiniciar em modo recovery para actualizar.</string>
@@ -54,9 +54,10 @@
 	<string name="check_now_button_text">Verificar</string>
 	
 	<string name="menu_check_now">Verificar agora</string>
-    <string name="menu_config">Configuração</string><string name="menu_about">Acerca</string>
+    <string name="menu_config">Configuração</string>
+    <string name="menu_about">Acerca</string>
     <string name="cancel_download_buton_text">Cancelar Download</string>
-    <string name="confirm_download_cancelation_dialog_message">Tem a certeza que quer cancelar a presente descarga?</string>
+    <string name="confirm_download_cancelation_dialog_message">Tem a certeza de que quer cancelar esta descarga?</string>
     <string name="confirm_download_cancelation_dialog_yes">Sim</string>
     <string name="confirm_download_cancelation_dialog_no">Não</string>
     <string name="download_canceled_toast_message">Descarga cancelada</string>
@@ -69,7 +70,7 @@
     <!-- .service.* Strings -->
     <string name="no_updates_found">Actualizações CM não encontradas</string>
     <string name="not_new_updates_found_ticker">Actualizações CM encontradas!</string>
-    <string name="not_new_updates_found_title">Actulizações CM encontradas</string>
+    <string name="not_new_updates_found_title">Actualizações CM encontradas</string>
     <string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} found</string>
     <string name="exception_while_updating">Ocorreu um erro ao tentar contactar o servidor de actualizações CM</string>
     <string name="exception_while_downloading">Ocorreu um erro ao tentar descarregar uma actualização CM</string>
@@ -97,11 +98,11 @@
     <string name="confirm_delete_update_folder_dialog_no">Cancelar</string>
     
     <!-- Preferences Strings -->
-    <string name="p_update_check_freq_title">Actualizar frequencia de pesquisa</string>
-    <string name="p_update_check_freq_summary">Ajustar a frequencia da pesquisa</string>
+    <string name="p_update_check_freq_title">Ajustar o intervalo da pesquisa</string>
+    <string name="p_update_check_freq_summary">Ajustar a frequência da pesquisa</string>
     
     <string name="p_update_file_url_title">Servidor de actualizações</string>
-    <string name="p_update_file_url_summary">Ajustar o URL para o ficheiro de actualizaçã</string>
+    <string name="p_update_file_url_summary">Ajustar o link para o servidor de actualizações</string>
     
     <string name="p_updates_mod_version_title">Versão</string>
     <string name="p_updates_mod_version_summary">Defina a versão para a qual pretende receber actualizações</string>
