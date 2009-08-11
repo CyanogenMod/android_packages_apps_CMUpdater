@@ -74,7 +74,6 @@
     <string name="no_updates_found">Новых версий прошивки не найдено.</string>
     <string name="not_new_updates_found_ticker">Найдена новая версия!</string>
     <string name="not_new_updates_found_title">Найдена новая версия</string>
-    <string name="not_new_updates_found_body">{0,choice,0#версий найдено|1#Одна версия найдена|1&lt;{0, number} версий найдено}</string>
     <string name="exception_while_updating">Ошибка в связи с сервером обновления</string>
     <string name="exception_while_downloading">Ошибка при загрузке файла</string>
 	

@@ -19,7 +19,6 @@
   59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  
 -->
-−
 <resources>
 <!-- .ui.* Strings -->
 <string name="apply_now_button_text">Instaluj teraz</string>
@@ -92,10 +91,6 @@ Ta wersja programu zawiera opcję automatycznego restartu systemu, więc po wybr
 <string name="not_new_updates_found_ticker">Znaleziono nowe aktualizacje!</string>
 <string name="not_new_updates_found_title">Znaleziono nowe aktualizacje</string>
 −
-<string name="not_new_updates_found_body">
-Znaleziono {0,choice,0#updates|1#jedną aktualizację|1&lt;{0, number} aktualizacji}
-</string>
-−
 <string name="exception_while_updating">
 Wystąpił błąd przy próbie komunikacji z serwerem Aktualizacji CM
 </string>
@@ -123,19 +118,6 @@ Wystąpił błąd przy próbie wyszukania Aktualizacji CM
 <string name="confirm_delete_update_folder_dialog_message">Usunąć folder aktualizacji?</string>
 <string name="confirm_delete_update_folder_dialog_yes">Usuń</string>
 <string name="confirm_delete_update_folder_dialog_no">Anuluj</string>
-<!-- Preferences keys -->
-<string name="p_key_update_check_freq">prefUpdateCheckFrequency</string>
-<string name="p_key_configured_updates_mod_version">updatesModVersion</string>
-<string name="p_update_check_freq_def_value">-1</string>
-<string name="p_display_older_mod_versions">displayOlderModVersins</string>
-<string name="p_display_allow_experimental_versions">displayExperimentalVersions</string>
-<string name="p_do_nandroid_backup">doNandroidBackup</string>
-<string name="p_display_older_mod_versions_def_value">false</string>
-<string name="p_key_notification_ringtone">prefNotificationRingtone</string>
-<string name="p_update_file_url_screen">prefUpdateFileURLScreen</string>
-<string name="p_update_file_url">prefUpdateFileURL</string>
-<string name="p_update_file_url_qr">prefUpdateFileURLQr</string>
-<string name="p_update_file_url_def">prefUpdateFileURLDef</string>
 <!-- Preferences Strings -->
 <string name="p_update_check_freq_title">Częstotliwość sprawdzania aktualizacji</string>
 <string name="p_update_check_freq_summary">

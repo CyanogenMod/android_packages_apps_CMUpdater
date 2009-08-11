@@ -68,7 +68,6 @@
     <string name="no_updates_found">没有找到CM的更新包</string>
     <string name="not_new_updates_found_ticker">CM的已经有新的更新包！</string>
     <string name="not_new_updates_found_title">找到CM的更新包</string>
-    <string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} 已找到</string>
     <string name="exception_while_updating">在试图连接CM更新服务器是出现错误</string>
     <string name="exception_while_downloading">An error occurred while trying to download a CM Update</string>
     

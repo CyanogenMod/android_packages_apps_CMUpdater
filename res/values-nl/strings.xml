@@ -70,7 +70,6 @@
     <string name="no_updates_found">Geen CM updates gevonden</string>
     <string name="not_new_updates_found_ticker">Nieuwe CM updates gevonden!</string>
     <string name="not_new_updates_found_title">Nieuwe CM updates gevonden</string>
-    <string name="not_new_updates_found_body">{0,choice,0#updates|1#Een update|1&lt;{0, number} updates} gevonden</string>
     <string name="exception_while_updating">Een fout is opgetreden bij het verbinden naar de CM Update Server</string>
     <string name="exception_while_downloading">Een fout is opgetreden bij het downloaden van een CM Update</string>
     

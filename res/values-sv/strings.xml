@@ -150,7 +150,6 @@ STARTA OM I ÅTERSTÄLLNINGSLÄGE MANUELLT *INNAN* DU INSTALLERAR DENNA UPPDATER
 
     <string name="not_new_updates_found_title">Ny CM-uppdatering hittad</string>
 
-    <string name="not_new_updates_found_body">{0,choice,0#uppdateringar|1#En uppdatering|1&lt;{0, number} uppdateringar} hittad</string>
 
     <string name="exception_while_updating">Ett fel inträffade vid anslutningsförsök till uppdateringsservern</string>
 

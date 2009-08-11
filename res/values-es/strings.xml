@@ -68,7 +68,6 @@
     <string name="no_updates_found">No CM Actualizaciones Encontrados</string>
     <string name="not_new_updates_found_ticker">¡Nuevos CM actualizaciones encontrados!</string>
     <string name="not_new_updates_found_title">Nuevos CM actualizaciones encontrados</string>
-    <string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} found</string>
     <string name="exception_while_updating">Estuvo un error tratando de contactar el servidor de CM Actualizaciones</string>
     <string name="exception_while_downloading">Estuvo un error tratando de descargar un CM Actualizacion</string>
     

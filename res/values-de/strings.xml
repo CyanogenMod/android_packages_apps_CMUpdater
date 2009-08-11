@@ -73,7 +73,6 @@ Wenn sie ein Backup erstellen wollen, booten sie bitte vorher manuell in den Rec
     <string name="no_updates_found">Keine CM Updates gefunden</string>
     <string name="not_new_updates_found_ticker">Neue CM Updates gefunden!</string>
     <string name="not_new_updates_found_title">Neue CM Updates gefunden</string>
-    <string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} found</string>
     <string name="exception_while_updating">Ein Fehler ist aufgetreten, als versucht wurde den CM Update Server zu kontaktieren</string>
     <string name="exception_while_downloading">Ein Fehler ist beim Download eines CM Update aufgetreten</string>
     

@@ -31,7 +31,7 @@
     
     <string name="available_updates_text">Escolha a ROM a descarregar:</string>
     <string name="choose_available_update_text">Descarregar</string>
-    <string name="no_updates_found_instructions">Não encontrou ROMs.\nPress \'Verificar agora\' procurar manualmente por actualizações>
+    <string name="no_updates_found_instructions">Não encontrou ROMs.\nPress \'Verificar agora\' procurar manualmente por actualizações</string>
     <string name="downloaded_update_found_text">Actualizações encontradas:</string>
     <string name="checking_for_updates">A procurar actualizações</string>
     <string name="downloading_update">A descarregar actualizações</string>
@@ -42,7 +42,7 @@
     <string name="delete_updates_text">Apagar actualizações</string>
     <string name="delete_updates_success_message">Pasta de actualizações apagada</string>
     <string name="delete_updates_failure_message">Ocorreu um erro ao apagar a pasta</string>
-    <string name="delete_updates_noFolder_message">Pasta de actualizações não encontrada/string>
+    <string name="delete_updates_noFolder_message">Pasta de actualizações não encontrada</string>
     
     <string name="apply_update_dialog_title">Confirmaçãon</string>
     <string name="apply_update_dialog_text">Esta pretes a actualizar para to {0}.\nSe premir Actualizar, o telefone vai reiniciar em modo recovery para actualizar.</string>
@@ -71,7 +71,6 @@
     <string name="no_updates_found">Actualizações CM não encontradas</string>
     <string name="not_new_updates_found_ticker">Actualizações CM encontradas!</string>
     <string name="not_new_updates_found_title">Actualizações CM encontradas</string>
-    <string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} found</string>
     <string name="exception_while_updating">Ocorreu um erro ao tentar contactar o servidor de actualizações CM</string>
     <string name="exception_while_downloading">Ocorreu um erro ao tentar descarregar uma actualização CM</string>
     
