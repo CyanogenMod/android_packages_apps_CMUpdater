@@ -756,14 +756,19 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		
 		if (mfilenames != null && mfilenames.length > 0)
 		{
-			//Display the Check Now Button and add the Event
-			CheckNowUpdateChooserText.setVisibility(View.VISIBLE);
-			CheckNowUpdateChooser.setVisibility(View.VISIBLE);
-			CheckNowUpdateChooser.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View v) {
-					checkForUpdates();
-				}
-			});
+			if(availableUpdates == null)
+			{
+				//Display the Check Now Button and add the Event
+				//only Display when there are no Updates available
+				//or this Button and the Apply Button will be there
+				CheckNowUpdateChooserText.setVisibility(View.VISIBLE);
+				CheckNowUpdateChooser.setVisibility(View.VISIBLE);
+				CheckNowUpdateChooser.setOnClickListener(new View.OnClickListener() {
+					public void onClick(View v) {
+						checkForUpdates();
+					}
+				});
+			}
 			
 			ArrayAdapter<String> localUpdates = new ArrayAdapter<String>(
 					this,
