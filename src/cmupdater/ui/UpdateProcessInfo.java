@@ -730,6 +730,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		Spinner sp = mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
 		TextView DownloadText = (TextView) findViewById(R.id.available_updates_text);
 		
+		Button CheckNowUpdateChooser = (Button) findViewById(R.id.check_now_button_update_chooser);
+		TextView CheckNowUpdateChooserText = (TextView) findViewById(R.id.check_now_update_chooser_text);
+		CheckNowUpdateChooserText.setVisibility(View.GONE);
+		CheckNowUpdateChooser.setVisibility(View.GONE);
+		
 		if(availableUpdates != null)
 		{
 			selectUploadButton.setOnClickListener(mSelectUpdateButtonListener);
@@ -751,14 +756,23 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		
 		if (mfilenames != null && mfilenames.length > 0)
 		{
-				ArrayAdapter<String> localUpdates = new ArrayAdapter<String>(
-						this,
-						android.R.layout.simple_spinner_item,
-						mfilenames);
-				localUpdates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-				mspFoundUpdates.setAdapter(localUpdates);
-		  		mapplyUpdateButton.setOnClickListener(new mApplyExistingButtonListener());
-				mdeleteOldUpdatesButton.setOnClickListener(mDeleteUpdatesButtonListener);
+			//Display the Check Now Button and add the Event
+			CheckNowUpdateChooserText.setVisibility(View.VISIBLE);
+			CheckNowUpdateChooser.setVisibility(View.VISIBLE);
+			CheckNowUpdateChooser.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					checkForUpdates();
+				}
+			});
+			
+			ArrayAdapter<String> localUpdates = new ArrayAdapter<String>(
+					this,
+					android.R.layout.simple_spinner_item,
+					mfilenames);
+			localUpdates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			mspFoundUpdates.setAdapter(localUpdates);
+		  	mapplyUpdateButton.setOnClickListener(new mApplyExistingButtonListener());
+			mdeleteOldUpdatesButton.setOnClickListener(mDeleteUpdatesButtonListener);
 		}
 		else
 		{
