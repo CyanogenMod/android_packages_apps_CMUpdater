@@ -204,7 +204,7 @@ public class UpdateDownloaderService extends Service {
 		mRandom = new Random();
 
 		mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-		mWifiLock = mWifiManager.createWifiLock("JF Updater");
+		mWifiLock = mWifiManager.createWifiLock("CM Updater");
 
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
 	}
