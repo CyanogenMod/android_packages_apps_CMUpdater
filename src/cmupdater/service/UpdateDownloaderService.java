@@ -465,9 +465,11 @@ public class UpdateDownloaderService extends Service {
 
 		Log.e(TAG, "Unable to download the update file from any mirror");
 
-		if(mDestinationFile.exists()) mDestinationFile.delete();
-		if (null != mDestinationMD5File) {
-			if(mDestinationMD5File.exists()) mDestinationMD5File.delete();
+		if (null != mDestinationFile && mDestinationFile.exists()) {
+			mDestinationFile.delete();
+		}
+		if (null != mDestinationMD5File && mDestinationMD5File.exists()) {
+			mDestinationMD5File.delete();
 		}
 
 		return null;

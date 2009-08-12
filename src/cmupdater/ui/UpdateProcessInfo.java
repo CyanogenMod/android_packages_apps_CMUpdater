@@ -54,6 +54,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -596,22 +597,31 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	 */
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
-		switch(item.getItemId()) {
-		case MENU_ID_UPDATE_NOW:
-			checkForUpdates();
-			return true;
-		case MENU_ID_SCAN_QR:
-			scanQRURL();
-			return true;
-		case MENU_ID_CONFIG:
-			showConfigActivity();
-			return true;
-		case MENU_ID_ABOUT:
-			showAboutDialog();
-			return true;
-		default:
-			Log.w(TAG, "Unknown Menu ID:" + item.getItemId());
-			break;
+		switch(item.getItemId())
+		{
+			case MENU_ID_UPDATE_NOW:
+				//If downloading, cancel it so the download wont proceed in the background
+				cancelDownloading();
+				checkForUpdates();
+				return true;
+			case MENU_ID_SCAN_QR:
+				//If downloading, cancel it so the download wont proceed in the background
+				cancelDownloading();
+				scanQRURL();
+				return true;
+			case MENU_ID_CONFIG:
+				//If downloading, cancel it so the download wont proceed in the background
+				cancelDownloading();
+				showConfigActivity();
+				return true;
+			case MENU_ID_ABOUT:
+				//If downloading, cancel it so the download wont proceed in the background
+				cancelDownloading();
+				showAboutDialog();
+				return true;
+			default:
+				Log.w(TAG, "Unknown Menu ID:" + item.getItemId());
+				break;
 		}
 
 		return super.onMenuItemSelected(featureId, item);
@@ -946,6 +956,42 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		}
 		// else continue with any other code you need in the method
 
+	}
+	
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{ 
+		switch (keyCode)
+		{ 
+	        case KeyEvent.KEYCODE_BACK: 
+	             cancelDownloading(); 
+	             break; 
+	        case KeyEvent.KEYCODE_HOME: 
+	        	cancelDownloading();
+	        	break; 
+	        case KeyEvent.KEYCODE_DPAD_CENTER : 
+	        	cancelDownloading();
+	        	break; 
+	        case KeyEvent.KEYCODE_ENDCALL : 
+	        	cancelDownloading();
+	        	break; 
+	        case KeyEvent.ACTION_DOWN : 
+	        	cancelDownloading();
+	        	break; 
+	        default: 
+	        	break; 
+        } 
+        return super.onKeyDown(keyCode, event); 
+   }
+	
+	private void cancelDownloading()
+	{
+		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
+		{
+			mUpdateDownloaderService.cancelDownload();
+			Log.i(TAG, "Download Canceled due to Event");
+		}
+		else
+			Log.i(TAG, "Not Downloading. Proceed with the Event");
 	}
 }
 
