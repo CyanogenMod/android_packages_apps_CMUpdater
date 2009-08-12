@@ -115,8 +115,10 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     <string name="download_info_remaining_time">Remaining Time: </string>
     
     <string name="confirm_delete_update_folder_dialog_message">Delete Update Folder?</string>
-    <string name="confirm_delete_update_folder_dialog_yes">Delete</string>
+    <string name="confirm_delete_update_folder_dialog_yes">Delete All Updates</string>
+    <string name="confirm_delete_update_folder_dialog_neutral">Delete selected Update</string>
     <string name="confirm_delete_update_folder_dialog_no">Cancel</string>
+    <string name="delete_single_update_success_message">Update {0} deleted</string>
     
     <!-- Preferences keys -->
     <string name="p_key_update_check_freq">prefUpdateCheckFrequency</string>

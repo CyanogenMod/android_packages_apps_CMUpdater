@@ -33,6 +33,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -119,7 +120,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	private int mSpeed;
 	private long mRemainingTime;
 	
-	private String[] mfilenames;
+	private ArrayList<String> mfilenames;
 	
 	TextView mdownloadedUpdateText;
 	Spinner mspFoundUpdates;
@@ -187,26 +188,48 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			{
 				new AlertDialog.Builder(UpdateProcessInfo.this)
 				.setMessage(R.string.confirm_delete_update_folder_dialog_message)
+				//Delete Only Selected Update
+				.setNeutralButton(R.string.confirm_delete_update_folder_dialog_neutral, new DialogInterface.OnClickListener(){
+					public void onClick(DialogInterface dialog, int which) {
+						//Delete Updates here
+						String f = (String) mExistingUpdatesSpinner.getSelectedItem();
+						if(deleteUpdate(f))
+						{
+							mfilenames.remove(f);
+							mfilenames.trimToSize();
+						}
+						//If Updates are cached or Present, reload the View
+						if(mAvailableUpdates != null)
+						{
+							switchToUpdateChooserLayout(mAvailableUpdates);
+						}
+						//Otherwise switch to Updatechooserlayout. If no Updates are found and no files in Updatefolder, the Functions redirects you to NO ROMS FOUND
+						else
+						{
+							switchToUpdateChooserLayout(null);
+						}
+					}
+				})
+				//Delete All Updates
 				.setPositiveButton(R.string.confirm_delete_update_folder_dialog_yes, new DialogInterface.OnClickListener(){
 					public void onClick(DialogInterface dialog, int which) {
 						//Delete Updates here
 						deleteOldUpdates();
-						//If Updates are cached or Present, stay on this View, but do not Show the Buttons
+						//Set the Filenames to null, so the Spinner will be empty
+						mfilenames = null;
+						//If Updates are cached or Present, reload the View
 						if(mAvailableUpdates != null)
 						{
-							mseparator.setVisibility(View.GONE);
-							mspFoundUpdates.setVisibility(View.GONE);
-							mapplyUpdateButton.setVisibility(View.GONE);
-							mdownloadedUpdateText.setVisibility(View.GONE);
-							mdeleteOldUpdatesButton.setVisibility(View.GONE);
+							switchToUpdateChooserLayout(mAvailableUpdates);
 						}
-						//Otherwise go to No Updates Available(or it would stay on a blank layout;) )
+						//Otherwise switch to Updatechooserlayout. If no Updates are found and no files in Updatefolder, the Functions redirects you to NO ROMS FOUND
 						else
 						{
-							switchToNoUpdatesAvailable();
+							switchToUpdateChooserLayout(null);
 						}
 					}
 				})
+				//Delete no Update
 				.setNegativeButton(R.string.confirm_delete_update_folder_dialog_no, new DialogInterface.OnClickListener(){
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
@@ -442,16 +465,16 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		if(mUpdateFolder.exists() && mUpdateFolder.isDirectory() && files != null && files.length>0)
 		{
 			//To show only the Filename. Otherwise the whole Path with /sdcard/cm-updates will be shown
-			mfilenames = new String[files.length];
+			mfilenames = new ArrayList<String>();
 			for (int i=0;i<files.length;i++)
 			{
-				mfilenames[i] = files[i].getName();
+				mfilenames.add(files[i].getName());
 			}
 		}
 		files = null;
 		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading()) {
 			switchToDownloadingLayout(mUpdateDownloaderService.getCurrentUpdate());
-		} else if (mAvailableUpdates != null || (mfilenames != null && mfilenames.length > 0)) {
+		} else if (mAvailableUpdates != null || (mfilenames != null && mfilenames.size() > 0)) {
 			switchToUpdateChooserLayout(mAvailableUpdates);
 		} else {
 			switchToNoUpdatesAvailable();
@@ -706,7 +729,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		{
 			if (null == mAvailableUpdates)
 			{
-				if (mfilenames == null || mfilenames.length <= 0)
+				if (mfilenames == null || mfilenames.size() <= 0)
 				{
 					//No Updates and nothing downloaded
 					switchToNoUpdatesAvailable();
@@ -764,7 +787,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			DownloadText.setVisibility(View.GONE);
 		}
 		
-		if (mfilenames != null && mfilenames.length > 0)
+		if (mfilenames != null && mfilenames.size() > 0)
 		{
 			if(availableUpdates == null)
 			{
@@ -798,7 +821,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			mdeleteOldUpdatesButton.setVisibility(View.GONE);
 		}
 		
-		if (availableUpdates == null && (mfilenames == null || mfilenames.length <= 0))
+		if (availableUpdates == null && (mfilenames == null || mfilenames.size() <= 0))
 			switchToNoUpdatesAvailable();
 	}
 
@@ -895,6 +918,40 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			deleteDir(mUpdateFolder);
 			success=true;
 			Toast.makeText(this, R.string.delete_updates_success_message, Toast.LENGTH_LONG).show();
+		}
+		else if (!mUpdateFolder.exists())
+		{
+			Toast.makeText(this, R.string.delete_updates_noFolder_message, Toast.LENGTH_LONG).show();
+		}
+		else
+		{
+			Toast.makeText(this, R.string.delete_updates_failure_message, Toast.LENGTH_LONG).show();
+		}
+		return success;
+	}
+	
+	private boolean deleteUpdate(String filename) {
+		boolean success = false;
+		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory()) {
+			File ZIPfiletodelete = new File(mUpdateFolder + "/" + filename);
+			File MD5filetodelete = new File(mUpdateFolder + "/" + filename + ".md5sum");
+			if (ZIPfiletodelete.exists() && MD5filetodelete.exists())
+			{
+				ZIPfiletodelete.delete();
+				MD5filetodelete.delete();
+			}
+			else
+			{
+				Log.e(TAG, "Update to delete not found");
+				Log.e(TAG, "Zip File: "+ZIPfiletodelete.getAbsolutePath());
+				Log.e(TAG, "MD5 File: "+MD5filetodelete.getAbsolutePath());
+				return false;
+			}
+			ZIPfiletodelete = null;
+			MD5filetodelete = null;
+			
+			success=true;
+			Toast.makeText(this, MessageFormat.format(getResources().getString(R.string.delete_single_update_success_message), filename), Toast.LENGTH_LONG).show();
 		}
 		else if (!mUpdateFolder.exists())
 		{

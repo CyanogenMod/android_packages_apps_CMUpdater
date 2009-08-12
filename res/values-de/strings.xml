@@ -96,9 +96,11 @@ Wenn sie ein Backup erstellen wollen, booten sie bitte vorher manuell in den Rec
     <string name="download_info_speed">Geschwindigkeit: </string>
     <string name="download_info_remaining_time">Verbleibende Zeit: </string>
     
-    <string name="confirm_delete_update_folder_dialog_message">Update Folder löschen?</string>
-    <string name="confirm_delete_update_folder_dialog_yes">Löschen</string>
+    <string name="confirm_delete_update_folder_dialog_message">Update Verzeichnis löschen?</string>
+    <string name="confirm_delete_update_folder_dialog_yes">Alle Updates löschen</string>
+    <string name="confirm_delete_update_folder_dialog_neutral">Ausgewähltes Update löschen</string>
     <string name="confirm_delete_update_folder_dialog_no">Abbrechen</string>
+    <string name="delete_single_update_success_message">Update {0} gelöscht</string>
     
     <!-- Preferences Strings -->
     <string name="p_update_check_freq_title">Updateprüfungs Intervall</string>
