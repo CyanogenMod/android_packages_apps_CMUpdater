@@ -592,8 +592,15 @@ public class UpdateDownloaderService extends Service {
 
 	}
 
-	public void cancelDownload() {
+	public void cancelDownload()
+	{
 		//Thread.currentThread().interrupt();
-		mHandlerThread.interrupt();
+		mDownloading = false;
+		if(mHandlerThread != null)
+		{
+		    HandlerThread tempThread = mHandlerThread;
+		    mHandlerThread = null;
+		    tempThread.interrupt();
+		}
 	}
 }
