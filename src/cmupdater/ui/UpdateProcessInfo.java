@@ -187,6 +187,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			else
 			{
 				new AlertDialog.Builder(UpdateProcessInfo.this)
+				.setTitle(R.string.delete_updates_text)
 				.setMessage(R.string.confirm_delete_update_folder_dialog_message)
 				//Delete Only Selected Update
 				.setNeutralButton(R.string.confirm_delete_update_folder_dialog_neutral, new DialogInterface.OnClickListener(){
