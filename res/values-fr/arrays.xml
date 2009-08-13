@@ -13,12 +13,12 @@
   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
   or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
   for more details.
- 
+
   You should have received a copy of the GNU General Public License along
   with this program; if not, write to the Free Software Foundation, Inc.,
   59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
- 
 -->
+
 <resources>
 	<!-- Frequency times, in seconds -->
     <string-array name="update_frequency">
@@ -28,7 +28,7 @@
         <item>chque jour</item>
         <item>chaque semaine</item>
     </string-array>
-    
+
     <!-- Frequency times, in seconds -->
     <string-array name="update_frequency_values">
         <item>-2</item>
@@ -37,20 +37,4 @@
         <item>86400</item>
         <item>604800</item>
     </string-array>    
-    
-    <!-- Mod Versions -->
-    <!--<string-array name="updates_mod_types">
-        <item>ADP 1</item>
-        <item>T-Mobile G1 (US)</item>
-        <item>T-Mobile G1 (UK)</item>
-	<item>Orange Dream (FR)</item>
-        <item>Toutes les mises à jour</item>
-    </string-array>-->
-    <!--<string-array name="updates_mod_types_values">
-        <item>ADP1</item>
-        <item>US</item>
-        <item>UK</item>
-        <item>FR</item>
-	<item>*</item>
-    </string-array>-->    
 </resources>
