@@ -15,29 +15,10 @@ public class Preferences {
 	
 	public static final int UPDATE_FREQ_AT_BOOT = -1;
 	public static final int UPDATE_FREQ_NONE = -2;
-	/*public static final int UPDATE_FREQ_EVERY_HOUR = 3600;
-	public static final int UPDATE_FREQ_EVERY_DAY =  86400;
-	public static final int UPDATE_FREQ_EVERY_WEEK = 604800;*/
 	
 	private static final String TAG = "Preferences";
-
-	// getprop keys
-	//private static final String PROP_PRODUCT_MODEL = "ro.product.model";
-	//private static final String PROP_COUNTRY_CODE = "ro.product.locale.region";
 	
-	// values returned by getprop
-	//private static final String PROP_PRODUCT_MODEL_ADP1_VALUE = "Android Dev Phone 1";
-	//private static final String PROP_PRODUCT_MODEL_US_VALUE = "T-Mobile G1";
-	//private static final String PROP_PRODUCT_MODEL_UK_VALUE = "T-Mobile G1";
-	
-	//private static final String PROP_COUNTRY_CODE_ADP1_VALUE = "US";
-	//private static final String PROP_COUNTRY_CODE_US_VALUE = "US";
-	//private static final String PROP_COUNTRY_CODE_UK_VALUE = "GB";
-	
-	//Keys used in update file
-	private static final String MOD_VERSION_ADP1 = "ADP1";
-	//private static final String MOD_VERSION_US = "US";
-	//private static final String MOD_VERSION_UK = "UK";
+	private static final String SYS_PROP_DEVICE = "ro.product.board";
 	
 	private static final String KEY_FIRST_RUN = "firstRun";
 	private static final String KEY_LAST_UPDATE_CHECK = "lastUpdateCheck";
@@ -142,37 +123,8 @@ public class Preferences {
 		return mPrefs.getString(mRes.getString(R.string.conf_update_folder), mRes.getString(R.string.conf_update_folder));
 	}
 
-	private String getSystemModString() {
-		
-		/**
-		
-		String prodMod = SysUtils.getSystemProperty(PROP_PRODUCT_MODEL);
-		String country = SysUtils.getSystemProperty(PROP_COUNTRY_CODE);
-		
-		if(PROP_PRODUCT_MODEL_ADP1_VALUE.equalsIgnoreCase(prodMod)) {
-			
-		}
-		
-		if(PROP_PRODUCT_MODEL_UK_VALUE.equalsIgnoreCase(prodMod) &&
-				PROP_COUNTRY_CODE_UK_VALUE.equalsIgnoreCase(country)) {
-			return MOD_VERSION_UK;
-		}
-		
-		if(PROP_PRODUCT_MODEL_US_VALUE.equalsIgnoreCase(prodMod) &&
-				PROP_COUNTRY_CODE_US_VALUE.equalsIgnoreCase(country)) {
-			return MOD_VERSION_US;
-		}
-		
-		*/
-		
-		return MOD_VERSION_ADP1;
-
-		/**
-		
-		Log.e(TAG, "Unable to determine system mod. " +
-				"Please report these values: Product model:" + prodMod + "; country:" + country);
-		return "*";
-		
-		*/
+	private String getSystemModString()
+	{
+		return SysUtils.getSystemProperty(SYS_PROP_DEVICE);
 	}
 }

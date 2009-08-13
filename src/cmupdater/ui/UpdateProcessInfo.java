@@ -391,6 +391,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			prefs.configureModString();
 			prefs.setFirstRun(false);
 		}
+		//If an older Version was installed, the ModVersion is still ADP1. So reset it
+		if(prefs.getConfiguredModString().equals("ADP1"))
+			prefs.configureModString();
 
 		try {
 			loadState();

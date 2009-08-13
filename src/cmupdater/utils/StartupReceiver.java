@@ -40,7 +40,8 @@ public class StartupReceiver extends BroadcastReceiver {
 	public void onReceive(Context ctx, Intent intent) {
 		Preferences prefs = Preferences.getPreferences(ctx);
 		
-		if(prefs.getConfiguredModString() == null) {
+		//If older Version was installed before, the ModString is ADP1. So reset it
+		if(prefs.getConfiguredModString() == null || prefs.getConfiguredModString().equals("ADP1")) {
 			Preferences.getPreferences(ctx).configureModString();
 		}
 		
