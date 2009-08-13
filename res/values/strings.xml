@@ -33,7 +33,7 @@
     <string name="about_email">http://forum.xda-developers.com/forumdisplay.php?f=448</string>
         
     <!-- Config Strings -->
-    <string name="conf_update_server_url_def">http://cyanogen-updater.googlecode.com/files/update_file_cm.json</string>
+    <string name="conf_update_server_url_def">http://cyanogen-updater.googlecode.com/files/update_file.json</string>
     <string name="conf_update_folder">cm-updates</string>
     
     <!-- .ui.* Strings -->
