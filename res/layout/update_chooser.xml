@@ -127,7 +127,24 @@
 		android:text="@string/delete_updates_text"
 	    style="@style/TextAppearance.Button"
 	    android:drawableLeft="@drawable/check_now" />
-	    	    
+
+	<TextView
+    	android:id="@+id/experimental_updates_textview"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10px"
+		android:layout_marginRight="10px"
+		android:layout_gravity="bottom|right" />
+
+	<TextView
+    	android:id="@+id/show_downgrades_textview"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10px"
+		android:layout_marginRight="10px"
+		android:layout_gravity="bottom|right" />
+
+
 	<TextView
     	android:id="@+id/up_chooser_current_version"
 		android:layout_width="wrap_content"

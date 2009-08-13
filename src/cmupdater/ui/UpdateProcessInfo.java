@@ -671,10 +671,15 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 					checkForUpdates();
 				}
 			});
-
+			
 			TextView currentVersion = (TextView) findViewById(R.id.no_updates_current_version);
+			TextView experimentalBuilds = (TextView) findViewById(R.id.experimental_updates_textview);
+			TextView showDowngrades = (TextView) findViewById(R.id.show_downgrades_textview);
 			String pattern = getResources().getString(R.string.current_version_text);
+			Preferences prefs = Preferences.getPreferences(this);
 			currentVersion.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
+			experimentalBuilds.setText(MessageFormat.format(getResources().getString(R.string.p_display_allow_experimental_versions_title)+": {0}", Boolean.toString(prefs.allowExperimental())));
+			showDowngrades.setText(MessageFormat.format(getResources().getString(R.string.p_display_older_mod_versions_title)+": {0}", Boolean.toString(prefs.showDowngrades())));
 		//} else {
 		//	Log.w(TAG, "Mod version not supported. Mod Version:" + Arrays.toString(sysVer) +
 		//			"; Min suported version:" + Arrays.toString(MIN_SUPPORTED_MOD_VERSION));
@@ -750,8 +755,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).cancel(R.string.not_new_updates_found_title);
 		
 		TextView currentVersion = (TextView) findViewById(R.id.up_chooser_current_version);
+		TextView experimentalBuilds = (TextView) findViewById(R.id.experimental_updates_textview);
+		TextView showDowngrades = (TextView) findViewById(R.id.show_downgrades_textview);
 		String pattern = getResources().getString(R.string.current_version_text);
+		Preferences prefs = Preferences.getPreferences(this);
 		currentVersion.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
+		experimentalBuilds.setText(MessageFormat.format(getResources().getString(R.string.p_display_allow_experimental_versions_title)+": {0}", Boolean.toString(prefs.allowExperimental())));
+		showDowngrades.setText(MessageFormat.format(getResources().getString(R.string.p_display_older_mod_versions_title)+": {0}", Boolean.toString(prefs.showDowngrades())));
 		
 		mdownloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
 		mspFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
