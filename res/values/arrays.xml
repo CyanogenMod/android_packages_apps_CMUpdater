@@ -67,19 +67,4 @@
         <item>86400</item>
         <item>604800</item>
     </string-array>    
-    
-    <!-- Mod Versions -->
-    <!--<string-array name="updates_mod_types">
-        <item>ADP 1</item>
-        <item>T-Mobile G1 (US)</item>
-        <item>T-Mobile G1 (UK)</item>
-        <item>All the updates</item>
-    </string-array>-->
-    <!--<string-array name="updates_mod_types_values">
-        <item>ADP1</item>
-        <item>US</item>
-        <item>UK</item>
-        <item>*</item>
-    </string-array>-->    
-    
 </resources>
