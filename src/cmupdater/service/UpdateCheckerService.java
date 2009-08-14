@@ -216,13 +216,18 @@ public class UpdateCheckerService extends Service {
 			notification.setLatestEventInfo(this, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
 			
 			Uri notificationRingtone = prefs.getConfiguredRingtone();
-			if(notificationRingtone == null) {
-				notification.defaults = Notification.DEFAULT_ALL;
-			} else {
-				notification.defaults = Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE;
+			if(prefs.getVibrate())
+				notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
+			else
+				notification.defaults = Notification.DEFAULT_LIGHTS;
+			if(notificationRingtone == null)
+			{
+				notification.sound = null;
+			}
+			else
+			{
 				notification.sound = notificationRingtone;
 			}
-			
 			
 			//Use a resourceId as an unique identifier
 			mNM.notify(R.string.not_new_updates_found_title, notification);
@@ -257,10 +262,16 @@ public class UpdateCheckerService extends Service {
 							contentIntent);
 		
 		Uri notificationRingtone = Preferences.getPreferences(this).getConfiguredRingtone();
-		if(notificationRingtone == null) {
-			notification.defaults = Notification.DEFAULT_ALL;
-		} else {
-			notification.defaults = Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE;
+		if(Preferences.getPreferences(this).getVibrate())
+			notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
+		else
+			notification.defaults = Notification.DEFAULT_LIGHTS;
+		if(notificationRingtone == null)
+		{
+			notification.sound = null;
+		}
+		else
+		{
 			notification.sound = notificationRingtone;
 		}
 		

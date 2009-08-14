@@ -335,10 +335,16 @@ public class UpdateDownloaderService extends Service {
 				contentIntent);
 
 		Uri notificationRingtone = Preferences.getPreferences(this).getConfiguredRingtone();
-		if(notificationRingtone == null) {
-			notification.defaults = Notification.DEFAULT_ALL;
-		} else {
-			notification.defaults = Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE;
+		if(Preferences.getPreferences(this).getVibrate())
+			notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
+		else
+			notification.defaults = Notification.DEFAULT_LIGHTS;
+		if(notificationRingtone == null)
+		{
+			notification.sound = null;
+		}
+		else
+		{
 			notification.sound = notificationRingtone;
 		}
 
@@ -572,10 +578,16 @@ public class UpdateDownloaderService extends Service {
 					ui.name);
 			notification.setLatestEventInfo(this, res.getString(R.string.not_update_downloaded_title), notificationBody, contentIntent);
 			Uri notificationRingtone = Preferences.getPreferences(this).getConfiguredRingtone();
-			if(notificationRingtone == null) {
-				notification.defaults = Notification.DEFAULT_ALL;
-			} else {
-				notification.defaults = Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE;
+			if(Preferences.getPreferences(this).getVibrate())
+				notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
+			else
+				notification.defaults = Notification.DEFAULT_LIGHTS;
+			if(notificationRingtone == null)
+			{
+				notification.sound = null;
+			}
+			else
+			{
 				notification.sound = notificationRingtone;
 			}
 

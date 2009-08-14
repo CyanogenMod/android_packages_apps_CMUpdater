@@ -85,10 +85,16 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo
 			//notification.icon = R.drawable.icon_notification;
 			
 			Uri notificationRingtone = prefs.getConfiguredRingtone();
-			if(notificationRingtone == null) {
-				notification.defaults = Notification.DEFAULT_ALL;
-			} else {
-				notification.defaults = Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE;
+			if(prefs.getVibrate())
+				notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
+			else
+				notification.defaults = Notification.DEFAULT_LIGHTS;
+			if(notificationRingtone == null)
+			{
+				notification.sound = null;
+			}
+			else
+			{
 				notification.sound = notificationRingtone;
 			}
 			

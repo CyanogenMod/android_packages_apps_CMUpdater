@@ -97,7 +97,7 @@ public class Preferences {
 	}
 	
 	public boolean showDowngrades() {
-		return mPrefs.getBoolean(mRes.getString(R.string.p_display_older_mod_versions), false);
+		return mPrefs.getBoolean(mRes.getString(R.string.p_display_older_mod_versions), mRes.getBoolean(R.string.p_display_older_mod_versions_def_value));
 	}
 	
 	public String getUpdateFileURL() {
@@ -111,14 +111,25 @@ public class Preferences {
 		if(!editor.commit()) Log.e(TAG, "Unable to write Update File URL");
 	}
 	
+	public void setNotificationRingtone(String RingTone) {
+		Log.d(TAG, "Setting RingtoneURL to "+RingTone);
+		Editor editor = mPrefs.edit();
+		editor.putString(mRes.getString(R.string.p_key_notification_ringtone), RingTone);
+		if(!editor.commit()) Log.e(TAG, "Unable to write Ringtone URI");
+	}
+	
 	public boolean allowExperimental() {
-		return mPrefs.getBoolean(mRes.getString(R.string.p_display_allow_experimental_versions), false);
+		return mPrefs.getBoolean(mRes.getString(R.string.p_display_allow_experimental_versions), mRes.getBoolean(R.string.p_display_allow_experimental_versions_def_value));
 	}
 	
 	public boolean doNandroidBackup() {
-		return mPrefs.getBoolean(mRes.getString(R.string.p_do_nandroid_backup), false);
+		return mPrefs.getBoolean(mRes.getString(R.string.p_do_nandroid_backup), mRes.getBoolean(R.string.p_do_nandroid_backup_def_value));
 	}
 	
+	public boolean getVibrate() {
+		return mPrefs.getBoolean(mRes.getString(R.string.p_vibrate), mRes.getBoolean(R.string.p_vibrate_def_value));
+	}
+	 
 	public String getUpdateFolder() {
 		return mPrefs.getString(mRes.getString(R.string.conf_update_folder), mRes.getString(R.string.conf_update_folder));
 	}

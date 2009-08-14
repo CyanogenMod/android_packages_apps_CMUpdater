@@ -128,11 +128,15 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     <string name="p_display_allow_experimental_versions">displayExperimentalVersions</string>
     <string name="p_do_nandroid_backup">doNandroidBackup</string>
     <string name="p_display_older_mod_versions_def_value">false</string>
+    <string name="p_display_allow_experimental_versions_def_value">false</string>
+    <string name="p_do_nandroid_backup_def_value">true</string>
     <string name="p_key_notification_ringtone">prefNotificationRingtone</string>
     <string name="p_update_file_url_screen">prefUpdateFileURLScreen</string>
     <string name="p_update_file_url">prefUpdateFileURL</string>
     <string name="p_update_file_url_qr">prefUpdateFileURLQr</string>
     <string name="p_update_file_url_def">prefUpdateFileURLDef</string>
+    <string name="p_vibrate">prefVibrate</string>
+    <string name="p_vibrate_def_value">true</string>
     
     <!-- Preferences Strings -->
     <string name="p_update_check_freq_title">Update Checking frequency</string>
@@ -167,4 +171,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     
     <string name="p_update_file_url_qr_title">Scan Barcode</string>
     <string name="p_update_file_url_qr_summary">Scan QR Code for Update File URL</string>
+    
+    <string name="p_vibrate_title">Vibrate</string>
+    <string name="p_vibrate_summary">Vibrate on Notifications</string>
 </resources>

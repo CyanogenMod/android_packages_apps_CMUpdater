@@ -13,61 +13,75 @@
 		Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
 		02111-1307 USA
 	-->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
-	<ListPreference android:key="@string/p_key_update_check_freq"
-		android:title="@string/p_update_check_freq_title" android:summary="@string/p_update_check_freq_summary"
-		android:entries="@array/update_frequency" android:entryValues="@array/update_frequency_values"
+	<ListPreference
+		android:key="@string/p_key_update_check_freq"
+		android:title="@string/p_update_check_freq_title"
+		android:summary="@string/p_update_check_freq_summary"
+		android:entries="@array/update_frequency"
+		android:entryValues="@array/update_frequency_values"
 		android:defaultValue="@string/p_update_check_freq_def_value" />
 
-	<RingtonePreference android:key="@string/p_key_notification_ringtone"
-		android:title="@string/p_notification_ringtone_title" android:summary="@string/p_notification_ringtone_summary"
+	<RingtonePreference
+		android:key="@string/p_key_notification_ringtone"
+		android:title="@string/p_notification_ringtone_title"
+		android:summary="@string/p_notification_ringtone_summary"
 		android:ringtoneType="notification" />
 
-	<!--
-		<ListPreference
-		android:key="@string/p_key_configured_updates_mod_version"
-		android:title="@string/p_updates_mod_version_title"
-		android:summary="@string/p_updates_mod_version_summary"
-		android:entries="@array/updates_mod_types"
-		android:entryValues="@array/updates_mod_types_values" />
-	-->
+	<CheckBoxPreference
+		android:key="@string/p_vibrate"
+		android:title="@string/p_vibrate_title"
+		android:summary="@string/p_vibrate_summary"
+		android:defaultValue="@string/p_vibrate_def_value" />
 
 	<!--
 
 		<CheckBoxPreference android:key="@string/p_do_nandroid_backup"
 		android:title="@string/p_do_nandroid_backup_title"
 		android:summary="@string/p_do_nandroid_backup_summary"
-		android:defaultValue="true" />
+		android:defaultValue="@string/p_do_nandroid_backup_def_value" />
 	-->
 
-	<CheckBoxPreference android:key="@string/p_display_older_mod_versions"
+	<CheckBoxPreference
+		android:key="@string/p_display_older_mod_versions"
 		android:title="@string/p_display_older_mod_versions_title"
 		android:summary="@string/p_display_older_mod_versions_summary"
 		android:defaultValue="@string/p_display_older_mod_versions_def_value" />
 
-	<CheckBoxPreference android:key="@string/p_display_allow_experimental_versions"
+	<CheckBoxPreference
+		android:key="@string/p_display_allow_experimental_versions"
 		android:title="@string/p_display_allow_experimental_versions_title"
 		android:summary="@string/p_display_allow_experimental_versions_summary"
-		android:defaultValue="false" />
+		android:defaultValue="@string/p_display_allow_experimental_versions_def_value" />
 
-	<PreferenceScreen android:key="@string/p_update_file_url_screen_title"
+	<PreferenceScreen
+		android:key="@string/p_update_file_url_screen_title"
 		android:title="@string/p_update_file_url_screen_title"
-		android:summary="@string/p_update_file_url_screen_summary">
-		<PreferenceCategory android:title="@string/p_update_file_url_screen_title">
-			<EditTextPreference android:key="@string/p_update_file_url"
-				android:title="@string/p_update_file_url_title" android:summary="@string/p_update_file_url_summary"
+		android:summary="@string/p_update_file_url_screen_summary" >
+		<PreferenceCategory
+			android:title="@string/p_update_file_url_screen_title" >
+			<EditTextPreference
+				android:key="@string/p_update_file_url"
+				android:title="@string/p_update_file_url_title"
+				android:summary="@string/p_update_file_url_summary"
 				android:dialogTitle="@string/p_update_file_url_title"
 				android:defaultValue="@string/conf_update_server_url_def"
 				android:singleLine="false" />
 
-			<Preference android:key="@string/p_update_file_url_qr"
-				android:title="@string/p_update_file_url_qr_title" android:summary="@string/p_update_file_url_qr_summary" />
+			<Preference
+				android:key="@string/p_update_file_url_qr"
+				android:title="@string/p_update_file_url_qr_title"
+				android:summary="@string/p_update_file_url_qr_summary" />
 
-			<Preference android:key="@string/p_update_file_url_def"
-				android:title="@string/p_update_file_url_def_title" android:summary="@string/p_update_file_url_def_summary" />
+			<Preference
+				android:key="@string/p_update_file_url_def"
+				android:title="@string/p_update_file_url_def_title"
+				android:summary="@string/p_update_file_url_def_summary" />
 		</PreferenceCategory>
 	</PreferenceScreen>
 </PreferenceScreen>

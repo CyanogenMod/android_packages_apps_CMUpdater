@@ -21,6 +21,8 @@
 package cmupdater.ui;
 
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -111,23 +113,44 @@ public class ConfigActivity extends PreferenceActivity {
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-		if (null != scanResult) {
-			String result = scanResult.getContents();
-			if (null != result && !result.equals("") ) {
-				prefs.setUpdateFileURL(result);
-				Toast.makeText(getBaseContext(), "Update File URL: " + result, Toast.LENGTH_SHORT).show();
-				Log.d(TAG, "Scanned QR Code: " + scanResult.getContents());
-				ConfigActivity.this.finish();
-			} else {
+		Log.d(TAG, "onActivityResult requestCode: "+requestCode);
+		//Switch is necessary, because RingtonePreference and QRBarcodeScanner call the same Event
+		switch (requestCode)
+		{
+		//QR Barcode scanner
+		case IntentIntegrator.REQUEST_CODE:
+			IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+			if (null != scanResult) {
+				String result = scanResult.getContents();
+				if (null != result && !result.equals("") ) {
+					prefs.setUpdateFileURL(result);
+					Toast.makeText(getBaseContext(), "Update File URL: " + result, Toast.LENGTH_SHORT).show();
+					Log.d(TAG, "Scanned QR Code: " + scanResult.getContents());
+					ConfigActivity.this.finish();
+				} else {
+					Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
+				}
+				
+			}
+			else {
 				Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
 			}
-			
+			break;
+		//RingtonePicker
+		case 100:
+			//Needs to be an Object, because when giving the toString() here, it crashes when NULL is returned
+			//Object ringtone = intent.getExtras().get(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+			//intent = null when pressing back on the ringtonpickerdialog
+			if (intent == null)
+				break;
+			Uri ringtone = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI); 
+			if (ringtone != null)
+				prefs.setNotificationRingtone(ringtone.toString());
+			else
+				prefs.setNotificationRingtone(null);
+			break;
+		default:
+			break;
 		}
-		else {
-			Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
-		}
-		// else continue with any other code you need in the method
-
 	}
 }
