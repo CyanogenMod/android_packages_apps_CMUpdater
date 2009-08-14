@@ -42,6 +42,15 @@
 			android:layout_weight="1" />
 
 		<TextView
+	    	android:id="@+id/last_update_check"
+	    	android:text="@string/last_update_check_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10px"
+			android:layout_marginRight="10px"
+			android:layout_gravity="bottom|right" />
+
+		<TextView
 	    	android:id="@+id/experimental_updates_textview"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -56,15 +65,15 @@
 			android:layout_marginTop="10px"
 			android:layout_marginRight="10px"
 			android:layout_gravity="bottom|right" />
-			
+
 		<TextView
 	    	android:id="@+id/no_updates_current_version"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="10px"
+			android:layout_marginTop="10px"
 			android:layout_marginRight="10px"
 			android:layout_gravity="bottom|right" />
-	</LinearLayout>
+</LinearLayout>
 		
 	<LinearLayout
 		android:id="@+id/no_updates_no_mod_layout"

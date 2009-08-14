@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.text.DateFormat;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -647,11 +648,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		TextView currentVersion = (TextView) findViewById(R.id.no_updates_current_version);
 		TextView experimentalBuilds = (TextView) findViewById(R.id.experimental_updates_textview);
 		TextView showDowngrades = (TextView) findViewById(R.id.show_downgrades_textview);
+		TextView lastUpdateCheck = (TextView) findViewById(R.id.last_update_check);
 		String pattern = getResources().getString(R.string.current_version_text);
 		Preferences prefs = Preferences.getPreferences(this);
 		currentVersion.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
 		experimentalBuilds.setText(MessageFormat.format(getResources().getString(R.string.p_display_allow_experimental_versions_title)+": {0}", Boolean.toString(prefs.allowExperimental())));
 		showDowngrades.setText(MessageFormat.format(getResources().getString(R.string.p_display_older_mod_versions_title)+": {0}", Boolean.toString(prefs.showDowngrades())));
+		lastUpdateCheck.setText(MessageFormat.format(getResources().getString(R.string.last_update_check_text)+": {0} {1}", DateFormat.getDateInstance().format(prefs.getLastUpdateCheck()), DateFormat.getTimeInstance().format(prefs.getLastUpdateCheck())));
 	}
 
 	@Override
@@ -714,11 +717,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		TextView currentVersion = (TextView) findViewById(R.id.up_chooser_current_version);
 		TextView experimentalBuilds = (TextView) findViewById(R.id.experimental_updates_textview);
 		TextView showDowngrades = (TextView) findViewById(R.id.show_downgrades_textview);
+		TextView lastUpdateCheck = (TextView) findViewById(R.id.last_update_check);
 		String pattern = getResources().getString(R.string.current_version_text);
 		Preferences prefs = Preferences.getPreferences(this);
 		currentVersion.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
 		experimentalBuilds.setText(MessageFormat.format(getResources().getString(R.string.p_display_allow_experimental_versions_title)+": {0}", Boolean.toString(prefs.allowExperimental())));
 		showDowngrades.setText(MessageFormat.format(getResources().getString(R.string.p_display_older_mod_versions_title)+": {0}", Boolean.toString(prefs.showDowngrades())));
+		lastUpdateCheck.setText(MessageFormat.format(getResources().getString(R.string.last_update_check_text)+": {0} {1}", DateFormat.getDateInstance().format(prefs.getLastUpdateCheck()), DateFormat.getTimeInstance().format(prefs.getLastUpdateCheck())));
 		
 		mdownloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
 		mspFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);

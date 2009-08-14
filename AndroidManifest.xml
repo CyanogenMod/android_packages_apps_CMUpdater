@@ -25,10 +25,12 @@
                        android:resource="@raw/license_short" />
         <meta-data android:name="org.openintents.metadata.EMAIL"
                        android:value="@string/about_email" />
-	<meta-data android:name="com.a0soft.gphone.aTrackDog.webURL"
-		       android:value="http://code.google.com/p/cyanogen-updater" />
-	<meta-data android:name="com.a0soft.gphone.aTrackDog.dlURL"
-        	       android:value="http://code.google.com/p/cyanogen-updater/downloads/list" />
+		<meta-data android:name="com.a0soft.gphone.aTrackDog.webURL"
+						android:value="http://code.google.com/p/cyanogen-updater" />
+		<meta-data android:name="com.a0soft.gphone.aTrackDog.dlURL"
+						android:value="http://code.google.com/p/cyanogen-updater/downloads/list" />
+		<!-- <meta-data android:name="com.a0soft.gphone.aTrackDog.testVersion"
+						android:value="3" /> -->
 
 		<activity android:name=".UpdateProcessInfo" android:launchMode="singleTask" android:configChanges="orientation|keyboardHidden">
 			<intent-filter>

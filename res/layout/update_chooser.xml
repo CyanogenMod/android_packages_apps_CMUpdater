@@ -105,6 +105,15 @@
 	    android:drawableLeft="@drawable/check_now" />
 
 	<TextView
+	    android:id="@+id/last_update_check"
+	    android:text="@string/last_update_check_text"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10px"
+		android:layout_marginRight="10px"
+		android:layout_gravity="bottom|right" />
+
+	<TextView
     	android:id="@+id/experimental_updates_textview"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -119,14 +128,12 @@
 		android:layout_marginTop="10px"
 		android:layout_marginRight="10px"
 		android:layout_gravity="bottom|right" />
-
 	<TextView
-    	android:id="@+id/up_chooser_current_version"
+	    android:id="@+id/up_chooser_current_version"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="10px"
 		android:layout_marginRight="10px"
 		android:layout_gravity="bottom|right" />
-
 </LinearLayout>
 </ScrollView>
