@@ -76,13 +76,12 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo
 							.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_NEW_UPDATE_LIST);
 			PendingIntent contentIntent = PendingIntent.getActivity(upi, 0, i, PendingIntent.FLAG_ONE_SHOT);
 
-			Notification notification = new Notification(R.drawable.icon_notification, //android.R.drawable.stat_notify_sync,
+			Notification notification = new Notification(R.drawable.icon_notification,
 								res.getString(R.string.not_new_updates_found_ticker),
 								System.currentTimeMillis());
 			
 			String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
 			notification.setLatestEventInfo(upi, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
-			//notification.icon = R.drawable.icon_notification;
 			
 			Uri notificationRingtone = prefs.getConfiguredRingtone();
 			if(prefs.getVibrate())

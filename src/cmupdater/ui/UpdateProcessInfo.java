@@ -1,23 +1,3 @@
-/*
- * JF Updater: Auto-updater for modified Android OS
- *
- * Copyright (c) 2009 Sergi Vélez
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
- * for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
- */
-
 package cmupdater.ui;
 
 import java.io.BufferedReader;
@@ -79,7 +59,6 @@ import com.google.zxing.integration.android.IntentResult;
 public class UpdateProcessInfo extends IUpdateProcessInfo {
 
 	private static final String TAG = "<CM-Updater> UpdateProcessInfo";
-	//private static final String STATE_DIR = "state";
 	private static final String STORED_STATE_FILENAME = "UpdateProcessInfo.ser";
 
 	private static final int MENU_ID_UPDATE_NOW = 1;
@@ -96,9 +75,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 
 	public static final String KEY_REQUEST = "cmupdater.keyRequest";
 	public static final String KEY_UPDATE_LIST = "cmupdater.updateList";
-
-	//private static final int[] MIN_SUPPORTED_MOD_VERSION = new int[]{3,2,0};
-
 
 	private Spinner mUpdatesSpinner;
 	private PlainTextUpdateServer mUpdateServer;
@@ -163,9 +139,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 				return;
 			}
 
-			UpdateInfo ui = (UpdateInfo) mUpdatesSpinner.getSelectedItem(); //(UpdateInfo) checkedRB.getTag();
+			UpdateInfo ui = (UpdateInfo) mUpdatesSpinner.getSelectedItem();
 			downloadRequestedUpdate(ui);
-			//UpdateProcessInfo.this.finish();
 		}
 	};
 
@@ -406,9 +381,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		URI uri = URI.create(prefs.getUpdateFileURL());
 		mUpdateServer = new PlainTextUpdateServer(uri, this);
 
-		//String destFileName = getResources().getString(R.string.conf_update_file_name);
-		//mDestinationFile = new File(Environment.getExternalStorageDirectory(), destFileName);
-
 		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
 
 		mUpdateDownloaderServiceIntent = new Intent(this, UpdateDownloaderService.class);
@@ -467,12 +439,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		{
 			Log.w(TAG, "Intent is NULL");
 		}
-		
-		/*DownloadUpdateTask downloadUpdateTask = DownloadUpdateTask.INSTANCE;
-        if(downloadUpdateTask != null && downloadUpdateTask.getStatus() == DownloadUpdateTask.Status.RUNNING) {
-        	switchToDownloadingLayout(mDownloadingUpdate);
-        	downloadUpdateTask.setIUpdateProcessInfo(this);
-        } else*/
 		
 		//Outside the if to prevent a empty spinnercontrol
 		FilenameFilter f = new UpdateFilter();
@@ -611,15 +577,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		boolean superReturn = super.onPrepareOptionsMenu(menu);
 
-		/**
-		if(SysUtils.VERSION_COMPARATOR.compare(
-				SysUtils.getSystemModVersion(),
-				MIN_SUPPORTED_MOD_VERSION) < 0) {
-			//No supported mod
-			return false;
-		}
-		*/
-
 		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading()) {
 			//Download in progress
 			menu.findItem(MENU_ID_UPDATE_NOW).setEnabled(false);
@@ -679,32 +636,22 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		LinearLayout checkForUpdatesLayout = (LinearLayout) findViewById(R.id.no_updates_chec_for_updates_layout);
 		LinearLayout noModLayout = (LinearLayout) findViewById(R.id.no_updates_no_mod_layout);
 
-		//if(SysUtils.VERSION_COMPARATOR.compare(sysVer, MIN_SUPPORTED_MOD_VERSION) >= 0) {
-			noModLayout.setVisibility(View.GONE);
-			checkForUpdatesLayout.setVisibility(View.VISIBLE);
-			((Button)findViewById(R.id.check_now_button)).setOnClickListener(new View.OnClickListener() {
-				public void onClick(View v) {
-					checkForUpdates();
-				}
-			});
+		noModLayout.setVisibility(View.GONE);
+		checkForUpdatesLayout.setVisibility(View.VISIBLE);
+		((Button)findViewById(R.id.check_now_button)).setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				checkForUpdates();
+			}
+		});
 			
-			TextView currentVersion = (TextView) findViewById(R.id.no_updates_current_version);
-			TextView experimentalBuilds = (TextView) findViewById(R.id.experimental_updates_textview);
-			TextView showDowngrades = (TextView) findViewById(R.id.show_downgrades_textview);
-			String pattern = getResources().getString(R.string.current_version_text);
-			Preferences prefs = Preferences.getPreferences(this);
-			currentVersion.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
-			experimentalBuilds.setText(MessageFormat.format(getResources().getString(R.string.p_display_allow_experimental_versions_title)+": {0}", Boolean.toString(prefs.allowExperimental())));
-			showDowngrades.setText(MessageFormat.format(getResources().getString(R.string.p_display_older_mod_versions_title)+": {0}", Boolean.toString(prefs.showDowngrades())));
-		//} else {
-		//	Log.w(TAG, "Mod version not supported. Mod Version:" + Arrays.toString(sysVer) +
-		//			"; Min suported version:" + Arrays.toString(MIN_SUPPORTED_MOD_VERSION));
-		//	checkForUpdatesLayout.setVisibility(View.GONE);
-		//	noModLayout.setVisibility(View.VISIBLE);
-		//	TextView tv = (TextView) findViewById(R.id.no_updates_no_mod_text_view);
-		//	String text = getResources().getString(R.string.no_updates_no_mod_text);
-		//	tv.setText(MessageFormat.format(text, SysUtils.getReadableModVersion()));
-		//}
+		TextView currentVersion = (TextView) findViewById(R.id.no_updates_current_version);
+		TextView experimentalBuilds = (TextView) findViewById(R.id.experimental_updates_textview);
+		TextView showDowngrades = (TextView) findViewById(R.id.show_downgrades_textview);
+		String pattern = getResources().getString(R.string.current_version_text);
+		Preferences prefs = Preferences.getPreferences(this);
+		currentVersion.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
+		experimentalBuilds.setText(MessageFormat.format(getResources().getString(R.string.p_display_allow_experimental_versions_title)+": {0}", Boolean.toString(prefs.allowExperimental())));
+		showDowngrades.setText(MessageFormat.format(getResources().getString(R.string.p_display_older_mod_versions_title)+": {0}", Boolean.toString(prefs.showDowngrades())));
 	}
 
 	@Override
@@ -732,13 +679,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		if(mFileName != null)
 			mDownloadFilenameTextView.setText(mFileName);
 		((Button)findViewById(R.id.cancel_download_buton)).setOnClickListener(mCancelDownloadListener);
-	}/*
-
-	@Override
-	void switchToUpdateChooserLayout(UpdateInfo downloadedUpdate) {
-		mUpdateReady = downloadedUpdate;
-		switchToUpdateChooserLayout((List<UpdateInfo>)null);
-	}*/
+	}
 
 	@Override
 	public void switchToUpdateChooserLayout(List<UpdateInfo> availableUpdates) {
@@ -853,7 +794,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 
 	@Override
 	public void updateDownloadProgress(final int downloaded, final int total, final long StartTime) {
-		//final ProgressBar pb = mProgressBar;
 		if(mProgressBar ==null)return;
 
 		mProgressBar.post(new Runnable(){
@@ -884,7 +824,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		mDownloadMirrorTextView.post(new Runnable(){
 			public void run() {
 				mDownloadMirrorTextView.setText(mirror);
-				//mDownloadFilenameTextView.setText(Filename);
 				mMirrorName = mirror;
 			}
 		});
@@ -896,7 +835,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	}
 
 	private void checkForUpdates() {
-		//(mCheckForUpdatesTask = new CheckForUpdatesTask(mUpdateServer, this, true)).execute();
 		new CheckForUpdatesTask(mUpdateServer, this).execute();
 		Toast.makeText(this, R.string.checking_for_updates, Toast.LENGTH_SHORT).show();
 		finish();
@@ -930,8 +868,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 
 	private void downloadRequestedUpdate(UpdateInfo ui) {
 		switchToDownloadingLayout(ui);
-		//(mDownloadUpdateTask = new DownloadUpdateTask(this)).execute(ui);
-		//bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, 0);
 		mUpdateDownloaderServiceIntent.putExtra(UpdateDownloaderService.KEY_REQUEST, UpdateDownloaderService.REQUEST_DOWNLOAD_UPDATE);
 		mUpdateDownloaderServiceIntent.putExtra(UpdateDownloaderService.KEY_UPDATE_INFO, ui);
 		startService(mUpdateDownloaderServiceIntent);
@@ -1037,8 +973,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		else {
 			Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
 		}
-		// else continue with any other code you need in the method
-
 	}
 	
 	public boolean onKeyDown(int keyCode, KeyEvent event)

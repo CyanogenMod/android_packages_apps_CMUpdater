@@ -1,24 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  JF Updater: Auto-updater for modified Android OS
- 
-  Copyright (c) 2009 Sergi Vélez
- 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or
-  (at your option) any later version.
- 
-  This program is distributed in the hope that it will be useful, but
-  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
-  for more details.
- 
-  You should have received a copy of the GNU General Public License along
-  with this program; if not, write to the Free Software Foundation, Inc.,
-  59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
- 
--->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
@@ -36,10 +16,6 @@
 		android:gravity="center_horizontal"
 		android:layout_marginTop="10sp"
     	style="@style/TextAppearance.Text" />
-	<!-- <ListView
-		android:id="@+id/available_updates_list"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"/> -->
 		
 	<ScrollView
 		android:layout_width="fill_parent"
@@ -143,7 +119,6 @@
 		android:layout_marginTop="10px"
 		android:layout_marginRight="10px"
 		android:layout_gravity="bottom|right" />
-
 
 	<TextView
     	android:id="@+id/up_chooser_current_version"

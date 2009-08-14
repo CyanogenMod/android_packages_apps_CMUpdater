@@ -1,264 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--
-
-  CM Updater: Auto-updater for modified Android OS
-
- 
-
-  Copyright (c) 2009 Sergi Vélez
-
- 
-
-  This program is free software; you can redistribute it and/or modify
-
-  it under the terms of the GNU General Public License as published by
-
-  the Free Software Foundation; either version 2 of the License, or
-
-  (at your option) any later version.
-
- 
-
-  This program is distributed in the hope that it will be useful, but
-
-  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-
-  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
-
-  for more details.
-
- 
-
-  You should have received a copy of the GNU General Public License along
-
-  with this program; if not, write to the Free Software Foundation, Inc.,
-
-  59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-
- 
-
--->
-
 <resources>
-
     <!-- .ui.* Strings -->
-
     <string name="apply_now_button_text">Uppdatera nu</string>
-
     <string name="apply_later_button_text">Uppdatera senare</string>
-
     <string name="apply_update_button_text">Uppdatera</string>
-
     <string name="apply_title_textview_text">{0} redo för uppdatering</string>
-
     <string name="apply_subtitle_textview_text">Release notes:</string>
-
     <string name="apply_unable_to_reboot_toast">Kan ej starta om i återställning</string>
-
     <string name="apply_trying_to_get_root_access">Försöker erhålla rotåtkomst för omstart i återställning</string>
 
-    
-
     <string name="available_updates_text">Välj ROM för nedladdning:</string>
-
     <string name="choose_available_update_text">Ladda ner</string>
-
     <string name="no_updates_found_instructions">Inga ROM hittade.\nTryck \'Kontrollera nu\' för manuell kontroll av nya uppdateringar</string>
-
     <string name="downloaded_update_found_text">Uppdateringar hittade i uppdateringsmapp::</string>
-
     <string name="checking_for_updates">Söker efter uppdateringar</string>
-
     <string name="downloading_update">Laddar ner uppdatering</string>
-
     <string name="sdcard_is_not_present_dialog_body">Du måste ha ett skrivbart SD-kort för att kunna ladda ner denna uppdatering</string>
-
     <string name="sdcard_is_not_present_dialog_title">Hittar inget SD-kort</string>
-
     <string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
-
     <string name="current_version_text">Aktuell version: {0}</string>
-
     <string name="delete_updates_text">Radera uppdateringar</string>
-
     <string name="delete_updates_success_message">Uppdateringsmapp raderad</string>
-
     <string name="delete_updates_failure_message">Ett fel inträffade när uppdateringsmappen skulle raderas</string>
-
     <string name="delete_updates_noFolder_message">Hittade inte uppdateringsmapp</string>
 
-    
-
     <string name="apply_update_dialog_title">Bekräftelse</string>
-
     <string name="apply_update_dialog_text">Du kommer att uppdatera till {0}.\nOm du trycker Uppdatera, kommer telefonen att startas om i återställningsläge för att göra uppdateringen.</string>
-
 	<string name="apply_update_dialog_update_button">Uppdatera</string>
-
 	<string name="apply_update_dialog_backup_and_update_button">Backup &amp; uppdatera</string>
-
 	<string name="apply_update_dialog_cancel_button">Avbryt</string>
 
-	
-
 	<string name="no_updates_no_mod_text">Ditt operativsystem är en version som ej stöds (Version {0}).</string>
-
 	<string name="check_now_button_text">Kontrollera nu</string>
 
-	
-
 	<string name="menu_check_now">Kontrollera nu</string>
-
 	<string name="menu_qr_code">Skanna QR-kod</string>
-
     <string name="menu_config">Inställningar</string><string name="menu_about">Om</string>
-
     <string name="cancel_download_buton_text">Avbryt nedladdning</string>
-
     <string name="confirm_download_cancelation_dialog_message">Är du säker på att du vill avbryta pågående nedladdning?</string>
-
     <string name="confirm_download_cancelation_dialog_yes">Ja</string>
-
     <string name="confirm_download_cancelation_dialog_no">Nej</string>
-
     <string name="download_canceled_toast_message">Nedladdning avbruten</string>
 
-    
-
     <string name="verify_and_apply_dialog_title">Verifierar</string>
-
     <string name="verify_and_apply_dialog_message">Verifierar update.zip MD5-summa</string>
-
-    
 
     <string name="apply_existing_update_md5error_message">Fel. MD5-summa stämmer ej</string>
 
-    
-
     <string name="apply_upload_info_message">DENNA VERSION AV CM UPDATER HAR OMSTART AKTIVERAD, SÅ OM DU KLICKAR PÅ UPPDATERA NU KOMMER DIN TELEFON ATT UPPDATERAS OMGÅENDE.
-
 STARTA OM I ÅTERSTÄLLNINGSLÄGE MANUELLT *INNAN* DU INSTALLERAR DENNA UPPDATERING OM DU VILL GÖRA BACKUP</string>
 
-    
-
     <!-- .service.* Strings -->
-
     <string name="no_updates_found">Ingen CM-uppdatering hittad</string>
-
     <string name="not_new_updates_found_ticker">Ny CM-uppdatering hittad!</string>
-
     <string name="not_new_updates_found_title">Ny CM-uppdatering hittad</string>
 
-
     <string name="exception_while_updating">Ett fel inträffade vid anslutningsförsök till uppdateringsservern</string>
-
     <string name="exception_while_downloading">Ett fel inträffade när uppdatering skulle hämtas</string>
 
-    
-
     <string name="not_update_check_error_ticker">Kontroll av uppdateringar misslyckades</string>
-
     <string name="not_update_check_error_title">Kunde inte söka efter nya CM OS uppdateringar</string>
-
     <string name="not_update_check_error_body">Försök senare.</string>
 
-    
-
     <string name="not_update_download_error_ticker">Ett fel inträffade under nedladdning av uppdatering</string>
-
     <string name="not_update_download_error_title">Ett fel inträffade under nedladdning av uppdatering</string>
-
     <string name="not_update_download_error_body">Försök senare.</string>
 
-    
-
     <string name="not_update_downloaded_ticker">CyanogenMod uppdatering hämtad</string>
-
     <string name="not_update_downloaded_title">CyanogenMod uppdatering hämtad</string>
-
     <string name="not_update_downloaded_body">{0} färdig för installation</string>
 
-    
-
     <string name="download_info_filename">Filnamn: </string>
-
     <string name="download_info_mirror">Spegel: </string>
-
     <string name="download_info_downloading">Laddar ner...</string>
-
     <string name="download_info_speed">Hastighet: </string>
-
     <string name="download_info_remaining_time">Återstående tid: </string>
 
-    
-
     <string name="confirm_delete_update_folder_dialog_message">Radera uppdateringsmapp?</string>
-
     <string name="confirm_delete_update_folder_dialog_yes">Radera</string>
-
     <string name="confirm_delete_update_folder_dialog_no">Avbryt</string>
 
-    
-
     <!-- Preferences Strings -->
-
     <string name="p_update_check_freq_title">Kontroll-intervall</string>
-
     <string name="p_update_check_freq_summary">Ange kontrollintervall</string>
-
-    
-
     <string name="p_update_file_url_title">Uppdateringsserver</string>
-
     <string name="p_update_file_url_summary">Ange URL till uppdateringsfil</string>
 
-    
-
     <string name="p_updates_mod_version_title">Ange version</string>
-
     <string name="p_updates_mod_version_summary">Ange för vilken version du vill söka efter uppdateringar</string>
 
-    
-
     <string name="p_display_older_mod_versions_title">Visa alla uppdateringar</string>
-
     <string name="p_display_older_mod_versions_summary">Visa alla uppdateringar, inklusive äldre versioner</string>
 
-    
-
     <string name="p_display_allow_experimental_versions_title">Experimentella versioner</string>
-
     <string name="p_display_allow_experimental_versions_summary">Visa experimentella uppdateringar (icke stabila)</string>
 
-    
-
     <string name="p_do_nandroid_backup_title">Nandroid Backup</string>
-
     <string name="p_do_nandroid_backup_summary">Skapa Nandroid backup innan uppdatering?</string>
 
-    
-
     <string name="p_notification_ringtone_title">Välj ljudsignal</string>
-
     <string name="p_notification_ringtone_summary">Välj ett ljud för CM Updater</string>
 
-    
-
     <string name="p_update_file_url_screen_title">Uppdateringsserver</string>
-
     <string name="p_update_file_url_screen_summary">Ändra uppdateringsserver</string>
 
-    
-
     <string name="p_update_file_url_def_title">Återställ uppdateringsserver</string>
-
     <string name="p_update_file_url_def_summary">Ändra uppdateringsserver till grundinställning</string>
 
-    
-
     <string name="p_update_file_url_qr_title">Skanna streckkod</string>
-
     <string name="p_update_file_url_qr_summary">Skanna QR-kod till URL för uppdateringsfil</string>
-
 </resources>

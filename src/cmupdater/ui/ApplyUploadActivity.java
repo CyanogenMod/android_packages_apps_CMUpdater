@@ -1,23 +1,3 @@
-/*
- * JF Updater: Auto-updater for modified Android OS
- *
- * Copyright (c) 2009 Sergi Vélez
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
- * for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
- */
-
 package cmupdater.ui;
 
 import java.io.IOException;
@@ -48,8 +28,6 @@ public class ApplyUploadActivity extends Activity {
 	private String mUpdateFolder;
 	
 	private TextView mTitle;
-	//private TextView mSubtitle;
-	//private EditText mReleaseNotes;
 	private Button mApplyButton;
 	private Button mPostponeButton;
 
@@ -62,7 +40,6 @@ public class ApplyUploadActivity extends Activity {
 			AlertDialog dialog = new AlertDialog.Builder(ApplyUploadActivity.this)
 			.setTitle(R.string.apply_update_dialog_title)
 			.setMessage(dialogBody)
-			//.setPositiveButton(R.string.apply_update_dialog_backup_and_update_button, mBackupAndApplyUpdateListener)
 			.setNeutralButton(R.string.apply_update_dialog_update_button, mBackupAndApplyUpdateListener)
 			.setNegativeButton(R.string.apply_update_dialog_cancel_button, new DialogInterface.OnClickListener(){
 				public void onClick(DialogInterface dialog, int which) {
@@ -130,9 +107,6 @@ public class ApplyUploadActivity extends Activity {
 
 		mTitle = (TextView) findViewById(R.id.apply_title_textview);
 
-		//mSubtitle = (TextView) findViewById(R.id.apply_subtitle_textview);
-		//mReleaseNotes = (EditText) findViewById(R.id.apply_release_notes);
-
 		mApplyButton = (Button) findViewById(R.id.apply_now_button);
 		mApplyButton.setOnClickListener(mApplyButtonListener);
 
@@ -144,7 +118,6 @@ public class ApplyUploadActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 		mUpdateInfo = (UpdateInfo) getIntent().getExtras().getSerializable(KEY_UPDATE_INFO);
-		//Resources res = getResources();
 		String template = getResources().getString(R.string.apply_title_textview_text);
 		mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();

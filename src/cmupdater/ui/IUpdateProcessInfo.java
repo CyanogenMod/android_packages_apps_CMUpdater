@@ -15,13 +15,7 @@ public abstract class IUpdateProcessInfo extends Activity {
 	 * @param availableUpdates
 	 */
 	public abstract void switchToUpdateChooserLayout(List<UpdateInfo> availableUpdates);
-	
-	/**
-	 * Switches to the update chooser layout, showing the option to apply the provided update
-	 * @param downloadedUpdate
-	 */
-	//abstract void switchToUpdateChooserLayout(UpdateInfo downloadedUpdate);
-	
+
 	public abstract void switchToNoUpdatesAvailable();
 	
 	public abstract void switchToDownloadingLayout(UpdateInfo downloadingUpdate);

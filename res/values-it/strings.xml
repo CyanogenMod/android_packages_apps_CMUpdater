@@ -1,24 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
- CM Updater: Aggiornamenti automatici per Sistemi Android modificati
-
- Copyright (c) 2009 Sergi Vélez
-
- Questo programma è un software libero; puoi ridistribuirlo e/o modificarlo
- sotto i termini della GNU General Public License pubblicata dalla
- Free Software Foundation; anche la versione 2 della Licenza, o
- (a tua scelta) qualsiasi altra versione.
-
- Questo programma è distribuito nella speranza che possa essere utile, ma
- SENZA ALCUNA GARANZIA; senza la garanzia implicita di MERCHANTABILITY
- or FITNESS PER UNO SCOPO PARTICOLARE. Leggi la GNU General Public License
- per maggiori dettagli.
-
- Dovresti aver ricevuto una copia della GNU General Public License
- insieme a questo programma; se no, scrivi alla Free Software Foundation, Inc.,
- 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-
--->
 <resources>
    <!-- .ui.* Strings -->
    <string name="apply_now_button_text">Applica ora</string>
