@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 import android.widget.Toast;
@@ -74,7 +75,6 @@ public class ConfigActivity extends PreferenceActivity {
 				Log.d(TAG, "Intent to Barcode Scanner Sent");
 				return true;
 			}
-
 		});
 		
 		pref = (Preference) findPreference(getResources().getString(R.string.p_update_file_url_def));
@@ -82,14 +82,32 @@ public class ConfigActivity extends PreferenceActivity {
 
 			public boolean onPreferenceClick(Preference preference) {
 				prefs.setUpdateFileURL(getResources().getString(R.string.conf_update_server_url_def));
-				Toast.makeText(getBaseContext(), "Update URL set back to default", Toast.LENGTH_LONG).show();
+				Toast.makeText(getBaseContext(), R.string.p_update_file_url_changed, Toast.LENGTH_LONG).show();
 				Log.d(TAG, "Update File URL set back to default: " + prefs.getUpdateFileURL());
 				ConfigActivity.this.finish();
 				return true;
 			}
-
+		});
+		
+		pref = (Preference) findPreference(getResources().getString(R.string.p_display_older_mod_versions));
+		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
+		{
+			public boolean onPreferenceChange(Preference preference, Object newValue)
+			{
+				Toast.makeText(getBaseContext(), R.string.p_display_older_mod_versions_changed, Toast.LENGTH_LONG).show();
+				return true;
+			}
 		});
 
+		pref = (Preference) findPreference(getResources().getString(R.string.p_display_allow_experimental_versions));
+		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
+		{
+			public boolean onPreferenceChange(Preference preference, Object newValue)
+			{
+				Toast.makeText(getBaseContext(), R.string.p_display_allow_experimental_versions_changed, Toast.LENGTH_LONG).show();
+				return true;
+			}
+		});
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
