@@ -39,7 +39,7 @@ import cmupdater.utils.Preferences;
 
 public class ApplyUploadActivity extends Activity {
 
-	private static final String TAG = "ApplyUploadActivity";
+	private static final String TAG = "<CM-Updater> ApplyUploadActivity";
 
 	public static final String KEY_UPDATE_INFO = "cmupdater.updateInfo";
 

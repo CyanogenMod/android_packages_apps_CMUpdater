@@ -75,7 +75,7 @@ public class UpdateDownloaderService extends Service {
 
 	//public static UpdateDownloaderService INSTANCE;
 
-	private static final String TAG = "UpdateDownloader";
+	private static final String TAG = "<CM-Updater> UpdateDownloader";
 
 	public static final String KEY_REQUEST = "cmupdater.request";
 	public static final String KEY_UPDATE_INFO = "cmupdater.updateInfo";

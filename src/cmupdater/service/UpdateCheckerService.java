@@ -53,7 +53,7 @@ public class UpdateCheckerService extends Service {
 	
 	public static UpdateCheckerService INSTANCE;
 	
-	private static final String TAG = "UpdateService";
+	private static final String TAG = "<CM-Updater> UpdateService";
 	
 	public static final String KEY_REQUEST = "cmupdater.request";
 	

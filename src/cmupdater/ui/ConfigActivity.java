@@ -39,7 +39,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class ConfigActivity extends PreferenceActivity {
 
-	private static final String TAG = "ConfigActivity";
+	private static final String TAG = "<CM-Updater> ConfigActivity";
 	private Preferences prefs;
 
 	private final Preference.OnPreferenceChangeListener mUpdateCheckingFrequencyListener = new Preference.OnPreferenceChangeListener() {

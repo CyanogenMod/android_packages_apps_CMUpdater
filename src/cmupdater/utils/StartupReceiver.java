@@ -34,7 +34,7 @@ import android.util.Log;
 
 public class StartupReceiver extends BroadcastReceiver {
 	
-	private static final String TAG = "StartupReceiver";
+	private static final String TAG = "<CM-Updater> StartupReceiver";
 	
 	@Override
 	public void onReceive(Context ctx, Intent intent) {

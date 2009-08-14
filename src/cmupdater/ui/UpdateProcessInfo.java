@@ -78,7 +78,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class UpdateProcessInfo extends IUpdateProcessInfo {
 
-	private static final String TAG = "UpdateProcessInfo";
+	private static final String TAG = "<CM-Updater> UpdateProcessInfo";
 	//private static final String STATE_DIR = "state";
 	private static final String STORED_STATE_FILENAME = "UpdateProcessInfo.ser";
 
@@ -430,32 +430,43 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			Log.w(TAG, "Unable to restore activity status", e);
 		}
 
-
 		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
 
+		Intent UpdateIntent = getIntent();
+		if (UpdateIntent != null)
+		{
+			int req = UpdateIntent.getIntExtra(KEY_REQUEST, -1);
+			switch(req)
+			{
+				case REQUEST_NEW_UPDATE_LIST:
+					mAvailableUpdates = (List<UpdateInfo>) getIntent().getSerializableExtra(KEY_UPDATE_LIST);
+					try
+					{
+						saveState();
+					}
+					catch (IOException e)
+					{
+						Log.e(TAG, "Unable to save application state");
+					}
+					break;
+				case REQUEST_UPDATE_CHECK_ERROR:
+					//TODO
+					Log.w(TAG, "Update check error");
+					break;
 		
-		int req = getIntent().getIntExtra(KEY_REQUEST, -1);
-		switch(req) {
-		case REQUEST_NEW_UPDATE_LIST:
-			mAvailableUpdates = (List<UpdateInfo>) getIntent().getSerializableExtra(KEY_UPDATE_LIST);
-			try {
-				saveState();
-			} catch (IOException e) {
-				Log.e(TAG, "Unable to save application state");
+				case REQUEST_DOWNLOAD_FAILED:
+					//TODO
+					Log.w(TAG, "Update check error");
+					break;
+				default:
+					Log.w(TAG, "Uknown KEY_REQUEST in Intent. Maybe its the first start.");
+					break;
 			}
-			break;
-		case REQUEST_UPDATE_CHECK_ERROR:
-			//TODO
-			Log.w(TAG, "Update check error");
-			break;
-
-		case REQUEST_DOWNLOAD_FAILED:
-			//TODO
-			Log.w(TAG, "Update check error");
-			break;
 		}
-		
-		
+		else
+		{
+			Log.w(TAG, "Intent is NULL");
+		}
 		
 		/*DownloadUpdateTask downloadUpdateTask = DownloadUpdateTask.INSTANCE;
         if(downloadUpdateTask != null && downloadUpdateTask.getStatus() == DownloadUpdateTask.Status.RUNNING) {

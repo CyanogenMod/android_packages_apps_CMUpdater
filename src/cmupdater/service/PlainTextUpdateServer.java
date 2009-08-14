@@ -28,7 +28,7 @@ import android.util.Log;
 
 public class PlainTextUpdateServer implements IUpdateServer {
 
-	private static final String TAG = "PlainTextUpdateServer";
+	private static final String TAG = "<CM-Updater> PlainTextUpdateServer";
 
 	private HttpClient httpClient;
 	private URI mUpdateServerUri;

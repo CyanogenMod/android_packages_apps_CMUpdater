@@ -16,7 +16,7 @@ public class Preferences {
 	public static final int UPDATE_FREQ_AT_BOOT = -1;
 	public static final int UPDATE_FREQ_NONE = -2;
 	
-	private static final String TAG = "Preferences";
+	private static final String TAG = "<CM-Updater> Preferences";
 	
 	private static final String SYS_PROP_DEVICE = "ro.product.board";
 	

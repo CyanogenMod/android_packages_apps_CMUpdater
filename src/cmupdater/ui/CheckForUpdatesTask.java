@@ -23,7 +23,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo
 	
 	public static final String KEY_UPDATE_LIST = "cmupdater.updates";
 
-	private static final String TAG = "CheckForUpdatesTask";
+	private static final String TAG = "<CM-Updater> CheckForUpdatesTask";
 
 	private IUpdateServer mUpdateServer;
 	private IUpdateProcessInfo mUpdateProcessInfo;	
