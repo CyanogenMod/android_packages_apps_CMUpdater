@@ -97,7 +97,7 @@ public class Preferences {
 	}
 	
 	public boolean showDowngrades() {
-		return mPrefs.getBoolean(mRes.getString(R.string.p_display_older_mod_versions), mRes.getBoolean(R.string.p_display_older_mod_versions_def_value));
+		return mPrefs.getBoolean(mRes.getString(R.string.p_display_older_mod_versions), Boolean.valueOf(mRes.getString(R.string.p_display_older_mod_versions_def_value)));
 	}
 	
 	public String getUpdateFileURL() {
@@ -119,15 +119,15 @@ public class Preferences {
 	}
 	
 	public boolean allowExperimental() {
-		return mPrefs.getBoolean(mRes.getString(R.string.p_display_allow_experimental_versions), mRes.getBoolean(R.string.p_display_allow_experimental_versions_def_value));
+		return mPrefs.getBoolean(mRes.getString(R.string.p_display_allow_experimental_versions), Boolean.valueOf(mRes.getString(R.string.p_display_allow_experimental_versions_def_value)));
 	}
 	
 	public boolean doNandroidBackup() {
-		return mPrefs.getBoolean(mRes.getString(R.string.p_do_nandroid_backup), mRes.getBoolean(R.string.p_do_nandroid_backup_def_value));
+		return mPrefs.getBoolean(mRes.getString(R.string.p_do_nandroid_backup), Boolean.valueOf(mRes.getString(R.string.p_do_nandroid_backup_def_value)));
 	}
 	
 	public boolean getVibrate() {
-		return mPrefs.getBoolean(mRes.getString(R.string.p_vibrate), mRes.getBoolean(R.string.p_vibrate_def_value));
+		return mPrefs.getBoolean(mRes.getString(R.string.p_vibrate), Boolean.valueOf(mRes.getString(R.string.p_vibrate_def_value)));
 	}
 	 
 	public String getUpdateFolder() {
