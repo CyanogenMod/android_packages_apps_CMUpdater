@@ -67,6 +67,10 @@
 PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT TO PERFORM A BACKUP</string>
     
     <string name="last_update_check_text">Last update check</string>
+    <string name="overwrite_update_title">Update exists</string>
+    <string name="overwrite_update_summary">The selected Update already exists in your Update Folder.\nWould you like to overwrite it?</string>
+    <string name="overwrite_update_positive">Yes</string>
+    <string name="overwrite_update_negative">No</string>
     
     <!-- .service.* Strings -->
     <string name="no_updates_found">No CM updates found</string>

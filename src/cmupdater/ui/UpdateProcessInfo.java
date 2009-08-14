@@ -140,8 +140,33 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 				return;
 			}
 
+			
 			UpdateInfo ui = (UpdateInfo) mUpdatesSpinner.getSelectedItem();
-			downloadRequestedUpdate(ui);
+			//Check if the File is present, so prompt the User to overwrite it
+			File foo = new File(mUpdateFolder + "/" + ui.fileName);
+			if (foo.isFile() && foo.exists())
+			{
+				new AlertDialog.Builder(UpdateProcessInfo.this)
+				.setTitle(R.string.overwrite_update_title)
+				.setMessage(R.string.overwrite_update_summary)
+				.setNegativeButton(R.string.overwrite_update_negative, new DialogInterface.OnClickListener(){
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				})
+				.setPositiveButton(R.string.overwrite_update_positive, new DialogInterface.OnClickListener(){
+					public void onClick(DialogInterface dialog, int which) {
+						downloadRequestedUpdate((UpdateInfo) mUpdatesSpinner.getSelectedItem());
+					}
+				})
+				.show();
+				return;
+			}
+			//Otherwise download it
+			else
+			{
+				downloadRequestedUpdate((UpdateInfo) mUpdatesSpinner.getSelectedItem());
+			}
 		}
 	};
 
