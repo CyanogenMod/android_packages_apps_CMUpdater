@@ -382,7 +382,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 
 	};
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -404,8 +403,37 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 
 		restoreSavedInstanceValues(savedInstanceState);
 
-		//mStoredStateFile = 
+		URI uri = URI.create(prefs.getUpdateFileURL());
+		mUpdateServer = new PlainTextUpdateServer(uri, this);
 
+		//String destFileName = getResources().getString(R.string.conf_update_file_name);
+		//mDestinationFile = new File(Environment.getExternalStorageDirectory(), destFileName);
+
+		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
+
+		mUpdateDownloaderServiceIntent = new Intent(this, UpdateDownloaderService.class);
+	}
+
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onStart()
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void onStart() {
+		super.onStart();
+
+		try {
+			loadState();
+		} catch (FileNotFoundException e) {
+			//Ignored, data was not saved
+		} catch (IOException e) {
+			Log.w(TAG, "Unable to restore activity status", e);
+		}
+
+
+		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
+
+		
 		int req = getIntent().getIntExtra(KEY_REQUEST, -1);
 		switch(req) {
 		case REQUEST_NEW_UPDATE_LIST:
@@ -426,36 +454,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			Log.w(TAG, "Update check error");
 			break;
 		}
-
-		URI uri = URI.create(prefs.getUpdateFileURL());
-		mUpdateServer = new PlainTextUpdateServer(uri, this);
-
-		//String destFileName = getResources().getString(R.string.conf_update_file_name);
-		//mDestinationFile = new File(Environment.getExternalStorageDirectory(), destFileName);
-
-		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
-
-		mUpdateDownloaderServiceIntent = new Intent(this, UpdateDownloaderService.class);
-	}
-
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onStart()
-	 */
-	@Override
-	protected void onStart() {
-		super.onStart();
-
-		try {
-			loadState();
-		} catch (FileNotFoundException e) {
-			//Ignored, data was not saved
-		} catch (IOException e) {
-			Log.w(TAG, "Unable to restore activity status", e);
-		}
-
-
-		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
-
+		
+		
+		
 		/*DownloadUpdateTask downloadUpdateTask = DownloadUpdateTask.INSTANCE;
         if(downloadUpdateTask != null && downloadUpdateTask.getStatus() == DownloadUpdateTask.Status.RUNNING) {
         	switchToDownloadingLayout(mDownloadingUpdate);
