@@ -247,6 +247,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	{
 		private ProgressDialog mDialog;
 		private UserTask<File, Void, Boolean> mBgTask;
+		private String filename;
+		private File Update;
+		
 		public void onClick(View v)
 		{	
 			if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
@@ -264,26 +267,67 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 				return;
 			}
 
-			String filename = (String) mExistingUpdatesSpinner.getSelectedItem();
-			File Update = new File(mUpdateFolder + "/" +filename);
-
-			Resources r = getResources();
-			mDialog = ProgressDialog.show(
-					UpdateProcessInfo.this,
-					r.getString(R.string.verify_and_apply_dialog_title),
-					r.getString(R.string.verify_and_apply_dialog_message),
-					true,
-					true,
-					new DialogInterface.OnCancelListener()
+			filename = (String) mExistingUpdatesSpinner.getSelectedItem();
+			Update = new File(mUpdateFolder + "/" +filename);
+			File MD5 = new File(mUpdateFolder + "/" +filename + ".md5sum");
+			//IF no MD5 exists, ask the User what to do
+			if(!MD5.exists() || !MD5.canRead())
+			{
+				new AlertDialog.Builder(UpdateProcessInfo.this)
+				.setTitle(R.string.no_md5_found_title)
+				.setMessage(R.string.no_md5_found_summary)
+				.setPositiveButton(R.string.no_md5_found_positive, new DialogInterface.OnClickListener(){
+					public void onClick(DialogInterface dialog, int which)
 					{
-						public void onCancel(DialogInterface arg0)
-						{
-							mBgTask.cancel(true);
-						}
+						Resources r = getResources();
+						mDialog = ProgressDialog.show(
+								UpdateProcessInfo.this,
+								r.getString(R.string.verify_and_apply_dialog_title),
+								r.getString(R.string.verify_and_apply_dialog_message),
+								true,
+								true,
+								new DialogInterface.OnCancelListener()
+								{
+									public void onCancel(DialogInterface arg0)
+									{
+										mBgTask.cancel(true);
+									}
+								}
+						);
+			
+						mBgTask = new MD5CheckerTask(mDialog, filename).execute(Update);
+						dialog.dismiss();
 					}
-			);
-
-			mBgTask = new MD5CheckerTask(mDialog, filename).execute(Update);
+				})
+				.setNegativeButton(R.string.no_md5_found_negative, new DialogInterface.OnClickListener(){
+					public void onClick(DialogInterface dialog, int which)
+					{
+						dialog.dismiss();
+					}
+				})
+				.show();
+			}
+			//If MD5 exists, apply the update normally
+			else
+			{
+				Resources r = getResources();
+				mDialog = ProgressDialog.show(
+						UpdateProcessInfo.this,
+						r.getString(R.string.verify_and_apply_dialog_title),
+						r.getString(R.string.verify_and_apply_dialog_message),
+						true,
+						true,
+						new DialogInterface.OnCancelListener()
+						{
+							public void onCancel(DialogInterface arg0)
+							{
+								mBgTask.cancel(true);
+							}
+						}
+				);
+	
+				mBgTask = new MD5CheckerTask(mDialog, filename).execute(Update);
+			}
 		}
 	}
 
@@ -302,6 +346,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		@Override
 		public Boolean doInBackground(File... params)
 		{
+			
 			boolean MD5exists = false;
 			try
 			{
@@ -331,27 +376,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 						else
 							mreturnvalue = false;
 					}
-					//If no MD5 Exists: Alertdialog to the User if he wants to apply it
 					else
 					{
-						new AlertDialog.Builder(UpdateProcessInfo.this)
-						.setTitle(R.string.no_md5_found_title)
-						.setMessage(R.string.no_md5_found_summary)
-						.setPositiveButton(R.string.no_md5_found_positive, new DialogInterface.OnClickListener(){
-							public void onClick(DialogInterface dialog, int which)
-							{
-								mreturnvalue = true;
-								dialog.dismiss();
-							}
-						})
-						.setNegativeButton(R.string.no_md5_found_negative, new DialogInterface.OnClickListener(){
-							public void onClick(DialogInterface dialog, int which)
-							{
-								mreturnvalue = false;
-								dialog.dismiss();
-							}
-						})
-						.show();
+						return true;
 					}
 				}
 			}
