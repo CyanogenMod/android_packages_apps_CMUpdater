@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!-- Frequency times, in seconds -->
-    <string-array name="update_frequency">
-        <item>Manualmente</item>
-        <item>A cada arranque</item>
-        <item>A cada hora</item>
-        <item>Diariamente</item>
-        <item>Semanalmente</item>
-    </string-array>
+	<string-array name="update_frequency">
+		<item>Manual</item>
+		<item>Em cada iniciação</item>
+		<item>A cada hora</item>
+		<item>A cada dia</item>
+		<item>A cada semana</item>
+	</string-array>
     
     <!-- Frequency times, in seconds -->
     <string-array name="update_frequency_values">

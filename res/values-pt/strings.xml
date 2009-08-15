@@ -2,98 +2,129 @@
 <resources>
     <!-- .ui.* Strings -->
     <string name="apply_now_button_text">Aplicar agora</string>
-    <string name="apply_later_button_text">Aplicar + tarde</string>
-    <string name="apply_update_button_text">Verificar &amp; Aplicar</string>
-    <string name="apply_title_textview_text">{0} esta pronto a ser aplicado</string>
-    <string name="apply_subtitle_textview_text">Novidades:</string>
-    <string name="apply_unable_to_reboot_toast">Incapaz de reiniciar em modo recovery</string>
-    <string name="apply_trying_to_get_root_access">A tentar ter acesso root para reiniciar em mode recovery</string>
+    <string name="apply_later_button_text">Aplicar mais tarde</string>
+    <string name="apply_update_button_text">Aplicar actualização</string>
+    <string name="apply_title_textview_text">{0} está pronto para ser aplicado</string>
+    <string name="apply_subtitle_textview_text">Notas de lançamento:</string>
+    <string name="apply_unable_to_reboot_toast">incapaz de reiniciar em modo de recuperação </string>
+    <string name="apply_trying_to_get_root_access">Tentando adquirir autorização root para reiniciar em modo de recuperação</string>
     
-    <string name="available_updates_text">Escolha a ROM a descarregar:</string>
-    <string name="choose_available_update_text">Descarregar</string>
-    <string name="no_updates_found_instructions">Não encontrou ROMs.\nPrima \'Verificar\'para procurar manualmente actualizações</string>
-    <string name="downloaded_update_found_text">Actualizações encontradas:</string>
-    <string name="checking_for_updates">A procurar actualizações</string>
-    <string name="downloading_update">A descarregar actualizações</string>
-    <string name="sdcard_is_not_present_dialog_body">Precisa de um cartão SD para descarregar esta actualização</string>
-    <string name="sdcard_is_not_present_dialog_title">Sem cartão SD</string>
+    <string name="available_updates_text">Por favor seleccionar o ROM a ser transferido:</string>
+    <string name="choose_available_update_text">Transferir</string>
+    <string name="no_updates_found_instructions">Nenhum ROM encontrado.\nPress \'Check now\' to manually check for new updates</string>
+    <string name="downloaded_update_found_text">Actualizações encontradas na pasta de actualizações:</string>
+    <string name="checking_for_updates">Procurando actualizações</string>
+    <string name="downloading_update">A transferir a actualização</string>
+    <string name="sdcard_is_not_present_dialog_body">Precisará de um cartão SD desprotegido para transferir esta actualização</string>
+    <string name="sdcard_is_not_present_dialog_title">Nenhum cartão SD encontrado</string>
     <string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
-    <string name="current_version_text">Versão actual: {0}</string>
+    <string name="current_version_text">A correr a versão: {0}</string>
     <string name="delete_updates_text">Apagar actualizações</string>
-    <string name="delete_updates_success_message">Pasta de actualizações apagada</string>
-    <string name="delete_updates_failure_message">Ocorreu um erro ao apagar a pasta</string>
+    <string name="delete_updates_success_message">Pasta de actualizações eliminada.</string>
+    <string name="delete_updates_failure_message">Houve um erro ao eliminar a pasta de actualizações</string>
     <string name="delete_updates_noFolder_message">Pasta de actualizações não encontrada</string>
     
+    <string name="check_now_update_chooser">Carregue em Verificar agora para procurar novas versões</string>
+    
     <string name="apply_update_dialog_title">Confirmação</string>
-    <string name="apply_update_dialog_text">Esta pretes a actualizar para {0}.\nSe premir Actualizar, o telefone vai reiniciar em modo recovery para actualizar.</string>
+    <string name="apply_update_dialog_text">Está prestes a actualizar para a versão {0}.\nSe carregar em actualizar, o telephone reiniciar-se-á em modo de recuperação para aplicar a actualização.</string>
 	<string name="apply_update_dialog_update_button">Actualizar</string>
-	<string name="apply_update_dialog_backup_and_update_button">Backup &amp; Aplicar</string>
+	<string name="apply_update_dialog_backup_and_update_button">Fazer cópia de segurança e aplicar</string>
 	<string name="apply_update_dialog_cancel_button">Cancelar</string>
-	
-	<string name="no_updates_no_mod_text">O sua ROM não é suportada (Versão {0}).</string>
-	<string name="check_now_button_text">Verificar</string>
-	
+
+	<string name="no_updates_no_mod_text">O seu sistema está a correr uma versão modificada do Sistema Operativo não suportada (Versão {0}).</string>
+	<string name="check_now_button_text">Verificar agora</string>
+
 	<string name="menu_check_now">Verificar agora</string>
-    <string name="menu_config">Configuração</string><string name="menu_about">Acerca</string>
-    <string name="cancel_download_buton_text">Cancelar a descarga</string>
-    <string name="confirm_download_cancelation_dialog_message">Tem a certeza de que quer cancelar esta descarga?</string>
+	<string name="menu_qr_code">Captar URL do QR</string>
+    <string name="menu_config">Configurações</string>
+    <string name="menu_about">Sobre</string>
+    <string name="cancel_download_buton_text">Cancelar Transferência</string>
+    <string name="confirm_download_cancelation_dialog_message">Tem a certeza que deseja cancelar a transferência?</string>
     <string name="confirm_download_cancelation_dialog_yes">Sim</string>
     <string name="confirm_download_cancelation_dialog_no">Não</string>
-    <string name="download_canceled_toast_message">Descarga cancelada</string>
+    <string name="download_canceled_toast_message">Transferência cancelada</string>
     
     <string name="verify_and_apply_dialog_title">A verificar</string>
-    <string name="verify_and_apply_dialog_message">A verificar o MD5 do update.zip</string>
+    <string name="verify_and_apply_dialog_message">A verificar actualizção MD5 sum</string>
     
-    <string name="apply_existing_update_md5error_message">Erro. O valor do MD5 não coincide</string>
+    <string name="apply_existing_update_md5error_message">Erro. MD5 checksum não correspondente</string>
+    
+    <string name="apply_upload_info_message">ESTA VERSÃO DO CM UPDATER TEM A OPÇÃO DE REINICIAÇÃO ACTIVADA, PORTANTO AO CARREGAR EM APLICAR AGORA FARÁ ISSO MESMO.
+POR FAVOR REINCIE EM MODO DE RECUPERAÇÃO MANUALMENTE *ANTES* DE APLICAR A ACTUALIZAÇÃO SE DESEJA EFECTUAR UMA CÓPIA DE SEGURANÇA.
+ </string>
+    
+    <string name="last_update_check_text">Última verificação de actualizações</string>
+    <string name="overwrite_update_title">Existe uma actualização nova</string>
+    <string name="overwrite_update_summary">A actualização seleccionada já existe na sua pasta de actualizações.\nDeseja copiar por cima?</string>
+    <string name="overwrite_update_positive">Sim</string>
+    <string name="overwrite_update_negative">Não</string>
     
     <!-- .service.* Strings -->
-    <string name="no_updates_found">Actualizações CM não encontradas</string>
-    <string name="not_new_updates_found_ticker">Actualizações CM encontradas!</string>
-    <string name="not_new_updates_found_title">Actualizações CM encontradas</string>
+    <string name="no_updates_found">Nenhuma actualização encontrada.</string>
+    <string name="not_new_updates_found_ticker">Encontradas novas actualizações!</string>
+    <string name="not_new_updates_found_title">Nocas actualizações encontradas.</string>
     <string name="exception_while_updating">Ocorreu um erro ao tentar contactar o servidor de actualizações CM</string>
-    <string name="exception_while_downloading">Ocorreu um erro ao tentar descarregar uma actualização CM</string>
+    <string name="exception_while_downloading"> Ocorreu um erro ao tentar transferir a actualização CM </string>
     
-    <string name="not_update_check_error_ticker">Falhou a procura de actualizações CM</string>
-    <string name="not_update_check_error_title">Impossível verificar se há actualizações CM</string>
-    <string name="not_update_check_error_body">Volte a tentar mais tarde.</string>
+    <string name="not_update_check_error_ticker">Verificação de actualizações CM falhada. </string>
+    <string name="not_update_check_error_title">Incapaz de verificar novas actualizações do Sistema Operativo CM </string>
+    <string name="not_update_check_error_body">Por favor, tente mais tarde.</string>
     
-    <string name="not_update_download_error_ticker">Ocorreu um erro ao tentar descarregar a actualização</string>
-    <string name="not_update_download_error_title">Ocorreu um erro ao descarregar a actualização</string>
-    <string name="not_update_download_error_body">Tente de novo mais tarde.</string>
+    <string name="not_update_download_error_ticker"> Ocorreu um erro ao transferir a actualização</string>
+    <string name="not_update_download_error_title"> Ocorreu um erro ao transferir a actualização</string>
+    <string name="not_update_download_error_body">Por favor, tente mais tarde.</string>
     
-    <string name="not_update_downloaded_ticker">Actualização do CyanogenMod descarregada</string>
-    <string name="not_update_downloaded_title">Actualização do CyanogenMod descarregada</string>
-    <string name="not_update_downloaded_body">{0} Pronto a instalar</string>
+    <string name="not_update_downloaded_ticker">Actualização CyanogenMod transferida com sucesso.</string>
+    <string name="not_update_downloaded_title">Actualização CyanogenMod transferida com sucesso</string>
+    <string name="not_update_downloaded_body">{0} está pronto para ser instalada</string>
     
-    <string name="download_info_filename">Nome do ficheiro: </string>
-    <string name="download_info_mirror">Mirror: </string>
-    <string name="download_info_downloading">A descarregar...</string>
+    <string name="download_info_filename">Nome de ficheiro: </string>
+    <string name="download_info_mirror">Link espelhado: </string>
+    <string name="download_info_downloading">A transferir...</string>
     <string name="download_info_speed">Velocidade: </string>
     <string name="download_info_remaining_time">Tempo restante: </string>
     
-    <string name="confirm_delete_update_folder_dialog_message">Apagar a pasta de actualização?</string>
-    <string name="confirm_delete_update_folder_dialog_yes">Apagar</string>
+    <string name="confirm_delete_update_folder_dialog_message">Eliminar pasta de actualizações?</string>
+    <string name="confirm_delete_update_folder_dialog_yes">Eliminar todas as actualizações</string>
+    <string name="confirm_delete_update_folder_dialog_neutral">Eliminar actualização seleccionada</string>
     <string name="confirm_delete_update_folder_dialog_no">Cancelar</string>
-    
+    <string name="delete_single_update_success_message">Actualização {0} eliminada</string>
+
     <!-- Preferences Strings -->
-    <string name="p_update_check_freq_title">Ajustar o intervalo da pesquisa</string>
-    <string name="p_update_check_freq_summary">Ajustar a frequência da pesquisa</string>
+    <string name="p_update_check_freq_title">Actualizar frequência de verifição de novas actualizações</string>
+    <string name="p_update_check_freq_summary">Estabelecer frequência de verificação de novas actualizações</string>
     
     <string name="p_update_file_url_title">Servidor de actualizações</string>
-    <string name="p_update_file_url_summary">Ajustar o link para o servidor de actualizações</string>
+    <string name="p_update_file_url_summary">Estabelecer o URL do ficheiro de actualização </string>
+    <string name="p_update_file_url_changed">Estabelecer o URL de actualização para o  predefinido</string>
     
-    <string name="p_updates_mod_version_title">Versão</string>
-    <string name="p_updates_mod_version_summary">Defina a versão para a qual pretende receber actualizações</string>
+    <string name="p_updates_mod_version_title">Versão do Sistema Modificado</string>
+    <string name="p_updates_mod_version_summary">Escolher de que versão modificada prefere receber actualizações</string>
     
     <string name="p_display_older_mod_versions_title">Mostrar todas as actualizações</string>
-    <string name="p_display_older_mod_versions_summary">Mostrar todas as actualizações, incluindo as antigas</string>
+    <string name="p_display_older_mod_versions_summary"> Mostrar todas as actualizações, incluindo versões antigas</string>
+    <string name="p_display_older_mod_versions_changed">Por favor, verifique novamente por actualizações para renovar a lista de actualizações disponíveis</string>
     
-    <string name="p_display_allow_experimental_versions_title">Versões experimentais</string>
-    <string name="p_display_allow_experimental_versions_summary">Mostar versões experimentais (não-estáveis)</string>
+    <string name="p_display_allow_experimental_versions_title">Versões Experimentais</string>
+    <string name="p_display_allow_experimental_versions_summary">Mostrar versões experimentais (não estáveis)</string>
+    <string name="p_display_allow_experimental_versions_changed"> Por favor, verifique novamente por actualizações para renovar a lista de actualizações disponíveis </string>
     
-    <string name="p_do_nandroid_backup_title">Nandroid Backup</string>
-    <string name="p_do_nandroid_backup_summary">Criar Nandroid backup antes de aplicar a actualização?</string>
+    <string name="p_do_nandroid_backup_title">Cópia de segurança Nandroid</string>
+    <string name="p_do_nandroid_backup_summary">Criar cópia de segurança Nandroid antes de aplicar a actualização?</string>
     
-    <string name="p_notification_ringtone_title">Som de notificação</string>
-    <string name="p_notification_ringtone_summary">Escolher um som de alerta para uma actualização CM</string>
+    <string name="p_notification_ringtone_title">Toque de notificação</string>
+    <string name="p_notification_ringtone_summary">Escolha um toque para os alertas do CM Updater </string>
+    
+    <string name="p_update_file_url_screen_title">Actualizar servidor</string>
+    <string name="p_update_file_url_screen_summary">Modificar o servidor de actualizações</string>
+    
+    <string name="p_update_file_url_def_title">Restaurar o servidor de actualizações </string>
+    <string name="p_update_file_url_def_summary">Restaurar a localização do servidor de actualizações para o predefinido </string>
+    
+    <string name="p_update_file_url_qr_title">Captar código de barras</string>
+    <string name="p_update_file_url_qr_summary">Captar código QR do URL do ficheiro de actualização</string>
+    
+    <string name="p_vibrate_title">Vibrar</string>
+    <string name="p_vibrate_summary">Vibrar com notificações</string>
 </resources>
