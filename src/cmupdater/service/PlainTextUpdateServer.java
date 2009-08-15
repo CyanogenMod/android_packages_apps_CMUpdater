@@ -139,7 +139,7 @@ public class PlainTextUpdateServer implements IUpdateServer {
 
 		try {
 			ui.board = new LinkedList<String>();
-			String[] Boards = obj.getString("board").split("|");
+			String[] Boards = obj.getString("board").split("\\|");
 			for(String item:Boards)
 			{
 				if(item!=null)
