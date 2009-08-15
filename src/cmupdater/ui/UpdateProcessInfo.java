@@ -1109,6 +1109,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory())
 		{
 			deleteDir(mUpdateFolder);
+			mUpdateFolder.mkdir();
+			Log.e(TAG, "Updates deleted and UpdateFolder created again");
 			success=true;
 			Toast.makeText(this, R.string.delete_updates_success_message, Toast.LENGTH_LONG).show();
 		}
