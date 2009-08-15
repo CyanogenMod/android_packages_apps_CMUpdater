@@ -3,7 +3,7 @@
     <!-- .ui.* Strings -->
     <string name="apply_now_button_text">Прошить</string>
     <string name="apply_later_button_text">Позже</string>
-    <string name="apply_update_button_text">Проверить и Прошить</string>
+    <string name="apply_update_button_text">Прошить</string>
     <string name="apply_title_textview_text">{0} готов к прошивке</string>
     <string name="apply_subtitle_textview_text">Примечания к выпуску:</string>
     <string name="apply_unable_to_reboot_toast">Перезагрузка в режим восстановки не удалась</string>
@@ -23,6 +23,8 @@
     <string name="delete_updates_success_message">Папка с прошивками удалена</string>
     <string name="delete_updates_failure_message">Ошибка при удалении папки прошивок</string>
     <string name="delete_updates_noFolder_message">Папки с прошивками не существует</string>
+	
+	<string name="check_now_update_chooser">Нажмите \'Проверить\' для проверки наличия новой Версии</string>
     
     <string name="apply_update_dialog_title">Подтверждение</string>
     <string name="apply_update_dialog_text">Внимание, обнавляемся на {0}.\nПри нажатии кнопки \'Прошить\', телефон перезагрузится в режим восстановки для обновления прошивки.</string>
@@ -34,7 +36,8 @@
 	<string name="check_now_button_text">Проверить</string>
 	
 	<string name="menu_check_now">Проверить</string>
-    <string name="menu_config">Конфигурация</string>
+	<string name="menu_qr_code">Сканировать Код</string>
+    <string name="menu_config">Настройки</string>
 	<string name="menu_about">О Программе</string>
     <string name="cancel_download_buton_text">Отменить Загрузку</string>
     <string name="confirm_download_cancelation_dialog_message">Пожалуйста подтвердите отмену загрузки</string>
@@ -49,6 +52,12 @@
 
 	<string name="apply_upload_info_message">ВНИМАНИЕ! ОПЦИЯ ПЕРЕЗАГРУЗКИ ВКЛЮЧЕНА ПО УМОЛЧАНИЮ. НАЖАТИЕ КНОПКИ \'ПРОШИТЬ\' ПЕРЕЗАГРУЗИТ ТЕЛЕФОН И НАЧНЕТ ОПЕРАЦИЮ АВТОМАТИЧЕСКИ.
 ПОЖАЛУЙСТА ПЕРЕГРУЗИТЕСЬ ВРУЧНУЮ В РЕЖИМ ВОССТАНОВЛЕНИЯ, ЕСЛИ НЕОБХОДИМО СОХРАНИТЬ РЕЗЕРВНЫЙ ЗАПАС.</string>
+	
+	<string name="last_update_check_text">Предыдущая проверка</string>
+    <string name="overwrite_update_title">Файл загружен</string>
+    <string name="overwrite_update_summary">Выбранная верия уже загружена в папке бновлений.\nУдалить и заргузить снова?</string>
+    <string name="overwrite_update_positive">Да</string>
+    <string name="overwrite_update_negative">Нет</string>
 	
     <!-- .service.* Strings -->
     <string name="no_updates_found">Новых версий прошивки не найдено.</string>
@@ -76,8 +85,10 @@
     <string name="download_info_remaining_time">Осталось: </string>
     
     <string name="confirm_delete_update_folder_dialog_message">Удалить Папку Загрузок?</string>
-    <string name="confirm_delete_update_folder_dialog_yes">Удалить</string>
+    <string name="confirm_delete_update_folder_dialog_yes">Удалить все содержимое</string>
+	<string name="confirm_delete_update_folder_dialog_neutral">Удалить только выбранное</string>
     <string name="confirm_delete_update_folder_dialog_no">Отменить</string>
+	<string name="delete_single_update_success_message">{0} удален</string>
 
     <!-- Preferences Strings -->
     <string name="p_update_check_freq_title">Частота Проверок</string>
@@ -85,15 +96,18 @@
     
     <string name="p_update_file_url_title">Файл Обновления</string>
     <string name="p_update_file_url_summary">Интернет адрес для загрузки файла обновления</string>
+	<string name="p_update_file_url_changed">Адрес обнобителя сброшен на оригинальный</string>
     
     <string name="p_updates_mod_version_title">Версия Системы</string>
     <string name="p_updates_mod_version_summary">За какой весрией следить</string>
     
     <string name="p_display_older_mod_versions_title">Все Версии</string>
     <string name="p_display_older_mod_versions_summary">Быдут показаны все предыдущие весрии (даже старые)</string>
+	<string name="p_display_older_mod_versions_changed">Проверьте еще раз для обновления списка имеющихся версий</string>
     
     <string name="p_display_allow_experimental_versions_title">Экспериментальные</string>
     <string name="p_display_allow_experimental_versions_summary">Следить за экспериментальными (не стабильными) версиями</string>
+	<string name="p_display_allow_experimental_versions_changed">Проверьте еще раз для обновления списка имеющихся версий</string>
     
     <string name="p_do_nandroid_backup_title">Резервный Запас</string>
     <string name="p_do_nandroid_backup_summary">Сохранить резервный запас системы про помощи программы Nandroid перед обновлением</string>
@@ -109,4 +123,7 @@
     
     <string name="p_update_file_url_qr_title">Сканировка Кода</string>
     <string name="p_update_file_url_qr_summary">Сканировать штриховой код содержащий адрес сервера обновления</string>
+	
+	<string name="p_vibrate_title">Вибрация</string>
+    <string name="p_vibrate_summary">Вибрировать телефон при уведомлениях</string>
 </resources>
