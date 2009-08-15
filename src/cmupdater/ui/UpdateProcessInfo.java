@@ -57,8 +57,8 @@ import cmupdater.utils.SysUtils;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class UpdateProcessInfo extends IUpdateProcessInfo {
-
+public class UpdateProcessInfo extends IUpdateProcessInfo
+{
 	private static final String TAG = "<CM-Updater> UpdateProcessInfo";
 	private static final String STORED_STATE_FILENAME = "UpdateProcessInfo.ser";
 
@@ -106,16 +106,19 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	View mseparator;
 
 
-	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection(){
-
-		public void onServiceConnected(ComponentName className, IBinder service) {
+	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection()
+	{
+		public void onServiceConnected(ComponentName className, IBinder service)
+		{
 			mUpdateDownloaderService = ((UpdateDownloaderService.LocalBinder)service).getService();
-			if(mUpdateDownloaderService.isDownloading()) {
+			if(mUpdateDownloaderService.isDownloading())
+			{
 				switchToDownloadingLayout(mUpdateDownloaderService.getCurrentUpdate());
 			}
 		}
 
-		public void onServiceDisconnected(ComponentName className) {
+		public void onServiceDisconnected(ComponentName className)
+		{
 			mUpdateDownloaderService = null;
 		}
 	};
@@ -124,15 +127,19 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	//private static DownloadUpdateTask mDownloadUpdateTask;
 
 
-	private final View.OnClickListener mSelectUpdateButtonListener = new View.OnClickListener() {
-		public void onClick(View v) {
-
-			if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+	private final View.OnClickListener mSelectUpdateButtonListener = new View.OnClickListener()
+	{
+		public void onClick(View v)
+		{
+			if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
+			{
 				new AlertDialog.Builder(UpdateProcessInfo.this)
 				.setTitle(R.string.sdcard_is_not_present_dialog_title)
 				.setMessage(R.string.sdcard_is_not_present_dialog_body)
-				.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener(){
-					public void onClick(DialogInterface dialog, int which) {
+				.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
 						dialog.dismiss();
 					}
 				})
@@ -149,13 +156,17 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 				new AlertDialog.Builder(UpdateProcessInfo.this)
 				.setTitle(R.string.overwrite_update_title)
 				.setMessage(R.string.overwrite_update_summary)
-				.setNegativeButton(R.string.overwrite_update_negative, new DialogInterface.OnClickListener(){
-					public void onClick(DialogInterface dialog, int which) {
+				.setNegativeButton(R.string.overwrite_update_negative, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
 						dialog.dismiss();
 					}
 				})
-				.setPositiveButton(R.string.overwrite_update_positive, new DialogInterface.OnClickListener(){
-					public void onClick(DialogInterface dialog, int which) {
+				.setPositiveButton(R.string.overwrite_update_positive, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
 						downloadRequestedUpdate((UpdateInfo) mUpdatesSpinner.getSelectedItem());
 					}
 				})
@@ -170,15 +181,19 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		}
 	};
 
-	private final View.OnClickListener mDeleteUpdatesButtonListener = new View.OnClickListener() {
+	private final View.OnClickListener mDeleteUpdatesButtonListener = new View.OnClickListener()
+	{
 		public void onClick(View v) {
 
-			if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+			if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
+			{
 				new AlertDialog.Builder(UpdateProcessInfo.this)
 				.setTitle(R.string.sdcard_is_not_present_dialog_title)
 				.setMessage(R.string.sdcard_is_not_present_dialog_body)
-				.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener(){
-					public void onClick(DialogInterface dialog, int which) {
+				.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
 						dialog.dismiss();
 					}
 				})
@@ -191,7 +206,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 				.setTitle(R.string.delete_updates_text)
 				.setMessage(R.string.confirm_delete_update_folder_dialog_message)
 				//Delete Only Selected Update
-				.setNeutralButton(R.string.confirm_delete_update_folder_dialog_neutral, new DialogInterface.OnClickListener(){
+				.setNeutralButton(R.string.confirm_delete_update_folder_dialog_neutral, new DialogInterface.OnClickListener()
+				{
 					public void onClick(DialogInterface dialog, int which) {
 						//Delete Updates here
 						String f = (String) mExistingUpdatesSpinner.getSelectedItem();
@@ -213,8 +229,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 					}
 				})
 				//Delete All Updates
-				.setPositiveButton(R.string.confirm_delete_update_folder_dialog_yes, new DialogInterface.OnClickListener(){
-					public void onClick(DialogInterface dialog, int which) {
+				.setPositiveButton(R.string.confirm_delete_update_folder_dialog_yes, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
 						//Delete Updates here
 						deleteOldUpdates();
 						//Set the Filenames to null, so the Spinner will be empty
@@ -232,8 +250,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 					}
 				})
 				//Delete no Update
-				.setNegativeButton(R.string.confirm_delete_update_folder_dialog_no, new DialogInterface.OnClickListener(){
-					public void onClick(DialogInterface dialog, int which) {
+				.setNegativeButton(R.string.confirm_delete_update_folder_dialog_no, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
 						dialog.dismiss();
 					}
 				})
@@ -257,7 +277,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 				new AlertDialog.Builder(UpdateProcessInfo.this)
 				.setTitle(R.string.sdcard_is_not_present_dialog_title)
 				.setMessage(R.string.sdcard_is_not_present_dialog_body)
-				.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener(){
+				.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener()
+				{
 					public void onClick(DialogInterface dialog, int which)
 					{
 						dialog.dismiss();
@@ -276,7 +297,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 				new AlertDialog.Builder(UpdateProcessInfo.this)
 				.setTitle(R.string.no_md5_found_title)
 				.setMessage(R.string.no_md5_found_summary)
-				.setPositiveButton(R.string.no_md5_found_positive, new DialogInterface.OnClickListener(){
+				.setPositiveButton(R.string.no_md5_found_positive, new DialogInterface.OnClickListener()
+				{
 					public void onClick(DialogInterface dialog, int which)
 					{
 						Resources r = getResources();
@@ -299,7 +321,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 						dialog.dismiss();
 					}
 				})
-				.setNegativeButton(R.string.no_md5_found_negative, new DialogInterface.OnClickListener(){
+				.setNegativeButton(R.string.no_md5_found_negative, new DialogInterface.OnClickListener()
+				{
 					public void onClick(DialogInterface dialog, int which)
 					{
 						dialog.dismiss();
@@ -417,20 +440,24 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		}
 	};
 
-	private final View.OnClickListener mCancelDownloadListener = new View.OnClickListener() {
-
-		public void onClick(View arg0) {
-
+	private final View.OnClickListener mCancelDownloadListener = new View.OnClickListener()
+	{
+		public void onClick(View arg0)
+		{
 			new AlertDialog.Builder(UpdateProcessInfo.this)
 			.setMessage(R.string.confirm_download_cancelation_dialog_message)
-			.setPositiveButton(R.string.confirm_download_cancelation_dialog_yes, new DialogInterface.OnClickListener(){
-				public void onClick(DialogInterface dialog, int which) {
+			.setPositiveButton(R.string.confirm_download_cancelation_dialog_yes, new DialogInterface.OnClickListener()
+			{
+				public void onClick(DialogInterface dialog, int which)
+				{
 					mUpdateDownloaderService.cancelDownload();
 					switchToUpdateChooserLayout(null);
 				}
 			})
-			.setNegativeButton(R.string.confirm_download_cancelation_dialog_no, new DialogInterface.OnClickListener(){
-				public void onClick(DialogInterface dialog, int which) {
+			.setNegativeButton(R.string.confirm_download_cancelation_dialog_no, new DialogInterface.OnClickListener()
+			{
+				public void onClick(DialogInterface dialog, int which)
+				{
 					dialog.dismiss();
 				}
 			})
@@ -440,11 +467,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	};
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 
 		Preferences prefs = Preferences.getPreferences(this);
-		if(prefs.isFirstRun()) {
+		if(prefs.isFirstRun())
+		{
 			prefs.configureModString();
 			prefs.setFirstRun(false);
 		}
@@ -452,9 +481,12 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		if(prefs.getConfiguredModString().equals("ADP1"))
 			prefs.configureModString();
 
-		try {
+		try
+		{
 			loadState();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			Log.e(TAG, "Unable to load application state");
 		}
 
@@ -473,14 +505,19 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void onStart() {
+	protected void onStart()
+	{
 		super.onStart();
-
-		try {
+		try
+		{
 			loadState();
-		} catch (FileNotFoundException e) {
+		}
+		catch (FileNotFoundException e)
+		{
 			//Ignored, data was not saved
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			Log.w(TAG, "Unable to restore activity status", e);
 		}
 
@@ -536,18 +573,24 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			}
 		}
 		files = null;
-		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading()) {
+		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
+		{
 			switchToDownloadingLayout(mUpdateDownloaderService.getCurrentUpdate());
-		} else if (mAvailableUpdates != null || (mfilenames != null && mfilenames.size() > 0)) {
+		}
+		else if (mAvailableUpdates != null || (mfilenames != null && mfilenames.size() > 0))
+		{
 			switchToUpdateChooserLayout(mAvailableUpdates);
-		} else {
+		}
+		else
+		{
 			switchToNoUpdatesAvailable();
 		}
 		UpdateDownloaderService.setUpdateProcessInfo(UpdateProcessInfo.this);
 	}
 
 	@Override
-	public void onConfigurationChanged(Configuration newConfig) { 
+	public void onConfigurationChanged(Configuration newConfig)
+	{ 
         super.onConfigurationChanged(newConfig); 
         Log.i(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
     }
@@ -556,13 +599,17 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	 * @see android.app.Activity#onStop()
 	 */
 	@Override
-	protected void onStop() {
+	protected void onStop()
+	{
 		super.onStop();
 		if (mUpdateDownloaderService != null)
 		{
-			try {
+			try
+			{
 				saveState();
-			} catch (IOException e) {
+			}
+			catch (IOException e)
+			{
 				Log.w(TAG, "Unable to save state", e);
 			}
 			Log.d(TAG, "Cancel the download");
@@ -574,23 +621,29 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 			Log.e(TAG, "mUpdateDownloaderService is NULL");
 	}
 
-	private void saveState() throws IOException {
+	private void saveState() throws IOException
+	{
 		ObjectOutputStream oos = new ObjectOutputStream(openFileOutput(STORED_STATE_FILENAME, Context.MODE_PRIVATE));
-		try {
+		try
+		{
 			Map<String,Serializable> data = new HashMap<String, Serializable>();
 			data.put("mAvailableUpdates", (Serializable)mAvailableUpdates);
 			data.put("mMirrorName", mMirrorName);
 			oos.writeObject(data);
 			oos.flush();
-		} finally {
+		}
+		finally
+		{
 			oos.close();
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadState() throws IOException {
+	private void loadState() throws IOException
+	{
 		ObjectInputStream ois = new ObjectInputStream(openFileInput(STORED_STATE_FILENAME));
-		try {
+		try
+		{
 			Map<String,Serializable> data = (Map<String, Serializable>) ois.readObject();
 
 			Object o = data.get("mAvailableUpdates"); 
@@ -598,22 +651,28 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 
 			o = data.get("mMirrorName"); 
 			if(o != null) mMirrorName =  (String) o;
-		} catch (ClassNotFoundException e) {
+		}
+		catch (ClassNotFoundException e)
+		{
 			Log.e(TAG, "Unable to load stored class", e);
-		} finally {
+		}
+		finally
+		{
 			ois.close();
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	private void restoreSavedInstanceValues(Bundle b) {
+	private void restoreSavedInstanceValues(Bundle b)
+	{
 		if(b == null) return;
 		mAvailableUpdates = (List<UpdateInfo>) b.getSerializable(KEY_AVAILABLE_UPDATES);
 		mMirrorName = b.getString(KEY_MIRROR_NAME);
 	}
 
 	@Override
-	protected void onSaveInstanceState(Bundle outState) {
+	protected void onSaveInstanceState(Bundle outState)
+	{
 		outState.putSerializable(KEY_AVAILABLE_UPDATES, (Serializable)mAvailableUpdates);
 		outState.putString(KEY_MIRROR_NAME, mMirrorName);
 	}
@@ -623,7 +682,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void onNewIntent(Intent intent) {
+	protected void onNewIntent(Intent intent)
+	{
 		super.onNewIntent(intent);
 
 		int req = intent.getIntExtra(KEY_REQUEST, -1);
@@ -639,7 +699,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
 		super.onCreateOptionsMenu(menu);
 		menu.add(Menu.NONE, MENU_ID_UPDATE_NOW, Menu.NONE, R.string.menu_check_now)
 		.setIcon(R.drawable.check_now);
@@ -656,15 +717,21 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	 * @see android.app.Activity#onPrepareOptionsMenu(android.view.Menu)
 	 */
 	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
+	public boolean onPrepareOptionsMenu(Menu menu) 
+	{
 		boolean superReturn = super.onPrepareOptionsMenu(menu);
 
-		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading()) {
+		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
+		{
 			//Download in progress
 			menu.findItem(MENU_ID_UPDATE_NOW).setEnabled(false);
-		} else if (mAvailableUpdates != null) {
+		}
+		else if (mAvailableUpdates != null)
+		{
 			//Available updates
-		} else {
+		}
+		else
+		{
 			//No available updates
 		}
 		return superReturn;
@@ -674,7 +741,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	 * @see android.app.Activity#onMenuItemSelected(int, android.view.MenuItem)
 	 */
 	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+	public boolean onMenuItemSelected(int featureId, MenuItem item)
+	{
 		switch(item.getItemId())
 		{
 			case MENU_ID_UPDATE_NOW:
@@ -706,11 +774,15 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	}
 
 	@Override
-	public void switchToNoUpdatesAvailable() {
+	public void switchToNoUpdatesAvailable()
+	{
 		mAvailableUpdates = null;
-		try {
+		try
+		{
 			saveState();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			Log.w(TAG, "Unable to save application state", e);
 		}
 
@@ -720,8 +792,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 
 		noModLayout.setVisibility(View.GONE);
 		checkForUpdatesLayout.setVisibility(View.VISIBLE);
-		((Button)findViewById(R.id.check_now_button)).setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
+		((Button)findViewById(R.id.check_now_button)).setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View v)
+			{
 				checkForUpdates();
 			}
 		});
@@ -739,12 +813,16 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	}
 
 	@Override
-	public void switchToDownloadingLayout(UpdateInfo downloadingUpdate) {
+	public void switchToDownloadingLayout(UpdateInfo downloadingUpdate)
+	{
 		setContentView(R.layout.update_download_info);
-		try {
+		try
+		{
 			String[] temp = downloadingUpdate.updateFileUris.get(0).toURL().getFile().split("/");
 			mFileName = temp[temp.length-1];
-		} catch (MalformedURLException e) {
+		}
+		catch (MalformedURLException e)
+		{
 			mFileName = "Unable to get Filename";
 			e.printStackTrace();
 		}
@@ -766,7 +844,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	}
 
 	@Override
-	public void switchToUpdateChooserLayout(List<UpdateInfo> availableUpdates) {
+	public void switchToUpdateChooserLayout(List<UpdateInfo> availableUpdates)
+	{
 		/*
 		 * If availableUpdates is null, use the cached value.
 		 * If not, cache the value for future uses
@@ -849,8 +928,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 				//or this Button and the Apply Button will be there
 				CheckNowUpdateChooserText.setVisibility(View.VISIBLE);
 				CheckNowUpdateChooser.setVisibility(View.VISIBLE);
-				CheckNowUpdateChooser.setOnClickListener(new View.OnClickListener() {
-					public void onClick(View v) {
+				CheckNowUpdateChooser.setOnClickListener(new View.OnClickListener()
+				{
+					public void onClick(View v)
+					{
 						checkForUpdates();
 					}
 				});
@@ -879,14 +960,20 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	}
 
 	@Override
-	public void updateDownloadProgress(final int downloaded, final int total, final long StartTime) {
+	public void updateDownloadProgress(final int downloaded, final int total, final long StartTime)
+	{
 		if(mProgressBar ==null)return;
 
-		mProgressBar.post(new Runnable(){
-			public void run() {
-				if(total < 0) {
+		mProgressBar.post(new Runnable()
+		{
+			public void run()
+			{
+				if(total < 0)
+				{
 					mProgressBar.setIndeterminate(true);
-				} else {
+				}
+				else
+				{
 					mProgressBar.setIndeterminate(false);
 					mProgressBar.setMax(total);
 				}
@@ -904,43 +991,56 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	}
 
 	@Override
-	public void updateDownloadMirror(final String mirror) {
+	public void updateDownloadMirror(final String mirror)
+	{
 		if(mDownloadMirrorTextView == null) return;
 
-		mDownloadMirrorTextView.post(new Runnable(){
-			public void run() {
+		mDownloadMirrorTextView.post(new Runnable()
+		{
+			public void run()
+			{
 				mDownloadMirrorTextView.setText(mirror);
 				mMirrorName = mirror;
 			}
 		});
 	}
 
-	private void showConfigActivity() {
+	private void showConfigActivity()
+	{
 		Intent i = new Intent(this, ConfigActivity.class);
 		startActivity(i);
 	}
 
-	private void checkForUpdates() {
-		new CheckForUpdatesTask(mUpdateServer, this).execute();
-		Toast.makeText(this, R.string.checking_for_updates, Toast.LENGTH_SHORT).show();
-		finish();
+	private void checkForUpdates()
+	{
+		ProgressDialog pg = ProgressDialog.show(this, getResources().getString(R.string.checking_for_updates), getResources().getString(R.string.checking_for_updates), true, true);	
+		UpdateCheck u = new UpdateCheck(mUpdateServer, this, pg);
+		Thread t = new Thread(u);
+		t.start();
 	}
 
-	private void showAboutDialog() {
+	private void showAboutDialog()
+	{
 		// use OI About if available, otherwise use the simple About dialog
-		if (SysUtils.isIntentAvailable(this,"org.openintents.action.SHOW_ABOUT_DIALOG")) {
+		if (SysUtils.isIntentAvailable(this,"org.openintents.action.SHOW_ABOUT_DIALOG"))
+		{
 			Intent intent = new Intent("org.openintents.action.SHOW_ABOUT_DIALOG");
 			startActivityForResult(intent, 0);
-		} else {
+		}
+		else
+		{
 			// TODO redirect user to install OI About
 			Dialog dialog = new Dialog(this);
 			dialog.setTitle("About");
 			dialog.setContentView(R.layout.about);
 			TextView mVersionName = (TextView) dialog.findViewById(R.id.version_name_about_text_view);            
-			try {
+			try
+			{
 				PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);                
 				mVersionName.setText("v " + pi.versionName);
-			} catch (Exception e) {
+			}
+			catch (Exception e)
+			{
 				Log.e(TAG, "Can't find version name", e);
 				mVersionName.setText("v unknown");
 			}
@@ -948,11 +1048,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		}			
 	}
 
-	private void scanQRURL() {
+	private void scanQRURL()
+	{
 		IntentIntegrator.initiateScan(this);
 	}
 
-	private void downloadRequestedUpdate(UpdateInfo ui) {
+	private void downloadRequestedUpdate(UpdateInfo ui)
+	{
 		switchToDownloadingLayout(ui);
 		mUpdateDownloaderServiceIntent.putExtra(UpdateDownloaderService.KEY_REQUEST, UpdateDownloaderService.REQUEST_DOWNLOAD_UPDATE);
 		mUpdateDownloaderServiceIntent.putExtra(UpdateDownloaderService.KEY_UPDATE_INFO, ui);
@@ -960,9 +1062,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		Toast.makeText(this, R.string.downloading_update, Toast.LENGTH_SHORT).show();
 	}
 
-	private boolean deleteOldUpdates() {
+	private boolean deleteOldUpdates()
+	{
 		boolean success = false;
-		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory()) {
+		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory())
+		{
 			deleteDir(mUpdateFolder);
 			success=true;
 			Toast.makeText(this, R.string.delete_updates_success_message, Toast.LENGTH_LONG).show();
@@ -978,9 +1082,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		return success;
 	}
 	
-	private boolean deleteUpdate(String filename) {
+	private boolean deleteUpdate(String filename)
+	{
 		boolean success = false;
-		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory()) {
+		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory())
+		{
 			File ZIPfiletodelete = new File(mUpdateFolder + "/" + filename);
 			File MD5filetodelete = new File(mUpdateFolder + "/" + filename + ".md5sum");
 			if (ZIPfiletodelete.exists() && MD5filetodelete.exists())
@@ -1012,12 +1118,16 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		return success;
 	}
 
-	public static boolean deleteDir(File dir) {
-		if (dir.isDirectory()) { 	
+	public static boolean deleteDir(File dir)
+	{
+		if (dir.isDirectory())
+		{ 	
 			String[] children = dir.list();
-			for (int i=0; i<children.length; i++) {
+			for (int i=0; i<children.length; i++)
+			{
 				boolean success = deleteDir(new File(dir, children[i]));
-				if (!success) {
+				if (!success)
+				{
 					return false;
 				}
 			}
@@ -1026,19 +1136,24 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		return dir.delete();
 	}
 
-	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+	public void onActivityResult(int requestCode, int resultCode, Intent intent)
+	{
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-		if (null != scanResult) {
+		if (null != scanResult)
+		{
 			String result = scanResult.getContents();
-			if (null != result && !result.equals("") ) {
-				if (result.contains("zip")) {
-
+			if (null != result && !result.equals("") )
+			{
+				if (result.contains("zip"))
+				{
 					UpdateInfo ui = new UpdateInfo();
 					ui.updateFileUris = new LinkedList<URI>();
-					try {
+					try
+					{
 						ui.updateFileUris.add(new URI(result));
-					} catch (URISyntaxException e) {
-						// TODO Auto-generated catch block
+					}
+					catch (URISyntaxException e)
+					{
 						e.printStackTrace();
 					}
 					String[] tmp = result.split("/");
@@ -1048,15 +1163,19 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 					Log.d(TAG, "Scanned QR Code: " + scanResult.getContents());
 					downloadRequestedUpdate(ui);
 				}
-				else {
+				else
+				{
 					Toast.makeText(getBaseContext(), "Scanned result is not a zip. Please check.", Toast.LENGTH_LONG).show();
 				}
-			} else {
+			}
+			else
+			{
 				Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
 			}
 
 		}
-		else {
+		else
+		{
 			Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
 		}
 	}
