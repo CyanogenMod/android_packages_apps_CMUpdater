@@ -44,6 +44,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -590,7 +591,23 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig)
-	{ 
+	{
+		ScrollView s = (ScrollView) findViewById(R.id.mainScroll);
+		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
+		if (s!=null)
+		{
+			if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+				s.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_landscape));
+			else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
+				s.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
+		}
+		else if (l!=null)
+		{
+			if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+				l.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_landscape));
+			else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
+				l.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
+		}
         super.onConfigurationChanged(newConfig); 
         Log.i(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
     }
@@ -810,6 +827,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		experimentalBuilds.setText(MessageFormat.format(getResources().getString(R.string.p_display_allow_experimental_versions_title)+": {0}", Boolean.toString(prefs.allowExperimental())));
 		showDowngrades.setText(MessageFormat.format(getResources().getString(R.string.p_display_older_mod_versions_title)+": {0}", Boolean.toString(prefs.showDowngrades())));
 		lastUpdateCheck.setText(MessageFormat.format(getResources().getString(R.string.last_update_check_text)+": {0} {1}", DateFormat.getDateInstance().format(prefs.getLastUpdateCheck()), DateFormat.getTimeInstance().format(prefs.getLastUpdateCheck())));
+		
+		//Set the right wallpaper
+		ScrollView s = (ScrollView) findViewById(R.id.mainScroll);
+		int Orientation = getResources().getConfiguration().orientation;
+		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
+			s.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_landscape));
+		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
+			s.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
 	}
 
 	@Override
@@ -841,6 +866,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		if(mFileName != null)
 			mDownloadFilenameTextView.setText(mFileName);
 		((Button)findViewById(R.id.cancel_download_buton)).setOnClickListener(mCancelDownloadListener);
+		
+		//Set the right wallpaper
+		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
+		int Orientation = getResources().getConfiguration().orientation;
+		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
+			l.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_landscape));
+		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
+			l.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
 	}
 
 	@Override
@@ -899,6 +932,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		TextView CheckNowUpdateChooserText = (TextView) findViewById(R.id.check_now_update_chooser_text);
 		CheckNowUpdateChooserText.setVisibility(View.GONE);
 		CheckNowUpdateChooser.setVisibility(View.GONE);
+		
+		//Set the right wallpaper
+		ScrollView s = (ScrollView) findViewById(R.id.mainScroll);
+		int Orientation = getResources().getConfiguration().orientation;
+		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
+			s.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_landscape));
+		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
+			s.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
 		
 		if(availableUpdates != null)
 		{

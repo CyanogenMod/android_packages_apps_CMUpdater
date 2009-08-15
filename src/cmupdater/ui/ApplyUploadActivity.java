@@ -8,10 +8,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import cmupdater.service.UpdateInfo;
@@ -121,5 +123,12 @@ public class ApplyUploadActivity extends Activity {
 		String template = getResources().getString(R.string.apply_title_textview_text);
 		mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
+		//Set the right wallpaper
+		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
+		int Orientation = getResources().getConfiguration().orientation;
+		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
+			l.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_landscape));
+		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
+			l.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
 	}
 }
