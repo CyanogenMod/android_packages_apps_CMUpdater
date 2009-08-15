@@ -291,6 +291,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 	{	
 		private ProgressDialog mDialog;
 		private String mFilename;
+		private boolean mreturnvalue;
 
 		public MD5CheckerTask(ProgressDialog dialog, String filename)
 		{
@@ -301,37 +302,65 @@ public class UpdateProcessInfo extends IUpdateProcessInfo {
 		@Override
 		public Boolean doInBackground(File... params)
 		{
-			boolean returnvalue = false;
+			boolean MD5exists = false;
 			try
 			{
 				File MD5 = new File(params[0]+".md5sum");
-				if (params[0].exists() && params[0].canRead() && MD5.exists() && MD5.canRead())
+				if (MD5.exists() && MD5.canRead())
+					MD5exists = true;
+				if (params[0].exists() && params[0].canRead())
 				{
-					//Calculate MD5 of Existing Update
-					String calculatedMD5 = IOUtils.calculateMD5(params[0]);
-					//Read the existing MD5SUM
-					FileReader input = new FileReader(MD5);
-					BufferedReader bufRead = new BufferedReader(input);
-					String firstLine = bufRead.readLine();
-					bufRead.close();
-					input.close();
-					//If the content of the File is not empty, compare it
-					if (firstLine != null)
+					//If MD5 File exists, check it
+					if(MD5exists)
 					{
-						String[] SplittedString = firstLine.split("  ");
-						if(SplittedString[0].equalsIgnoreCase(calculatedMD5))
-							returnvalue = true;
+						//Calculate MD5 of Existing Update
+						String calculatedMD5 = IOUtils.calculateMD5(params[0]);
+						//Read the existing MD5SUM
+						FileReader input = new FileReader(MD5);
+						BufferedReader bufRead = new BufferedReader(input);
+						String firstLine = bufRead.readLine();
+						bufRead.close();
+						input.close();
+						//If the content of the File is not empty, compare it
+						if (firstLine != null)
+						{
+							String[] SplittedString = firstLine.split("  ");
+							if(SplittedString[0].equalsIgnoreCase(calculatedMD5))
+								mreturnvalue = true;
+						}
+						else
+							mreturnvalue = false;
 					}
+					//If no MD5 Exists: Alertdialog to the User if he wants to apply it
 					else
-						returnvalue = false;
+					{
+						new AlertDialog.Builder(UpdateProcessInfo.this)
+						.setTitle(R.string.no_md5_found_title)
+						.setMessage(R.string.no_md5_found_summary)
+						.setPositiveButton(R.string.no_md5_found_positive, new DialogInterface.OnClickListener(){
+							public void onClick(DialogInterface dialog, int which)
+							{
+								mreturnvalue = true;
+								dialog.dismiss();
+							}
+						})
+						.setNegativeButton(R.string.no_md5_found_negative, new DialogInterface.OnClickListener(){
+							public void onClick(DialogInterface dialog, int which)
+							{
+								mreturnvalue = false;
+								dialog.dismiss();
+							}
+						})
+						.show();
+					}
 				}
 			}
 			catch (IOException e)
 			{
 				Log.e(TAG, "IOEx while checking MD5 sum", e);
-				returnvalue = false;
+				mreturnvalue = false;
 			}
-			return returnvalue;
+			return mreturnvalue;
 		}
 
 		@Override
@@ -1048,8 +1077,9 @@ class UpdateFilter implements FilenameFilter
 	public boolean accept(File dir, String name)
 	{
 		boolean status = false;
-		File MD5 = new File(dir + "/" + name + ".md5sum");
-		if (MD5.exists() && name.endsWith(".zip"))
+		//File MD5 = new File(dir + "/" + name + ".md5sum");
+		//if (MD5.exists() && name.endsWith(".zip"))
+		if (name.endsWith(".zip"))
 			status = true;
 		return status;
 	}

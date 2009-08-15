@@ -72,6 +72,11 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     <string name="overwrite_update_positive">Yes</string>
     <string name="overwrite_update_negative">No</string>
     
+    <string name="no_md5_found_title">No MD5 found</string>
+    <string name="no_md5_found_summary">No MD5 File according to the Update was found.\nDo you want to apply it without checking?</string>
+    <string name="no_md5_found_positive">Apply</string>
+    <string name="no_md5_found_negative">Cancel</string>
+    
     <!-- .service.* Strings -->
     <string name="no_updates_found">No CM updates found</string>
     <string name="not_new_updates_found_ticker">New CM updates found!</string>
