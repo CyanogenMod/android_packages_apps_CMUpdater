@@ -138,10 +138,12 @@ public class PlainTextUpdateServer implements IUpdateServer {
 		UpdateInfo ui = new UpdateInfo();
 
 		try {
+			ui.board = new LinkedList<String>();
 			String[] Boards = obj.getString("board").split("|");
 			for(String item:Boards)
 			{
-				ui.board.add(item);
+				if(item!=null)
+					ui.board.add(item);
 			}
 			ui.type = obj.getString("type");
 			ui.name = obj.getString("name");
