@@ -75,6 +75,7 @@ public class UpdateCheck implements Runnable
 			{
 				Log.i(TAG, "No updates found");
 				Toast.makeText(upi, R.string.no_updates_found, Toast.LENGTH_SHORT).show();
+				p.dismiss();
 				upi.switchToNoUpdatesAvailable();
 			}
 			else
