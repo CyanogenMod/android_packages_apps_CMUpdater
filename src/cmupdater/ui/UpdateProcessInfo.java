@@ -1025,7 +1025,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				mRemainingTime = ((total - downloaded)/mSpeed)/1000;
 
 				mDownloadedBytesTextView.setText((downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB");
-				mDownloadSpeedTextView.setText(Integer.toString(mSpeed) + " kb/s");
+				mDownloadSpeedTextView.setText(Integer.toString(mSpeed) + " kB/s");
 				mRemainingTimeTextView.setText(Long.toString(mRemainingTime) + " seconds");
 			}
 		});
