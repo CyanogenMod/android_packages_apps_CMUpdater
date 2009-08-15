@@ -9,7 +9,7 @@ public class UpdateInfo implements Serializable {
 	private static final long serialVersionUID = 8671456102755862106L;
 	
 	public boolean needsWipe;
-	public String board;
+	public List<String> board;
 	public String name;
 	public String displayVersion;
 	public String type;

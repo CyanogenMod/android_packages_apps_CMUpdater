@@ -138,7 +138,11 @@ public class PlainTextUpdateServer implements IUpdateServer {
 		UpdateInfo ui = new UpdateInfo();
 
 		try {
-			ui.board = obj.getString("board");
+			String[] Boards = obj.getString("board").split("|");
+			for(String item:Boards)
+			{
+				ui.board.add(item);
+			}
 			ui.type = obj.getString("type");
 			ui.name = obj.getString("name");
 			ui.displayVersion = obj.getString("version");
@@ -179,14 +183,18 @@ public class PlainTextUpdateServer implements IUpdateServer {
 		return allow;
 	}
 
-	private boolean modMatches(UpdateInfo ui, String systemMod) {
+	private boolean modMatches(UpdateInfo ui, String systemMod)
+	{
 		if(ui == null) return false;
-
-		Log.d(TAG, "Update Mod:" + ui.board + "; System Mod:" + systemMod);
-
+		//If * is provided, all Boards are supported
 		if(ui.board.equals("*") || systemMod.equals("*")) return true;
-
-		return ui.board.equals(systemMod);
+		Log.d(TAG, "BoardString:" + ui.board + "; System Mod:" + systemMod);
+		for(String board:ui.board)
+		{
+			if(board.equals(systemMod))
+				return true;
+		}
+		return false;
 	}
 
 	private boolean updateIsNewer(UpdateInfo ui, boolean defaultValue) {
