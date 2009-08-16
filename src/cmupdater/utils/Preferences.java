@@ -165,4 +165,9 @@ public class Preferences
 	{
 		return SysUtils.getSystemProperty(SYS_PROP_DEVICE);
 	}
+	
+	public String getAboutURL()
+	{
+		return mPrefs.getString(mRes.getString(R.string.conf_about_url), mRes.getString(R.string.conf_about_url));
+	}
 }

@@ -17,8 +17,8 @@ public class Changelog
         try
         {
         	SAXParserFactory spf = SAXParserFactory.newInstance(); 
-        	SAXParser sp = spf.newSAXParser();  
-        	XMLReader xr = sp.getXMLReader();  
+        	SAXParser sp = spf.newSAXParser();
+        	XMLReader xr = sp.getXMLReader(); 
         	ChangelogHandler ch = new ChangelogHandler(); 
         	xr.setContentHandler(ch); 
         	xr.parse(i);  

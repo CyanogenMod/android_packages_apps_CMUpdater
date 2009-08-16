@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<ScrollView
+<ScrollView
 	xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainScroll"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">-->
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent">
 <TableLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/myTableLayout"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="fill_parent"
     >
 </TableLayout>
-<!--</ScrollView>-->
+</ScrollView>

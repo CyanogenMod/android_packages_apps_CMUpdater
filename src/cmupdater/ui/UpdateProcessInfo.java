@@ -793,9 +793,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				//If downloading, cancel it so the download wont proceed in the background
 				cancelDownloading();
 				//showChangelog();
-				String url = "http://code.google.com/p/cyanogen-updater/";
+				Preferences prefs = Preferences.getPreferences(this);
 				Intent i = new Intent(Intent.ACTION_VIEW);
-				i.setData(Uri.parse(url));
+				i.setData(Uri.parse(prefs.getAboutURL()));
 				startActivity(i);
 				return true;
 			default:
