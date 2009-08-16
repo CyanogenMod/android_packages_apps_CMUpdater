@@ -61,9 +61,13 @@ public class ChangelogHandler extends DefaultHandler
     @Override 
 	public void characters(char ch[], int start, int length)
     {
+    	String a = new String(ch, start, length);
+    	a = a.replaceAll("\\n", "");
+    	a = a.replaceAll("\\r", "");
+    	a = a.replaceAll("\\t", "");
     	// If the object is not initialized because of junk data in the xml like the xml starting tag and so
-    	if (currentVersion != null && currentVersion.ChangeLogText != null)
-    		currentVersion.ChangeLogText.add(new String(ch, start, length));
+    	if (currentVersion != null && currentVersion.ChangeLogText != null && a != "")
+    		currentVersion.ChangeLogText.add(a);
     }
 }
 
