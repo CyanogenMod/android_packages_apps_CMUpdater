@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.net.URI;
 import java.util.List;
 
-public class UpdateInfo implements Serializable {
-
+public class UpdateInfo implements Serializable
+{
 	private static final long serialVersionUID = 8671456102755862106L;
 	
 	public boolean needsWipe;
@@ -19,7 +19,8 @@ public class UpdateInfo implements Serializable {
 	
 	public List<URI> updateFileUris;
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return name;
 	}
 }

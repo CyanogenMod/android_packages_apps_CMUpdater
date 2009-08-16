@@ -8,14 +8,15 @@ import java.security.InvalidParameterException;
 
 import android.util.Log;
 
-public class IOUtils {
-    
+public class IOUtils
+{
     private static final char[] TABLE = {'0','1','2','3','4','5','6','7','8','9', 'A','B','C','D','E','F'};
     private static final String TAG = "<CM-Updater> IOUtils";
     private static final String MD5_COMMAND = "md5sum";
     
     //Non instantiable class
-    private IOUtils() {
+    private IOUtils()
+    {
         //This constructor will not be called
     }
     
@@ -25,7 +26,8 @@ public class IOUtils {
      * @param in The byte array whitch representation will be obtained.
      * @return a char array with the representation of the specified byte array.
      */
-    public static char[] toCharArray(byte[] in) {
+    public static char[] toCharArray(byte[] in)
+    {
         final char[] out = new char[in.length*2];
         
         dump(in,out);
@@ -38,22 +40,32 @@ public class IOUtils {
      * @param in 
      * @return 
      */
-    public static byte[] toByteArray(char[] in) {
+    public static byte[] toByteArray(char[] in)
+    {
         final byte[] out = new byte[in.length/2];
-        for (int i = 0; i < out.length; i++) {
+        for (int i = 0; i < out.length; i++)
+        {
             byte b=0;
-            for (int j = 0; j < 2; j++) {
+            for (int j = 0; j < 2; j++)
+            {
                 char c = in[ (i*2) + j ];
-                if(c>='0' && c<='9') {
+                if(c>='0' && c<='9')
+                {
                     b=(byte)(b<<4);
                     b= (byte)(b | ( 0 + (c-'0') ));
-                } else if(c>='A' && c<='F') {
+                }
+                else if(c>='A' && c<='F')
+                {
                     b=(byte)(b<<4);
                     b= (byte)(b | ( 10 + (c-'A') ));
-                } else if(c>='a' && c<='f') {
+                }
+                else if(c>='a' && c<='f')
+                {
                     b=(byte)(b<<4);
                     b= (byte)(b | ( 10 + (c-'a') ));
-                } else {
+                }
+                else
+                {
                     throw new InvalidParameterException("Input data contains invalid character");
                 }
             }
@@ -73,15 +85,18 @@ public class IOUtils {
      * is smaller than <code>in.length*2</code>
      */
     private static void dump(byte[] in, char[] out)
-    throws ArrayIndexOutOfBoundsException {     
-        for(int i=0;i<in.length;i++) {
+    throws ArrayIndexOutOfBoundsException
+    {     
+        for(int i=0;i<in.length;i++)
+        {
             out[i*2]= TABLE[ (((in[i] & 0xF0)>>4) & 0x0F) ];
             out[i*2 +1] = TABLE[ (in[i] & 0x0F) ];
         }
     }
     
     
-    public static boolean checkMD5(String md5, File updateFile) throws IOException {
+    public static boolean checkMD5(String md5, File updateFile) throws IOException
+    {
     	String calculatedDigest = calculateMD5(updateFile);
     	
     	Log.d(TAG, "Calculated digest: " + calculatedDigest);
@@ -90,12 +105,14 @@ public class IOUtils {
 		return calculatedDigest.equalsIgnoreCase(md5);
 	}
 	
-    public static String calculateMD5(File updateFile) throws IOException {
+    public static String calculateMD5(File updateFile) throws IOException
+    {
     	String calculatedDigest;
 		Process process = Runtime.getRuntime().exec(
 				new String[] { MD5_COMMAND, updateFile.getAbsolutePath() });
 
-		try {
+		try
+		{
 			process.getOutputStream().close();
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					process.getInputStream()), 1024);
@@ -105,13 +122,18 @@ public class IOUtils {
 						+ calculatedDigest);
 
 			calculatedDigest = calculatedDigest.substring(0, 32);
-		} finally {
+		}
+		finally
+		{
 			process.destroy();
 		}
-		try {
+		try
+		{
 			process.waitFor();
 			Log.d(TAG, MD5_COMMAND + " exit value:" + process.exitValue());
-		} catch (InterruptedException e) {
+		}
+		catch (InterruptedException e)
+		{
 		}
        	
     	return calculatedDigest;

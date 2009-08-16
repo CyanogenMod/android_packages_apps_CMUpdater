@@ -26,28 +26,32 @@ import cmupdater.utils.SysUtils;
 import android.content.Context;
 import android.util.Log;
 
-public class PlainTextUpdateServer implements IUpdateServer {
-
+public class PlainTextUpdateServer implements IUpdateServer
+{
 	private static final String TAG = "<CM-Updater> PlainTextUpdateServer";
 
 	private HttpClient httpClient;
 	private URI mUpdateServerUri;
 	private Preferences mPreferences;
 
-	public PlainTextUpdateServer(URI updateServerUri, Context ctx) {
+	public PlainTextUpdateServer(URI updateServerUri, Context ctx)
+	{
 		httpClient = new DefaultHttpClient();
 		mUpdateServerUri = updateServerUri;
 		Preferences p = mPreferences = Preferences.getPreferences(ctx);
 		String sm = p.getConfiguredModString();
 
-		if(sm == null) {
+		if(sm == null)
+		{
 			Log.e(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
-		} else {
+		}
+		else
+		{
 			Log.i(TAG, "System's Mod version:" + sm);
 		}
 	}
-	public List<UpdateInfo> getAvailableUpdates() throws IOException {
-
+	public List<UpdateInfo> getAvailableUpdates() throws IOException
+	{
 		String systemMod = mPreferences.getConfiguredModString();
 		HttpUriRequest req = new HttpGet(mUpdateServerUri);
 		req.addHeader("Cache-Control", "no-cache");
@@ -55,7 +59,8 @@ public class PlainTextUpdateServer implements IUpdateServer {
 		HttpResponse response = httpClient.execute(req);
 
 		int serverResponse = response.getStatusLine().getStatusCode();
-		if (serverResponse != 200) {
+		if (serverResponse != 200)
+		{
 			Log.e(TAG, "Server returned status code " + serverResponse);
 			throw new IOException("Server returned status code "
 					+ serverResponse);
@@ -63,10 +68,9 @@ public class PlainTextUpdateServer implements IUpdateServer {
 
 		LinkedList<UpdateInfo> retValue = new LinkedList<UpdateInfo>();
 		HttpEntity responseEntity = response.getEntity();
-		
 
-		try {
-			
+		try
+		{
 			/**
 			 * Read Entity into BufferedReader and eventually into a StringBuffer
 			 */
@@ -78,7 +82,8 @@ public class PlainTextUpdateServer implements IUpdateServer {
 			StringBuffer buf = new StringBuffer();
 			String line;
 
-			while ((line = lineReader.readLine()) != null) {
+			while ((line = lineReader.readLine()) != null)
+			{
 				buf.append(line);
 			}
 
@@ -90,43 +95,58 @@ public class PlainTextUpdateServer implements IUpdateServer {
 			 */
 
 			LinkedList<UpdateInfo> updateInfos = parseJSON(buf);
-			for (int i = 0, max = updateInfos.size() ; i < max ; i++) {
+			for (int i = 0, max = updateInfos.size() ; i < max ; i++)
+			{
 				UpdateInfo ui = updateInfos.poll();
-				if (modMatches(ui, systemMod)) {
-					if(mPreferences.showDowngrades() || updateIsNewer(ui, true)) {
-						if (branchMatches(ui, mPreferences.allowExperimental())) {
+				if (modMatches(ui, systemMod))
+				{
+					if(mPreferences.showDowngrades() || updateIsNewer(ui, true))
+					{
+						if (branchMatches(ui, mPreferences.allowExperimental()))
+						{
 							retValue.add(ui);
 						}
-					} else {
+					}
+					else
+					{
 						Log.d(TAG, "Discarding " + ui.name + " (older version)");
 					}
-				} else {
+				}
+				else
+				{
 					Log.d(TAG, "Discarding " + ui.name + " (mod mismatch)");
 				}
 			}
 
-		} finally {
+		}
+		finally
+		{
 			responseEntity.consumeContent();
 		}
 
 		return retValue;
 	}
 
-	private LinkedList<UpdateInfo> parseJSON(StringBuffer buf) {
+	private LinkedList<UpdateInfo> parseJSON(StringBuffer buf)
+	{
 		//mod|versionCode|displayVersion|displayName|md5sum|mirror1|mirror2|mirror3|mirror4|etc
 		LinkedList<UpdateInfo> uis = new LinkedList<UpdateInfo>();
 
 		JSONObject mainJSONObject;
-		try {
+		try
+		{
 			mainJSONObject = new JSONObject(buf.toString());
 			JSONArray mirrorList = mainJSONObject.getJSONArray("MirrorList");
 			JSONArray updateList = mainJSONObject.getJSONArray("UpdateList");
 
-			for (int i = 0, max = updateList.length() ; i < max ; i++) {
+			for (int i = 0, max = updateList.length() ; i < max ; i++)
+			{
 				uis.add(parseUpdateJSONObject(updateList.getJSONObject(i),mirrorList));
 			}
 
-		} catch (JSONException e) {
+		}
+		catch (JSONException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -134,10 +154,12 @@ public class PlainTextUpdateServer implements IUpdateServer {
 		return uis;
 	}
 
-	private UpdateInfo parseUpdateJSONObject(JSONObject obj, JSONArray mirrorList) {
+	private UpdateInfo parseUpdateJSONObject(JSONObject obj, JSONArray mirrorList)
+	{
 		UpdateInfo ui = new UpdateInfo();
 
-		try {
+		try
+		{
 			ui.board = new LinkedList<String>();
 			String[] Boards = obj.getString("board").split("\\|");
 			for(String item:Boards)
@@ -154,30 +176,40 @@ public class PlainTextUpdateServer implements IUpdateServer {
 			
 			ui.updateFileUris = new LinkedList<URI>();
 
-			for (int i = 0, max = mirrorList.length() ; i < max ; i++) {
-				try {
+			for (int i = 0, max = mirrorList.length() ; i < max ; i++)
+			{
+				try
+				{
 					ui.updateFileUris.add(new URI(mirrorList.getString(i) + ui.fileName));
-				} catch (URISyntaxException e) {
+				}
+				catch (URISyntaxException e)
+				{
 					Log.w(TAG, "Unable to parse mirror url (" + mirrorList.getString(i) + ui.fileName
 							+ "). Ignoring this mirror", e);
 				}
 			}
-		} catch (JSONException e) {
+		}
+		catch (JSONException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ui;
 	}
 
-	private boolean branchMatches(UpdateInfo ui, boolean experimentalAllowed ) {
+	private boolean branchMatches(UpdateInfo ui, boolean experimentalAllowed )
+	{
 		if(ui == null) return false;
 
 		boolean allow = false;
 
-		if (ui.branchCode.charAt(0) == 'X') {
+		if (ui.branchCode.charAt(0) == 'X')
+		{
 			if (experimentalAllowed == true)
 				allow = true;
-		} else {
+		}
+		else
+		{
 			allow = true;
 		}
 
@@ -199,7 +231,8 @@ public class PlainTextUpdateServer implements IUpdateServer {
 		return false;
 	}
 
-	private boolean updateIsNewer(UpdateInfo ui, boolean defaultValue) {
+	private boolean updateIsNewer(UpdateInfo ui, boolean defaultValue)
+	{
 		/*
 		String modVersion = Preferences.getSystemProperty(Preferences.SYS_PROP_MOD_VERSION);
 		if(modVersion == null || modVersion.length() < PROP_MOD_VERSION_SKIP_CHARS) return defaultValue;
@@ -213,14 +246,18 @@ public class PlainTextUpdateServer implements IUpdateServer {
 
 		int sys, update;
 		int max = Math.min(sysVersion.length, updateVersion.length);
-		for(int i = 0; i < max; i++) {
-			try{
+		for(int i = 0; i < max; i++)
+		{
+			try
+			{
 				sys = sysVersion[i];
 				update = Integer.parseInt(updateVersion[i]);
 
 				if(sys != update) return sys < update; 
 
-			} catch (NumberFormatException ex) {
+			}
+			catch (NumberFormatException ex)
+			{
 				Log.d(TAG, "NumberFormatException while parsing version values:", ex);
 				return defaultValue;
 			}

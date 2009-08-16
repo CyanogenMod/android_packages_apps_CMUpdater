@@ -51,8 +51,8 @@ import cmupdater.utils.IOUtils;
 import cmupdater.utils.Preferences;
 
 
-public class UpdateDownloaderService extends Service {
-
+public class UpdateDownloaderService extends Service
+{
 	//public static UpdateDownloaderService INSTANCE;
 
 	private static final String TAG = "<CM-Updater> UpdateDownloader";
@@ -62,12 +62,16 @@ public class UpdateDownloaderService extends Service {
 
 	public static final int REQUEST_DOWNLOAD_UPDATE = 1;
 
-	private final BroadcastReceiver mConnectivityChangesReceiver = new BroadcastReceiver() {
+	private final BroadcastReceiver mConnectivityChangesReceiver = new BroadcastReceiver()
+	{
 		@Override
-		public void onReceive(Context context, Intent intent) {
+		public void onReceive(Context context, Intent intent)
+		{
 			NetworkInfo netInfo = (NetworkInfo) intent.getSerializableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
-			if(netInfo != null && netInfo.isConnected()) {
-				synchronized (mConnectivityManager) {
+			if(netInfo != null && netInfo.isConnected())
+			{
+				synchronized (mConnectivityManager)
+				{
 					mConnectivityManager.notifyAll();
 					mWaitingForDataConnection = false;
 					unregisterReceiver(this);
@@ -120,32 +124,40 @@ public class UpdateDownloaderService extends Service {
 	private String mUpdateFolder;
 	private String mDownlaodedMD5;
 
-	public class LocalBinder extends Binder {
-		public UpdateDownloaderService getService() {
+	public class LocalBinder extends Binder
+	{
+		public UpdateDownloaderService getService()
+		{
 			return UpdateDownloaderService.this;
 		}
 	}
 
 
-	private final class ServiceHandler extends Handler {
-
-		public ServiceHandler(Looper looper) {
+	private final class ServiceHandler extends Handler
+	{
+		public ServiceHandler(Looper looper)
+		{
 			super(looper);
 		}
 
 		@Override
-		public void handleMessage(Message msg) {
+		public void handleMessage(Message msg)
+		{
 			Bundle arguments = (Bundle)msg.obj;
 
 			int request = arguments.getInt(KEY_REQUEST); 
-			switch(request) {
+			switch(request)
+			{
 			case REQUEST_DOWNLOAD_UPDATE:
 				mDownloading = true;
-				try {
+				try 
+				{
 					UpdateInfo ui = mCurrentUpdate = (UpdateInfo) arguments.getSerializable(KEY_UPDATE_INFO);
 					File downloadedUpdate = checkForConnectionAndUpdate(ui);
 					notifyUser(ui, downloadedUpdate);
-				} finally {
+				}
+				finally
+				{
 					mDownloading = false;
 				}
 				break;
@@ -158,13 +170,15 @@ public class UpdateDownloaderService extends Service {
 		}
 	}
 
-	public static void setUpdateProcessInfo(IUpdateProcessInfo iupi) {
+	public static void setUpdateProcessInfo(IUpdateProcessInfo iupi)
+	{
 		UPDATE_PROCESS_INFO = iupi;
 	}
 
 
 	@Override
-	public void onCreate() {
+	public void onCreate()
+	{
 		mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 		//mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		mConnectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
@@ -190,9 +204,12 @@ public class UpdateDownloaderService extends Service {
 	}
 
 	@Override
-	public void onStart(Intent intent, int startId) {
-		synchronized (mConnectivityManager) {
-			if(mWaitingForDataConnection) {
+	public void onStart(Intent intent, int startId)
+	{
+		synchronized (mConnectivityManager)
+		{
+			if(mWaitingForDataConnection)
+			{
 				Log.w(TAG, "Another update process is waiting for data connection. This should not happen");
 				return;
 			}
@@ -208,7 +225,8 @@ public class UpdateDownloaderService extends Service {
 
 
 
-	private boolean isDataConnected() {
+	private boolean isDataConnected()
+	{
 		if (mConnectivityManager.getActiveNetworkInfo() == null)
 		{
 			return false;
@@ -220,74 +238,88 @@ public class UpdateDownloaderService extends Service {
 	}
 
 	/**
-	private boolean isWifiNetwork() {
+	private boolean isWifiNetwork()
+	{
 		return mConnectivityManager.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
 	}
 	 */
 
 	@Override
-	public void onDestroy() {
+	public void onDestroy()
+	{
 		mServiceLooper.quit();
 		//INSTANCE = null;
 		mDownloading = false;
 	}
 
 	@Override
-	public IBinder onBind(Intent intent) {
+	public IBinder onBind(Intent intent)
+	{
 		return mBinder;
 	}
 
 	/**
 	 * @return the downloading
 	 */
-	public boolean isDownloading() {
+	public boolean isDownloading()
+	{
 		return mDownloading;
 	}
-
 
 	/**
 	 * @return the mCurrentUpdate
 	 */
-	public UpdateInfo getCurrentUpdate() {
+	public UpdateInfo getCurrentUpdate()
+	{
 		return mCurrentUpdate;
 	}
 
 
-	private File checkForConnectionAndUpdate(UpdateInfo updateToDownload) {
+	private File checkForConnectionAndUpdate(UpdateInfo updateToDownload)
+	{
 		File downloadedFile;
 
 		//wait for a data connection
 		while(!isDataConnected()) {
 			Log.d(TAG, "No data connection, waiting for a data connection");
 			registerDataListener();
-			synchronized (mConnectivityManager) {
-				try {
+			synchronized (mConnectivityManager)
+			{
+				try
+				{
 					mConnectivityManager.wait();
 					break;
-				} catch (InterruptedException e) {
+				}
+				catch (InterruptedException e)
+				{
 				}
 			}
 		}
 
 		mWifiLock.acquire();
 
-		try {
+		try
+		{
 			Log.i(TAG, "Downloading update...");
 			downloadedFile = downloadFile(updateToDownload);
-		} catch (RuntimeException ex) {
+		}
+		catch (RuntimeException ex)
+		{
 			Log.e(TAG, "RuntimeEx while checking for updates", ex);
 			notificateDownloadError();
 			return null;
-		} finally {
+		}
+		finally
+		{
 			mWifiLock.release();
 		}
-
 		return downloadedFile;
 	}
 
-
-	private void registerDataListener() {
-		synchronized (mConnectivityManager) {
+	private void registerDataListener()
+	{
+		synchronized (mConnectivityManager)
+		{
 			//mTelephonyManager.listen(mDataStateListener, PhoneStateListener.LISTEN_DATA_CONNECTION_STATE);
 
 			registerReceiver(mConnectivityChangesReceiver, mConectivityManagerIntentFilter);
@@ -295,7 +327,8 @@ public class UpdateDownloaderService extends Service {
 		}
 	}
 
-	private void notificateDownloadError() {
+	private void notificateDownloadError()
+	{
 		Resources res = getResources();
 		Intent i = new Intent(this, UpdateProcessInfo.class)
 		.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_DOWNLOAD_FAILED);
@@ -332,7 +365,8 @@ public class UpdateDownloaderService extends Service {
 		mNM.notify(R.string.not_update_download_error_title, notification);
 	}
 
-	private File downloadFile(UpdateInfo updateInfo) {
+	private File downloadFile(UpdateInfo updateInfo)
+	{
 
 		HttpClient httpClient = mHttpClient;
 		HttpClient MD5httpClient = mMD5HttpClient;
@@ -345,12 +379,14 @@ public class UpdateDownloaderService extends Service {
 		int start = mRandom.nextInt(size);
 		URI updateURI;
 
-		for(int i = 0; i < size; i++) {
+		for(int i = 0; i < size; i++)
+		{
 			updateURI = updateMirrors.get((start + i)% size);
 			mMirrorName = updateURI.getHost();
 
 			mFileName = updateInfo.fileName; 
-			if (null == mFileName || mFileName.length() < 1) {
+			if (null == mFileName || mFileName.length() < 1)
+			{
 				mFileName = "update.zip";
 			}
 			Log.d(TAG, "mFileName: " + mFileName);
@@ -359,7 +395,8 @@ public class UpdateDownloaderService extends Service {
 
 			mMirrorNameUpdated = false;
 			//mUpdateProcessInfo.updateDownloadMirror(updateURI.getHost());
-			try {
+			try
+			{
 				req = new HttpGet(updateURI);
 				md5req = new HttpGet(updateURI+".md5sum");
 
@@ -376,19 +413,26 @@ public class UpdateDownloaderService extends Service {
 				int md5serverResponse = md5response.getStatusLine().getStatusCode();
 				
 
-				if (serverResponse == 404) {
+				if (serverResponse == 404)
+				{
 					Log.e(TAG, "File not found on Server. Trying next one.");
-				} else if(serverResponse != 200) {
+				}
+				else if(serverResponse != 200)
+				{
 					Log.e(TAG, "Server returned status code " + serverResponse + " for update zip trying next mirror");
 
-				} else {
-					if (md5serverResponse != 200) {
+				}
+				else
+				{
+					if (md5serverResponse != 200)
+					{
 						md5Available = false;
 						Log.e(TAG, "Server returned status code " + md5serverResponse + " for update zip md5sum trying next mirror");
 					}
 					//If directory not exists, create it
 					File directory = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder);
-					if (!directory.exists()) {
+					if (!directory.exists())
+					{
 						directory.mkdirs();
 						Log.d(TAG, "UpdateFolder created");
 					}
@@ -396,7 +440,8 @@ public class UpdateDownloaderService extends Service {
 					mDestinationFile = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder, mFileName);
 					if(mDestinationFile.exists()) mDestinationFile.delete();
 
-					if (md5Available) {
+					if (md5Available)
+					{
 						mDestinationMD5File = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder, mFileName + ".md5sum");
 						if(mDestinationMD5File.exists()) mDestinationMD5File.delete();
 
@@ -415,7 +460,8 @@ public class UpdateDownloaderService extends Service {
 								temp.consumeContent();
 
 							//Write the String in a .md5 File
-							if (mDownlaodedMD5 != null || !mDownlaodedMD5.equals(""))	{
+							if (mDownlaodedMD5 != null || !mDownlaodedMD5.equals(""))
+							{
 								writeMD5(mDestinationMD5File, mDownlaodedMD5);
 							}
 						}
@@ -433,9 +479,11 @@ public class UpdateDownloaderService extends Service {
 						entity.consumeContent();
 					Log.i(TAG, "Update download finished");
 					
-					if (md5Available) {
+					if (md5Available)
+					{
 						Log.i(TAG, "Performing MD5 verification");
-						if(!IOUtils.checkMD5(mDownlaodedMD5, mDestinationFile)) {
+						if(!IOUtils.checkMD5(mDownlaodedMD5, mDestinationFile))
+						{
 							throw new IOException("MD5 verification failed");
 						}
 					}
@@ -443,7 +491,8 @@ public class UpdateDownloaderService extends Service {
 					//If we reach here, download & MD5 check went fine :)
 					return mDestinationFile;
 				}
-			} catch (Exception ex) {
+			} catch (Exception ex)
+			{
 				Log.w(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
 			}
 			if(Thread.currentThread().isInterrupted()) break;
@@ -451,17 +500,20 @@ public class UpdateDownloaderService extends Service {
 
 		Log.e(TAG, "Unable to download the update file from any mirror");
 
-		if (null != mDestinationFile && mDestinationFile.exists()) {
+		if (null != mDestinationFile && mDestinationFile.exists())
+		{
 			mDestinationFile.delete();
 		}
-		if (null != mDestinationMD5File && mDestinationMD5File.exists()) {
+		if (null != mDestinationMD5File && mDestinationMD5File.exists())
+		{
 			mDestinationMD5File.delete();
 		}
 
 		return null;
 	}
 
-	private void dumpFile(HttpEntity entity, File destinationFile) throws IOException {
+	private void dumpFile(HttpEntity entity, File destinationFile) throws IOException
+	{
 		long contentLength = entity.getContentLength();
 		if(contentLength <= 0)
 		{
@@ -479,13 +531,15 @@ public class UpdateDownloaderService extends Service {
 		InputStream is = entity.getContent();
 		try
 		{
-			while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0) {
+			while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0)
+			{
 				fos.write(buff, 0, read);
 				totalDownloaded += read;
 				onProgressUpdate(totalDownloaded, (int)contentLength, StartTime);
 			}
 
-			if(read > 0) {
+			if(read > 0)
+			{
 				throw new IOException("Download Canceled");
 			}
 
@@ -511,30 +565,37 @@ public class UpdateDownloaderService extends Service {
 		}
 	}
 
-	private void writeMD5(File md5File, String md5) throws IOException {
-
+	private void writeMD5(File md5File, String md5) throws IOException
+	{
 		Log.d(TAG, "Writing the calculated MD5 to disk");
 		FileWriter fw = new FileWriter(md5File);
-		try {
+		try
+		{
 			fw.write(md5);
 			fw.flush();
-		} finally {
+		}
+		finally
+		{
 			fw.close();
 		}
 	}
 
-	private void onProgressUpdate(int downloaded, int total, long StartTime) {
+	private void onProgressUpdate(int downloaded, int total, long StartTime)
+	{
 		if(UPDATE_PROCESS_INFO == null) return;
 
-		if(!mMirrorNameUpdated) {
+		if(!mMirrorNameUpdated)
+		{
 			UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
 			mMirrorNameUpdated = true;
 		}
 		UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, total, StartTime);
 	}
 
-	private void notifyUser(UpdateInfo ui, File downloadedUpdate) {
-		if(downloadedUpdate == null) {
+	private void notifyUser(UpdateInfo ui, File downloadedUpdate)
+	{
+		if(downloadedUpdate == null)
+		{
 			Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_LONG).show();
 //			mHandlerThread.interrupt();
 //			UpdateProcessInfo upi = new UpdateProcessInfo();
@@ -542,7 +603,8 @@ public class UpdateDownloaderService extends Service {
 			return;
 		}
 
-		if(UPDATE_PROCESS_INFO == null) {
+		if(UPDATE_PROCESS_INFO == null)
+		{
 			//app is closed, launching a notification
 			Resources res = getResources();
 			Intent i = new Intent(this, ApplyUploadActivity.class)
@@ -573,7 +635,9 @@ public class UpdateDownloaderService extends Service {
 
 			NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 			nm.notify(R.string.not_update_downloaded_title, notification);
-		} else {
+		}
+		else
+		{
 			//app is active, switching layout
 			Intent i = new Intent(this, ApplyUploadActivity.class);
 			i.putExtra(ApplyUploadActivity.KEY_UPDATE_INFO, ui);

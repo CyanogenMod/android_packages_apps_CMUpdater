@@ -5,25 +5,34 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
+	<CheckBoxPreference
+		android:key="@string/p_notifications"
+		android:title="@string/p_notifications_title"
+		android:summary="@string/p_notifications_summary"
+		android:defaultValue="@string/p_notifications_def_value" />
+
 	<ListPreference
 		android:key="@string/p_key_update_check_freq"
 		android:title="@string/p_update_check_freq_title"
 		android:summary="@string/p_update_check_freq_summary"
 		android:entries="@array/update_frequency"
 		android:entryValues="@array/update_frequency_values"
-		android:defaultValue="@string/p_update_check_freq_def_value" />
+		android:defaultValue="@string/p_update_check_freq_def_value"
+		android:dependency="@string/p_notifications" />
 
 	<RingtonePreference
 		android:key="@string/p_key_notification_ringtone"
 		android:title="@string/p_notification_ringtone_title"
 		android:summary="@string/p_notification_ringtone_summary"
-		android:ringtoneType="notification" />
+		android:ringtoneType="notification"
+		android:dependency="@string/p_notifications" />
 
 	<CheckBoxPreference
 		android:key="@string/p_vibrate"
 		android:title="@string/p_vibrate_title"
 		android:summary="@string/p_vibrate_summary"
-		android:defaultValue="@string/p_vibrate_def_value" />
+		android:defaultValue="@string/p_vibrate_def_value"
+		android:dependency="@string/p_notifications" />
 
 	<!--
 

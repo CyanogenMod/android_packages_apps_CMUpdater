@@ -82,36 +82,38 @@ public class UpdateCheck implements Runnable
 			{
 				Log.i(TAG, updateCount + " update(s) found");
 				upi.switchToUpdateChooserLayout(ui);
-				
-				Intent i = new Intent(upi, UpdateProcessInfo.class)
-								.putExtra(UpdateProcessInfo.KEY_UPDATE_LIST, (Serializable)ui)
-								.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_NEW_UPDATE_LIST);
-				PendingIntent contentIntent = PendingIntent.getActivity(upi, 0, i, PendingIntent.FLAG_ONE_SHOT);
+				if(prefs.notificationsEnabled())
+				{	
+					Intent i = new Intent(upi, UpdateProcessInfo.class)
+							.putExtra(UpdateProcessInfo.KEY_UPDATE_LIST, (Serializable)ui)
+							.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_NEW_UPDATE_LIST);
+					PendingIntent contentIntent = PendingIntent.getActivity(upi, 0, i, PendingIntent.FLAG_ONE_SHOT);
 	
-				Notification notification = new Notification(R.drawable.icon_notification,
-									res.getString(R.string.not_new_updates_found_ticker),
-									System.currentTimeMillis());
-				
-				String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
-				notification.setLatestEventInfo(upi, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
-				
-				Uri notificationRingtone = prefs.getConfiguredRingtone();
-				if(prefs.getVibrate())
-					notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
-				else
-					notification.defaults = Notification.DEFAULT_LIGHTS;
-				if(notificationRingtone == null)
-				{
-					notification.sound = null;
+					Notification notification = new Notification(R.drawable.icon_notification,
+										res.getString(R.string.not_new_updates_found_ticker),
+										System.currentTimeMillis());
+		
+					String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
+					notification.setLatestEventInfo(upi, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
+	
+					Uri notificationRingtone = prefs.getConfiguredRingtone();
+					if(prefs.getVibrate())
+						notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
+					else
+						notification.defaults = Notification.DEFAULT_LIGHTS;
+					if(notificationRingtone == null)
+					{
+						notification.sound = null;
+					}
+					else
+					{
+						notification.sound = notificationRingtone;
+					}
+		
+					//Use a resourceId as an unique identifier
+					((NotificationManager)upi.getSystemService(Context.NOTIFICATION_SERVICE)).
+							notify(R.string.not_new_updates_found_title, notification);
 				}
-				else
-				{
-					notification.sound = notificationRingtone;
-				}
-				
-				//Use a resourceId as an unique identifier
-				((NotificationManager)upi.getSystemService(Context.NOTIFICATION_SERVICE)).
-						notify(R.string.not_new_updates_found_title, notification);
 				p.dismiss();
 			}
 		}

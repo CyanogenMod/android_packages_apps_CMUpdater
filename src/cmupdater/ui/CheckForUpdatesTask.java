@@ -19,8 +19,8 @@ import cmupdater.service.IUpdateServer;
 import cmupdater.service.UpdateInfo;
 import cmupdater.utils.Preferences;
 
-public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo>>{
-	
+public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo>>
+{	
 	public static final String KEY_UPDATE_LIST = "cmupdater.updates";
 
 	private static final String TAG = "<CM-Updater> CheckForUpdatesTask";
@@ -29,32 +29,40 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo
 	private IUpdateProcessInfo mUpdateProcessInfo;	
 
 	
-	public CheckForUpdatesTask(IUpdateServer updateServer, IUpdateProcessInfo upi) {
+	public CheckForUpdatesTask(IUpdateServer updateServer, IUpdateProcessInfo upi)
+	{
 		mUpdateServer = updateServer;
 		mUpdateProcessInfo = upi;
 	}
 
 	@Override
-	public List<UpdateInfo> doInBackground(Void... params) {
-		try {
+	public List<UpdateInfo> doInBackground(Void... params)
+	{
+		try
+		{
 			Log.i(TAG, "Checking for updates...");
 			return mUpdateServer.getAvailableUpdates();
-		} catch (IOException ex) {
+		}
+		catch (IOException ex)
+		{
 			Log.e(TAG, "IOEx while checking for updates", ex);
 			return null;
-		} catch (RuntimeException ex) {
+		}
+		catch (RuntimeException ex)
+		{
 			Log.e(TAG, "RuntimeEx while checking for updates", ex);
 			return null;
 		}
 	}
 	
-	
 	@Override
-	public void onPostExecute(List<UpdateInfo> result) {
+	public void onPostExecute(List<UpdateInfo> result)
+	{
 		IUpdateProcessInfo upi = mUpdateProcessInfo;
 		
 		Resources res = upi.getResources();
-		if(result == null) {
+		if(result == null)
+		{
 			Toast.makeText(upi, R.string.exception_while_updating, Toast.LENGTH_SHORT).show();
 			return;
 		}
@@ -63,11 +71,14 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo
 		prefs.setLastUpdateCheck(new Date());
 		
 		int updateCount = result.size();
-		if(updateCount == 0) {
+		if(updateCount == 0)
+		{
 			Log.i(TAG, "No updates found");
 			Toast.makeText(upi, R.string.no_updates_found, Toast.LENGTH_SHORT).show();
 			upi.switchToNoUpdatesAvailable();
-		} else {
+		}
+		else
+		{
 			Log.i(TAG, updateCount + " update(s) found");
 			upi.switchToUpdateChooserLayout(result);
 			

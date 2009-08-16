@@ -29,8 +29,8 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 
-public class UpdateCheckerService extends Service {
-	
+public class UpdateCheckerService extends Service
+{
 	public static UpdateCheckerService INSTANCE;
 	
 	private static final String TAG = "<CM-Updater> UpdateService";
@@ -39,12 +39,15 @@ public class UpdateCheckerService extends Service {
 	
 	public static final int REQUEST_CHECK_FOR_UPDATES = 1;
 	
-	private final PhoneStateListener mDataStateListener = new PhoneStateListener(){
-
+	private final PhoneStateListener mDataStateListener = new PhoneStateListener()
+	{
 		@Override
-		public void onDataConnectionStateChanged(int state) {
-			if(state == TelephonyManager.DATA_CONNECTED) {
-				synchronized (mTelephonyManager) {
+		public void onDataConnectionStateChanged(int state)
+		{
+			if(state == TelephonyManager.DATA_CONNECTED)
+			{
+				synchronized (mTelephonyManager)
+				{
 					mTelephonyManager.notifyAll();
 					mTelephonyManager.listen(mDataStateListener, PhoneStateListener.LISTEN_NONE);
 					mWaitingForDataConnection = false;
@@ -62,18 +65,22 @@ public class UpdateCheckerService extends Service {
 
 	private TelephonyManager mTelephonyManager;
 	
-	private final class ServiceHandler extends Handler {
+	private final class ServiceHandler extends Handler
+	{
 
-		public ServiceHandler(Looper looper) {
+		public ServiceHandler(Looper looper)
+		{
 			super(looper);
 		}
 
 		@Override
-		public void handleMessage(Message msg) {
+		public void handleMessage(Message msg)
+		{
             Bundle arguments = (Bundle)msg.obj;
             
             int request = arguments.getInt(KEY_REQUEST); 
-            switch(request) {
+            switch(request)
+            {
             	case REQUEST_CHECK_FOR_UPDATES:
 					checkForUpdates();
 					break;
@@ -88,7 +95,8 @@ public class UpdateCheckerService extends Service {
 	
 
 	@Override
-	public void onCreate() {
+	public void onCreate()
+	{
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         
@@ -105,9 +113,12 @@ public class UpdateCheckerService extends Service {
 	}
 
 	@Override
-	public void onStart(Intent intent, int startId) {
-		synchronized (mTelephonyManager) {
-			if(mWaitingForDataConnection) {
+	public void onStart(Intent intent, int startId)
+	{
+		synchronized (mTelephonyManager)
+		{
+			if(mWaitingForDataConnection)
+			{
 				Log.i(TAG, "Another update check is waiting for data connection. Skipping");
 				return;
 			}
@@ -121,52 +132,67 @@ public class UpdateCheckerService extends Service {
         Log.d("ServiceStartArguments", "Sending: " + msg);
 	}
 	
-	private boolean isDataConnected() {
+	private boolean isDataConnected()
+	{
 		int state = mTelephonyManager.getDataState(); 
 		return state == TelephonyManager.DATA_CONNECTED || state == TelephonyManager.DATA_SUSPENDED;
 	}
 
 	@Override
-	public void onDestroy() {
+	public void onDestroy()
+	{
 		mServiceLooper.quit();
 		INSTANCE = null;
 	}
 
 	@Override
-	public IBinder onBind(Intent intent) {
+	public IBinder onBind(Intent intent)
+	{
 		return null;
 	}
 
-	private void checkForUpdates() {
+	private void checkForUpdates()
+	{
 		Resources res = getResources();
 		
 		List<UpdateInfo> availableUpdates;
-		while (true) {
+		while (true)
+		{
 			
 			//wait for a data connection
-			while(!isDataConnected()) {
+			while(!isDataConnected())
+			{
 				Log.d(TAG, "No data connection, waiting for a data connection");
 				registerDataListener();
-				synchronized (mTelephonyManager) {
-					try {
+				synchronized (mTelephonyManager)
+				{
+					try
+					{
 						mTelephonyManager.wait();
 						break;
-					} catch (InterruptedException e) {
+					}
+					catch (InterruptedException e)
+					{
 					}
 				}
 			}
 			
-			try {
+			try
+			{
 				Log.i(TAG, "Checking for updates...");
 				availableUpdates = mUpdateServer.getAvailableUpdates();
 				break;
-			} catch (IOException ex) {
+			}
+			catch (IOException ex)
+			{
 				Log.e(TAG, "IOEx while checking for updates", ex);
-				if(isDataConnected()) {
+				if(isDataConnected())
+				{
 					notificateCheckError();
 					return;
 				}
-			} catch (RuntimeException ex) {
+			} catch (RuntimeException ex)
+			{
 				Log.e(TAG, "RuntimeEx while checking for updates", ex);
 				notificateCheckError();
 				return;
@@ -180,7 +206,8 @@ public class UpdateCheckerService extends Service {
 		int updateCount = availableUpdates.size();
 		Log.i(TAG, updateCount + " update(s) found");
 		
-		if(updateCount > 0) {
+		if(updateCount > 0)
+		{
 			Intent i = new Intent(this, UpdateProcessInfo.class)
 							.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_NEW_UPDATE_LIST)
 							.putExtra(UpdateProcessInfo.KEY_UPDATE_LIST, (Serializable)availableUpdates);
@@ -211,19 +238,24 @@ public class UpdateCheckerService extends Service {
 			
 			//Use a resourceId as an unique identifier
 			mNM.notify(R.string.not_new_updates_found_title, notification);
-		} else {
+		}
+		else
+		{
 			Log.i(TAG, "No updates found");
 		}
 	}
 
-	private void registerDataListener() {
-		synchronized (mTelephonyManager) {
+	private void registerDataListener()
+	{
+		synchronized (mTelephonyManager)
+		{
 			mTelephonyManager.listen(mDataStateListener, PhoneStateListener.LISTEN_DATA_CONNECTION_STATE);
 			mWaitingForDataConnection = true;
 		}
 	}
 
-	private void notificateCheckError() {
+	private void notificateCheckError()
+	{
 		Resources res = getResources();
 		Intent i = new Intent(this, UpdateProcessInfo.class)
 						.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_UPDATE_CHECK_ERROR);
@@ -258,5 +290,4 @@ public class UpdateCheckerService extends Service {
 		//Use a resourceId as an unique identifier
 		mNM.notify(R.string.not_update_downloaded_title, notification);
 	}
-
 }

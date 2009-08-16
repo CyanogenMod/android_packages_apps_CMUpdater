@@ -19,8 +19,9 @@ import android.widget.Toast;
 import cmupdater.service.UpdateInfo;
 import cmupdater.utils.Preferences;
 
-public class ApplyUploadActivity extends Activity {
-
+public class ApplyUploadActivity extends Activity
+{
+	
 	private static final String TAG = "<CM-Updater> ApplyUploadActivity";
 
 	public static final String KEY_UPDATE_INFO = "cmupdater.updateInfo";
@@ -33,8 +34,10 @@ public class ApplyUploadActivity extends Activity {
 	private Button mApplyButton;
 	private Button mPostponeButton;
 
-	private final View.OnClickListener mApplyButtonListener = new View.OnClickListener() {
-		public void onClick(View v) {
+	private final View.OnClickListener mApplyButtonListener = new View.OnClickListener()
+	{
+		public void onClick(View v)
+		{
 			String dialogBody = MessageFormat.format(
 					getResources().getString(R.string.apply_update_dialog_text),
 					mUpdateInfo.name);
@@ -43,8 +46,10 @@ public class ApplyUploadActivity extends Activity {
 			.setTitle(R.string.apply_update_dialog_title)
 			.setMessage(dialogBody)
 			.setNeutralButton(R.string.apply_update_dialog_update_button, mBackupAndApplyUpdateListener)
-			.setNegativeButton(R.string.apply_update_dialog_cancel_button, new DialogInterface.OnClickListener(){
-				public void onClick(DialogInterface dialog, int which) {
+			.setNegativeButton(R.string.apply_update_dialog_cancel_button, new DialogInterface.OnClickListener()
+			{
+				public void onClick(DialogInterface dialog, int which)
+				{
 					dialog.dismiss();
 				}
 			}).create();
@@ -53,18 +58,19 @@ public class ApplyUploadActivity extends Activity {
 		}
 	};
 	private final DialogInterface.OnClickListener mBackupAndApplyUpdateListener = new ApplyUpdateListener(this);
-	private class ApplyUpdateListener implements DialogInterface.OnClickListener {
-
+	private class ApplyUpdateListener implements DialogInterface.OnClickListener
+	{
 		private boolean mBackup;
 		private Context mCtx;
 
-		public ApplyUpdateListener(Context ctx) {
+		public ApplyUpdateListener(Context ctx)
+		{
 			mBackup = Preferences.getPreferences(ctx).doNandroidBackup();
 			mCtx = ctx;
 		}
 
-		public void onClick(DialogInterface dialog, int which) {
-			
+		public void onClick(DialogInterface dialog, int which)
+		{
 			/*
 			 * Should perform the following steps.
 			 * 0.- Ask the user for a confirmation (already done when we reach here)
@@ -75,7 +81,8 @@ public class ApplyUploadActivity extends Activity {
 			 * 5.- echo '--update_package=SDCARD:update.zip' >> /cache/recovery/command
 			 * 6.- reboot recovery 
 			 */
-			try {
+			try
+			{
 				Process p = Runtime.getRuntime().exec("su");
 				OutputStream os = p.getOutputStream();
 				os.write("mkdir -p /cache/recovery/\n".getBytes());
@@ -88,24 +95,28 @@ public class ApplyUploadActivity extends Activity {
 				os.flush();
 
 				Toast.makeText(mCtx, R.string.apply_trying_to_get_root_access, Toast.LENGTH_LONG).show();
-			} catch (IOException e) {
+			}
+			catch (IOException e)
+			{
 				Log.e(TAG, "Unable to reboot into recovery mode:", e);
 				Toast.makeText(mCtx, R.string.apply_unable_to_reboot_toast, Toast.LENGTH_LONG).show();
 			}
 		}
 	};
 
-	private final View.OnClickListener mPostponeButtonListener = new View.OnClickListener() {
-		public void onClick(View v) {
+	private final View.OnClickListener mPostponeButtonListener = new View.OnClickListener()
+	{
+		public void onClick(View v)
+		{
 			finish();
 		}
 	};
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.apply_upload);
-
 
 		mTitle = (TextView) findViewById(R.id.apply_title_textview);
 
@@ -117,7 +128,8 @@ public class ApplyUploadActivity extends Activity {
 	}
 
 	@Override
-	protected void onStart() {
+	protected void onStart()
+	{
 		super.onStart();
 		mUpdateInfo = (UpdateInfo) getIntent().getExtras().getSerializable(KEY_UPDATE_INFO);
 		String template = getResources().getString(R.string.apply_title_textview_text);

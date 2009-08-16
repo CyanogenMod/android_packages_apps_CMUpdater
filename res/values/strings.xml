@@ -126,6 +126,8 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     <string name="p_update_file_url_def">prefUpdateFileURLDef</string>
     <string name="p_vibrate">prefVibrate</string>
     <string name="p_vibrate_def_value">true</string>
+    <string name="p_notifications">prefNotifications</string>
+    <string name="p_notifications_def_value">true</string>
     
     <!-- Preferences Strings -->
     <string name="p_update_check_freq_title">Update Checking frequency</string>
@@ -163,4 +165,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     
     <string name="p_vibrate_title">Vibrate</string>
     <string name="p_vibrate_summary">Vibrate on Notifications</string>
+    
+    <string name="p_notifications_title">Notifications</string>
+    <string name="p_notifications_summary">Enable/Disable Notifications</string>
 </resources>

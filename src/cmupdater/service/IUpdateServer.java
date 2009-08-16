@@ -3,8 +3,8 @@ package cmupdater.service;
 import java.io.IOException;
 import java.util.List;
 
-public interface IUpdateServer {
-
+public interface IUpdateServer
+{
 	/**
 	 * Returns a list with all available updates on that server.
 	 * 

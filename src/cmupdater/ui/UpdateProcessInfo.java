@@ -184,8 +184,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 
 	private final View.OnClickListener mDeleteUpdatesButtonListener = new View.OnClickListener()
 	{
-		public void onClick(View v) {
-
+		public void onClick(View v)
+		{
 			if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
 			{
 				new AlertDialog.Builder(UpdateProcessInfo.this)
@@ -209,7 +209,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				//Delete Only Selected Update
 				.setNeutralButton(R.string.confirm_delete_update_folder_dialog_neutral, new DialogInterface.OnClickListener()
 				{
-					public void onClick(DialogInterface dialog, int which) {
+					public void onClick(DialogInterface dialog, int which)
+					{
 						//Delete Updates here
 						String f = (String) mExistingUpdatesSpinner.getSelectedItem();
 						if(deleteUpdate(f))

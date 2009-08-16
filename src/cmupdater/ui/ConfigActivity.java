@@ -17,13 +17,14 @@ import cmupdater.utils.StartupReceiver;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class ConfigActivity extends PreferenceActivity {
-
+public class ConfigActivity extends PreferenceActivity
+{
 	private static final String TAG = "<CM-Updater> ConfigActivity";
 	private Preferences prefs;
 
 	private final Preference.OnPreferenceChangeListener mUpdateCheckingFrequencyListener = new Preference.OnPreferenceChangeListener() {
-		public boolean onPreferenceChange(Preference preference, Object newValue) {
+		public boolean onPreferenceChange(Preference preference, Object newValue)
+		{
 			int updateFreq = Integer.parseInt((String) newValue) * 1000;
 
 			if(updateFreq > 0)
@@ -33,12 +34,12 @@ public class ConfigActivity extends PreferenceActivity {
 
 			return true;
 		}
-
 	};
 
 	/** Called when the activity is first created. */
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.layout.config);
 		
@@ -49,10 +50,10 @@ public class ConfigActivity extends PreferenceActivity {
 		updateCheckFreqPref.setOnPreferenceChangeListener(mUpdateCheckingFrequencyListener);
 		
 		Preference pref = (Preference) findPreference(getResources().getString(R.string.p_update_file_url_qr));
-		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-
-			public boolean onPreferenceClick(Preference preference) {
-				
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
+		{
+			public boolean onPreferenceClick(Preference preference)
+			{
 				IntentIntegrator.initiateScan(ConfigActivity.this);
 				Log.d(TAG, "Intent to Barcode Scanner Sent");
 				return true;
@@ -60,9 +61,10 @@ public class ConfigActivity extends PreferenceActivity {
 		});
 		
 		pref = (Preference) findPreference(getResources().getString(R.string.p_update_file_url_def));
-		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-
-			public boolean onPreferenceClick(Preference preference) {
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
+		{
+			public boolean onPreferenceClick(Preference preference)
+			{
 				prefs.setUpdateFileURL(getResources().getString(R.string.conf_update_server_url_def));
 				Toast.makeText(getBaseContext(), R.string.p_update_file_url_changed, Toast.LENGTH_LONG).show();
 				Log.d(TAG, "Update File URL set back to default: " + prefs.getUpdateFileURL());
@@ -92,7 +94,8 @@ public class ConfigActivity extends PreferenceActivity {
 		});
 	}
 
-	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+	public void onActivityResult(int requestCode, int resultCode, Intent intent)
+	{
 		Log.d(TAG, "onActivityResult requestCode: "+requestCode);
 		//Switch is necessary, because RingtonePreference and QRBarcodeScanner call the same Event
 		switch (requestCode)
@@ -100,19 +103,24 @@ public class ConfigActivity extends PreferenceActivity {
 		//QR Barcode scanner
 		case IntentIntegrator.REQUEST_CODE:
 			IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-			if (null != scanResult) {
+			if (null != scanResult)
+			{
 				String result = scanResult.getContents();
-				if (null != result && !result.equals("") ) {
+				if (null != result && !result.equals("") )
+				{
 					prefs.setUpdateFileURL(result);
 					Toast.makeText(getBaseContext(), "Update File URL: " + result, Toast.LENGTH_SHORT).show();
 					Log.d(TAG, "Scanned QR Code: " + scanResult.getContents());
 					ConfigActivity.this.finish();
-				} else {
+				}
+				else
+				{
 					Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
 				}
 				
 			}
-			else {
+			else
+			{
 				Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
 			}
 			break;
