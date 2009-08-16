@@ -32,6 +32,7 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -731,8 +732,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		.setIcon(android.R.drawable.ic_menu_preferences);
 		menu.add(Menu.NONE, MENU_ID_ABOUT, Menu.NONE, R.string.menu_about)
 		.setIcon(android.R.drawable.ic_menu_info_details);
-//		menu.add(Menu.NONE, MENU_ID_CHANGELOG, Menu.NONE, R.string.menu_changelog)
-//		.setIcon(android.R.drawable.ic_dialog_info);
+		menu.add(Menu.NONE, MENU_ID_CHANGELOG, Menu.NONE, R.string.menu_changelog)
+		.setIcon(android.R.drawable.ic_dialog_info);
 		return true;
 	}
 
@@ -788,11 +789,15 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				cancelDownloading();
 				showAboutDialog();
 				return true;
-//			case MENU_ID_CHANGELOG:
-//				//If downloading, cancel it so the download wont proceed in the background
-//				cancelDownloading();
-//				showChangelog();
-//				return true;
+			case MENU_ID_CHANGELOG:
+				//If downloading, cancel it so the download wont proceed in the background
+				cancelDownloading();
+				//showChangelog();
+				String url = "http://code.google.com/p/cyanogen-updater/";
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				i.setData(Uri.parse(url));
+				startActivity(i);
+				return true;
 			default:
 				Log.w(TAG, "Unknown Menu ID:" + item.getItemId());
 				break;
@@ -1022,9 +1027,12 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		for (Version v:c)
 		{
 			TableRow tr = new TableRow(this);
+//			tr.setLayoutParams(new LayoutParams(
+//					LayoutParams.FILL_PARENT,
+//					LayoutParams.WRAP_CONTENT));
 			tr.setLayoutParams(new LayoutParams(
-					LayoutParams.FILL_PARENT,
-					LayoutParams.WRAP_CONTENT));
+					LayoutParams.WRAP_CONTENT,
+					LayoutParams.FILL_PARENT));
 			TextView Version = new TextView(this);
 			Version.setText("Version: "+v.Version);
 			tr.addView(Version);
@@ -1033,15 +1041,22 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					LayoutParams.WRAP_CONTENT));
 			for(String Change:v.ChangeLogText)
 			{
+				TableRow tr2 = new TableRow(this);
+				tr2.setLayoutParams(new LayoutParams(
+						LayoutParams.FILL_PARENT,
+						LayoutParams.WRAP_CONTENT));
+				TextView tr2t = new TextView(this);
+				tr2t.setText("*");
+				tr2.addView(tr2t);
+				tl.addView(tr2,new TableLayout.LayoutParams(
+						LayoutParams.FILL_PARENT,
+						LayoutParams.WRAP_CONTENT));
 				TableRow Changetr = new TableRow(this);
 				Changetr.setLayoutParams(new LayoutParams(
 						LayoutParams.FILL_PARENT,
 						LayoutParams.WRAP_CONTENT));
 				TextView ChangeView = new TextView(this);
 				ChangeView.setText(Change);
-				ChangeView.setLayoutParams(new LayoutParams(
-						LayoutParams.FILL_PARENT,
-						LayoutParams.WRAP_CONTENT));
 				Changetr.addView(ChangeView);
 				tl.addView(Changetr,new TableLayout.LayoutParams(
 						LayoutParams.FILL_PARENT,
