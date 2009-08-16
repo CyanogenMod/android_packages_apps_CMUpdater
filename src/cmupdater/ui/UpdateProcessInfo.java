@@ -1132,17 +1132,24 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			File ZIPfiletodelete = new File(mUpdateFolder + "/" + filename);
 			File MD5filetodelete = new File(mUpdateFolder + "/" + filename + ".md5sum");
-			if (ZIPfiletodelete.exists() && MD5filetodelete.exists())
+			if (ZIPfiletodelete.exists())
 			{
 				ZIPfiletodelete.delete();
-				MD5filetodelete.delete();
 			}
 			else
 			{
 				Log.e(TAG, "Update to delete not found");
 				Log.e(TAG, "Zip File: "+ZIPfiletodelete.getAbsolutePath());
-				Log.e(TAG, "MD5 File: "+MD5filetodelete.getAbsolutePath());
 				return false;
+			}
+			if (MD5filetodelete.exists())
+			{
+				MD5filetodelete.delete();
+			}
+			else
+			{
+				Log.e(TAG, "MD5 to delete not found. No Problem here.");
+				Log.e(TAG, "MD5 File: "+MD5filetodelete.getAbsolutePath());
 			}
 			ZIPfiletodelete = null;
 			MD5filetodelete = null;
