@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog>
+	<Version name="3.0">
+		<item>Download should be cancelled correctly(no more downloading in the background)</item>
+		<item>Download will now be cancelled, if one of the front keys on the g1 are pressed</item>
+		<item>Download will be cancelled, when a menu is opened(Preferences, QR Scan,...)</item>
+		<item>Abbility to delete only the selected Update in the Update folder instead of the whole folder</item>
+		<item>Fixed the Translation Bugs that force closes (some strings will be in english)</item>
+		<item>User is redirected to Updater Chooser Layout after a fresh install(No metadatafile in cache) when there are Updates in the Update folder, so he can apply them through the app</item>
+		<item>Added a Check Now Button on the UpdateChooser? Layout (point Above) if no metadatafile is cached (otherwise you have to da a menu --> check now ;) )</item>
+		<item>Orientation Changes in the Download View no longer cancels the download</item>
+		<item>New Item in JSON File to support the upcoming Cyanogen MyTouch? Mod (board: board1|board2|board3...)</item>
+		<item>Ringtone Preferences will now work</item>
+		<item>Vibrate Setting for Notifications</item>
+		<item>Fixed Bug, that Found Updates are not shown in Dropdown List</item>
+		<item>now you can do an adb logcat | grep "&gt;CM-Updater&lt;" so see only our Output from the App</item>
+		<item>Last UpdateCheck? Date is now shown on GUI</item>
+		<item>If the update you're trying to download exists, the app will promp you to overwrite it or not</item>
+		<item>No more strechted Background on the updatechooser Layout when showing all Buttons</item>
+		<item>If no MD5SUM exists in the existing Update Folder, User is asked what to do before Applying</item>
+		<item>Check for Update in the App no longer closes it. Runs in a seperate Thread</item>
+		<item>New Landscape Wallpaper</item>
+		<item>Notifications can now be disabled at all. But when no Notifications are selected, no automated Updatechecking will be done</item>
+	</Version>
+	<Version name="2.0">
+		<item>Update check period can be set to manual</item>
+		<item>Metadata-File changed to JSON Format</item>
+		<item>Set the Location of the MetaData? File via Preferences</item>
+		<item>The configurable Update Server has been improved. You can now update your update server URL by scanning a QR Code. Menu -> Configuration -> Update Server -> Scan Barcode</item>
+		<item>You can also now scan a QR code containing a direct link to Update zip (i.e. no need for a update server). Menu -> Scan QR URL</item>
+		<item>Ability to set Update Server URL via QR Code. And also a button to set it to default</item>
+		<item>MD5SUM removed from Metadata File. Its getting downloaded from the Server</item>
+		<item>Updates are now stored in the cm-updates Folder on SD and also get applied from there</item>
+		<item>Abbility to delete the whole UpdateFolder? via the App</item>
+		<item>The "Existing update.zip found" replaced with a Dropdownlist of all updates in the cm-updates Folder, so the User can choose which one to apply</item>
+		<item>Updates are not renamed to update.zip. the original filename from the server is taken to store them in the new folder. So you can have multiple updates in the folder</item>
+		<item>A little Bit Connection cleanup on Mirror Changes</item>
+		<item>New Infos in DownloadDialog?: Filename, Download Speed and Remaining Time</item>
+		<item>aTrackDog support</item>
+		<item>Russian, German, Italian, Dutch, French, Portuguese, Polish, Simplified Chinese and Spanish Translation</item>
+	</Version>
+</changelog>
+
+

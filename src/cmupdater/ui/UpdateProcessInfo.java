@@ -40,12 +40,15 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import cmupdater.service.PlainTextUpdateServer;
@@ -67,6 +70,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	private static final int MENU_ID_SCAN_QR = 2;
 	private static final int MENU_ID_CONFIG= 3;
 	private static final int MENU_ID_ABOUT= 4;
+	private static final int MENU_ID_CHANGELOG= 5;
 
 	private static final String KEY_AVAILABLE_UPDATES = "cmupdater.availableUpdates";
 	private static final String KEY_MIRROR_NAME = "cmupdater.mirrorName";
@@ -521,9 +525,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			Log.w(TAG, "Unable to restore activity status", e);
 		}
-
+		
 		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
-
+		
 		Intent UpdateIntent = getIntent();
 		if (UpdateIntent != null)
 		{
@@ -727,6 +731,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		.setIcon(android.R.drawable.ic_menu_preferences);
 		menu.add(Menu.NONE, MENU_ID_ABOUT, Menu.NONE, R.string.menu_about)
 		.setIcon(android.R.drawable.ic_menu_info_details);
+//		menu.add(Menu.NONE, MENU_ID_CHANGELOG, Menu.NONE, R.string.menu_changelog)
+//		.setIcon(android.R.drawable.ic_dialog_info);
 		return true;
 	}
 
@@ -782,6 +788,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				cancelDownloading();
 				showAboutDialog();
 				return true;
+//			case MENU_ID_CHANGELOG:
+//				//If downloading, cancel it so the download wont proceed in the background
+//				cancelDownloading();
+//				showChangelog();
+//				return true;
 			default:
 				Log.w(TAG, "Unknown Menu ID:" + item.getItemId());
 				break;
@@ -1000,6 +1011,46 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			switchToNoUpdatesAvailable();
 	}
 
+	private void showChangelog()
+	{
+		Dialog dialog = new Dialog(this);
+		dialog.setTitle("Changelog");
+		dialog.setContentView(R.layout.changelog);
+		List<Version> c = Changelog.getChangelog(this);
+		TableLayout tl = (TableLayout)dialog.findViewById(R.id.myTableLayout);
+		//Foreach Version
+		for (Version v:c)
+		{
+			TableRow tr = new TableRow(this);
+			tr.setLayoutParams(new LayoutParams(
+					LayoutParams.FILL_PARENT,
+					LayoutParams.WRAP_CONTENT));
+			TextView Version = new TextView(this);
+			Version.setText("Version: "+v.Version);
+			tr.addView(Version);
+			tl.addView(tr,new TableLayout.LayoutParams(
+					LayoutParams.FILL_PARENT,
+					LayoutParams.WRAP_CONTENT));
+			for(String Change:v.ChangeLogText)
+			{
+				TableRow Changetr = new TableRow(this);
+				Changetr.setLayoutParams(new LayoutParams(
+						LayoutParams.FILL_PARENT,
+						LayoutParams.WRAP_CONTENT));
+				TextView ChangeView = new TextView(this);
+				ChangeView.setText(Change);
+				ChangeView.setLayoutParams(new LayoutParams(
+						LayoutParams.FILL_PARENT,
+						LayoutParams.WRAP_CONTENT));
+				Changetr.addView(ChangeView);
+				tl.addView(Changetr,new TableLayout.LayoutParams(
+						LayoutParams.FILL_PARENT,
+						LayoutParams.WRAP_CONTENT));
+			}
+		}
+		dialog.show();
+	}
+	
 	@Override
 	public void updateDownloadProgress(final int downloaded, final int total, final long StartTime)
 	{
