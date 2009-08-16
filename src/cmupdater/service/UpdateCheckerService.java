@@ -170,6 +170,7 @@ public class UpdateCheckerService extends Service
 					}
 					catch (InterruptedException e)
 					{
+						e.printStackTrace();
 					}
 				}
 			}
@@ -183,14 +184,17 @@ public class UpdateCheckerService extends Service
 			catch (IOException ex)
 			{
 				Log.e(TAG, "IOEx while checking for updates", ex);
+				ex.printStackTrace();
 				if(isDataConnected())
 				{
 					notificateCheckError();
 					return;
 				}
-			} catch (RuntimeException ex)
+			}
+			catch (RuntimeException ex)
 			{
 				Log.e(TAG, "RuntimeEx while checking for updates", ex);
+				ex.printStackTrace();
 				notificateCheckError();
 				return;
 			}

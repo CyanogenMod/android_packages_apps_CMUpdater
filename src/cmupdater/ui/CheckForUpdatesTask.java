@@ -46,11 +46,13 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo
 		catch (IOException ex)
 		{
 			Log.e(TAG, "IOEx while checking for updates", ex);
+			ex.printStackTrace();
 			return null;
 		}
 		catch (RuntimeException ex)
 		{
 			Log.e(TAG, "RuntimeEx while checking for updates", ex);
+			ex.printStackTrace();
 			return null;
 		}
 	}

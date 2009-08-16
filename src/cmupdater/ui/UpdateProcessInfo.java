@@ -415,6 +415,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			catch (IOException e)
 			{
 				Log.e(TAG, "IOEx while checking MD5 sum", e);
+				e.printStackTrace();
 				mreturnvalue = false;
 			}
 			return mreturnvalue;
@@ -495,6 +496,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		catch (IOException e)
 		{
 			Log.e(TAG, "Unable to load application state");
+			e.printStackTrace();
 		}
 
 		restoreSavedInstanceValues(savedInstanceState);
@@ -525,6 +527,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		catch (IOException e)
 		{
 			Log.w(TAG, "Unable to restore activity status", e);
+			e.printStackTrace();
 		}
 		
 		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
@@ -544,6 +547,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					catch (IOException e)
 					{
 						Log.e(TAG, "Unable to save application state");
+						e.printStackTrace();
 					}
 					break;
 				case REQUEST_UPDATE_CHECK_ERROR:
@@ -633,6 +637,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			catch (IOException e)
 			{
 				Log.w(TAG, "Unable to save state", e);
+				e.printStackTrace();
 			}
 			Log.d(TAG, "Cancel the download");
 			mUpdateDownloaderService.cancelDownload();
@@ -677,6 +682,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		catch (ClassNotFoundException e)
 		{
 			Log.e(TAG, "Unable to load stored class", e);
+			e.printStackTrace();
 		}
 		finally
 		{
@@ -817,6 +823,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		catch (IOException e)
 		{
 			Log.w(TAG, "Unable to save application state", e);
+			e.printStackTrace();
 		}
 
 		setContentView(R.layout.no_updates);
@@ -1150,6 +1157,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			{
 				Log.e(TAG, "Can't find version name", e);
 				mVersionName.setText("v unknown");
+				e.printStackTrace();
 			}
 			dialog.show();
 		}			

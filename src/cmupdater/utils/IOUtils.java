@@ -134,6 +134,7 @@ public class IOUtils
 		}
 		catch (InterruptedException e)
 		{
+			e.printStackTrace();
 		}
        	
     	return calculatedDigest;

@@ -44,6 +44,7 @@ public class SysUtils
         catch (IOException ex)
         {
         	Log.e(TAG, "Unable to read sysprop " + propName, ex);
+        	ex.printStackTrace();
         	return null;
         }
         finally
@@ -56,6 +57,7 @@ public class SysUtils
 				}
 				catch (IOException e)
 				{
+					e.printStackTrace();
 				}
         	}
         }
