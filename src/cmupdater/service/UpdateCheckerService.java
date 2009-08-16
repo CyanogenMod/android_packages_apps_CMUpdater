@@ -2,7 +2,6 @@ package cmupdater.service;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URI;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.List;
@@ -105,9 +104,7 @@ public class UpdateCheckerService extends Service
         
         mServiceLooper = thread.getLooper();
         mServiceHandler = new ServiceHandler(mServiceLooper);
-        Preferences prefs = Preferences.getPreferences(this);
-		URI uri = URI.create(prefs.getUpdateFileURL());
-        mUpdateServer = new PlainTextUpdateServer(uri, this);
+        mUpdateServer = new PlainTextUpdateServer(this);
 		
 		INSTANCE = this;
 	}

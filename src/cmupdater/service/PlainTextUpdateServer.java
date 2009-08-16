@@ -34,10 +34,9 @@ public class PlainTextUpdateServer implements IUpdateServer
 	private URI mUpdateServerUri;
 	private Preferences mPreferences;
 
-	public PlainTextUpdateServer(URI updateServerUri, Context ctx)
+	public PlainTextUpdateServer(Context ctx)
 	{
 		httpClient = new DefaultHttpClient();
-		mUpdateServerUri = updateServerUri;
 		Preferences p = mPreferences = Preferences.getPreferences(ctx);
 		String sm = p.getConfiguredModString();
 
@@ -53,6 +52,8 @@ public class PlainTextUpdateServer implements IUpdateServer
 	public List<UpdateInfo> getAvailableUpdates() throws IOException
 	{
 		String systemMod = mPreferences.getConfiguredModString();
+		//Get the actual Updateserver URL
+		mUpdateServerUri = URI.create(mPreferences.getUpdateFileURL());
 		HttpUriRequest req = new HttpGet(mUpdateServerUri);
 		req.addHeader("Cache-Control", "no-cache");
 

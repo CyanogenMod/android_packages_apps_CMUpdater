@@ -494,8 +494,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 
 		restoreSavedInstanceValues(savedInstanceState);
 
-		URI uri = URI.create(prefs.getUpdateFileURL());
-		mUpdateServer = new PlainTextUpdateServer(uri, this);
+		mUpdateServer = new PlainTextUpdateServer(this);
 
 		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
 
