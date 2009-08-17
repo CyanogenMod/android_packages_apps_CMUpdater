@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
    <string-array name="update_frequency">
-       <item>Manuale</item>
-       <item>Ad ogni riavvio</item>
-       <item>Ogni ora</item>
-       <item>Ogni giorno</item>
-       <item>Ogni settimana</item>
+		<item>Manuale</item>
+		<item>Ogni boot</item>
+		<item>Ogni ora</item>
+		<item>Ogni giorno</item>
+		<item>Ogni settimana</item>
    </string-array>
 </resources>

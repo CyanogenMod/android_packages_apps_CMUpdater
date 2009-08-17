@@ -1021,6 +1021,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			switchToNoUpdatesAvailable();
 	}
 
+	//Will be included in a future Release. Layout still messed up. Till implementation Changelog redirects to Google Code Page
 	private void showChangelog()
 	{
 		Dialog dialog = new Dialog(this);
