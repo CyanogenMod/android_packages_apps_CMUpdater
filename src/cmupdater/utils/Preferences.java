@@ -20,9 +20,6 @@ public class Preferences
 	
 	private static final String SYS_PROP_DEVICE = "ro.product.board";
 	
-	private static final String KEY_FIRST_RUN = "firstRun";
-	private static final String KEY_LAST_UPDATE_CHECK = "lastUpdateCheck";
-	
 	private static Preferences INSTANCE;
 	
 	private final SharedPreferences mPrefs;
@@ -78,25 +75,25 @@ public class Preferences
 	
 	public boolean isFirstRun()
 	{
-		return mPrefs.getBoolean(KEY_FIRST_RUN, true);
+		return mPrefs.getBoolean(mRes.getString(R.string.p_first_run), true);
 	}
 	
 	public void setFirstRun(boolean firstRun)
 	{
 		Editor editor = mPrefs.edit();
-		editor.putBoolean(KEY_FIRST_RUN, firstRun);
+		editor.putBoolean(mRes.getString(R.string.p_first_run), firstRun);
 		if(!editor.commit()) Log.e(TAG, "Unable to write first run bit");
 	}
 	
 	public Date getLastUpdateCheck()
 	{
-		return new Date(mPrefs.getLong(KEY_LAST_UPDATE_CHECK, 0));
+		return new Date(mPrefs.getLong(mRes.getString(R.string.p_last_update_check), 0));
 	}
 	
 	public void setLastUpdateCheck(Date d)
 	{
 		Editor editor = mPrefs.edit();
-		editor.putLong(KEY_LAST_UPDATE_CHECK, d.getTime());
+		editor.putLong(mRes.getString(R.string.p_last_update_check), d.getTime());
 		if(!editor.commit()) Log.e(TAG, "Unable to write last update check");
 	}
 

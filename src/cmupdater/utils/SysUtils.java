@@ -3,7 +3,6 @@ package cmupdater.utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Comparator;
 import java.util.List;
 
 import android.content.Context;
@@ -113,20 +112,4 @@ public class SysUtils
 	                    PackageManager.MATCH_DEFAULT_ONLY);
 	    return list.size() > 0;
 	}
-	
-	public static final Comparator<int[]> VERSION_COMPARATOR = new Comparator<int[]>()
-	{
-		public int compare(int[] a, int[] b)
-		{
-			int max = Math.min(a.length, b.length);
-			for(int i = 0; i< max; i++)
-			{
-				if(a[i] != b[i])
-					return a[i] - b[i];
-			}
-			
-			if (a.length != b.length) return a.length - b.length;
-			else return 0;
-		}
-	};
 }

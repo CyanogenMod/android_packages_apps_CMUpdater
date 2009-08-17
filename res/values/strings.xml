@@ -131,6 +131,8 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     <string name="p_vibrate_def_value">true</string>
     <string name="p_notifications">prefNotifications</string>
     <string name="p_notifications_def_value">true</string>
+    <string name="p_first_run">firstRun</string>
+    <string name="p_last_update_check">lastUpdateCheck</string>
     
     <!-- Preferences Strings -->
     <string name="p_update_check_freq_title">Update Checking frequency</string>
