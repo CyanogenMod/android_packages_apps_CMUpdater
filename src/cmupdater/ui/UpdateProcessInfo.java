@@ -425,7 +425,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		public void onPostExecute(Boolean result)
 		{
 			UpdateInfo ui = new UpdateInfo();
-			ui.name = "Existing Update";
+			String[] temp = mFilename.split("\\\\");
+			ui.name = temp[temp.length-1];
 			ui.fileName = mFilename;
 			if(result == true)
 			{
