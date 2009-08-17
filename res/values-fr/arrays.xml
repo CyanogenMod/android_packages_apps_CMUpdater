@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<!-- Frequency times, in seconds -->
     <string-array name="update_frequency">
         <item>Manuel</item>
         <item>Chaque Demarrage boot</item>
@@ -8,13 +7,4 @@
         <item>chque jour</item>
         <item>chaque semaine</item>
     </string-array>
-
-    <!-- Frequency times, in seconds -->
-    <string-array name="update_frequency_values">
-        <item>-2</item>
-        <item>-1</item>
-        <item>3600</item>
-        <item>86400</item>
-        <item>604800</item>
-    </string-array>       
 </resources>

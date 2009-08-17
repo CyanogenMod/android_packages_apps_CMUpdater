@@ -11,8 +11,6 @@
                        android:value="@string/about_copyright" />
         <meta-data android:name="org.openintents.metadata.AUTHORS"
                        android:resource="@array/about_authors" />
-        <meta-data android:name="org.openintents.metadata.DOCUMENTERS"
-                       android:resource="@array/about_documenters" />
         <meta-data android:name="org.openintents.metadata.TRANSLATORS"
                        android:resource="@array/about_translators" />
         <meta-data android:name="org.openintents.metadata.ARTISTS"

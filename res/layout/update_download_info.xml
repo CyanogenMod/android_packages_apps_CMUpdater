@@ -55,12 +55,10 @@
 			android:text="@string/download_info_downloading"
 			android:layout_weight="0"
 			android:layout_gravity="left"/>
-			
 		<TextView
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"/>
-			
 		<TextView
 			android:id="@+id/bytes_downloaded_text_view"
 			android:layout_width="wrap_content"
@@ -68,13 +66,11 @@
 			android:layout_gravity="right"
 			android:layout_weight="0"/>
     </LinearLayout>
-		
 	<ProgressBar
 		android:id="@+id/download_progress_bar"
 		style="?android:attr/progressBarStyleHorizontal"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
-		
 	<LinearLayout
 	    android:orientation="horizontal"
 	    android:layout_width="fill_parent"
@@ -86,12 +82,10 @@
 			android:text="@string/download_info_speed"
 			android:layout_weight="0"
 			android:layout_gravity="left"/>
-			
 		<TextView
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"/>
-			
 		<TextView
 			android:id="@+id/speed_text_view"
 			android:layout_width="wrap_content"
@@ -99,7 +93,6 @@
 			android:layout_gravity="right"
 			android:layout_weight="0"/>
     </LinearLayout>
-    
 	<LinearLayout
 	    android:orientation="horizontal"
 	    android:layout_width="fill_parent"
@@ -111,12 +104,10 @@
 			android:text="@string/download_info_remaining_time"
 			android:layout_weight="0"
 			android:layout_gravity="left"/>
-			
 		<TextView
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"/>
-			
 		<TextView
 			android:id="@+id/remaining_time_text_view"
 			android:layout_width="wrap_content"
@@ -124,7 +115,6 @@
 			android:layout_gravity="right"
 			android:layout_weight="0"/>
     </LinearLayout>
-		
 	<Button
 		android:id="@+id/cancel_download_buton"
 		android:text="@string/cancel_download_buton_text"

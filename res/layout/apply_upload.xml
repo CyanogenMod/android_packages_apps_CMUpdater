@@ -6,7 +6,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background">
-    
     <TextView
 	    android:id="@+id/apply_title_textview"
 	    android:layout_width="fill_parent"
@@ -20,7 +19,6 @@
 	    android:layout_height="wrap_content"
 	    android:gravity="center_horizontal"
     	style="@style/TextAppearance.Subtitle"/>
-    
     <EditText
     	android:id="@+id/apply_release_notes"
     	android:layout_width="fill_parent"

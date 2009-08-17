@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<!-- Frequency times, in seconds -->
     <string-array name="update_frequency">
         <item>手动</item>
         <item>机器启动时</item>
@@ -8,13 +7,4 @@
         <item>每天一次</item>
         <item>每周一次</item>
     </string-array>
-    
-    <!-- Frequency times, in seconds -->
-    <string-array name="update_frequency_values">
-        <item>-2</item>
-        <item>-1</item>
-        <item>3600</item>
-        <item>86400</item>
-        <item>604800</item>
-    </string-array>  
 </resources>
