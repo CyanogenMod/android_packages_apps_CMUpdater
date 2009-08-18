@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="update_frequency">
+		<item>Œöµ¿</item>
+		<item>ºÎÆÃ ÇÒ¶§ž¶ŽÙ</item>
+		<item>ÇÑœÃ°£¿¡ ÇÑ¹ø</item>
+		<item>ÇÏ·ç¿¡ ÇÑ¹ø</item>
+		<item>ÇÑÁÖ¿¡ ÇÑ¹ø</item>
+	</string-array>
+</resources>

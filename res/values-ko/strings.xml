@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- .ui.* Strings -->
+	<string name="apply_now_button_text">Áö±Ý Àû¿ëÇÏ±â</string>
+	<string name="apply_later_button_text">³ªÁß¿¡ Àû¿ëÇÏ±â</string>
+	<string name="apply_update_button_text">Ÿ÷µ¥ÀÌÆ® Àû¿ëÇÏ±â</string>
+	<string name="apply_title_textview_text">{0} is ready to be applied.</string>
+	<string name="apply_subtitle_textview_text">Release notes:</string>
+	<string name="apply_unable_to_reboot_toast">º¹±žžðµå·Î ÀçºÎÆÃ ÇÒ Œö ŸøœÀŽÏŽÙ.</string>
+	<string name="apply_trying_to_get_root_access">º¹±žžðµå·Î µéŸî°¡±â À§ÇØ root ±ÇÇÑÀ» ŸòŽÂÁß</string>
+	<string name="available_updates_text">ŽÙ¿î·Îµå ¹ÞÀ» ·ÒÀ» Œ±ÅÃÇÏŒŒ¿ä:</string>
+	<string name="choose_available_update_text">ŽÙ¿î·Îµå</string>
+	<string name="no_updates_found_instructions">·ÒÀ» Ã£À» Œö ŸøœÀŽÏŽÙ.\n\'ÃŒÅ©\' ¹öÆ°À» Ž­·¯ »õ Ÿ÷µ¥ÀÌÆ®žŠ È®ÀÎÇÏŒŒ¿ä.</string>
+	<string name="downloaded_update_found_text">Ÿ÷µ¥ÀÌÆ® ÆúŽõ¿¡Œ­ È®ÀÎµÈ Ÿ÷µ¥ÀÌÆ® ÆÄÀÏ:</string>
+	<string name="checking_for_updates">Ÿ÷µ¥ÀÌÆ® ÃŒÅ©Áß</string>
+	<string name="downloading_update">Ÿ÷µ¥ÀÌÆ® ŽÙ¿î·ÎµåÁß</string>
+	<string name="sdcard_is_not_present_dialog_body">ÀÌ Ÿ÷µ¥ÀÌÆ®žŠ ŽÙ¿î·Îµå ÇÏ±â À§ÇØŒ­ŽÂ ÆÄÀÏ Ÿ²±â°¡ °¡ŽÉÇÑ SDÄ«µå°¡ ÇÊ¿ä ÇÕŽÏŽÙ.</string>
+	<string name="sdcard_is_not_present_dialog_title">SDÄ«µåžŠ Ã£À» Œö ŸøœÀŽÏŽÙ.</string>
+	<string name="sdcard_is_not_present_dialog_ok_button">È®ÀÎ</string>
+	<string name="current_version_text">»ç¿ëÁßÀÎ ¹öÁ¯: {0}</string>
+	<string name="delete_updates_text">Ÿ÷µ¥ÀÌÆ® Áö¿ì±â</string>
+	<string name="delete_updates_success_message">Ÿ÷µ¥ÀÌÆ® ÆúŽõ°¡ »èÁŠ µÇŸúœÀŽÏŽÙ.</string>
+	<string name="delete_updates_failure_message">Ÿ÷µ¥ÀÌÆ® ÆúŽõžŠ »èÁŠÇÏŽÂÁß ¿¡·¯°¡ ¹ß»ýÇßœÀŽÏŽÙ.</string>
+	<string name="delete_updates_noFolder_message">Ÿ÷µ¥ÀÌÆ® ÆúŽõžŠ Ã£À» Œö ŸøœÀŽÏŽÙ.</string>
+	<string name="check_now_update_chooser">\'ÃŒÅ©\' ¹öÆ°À» Ž­·¯ »õ ¹öÁ¯À» È®ÀÎ ÇÏŒŒ¿ä.</string>
+	<string name="apply_update_dialog_title">È®ÀÎ</string>
+	<string name="apply_update_dialog_text">Áö±Ý ¹öÁ¯ {0}(Àž)·Î Ÿ÷µ¥ÀÌÆ® ÇÏ·Á°í ÇÕŽÏŽÙ..\n\'Ÿ÷µ¥ÀÌÆ®\' ¹öÆ°À» Ž©ž£œÃžé º¹±žžðµå·Î ºÎÆÃÇØ Ÿ÷µ¥ÀÌÆ®°¡ Àû¿ë µÉ °ÍÀÔŽÏŽÙ.</string>
+	<string name="apply_update_dialog_update_button">Ÿ÷µ¥ÀÌÆ®</string>
+	<string name="apply_update_dialog_backup_and_update_button">¹éŸ÷ &amp; Àû¿ë</string>
+	<string name="apply_update_dialog_cancel_button">ÃëŒÒ</string>
+	<string name="no_updates_no_mod_text">Áö¿øµÇÁö ŸÊŽÂ OS mod (Version {0}).</string>
+	<string name="check_now_button_text">ÃŒÅ©</string>
+	<string name="menu_check_now">ÃŒÅ©</string>
+	<string name="menu_qr_code">QR URL °Ë»ö</string>
+	<string name="menu_config">Œ³Á€</string><string name="menu_about">About</string>
+	<string name="cancel_download_buton_text">ŽÙ¿î·Îµå ÃëŒÒ</string>
+	<string name="confirm_download_cancelation_dialog_message">Á€ž»·Î ŽÙ¿î·ÎµåžŠ ÃëŒÒ ÇÏœÃ°ÚœÀŽÏ±î?</string>
+	<string name="confirm_download_cancelation_dialog_yes">¿¹</string>
+	<string name="confirm_download_cancelation_dialog_no">ŸÆŽÏ¿ä</string>
+	<string name="download_canceled_toast_message">ŽÙ¿î·Îµå°¡ ÃëŒÒ µÇŸúœÀŽÏŽÙ.</string>
+	<string name="verify_and_apply_dialog_title">ÆÄÀÏ È®ÀÎ</string>
+	<string name="verify_and_apply_dialog_message">MD5 sum À» È®ÀÎ ÇÏŽÂ Áß</string>
+	<string name="apply_existing_update_md5error_message">¿¡·¯. MD5 checksum °¡ ÀÏÄ¡ ÇÏÁö ŸÊœÀŽÏŽÙ.</string>
+	<string name="apply_upload_info_message">CM UPDATER ŽÂ ÀçºÎÆÃ ¿ÉŒÇÀÌ È°ŒºÈ­ µÇŸî ÀÖŸî, Àû¿ë ¹öÆ°À» Ž©ž£œÃžé ÀçºÎÆÃ µËŽÏŽÙ.
+¹éŸ÷À» ÇÏœÃ·Ážé ÀÌ Ÿ÷µ¥ÀÌÆ®žŠ Àû¿ë ÇÏœÃ±âÀü¿¡ Œöµ¿Àž·Î º¹±žžðµå·Î ºÎÆÃÇÏŒŒ¿ä.</string>
+	<!-- .service.* Strings -->
+	<string name="no_updates_found">»õ Ÿ÷µ¥ÀÌÆ®°¡ ŸøœÀŽÏŽÙ.</string>
+	<string name="not_new_updates_found_ticker">»õ Ÿ÷µ¥ÀÌÆ®žŠ Ã£ŸÒœÀŽÏŽÙ!</string>
+	<string name="not_new_updates_found_title">»õ Ÿ÷µ¥ÀÌÆ®žŠ Ã£ŸÒœÀŽÏŽÙ.</string>
+	<string name="exception_while_updating">Ÿ÷µ¥ÀÌÆ® Œ­¹ö¿¡ ¿¬°áÇÏŽÂ Áß ¿¡·¯°¡ ¹ß»ýÇßœÀŽÏŽÙ.</string>
+	<string name="exception_while_downloading">ŽÙ¿î·ÎµåžŠ œÃµµ ÇÏŽÂÁß ¿¡·¯°¡ ¹ß»ýÇßœÀŽÏŽÙ.</string>
+	<string name="not_update_check_error_ticker">Ÿ÷µ¥ÀÌÆ® È®ÀÎ œÇÆÐ</string>
+	<string name="not_update_check_error_title">Ÿ÷µ¥ÀÌÆ®žŠ È®ÀÎ ÇÒ Œö ŸøœÀŽÏŽÙ.</string>
+	<string name="not_update_check_error_body">³ªÁß¿¡ ŽÙœÃ œÃµµÇÏŒŒ¿ä.</string>
+	<string name="not_update_download_error_ticker">Ÿ÷µ¥ÀÌÆ®žŠ ŽÙ¿î·Îµå ÇÏŽÂÁß ¿¡·¯°¡ ¹ß»ýÇßœÀŽÏŽÙ.</string>
+	<string name="not_update_download_error_title">Ÿ÷µ¥ÀÌÆ®žŠ ŽÙ¿î·Îµå ÇÏŽÂÁß ¿¡·¯°¡ ¹ß»ýÇßœÀŽÏŽÙ.</string>
+	<string name="not_update_download_error_body">³ªÁß¿¡ ŽÙœÃ œÃµµÇÏŒŒ¿ä.</string>
+	<string name="not_update_downloaded_ticker">CyanogenMod Ÿ÷µ¥ÀÌÆ®°¡ ŽÙ¿î·Îµå µÇŸúœÀŽÏŽÙ!</string>
+	<string name="not_update_downloaded_title">CyanogenMod Ÿ÷µ¥ÀÌÆ®°¡ ŽÙ¿î·Îµå µÊ</string>
+	<string name="not_update_downloaded_body">{0} ÀÌ Ÿ÷µ¥ÀÌÆ® °¡ŽÉ.</string>
+	<string name="download_info_filename">ÆÄÀÏží: </string>
+	<string name="download_info_mirror">¹Ì·¯: </string>
+	<string name="download_info_downloading">ŽÙ¿îÁß...</string>
+	<string name="download_info_speed">ŒÓµµ: </string>
+	<string name="download_info_remaining_time">³²Àº œÃ°£: </string>
+	<string name="confirm_delete_update_folder_dialog_message">Ÿ÷µ¥ÀÌÆ® ÆúŽõžŠ »èÁŠ ÇÏœÃ°ÚœÀŽÏ±îr?</string>
+	<string name="confirm_delete_update_folder_dialog_yes">žðµç Ÿ÷µ¥ÀÌÆ® »èÁŠ</string>
+	<string name="confirm_delete_update_folder_dialog_neutral">Œ±ÅÃµÈ Ÿ÷µ¥ÀÌÆ® »èÁŠ</string>
+	<string name="confirm_delete_update_folder_dialog_no">ÃëŒÒ</string>
+	<string name="delete_single_update_success_message">Ÿ÷µ¥ÀÌÆ® {0}(ÀÌ)°¡ »èÁŠ µÇŸúœÀŽÏŽÙ.</string>
+	<!-- Preferences Strings -->
+	<string name="p_update_check_freq_title">Ÿ÷µ¥ÀÌÆ® ÃŒÅ© ºóµµ</string>
+	<string name="p_update_check_freq_summary">Ÿ÷µ¥ÀÌÆ®ÃŒÅ© ºóµµ Œ³Á€ÇÏ±â</string>
+	<string name="p_update_file_url_title">Update Server</string>
+	<string name="p_update_file_url_summary">Ÿ÷µ¥ÀÌÆ® ÆÄÀÏÀÇ URL À» Œ³Á€ÇÏŒŒ¿ä</string>
+	<string name="p_update_file_url_changed">Ÿ÷µ¥ÀÌÆ® URL Œ³Á€ ±âº»Œ³Á€Àž·Î µ¹ž®±â</string>
+	<string name="p_updates_mod_version_title">œÃœºÅÛ ¹öÀü</string>
+	<string name="p_updates_mod_version_summary">Set up which mod version do you want to receive updates of</string>
+	<string name="p_display_older_mod_versions_title">žðµç Ÿ÷µ¥ÀÌÆ® Ç¥œÃ</string>
+	<string name="p_display_older_mod_versions_summary">±ž ¹öÀüÀ» Æ÷ÇÔÇÑ žðµç Ÿ÷µ¥ÀÌÆ®žŠ Ç¥œÃÇÕŽÏŽÙ.</string>
+	<string name="p_display_older_mod_versions_changed">»ç¿ë°¡ŽÉÇÑ Ÿ÷µ¥ÀÌÆ® ž®œºÆ®žŠ Ÿ÷µ¥ÀÌÆ® ÇÏ±â À§ÇØ ŽÙœÃÇÑ¹ø Ÿ÷µ¥ÀÌÆ®žŠ È®ÀÎ ÇØ ÁÖŒŒ¿ä</string>
+	<string name="p_display_allow_experimental_versions_title">œÇÇè¿ë ºôµå</string>
+	<string name="p_display_allow_experimental_versions_summary">œÇÇè¿ë ºôµåžŠ Ç¥œÃÇÕŽÏŽÙ. (non-stable)</string>
+	<string name="p_display_allow_experimental_versions_changed">»ç¿ë°¡ŽÉÇÑ Ÿ÷µ¥ÀÌÆ® ž®œºÆ®žŠ Ÿ÷µ¥ÀÌÆ® ÇÏ±â À§ÇØ ŽÙœÃÇÑ¹ø Ÿ÷µ¥ÀÌÆ®žŠ È®ÀÎ ÇØ ÁÖŒŒ¿ä</string>
+	<string name="p_do_nandroid_backup_title">Nandroid Backup</string>
+	<string name="p_do_nandroid_backup_summary">Ÿ÷µ¥ÀÌÆ® Àü¿¡ Nandroid backupÀ» ÇÏœÃ°ÚœÀŽÏ±î?</string>
+	<string name="p_notification_ringtone_title">ŸËž²Àœ</string>
+	<string name="p_notification_ringtone_summary">CM Updater ŸËž²ÀœÀ» Œ³Á€ ÇÕŽÏŽÙ</string>
+	<string name="p_update_file_url_screen_title">Ÿ÷µ¥ÀÌÆ® Œ­¹ö</string>
+	<string name="p_update_file_url_screen_summary">Ÿ÷µ¥ÀÌÆ® Œ­¹ö º¯°æ</string>
+	<string name="p_update_file_url_def_title">Ÿ÷µ¥ÀÌÆ® Œ­¹ö ž®ŒÂ</string>
+	<string name="p_update_file_url_def_summary">Ÿ÷µ¥ÀÌÆ® Œ­¹öžŠ ±âº» Œ³Á€Àž·Î µÇµ¹ž³ŽÏŽÙ.</string>
+	<string name="p_update_file_url_qr_title">œºÄµ ¹ÙÄÚµå</string>
+	<string name="p_update_file_url_qr_summary">Ÿ÷µ¥ÀÌÆ® URLÀ» Æ÷ÇÔÇÑ QR ÄÚµåžŠ œºÄµÇÕŽÏŽÙ.</string>
+	<string name="p_vibrate_title">Áøµ¿</string>
+	<string name="p_vibrate_summary">ŸËž²Àœ°ú ÇÔ²² Áøµ¿</string>
+</resources>
