@@ -1134,32 +1134,22 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 
 	private void showAboutDialog()
 	{
-		// use OI About if available, otherwise use the simple About dialog
-		if (SysUtils.isIntentAvailable(this,"org.openintents.action.SHOW_ABOUT_DIALOG"))
+		Dialog dialog = new Dialog(this);
+		dialog.setTitle("About");
+		dialog.setContentView(R.layout.about);
+		TextView mVersionName = (TextView) dialog.findViewById(R.id.version_name_about_text_view);            
+		try
 		{
-			Intent intent = new Intent("org.openintents.action.SHOW_ABOUT_DIALOG");
-			startActivityForResult(intent, 0);
+			PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);                
+			mVersionName.setText("v " + pi.versionName);
 		}
-		else
+		catch (Exception e)
 		{
-			// TODO redirect user to install OI About
-			Dialog dialog = new Dialog(this);
-			dialog.setTitle("About");
-			dialog.setContentView(R.layout.about);
-			TextView mVersionName = (TextView) dialog.findViewById(R.id.version_name_about_text_view);            
-			try
-			{
-				PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);                
-				mVersionName.setText("v " + pi.versionName);
-			}
-			catch (Exception e)
-			{
-				Log.e(TAG, "Can't find version name", e);
-				mVersionName.setText("v unknown");
-				e.printStackTrace();
-			}
-			dialog.show();
-		}			
+			Log.e(TAG, "Can't find version name", e);
+			mVersionName.setText("v unknown");
+			e.printStackTrace();
+		}
+		dialog.show();			
 	}
 
 	private void scanQRURL()
