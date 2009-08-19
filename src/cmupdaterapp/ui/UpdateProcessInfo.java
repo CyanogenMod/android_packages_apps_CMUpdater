@@ -743,13 +743,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		menu.add(Menu.NONE, MENU_ID_UPDATE_NOW, Menu.NONE, R.string.menu_check_now)
 		.setIcon(R.drawable.check_now);
 		menu.add(Menu.NONE, MENU_ID_SCAN_QR, Menu.NONE, R.string.menu_qr_code)
-		.setIcon(android.R.drawable.ic_menu_compass);
+		.setIcon(R.drawable.button_scanqr);
 		menu.add(Menu.NONE, MENU_ID_CONFIG, Menu.NONE, R.string.menu_config)
-		.setIcon(android.R.drawable.ic_menu_preferences);
+		.setIcon(R.drawable.button_config);
 		menu.add(Menu.NONE, MENU_ID_ABOUT, Menu.NONE, R.string.menu_about)
-		.setIcon(android.R.drawable.ic_menu_info_details);
+		.setIcon(R.drawable.button_about);
 		menu.add(Menu.NONE, MENU_ID_CHANGELOG, Menu.NONE, R.string.menu_changelog)
-		.setIcon(android.R.drawable.ic_dialog_info);
+		.setIcon(R.drawable.button_clog);
 		return true;
 	}
 
