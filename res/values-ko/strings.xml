@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- .ui.* Strings -->
+	<string name="apply_now_button_text">지금 적용하기</string>
+	<string name="apply_later_button_text">나중에 적용하기</string>
+	<string name="apply_update_button_text">업데이트 적용하기</string>
+	<string name="apply_title_textview_text">{0} is ready to be applied.</string>
+	<string name="apply_subtitle_textview_text">Release notes:</string>
+	<string name="apply_unable_to_reboot_toast">복구모드로 재부팅 할 수 없습니다.</string>
+	<string name="apply_trying_to_get_root_access">복구모드로 들어가기 위해 root 권한을 얻는중</string>
+
+	<string name="available_updates_text">다운로드 받을 롬을 선택하세요:</string>
+	<string name="choose_available_update_text">다운로드</string>
+	<string name="no_updates_found_instructions">롬을 찾을 수 없습니다.\n\'체크\' 버튼을 눌러 새 업데이트를 확인하세요.</string>
+	<string name="downloaded_update_found_text">업데이트 폴더에서 확인된 업데이트 파일:</string>
+	<string name="checking_for_updates">업데이트 체크중</string>
+	<string name="downloading_update">업데이트 다운로드중</string>
+	<string name="sdcard_is_not_present_dialog_body">이 업데이트를 다운로드 하기 위해서는 파일 쓰기가 가능한 SD카드가 필요 합니다.</string>
+	<string name="sdcard_is_not_present_dialog_title">SD카드를 찾을 수 없습니다.</string>
+	<string name="sdcard_is_not_present_dialog_ok_button">확인</string>
+	<string name="current_version_text">사용중인 버젼: {0}</string>
+	<string name="delete_updates_text">업데이트 지우기</string>
+	<string name="delete_updates_success_message">업데이트 폴더가 삭제 되었습니다.</string>
+	<string name="delete_updates_failure_message">업데이트 폴더를 삭제하는중 에러가 발생했습니다.</string>
+	<string name="delete_updates_noFolder_message">업데이트 폴더를 찾을 수 없습니다.</string>
+
+	<string name="check_now_update_chooser">\'체크\' 버튼을 눌러 새 버젼을 확인 하세요.</string>
+
+	<string name="apply_update_dialog_title">확인</string>
+	<string name="apply_update_dialog_text">지금 버젼 {0}(으)로 업데이트 하려고 합니다..\n\'업데이트\' 버튼을 누르시면 복구모드로 부팅해 업데이트가 적용 될 것입니다.</string>
+	<string name="apply_update_dialog_update_button">업데이트</string>
+	<string name="apply_update_dialog_backup_and_update_button">백업 &amp; 적용</string>
+	<string name="apply_update_dialog_cancel_button">취소</string>
+
+	<string name="no_updates_no_mod_text">지원되지 않는 OS mod (Version {0}).</string>
+	<string name="check_now_button_text">체크</string>
+
+	<string name="menu_check_now">체크</string>
+	<string name="menu_qr_code">QR URL 검색</string>
+	<string name="menu_config">설정</string>
+	<string name="menu_about">About</string>
+	<string name="cancel_download_buton_text">다운로드 취소</string>
+	<string name="confirm_download_cancelation_dialog_message">정말로 다운로드를 취소 하시겠습니까?</string>
+	<string name="confirm_download_cancelation_dialog_yes">예</string>
+	<string name="confirm_download_cancelation_dialog_no">아니요</string>
+	<string name="download_canceled_toast_message">다운로드가 취소 되었습니다.</string>
+
+	<string name="verify_and_apply_dialog_title">파일 확인</string>
+	<string name="verify_and_apply_dialog_message">MD5 sum 을 확인 하는 중</string>
+
+	<string name="apply_existing_update_md5error_message">에러. MD5 checksum 가 일치 하지 않습니다.</string>
+
+	<string name="apply_upload_info_message">CM UPDATER 는 재부팅 옵션이 활성화 되어 있어, 적용 버튼을 누르시면 재부팅 됩니다.
+백업을 하시려면 이 업데이트를 적용 하시기전에 수동으로 복구모드로 부팅하세요.</string>
+
+	<!-- .service.* Strings -->
+	<string name="no_updates_found">새 업데이트가 없습니다.</string>
+	<string name="not_new_updates_found_ticker">새 업데이트를 찾았습니다!</string>
+	<string name="not_new_updates_found_title">새 업데이트를 찾았습니다.</string>
+	<string name="exception_while_updating">업데이트 서버에 연결하는 중 에러가 발생했습니다.</string>
+	<string name="exception_while_downloading">다운로드를 시도 하는중 에러가 발생했습니다.</string>
+
+	<string name="not_update_check_error_ticker">업데이트 확인 실패</string>
+	<string name="not_update_check_error_title">업데이트를 확인 할 수 없습니다.</string>
+	<string name="not_update_check_error_body">나중에 다시 시도하세요.</string>
+
+	<string name="not_update_download_error_ticker">업데이트를 다운로드 하는중 에러가 발생했습니다.</string>
+	<string name="not_update_download_error_title">업데이트를 다운로드 하는중 에러가 발생했습니다.</string>
+	<string name="not_update_download_error_body">나중에 다시 시도하세요.</string>
+
+	<string name="not_update_downloaded_ticker">CyanogenMod 업데이트가 다운로드 되었습니다!</string>
+	<string name="not_update_downloaded_title">CyanogenMod 업데이트가 다운로드 됨</string>
+	<string name="not_update_downloaded_body">{0} 이 업데이트 가능.</string>
+
+	<string name="download_info_filename">파일명: </string>
+	<string name="download_info_mirror">미러: </string>
+	<string name="download_info_downloading">다운중...</string>
+	<string name="download_info_speed">속도: </string>
+	<string name="download_info_remaining_time">남은 시간: </string>
+
+	<string name="confirm_delete_update_folder_dialog_message">업데이트 폴더를 삭제 하시겠습니까r?</string>
+	<string name="confirm_delete_update_folder_dialog_yes">모든 업데이트 삭제</string>
+	<string name="confirm_delete_update_folder_dialog_neutral">선택된 업데이트 삭제</string>
+	<string name="confirm_delete_update_folder_dialog_no">취소</string>
+	<string name="delete_single_update_success_message">업데이트 {0}(이)가 삭제 되었습니다.</string>
+
+	<!-- Preferences Strings -->
+	<string name="p_update_check_freq_title">업데이트 체크 빈도</string>
+	<string name="p_update_check_freq_summary">업데이트체크 빈도 설정하기</string>
+
+	<string name="p_update_file_url_title">Update Server</string>
+	<string name="p_update_file_url_summary">업데이트 파일의 URL 을 설정하세요</string>
+	<string name="p_update_file_url_changed">업데이트 URL 설정 기본설정으로 돌리기</string>
+
+	<string name="p_updates_mod_version_title">시스템 버전</string>
+	<string name="p_updates_mod_version_summary">Set up which mod version do you want to receive updates of</string>
+
+	<string name="p_display_older_mod_versions_title">모든 업데이트 표시</string>
+	<string name="p_display_older_mod_versions_summary">구 버전을 포함한 모든 업데이트를 표시합니다.</string>
+	<string name="p_display_older_mod_versions_changed">사용가능한 업데이트 리스트를 업데이트 하기 위해 다시한번 업데이트를 확인 해 주세요</string>
+
+	<string name="p_display_allow_experimental_versions_title">실험용 빌드</string>
+	<string name="p_display_allow_experimental_versions_summary">실험용 빌드를 표시합니다. (non-stable)</string>
+	<string name="p_display_allow_experimental_versions_changed">사용가능한 업데이트 리스트를 업데이트 하기 위해 다시한번 업데이트를 확인 해 주세요</string>
+
+	<string name="p_do_nandroid_backup_title">Nandroid Backup</string>
+	<string name="p_do_nandroid_backup_summary">업데이트 전에 Nandroid backup을 하시겠습니까?</string>
+
+	<string name="p_notification_ringtone_title">알림음</string>
+	<string name="p_notification_ringtone_summary">CM Updater 알림음을 설정 합니다</string>
+
+	<string name="p_update_file_url_screen_title">업데이트 서버</string>
+	<string name="p_update_file_url_screen_summary">업데이트 서버 변경</string>
+
+	<string name="p_update_file_url_def_title">업데이트 서버 리셋</string>
+	<string name="p_update_file_url_def_summary">업데이트 서버를 기본 설정으로 되돌립니다.</string>
+
+	<string name="p_update_file_url_qr_title">스캔 바코드</string>
+	<string name="p_update_file_url_qr_summary">업데이트 URL을 포함한 QR 코드를 스캔합니다.</string>
+
+	<string name="p_vibrate_title">진동</string>
+	<string name="p_vibrate_summary">알림음과 함께 진동</string>
+</resources>
