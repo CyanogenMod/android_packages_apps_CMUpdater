@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="cmupdater.ui" android:versionName="3.0" android:versionCode="300">
+	android:versionName="3.0" android:versionCode="300" package="cmupdaterapp.ui">
 
 	<uses-sdk android:minSdkVersion="3"/>
 
@@ -43,15 +43,15 @@
 
 		<activity android:name=".ConfigActivity" />
 		<activity android:name=".ApplyUploadActivity" />
-		<receiver android:name="cmupdater.utils.StartupReceiver">
+		<receiver android:name="cmupdaterapp.utils.StartupReceiver">
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED"></action>
 				<category android:name="android.intent.category.HOME"></category>
 			</intent-filter>
 		</receiver>
 
-		<service android:name="cmupdater.service.UpdateCheckerService"></service>
-		<service android:name="cmupdater.service.UpdateDownloaderService"></service>
+		<service android:name="cmupdaterapp.service.UpdateCheckerService"></service>
+		<service android:name="cmupdaterapp.service.UpdateDownloaderService"></service>
 	</application>
 
 	<uses-permission android:name="android.permission.INTERNET" />
