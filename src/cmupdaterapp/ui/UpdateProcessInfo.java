@@ -30,6 +30,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -517,6 +518,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	protected void onStart()
 	{
 		super.onStart();
+		
+		//Delete any older Versions, because of the changed Signing Key
+		while (deleteOldVersionsOfUpdater()==false)
+		{
+			//User MUST uninstall old App
+			Log.i(TAG, "Old App not uninstalled, try again");
+		}
+		
 		try
 		{
 			loadState();
@@ -1327,6 +1336,43 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 		else
 			Log.i(TAG, "Not Downloading. Proceed with the Event");
+	}
+	
+	private boolean deleteOldVersionsOfUpdater()
+	{
+		try
+		{
+			String packageName = "cmupdater.ui";
+			PackageManager p = getPackageManager();
+			//This throws an Exception, when the Package is not found
+			PackageInfo a = p.getPackageInfo(packageName, 0);
+			if (a!=null && a.versionCode < 310)
+			{
+				Log.i(TAG, "Old VersionCode: "+a.versionCode);
+				Intent intent1 = new Intent(Intent.ACTION_DELETE); 
+				Uri data = Uri.fromParts("package", packageName, null); 
+				intent1.setData(data); 
+				startActivity(intent1);
+				Log.i(TAG, "Uninstall Activity started");
+				return true;
+			}
+			else
+			{
+				throw new PackageManager.NameNotFoundException();
+			}
+		}
+		catch (PackageManager.NameNotFoundException e)
+		{
+			//No old Version found, so we return true
+			Log.i(TAG, "No old Version found");
+			return true;
+		}
+		catch (Exception e)
+		{
+			//Other Exception
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
 
