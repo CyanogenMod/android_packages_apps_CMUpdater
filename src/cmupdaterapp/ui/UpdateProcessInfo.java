@@ -22,7 +22,9 @@ import java.text.DateFormat;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -47,6 +49,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RemoteViews;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -67,6 +70,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 {
 	private static final String TAG = "<CM-Updater> UpdateProcessInfo";
 	private static final String STORED_STATE_FILENAME = "UpdateProcessInfo.ser";
+	private static final int NOTIFICATION_DOWNLOAD_STATUS = 5464;
 
 	private static final int MENU_ID_UPDATE_NOW = 1;
 	private static final int MENU_ID_SCAN_QR = 2;
@@ -112,6 +116,12 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	Button mapplyUpdateButton;
 	View mseparator;
 
+	private NotificationManager mNotificationManager;
+	private Notification mNotification;
+	private RemoteViews mNotificationRemoteView;
+	private Intent mNotificationIntent;
+	private PendingIntent mNotificationContentIntent;
+	
 
 	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection()
 	{
@@ -541,6 +551,15 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 		
 		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
+		
+		// Shows Downloadstatus in Notificationbar. Initialize the Variables
+		mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotification = new Notification(R.drawable.icon_notification, "Donwloading", System.currentTimeMillis());
+		mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
+		mNotificationIntent = new Intent(this, UpdateProcessInfo.class);
+		mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
+		mNotification.contentView = mNotificationRemoteView;
+		mNotification.contentIntent = mNotificationContentIntent;
 		
 		Intent UpdateIntent = getIntent();
 		if (UpdateIntent != null)
@@ -1086,6 +1105,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		if(mProgressBar ==null)return;
 
+		mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
+		mSpeed = (mSpeed > 0) ? mSpeed : 1;
+		mRemainingTime = ((total - downloaded)/mSpeed)/1000;
+
+		final String stringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
+		final String stringSpeed = Integer.toString(mSpeed) + " kB/s";
+		final String stringRemainingTime = Long.toString(mRemainingTime) + " seconds";
+		
 		mProgressBar.post(new Runnable()
 		{
 			public void run()
@@ -1101,15 +1128,17 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				}
 				mProgressBar.setProgress(downloaded);
 
-				mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
-				mSpeed = (mSpeed > 0) ? mSpeed : 1;
-				mRemainingTime = ((total - downloaded)/mSpeed)/1000;
-
-				mDownloadedBytesTextView.setText((downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB");
-				mDownloadSpeedTextView.setText(Integer.toString(mSpeed) + " kB/s");
-				mRemainingTimeTextView.setText(Long.toString(mRemainingTime) + " seconds");
+				mDownloadedBytesTextView.setText(stringDownloaded);
+				mDownloadSpeedTextView.setText(stringSpeed);
+				mRemainingTimeTextView.setText(stringRemainingTime);
 			}
 		});
+		
+		mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloading, stringDownloaded);
+		mNotificationRemoteView.setTextViewText(R.id.notificationTextSpeed, stringSpeed);
+		mNotificationRemoteView.setTextViewText(R.id.notificationTextRemainingTime, stringRemainingTime);
+		mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, total, downloaded, false);
+		mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
 	}
 
 	@Override
