@@ -600,7 +600,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 		
 		//Outside the if to prevent a empty spinnercontrol
-		FilenameFilter f = new UpdateFilter();
+		FilenameFilter f = new UpdateFilter(".zip");
 		File[] files = mUpdateFolder.listFiles(f);
 		//If Folder Exists and Updates are present(with md5files)
 		if(mUpdateFolder.exists() && mUpdateFolder.isDirectory() && files != null && files.length>0)
@@ -1406,16 +1406,30 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	}
 }
 
-//Class for Checking existing Updates
+/**
+ * Filename Filter for getting only Files that matches the Given Extensions 
+ * Extensions can be split with |
+ * Example: .zip|.md5sum  
+ *
+ * @param  Extensions  String with supported Extensions. Split multiple Extensions with |
+ * @return      true when file Matches Extension, otherwise false
+ */
 class UpdateFilter implements FilenameFilter
 {
+	private String[] mExtension;
+	
+	public UpdateFilter(String Extensions)
+	{
+		mExtension = Extensions.split("\\|");
+	}
+	
 	public boolean accept(File dir, String name)
 	{
-		boolean status = false;
-		//File MD5 = new File(dir + "/" + name + ".md5sum");
-		//if (MD5.exists() && name.endsWith(".zip"))
-		if (name.endsWith(".zip"))
-			status = true;
-		return status;
+		for (String Ext : mExtension)
+		{
+			if (name.endsWith(Ext))
+				return true;
+		}
+		return false;
 	}
 }
