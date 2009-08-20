@@ -660,6 +660,9 @@ public class UpdateDownloaderService extends Service
 
 	public void cancelDownload()
 	{
+		//Delete the Downloading in Statusbar Notification
+		NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		nm.cancel(UpdateProcessInfo.NOTIFICATION_DOWNLOAD_STATUS);
 		//Thread.currentThread().interrupt();
 		mDownloading = false;
 		if(mHandlerThread != null)

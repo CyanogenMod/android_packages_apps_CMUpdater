@@ -70,7 +70,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 {
 	private static final String TAG = "<CM-Updater> UpdateProcessInfo";
 	private static final String STORED_STATE_FILENAME = "UpdateProcessInfo.ser";
-	private static final int NOTIFICATION_DOWNLOAD_STATUS = 5464;
+	public static final int NOTIFICATION_DOWNLOAD_STATUS = 5464;
 
 	private static final int MENU_ID_UPDATE_NOW = 1;
 	private static final int MENU_ID_SCAN_QR = 2;
