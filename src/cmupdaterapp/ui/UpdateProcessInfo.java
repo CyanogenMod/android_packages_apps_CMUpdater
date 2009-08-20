@@ -116,7 +116,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	Button mapplyUpdateButton;
 	View mseparator;
 
-	private NotificationManager mNotificationManager;
+	private static NotificationManager mNotificationManager;
 	private Notification mNotification;
 	private RemoteViews mNotificationRemoteView;
 	private Intent mNotificationIntent;
@@ -1402,6 +1402,15 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			//Other Exception
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public static void DeleteDownloadStatusNotification()
+	{
+		if(mNotificationManager != null)
+		{
+			//Delete the Downloading in Statusbar Notification
+			mNotificationManager.cancel(UpdateProcessInfo.NOTIFICATION_DOWNLOAD_STATUS);
 		}
 	}
 }
