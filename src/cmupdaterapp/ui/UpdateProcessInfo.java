@@ -554,7 +554,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		
 		// Shows Downloadstatus in Notificationbar. Initialize the Variables
 		mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		mNotification = new Notification(R.drawable.icon_notification, "Donwloading", System.currentTimeMillis());
+		mNotification = new Notification(R.drawable.icon_notification, getResources().getString(R.string.notification_tickertext), System.currentTimeMillis());
+		mNotification.flags = Notification.FLAG_NO_CLEAR;
 		mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
 		mNotificationIntent = new Intent(this, UpdateProcessInfo.class);
 		mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
@@ -806,27 +807,27 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			case MENU_ID_UPDATE_NOW:
 				//If downloading, cancel it so the download wont proceed in the background
-				cancelDownloading();
+				//cancelDownloading();
 				checkForUpdates();
 				return true;
 			case MENU_ID_SCAN_QR:
 				//If downloading, cancel it so the download wont proceed in the background
-				cancelDownloading();
+				//cancelDownloading();
 				scanQRURL();
 				return true;
 			case MENU_ID_CONFIG:
 				//If downloading, cancel it so the download wont proceed in the background
-				cancelDownloading();
+				//cancelDownloading();
 				showConfigActivity();
 				return true;
 			case MENU_ID_ABOUT:
 				//If downloading, cancel it so the download wont proceed in the background
-				cancelDownloading();
+				//cancelDownloading();
 				showAboutDialog();
 				return true;
 			case MENU_ID_CHANGELOG:
 				//If downloading, cancel it so the download wont proceed in the background
-				cancelDownloading();
+				//cancelDownloading();
 				//showChangelog();
 				Preferences prefs = Preferences.getPreferences(this);
 				Intent i = new Intent(Intent.ACTION_VIEW);
@@ -1336,19 +1337,19 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		switch (keyCode)
 		{ 
 	        case KeyEvent.KEYCODE_BACK: 
-	             cancelDownloading(); 
-	             break; 
+	        	//cancelDownloading(); 
+	        	break; 
 	        case KeyEvent.KEYCODE_HOME: 
-	        	cancelDownloading();
+	        	//cancelDownloading();
 	        	break; 
 	        case KeyEvent.KEYCODE_DPAD_CENTER : 
-	        	cancelDownloading();
+	        	//cancelDownloading();
 	        	break; 
 	        case KeyEvent.KEYCODE_ENDCALL : 
-	        	cancelDownloading();
+	        	//cancelDownloading();
 	        	break; 
 	        case KeyEvent.ACTION_DOWN : 
-	        	cancelDownloading();
+	        	//cancelDownloading();
 	        	break; 
 	        default: 
 	        	break; 
