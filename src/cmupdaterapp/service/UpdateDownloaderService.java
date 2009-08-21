@@ -135,6 +135,9 @@ public class UpdateDownloaderService extends Service
 
 	private int mSpeed;
 	private long mRemainingTime;
+	String mstringDownloaded;
+	String mstringSpeed;
+	String mstringRemainingTime;
 	
 	public class LocalBinder extends Binder
 	{
@@ -619,17 +622,17 @@ public class UpdateDownloaderService extends Service
 		mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
 		mSpeed = (mSpeed > 0) ? mSpeed : 1;
 		mRemainingTime = ((total - downloaded)/mSpeed)/1000;
-		final String stringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
-		final String stringSpeed = Integer.toString(mSpeed) + " kB/s";
-		final String stringRemainingTime = Long.toString(mRemainingTime) + " seconds";
+		mstringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
+		mstringSpeed = Integer.toString(mSpeed) + " kB/s";
+		mstringRemainingTime = Long.toString(mRemainingTime) + " seconds";
 		if(!mMirrorNameUpdated)
 		{
 			UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
 			mMirrorNameUpdated = true;
 		}
-		mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloading, stringDownloaded);
-		mNotificationRemoteView.setTextViewText(R.id.notificationTextSpeed, stringSpeed);
-		mNotificationRemoteView.setTextViewText(R.id.notificationTextRemainingTime, stringRemainingTime);
+		mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloading, mstringDownloaded);
+		mNotificationRemoteView.setTextViewText(R.id.notificationTextSpeed, mstringSpeed);
+		mNotificationRemoteView.setTextViewText(R.id.notificationTextRemainingTime, mstringRemainingTime);
 		mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, total, downloaded, false);
 		mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
 		UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, total, StartTime);
