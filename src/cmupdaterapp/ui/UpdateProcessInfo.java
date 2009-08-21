@@ -22,9 +22,7 @@ import java.text.DateFormat;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -44,16 +42,15 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+//import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RemoteViews;
 import android.widget.ScrollView;
 import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+//import android.widget.TableLayout;
+//import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import cmupdaterapp.service.PlainTextUpdateServer;
@@ -70,7 +67,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 {
 	private static final String TAG = "<CM-Updater> UpdateProcessInfo";
 	private static final String STORED_STATE_FILENAME = "UpdateProcessInfo.ser";
-	public static final int NOTIFICATION_DOWNLOAD_STATUS = 5464;
 
 	private static final int MENU_ID_UPDATE_NOW = 1;
 	private static final int MENU_ID_SCAN_QR = 2;
@@ -116,11 +112,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	Button mapplyUpdateButton;
 	View mseparator;
 
-	private static NotificationManager mNotificationManager;
-	private Notification mNotification;
-	private RemoteViews mNotificationRemoteView;
-	private Intent mNotificationIntent;
-	private PendingIntent mNotificationContentIntent;
+
 	
 
 	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection()
@@ -551,16 +543,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 		
 		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
-		
-		// Shows Downloadstatus in Notificationbar. Initialize the Variables
-		mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		mNotification = new Notification(R.drawable.icon_notification, getResources().getString(R.string.notification_tickertext), System.currentTimeMillis());
-		mNotification.flags = Notification.FLAG_NO_CLEAR;
-		mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
-		mNotificationIntent = new Intent(this, UpdateProcessInfo.class);
-		mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
-		mNotification.contentView = mNotificationRemoteView;
-		mNotification.contentIntent = mNotificationContentIntent;
 		
 		Intent UpdateIntent = getIntent();
 		if (UpdateIntent != null)
@@ -1050,56 +1032,56 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			switchToNoUpdatesAvailable();
 	}
 
-	//Will be included in a future Release. Layout still messed up. Till implementation Changelog redirects to Google Code Page
-	private void showChangelog()
-	{
-		Dialog dialog = new Dialog(this);
-		dialog.setTitle("Changelog");
-		dialog.setContentView(R.layout.changelog);
-		List<Version> c = Changelog.getChangelog(this);
-		TableLayout tl = (TableLayout)dialog.findViewById(R.id.myTableLayout);
-		//Foreach Version
-		for (Version v:c)
-		{
-			TableRow tr = new TableRow(this);
+//	//Will be included in a future Release. Layout still messed up. Till implementation Changelog redirects to Google Code Page
+//	private void showChangelog()
+//	{
+//		Dialog dialog = new Dialog(this);
+//		dialog.setTitle("Changelog");
+//		dialog.setContentView(R.layout.changelog);
+//		List<Version> c = Changelog.getChangelog(this);
+//		TableLayout tl = (TableLayout)dialog.findViewById(R.id.myTableLayout);
+//		//Foreach Version
+//		for (Version v:c)
+//		{
+//			TableRow tr = new TableRow(this);
+////			tr.setLayoutParams(new LayoutParams(
+////					LayoutParams.FILL_PARENT,
+////					LayoutParams.WRAP_CONTENT));
 //			tr.setLayoutParams(new LayoutParams(
+//					LayoutParams.WRAP_CONTENT,
+//					LayoutParams.FILL_PARENT));
+//			TextView Version = new TextView(this);
+//			Version.setText("Version: "+v.Version);
+//			tr.addView(Version);
+//			tl.addView(tr,new TableLayout.LayoutParams(
 //					LayoutParams.FILL_PARENT,
 //					LayoutParams.WRAP_CONTENT));
-			tr.setLayoutParams(new LayoutParams(
-					LayoutParams.WRAP_CONTENT,
-					LayoutParams.FILL_PARENT));
-			TextView Version = new TextView(this);
-			Version.setText("Version: "+v.Version);
-			tr.addView(Version);
-			tl.addView(tr,new TableLayout.LayoutParams(
-					LayoutParams.FILL_PARENT,
-					LayoutParams.WRAP_CONTENT));
-			for(String Change:v.ChangeLogText)
-			{
-				TableRow tr2 = new TableRow(this);
-				tr2.setLayoutParams(new LayoutParams(
-						LayoutParams.FILL_PARENT,
-						LayoutParams.WRAP_CONTENT));
-				TextView tr2t = new TextView(this);
-				tr2t.setText("*");
-				tr2.addView(tr2t);
-				tl.addView(tr2,new TableLayout.LayoutParams(
-						LayoutParams.FILL_PARENT,
-						LayoutParams.WRAP_CONTENT));
-				TableRow Changetr = new TableRow(this);
-				Changetr.setLayoutParams(new LayoutParams(
-						LayoutParams.FILL_PARENT,
-						LayoutParams.WRAP_CONTENT));
-				TextView ChangeView = new TextView(this);
-				ChangeView.setText(Change);
-				Changetr.addView(ChangeView);
-				tl.addView(Changetr,new TableLayout.LayoutParams(
-						LayoutParams.FILL_PARENT,
-						LayoutParams.WRAP_CONTENT));
-			}
-		}
-		dialog.show();
-	}
+//			for(String Change:v.ChangeLogText)
+//			{
+//				TableRow tr2 = new TableRow(this);
+//				tr2.setLayoutParams(new LayoutParams(
+//						LayoutParams.FILL_PARENT,
+//						LayoutParams.WRAP_CONTENT));
+//				TextView tr2t = new TextView(this);
+//				tr2t.setText("*");
+//				tr2.addView(tr2t);
+//				tl.addView(tr2,new TableLayout.LayoutParams(
+//						LayoutParams.FILL_PARENT,
+//						LayoutParams.WRAP_CONTENT));
+//				TableRow Changetr = new TableRow(this);
+//				Changetr.setLayoutParams(new LayoutParams(
+//						LayoutParams.FILL_PARENT,
+//						LayoutParams.WRAP_CONTENT));
+//				TextView ChangeView = new TextView(this);
+//				ChangeView.setText(Change);
+//				Changetr.addView(ChangeView);
+//				tl.addView(Changetr,new TableLayout.LayoutParams(
+//						LayoutParams.FILL_PARENT,
+//						LayoutParams.WRAP_CONTENT));
+//			}
+//		}
+//		dialog.show();
+//	}
 	
 	@Override
 	public void updateDownloadProgress(final int downloaded, final int total, final long StartTime)
@@ -1134,12 +1116,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				mRemainingTimeTextView.setText(stringRemainingTime);
 			}
 		});
-		
-		mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloading, stringDownloaded);
-		mNotificationRemoteView.setTextViewText(R.id.notificationTextSpeed, stringSpeed);
-		mNotificationRemoteView.setTextViewText(R.id.notificationTextRemainingTime, stringRemainingTime);
-		mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, total, downloaded, false);
-		mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
 	}
 
 	@Override
@@ -1357,16 +1333,16 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
         return super.onKeyDown(keyCode, event); 
    }
 	
-	private void cancelDownloading()
-	{
-		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
-		{
-			mUpdateDownloaderService.cancelDownload();
-			Log.i(TAG, "Download Canceled due to Event");
-		}
-		else
-			Log.i(TAG, "Not Downloading. Proceed with the Event");
-	}
+//	private void cancelDownloading()
+//	{
+//		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
+//		{
+//			mUpdateDownloaderService.cancelDownload();
+//			Log.i(TAG, "Download Canceled due to Event");
+//		}
+//		else
+//			Log.i(TAG, "Not Downloading. Proceed with the Event");
+//	}
 	
 	private boolean deleteOldVersionsOfUpdater()
 	{
@@ -1402,15 +1378,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			//Other Exception
 			e.printStackTrace();
 			return false;
-		}
-	}
-	
-	public static void DeleteDownloadStatusNotification()
-	{
-		if(mNotificationManager != null)
-		{
-			//Delete the Downloading in Statusbar Notification
-			mNotificationManager.cancel(UpdateProcessInfo.NOTIFICATION_DOWNLOAD_STATUS);
 		}
 	}
 }

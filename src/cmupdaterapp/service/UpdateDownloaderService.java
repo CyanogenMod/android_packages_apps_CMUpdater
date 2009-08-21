@@ -42,6 +42,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.widget.RemoteViews;
 import android.widget.Toast;
 import cmupdaterapp.ui.ApplyUploadActivity;
 import cmupdaterapp.ui.IUpdateProcessInfo;
@@ -61,6 +62,14 @@ public class UpdateDownloaderService extends Service
 	public static final String KEY_UPDATE_INFO = "cmupdaterapp.updateInfo";
 
 	public static final int REQUEST_DOWNLOAD_UPDATE = 1;
+
+	public static final int NOTIFICATION_DOWNLOAD_STATUS = 5464;
+	
+	private static NotificationManager mNotificationManager;
+	private Notification mNotification;
+	private RemoteViews mNotificationRemoteView;
+	private Intent mNotificationIntent;
+	private PendingIntent mNotificationContentIntent;
 
 	private final BroadcastReceiver mConnectivityChangesReceiver = new BroadcastReceiver()
 	{
@@ -124,6 +133,9 @@ public class UpdateDownloaderService extends Service
 	private String mUpdateFolder;
 	private String mDownlaodedMD5;
 
+	private int mSpeed;
+	private long mRemainingTime;
+	
 	public class LocalBinder extends Binder
 	{
 		public UpdateDownloaderService getService()
@@ -216,6 +228,16 @@ public class UpdateDownloaderService extends Service
 		}
 		Log.i(TAG, "Starting #" + startId + ": " + intent.getExtras());
 
+		// Shows Downloadstatus in Notificationbar. Initialize the Variables
+		mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotification = new Notification(R.drawable.icon_notification, getResources().getString(R.string.notification_tickertext), System.currentTimeMillis());
+		mNotification.flags = Notification.FLAG_NO_CLEAR;
+		mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
+		mNotificationIntent = new Intent(this, UpdateProcessInfo.class);
+		mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
+		mNotification.contentView = mNotificationRemoteView;
+		mNotification.contentIntent = mNotificationContentIntent;
+		
 		Message msg = mServiceHandler.obtainMessage();
 		msg.arg1 = startId;
 		msg.obj = intent.getExtras();
@@ -594,11 +616,22 @@ public class UpdateDownloaderService extends Service
 	{
 		if(UPDATE_PROCESS_INFO == null) return;
 
+		mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
+		mSpeed = (mSpeed > 0) ? mSpeed : 1;
+		mRemainingTime = ((total - downloaded)/mSpeed)/1000;
+		final String stringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
+		final String stringSpeed = Integer.toString(mSpeed) + " kB/s";
+		final String stringRemainingTime = Long.toString(mRemainingTime) + " seconds";
 		if(!mMirrorNameUpdated)
 		{
 			UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
 			mMirrorNameUpdated = true;
 		}
+		mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloading, stringDownloaded);
+		mNotificationRemoteView.setTextViewText(R.id.notificationTextSpeed, stringSpeed);
+		mNotificationRemoteView.setTextViewText(R.id.notificationTextRemainingTime, stringRemainingTime);
+		mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, total, downloaded, false);
+		mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
 		UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, total, StartTime);
 	}
 
@@ -660,7 +693,7 @@ public class UpdateDownloaderService extends Service
 
 	public void cancelDownload()
 	{
-		UpdateProcessInfo.DeleteDownloadStatusNotification();
+		DeleteDownloadStatusNotification();
 		//Thread.currentThread().interrupt();
 		mDownloading = false;
 		if(mHandlerThread != null)
@@ -668,6 +701,15 @@ public class UpdateDownloaderService extends Service
 		    HandlerThread tempThread = mHandlerThread;
 		    mHandlerThread = null;
 		    tempThread.interrupt();
+		}
+	}
+	
+	public void DeleteDownloadStatusNotification()
+	{
+		if(mNotificationManager != null)
+		{
+			//Delete the Downloading in Statusbar Notification
+			mNotificationManager.cancel(NOTIFICATION_DOWNLOAD_STATUS);
 		}
 	}
 }
