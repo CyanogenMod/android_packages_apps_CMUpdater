@@ -70,6 +70,8 @@ public class UpdateDownloaderService extends Service
 	private RemoteViews mNotificationRemoteView;
 	private Intent mNotificationIntent;
 	private PendingIntent mNotificationContentIntent;
+	
+	private boolean prepareForDownloadCancel;
 
 	private final BroadcastReceiver mConnectivityChangesReceiver = new BroadcastReceiver()
 	{
@@ -194,6 +196,7 @@ public class UpdateDownloaderService extends Service
 	@Override
 	public void onCreate()
 	{
+		Log.d(TAG, "Download Service Created");
 		mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 		//mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		mConnectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
@@ -217,6 +220,8 @@ public class UpdateDownloaderService extends Service
 	@Override
 	public void onStart(Intent intent, int startId)
 	{
+		prepareForDownloadCancel = false;
+		Log.d(TAG, "Download Service started");
 		synchronized (mConnectivityManager)
 		{
 			if(mWaitingForDataConnection)
@@ -269,6 +274,7 @@ public class UpdateDownloaderService extends Service
 	@Override
 	public void onDestroy()
 	{
+		Log.d(TAG, "Download Service Destroyed");
 		mServiceLooper.quit();
 		//INSTANCE = null;
 		mDownloading = false;
@@ -278,6 +284,7 @@ public class UpdateDownloaderService extends Service
 	@Override
 	public IBinder onBind(Intent intent)
 	{
+		Log.d(TAG, "Download Service onBind was called");
 		return mBinder;
 	}
 
@@ -615,27 +622,33 @@ public class UpdateDownloaderService extends Service
 
 	private void onProgressUpdate(int downloaded, int total, long StartTime)
 	{
-		mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
-		mSpeed = (mSpeed > 0) ? mSpeed : 1;
-		mRemainingTime = ((total - downloaded)/mSpeed)/1000;
-		mstringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
-		mstringSpeed = Integer.toString(mSpeed) + " kB/s";
-		mstringRemainingTime = Long.toString(mRemainingTime) + " seconds";
-		
-		mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloading, mstringDownloaded);
-		mNotificationRemoteView.setTextViewText(R.id.notificationTextSpeed, mstringSpeed);
-		mNotificationRemoteView.setTextViewText(R.id.notificationTextRemainingTime, mstringRemainingTime);
-		mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, total, downloaded, false);
-		mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
-		
-		if(UPDATE_PROCESS_INFO == null) return;
-		
-		if(!mMirrorNameUpdated)
+		//Only update the Notification and DownloadLayout, when no downloadcancel is in progress, so the notification will not pop up again
+		if (!prepareForDownloadCancel)
 		{
-			UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
-			mMirrorNameUpdated = true;
+			mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
+			mSpeed = (mSpeed > 0) ? mSpeed : 1;
+			mRemainingTime = ((total - downloaded)/mSpeed)/1000;
+			mstringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
+			mstringSpeed = Integer.toString(mSpeed) + " kB/s";
+			mstringRemainingTime = Long.toString(mRemainingTime) + " seconds";
+			
+			mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloading, mstringDownloaded);
+			mNotificationRemoteView.setTextViewText(R.id.notificationTextSpeed, mstringSpeed);
+			mNotificationRemoteView.setTextViewText(R.id.notificationTextRemainingTime, mstringRemainingTime);
+			mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, total, downloaded, false);
+			mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
+			
+			if(UPDATE_PROCESS_INFO == null) return;
+			
+			if(!mMirrorNameUpdated)
+			{
+				UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
+				mMirrorNameUpdated = true;
+			}
+			UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, total, StartTime);
 		}
-		UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, total, StartTime);
+		else
+			Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
 	}
 
 	private void notifyUser(UpdateInfo ui, File downloadedUpdate)
@@ -683,6 +696,8 @@ public class UpdateDownloaderService extends Service
 
 	public void cancelDownload()
 	{
+		prepareForDownloadCancel = true;
+		Log.d(TAG, "Download Service CancelDownload was called");
 		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
 		mDownloading = false;
 		if(mHandlerThread != null)
@@ -699,6 +714,10 @@ public class UpdateDownloaderService extends Service
 		{
 			//Delete the Downloading in Statusbar Notification
 			mNotificationManager.cancel(id);
+		}
+		else
+		{
+			Log.d(TAG, "Download Service mNotificationManger is NULL. Notification not deleted");
 		}
 	}
 }

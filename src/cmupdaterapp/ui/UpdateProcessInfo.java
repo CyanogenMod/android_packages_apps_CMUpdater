@@ -463,6 +463,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				public void onClick(DialogInterface dialog, int which)
 				{
 					mUpdateDownloaderService.cancelDownload();
+					stopService(mUpdateDownloaderServiceIntent);
+					unbindService(mUpdateDownloaderServiceConnection);
+					//UpdateDownloaderService.setUpdateProcessInfo(null);
 					switchToUpdateChooserLayout(null);
 				}
 			})
