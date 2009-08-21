@@ -203,11 +203,7 @@ public class UpdateDownloaderService extends Service
 		mHandlerThread.start();
 		mServiceLooper = mHandlerThread.getLooper();
 		mServiceHandler = new ServiceHandler(mServiceLooper);
-		//Resources res = getResources();
 
-		//String destFileName = res.getString(R.string.conf_update_file_name);
-		//mDestinationFile = new File(Environment.getExternalStorageDirectory(), destFileName);
-		//mDestinationMD5File = new File(Environment.getExternalStorageDirectory(), destFileName + ".md5sum");
 		mHttpClient = new DefaultHttpClient();
 		mMD5HttpClient = new DefaultHttpClient();
 		mRandom = new Random();
@@ -678,8 +674,6 @@ public class UpdateDownloaderService extends Service
 		if(UPDATE_PROCESS_INFO != null)
 		{
 			//app is active, switching layout
-			
-			//TODO check!
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);
 		}
@@ -688,7 +682,6 @@ public class UpdateDownloaderService extends Service
 	public void cancelDownload()
 	{
 		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
-		//Thread.currentThread().interrupt();
 		mDownloading = false;
 		if(mHandlerThread != null)
 		{
