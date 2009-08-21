@@ -235,6 +235,7 @@ public class UpdateDownloaderService extends Service
 		mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		mNotification = new Notification(R.drawable.icon_notification, getResources().getString(R.string.notification_tickertext), System.currentTimeMillis());
 		mNotification.flags = Notification.FLAG_NO_CLEAR;
+		mNotification.flags = Notification.FLAG_ONGOING_EVENT;
 		mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
 		mNotificationIntent = new Intent(this, UpdateProcessInfo.class);
 		mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
