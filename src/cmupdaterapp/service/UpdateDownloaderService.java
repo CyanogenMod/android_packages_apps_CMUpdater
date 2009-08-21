@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Random;
 
@@ -63,7 +62,8 @@ public class UpdateDownloaderService extends Service
 
 	public static final int REQUEST_DOWNLOAD_UPDATE = 1;
 
-	public static final int NOTIFICATION_DOWNLOAD_STATUS = 5464;
+	public static final int NOTIFICATION_DOWNLOAD_STATUS = 100;
+	public static final int NOTIFICATION_DOWNLOAD_FINISHED = 200;
 	
 	private static NotificationManager mNotificationManager;
 	private Notification mNotification;
@@ -276,6 +276,7 @@ public class UpdateDownloaderService extends Service
 		mServiceLooper.quit();
 		//INSTANCE = null;
 		mDownloading = false;
+		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
 	}
 
 	@Override
@@ -650,54 +651,43 @@ public class UpdateDownloaderService extends Service
 			return;
 		}
 
-		if(UPDATE_PROCESS_INFO == null)
+		Intent i = new Intent(this, ApplyUploadActivity.class);
+		i.putExtra(ApplyUploadActivity.KEY_UPDATE_INFO, ui);
+		
+		//Set the Notification to finished
+		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
+		mNotification = new Notification(R.drawable.icon, getResources().getString(R.string.notification_finished), System.currentTimeMillis());
+		mNotification.flags = Notification.FLAG_AUTO_CANCEL;
+		mNotificationContentIntent = PendingIntent.getActivity(getApplicationContext(), 0, i, 0);
+		mNotification.setLatestEventInfo(getApplicationContext(), getResources().getString(R.string.app_name), getResources().getString(R.string.notification_finished), mNotificationContentIntent);
+		Uri notificationRingtone = Preferences.getPreferences(getApplicationContext()).getConfiguredRingtone();
+		if(Preferences.getPreferences(getApplicationContext()).getVibrate())
+			mNotification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
+		else
+			mNotification.defaults = Notification.DEFAULT_LIGHTS;
+		if(notificationRingtone == null)
 		{
-			//app is closed, launching a notification
-			Resources res = getResources();
-			Intent i = new Intent(this, ApplyUploadActivity.class)
-			.putExtra(ApplyUploadActivity.KEY_UPDATE_INFO, ui);
-
-			PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
-					PendingIntent.FLAG_CANCEL_CURRENT);
-
-			Notification notification = new Notification(R.drawable.icon_notification,
-					res.getString(R.string.not_update_downloaded_ticker),
-					System.currentTimeMillis());
-			String notificationBody = MessageFormat.format(res.getString(R.string.not_update_downloaded_body),
-					ui.name);
-			notification.setLatestEventInfo(this, res.getString(R.string.not_update_downloaded_title), notificationBody, contentIntent);
-			Uri notificationRingtone = Preferences.getPreferences(this).getConfiguredRingtone();
-			if(Preferences.getPreferences(this).getVibrate())
-				notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
-			else
-				notification.defaults = Notification.DEFAULT_LIGHTS;
-			if(notificationRingtone == null)
-			{
-				notification.sound = null;
-			}
-			else
-			{
-				notification.sound = notificationRingtone;
-			}
-
-			NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-			nm.notify(R.string.not_update_downloaded_title, notification);
+			mNotification.sound = null;
 		}
 		else
 		{
+			mNotification.sound = notificationRingtone;
+		}
+		mNotificationManager.notify(NOTIFICATION_DOWNLOAD_FINISHED, mNotification);
+		
+		if(UPDATE_PROCESS_INFO != null)
+		{
 			//app is active, switching layout
-			Intent i = new Intent(this, ApplyUploadActivity.class);
-			i.putExtra(ApplyUploadActivity.KEY_UPDATE_INFO, ui);
+			
 			//TODO check!
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);
 		}
-
 	}
 
 	public void cancelDownload()
 	{
-		DeleteDownloadStatusNotification();
+		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
 		//Thread.currentThread().interrupt();
 		mDownloading = false;
 		if(mHandlerThread != null)
@@ -708,12 +698,12 @@ public class UpdateDownloaderService extends Service
 		}
 	}
 	
-	public void DeleteDownloadStatusNotification()
+	public void DeleteDownloadStatusNotification(int id)
 	{
 		if(mNotificationManager != null)
 		{
 			//Delete the Downloading in Statusbar Notification
-			mNotificationManager.cancel(NOTIFICATION_DOWNLOAD_STATUS);
+			mNotificationManager.cancel(id);
 		}
 	}
 }

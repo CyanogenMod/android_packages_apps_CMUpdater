@@ -81,6 +81,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     <string name="no_md5_found_negative">Cancel</string>
     
     <string name="notification_tickertext">Downloading Update</string>
+    <string name="notification_finished">Download finished</string>
     
     <!-- .service.* Strings -->
     <string name="no_updates_found">No CM updates found</string>
