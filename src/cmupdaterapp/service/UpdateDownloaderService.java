@@ -615,24 +615,26 @@ public class UpdateDownloaderService extends Service
 
 	private void onProgressUpdate(int downloaded, int total, long StartTime)
 	{
-		if(UPDATE_PROCESS_INFO == null) return;
-
 		mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
 		mSpeed = (mSpeed > 0) ? mSpeed : 1;
 		mRemainingTime = ((total - downloaded)/mSpeed)/1000;
 		mstringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
 		mstringSpeed = Integer.toString(mSpeed) + " kB/s";
 		mstringRemainingTime = Long.toString(mRemainingTime) + " seconds";
-		if(!mMirrorNameUpdated)
-		{
-			UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
-			mMirrorNameUpdated = true;
-		}
+		
 		mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloading, mstringDownloaded);
 		mNotificationRemoteView.setTextViewText(R.id.notificationTextSpeed, mstringSpeed);
 		mNotificationRemoteView.setTextViewText(R.id.notificationTextRemainingTime, mstringRemainingTime);
 		mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, total, downloaded, false);
 		mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
+		
+		if(UPDATE_PROCESS_INFO == null) return;
+		
+		if(!mMirrorNameUpdated)
+		{
+			UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
+			mMirrorNameUpdated = true;
+		}
 		UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, total, StartTime);
 	}
 
