@@ -652,9 +652,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				e.printStackTrace();
 			}
 			Log.d(TAG, "Cancel the download");
-			mUpdateDownloaderService.cancelDownload();
-			unbindService(mUpdateDownloaderServiceConnection);
-			UpdateDownloaderService.setUpdateProcessInfo(null);
+			
+			//Uncommented to make the Service do downloading in the background
+			//mUpdateDownloaderService.cancelDownload();
+			//unbindService(mUpdateDownloaderServiceConnection);
+			//UpdateDownloaderService.setUpdateProcessInfo(null);
 		}
 		else
 			Log.e(TAG, "mUpdateDownloaderService is NULL");

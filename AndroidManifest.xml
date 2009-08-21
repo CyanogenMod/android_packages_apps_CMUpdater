@@ -32,8 +32,8 @@
 			</intent-filter>
 		</receiver>
 
-		<service android:name="cmupdaterapp.service.UpdateCheckerService"></service>
-		<service android:name="cmupdaterapp.service.UpdateDownloaderService"></service>
+		<service android:name="cmupdaterapp.service.UpdateCheckerService" />
+		<service android:name="cmupdaterapp.service.UpdateDownloaderService" />
 	</application>
 
 	<uses-permission android:name="android.permission.INTERNET" />
