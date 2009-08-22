@@ -471,7 +471,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					}
 					catch (Exception ex)
 					{
-						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceConnection unbind failed");
+						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceConnection unbind failed", ex);
 					}
 					try
 					{
@@ -479,7 +479,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					}
 					catch (Exception ex)
 					{
-						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceIntent could not be Stopped");
+						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceIntent could not be Stopped", ex);
 					}
 					//UpdateDownloaderService.setUpdateProcessInfo(null);
 					switchToUpdateChooserLayout(null);
