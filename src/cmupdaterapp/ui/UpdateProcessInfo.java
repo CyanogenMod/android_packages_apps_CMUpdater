@@ -668,10 +668,25 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			}
 			Log.d(TAG, "App closed");
 			
-			//Uncommented to make the Service do downloading in the background
-			//mUpdateDownloaderService.cancelDownload();
-			//unbindService(mUpdateDownloaderServiceConnection);
-			//UpdateDownloaderService.setUpdateProcessInfo(null);
+			if(!mUpdateDownloaderService.isDownloading())
+			{
+				try
+				{
+					unbindService(mUpdateDownloaderServiceConnection);
+				}
+				catch (Exception ex)
+				{
+					Log.e(TAG, "Exit App: mUpdateDownloaderServiceConnection unbind failed", ex);
+				}
+				try
+				{
+					stopService(mUpdateDownloaderServiceIntent);
+				}
+				catch (Exception ex)
+				{
+					Log.e(TAG, "Exit App: mUpdateDownloaderServiceIntent could not be Stopped", ex);
+			}
+			}
 		}
 		else
 			Log.e(TAG, "mUpdateDownloaderService is NULL");

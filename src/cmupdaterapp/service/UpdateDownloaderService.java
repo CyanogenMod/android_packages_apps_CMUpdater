@@ -141,6 +141,8 @@ public class UpdateDownloaderService extends Service
 	String mstringSpeed;
 	String mstringRemainingTime;
 	
+	private Message mMsg;
+	
 	public class LocalBinder extends Binder
 	{
 		public UpdateDownloaderService getService()
@@ -160,6 +162,8 @@ public class UpdateDownloaderService extends Service
 		@Override
 		public void handleMessage(Message msg)
 		{
+			mMsg = msg;
+			
 			Bundle arguments = (Bundle)msg.obj;
 
 			int request = arguments.getInt(KEY_REQUEST); 
@@ -307,6 +311,7 @@ public class UpdateDownloaderService extends Service
 
 	private File checkForConnectionAndUpdate(UpdateInfo updateToDownload)
 	{
+		Log.d(TAG, "Called CheckForConnectionAndUpdate");
 		File downloadedFile;
 
 		//wait for a data connection
@@ -398,7 +403,7 @@ public class UpdateDownloaderService extends Service
 
 	private File downloadFile(UpdateInfo updateInfo)
 	{
-
+		Log.d(TAG, "Called downloadFile");
 		HttpClient httpClient = mHttpClient;
 		HttpClient MD5httpClient = mMD5HttpClient;
 
@@ -546,56 +551,62 @@ public class UpdateDownloaderService extends Service
 
 	private void dumpFile(HttpEntity entity, File destinationFile) throws IOException
 	{
-		long contentLength = entity.getContentLength();
-		if(contentLength <= 0)
+		Log.d(TAG, "DumpFile Called");
+		if(!prepareForDownloadCancel)
 		{
-			Log.w(TAG, "unable to determine the update file size, Set ContentLength to 1024");
-			contentLength = 1024;
-		}
-		else Log.i(TAG, "Update size: " + (contentLength/1024) + "KB" );
-
-		long StartTime = System.currentTimeMillis(); 
-
-		byte[] buff = new byte[64 * 1024];
-		int read = 0;
-		int totalDownloaded = 0;
-		FileOutputStream fos = new FileOutputStream(destinationFile);
-		InputStream is = entity.getContent();
-		try
-		{
-			while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0)
+			long contentLength = entity.getContentLength();
+			if(contentLength <= 0)
 			{
-				fos.write(buff, 0, read);
-				totalDownloaded += read;
-				onProgressUpdate(totalDownloaded, (int)contentLength, StartTime);
+				Log.w(TAG, "unable to determine the update file size, Set ContentLength to 1024");
+				contentLength = 1024;
 			}
-
-			if(read > 0)
-			{
-				throw new IOException("Download Canceled");
-			}
-
-			fos.flush();
-			fos.close();
-		}
-		catch(Exception e)
-		{
-			fos.close();
+			else Log.i(TAG, "Update size: " + (contentLength/1024) + "KB" );
+	
+			long StartTime = System.currentTimeMillis(); 
+	
+			byte[] buff = new byte[64 * 1024];
+			int read = 0;
+			int totalDownloaded = 0;
+			FileOutputStream fos = new FileOutputStream(destinationFile);
+			InputStream is = entity.getContent();
 			try
 			{
-				destinationFile.delete();
+				while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0)
+				{
+					fos.write(buff, 0, read);
+					totalDownloaded += read;
+					onProgressUpdate(totalDownloaded, (int)contentLength, StartTime);
+				}
+	
+				if(read > 0)
+				{
+					throw new IOException("Download Canceled");
+				}
+	
+				fos.flush();
+				fos.close();
 			}
-			catch (Exception ex)
+			catch(Exception e)
 			{
-				Log.e(TAG, "Unable to delete downlaoded File. Continue anyway.", ex);
+				fos.close();
+				try
+				{
+					destinationFile.delete();
+				}
+				catch (Exception ex)
+				{
+					Log.e(TAG, "Unable to delete downlaoded File. Continue anyway.", ex);
+				}
+				Log.e(TAG, "Exception in DumpFile", e);
 			}
-			Log.e(TAG, "Exception in DumpFile", e);
+			finally
+			{
+				//is.close();
+				buff = null;
+			}
 		}
-		finally
-		{
-			//is.close();
-			buff = null;
-		}
+		else
+			Log.d(TAG, "Download Cancel in Progress. Don't start Downloading");
 	}
 
 	private void writeMD5(File md5File, String md5) throws IOException
@@ -650,6 +661,7 @@ public class UpdateDownloaderService extends Service
 
 	private void notifyUser(UpdateInfo ui, File downloadedUpdate)
 	{
+		Log.d(TAG, "Called Notify User");
 		if(downloadedUpdate == null)
 		{
 			Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_LONG).show();
@@ -697,6 +709,8 @@ public class UpdateDownloaderService extends Service
 		Log.d(TAG, "Download Service CancelDownload was called");
 		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
 		mDownloading = false;
+		Log.i("ServiceStartArguments", "Done with #" + mMsg.arg1);
+		stopSelf(mMsg.arg1);
 		if(mHandlerThread != null)
 		{
 		    HandlerThread tempThread = mHandlerThread;
@@ -710,8 +724,8 @@ public class UpdateDownloaderService extends Service
 		if(mNotificationManager != null)
 		{
 			//Delete the Downloading in Statusbar Notification
-			Log.d(TAG, "Download Notification removed");
 			mNotificationManager.cancel(id);
+			Log.d(TAG, "Download Notification removed");
 		}
 		else
 		{
