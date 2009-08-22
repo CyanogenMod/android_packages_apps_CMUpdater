@@ -186,7 +186,7 @@ public class UpdateDownloaderService extends Service
 				Log.e(TAG, "Unknown request ID:" + request);
 			}
 
-			Log.i("ServiceStartArguments", "Done with #" + msg.arg1);
+			Log.i(TAG, "Done with #" + msg.arg1);
 			stopSelf(msg.arg1);
 		}
 	}
@@ -279,8 +279,15 @@ public class UpdateDownloaderService extends Service
 	public void onDestroy()
 	{
 		Log.d(TAG, "Download Service Destroyed");
-		mServiceLooper.quit();
-		//INSTANCE = null;
+		mHandlerThread.getLooper().quit();
+		try
+		{
+			mHandlerThread.join();
+		}
+		catch (InterruptedException e)
+		{
+			Log.e(TAG, "Exception on Thread.join", e);
+		}
 		mDownloading = false;
 		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
 	}
@@ -711,14 +718,8 @@ public class UpdateDownloaderService extends Service
 		Log.d(TAG, "Download Service CancelDownload was called");
 		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
 		mDownloading = false;
-		Log.i("ServiceStartArguments", "Done with #" + mMsg.arg1);
+		Log.i(TAG, "Done with #" + mMsg.arg1);
 		stopSelf(mMsg.arg1);
-		if(mHandlerThread != null)
-		{
-		    HandlerThread tempThread = mHandlerThread;
-		    mHandlerThread = null;
-		    tempThread.interrupt();
-		}
 		Log.d(TAG, "Download Cancel StopSelf was called");
 		stopSelf();
 	}
