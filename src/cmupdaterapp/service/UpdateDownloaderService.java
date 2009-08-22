@@ -50,7 +50,6 @@ import cmupdaterapp.ui.UpdateProcessInfo;
 import cmupdaterapp.utils.IOUtils;
 import cmupdaterapp.utils.Preferences;
 
-
 public class UpdateDownloaderService extends Service
 {
 	//public static UpdateDownloaderService INSTANCE;
@@ -105,7 +104,6 @@ public class UpdateDownloaderService extends Service
 		}
 	};*/
 
-
 	private Looper mServiceLooper;
 	private ServiceHandler mServiceHandler;
 	private HandlerThread mHandlerThread;
@@ -133,7 +131,7 @@ public class UpdateDownloaderService extends Service
 	private WifiManager mWifiManager;
 
 	private String mUpdateFolder;
-	private String mDownlaodedMD5;
+	private String mDownloadedMD5;
 
 	private int mSpeed;
 	private long mRemainingTime;
@@ -150,7 +148,6 @@ public class UpdateDownloaderService extends Service
 			return UpdateDownloaderService.this;
 		}
 	}
-
 
 	private final class ServiceHandler extends Handler
 	{
@@ -169,21 +166,22 @@ public class UpdateDownloaderService extends Service
 			int request = arguments.getInt(KEY_REQUEST); 
 			switch(request)
 			{
-			case REQUEST_DOWNLOAD_UPDATE:
-				mDownloading = true;
-				try 
-				{
-					UpdateInfo ui = mCurrentUpdate = (UpdateInfo) arguments.getSerializable(KEY_UPDATE_INFO);
-					File downloadedUpdate = checkForConnectionAndUpdate(ui);
-					notifyUser(ui, downloadedUpdate);
-				}
-				finally
-				{
-					mDownloading = false;
-				}
-				break;
-			default:
-				Log.e(TAG, "Unknown request ID:" + request);
+				case REQUEST_DOWNLOAD_UPDATE:
+					Log.d(TAG, "Request Download Update Message was recieved");
+					mDownloading = true;
+					try
+					{
+						UpdateInfo ui = mCurrentUpdate = (UpdateInfo) arguments.getSerializable(KEY_UPDATE_INFO);
+						File downloadedUpdate = checkForConnectionAndUpdate(ui);
+						notifyUser(ui, downloadedUpdate);
+					}
+					finally
+					{
+						mDownloading = false;
+					}
+					break;
+				default:
+					Log.e(TAG, "Unknown request ID:" + request);
 			}
 
 			Log.i(TAG, "Done with #" + msg.arg1);
@@ -195,7 +193,6 @@ public class UpdateDownloaderService extends Service
 	{
 		UPDATE_PROCESS_INFO = iupi;
 	}
-
 
 	@Override
 	public void onCreate()
@@ -254,8 +251,6 @@ public class UpdateDownloaderService extends Service
 		mServiceHandler.sendMessage(msg);
 	}
 
-
-
 	private boolean isDataConnected()
 	{
 		if (mConnectivityManager.getActiveNetworkInfo() == null)
@@ -278,18 +273,22 @@ public class UpdateDownloaderService extends Service
 	@Override
 	public void onDestroy()
 	{
-		Log.d(TAG, "Download Service Destroyed");
+		Log.d(TAG, "Download Service onDestroy Called");
 		mHandlerThread.getLooper().quit();
 		try
 		{
+			Thread.currentThread().interrupt();
+			mHandlerThread.interrupt();
+			Thread.currentThread().join();
 			mHandlerThread.join();
 		}
 		catch (InterruptedException e)
 		{
-			Log.e(TAG, "Exception on Thread.join", e);
+			Log.e(TAG, "Exception on Thread closing", e);
 		}
 		mDownloading = false;
 		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
+		Log.d(TAG, "Download Service Destroyed");
 	}
 
 	@Override
@@ -315,7 +314,6 @@ public class UpdateDownloaderService extends Service
 		return mCurrentUpdate;
 	}
 
-
 	private File checkForConnectionAndUpdate(UpdateInfo updateToDownload)
 	{
 		Log.d(TAG, "Called CheckForConnectionAndUpdate");
@@ -330,6 +328,7 @@ public class UpdateDownloaderService extends Service
 			{
 				try
 				{
+					Log.d(TAG, "No Data Connection. Waiting...");
 					mConnectivityManager.wait();
 					break;
 				}
@@ -409,7 +408,7 @@ public class UpdateDownloaderService extends Service
 		mNM.notify(R.string.not_update_download_error_title, notification);
 	}
 
-	private File downloadFile(UpdateInfo updateInfo)
+	private synchronized File downloadFile(UpdateInfo updateInfo)
 	{
 		Log.d(TAG, "Called downloadFile");
 		HttpClient httpClient = mHttpClient;
@@ -422,127 +421,141 @@ public class UpdateDownloaderService extends Service
 		int size = updateMirrors.size();
 		int start = mRandom.nextInt(size);
 		URI updateURI;
-
+		//For every Mirror
 		for(int i = 0; i < size; i++)
 		{
-			updateURI = updateMirrors.get((start + i)% size);
-			mMirrorName = updateURI.getHost();
-
-			mFileName = updateInfo.fileName; 
-			if (null == mFileName || mFileName.length() < 1)
+			if (!prepareForDownloadCancel)
 			{
-				mFileName = "update.zip";
-			}
-			Log.d(TAG, "mFileName: " + mFileName);
-			
-			boolean md5Available = true;
-
-			mMirrorNameUpdated = false;
-			//mUpdateProcessInfo.updateDownloadMirror(updateURI.getHost());
-			try
-			{
-				req = new HttpGet(updateURI);
-				md5req = new HttpGet(updateURI+".md5sum");
-
-				// Add no-cache Header, so the File gets downloaded each time
-				req.addHeader("Cache-Control", "no-cache");
-				md5req.addHeader("Cache-Control", "no-cache");
-
-				Log.i(TAG, "Trying to download md5sum file from " + md5req.getURI());
-				md5response = MD5httpClient.execute(md5req);
-				Log.i(TAG, "Trying to download update zip from " + req.getURI());
-				response = httpClient.execute(req);
-
-				int serverResponse = response.getStatusLine().getStatusCode();
-				int md5serverResponse = md5response.getStatusLine().getStatusCode();
+				updateURI = updateMirrors.get((start + i)% size);
+				mMirrorName = updateURI.getHost();
+	
+				mFileName = updateInfo.fileName; 
+				if (null == mFileName || mFileName.length() < 1)
+				{
+					mFileName = "update.zip";
+				}
+				Log.d(TAG, "mFileName: " + mFileName);
 				
-
-				if (serverResponse == 404)
+				boolean md5Available = true;
+	
+				mMirrorNameUpdated = false;
+				//mUpdateProcessInfo.updateDownloadMirror(updateURI.getHost());
+				try
 				{
-					Log.e(TAG, "File not found on Server. Trying next one.");
-				}
-				else if(serverResponse != 200)
-				{
-					Log.e(TAG, "Server returned status code " + serverResponse + " for update zip trying next mirror");
-
-				}
-				else
-				{
-					if (md5serverResponse != 200)
+					req = new HttpGet(updateURI);
+					md5req = new HttpGet(updateURI+".md5sum");
+	
+					// Add no-cache Header, so the File gets downloaded each time
+					req.addHeader("Cache-Control", "no-cache");
+					md5req.addHeader("Cache-Control", "no-cache");
+	
+					Log.i(TAG, "Trying to download md5sum file from " + md5req.getURI());
+					md5response = MD5httpClient.execute(md5req);
+					Log.i(TAG, "Trying to download update zip from " + req.getURI());
+					response = httpClient.execute(req);
+	
+					int serverResponse = response.getStatusLine().getStatusCode();
+					int md5serverResponse = md5response.getStatusLine().getStatusCode();
+					
+	
+					if (serverResponse == 404)
 					{
-						md5Available = false;
-						Log.e(TAG, "Server returned status code " + md5serverResponse + " for update zip md5sum trying next mirror");
+						Log.e(TAG, "File not found on Server. Trying next one.");
 					}
-					//If directory not exists, create it
-					File directory = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder);
-					if (!directory.exists())
+					else if(serverResponse != 200)
 					{
-						directory.mkdirs();
-						Log.d(TAG, "UpdateFolder created");
+						Log.e(TAG, "Server returned status code " + serverResponse + " for update zip trying next mirror");
+	
 					}
-
-					mDestinationFile = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder, mFileName);
-					if(mDestinationFile.exists()) mDestinationFile.delete();
-
-					if (md5Available)
+					else
 					{
-						mDestinationMD5File = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder, mFileName + ".md5sum");
-						if(mDestinationMD5File.exists()) mDestinationMD5File.delete();
-
-						try
+						if (md5serverResponse != 200)
 						{
-							Log.i(TAG, "Trying to Read MD5 hash from response");
-							HttpEntity temp = md5response.getEntity();
-							InputStreamReader isr = new InputStreamReader(temp.getContent());
-							BufferedReader br = new BufferedReader(isr);
-							mDownlaodedMD5 = br.readLine().split("  ")[0];
-							Log.d(TAG,"MD5: " + mDownlaodedMD5);
-							br.close();
-							isr.close();
-
-							if (temp != null)
-								temp.consumeContent();
-
-							//Write the String in a .md5 File
-							if (mDownlaodedMD5 != null || !mDownlaodedMD5.equals(""))
+							md5Available = false;
+							Log.e(TAG, "Server returned status code " + md5serverResponse + " for update zip md5sum trying next mirror");
+						}
+						//If directory not exists, create it
+						File directory = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder);
+						if (!directory.exists())
+						{
+							directory.mkdirs();
+							Log.d(TAG, "UpdateFolder created");
+						}
+	
+						mDestinationFile = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder, mFileName);
+						if(mDestinationFile.exists()) mDestinationFile.delete();
+	
+						if (md5Available)
+						{
+							mDestinationMD5File = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder, mFileName + ".md5sum");
+							if(mDestinationMD5File.exists()) mDestinationMD5File.delete();
+	
+							try
 							{
-								writeMD5(mDestinationMD5File, mDownlaodedMD5);
+								Log.i(TAG, "Trying to Read MD5 hash from response");
+								HttpEntity temp = md5response.getEntity();
+								InputStreamReader isr = new InputStreamReader(temp.getContent());
+								BufferedReader br = new BufferedReader(isr);
+								mDownloadedMD5 = br.readLine().split("  ")[0];
+								Log.d(TAG, "MD5: " + mDownloadedMD5);
+								br.close();
+								isr.close();
+	
+								if (temp != null)
+									temp.consumeContent();
+	
+								//Write the String in a .md5 File
+								if (mDownloadedMD5 != null || !mDownloadedMD5.equals(""))
+								{
+									writeMD5(mDestinationMD5File, mDownloadedMD5);
+								}
+							}
+							catch (Exception e)
+							{
+								Log.e(TAG, "Exception while reading MD5 response: ", e);
+								throw new IOException("MD5 Response cannot be read");
 							}
 						}
-						catch (Exception e)
+	
+						// Download Update ZIP if md5sum went ok
+						HttpEntity entity = response.getEntity();
+						dumpFile(entity, mDestinationFile);
+						if (entity != null && !prepareForDownloadCancel)
 						{
-							Log.e(TAG, "Exception while reading MD5 response: ", e);
-							throw new IOException("MD5 Response cannot be read");
+							Log.d(TAG, "Consuming entity....");
+							entity.consumeContent();
+							Log.d(TAG, "Entity consumed");
 						}
-					}
-
-					// Download Update ZIP if md5sum went ok
-					HttpEntity entity = response.getEntity();
-					dumpFile(entity, mDestinationFile);
-					if (entity != null)
-						entity.consumeContent();
-					Log.i(TAG, "Update download finished");
-					
-					if (md5Available)
-					{
-						Log.i(TAG, "Performing MD5 verification");
-						if(!IOUtils.checkMD5(mDownlaodedMD5, mDestinationFile))
+						else
 						{
-							throw new IOException("MD5 verification failed");
+							Log.d(TAG, "Entity resetted to NULL");
+							entity = null;
 						}
+						Log.i(TAG, "Update download finished");
+						
+						if (md5Available)
+						{
+							Log.i(TAG, "Performing MD5 verification");
+							if(!IOUtils.checkMD5(mDownloadedMD5, mDestinationFile))
+							{
+								throw new IOException("MD5 verification failed");
+							}
+						}
+	
+						//If we reach here, download & MD5 check went fine :)
+						return mDestinationFile;
 					}
-
-					//If we reach here, download & MD5 check went fine :)
-					return mDestinationFile;
 				}
+				catch (Exception ex)
+				{
+					Log.w(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
+				}
+				if(Thread.currentThread().isInterrupted() || !Thread.currentThread().isAlive())
+					break;
 			}
-			catch (Exception ex)
-			{
-				Log.w(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
-			}
-			if(Thread.currentThread().isInterrupted()) break;
+			else
+				Log.d(TAG, "Not trying any more mirrors, download canceled");
 		}
-
 		Log.e(TAG, "Unable to download the update file from any mirror");
 
 		if (null != mDestinationFile && mDestinationFile.exists())
@@ -557,7 +570,7 @@ public class UpdateDownloaderService extends Service
 		return null;
 	}
 
-	private void dumpFile(HttpEntity entity, File destinationFile) throws IOException
+	private synchronized void dumpFile(HttpEntity entity, File destinationFile) throws IOException
 	{
 		Log.d(TAG, "DumpFile Called");
 		if(!prepareForDownloadCancel)
@@ -568,7 +581,8 @@ public class UpdateDownloaderService extends Service
 				Log.w(TAG, "unable to determine the update file size, Set ContentLength to 1024");
 				contentLength = 1024;
 			}
-			else Log.i(TAG, "Update size: " + (contentLength/1024) + "KB" );
+			else
+				Log.i(TAG, "Update size: " + (contentLength/1024) + "KB" );
 	
 			long StartTime = System.currentTimeMillis(); 
 	
@@ -593,6 +607,7 @@ public class UpdateDownloaderService extends Service
 	
 				fos.flush();
 				fos.close();
+				is.close();
 			}
 			catch(Exception e)
 			{
@@ -609,7 +624,6 @@ public class UpdateDownloaderService extends Service
 			}
 			finally
 			{
-				//is.close();
 				buff = null;
 			}
 		}
@@ -713,7 +727,7 @@ public class UpdateDownloaderService extends Service
 
 	public void cancelDownload()
 	{
-		Thread.currentThread().interrupt();
+		//Thread.currentThread().interrupt();
 		prepareForDownloadCancel = true;
 		Log.d(TAG, "Download Service CancelDownload was called");
 		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
@@ -724,7 +738,7 @@ public class UpdateDownloaderService extends Service
 		stopSelf();
 	}
 	
-	public void DeleteDownloadStatusNotification(int id)
+	private void DeleteDownloadStatusNotification(int id)
 	{
 		if(mNotificationManager != null)
 		{

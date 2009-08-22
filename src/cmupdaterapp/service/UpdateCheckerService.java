@@ -87,7 +87,7 @@ public class UpdateCheckerService extends Service
             		Log.e(TAG, "Unknown request ID:" + request);
             }
 
-            Log.i("ServiceStartArguments", "Done with #" + msg.arg1);
+            Log.i(TAG, "Done with #" + msg.arg1);
             stopSelf(msg.arg1);
 		}
 	}
@@ -126,7 +126,7 @@ public class UpdateCheckerService extends Service
         msg.arg1 = startId;
         msg.obj = intent.getExtras();
         mServiceHandler.sendMessage(msg);
-        Log.d("ServiceStartArguments", "Sending: " + msg);
+        Log.d(TAG, "Sending: " + msg);
 	}
 	
 	private boolean isDataConnected()
