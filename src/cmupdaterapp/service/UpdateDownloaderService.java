@@ -710,6 +710,7 @@ public class UpdateDownloaderService extends Service
 		if(mNotificationManager != null)
 		{
 			//Delete the Downloading in Statusbar Notification
+			Log.d(TAG, "Download Notification removed");
 			mNotificationManager.cancel(id);
 		}
 		else
