@@ -250,8 +250,8 @@ public class UpdateDownloaderService extends Service
 		Message msg = mServiceHandler.obtainMessage();
 		msg.arg1 = startId;
 		msg.obj = intent.getExtras();
+		Log.d(TAG, "Sending: " + msg);
 		mServiceHandler.sendMessage(msg);
-		Log.d("ServiceStartArguments", "Sending: " + msg);
 	}
 
 
@@ -572,7 +572,7 @@ public class UpdateDownloaderService extends Service
 			InputStream is = entity.getContent();
 			try
 			{
-				while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0)
+				while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0 && !prepareForDownloadCancel)
 				{
 					fos.write(buff, 0, read);
 					totalDownloaded += read;
@@ -706,6 +706,7 @@ public class UpdateDownloaderService extends Service
 
 	public void cancelDownload()
 	{
+		Thread.currentThread().interrupt();
 		prepareForDownloadCancel = true;
 		Log.d(TAG, "Download Service CancelDownload was called");
 		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
@@ -718,6 +719,8 @@ public class UpdateDownloaderService extends Service
 		    mHandlerThread = null;
 		    tempThread.interrupt();
 		}
+		Log.d(TAG, "Download Cancel StopSelf was called");
+		stopSelf();
 	}
 	
 	public void DeleteDownloadStatusNotification(int id)

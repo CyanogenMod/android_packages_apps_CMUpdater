@@ -463,24 +463,29 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				{
 					Log.d(TAG, "Positive Download Cancel Button pressed");
 					if (mUpdateDownloaderService!=null)
+					{
 						mUpdateDownloaderService.cancelDownload();
+						Log.d(TAG, "Cancel onClick Event: cancelDownload finished");
+					}
 					else
 						Log.d(TAG, "Cancel Download: mUpdateDownloaderService was NULL");
 					try
 					{
-						unbindService(mUpdateDownloaderServiceConnection);
-					}
-					catch (Exception ex)
-					{
-						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceConnection unbind failed", ex);
-					}
-					try
-					{
 						stopService(mUpdateDownloaderServiceIntent);
+						Log.d(TAG, "stopService(mUpdateDownloaderServiceIntent) finished");
 					}
 					catch (Exception ex)
 					{
 						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceIntent could not be Stopped", ex);
+					}
+					try
+					{
+						unbindService(mUpdateDownloaderServiceConnection);
+						Log.d(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
+					}
+					catch (Exception ex)
+					{
+						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceConnection unbind failed", ex);
 					}
 					//UpdateDownloaderService.setUpdateProcessInfo(null);
 					Log.d(TAG, "Download Cancel Procedure Finished. Switching Layout");
@@ -561,8 +566,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			Log.w(TAG, "Unable to restore activity status", e);
 		}
-		
-		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
 		
 		Intent UpdateIntent = getIntent();
 		if (UpdateIntent != null)
@@ -905,6 +908,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	@Override
 	public void switchToDownloadingLayout(UpdateInfo downloadingUpdate)
 	{
+		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
 		setContentView(R.layout.update_download_info);
 		try
 		{
