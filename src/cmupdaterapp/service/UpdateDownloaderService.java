@@ -686,7 +686,7 @@ public class UpdateDownloaderService extends Service
 		Log.d(TAG, "Called Notify User");
 		if(downloadedUpdate == null)
 		{
-			Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_SHORT).show();
 //			mHandlerThread.interrupt();
 //			UpdateProcessInfo upi = new UpdateProcessInfo();
 //			upi.switchToUpdateChooserLayout(null);
