@@ -322,7 +322,7 @@ public class UpdateDownloaderService extends Service
 				}
 				catch (InterruptedException e)
 				{
-					e.printStackTrace();
+					Log.e(TAG, "Exception in ConnectivityManager.wait", e);
 				}
 			}
 		}
@@ -337,7 +337,6 @@ public class UpdateDownloaderService extends Service
 		catch (RuntimeException ex)
 		{
 			Log.e(TAG, "RuntimeEx while checking for updates", ex);
-			ex.printStackTrace();
 			notificateDownloadError();
 			return null;
 		}
@@ -499,8 +498,7 @@ public class UpdateDownloaderService extends Service
 						}
 						catch (Exception e)
 						{
-							Log.e(TAG, "Exception while reading MD5 response: "+e.getMessage());
-							e.printStackTrace();
+							Log.e(TAG, "Exception while reading MD5 response: ", e);
 							throw new IOException("MD5 Response cannot be read");
 						}
 					}
@@ -528,7 +526,6 @@ public class UpdateDownloaderService extends Service
 			catch (Exception ex)
 			{
 				Log.w(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
-				ex.printStackTrace();
 			}
 			if(Thread.currentThread().isInterrupted()) break;
 		}
@@ -590,9 +587,9 @@ public class UpdateDownloaderService extends Service
 			}
 			catch (Exception ex)
 			{
-				Log.e(TAG, "Unable to delete downlaoded File. Continue anyway. Message: "+ ex.getMessage());
+				Log.e(TAG, "Unable to delete downlaoded File. Continue anyway.", ex);
 			}
-			e.printStackTrace();
+			Log.e(TAG, "Exception in DumpFile", e);
 		}
 		finally
 		{
@@ -612,7 +609,7 @@ public class UpdateDownloaderService extends Service
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			Log.e(TAG, "Exception while writing MD5 to disk", e);
 		}
 		finally
 		{

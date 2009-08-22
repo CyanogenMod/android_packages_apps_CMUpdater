@@ -57,7 +57,7 @@ public class IOUtils
 		}
 		catch (InterruptedException e)
 		{
-			e.printStackTrace();
+			Log.e(TAG, "Exception while Calculating MD5", e);
 		}
        	
     	return calculatedDigest;

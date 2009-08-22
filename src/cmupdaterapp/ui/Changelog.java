@@ -8,8 +8,12 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
+
+import android.util.Log;
 public class Changelog
 {
+	private static final String TAG = "<CM-Updater> Changelog";
+	
 	static List<Version> getChangelog(IUpdateProcessInfo upi)
 	{
 		InputStream is = upi.getResources().openRawResource(R.raw.changelog);
@@ -26,7 +30,7 @@ public class Changelog
         }
         catch (Exception e)
         {
-        	e.printStackTrace();
+        	Log.e(TAG, "Exception in Reading ChangelogXMLFile", e);
         	return null;
         }
 	}

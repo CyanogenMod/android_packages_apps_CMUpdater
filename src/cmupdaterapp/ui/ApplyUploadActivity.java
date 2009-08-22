@@ -99,7 +99,6 @@ public class ApplyUploadActivity extends Activity
 			catch (IOException e)
 			{
 				Log.e(TAG, "Unable to reboot into recovery mode:", e);
-				e.printStackTrace();
 				Toast.makeText(mCtx, R.string.apply_unable_to_reboot_toast, Toast.LENGTH_LONG).show();
 			}
 		}

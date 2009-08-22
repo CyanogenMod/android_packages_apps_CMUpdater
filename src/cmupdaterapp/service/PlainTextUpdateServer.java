@@ -130,7 +130,6 @@ public class PlainTextUpdateServer implements IUpdateServer
 
 	private LinkedList<UpdateInfo> parseJSON(StringBuffer buf)
 	{
-		//mod|versionCode|displayVersion|displayName|md5sum|mirror1|mirror2|mirror3|mirror4|etc
 		LinkedList<UpdateInfo> uis = new LinkedList<UpdateInfo>();
 
 		JSONObject mainJSONObject;
@@ -148,8 +147,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		}
 		catch (JSONException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG, "Error in JSON File: ", e);
 		}
 
 		return uis;
@@ -192,8 +190,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		}
 		catch (JSONException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG, "Error in JSON File: ", e);
 		}
 		return ui;
 	}

@@ -26,7 +26,7 @@ public class UpdateCheck implements Runnable
 {
 	public static final String KEY_UPDATE_LIST = "cmupdaterapp.updates";
 
-	private static final String TAG = "<CM-Updater> UpdaterCheck";
+	private static final String TAG = "<CM-Updater> UpdateCheck";
 
 	private IUpdateServer mUpdateServer;
 	private IUpdateProcessInfo mUpdateProcessInfo;	
@@ -50,7 +50,7 @@ public class UpdateCheck implements Runnable
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
+			Log.e(TAG, "Exception while checking for Updates", e);
 		}
 	}
 	private Handler h = new Handler()

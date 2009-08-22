@@ -170,7 +170,7 @@ public class UpdateCheckerService extends Service
 					}
 					catch (InterruptedException e)
 					{
-						e.printStackTrace();
+						Log.e(TAG, "Error in TelephonyManager.wait", e);
 					}
 				}
 			}
@@ -184,7 +184,6 @@ public class UpdateCheckerService extends Service
 			catch (IOException ex)
 			{
 				Log.e(TAG, "IOEx while checking for updates", ex);
-				ex.printStackTrace();
 				if(isDataConnected())
 				{
 					notificateCheckError();
@@ -194,7 +193,6 @@ public class UpdateCheckerService extends Service
 			catch (RuntimeException ex)
 			{
 				Log.e(TAG, "RuntimeEx while checking for updates", ex);
-				ex.printStackTrace();
 				notificateCheckError();
 				return;
 			}
