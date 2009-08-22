@@ -609,6 +609,18 @@ public class UpdateDownloaderService extends Service
 				fos.close();
 				is.close();
 			}
+			catch(IOException e)
+			{
+				fos.close();
+				try
+				{
+					destinationFile.delete();
+				}
+				catch (Exception ex)
+				{
+					Log.e(TAG, "Unable to delete downlaoded File. Continue anyway.", ex);
+				}
+			}
 			catch(Exception e)
 			{
 				fos.close();
