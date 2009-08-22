@@ -315,7 +315,8 @@ public class UpdateDownloaderService extends Service
 		File downloadedFile;
 
 		//wait for a data connection
-		while(!isDataConnected()) {
+		while(!isDataConnected())
+		{
 			Log.d(TAG, "No data connection, waiting for a data connection");
 			registerDataListener();
 			synchronized (mConnectivityManager)

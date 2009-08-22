@@ -461,6 +461,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			{
 				public void onClick(DialogInterface dialog, int which)
 				{
+					Log.d(TAG, "Positive Download Cancel Button pressed");
 					if (mUpdateDownloaderService!=null)
 						mUpdateDownloaderService.cancelDownload();
 					else
@@ -482,6 +483,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceIntent could not be Stopped", ex);
 					}
 					//UpdateDownloaderService.setUpdateProcessInfo(null);
+					Log.d(TAG, "Download Cancel Procedure Finished. Switching Layout");
 					switchToUpdateChooserLayout(null);
 				}
 			})
@@ -489,6 +491,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			{
 				public void onClick(DialogInterface dialog, int which)
 				{
+					Log.d(TAG, "Negative Download Cancel Button pressed");
 					dialog.dismiss();
 				}
 			})
