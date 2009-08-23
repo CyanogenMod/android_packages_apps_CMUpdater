@@ -671,34 +671,33 @@ public class UpdateDownloaderService extends Service
 		if (!prepareForDownloadCancel)
 		{
 			//Update the Progress not so heavily
-			if (progressBarUpdate > PROGRESS_BAR_UPDATE_INTERVALL)
+			if (progressBarUpdate == PROGRESS_BAR_UPDATE_INTERVALL)
 			{
+				mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
+				mSpeed = (mSpeed > 0) ? mSpeed : 1;
+				mRemainingTime = ((total - downloaded)/mSpeed)/1000;
+				mstringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
+				mstringSpeed = Integer.toString(mSpeed) + " kB/s";
+				mstringRemainingTime = Long.toString(mRemainingTime) + " seconds";
+				
+				mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloading, mstringDownloaded);
+				mNotificationRemoteView.setTextViewText(R.id.notificationTextSpeed, mstringSpeed);
+				mNotificationRemoteView.setTextViewText(R.id.notificationTextRemainingTime, mstringRemainingTime);
+				mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, total, downloaded, false);
+				mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
+				
+				if(UPDATE_PROCESS_INFO == null) return;
+				
+				if(!mMirrorNameUpdated)
+				{
+					UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
+					mMirrorNameUpdated = true;
+				}
+				UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, total, mstringDownloaded, mstringSpeed, mstringRemainingTime);
+			}
+			else if (progressBarUpdate > PROGRESS_BAR_UPDATE_INTERVALL)
 				progressBarUpdate = 1;
-				return;
-			}
-			mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
-			mSpeed = (mSpeed > 0) ? mSpeed : 1;
-			mRemainingTime = ((total - downloaded)/mSpeed)/1000;
-			mstringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
-			mstringSpeed = Integer.toString(mSpeed) + " kB/s";
-			mstringRemainingTime = Long.toString(mRemainingTime) + " seconds";
-			
-			mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloading, mstringDownloaded);
-			mNotificationRemoteView.setTextViewText(R.id.notificationTextSpeed, mstringSpeed);
-			mNotificationRemoteView.setTextViewText(R.id.notificationTextRemainingTime, mstringRemainingTime);
-			mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, total, downloaded, false);
-			mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
-			
 			progressBarUpdate++;
-			
-			if(UPDATE_PROCESS_INFO == null) return;
-			
-			if(!mMirrorNameUpdated)
-			{
-				UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
-				mMirrorNameUpdated = true;
-			}
-			UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, total, mstringDownloaded, mstringSpeed, mstringRemainingTime);
 		}
 		else
 			Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
