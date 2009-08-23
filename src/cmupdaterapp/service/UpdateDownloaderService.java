@@ -687,7 +687,7 @@ public class UpdateDownloaderService extends Service
 				UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
 				mMirrorNameUpdated = true;
 			}
-			UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, total, StartTime);
+			UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, total, mstringDownloaded, mstringSpeed, mstringRemainingTime);
 		}
 		else
 			Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");

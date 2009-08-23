@@ -101,8 +101,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	private File mUpdateFolder;
 	private Spinner mExistingUpdatesSpinner;
 	
-	private int mSpeed;
-	private long mRemainingTime;
+//	private int mSpeed;
+//	private long mRemainingTime;
 	
 	private ArrayList<String> mfilenames;
 	
@@ -1120,19 +1120,46 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 //		dialog.show();
 //	}
 	
+//	@Override
+//	public void updateDownloadProgress(final int downloaded, final int total, final long StartTime)
+//	{
+//		if(mProgressBar ==null)return;
+//
+//		mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
+//		mSpeed = (mSpeed > 0) ? mSpeed : 1;
+//		mRemainingTime = ((total - downloaded)/mSpeed)/1000;
+//
+//		final String stringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
+//		final String stringSpeed = Integer.toString(mSpeed) + " kB/s";
+//		final String stringRemainingTime = Long.toString(mRemainingTime) + " seconds";
+//		
+//		mProgressBar.post(new Runnable()
+//		{
+//			public void run()
+//			{
+//				if(total < 0)
+//				{
+//					mProgressBar.setIndeterminate(true);
+//				}
+//				else
+//				{
+//					mProgressBar.setIndeterminate(false);
+//					mProgressBar.setMax(total);
+//				}
+//				mProgressBar.setProgress(downloaded);
+//
+//				mDownloadedBytesTextView.setText(stringDownloaded);
+//				mDownloadSpeedTextView.setText(stringSpeed);
+//				mRemainingTimeTextView.setText(stringRemainingTime);
+//			}
+//		});
+//	}
+
 	@Override
-	public void updateDownloadProgress(final int downloaded, final int total, final long StartTime)
+	public void updateDownloadProgress(final int downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
 	{
 		if(mProgressBar ==null)return;
 
-		mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
-		mSpeed = (mSpeed > 0) ? mSpeed : 1;
-		mRemainingTime = ((total - downloaded)/mSpeed)/1000;
-
-		final String stringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
-		final String stringSpeed = Integer.toString(mSpeed) + " kB/s";
-		final String stringRemainingTime = Long.toString(mRemainingTime) + " seconds";
-		
 		mProgressBar.post(new Runnable()
 		{
 			public void run()
@@ -1148,13 +1175,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				}
 				mProgressBar.setProgress(downloaded);
 
-				mDownloadedBytesTextView.setText(stringDownloaded);
-				mDownloadSpeedTextView.setText(stringSpeed);
-				mRemainingTimeTextView.setText(stringRemainingTime);
+				mDownloadedBytesTextView.setText(downloadedText);
+				mDownloadSpeedTextView.setText(speedText);
+				mRemainingTimeTextView.setText(remainingTimeText);
 			}
 		});
 	}
-
+	
 	@Override
 	public void updateDownloadMirror(final String mirror)
 	{
