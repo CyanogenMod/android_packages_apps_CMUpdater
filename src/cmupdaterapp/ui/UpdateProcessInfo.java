@@ -392,7 +392,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					if(MD5exists)
 					{
 						//Calculate MD5 of Existing Update
-						String calculatedMD5 = IOUtils.calculateMD5(params[0]);
+						String calculatedMD5 = IOUtils.calculateMD5(params[0], false);
 						//Read the existing MD5SUM
 						FileReader input = new FileReader(MD5);
 						BufferedReader bufRead = new BufferedReader(input);
@@ -553,6 +553,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			//User MUST uninstall old App
 			Log.i(TAG, "Old App not uninstalled, try again");
 		}
+		
+		IOUtils.getRecoveryMD5();
 		
 		try
 		{
