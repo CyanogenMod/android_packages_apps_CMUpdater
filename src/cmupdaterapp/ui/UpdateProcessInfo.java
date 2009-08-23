@@ -554,8 +554,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			Log.i(TAG, "Old App not uninstalled, try again");
 		}
 		
-		IOUtils.getRecoveryMD5();
-		
 		try
 		{
 			loadState();
