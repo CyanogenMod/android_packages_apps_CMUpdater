@@ -1,5 +1,10 @@
 package cmupdaterapp.utils;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Date;
 
 import cmupdaterapp.ui.R;
@@ -114,7 +119,7 @@ public class Preferences
 	
 	public String getUpdateFileURL()
 	{
-		Log.d(TAG, "MetadataFile-Url: "+mPrefs.getString(mRes.getString(R.string.p_update_file_url),  mRes.getString(R.string.conf_update_server_url_def)));
+		Log.d(TAG, "MetadataFile-Url: "+ mPrefs.getString(mRes.getString(R.string.p_update_file_url),  mRes.getString(R.string.conf_update_server_url_def)));
 		return mPrefs.getString(mRes.getString(R.string.p_update_file_url),  mRes.getString(R.string.conf_update_server_url_def));
 	}
 	
@@ -167,5 +172,44 @@ public class Preferences
 	public String getAboutURL()
 	{
 		return mPrefs.getString(mRes.getString(R.string.conf_about_url), mRes.getString(R.string.conf_about_url));
+	}
+	
+	public String getThemeFile()
+	{
+		Log.d(TAG, "ThemeFile: "+ mPrefs.getString(mRes.getString(R.string.conf_theme_version_file),  mRes.getString(R.string.conf_theme_version_file)));
+		return mPrefs.getString(mRes.getString(R.string.conf_theme_version_file),  mRes.getString(R.string.conf_theme_version_file));
+	}
+	
+	public String[] getThemeInformations()
+	{
+		File f = new File(getThemeFile());
+		if (f.exists() && f.canRead())
+		{
+			try
+			{
+				FileReader input = new FileReader(f);
+				BufferedReader bufRead = new BufferedReader(input);
+				String firstLine = bufRead.readLine();
+				bufRead.close();
+				input.close();
+				String[] Return = firstLine.split("\\|");
+				//Only return if there was a string like Hero|2.0.1
+				if (Return.length == 2)
+					return Return;
+			}
+			catch (FileNotFoundException e)
+			{
+				Log.e(TAG, "File not Found", e);
+			}
+			catch (IOException e)
+			{
+				Log.e(TAG, "Exception in readline", e);
+			}
+		}
+		else
+		{
+			Log.d(TAG, "No Theme File found. Probably no Theme installed or Theme URL not configured");
+		}
+		return null;
 	}
 }

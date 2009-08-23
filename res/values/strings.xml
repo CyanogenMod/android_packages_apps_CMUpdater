@@ -14,6 +14,7 @@
     <string name="conf_update_server_url_def">http://cyanogen-updater.googlecode.com/files/update_file.json</string>
     <string name="conf_about_url">http://code.google.com/p/cyanogen-updater/</string>
     <string name="conf_update_folder">cm-updates</string>
+    <string name="conf_theme_version_file">/sdcard/cm-updates/themes.theme</string>
     
     <!-- .ui.* Strings -->
     <string name="apply_now_button_text">Apply Now</string>
