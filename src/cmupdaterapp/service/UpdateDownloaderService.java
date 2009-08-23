@@ -143,6 +143,9 @@ public class UpdateDownloaderService extends Service
 	String mstringRemainingTime;
 	String mstringComplete;
 	
+	private int mcontentLength;
+	private long mStartTime;
+	
 	private Message mMsg;
 	
 	public class LocalBinder extends Binder
@@ -579,16 +582,16 @@ public class UpdateDownloaderService extends Service
 		Log.d(TAG, "DumpFile Called");
 		if(!prepareForDownloadCancel)
 		{
-			int contentLength = (int) entity.getContentLength();
-			if(contentLength <= 0)
+			mcontentLength = (int) entity.getContentLength();
+			if(mcontentLength <= 0)
 			{
 				Log.w(TAG, "unable to determine the update file size, Set ContentLength to 1024");
-				contentLength = 1024;
+				mcontentLength = 1024;
 			}
 			else
-				Log.i(TAG, "Update size: " + (contentLength/1024) + "KB" );
+				Log.i(TAG, "Update size: " + (mcontentLength/1024) + "KB" );
 	
-			long StartTime = System.currentTimeMillis(); 
+			mStartTime = System.currentTimeMillis(); 
 	
 			byte[] buff = new byte[64 * 1024];
 			int read = 0;
@@ -601,7 +604,7 @@ public class UpdateDownloaderService extends Service
 				{
 					fos.write(buff, 0, read);
 					totalDownloaded += read;
-					onProgressUpdate(totalDownloaded, contentLength, StartTime);
+					onProgressUpdate(totalDownloaded);
 				}
 
 				if(read > 0)
@@ -666,7 +669,7 @@ public class UpdateDownloaderService extends Service
 		}
 	}
 
-	private void onProgressUpdate(int downloaded, int total, long StartTime)
+	private void onProgressUpdate(int downloaded)
 	{
 		//Only update the Notification and DownloadLayout, when no downloadcancel is in progress, so the notification will not pop up again
 		if (!prepareForDownloadCancel)
@@ -674,18 +677,18 @@ public class UpdateDownloaderService extends Service
 			//Update the Progress not so heavily
 			if (progressBarUpdate == PROGRESS_BAR_UPDATE_INTERVALL)
 			{
-				mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
+				mSpeed = (downloaded/(int)(System.currentTimeMillis() - mStartTime));
 				mSpeed = (mSpeed > 0) ? mSpeed : 1;
-				mRemainingTime = ((total - downloaded)/mSpeed)/1000;
+				mRemainingTime = ((mcontentLength - downloaded)/mSpeed)/1000;
 				//mstringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
-				mstringDownloaded = downloaded/1048576 + "/" + total/1048576 + " MB";
+				mstringDownloaded = downloaded/1048576 + "/" + mcontentLength/1048576 + " MB";
 				mstringSpeed = mSpeed + " kB/s";
 				mstringRemainingTime = mRemainingTime + " seconds";
 				
 				mstringComplete = mstringDownloaded + " " + mstringSpeed + " " + mstringRemainingTime;
 				
 				mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloadInfos, mstringComplete);
-				mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, total, downloaded, false);
+				mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, mcontentLength, downloaded, false);
 				mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
 				
 				if(UPDATE_PROCESS_INFO == null) return;
@@ -695,7 +698,7 @@ public class UpdateDownloaderService extends Service
 					UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
 					mMirrorNameUpdated = true;
 				}
-				UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, total, mstringDownloaded, mstringSpeed, mstringRemainingTime);
+				UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, mcontentLength, mstringDownloaded, mstringSpeed, mstringRemainingTime);
 			}
 			else if (progressBarUpdate > PROGRESS_BAR_UPDATE_INTERVALL)
 				progressBarUpdate = 1;
