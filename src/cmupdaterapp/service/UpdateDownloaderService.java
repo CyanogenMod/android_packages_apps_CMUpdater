@@ -64,6 +64,8 @@ public class UpdateDownloaderService extends Service
 	public static final int NOTIFICATION_DOWNLOAD_STATUS = 100;
 	public static final int NOTIFICATION_DOWNLOAD_FINISHED = 200;
 	
+	private static final int PROGRESS_BAR_UPDATE_INTERVALL = 3;
+	
 	private static NotificationManager mNotificationManager;
 	private Notification mNotification;
 	private RemoteViews mNotificationRemoteView;
@@ -71,6 +73,7 @@ public class UpdateDownloaderService extends Service
 	private PendingIntent mNotificationContentIntent;
 	
 	private boolean prepareForDownloadCancel;
+	private int progressBarUpdate = 1;
 
 	private final BroadcastReceiver mConnectivityChangesReceiver = new BroadcastReceiver()
 	{
@@ -667,6 +670,12 @@ public class UpdateDownloaderService extends Service
 		//Only update the Notification and DownloadLayout, when no downloadcancel is in progress, so the notification will not pop up again
 		if (!prepareForDownloadCancel)
 		{
+			//Update the Progress not so heavily
+			if (progressBarUpdate > PROGRESS_BAR_UPDATE_INTERVALL)
+			{
+				progressBarUpdate = 1;
+				return;
+			}
 			mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
 			mSpeed = (mSpeed > 0) ? mSpeed : 1;
 			mRemainingTime = ((total - downloaded)/mSpeed)/1000;
@@ -679,6 +688,8 @@ public class UpdateDownloaderService extends Service
 			mNotificationRemoteView.setTextViewText(R.id.notificationTextRemainingTime, mstringRemainingTime);
 			mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, total, downloaded, false);
 			mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
+			
+			progressBarUpdate++;
 			
 			if(UPDATE_PROCESS_INFO == null) return;
 			
