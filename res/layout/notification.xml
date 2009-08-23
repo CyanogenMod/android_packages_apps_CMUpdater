@@ -5,31 +5,18 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:verticalSpacing="0px">
-		<LinearLayout
-			xmlns:android="http://schemas.android.com/apk/res/android"
-			android:orientation="horizontal"
+		<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:verticalSpacing="0px"
-			android:layout_gravity="center">
-				<ImageView
-					android:layout_width="wrap_content"
-	              	android:layout_height="wrap_content"
-					android:verticalSpacing="0px"
-	              	android:src="@drawable/icon" />
-		</LinearLayout>
+			android:src="@drawable/icon"
+			android:layout_gravity="center" />
 		<LinearLayout
 			xmlns:android="http://schemas.android.com/apk/res/android"
 			android:orientation="vertical"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:verticalSpacing="0px">
-			<LinearLayout
-				xmlns:android="http://schemas.android.com/apk/res/android"
-				android:orientation="horizontal"
-				android:layout_width="fill_parent"
-				android:layout_height="fill_parent"
-				android:verticalSpacing="0px">
 				<TextView
 					android:text="@string/notification_tickertext"
 					android:textStyle="bold"
@@ -37,54 +24,17 @@
 					android:layout_height="fill_parent"
 					android:verticalSpacing="0px"
 					android:textColor="#000" />
-			</LinearLayout>
-			<LinearLayout
-				xmlns:android="http://schemas.android.com/apk/res/android"
-				android:orientation="horizontal"
-				android:layout_width="fill_parent"
-				android:layout_height="fill_parent"
-				android:verticalSpacing="0px">
 				<TextView
-					android:id="@+id/notificationTextDownloading"
+					android:id="@+id/notificationTextDownloadInfos"
 					android:layout_width="wrap_content"
 					android:layout_height="fill_parent"
 					android:verticalSpacing="0px"
 					android:textColor="#000" />
-				<TextView
-					android:text=" "
-					android:layout_width="wrap_content"
-					android:layout_height="fill_parent"
-					android:verticalSpacing="0px" />
-				<TextView
-					android:id="@+id/notificationTextSpeed"
-					android:layout_width="wrap_content"
-					android:layout_height="fill_parent"
-					android:verticalSpacing="0px"
-					android:textColor="#000" />
-				<TextView
-					android:text=" "
-					android:layout_width="wrap_content"
-					android:layout_height="fill_parent"
-					android:verticalSpacing="0px" />
-				<TextView
-					android:id="@+id/notificationTextRemainingTime"
-					android:layout_width="wrap_content"
-					android:layout_height="fill_parent"
-					android:verticalSpacing="0px"
-					android:textColor="#000" />
-			</LinearLayout>
-		    <LinearLayout
-		    	xmlns:android="http://schemas.android.com/apk/res/android"
-				android:orientation="horizontal"
-				android:layout_width="fill_parent"
-				android:layout_height="fill_parent"
-				android:verticalSpacing="0px">
 				<ProgressBar 
 					android:id="@+id/notificationProgressBar"
 		    		style="?android:attr/progressBarStyleHorizontal" 
 			    	android:layout_width="fill_parent"
 			    	android:layout_height="wrap_content" 
 			    	android:verticalSpacing="0px" />
-		</LinearLayout>
 	</LinearLayout>
 </LinearLayout>

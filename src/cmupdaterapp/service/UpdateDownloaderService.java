@@ -141,6 +141,7 @@ public class UpdateDownloaderService extends Service
 	String mstringDownloaded;
 	String mstringSpeed;
 	String mstringRemainingTime;
+	String mstringComplete;
 	
 	private Message mMsg;
 	
@@ -680,9 +681,9 @@ public class UpdateDownloaderService extends Service
 				mstringSpeed = Integer.toString(mSpeed) + " kB/s";
 				mstringRemainingTime = Long.toString(mRemainingTime) + " seconds";
 				
-				mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloading, mstringDownloaded);
-				mNotificationRemoteView.setTextViewText(R.id.notificationTextSpeed, mstringSpeed);
-				mNotificationRemoteView.setTextViewText(R.id.notificationTextRemainingTime, mstringRemainingTime);
+				mstringComplete = mstringDownloaded + " " + mstringSpeed + " " + mstringRemainingTime;
+				
+				mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloadInfos, mstringComplete);
 				mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, total, downloaded, false);
 				mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
 				
