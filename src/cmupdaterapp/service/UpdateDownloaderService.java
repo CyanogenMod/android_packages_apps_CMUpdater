@@ -579,7 +579,7 @@ public class UpdateDownloaderService extends Service
 		Log.d(TAG, "DumpFile Called");
 		if(!prepareForDownloadCancel)
 		{
-			long contentLength = entity.getContentLength();
+			int contentLength = (int) entity.getContentLength();
 			if(contentLength <= 0)
 			{
 				Log.w(TAG, "unable to determine the update file size, Set ContentLength to 1024");
@@ -601,9 +601,9 @@ public class UpdateDownloaderService extends Service
 				{
 					fos.write(buff, 0, read);
 					totalDownloaded += read;
-					onProgressUpdate(totalDownloaded, (int)contentLength, StartTime);
+					onProgressUpdate(totalDownloaded, contentLength, StartTime);
 				}
-	
+
 				if(read > 0)
 				{
 					throw new IOException("Download Canceled");
@@ -677,9 +677,10 @@ public class UpdateDownloaderService extends Service
 				mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
 				mSpeed = (mSpeed > 0) ? mSpeed : 1;
 				mRemainingTime = ((total - downloaded)/mSpeed)/1000;
-				mstringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
-				mstringSpeed = Integer.toString(mSpeed) + " kB/s";
-				mstringRemainingTime = Long.toString(mRemainingTime) + " seconds";
+				//mstringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
+				mstringDownloaded = downloaded/1048576 + "/" + total/1048576 + " MB";
+				mstringSpeed = mSpeed + " kB/s";
+				mstringRemainingTime = mRemainingTime + " seconds";
 				
 				mstringComplete = mstringDownloaded + " " + mstringSpeed + " " + mstringRemainingTime;
 				
@@ -698,7 +699,8 @@ public class UpdateDownloaderService extends Service
 			}
 			else if (progressBarUpdate > PROGRESS_BAR_UPDATE_INTERVALL)
 				progressBarUpdate = 1;
-			progressBarUpdate++;
+			else
+				progressBarUpdate++;
 		}
 		else
 			Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
