@@ -412,7 +412,7 @@ public class UpdateDownloaderService extends Service
 		mNM.notify(R.string.not_update_download_error_title, notification);
 	}
 
-	private synchronized File downloadFile(UpdateInfo updateInfo)
+	private File downloadFile(UpdateInfo updateInfo)
 	{
 		Log.d(TAG, "Called downloadFile");
 		HttpClient httpClient = mHttpClient;
@@ -574,7 +574,7 @@ public class UpdateDownloaderService extends Service
 		return null;
 	}
 
-	private synchronized void dumpFile(HttpEntity entity, File destinationFile) throws IOException
+	private void dumpFile(HttpEntity entity, File destinationFile) throws IOException
 	{
 		Log.d(TAG, "DumpFile Called");
 		if(!prepareForDownloadCancel)
@@ -647,7 +647,7 @@ public class UpdateDownloaderService extends Service
 			Log.d(TAG, "Download Cancel in Progress. Don't start Downloading");
 	}
 
-	private synchronized void writeMD5(File md5File, String md5) throws IOException
+	private void writeMD5(File md5File, String md5) throws IOException
 	{
 		Log.d(TAG, "Writing the calculated MD5 to disk");
 		FileWriter fw = new FileWriter(md5File);
@@ -666,7 +666,7 @@ public class UpdateDownloaderService extends Service
 		}
 	}
 
-	private synchronized void onProgressUpdate(int downloaded, int total, long StartTime)
+	private void onProgressUpdate(int downloaded, int total, long StartTime)
 	{
 		//Only update the Notification and DownloadLayout, when no downloadcancel is in progress, so the notification will not pop up again
 		if (!prepareForDownloadCancel)
