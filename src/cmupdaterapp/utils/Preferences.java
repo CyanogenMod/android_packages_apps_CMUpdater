@@ -140,7 +140,8 @@ public class Preferences
 	
 	public boolean doNandroidBackup()
 	{
-		return mPrefs.getBoolean(mRes.getString(R.string.p_do_nandroid_backup), Boolean.valueOf(mRes.getString(R.string.p_do_nandroid_backup_def_value)));
+		//return mPrefs.getBoolean(mRes.getString(R.string.p_do_nandroid_backup), Boolean.valueOf(mRes.getString(R.string.p_do_nandroid_backup_def_value)));
+		return false;
 	}
 	
 	public boolean getVibrate()

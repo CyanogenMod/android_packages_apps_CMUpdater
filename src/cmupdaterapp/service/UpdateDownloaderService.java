@@ -643,7 +643,7 @@ public class UpdateDownloaderService extends Service
 			Log.d(TAG, "Download Cancel in Progress. Don't start Downloading");
 	}
 
-	private void writeMD5(File md5File, String md5) throws IOException
+	private synchronized void writeMD5(File md5File, String md5) throws IOException
 	{
 		Log.d(TAG, "Writing the calculated MD5 to disk");
 		FileWriter fw = new FileWriter(md5File);
@@ -662,7 +662,7 @@ public class UpdateDownloaderService extends Service
 		}
 	}
 
-	private void onProgressUpdate(int downloaded, int total, long StartTime)
+	private synchronized void onProgressUpdate(int downloaded, int total, long StartTime)
 	{
 		//Only update the Notification and DownloadLayout, when no downloadcancel is in progress, so the notification will not pop up again
 		if (!prepareForDownloadCancel)
