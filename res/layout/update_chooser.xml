@@ -97,7 +97,6 @@
 		    android:drawableLeft="@drawable/check_now" />
 		<TextView
 		    android:id="@+id/last_update_check"
-		    android:text="@string/last_update_check_text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="10px"

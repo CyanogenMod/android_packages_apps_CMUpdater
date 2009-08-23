@@ -875,8 +875,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 
 		setContentView(R.layout.no_updates);
-		LinearLayout checkForUpdatesLayout = (LinearLayout) findViewById(R.id.no_updates_chec_for_updates_layout);
-		checkForUpdatesLayout.setVisibility(View.VISIBLE);
 		((Button)findViewById(R.id.check_now_button)).setOnClickListener(new View.OnClickListener()
 		{
 			public void onClick(View v)
