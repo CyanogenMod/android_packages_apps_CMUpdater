@@ -698,6 +698,7 @@ public class UpdateDownloaderService extends Service
 		Log.d(TAG, "Called Notify User");
 		if(downloadedUpdate == null)
 		{
+			DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
 			Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_SHORT).show();
 //			mHandlerThread.interrupt();
 //			UpdateProcessInfo upi = new UpdateProcessInfo();
