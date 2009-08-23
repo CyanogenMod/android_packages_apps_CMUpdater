@@ -73,7 +73,7 @@ public class UpdateDownloaderService extends Service
 	private PendingIntent mNotificationContentIntent;
 	
 	private boolean prepareForDownloadCancel;
-	private int progressBarUpdate = 1;
+	private int progressBarUpdate = PROGRESS_BAR_UPDATE_INTERVALL;
 
 	private final BroadcastReceiver mConnectivityChangesReceiver = new BroadcastReceiver()
 	{
