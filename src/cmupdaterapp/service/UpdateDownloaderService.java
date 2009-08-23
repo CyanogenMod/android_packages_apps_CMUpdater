@@ -64,7 +64,7 @@ public class UpdateDownloaderService extends Service
 	public static final int NOTIFICATION_DOWNLOAD_STATUS = 100;
 	public static final int NOTIFICATION_DOWNLOAD_FINISHED = 200;
 	
-	private static final int PROGRESS_BAR_UPDATE_INTERVALL = 3;
+	private int PROGRESS_BAR_UPDATE_INTERVALL;
 	
 	private static NotificationManager mNotificationManager;
 	private Notification mNotification;
@@ -223,6 +223,8 @@ public class UpdateDownloaderService extends Service
 		mWifiLock = mWifiManager.createWifiLock("CM Updater");
 
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
+		PROGRESS_BAR_UPDATE_INTERVALL = Preferences.getPreferences(this).getProgressUpdateFreq();
+		Log.d(TAG, "ProgressBarIntervall: " + PROGRESS_BAR_UPDATE_INTERVALL);
 	}
 
 	@Override
@@ -716,9 +718,9 @@ public class UpdateDownloaderService extends Service
 		{
 			DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
 			Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_SHORT).show();
-//			mHandlerThread.interrupt();
-//			UpdateProcessInfo upi = new UpdateProcessInfo();
-//			upi.switchToUpdateChooserLayout(null);
+			//mHandlerThread.interrupt();
+			//UpdateProcessInfo upi = new UpdateProcessInfo();
+			//upi.switchToUpdateChooserLayout(null);
 			return;
 		}
 

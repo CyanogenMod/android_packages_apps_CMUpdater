@@ -132,7 +132,7 @@ public class Preferences
 	
 	public void setNotificationRingtone(String RingTone)
 	{
-		Log.d(TAG, "Setting RingtoneURL to "+RingTone);
+		Log.d(TAG, "Setting RingtoneURL to " + RingTone);
 		Editor editor = mPrefs.edit();
 		editor.putString(mRes.getString(R.string.p_key_notification_ringtone), RingTone);
 		if(!editor.commit()) Log.e(TAG, "Unable to write Ringtone URI");
@@ -163,7 +163,20 @@ public class Preferences
 	{
 		return mPrefs.getString(mRes.getString(R.string.conf_update_folder), mRes.getString(R.string.conf_update_folder));
 	}
+	
+	public int getProgressUpdateFreq()
+	{
+		return Integer.parseInt(mPrefs.getString(mRes.getString(R.string.p_progress_update_frequency), mRes.getString(R.string.p_progress_update_frequency_def)));
+	}
 
+	public void setProgressUpdateFreq(String freq)
+	{
+		Log.d(TAG, "Setting ProgressUpdate Frequency to " + freq);
+		Editor editor = mPrefs.edit();
+		editor.putString(mRes.getString(R.string.p_progress_update_frequency), freq);
+		if(!editor.commit()) Log.e(TAG, "Unable to write Update Frequency");
+	}
+	
 	private String getSystemModString()
 	{
 		return SysUtils.getSystemProperty(SYS_PROP_DEVICE);

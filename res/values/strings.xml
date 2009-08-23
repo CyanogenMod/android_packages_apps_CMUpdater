@@ -137,6 +137,9 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     <string name="p_notifications_def_value">true</string>
     <string name="p_first_run">firstRun</string>
     <string name="p_last_update_check">lastUpdateCheck</string>
+    <string name="p_progress_update_frequency">progressUpdateFreq</string>
+    <string name="p_progress_update_frequency_def">3</string>
+    <string name="p_progress_update_freq_def">progressUpdateFreqDef</string>
     
     <!-- Preferences Strings -->
     <string name="p_update_check_freq_title">Update Checking frequency</string>
@@ -177,4 +180,13 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     
     <string name="p_notifications_title">Notifications</string>
     <string name="p_notifications_summary">Enable/Disable Notifications</string>
+    
+    <string name="p_advanced_title">Advanced Properties</string>
+    <string name="p_advanced_summary">Only change this Properties if you know what you do!</string>
+    
+    <string name="p_progress_update_frequency_title">Progress Update Frequency</string>
+    <string name="p_progress_update_frequency_summary">Higher Values --> Less updating\nLower Values --> More updating</string>
+    
+    <string name="p_progress_update_freq_def_title">Reset Update Frequency</string>
+    <string name="p_progress_update_freq_def_summary">Reset the Update Frequency of the Downloaddialog/Notificationbar</string>
 </resources>

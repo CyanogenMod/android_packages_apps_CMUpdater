@@ -73,6 +73,17 @@ public class ConfigActivity extends PreferenceActivity
 			}
 		});
 		
+		pref = (Preference) findPreference(getResources().getString(R.string.p_progress_update_freq_def));
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
+		{
+			public boolean onPreferenceClick(Preference preference)
+			{
+				prefs.setProgressUpdateFreq(getResources().getString(R.string.p_progress_update_frequency_def));
+				Log.d(TAG, "ProgressUpdateFreq set back to default: " + prefs.getProgressUpdateFreq());
+				return true;
+			}
+		});
+		
 		pref = (Preference) findPreference(getResources().getString(R.string.p_display_older_mod_versions));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{

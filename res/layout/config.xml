@@ -69,4 +69,22 @@
 				android:summary="@string/p_update_file_url_def_summary" />
 		</PreferenceCategory>
 	</PreferenceScreen>
+	<PreferenceScreen
+		android:title="@string/p_advanced_title"
+		android:summary="@string/p_advanced_summary" >
+		<PreferenceCategory
+			android:title="@string/p_advanced_title" >
+			<ListPreference
+				android:key="@string/p_progress_update_frequency"
+				android:title="@string/p_progress_update_frequency_title"
+				android:summary="@string/p_progress_update_frequency_summary"
+				android:defaultValue="@string/p_progress_update_frequency_def"
+				android:entryValues="@array/progress_update_freq"
+				android:entries="@array/progress_update_freq" />
+			<Preference
+				android:key="@string/p_progress_update_freq_def"
+				android:title="@string/p_progress_update_freq_def_title"
+				android:summary="@string/p_progress_update_freq_def_summary" />
+		</PreferenceCategory>
+	</PreferenceScreen>
 </PreferenceScreen>
