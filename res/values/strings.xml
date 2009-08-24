@@ -84,6 +84,10 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     <string name="notification_tickertext">Downloading Update</string>
     <string name="notification_finished">Download finished</string>
     
+    <string name="toast_uninstall_old_Version">You have to uninstall any old Version of the App to proceed!</string>
+    
+    <string name="stable_experimental_description">S: Stable, X: Experimental</string>
+    
     <!-- .service.* Strings -->
     <string name="no_updates_found">No CM updates found</string>
     <string name="not_new_updates_found_ticker">New CM updates found!</string>

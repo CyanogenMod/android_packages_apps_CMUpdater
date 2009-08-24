@@ -30,11 +30,18 @@
 				android:layout_gravity="center_horizontal">
 			</Spinner>
 		</ScrollView>
+		<TextView
+	    	android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/stable_experimental_description"
+			android:gravity="center_horizontal"
+	    	style="@style/TextAppearance.Text" />
 	    <Button
 	    	android:id="@+id/download_update_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/choose_available_update_text"
+			android:layout_marginTop="20sp"
 		    style="@style/TextAppearance.Button"
 		    android:drawableLeft="@drawable/download" />
 		<TextView

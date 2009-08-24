@@ -1409,6 +1409,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		try
 		{
+			Toast.makeText(getBaseContext(), R.string.toast_uninstall_old_Version, Toast.LENGTH_LONG).show();
 			String packageName = "cmupdater.ui";
 			PackageManager p = getPackageManager();
 			//This throws an Exception, when the Package is not found
