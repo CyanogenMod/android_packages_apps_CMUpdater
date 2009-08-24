@@ -67,7 +67,7 @@ public class UpdateDownloaderService extends Service
 	private int PROGRESS_BAR_UPDATE_INTERVALL;
 	
 	private boolean prepareForDownloadCancel;
-	private int progressBarUpdate = PROGRESS_BAR_UPDATE_INTERVALL;
+	private int progressBarUpdate;
 
 	private final BroadcastReceiver mConnectivityChangesReceiver = new BroadcastReceiver()
 	{
@@ -218,6 +218,7 @@ public class UpdateDownloaderService extends Service
 
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
 		PROGRESS_BAR_UPDATE_INTERVALL = Preferences.getPreferences(this).getProgressUpdateFreq();
+		progressBarUpdate = PROGRESS_BAR_UPDATE_INTERVALL; 
 		Log.d(TAG, "ProgressBarIntervall: " + PROGRESS_BAR_UPDATE_INTERVALL);
 	}
 
