@@ -662,6 +662,8 @@ public class UpdateDownloaderService extends Service
 			//Update the Progress not so heavily
 			if (progressBarUpdate == PROGRESS_BAR_UPDATE_INTERVALL)
 			{
+				//Set the String back to 1
+				progressBarUpdate = 1;
 				// Shows Downloadstatus in Notificationbar. Initialize the Variables
 				NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 				Notification mNotification = new Notification(R.drawable.icon_notification, getResources().getString(R.string.notification_tickertext), System.currentTimeMillis());
