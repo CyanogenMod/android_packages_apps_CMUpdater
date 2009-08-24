@@ -268,17 +268,8 @@ public class UpdateDownloaderService extends Service
 	{
 		Log.d(TAG, "Download Service onDestroy Called");
 		mHandlerThread.getLooper().quit();
-		try
-		{
-			Thread.currentThread().interrupt();
-			mHandlerThread.interrupt();
-			Thread.currentThread().join();
-			mHandlerThread.join();
-		}
-		catch (InterruptedException e)
-		{
-			Log.e(TAG, "Exception on Thread closing", e);
-		}
+		Thread.currentThread().interrupt();
+		mHandlerThread.interrupt();
 		mDownloading = false;
 		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
 		Log.d(TAG, "Download Service Destroyed");
