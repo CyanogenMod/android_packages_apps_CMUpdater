@@ -66,12 +66,6 @@ public class UpdateDownloaderService extends Service
 	
 	private int PROGRESS_BAR_UPDATE_INTERVALL;
 	
-	private static NotificationManager mNotificationManager;
-	private Notification mNotification;
-	private RemoteViews mNotificationRemoteView;
-	private Intent mNotificationIntent;
-	private PendingIntent mNotificationContentIntent;
-	
 	private boolean prepareForDownloadCancel;
 	private int progressBarUpdate = PROGRESS_BAR_UPDATE_INTERVALL;
 
@@ -241,17 +235,6 @@ public class UpdateDownloaderService extends Service
 			}
 		}
 		Log.i(TAG, "Starting #" + startId + ": " + intent.getExtras());
-
-		// Shows Downloadstatus in Notificationbar. Initialize the Variables
-		mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		mNotification = new Notification(R.drawable.icon_notification, getResources().getString(R.string.notification_tickertext), System.currentTimeMillis());
-		mNotification.flags = Notification.FLAG_NO_CLEAR;
-		mNotification.flags = Notification.FLAG_ONGOING_EVENT;
-		mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
-		mNotificationIntent = new Intent(this, UpdateProcessInfo.class);
-		mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
-		mNotification.contentView = mNotificationRemoteView;
-		mNotification.contentIntent = mNotificationContentIntent;
 		
 		Message msg = mServiceHandler.obtainMessage();
 		msg.arg1 = startId;
@@ -679,10 +662,19 @@ public class UpdateDownloaderService extends Service
 			//Update the Progress not so heavily
 			if (progressBarUpdate == PROGRESS_BAR_UPDATE_INTERVALL)
 			{
+				// Shows Downloadstatus in Notificationbar. Initialize the Variables
+				NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+				Notification mNotification = new Notification(R.drawable.icon_notification, getResources().getString(R.string.notification_tickertext), System.currentTimeMillis());
+				mNotification.flags = Notification.FLAG_NO_CLEAR;
+				mNotification.flags = Notification.FLAG_ONGOING_EVENT;
+				RemoteViews mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
+				Intent mNotificationIntent = new Intent(this, UpdateProcessInfo.class);
+				PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
+				mNotification.contentView = mNotificationRemoteView;
+				mNotification.contentIntent = mNotificationContentIntent;
 				mSpeed = (downloaded/(int)(System.currentTimeMillis() - mStartTime));
 				mSpeed = (mSpeed > 0) ? mSpeed : 1;
 				mRemainingTime = ((mcontentLength - downloaded)/mSpeed)/1000;
-				//mstringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
 				mstringDownloaded = downloaded/1048576 + "/" + mcontentLength/1048576 + " MB";
 				mstringSpeed = mSpeed + " kB/s";
 				mstringRemainingTime = mRemainingTime + " seconds";
@@ -729,6 +721,10 @@ public class UpdateDownloaderService extends Service
 		
 		//Set the Notification to finished
 		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
+		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		Notification mNotification = new Notification(R.drawable.icon_notification, getResources().getString(R.string.notification_tickertext), System.currentTimeMillis());
+		Intent mNotificationIntent = new Intent(this, UpdateProcessInfo.class);
+		PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
 		mNotification = new Notification(R.drawable.icon, getResources().getString(R.string.notification_finished), System.currentTimeMillis());
 		mNotification.flags = Notification.FLAG_AUTO_CANCEL;
 		mNotificationContentIntent = PendingIntent.getActivity(getApplicationContext(), 0, i, 0);
@@ -771,15 +767,8 @@ public class UpdateDownloaderService extends Service
 	
 	private void DeleteDownloadStatusNotification(int id)
 	{
-		if(mNotificationManager != null)
-		{
-			//Delete the Downloading in Statusbar Notification
-			mNotificationManager.cancel(id);
-			Log.d(TAG, "Download Notification removed");
-		}
-		else
-		{
-			Log.d(TAG, "Download Service mNotificationManger is NULL. Notification not deleted");
-		}
+		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotificationManager.cancel(id);
+		Log.d(TAG, "Download Notification removed");
 	}
 }

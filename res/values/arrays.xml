@@ -49,15 +49,15 @@
     
     <!-- Update Frequency of the Downloaddialog, Notificationbar -->
     <string-array name="progress_update_freq">
-    	<item>1</item>
-		<item>2</item>
-		<item>3</item>
-		<item>4</item>
-		<item>5</item>
-		<item>6</item>
-		<item>7</item>
-		<item>8</item>
-		<item>9</item>
-		<item>10</item>
+    	<item>10</item>
+		<item>20</item>
+		<item>30</item>
+		<item>40</item>
+		<item>50</item>
+		<item>60</item>
+		<item>70</item>
+		<item>80</item>
+		<item>90</item>
+		<item>100</item>
     </string-array>
 </resources>
