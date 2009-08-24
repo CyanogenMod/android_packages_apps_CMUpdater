@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+	<Version name="3.5">
+		<item>New Menu Icons and new Notificatiobaricon thanks Prash</item>
+		<item>Updated Russian Translation</item>
+		<item>Download Status in the Notification Bar and can run in Background</item>
+		<item>User is now notified via Toast that he has to uninstall the old Version</item>
+		<item>Now Stable/Experimental is shown next to each Update Entry</item>
+		<item>New Advanced Preferences, to play with the Update Speed of the Download Notifications. Please handle with care ;)</item>
+	</Version>
 	<Version name="3.0">
 		<item>Download should be cancelled correctly(no more downloading in the background)</item>
 		<item>Download will now be cancelled, if one of the front keys on the g1 are pressed</item>
@@ -13,7 +21,7 @@
 		<item>Ringtone Preferences will now work</item>
 		<item>Vibrate Setting for Notifications</item>
 		<item>Fixed Bug, that Found Updates are not shown in Dropdown List</item>
-		<item>now you can do an adb logcat | grep "&gt;CM-Updater&lt;" so see only our Output from the App</item>
+		<item>now you can do an adb logcat | grep "CM-Updater" so see only our Output from the App</item>
 		<item>Last UpdateCheck? Date is now shown on GUI</item>
 		<item>If the update you're trying to download exists, the app will promp you to overwrite it or not</item>
 		<item>No more strechted Background on the updatechooser Layout when showing all Buttons</item>

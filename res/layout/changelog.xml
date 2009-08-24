@@ -4,11 +4,11 @@
     android:id="@+id/mainScroll"
     android:layout_width="wrap_content"
     android:layout_height="fill_parent">
-	<TableLayout
+	<LinearLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
-	    android:id="@+id/myTableLayout"
-	    android:layout_width="wrap_content"
+	    android:id="@+id/ChangelogLinearMain"
+	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    >
-	</TableLayout>
+	    android:orientation="vertical"
+	    />
 </ScrollView>

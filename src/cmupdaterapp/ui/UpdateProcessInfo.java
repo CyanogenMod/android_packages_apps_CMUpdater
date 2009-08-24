@@ -33,24 +33,27 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-//import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
-//import android.widget.TableLayout;
-//import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import cmupdaterapp.service.PlainTextUpdateServer;
@@ -825,33 +828,24 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		switch(item.getItemId())
 		{
 			case MENU_ID_UPDATE_NOW:
-				//If downloading, cancel it so the download wont proceed in the background
-				//cancelDownloading();
 				checkForUpdates();
 				return true;
 			case MENU_ID_SCAN_QR:
-				//If downloading, cancel it so the download wont proceed in the background
-				//cancelDownloading();
 				scanQRURL();
 				return true;
 			case MENU_ID_CONFIG:
-				//If downloading, cancel it so the download wont proceed in the background
-				//cancelDownloading();
 				showConfigActivity();
 				return true;
 			case MENU_ID_ABOUT:
-				//If downloading, cancel it so the download wont proceed in the background
-				//cancelDownloading();
 				showAboutDialog();
 				return true;
 			case MENU_ID_CHANGELOG:
-				//If downloading, cancel it so the download wont proceed in the background
-				//cancelDownloading();
-				//showChangelog();
-				Preferences prefs = Preferences.getPreferences(this);
-				Intent i = new Intent(Intent.ACTION_VIEW);
-				i.setData(Uri.parse(prefs.getAboutURL()));
-				startActivity(i);
+				showChangelog();
+				//Open the Browser for Changelog
+				//Preferences prefs = Preferences.getPreferences(this);
+				//Intent i = new Intent(Intent.ACTION_VIEW);
+				//i.setData(Uri.parse(prefs.getAboutURL()));
+				//startActivity(i);
 				return true;
 			default:
 				Log.w(TAG, "Unknown Menu ID:" + item.getItemId());
@@ -1069,56 +1063,49 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			switchToNoUpdatesAvailable();
 	}
 
-//	//Will be included in a future Release. Layout still messed up. Till implementation Changelog redirects to Google Code Page
-//	private void showChangelog()
-//	{
-//		Dialog dialog = new Dialog(this);
-//		dialog.setTitle("Changelog");
-//		dialog.setContentView(R.layout.changelog);
-//		List<Version> c = Changelog.getChangelog(this);
-//		TableLayout tl = (TableLayout)dialog.findViewById(R.id.myTableLayout);
-//		//Foreach Version
-//		for (Version v:c)
-//		{
-//			TableRow tr = new TableRow(this);
-////			tr.setLayoutParams(new LayoutParams(
-////					LayoutParams.FILL_PARENT,
-////					LayoutParams.WRAP_CONTENT));
-//			tr.setLayoutParams(new LayoutParams(
-//					LayoutParams.WRAP_CONTENT,
-//					LayoutParams.FILL_PARENT));
-//			TextView Version = new TextView(this);
-//			Version.setText("Version: "+v.Version);
-//			tr.addView(Version);
-//			tl.addView(tr,new TableLayout.LayoutParams(
-//					LayoutParams.FILL_PARENT,
-//					LayoutParams.WRAP_CONTENT));
-//			for(String Change:v.ChangeLogText)
-//			{
-//				TableRow tr2 = new TableRow(this);
-//				tr2.setLayoutParams(new LayoutParams(
-//						LayoutParams.FILL_PARENT,
-//						LayoutParams.WRAP_CONTENT));
-//				TextView tr2t = new TextView(this);
-//				tr2t.setText("*");
-//				tr2.addView(tr2t);
-//				tl.addView(tr2,new TableLayout.LayoutParams(
-//						LayoutParams.FILL_PARENT,
-//						LayoutParams.WRAP_CONTENT));
-//				TableRow Changetr = new TableRow(this);
-//				Changetr.setLayoutParams(new LayoutParams(
-//						LayoutParams.FILL_PARENT,
-//						LayoutParams.WRAP_CONTENT));
-//				TextView ChangeView = new TextView(this);
-//				ChangeView.setText(Change);
-//				Changetr.addView(ChangeView);
-//				tl.addView(Changetr,new TableLayout.LayoutParams(
-//						LayoutParams.FILL_PARENT,
-//						LayoutParams.WRAP_CONTENT));
-//			}
-//		}
-//		dialog.show();
-//	}
+	private void showChangelog()
+	{
+		Dialog dialog = new Dialog(this);
+		dialog.setTitle("Changelog");
+		dialog.setContentView(R.layout.changelog);
+		List<Version> c = Changelog.getChangelog(this);
+		LinearLayout main = (LinearLayout) dialog.findViewById(R.id.ChangelogLinearMain);
+		
+		//Foreach Version
+		for (Version v:c)
+		{
+			TextView versiontext = new TextView(this);
+			versiontext.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+			versiontext.setGravity(Gravity.CENTER);
+			versiontext.setTextColor(Color.RED);
+			versiontext.setText("Version " + v.Version);
+			versiontext.setTypeface(null, Typeface.BOLD);
+			versiontext.setTextSize((versiontext.getTextSize() * (float)1.5));
+			main.addView(versiontext);
+			//Foreach Changelogtext
+			for(String Change:v.ChangeLogText)
+			{
+				LinearLayout l = new LinearLayout(this);
+				l.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT));
+				l.setGravity(Gravity.CENTER_VERTICAL);
+				ImageView i = new ImageView(this);
+				i.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+				i.setImageResource(R.drawable.icon);
+				l.addView(i);
+				TextView ChangeText = new TextView(this);
+				ChangeText.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+				ChangeText.setText(Change);
+				l.addView(ChangeText);
+				main.addView(l);
+				//Horizontal Line
+				View ruler = new View(this);
+				ruler.setBackgroundColor(Color.WHITE);
+				main.addView(ruler, new ViewGroup.LayoutParams( ViewGroup.LayoutParams.FILL_PARENT, 1));
+			}
+		}
+		dialog.show();
+		System.gc();
+	}
 	
 //	@Override
 //	public void updateDownloadProgress(final int downloaded, final int total, final long StartTime)
