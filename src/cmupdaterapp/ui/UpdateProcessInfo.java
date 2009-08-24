@@ -994,6 +994,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		final Button selectUploadButton = (Button) findViewById(R.id.download_update_button);
 		Spinner sp = mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
 		TextView DownloadText = (TextView) findViewById(R.id.available_updates_text);
+		TextView stableExperimentalInfo = (TextView) findViewById(R.id.stable_experimental_description);
 		
 		Button CheckNowUpdateChooser = (Button) findViewById(R.id.check_now_button_update_chooser);
 		TextView CheckNowUpdateChooserText = (TextView) findViewById(R.id.check_now_update_chooser_text);
@@ -1025,6 +1026,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			selectUploadButton.setVisibility(View.GONE);
 			sp.setVisibility(View.GONE);
 			DownloadText.setVisibility(View.GONE);
+			stableExperimentalInfo.setVisibility(View.GONE);
 		}
 		
 		if (mfilenames != null && mfilenames.size() > 0)
