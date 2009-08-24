@@ -1409,7 +1409,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		try
 		{
-			Toast.makeText(getBaseContext(), R.string.toast_uninstall_old_Version, Toast.LENGTH_LONG).show();
 			String packageName = "cmupdater.ui";
 			PackageManager p = getPackageManager();
 			//This throws an Exception, when the Package is not found
@@ -1419,7 +1418,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				Log.i(TAG, "Old VersionCode: "+a.versionCode);
 				Intent intent1 = new Intent(Intent.ACTION_DELETE); 
 				Uri data = Uri.fromParts("package", packageName, null); 
-				intent1.setData(data); 
+				intent1.setData(data);
+				Toast.makeText(getBaseContext(), R.string.toast_uninstall_old_Version, Toast.LENGTH_LONG).show();
 				startActivity(intent1);
 				Log.i(TAG, "Uninstall Activity started");
 				return true;
