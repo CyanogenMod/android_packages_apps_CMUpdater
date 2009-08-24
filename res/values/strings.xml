@@ -193,4 +193,5 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     
     <string name="p_progress_update_freq_def_title">Reset Update Frequency</string>
     <string name="p_progress_update_freq_def_summary">Reset the Update Frequency of the Downloaddialog/Notificationbar</string>
+    <string name="p_progress_update_freq_def_toast">Progress Update Frequency set back to default</string>
 </resources>

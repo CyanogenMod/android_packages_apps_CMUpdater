@@ -79,6 +79,7 @@ public class ConfigActivity extends PreferenceActivity
 			public boolean onPreferenceClick(Preference preference)
 			{
 				prefs.setProgressUpdateFreq(getResources().getString(R.string.p_progress_update_frequency_def));
+				Toast.makeText(getBaseContext(), R.string.p_progress_update_freq_def_toast, Toast.LENGTH_LONG).show();
 				Log.d(TAG, "ProgressUpdateFreq set back to default: " + prefs.getProgressUpdateFreq());
 				return true;
 			}
