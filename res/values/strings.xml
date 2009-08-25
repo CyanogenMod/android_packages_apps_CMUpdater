@@ -92,6 +92,9 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     <string name="changelog_progress_title">Please wait ...</string>
     <string name="changelog_progress_body">Trying to download the changelog.xml</string>
     
+    <string name="changelog_button_text">Changelog of selected Update</string>
+    <string name="no_changelog_found">No Changelog found</string>
+    
     <!-- .service.* Strings -->
     <string name="no_updates_found">No CM updates found</string>
     <string name="not_new_updates_found_ticker">New CM updates found!</string>

@@ -85,6 +85,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 
 	public static final String KEY_REQUEST = "cmupdaterapp.keyRequest";
 	public static final String KEY_UPDATE_LIST = "cmupdaterapp.updateList";
+	
+	public static final int CHANGELOGTYPE_ROM = 1;
+	public static final int CHANGELOGTYPE_APP = 2;
 
 	private Spinner mUpdatesSpinner;
 	private PlainTextUpdateServer mUpdateServer;
@@ -102,6 +105,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 
 	private File mUpdateFolder;
 	private Spinner mExistingUpdatesSpinner;
+	
+	public static ProgressDialog pd;
 	
 //	private int mSpeed;
 //	private long mRemainingTime;
@@ -189,6 +194,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			{
 				downloadRequestedUpdate((UpdateInfo) mUpdatesSpinner.getSelectedItem());
 			}
+		}
+	};
+	
+	private final View.OnClickListener mChangelogButtonListener = new View.OnClickListener()
+	{
+		public void onClick(View v)
+		{
+			showChangelog(CHANGELOGTYPE_ROM);
 		}
 	};
 
@@ -839,7 +852,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				showAboutDialog();
 				return true;
 			case MENU_ID_CHANGELOG:
-				showChangelog();
+				showChangelog(CHANGELOGTYPE_APP);
 				//Open the Browser for Changelog
 				//Preferences prefs = Preferences.getPreferences(this);
 				//Intent i = new Intent(Intent.ACTION_VIEW);
@@ -988,6 +1001,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		Spinner sp = mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
 		TextView DownloadText = (TextView) findViewById(R.id.available_updates_text);
 		TextView stableExperimentalInfo = (TextView) findViewById(R.id.stable_experimental_description);
+		Button changelogButton = (Button) findViewById(R.id.show_changelog_button);
 		
 		Button CheckNowUpdateChooser = (Button) findViewById(R.id.check_now_button_update_chooser);
 		TextView CheckNowUpdateChooserText = (TextView) findViewById(R.id.check_now_update_chooser_text);
@@ -1005,7 +1019,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		if(availableUpdates != null)
 		{
 			selectUploadButton.setOnClickListener(mSelectUpdateButtonListener);
-
+			changelogButton.setOnClickListener(mChangelogButtonListener);
+			
 			ArrayAdapter<UpdateInfo> spAdapter = new ArrayAdapter<UpdateInfo>(
 					this,
 					android.R.layout.simple_spinner_item,
@@ -1020,6 +1035,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			sp.setVisibility(View.GONE);
 			DownloadText.setVisibility(View.GONE);
 			stableExperimentalInfo.setVisibility(View.GONE);
+			changelogButton.setVisibility(View.GONE);
 		}
 		
 		if (mfilenames != null && mfilenames.size() > 0)
@@ -1062,9 +1078,30 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			switchToNoUpdatesAvailable();
 	}
 
-	private void showChangelog()
+	private void showChangelog(int changelogType)
 	{
-		List<Version> c = Changelog.getChangelog(this);
+		boolean ChangelogEmpty = true;
+		Resources res = this.getResources();
+		List<Version> c = null;
+		switch (changelogType)
+		{
+			case CHANGELOGTYPE_ROM:
+				c = Changelog.getRomChangelog((UpdateInfo) mUpdatesSpinner.getSelectedItem());
+				break;
+			case CHANGELOGTYPE_APP:
+				pd = ProgressDialog.show(this, res.getString(R.string.changelog_progress_title), res.getString(R.string.changelog_progress_body), true);
+				c = Changelog.getAppChangelog(this);
+			try {
+				Changelog.t.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+				break;
+			default:
+				return;
+		}
+		
 		if (c == null)
 			return;
 		Dialog dialog = new Dialog(this);
@@ -1075,6 +1112,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		//Foreach Version
 		for (Version v:c)
 		{
+			if (v.ChangeLogText.isEmpty())
+			{
+				continue;
+			}
+			ChangelogEmpty = false;
 			TextView versiontext = new TextView(this);
 			versiontext.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 			versiontext.setGravity(Gravity.CENTER);
@@ -1104,7 +1146,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				main.addView(ruler, new ViewGroup.LayoutParams( ViewGroup.LayoutParams.FILL_PARENT, 1));
 			}
 		}
-		dialog.show();
+		if(!ChangelogEmpty)
+			dialog.show();
+		else
+			Toast.makeText(this, res.getString(R.string.no_changelog_found), Toast.LENGTH_SHORT).show();
 		System.gc();
 	}
 	

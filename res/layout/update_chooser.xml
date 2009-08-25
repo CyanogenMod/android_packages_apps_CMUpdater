@@ -45,6 +45,14 @@
 			android:layout_marginTop="20sp"
 		    style="@style/TextAppearance.Button"
 		    android:drawableLeft="@drawable/download" />
+		<Button
+	    	android:id="@+id/show_changelog_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/changelog_button_text"
+			android:layout_marginTop="20sp"
+		    style="@style/TextAppearance.Button"
+		    android:drawableLeft="@drawable/icon" />
 		<TextView
 	    	android:id="@+id/check_now_update_chooser_text"
 	    	android:layout_width="fill_parent"

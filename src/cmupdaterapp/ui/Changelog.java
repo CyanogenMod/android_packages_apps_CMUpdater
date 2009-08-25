@@ -3,6 +3,7 @@ package cmupdaterapp.ui;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
@@ -11,11 +12,10 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
+import cmupdaterapp.service.UpdateInfo;
 import cmupdaterapp.utils.Preferences;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -24,17 +24,15 @@ import android.widget.Toast;
 public class Changelog extends Activity
 {
 	private static final String TAG = "<CM-Updater> Changelog";
-	static ProgressDialog pd;
 	static List<Version> r = null;
 	static Preferences p;
+	public static Thread t;
 	
-	static List<Version> getChangelog(final IUpdateProcessInfo upi)
+	static List<Version> getAppChangelog(final IUpdateProcessInfo upi)
 	{ 
-		Resources res = upi.getResources();
 		p = Preferences.getPreferences(upi);
-		pd = ProgressDialog.show(upi, res.getString(R.string.changelog_progress_title), res.getString(R.string.changelog_progress_body), true);
-		
-		new Thread()
+
+		t = new Thread()
 		{
 			public void run()
 			{
@@ -77,7 +75,8 @@ public class Changelog extends Activity
 				@SuppressWarnings("unchecked")
 				public void handleMessage(Message msg)
 				{
-					pd.dismiss();
+					if (UpdateProcessInfo.pd != null)
+						UpdateProcessInfo.pd.dismiss();
 					if (msg.obj instanceof String)
 					{
 						Toast.makeText(upi, (CharSequence) msg.obj, Toast.LENGTH_LONG).show();
@@ -88,7 +87,22 @@ public class Changelog extends Activity
 					Thread.currentThread().interrupt();
 		        }
 		    };
-      }.start();
+      };
+      t.start();
       return r;
+	}
+
+	static List<Version> getRomChangelog(UpdateInfo ui)
+	{
+		Version v = new Version();
+		List<Version> returnValue = new LinkedList<Version>();
+		v.Version = ui.displayVersion;
+		for (String str : ui.description.split("\\|"))
+		{
+			if(str != "")
+				v.ChangeLogText.add(str);
+		}
+		returnValue.add(v);
+		return returnValue;
 	}
 }
