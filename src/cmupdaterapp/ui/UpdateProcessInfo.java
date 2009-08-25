@@ -41,7 +41,6 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -1065,10 +1064,12 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 
 	private void showChangelog()
 	{
+		List<Version> c = Changelog.getChangelog(this);
+		if (c == null)
+			return;
 		Dialog dialog = new Dialog(this);
 		dialog.setTitle("Changelog");
 		dialog.setContentView(R.layout.changelog);
-		List<Version> c = Changelog.getChangelog(this);
 		LinearLayout main = (LinearLayout) dialog.findViewById(R.id.ChangelogLinearMain);
 		
 		//Foreach Version
@@ -1358,30 +1359,25 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 	}
 	
-	public boolean onKeyDown(int keyCode, KeyEvent event)
-	{ 
-		switch (keyCode)
-		{ 
-	        case KeyEvent.KEYCODE_BACK: 
-	        	//cancelDownloading(); 
-	        	break; 
-	        case KeyEvent.KEYCODE_HOME: 
-	        	//cancelDownloading();
-	        	break; 
-	        case KeyEvent.KEYCODE_DPAD_CENTER : 
-	        	//cancelDownloading();
-	        	break; 
-	        case KeyEvent.KEYCODE_ENDCALL : 
-	        	//cancelDownloading();
-	        	break; 
-	        case KeyEvent.ACTION_DOWN : 
-	        	//cancelDownloading();
-	        	break; 
-	        default: 
-	        	break; 
-        } 
-        return super.onKeyDown(keyCode, event); 
-   }
+//	public boolean onKeyDown(int keyCode, KeyEvent event)
+//	{ 
+//		switch (keyCode)
+//		{ 
+//	        case KeyEvent.KEYCODE_BACK: 
+//	        	break; 
+//	        case KeyEvent.KEYCODE_HOME:
+//	        	break; 
+//	        case KeyEvent.KEYCODE_DPAD_CENTER :
+//	        	break; 
+//	        case KeyEvent.KEYCODE_ENDCALL : 
+//	        	break; 
+//	        case KeyEvent.ACTION_DOWN : 
+//	        	break; 
+//	        default: 
+//	        	break; 
+//        } 
+//        return super.onKeyDown(keyCode, event); 
+//   }
 	
 //	private void cancelDownloading()
 //	{

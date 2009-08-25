@@ -161,7 +161,7 @@ public class Preferences
 	 
 	public String getUpdateFolder()
 	{
-		return mPrefs.getString(mRes.getString(R.string.conf_update_folder), mRes.getString(R.string.conf_update_folder));
+		return mRes.getString(R.string.conf_update_folder);
 	}
 	
 	public int getProgressUpdateFreq()
@@ -184,13 +184,18 @@ public class Preferences
 	
 	public String getAboutURL()
 	{
-		return mPrefs.getString(mRes.getString(R.string.conf_about_url), mRes.getString(R.string.conf_about_url));
+		return mRes.getString(R.string.conf_about_url);
+	}
+	
+	public String getChangelogURL()
+	{
+		return mRes.getString(R.string.conf_changelog_url);
 	}
 	
 	public String getThemeFile()
 	{
-		Log.d(TAG, "ThemeFile: "+ mPrefs.getString(mRes.getString(R.string.conf_theme_version_file),  mRes.getString(R.string.conf_theme_version_file)));
-		return mPrefs.getString(mRes.getString(R.string.conf_theme_version_file),  mRes.getString(R.string.conf_theme_version_file));
+		Log.d(TAG, "ThemeFile: "+ mRes.getString(R.string.conf_theme_version_file));
+		return mRes.getString(R.string.conf_theme_version_file);
 	}
 	
 	public String[] getThemeInformations()

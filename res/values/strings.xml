@@ -15,6 +15,7 @@
     <string name="conf_about_url">http://code.google.com/p/cyanogen-updater/</string>
     <string name="conf_update_folder">cm-updates</string>
     <string name="conf_theme_version_file">/sdcard/cm-updates/themes.theme</string>
+    <string name="conf_changelog_url">http://cyanogen-updater.googlecode.com/files/changelog.xml</string>
     
     <!-- .ui.* Strings -->
     <string name="apply_now_button_text">Apply Now</string>
@@ -87,6 +88,9 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     <string name="toast_uninstall_old_Version">You have to uninstall any old Version of the App to proceed!</string>
     
     <string name="stable_experimental_description">S: Stable, X: Experimental</string>
+    
+    <string name="changelog_progress_title">Please wait ...</string>
+    <string name="changelog_progress_body">Trying to download the changelog.xml</string>
     
     <!-- .service.* Strings -->
     <string name="no_updates_found">No CM updates found</string>
