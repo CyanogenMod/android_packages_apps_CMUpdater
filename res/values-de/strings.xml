@@ -127,7 +127,7 @@ Wenn sie ein Backup erstellen wollen, booten sie bitte vorher manuell in den Rec
     <string name="p_display_older_mod_versions_summary">Updates von älteren Versionen anzeigen (Nötig um Downzugraden)</string>
     <string name="p_display_older_mod_versions_changed">Bitte erneut auf Updates prüfen, um die Liste der verfügbaren Updates zu aktualisieren</string>
     
-    <string name="p_display_allow_experimental_versions_title">Experimental Builds</string>
+    <string name="p_display_allow_experimental_versions_title">Entwickler Versionen</string>
     <string name="p_display_allow_experimental_versions_summary">Entwickler Versionen anzeigen (non-stable)</string>
     <string name="p_display_allow_experimental_versions_changed">Bitte erneut auf Updates prüfen, um die Liste der verfügbaren Updates zu aktualisieren</string>
     
