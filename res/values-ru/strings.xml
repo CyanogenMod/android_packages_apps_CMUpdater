@@ -77,6 +77,9 @@
     <string name="changelog_button_text">Изменения Обновления</string>
     <string name="no_changelog_found">Файл изменений не найден</string>
     
+    <string name="true_string">да</string>
+    <string name="false_string">нет</string>
+    
     <!-- .service.* Strings -->
     <string name="no_updates_found">Новых версий прошивки не найдено.</string>
     <string name="not_new_updates_found_ticker">Найдена новая версия!</string>
