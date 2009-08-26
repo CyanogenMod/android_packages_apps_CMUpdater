@@ -46,6 +46,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -194,6 +195,28 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			{
 				downloadRequestedUpdate((UpdateInfo) mUpdatesSpinner.getSelectedItem());
 			}
+		}
+	};
+	
+	private final Spinner.OnItemSelectedListener mSpinnerChanged = new Spinner.OnItemSelectedListener()
+	{
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+		{
+			Button changelogButton = (Button) findViewById(R.id.show_changelog_button);
+			String changelog = ((UpdateInfo) mUpdatesSpinner.getSelectedItem()).description;
+			if (changelog == null || changelog == "")
+			{
+				changelogButton.setVisibility(View.GONE);
+			}
+			else
+			{
+				changelogButton.setVisibility(View.VISIBLE);
+			}
+		}
+
+		public void onNothingSelected(AdapterView<?> arg0)
+		{
+
 		}
 	};
 	
@@ -1020,6 +1043,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			selectUploadButton.setOnClickListener(mSelectUpdateButtonListener);
 			changelogButton.setOnClickListener(mChangelogButtonListener);
+			mUpdatesSpinner.setOnItemSelectedListener(mSpinnerChanged);
 			
 			ArrayAdapter<UpdateInfo> spAdapter = new ArrayAdapter<UpdateInfo>(
 					this,
