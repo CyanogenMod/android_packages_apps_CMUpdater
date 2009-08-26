@@ -38,7 +38,9 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -107,7 +109,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	private File mUpdateFolder;
 	private Spinner mExistingUpdatesSpinner;
 	
-	public static ProgressDialog pd;
+	public static ProgressDialog ChangelogProgressDialog;
+	public static Handler ChangelogProgressHandler;
+	public Thread ChangelogThread;
+	public List<Version> ChangelogList = null;
 	
 //	private int mSpeed;
 //	private long mRemainingTime;
@@ -224,7 +229,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		public void onClick(View v)
 		{
-			showChangelog(CHANGELOGTYPE_ROM);
+			getChangelog(CHANGELOGTYPE_ROM);
 		}
 	};
 
@@ -875,7 +880,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				showAboutDialog();
 				return true;
 			case MENU_ID_CHANGELOG:
-				showChangelog(CHANGELOGTYPE_APP);
+				getChangelog(CHANGELOGTYPE_APP);
 				//Open the Browser for Changelog
 				//Preferences prefs = Preferences.getPreferences(this);
 				//Intent i = new Intent(Intent.ACTION_VIEW);
@@ -1102,31 +1107,59 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			switchToNoUpdatesAvailable();
 	}
 
-	private void showChangelog(int changelogType)
+	private void getChangelog(int changelogType)
 	{
-		boolean ChangelogEmpty = true;
-		Resources res = this.getResources();
-		List<Version> c = null;
+		Resources res = this.getResources(); 
+		
+		//Handler for the ThreadClass, that downloads the AppChangelog
+		ChangelogProgressHandler = new Handler()
+		{
+			@SuppressWarnings("unchecked")
+			public void handleMessage(Message msg)
+			{
+				if (UpdateProcessInfo.ChangelogProgressDialog != null)
+					UpdateProcessInfo.ChangelogProgressDialog.dismiss();
+				if (msg.obj instanceof String)
+				{
+					Toast.makeText(UpdateProcessInfo.this, (CharSequence) msg.obj, Toast.LENGTH_LONG).show();
+					ChangelogList = null;
+					UpdateProcessInfo.this.ChangelogThread.interrupt();
+					UpdateProcessInfo.ChangelogProgressDialog.dismiss();
+					displayChangelog();
+				}
+				else if (msg.obj instanceof List<?>)
+				{
+					ChangelogList = (List<Version>) msg.obj;
+					UpdateProcessInfo.this.ChangelogThread.interrupt();
+					UpdateProcessInfo.ChangelogProgressDialog.dismiss();
+					displayChangelog();
+				}
+	        }
+	    };
+		
 		switch (changelogType)
 		{
 			case CHANGELOGTYPE_ROM:
-				c = Changelog.getRomChangelog((UpdateInfo) mUpdatesSpinner.getSelectedItem());
+				//Get the ROM Changelog and Display the Changelog
+				ChangelogList = Changelog.getRomChangelog((UpdateInfo) mUpdatesSpinner.getSelectedItem());
+				displayChangelog();
 				break;
 			case CHANGELOGTYPE_APP:
-				pd = ProgressDialog.show(this, res.getString(R.string.changelog_progress_title), res.getString(R.string.changelog_progress_body), true);
-				c = Changelog.getAppChangelog(this);
-			try {
-				Changelog.t.join();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				//Show a ProgressDialog and start the Thread. The Dialog is shown in the Handler Function
+				ChangelogProgressDialog = ProgressDialog.show(this, res.getString(R.string.changelog_progress_title), res.getString(R.string.changelog_progress_body), true);
+				ChangelogThread = new Thread(new Changelog(this));
+				ChangelogThread.start();
 				break;
 			default:
 				return;
 		}
-		
-		if (c == null)
+	}
+	
+	private void displayChangelog()
+	{
+		Resources res = this.getResources(); 
+		boolean ChangelogEmpty = true;
+		if (ChangelogList == null)
 			return;
 		Dialog dialog = new Dialog(this);
 		dialog.setTitle("Changelog");
@@ -1134,7 +1167,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		LinearLayout main = (LinearLayout) dialog.findViewById(R.id.ChangelogLinearMain);
 		
 		//Foreach Version
-		for (Version v:c)
+		for (Version v:ChangelogList)
 		{
 			if (v.ChangeLogText.isEmpty())
 			{
@@ -1176,41 +1209,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			Toast.makeText(this, res.getString(R.string.no_changelog_found), Toast.LENGTH_SHORT).show();
 		System.gc();
 	}
-	
-//	@Override
-//	public void updateDownloadProgress(final int downloaded, final int total, final long StartTime)
-//	{
-//		if(mProgressBar ==null)return;
-//
-//		mSpeed = (downloaded/(int)(System.currentTimeMillis() - StartTime));
-//		mSpeed = (mSpeed > 0) ? mSpeed : 1;
-//		mRemainingTime = ((total - downloaded)/mSpeed)/1000;
-//
-//		final String stringDownloaded = (downloaded/(1024*1024)) + "/" + (total/(1024*1024)) + " MB";
-//		final String stringSpeed = Integer.toString(mSpeed) + " kB/s";
-//		final String stringRemainingTime = Long.toString(mRemainingTime) + " seconds";
-//		
-//		mProgressBar.post(new Runnable()
-//		{
-//			public void run()
-//			{
-//				if(total < 0)
-//				{
-//					mProgressBar.setIndeterminate(true);
-//				}
-//				else
-//				{
-//					mProgressBar.setIndeterminate(false);
-//					mProgressBar.setMax(total);
-//				}
-//				mProgressBar.setProgress(downloaded);
-//
-//				mDownloadedBytesTextView.setText(stringDownloaded);
-//				mDownloadSpeedTextView.setText(stringSpeed);
-//				mRemainingTimeTextView.setText(stringRemainingTime);
-//			}
-//		});
-//	}
 
 	@Override
 	public void updateDownloadProgress(final int downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)

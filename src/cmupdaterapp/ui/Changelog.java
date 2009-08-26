@@ -13,86 +13,24 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import cmupdaterapp.service.UpdateInfo;
+import cmupdaterapp.ui.UpdateProcessInfo;
 import cmupdaterapp.utils.Preferences;
 
-import android.app.Activity;
-import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
-public class Changelog extends Activity
+class Changelog implements Runnable
 {
 	private static final String TAG = "<CM-Updater> Changelog";
-	static List<Version> r = null;
-	static Preferences p;
-	public static Thread t;
+	Preferences p;
 	
-	static List<Version> getAppChangelog(final IUpdateProcessInfo upi)
-	{ 
+	public Changelog(IUpdateProcessInfo upi)
+	{
 		p = Preferences.getPreferences(upi);
-
-		t = new Thread()
-		{
-			public void run()
-			{
-				URL url;
-				InputSource i;
-				
-				Message m = null;
-				try
-				{
-					m = new Message();
-					url = new URL(p.getChangelogURL());
-					i = new InputSource(url.openStream());
-		        	SAXParserFactory spf = SAXParserFactory.newInstance(); 
-		        	SAXParser sp = spf.newSAXParser();
-		        	XMLReader xr = sp.getXMLReader(); 
-		        	ChangelogHandler ch = new ChangelogHandler(); 
-		        	xr.setContentHandler(ch); 
-		        	xr.parse(i);  
-		        	m.obj = ch.getParsedData();
-		        }
-		        catch (MalformedURLException e)
-				{
-		        	m.obj = e.toString();
-					Log.e(TAG, "Malformed URL!", e);
-				}
-				catch (IOException e)
-				{
-					m.obj = e.toString();
-					Log.e(TAG, "Exception on opening Input Stream", e);
-				}
-		        catch (Exception e)
-		        {
-		        	m.obj = e.toString();
-		        	Log.e(TAG, "Exception in Reading ChangelogXMLFile", e);
-		        }
-		        handler.sendMessage(m);
-			}
-			private Handler handler = new Handler()
-			{
-				@SuppressWarnings("unchecked")
-				public void handleMessage(Message msg)
-				{
-					if (UpdateProcessInfo.pd != null)
-						UpdateProcessInfo.pd.dismiss();
-					if (msg.obj instanceof String)
-					{
-						Toast.makeText(upi, (CharSequence) msg.obj, Toast.LENGTH_LONG).show();
-						r = null;
-					}
-					else if (msg.obj instanceof List<?>)
-						r = (List<Version>) msg.obj;
-					Thread.currentThread().interrupt();
-		        }
-		    };
-      };
-      t.start();
-      return r;
 	}
-
-	static List<Version> getRomChangelog(UpdateInfo ui)
+	
+	//Returns the RomChangelog without a Thread
+	public static List<Version> getRomChangelog(UpdateInfo ui)
 	{
 		Version v = new Version();
 		List<Version> returnValue = new LinkedList<Version>();
@@ -104,5 +42,43 @@ public class Changelog extends Activity
 		}
 		returnValue.add(v);
 		return returnValue;
+	}
+	
+	//Gets the AppChangelog in a Thread
+	public void run()
+	{
+		URL url;
+		InputSource i;
+		
+		Message m = null;
+		try
+		{
+			m = new Message();
+			url = new URL(p.getChangelogURL());
+			i = new InputSource(url.openStream());
+        	SAXParserFactory spf = SAXParserFactory.newInstance(); 
+        	SAXParser sp = spf.newSAXParser();
+        	XMLReader xr = sp.getXMLReader(); 
+        	ChangelogHandler ch = new ChangelogHandler(); 
+        	xr.setContentHandler(ch); 
+        	xr.parse(i);  
+        	m.obj = ch.getParsedData();
+        }
+        catch (MalformedURLException e)
+		{
+        	m.obj = e.toString();
+			Log.e(TAG, "Malformed URL!", e);
+		}
+		catch (IOException e)
+		{
+			m.obj = e.toString();
+			Log.e(TAG, "Exception on opening Input Stream", e);
+		}
+        catch (Exception e)
+        {
+        	m.obj = e.toString();
+        	Log.e(TAG, "Exception in Reading ChangelogXMLFile", e);
+        }
+        UpdateProcessInfo.ChangelogProgressHandler.sendMessage(m);
 	}
 }
