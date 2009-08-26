@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -131,16 +132,17 @@ public class ApplyUploadActivity extends Activity
 	protected void onStart()
 	{
 		super.onStart();
+		Resources res = getResources();
 		mUpdateInfo = (UpdateInfo) getIntent().getExtras().getSerializable(KEY_UPDATE_INFO);
-		String template = getResources().getString(R.string.apply_title_textview_text);
+		String template = res.getString(R.string.apply_title_textview_text);
 		mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
 		//Set the right wallpaper
 		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
-		int Orientation = getResources().getConfiguration().orientation;
+		int Orientation = res.getConfiguration().orientation;
 		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
-			l.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_landscape));
+			l.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
 		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
-			l.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
+			l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 	}
 }

@@ -1,6 +1,7 @@
 package cmupdaterapp.ui;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -44,12 +45,13 @@ public class ConfigActivity extends PreferenceActivity
 		addPreferencesFromResource(R.layout.config);
 		
 		prefs = Preferences.getPreferences(ConfigActivity.this);
+		final Resources res = getResources();
 
-		ListPreference updateCheckFreqPref = (ListPreference) findPreference(getResources().getString(R.string.p_key_update_check_freq));
+		ListPreference updateCheckFreqPref = (ListPreference) findPreference(res.getString(R.string.p_key_update_check_freq));
 
 		updateCheckFreqPref.setOnPreferenceChangeListener(mUpdateCheckingFrequencyListener);
 		
-		Preference pref = (Preference) findPreference(getResources().getString(R.string.p_update_file_url_qr));
+		Preference pref = (Preference) findPreference(res.getString(R.string.p_update_file_url_qr));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
 			public boolean onPreferenceClick(Preference preference)
@@ -60,12 +62,12 @@ public class ConfigActivity extends PreferenceActivity
 			}
 		});
 		
-		pref = (Preference) findPreference(getResources().getString(R.string.p_update_file_url_def));
+		pref = (Preference) findPreference(res.getString(R.string.p_update_file_url_def));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
 			public boolean onPreferenceClick(Preference preference)
 			{
-				prefs.setUpdateFileURL(getResources().getString(R.string.conf_update_server_url_def));
+				prefs.setUpdateFileURL(res.getString(R.string.conf_update_server_url_def));
 				Toast.makeText(getBaseContext(), R.string.p_update_file_url_changed, Toast.LENGTH_LONG).show();
 				Log.d(TAG, "Update File URL set back to default: " + prefs.getUpdateFileURL());
 				ConfigActivity.this.finish();
@@ -73,19 +75,19 @@ public class ConfigActivity extends PreferenceActivity
 			}
 		});
 		
-		pref = (Preference) findPreference(getResources().getString(R.string.p_progress_update_freq_def));
+		pref = (Preference) findPreference(res.getString(R.string.p_progress_update_freq_def));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
 			public boolean onPreferenceClick(Preference preference)
 			{
-				prefs.setProgressUpdateFreq(getResources().getString(R.string.p_progress_update_frequency_def));
+				prefs.setProgressUpdateFreq(res.getString(R.string.p_progress_update_frequency_def));
 				Toast.makeText(getBaseContext(), R.string.p_progress_update_freq_def_toast, Toast.LENGTH_LONG).show();
 				Log.d(TAG, "ProgressUpdateFreq set back to default: " + prefs.getProgressUpdateFreq());
 				return true;
 			}
 		});
 		
-		pref = (Preference) findPreference(getResources().getString(R.string.p_display_older_mod_versions));
+		pref = (Preference) findPreference(res.getString(R.string.p_display_older_mod_versions));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			public boolean onPreferenceChange(Preference preference, Object newValue)
@@ -95,7 +97,7 @@ public class ConfigActivity extends PreferenceActivity
 			}
 		});
 
-		pref = (Preference) findPreference(getResources().getString(R.string.p_display_allow_experimental_versions));
+		pref = (Preference) findPreference(res.getString(R.string.p_display_allow_experimental_versions));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			public boolean onPreferenceChange(Preference preference, Object newValue)

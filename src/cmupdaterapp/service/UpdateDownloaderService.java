@@ -714,15 +714,16 @@ public class UpdateDownloaderService extends Service
 		i.putExtra(ApplyUploadActivity.KEY_UPDATE_INFO, ui);
 		
 		//Set the Notification to finished
+		Resources res = getResources();
 		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		Notification mNotification = new Notification(R.drawable.icon_notification, getResources().getString(R.string.notification_tickertext), System.currentTimeMillis());
+		Notification mNotification = new Notification(R.drawable.icon_notification, res.getString(R.string.notification_tickertext), System.currentTimeMillis());
 		Intent mNotificationIntent = new Intent(this, UpdateProcessInfo.class);
 		PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
-		mNotification = new Notification(R.drawable.icon, getResources().getString(R.string.notification_finished), System.currentTimeMillis());
+		mNotification = new Notification(R.drawable.icon, res.getString(R.string.notification_finished), System.currentTimeMillis());
 		mNotification.flags = Notification.FLAG_AUTO_CANCEL;
 		mNotificationContentIntent = PendingIntent.getActivity(getApplicationContext(), 0, i, 0);
-		mNotification.setLatestEventInfo(getApplicationContext(), getResources().getString(R.string.app_name), getResources().getString(R.string.notification_finished), mNotificationContentIntent);
+		mNotification.setLatestEventInfo(getApplicationContext(), res.getString(R.string.app_name), res.getString(R.string.notification_finished), mNotificationContentIntent);
 		Uri notificationRingtone = Preferences.getPreferences(getApplicationContext()).getConfiguredRingtone();
 		if(Preferences.getPreferences(getApplicationContext()).getVibrate())
 			mNotification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;

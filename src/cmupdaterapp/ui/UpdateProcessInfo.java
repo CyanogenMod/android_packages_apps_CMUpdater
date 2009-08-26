@@ -680,19 +680,20 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		ScrollView s = (ScrollView) findViewById(R.id.mainScroll);
 		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
+		Resources res = getResources();
 		if (s!=null)
 		{
 			if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-				s.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_landscape));
+				s.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
 			else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
-				s.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
+				s.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 		}
 		else if (l!=null)
 		{
 			if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-				l.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_landscape));
+				l.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
 			else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
-				l.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
+				l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 		}
         super.onConfigurationChanged(newConfig); 
         Log.i(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
@@ -705,40 +706,37 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	protected void onStop()
 	{
 		super.onStop();
-		if (mUpdateDownloaderService != null)
+		try
+		{
+			saveState();
+		}
+		catch (IOException e)
+		{
+			Log.w(TAG, "Unable to save state", e);
+		}
+		Log.d(TAG, "App closed");
+
+		if(mUpdateDownloaderService != null && !mUpdateDownloaderService.isDownloading())
 		{
 			try
 			{
-				saveState();
+				unbindService(mUpdateDownloaderServiceConnection);
 			}
-			catch (IOException e)
+			catch (Exception ex)
 			{
-				Log.w(TAG, "Unable to save state", e);
+				Log.e(TAG, "Exit App: mUpdateDownloaderServiceConnection unbind failed", ex);
 			}
-			Log.d(TAG, "App closed");
-			
-			if(!mUpdateDownloaderService.isDownloading())
+			try
 			{
-				try
-				{
-					unbindService(mUpdateDownloaderServiceConnection);
-				}
-				catch (Exception ex)
-				{
-					Log.e(TAG, "Exit App: mUpdateDownloaderServiceConnection unbind failed", ex);
-				}
-				try
-				{
-					stopService(mUpdateDownloaderServiceIntent);
-				}
-				catch (Exception ex)
-				{
-					Log.e(TAG, "Exit App: mUpdateDownloaderServiceIntent could not be Stopped", ex);
+				stopService(mUpdateDownloaderServiceIntent);
 			}
+			catch (Exception ex)
+			{
+				Log.e(TAG, "Exit App: mUpdateDownloaderServiceIntent could not be Stopped", ex);
 			}
 		}
 		else
-			Log.e(TAG, "mUpdateDownloaderService is NULL");
+			Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
 	}
 
 	private void saveState() throws IOException
@@ -917,24 +915,35 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			}
 		});
 			
-		TextView currentVersion = (TextView) findViewById(R.id.no_updates_current_version);
-		TextView experimentalBuilds = (TextView) findViewById(R.id.experimental_updates_textview);
-		TextView showDowngrades = (TextView) findViewById(R.id.show_downgrades_textview);
-		TextView lastUpdateCheck = (TextView) findViewById(R.id.last_update_check);
-		String pattern = getResources().getString(R.string.current_version_text);
+		Resources res = getResources();
+		TextView currentVersiontv = (TextView) findViewById(R.id.no_updates_current_version);
+		TextView experimentalBuildstv = (TextView) findViewById(R.id.experimental_updates_textview);
+		TextView showDowngradestv = (TextView) findViewById(R.id.show_downgrades_textview);
+		TextView lastUpdateChecktv = (TextView) findViewById(R.id.last_update_check);
+		String pattern = res.getString(R.string.current_version_text);
 		Preferences prefs = Preferences.getPreferences(this);
-		currentVersion.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
-		experimentalBuilds.setText(MessageFormat.format(getResources().getString(R.string.p_display_allow_experimental_versions_title)+": {0}", Boolean.toString(prefs.allowExperimental())));
-		showDowngrades.setText(MessageFormat.format(getResources().getString(R.string.p_display_older_mod_versions_title)+": {0}", Boolean.toString(prefs.showDowngrades())));
-		lastUpdateCheck.setText(MessageFormat.format(getResources().getString(R.string.last_update_check_text)+": {0} {1}", DateFormat.getDateInstance().format(prefs.getLastUpdateCheck()), DateFormat.getTimeInstance().format(prefs.getLastUpdateCheck())));
+		String allowExperimental;
+		String showDowngrades;
+		if(prefs.allowExperimental())
+			allowExperimental = res.getString(R.string.true_string);
+		else
+			allowExperimental = res.getString(R.string.false_string);
+		if(prefs.showDowngrades())
+			showDowngrades = res.getString(R.string.true_string);
+		else
+			showDowngrades = res.getString(R.string.false_string);
+		currentVersiontv.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
+		experimentalBuildstv.setText(MessageFormat.format(res.getString(R.string.p_display_allow_experimental_versions_title)+": {0}", allowExperimental));
+		showDowngradestv.setText(MessageFormat.format(res.getString(R.string.p_display_older_mod_versions_title)+": {0}", showDowngrades));
+		lastUpdateChecktv.setText(MessageFormat.format(res.getString(R.string.last_update_check_text)+": {0} {1}", DateFormat.getDateInstance().format(prefs.getLastUpdateCheck()), DateFormat.getTimeInstance().format(prefs.getLastUpdateCheck())));
 		
 		//Set the right wallpaper
 		ScrollView s = (ScrollView) findViewById(R.id.mainScroll);
-		int Orientation = getResources().getConfiguration().orientation;
+		int Orientation = res.getConfiguration().orientation;
 		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
-			s.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_landscape));
+			s.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
 		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
-			s.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
+			s.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 	}
 
 	@Override
@@ -952,6 +961,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			mFileName = "Unable to get Filename";
 			Log.e(TAG, "Unable to get Filename", e);
 		}
+		
+		Resources res = getResources();
+		
 		mProgressBar = (ProgressBar) findViewById(R.id.download_progress_bar);
 		mDownloadedBytesTextView = (TextView) findViewById(R.id.bytes_downloaded_text_view);
 
@@ -970,11 +982,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		
 		//Set the right wallpaper
 		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
-		int Orientation = getResources().getConfiguration().orientation;
+		int Orientation = res.getConfiguration().orientation;
 		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
-			l.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_landscape));
+			l.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
 		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
-			l.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
+			l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 	}
 
 	@Override
@@ -1008,16 +1020,27 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		setContentView(R.layout.update_chooser);
 		((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).cancel(R.string.not_new_updates_found_title);
 		
-		TextView currentVersion = (TextView) findViewById(R.id.up_chooser_current_version);
-		TextView experimentalBuilds = (TextView) findViewById(R.id.experimental_updates_textview);
-		TextView showDowngrades = (TextView) findViewById(R.id.show_downgrades_textview);
-		TextView lastUpdateCheck = (TextView) findViewById(R.id.last_update_check);
-		String pattern = getResources().getString(R.string.current_version_text);
+		Resources res = getResources();
+		TextView currentVersiontv = (TextView) findViewById(R.id.up_chooser_current_version);
+		TextView experimentalBuildstv = (TextView) findViewById(R.id.experimental_updates_textview);
+		TextView showDowngradestv = (TextView) findViewById(R.id.show_downgrades_textview);
+		TextView lastUpdateChecktv = (TextView) findViewById(R.id.last_update_check);
+		String pattern = res.getString(R.string.current_version_text);
 		Preferences prefs = Preferences.getPreferences(this);
-		currentVersion.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
-		experimentalBuilds.setText(MessageFormat.format(getResources().getString(R.string.p_display_allow_experimental_versions_title)+": {0}", Boolean.toString(prefs.allowExperimental())));
-		showDowngrades.setText(MessageFormat.format(getResources().getString(R.string.p_display_older_mod_versions_title)+": {0}", Boolean.toString(prefs.showDowngrades())));
-		lastUpdateCheck.setText(MessageFormat.format(getResources().getString(R.string.last_update_check_text)+": {0} {1}", DateFormat.getDateInstance().format(prefs.getLastUpdateCheck()), DateFormat.getTimeInstance().format(prefs.getLastUpdateCheck())));
+		currentVersiontv.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
+		String allowExperimental;
+		String showDowngrades;
+		if(prefs.allowExperimental())
+			allowExperimental = res.getString(R.string.true_string);
+		else
+			allowExperimental = res.getString(R.string.false_string);
+		if(prefs.showDowngrades())
+			showDowngrades = res.getString(R.string.true_string);
+		else
+			showDowngrades = res.getString(R.string.false_string);
+		experimentalBuildstv.setText(MessageFormat.format(res.getString(R.string.p_display_allow_experimental_versions_title)+": {0}", allowExperimental));
+		showDowngradestv.setText(MessageFormat.format(res.getString(R.string.p_display_older_mod_versions_title)+": {0}", showDowngrades));
+		lastUpdateChecktv.setText(MessageFormat.format(res.getString(R.string.last_update_check_text)+": {0} {1}", DateFormat.getDateInstance().format(prefs.getLastUpdateCheck()), DateFormat.getTimeInstance().format(prefs.getLastUpdateCheck())));
 		
 		mdownloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
 		mspFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
@@ -1038,11 +1061,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		
 		//Set the right wallpaper
 		ScrollView s = (ScrollView) findViewById(R.id.mainScroll);
-		int Orientation = getResources().getConfiguration().orientation;
+		int Orientation = res.getConfiguration().orientation;
 		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
-			s.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_landscape));
+			s.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
 		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
-			s.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
+			s.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 		
 		if(availableUpdates != null)
 		{
