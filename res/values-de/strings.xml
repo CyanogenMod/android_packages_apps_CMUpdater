@@ -3,7 +3,7 @@
     <!-- .ui.* Strings -->
     <string name="apply_now_button_text">Jetzt anwenden</string>
     <string name="apply_later_button_text">Später anwenden</string>
-    <string name="apply_update_button_text">Update Prüfen &amp; Installieren</string>
+    <string name="apply_update_button_text">Update Installieren</string>
     <string name="apply_title_textview_text">{0} ist bereit um installiert zu werden</string>
     <string name="apply_subtitle_textview_text">Release notes:</string>
     <string name="apply_unable_to_reboot_toast">Fehler beim rebooten in den recovery modus</string>
@@ -36,7 +36,10 @@
 	<string name="check_now_button_text">Jetzt Prüfen</string>
 	
 	<string name="menu_check_now">Jetzt Prüfen</string>
-    <string name="menu_config">Konfiguration</string><string name="menu_about">About</string>
+	<string name="menu_qr_code">QR URL Scannen</string>
+    <string name="menu_config">Konfiguration</string>
+    <string name="menu_about">About</string>
+    <string name="menu_changelog">Changelog</string>
     <string name="cancel_download_buton_text">Download Abbrechen</string>
     <string name="confirm_download_cancelation_dialog_message">Wollen sie den derzeitigen Download wirklich abbrechen?</string>
     <string name="confirm_download_cancelation_dialog_yes">Ja</string>
@@ -44,12 +47,39 @@
     <string name="download_canceled_toast_message">Download abgebrochen</string>
     
     <string name="verify_and_apply_dialog_title">Überprüfen</string>
-    <string name="verify_and_apply_dialog_message">Überprüfe update.zip MD5 Checksumme</string>
+    <string name="verify_and_apply_dialog_message">Überprüfe MD5 Checksumme des Updates</string>
     
     <string name="apply_existing_update_md5error_message">Fehler. MD5 Checksumme falsch</string>
     
     <string name="apply_upload_info_message">Diese Version von CM-Updater hat eine reboot Option. When sie auf Update drücken, wird ihr System automatisch neu gestartet.
 Wenn sie ein Backup erstellen wollen, booten sie bitte vorher manuell in den Recovery Modus</string>
+    
+    <string name="last_update_check_text">Letzer Update check</string>
+	<string name="overwrite_update_title">Update existiert</string>
+	<string name="overwrite_update_summary">Das gewählte Update existiert bereits in ihrem Update Verzeichnis.\nWollen sie es überschreiben?</string>
+	<string name="overwrite_update_positive">Ja</string>
+	<string name="overwrite_update_negative">Nein</string>
+
+	<string name="no_md5_found_title">Keine MD5-Datei gefunden</string>
+	<string name="no_md5_found_summary">Keine MD5 Datei für dieses Update gefunden.\nWollen sie es ohne Überprüfung installieren?</string>
+	<string name="no_md5_found_positive">Installieren</string>
+	<string name="no_md5_found_negative">Abbrechen</string>
+
+	<string name="notification_tickertext">Downloade Update</string>
+	<string name="notification_finished">Download abgeschlossen</string>
+
+	<string name="toast_uninstall_old_Version">Sie müssen die alte Version der Applikation deinstallieren um fortfahren zu können!</string>
+
+	<string name="stable_experimental_description">S: Stable, X: Experimental</string>
+
+	<string name="changelog_progress_title">Bitte warten ...</string>
+	<string name="changelog_progress_body">Versuche changelog.xml herunterzuladen</string>
+
+	<string name="changelog_button_text">Changelog vom ausgewählten update</string>
+	<string name="no_changelog_found">Kein Changelog gefunden</string>
+
+	<string name="true_string">ja</string>
+	<string name="false_string">nein</string>
     
     <!-- .service.* Strings -->
     <string name="no_updates_found">Keine CM Updates gefunden</string>
@@ -115,4 +145,20 @@ Wenn sie ein Backup erstellen wollen, booten sie bitte vorher manuell in den Rec
     
     <string name="p_update_file_url_qr_title">Barcode scannen</string>
     <string name="p_update_file_url_qr_summary">QR Code für Update URL scannen</string>
+    
+    <string name="p_vibrate_title">Vibrieren</string>
+	<string name="p_vibrate_summary">Bei Benachrichtigungen Vibrieren</string>
+
+	<string name="p_notifications_title">Benachrichtigungen</string>
+	<string name="p_notifications_summary">Benachrichtigungen ein/ausschalten</string>
+
+	<string name="p_advanced_title">Erweiterte Einstellungen</string>
+	<string name="p_advanced_summary">Nur ändern, wenn auch die Folgen bewusst sind!</string>
+
+	<string name="p_progress_update_frequency_title">Fortschritts Update Intervall</string>
+	<string name="p_progress_update_frequency_summary">Hoher Wert --> Weniger updates\nNiedriger Wert --> Mehr updates</string>
+
+	<string name="p_progress_update_freq_def_title">Update Intervall zurücksetzen</string>
+	<string name="p_progress_update_freq_def_summary">Das Update Intervall von Downloaddialog/Notificationbar zurücksetzen</string>
+	<string name="p_progress_update_freq_def_toast">Update Intervall zurückgesetzt</string>
 </resources>
