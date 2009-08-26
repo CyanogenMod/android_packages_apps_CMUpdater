@@ -95,6 +95,9 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
     <string name="changelog_button_text">Changelog of selected Update</string>
     <string name="no_changelog_found">No Changelog found</string>
     
+    <string name="changelog_title_rom">Update Changelog</string>
+    <string name="changelog_title_app">Application Changelog</string>
+    
     <string name="true_string">true</string>
     <string name="false_string">false</string>
     

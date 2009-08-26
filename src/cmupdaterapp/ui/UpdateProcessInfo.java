@@ -1148,14 +1148,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					ChangelogList = null;
 					UpdateProcessInfo.this.ChangelogThread.interrupt();
 					UpdateProcessInfo.ChangelogProgressDialog.dismiss();
-					displayChangelog();
+					displayChangelog(CHANGELOGTYPE_APP);
 				}
 				else if (msg.obj instanceof List<?>)
 				{
 					ChangelogList = (List<Version>) msg.obj;
 					UpdateProcessInfo.this.ChangelogThread.interrupt();
 					UpdateProcessInfo.ChangelogProgressDialog.dismiss();
-					displayChangelog();
+					displayChangelog(CHANGELOGTYPE_APP);
 				}
 	        }
 	    };
@@ -1165,7 +1165,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			case CHANGELOGTYPE_ROM:
 				//Get the ROM Changelog and Display the Changelog
 				ChangelogList = Changelog.getRomChangelog((UpdateInfo) mUpdatesSpinner.getSelectedItem());
-				displayChangelog();
+				displayChangelog(CHANGELOGTYPE_ROM);
 				break;
 			case CHANGELOGTYPE_APP:
 				//Show a ProgressDialog and start the Thread. The Dialog is shown in the Handler Function
@@ -1178,14 +1178,26 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 	}
 	
-	private void displayChangelog()
+	private void displayChangelog(int changelogtype)
 	{
-		Resources res = this.getResources(); 
-		boolean ChangelogEmpty = true;
 		if (ChangelogList == null)
 			return;
+		Resources res = this.getResources(); 
+		boolean ChangelogEmpty = true;
 		Dialog dialog = new Dialog(this);
-		dialog.setTitle("Changelog");
+		String dialogTitle;
+		switch (changelogtype)
+		{
+			case CHANGELOGTYPE_ROM:
+				dialogTitle = res.getString(R.string.changelog_title_rom);
+				break;
+			case CHANGELOGTYPE_APP:
+				dialogTitle = res.getString(R.string.changelog_title_app);
+				break;
+			default:
+				return;
+		}
+		dialog.setTitle(dialogTitle);
 		dialog.setContentView(R.layout.changelog);
 		LinearLayout main = (LinearLayout) dialog.findViewById(R.id.ChangelogLinearMain);
 		

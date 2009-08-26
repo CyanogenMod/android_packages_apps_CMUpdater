@@ -78,6 +78,9 @@ Wenn sie ein Backup erstellen wollen, booten sie bitte vorher manuell in den Rec
 	<string name="changelog_button_text">Changelog vom ausgewählten update</string>
 	<string name="no_changelog_found">Kein Changelog gefunden</string>
 
+    <string name="changelog_title_rom">Update Changelog</string>
+    <string name="changelog_title_app">Applikations Changelog</string>
+
 	<string name="true_string">ja</string>
 	<string name="false_string">nein</string>
     
