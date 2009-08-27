@@ -8,8 +8,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+//import java.text.SimpleDateFormat;
+//import java.util.Date;
 import java.util.List;
 import java.util.Random;
+//import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -67,7 +72,6 @@ public class UpdateDownloaderService extends Service
 	private int PROGRESS_BAR_UPDATE_INTERVALL;
 	
 	private boolean prepareForDownloadCancel;
-	private int progressBarUpdate;
 
 	private final BroadcastReceiver mConnectivityChangesReceiver = new BroadcastReceiver()
 	{
@@ -130,6 +134,7 @@ public class UpdateDownloaderService extends Service
 	private String mUpdateFolder;
 	private String mDownloadedMD5;
 
+	private volatile int mtotalDownloaded;
 	private int mSpeed;
 	private long mRemainingTime;
 	String mstringDownloaded;
@@ -139,6 +144,11 @@ public class UpdateDownloaderService extends Service
 	
 	private int mcontentLength;
 	private long mStartTime;
+	
+	private String minutesString;
+	private String secondsString;
+	
+	//SimpleDateFormat df;
 	
 	private Message mMsg;
 	
@@ -218,8 +228,11 @@ public class UpdateDownloaderService extends Service
 
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
 		PROGRESS_BAR_UPDATE_INTERVALL = Preferences.getPreferences(this).getProgressUpdateFreq();
-		progressBarUpdate = PROGRESS_BAR_UPDATE_INTERVALL; 
 		Log.d(TAG, "ProgressBarIntervall: " + PROGRESS_BAR_UPDATE_INTERVALL);
+		//df = new SimpleDateFormat("HH 'hours' mm 'mins' ss 'seconds'");
+		//df.setTimeZone(TimeZone.getDefault());
+		minutesString = getResources().getString(R.string.minutes);
+		secondsString = getResources().getString(R.string.seconds);
 	}
 
 	@Override
@@ -572,16 +585,23 @@ public class UpdateDownloaderService extends Service
 	
 			byte[] buff = new byte[64 * 1024];
 			int read = 0;
-			int totalDownloaded = 0;
 			FileOutputStream fos = new FileOutputStream(destinationFile);
 			InputStream is = entity.getContent();
+			TimerTask progressUpdateTimerTask = new TimerTask() {
+				@Override
+				public void run() {
+					onProgressUpdate();
+				}
+			};
+			Timer progressUpdateTimer = new Timer();
 			try
 			{
+				mtotalDownloaded = 0;
+				progressUpdateTimer.scheduleAtFixedRate(progressUpdateTimerTask, 100, PROGRESS_BAR_UPDATE_INTERVALL);
 				while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0 && !prepareForDownloadCancel)
 				{
 					fos.write(buff, 0, read);
-					totalDownloaded += read;
-					onProgressUpdate(totalDownloaded);
+					mtotalDownloaded += read;
 				}
 
 				if(read > 0)
@@ -620,6 +640,7 @@ public class UpdateDownloaderService extends Service
 			}
 			finally
 			{
+				progressUpdateTimer.cancel();
 				buff = null;
 			}
 		}
@@ -646,52 +667,43 @@ public class UpdateDownloaderService extends Service
 		}
 	}
 
-	private void onProgressUpdate(int downloaded)
+	private void onProgressUpdate()
 	{
 		//Only update the Notification and DownloadLayout, when no downloadcancel is in progress, so the notification will not pop up again
 		if (!prepareForDownloadCancel)
 		{
-			//Update the Progress not so heavily
-			if (progressBarUpdate == PROGRESS_BAR_UPDATE_INTERVALL)
+			// Shows Downloadstatus in Notificationbar. Initialize the Variables
+			NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+			Notification mNotification = new Notification(R.drawable.icon_notification, getResources().getString(R.string.notification_tickertext), System.currentTimeMillis());
+			mNotification.flags = Notification.FLAG_NO_CLEAR;
+			mNotification.flags = Notification.FLAG_ONGOING_EVENT;
+			RemoteViews mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
+			Intent mNotificationIntent = new Intent(this, UpdateProcessInfo.class);
+			PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
+			mNotification.contentView = mNotificationRemoteView;
+			mNotification.contentIntent = mNotificationContentIntent;
+			mSpeed = (mtotalDownloaded/(int)(System.currentTimeMillis() - mStartTime));
+			mSpeed = (mSpeed > 0) ? mSpeed : 1;
+			mRemainingTime = ((mcontentLength - mtotalDownloaded)/mSpeed);
+			mstringDownloaded = mtotalDownloaded/1048576 + "/" + mcontentLength/1048576 + " MB";
+			mstringSpeed = mSpeed + " kB/s";
+			//mstringRemainingTime = df.format(new Date(mRemainingTime));
+			mstringRemainingTime = mRemainingTime/60000 + " " + minutesString + " " + mRemainingTime%60 + " " + secondsString;
+
+			mstringComplete = mstringDownloaded + " " + mstringSpeed + " " + mstringRemainingTime;
+			
+			mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloadInfos, mstringComplete);
+			mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, mcontentLength, mtotalDownloaded, false);
+			mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
+			
+			if(UPDATE_PROCESS_INFO == null) return;
+			
+			if(!mMirrorNameUpdated)
 			{
-				//Set the String back to 1
-				progressBarUpdate = 1;
-				// Shows Downloadstatus in Notificationbar. Initialize the Variables
-				NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-				Notification mNotification = new Notification(R.drawable.icon_notification, getResources().getString(R.string.notification_tickertext), System.currentTimeMillis());
-				mNotification.flags = Notification.FLAG_NO_CLEAR;
-				mNotification.flags = Notification.FLAG_ONGOING_EVENT;
-				RemoteViews mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
-				Intent mNotificationIntent = new Intent(this, UpdateProcessInfo.class);
-				PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
-				mNotification.contentView = mNotificationRemoteView;
-				mNotification.contentIntent = mNotificationContentIntent;
-				mSpeed = (downloaded/(int)(System.currentTimeMillis() - mStartTime));
-				mSpeed = (mSpeed > 0) ? mSpeed : 1;
-				mRemainingTime = ((mcontentLength - downloaded)/mSpeed)/1000;
-				mstringDownloaded = downloaded/1048576 + "/" + mcontentLength/1048576 + " MB";
-				mstringSpeed = mSpeed + " kB/s";
-				mstringRemainingTime = mRemainingTime + " seconds";
-				
-				mstringComplete = mstringDownloaded + " " + mstringSpeed + " " + mstringRemainingTime;
-				
-				mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloadInfos, mstringComplete);
-				mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, mcontentLength, downloaded, false);
-				mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
-				
-				if(UPDATE_PROCESS_INFO == null) return;
-				
-				if(!mMirrorNameUpdated)
-				{
-					UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
-					mMirrorNameUpdated = true;
-				}
-				UPDATE_PROCESS_INFO.updateDownloadProgress(downloaded, mcontentLength, mstringDownloaded, mstringSpeed, mstringRemainingTime);
+				UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
+				mMirrorNameUpdated = true;
 			}
-			else if (progressBarUpdate > PROGRESS_BAR_UPDATE_INTERVALL)
-				progressBarUpdate = 1;
-			else
-				progressBarUpdate++;
+			UPDATE_PROCESS_INFO.updateDownloadProgress(mtotalDownloaded, mcontentLength, mstringDownloaded, mstringSpeed, mstringRemainingTime);
 		}
 		else
 			Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");

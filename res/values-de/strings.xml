@@ -115,6 +115,9 @@ Wenn sie ein Backup erstellen wollen, booten sie bitte vorher manuell in den Rec
     <string name="confirm_delete_update_folder_dialog_no">Abbrechen</string>
     <string name="delete_single_update_success_message">Update {0} gelöscht</string>
     
+    <string name="minutes">min</string>
+	<string name="seconds">sek</string>
+    
     <!-- Preferences Strings -->
     <string name="p_update_check_freq_title">Updateprüfungs Intervall</string>
     <string name="p_update_check_freq_summary">Stellt das Intervall ein, in dem nach neuen Updates gesucht werden soll</string>

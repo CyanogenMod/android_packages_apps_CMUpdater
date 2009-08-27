@@ -114,6 +114,9 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="confirm_delete_update_folder_dialog_neutral">Delete selected Update</string>
 	<string name="confirm_delete_update_folder_dialog_no">Cancel</string>
 	<string name="delete_single_update_success_message">Update {0} deleted</string>    
+	<string name="minutes">min</string>
+	<string name="seconds">sec</string>
+
 	<!-- Preferences Strings -->
 	<string name="p_update_check_freq_title">Update Checking frequency</string>
 	<string name="p_update_check_freq_summary">Set update checking frequency</string>

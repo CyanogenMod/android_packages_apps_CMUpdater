@@ -40,8 +40,8 @@
 	<string name="p_notifications_def_value">true</string>
 	<string name="p_first_run">firstRun</string>
 	<string name="p_last_update_check">lastUpdateCheck</string>
-	<string name="p_progress_update_frequency">progressUpdateFreq</string>
-	<string name="p_progress_update_frequency_def">50</string>
+	<string name="p_progress_update_frequency">progressUpdateFrequ</string>
+	<string name="p_progress_update_frequency_def">500</string>
 	<string name="p_progress_update_freq_def">progressUpdateFreqDef</string>
 
 	<!-- About dialog -->
@@ -83,15 +83,15 @@
 
 	<!-- Update Frequency of the Downloaddialog, Notificationbar -->
 	<string-array name="progress_update_freq">
-		<item>10</item>
-		<item>20</item>
-		<item>30</item>
-		<item>40</item>
-		<item>50</item>
-		<item>60</item>
-		<item>70</item>
-		<item>80</item>
-		<item>90</item>
 		<item>100</item>
+		<item>200</item>
+		<item>300</item>
+		<item>400</item>
+		<item>500</item>
+		<item>600</item>
+		<item>700</item>
+		<item>800</item>
+		<item>900</item>
+		<item>1000</item>
 	</string-array>
 </resources>
