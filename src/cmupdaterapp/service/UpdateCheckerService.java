@@ -218,6 +218,9 @@ public class UpdateCheckerService extends Service
 												res.getString(R.string.not_new_updates_found_ticker),
 												System.currentTimeMillis());
 			
+			//To remove the Notification, when the User clicks on it
+			notification.flags = Notification.FLAG_AUTO_CANCEL;
+			
 			String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
 			notification.setLatestEventInfo(this, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
 			
