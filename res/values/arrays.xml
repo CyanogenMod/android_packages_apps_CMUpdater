@@ -1,63 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<!-- About dialog -->
-	<string-array name="about_authors">
-        <item>Sergi Vélez http://code.google.com/p/jfupdater</item>
-        <item>Darkrift http://android-dls.com</item>
-        <item>Dan Poulsen</item>
-		<item>FireFart</item>
-		<item>senab</item>
-    </string-array>
-    
-    <string-array name="about_translators">
-		<item>FireFart</item>
-		<item>DavidChill</item>
-		<item>Moksha</item>
-		<item>Gamempire</item>
-		<item>Wiebbe</item>
-		<item>Chahk</item>
-		<item>Offcina</item>
-		<item>ss1271</item>
-		<item>baggus</item>
-		<item>kog</item>
-		<item>ZilverZurfan</item>
-		<item>Jar0b_</item>
-    </string-array>
-    
-    <string-array name="about_artists">
-    	<item>prash</item>
-		<item>matt_stang</item>
-    </string-array>
-    
 	<!-- Frequency times, in seconds -->
-    <string-array name="update_frequency">
-        <item>Manual</item>
-        <item>Every boot</item>
-        <item>Every hour</item>
-        <item>Every day</item>
-        <item>Every week</item>
-    </string-array>
-    
-    <!-- Frequency times, in seconds -->
-    <string-array name="update_frequency_values">
-        <item>-2</item>
-        <item>-1</item>
-        <item>3600</item>
-        <item>86400</item>
-        <item>604800</item>
-    </string-array>    
-    
-    <!-- Update Frequency of the Downloaddialog, Notificationbar -->
-    <string-array name="progress_update_freq">
-    	<item>10</item>
-		<item>20</item>
-		<item>30</item>
-		<item>40</item>
-		<item>50</item>
-		<item>60</item>
-		<item>70</item>
-		<item>80</item>
-		<item>90</item>
-		<item>100</item>
-    </string-array>
+	<string-array name="update_frequency">
+		<item>Manual</item>
+		<item>Every boot</item>
+		<item>Every hour</item>
+		<item>Every day</item>
+		<item>Every week</item>
+	</string-array>
 </resources>

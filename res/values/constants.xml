@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">CM Updater</string>
+
+	<!-- About Strings -->
+	<string name="about_comments">Auto-updater for the CyanogenMod Android OS.</string>
+	<string name="about_credits">Thanks to Sergi Vélez for the original JFUpdater.\nThread Starter: garok89 - Ross McAusland\nProgrammer: FireFart - Christian Mehlmauer\nProgrammer: senab - Chris Banes\nGraphics: prash\nGraphics: matt_stang\nBeta-Testers: willmav5000, tuxfoo, DirectMatrix, amarkow2\nAnd big thanks to all the guys @ XDA for the translations and other stuff ;)\n\nBig thanks to Cyanogen for his superb builds!\n\n</string>
+	<string name="about_copyright">Copyright © 2009 Sergi Vélez</string><!-- Add your name here, separated with comma's, if you helped out --> 
+	<string name="about_website_label">CM Updater at Google Code</string> 
+	<string name="about_website_url">http://code.google.com/p/cyanogen-updater/</string>
+	<string name="about_email">http://forum.xda-developers.com/forumdisplay.php?f=448</string>
+
+	<!-- Config Strings -->
+	<string name="conf_update_server_url_def">http://cyanogen-updater.googlecode.com/files/update_file.json</string>
+	<string name="conf_about_url">http://code.google.com/p/cyanogen-updater/</string>
+	<string name="conf_update_folder">cm-updates</string>
+	<string name="conf_theme_version_file">/sdcard/cm-updates/themes.theme</string>
+	<string name="conf_changelog_url">http://cyanogen-updater.googlecode.com/files/changelog.xml</string>
+
+	<string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} found</string>
+
+	<!-- Preferences keys -->
+	<string name="p_key_update_check_freq">prefUpdateCheckFrequency</string>
+	<string name="p_key_configured_updates_mod_version">updatesModVersion</string>
+	<string name="p_update_check_freq_def_value">-1</string>
+	<string name="p_display_older_mod_versions">displayOlderModVersins</string>
+	<string name="p_display_allow_experimental_versions">displayExperimentalVersions</string>
+	<string name="p_do_nandroid_backup">doNandroidBackup</string>
+	<string name="p_display_older_mod_versions_def_value">false</string>
+	<string name="p_display_allow_experimental_versions_def_value">false</string>
+	<string name="p_do_nandroid_backup_def_value">true</string>
+	<string name="p_key_notification_ringtone">prefNotificationRingtone</string>
+	<string name="p_update_file_url_screen">prefUpdateFileURLScreen</string>
+	<string name="p_update_file_url">prefUpdateFileURL</string>
+	<string name="p_update_file_url_qr">prefUpdateFileURLQr</string>
+	<string name="p_update_file_url_def">prefUpdateFileURLDef</string>
+	<string name="p_vibrate">prefVibrate</string>
+	<string name="p_vibrate_def_value">true</string>
+	<string name="p_notifications">prefNotifications</string>
+	<string name="p_notifications_def_value">true</string>
+	<string name="p_first_run">firstRun</string>
+	<string name="p_last_update_check">lastUpdateCheck</string>
+	<string name="p_progress_update_frequency">progressUpdateFreq</string>
+	<string name="p_progress_update_frequency_def">50</string>
+	<string name="p_progress_update_freq_def">progressUpdateFreqDef</string>
+
+	<!-- About dialog -->
+	<string-array name="about_authors">
+        	<item>Sergi Vélez http://code.google.com/p/jfupdater</item>
+        	<item>Darkrift http://android-dls.com</item>
+        	<item>Dan Poulsen</item>
+		<item>FireFart</item>
+		<item>senab</item>
+	</string-array>
+    
+	<string-array name="about_translators">
+		<item>FireFart</item>
+		<item>DavidChill</item>
+		<item>Moksha</item>
+		<item>Gamempire</item>
+		<item>Wiebbe</item>
+		<item>Chahk</item>
+		<item>Offcina</item>
+		<item>ss1271</item>
+		<item>baggus</item>
+		<item>kog</item>
+		<item>ZilverZurfan</item>
+		<item>Jar0b_</item>
+	</string-array>
+
+	<string-array name="about_artists">
+		<item>prash</item>
+		<item>matt_stang</item>	</string-array>
+
+	<!-- Frequency times, in seconds -->
+	<string-array name="update_frequency_values">
+		<item>-2</item>
+		<item>-1</item>
+		<item>3600</item>
+		<item>86400</item>
+		<item>604800</item>
+	</string-array>    
+
+	<!-- Update Frequency of the Downloaddialog, Notificationbar -->
+	<string-array name="progress_update_freq">
+		<item>10</item>
+		<item>20</item>
+		<item>30</item>
+		<item>40</item>
+		<item>50</item>
+		<item>60</item>
+		<item>70</item>
+		<item>80</item>
+		<item>90</item>
+		<item>100</item>
+	</string-array>
+</resources>
