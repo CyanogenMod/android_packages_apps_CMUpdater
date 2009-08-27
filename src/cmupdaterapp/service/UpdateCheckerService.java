@@ -269,6 +269,8 @@ public class UpdateCheckerService extends Service
 												res.getString(R.string.not_update_check_error_ticker),
 												System.currentTimeMillis());
 		
+		notification.flags = Notification.FLAG_AUTO_CANCEL;
+		
 		notification.setLatestEventInfo(
 							this,
 							res.getString(R.string.not_update_check_error_title),
