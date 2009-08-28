@@ -85,6 +85,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	public static final int REQUEST_NEW_UPDATE_LIST = 1;
 	public static final int REQUEST_UPDATE_CHECK_ERROR = 2;
 	public static final int REQUEST_DOWNLOAD_FAILED = 3;
+	public static final int REQUEST_MD5CHECKER_CANCEL = 4;
 
 	public static final String KEY_REQUEST = "cmupdaterapp.keyRequest";
 	public static final String KEY_UPDATE_LIST = "cmupdaterapp.updateList";
@@ -490,7 +491,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		@Override
 		public void onCancelled()
 		{
-			//TODO cancel MD% check
+			Log.w(TAG, "MD5Checker Task cancelled");
+			Intent i = new Intent(UpdateProcessInfo.this, UpdateProcessInfo.class);
+			i.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_MD5CHECKER_CANCEL);
+			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(i);
 		}
 	};
 
@@ -628,13 +633,17 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					}
 					break;
 				case REQUEST_UPDATE_CHECK_ERROR:
-					//TODO
 					Log.w(TAG, "Update check error");
+					Toast.makeText(this, R.string.not_update_check_error_ticker, Toast.LENGTH_SHORT).show();
 					break;
 		
 				case REQUEST_DOWNLOAD_FAILED:
 					Log.w(TAG, "Download Error");
 					Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_SHORT).show();
+					break;
+				case REQUEST_MD5CHECKER_CANCEL:
+					Log.w(TAG, "MD5Check canceled. Switching Layout");
+					Toast.makeText(this, R.string.md5_check_cancelled, Toast.LENGTH_SHORT).show();
 					break;
 				default:
 					Log.w(TAG, "Uknown KEY_REQUEST in Intent. Maybe its the first start.");
@@ -805,14 +814,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		super.onNewIntent(intent);
 
 		int req = intent.getIntExtra(KEY_REQUEST, -1);
-		switch(req) {
-		case REQUEST_NEW_UPDATE_LIST:
-			switchToUpdateChooserLayout((List<UpdateInfo>) intent.getSerializableExtra(KEY_UPDATE_LIST));
-			break;
-		case REQUEST_UPDATE_CHECK_ERROR:
-			//TODO
-			Log.w(TAG, "Update check error");
-			break;
+		switch(req)
+		{
+			case REQUEST_NEW_UPDATE_LIST:
+				switchToUpdateChooserLayout((List<UpdateInfo>) intent.getSerializableExtra(KEY_UPDATE_LIST));
+				break;
 		}
 	}
 
