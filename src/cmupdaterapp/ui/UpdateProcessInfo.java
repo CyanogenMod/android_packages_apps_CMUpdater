@@ -633,8 +633,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					break;
 		
 				case REQUEST_DOWNLOAD_FAILED:
-					//TODO
-					Log.w(TAG, "Update check error");
+					Log.w(TAG, "Download Error");
+					Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_SHORT).show();
 					break;
 				default:
 					Log.w(TAG, "Uknown KEY_REQUEST in Intent. Maybe its the first start.");

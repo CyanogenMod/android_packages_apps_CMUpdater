@@ -8,11 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
-//import java.text.SimpleDateFormat;
-//import java.util.Date;
 import java.util.List;
 import java.util.Random;
-//import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -47,7 +44,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 import cmupdaterapp.ui.ApplyUploadActivity;
 import cmupdaterapp.ui.IUpdateProcessInfo;
 import cmupdaterapp.ui.R;
@@ -712,17 +708,21 @@ public class UpdateDownloaderService extends Service
 	private void notifyUser(UpdateInfo ui, File downloadedUpdate)
 	{
 		Log.d(TAG, "Called Notify User");
+		Intent i;
+		
 		if(downloadedUpdate == null)
 		{
 			DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
-			Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_SHORT).show();
-			//mHandlerThread.interrupt();
-			//UpdateProcessInfo upi = new UpdateProcessInfo();
-			//upi.switchToUpdateChooserLayout(null);
+			mHandlerThread.interrupt();
+			//Go to the App with a download error
+			i = new Intent(this, UpdateProcessInfo.class);
+			i.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_DOWNLOAD_FAILED);
+			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(i);
 			return;
 		}
-
-		Intent i = new Intent(this, ApplyUploadActivity.class);
+		
+		i = new Intent(this, ApplyUploadActivity.class);
 		i.putExtra(ApplyUploadActivity.KEY_UPDATE_INFO, ui);
 		
 		//Set the Notification to finished
