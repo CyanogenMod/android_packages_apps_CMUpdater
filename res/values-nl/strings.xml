@@ -24,8 +24,6 @@
 	<string name="delete_updates_failure_message">Er is een fout opgetreden bij het verwijderen van de Update Folder</string>
 	<string name="delete_updates_noFolder_message">Update Folder kon niet gevonden worden</string>
 
-	<string name="check_now_update_chooser">Druk op \'Controleer nu\' om naar updates te zoeken.</string>
-
 	<string name="apply_update_dialog_title">Bevestiging</string>
 	<string name="apply_update_dialog_text">Je staat op het punt om te upgraden naar {0}.\nAls je op update drukt, zal de telefoon herstarten in recovery modus om de update toe te passen.</string>
 	<string name="apply_update_dialog_update_button">Update</string>

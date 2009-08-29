@@ -24,8 +24,6 @@
     <string name="delete_updates_failure_message">Fehler beim Löschen des Update Verzeichnisses</string>
     <string name="delete_updates_noFolder_message">Update Verzeichnis nicht gefunden</string>
     
-    <string name="check_now_update_chooser">Drücken sie Jetzt Prüfen um nach neuen Updates zu suchen</string>
-    
     <string name="apply_update_dialog_title">Bestätigung</string>
     <string name="apply_update_dialog_text">Sie sind dabei auf {0} zu aktualisieren.\nWenn sie Update drücken, wird das Telefon automatisch in den recovery Modus rebooten um das Update zu installieren.</string>
 	<string name="apply_update_dialog_update_button">Update</string>

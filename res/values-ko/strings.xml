@@ -24,8 +24,6 @@
 	<string name="delete_updates_failure_message">업데이트 폴더를 삭제하는중 에러가 발생했습니다.</string>
 	<string name="delete_updates_noFolder_message">업데이트 폴더를 찾을 수 없습니다.</string>
 
-	<string name="check_now_update_chooser">\'체크\' 버튼을 눌러 새 버젼을 확인 하세요.</string>
-
 	<string name="apply_update_dialog_title">확인</string>
 	<string name="apply_update_dialog_text">지금 버젼 {0}(으)로 업데이트 하려고 합니다..\n\'업데이트\' 버튼을 누르시면 복구모드로 부팅해 업데이트가 적용 될 것입니다.</string>
 	<string name="apply_update_dialog_update_button">업데이트</string>

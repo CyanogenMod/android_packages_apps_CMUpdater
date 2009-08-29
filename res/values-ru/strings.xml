@@ -23,8 +23,6 @@
     <string name="delete_updates_success_message">Папка с прошивками удалена</string>
     <string name="delete_updates_failure_message">Ошибка при удалении папки прошивок</string>
     <string name="delete_updates_noFolder_message">Папки с прошивками не существует</string>
-
-    <string name="check_now_update_chooser">Нажмите \'Проверить\' для проверки наличия новой версии</string>
     
     <string name="apply_update_dialog_title">Подтверждение</string>
     <string name="apply_update_dialog_text">Внимание, обновляемся на {0}.\nПри нажатии кнопки \'Прошить\', телефон перегрузится в режим восстановки для обновления прошивки.</string>
@@ -68,8 +66,6 @@
     <string name="notification_finished">Загрузка успешно завершена</string>
 	 
     <string name="toast_uninstall_old_Version">Необходимо удалить старую версию этой программы!</string>
-    
-    <string name="stable_experimental_description">S: Стабильная, X: Экспериментальная</string>
     
     <string name="changelog_progress_title">Загрузка ...</string>
     <string name="changelog_progress_body">Загружается файл changelog.xml</string>

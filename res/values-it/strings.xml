@@ -24,8 +24,6 @@
 	<string name="delete_updates_failure_message">C'è stato un errore mentre si cancellava la cartella degli aggiornamenti</string>
 	<string name="delete_updates_noFolder_message">Cartella degli aggiornamenti non trovata</string>
 
-	<string name="check_now_update_chooser">Premi Controlla Ora per cercare nuove versioni</string>
-
 	<string name="apply_update_dialog_title">Conferma</string>
 	<string name="apply_update_dialog_text">Stai per aggiornare a {0}.\nSe premi aggiorna, il telefono si riavvierà da solo in recovery mode per applicare l'aggiornamento.</string>
 	<string name="apply_update_dialog_update_button">Aggiorna</string>

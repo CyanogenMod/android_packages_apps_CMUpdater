@@ -24,8 +24,6 @@
     <string name="delete_updates_failure_message">Houve um erro ao apagar a pasta de atualizações</string>
     <string name="delete_updates_noFolder_message">Pasta de atualizações não encontrada</string>
     
-    <string name="check_now_update_chooser">Clique em \'Verificar Agora\' para procurar novas versões</string>
-    
     <string name="apply_update_dialog_title">Confirmação</string>
     <string name="apply_update_dialog_text">Você está prestes a atualizar para a versão {0}.\nSe clicar em atualizar, o celular reiniciará em modo de recuperação para aplicar a atualização.</string>
 	<string name="apply_update_dialog_update_button">Atualizar</string>

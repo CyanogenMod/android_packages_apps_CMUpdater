@@ -24,8 +24,6 @@
 	<string name="delete_updates_failure_message">There was an error deleting the Update Folder</string>
 	<string name="delete_updates_noFolder_message">Update Folder not found</string>
 
-	<string name="check_now_update_chooser">Press Check Now to check for new Versions</string>
-
 	<string name="apply_update_dialog_title">Confirmation</string>
 	<string name="apply_update_dialog_text">You are about to upgrade to {0}.\nIf you press update, the phone will restart itself in recovery mode to apply the update.</string>
 	<string name="apply_update_dialog_update_button">Update</string>

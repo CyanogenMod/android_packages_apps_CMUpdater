@@ -75,7 +75,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo
 		{
 			Log.i(TAG, "No updates found");
 			Toast.makeText(upi, R.string.no_updates_found, Toast.LENGTH_SHORT).show();
-			upi.switchToNoUpdatesAvailable();
+			upi.switchToUpdateChooserLayout(null);
 		}
 		else
 		{

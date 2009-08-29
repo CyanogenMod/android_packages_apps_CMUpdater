@@ -24,8 +24,6 @@
     <string name="delete_updates_failure_message">Houve um erro ao eliminar a pasta de actualizações</string>
     <string name="delete_updates_noFolder_message">Pasta de actualizações não encontrada</string>
     
-    <string name="check_now_update_chooser">Carregue em Verificar agora para procurar novas versões</string>
-    
     <string name="apply_update_dialog_title">Confirmação</string>
     <string name="apply_update_dialog_text">Está prestes a actualizar para a versão {0}.\nSe carregar em actualizar, o telephone reiniciar-se-á em modo de recuperação para aplicar a actualização.</string>
 	<string name="apply_update_dialog_update_button">Actualizar</string>

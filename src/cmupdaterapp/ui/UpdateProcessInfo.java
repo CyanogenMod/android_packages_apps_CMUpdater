@@ -679,7 +679,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 		else
 		{
-			switchToNoUpdatesAvailable();
+			switchToUpdateChooserLayout(null);
+			//switchToNoUpdatesAvailable();
 		}
 		UpdateDownloaderService.setUpdateProcessInfo(UpdateProcessInfo.this);
 	}
@@ -900,59 +901,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	}
 
 	@Override
-	public void switchToNoUpdatesAvailable()
-	{
-		mAvailableUpdates = null;
-		try
-		{
-			saveState();
-		}
-		catch (IOException e)
-		{
-			Log.w(TAG, "Unable to save application state", e);
-		}
-
-		setContentView(R.layout.no_updates);
-		((Button)findViewById(R.id.check_now_button)).setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				checkForUpdates();
-			}
-		});
-			
-		Resources res = getResources();
-		TextView currentVersiontv = (TextView) findViewById(R.id.no_updates_current_version);
-		TextView experimentalBuildstv = (TextView) findViewById(R.id.experimental_updates_textview);
-		TextView showDowngradestv = (TextView) findViewById(R.id.show_downgrades_textview);
-		TextView lastUpdateChecktv = (TextView) findViewById(R.id.last_update_check);
-		String pattern = res.getString(R.string.current_version_text);
-		Preferences prefs = Preferences.getPreferences(this);
-		String allowExperimental;
-		String showDowngrades;
-		if(prefs.allowExperimental())
-			allowExperimental = res.getString(R.string.true_string);
-		else
-			allowExperimental = res.getString(R.string.false_string);
-		if(prefs.showDowngrades())
-			showDowngrades = res.getString(R.string.true_string);
-		else
-			showDowngrades = res.getString(R.string.false_string);
-		currentVersiontv.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
-		experimentalBuildstv.setText(MessageFormat.format(res.getString(R.string.p_display_allow_experimental_versions_title)+": {0}", allowExperimental));
-		showDowngradestv.setText(MessageFormat.format(res.getString(R.string.p_display_older_mod_versions_title)+": {0}", showDowngrades));
-		lastUpdateChecktv.setText(MessageFormat.format(res.getString(R.string.last_update_check_text)+": {0} {1}", DateFormat.getDateInstance().format(prefs.getLastUpdateCheck()), DateFormat.getTimeInstance().format(prefs.getLastUpdateCheck())));
-		
-		//Set the right wallpaper
-		ScrollView s = (ScrollView) findViewById(R.id.mainScroll);
-		int Orientation = res.getConfiguration().orientation;
-		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
-			s.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
-		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
-			s.setBackgroundDrawable(res.getDrawable(R.drawable.background));
-	}
-
-	@Override
 	public void switchToDownloadingLayout(UpdateInfo downloadingUpdate)
 	{
 		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
@@ -998,27 +946,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	@Override
 	public void switchToUpdateChooserLayout(List<UpdateInfo> availableUpdates)
 	{
-		/*
-		 * If availableUpdates is null, use the cached value.
-		 * If not, cache the value for future uses
-		 */
-		if(availableUpdates == null)
-		{
-			if (null == mAvailableUpdates)
-			{
-				if (mfilenames == null || mfilenames.size() <= 0)
-				{
-					//No Updates and nothing downloaded
-					switchToNoUpdatesAvailable();
-					return;
-				}
-			}
-			else
-			{
-				availableUpdates = mAvailableUpdates;
-			}
-		}
-		else
+		if(availableUpdates!=null)
 		{
 			mAvailableUpdates = availableUpdates;
 		}
@@ -1133,7 +1061,19 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 		
 		if (availableUpdates == null && (mfilenames == null || mfilenames.size() <= 0))
-			switchToNoUpdatesAvailable();
+		{
+			//Display the Check Now Button and add the Event
+			//The same as the SwitchToNoUpdatesAvailable
+			CheckNowUpdateChooserText.setVisibility(View.VISIBLE);
+			CheckNowUpdateChooser.setVisibility(View.VISIBLE);
+			CheckNowUpdateChooser.setOnClickListener(new View.OnClickListener()
+			{
+				public void onClick(View v)
+				{
+					checkForUpdates();
+				}
+			});
+		}
 	}
 
 	private void getChangelog(int changelogType)
