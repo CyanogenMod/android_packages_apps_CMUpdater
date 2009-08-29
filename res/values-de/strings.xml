@@ -70,7 +70,8 @@ Wenn sie ein Backup erstellen wollen, booten sie bitte vorher manuell in den Rec
 
 	<string name="toast_uninstall_old_Version">Sie müssen die alte Version der Applikation deinstallieren um fortfahren zu können!</string>
 
-	<string name="stable_experimental_description">S: Stable, X: Experimental</string>
+	<string name="stable_description"> = Stable</string>
+	<string name="experimental_description"> = Experimental</string>
 
 	<string name="changelog_progress_title">Bitte warten ...</string>
 	<string name="changelog_progress_body">Versuche changelog.xml herunterzuladen</string>
@@ -83,6 +84,8 @@ Wenn sie ein Backup erstellen wollen, booten sie bitte vorher manuell in den Rec
 
 	<string name="true_string">ja</string>
 	<string name="false_string">nein</string>
+	
+	<string name="md5_check_cancelled">MD5 Überprüfung Abgebrochen</string>
     
     <!-- .service.* Strings -->
     <string name="no_updates_found">Keine CM Updates gefunden</string>
