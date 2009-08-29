@@ -1057,7 +1057,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		final Button selectUploadButton = (Button) findViewById(R.id.download_update_button);
 		Spinner sp = mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
 		TextView DownloadText = (TextView) findViewById(R.id.available_updates_text);
-		TextView stableExperimentalInfo = (TextView) findViewById(R.id.stable_experimental_description);
+		//TextView stableExperimentalInfo = (TextView) findViewById(R.id.stable_experimental_description);
+		LinearLayout stableExperimentalInfo = (LinearLayout) findViewById(R.id.stable_experimental_description_container);
 		Button changelogButton = (Button) findViewById(R.id.show_changelog_button);
 		
 		Button CheckNowUpdateChooser = (Button) findViewById(R.id.check_now_button_update_chooser);
@@ -1078,8 +1079,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			selectUploadButton.setOnClickListener(mSelectUpdateButtonListener);
 			changelogButton.setOnClickListener(mChangelogButtonListener);
 			mUpdatesSpinner.setOnItemSelectedListener(mSpinnerChanged);
-			
-			ArrayAdapter<UpdateInfo> spAdapter = new ArrayAdapter<UpdateInfo>(
+			UpdateListAdapter<UpdateInfo> spAdapter = new UpdateListAdapter<UpdateInfo>(
 					this,
 					android.R.layout.simple_spinner_item,
 					availableUpdates);

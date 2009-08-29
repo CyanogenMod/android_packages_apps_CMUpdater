@@ -21,6 +21,6 @@ public class UpdateInfo implements Serializable
 	@Override
 	public String toString()
 	{
-		return branchCode + ": " + name;
+		return name;
 	}
 }

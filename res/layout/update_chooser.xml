@@ -27,16 +27,39 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:paddingLeft="10sp"
-				android:layout_gravity="center_horizontal">
-			</Spinner>
+				android:layout_gravity="center_horizontal" />
 		</ScrollView>
-		<TextView
-			android:id="@+id/stable_experimental_description"
-	    	android:layout_width="fill_parent"
+		<LinearLayout
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/stable_experimental_description"
-			android:gravity="center_horizontal"
-	    	style="@style/TextAppearance.Text" />
+			android:id="@+id/stable_experimental_description_container">
+			<ImageView
+				android:layout_height="24px"
+				android:layout_width="24px"
+				android:src="@drawable/stable" />
+			<TextView
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center_horizontal"
+				style="@style/TextAppearance.Text"
+				android:text="@string/stable_description"
+				android:textSize="16px"
+				android:paddingTop="2px"
+				android:layout_marginRight="20px"/>
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/experimental" />
+			<TextView
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center_horizontal" 
+				style="@style/TextAppearance.Text"
+				android:text="@string/experimental_description"
+				android:paddingTop="2px"
+				android:textSize="16px"/>
+		</LinearLayout>
+		
 	    <Button
 	    	android:id="@+id/download_update_button"
 			android:layout_width="wrap_content"
@@ -139,5 +162,6 @@
 			android:layout_marginTop="10px"
 			android:layout_marginRight="10px"
 			android:layout_gravity="bottom|right" />
+	
 	</LinearLayout>
 </ScrollView>

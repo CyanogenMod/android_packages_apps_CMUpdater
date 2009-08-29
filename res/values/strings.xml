@@ -70,7 +70,8 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 
 	<string name="toast_uninstall_old_Version">You have to uninstall any old Version of the App to proceed!</string>
 
-	<string name="stable_experimental_description">S: Stable, X: Experimental</string>
+	<string name="stable_description"> = Stable</string>
+	<string name="experimental_description"> = Experimental</string>
 
 	<string name="changelog_progress_title">Please wait ...</string>
 	<string name="changelog_progress_body">Trying to download the changelog.xml</string>
