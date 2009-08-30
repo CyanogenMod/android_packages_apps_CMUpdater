@@ -96,6 +96,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	public static final int CHANGELOGTYPE_ROM = 1;
 	public static final int CHANGELOGTYPE_APP = 2;
 
+	public static final int FLIPPER_AVAILABLE_UPDATES = 0;
+	public static final int FLIPPER_EXISTING_UPDATES = 1;
+	
 	private Spinner mUpdatesSpinner;
 	private PlainTextUpdateServer mUpdateServer;
 	private ProgressBar mProgressBar;
@@ -961,24 +964,24 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		flipper=(ViewFlipper)findViewById(R.id.Flipper);
 		flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_in));
 		flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_out));
-		Button btn=(Button)findViewById(R.id.button_available_updates);
-		btn.setOnClickListener(new View.OnClickListener()
+		Button btnAvailableUpdates=(Button)findViewById(R.id.button_available_updates);
+		btnAvailableUpdates.setOnClickListener(new View.OnClickListener()
 		{
 			public void onClick(View view)
 			{
 				Log.d(TAG, "Show next");
-				if(flipper.getDisplayedChild() != 0)
-					flipper.setDisplayedChild(0);
+				if(flipper.getDisplayedChild() != FLIPPER_AVAILABLE_UPDATES)
+					flipper.setDisplayedChild(FLIPPER_AVAILABLE_UPDATES);
 			}
 		});
-		Button btn2=(Button)findViewById(R.id.button_existing_updates);
-		btn2.setOnClickListener(new View.OnClickListener()
+		Button btnExistingUpdates=(Button)findViewById(R.id.button_existing_updates);
+		btnExistingUpdates.setOnClickListener(new View.OnClickListener()
 		{
 			public void onClick(View view)
 			{
 				Log.d(TAG, "Show next");
-				if(flipper.getDisplayedChild() != 1)
-					flipper.setDisplayedChild(1);
+				if(flipper.getDisplayedChild() != FLIPPER_EXISTING_UPDATES)
+					flipper.setDisplayedChild(FLIPPER_EXISTING_UPDATES);
 			}
 		});
 
