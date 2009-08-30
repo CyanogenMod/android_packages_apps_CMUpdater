@@ -85,8 +85,8 @@
     
 	<string name="md5_check_cancelled">Проверка MD5 Отменена</string>
 	
-    <string name="button_available_updates">Прошивки На Сервере</string>
-	<string name="button_existing_updates">Загруженные Обновления</string>
+    <string name="button_available_updates">На Сервере</string>
+	<string name="button_existing_updates">Загруженные</string>
 	
 	<string name="no_existing_updates_found">Загруженных Обновлений Не Найдено</string>
     
