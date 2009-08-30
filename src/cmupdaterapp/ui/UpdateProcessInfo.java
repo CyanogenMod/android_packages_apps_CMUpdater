@@ -14,6 +14,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -120,12 +121,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 //	private int mSpeed;
 //	private long mRemainingTime;
 	
-	private ArrayList<String> mfilenames;
+	private List<String> mfilenames;
 	
-	TextView mdownloadedUpdateText;
-	Spinner mspFoundUpdates;
-	Button mdeleteOldUpdatesButton;
-	Button mapplyUpdateButton;
+	private TextView mdownloadedUpdateText;
+	private Spinner mspFoundUpdates;
+	private Button mdeleteOldUpdatesButton;
+	private Button mapplyUpdateButton;
+	private TextView mNoExistingUpdatesFound;
 
 	private ViewFlipper flipper;
 	
@@ -269,7 +271,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 						if(deleteUpdate(f))
 						{
 							mfilenames.remove(f);
-							mfilenames.trimToSize();
+							//mfilenames.trimToSize();
 						}
 						//If Updates are cached or Present, reload the View
 						if(mAvailableUpdates != null)
@@ -668,6 +670,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			{
 				mfilenames.add(files[i].getName());
 			}
+			//For sorting the Filenames, have to find a way to do natural sorting
+			mfilenames = Collections.synchronizedList(mfilenames); 
+            Collections.sort(mfilenames, Collections.reverseOrder()); 
 		}
 		files = null;
 		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
@@ -1005,6 +1010,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		mspFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
 		mdeleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
 		mapplyUpdateButton = (Button) findViewById(R.id.apply_update_button);
+		mNoExistingUpdatesFound = (TextView) findViewById(R.id.no_existing_updates_found_textview);
 		
 		final Button selectUploadButton = (Button) findViewById(R.id.download_update_button);
 		Spinner sp = mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
@@ -1019,12 +1025,12 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		CheckNowUpdateChooser.setVisibility(View.GONE);
 		
 		//Set the right wallpaper
-		ScrollView s = (ScrollView) findViewById(R.id.mainScroll);
+		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
 		int Orientation = res.getConfiguration().orientation;
 		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
-			s.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
+			l.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
 		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
-			s.setBackgroundDrawable(res.getDrawable(R.drawable.background));
+			l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 		
 		if(mAvailableUpdates != null)
 		{
@@ -1077,6 +1083,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 		else
 		{
+			mNoExistingUpdatesFound.setVisibility(View.VISIBLE);
 			mspFoundUpdates.setVisibility(View.GONE);
 			mapplyUpdateButton.setVisibility(View.GONE);
 			mdownloadedUpdateText.setVisibility(View.GONE);

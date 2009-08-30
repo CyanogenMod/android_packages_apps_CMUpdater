@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mainScroll"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-	<LinearLayout 
-	    android:orientation="vertical"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:gravity="center_horizontal">
-	    <LinearLayout
-	    	android:orientation="horizontal"
-	    	android:layout_width="fill_parent"
-	    	android:layout_height="wrap_content"
-	    	android:gravity="center_horizontal">
-	    	<Button
-	    		android:id="@+id/button_available_updates"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/button_available_updates"
-				android:layout_marginTop="20sp"
-		    	style="@style/TextAppearance.Button"/>	
-			<Button
-	    		android:id="@+id/button_existing_updates"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/button_existing_updates"
-				android:layout_marginTop="20sp"
-		    	style="@style/TextAppearance.Button"/>
-	    </LinearLayout>
-	    <ViewFlipper
-	    	android:id="@+id/Flipper"
+	android:id="@+id/mainLinear"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:gravity="center_horizontal">
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal">
+		<Button
+			android:id="@+id/button_available_updates"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/button_available_updates"
+			android:layout_marginTop="20sp"
+			style="@style/TextAppearance.Button"/>	
+		<Button
+			android:id="@+id/button_existing_updates"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/button_existing_updates"
+			android:layout_marginTop="20sp"
+			style="@style/TextAppearance.Button"/>
+	</LinearLayout>
+	<ViewFlipper
+		android:id="@+id/Flipper"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<ScrollView
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
 		    <LinearLayout 
@@ -84,7 +84,6 @@
 						android:paddingTop="2px"
 						android:layout_marginLeft="5px"/>
 				</LinearLayout>
-				
 			    <Button
 			    	android:id="@+id/download_update_button"
 					android:layout_width="wrap_content"
@@ -147,11 +146,24 @@
 					android:layout_marginRight="10px"
 					android:layout_gravity="bottom|right" />
 			</LinearLayout>
+		</ScrollView>
+		<ScrollView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
 			<LinearLayout 
 		    	android:orientation="vertical"
 		    	android:layout_width="fill_parent"
 		    	android:layout_height="fill_parent"
 		    	android:gravity="center_horizontal">
+				<TextView
+					android:id="@+id/no_existing_updates_found_textview"
+			    	android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/no_existing_updates_found"
+					android:layout_marginBottom="10px"
+			    	style="@style/TextAppearance.Text"
+			    	android:gravity="center_horizontal"
+			    	android:visibility="gone"/>
 				<TextView
 					android:id="@+id/downloaded_update_found"
 			    	android:layout_width="fill_parent"
@@ -179,6 +191,6 @@
 				    style="@style/TextAppearance.Button"
 				    android:drawableLeft="@drawable/check_now" />
 			</LinearLayout>
-		</ViewFlipper>
-	</LinearLayout>
-</ScrollView>
+		</ScrollView>
+	</ViewFlipper>
+</LinearLayout>

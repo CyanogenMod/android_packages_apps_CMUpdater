@@ -87,6 +87,8 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	
 	<string name="button_available_updates">Available Updates</string>
 	<string name="button_existing_updates">Existing Updates</string>
+	
+	<string name="no_existing_updates_found">No Existing Updates found</string>
 
 	<!-- .service.* Strings -->
 	<string name="no_updates_found">No CM updates found</string>
