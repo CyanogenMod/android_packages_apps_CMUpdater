@@ -957,7 +957,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			mAvailableUpdates = availableUpdates;
 		}
 
-		setContentView(R.layout.update_chooser);
+		setContentView(R.layout.main);
 		flipper=(ViewFlipper)findViewById(R.id.Flipper);
 		flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_in));
 		flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_out));
