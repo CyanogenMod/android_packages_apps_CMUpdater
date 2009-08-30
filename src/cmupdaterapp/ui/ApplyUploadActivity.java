@@ -137,7 +137,7 @@ public class ApplyUploadActivity extends Activity
 		String template = res.getString(R.string.apply_title_textview_text);
 		mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
-		//Set the right wallpaper
+		//Set the correct wallpaper
 		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
 		int Orientation = res.getConfiguration().orientation;
 		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)

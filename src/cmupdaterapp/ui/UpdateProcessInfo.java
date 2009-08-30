@@ -98,7 +98,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 
 	public static final int FLIPPER_AVAILABLE_UPDATES = 0;
 	public static final int FLIPPER_EXISTING_UPDATES = 1;
-	
+
 	private Spinner mUpdatesSpinner;
 	private PlainTextUpdateServer mUpdateServer;
 	private ProgressBar mProgressBar;
@@ -115,7 +115,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 
 	private File mUpdateFolder;
 	private Spinner mExistingUpdatesSpinner;
-	
+
 	public static ProgressDialog ChangelogProgressDialog;
 	public static Handler ChangelogProgressHandler;
 	public Thread ChangelogThread;
@@ -123,9 +123,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	
 //	private int mSpeed;
 //	private long mRemainingTime;
-	
+
 	private List<String> mfilenames;
-	
+
 	private TextView mdownloadedUpdateText;
 	private Spinner mspFoundUpdates;
 	private Button mdeleteOldUpdatesButton;
@@ -133,7 +133,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	private TextView mNoExistingUpdatesFound;
 
 	private ViewFlipper flipper;
-	
+
 
 	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection()
 	{
@@ -689,7 +689,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		else
 		{
 			switchToUpdateChooserLayout(null);
-			//switchToNoUpdatesAvailable();
 		}
 		UpdateDownloaderService.setUpdateProcessInfo(UpdateProcessInfo.this);
 	}
@@ -943,7 +942,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			mDownloadFilenameTextView.setText(mFileName);
 		((Button)findViewById(R.id.cancel_download_buton)).setOnClickListener(mCancelDownloadListener);
 		
-		//Set the right wallpaper
+		//Set the correct wallpaper
 		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
 		int Orientation = res.getConfiguration().orientation;
 		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
@@ -1018,7 +1017,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		final Button selectUploadButton = (Button) findViewById(R.id.download_update_button);
 		Spinner sp = mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
 		TextView DownloadText = (TextView) findViewById(R.id.available_updates_text);
-		//TextView stableExperimentalInfo = (TextView) findViewById(R.id.stable_experimental_description);
 		LinearLayout stableExperimentalInfo = (LinearLayout) findViewById(R.id.stable_experimental_description_container);
 		Button changelogButton = (Button) findViewById(R.id.show_changelog_button);
 		
@@ -1027,7 +1025,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		CheckNowUpdateChooserText.setVisibility(View.GONE);
 		CheckNowUpdateChooser.setVisibility(View.GONE);
 		
-		//Set the right wallpaper
+		//Set the correct wallpaper
 		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
 		int Orientation = res.getConfiguration().orientation;
 		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
@@ -1439,38 +1437,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
 		}
 	}
-	
-//	public boolean onKeyDown(int keyCode, KeyEvent event)
-//	{ 
-//		switch (keyCode)
-//		{ 
-//	        case KeyEvent.KEYCODE_BACK: 
-//	        	break; 
-//	        case KeyEvent.KEYCODE_HOME:
-//	        	break; 
-//	        case KeyEvent.KEYCODE_DPAD_CENTER :
-//	        	break; 
-//	        case KeyEvent.KEYCODE_ENDCALL : 
-//	        	break; 
-//	        case KeyEvent.ACTION_DOWN : 
-//	        	break; 
-//	        default: 
-//	        	break; 
-//        } 
-//        return super.onKeyDown(keyCode, event); 
-//   }
-	
-//	private void cancelDownloading()
-//	{
-//		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
-//		{
-//			mUpdateDownloaderService.cancelDownload();
-//			Log.i(TAG, "Download Canceled due to Event");
-//		}
-//		else
-//			Log.i(TAG, "Not Downloading. Proceed with the Event");
-//	}
-	
+
 	private boolean deleteOldVersionsOfUpdater()
 	{
 		try
