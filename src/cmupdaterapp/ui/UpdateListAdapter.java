@@ -45,9 +45,9 @@ public class UpdateListAdapter<T> extends ArrayAdapter<T>
     	wrapper.getTextView().setText(info.name);
     	
     	if(info.branchCode.toLowerCase().equals("x"))
-    		wrapper.getImage().setImageResource(R.drawable.experimental_big);
+    		wrapper.getImage().setImageResource(R.drawable.experimental);
     	else
-    		wrapper.getImage().setImageResource(R.drawable.stable_big);
+    		wrapper.getImage().setImageResource(R.drawable.stable);
         return row;
    } 
 }

@@ -29,17 +29,17 @@
 			android:layout_marginTop="20sp"
 			android:id="@+id/stable_experimental_description_container">
 			<ImageView
-				android:layout_height="24px"
-				android:layout_width="24px"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
 				android:src="@drawable/stable" />
 			<TextView
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:gravity="center_horizontal"
-				style="@style/TextAppearance.Text"
 				android:text="@string/stable_description"
-				android:textSize="16px"
+				style="@style/TextAppearance.Text"
 				android:paddingTop="2px"
+				android:layout_marginLeft="5px"
 				android:layout_marginRight="20px"/>
 			<ImageView
 				android:layout_width="wrap_content"
@@ -49,10 +49,10 @@
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:gravity="center_horizontal" 
-				style="@style/TextAppearance.Text"
 				android:text="@string/experimental_description"
+				style="@style/TextAppearance.Text"
 				android:paddingTop="2px"
-				android:textSize="16px"/>
+				android:layout_marginLeft="5px"/>
 		</LinearLayout>
 		
 	    <Button
