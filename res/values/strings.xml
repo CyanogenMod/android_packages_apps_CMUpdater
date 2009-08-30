@@ -84,6 +84,9 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="false_string">false</string>
 	
 	<string name="md5_check_cancelled">MD5 Check was Cancelled</string>
+	
+	<string name="button_available_updates">Available Updates</string>
+	<string name="button_existing_updates">Existing Updates</string>
 
 	<!-- .service.* Strings -->
 	<string name="no_updates_found">No CM updates found</string>

@@ -48,6 +48,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -58,6 +59,7 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 import cmupdaterapp.service.PlainTextUpdateServer;
 import cmupdaterapp.service.UpdateDownloaderService;
 import cmupdaterapp.service.UpdateInfo;
@@ -124,9 +126,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	Spinner mspFoundUpdates;
 	Button mdeleteOldUpdatesButton;
 	Button mapplyUpdateButton;
-	View mseparator;
 
-
+	private ViewFlipper flipper;
 	
 
 	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection()
@@ -952,6 +953,30 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 
 		setContentView(R.layout.update_chooser);
+		flipper=(ViewFlipper)findViewById(R.id.Flipper);
+		flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_in));
+		flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_out));
+		Button btn=(Button)findViewById(R.id.button_available_updates);
+		btn.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View view)
+			{
+				Log.d(TAG, "Show next");
+				if(flipper.getDisplayedChild() != 0)
+					flipper.setDisplayedChild(0);
+			}
+		});
+		Button btn2=(Button)findViewById(R.id.button_existing_updates);
+		btn2.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View view)
+			{
+				Log.d(TAG, "Show next");
+				if(flipper.getDisplayedChild() != 1)
+					flipper.setDisplayedChild(1);
+			}
+		});
+
 		((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).cancel(R.string.not_new_updates_found_title);
 		
 		Resources res = getResources();
@@ -980,7 +1005,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		mspFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
 		mdeleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
 		mapplyUpdateButton = (Button) findViewById(R.id.apply_update_button);
-		mseparator = findViewById(R.id.downloaded_update_found_separator);
 		
 		final Button selectUploadButton = (Button) findViewById(R.id.download_update_button);
 		Spinner sp = mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
@@ -1053,7 +1077,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 		else
 		{
-			mseparator.setVisibility(View.GONE);
 			mspFoundUpdates.setVisibility(View.GONE);
 			mapplyUpdateButton.setVisibility(View.GONE);
 			mdownloadedUpdateText.setVisibility(View.GONE);
