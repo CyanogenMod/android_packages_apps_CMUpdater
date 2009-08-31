@@ -75,7 +75,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class UpdateProcessInfo extends IUpdateProcessInfo
 {
 	private static final String TAG = "<CM-Updater> UpdateProcessInfo";
-	private static final String STORED_STATE_FILENAME = "UpdateProcessInfo.ser";
+	private static final String STORED_STATE_FILENAME = "CMUpdater.ser";
 
 	private static final int MENU_ID_UPDATE_NOW = 1;
 	private static final int MENU_ID_SCAN_QR = 2;
@@ -96,6 +96,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	
 	public static final int CHANGELOGTYPE_ROM = 1;
 	public static final int CHANGELOGTYPE_APP = 2;
+	public static final int CHANGELOGTYPE_THEME = 3;
 
 	public static final int FLIPPER_AVAILABLE_UPDATES = 0;
 	public static final int FLIPPER_EXISTING_UPDATES = 1;
@@ -123,9 +124,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	public static Handler ChangelogProgressHandler;
 	public Thread ChangelogThread;
 	public List<Version> ChangelogList = null;
-	
-//	private int mSpeed;
-//	private long mRemainingTime;
 
 	private List<String> mfilenames;
 
@@ -159,7 +157,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	//private static DownloadUpdateTask mDownloadUpdateTask;
 
 
-	private final View.OnClickListener mSelectUpdateButtonListener = new View.OnClickListener()
+	private final View.OnClickListener mDownloadUpdateButtonListener = new View.OnClickListener()
 	{
 		public void onClick(View v)
 		{
@@ -213,19 +211,73 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 	};
 	
-	private final Spinner.OnItemSelectedListener mSpinnerChanged = new Spinner.OnItemSelectedListener()
+	private final View.OnClickListener mDownloadThemeButtonListener = new View.OnClickListener()
+	{
+		public void onClick(View v)
+		{
+			if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
+			{
+				new AlertDialog.Builder(UpdateProcessInfo.this)
+				.setTitle(R.string.sdcard_is_not_present_dialog_title)
+				.setMessage(R.string.sdcard_is_not_present_dialog_body)
+				.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						dialog.dismiss();
+					}
+				})
+				.show();
+				return;
+			}
+
+			
+			UpdateInfo ui = (UpdateInfo) mThemesSpinner.getSelectedItem();
+			//Check if the File is present, so prompt the User to overwrite it
+			File foo = new File(mUpdateFolder + "/" + ui.fileName);
+			if (foo.isFile() && foo.exists())
+			{
+				new AlertDialog.Builder(UpdateProcessInfo.this)
+				.setTitle(R.string.overwrite_update_title)
+				.setMessage(R.string.overwrite_update_summary)
+				.setNegativeButton(R.string.overwrite_update_negative, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						dialog.dismiss();
+					}
+				})
+				.setPositiveButton(R.string.overwrite_update_positive, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						downloadRequestedUpdate((UpdateInfo) mThemesSpinner.getSelectedItem());
+					}
+				})
+				.show();
+				return;
+			}
+			//Otherwise download it
+			else
+			{
+				downloadRequestedUpdate((UpdateInfo) mThemesSpinner.getSelectedItem());
+			}
+		}
+	};
+	
+	private final Spinner.OnItemSelectedListener mUpdateSpinnerChanged = new Spinner.OnItemSelectedListener()
 	{
 		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3)
 		{
-			Button changelogButton = (Button) findViewById(R.id.show_changelog_button);
+			Button updateChangelogButton = (Button) findViewById(R.id.show_changelog_button);
 			String changelog = ((UpdateInfo) mUpdatesSpinner.getSelectedItem()).description;
 			if (changelog == null || changelog == "")
 			{
-				changelogButton.setVisibility(View.GONE);
+				updateChangelogButton.setVisibility(View.GONE);
 			}
 			else
 			{
-				changelogButton.setVisibility(View.VISIBLE);
+				updateChangelogButton.setVisibility(View.VISIBLE);
 			}
 		}
 
@@ -235,11 +287,41 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 	};
 	
-	private final View.OnClickListener mChangelogButtonListener = new View.OnClickListener()
+	private final Spinner.OnItemSelectedListener mThemeSpinnerChanged = new Spinner.OnItemSelectedListener()
+	{
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+		{
+			Button themeChangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
+			String changelog = ((UpdateInfo) mThemesSpinner.getSelectedItem()).description;
+			if (changelog == null || changelog == "")
+			{
+				themeChangelogButton.setVisibility(View.GONE);
+			}
+			else
+			{
+				themeChangelogButton.setVisibility(View.VISIBLE);
+			}
+		}
+
+		public void onNothingSelected(AdapterView<?> arg0)
+		{
+
+		}
+	};
+	
+	private final View.OnClickListener mUpdateChangelogButtonListener = new View.OnClickListener()
 	{
 		public void onClick(View v)
 		{
 			getChangelog(CHANGELOGTYPE_ROM);
+		}
+	};
+	
+	private final View.OnClickListener mThemeChangelogButtonListener = new View.OnClickListener()
+	{
+		public void onClick(View v)
+		{
+			getChangelog(CHANGELOGTYPE_THEME);
 		}
 	};
 
@@ -1058,9 +1140,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		//Rom Layout
 		if(availableRoms != null)
 		{
-			selectUploadButton.setOnClickListener(mSelectUpdateButtonListener);
-			changelogButton.setOnClickListener(mChangelogButtonListener);
-			mUpdatesSpinner.setOnItemSelectedListener(mSpinnerChanged);
+			selectUploadButton.setOnClickListener(mDownloadUpdateButtonListener);
+			changelogButton.setOnClickListener(mUpdateChangelogButtonListener);
+			mUpdatesSpinner.setOnItemSelectedListener(mUpdateSpinnerChanged);
 			
 			UpdateListAdapter<UpdateInfo> spAdapterRoms = new UpdateListAdapter<UpdateInfo>(
 					this,
@@ -1082,9 +1164,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		//Theme Layout
 		if(availableThemes != null)
 		{
-			//btnDownloadTheme.setOnClickListener(mSelectUpdateButtonListener);
-			//changelogButton.setOnClickListener(mChangelogButtonListener);
-			//mThemesSpinner.setOnItemSelectedListener(mSpinnerChanged);
+			btnDownloadTheme.setOnClickListener(mDownloadThemeButtonListener);
+			btnThemechangelogButton.setOnClickListener(mThemeChangelogButtonListener);
+			mThemesSpinner.setOnItemSelectedListener(mThemeSpinnerChanged);
 			
 			UpdateListAdapter<UpdateInfo> spAdapterThemes = new UpdateListAdapter<UpdateInfo>(
 					this,
@@ -1102,7 +1184,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			btnThemechangelogButton.setVisibility(View.GONE);
 		}
 
-		
+		//Existing Updates Layout
 		if (mfilenames != null && mfilenames.size() > 0)
 		{
 			if(availableUpdates == null)
@@ -1192,6 +1274,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				ChangelogList = Changelog.getRomChangelog((UpdateInfo) mUpdatesSpinner.getSelectedItem());
 				displayChangelog(CHANGELOGTYPE_ROM);
 				break;
+			case CHANGELOGTYPE_THEME:
+				//Get the ROM Changelog and Display the Changelog
+				ChangelogList = Changelog.getRomChangelog((UpdateInfo) mThemesSpinner.getSelectedItem());
+				displayChangelog(CHANGELOGTYPE_THEME);
+				break;
 			case CHANGELOGTYPE_APP:
 				//Show a ProgressDialog and start the Thread. The Dialog is shown in the Handler Function
 				ChangelogProgressDialog = ProgressDialog.show(this, res.getString(R.string.changelog_progress_title), res.getString(R.string.changelog_progress_body), true);
@@ -1215,6 +1302,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			case CHANGELOGTYPE_ROM:
 				dialogTitle = res.getString(R.string.changelog_title_rom);
+				break;
+			case CHANGELOGTYPE_THEME:
+				dialogTitle = res.getString(R.string.changelog_title_theme);
 				break;
 			case CHANGELOGTYPE_APP:
 				dialogTitle = res.getString(R.string.changelog_title_app);

@@ -79,6 +79,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 
 	<string name="changelog_title_rom">Update Changelog</string>
 	<string name="changelog_title_app">Application Changelog</string>
+	<string name="changelog_title_theme">Theme Changelog</string>
 
 	<string name="true_string">true</string>
 	<string name="false_string">false</string>
