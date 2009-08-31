@@ -230,4 +230,22 @@ public class Preferences
 		}
 		return null;
 	}
+	
+	public int[] convertVersionToIntArray(String oriVersion)
+	{
+		String version[] = oriVersion.split("\\.");
+		int[] retValue = new int[version.length];
+		try
+		{
+			for(int i = 0; i < version.length; i++)
+			{
+				retValue[i] = Integer.parseInt(version[i]);
+			}
+			return retValue;
+		}
+		catch (NumberFormatException e)
+		{
+			return new int[0];
+		}
+	}
 }

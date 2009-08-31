@@ -54,9 +54,12 @@ public class PlainTextUpdateServer implements IUpdateServer
 		String systemRom = SysUtils.getReadableModVersion();
 		int[] sysVersion = SysUtils.getSystemModVersion();
 		String[] themeInfos = mPreferences.getThemeInformations();
-		//Instantiate it, so we can use later [0] and [1] without checking
-		if (themeInfos == null)
+		if (themeInfos == null || themeInfos.length != 2)
+		{
 			themeInfos = new String[2];
+			themeInfos[0] = "";
+			themeInfos[1] = "";
+		}
 		//Get the actual Updateserver URL
 		mUpdateServerUri = URI.create(mPreferences.getUpdateFileURL());
 		HttpUriRequest req = new HttpGet(mUpdateServerUri);
@@ -110,7 +113,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 				{
 					if (boardMatches(ui, systemMod))
 					{
-						if(mPreferences.showDowngrades() || updateIsNewer(ui, sysVersion, true))
+						if(mPreferences.showDowngrades() || updateIsNewer(ui, mPreferences.convertVersionToIntArray(themeInfos[1]), true))
 						{
 							if (branchMatches(ui, mPreferences.allowExperimental()))
 							{
@@ -132,40 +135,48 @@ public class PlainTextUpdateServer implements IUpdateServer
 					}
 				}
 				//For Themes
-				else if (ui.type.toLowerCase().equals("theme"))
+				//Theme installed?
+				else if (themeInfos != null)
 				{
-					if (themeInfos != null && ui.name.equals(themeInfos[0]))
+					//Json object is a theme
+					if (ui.type.toLowerCase().equals("theme"))
 					{
-						if (romMatches(ui, systemRom))
+						//Name matches
+						if (themeInfos[0] != null && ui.name.equals(themeInfos[0]))
 						{
-							if(mPreferences.showDowngrades() || updateIsNewer(ui, sysVersion, true))
+							//Mod matches
+							if (romMatches(ui, systemRom))
 							{
-								if (branchMatches(ui, mPreferences.allowExperimental()))
+								//Version matchrs
+								if(mPreferences.showDowngrades() || updateIsNewer(ui, sysVersion, true))
 								{
-									retValue.themes.add(ui);
+									//Branch matches
+									if (branchMatches(ui, mPreferences.allowExperimental()))
+									{
+										retValue.themes.add(ui);
+									}
+									else
+									{
+										Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
+									}
 								}
 								else
 								{
-									Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
+									Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
 								}
 							}
 							else
 							{
-								Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
+								Log.d(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
 							}
 						}
 						else
 						{
-							Log.d(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
+							Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
 						}
-					}
-					else
-					{
-						Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
 					}
 				}
 			}
-
 		}
 		finally
 		{
