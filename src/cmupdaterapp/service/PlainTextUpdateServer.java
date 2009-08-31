@@ -104,7 +104,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 			{
 				UpdateInfo ui = updateInfos.poll();
 				//For Roms
-				if (ui.type.toLowerCase().equals("rom"))
+				if (ui.type.equalsIgnoreCase("rom"))
 				{
 					if (boardMatches(ui, systemMod))
 					{
@@ -134,7 +134,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 				else if (themeInfos != null && themeInfos.length == 2)
 				{
 					//Json object is a theme
-					if (ui.type.toLowerCase().equals("theme"))
+					if (ui.type.equalsIgnoreCase("theme"))
 					{
 						//Name matches
 						if (themeInfos[0] != null && ui.name.equalsIgnoreCase(themeInfos[0]))
@@ -281,7 +281,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		Log.d(TAG, "BoardString:" + ui.board + "; System Mod:" + systemMod);
 		for(String board:ui.board)
 		{
-			if(board.equals(systemMod))
+			if(board.equalsIgnoreCase(systemMod))
 				return true;
 		}
 		return false;
@@ -292,7 +292,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		if(ui == null) return false;
 		if(ui.mod.equals("*") || systemRom.equals("*")) return true;
 		Log.d(TAG, "ThemeRom:" + ui.mod + "; SystemRom:" + systemRom);
-		if(ui.mod.equals(systemRom))
+		if(ui.mod.equalsIgnoreCase(systemRom))
 				return true;
 		return false;
 	}
