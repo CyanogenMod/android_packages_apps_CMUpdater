@@ -200,8 +200,9 @@ public class UpdateCheckerService extends Service
 		prefs.setLastUpdateCheck(new Date());
 		
 		
-		int updateCountRoms = availableUpdates.roms.size();
-		int updateCountThemes = availableUpdates.themes.size();
+		int updateCountRoms = availableUpdates.getRomCount();
+		int updateCountThemes = availableUpdates.getThemeCount();
+		int updateCount = availableUpdates.getUpdateCount();
 		Log.i(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
 		
 		if(updateCountRoms > 0 || updateCountThemes > 0)
@@ -220,7 +221,7 @@ public class UpdateCheckerService extends Service
 			//To remove the Notification, when the User clicks on it
 			notification.flags = Notification.FLAG_AUTO_CANCEL;
 			
-			String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCountRoms + updateCountThemes);
+			String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
 			notification.setLatestEventInfo(this, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
 			
 			Uri notificationRingtone = prefs.getConfiguredRingtone();

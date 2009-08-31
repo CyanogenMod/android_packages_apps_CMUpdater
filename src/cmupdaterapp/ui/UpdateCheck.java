@@ -69,8 +69,9 @@ public class UpdateCheck implements Runnable
 			Preferences prefs = Preferences.getPreferences(upi);
 			prefs.setLastUpdateCheck(new Date());
 			
-			int updateCountRoms = ui.roms.size();
-			int updateCountThemes = ui.themes.size();
+			int updateCountRoms = ui.getRomCount();
+			int updateCountThemes = ui.getThemeCount();
+			int updateCount = ui.getUpdateCount();
 			if(updateCountRoms == 0 && updateCountThemes == 0)
 			{
 				Log.i(TAG, "No updates found");
@@ -93,7 +94,7 @@ public class UpdateCheck implements Runnable
 										res.getString(R.string.not_new_updates_found_ticker),
 										System.currentTimeMillis());
 		
-					String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCountRoms + updateCountThemes);
+					String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
 					notification.setLatestEventInfo(upi, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
 	
 					Uri notificationRingtone = prefs.getConfiguredRingtone();

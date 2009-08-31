@@ -69,8 +69,9 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 		Preferences prefs = Preferences.getPreferences(upi);
 		prefs.setLastUpdateCheck(new Date());
 		
-		int updateCountRoms = result.roms.size();
-		int updateCountThemes = result.themes.size();
+		int updateCountRoms = result.getRomCount();
+		int updateCountThemes = result.getThemeCount();
+		int updateCount = result.getUpdateCount();
 		if(updateCountRoms == 0 && updateCountThemes == 0)
 		{
 			Log.i(TAG, "No updates found");
@@ -91,7 +92,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 								res.getString(R.string.not_new_updates_found_ticker),
 								System.currentTimeMillis());
 			
-			String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCountRoms + updateCountThemes);
+			String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
 			notification.setLatestEventInfo(upi, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
 			
 			Uri notificationRingtone = prefs.getConfiguredRingtone();

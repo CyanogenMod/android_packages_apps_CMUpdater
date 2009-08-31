@@ -21,4 +21,19 @@ public class FullUpdateInfo implements Serializable
 	{
 		return "FullUpdateInfo";
 	}
+	
+	public int getRomCount()
+	{
+		return roms.size();
+	}
+	
+	public int getThemeCount()
+	{
+		return themes.size();
+	}
+	
+	public int getUpdateCount()
+	{
+		return themes.size() + roms.size();
+	}
 }
