@@ -201,7 +201,7 @@ public class Preferences
 	public String[] getThemeInformations()
 	{
 		File f = new File(getThemeFile());
-		if (f.exists() && f.canRead())
+		if (f != null && f.exists() && f.canRead())
 		{
 			try
 			{
@@ -210,10 +210,14 @@ public class Preferences
 				String firstLine = bufRead.readLine();
 				bufRead.close();
 				input.close();
-				String[] Return = firstLine.split("\\|");
-				//Only return if there was a string like Hero|2.0.1
-				if (Return.length == 2)
-					return Return;
+				//Empty File prevention
+				if(firstLine != null)
+				{
+					String[] Return = firstLine.split("\\|");
+					//Only return if there was a string like Hero|2.0.1
+					if (Return.length == 2)
+						return Return;
+				}
 			}
 			catch (FileNotFoundException e)
 			{
@@ -226,7 +230,7 @@ public class Preferences
 		}
 		else
 		{
-			Log.d(TAG, "No Theme File found. Probably no Theme installed or Theme Path not configured");
+			Log.d(TAG, "No Theme File found. Probably no Theme installed, Theme Path not configured, or Bad Theme File");
 		}
 		return null;
 	}

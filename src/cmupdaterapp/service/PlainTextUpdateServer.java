@@ -54,12 +54,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		String systemRom = SysUtils.getReadableModVersion();
 		int[] sysVersion = SysUtils.getSystemModVersion();
 		String[] themeInfos = mPreferences.getThemeInformations();
-		if (themeInfos == null || themeInfos.length != 2)
-		{
-			themeInfos = new String[2];
-			themeInfos[0] = "";
-			themeInfos[1] = "";
-		}
+		
 		//Get the actual Updateserver URL
 		mUpdateServerUri = URI.create(mPreferences.getUpdateFileURL());
 		HttpUriRequest req = new HttpGet(mUpdateServerUri);
@@ -113,7 +108,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 				{
 					if (boardMatches(ui, systemMod))
 					{
-						if(mPreferences.showDowngrades() || updateIsNewer(ui, mPreferences.convertVersionToIntArray(themeInfos[1]), true))
+						if(mPreferences.showDowngrades() || updateIsNewer(ui, sysVersion, true))
 						{
 							if (branchMatches(ui, mPreferences.allowExperimental()))
 							{
@@ -135,8 +130,8 @@ public class PlainTextUpdateServer implements IUpdateServer
 					}
 				}
 				//For Themes
-				//Theme installed?
-				else if (themeInfos != null)
+				//Theme installed and in correct format?
+				else if (themeInfos != null && themeInfos.length == 2)
 				{
 					//Json object is a theme
 					if (ui.type.toLowerCase().equals("theme"))
@@ -148,7 +143,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 							if (romMatches(ui, systemRom))
 							{
 								//Version matchrs
-								if(mPreferences.showDowngrades() || updateIsNewer(ui, sysVersion, true))
+								if(mPreferences.showDowngrades() || updateIsNewer(ui, mPreferences.convertVersionToIntArray(themeInfos[1]), true))
 								{
 									//Branch matches
 									if (branchMatches(ui, mPreferences.allowExperimental()))
@@ -175,6 +170,10 @@ public class PlainTextUpdateServer implements IUpdateServer
 							Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
 						}
 					}
+				}
+				else
+				{
+					Log.d(TAG, String.format("Discarding Update %s %s. Invalid or no Themes installed", ui.name, ui.displayVersion));
 				}
 			}
 		}
