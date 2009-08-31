@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
-import java.util.List;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -18,13 +17,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
+import cmupdaterapp.service.FullUpdateInfo;
 import cmupdaterapp.service.IUpdateServer;
-import cmupdaterapp.service.UpdateInfo;
 import cmupdaterapp.utils.Preferences;
 
 public class UpdateCheck implements Runnable
 {
-	public static final String KEY_UPDATE_LIST = "cmupdaterapp.updates";
+	public static final String KEY_UPDATE_LIST = "cmupdaterapp.fullUpdateList";
 
 	private static final String TAG = "<CM-Updater> UpdateCheck";
 
@@ -32,7 +31,7 @@ public class UpdateCheck implements Runnable
 	private IUpdateProcessInfo mUpdateProcessInfo;	
 	private ProgressDialog p;
 	
-	private List<UpdateInfo> ui = null;
+	private FullUpdateInfo ui = null;
 	
 	public UpdateCheck(IUpdateServer updateServer, IUpdateProcessInfo upi, ProgressDialog pg)
 	{
@@ -70,8 +69,9 @@ public class UpdateCheck implements Runnable
 			Preferences prefs = Preferences.getPreferences(upi);
 			prefs.setLastUpdateCheck(new Date());
 			
-			int updateCount = ui.size();
-			if(updateCount == 0)
+			int updateCountRoms = ui.roms.size();
+			int updateCountThemes = ui.themes.size();
+			if(updateCountRoms == 0 && updateCountThemes == 0)
 			{
 				Log.i(TAG, "No updates found");
 				Toast.makeText(upi, R.string.no_updates_found, Toast.LENGTH_SHORT).show();
@@ -80,7 +80,7 @@ public class UpdateCheck implements Runnable
 			}
 			else
 			{
-				Log.i(TAG, updateCount + " update(s) found");
+				Log.i(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
 				upi.switchToUpdateChooserLayout(ui);
 				if(prefs.notificationsEnabled())
 				{	
@@ -93,7 +93,7 @@ public class UpdateCheck implements Runnable
 										res.getString(R.string.not_new_updates_found_ticker),
 										System.currentTimeMillis());
 		
-					String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
+					String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCountRoms + updateCountThemes);
 					notification.setLatestEventInfo(upi, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
 	
 					Uri notificationRingtone = prefs.getConfiguredRingtone();

@@ -7,29 +7,48 @@
 	android:layout_height="fill_parent"
 	android:gravity="center_horizontal">
 	<LinearLayout
-		android:orientation="horizontal"
+		android:orientation="vertical"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:gravity="center_horizontal">
-		<Button
-			android:id="@+id/button_available_updates"
-			android:layout_width="wrap_content"
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:text="@string/button_available_updates"
-			android:layout_marginTop="20sp"
-			style="@style/TextAppearance.Button"/>	
-		<Button
-			android:id="@+id/button_existing_updates"
-			android:layout_width="wrap_content"
+			android:gravity="center_horizontal">
+			<Button
+				android:id="@+id/button_available_updates"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/button_available_updates"
+				android:layout_marginTop="20sp"
+				style="@style/TextAppearance.Button"/>
+			<Button
+				android:id="@+id/button_available_themes"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/button_available_themes"
+				android:layout_marginTop="20sp"
+				style="@style/TextAppearance.Button"/>	
+		</LinearLayout>
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:text="@string/button_existing_updates"
-			android:layout_marginTop="20sp"
-			style="@style/TextAppearance.Button"/>
+			android:gravity="center_horizontal">
+			<Button
+				android:id="@+id/button_existing_updates"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/button_existing_updates"
+				style="@style/TextAppearance.Button"/>
+		</LinearLayout>
 	</LinearLayout>
 	<ViewFlipper
 		android:id="@+id/Flipper"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
+		<!-- Roms -->
 		<ScrollView
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
@@ -147,6 +166,7 @@
 					android:layout_gravity="bottom|right" />
 			</LinearLayout>
 		</ScrollView>
+		<!-- Existing Updates -->
 		<ScrollView
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
@@ -190,6 +210,48 @@
 					android:text="@string/delete_updates_text"
 				    style="@style/TextAppearance.Button"
 				    android:drawableLeft="@drawable/check_now" />
+			</LinearLayout>
+		</ScrollView>
+		<!-- Themes -->
+		<ScrollView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+		    <LinearLayout 
+		    	android:orientation="vertical"
+		    	android:layout_width="fill_parent"
+		    	android:layout_height="fill_parent"
+		    	android:gravity="center_horizontal">
+			    <TextView
+			    	android:id="@+id/available_themes_text"
+			    	android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/available_themes_text"
+					android:gravity="center_horizontal"
+					android:layout_marginTop="10sp"
+			    	style="@style/TextAppearance.Text" />
+				<Spinner
+					android:id="@+id/available_themes_list"
+					android:layout_marginTop="20sp"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_horizontal"
+					android:prompt="@string/available_themes_text" />
+			    <Button
+			    	android:id="@+id/download_theme_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/choose_available_theme_text"
+					android:layout_marginTop="20sp"
+				    style="@style/TextAppearance.Button"
+				    android:drawableLeft="@drawable/download" />
+				<Button
+			    	android:id="@+id/show_theme_changelog_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/changelog_button_theme_text"
+					android:layout_marginTop="20sp"
+				    style="@style/TextAppearance.Button"
+				    android:drawableLeft="@drawable/icon" />
 			</LinearLayout>
 		</ScrollView>
 	</ViewFlipper>

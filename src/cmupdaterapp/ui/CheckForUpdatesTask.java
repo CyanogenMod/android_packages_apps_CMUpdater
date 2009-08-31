@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
-import java.util.List;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -15,13 +14,13 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
+import cmupdaterapp.service.FullUpdateInfo;
 import cmupdaterapp.service.IUpdateServer;
-import cmupdaterapp.service.UpdateInfo;
 import cmupdaterapp.utils.Preferences;
 
-public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo>>
+public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 {	
-	public static final String KEY_UPDATE_LIST = "cmupdaterapp.updates";
+	public static final String KEY_UPDATE_LIST = "cmupdaterapp.fullUpdateList";
 
 	private static final String TAG = "<CM-Updater> CheckForUpdatesTask";
 
@@ -36,7 +35,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo
 	}
 
 	@Override
-	public List<UpdateInfo> doInBackground(Void... params)
+	public FullUpdateInfo doInBackground(Void... params)
 	{
 		try
 		{
@@ -56,7 +55,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo
 	}
 	
 	@Override
-	public void onPostExecute(List<UpdateInfo> result)
+	public void onPostExecute(FullUpdateInfo result)
 	{
 		IUpdateProcessInfo upi = mUpdateProcessInfo;
 		
@@ -70,8 +69,9 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo
 		Preferences prefs = Preferences.getPreferences(upi);
 		prefs.setLastUpdateCheck(new Date());
 		
-		int updateCount = result.size();
-		if(updateCount == 0)
+		int updateCountRoms = result.roms.size();
+		int updateCountThemes = result.themes.size();
+		if(updateCountRoms == 0 && updateCountThemes == 0)
 		{
 			Log.i(TAG, "No updates found");
 			Toast.makeText(upi, R.string.no_updates_found, Toast.LENGTH_SHORT).show();
@@ -79,7 +79,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo
 		}
 		else
 		{
-			Log.i(TAG, updateCount + " update(s) found");
+			Log.i(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
 			upi.switchToUpdateChooserLayout(result);
 			
 			Intent i = new Intent(upi, UpdateProcessInfo.class)
@@ -91,7 +91,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, List<UpdateInfo
 								res.getString(R.string.not_new_updates_found_ticker),
 								System.currentTimeMillis());
 			
-			String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
+			String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCountRoms + updateCountThemes);
 			notification.setLatestEventInfo(upi, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
 			
 			Uri notificationRingtone = prefs.getConfiguredRingtone();

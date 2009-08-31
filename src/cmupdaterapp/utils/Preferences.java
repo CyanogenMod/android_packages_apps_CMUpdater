@@ -226,7 +226,7 @@ public class Preferences
 		}
 		else
 		{
-			Log.d(TAG, "No Theme File found. Probably no Theme installed or Theme URL not configured");
+			Log.d(TAG, "No Theme File found. Probably no Theme installed or Theme Path not configured");
 		}
 		return null;
 	}

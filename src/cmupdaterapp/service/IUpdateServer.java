@@ -1,7 +1,6 @@
 package cmupdaterapp.service;
 
 import java.io.IOException;
-import java.util.List;
 
 public interface IUpdateServer
 {
@@ -15,5 +14,5 @@ public interface IUpdateServer
 	 * 
 	 * @return A list of <code>UpdateInfo</code> instances, one per each update available 
 	 */
-	public List<UpdateInfo> getAvailableUpdates() throws IOException;
+	public FullUpdateInfo getAvailableUpdates() throws IOException;
 }

@@ -1,7 +1,6 @@
 package cmupdaterapp.ui;
 
-import java.util.List;
-
+import cmupdaterapp.service.FullUpdateInfo;
 import cmupdaterapp.service.UpdateInfo;
 
 import android.app.Activity;
@@ -14,7 +13,7 @@ public abstract class IUpdateProcessInfo extends Activity
 	 * 
 	 * @param availableUpdates
 	 */
-	public abstract void switchToUpdateChooserLayout(List<UpdateInfo> availableUpdates);
+	public abstract void switchToUpdateChooserLayout(FullUpdateInfo availableUpdates);
 	
 	public abstract void switchToDownloadingLayout(UpdateInfo downloadingUpdate);
 	

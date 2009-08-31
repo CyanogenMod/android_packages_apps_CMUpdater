@@ -25,7 +25,7 @@ public class ApplyUploadActivity extends Activity
 	
 	private static final String TAG = "<CM-Updater> ApplyUploadActivity";
 
-	public static final String KEY_UPDATE_INFO = "cmupdaterapp.updateInfo";
+	public static final String KEY_UPDATE_INFO = "cmupdaterapp.fullUpdateList";
 
 
 	private UpdateInfo mUpdateInfo;

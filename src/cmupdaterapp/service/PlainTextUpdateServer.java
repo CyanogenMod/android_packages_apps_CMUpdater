@@ -7,7 +7,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,9 +48,11 @@ public class PlainTextUpdateServer implements IUpdateServer
 			Log.i(TAG, "System's Mod version:" + sm);
 		}
 	}
-	public List<UpdateInfo> getAvailableUpdates() throws IOException
+	public FullUpdateInfo getAvailableUpdates() throws IOException
 	{
 		String systemMod = mPreferences.getConfiguredModString();
+		String systemRom = SysUtils.getReadableModVersion();
+		int[] sysVersion = SysUtils.getSystemModVersion();
 		//Get the actual Updateserver URL
 		mUpdateServerUri = URI.create(mPreferences.getUpdateFileURL());
 		HttpUriRequest req = new HttpGet(mUpdateServerUri);
@@ -67,7 +68,8 @@ public class PlainTextUpdateServer implements IUpdateServer
 					+ serverResponse);
 		}
 
-		LinkedList<UpdateInfo> retValue = new LinkedList<UpdateInfo>();
+		FullUpdateInfo retValue = new FullUpdateInfo();
+		
 		HttpEntity responseEntity = response.getEntity();
 
 		try
@@ -99,23 +101,49 @@ public class PlainTextUpdateServer implements IUpdateServer
 			for (int i = 0, max = updateInfos.size() ; i < max ; i++)
 			{
 				UpdateInfo ui = updateInfos.poll();
-				if (modMatches(ui, systemMod))
+				//For Roms
+				if (ui.type.toLowerCase().equals("rom"))
 				{
-					if(mPreferences.showDowngrades() || updateIsNewer(ui, true))
+					if (boardMatches(ui, systemMod))
 					{
-						if (branchMatches(ui, mPreferences.allowExperimental()))
+						if(mPreferences.showDowngrades() || updateIsNewer(ui, sysVersion, true))
 						{
-							retValue.add(ui);
+							if (branchMatches(ui, mPreferences.allowExperimental()))
+							{
+								retValue.roms.add(ui);
+							}
+						}
+						else
+						{
+							Log.d(TAG, "Discarding Rom " + ui.name + " (older version)");
 						}
 					}
 					else
 					{
-						Log.d(TAG, "Discarding " + ui.name + " (older version)");
+						Log.d(TAG, "Discarding Rom " + ui.name + " (mod mismatch)");
 					}
 				}
-				else
+				//For Themes
+				if (ui.type.toLowerCase().equals("theme"))
 				{
-					Log.d(TAG, "Discarding " + ui.name + " (mod mismatch)");
+					if (romMatches(ui, systemRom))
+					{
+						if(mPreferences.showDowngrades() || updateIsNewer(ui, sysVersion, true))
+						{
+							if (branchMatches(ui, mPreferences.allowExperimental()))
+							{
+								retValue.themes.add(ui);
+							}
+						}
+						else
+						{
+							Log.d(TAG, "Discarding Theme " + ui.name + " (older version)");
+						}
+					}
+					else
+					{
+						Log.d(TAG, "Discarding Theme " + ui.name + " (mod mismatch)");
+					}
 				}
 			}
 
@@ -124,7 +152,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		{
 			responseEntity.consumeContent();
 		}
-
+		
 		return retValue;
 	}
 
@@ -167,6 +195,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 					ui.board.add(item);
 			}
 			ui.type = obj.getString("type");
+			ui.mod = obj.getString("mod");
 			ui.name = obj.getString("name");
 			ui.displayVersion = obj.getString("version");
 			ui.description = obj.getString("description");
@@ -215,7 +244,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		return allow;
 	}
 
-	private boolean modMatches(UpdateInfo ui, String systemMod)
+	private boolean boardMatches(UpdateInfo ui, String systemMod)
 	{
 		if(ui == null) return false;
 		//If * is provided, all Boards are supported
@@ -228,8 +257,18 @@ public class PlainTextUpdateServer implements IUpdateServer
 		}
 		return false;
 	}
+	
+	private boolean romMatches(UpdateInfo ui, String systemRom)
+	{
+		if(ui == null) return false;
+		if(ui.mod.equals("*") || systemRom.equals("*")) return true;
+		Log.d(TAG, "ThemeRom:" + ui.mod + "; SystemRom:" + systemRom);
+		if(ui.mod.equals(systemRom))
+				return true;
+		return false;
+	}
 
-	private boolean updateIsNewer(UpdateInfo ui, boolean defaultValue)
+	private boolean updateIsNewer(UpdateInfo ui, int[] sysVersion, boolean defaultValue)
 	{
 		/*
 		String modVersion = Preferences.getSystemProperty(Preferences.SYS_PROP_MOD_VERSION);
@@ -237,7 +276,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 
 		String[] sysVersion = modVersion.substring(PROP_MOD_VERSION_SKIP_CHARS).split("\\.");*/
 
-		int[] sysVersion = SysUtils.getSystemModVersion();
+		
 		String[] updateVersion = ui.displayVersion.split("\\.");
 
 		Log.d(TAG, "Update Version:" + Arrays.toString(updateVersion) + "; System Version:" + Arrays.toString(sysVersion));

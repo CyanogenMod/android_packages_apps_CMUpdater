@@ -14,7 +14,7 @@
 	<string name="conf_update_server_url_def">http://cyanogen-updater.googlecode.com/files/update_file.json</string>
 	<string name="conf_about_url">http://code.google.com/p/cyanogen-updater/</string>
 	<string name="conf_update_folder">cm-updates</string>
-	<string name="conf_theme_version_file">/sdcard/cm-updates/themes.theme</string>
+	<string name="conf_theme_version_file">/system/framework/themes.theme</string>
 	<string name="conf_changelog_url">http://cyanogen-updater.googlecode.com/files/changelog.xml</string>
 
 	<string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} found</string>

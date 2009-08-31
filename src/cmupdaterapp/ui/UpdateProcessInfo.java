@@ -61,6 +61,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
+import cmupdaterapp.service.FullUpdateInfo;
 import cmupdaterapp.service.PlainTextUpdateServer;
 import cmupdaterapp.service.UpdateDownloaderService;
 import cmupdaterapp.service.UpdateInfo;
@@ -91,15 +92,17 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	public static final int REQUEST_MD5CHECKER_CANCEL = 4;
 
 	public static final String KEY_REQUEST = "cmupdaterapp.keyRequest";
-	public static final String KEY_UPDATE_LIST = "cmupdaterapp.updateList";
+	public static final String KEY_UPDATE_LIST = "cmupdaterapp.fullUpdateList";
 	
 	public static final int CHANGELOGTYPE_ROM = 1;
 	public static final int CHANGELOGTYPE_APP = 2;
 
 	public static final int FLIPPER_AVAILABLE_UPDATES = 0;
 	public static final int FLIPPER_EXISTING_UPDATES = 1;
+	public static final int FLIPPER_AVAILABLE_THEMES = 2;
 
 	private Spinner mUpdatesSpinner;
+	private Spinner mThemesSpinner;
 	private PlainTextUpdateServer mUpdateServer;
 	private ProgressBar mProgressBar;
 	private TextView mDownloadedBytesTextView;
@@ -107,7 +110,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	private TextView mDownloadFilenameTextView;
 	private TextView mDownloadSpeedTextView;
 	private TextView mRemainingTimeTextView;
-	private List<UpdateInfo> mAvailableUpdates;
+	private FullUpdateInfo mAvailableUpdates;
 	private String mMirrorName;
 	private String mFileName;
 	private UpdateDownloaderService mUpdateDownloaderService;
@@ -595,7 +598,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onStart()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void onStart()
 	{
@@ -628,7 +630,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			switch(req)
 			{
 				case REQUEST_NEW_UPDATE_LIST:
-					mAvailableUpdates = (List<UpdateInfo>) getIntent().getSerializableExtra(KEY_UPDATE_LIST);
+					mAvailableUpdates = (FullUpdateInfo) getIntent().getSerializableExtra(KEY_UPDATE_LIST);
 					try
 					{
 						saveState();
@@ -783,7 +785,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			Map<String,Serializable> data = (Map<String, Serializable>) ois.readObject();
 
 			Object o = data.get("mAvailableUpdates"); 
-			if(o != null) mAvailableUpdates = (List<UpdateInfo>) o;
+			if(o != null) mAvailableUpdates = (FullUpdateInfo) o;
 
 			o = data.get("mMirrorName"); 
 			if(o != null) mMirrorName =  (String) o;
@@ -798,11 +800,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void restoreSavedInstanceValues(Bundle b)
 	{
 		if(b == null) return;
-		mAvailableUpdates = (List<UpdateInfo>) b.getSerializable(KEY_AVAILABLE_UPDATES);
+		mAvailableUpdates = (FullUpdateInfo) b.getSerializable(KEY_AVAILABLE_UPDATES);
 		mMirrorName = b.getString(KEY_MIRROR_NAME);
 	}
 
@@ -816,7 +817,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onNewIntent(android.content.Intent)
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void onNewIntent(Intent intent)
 	{
@@ -826,7 +826,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		switch(req)
 		{
 			case REQUEST_NEW_UPDATE_LIST:
-				switchToUpdateChooserLayout((List<UpdateInfo>) intent.getSerializableExtra(KEY_UPDATE_LIST));
+				switchToUpdateChooserLayout((FullUpdateInfo) intent.getSerializableExtra(KEY_UPDATE_LIST));
 				break;
 		}
 	}
@@ -952,7 +952,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	}
 
 	@Override
-	public void switchToUpdateChooserLayout(List<UpdateInfo> availableUpdates)
+	public void switchToUpdateChooserLayout(FullUpdateInfo availableUpdates)
 	{
 		if(availableUpdates!=null)
 		{
@@ -963,12 +963,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		flipper=(ViewFlipper)findViewById(R.id.Flipper);
 		flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_in));
 		flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_out));
+		
+		//Flipper Buttons
 		Button btnAvailableUpdates=(Button)findViewById(R.id.button_available_updates);
 		btnAvailableUpdates.setOnClickListener(new View.OnClickListener()
 		{
 			public void onClick(View view)
 			{
-				Log.d(TAG, "Show next");
 				if(flipper.getDisplayedChild() != FLIPPER_AVAILABLE_UPDATES)
 					flipper.setDisplayedChild(FLIPPER_AVAILABLE_UPDATES);
 			}
@@ -978,12 +979,20 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			public void onClick(View view)
 			{
-				Log.d(TAG, "Show next");
 				if(flipper.getDisplayedChild() != FLIPPER_EXISTING_UPDATES)
 					flipper.setDisplayedChild(FLIPPER_EXISTING_UPDATES);
 			}
 		});
-
+		Button btnAvailableThemes=(Button)findViewById(R.id.button_available_themes);
+		btnAvailableThemes.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View view)
+			{
+				if(flipper.getDisplayedChild() != FLIPPER_AVAILABLE_THEMES)
+					flipper.setDisplayedChild(FLIPPER_AVAILABLE_THEMES);
+			}
+		});
+		
 		((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).cancel(R.string.not_new_updates_found_title);
 		
 		Resources res = getResources();
@@ -1008,18 +1017,27 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		showDowngradestv.setText(MessageFormat.format(res.getString(R.string.p_display_older_mod_versions_title)+": {0}", showDowngrades));
 		lastUpdateChecktv.setText(MessageFormat.format(res.getString(R.string.last_update_check_text)+": {0} {1}", DateFormat.getDateInstance().format(prefs.getLastUpdateCheck()), DateFormat.getTimeInstance().format(prefs.getLastUpdateCheck())));
 		
+		//Existing Updates Layout
 		mdownloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
 		mspFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
 		mdeleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
 		mapplyUpdateButton = (Button) findViewById(R.id.apply_update_button);
 		mNoExistingUpdatesFound = (TextView) findViewById(R.id.no_existing_updates_found_textview);
 		
-		final Button selectUploadButton = (Button) findViewById(R.id.download_update_button);
-		Spinner sp = mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
+		//Rom Layout
+		Button selectUploadButton = (Button) findViewById(R.id.download_update_button);
+		mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
 		TextView DownloadText = (TextView) findViewById(R.id.available_updates_text);
 		LinearLayout stableExperimentalInfo = (LinearLayout) findViewById(R.id.stable_experimental_description_container);
 		Button changelogButton = (Button) findViewById(R.id.show_changelog_button);
 		
+		//Theme Layout
+		Button btnDownloadTheme = (Button) findViewById(R.id.download_theme_button);
+		mThemesSpinner = (Spinner) findViewById(R.id.available_themes_list);
+		TextView tvThemeDownloadText = (TextView) findViewById(R.id.available_themes_text);
+		Button btnThemechangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
+		
+		//No Updates Found Layout
 		Button CheckNowUpdateChooser = (Button) findViewById(R.id.check_now_button_update_chooser);
 		TextView CheckNowUpdateChooserText = (TextView) findViewById(R.id.check_now_update_chooser_text);
 		CheckNowUpdateChooserText.setVisibility(View.GONE);
@@ -1033,27 +1051,57 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
 			l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 		
-		if(mAvailableUpdates != null)
+		//Sets the Theme and Rom Variables
+		List<UpdateInfo> availableRoms = mAvailableUpdates.roms;
+		List<UpdateInfo> availableThemes = mAvailableUpdates.themes;
+		
+		//Rom Layout
+		if(availableRoms != null)
 		{
 			selectUploadButton.setOnClickListener(mSelectUpdateButtonListener);
 			changelogButton.setOnClickListener(mChangelogButtonListener);
 			mUpdatesSpinner.setOnItemSelectedListener(mSpinnerChanged);
-			UpdateListAdapter<UpdateInfo> spAdapter = new UpdateListAdapter<UpdateInfo>(
+			
+			UpdateListAdapter<UpdateInfo> spAdapterRoms = new UpdateListAdapter<UpdateInfo>(
 					this,
 					android.R.layout.simple_spinner_item,
-					mAvailableUpdates);
-			spAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			sp.setAdapter(spAdapter);
+					availableRoms);
+			spAdapterRoms.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			mUpdatesSpinner.setAdapter(spAdapterRoms);
 
 		}
 		else
 		{
 			selectUploadButton.setVisibility(View.GONE);
-			sp.setVisibility(View.GONE);
+			mUpdatesSpinner.setVisibility(View.GONE);
 			DownloadText.setVisibility(View.GONE);
 			stableExperimentalInfo.setVisibility(View.GONE);
 			changelogButton.setVisibility(View.GONE);
 		}
+
+		//Theme Layout
+		if(availableThemes != null)
+		{
+			//btnDownloadTheme.setOnClickListener(mSelectUpdateButtonListener);
+			//changelogButton.setOnClickListener(mChangelogButtonListener);
+			//mThemesSpinner.setOnItemSelectedListener(mSpinnerChanged);
+			
+			UpdateListAdapter<UpdateInfo> spAdapterThemes = new UpdateListAdapter<UpdateInfo>(
+					this,
+					android.R.layout.simple_spinner_item,
+					availableThemes);
+			spAdapterThemes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			mThemesSpinner.setAdapter(spAdapterThemes);
+
+		}
+		else
+		{
+			btnDownloadTheme.setVisibility(View.GONE);
+			mThemesSpinner.setVisibility(View.GONE);
+			tvThemeDownloadText.setVisibility(View.GONE);
+			btnThemechangelogButton.setVisibility(View.GONE);
+		}
+
 		
 		if (mfilenames != null && mfilenames.size() > 0)
 		{

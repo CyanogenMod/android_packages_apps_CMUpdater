@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
-import java.util.List;
-
 
 import cmupdaterapp.ui.R;
 import cmupdaterapp.ui.UpdateProcessInfo;
@@ -152,7 +150,7 @@ public class UpdateCheckerService extends Service
 	{
 		Resources res = getResources();
 		
-		List<UpdateInfo> availableUpdates;
+		FullUpdateInfo availableUpdates;
 		while (true)
 		{
 			
@@ -202,10 +200,11 @@ public class UpdateCheckerService extends Service
 		prefs.setLastUpdateCheck(new Date());
 		
 		
-		int updateCount = availableUpdates.size();
-		Log.i(TAG, updateCount + " update(s) found");
+		int updateCountRoms = availableUpdates.roms.size();
+		int updateCountThemes = availableUpdates.themes.size();
+		Log.i(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
 		
-		if(updateCount > 0)
+		if(updateCountRoms > 0 || updateCountThemes > 0)
 		{
 			Intent i = new Intent(this, UpdateProcessInfo.class)
 							.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_NEW_UPDATE_LIST)
@@ -221,7 +220,7 @@ public class UpdateCheckerService extends Service
 			//To remove the Notification, when the User clicks on it
 			notification.flags = Notification.FLAG_AUTO_CANCEL;
 			
-			String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
+			String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCountRoms + updateCountThemes);
 			notification.setLatestEventInfo(this, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
 			
 			Uri notificationRingtone = prefs.getConfiguredRingtone();
