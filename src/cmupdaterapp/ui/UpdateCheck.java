@@ -42,6 +42,7 @@ public class UpdateCheck implements Runnable
 	
 	public void run()
 	{
+		Message m = new Message();
 		try
 		{
 			ui = mUpdateServer.getAvailableUpdates();
@@ -50,6 +51,8 @@ public class UpdateCheck implements Runnable
 		catch (IOException e)
 		{
 			Log.e(TAG, "Exception while checking for Updates", e);
+			m.obj = e.toString();
+			h.sendMessage(m);
 		}
 	}
 	private Handler h = new Handler()
@@ -62,7 +65,11 @@ public class UpdateCheck implements Runnable
 			Resources res = upi.getResources();
 			if(ui == null)
 			{
-				Toast.makeText(upi, R.string.exception_while_updating, Toast.LENGTH_SHORT).show();
+				if (msg != null && msg.obj != null)
+					Toast.makeText(upi, (String) msg.obj, Toast.LENGTH_LONG).show();
+				else
+					Toast.makeText(upi, R.string.exception_while_updating, Toast.LENGTH_LONG).show();
+				p.dismiss();
 				return;
 			}
 			
