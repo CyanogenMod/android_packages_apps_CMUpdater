@@ -190,7 +190,8 @@
 					android:layout_height="wrap_content"
 					android:text="@string/downloaded_update_found_text"
 					android:layout_marginBottom="10px"
-			    	style="@style/TextAppearance.Text" />
+			    	style="@style/TextAppearance.Text"
+			    	android:gravity="center_horizontal"/>
 				<Spinner
 					android:id="@+id/found_updates_list"
 					android:layout_width="wrap_content"
