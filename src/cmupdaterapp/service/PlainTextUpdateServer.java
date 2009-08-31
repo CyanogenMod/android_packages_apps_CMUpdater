@@ -53,6 +53,10 @@ public class PlainTextUpdateServer implements IUpdateServer
 		String systemMod = mPreferences.getConfiguredModString();
 		String systemRom = SysUtils.getReadableModVersion();
 		int[] sysVersion = SysUtils.getSystemModVersion();
+		String[] themeInfos = mPreferences.getThemeInformations();
+		//Instantiate it, so we can use later [0] and [1] without checking
+		if (themeInfos == null)
+			themeInfos = new String[2];
 		//Get the actual Updateserver URL
 		mUpdateServerUri = URI.create(mPreferences.getUpdateFileURL());
 		HttpUriRequest req = new HttpGet(mUpdateServerUri);
@@ -124,25 +128,34 @@ public class PlainTextUpdateServer implements IUpdateServer
 					}
 				}
 				//For Themes
-				if (ui.type.toLowerCase().equals("theme"))
+				else if (ui.type.toLowerCase().equals("theme"))
 				{
-					if (romMatches(ui, systemRom))
+					if (themeInfos != null
+						&& ui.name.equals(themeInfos[0])
+						&& Integer.valueOf(ui.displayVersion) > Integer.valueOf(themeInfos[1]))
 					{
-						if(mPreferences.showDowngrades() || updateIsNewer(ui, sysVersion, true))
+						if (romMatches(ui, systemRom))
 						{
-							if (branchMatches(ui, mPreferences.allowExperimental()))
+							if(mPreferences.showDowngrades() || updateIsNewer(ui, sysVersion, true))
 							{
-								retValue.themes.add(ui);
+								if (branchMatches(ui, mPreferences.allowExperimental()))
+								{
+									retValue.themes.add(ui);
+								}
+							}
+							else
+							{
+								Log.d(TAG, String.format("Discarding Theme %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
 							}
 						}
 						else
 						{
-							Log.d(TAG, "Discarding Theme " + ui.name + " (older version)");
+							Log.d(TAG, String.format("Discarding Theme %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
 						}
 					}
 					else
 					{
-						Log.d(TAG, "Discarding Theme " + ui.name + " (mod mismatch)");
+						Log.d(TAG, String.format("Discarding Theme %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
 					}
 				}
 			}

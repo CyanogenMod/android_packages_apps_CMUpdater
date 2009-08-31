@@ -1156,7 +1156,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 		
 		//Rom Layout
-		if(availableRoms != null)
+		if(availableRoms != null && availableRoms.size() > 0)
 		{
 			selectUploadButton.setOnClickListener(mDownloadUpdateButtonListener);
 			changelogButton.setOnClickListener(mUpdateChangelogButtonListener);
@@ -1177,10 +1177,19 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			DownloadText.setVisibility(View.GONE);
 			stableExperimentalInfoUpdates.setVisibility(View.GONE);
 			changelogButton.setVisibility(View.GONE);
+			CheckNowUpdateChooserTextUpdates.setVisibility(View.VISIBLE);
+			CheckNowUpdateChooserUpdates.setVisibility(View.VISIBLE);
+			CheckNowUpdateChooserUpdates.setOnClickListener(new View.OnClickListener()
+			{
+				public void onClick(View v)
+				{
+					checkForUpdates();
+				}
+			});
 		}
 
 		//Theme Layout
-		if(availableThemes != null)
+		if(availableThemes != null && availableThemes.size() > 0)
 		{
 			btnDownloadTheme.setOnClickListener(mDownloadThemeButtonListener);
 			btnThemechangelogButton.setOnClickListener(mThemeChangelogButtonListener);
@@ -1201,36 +1210,20 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			tvThemeDownloadText.setVisibility(View.GONE);
 			stableExperimentalInfoThemes.setVisibility(View.GONE);
 			btnThemechangelogButton.setVisibility(View.GONE);
+			CheckNowUpdateChooserTextThemes.setVisibility(View.VISIBLE);
+			CheckNowUpdateChooserThemes.setVisibility(View.VISIBLE);
+			CheckNowUpdateChooserThemes.setOnClickListener(new View.OnClickListener()
+			{
+				public void onClick(View v)
+				{
+					checkForUpdates();
+				}
+			});
 		}
 
 		//Existing Updates Layout
 		if (mfilenames != null && mfilenames.size() > 0)
 		{
-			if(availableUpdates == null)
-			{
-				//Display the Check Now Button and add the Event
-				//only Display when there are no Updates available
-				//or this Button and the Apply Button will be there
-				CheckNowUpdateChooserTextUpdates.setVisibility(View.VISIBLE);
-				CheckNowUpdateChooserUpdates.setVisibility(View.VISIBLE);
-				CheckNowUpdateChooserUpdates.setOnClickListener(new View.OnClickListener()
-				{
-					public void onClick(View v)
-					{
-						checkForUpdates();
-					}
-				});
-				CheckNowUpdateChooserTextThemes.setVisibility(View.VISIBLE);
-				CheckNowUpdateChooserThemes.setVisibility(View.VISIBLE);
-				CheckNowUpdateChooserThemes.setOnClickListener(new View.OnClickListener()
-				{
-					public void onClick(View v)
-					{
-						checkForUpdates();
-					}
-				});
-			}
-			
 			ArrayAdapter<String> localUpdates = new ArrayAdapter<String>(
 					this,
 					android.R.layout.simple_spinner_item,
@@ -1247,30 +1240,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			mapplyUpdateButton.setVisibility(View.GONE);
 			mdownloadedUpdateText.setVisibility(View.GONE);
 			mdeleteOldUpdatesButton.setVisibility(View.GONE);
-		}
-		
-		if (mAvailableUpdates == null && (mfilenames == null || mfilenames.size() <= 0))
-		{
-			//Display the Check Now Button and add the Event
-			//The same as the SwitchToNoUpdatesAvailable
-			CheckNowUpdateChooserTextUpdates.setVisibility(View.VISIBLE);
-			CheckNowUpdateChooserUpdates.setVisibility(View.VISIBLE);
-			CheckNowUpdateChooserUpdates.setOnClickListener(new View.OnClickListener()
-			{
-				public void onClick(View v)
-				{
-					checkForUpdates();
-				}
-			});
-			CheckNowUpdateChooserTextThemes.setVisibility(View.VISIBLE);
-			CheckNowUpdateChooserThemes.setVisibility(View.VISIBLE);
-			CheckNowUpdateChooserThemes.setOnClickListener(new View.OnClickListener()
-			{
-				public void onClick(View v)
-				{
-					checkForUpdates();
-				}
-			});
 		}
 	}
 
