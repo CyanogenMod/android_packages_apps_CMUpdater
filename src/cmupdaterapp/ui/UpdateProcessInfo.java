@@ -1228,7 +1228,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			mdeleteOldUpdatesButton.setVisibility(View.GONE);
 		}
 		
-		if (availableUpdates == null && (mfilenames == null || mfilenames.size() <= 0))
+		if (mAvailableUpdates == null && (mfilenames == null || mfilenames.size() <= 0))
 		{
 			//Display the Check Now Button and add the Event
 			//The same as the SwitchToNoUpdatesAvailable
