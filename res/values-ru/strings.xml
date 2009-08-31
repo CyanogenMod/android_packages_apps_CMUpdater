@@ -1,177 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- .ui.* Strings -->
-    <string name="apply_now_button_text">Прошить</string>
-    <string name="apply_later_button_text">Позже</string>
-    <string name="apply_update_button_text">Прошить</string>
-    <string name="apply_title_textview_text">{0} готов к прошивке</string>
-    <string name="apply_subtitle_textview_text">Примечания к выпуску:</string>
-    <string name="apply_unable_to_reboot_toast">Перезагрузка в режим восстановки не удалась</string>
-    <string name="apply_trying_to_get_root_access">Попытка получить административный доступ для перезагрузки</string>
+   <!-- .ui.* Strings -->
+   <string name="apply_now_button_text">Прошить</string>
+   <string name="apply_later_button_text">Позже</string>
+   <string name="apply_update_button_text">Прошить</string>
+   <string name="apply_title_textview_text">{0} готов к применению</string>
+   <string name="apply_subtitle_textview_text">Примечания к выпуску:</string>
+   <string name="apply_unable_to_reboot_toast">Перезапуск в режим восстановки не удалась</string>
+   <string name="apply_trying_to_get_root_access">Попытка получить административный доступ для перезапуска</string>
+   
+   <string name="available_updates_text">Пожалуйста выберите прошивку:</string>
+   <string name="choose_available_update_text">Загрузить</string>
+   <string name="no_updates_found_instructions">Обновлений Прошивок не найдено.\nНажмите \'Проверить\' для проверки наличия новых версий вручную</string>
+   <string name="no_themes_found_instructions">Обновлений Тем не найдено.\nНажмите \'Проверить\' для проверки наличия новых версий вручную</string>
+   <string name="downloaded_update_found_text">Найден файл \'update.zip\'. Проверить и прошить?</string>
+   <string name="checking_for_updates">Проверяется наличие новой версии</string>
+   <string name="downloading_update">Загрузка</string>
+   <string name="sdcard_is_not_present_dialog_body">Требуется режим доступа записи на Карту SD</string>
+   <string name="sdcard_is_not_present_dialog_title">Карта SD не найдена</string>
+   <string name="sdcard_is_not_present_dialog_ok_button">ОК</string>
+   <string name="current_version_text">Текущая Версия: {0}</string>
+   <string name="delete_updates_text">Удалить Прошивки</string>
+   <string name="delete_updates_success_message">Каталог с прошивками удален</string>
+   <string name="delete_updates_failure_message">Ошибка при удалении каталога прошивок</string>
+   <string name="delete_updates_noFolder_message">Каталога с прошивками не существует</string>
+   
+   <string name="apply_update_dialog_title">Подтверждение</string>
+   <string name="apply_update_dialog_text">Внимание, обновляемся на {0}.\nПри нажатии кнопки \'Прошить\', телефон перезапустится в режим восстановки для обновления прошивки.</string>
+   <string name="apply_update_dialog_update_button">Прошить</string>
+   <string name="apply_update_dialog_backup_and_update_button">Сохранить Резерв и Прошить</string>
+   <string name="apply_update_dialog_cancel_button">Отменить</string>
+   
+   <string name="no_updates_no_mod_text">Текущая версия системы вашего телефона не подлагается обновлению ({0}).</string>
+   <string name="check_now_button_text">Проверить</string>
+      
+   <string name="menu_check_now">Проверить</string>
+   <string name="menu_qr_code">Штрих-Код</string>
+   <string name="menu_config">Настройки</string>
+   <string name="menu_about">О Программе</string>
+   <string name="menu_changelog">Список Изменений</string>
+   <string name="cancel_download_buton_text">Отменить Загрузку</string>
+   <string name="confirm_download_cancelation_dialog_message">Пожалуйста подтвердите отмену загрузки</string>
+   <string name="confirm_download_cancelation_dialog_yes">Отменить</string>
+   <string name="confirm_download_cancelation_dialog_no">Продолжить</string>
+   <string name="download_canceled_toast_message">Загрузка Отменена</string>
+   
+   <string name="verify_and_apply_dialog_title">Проверка</string>
+   <string name="verify_and_apply_dialog_message">Проверяется MD5 ключ файла \'update.zip\'</string>
+   
+   <string name="apply_existing_update_md5error_message">Ошибка: контрольная сумма MD5 загруженного файла не соответствует с источным</string>
+   
+   <string name="apply_upload_info_message">ВНИМАНИЕ! КЛЮЧ ПЕРЕЗАГРУЗКИ ВКЛЮЧЕН ПО УМОЛЧАНИЮ. НАЖАТИЕ КНОПКИ \'ПРОШИТЬ\' ПЕРЕЗАПУСТИТ ТЕЛЕФОН И НАЧНЕТ ОПЕРАЦИЮ АВТОМАТИЧЕСКИ.
+ПОЖАЛУЙСТА ПЕРЕЗАПУСТИТЕ ВРУЧНУЮ В РЕЖИМ ВОССТАНОВЛЕНИЯ, ДЛЯ СОХРАНЕНИЯ РЕЗЕРВНОГО ЗАПАСА.</string>
+   
+   <string name="last_update_check_text">Предыдущая проверка</string>
+   <string name="overwrite_update_title">Файл Найден</string>
+   <string name="overwrite_update_summary">Выбранная версия уже загружена в каталоге обновлений.\nУдалить и заргузить снова?</string>
+   <string name="overwrite_update_positive">Да</string>
+   <string name="overwrite_update_negative">Нет</string>
+   
+   <string name="no_md5_found_title">MD5 Не Найден</string>
+   <string name="no_md5_found_summary">Файл проверки MD5 ключа отсутствует.\nПрошить не проверяя?</string>
+   <string name="no_md5_found_positive">Прошить</string>
+   <string name="no_md5_found_negative">Отменить</string>
+   
+   <string name="notification_tickertext">Загрузка Файла</string>
+   <string name="notification_finished">Загрузка успешно завершена</string>
+   
+   <string name="toast_uninstall_old_Version">Необходимо удалить старую версию этой программы!</string>
+   
+   <string name="stable_description"> = Стабильная</string>
+   <string name="experimental_description"> = Экспериментальная</string>
+   
+   <string name="changelog_progress_title">Загрузка ...</string>
+   <string name="changelog_progress_body">Загружается файл changelog.xml</string>
+   
+   <string name="changelog_button_text">Изменения Обновления</string>
+   <string name="no_changelog_found">Файл изменений не найден</string>
+   
+   <string name="changelog_title_rom">Изменения в Прошивке</string>
+   <string name="changelog_title_app">Изменения в Обновителе</string>
+   <string name="changelog_title_theme">Изменения в Теме</string>
+   
+   <string name="true_string">да</string>
+   <string name="false_string">нет</string>
+   
+   <string name="md5_check_cancelled">Проверка MD5 Отменена</string>
+   
+   <string name="button_available_updates">Доступные</string>
+   <string name="button_existing_updates">Загруженные</string>
     
-    <string name="available_updates_text">Пожалуйста выберите прошивку:</string>
-    <string name="choose_available_update_text">Загрузить</string>
-    <string name="no_updates_found_instructions">Прошивок не найдено.\nНажмите \'Проверить\' для проверки наличия новых версий вручную</string>
-    <string name="downloaded_update_found_text">Найден файл \'update.zip\'. Проверить его и прошить?</string>
-    <string name="checking_for_updates">Проверяется наличие новой версии</string>
-    <string name="downloading_update">Загрузка</string>
-    <string name="sdcard_is_not_present_dialog_body">Требуется карта SD с доступом писания</string>
-    <string name="sdcard_is_not_present_dialog_title">Карта SD не найдена</string>
-    <string name="sdcard_is_not_present_dialog_ok_button">Да</string>
-    <string name="current_version_text">Текущая Версия: {0}</string>
-    <string name="delete_updates_text">Удалить прошивки</string>
-    <string name="delete_updates_success_message">Папка с прошивками удалена</string>
-    <string name="delete_updates_failure_message">Ошибка при удалении папки прошивок</string>
-    <string name="delete_updates_noFolder_message">Папки с прошивками не существует</string>
-    
-    <string name="apply_update_dialog_title">Подтверждение</string>
-    <string name="apply_update_dialog_text">Внимание, обновляемся на {0}.\nПри нажатии кнопки \'Прошить\', телефон перегрузится в режим восстановки для обновления прошивки.</string>
-    <string name="apply_update_dialog_update_button">Прошить</string>
-    <string name="apply_update_dialog_backup_and_update_button">Сохранить резерв и Прошить</string>
-    <string name="apply_update_dialog_cancel_button">Отменить</string>
-	 
-    <string name="no_updates_no_mod_text">Текущая версия системы вашего телефона не подлагается обновлению ({0}).</string>
-    <string name="check_now_button_text">Проверить</string>
-	 
-    <string name="menu_check_now">Проверить</string>
-    <string name="menu_qr_code">Сканировать Код</string>
-    <string name="menu_config">Настройки</string>
-    <string name="menu_about">О Программе</string>
-    <string name="menu_changelog">Список Изменений</string>
-    <string name="cancel_download_buton_text">Отменить Загрузку</string>
-    <string name="confirm_download_cancelation_dialog_message">Пожалуйста подтвердите отмену загрузки</string>
-    <string name="confirm_download_cancelation_dialog_yes">Отменить</string>
-    <string name="confirm_download_cancelation_dialog_no">Продолжить</string>
-    <string name="download_canceled_toast_message">Загрузка отменена</string>
-    
-    <string name="verify_and_apply_dialog_title">Проверка</string>
-    <string name="verify_and_apply_dialog_message">Проверяется MD5 подпись файла \'update.zip\'</string>
-    
-    <string name="apply_existing_update_md5error_message">Ошибка: MD5 подпись загруженного файла не соответствует с серверной</string>
-    
-    <string name="apply_upload_info_message">ВНИМАНИЕ! НАСТРОЙКА ПЕРЕЗАГРУЗКИ ВКЛЮЧЕНА ПО УМОЛЧАНИЮ. НАЖАТИЕ КНОПКИ \'ПРОШИТЬ\' ПЕРЕЗАГРУЗИТ ТЕЛЕФОН И НАЧНЕТ ОПЕРАЦИЮ АВТОМАТИЧЕСКИ.
-ПОЖАЛУЙСТА ПЕРЕГРУЗИТЕСЬ ВРУЧНУЮ В РЕЖИМ ВОССТАНОВЛЕНИЯ, ДЛЯ СОХРАНЕНИЯ РЕЗЕРВНОГО ЗАПАСА.</string>
-	 
-    <string name="last_update_check_text">Предыдущая проверка</string>
-    <string name="overwrite_update_title">Файл Найден</string>
-    <string name="overwrite_update_summary">Выбранная версия уже загружена в папке обновлений.\nУдалить и заргузить снова?</string>
-    <string name="overwrite_update_positive">Да</string>
-    <string name="overwrite_update_negative">Нет</string>
-    
-    <string name="no_md5_found_title">MD5 Не Найден</string>
-    <string name="no_md5_found_summary">Файл проверки MD5 отсутствует.\nПрошить без проверки?</string>
-    <string name="no_md5_found_positive">Прошить</string>
-    <string name="no_md5_found_negative">Отменить</string>
-    
-    <string name="notification_tickertext">Загрузка Файла</string>
-    <string name="notification_finished">Загрузка успешно завершена</string>
-	 
-    <string name="toast_uninstall_old_Version">Необходимо удалить старую версию этой программы!</string>
-    
-	 <string name="stable_description"> = Стабильная</string>
-	 <string name="experimental_description"> = Экспериментальная</string>
-    
-    <string name="changelog_progress_title">Загрузка ...</string>
-    <string name="changelog_progress_body">Загружается файл changelog.xml</string>
-    
-    <string name="changelog_button_text">Изменения Обновления</string>
-    <string name="no_changelog_found">Файл изменений не найден</string>
-    
-	 <string name="changelog_title_rom">Изменения в Прошивке</string>
-	 <string name="changelog_title_app">Изменения в Обновителе</string>
-    
-    <string name="true_string">да</string>
-    <string name="false_string">нет</string>
-    
-	<string name="md5_check_cancelled">Проверка MD5 Отменена</string>
-	
-    <string name="button_available_updates">На Сервере</string>
-	<string name="button_existing_updates">Загруженные</string>
-	
-	<string name="no_existing_updates_found">Загруженных Обновлений Не Найдено</string>
-    
-    <!-- .service.* Strings -->
-    <string name="no_updates_found">Новых версий прошивки не найдено.</string>
-    <string name="not_new_updates_found_ticker">Найдена новая версия!</string>
-    <string name="not_new_updates_found_title">Найдена новая версия</string>
-
-    <string name="exception_while_updating">Ошибка в связи с сервером обновления</string>
-    <string name="exception_while_downloading">Ошибка при загрузке файла</string>
-	
-    <string name="not_update_check_error_ticker">Ошибка при проверке новых версий</string>
-    <string name="not_update_check_error_title">Ошибка при проверке новых версий CM ОС</string>
-    <string name="not_update_check_error_body">Попробуйте позже.</string>
-    
-    <string name="not_update_download_error_ticker">Ошибка при загрузке файла обновления прошивки</string>
-    <string name="not_update_download_error_title">Ошибка При Загрузке</string>
-    <string name="not_update_download_error_body">Попробуйте позже.</string>
-    
-    <string name="not_update_downloaded_ticker">Файл обновления загружен успешно</string>
-    <string name="not_update_downloaded_title">Файл Обновления Загружен</string>
-    <string name="not_update_downloaded_body">{0} готов к прошивке</string>
-
-    <string name="download_info_filename">Имя файла: </string>
-    <string name="download_info_mirror">Адрес: </string>
-    <string name="download_info_downloading">Загрузка...</string>
-    <string name="download_info_speed">Скорость: </string>
-    <string name="download_info_remaining_time">Осталось: </string>
-    
-    <string name="confirm_delete_update_folder_dialog_message">Удалить Папку Загрузок?</string>
-    <string name="confirm_delete_update_folder_dialog_yes">Удалить все содержимое</string>
-    <string name="confirm_delete_update_folder_dialog_neutral">Удалить только избранное</string>
-    <string name="confirm_delete_update_folder_dialog_no">Отменить</string>
-    <string name="delete_single_update_success_message">{0} удален</string>
-    
-	 <string name="minutes">минут</string>
-	 <string name="seconds">секунд</string>
-    
-    <!-- Preferences Strings -->
-    <string name="p_update_check_freq_title">Частота Проверок</string>
-    <string name="p_update_check_freq_summary">Как часто проверять наличие новых версий</string>
-    
-    <string name="p_update_file_url_title">Файл Обновления</string>
-    <string name="p_update_file_url_summary">Интернет адрес для загрузки файла обновления</string>
-    <string name="p_update_file_url_changed">Адрес обновителя сброшен на заводской</string>
-    
-    <string name="p_updates_mod_version_title">Версия Системы</string>
-    <string name="p_updates_mod_version_summary">За какой весрией следить</string>
-    
-    <string name="p_display_older_mod_versions_title">Все Версии</string>
-    <string name="p_display_older_mod_versions_summary">Быдут показаны все предыдущие весрии (даже старые)</string>
-    <string name="p_display_older_mod_versions_changed">Проверьте еще раз для обновления списка имеющихся версий</string>
-    
-    <string name="p_display_allow_experimental_versions_title">Экспериментальные</string>
-    <string name="p_display_allow_experimental_versions_summary">Следить за экспериментальными (не стабильными) версиями</string>
-    <string name="p_display_allow_experimental_versions_changed">Проверьте еще раз для обновления списка имеющихся версий</string>
-    
-    <string name="p_do_nandroid_backup_title">Резервный Запас</string>
-    <string name="p_do_nandroid_backup_summary">Сохранить резервный запас системы про помощи программы Nandroid перед обновлением</string>
-    
-    <string name="p_notification_ringtone_title">Звонок Уведомления</string>
-    <string name="p_notification_ringtone_summary">Выбрать звонок уведомления о новой версии</string>
-    
-    <string name="p_update_file_url_screen_title">Сервер Обновления</string>
-    <string name="p_update_file_url_screen_summary">Установить адрес сервера где хранятся файлы обновления</string>
-    
-    <string name="p_update_file_url_def_title">Сброс Адреса</string>
-    <string name="p_update_file_url_def_summary">Сбросить адрес сервера на заводской</string>
-    
-    <string name="p_update_file_url_qr_title">Сканировка Кода</string>
-    <string name="p_update_file_url_qr_summary">Сканировать штриховой код содержащий адрес сервера обновления</string>
-	 
-    <string name="p_vibrate_title">Вибрация</string>
-    <string name="p_vibrate_summary">Вибрировать телефон при уведомлениях</string>
-    
-    <string name="p_notifications_title">Уведомления</string>
-    <string name="p_notifications_summary">Включить/Выключить Все Уведомления</string>
-    
-    <string name="p_advanced_title">Дополнительные Настройки</string>
-    <string name="p_advanced_summary">Изменение настроек рекомендуется только высоко-техническим пользователям!</string>
-    
-    <string name="p_progress_update_frequency_title">Частота Обновления Уведомлений</string>
-    <string name="p_progress_update_frequency_summary">Выше числа = Реже обновлять\nНиже числа = Чаще обновлять</string>
-    
-    <string name="p_progress_update_freq_def_title">Сброс Частоты Обновления</string>
-    <string name="p_progress_update_freq_def_summary">Сбросить частоту обновлений Уведомлений/Загрузки на заводскую</string>
-    <string name="p_progress_update_freq_def_toast">Частота обновлений сброшена на заводскую</string>
+   <string name="no_existing_updates_found">Загруженных Обновлений Не Найдено</string>
+   
+   <string name="button_available_themes">Доступные Темы</string>
+   <string name="available_themes_text">Выбор Темы для Загрузки:</string>
+   <string name="choose_available_theme_text">Загрузить</string>
+   <string name="changelog_button_theme_text">Изменения выделенной Темы</string>
+   
+   <string name="title_running">работает</string>
+   
+   <!-- .service.* Strings -->
+   <string name="no_updates_found">Новых версий прошивки не найдено.</string>
+   <string name="not_new_updates_found_ticker">Найдена новая версия!</string>
+   <string name="not_new_updates_found_title">Найдена новая версия</string>
+   
+   <string name="exception_while_updating">Ошибка в связи с сервером обновления</string>
+   <string name="exception_while_downloading">Ошибка при загрузке файла</string>
+   
+   <string name="not_update_check_error_ticker">Ошибка при проверке новых версий</string>
+   <string name="not_update_check_error_title">Ошибка при проверке новых версий CM ОС</string>
+   <string name="not_update_check_error_body">Попробуйте позже.</string>
+   
+   <string name="not_update_download_error_ticker">Ошибка при загрузке файла обновления прошивки</string>
+   <string name="not_update_download_error_title">Ошибка При Загрузке</string>
+   <string name="not_update_download_error_body">Попробуйте позже.</string>
+   
+   <string name="not_update_downloaded_ticker">Файл обновления загружен успешно</string>
+   <string name="not_update_downloaded_title">Файл Обновления Загружен</string>
+   <string name="not_update_downloaded_body">{0} готов к прошивке</string>
+   
+   <string name="download_info_filename">Имя файла: </string>
+   <string name="download_info_mirror">Адрес: </string>
+   <string name="download_info_downloading">Загрузка...</string>
+   <string name="download_info_speed">Скорость: </string>
+   <string name="download_info_remaining_time">Осталось: </string>
+   
+   <string name="confirm_delete_update_folder_dialog_message">Удалить Папку Загрузок?</string>
+   <string name="confirm_delete_update_folder_dialog_yes">Удалить все содержимое</string>
+   <string name="confirm_delete_update_folder_dialog_neutral">Удалить только избранное</string>
+   <string name="confirm_delete_update_folder_dialog_no">Отменить</string>
+   <string name="delete_single_update_success_message">{0} удален</string>
+   
+   <string name="minutes">минут</string>
+   <string name="seconds">секунд</string>
+   
+   <!-- Preferences Strings -->
+   <string name="p_update_check_freq_title">Частота Проверок</string>
+   <string name="p_update_check_freq_summary">Как часто проверять наличие новых версий</string>
+   
+   <string name="p_update_file_url_title">Файл Обновления</string>
+   <string name="p_update_file_url_summary">Адрес для загрузки файла обновления</string>
+   <string name="p_update_file_url_changed">Адрес обновителя сброшен на заводской</string>
+   
+   <string name="p_updates_mod_version_title">Версия Системы</string>
+   <string name="p_updates_mod_version_summary">За какой весрией следить</string>
+   
+   <string name="p_display_older_mod_versions_title">Все Версии</string>
+   <string name="p_display_older_mod_versions_summary">Показавать все предыдущие весрии (даже старые)</string>
+   <string name="p_display_older_mod_versions_changed">Проверьте еще раз для обновления списка доступных версий</string>
+   
+   <string name="p_display_allow_experimental_versions_title">Экспериментальные</string>
+   <string name="p_display_allow_experimental_versions_summary">Следить за экспериментальными (не стабильными) версиями</string>
+   <string name="p_display_allow_experimental_versions_changed">Проверьте еще раз для обновления списка доступных версий</string>
+   
+   <string name="p_do_nandroid_backup_title">Резервный Запас</string>
+   <string name="p_do_nandroid_backup_summary">Сохранить резервный запас системы про помощи программы Nandroid перед обновлением</string>
+   
+   <string name="p_notification_ringtone_title">Звонок Уведомления</string>
+   <string name="p_notification_ringtone_summary">Выбрать звонок уведомления о новой версии</string>
+   
+   <string name="p_update_file_url_screen_title">Сервер Обновления</string>
+   <string name="p_update_file_url_screen_summary">Установить адрес сервера где хранятся файлы обновления</string>
+   
+   <string name="p_update_file_url_def_title">Сброс Адреса</string>
+   <string name="p_update_file_url_def_summary">Сбросить адрес сервера на заводской</string>
+   
+   <string name="p_update_file_url_qr_title">Сканировка Кода</string>
+   <string name="p_update_file_url_qr_summary">Сканировать штрих-код содержащий адрес сервера обновления</string>
+   
+   <string name="p_vibrate_title">Вибрация</string>
+   <string name="p_vibrate_summary">Вибрировать телефон при уведомлениях</string>
+   
+   <string name="p_notifications_title">Уведомления</string>
+   <string name="p_notifications_summary">Включить/Выключить Все Уведомления</string>
+   
+   <string name="p_advanced_title">Дополнительные Настройки</string>
+   <string name="p_advanced_summary">Изменение настроек рекомендуется только высоко-техническим пользователям!</string>
+   
+   <string name="p_progress_update_frequency_title">Частота Обновления Уведомлений</string>
+   <string name="p_progress_update_frequency_summary">Выше числа = Реже обновлять\nНиже числа = Чаще обновлять</string>
+   
+   <string name="p_progress_update_freq_def_title">Сброс Частоты Обновления</string>
+   <string name="p_progress_update_freq_def_summary">Сбросить частоту обновлений Уведомлений/Загрузки на заводскую</string>
+   <string name="p_progress_update_freq_def_toast">Частота обновлений сброшена на заводскую</string>
 </resources>
