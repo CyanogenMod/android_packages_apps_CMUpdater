@@ -137,7 +137,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 					if (ui.type.toLowerCase().equals("theme"))
 					{
 						//Name matches
-						if (themeInfos[0] != null && ui.name.equals(themeInfos[0]))
+						if (themeInfos[0] != null && ui.name.equalsIgnoreCase(themeInfos[0]))
 						{
 							//Mod matches
 							if (romMatches(ui, systemRom))
