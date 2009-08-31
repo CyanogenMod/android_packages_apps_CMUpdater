@@ -1,100 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Polish translated by: zezol # E-Mail: piotrek.wi@gmail.com -->
 <resources>
-<!-- .ui.* Strings -->
-<string name="apply_now_button_text">Instaluj teraz</string>
-<string name="apply_later_button_text">Później</string>
-<string name="apply_update_button_text">Weryfikuj i instaluj</string>
-<string name="apply_title_textview_text">{0} jest gotowy do instalacji</string>
-<string name="apply_subtitle_textview_text">Informacje o aktualizacji:</string>
-<string name="apply_unable_to_reboot_toast">Nie można przejść do trybu recovery</string>
+	<!-- .ui.* Strings -->
+	<string name="apply_now_button_text">Instaluj teraz</string>
+	<string name="apply_later_button_text">Później</string>
+	<string name="apply_update_button_text">Weryfikuj i instaluj</string>
+	<string name="apply_title_textview_text">{0} jest gotowy do instalacji</string>
+	<string name="apply_subtitle_textview_text">Informacje o aktualizacji:</string>
+	<string name="apply_unable_to_reboot_toast">Nie można przejść do trybu recovery</string>
+	<string name="apply_trying_to_get_root_access">Uzyskiwanie dostępu do root’a w celu przejścia do trybu recovery</string>
 
-<string name="apply_trying_to_get_root_access">Uzyskiwanie dostępu do root’a w celu przejścia do trybu recovery</string>
-<string name="available_updates_text">Wybierz ROM do pobrania:</string>
-<string name="choose_available_update_text">Pobierz</string>
+	<string name="available_updates_text">Wybierz ROM do pobrania:</string>
+	<string name="choose_available_update_text">Pobierz</string>
+	<string name="no_updates_found_instructions">Nie znaleziono aktualizacji.\nWybierz "Sprawdź teraz", aby ręcznie wyszukać nowych aktualizacji</string>
+	<string name="downloaded_update_found_text">Pobrane aktualizacje:</string>
+	<string name="checking_for_updates">Szukanie aktualizacji</string>
+	<string name="downloading_update">Pobieranie aktualizacji</string>
+	<string name="sdcard_is_not_present_dialog_body">Program potrzebuje karty pamięci, aby pobrać aktualizację</string>
+	<string name="sdcard_is_not_present_dialog_title">Brak karty pamięci</string>
+	<string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
+	<string name="current_version_text">Aktualna wersja: {0}</string>
+	<string name="delete_updates_text">Usuń pobrane aktualizacje</string>
+	<string name="delete_updates_success_message">Folder aktualizacji został usunięty</string>
+	<string name="delete_updates_failure_message">Wystąpił błąd podczas usuwania folderu aktualizacji</string>
+	<string name="delete_updates_noFolder_message">Folder aktualizacji nie został znaleziony</string>
 
-<string name="no_updates_found_instructions">Nie znaleziono aktualizacji.\nWybierz "Sprawdź teraz", aby ręcznie wyszukać nowych aktualizacji</string>
-<string name="downloaded_update_found_text">Pobrane aktualizacje:</string>
-<string name="checking_for_updates">Szukanie aktualizacji</string>
-<string name="downloading_update">Pobieranie aktualizacji</string>
+	<string name="apply_update_dialog_title">Potwierdzenie</string>
+	<string name="apply_update_dialog_text">Za chwilę dokonasz aktualizacji do {0}.\nTwój telefon automatycznie uruchomi się w trybie recovery, aby dokonać aktualizacji.</string>
+	<string name="apply_update_dialog_update_button">Aktualizuj</string>
+	<string name="apply_update_dialog_backup_and_update_button">Backup i instaluj</string>
+	<string name="apply_update_dialog_cancel_button">Anuluj</string>
 
-<string name="sdcard_is_not_present_dialog_body">Program potrzebuje karty pamięci, aby pobrać aktualizację</string>
-<string name="sdcard_is_not_present_dialog_title">Brak karty pamięci</string>
-<string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
-<string name="current_version_text">Aktualna wersja: {0}</string>
-<string name="delete_updates_text">Usuń pobrane aktualizacje</string>
-<string name="delete_updates_success_message">Folder aktualizacji został usunięty</string>
+	<string name="no_updates_no_mod_text">Twój obecny system (Version {0}) nie jest wspierany przez ten program.</string>
+	<string name="check_now_button_text">Sprawdź teraz</string>
 
-<string name="delete_updates_failure_message">Wystąpił błąd podczas usuwania folderu aktualizacji</string>
-<string name="delete_updates_noFolder_message">Folder aktualizacji nie został znaleziony</string>
-<string name="apply_update_dialog_title">Potwierdzenie</string>
+	<string name="menu_check_now">Sprawdź teraz</string>
+	<string name="menu_qr_code">Skanuj fotokod</string>
+	<string name="menu_config">Ustawienia</string>
+	<string name="menu_about">O programie</string>
+	<string name="menu_changelog">Lista zmian</string>
+	<string name="cancel_download_buton_text">Anuluj pobieranie</string>
+	<string name="confirm_download_cancelation_dialog_message">Jesteś pewien, że chcesz anulować bieżące pobieranie?</string>
+	<string name="confirm_download_cancelation_dialog_yes">Tak</string>
+	<string name="confirm_download_cancelation_dialog_no">Nie</string>
+	<string name="download_canceled_toast_message">Anulowano pobieranie</string>
 
-<string name="apply_update_dialog_text">Za chwilę dokonasz aktualizacji do {0}.\nTwój telefon automatycznie uruchomi się w trybie recovery, aby dokonać aktualizacji.</string>
-<string name="apply_update_dialog_update_button">Aktualizuj</string>
-<string name="apply_update_dialog_backup_and_update_button">Backup i instaluj</string>
-<string name="apply_update_dialog_cancel_button">Anuluj</string>
+	<string name="verify_and_apply_dialog_title">Weryfikacja</string>
+	<string name="verify_and_apply_dialog_message">Weryfikacja sum kontrolnych MD5 pliku update.zip</string>
 
-<string name="no_updates_no_mod_text">Twój obecny system (Version {0}) nie jest wspierany przez ten program.</string>
-<string name="check_now_button_text">Sprawdź teraz</string>
-<string name="menu_check_now">Sprawdź teraz</string>
-<string name="menu_qr_code">Skanuj QR URL</string>
-<string name="menu_config">Configuration</string>
-<string name="menu_about">O programie</string>
-<string name="cancel_download_buton_text">Anuluj pobieranie</string>
+	<string name="apply_existing_update_md5error_message">Błąd. Sumy kontrolne MD5 są niepoprawne.</string>
 
-<string name="confirm_download_cancelation_dialog_message">Jesteś pewien, że chcesz anulować bieżące pobieranie pliku?</string>
-<string name="confirm_download_cancelation_dialog_yes">Tak</string>
-<string name="confirm_download_cancelation_dialog_no">Nie</string>
-<string name="download_canceled_toast_message">Anulowano pobieranie</string>
-<string name="verify_and_apply_dialog_title">Weryfikacja</string>
-<string name="verify_and_apply_dialog_message">Weryfikacja sum kontrolnych MD5 pliku update.zip</string>
-<string name="apply_existing_update_md5error_message">Błąd. Sumy kontrolne są niepoprawne.</string>
+	<string name="apply_upload_info_message">Ta wersja programu zawiera opcję automatycznego restartu systemu, więc po wybraniu opcji ”Instaluj teraz” program automatycznie wykona tą czynność. Jeżeli chcesz wykonać kopię zapasową systemu musisz ręcznie przejść do trybu recovery przed dokonaniem instalacji.</string>
+	
+	<string name="last_update_check_text">Ostatnie sprawdzenie</string>
+	<string name="overwrite_update_title">Aktualizacja istnieje</string>
+	<string name="overwrite_update_summary">Wybrana aktualizacja już istnieje w Folderze Pobrań.\nChcesz ją nadpisać?</string>
+	<string name="overwrite_update_positive">Tak</string>
+	<string name="overwrite_update_negative">Nie</string>
 
-<string name="apply_upload_info_message">Ta wersja programu zawiera opcję automatycznego restartu systemu, więc po wybraniu opcji ”Instaluj teraz” program automatycznie wykona tą czynność. Jeżeli chcesz wykonać kopię zapasową systemu musisz ręcznie przejść do trybu recovery przed wybraniem Instalacji.</string>
-<!-- .service.* Strings -->
-<string name="no_updates_found">Nie znaleziono aktualizacji</string>
-<string name="not_new_updates_found_ticker">Znaleziono nowe aktualizacje!</string>
-<string name="not_new_updates_found_title">Znaleziono nowe aktualizacje</string>
+	<string name="no_md5_found_title">Brak sumy MD5</string>
+	<string name="no_md5_found_summary">Nie znaleziono pliku MD5 zgodnego z aktualizacją.\nCzy chcesz zainstalować ją bez sprawdzenia?</string>
+	<string name="no_md5_found_positive">Instaluj</string>
+	<string name="no_md5_found_negative">Anuluj</string>
 
-<string name="exception_while_updating">Wystąpił błąd przy próbie komunikacji z serwerem Aktualizacji CM</string>
+	<string name="notification_tickertext">Pobieranie aktualizacji</string>
+	<string name="notification_finished">Pobieranie ukończone</string>
 
-<string name="exception_while_downloading">Wystąpił błąd przy próbie pobierania Aktualizacji CM</string>
+	<string name="toast_uninstall_old_Version">Musisz odinstalować starą wersję programu, aby kontynuować!</string>
 
-<string name="not_update_check_error_ticker">Wystąpił błąd przy próbie wyszukania Aktualizacji CM</string>
-<string name="not_update_check_error_title">Nie można wyszukać nowych Aktualizacji CM</string>
-<string name="not_update_check_error_body">Proszę spróbować ponownie później.</string>
-<string name="not_update_download_error_ticker">Wystąpił błąd podczas pobierania aktualizacji</string>
-<string name="not_update_download_error_title">Wystąpił błąd podczas pobierania aktualizacji</string>
-<string name="not_update_download_error_body">Proszę spróbować ponownie później.</string>
-<string name="not_update_downloaded_ticker">Aktualizacja CyanogenMod została pobrana</string>
-<string name="not_update_downloaded_title">Aktualizacja CyanogenMod została pobrana</string>
-<string name="not_update_downloaded_body">{0} jest gotowy do instalacji</string>
-<string name="download_info_filename">Nazwa pliku: </string>
-<string name="download_info_mirror">Mirror: </string>
-<string name="download_info_downloading">Pobrano:</string>
-<string name="download_info_speed">Prędkość: </string>
-<string name="download_info_remaining_time">Pozostały czas: </string>
-<string name="confirm_delete_update_folder_dialog_message">Usunąć folder aktualizacji?</string>
-<string name="confirm_delete_update_folder_dialog_yes">Usuń</string>
-<string name="confirm_delete_update_folder_dialog_no">Anuluj</string>
-<!-- Preferences Strings -->
-<string name="p_update_check_freq_title">Częstotliwość sprawdzania aktualizacji</string>
-<string name="p_update_check_freq_summary">Ustaw jak często program ma szukać nowych aktualizacji</string>
-<string name="p_update_file_url_title">Serwer aktualizacji</string>
-<string name="p_update_file_url_summary">Podaj adres serwera, z którego będą pobierane aktualizacje</string>
-<string name="p_updates_mod_version_title">Rodzaje aktualizacji</string>
-<string name="p_updates_mod_version_summary">Ustaw rodzaje aktualizacji jakich program ma szukać</string>
-<string name="p_display_older_mod_versions_title">Wyświetlaj wszystkie aktualizacje</string>
-<string name="p_display_older_mod_versions_summary">Wyświetlaj wszystkie aktualizacje, również starsze niż obecna</string>
-<string name="p_display_allow_experimental_versions_title">Wersje eksperymentalne</string>
-<string name="p_display_allow_experimental_versions_summary">Wyświetlaj eksperymentalne (niestabilne) wersje</string>
-<string name="p_do_nandroid_backup_title">Nandroid Backup</string>
-<string name="p_do_nandroid_backup_summary">Wykonać kopię systemu (Nandroid) przed instalacją aktualizacji?</string>
-<string name="p_notification_ringtone_title">Dźwięk powiadomienia</string>
-<string name="p_notification_ringtone_summary">Wybierz dźwięk powiadomienia dla nowych Aktualizacji CM</string>
-<string name="p_update_file_url_screen_title">Serwer aktualizacji</string>
-<string name="p_update_file_url_screen_summary">Zmień serwer, z którego będą pobierane aktualizacje</string>
-<string name="p_update_file_url_def_title">Resetuj serwer aktualizacji</string>
-<string name="p_update_file_url_def_summary">Przywróć adres serwera do wartości domyślnej</string>
-<string name="p_update_file_url_qr_title">Skanuj kody kreskowe</string>
-<string name="p_update_file_url_qr_summary">Skanuj kod QR adresu URL pliku</string>
+	<string name="stable_description"> = Stabilna</string>
+	<string name="experimental_description"> = Eksperymentalna</string>
+
+	<string name="changelog_progress_title">Proszę czekać ...</string>
+	<string name="changelog_progress_body">Próba pobrania changelog.xml</string>
+
+	<string name="changelog_button_text">Lista zmian wybranej\naktualizacji</string>
+	<string name="no_changelog_found">Nie znaleziono listy zmian</string>
+
+	<string name="changelog_title_rom">Aktualizacja listy zmian</string>
+	<string name="changelog_title_app">Lista zmian programu</string>
+
+	<string name="true_string">tak</string>
+	<string name="false_string">nie</string>
+	
+	<string name="md5_check_cancelled">Sprawdzanie MD5 zostało anulowane</string>
+	
+	<string name="button_available_updates">Dostępne aktual.</string>
+	<string name="button_existing_updates">Istniejące aktual.</string>
+	
+	<string name="no_existing_updates_found">Nie znaleziono istniejących\naktualizacji</string>
+	
+	<!-- .service.* Strings -->
+	<string name="no_updates_found">Nie znaleziono aktualizacji</string>
+	<string name="not_new_updates_found_ticker">Znaleziono nowe aktualizacje!</string>
+	<string name="not_new_updates_found_title">Znaleziono nowe aktualizacje</string>
+
+	<string name="exception_while_updating">Wystąpił błąd przy próbie połączenia z serwerem aktualizacji CM</string>
+	<string name="exception_while_downloading">Wystąpił błąd przy próbie pobrania aktualizacji CM</string>
+
+	<string name="not_update_check_error_ticker">Wystąpił błąd przy próbie wyszukania aktualizacji CM</string>
+	<string name="not_update_check_error_title">Nie można wyszukać nowych aktualizacji CM</string>
+	<string name="not_update_check_error_body">Proszę spróbować ponownie później.</string>
+	
+	<string name="not_update_download_error_ticker">Wystąpił błąd podczas pobierania aktualizacji</string>
+	<string name="not_update_download_error_title">Wystąpił błąd podczas pobierania aktualizacji</string>
+	<string name="not_update_download_error_body">Proszę spróbować ponownie później.</string>
+	
+	<string name="not_update_downloaded_ticker">Aktualizacja CyanogenMod została pobrana</string>
+	<string name="not_update_downloaded_title">Aktualizacja CyanogenMod została pobrana</string>
+	<string name="not_update_downloaded_body">{0} jest gotowy do instalacji</string>
+	
+	<string name="download_info_filename">Nazwa pliku: </string>
+	<string name="download_info_mirror">Źródło: </string>
+	<string name="download_info_downloading">Pobrano:</string>
+	<string name="download_info_speed">Prędkość: </string>
+	<string name="download_info_remaining_time">Pozostały czas: </string>
+	
+	<string name="confirm_delete_update_folder_dialog_message">Usunąć folder aktualizacji?</string>
+	<string name="confirm_delete_update_folder_dialog_yes">Usuń wszystkie</string>
+	<string name="confirm_delete_update_folder_dialog_neutral">Usuń wybraną</string>
+	<string name="confirm_delete_update_folder_dialog_no">Anuluj</string>
+	<string name="delete_single_update_success_message">Aktualizacja {0} usunięta</string>    
+	<string name="minutes">min</string>
+	<string name="seconds">sek</string>
+
+	<!-- Preferences Strings -->
+	<string name="p_update_check_freq_title">Częstotliwość sprawdzania aktualizacji</string>
+	<string name="p_update_check_freq_summary">Ustaw jak często program ma szukać nowych aktualizacji</string>
+
+	<string name="p_update_file_url_title">Serwer aktualizacji</string>
+	<string name="p_update_file_url_summary">Podaj adres serwera, z którego będą pobierane aktualizacje</string>
+	<string name="p_update_file_url_changed">Adres aktualizacji przywrócony do wartości domyślnej</string>
+
+	<string name="p_updates_mod_version_title">Rodzaje aktualizacji</string>
+	<string name="p_updates_mod_version_summary">Ustaw rodzaje aktualizacji jakich program ma szukać</string>
+
+	<string name="p_display_older_mod_versions_title">Wyświetlaj wszystkie aktualizacje</string>
+	<string name="p_display_older_mod_versions_summary">Wyświetlaj wszystkie aktualizacje, również starsze niż obecna</string>
+	<string name="p_display_older_mod_versions_changed">Proszę sprawdzić dostępność aktualizacji ponownie, aby zaktualizować listę dostępnych aktualizacji</string>
+
+	<string name="p_display_allow_experimental_versions_title">Wersje eksperymentalne</string>
+	<string name="p_display_allow_experimental_versions_summary">Wyświetlaj eksperymentalne (niestabilne) wersje</string>
+	<string name="p_display_allow_experimental_versions_changed">Proszę sprawdzić dostępność aktualizacji ponownie, aby zaktualizować listę dostępnych aktualizacji</string>
+
+	<string name="p_do_nandroid_backup_title">Nandroid Backup</string>
+	<string name="p_do_nandroid_backup_summary">Wykonać kopię systemu (Nandroid) przed instalacją aktualizacji?</string>
+
+	<string name="p_notification_ringtone_title">Dźwięk powiadomienia</string>
+	<string name="p_notification_ringtone_summary">Wybierz dźwięk powiadomienia dla nowych aktualizacji CM</string>
+
+	<string name="p_update_file_url_screen_title">Serwer aktualizacji</string>
+	<string name="p_update_file_url_screen_summary">Zmień serwer aktualizacji</string>
+
+	<string name="p_update_file_url_def_title">Resetuj serwer aktualizacji</string>
+	<string name="p_update_file_url_def_summary">Przywróć adres serwera do wartości domyślnej</string>
+
+	<string name="p_update_file_url_qr_title">Skanuj fotokod</string>
+	<string name="p_update_file_url_qr_summary">Skanuj fotokod z adresem pliku</string>
+
+	<string name="p_vibrate_title">Wibracje</string>
+	<string name="p_vibrate_summary">Wibruj przy powiadomieniach</string>
+
+	<string name="p_notifications_title">Powiadomienia</string>
+	<string name="p_notifications_summary">Włącz/wyłącz powiadomienia</string>
+
+	<string name="p_advanced_title">Ustawienia zaawansowane</string>
+	<string name="p_advanced_summary">Zmieniaj te ustawienia tylko jeśli wiesz co robisz!</string>
+
+	<string name="p_progress_update_frequency_title">Częstotliwość aktualizacji paska postępu</string>
+	<string name="p_progress_update_frequency_summary">Wyższe wartości --> Więcej aktualizacji\nNiższe wartości --> Mniej aktualizacji</string>
+
+	<string name="p_progress_update_freq_def_title">Resetuj częstotliwość aktualizacji</string>
+	<string name="p_progress_update_freq_def_summary">Resetuj częstotliwość aktualizacji paska postępu</string>
+	<string name="p_progress_update_freq_def_toast">Częstotliwość aktualizacji paska postępu przywrócona do wartości domyślnej</string>
 </resources>
