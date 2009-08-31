@@ -1036,7 +1036,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	@Override
 	public void switchToUpdateChooserLayout(FullUpdateInfo availableUpdates)
 	{
-		if(availableUpdates!=null)
+		if(availableUpdates != null)
 		{
 			mAvailableUpdates = availableUpdates;
 		}
@@ -1135,11 +1135,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		
 		//Sets the Theme and Rom Variables
 		List<UpdateInfo> availableRoms = null;
-		if (mAvailableUpdates.roms != null)
-			availableRoms = mAvailableUpdates.roms;
 		List<UpdateInfo> availableThemes = null;
-		if(mAvailableUpdates.themes != null)
-			availableThemes = mAvailableUpdates.themes;
+		if (mAvailableUpdates != null)
+		{
+			if (mAvailableUpdates.roms != null)
+				availableRoms = mAvailableUpdates.roms;
+			if (mAvailableUpdates.themes != null)
+				availableThemes = mAvailableUpdates.themes;
+		}
 		
 		//Rom Layout
 		if(availableRoms != null)
