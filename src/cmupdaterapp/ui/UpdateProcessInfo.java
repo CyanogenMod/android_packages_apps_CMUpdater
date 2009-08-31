@@ -1042,7 +1042,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 
 		setContentView(R.layout.main);
-		flipper=(ViewFlipper)findViewById(R.id.Flipper);
+		flipper = (ViewFlipper)findViewById(R.id.Flipper);
 		flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_in));
 		flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_out));
 		
@@ -1134,8 +1134,12 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 		
 		//Sets the Theme and Rom Variables
-		List<UpdateInfo> availableRoms = mAvailableUpdates.roms;
-		List<UpdateInfo> availableThemes = mAvailableUpdates.themes;
+		List<UpdateInfo> availableRoms = null;
+		if (mAvailableUpdates.roms != null)
+			availableRoms = mAvailableUpdates.roms;
+		List<UpdateInfo> availableThemes = null;
+		if(mAvailableUpdates.themes != null)
+			availableThemes = mAvailableUpdates.themes;
 		
 		//Rom Layout
 		if(availableRoms != null)
