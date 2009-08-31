@@ -650,6 +650,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		super.onCreate(savedInstanceState);
 
 		Preferences prefs = Preferences.getPreferences(this);
+		
+		//Sets the Title to Appname + Mod Version
+		setTitle(getResources().getString(R.string.app_name) + " " + getResources().getString(R.string.title_running) + " " + SysUtils.getReadableModVersion());
+		
 		if(prefs.isFirstRun())
 		{
 			prefs.configureModString();
@@ -667,7 +671,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			Log.e(TAG, "Unable to load application state", e);
 		}
-
+		
 		restoreSavedInstanceValues(savedInstanceState);
 
 		mUpdateServer = new PlainTextUpdateServer(this);
