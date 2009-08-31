@@ -1110,20 +1110,27 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		Button selectUploadButton = (Button) findViewById(R.id.download_update_button);
 		mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
 		TextView DownloadText = (TextView) findViewById(R.id.available_updates_text);
-		LinearLayout stableExperimentalInfo = (LinearLayout) findViewById(R.id.stable_experimental_description_container);
+		LinearLayout stableExperimentalInfoUpdates = (LinearLayout) findViewById(R.id.stable_experimental_description_container_updates);
 		Button changelogButton = (Button) findViewById(R.id.show_changelog_button);
 		
 		//Theme Layout
 		Button btnDownloadTheme = (Button) findViewById(R.id.download_theme_button);
 		mThemesSpinner = (Spinner) findViewById(R.id.available_themes_list);
 		TextView tvThemeDownloadText = (TextView) findViewById(R.id.available_themes_text);
+		LinearLayout stableExperimentalInfoThemes = (LinearLayout) findViewById(R.id.stable_experimental_description_container_themes);
 		Button btnThemechangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
 		
-		//No Updates Found Layout
-		Button CheckNowUpdateChooser = (Button) findViewById(R.id.check_now_button_update_chooser);
-		TextView CheckNowUpdateChooserText = (TextView) findViewById(R.id.check_now_update_chooser_text);
-		CheckNowUpdateChooserText.setVisibility(View.GONE);
-		CheckNowUpdateChooser.setVisibility(View.GONE);
+		//No ROM Updates Found Layout
+		Button CheckNowUpdateChooserUpdates = (Button) findViewById(R.id.check_now_button_update_chooser_updates);
+		TextView CheckNowUpdateChooserTextUpdates = (TextView) findViewById(R.id.check_now_update_chooser_text_updates);
+		CheckNowUpdateChooserTextUpdates.setVisibility(View.GONE);
+		CheckNowUpdateChooserUpdates.setVisibility(View.GONE);
+
+		//No Theme Updates Found Layout
+		Button CheckNowUpdateChooserThemes = (Button) findViewById(R.id.check_now_button_update_chooser_themes);
+		TextView CheckNowUpdateChooserTextThemes = (TextView) findViewById(R.id.check_now_update_chooser_text_themes);
+		CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
+		CheckNowUpdateChooserThemes.setVisibility(View.GONE);
 		
 		//Set the correct wallpaper
 		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
@@ -1164,7 +1171,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			selectUploadButton.setVisibility(View.GONE);
 			mUpdatesSpinner.setVisibility(View.GONE);
 			DownloadText.setVisibility(View.GONE);
-			stableExperimentalInfo.setVisibility(View.GONE);
+			stableExperimentalInfoUpdates.setVisibility(View.GONE);
 			changelogButton.setVisibility(View.GONE);
 		}
 
@@ -1188,6 +1195,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			btnDownloadTheme.setVisibility(View.GONE);
 			mThemesSpinner.setVisibility(View.GONE);
 			tvThemeDownloadText.setVisibility(View.GONE);
+			stableExperimentalInfoThemes.setVisibility(View.GONE);
 			btnThemechangelogButton.setVisibility(View.GONE);
 		}
 
@@ -1199,9 +1207,18 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				//Display the Check Now Button and add the Event
 				//only Display when there are no Updates available
 				//or this Button and the Apply Button will be there
-				CheckNowUpdateChooserText.setVisibility(View.VISIBLE);
-				CheckNowUpdateChooser.setVisibility(View.VISIBLE);
-				CheckNowUpdateChooser.setOnClickListener(new View.OnClickListener()
+				CheckNowUpdateChooserTextUpdates.setVisibility(View.VISIBLE);
+				CheckNowUpdateChooserUpdates.setVisibility(View.VISIBLE);
+				CheckNowUpdateChooserUpdates.setOnClickListener(new View.OnClickListener()
+				{
+					public void onClick(View v)
+					{
+						checkForUpdates();
+					}
+				});
+				CheckNowUpdateChooserTextThemes.setVisibility(View.VISIBLE);
+				CheckNowUpdateChooserThemes.setVisibility(View.VISIBLE);
+				CheckNowUpdateChooserThemes.setOnClickListener(new View.OnClickListener()
 				{
 					public void onClick(View v)
 					{
@@ -1232,9 +1249,18 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			//Display the Check Now Button and add the Event
 			//The same as the SwitchToNoUpdatesAvailable
-			CheckNowUpdateChooserText.setVisibility(View.VISIBLE);
-			CheckNowUpdateChooser.setVisibility(View.VISIBLE);
-			CheckNowUpdateChooser.setOnClickListener(new View.OnClickListener()
+			CheckNowUpdateChooserTextUpdates.setVisibility(View.VISIBLE);
+			CheckNowUpdateChooserUpdates.setVisibility(View.VISIBLE);
+			CheckNowUpdateChooserUpdates.setOnClickListener(new View.OnClickListener()
+			{
+				public void onClick(View v)
+				{
+					checkForUpdates();
+				}
+			});
+			CheckNowUpdateChooserTextThemes.setVisibility(View.VISIBLE);
+			CheckNowUpdateChooserThemes.setVisibility(View.VISIBLE);
+			CheckNowUpdateChooserThemes.setOnClickListener(new View.OnClickListener()
 			{
 				public void onClick(View v)
 				{
