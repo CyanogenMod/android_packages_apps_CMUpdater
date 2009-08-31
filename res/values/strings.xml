@@ -11,7 +11,8 @@
 
 	<string name="available_updates_text">Please select the ROM to download:</string>
 	<string name="choose_available_update_text">Download</string>
-	<string name="no_updates_found_instructions">No Updates found.\nPress \'Check now\' to manually check for new updates</string>
+	<string name="no_updates_found_instructions">No Roms found.\nPress \'Check now\' to manually check for new updates</string>
+	<string name="no_themes_found_instructions">No Themes found.\nPress \'Check now\' to manually check for new updates</string>
 	<string name="downloaded_update_found_text">Updates found in Update Folder:</string>
 	<string name="checking_for_updates">Checking for updates</string>
 	<string name="downloading_update">Downloading update</string>
