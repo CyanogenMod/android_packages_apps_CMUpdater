@@ -116,6 +116,10 @@ public class PlainTextUpdateServer implements IUpdateServer
 							{
 								retValue.roms.add(ui);
 							}
+							else
+							{
+								Log.d(TAG, "Discarding Rom " + ui.name + " (Branch mismatch - stable/experimental)");
+							}
 						}
 						else
 						{
@@ -130,9 +134,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 				//For Themes
 				else if (ui.type.toLowerCase().equals("theme"))
 				{
-					if (themeInfos != null
-						&& ui.name.equals(themeInfos[0])
-						&& Integer.valueOf(ui.displayVersion) > Integer.valueOf(themeInfos[1]))
+					if (themeInfos != null && ui.name.equals(themeInfos[0]))
 					{
 						if (romMatches(ui, systemRom))
 						{
@@ -142,20 +144,24 @@ public class PlainTextUpdateServer implements IUpdateServer
 								{
 									retValue.themes.add(ui);
 								}
+								else
+								{
+									Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
+								}
 							}
 							else
 							{
-								Log.d(TAG, String.format("Discarding Theme %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
+								Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
 							}
 						}
 						else
 						{
-							Log.d(TAG, String.format("Discarding Theme %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
+							Log.d(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
 						}
 					}
 					else
 					{
-						Log.d(TAG, String.format("Discarding Theme %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
+						Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
 					}
 				}
 			}
@@ -282,14 +288,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 	}
 
 	private boolean updateIsNewer(UpdateInfo ui, int[] sysVersion, boolean defaultValue)
-	{
-		/*
-		String modVersion = Preferences.getSystemProperty(Preferences.SYS_PROP_MOD_VERSION);
-		if(modVersion == null || modVersion.length() < PROP_MOD_VERSION_SKIP_CHARS) return defaultValue;
-
-		String[] sysVersion = modVersion.substring(PROP_MOD_VERSION_SKIP_CHARS).split("\\.");*/
-
-		
+	{	
 		String[] updateVersion = ui.displayVersion.split("\\.");
 
 		Log.d(TAG, "Update Version:" + Arrays.toString(updateVersion) + "; System Version:" + Arrays.toString(sysVersion));
