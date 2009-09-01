@@ -11,6 +11,7 @@ import android.preference.PreferenceActivity;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
+import android.webkit.URLUtil;
 import android.widget.Toast;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.StartupReceiver;
@@ -53,6 +54,7 @@ public class ConfigActivity extends PreferenceActivity
 
 		updateCheckFreqPref.setOnPreferenceChangeListener(mUpdateCheckingFrequencyListener);
 		
+		//Barcodescanning Stuff
 		Preference pref = (Preference) findPreference(res.getString(R.string.p_update_file_url_qr));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
@@ -77,6 +79,7 @@ public class ConfigActivity extends PreferenceActivity
 			}
 		});
 		
+		//Reset Update URLs
 		pref = (Preference) findPreference(res.getString(R.string.p_update_file_url_def));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
@@ -103,6 +106,46 @@ public class ConfigActivity extends PreferenceActivity
 			}
 		});
 		
+		//URL Validation checkers
+		pref = (Preference) findPreference(res.getString(R.string.p_update_file_url));
+		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
+		{
+			public boolean onPreferenceChange(Preference preference, Object newValue)
+			{
+				if(URLUtil.isValidUrl(String.valueOf(newValue)))
+				{
+					prefs.setRomUpdateFileURL(String.valueOf(newValue));
+					Log.d(TAG, "Rom Update URL Set to: " + String.valueOf(newValue));
+				}
+				else
+				{
+					Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
+					Log.d(TAG, "Entered Rom Update URL not valid: " + String.valueOf(newValue));
+				}
+				return true;
+			}
+		});
+		
+		pref = (Preference) findPreference(res.getString(R.string.p_theme_file_url));
+		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
+		{
+			public boolean onPreferenceChange(Preference preference, Object newValue)
+			{
+				if(URLUtil.isValidUrl(String.valueOf(newValue)))
+				{
+					prefs.setThemeUpdateFileURL(String.valueOf(newValue));
+					Log.d(TAG, "Theme Update URL Set to: " + String.valueOf(newValue));
+				}
+				else
+				{
+					Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
+					Log.d(TAG, "Entered Theme Update URL not valid: " + String.valueOf(newValue));
+				}
+				return true;
+			}
+		});
+		
+		//Progress Update Frequency
 		pref = (Preference) findPreference(res.getString(R.string.p_progress_update_freq_def));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
@@ -115,6 +158,7 @@ public class ConfigActivity extends PreferenceActivity
 			}
 		});
 		
+		//Display All Updates
 		pref = (Preference) findPreference(res.getString(R.string.p_display_older_mod_versions));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
@@ -124,7 +168,8 @@ public class ConfigActivity extends PreferenceActivity
 				return true;
 			}
 		});
-
+		
+		//Show Experimental
 		pref = (Preference) findPreference(res.getString(R.string.p_display_allow_experimental_versions));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
