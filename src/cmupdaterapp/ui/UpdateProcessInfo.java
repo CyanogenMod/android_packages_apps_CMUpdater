@@ -740,7 +740,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					Toast.makeText(this, R.string.md5_check_cancelled, Toast.LENGTH_SHORT).show();
 					break;
 				default:
-					Log.w(TAG, "Uknown KEY_REQUEST in Intent. Maybe its the first start.");
+					Log.w(TAG, "No Intent. Starting App in Default mode");
 					break;
 			}
 		}
