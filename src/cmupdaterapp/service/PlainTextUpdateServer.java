@@ -29,13 +29,11 @@ public class PlainTextUpdateServer implements IUpdateServer
 {
 	private static final String TAG = "<CM-Updater> PlainTextUpdateServer";
 
-	private HttpClient httpClient;
 	private URI mUpdateServerUri;
 	private Preferences mPreferences;
 
 	public PlainTextUpdateServer(Context ctx)
 	{
-		httpClient = new DefaultHttpClient();
 		Preferences p = mPreferences = Preferences.getPreferences(ctx);
 		String sm = p.getConfiguredModString();
 
@@ -50,6 +48,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 	}
 	public FullUpdateInfo getAvailableUpdates() throws IOException
 	{
+		HttpClient httpClient = new DefaultHttpClient();
 		String systemMod = mPreferences.getConfiguredModString();
 		String systemRom = SysUtils.getReadableModVersion();
 		int[] sysVersion = SysUtils.getSystemModVersion();
@@ -224,7 +223,13 @@ public class PlainTextUpdateServer implements IUpdateServer
 					ui.board.add(item);
 			}
 			ui.type = obj.getString("type");
-			ui.mod = obj.getString("mod");
+			ui.mod = new LinkedList<String>();
+			String[] mods= obj.getString("mod").split("\\|");
+			for(String mod:mods)
+			{
+				if(mod!=null)
+					ui.mod.add(mod);
+			}
 			ui.name = obj.getString("name");
 			ui.displayVersion = obj.getString("version");
 			ui.description = obj.getString("description");
@@ -292,8 +297,11 @@ public class PlainTextUpdateServer implements IUpdateServer
 		if(ui == null) return false;
 		if(ui.mod.equals("*") || systemRom.equals("*")) return true;
 		Log.d(TAG, "ThemeRom:" + ui.mod + "; SystemRom:" + systemRom);
-		if(ui.mod.equalsIgnoreCase(systemRom))
+		for(String mod:ui.mod)
+		{
+			if(mod.equalsIgnoreCase(systemRom))
 				return true;
+		}
 		return false;
 	}
 

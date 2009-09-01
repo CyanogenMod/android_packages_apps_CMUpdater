@@ -583,9 +583,11 @@ public class UpdateDownloaderService extends Service
 			int read = 0;
 			FileOutputStream fos = new FileOutputStream(destinationFile);
 			InputStream is = entity.getContent();
-			TimerTask progressUpdateTimerTask = new TimerTask() {
+			TimerTask progressUpdateTimerTask = new TimerTask()
+			{
 				@Override
-				public void run() {
+				public void run()
+				{
 					onProgressUpdate();
 				}
 			};
