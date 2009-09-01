@@ -30,7 +30,6 @@
 		android:defaultValue="@string/p_vibrate_def_value"
 		android:dependency="@string/p_notifications" />
 	<!--
-
 		<CheckBoxPreference android:key="@string/p_do_nandroid_backup"
 		android:title="@string/p_do_nandroid_backup_title"
 		android:summary="@string/p_do_nandroid_backup_summary"
@@ -111,6 +110,17 @@
 				android:key="@string/p_progress_update_freq_def"
 				android:title="@string/p_progress_update_freq_def_title"
 				android:summary="@string/p_progress_update_freq_def_summary" />
+			<EditTextPreference
+				android:key="@string/p_theme_file"
+				android:title="@string/p_theme_file_title"
+				android:summary="@string/p_theme_file_summary"
+				android:dialogTitle="@string/p_theme_file_title"
+				android:defaultValue="@string/conf_theme_version_file_def"
+				android:singleLine="false" />
+			<Preference
+				android:key="@string/p_theme_file_def"
+				android:title="@string/p_theme_file_def_title"
+				android:summary="@string/p_theme_file_def_summary" />
 		</PreferenceCategory>
 	</PreferenceScreen>
 </PreferenceScreen>

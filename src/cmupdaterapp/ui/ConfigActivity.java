@@ -106,6 +106,20 @@ public class ConfigActivity extends PreferenceActivity
 			}
 		});
 		
+		//Reset themes.theme
+		pref = (Preference) findPreference(res.getString(R.string.p_theme_file_def));
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
+		{
+			public boolean onPreferenceClick(Preference preference)
+			{
+				prefs.setThemeFile(res.getString(R.string.conf_theme_version_file_def));
+				Toast.makeText(getBaseContext(), R.string.p_theme_file_def_toast, Toast.LENGTH_LONG).show();
+				Log.d(TAG, "Theme File Path set back to default: " + prefs.getThemeFile());
+				ConfigActivity.this.finish();
+				return true;
+			}
+		});
+
 		//URL Validation checkers
 		pref = (Preference) findPreference(res.getString(R.string.p_update_file_url));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()

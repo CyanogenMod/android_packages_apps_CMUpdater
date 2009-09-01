@@ -196,4 +196,11 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_progress_update_freq_def_toast">Progress Update Frequency set back to default</string>
 	
 	<string name="p_invalid_url">Entered URL is not valid! Please try again.</string>
+	
+	<string name="p_theme_file_title">themes.theme Path</string>
+	<string name="p_theme_file_summary">Change the Path of the themes.theme File</string>
+	
+	<string name="p_theme_file_def_title">Reset themes.theme File</string>
+	<string name="p_theme_file_def_summary">Set the Path of themes.theme back to default</string>
+	<string name="p_theme_file_def_toast">themes.theme set back to default</string>
 </resources>

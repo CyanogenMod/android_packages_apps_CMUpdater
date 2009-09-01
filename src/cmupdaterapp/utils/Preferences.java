@@ -207,8 +207,15 @@ public class Preferences
 	
 	public String getThemeFile()
 	{
-		Log.d(TAG, "ThemeFile: "+ mRes.getString(R.string.conf_theme_version_file));
-		return mRes.getString(R.string.conf_theme_version_file);
+		Log.d(TAG, "ThemeFile: "+ mPrefs.getString(mRes.getString(R.string.p_theme_file), mRes.getString(R.string.conf_theme_version_file_def)));
+		return mPrefs.getString(mRes.getString(R.string.p_theme_file), mRes.getString(R.string.conf_theme_version_file_def));
+	}
+	
+	public void setThemeFile(String path)
+	{
+		Editor editor = mPrefs.edit();
+		editor.putString(mRes.getString(R.string.p_theme_file), path);
+		if(!editor.commit()) Log.e(TAG, "Unable to write Theme File Path");
 	}
 	
 	public String[] getThemeInformations()

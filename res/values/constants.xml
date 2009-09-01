@@ -15,7 +15,7 @@
 	<string name="conf_theme_server_url_def">http://cyanogen-updater.googlecode.com/files/theme_file.json</string>
 	<string name="conf_about_url">http://code.google.com/p/cyanogen-updater/</string>
 	<string name="conf_update_folder">cm-updates</string>
-	<string name="conf_theme_version_file">/system/framework/themes.theme</string>
+	<string name="conf_theme_version_file_def">/system/framework/themes.theme</string>
 	<string name="conf_changelog_url">http://cyanogen-updater.googlecode.com/files/changelog.xml</string>
 
 	<string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} found</string>
@@ -48,6 +48,8 @@
 	<string name="p_theme_file_url">prefThemeFileURL</string>
 	<string name="p_theme_file_url_qr">prefThemeFileURLQr</string>
 	<string name="p_theme_file_url_def">prefThemeFileURLDef</string>
+	<string name="p_theme_file">prefThemeFile</string>
+	<string name="p_theme_file_def">prefThemeFileDef</string>
 
 	<!-- About dialog -->
 	<string-array name="about_authors">
