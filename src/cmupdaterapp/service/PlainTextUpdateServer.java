@@ -29,9 +29,15 @@ public class PlainTextUpdateServer implements IUpdateServer
 {
 	private static final String TAG = "<CM-Updater> PlainTextUpdateServer";
 
-	private URI mUpdateServerUri;
 	private Preferences mPreferences;
 
+	private String systemMod;
+	private String systemRom;
+	private int[] sysVersion;
+	private String[] themeInfos;
+	
+	private boolean allowExperimental;
+	
 	public PlainTextUpdateServer(Context ctx)
 	{
 		Preferences p = mPreferences = Preferences.getPreferences(ctx);
@@ -48,137 +54,91 @@ public class PlainTextUpdateServer implements IUpdateServer
 	}
 	public FullUpdateInfo getAvailableUpdates() throws IOException
 	{
-		HttpClient httpClient = new DefaultHttpClient();
-		String systemMod = mPreferences.getConfiguredModString();
-		String systemRom = SysUtils.getReadableModVersion();
-		int[] sysVersion = SysUtils.getSystemModVersion();
-		String[] themeInfos = mPreferences.getThemeInformations();
+		FullUpdateInfo retValue = new FullUpdateInfo();
+		boolean romException = false;
+		boolean themeException = false;
+		HttpClient romHttpClient = new DefaultHttpClient();
+		HttpClient themeHttpClient = new DefaultHttpClient();
+		systemMod = mPreferences.getConfiguredModString();
+		systemRom = SysUtils.getReadableModVersion();
+		sysVersion = SysUtils.getSystemModVersion();
+		themeInfos = mPreferences.getThemeInformations();
+		allowExperimental = mPreferences.allowExperimental();
 		
-		//Get the actual Updateserver URL
-		mUpdateServerUri = URI.create(mPreferences.getRomUpdateFileURL());
-		HttpUriRequest req = new HttpGet(mUpdateServerUri);
-		req.addHeader("Cache-Control", "no-cache");
-
-		HttpResponse response = httpClient.execute(req);
-
-		int serverResponse = response.getStatusLine().getStatusCode();
-		if (serverResponse != 200)
+		//Get the actual Rom Updateserver URL
+		URI RomUpdateServerUri = URI.create(mPreferences.getRomUpdateFileURL());
+		HttpUriRequest romReq = new HttpGet(RomUpdateServerUri);
+		romReq.addHeader("Cache-Control", "no-cache");
+		HttpResponse romResponse = romHttpClient.execute(romReq);
+		int romServerResponse = romResponse.getStatusLine().getStatusCode();
+		if (romServerResponse != 200)
 		{
-			Log.e(TAG, "Server returned status code " + serverResponse);
-			throw new IOException("Server returned status code "
-					+ serverResponse);
+			Log.e(TAG, "Server returned status code for ROM " + romServerResponse);
+			romException = true;
 		}
 
-		FullUpdateInfo retValue = new FullUpdateInfo();
+		//Get the actual Theme Updateserver URL
+		URI ThemeUpdateServerUri = URI.create(mPreferences.getThemeUpdateFileURL());
+		HttpUriRequest themeReq = new HttpGet(ThemeUpdateServerUri);
+		themeReq.addHeader("Cache-Control", "no-cache");
+		HttpResponse themeResponse = themeHttpClient.execute(themeReq);
+		int themeServerResponse = themeResponse.getStatusLine().getStatusCode();
+		if (themeServerResponse != 200)
+		{
+			Log.e(TAG, "Server returned status code for Themes " + themeServerResponse);
+			themeException = true;
+		}
 		
-		HttpEntity responseEntity = response.getEntity();
-
+		HttpEntity romResponseEntity = null;
+		HttpEntity themeResponseEntity = null;
+		if (!romException)
+			romResponseEntity = romResponse.getEntity();
+		if(!themeException)
+			themeResponseEntity = themeResponse.getEntity();
+		
 		try
 		{
-			/**
-			 * Read Entity into BufferedReader and eventually into a StringBuffer
-			 */
-			
-			BufferedReader lineReader = new BufferedReader(
-					new InputStreamReader(responseEntity.getContent()),
-					2 * 1024);
-			
-			StringBuffer buf = new StringBuffer();
-			String line;
-
-			while ((line = lineReader.readLine()) != null)
+			if (!romException)
 			{
-				buf.append(line);
+				//Read the Rom Infos
+				BufferedReader romLineReader = new BufferedReader(new InputStreamReader(romResponseEntity.getContent()),2 * 1024);
+				StringBuffer romBuf = new StringBuffer();
+				String romLine;
+				while ((romLine = romLineReader.readLine()) != null)
+				{
+					romBuf.append(romLine);
+				}
+				romLineReader.close();
+	
+				LinkedList<UpdateInfo> romUpdateInfos = parseJSON(romBuf);
+				retValue.roms = getRomUpdates(romUpdateInfos);
 			}
-
-			lineReader.close();
-			
-			
-			/**
-			 * Parse StringBuffer (JSON Document)
-			 */
-
-			LinkedList<UpdateInfo> updateInfos = parseJSON(buf);
-			for (int i = 0, max = updateInfos.size() ; i < max ; i++)
+			else
+				Log.d(TAG, "There was an Exception on Downloading the Rom JSON File");
+			if (!themeException)
 			{
-				UpdateInfo ui = updateInfos.poll();
-				//For Roms
-				if (ui.type.equalsIgnoreCase("rom"))
+				//Read the Theme Infos
+				BufferedReader themeLineReader = new BufferedReader(new InputStreamReader(themeResponseEntity.getContent()),2 * 1024);
+				StringBuffer themeBuf = new StringBuffer();
+				String themeLine;
+				while ((themeLine = themeLineReader.readLine()) != null)
 				{
-					if (boardMatches(ui, systemMod))
-					{
-						if(mPreferences.showDowngrades() || updateIsNewer(ui, sysVersion, true))
-						{
-							if (branchMatches(ui, mPreferences.allowExperimental()))
-							{
-								retValue.roms.add(ui);
-							}
-							else
-							{
-								Log.d(TAG, "Discarding Rom " + ui.name + " (Branch mismatch - stable/experimental)");
-							}
-						}
-						else
-						{
-							Log.d(TAG, "Discarding Rom " + ui.name + " (older version)");
-						}
-					}
-					else
-					{
-						Log.d(TAG, "Discarding Rom " + ui.name + " (mod mismatch)");
-					}
+					themeBuf.append(themeLine);
 				}
-				//For Themes
-				//Theme installed and in correct format?
-				else if (themeInfos != null && themeInfos.length == 2)
-				{
-					//Json object is a theme
-					if (ui.type.equalsIgnoreCase("theme"))
-					{
-						//Name matches
-						if (themeInfos[0] != null && ui.name.equalsIgnoreCase(themeInfos[0]))
-						{
-							//Mod matches
-							if (romMatches(ui, systemRom))
-							{
-								//Version matchrs
-								if(mPreferences.showDowngrades() || updateIsNewer(ui, mPreferences.convertVersionToIntArray(themeInfos[1]), true))
-								{
-									//Branch matches
-									if (branchMatches(ui, mPreferences.allowExperimental()))
-									{
-										retValue.themes.add(ui);
-									}
-									else
-									{
-										Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
-									}
-								}
-								else
-								{
-									Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
-								}
-							}
-							else
-							{
-								Log.d(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
-							}
-						}
-						else
-						{
-							Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
-						}
-					}
-				}
-				else
-				{
-					Log.d(TAG, String.format("Discarding Update %s %s. Invalid or no Themes installed", ui.name, ui.displayVersion));
-				}
+				themeLineReader.close();
+				
+				LinkedList<UpdateInfo> themeUpdateInfos = parseJSON(themeBuf);
+				retValue.themes = getThemeUpdates(themeUpdateInfos);
 			}
+			else
+				Log.d(TAG, "There was an Exception on Downloading the Theme JSON File");
 		}
 		finally
 		{
-			responseEntity.consumeContent();
+			if (!romException)
+				romResponseEntity.consumeContent();
+			if (!themeException)
+				themeResponseEntity.consumeContent();
 		}
 		
 		return retValue;
@@ -274,7 +234,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 			allow = true;
 		}
 
-		Log.d(TAG, "Update Branch:" + ui.branchCode + "; Experimental Allowed:" + experimentalAllowed);
+		//Log.d(TAG, "Update Branch:" + ui.branchCode + "; Experimental Allowed:" + experimentalAllowed);
 		return allow;
 	}
 
@@ -283,7 +243,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		if(ui == null) return false;
 		//If * is provided, all Boards are supported
 		if(ui.board.equals("*") || systemMod.equals("*")) return true;
-		Log.d(TAG, "BoardString:" + ui.board + "; System Mod:" + systemMod);
+		//Log.d(TAG, "BoardString:" + ui.board + "; System Mod:" + systemMod);
 		for(String board:ui.board)
 		{
 			if(board.equalsIgnoreCase(systemMod))
@@ -296,7 +256,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 	{
 		if(ui == null) return false;
 		if(ui.mod.equals("*") || systemRom.equals("*")) return true;
-		Log.d(TAG, "ThemeRom:" + ui.mod + "; SystemRom:" + systemRom);
+		//Log.d(TAG, "ThemeRom:" + ui.mod + "; SystemRom:" + systemRom);
 		for(String mod:ui.mod)
 		{
 			if(mod.equalsIgnoreCase(systemRom))
@@ -331,5 +291,105 @@ public class PlainTextUpdateServer implements IUpdateServer
 		}
 
 		return sysVersion.length < updateVersion.length;
+	}
+	
+	private LinkedList<UpdateInfo> getRomUpdates(LinkedList<UpdateInfo> updateInfos)
+	{
+		LinkedList<UpdateInfo> ret = new LinkedList<UpdateInfo>();
+		for (int i = 0, max = updateInfos.size() ; i < max ; i++)
+		{
+			UpdateInfo ui = updateInfos.poll();
+			if (ui.type.equalsIgnoreCase("rom"))
+			{
+				if (boardMatches(ui, systemMod))
+				{
+					if(mPreferences.showDowngrades() || updateIsNewer(ui, sysVersion, true))
+					{
+						if (branchMatches(ui, allowExperimental))
+						{
+							Log.d(TAG, "Adding Rom: " + ui.name + " Version: " + ui.displayVersion + " Filename: " + ui.fileName);
+							ret.add(ui);
+						}
+						else
+						{
+							Log.d(TAG, "Discarding Rom " + ui.name + " (Branch mismatch - stable/experimental)");
+						}
+					}
+					else
+					{
+						Log.d(TAG, "Discarding Rom " + ui.name + " (older version)");
+					}
+				}
+				else
+				{
+					Log.d(TAG, "Discarding Rom " + ui.name + " (mod mismatch)");
+				}
+			}
+			else
+			{
+				Log.d(TAG, String.format("Discarding Update %s %s", ui.name, ui.displayVersion));
+			}
+		}
+		return ret;
+	}
+	
+	private LinkedList<UpdateInfo> getThemeUpdates(LinkedList<UpdateInfo> updateInfos)
+	{
+		LinkedList<UpdateInfo> ret = new LinkedList<UpdateInfo>();
+		for (int i = 0, max = updateInfos.size() ; i < max ; i++)
+		{
+			UpdateInfo ui = updateInfos.poll();
+			//Theme installed and in correct format?
+			if (themeInfos != null && themeInfos.length == 2)
+			{
+				//Json object is a theme
+				if (ui.type.equalsIgnoreCase("theme"))
+				{
+					//Name matches
+					if (themeInfos[0] != null && ui.name.equalsIgnoreCase(themeInfos[0]))
+					{
+						//Mod matches
+						if (romMatches(ui, systemRom))
+						{
+							//Version matchrs
+							if(mPreferences.showDowngrades() || updateIsNewer(ui, mPreferences.convertVersionToIntArray(themeInfos[1]), true))
+							{
+								//Branch matches
+								if (branchMatches(ui, allowExperimental))
+								{
+									Log.d(TAG, "Adding Theme: " + ui.name + " Version: " + ui.displayVersion + " Filename: " + ui.fileName);
+									ret.add(ui);
+								}
+								else
+								{
+									Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
+								}
+							}
+							else
+							{
+								Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
+							}
+						}
+						else
+						{
+							Log.d(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
+						}
+					}
+					else
+					{
+						Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos[0], themeInfos[1], ui.name, ui.displayVersion));
+					}
+				}
+				else
+				{
+					Log.d(TAG, String.format("Discarding Update %s %s", ui.name, ui.displayVersion));
+				}
+			}
+			else
+			{
+				Log.d(TAG, String.format("Discarding Update %s %s. Invalid or no Themes installed", ui.name, ui.displayVersion));
+			}
+		}
+		return ret;
 	}
 }
