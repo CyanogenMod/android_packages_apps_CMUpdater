@@ -75,7 +75,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="changelog_progress_title">Please wait ...</string>
 	<string name="changelog_progress_body">Trying to download the changelog.xml</string>
 
-	<string name="changelog_button_text">Changelog of selected Update</string>
+	<string name="changelog_button_text">Changelog of selected Rom</string>
 	<string name="no_changelog_found">No Changelog found</string>
 
 	<string name="changelog_title_rom">Update Changelog</string>
