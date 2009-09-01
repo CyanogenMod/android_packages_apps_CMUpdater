@@ -46,8 +46,9 @@
 		android:title="@string/p_display_allow_experimental_versions_title"
 		android:summary="@string/p_display_allow_experimental_versions_summary"
 		android:defaultValue="@string/p_display_allow_experimental_versions_def_value" />
+	<!-- Rom Update Server -->
 	<PreferenceScreen
-		android:key="@string/p_update_file_url_screen_title"
+		android:key="@string/p_update_file_url_screen"
 		android:title="@string/p_update_file_url_screen_title"
 		android:summary="@string/p_update_file_url_screen_summary" >
 		<PreferenceCategory
@@ -69,6 +70,31 @@
 				android:summary="@string/p_update_file_url_def_summary" />
 		</PreferenceCategory>
 	</PreferenceScreen>
+	<!-- Theme Update Server -->
+	<PreferenceScreen
+		android:key="@string/p_theme_file_url_screen"
+		android:title="@string/p_theme_file_url_screen_title"
+		android:summary="@string/p_theme_file_url_screen_summary" >
+		<PreferenceCategory
+			android:title="@string/p_theme_file_url_screen_title" >
+			<EditTextPreference
+				android:key="@string/p_theme_file_url"
+				android:title="@string/p_theme_file_url_title"
+				android:summary="@string/p_theme_file_url_summary"
+				android:dialogTitle="@string/p_theme_file_url_title"
+				android:defaultValue="@string/conf_theme_server_url_def"
+				android:singleLine="false" />
+			<Preference
+				android:key="@string/p_theme_file_url_qr"
+				android:title="@string/p_theme_file_url_qr_title"
+				android:summary="@string/p_theme_file_url_qr_summary" />
+			<Preference
+				android:key="@string/p_theme_file_url_def"
+				android:title="@string/p_theme_file_url_def_title"
+				android:summary="@string/p_theme_file_url_def_summary" />
+		</PreferenceCategory>
+	</PreferenceScreen>
+	<!-- Advanced Properties -->
 	<PreferenceScreen
 		android:title="@string/p_advanced_title"
 		android:summary="@string/p_advanced_summary" >

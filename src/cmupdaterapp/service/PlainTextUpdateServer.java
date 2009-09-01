@@ -55,7 +55,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		String[] themeInfos = mPreferences.getThemeInformations();
 		
 		//Get the actual Updateserver URL
-		mUpdateServerUri = URI.create(mPreferences.getUpdateFileURL());
+		mUpdateServerUri = URI.create(mPreferences.getRomUpdateFileURL());
 		HttpUriRequest req = new HttpGet(mUpdateServerUri);
 		req.addHeader("Cache-Control", "no-cache");
 

@@ -22,6 +22,8 @@ public class ConfigActivity extends PreferenceActivity
 {
 	private static final String TAG = "<CM-Updater> ConfigActivity";
 	private Preferences prefs;
+	private boolean RomBarcodeRequested;
+	private boolean ThemeBarcodeRequested;
 
 	private final Preference.OnPreferenceChangeListener mUpdateCheckingFrequencyListener = new Preference.OnPreferenceChangeListener() {
 		public boolean onPreferenceChange(Preference preference, Object newValue)
@@ -56,8 +58,21 @@ public class ConfigActivity extends PreferenceActivity
 		{
 			public boolean onPreferenceClick(Preference preference)
 			{
+				RomBarcodeRequested = true;
 				IntentIntegrator.initiateScan(ConfigActivity.this);
-				Log.d(TAG, "Intent to Barcode Scanner Sent");
+				Log.d(TAG, "Starting Barcodescanner for Rom Update File");
+				return true;
+			}
+		});
+
+		pref = (Preference) findPreference(res.getString(R.string.p_theme_file_url_qr));
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
+		{
+			public boolean onPreferenceClick(Preference preference)
+			{
+				ThemeBarcodeRequested = true;
+				IntentIntegrator.initiateScan(ConfigActivity.this);
+				Log.d(TAG, "Starting Barcodescanner for Theme Update File");
 				return true;
 			}
 		});
@@ -67,9 +82,22 @@ public class ConfigActivity extends PreferenceActivity
 		{
 			public boolean onPreferenceClick(Preference preference)
 			{
-				prefs.setUpdateFileURL(res.getString(R.string.conf_update_server_url_def));
+				prefs.setRomUpdateFileURL(res.getString(R.string.conf_update_server_url_def));
 				Toast.makeText(getBaseContext(), R.string.p_update_file_url_changed, Toast.LENGTH_LONG).show();
-				Log.d(TAG, "Update File URL set back to default: " + prefs.getUpdateFileURL());
+				Log.d(TAG, "Rom Update File URL set back to default: " + prefs.getRomUpdateFileURL());
+				ConfigActivity.this.finish();
+				return true;
+			}
+		});
+		
+		pref = (Preference) findPreference(res.getString(R.string.p_theme_file_url_def));
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
+		{
+			public boolean onPreferenceClick(Preference preference)
+			{
+				prefs.setThemeUpdateFileURL(res.getString(R.string.conf_theme_server_url_def));
+				Toast.makeText(getBaseContext(), R.string.p_theme_file_url_changed, Toast.LENGTH_LONG).show();
+				Log.d(TAG, "Theme Update File URL set back to default: " + prefs.getThemeUpdateFileURL());
 				ConfigActivity.this.finish();
 				return true;
 			}
@@ -114,45 +142,62 @@ public class ConfigActivity extends PreferenceActivity
 		//Switch is necessary, because RingtonePreference and QRBarcodeScanner call the same Event
 		switch (requestCode)
 		{
-		//QR Barcode scanner
-		case IntentIntegrator.REQUEST_CODE:
-			IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-			if (null != scanResult)
-			{
-				String result = scanResult.getContents();
-				if (null != result && !result.equals("") )
+			//QR Barcode scanner
+			case IntentIntegrator.REQUEST_CODE:
+				IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+				if (null != scanResult)
 				{
-					prefs.setUpdateFileURL(result);
-					Toast.makeText(getBaseContext(), "Update File URL: " + result, Toast.LENGTH_SHORT).show();
-					Log.d(TAG, "Scanned QR Code: " + scanResult.getContents());
-					ConfigActivity.this.finish();
+					String result = scanResult.getContents();
+					if (null != result && !result.equals("") )
+					{
+						Log.d(TAG, "Requested Rom Barcodescan? " + String.valueOf(RomBarcodeRequested));
+						Log.d(TAG, "Requested Theme Barcodescan? " + String.valueOf(ThemeBarcodeRequested));
+						if (RomBarcodeRequested)
+						{
+							Log.d(TAG, "Setting Rom Update File to " + result);
+							prefs.setRomUpdateFileURL(result);
+							Toast.makeText(getBaseContext(), "Rom Update File URL: " + result, Toast.LENGTH_SHORT).show();
+						}
+						else if (ThemeBarcodeRequested)
+						{
+							Log.d(TAG, "Setting Theme Update File to " + result);
+							prefs.setThemeUpdateFileURL(result);
+							Toast.makeText(getBaseContext(), "Theme Update File URL: " + result, Toast.LENGTH_SHORT).show();
+						}
+						RomBarcodeRequested = false;
+						ThemeBarcodeRequested = false;
+						ConfigActivity.this.finish();
+					}
+					else
+					{
+						Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
+						RomBarcodeRequested = false;
+						ThemeBarcodeRequested = false;
+					}
+					
 				}
 				else
 				{
 					Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
+					RomBarcodeRequested = false;
+					ThemeBarcodeRequested = false;
 				}
-				
-			}
-			else
-			{
-				Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
-			}
-			break;
-		//RingtonePicker
-		case 100:
-			//Needs to be an Object, because when giving the toString() here, it crashes when NULL is returned
-			//Object ringtone = intent.getExtras().get(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-			//intent = null when pressing back on the ringtonpickerdialog
-			if (intent == null)
 				break;
-			Uri ringtone = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI); 
-			if (ringtone != null)
-				prefs.setNotificationRingtone(ringtone.toString());
-			else
-				prefs.setNotificationRingtone(null);
-			break;
-		default:
-			break;
+			//RingtonePicker
+			case 100:
+				//Needs to be an Object, because when giving the toString() here, it crashes when NULL is returned
+				//Object ringtone = intent.getExtras().get(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+				//intent = null when pressing back on the ringtonpickerdialog
+				if (intent == null)
+					break;
+				Uri ringtone = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI); 
+				if (ringtone != null)
+					prefs.setNotificationRingtone(ringtone.toString());
+				else
+					prefs.setNotificationRingtone(null);
+				break;
+			default:
+				break;
 		}
 	}
 }

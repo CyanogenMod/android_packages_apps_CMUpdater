@@ -117,17 +117,30 @@ public class Preferences
 		return mPrefs.getBoolean(mRes.getString(R.string.p_display_older_mod_versions), Boolean.valueOf(mRes.getString(R.string.p_display_older_mod_versions_def_value)));
 	}
 	
-	public String getUpdateFileURL()
+	public String getRomUpdateFileURL()
 	{
-		Log.d(TAG, "MetadataFile-Url: "+ mPrefs.getString(mRes.getString(R.string.p_update_file_url),  mRes.getString(R.string.conf_update_server_url_def)));
+		Log.d(TAG, "Rom MetadataFile-Url: "+ mPrefs.getString(mRes.getString(R.string.p_update_file_url),  mRes.getString(R.string.conf_update_server_url_def)));
 		return mPrefs.getString(mRes.getString(R.string.p_update_file_url),  mRes.getString(R.string.conf_update_server_url_def));
 	}
+
+	public String getThemeUpdateFileURL()
+	{
+		Log.d(TAG, "Theme MetadataFile-Url: "+ mPrefs.getString(mRes.getString(R.string.p_theme_file_url),  mRes.getString(R.string.conf_theme_server_url_def)));
+		return mPrefs.getString(mRes.getString(R.string.p_theme_file_url),  mRes.getString(R.string.conf_theme_server_url_def));
+	}
 	
-	public void setUpdateFileURL(String updateFileURL)
+	public void setRomUpdateFileURL(String updateFileURL)
 	{
 		Editor editor = mPrefs.edit();
 		editor.putString(mRes.getString(R.string.p_update_file_url), updateFileURL);
-		if(!editor.commit()) Log.e(TAG, "Unable to write Update File URL");
+		if(!editor.commit()) Log.e(TAG, "Unable to write Rom Update File URL");
+	}
+
+	public void setThemeUpdateFileURL(String updateFileURL)
+	{
+		Editor editor = mPrefs.edit();
+		editor.putString(mRes.getString(R.string.p_theme_file_url), updateFileURL);
+		if(!editor.commit()) Log.e(TAG, "Unable to write Theme Update File URL");
 	}
 	
 	public void setNotificationRingtone(String RingTone)

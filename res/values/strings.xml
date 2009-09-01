@@ -136,9 +136,13 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_update_check_freq_title">Update Checking frequency</string>
 	<string name="p_update_check_freq_summary">Set update checking frequency</string>
 
-	<string name="p_update_file_url_title">Update Server</string>
-	<string name="p_update_file_url_summary">Set the URL of the update file</string>
-	<string name="p_update_file_url_changed">Update URL set back to default</string>
+	<string name="p_update_file_url_title">Rom Update Server</string>
+	<string name="p_update_file_url_summary">Set the URL of the Rom update file</string>
+	<string name="p_update_file_url_changed">Rom Update URL set back to default</string>
+
+	<string name="p_theme_file_url_title">Theme Update Server</string>
+	<string name="p_theme_file_url_summary">Set the URL of the Theme update file</string>
+	<string name="p_theme_file_url_changed">Theme Update URL set back to default</string>
 
 	<string name="p_updates_mod_version_title">System Mod Version</string>
 	<string name="p_updates_mod_version_summary">Set up which mod version do you want to receive updates of</string>
@@ -157,14 +161,23 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_notification_ringtone_title">Notification Ringtone</string>
 	<string name="p_notification_ringtone_summary">Choose a ringtone for CM Updater alerts</string>
 
-	<string name="p_update_file_url_screen_title">Update Server</string>
-	<string name="p_update_file_url_screen_summary">Change the Update Server</string>
+	<string name="p_update_file_url_screen_title">Rom Update Server</string>
+	<string name="p_update_file_url_screen_summary">Change the Rom Update Server</string>
 
-	<string name="p_update_file_url_def_title">Reset Update Server</string>
-	<string name="p_update_file_url_def_summary">Reset the location of the Update Server back to default</string>
+	<string name="p_update_file_url_def_title">Reset Rom Update Server</string>
+	<string name="p_update_file_url_def_summary">Reset the location of the Rom Update Server back to default</string>
 
 	<string name="p_update_file_url_qr_title">Scan Barcode</string>
-	<string name="p_update_file_url_qr_summary">Scan QR Code for Update File URL</string>
+	<string name="p_update_file_url_qr_summary">Scan QR Code for Rom Update File URL</string>
+
+	<string name="p_theme_file_url_screen_title">Theme Update Server</string>
+	<string name="p_theme_file_url_screen_summary">Change the Theme Update Server</string>
+
+	<string name="p_theme_file_url_def_title">Reset Theme Update Server</string>
+	<string name="p_theme_file_url_def_summary">Reset the location of the Theme Update Server back to default</string>
+
+	<string name="p_theme_file_url_qr_title">Scan Barcode</string>
+	<string name="p_theme_file_url_qr_summary">Scan QR Code for Theme Update File URL</string>
 
 	<string name="p_vibrate_title">Vibrate</string>
 	<string name="p_vibrate_summary">Vibrate on Notifications</string>
