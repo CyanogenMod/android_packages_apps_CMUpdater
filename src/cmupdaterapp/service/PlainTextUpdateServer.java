@@ -327,7 +327,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 			}
 			else
 			{
-				Log.d(TAG, String.format("Discarding Update %s %s", ui.name, ui.displayVersion));
+				Log.d(TAG, String.format("Discarding Rom %s %s", ui.name, ui.displayVersion));
 			}
 		}
 		return ret;
@@ -382,12 +382,12 @@ public class PlainTextUpdateServer implements IUpdateServer
 				}
 				else
 				{
-					Log.d(TAG, String.format("Discarding Update %s %s", ui.name, ui.displayVersion));
+					Log.d(TAG, String.format("Discarding Theme %s %s", ui.name, ui.displayVersion));
 				}
 			}
 			else
 			{
-				Log.d(TAG, String.format("Discarding Update %s %s. Invalid or no Themes installed", ui.name, ui.displayVersion));
+				Log.d(TAG, String.format("Discarding Theme %s %s. Invalid or no Themes installed", ui.name, ui.displayVersion));
 			}
 		}
 		return ret;
