@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.text.DateFormat;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -1102,7 +1101,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			showDowngrades = res.getString(R.string.false_string);
 		experimentalBuildstv.setText(MessageFormat.format(res.getString(R.string.p_display_allow_experimental_versions_title)+": {0}", allowExperimental));
 		showDowngradestv.setText(MessageFormat.format(res.getString(R.string.p_display_older_mod_versions_title)+": {0}", showDowngrades));
-		lastUpdateChecktv.setText(MessageFormat.format(res.getString(R.string.last_update_check_text)+": {0} {1}", DateFormat.getDateInstance().format(prefs.getLastUpdateCheck()), DateFormat.getTimeInstance().format(prefs.getLastUpdateCheck())));
+		lastUpdateChecktv.setText(res.getString(R.string.last_update_check_text) + ": " + prefs.getLastUpdateCheckString());
 		
 		//Existing Updates Layout
 		mdownloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);

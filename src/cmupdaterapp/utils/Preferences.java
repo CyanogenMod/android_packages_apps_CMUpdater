@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Date;
 
 import cmupdaterapp.ui.R;
@@ -93,6 +94,15 @@ public class Preferences
 	public Date getLastUpdateCheck()
 	{
 		return new Date(mPrefs.getLong(mRes.getString(R.string.p_last_update_check), 0));
+	}
+	
+	public String getLastUpdateCheckString()
+	{
+		Date d = getLastUpdateCheck();
+		if (d.getTime() == 0)
+			return mRes.getString(R.string.no_updatecheck_executed);
+		else
+			return DateFormat.getDateTimeInstance().format(d);
 	}
 	
 	public void setLastUpdateCheck(Date d)

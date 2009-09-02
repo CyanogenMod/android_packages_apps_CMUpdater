@@ -98,6 +98,8 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="changelog_button_theme_text">Changelog of selected Theme</string>
 
 	<string name="title_running">running</string>
+	
+	<string name="no_updatecheck_executed">No Updatecheck executed</string>
 
 	<!-- .service.* Strings -->
 	<string name="no_updates_found">No CM updates found</string>
