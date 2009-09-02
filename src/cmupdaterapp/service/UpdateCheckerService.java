@@ -124,7 +124,7 @@ public class UpdateCheckerService extends Service
         msg.arg1 = startId;
         msg.obj = intent.getExtras();
         mServiceHandler.sendMessage(msg);
-        Log.d(TAG, "Sending: arg1:" + msg.arg1 + " obj: " + msg.obj);
+        Log.d(TAG, "Sending: " + msg);
 	}
 	
 	private boolean isDataConnected()

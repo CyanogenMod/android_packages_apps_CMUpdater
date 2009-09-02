@@ -249,7 +249,7 @@ public class UpdateDownloaderService extends Service
 		Message msg = mServiceHandler.obtainMessage();
 		msg.arg1 = startId;
 		msg.obj = intent.getExtras();
-		Log.d(TAG, "Sending: arg1:" + msg.arg1 + " obj: " + msg.obj);
+		Log.d(TAG, "Sending: " + msg);
 		mServiceHandler.sendMessage(msg);
 	}
 
