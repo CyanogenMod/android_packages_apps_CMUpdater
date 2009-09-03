@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 
+import cmupdaterapp.service.ThemeInfo;
 import cmupdaterapp.ui.R;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -228,7 +229,7 @@ public class Preferences
 		if(!editor.commit()) Log.e(TAG, "Unable to write Theme File Path");
 	}
 	
-	public String[] getThemeInformations()
+	public ThemeInfo getThemeInformations()
 	{
 		File f = new File(getThemeFile());
 		if (f != null && f.exists() && f.canRead())
@@ -243,10 +244,21 @@ public class Preferences
 				//Empty File prevention
 				if(firstLine != null)
 				{
+					ThemeInfo t = new ThemeInfo();
+					if (firstLine.equals("*"))
+					{
+						t.name = "*";
+						Log.d(TAG, "Wildcard in themes.theme");
+						return t;
+					}
 					String[] Return = firstLine.split("\\|");
 					//Only return if there was a string like Hero|2.0.1
 					if (Return.length == 2)
-						return Return;
+					{
+						t.name = Return[0];
+						t.version = Return[1];
+						return t;
+					}
 				}
 			}
 			catch (FileNotFoundException e)
@@ -260,7 +272,7 @@ public class Preferences
 		}
 		else
 		{
-			Log.d(TAG, "No Theme File found. Probably no Theme installed, Theme Path not configured, or Bad Theme File");
+			Log.d(TAG, "No Theme File found. Using Wildcard for Theme Updates instead");
 		}
 		return null;
 	}
