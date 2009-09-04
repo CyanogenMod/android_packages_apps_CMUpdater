@@ -134,6 +134,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 
 	private ViewFlipper flipper;
 
+	private Preferences prefs;
 
 	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection()
 	{
@@ -648,7 +649,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		super.onCreate(savedInstanceState);
 
-		Preferences prefs = Preferences.getPreferences(this);
+		prefs = Preferences.getPreferences(this);
 		
 		//Sets the Title to Appname + Mod Version
 		setTitle(getResources().getString(R.string.app_name) + " " + getResources().getString(R.string.title_running) + " " + SysUtils.getReadableModVersion());
@@ -1044,6 +1045,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			mAvailableUpdates = availableUpdates;
 		}
 
+		//Theme Update File URL Set?
+		boolean ThemeUpdateUrlSet = prefs.ThemeUpdateUrlSet();
+		
 		setContentView(R.layout.main);
 		flipper = (ViewFlipper)findViewById(R.id.Flipper);
 		flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_in));
@@ -1142,6 +1146,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		TextView tvThemeDownloadText = (TextView) findViewById(R.id.available_themes_text);
 		LinearLayout stableExperimentalInfoThemes = (LinearLayout) findViewById(R.id.stable_experimental_description_container_themes);
 		Button btnThemechangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
+		TextView tvNoThemeUpdateServer = (TextView) findViewById(R.id.no_theme_update_server_configured);
 		
 		//No ROM Updates Found Layout
 		Button CheckNowUpdateChooserUpdates = (Button) findViewById(R.id.check_now_button_update_chooser_updates);
@@ -1208,7 +1213,20 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 
 		//Theme Layout
-		if(availableThemes != null && availableThemes.size() > 0)
+		//Update URL Set?
+		if (!ThemeUpdateUrlSet)
+		{
+			tvNoThemeUpdateServer.setVisibility(View.VISIBLE);
+			btnDownloadTheme.setVisibility(View.GONE);
+			mThemesSpinner.setVisibility(View.GONE);
+			tvThemeDownloadText.setVisibility(View.GONE);
+			stableExperimentalInfoThemes.setVisibility(View.GONE);
+			btnThemechangelogButton.setVisibility(View.GONE);
+			CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
+			CheckNowUpdateChooserThemes.setVisibility(View.GONE);
+		}
+		//Updates Found
+		else if(availableThemes != null && availableThemes.size() > 0)
 		{
 			btnDownloadTheme.setOnClickListener(mDownloadThemeButtonListener);
 			btnThemechangelogButton.setOnClickListener(mThemeChangelogButtonListener);
@@ -1222,6 +1240,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			mThemesSpinner.setAdapter(spAdapterThemes);
 
 		}
+		//No Updates Found
 		else
 		{
 			btnDownloadTheme.setVisibility(View.GONE);

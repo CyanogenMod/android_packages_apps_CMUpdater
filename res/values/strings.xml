@@ -100,6 +100,8 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="title_running">running</string>
 	
 	<string name="no_updatecheck_executed">No Updatecheck executed</string>
+	
+	<string name="no_theme_update_server_configured">No Theme Update Server configured.\nIf you want to use Theme Updates, go to Settings and configure a Update-Server</string>
 
 	<!-- .service.* Strings -->
 	<string name="no_updates_found">No CM updates found</string>
@@ -162,6 +164,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 
 	<string name="p_update_file_url_title">Rom Update Server</string>
 	<string name="p_update_file_url_summary">Change the Rom Update Server</string>
+	<string name="p_update_file_url_changed">Rom Update URL set back to default</string>
 
 	<string name="p_update_file_url_def_title">Reset Rom Update Server</string>
 	<string name="p_update_file_url_def_summary">Reset the location of the Rom Update Server back to default</string>
@@ -171,6 +174,8 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 
 	<string name="p_theme_file_url_title">Theme Update Server</string>
 	<string name="p_theme_file_url_summary">Change the Theme Update Server</string>
+	<string name="p_theme_file_url_changed">Theme Update URL set back to default</string>
+	
 
 	<string name="p_theme_file_url_def_title">Reset Theme Update Server</string>
 	<string name="p_theme_file_url_def_summary">Reset the location of the Theme Update Server back to default</string>

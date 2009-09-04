@@ -239,6 +239,14 @@ public class Preferences
 		if(!editor.commit()) Log.e(TAG, "Unable to write Theme File Path");
 	}
 	
+	public boolean ThemeUpdateUrlSet()
+	{
+		if(getThemeUpdateFileURL().equals(mRes.getString(R.string.conf_theme_server_url_def)))
+			return false;
+		else
+			return true;
+	}
+	
 	public ThemeInfo getThemeInformations()
 	{
 		File f = new File(getThemeFile());
