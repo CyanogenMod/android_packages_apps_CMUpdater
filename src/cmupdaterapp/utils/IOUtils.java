@@ -24,7 +24,6 @@ public class IOUtils
     
     public static boolean checkMD5(String md5, File updateFile) throws IOException
     {
-    	//String calculatedDigest = calculateMD5(updateFile, false);
     	String calculatedDigest = calculateMD5(updateFile);
     	
     	Log.d(TAG, "Calculated digest: " + calculatedDigest);
@@ -32,50 +31,6 @@ public class IOUtils
 		
 		return calculatedDigest.equalsIgnoreCase(md5);
 	}
-	
-//    public static String calculateMD5(File updateFile, boolean su) throws IOException
-//    {
-//    	String calculatedDigest;
-//    	Process process;
-//		if (su)
-//		{
-//			process = Runtime.getRuntime().exec("su");
-//	    	OutputStream os = process.getOutputStream();
-//			os.write((MD5_COMMAND + " " + updateFile.getAbsolutePath()).getBytes());
-//			os.flush();
-//		}
-//		else
-//		{
-//			process = Runtime.getRuntime().exec(new String[] { MD5_COMMAND, updateFile.getAbsolutePath() });
-//		}
-//		try
-//		{
-//			process.getOutputStream().close();
-//			BufferedReader br = new BufferedReader(new InputStreamReader(
-//					process.getInputStream()), 1024);
-//			calculatedDigest = br.readLine();
-//			if (calculatedDigest == null || calculatedDigest.length() < 32)
-//				throw new IOException("Returned String is not a MD5 sum: "
-//						+ calculatedDigest);
-//
-//			calculatedDigest = calculatedDigest.substring(0, 32);
-//		}
-//		finally
-//		{
-//			process.destroy();
-//		}
-//		try
-//		{
-//			process.waitFor();
-//			Log.d(TAG, MD5_COMMAND + " exit value:" + process.exitValue());
-//		}
-//		catch (InterruptedException e)
-//		{
-//			Log.e(TAG, "Exception while Calculating MD5", e);
-//		}
-//       	
-//    	return calculatedDigest;
-//	}
 
     public static String calculateMD5(File updateFile)
     {
@@ -137,7 +92,6 @@ public class IOUtils
 			File recovery = new File("/dev/mtd/mtd1");
 			if (recovery.exists())
 			{
-				//MD5 = IOUtils.calculateMD5(recovery, true);
 				MD5 = IOUtils.calculateMD5(recovery);
 				Log.d(TAG, "Recovery MD5: "+MD5);
 			}
