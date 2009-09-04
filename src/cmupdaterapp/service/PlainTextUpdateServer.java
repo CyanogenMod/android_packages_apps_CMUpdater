@@ -381,7 +381,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 					if (romMatches(ui, systemRom))
 					{
 						//Name matches or is *
-						if (WildcardUsed || (themeInfos.name != null && themeInfos.name != "" && ui.name.equalsIgnoreCase(themeInfos.name)))
+						if (WildcardUsed || showAllUpdatesTheme || (themeInfos.name != null && themeInfos.name != "" && ui.name.equalsIgnoreCase(themeInfos.name)))
 						{
 							//Version matches or name is *. If *, display all Versions
 							if(WildcardUsed || showAllUpdatesTheme || updateIsNewer(ui, mPreferences.convertVersionToIntArray(themeInfos.version), true))
