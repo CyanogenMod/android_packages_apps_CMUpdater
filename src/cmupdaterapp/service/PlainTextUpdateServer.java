@@ -36,8 +36,10 @@ public class PlainTextUpdateServer implements IUpdateServer
 	private int[] sysVersion;
 	private ThemeInfo themeInfos;
 	
-	private boolean allowExperimental;
-	private boolean showAllUpdates;
+	private boolean allowExperimentalRom;
+	private boolean showAllUpdatesRom;
+	private boolean allowExperimentalTheme;
+	private boolean showAllUpdatesTheme;
 	
 	private boolean WildcardUsed = false;
 	
@@ -68,8 +70,10 @@ public class PlainTextUpdateServer implements IUpdateServer
 		systemRom = SysUtils.getReadableModVersion();
 		sysVersion = SysUtils.getSystemModVersion();
 		themeInfos = mPreferences.getThemeInformations();
-		allowExperimental = mPreferences.allowExperimental();
-		showAllUpdates = mPreferences.showDowngrades();
+		allowExperimentalRom = mPreferences.allowExperimentalRom();
+		showAllUpdatesRom = mPreferences.showDowngradesRom();
+		allowExperimentalTheme = mPreferences.allowExperimentalTheme();
+		showAllUpdatesTheme = mPreferences.showDowngradesTheme();
 		
 		//If Wildcard is used or no themes.theme file present set the variable
 		if (themeInfos == null || themeInfos.name.equals("*"))
@@ -330,9 +334,9 @@ public class PlainTextUpdateServer implements IUpdateServer
 			{
 				if (boardMatches(ui, systemMod))
 				{
-					if(showAllUpdates || updateIsNewer(ui, sysVersion, true))
+					if(showAllUpdatesRom || updateIsNewer(ui, sysVersion, true))
 					{
-						if (branchMatches(ui, allowExperimental))
+						if (branchMatches(ui, allowExperimentalRom))
 						{
 							Log.d(TAG, "Adding Rom: " + ui.name + " Version: " + ui.displayVersion + " Filename: " + ui.fileName);
 							ret.add(ui);
@@ -380,10 +384,10 @@ public class PlainTextUpdateServer implements IUpdateServer
 						if (WildcardUsed || (themeInfos.name != null && themeInfos.name != "" && ui.name.equalsIgnoreCase(themeInfos.name)))
 						{
 							//Version matches or name is *. If *, display all Versions
-							if(WildcardUsed || showAllUpdates || updateIsNewer(ui, mPreferences.convertVersionToIntArray(themeInfos.version), true))
+							if(WildcardUsed || showAllUpdatesTheme || updateIsNewer(ui, mPreferences.convertVersionToIntArray(themeInfos.version), true))
 							{
 								//Branch matches
-								if (branchMatches(ui, allowExperimental))
+								if (branchMatches(ui, allowExperimentalTheme))
 								{
 									Log.d(TAG, "Adding Theme: " + ui.name + " Version: " + ui.displayVersion + " Filename: " + ui.fileName);
 									ret.add(ui);

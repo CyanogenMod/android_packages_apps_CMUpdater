@@ -9,7 +9,7 @@
    <string name="apply_unable_to_reboot_toast">Перезапуск в режим восстановки не удалась</string>
    <string name="apply_trying_to_get_root_access">Попытка получить административный доступ для перезапуска</string>
    
-   <string name="available_updates_text">Пожалуйста выберите прошивку:</string>
+   <string name="available_updates_text">Выбор Прошивки:</string>
    <string name="choose_available_update_text">Загрузить</string>
    <string name="no_updates_found_instructions">Обновлений Прошивок не найдено.\nНажмите \'Проверить\' для проверки наличия новых версий вручную</string>
    <string name="no_themes_found_instructions">Обновлений Тем не найдено.\nНажмите \'Проверить\' для проверки наличия новых версий вручную</string>
@@ -69,8 +69,8 @@
    
    <string name="toast_uninstall_old_Version">Необходимо удалить старую версию этой программы!</string>
    
-   <string name="stable_description"> = Стабильная</string>
-   <string name="experimental_description"> = Экспериментальная</string>
+   <string name="stable_description"> = Отлаженная</string>
+   <string name="experimental_description"> = Опытная</string>
    
    <string name="changelog_progress_title">Загрузка ...</string>
    <string name="changelog_progress_body">Загружается файл changelog.xml</string>
@@ -99,6 +99,8 @@
    
    <string name="title_running">работает</string>
    
+   <string name="no_updatecheck_executed">Проверка не начата</string>
+   
    <!-- .service.* Strings -->
    <string name="no_updates_found">Новых версий прошивки не найдено.</string>
    <string name="not_new_updates_found_ticker">Найдена новая версия!</string>
@@ -125,9 +127,9 @@
    <string name="download_info_speed">Скорость: </string>
    <string name="download_info_remaining_time">Осталось: </string>
    
-   <string name="confirm_delete_update_folder_dialog_message">Удалить Папку Загрузок?</string>
-   <string name="confirm_delete_update_folder_dialog_yes">Удалить все содержимое</string>
-   <string name="confirm_delete_update_folder_dialog_neutral">Удалить только избранное</string>
+   <string name="confirm_delete_update_folder_dialog_message">Удалить содержимое папки загрузок?</string>
+   <string name="confirm_delete_update_folder_dialog_yes">Всю Папку</string>
+   <string name="confirm_delete_update_folder_dialog_neutral">Отмеченное</string>
    <string name="confirm_delete_update_folder_dialog_no">Отменить</string>
    <string name="delete_single_update_success_message">{0} удален</string>
    
@@ -145,18 +147,7 @@
 	<string name="p_theme_file_url_title">Адрес Темы</string>
 	<string name="p_theme_file_url_summary">Изменить интернет адрес обновителя Тем</string>
 	<string name="p_theme_file_url_changed">Адрес обновителя Тем сброшен на заводской</string>
-   
-   <string name="p_updates_mod_version_title">Версия Системы</string>
-   <string name="p_updates_mod_version_summary">За какой весрией следить</string>
-   
-   <string name="p_display_older_mod_versions_title">Все Версии</string>
-   <string name="p_display_older_mod_versions_summary">Показавать все предыдущие весрии (даже старые)</string>
-   <string name="p_display_older_mod_versions_changed">Проверьте еще раз для обновления списка доступных версий</string>
-   
-   <string name="p_display_allow_experimental_versions_title">Экспериментальные</string>
-   <string name="p_display_allow_experimental_versions_summary">Следить за экспериментальными (не стабильными) версиями</string>
-   <string name="p_display_allow_experimental_versions_changed">Проверьте еще раз для обновления списка доступных версий</string>
-   
+
    <string name="p_do_nandroid_backup_title">Резервный Запас</string>
    <string name="p_do_nandroid_backup_summary">Сохранить резервный запас системы про помощи программы Nandroid перед обновлением</string>
    
@@ -187,13 +178,22 @@
    <string name="p_notifications_title">Уведомления</string>
    <string name="p_notifications_summary">Включить/Выключить Все Уведомления</string>
    
-   <string name="p_advanced_title">Дополнительные Настройки</string>
-   <string name="p_advanced_summary">Изменение настроек рекомендуется только высоко-техническим пользователям!</string>
+   <string name="p_advanced_title">Дополнительное</string>
+   <string name="p_advanced_summary">Изменять рекомендуется высоко техническим пользователям</string>
    
-   <string name="p_progress_update_frequency_title">Частота Обновления Уведомлений</string>
+   <string name="p_progress_update_frequency_title">Частота Уведомлений</string>
    <string name="p_progress_update_frequency_summary">Выше числа = Реже обновлять\nНиже числа = Чаще обновлять</string>
    
-   <string name="p_progress_update_freq_def_title">Сброс Частоты Обновления</string>
+   <string name="p_progress_update_freq_def_title">Сброс Частоты</string>
    <string name="p_progress_update_freq_def_summary">Сбросить частоту обновлений Уведомлений/Загрузки на заводскую</string>
    <string name="p_progress_update_freq_def_toast">Частота обновлений сброшена на заводскую</string>
+   
+   <string name="p_invalid_url">Введен неправильный адрес. Введите заново.</string>
+   
+   <string name="p_theme_file_title">Каталог themes.theme</string>
+   <string name="p_theme_file_summary">Изменить путь доступа к каталогу файла themes.theme</string>
+   
+   <string name="p_theme_file_def_title">Сброс themes.theme</string>
+   <string name="p_theme_file_def_summary">Сбросить путь доступа к файлу themes.theme на заводской</string>
+   <string name="p_theme_file_def_toast">Каталог themes.theme файла сброшен на заводской</string>
 </resources>

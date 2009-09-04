@@ -96,18 +96,7 @@ POR FAVOR REINCIE EM MODO DE RECUPERAÇÃO MANUALMENTE *ANTES* DE APLICAR A ACTU
     <string name="p_update_file_url_title">Servidor de actualizações</string>
     <string name="p_update_file_url_summary">Estabelecer o URL do ficheiro de actualização </string>
     <string name="p_update_file_url_changed">Estabelecer o URL de actualização para o  predefinido</string>
-    
-    <string name="p_updates_mod_version_title">Versão do Sistema Modificado</string>
-    <string name="p_updates_mod_version_summary">Escolher de que versão modificada prefere receber actualizações</string>
-    
-    <string name="p_display_older_mod_versions_title">Mostrar todas as actualizações</string>
-    <string name="p_display_older_mod_versions_summary"> Mostrar todas as actualizações, incluindo versões antigas</string>
-    <string name="p_display_older_mod_versions_changed">Por favor, verifique novamente por actualizações para renovar a lista de actualizações disponíveis</string>
-    
-    <string name="p_display_allow_experimental_versions_title">Versões Experimentais</string>
-    <string name="p_display_allow_experimental_versions_summary">Mostrar versões experimentais (não estáveis)</string>
-    <string name="p_display_allow_experimental_versions_changed"> Por favor, verifique novamente por actualizações para renovar a lista de actualizações disponíveis </string>
-    
+
     <string name="p_do_nandroid_backup_title">Cópia de segurança Nandroid</string>
     <string name="p_do_nandroid_backup_summary">Criar cópia de segurança Nandroid antes de aplicar a actualização?</string>
     

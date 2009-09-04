@@ -132,17 +132,6 @@
 	<string name="p_update_file_url_summary">Podaj adres serwera, z którego będą pobierane aktualizacje</string>
 	<string name="p_update_file_url_changed">Adres aktualizacji przywrócony do wartości domyślnej</string>
 
-	<string name="p_updates_mod_version_title">Rodzaje aktualizacji</string>
-	<string name="p_updates_mod_version_summary">Ustaw rodzaje aktualizacji jakich program ma szukać</string>
-
-	<string name="p_display_older_mod_versions_title">Wyświetlaj wszystkie aktualizacje</string>
-	<string name="p_display_older_mod_versions_summary">Wyświetlaj wszystkie aktualizacje, również starsze niż obecna</string>
-	<string name="p_display_older_mod_versions_changed">Proszę sprawdzić dostępność aktualizacji ponownie, aby zaktualizować listę dostępnych aktualizacji</string>
-
-	<string name="p_display_allow_experimental_versions_title">Wersje eksperymentalne</string>
-	<string name="p_display_allow_experimental_versions_summary">Wyświetlaj eksperymentalne (niestabilne) wersje</string>
-	<string name="p_display_allow_experimental_versions_changed">Proszę sprawdzić dostępność aktualizacji ponownie, aby zaktualizować listę dostępnych aktualizacji</string>
-
 	<string name="p_do_nandroid_backup_title">Nandroid Backup</string>
 	<string name="p_do_nandroid_backup_summary">Wykonać kopię systemu (Nandroid) przed instalacją aktualizacji?</string>
 

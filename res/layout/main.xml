@@ -137,28 +137,21 @@
 				    style="@style/TextAppearance.Button"
 				    android:drawableLeft="@drawable/check_now"/>
 				<TextView
-				    android:id="@+id/last_update_check"
+				    android:id="@+id/last_rom_update_check"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10px"
 					android:layout_marginRight="10px"
 					android:layout_gravity="bottom|right" />
 				<TextView
-			    	android:id="@+id/experimental_updates_textview"
+			    	android:id="@+id/experimental_rom_updates_textview"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10px"
 					android:layout_marginRight="10px"
 					android:layout_gravity="bottom|right" />
 				<TextView
-			    	android:id="@+id/show_downgrades_textview"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="10px"
-					android:layout_marginRight="10px"
-					android:layout_gravity="bottom|right" />
-				<TextView
-				    android:id="@+id/up_chooser_current_version"
+			    	android:id="@+id/show_rom_downgrades_textview"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10px"
@@ -301,6 +294,27 @@
 					android:layout_marginTop="20sp"
 				    style="@style/TextAppearance.Button"
 				    android:drawableLeft="@drawable/check_now"/>
+				<TextView
+				    android:id="@+id/last_theme_update_check"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10px"
+					android:layout_marginRight="10px"
+					android:layout_gravity="bottom|right" />
+				<TextView
+			    	android:id="@+id/experimental_theme_updates_textview"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10px"
+					android:layout_marginRight="10px"
+					android:layout_gravity="bottom|right" />
+				<TextView
+			    	android:id="@+id/show_theme_downgrades_textview"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10px"
+					android:layout_marginRight="10px"
+					android:layout_gravity="bottom|right" />
 			</LinearLayout>
 		</ScrollView>
 	</ViewFlipper>

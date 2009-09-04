@@ -79,16 +79,7 @@
     
     <string name="p_update_file_url_title">更新服务器</string>
     <string name="p_update_file_url_summary">设定更新服务器</string>
-    
-    <string name="p_updates_mod_version_title">ROM版本</string>
-    <string name="p_updates_mod_version_summary">设定你需要更新哪种ROM</string>
-    
-    <string name="p_display_older_mod_versions_title">显示全部更新</string>
-    <string name="p_display_older_mod_versions_summary">显示全部更新包，包含旧版本更新包</string>
-    
-    <string name="p_display_allow_experimental_versions_title">实验性更新</string>
-    <string name="p_display_allow_experimental_versions_summary">显示实验性的更新（不稳定）</string>
-    
+
     <string name="p_do_nandroid_backup_title">Nandroid备份</string>
     <string name="p_do_nandroid_backup_summary">是否在应用更新前创建Nandroid备份?</string>
     

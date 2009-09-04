@@ -86,15 +86,6 @@ STARTA OM I ÅTERSTÄLLNINGSLÄGE MANUELLT *INNAN* DU INSTALLERAR DENNA UPPDATER
     <string name="p_update_file_url_title">Uppdateringsserver</string>
     <string name="p_update_file_url_summary">Ange URL till uppdateringsfil</string>
 
-    <string name="p_updates_mod_version_title">Ange version</string>
-    <string name="p_updates_mod_version_summary">Ange för vilken version du vill söka efter uppdateringar</string>
-
-    <string name="p_display_older_mod_versions_title">Visa alla uppdateringar</string>
-    <string name="p_display_older_mod_versions_summary">Visa alla uppdateringar, inklusive äldre versioner</string>
-
-    <string name="p_display_allow_experimental_versions_title">Experimentella versioner</string>
-    <string name="p_display_allow_experimental_versions_summary">Visa experimentella uppdateringar (icke stabila)</string>
-
     <string name="p_do_nandroid_backup_title">Nandroid Backup</string>
     <string name="p_do_nandroid_backup_summary">Skapa Nandroid backup innan uppdatering?</string>
 

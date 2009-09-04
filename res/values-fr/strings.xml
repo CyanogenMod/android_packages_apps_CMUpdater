@@ -82,15 +82,6 @@
     <string name="p_update_file_url_title">Serveur de mises à jour</string>
     <string name="p_update_file_url_summary">Configurer l'URL du serveur de mise à jour</string>
 
-    <string name="p_updates_mod_version_title">Version du mod systeme</string>
-    <string name="p_updates_mod_version_summary">Configurer la version du mod systeme dont vous voulez les mises à jour</string>
-
-    <string name="p_display_older_mod_versions_title">Montrer toutes les versions</string>
-    <string name="p_display_older_mod_versions_summary">Afficher toutes les mises à jour, incluant les anciennes versions</string>
-
-    <string name="p_display_allow_experimental_versions_title">Versions experimentales</string>
-    <string name="p_display_allow_experimental_versions_summary">Montrer les mises à jour experimentales (non-stable)</string>
-
     <string name="p_do_nandroid_backup_title">Sauvergarde Nandroid</string>
     <string name="p_do_nandroid_backup_summary">Creer une sauvegarde Nandroid avant la mise à jour?</string>
 

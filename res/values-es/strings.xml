@@ -86,16 +86,7 @@
     
     <string name="p_update_file_url_title">Servidor de actualizaciones</string>
     <string name="p_update_file_url_summary">Establecer la URL del archivo de actualización</string>
-    
-    <string name="p_updates_mod_version_title">Version del MOD del sistema</string>
-    <string name="p_updates_mod_version_summary">Establecer de que version del mod quieres recibir actualizaciones</string>
-    
-    <string name="p_display_older_mod_versions_title">Mostrar todas las actualizaciones</string>
-    <string name="p_display_older_mod_versions_summary">Mostrar todas las actualizaciones, incluidas versiones anteriores</string>
-    
-    <string name="p_display_allow_experimental_versions_title">Builds experimentales</string>
-    <string name="p_display_allow_experimental_versions_summary">Mostrar actualizaciones experimentales (no estables)</string>
-    
+
     <string name="p_do_nandroid_backup_title">Nandroid Backup</string>
     <string name="p_do_nandroid_backup_summary">¿Crear un backup con Nandroid antes de aplicar la actualización?</string>
     

@@ -126,18 +126,7 @@ Wenn sie ein Backup erstellen wollen, booten sie bitte vorher manuell in den Rec
     <string name="p_update_file_url_title">Update Datei</string>
     <string name="p_update_file_url_summary">URL für die Metadatendatei einstellen</string>
     <string name="p_update_file_url_changed">Update URL zurückgesetzt</string>
-    
-    <string name="p_updates_mod_version_title">System Mod Version</string>
-    <string name="p_updates_mod_version_summary">Zu welcher mod version wollen sie Updates erhalten?</string>
-    
-    <string name="p_display_older_mod_versions_title">Downgrades anzeigen</string>
-    <string name="p_display_older_mod_versions_summary">Updates von älteren Versionen anzeigen (Nötig um Downzugraden)</string>
-    <string name="p_display_older_mod_versions_changed">Bitte erneut auf Updates prüfen, um die Liste der verfügbaren Updates zu aktualisieren</string>
-    
-    <string name="p_display_allow_experimental_versions_title">Entwickler Versionen</string>
-    <string name="p_display_allow_experimental_versions_summary">Entwickler Versionen anzeigen (non-stable)</string>
-    <string name="p_display_allow_experimental_versions_changed">Bitte erneut auf Updates prüfen, um die Liste der verfügbaren Updates zu aktualisieren</string>
-    
+ 
     <string name="p_do_nandroid_backup_title">Nandroid Backup</string>
     <string name="p_do_nandroid_backup_summary">Nandroid backup vor Update durchführen?</string>
     

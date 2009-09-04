@@ -90,17 +90,6 @@ ALS JE EEN BACKUP WILT MAKEN HERSTART DAN ZELF *HANDMATIG* IN DE RECOVERY CONSOL
 	<string name="p_update_file_url_summary">Stel de URL van de update file in</string>
 	<string name="p_update_file_url_changed">Stel de Update URL terug naar de standaard waarde</string>
 
-	<string name="p_updates_mod_version_title">System Mod Versie</string>
-	<string name="p_updates_mod_version_summary">Stel de mod versie in waarvoor je updates wilt ontvangen</string>
-
-	<string name="p_display_older_mod_versions_title">Alle Updates weergeven</string>
-	<string name="p_display_older_mod_versions_summary">Geef alle updates weer, inclusief oude versies</string>
-	<string name="p_display_older_mod_versions_changed">Controlleer voor nieuwe updates, om de lijst met beschikbare updates te vernieuwen</string>
-
-	<string name="p_display_allow_experimental_versions_title">Experimentele Builds</string>
-	<string name="p_display_allow_experimental_versions_summary">Geef alle updates weer die experimenteel zijn (niet-stabiel)</string>
-	<string name="p_display_allow_experimental_versions_changed">Controlleer voor nieuwe updates, om de lijst met beschikbare updates te vernieuwen</string>
-
 	<string name="p_do_nandroid_backup_title">Nandroid Backup</string>
 	<string name="p_do_nandroid_backup_summary">Wil je een Nandroid backup maken?</string>
 

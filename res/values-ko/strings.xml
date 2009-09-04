@@ -90,17 +90,6 @@
 	<string name="p_update_file_url_summary">업데이트 파일의 URL 을 설정하세요</string>
 	<string name="p_update_file_url_changed">업데이트 URL 설정 기본설정으로 돌리기</string>
 
-	<string name="p_updates_mod_version_title">시스템 버전</string>
-	<string name="p_updates_mod_version_summary">Set up which mod version do you want to receive updates of</string>
-
-	<string name="p_display_older_mod_versions_title">모든 업데이트 표시</string>
-	<string name="p_display_older_mod_versions_summary">구 버전을 포함한 모든 업데이트를 표시합니다.</string>
-	<string name="p_display_older_mod_versions_changed">사용가능한 업데이트 리스트를 업데이트 하기 위해 다시한번 업데이트를 확인 해 주세요</string>
-
-	<string name="p_display_allow_experimental_versions_title">실험용 빌드</string>
-	<string name="p_display_allow_experimental_versions_summary">실험용 빌드를 표시합니다. (non-stable)</string>
-	<string name="p_display_allow_experimental_versions_changed">사용가능한 업데이트 리스트를 업데이트 하기 위해 다시한번 업데이트를 확인 해 주세요</string>
-
 	<string name="p_do_nandroid_backup_title">Nandroid Backup</string>
 	<string name="p_do_nandroid_backup_summary">업데이트 전에 Nandroid backup을 하시겠습니까?</string>
 

@@ -1082,26 +1082,46 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).cancel(R.string.not_new_updates_found_title);
 		
 		Resources res = getResources();
-		TextView currentVersiontv = (TextView) findViewById(R.id.up_chooser_current_version);
-		TextView experimentalBuildstv = (TextView) findViewById(R.id.experimental_updates_textview);
-		TextView showDowngradestv = (TextView) findViewById(R.id.show_downgrades_textview);
-		TextView lastUpdateChecktv = (TextView) findViewById(R.id.last_update_check);
-		String pattern = res.getString(R.string.current_version_text);
+		TextView experimentalBuildsRomtv = (TextView) findViewById(R.id.experimental_rom_updates_textview);
+		TextView showDowngradesRomtv = (TextView) findViewById(R.id.show_rom_downgrades_textview);
+		TextView experimentalBuildsThemetv = (TextView) findViewById(R.id.experimental_theme_updates_textview);
+		TextView showDowngradesThemetv = (TextView) findViewById(R.id.show_theme_downgrades_textview);
+		TextView lastRomUpdateChecktv = (TextView) findViewById(R.id.last_rom_update_check);
+		TextView lastThemeUpdateChecktv = (TextView) findViewById(R.id.last_theme_update_check);
 		Preferences prefs = Preferences.getPreferences(this);
-		currentVersiontv.setText(MessageFormat.format(pattern, SysUtils.getReadableModVersion()));
-		String allowExperimental;
-		String showDowngrades;
-		if(prefs.allowExperimental())
-			allowExperimental = res.getString(R.string.true_string);
+		
+		//Experimental and All
+		String allowExperimentalRom;
+		String showDowngradesRom;
+		String allowExperimentalTheme;
+		String showDowngradesTheme;
+		
+		if(prefs.allowExperimentalRom())
+			allowExperimentalRom = res.getString(R.string.true_string);
 		else
-			allowExperimental = res.getString(R.string.false_string);
-		if(prefs.showDowngrades())
-			showDowngrades = res.getString(R.string.true_string);
+			allowExperimentalRom = res.getString(R.string.false_string);
+		
+		if(prefs.showDowngradesRom())
+			showDowngradesRom = res.getString(R.string.true_string);
 		else
-			showDowngrades = res.getString(R.string.false_string);
-		experimentalBuildstv.setText(MessageFormat.format(res.getString(R.string.p_display_allow_experimental_versions_title)+": {0}", allowExperimental));
-		showDowngradestv.setText(MessageFormat.format(res.getString(R.string.p_display_older_mod_versions_title)+": {0}", showDowngrades));
-		lastUpdateChecktv.setText(res.getString(R.string.last_update_check_text) + ": " + prefs.getLastUpdateCheckString());
+			showDowngradesRom = res.getString(R.string.false_string);
+		
+		if(prefs.allowExperimentalTheme())
+			allowExperimentalTheme = res.getString(R.string.true_string);
+		else
+			allowExperimentalTheme = res.getString(R.string.false_string);
+		
+		if(prefs.showDowngradesTheme())
+			showDowngradesTheme = res.getString(R.string.true_string);
+		else
+			showDowngradesTheme = res.getString(R.string.false_string);
+		
+		experimentalBuildsRomtv.setText(MessageFormat.format(res.getString(R.string.p_allow_experimental_rom_versions_title)+": {0}", allowExperimentalRom));
+		showDowngradesRomtv.setText(MessageFormat.format(res.getString(R.string.p_display_older_rom_versions_title)+": {0}", showDowngradesRom));
+		experimentalBuildsThemetv.setText(MessageFormat.format(res.getString(R.string.p_allow_experimental_theme_versions_title)+": {0}", allowExperimentalTheme));
+		showDowngradesThemetv.setText(MessageFormat.format(res.getString(R.string.p_display_older_theme_versions_title)+": {0}", showDowngradesTheme));
+		lastRomUpdateChecktv.setText(res.getString(R.string.last_update_check_text) + ": " + prefs.getLastUpdateCheckString());
+		lastThemeUpdateChecktv.setText(res.getString(R.string.last_update_check_text) + ": " + prefs.getLastUpdateCheckString());
 		
 		//Existing Updates Layout
 		mdownloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);

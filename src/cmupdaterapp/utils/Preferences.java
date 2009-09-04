@@ -123,9 +123,14 @@ public class Preferences
 		}
 	}
 	
-	public boolean showDowngrades()
+	public boolean showDowngradesRom()
 	{
-		return mPrefs.getBoolean(mRes.getString(R.string.p_display_older_mod_versions), Boolean.valueOf(mRes.getString(R.string.p_display_older_mod_versions_def_value)));
+		return mPrefs.getBoolean(mRes.getString(R.string.p_display_older_rom_versions), Boolean.valueOf(mRes.getString(R.string.p_display_older_rom_versions_def_value)));
+	}
+	
+	public boolean showDowngradesTheme()
+	{
+		return mPrefs.getBoolean(mRes.getString(R.string.p_display_older_theme_versions), Boolean.valueOf(mRes.getString(R.string.p_display_older_theme_versions_def_value)));
 	}
 	
 	public String getRomUpdateFileURL()
@@ -162,9 +167,14 @@ public class Preferences
 		if(!editor.commit()) Log.e(TAG, "Unable to write Ringtone URI");
 	}
 	
-	public boolean allowExperimental()
+	public boolean allowExperimentalRom()
 	{
-		return mPrefs.getBoolean(mRes.getString(R.string.p_display_allow_experimental_versions), Boolean.valueOf(mRes.getString(R.string.p_display_allow_experimental_versions_def_value)));
+		return mPrefs.getBoolean(mRes.getString(R.string.p_allow_experimental_rom_versions), Boolean.valueOf(mRes.getString(R.string.p_allow_experimental_rom_versions_def_value)));
+	}
+	
+	public boolean allowExperimentalTheme()
+	{
+		return mPrefs.getBoolean(mRes.getString(R.string.p_allow_experimental_theme_versions), Boolean.valueOf(mRes.getString(R.string.p_allow_experimental_theme_versions_def_value)));
 	}
 	
 	public boolean doNandroidBackup()

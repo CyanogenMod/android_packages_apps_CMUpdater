@@ -172,24 +172,46 @@ public class ConfigActivity extends PreferenceActivity
 			}
 		});
 		
-		//Display All Updates
-		pref = (Preference) findPreference(res.getString(R.string.p_display_older_mod_versions));
+		//Display All Rom Updates
+		pref = (Preference) findPreference(res.getString(R.string.p_display_older_rom_versions));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			public boolean onPreferenceChange(Preference preference, Object newValue)
 			{
-				Toast.makeText(getBaseContext(), R.string.p_display_older_mod_versions_changed, Toast.LENGTH_LONG).show();
+				Toast.makeText(getBaseContext(), R.string.p_display_older_rom_versions_changed, Toast.LENGTH_LONG).show();
 				return true;
 			}
 		});
 		
-		//Show Experimental
-		pref = (Preference) findPreference(res.getString(R.string.p_display_allow_experimental_versions));
+		//Show Experimental Roms
+		pref = (Preference) findPreference(res.getString(R.string.p_allow_experimental_rom_versions));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			public boolean onPreferenceChange(Preference preference, Object newValue)
 			{
-				Toast.makeText(getBaseContext(), R.string.p_display_allow_experimental_versions_changed, Toast.LENGTH_LONG).show();
+				Toast.makeText(getBaseContext(), R.string.p_allow_experimental_rom_versions_changed, Toast.LENGTH_LONG).show();
+				return true;
+			}
+		});
+		
+		//Display All Theme Updates
+		pref = (Preference) findPreference(res.getString(R.string.p_display_older_theme_versions));
+		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
+		{
+			public boolean onPreferenceChange(Preference preference, Object newValue)
+			{
+				Toast.makeText(getBaseContext(), R.string.p_display_older_theme_versions_changed, Toast.LENGTH_LONG).show();
+				return true;
+			}
+		});
+		
+		//Show Experimental Themes
+		pref = (Preference) findPreference(res.getString(R.string.p_allow_experimental_theme_versions));
+		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
+		{
+			public boolean onPreferenceChange(Preference preference, Object newValue)
+			{
+				Toast.makeText(getBaseContext(), R.string.p_allow_experimental_theme_versions_changed, Toast.LENGTH_LONG).show();
 				return true;
 			}
 		});

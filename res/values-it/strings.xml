@@ -89,17 +89,6 @@
 	<string name="p_update_file_url_summary">Imposta l'URL del file di aggiornamento</string>
 	<string name="p_update_file_url_changed">Imposta a default l'URL del file di aggiornamento</string>
 
-	<string name="p_updates_mod_version_title">System Mod Version</string>
-	<string name="p_updates_mod_version_summary">Imposta per quale tipo di versione vuoi ricevere gli aggiornamenti</string>
-
-	<string name="p_display_older_mod_versions_title">Mostra tutti gli Aggiornamenti</string>
-	<string name="p_display_older_mod_versions_summary">Mostra tutti gli aggiornamenti, comprese le versionei precedenti</string>
-	<string name="p_display_older_mod_versions_changed">Perfavore controlla ancora gli aggiornamenti, per aggiornare la lista degli aggiornamenti disponibili</string>
-
-	<string name="p_display_allow_experimental_versions_title">Experimental Builds</string>
-	<string name="p_display_allow_experimental_versions_summary">Mostra gli aggiornamenti che sono sperimentali (non-stabili)</string>
-	<string name="p_display_allow_experimental_versions_changed">Perfavore controlla ancora gli aggiornamenti, per aggiornare la lista degli aggiornamenti disponibili</string>
-
 	<string name="p_do_nandroid_backup_title">Nandroid Backup</string>
 	<string name="p_do_nandroid_backup_summary">Creare un Nandroid backup prima di applicare l'aggiornamento?</string>
 
