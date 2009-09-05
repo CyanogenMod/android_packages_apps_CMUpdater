@@ -69,8 +69,8 @@
    
    <string name="toast_uninstall_old_Version">Необходимо удалить старую версию этой программы!</string>
    
-   <string name="stable_description"> = Отлаженная</string>
-   <string name="experimental_description"> = Опытная</string>
+   <string name="stable_description">=Отлаженная</string>
+   <string name="experimental_description">=Опытная</string>
    
    <string name="changelog_progress_title">Загрузка ...</string>
    <string name="changelog_progress_body">Загружается файл changelog.xml</string>
@@ -78,28 +78,30 @@
    <string name="changelog_button_text">Изменения Обновления</string>
    <string name="no_changelog_found">Файл изменений не найден</string>
    
-   <string name="changelog_title_rom">Изменения в Прошивке</string>
-   <string name="changelog_title_app">Изменения в Обновителе</string>
-   <string name="changelog_title_theme">Изменения в Теме</string>
+   <string name="changelog_title_rom">Изменения Прошивки</string>
+   <string name="changelog_title_app">Изменения Обновителя</string>
+   <string name="changelog_title_theme">Изменения Темы</string>
    
    <string name="true_string">да</string>
    <string name="false_string">нет</string>
    
    <string name="md5_check_cancelled">Проверка MD5 Отменена</string>
    
-   <string name="button_available_updates">Доступные</string>
+   <string name="button_available_updates">Прошивки</string>
+   <string name="button_available_themes">Темы</string>
    <string name="button_existing_updates">Загруженные</string>
     
    <string name="no_existing_updates_found">Загруженных Обновлений Не Найдено</string>
    
-   <string name="button_available_themes">Доступные Темы</string>
-   <string name="available_themes_text">Выбор Темы для Загрузки:</string>
-   <string name="choose_available_theme_text">Загрузить</string>
-   <string name="changelog_button_theme_text">Изменения выделенной Темы</string>
+	<string name="available_themes_text">Выбор Темы:</string>
+	<string name="choose_available_theme_text">Загрузить</string>
+	<string name="changelog_button_theme_text">Изменения выбранной Темы</string>
    
    <string name="title_running">работает</string>
    
    <string name="no_updatecheck_executed">Проверка не начата</string>
+	
+	<string name="no_theme_update_server_configured">Адрес обновлений Темы не настроен.\nДля обновления тем необходимо настроить интернет адрес обновителя.</string>
    
    <!-- .service.* Strings -->
    <string name="no_updates_found">Новых версий прошивки не найдено.</string>
@@ -140,37 +142,47 @@
    <string name="p_update_check_freq_title">Частота Проверок</string>
    <string name="p_update_check_freq_summary">Как часто проверять наличие новых версий</string>
    
-	<string name="p_update_file_url_title">Адрес Прошивки</string>
-	<string name="p_update_file_url_summary">Изменить интернет адрес обновителя Прошивок</string>
-	<string name="p_update_file_url_changed">Адрес обновителя Прошивок сброшен на заводской</string>
+   <string name="p_display_older_rom_versions_title">Все Версии Прошивки</string>
+   <string name="p_display_older_rom_versions_summary">Показывать все версии Прошивки, включая предыдущие</string>
+   <string name="p_display_older_rom_versions_changed">Необходимо проверить наличие новых версий Прошивки еще раз</string>
    
-	<string name="p_theme_file_url_title">Адрес Темы</string>
-	<string name="p_theme_file_url_summary">Изменить интернет адрес обновителя Тем</string>
-	<string name="p_theme_file_url_changed">Адрес обновителя Тем сброшен на заводской</string>
-
+   <string name="p_allow_experimental_rom_versions_title">Опытные Версии Прошивки</string>
+   <string name="p_allow_experimental_rom_versions_summary">Показывать опытные (не отлаженные) версии Прошивки</string>
+   <string name="p_allow_experimental_rom_versions_changed">Необходимо проверить наличие новых версий Прошивки еще раз</string>
+   
+   <string name="p_display_older_theme_versions_title">Все Версии Темы</string>
+   <string name="p_display_older_theme_versions_summary">Показывать все версии Темы, включая предыдущие</string>
+   <string name="p_display_older_theme_versions_changed">Необходимо проверить наличие новых версий Темы еще раз</string>
+   
+   <string name="p_allow_experimental_theme_versions_title">Опытные Версии Темы</string>
+   <string name="p_allow_experimental_theme_versions_summary">Показывать опытные (не отлаженные) версии Темы</string>
+   <string name="p_allow_experimental_theme_versions_changed">Необходимо проверить наличие новых версий Темы еще раз</string>
+   
    <string name="p_do_nandroid_backup_title">Резервный Запас</string>
    <string name="p_do_nandroid_backup_summary">Сохранить резервный запас системы про помощи программы Nandroid перед обновлением</string>
    
    <string name="p_notification_ringtone_title">Звонок Уведомления</string>
    <string name="p_notification_ringtone_summary">Выбрать звонок уведомления о новой версии</string>
    
-	<string name="p_update_file_url_screen_title">Адрес Прошивки</string>
-	<string name="p_update_file_url_screen_summary">Изменить интернет адрес обновителя Прошивок</string>
-   
-	<string name="p_update_file_url_def_title">Сброс Адреса Прошивки</string>
-	<string name="p_update_file_url_def_summary">Сбросить интернет адрес обновитеня Прошивок на заводской</string>
+   <string name="p_update_file_url_title">Адрес Обновителя Прошивки</string>
+   <string name="p_update_file_url_summary">Установить интернет адрес обновителя Прошивки</string>
+   <string name="p_update_file_url_changed">Адрес обновителя Прошивки сброшен на заводской</string>
+      
+   <string name="p_update_file_url_def_title">Сброс Адреса Прошивки</string>
+   <string name="p_update_file_url_def_summary">Сбросить интернет адрес обновитеня Прошивки на заводской</string>
    
    <string name="p_update_file_url_qr_title">Сканировка Кода</string>
-	<string name="p_update_file_url_qr_summary">Сканировать штрих-код содержащий адрес обновителя Прошивок</string>
+   <string name="p_update_file_url_qr_summary">Сканировать штрих-код содержащий адрес обновителя Прошивок</string>
    
-	<string name="p_theme_file_url_screen_title">Адрес Темы</string>
-	<string name="p_theme_file_url_screen_summary">Изменить интернет адрес обновителя Тем</string>
+   <string name="p_theme_file_url_title">Адрес Обновителя Темы</string>
+   <string name="p_theme_file_url_summary">Установить интернет адрес обновителя Темы</string>
+   <string name="p_theme_file_url_changed">Адрес обновителя Темы сброшен на заводской</string>
    
-	<string name="p_theme_file_url_def_title">Сброс Адреса Темы</string>
-	<string name="p_theme_file_url_def_summary">Сбросить интернет адрес обновитеня Тем на заводской</string>
+   <string name="p_theme_file_url_def_title">Сброс Адреса Темы</string>
+   <string name="p_theme_file_url_def_summary">Сбросить интернет адрес обновитеня Тем на заводской</string>
    
-	<string name="p_theme_file_url_qr_title">Сканировка Кода</string>
-	<string name="p_theme_file_url_qr_summary">Сканировать штрих-код содержащий адрес обновителя Тем</string>
+   <string name="p_theme_file_url_qr_title">Сканировка Кода</string>
+   <string name="p_theme_file_url_qr_summary">Сканировать штрих-код содержащий адрес обновителя Тем</string>
    
    <string name="p_vibrate_title">Вибрация</string>
    <string name="p_vibrate_summary">Вибрировать телефон при уведомлениях</string>
@@ -193,4 +205,13 @@
    <string name="p_theme_file_def_title">Сброс themes.theme</string>
    <string name="p_theme_file_def_summary">Сбросить путь доступа к файлу themes.theme на заводской</string>
    <string name="p_theme_file_def_toast">Каталог themes.theme файла сброшен на заводской</string>
+   
+   <string name="p_notifications_screen_title">Уведомления</string>
+   <string name="p_notifications_screen_summary">Установить настройки Уведомлений</string>
+   
+   <string name="p_rom_screen_title">Настройки Прошивок</string>
+   <string name="p_rom_screen_summary">Установить настройки обновления Прошивок</string>
+   
+   <string name="p_theme_screen_title">Настройки Тем</string>
+   <string name="p_theme_screen_summary">Установить настройки обновления Тем</string>
 </resources>
