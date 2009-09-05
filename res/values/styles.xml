@@ -2,7 +2,6 @@
 <resources>
     <style name="TextAppearance" parent="android:TextAppearance">
     </style>
-
     <style name="TextAppearance.Text">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@android:color/white</item>
@@ -18,5 +17,9 @@
     <style name="TextAppearance.Button" >
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@android:color/black</item>
+    </style>
+    <style name="Theme.cmupdater" parent="android:Theme">
+        <item name="android:windowBackground">@drawable/background</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 </resources>

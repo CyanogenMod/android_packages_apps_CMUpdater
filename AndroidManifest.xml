@@ -4,15 +4,24 @@
 
 	<uses-sdk android:minSdkVersion="3"/>
 
-	<application android:label="@string/app_name" android:icon="@drawable/icon">
-		<meta-data android:name="com.a0soft.gphone.aTrackDog.webURL"
-						android:value="http://code.google.com/p/cyanogen-updater" />
-		<meta-data android:name="com.a0soft.gphone.aTrackDog.dlURL"
-						android:value="http://code.google.com/p/cyanogen-updater/downloads/list" />
-		<!-- <meta-data android:name="com.a0soft.gphone.aTrackDog.testVersion"
-						android:value="3" /> -->
+	<application
+		android:label="@string/app_name"
+		android:icon="@drawable/icon">
+		<meta-data
+			android:name="com.a0soft.gphone.aTrackDog.webURL"
+			android:value="http://code.google.com/p/cyanogen-updater" />
+		<meta-data
+			android:name="com.a0soft.gphone.aTrackDog.dlURL"
+			android:value="http://code.google.com/p/cyanogen-updater/downloads/list" />
+		<!--<meta-data
+			android:name="com.a0soft.gphone.aTrackDog.testVersion"
+			android:value="3" />-->
 
-		<activity android:name="cmupdaterapp.ui.UpdateProcessInfo" android:launchMode="singleTask" android:configChanges="orientation|keyboardHidden">
+		<activity
+			android:name="cmupdaterapp.ui.UpdateProcessInfo"
+			android:launchMode="singleTask"
+			android:configChanges="orientation|keyboardHidden"
+			android:theme="@style/Theme.cmupdater">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />

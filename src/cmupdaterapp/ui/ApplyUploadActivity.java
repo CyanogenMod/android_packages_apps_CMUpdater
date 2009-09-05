@@ -8,13 +8,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import cmupdaterapp.service.UpdateInfo;
@@ -138,12 +136,5 @@ public class ApplyUploadActivity extends Activity
 		mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
 		Log.d(TAG, "Filename selected to flash: " + mUpdateInfo.fileName);
-		//Set the correct wallpaper
-		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
-		int Orientation = res.getConfiguration().orientation;
-		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
-			l.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
-		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
-			l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 	}
 }

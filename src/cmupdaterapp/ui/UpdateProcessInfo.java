@@ -790,14 +790,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		if (s!=null)
 		{
 			if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-				s.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
+				s.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 			else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
 				s.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 		}
 		else if (l!=null)
 		{
 			if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-				l.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
+				l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 			else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
 				l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 		}
@@ -1010,8 +1010,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			Log.e(TAG, "Unable to get Filename", e);
 		}
 		
-		Resources res = getResources();
-		
 		mProgressBar = (ProgressBar) findViewById(R.id.download_progress_bar);
 		mDownloadedBytesTextView = (TextView) findViewById(R.id.bytes_downloaded_text_view);
 
@@ -1027,14 +1025,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		if(mFileName != null)
 			mDownloadFilenameTextView.setText(mFileName);
 		((Button)findViewById(R.id.cancel_download_buton)).setOnClickListener(mCancelDownloadListener);
-		
-		//Set the correct wallpaper
-		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
-		int Orientation = res.getConfiguration().orientation;
-		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
-			l.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
-		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
-			l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 	}
 
 	@Override
@@ -1159,14 +1149,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		TextView CheckNowUpdateChooserTextThemes = (TextView) findViewById(R.id.check_now_update_chooser_text_themes);
 		CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
 		CheckNowUpdateChooserThemes.setVisibility(View.GONE);
-		
-		//Set the correct wallpaper
-		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
-		int Orientation = res.getConfiguration().orientation;
-		if(Orientation == Configuration.ORIENTATION_LANDSCAPE)
-			l.setBackgroundDrawable(res.getDrawable(R.drawable.background_landscape));
-		else if(Orientation == Configuration.ORIENTATION_PORTRAIT)
-			l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
 		
 		//Sets the Theme and Rom Variables
 		List<UpdateInfo> availableRoms = null;
