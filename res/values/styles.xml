@@ -20,6 +20,6 @@
     </style>
     <style name="Theme.cmupdater" parent="android:Theme">
         <item name="android:windowBackground">@drawable/background</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowNoTitle">false</item>
     </style>
 </resources>
