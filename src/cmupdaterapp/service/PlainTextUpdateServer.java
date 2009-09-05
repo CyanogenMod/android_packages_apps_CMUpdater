@@ -74,6 +74,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		showAllUpdatesRom = mPreferences.showDowngradesRom();
 		allowExperimentalTheme = mPreferences.allowExperimentalTheme();
 		showAllUpdatesTheme = mPreferences.showDowngradesTheme();
+		boolean ThemeUpdateUrlSet = mPreferences.ThemeUpdateUrlSet();
 		
 		//If Wildcard is used or no themes.theme file present set the variable
 		if (themeInfos == null || themeInfos.name.equals("*"))
@@ -106,25 +107,28 @@ public class PlainTextUpdateServer implements IUpdateServer
 		}
 		
 		//Get the actual Theme Updateserver URL
-		try
+		if(ThemeUpdateUrlSet)
 		{
-			URI ThemeUpdateServerUri = URI.create(mPreferences.getThemeUpdateFileURL());
-			HttpUriRequest themeReq = new HttpGet(ThemeUpdateServerUri);
-			themeReq.addHeader("Cache-Control", "no-cache");
-			HttpResponse themeResponse = themeHttpClient.execute(themeReq);
-			int themeServerResponse = themeResponse.getStatusLine().getStatusCode();
-			if (themeServerResponse != 200)
+			try
 			{
-				Log.e(TAG, "Server returned status code for Themes " + themeServerResponse);
+				URI ThemeUpdateServerUri = URI.create(mPreferences.getThemeUpdateFileURL());
+				HttpUriRequest themeReq = new HttpGet(ThemeUpdateServerUri);
+				themeReq.addHeader("Cache-Control", "no-cache");
+				HttpResponse themeResponse = themeHttpClient.execute(themeReq);
+				int themeServerResponse = themeResponse.getStatusLine().getStatusCode();
+				if (themeServerResponse != 200)
+				{
+					Log.e(TAG, "Server returned status code for Themes " + themeServerResponse);
+					themeException = true;
+				}
+				if(!themeException)
+					themeResponseEntity = themeResponse.getEntity();
+			}
+			catch (IllegalArgumentException e)
+			{
+				Log.d(TAG, "Theme Update URI wrong: " + mPreferences.getThemeUpdateFileURL());
 				themeException = true;
 			}
-			if(!themeException)
-				themeResponseEntity = themeResponse.getEntity();
-		}
-		catch (IllegalArgumentException e)
-		{
-			Log.d(TAG, "Theme Update URI wrong: " + mPreferences.getThemeUpdateFileURL());
-			themeException = true;
 		}
 		
 		try
@@ -146,7 +150,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 			}
 			else
 				Log.d(TAG, "There was an Exception on Downloading the Rom JSON File");
-			if (!themeException)
+			if (!themeException && ThemeUpdateUrlSet)
 			{
 				//Read the Theme Infos
 				BufferedReader themeLineReader = new BufferedReader(new InputStreamReader(themeResponseEntity.getContent()),2 * 1024);
@@ -166,9 +170,9 @@ public class PlainTextUpdateServer implements IUpdateServer
 		}
 		finally
 		{
-			if (!romException)
+			if (romResponseEntity != null)
 				romResponseEntity.consumeContent();
-			if (!themeException)
+			if (themeResponseEntity != null)
 				themeResponseEntity.consumeContent();
 		}
 		
