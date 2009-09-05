@@ -55,7 +55,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -784,23 +783,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
-		ScrollView s = (ScrollView) findViewById(R.id.mainScroll);
 		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
 		Resources res = getResources();
-		if (s!=null)
-		{
-			if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-				s.setBackgroundDrawable(res.getDrawable(R.drawable.background));
-			else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
-				s.setBackgroundDrawable(res.getDrawable(R.drawable.background));
-		}
-		else if (l!=null)
-		{
-			if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-				l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
-			else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
-				l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
-		}
+		if (l!=null)
+			l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
         super.onConfigurationChanged(newConfig); 
         Log.i(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
     }
