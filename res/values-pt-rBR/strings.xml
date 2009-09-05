@@ -153,9 +153,6 @@ POR FAVOR REINCIE EM MODO DE RECUPERAÇÃO MANUALMENTE *ANTES* DE APLICAR A ATUA
 	<string name="p_notifications_title">Notoficações</string>
 	<string name="p_notifications_summary">Habilitar/Desabilitar Notificações</string>
 
-	<string name="p_advanced_title">Propriedades Avançadas</string>
-	<string name="p_advanced_summary">Apenas mude estas configurações se você souber o que está fazendo!</string>
-
 	<string name="p_progress_update_frequency_title">Frequencia de Atualização do Progresso</string>
 	<string name="p_progress_update_frequency_summary">Valores Altos --> Menos Atualização\nValores Baixos --> Mais Atualização</string>
 

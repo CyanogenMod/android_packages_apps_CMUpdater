@@ -144,7 +144,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_display_older_rom_versions_summary">Display all Rom updates, including old versions</string>
 	<string name="p_display_older_rom_versions_changed">Please check for updates again, to update the List of available updates</string>
 
-	<string name="p_allow_experimental_rom_versions_title">Experimental Builds</string>
+	<string name="p_allow_experimental_rom_versions_title">Display Experimental Roms</string>
 	<string name="p_allow_experimental_rom_versions_summary">Display Rom updates that are Experimental (non-stable)</string>
 	<string name="p_allow_experimental_rom_versions_changed">Please check for updates again, to update the List of available updates</string>
 
@@ -152,7 +152,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_display_older_theme_versions_summary">Display all Theme updates, including old versions</string>
 	<string name="p_display_older_theme_versions_changed">Please check for updates again, to update the List of available updates</string>
 
-	<string name="p_allow_experimental_theme_versions_title">Experimental Builds</string>
+	<string name="p_allow_experimental_theme_versions_title">Display Experimental Themes</string>
 	<string name="p_allow_experimental_theme_versions_summary">Display Theme updates that are Experimental (non-stable)</string>
 	<string name="p_allow_experimental_theme_versions_changed">Please check for updates again, to update the List of available updates</string>
 
@@ -188,9 +188,6 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 
 	<string name="p_notifications_title">Notifications</string>
 	<string name="p_notifications_summary">Enable/Disable Notifications</string>
-
-	<string name="p_advanced_title">Advanced Properties</string>
-	<string name="p_advanced_summary">Only change this Properties if you know what you do!</string>
 
 	<string name="p_progress_update_frequency_title">Progress Update Frequency</string>
 	<string name="p_progress_update_frequency_summary">Higher Values --> Less updating\nLower Values --> More updating</string>

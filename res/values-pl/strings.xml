@@ -153,9 +153,6 @@
 	<string name="p_notifications_title">Powiadomienia</string>
 	<string name="p_notifications_summary">Włącz/wyłącz powiadomienia</string>
 
-	<string name="p_advanced_title">Ustawienia zaawansowane</string>
-	<string name="p_advanced_summary">Zmieniaj te ustawienia tylko jeśli wiesz co robisz!</string>
-
 	<string name="p_progress_update_frequency_title">Częstotliwość aktualizacji paska postępu</string>
 	<string name="p_progress_update_frequency_summary">Wyższe wartości --> Więcej aktualizacji\nNiższe wartości --> Mniej aktualizacji</string>
 

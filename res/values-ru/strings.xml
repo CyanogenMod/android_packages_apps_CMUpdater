@@ -178,9 +178,6 @@
    <string name="p_notifications_title">Уведомления</string>
    <string name="p_notifications_summary">Включить/Выключить Все Уведомления</string>
    
-   <string name="p_advanced_title">Дополнительное</string>
-   <string name="p_advanced_summary">Изменять рекомендуется высоко техническим пользователям</string>
-   
    <string name="p_progress_update_frequency_title">Частота Уведомлений</string>
    <string name="p_progress_update_frequency_summary">Выше числа = Реже обновлять\nНиже числа = Чаще обновлять</string>
    

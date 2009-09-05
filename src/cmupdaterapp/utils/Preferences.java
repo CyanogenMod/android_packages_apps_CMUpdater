@@ -241,7 +241,7 @@ public class Preferences
 	
 	public boolean ThemeUpdateUrlSet()
 	{
-		if(getThemeUpdateFileURL().equals(mRes.getString(R.string.conf_theme_server_url_def)))
+		if(getThemeUpdateFileURL().equals(""))
 			return false;
 		else
 			return true;

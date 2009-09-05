@@ -148,9 +148,6 @@ Wenn sie ein Backup erstellen wollen, booten sie bitte vorher manuell in den Rec
 	<string name="p_notifications_title">Benachrichtigungen</string>
 	<string name="p_notifications_summary">Benachrichtigungen ein/ausschalten</string>
 
-	<string name="p_advanced_title">Erweiterte Einstellungen</string>
-	<string name="p_advanced_summary">Nur ändern, wenn auch die Folgen bewusst sind!</string>
-
 	<string name="p_progress_update_frequency_title">Fortschritts Update Intervall</string>
 	<string name="p_progress_update_frequency_summary">Hoher Wert --> Weniger updates\nNiedriger Wert --> Mehr updates</string>
 
