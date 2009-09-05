@@ -6,44 +6,36 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:gravity="center_horizontal">
-	<LinearLayout
-		android:orientation="vertical"
+	<TableLayout
+		android:orientation="horizontal"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:gravity="center_horizontal">
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:gravity="center_horizontal">
+		android:gravity="center_horizontal"
+		android:stretchColumns="*">
+		<TableRow>
 			<Button
 				android:id="@+id/button_available_updates"
-				android:layout_width="wrap_content"
+				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:text="@string/button_available_updates"
 				android:layout_marginTop="20sp"
 				style="@style/TextAppearance.Button"/>
 			<Button
 				android:id="@+id/button_available_themes"
-				android:layout_width="wrap_content"
+				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:text="@string/button_available_themes"
 				android:layout_marginTop="20sp"
 				style="@style/TextAppearance.Button"/>	
-		</LinearLayout>
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:gravity="center_horizontal">
 			<Button
 				android:id="@+id/button_existing_updates"
-				android:layout_width="wrap_content"
+				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:text="@string/button_existing_updates"
+				android:layout_marginTop="20sp"
 				style="@style/TextAppearance.Button"/>
-		</LinearLayout>
-	</LinearLayout>
+		</TableRow>
+	</TableLayout>
 	<ViewFlipper
 		android:id="@+id/Flipper"
 		android:layout_width="fill_parent"

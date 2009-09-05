@@ -87,12 +87,12 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	
 	<string name="md5_check_cancelled">MD5 Check was Cancelled</string>
 	
-	<string name="button_available_updates">Available Roms</string>
-	<string name="button_existing_updates">Existing Updates</string>
+	<string name="button_available_updates">Roms</string>
+	<string name="button_available_themes">Themes</string>
+	<string name="button_existing_updates">Existing</string>
 	
 	<string name="no_existing_updates_found">No Existing Updates found</string>
 
-	<string name="button_available_themes">Available Themes</string>
 	<string name="available_themes_text">Please select the Theme to download:</string>
 	<string name="choose_available_theme_text">Download</string>
 	<string name="changelog_button_theme_text">Changelog of selected Theme</string>
