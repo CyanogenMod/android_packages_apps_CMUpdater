@@ -18,8 +18,8 @@
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
-    <style name="Theme.cmupdater" parent="android:Theme">
-        <item name="android:windowBackground">@drawable/background</item>
+    <style name="Theme.loading" parent="android:Theme">
+        <item name="android:windowBackground">@drawable/loading</item>
         <item name="android:windowNoTitle">false</item>
     </style>
 </resources>

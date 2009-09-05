@@ -21,7 +21,7 @@
 			android:name="cmupdaterapp.ui.UpdateProcessInfo"
 			android:launchMode="singleTask"
 			android:configChanges="orientation|keyboardHidden"
-			android:theme="@style/Theme.cmupdater">
+			android:theme="@style/Theme.loading">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
