@@ -236,13 +236,29 @@ public class ConfigActivity extends PreferenceActivity
 						if (RomBarcodeRequested)
 						{
 							Log.d(TAG, "Setting Rom Update File to " + result);
-							prefs.setRomUpdateFileURL(result);
+							if(URLUtil.isValidUrl(result))
+							{
+								prefs.setRomUpdateFileURL(result);
+							}
+							else
+							{
+								Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
+								Log.d(TAG, "Entered Rom Update URL not valid: " + result);
+							}
 							Toast.makeText(getBaseContext(), "Rom Update File URL: " + result, Toast.LENGTH_SHORT).show();
 						}
 						else if (ThemeBarcodeRequested)
 						{
 							Log.d(TAG, "Setting Theme Update File to " + result);
-							prefs.setThemeUpdateFileURL(result);
+							if(URLUtil.isValidUrl(result))
+							{
+								prefs.setThemeUpdateFileURL(result);
+							}
+							else
+							{
+								Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
+								Log.d(TAG, "Entered Theme Update URL not valid: " + result);
+							}
 							Toast.makeText(getBaseContext(), "Theme Update File URL: " + result, Toast.LENGTH_SHORT).show();
 						}
 						RomBarcodeRequested = false;
