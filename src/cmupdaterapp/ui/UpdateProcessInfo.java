@@ -134,6 +134,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	private ViewFlipper flipper;
 
 	private Preferences prefs;
+	private Resources res;
 
 	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection()
 	{
@@ -647,8 +648,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
 		prefs = Preferences.getPreferences(this);
+		res = getResources();
+		setWallpaper();
 		
 		//Sets the Title to Appname + Mod Version
 		setTitle(getResources().getString(R.string.app_name) + " " + getResources().getString(R.string.title_running) + " " + SysUtils.getReadableModVersion());
@@ -783,10 +785,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
-		LinearLayout l = (LinearLayout) findViewById(R.id.mainLinear);
-		Resources res = getResources();
-		if (l!=null)
-			l.setBackgroundDrawable(res.getDrawable(R.drawable.background));
+		setWallpaper();
         super.onConfigurationChanged(newConfig); 
         Log.i(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
     }
@@ -1624,6 +1623,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			Log.e(TAG, "Exception while trying to uninstall old Versions of the App", e);
 			return false;
 		}
+	}
+	
+	private void setWallpaper()
+	{
+		getWindow().setBackgroundDrawable(res.getDrawable(R.drawable.background));
 	}
 }
 
