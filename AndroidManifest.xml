@@ -32,7 +32,9 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name="cmupdaterapp.ui.ConfigActivity" />
+		<activity
+			android:name="cmupdaterapp.ui.ConfigActivity"
+			android:configChanges="orientation|keyboardHidden" />
 		<activity android:name="cmupdaterapp.ui.ApplyUploadActivity" />
 		<receiver android:name="cmupdaterapp.utils.StartupReceiver">
 			<intent-filter>
