@@ -1469,7 +1469,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	private boolean deleteOldUpdates()
 	{
 		boolean success = false;
-		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory() && Preferences.getPreferences(this).getUpdateFolder() != "" && Preferences.getPreferences(this).getUpdateFolder() != "/")
+		//updateFolder: Foldername
+		//mUpdateFolder: Foldername with fullpath of SDCARD
+		String updateFolder = prefs.getUpdateFolder();
+		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory() && updateFolder != "" && updateFolder != "/")
 		{
 			deleteDir(mUpdateFolder);
 			mUpdateFolder.mkdir();
@@ -1482,7 +1485,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			success = false;
 			Toast.makeText(this, R.string.delete_updates_noFolder_message, Toast.LENGTH_LONG).show();
 		}
-		else if(Preferences.getPreferences(this).getUpdateFolder() == "" || Preferences.getPreferences(this).getUpdateFolder() == "/")
+		else if(updateFolder == "" || updateFolder == "/")
 		{
 			success = false;
 			Toast.makeText(this, R.string.delete_updates_root_folder_message, Toast.LENGTH_LONG).show();
