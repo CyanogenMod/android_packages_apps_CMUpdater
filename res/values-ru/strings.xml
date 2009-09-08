@@ -100,8 +100,10 @@
    <string name="title_running">работает</string>
    
    <string name="no_updatecheck_executed">Проверка не начата</string>
-	
-	<string name="no_theme_update_server_configured">Адрес обновлений Темы не настроен.\nДля обновления тем необходимо настроить интернет адрес обновителя.</string>
+   
+   <string name="no_theme_update_server_configured">Адрес обновлений Тем не настроен.\nУстановите интернет адрес обновителя Тем в настройках.</string>
+   
+   <string name="delete_updates_root_folder_message">Удаление корневого каталога запрещено\nНеобходимо удалить файлы по отдельности</string>
    
    <!-- .service.* Strings -->
    <string name="no_updates_found">Новых версий прошивки не найдено.</string>
@@ -214,4 +216,17 @@
    
    <string name="p_theme_screen_title">Настройки Тем</string>
    <string name="p_theme_screen_summary">Установить настройки обновления Тем</string>
+   
+   <string name="p_barcode_scan_failure">Ошибка при сканировке штрих-кода</string>
+   
+   <string name="p_advanced_screen_title">Дополнительные</string>
+   <string name="p_advanced_screen_summary">Дополнительные настройки</string>
+   
+   <string name="p_update_folder_title">Каталог Загружений</string>
+   <string name="p_update_folder_summary">Папка хранения загруженныx файлов\nПустое поле = корень SD</string>
+   
+   <string name="p_update_folder_def_title">Сброс Каталога</string>
+   <string name="p_update_folder_def_summary">Сбросить каталог загружений на заводской</string>
+   <string name="p_update_folder_def_toast">Каталог загружений сброшен на заводской</string>
+   <string name="p_update_folder_error">Ошибка при установке каталога загружений</string>
 </resources>
