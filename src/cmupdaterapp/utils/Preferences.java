@@ -15,6 +15,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -199,11 +200,28 @@ public class Preferences
 		return mPrefs.getString(mRes.getString(R.string.p_update_folder), mRes.getString(R.string.conf_update_folder));
 	}
 	
-	public void setUpdateFolder(String folder)
+	public boolean setUpdateFolder(String folder)
 	{
-		Editor editor = mPrefs.edit();
-		editor.putString(mRes.getString(R.string.p_update_folder), folder);
-		if(!editor.commit()) Log.e(TAG, "Unable to write Update Folder Path");
+		File f = new File(Environment.getExternalStorageDirectory() + "/" + folder);
+		if (f.isFile())
+			return false;
+		if (!f.exists())
+			f.mkdirs();
+		if (f.exists() && f.isDirectory())
+		{
+			Editor editor = mPrefs.edit();
+			editor.putString(mRes.getString(R.string.p_update_folder), folder);
+			if(!editor.commit())
+			{
+				Log.e(TAG, "Unable to write Update Folder Path");
+				return false;
+			}
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public int getProgressUpdateFreq()

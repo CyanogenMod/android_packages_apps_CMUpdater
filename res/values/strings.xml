@@ -227,4 +227,5 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_update_folder_def_title">Reset Update Folder</string>
 	<string name="p_update_folder_def_summary">Set the update Folder back to default</string>
 	<string name="p_update_folder_def_toast">Update Folder set back to default</string>
+	<string name="p_update_folder_error">Error on Setting the UpdateFolder</string>
 </resources>

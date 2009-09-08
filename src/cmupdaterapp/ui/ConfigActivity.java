@@ -126,9 +126,16 @@ public class ConfigActivity extends PreferenceActivity
 		{
 			public boolean onPreferenceClick(Preference preference)
 			{
-				prefs.setUpdateFolder(res.getString(R.string.conf_update_folder));
-				Toast.makeText(getBaseContext(), R.string.p_update_folder_def_toast, Toast.LENGTH_LONG).show();
-				Log.d(TAG, "UpdateFolder set back to default: " + prefs.getUpdateFolder());
+				if(prefs.setUpdateFolder(res.getString(R.string.conf_update_folder)))
+				{
+					Toast.makeText(getBaseContext(), R.string.p_update_folder_def_toast, Toast.LENGTH_LONG).show();
+					Log.d(TAG, "UpdateFolder set back to default: " + prefs.getUpdateFolder());
+				}
+				else
+				{
+					Toast.makeText(getBaseContext(), R.string.p_update_folder_error, Toast.LENGTH_LONG).show();
+					Log.d(TAG, "Error on Setting UpdateFolder: " + prefs.getUpdateFolder());
+				}
 				ConfigActivity.this.finish();
 				return true;
 			}
@@ -226,6 +233,26 @@ public class ConfigActivity extends PreferenceActivity
 			public boolean onPreferenceChange(Preference preference, Object newValue)
 			{
 				Toast.makeText(getBaseContext(), R.string.p_allow_experimental_theme_versions_changed, Toast.LENGTH_LONG).show();
+				return true;
+			}
+		});
+		
+		//Change Update Folder
+		pref = (Preference) findPreference(res.getString(R.string.p_update_folder));
+		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
+		{
+			public boolean onPreferenceChange(Preference preference, Object newValue)
+			{
+				if(prefs.setUpdateFolder((String)newValue))
+				{
+					Log.d(TAG, "UpdateFolder set to: " + prefs.getUpdateFolder());
+				}
+				else
+				{
+					Toast.makeText(getBaseContext(), R.string.p_update_folder_error, Toast.LENGTH_LONG).show();
+					Log.d(TAG, "Error on Setting UpdateFolder: " + prefs.getUpdateFolder());
+				}
+				ConfigActivity.this.finish();
 				return true;
 			}
 		});

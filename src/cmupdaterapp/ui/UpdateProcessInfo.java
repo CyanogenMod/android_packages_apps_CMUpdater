@@ -756,6 +756,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		Log.d(TAG, "onResume called");
 		super.onResume();
+		mfilenames = null;
 		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
 		FilenameFilter f = new UpdateFilter(".zip");
 		File[] files = mUpdateFolder.listFiles(f);
@@ -1072,7 +1073,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		TextView showDowngradesThemetv = (TextView) findViewById(R.id.show_theme_downgrades_textview);
 		TextView lastRomUpdateChecktv = (TextView) findViewById(R.id.last_rom_update_check);
 		TextView lastThemeUpdateChecktv = (TextView) findViewById(R.id.last_theme_update_check);
-		Preferences prefs = Preferences.getPreferences(this);
 		
 		//Experimental and All
 		String allowExperimentalRom;
