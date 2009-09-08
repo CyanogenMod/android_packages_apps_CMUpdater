@@ -222,7 +222,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_advanced_screen_summary">Set Advanced Settings</string>
 	
 	<string name="p_update_folder_title">Update Folder</string>
-	<string name="p_update_folder_summary">Set the update Folder\nLeave blank for root-Directory</string>
+	<string name="p_update_folder_summary">Set the update Folder\nSet blank for root-Directory</string>
 	
 	<string name="p_update_folder_def_title">Reset Update Folder</string>
 	<string name="p_update_folder_def_summary">Set the update Folder back to default</string>
