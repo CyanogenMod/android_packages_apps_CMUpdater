@@ -65,7 +65,7 @@ public class IOUtils
     		byte[] md5sum = digest.digest();
     		BigInteger bigInt = new BigInteger(1, md5sum);
     		String output = bigInt.toString(16);
-    		//Fill to 33 chars
+    		//Fill to 32 chars
     		output = String.format("%32s", output).replace(' ', '0');
     		return output;
     	}
