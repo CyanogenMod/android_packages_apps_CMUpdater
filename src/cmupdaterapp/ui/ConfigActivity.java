@@ -261,6 +261,12 @@ public class ConfigActivity extends PreferenceActivity
 								Log.d(TAG, "Entered Theme Update URL not valid: " + result);
 							}
 						}
+						else
+						{
+							//Something wrong here. Barcodescan requested but no Variables set
+							Toast.makeText(getBaseContext(), R.string.p_barcode_scan_failure, Toast.LENGTH_LONG).show();
+							Log.d(TAG, "Something wrong here. Barcodescan requested but no Variables set");
+						}
 						RomBarcodeRequested = false;
 						ThemeBarcodeRequested = false;
 						ConfigActivity.this.finish();

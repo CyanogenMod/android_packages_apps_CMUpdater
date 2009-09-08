@@ -213,4 +213,6 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	
 	<string name="p_theme_screen_title">Theme Update Settings</string>
 	<string name="p_theme_screen_summary">Set Settings for Theme Updates</string>
+	
+	<string name="p_barcode_scan_failure">There was an error while scanning the Barcode</string>
 </resources>
