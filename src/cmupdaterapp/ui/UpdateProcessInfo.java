@@ -645,7 +645,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	};
 
 	@Override
-	public void onCreate(Bundle savedInstanceState)
+	protected void onCreate(Bundle savedInstanceState)
 	{
 		Log.d(TAG, "onCreate called");
 		super.onCreate(savedInstanceState);
@@ -681,9 +681,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		mUpdateDownloaderServiceIntent = new Intent(this, UpdateDownloaderService.class);
 	}
 
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onStart()
-	 */
 	@Override
 	protected void onStart()
 	{
@@ -709,7 +706,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			Log.w(TAG, "Unable to restore activity status", e);
 		}
-		
+	}
+
+	@Override
+	protected void onResume()
+	{
+		Log.d(TAG, "onResume called");
+		super.onResume();
 		Intent UpdateIntent = getIntent();
 		if (UpdateIntent != null)
 		{
@@ -749,13 +752,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			Log.w(TAG, "Intent is NULL");
 		}
-	}
-
-	@Override
-	public void onResume()
-	{
-		Log.d(TAG, "onResume called");
-		super.onResume();
+		
 		mfilenames = null;
 		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
 		FilenameFilter f = new UpdateFilter(".zip");
@@ -797,12 +794,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
         Log.i(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
     }
 	
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onStop()
-	 */
 	@Override
 	protected void onStop()
 	{
+		Log.d(TAG, "onStop called");
 		super.onStop();
 		try
 		{
