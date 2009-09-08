@@ -103,6 +103,8 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	
 	<string name="no_theme_update_server_configured">No Theme Update Server configured.\nIf you want to use Theme Updates, go to Settings and configure a Update-Server</string>
 
+	<string name="delete_updates_root_folder_message">You can not delete the Root Folder\nPlease delete the Updates one by one</string>
+
 	<!-- .service.* Strings -->
 	<string name="no_updates_found">No CM updates found</string>
 	<string name="not_new_updates_found_ticker">New CM updates found!</string>
@@ -215,4 +217,14 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_theme_screen_summary">Set Settings for Theme Updates</string>
 	
 	<string name="p_barcode_scan_failure">There was an error while scanning the Barcode</string>
+	
+	<string name="p_advanced_screen_title">Advanced Settings</string>
+	<string name="p_advanced_screen_summary">Set Advanced Settings</string>
+	
+	<string name="p_update_folder_title">Update Folder</string>
+	<string name="p_update_folder_summary">Set the update Folder\nLeave blank for root-Directory</string>
+	
+	<string name="p_update_folder_def_title">Reset Update Folder</string>
+	<string name="p_update_folder_def_summary">Set the update Folder back to default</string>
+	<string name="p_update_folder_def_toast">Update Folder set back to default</string>
 </resources>

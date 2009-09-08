@@ -195,7 +195,15 @@ public class Preferences
 	 
 	public String getUpdateFolder()
 	{
-		return mRes.getString(R.string.conf_update_folder);
+		Log.d(TAG, "UpdateFolder: "+ mPrefs.getString(mRes.getString(R.string.p_update_folder), mRes.getString(R.string.conf_update_folder)));
+		return mPrefs.getString(mRes.getString(R.string.p_update_folder), mRes.getString(R.string.conf_update_folder));
+	}
+	
+	public void setUpdateFolder(String folder)
+	{
+		Editor editor = mPrefs.edit();
+		editor.putString(mRes.getString(R.string.p_update_folder), folder);
+		if(!editor.commit()) Log.e(TAG, "Unable to write Update Folder Path");
 	}
 	
 	public int getProgressUpdateFreq()
@@ -246,7 +254,7 @@ public class Preferences
 		else
 			return true;
 	}
-	
+
 	public ThemeInfo getThemeInformations()
 	{
 		File f = new File(getThemeFile());

@@ -413,6 +413,7 @@ public class UpdateDownloaderService extends Service
 		List<URI> updateMirrors = updateInfo.updateFileUris;
 		int size = updateMirrors.size();
 		int start = mRandom.nextInt(size);
+		Log.d(TAG, "Mirrorcount: " + size);
 		URI updateURI;
 		//For every Mirror
 		for(int i = 0; i < size; i++)
@@ -421,7 +422,8 @@ public class UpdateDownloaderService extends Service
 			{
 				updateURI = updateMirrors.get((start + i)% size);
 				mMirrorName = updateURI.getHost();
-	
+				Log.d(TAG, "Mirrorname: " + mMirrorName);
+				
 				mFileName = updateInfo.fileName; 
 				if (null == mFileName || mFileName.length() < 1)
 				{
@@ -610,6 +612,7 @@ public class UpdateDownloaderService extends Service
 				fos.flush();
 				fos.close();
 				is.close();
+				Log.d(TAG, "Download finished");
 			}
 			catch(IOException e)
 			{
@@ -714,6 +717,7 @@ public class UpdateDownloaderService extends Service
 		
 		if(downloadedUpdate == null)
 		{
+			Log.d(TAG, "Downloaded Update was NULL");
 			DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
 			mHandlerThread.interrupt();
 			//Go to the App with a download error

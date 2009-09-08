@@ -120,6 +120,20 @@ public class ConfigActivity extends PreferenceActivity
 			}
 		});
 
+		//Reset UpdateFolder
+		pref = (Preference) findPreference(res.getString(R.string.p_update_folder_def));
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
+		{
+			public boolean onPreferenceClick(Preference preference)
+			{
+				prefs.setUpdateFolder(res.getString(R.string.conf_update_folder));
+				Toast.makeText(getBaseContext(), R.string.p_update_folder_def_toast, Toast.LENGTH_LONG).show();
+				Log.d(TAG, "UpdateFolder set back to default: " + prefs.getUpdateFolder());
+				ConfigActivity.this.finish();
+				return true;
+			}
+		});
+		
 		//URL Validation checkers
 		pref = (Preference) findPreference(res.getString(R.string.p_update_file_url));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()

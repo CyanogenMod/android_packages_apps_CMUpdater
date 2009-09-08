@@ -24,7 +24,19 @@ public class IOUtils
     
     public static boolean checkMD5(String md5, File updateFile) throws IOException
     {
+    	if (md5 == null || md5 == "" || updateFile == null)
+    	{
+    		Log.d(TAG, "md5 String NULL or UpdateFile NULL");
+    		return false;
+    	}
+    	
     	String calculatedDigest = calculateMD5(updateFile);
+    	
+    	if(calculatedDigest == null)
+    	{
+    		Log.d(TAG, "calculatedDigest NULL");
+    		return false;
+    	}
     	
     	Log.d(TAG, "Calculated digest: " + calculatedDigest);
 		Log.d(TAG, "Provided digest: " + md5);

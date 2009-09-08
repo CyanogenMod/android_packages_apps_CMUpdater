@@ -54,6 +54,8 @@
 	<string name="p_allow_experimental_rom_versions_def_value">false</string>
 	<string name="p_display_older_theme_versions_def_value">false</string>
 	<string name="p_allow_experimental_theme_versions_def_value">false</string>
+	<string name="p_update_folder">prefUpdateFolder</string>
+	<string name="p_update_folder_def">prefUpdateFolderDef</string>
 
 	<!-- About dialog -->
 	<string-array name="about_authors">

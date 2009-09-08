@@ -35,17 +35,6 @@
 				android:summary="@string/p_vibrate_summary"
 				android:defaultValue="@string/p_vibrate_def_value"
 				android:dependency="@string/p_notifications" />
-			<ListPreference
-				android:key="@string/p_progress_update_frequency"
-				android:title="@string/p_progress_update_frequency_title"
-				android:summary="@string/p_progress_update_frequency_summary"
-				android:defaultValue="@string/p_progress_update_frequency_def"
-				android:entryValues="@array/progress_update_freq"
-				android:entries="@array/progress_update_freq" />
-			<Preference
-				android:key="@string/p_progress_update_freq_def"
-				android:title="@string/p_progress_update_freq_def_title"
-				android:summary="@string/p_progress_update_freq_def_summary" />
 		</PreferenceCategory>
 	</PreferenceScreen>
 	<!-- Nandroid Backup -->
@@ -130,6 +119,36 @@
 				android:key="@string/p_theme_file_def"
 				android:title="@string/p_theme_file_def_title"
 				android:summary="@string/p_theme_file_def_summary" />
+		</PreferenceCategory>
+	</PreferenceScreen>
+	<!-- Advanced Properties -->
+	<PreferenceScreen
+		android:title="@string/p_advanced_screen_title"
+		android:summary="@string/p_advanced_screen_summary" >
+		<PreferenceCategory
+			android:title="@string/p_advanced_screen_title" >
+			<EditTextPreference
+				android:key="@string/p_update_folder"
+				android:title="@string/p_update_folder_title"
+				android:summary="@string/p_update_folder_summary"
+				android:dialogTitle="@string/p_update_folder_title"
+				android:defaultValue="@string/conf_update_folder"
+				android:singleLine="false" />
+			<Preference
+				android:key="@string/p_update_folder_def"
+				android:title="@string/p_update_folder_def_title"
+				android:summary="@string/p_update_folder_def_summary" />
+			<ListPreference
+				android:key="@string/p_progress_update_frequency"
+				android:title="@string/p_progress_update_frequency_title"
+				android:summary="@string/p_progress_update_frequency_summary"
+				android:defaultValue="@string/p_progress_update_frequency_def"
+				android:entryValues="@array/progress_update_freq"
+				android:entries="@array/progress_update_freq" />
+			<Preference
+				android:key="@string/p_progress_update_freq_def"
+				android:title="@string/p_progress_update_freq_def_title"
+				android:summary="@string/p_progress_update_freq_def_summary" />
 		</PreferenceCategory>
 	</PreferenceScreen>
 </PreferenceScreen>

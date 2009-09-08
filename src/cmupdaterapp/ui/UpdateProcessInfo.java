@@ -379,9 +379,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					public void onClick(DialogInterface dialog, int which)
 					{
 						//Delete Updates here
-						deleteOldUpdates();
 						//Set the Filenames to null, so the Spinner will be empty
-						mfilenames = null;
+						if(deleteOldUpdates())
+							mfilenames = null;
 						//If Updates are cached or Present, reload the View
 						if(mAvailableUpdates != null)
 						{
@@ -647,6 +647,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
+		Log.d(TAG, "onCreate called");
 		super.onCreate(savedInstanceState);
 		prefs = Preferences.getPreferences(this);
 		res = getResources();
@@ -677,8 +678,6 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 
 		mUpdateServer = new PlainTextUpdateServer(this);
 
-		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
-
 		mUpdateDownloaderServiceIntent = new Intent(this, UpdateDownloaderService.class);
 	}
 
@@ -688,6 +687,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	@Override
 	protected void onStart()
 	{
+		Log.d(TAG, "onStart called");
 		super.onStart();
 		
 		//Delete any older Versions, because of the changed Signing Key
@@ -749,8 +749,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			Log.w(TAG, "Intent is NULL");
 		}
-		
-		//Outside the if to prevent a empty spinnercontrol
+	}
+
+	@Override
+	public void onResume()
+	{
+		Log.d(TAG, "onResume called");
+		super.onResume();
+		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
 		FilenameFilter f = new UpdateFilter(".zip");
 		File[] files = mUpdateFolder.listFiles(f);
 		//If Folder Exists and Updates are present(with md5files)
@@ -767,6 +773,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
             Collections.sort(mfilenames, Collections.reverseOrder()); 
 		}
 		files = null;
+		UpdateDownloaderService.setUpdateProcessInfo(UpdateProcessInfo.this);
 		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
 		{
 			switchToDownloadingLayout(mUpdateDownloaderService.getCurrentUpdate());
@@ -779,9 +786,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			switchToUpdateChooserLayout(null);
 		}
-		UpdateDownloaderService.setUpdateProcessInfo(UpdateProcessInfo.this);
 	}
-
+	
 	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
@@ -1463,7 +1469,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	private boolean deleteOldUpdates()
 	{
 		boolean success = false;
-		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory())
+		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory() && Preferences.getPreferences(this).getUpdateFolder() != "" && Preferences.getPreferences(this).getUpdateFolder() != "/")
 		{
 			deleteDir(mUpdateFolder);
 			mUpdateFolder.mkdir();
@@ -1473,10 +1479,17 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 		else if (!mUpdateFolder.exists())
 		{
+			success = false;
 			Toast.makeText(this, R.string.delete_updates_noFolder_message, Toast.LENGTH_LONG).show();
+		}
+		else if(Preferences.getPreferences(this).getUpdateFolder() == "" || Preferences.getPreferences(this).getUpdateFolder() == "/")
+		{
+			success = false;
+			Toast.makeText(this, R.string.delete_updates_root_folder_message, Toast.LENGTH_LONG).show();
 		}
 		else
 		{
+			success = false;
 			Toast.makeText(this, R.string.delete_updates_failure_message, Toast.LENGTH_LONG).show();
 		}
 		return success;
