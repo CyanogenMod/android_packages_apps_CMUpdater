@@ -85,10 +85,21 @@ POR FAVOR REINCIE EM MODO DE RECUPERAÇÃO MANUALMENTE *ANTES* DE APLICAR A ATUA
 
 	<string name="md5_check_cancelled">A checagem deMD5 foi Cancelada</string>
 
-	<string name="button_available_updates">Atualizações Disponíveis</string>
-	<string name="button_existing_updates">Atualizações Existentes</string>
+	<string name="button_available_updates">Roms</string>
+	<string name="button_available_themes">Temas</string>
+	<string name="button_existing_updates">Existentes</string>
+	
+	<string name="no_existing_updates_found">Nenhuma Atualização Existe Encontrada</string>
 
-	<string name="no_existing_updates_found">Nenhuma Atualização Existente encontrada</string>
+	<string name="available_themes_text">Por favor, selecione o Tema a ser transferido:</string>
+	<string name="choose_available_theme_text">Transferir</string>
+	<string name="changelog_button_theme_text">Changelog do Tema selecionado</string>
+
+	<string name="title_running">rodando</string>
+	
+	<string name="no_updatecheck_executed">Nenhum Updatecheck executadoNo Updatecheck executed</string>
+	
+	<string name="no_theme_update_server_configured">Nenhum Servidor de Atualização de Temas configurado.\nSe você quiser utilizar Atualizações de Temas, vá em opções e configure o \'Update=Server\'</string>
     
     <!-- .service.* Strings -->
     <string name="no_updates_found">Nenhuma atualização encontrada.</string>
@@ -159,4 +170,24 @@ POR FAVOR REINCIE EM MODO DE RECUPERAÇÃO MANUALMENTE *ANTES* DE APLICAR A ATUA
 	<string name="p_progress_update_freq_def_title">Resetar a Frequência de Atualizações</string>
 	<string name="p_progress_update_freq_def_summary">Resetar a Frequência de Atualização do DialogoDeDownload/BarraDeNotificação</string>
 	<string name="p_progress_update_freq_def_toast">Resetar a Frequência de Atualização do Progresso de volta para o Padrão</string>
+
+	<string name="p_invalid_url">A URL digitada não é válida! Tente de novo.Entered URL is not valid! Please try again.</string>
+	
+	<string name="p_theme_file_title">Caminho do themes.theme</string>
+	<string name="p_theme_file_summary">Mudar o Caminho do Arquivo themes.theme</string>
+	
+	<string name="p_theme_file_def_title">Resetar o arquivo themes.theme</string>
+	<string name="p_theme_file_def_summary">Resetar o arquivo themes.theme para o padrão</string>
+	<string name="p_theme_file_def_toast">themes.theme mudado para o padrão</string>
+	
+	<string name="p_notifications_screen_title">Notificações</string>
+	<string name="p_notifications_screen_summary">Mudar as Configurações de Notificações</string>
+	
+	<string name="p_rom_screen_title">Configurações de Update de Rom</string>
+	<string name="p_rom_screen_summary">Mudar as Configurações de Update de Rom</string>
+	
+	<string name="p_theme_screen_title">Configurações de Update de Temas</string>
+	<string name="p_theme_screen_summary">Mudar as Configurações de Update de Temas</string>
+	
+	<string name="p_barcode_scan_failure">Ouve um erro ao tentar escanear o Código de Barras</string>
 </resources>
