@@ -13,7 +13,6 @@
 	<!-- Config Strings -->
 	<string name="conf_update_server_url_def">http://cyanogen-updater.googlecode.com/files/update_file.json</string>
 	<string name="conf_theme_server_url_def"></string>
-	<string name="conf_about_url">http://code.google.com/p/cyanogen-updater/</string>
 	<string name="conf_update_folder">cm-updates</string>
 	<string name="conf_theme_version_file_def">/system/framework/themes.theme</string>
 	<string name="conf_changelog_url">http://cyanogen-updater.googlecode.com/files/changelog.xml</string>
@@ -21,42 +20,42 @@
 	<string name="not_new_updates_found_body">{0,choice,0#updates|1#One update|1&lt;{0, number} updates} found</string>
 
 	<!-- Preferences keys -->
-	<string name="p_key_update_check_freq">prefUpdateCheckFrequency</string>
-	<string name="p_key_configured_updates_mod_version">updatesModVersion</string>
-	<string name="p_update_check_freq_def_value">-1</string>
-	<string name="p_do_nandroid_backup">doNandroidBackup</string>
-	<string name="p_do_nandroid_backup_def_value">true</string>
-	<string name="p_key_notification_ringtone">prefNotificationRingtone</string>
-	<string name="p_update_file_url_screen">prefUpdateFileURLScreen</string>
-	<string name="p_update_file_url">prefUpdateFileURL</string>
-	<string name="p_update_file_url_qr">prefUpdateFileURLQr</string>
-	<string name="p_update_file_url_def">prefUpdateFileURLDef</string>
-	<string name="p_vibrate">prefVibrate</string>
-	<string name="p_vibrate_def_value">true</string>
-	<string name="p_notifications">prefNotifications</string>
-	<string name="p_notifications_def_value">true</string>
-	<string name="p_first_run">firstRun</string>
-	<string name="p_last_update_check">lastUpdateCheck</string>
-	<string name="p_progress_update_frequency">progressUpdateFrequ</string>
-	<string name="p_progress_update_frequency_def">500</string>
-	<string name="p_progress_update_freq_def">progressUpdateFreqDef</string>
-	<string name="p_theme_file_url_screen">prefThemeFileURLScreen</string>
-	<string name="p_theme_file_url">prefThemeFileURL</string>
-	<string name="p_theme_file_url_qr">prefThemeFileURLQr</string>
-	<string name="p_theme_file_url_def">prefThemeFileURLDef</string>
-	<string name="p_theme_file">prefThemeFile</string>
-	<string name="p_theme_file_def">prefThemeFileDef</string>
-	<string name="p_display_older_rom_versions">displayOlderRomVersins</string>
-	<string name="p_allow_experimental_rom_versions">displayExperimentalRomVersions</string>
-	<string name="p_display_older_theme_versions">displayOlderThemeVersins</string>
-	<string name="p_allow_experimental_theme_versions">displayExperimentalThemeVersions</string>
-	<string name="p_display_older_rom_versions_def_value">false</string>
-	<string name="p_allow_experimental_rom_versions_def_value">false</string>
-	<string name="p_display_older_theme_versions_def_value">false</string>
-	<string name="p_allow_experimental_theme_versions_def_value">false</string>
-	<string name="p_update_folder">prefUpdateFolder</string>
-	<string name="p_update_folder_def">prefUpdateFolderDef</string>
-
+	<string name="PREF_UPDATE_CHECK_FREQUENCY">prefUpdateCheckFrequency</string>
+	<string name="PREF_MOD_VERSION">updatesModVersion</string>
+	<string name="PREF_DO_NANDROID_BACKUP">doNandroidBackup</string>
+	<string name="PREF_NOTIFICATION_RINGTONE">prefNotificationRingtone</string>
+	<string name="PREF_ROM_UPDATE_FILE_URL">prefUpdateFileURL</string>
+	<string name="PREF_ROM_UPDATE_FILE_QR">prefUpdateFileURLQr</string>
+	<string name="PREF_ROM_UPDATE_FILE_URL_DEF">prefUpdateFileURLDef</string>
+	<string name="PREF_NOTIFICATION_VIBRATE">prefVibrate</string>
+	<string name="PREF_NOTIFICATION_ENABLED">prefNotifications</string>
+	<string name="PREF_FIRST_RUN">firstRun</string>
+	<string name="PREF_LAST_UPDATE_CHECK">lastUpdateCheck</string>
+	<string name="PREF_PROGRESS_UPDATE_FREQUENCY">progressUpdateFrequ</string>
+	<string name="PREF_PROGRESS_UPDATE_FREQUENCY_DEF">progressUpdateFreqDef</string>
+	<string name="PREF_THEME_UPDATE_FILE_URL">prefThemeFileURL</string>
+	<string name="PREF_THEME_UPDATE_FILE_QR">prefThemeFileURLQr</string>
+	<string name="PREF_THEME_UPDATE_FILE_URL_DEF">prefThemeFileURLDef</string>
+	<string name="PREF_THEMES_THEME_FILE">prefThemeFile</string>
+	<string name="PREF_THEMES_THEME_FILE_DEF">prefThemeFileDef</string>
+	<string name="PREF_DISPLAY_OLDER_ROM_VERSIONS">displayOlderRomVersions</string>
+	<string name="PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS">displayExperimentalRomVersions</string>
+	<string name="PREF_DISPLAY_OLDER_THEME_VERSIONS">displayOlderThemeVersions</string>
+	<string name="PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS">displayExperimentalThemeVersions</string>
+	<string name="PREF_UPDATE_FOLDER">prefUpdateFolder</string>
+	<string name="PREF_UPDATE_FOLDER_DEF">prefUpdateFolderDef</string>
+	
+	<!-- Default Values for Preference Keys -->
+	<string name="PREF_UPDATE_CHECK_FREQUENCY_DEF_VALUE">-1</string>
+	<string name="PREF_DO_NANDROID_BACKUP_DEF_VALUE">true</string>
+	<string name="PREF_NOTIFICATION_VIBRATE_DEF_VALUE">true</string>
+	<string name="PREF_NOTIFICATION_ENABLED_DEF_VALUE">true</string>
+	<string name="PREF_PROGRESS_UPDATE_FREQUENCY_DEF_VALUE">500</string>
+	<string name="PREF_DISPLAY_OLDER_ROM_VERSIONS_DEF_VALUE">false</string>
+	<string name="PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS_DEF_VALUE">false</string>
+	<string name="PREF_DISPLAY_OLDER_THEME_VERSIONS_DEF_VALUE">false</string>
+	<string name="PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS_DEF_VALUE">false</string>
+	
 	<!-- About dialog -->
 	<string-array name="about_authors">
         	<item>Sergi Vélez http://code.google.com/p/jfupdater</item>

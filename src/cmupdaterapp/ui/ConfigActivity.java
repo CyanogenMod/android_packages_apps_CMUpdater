@@ -50,12 +50,12 @@ public class ConfigActivity extends PreferenceActivity
 		prefs = Preferences.getPreferences(ConfigActivity.this);
 		final Resources res = getResources();
 
-		ListPreference updateCheckFreqPref = (ListPreference) findPreference(res.getString(R.string.p_key_update_check_freq));
+		ListPreference updateCheckFreqPref = (ListPreference) findPreference(res.getString(R.string.PREF_UPDATE_CHECK_FREQUENCY));
 
 		updateCheckFreqPref.setOnPreferenceChangeListener(mUpdateCheckingFrequencyListener);
 		
 		//Barcodescanning Stuff
-		Preference pref = (Preference) findPreference(res.getString(R.string.p_update_file_url_qr));
+		Preference pref = (Preference) findPreference(res.getString(R.string.PREF_ROM_UPDATE_FILE_QR));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
 			public boolean onPreferenceClick(Preference preference)
@@ -67,7 +67,7 @@ public class ConfigActivity extends PreferenceActivity
 			}
 		});
 
-		pref = (Preference) findPreference(res.getString(R.string.p_theme_file_url_qr));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_THEME_UPDATE_FILE_QR));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
 			public boolean onPreferenceClick(Preference preference)
@@ -80,7 +80,7 @@ public class ConfigActivity extends PreferenceActivity
 		});
 		
 		//Reset Update URLs
-		pref = (Preference) findPreference(res.getString(R.string.p_update_file_url_def));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_ROM_UPDATE_FILE_URL_DEF));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
 			public boolean onPreferenceClick(Preference preference)
@@ -93,7 +93,7 @@ public class ConfigActivity extends PreferenceActivity
 			}
 		});
 		
-		pref = (Preference) findPreference(res.getString(R.string.p_theme_file_url_def));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_THEME_UPDATE_FILE_URL_DEF));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
 			public boolean onPreferenceClick(Preference preference)
@@ -107,7 +107,7 @@ public class ConfigActivity extends PreferenceActivity
 		});
 		
 		//Reset themes.theme
-		pref = (Preference) findPreference(res.getString(R.string.p_theme_file_def));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_THEMES_THEME_FILE_DEF));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
 			public boolean onPreferenceClick(Preference preference)
@@ -121,7 +121,7 @@ public class ConfigActivity extends PreferenceActivity
 		});
 
 		//Reset UpdateFolder
-		pref = (Preference) findPreference(res.getString(R.string.p_update_folder_def));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_UPDATE_FOLDER_DEF));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
 			public boolean onPreferenceClick(Preference preference)
@@ -142,7 +142,7 @@ public class ConfigActivity extends PreferenceActivity
 		});
 		
 		//URL Validation checkers
-		pref = (Preference) findPreference(res.getString(R.string.p_update_file_url));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_ROM_UPDATE_FILE_URL));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			public boolean onPreferenceChange(Preference preference, Object newValue)
@@ -161,7 +161,7 @@ public class ConfigActivity extends PreferenceActivity
 			}
 		});
 		
-		pref = (Preference) findPreference(res.getString(R.string.p_theme_file_url));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_THEME_UPDATE_FILE_URL));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			public boolean onPreferenceChange(Preference preference, Object newValue)
@@ -181,12 +181,12 @@ public class ConfigActivity extends PreferenceActivity
 		});
 		
 		//Progress Update Frequency
-		pref = (Preference) findPreference(res.getString(R.string.p_progress_update_freq_def));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY_DEF));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
 			public boolean onPreferenceClick(Preference preference)
 			{
-				prefs.setProgressUpdateFreq(res.getString(R.string.p_progress_update_frequency_def));
+				prefs.setProgressUpdateFreq(res.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY_DEF_VALUE));
 				Toast.makeText(getBaseContext(), R.string.p_progress_update_freq_def_toast, Toast.LENGTH_LONG).show();
 				Log.d(TAG, "ProgressUpdateFreq set back to default: " + prefs.getProgressUpdateFreq());
 				return true;
@@ -194,7 +194,7 @@ public class ConfigActivity extends PreferenceActivity
 		});
 		
 		//Display All Rom Updates
-		pref = (Preference) findPreference(res.getString(R.string.p_display_older_rom_versions));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_DISPLAY_OLDER_ROM_VERSIONS));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			public boolean onPreferenceChange(Preference preference, Object newValue)
@@ -205,7 +205,7 @@ public class ConfigActivity extends PreferenceActivity
 		});
 		
 		//Show Experimental Roms
-		pref = (Preference) findPreference(res.getString(R.string.p_allow_experimental_rom_versions));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			public boolean onPreferenceChange(Preference preference, Object newValue)
@@ -216,7 +216,7 @@ public class ConfigActivity extends PreferenceActivity
 		});
 		
 		//Display All Theme Updates
-		pref = (Preference) findPreference(res.getString(R.string.p_display_older_theme_versions));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_DISPLAY_OLDER_THEME_VERSIONS));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			public boolean onPreferenceChange(Preference preference, Object newValue)
@@ -227,7 +227,7 @@ public class ConfigActivity extends PreferenceActivity
 		});
 		
 		//Show Experimental Themes
-		pref = (Preference) findPreference(res.getString(R.string.p_allow_experimental_theme_versions));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			public boolean onPreferenceChange(Preference preference, Object newValue)
@@ -238,7 +238,7 @@ public class ConfigActivity extends PreferenceActivity
 		});
 		
 		//Change Update Folder
-		pref = (Preference) findPreference(res.getString(R.string.p_update_folder));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_UPDATE_FOLDER));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			public boolean onPreferenceChange(Preference preference, Object newValue)

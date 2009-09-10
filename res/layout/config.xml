@@ -9,30 +9,30 @@
 		android:title="@string/p_notifications_screen_title"
 		android:summary="@string/p_notifications_screen_summary" >
 		<CheckBoxPreference
-			android:key="@string/p_notifications"
+			android:key="@string/PREF_NOTIFICATION_ENABLED"
 			android:title="@string/p_notifications_title"
 			android:summary="@string/p_notifications_summary"
-			android:defaultValue="@string/p_notifications_def_value" />
+			android:defaultValue="@string/PREF_NOTIFICATION_ENABLED_DEF_VALUE" />
 		<ListPreference
-			android:key="@string/p_key_update_check_freq"
+			android:key="@string/PREF_UPDATE_CHECK_FREQUENCY"
 			android:title="@string/p_update_check_freq_title"
 			android:summary="@string/p_update_check_freq_summary"
 			android:entries="@array/update_frequency"
 			android:entryValues="@array/update_frequency_values"
-			android:defaultValue="@string/p_update_check_freq_def_value"
-			android:dependency="@string/p_notifications" />
+			android:defaultValue="@string/PREF_UPDATE_CHECK_FREQUENCY_DEF_VALUE"
+			android:dependency="@string/PREF_NOTIFICATION_ENABLED" />
 		<RingtonePreference
-			android:key="@string/p_key_notification_ringtone"
+			android:key="@string/PREF_NOTIFICATION_RINGTONE"
 			android:title="@string/p_notification_ringtone_title"
 			android:summary="@string/p_notification_ringtone_summary"
 			android:ringtoneType="notification"
-			android:dependency="@string/p_notifications" />
+			android:dependency="@string/PREF_NOTIFICATION_ENABLED" />
 		<CheckBoxPreference
-			android:key="@string/p_vibrate"
+			android:key="@string/PREF_NOTIFICATION_VIBRATE"
 			android:title="@string/p_vibrate_title"
 			android:summary="@string/p_vibrate_summary"
-			android:defaultValue="@string/p_vibrate_def_value"
-			android:dependency="@string/p_notifications" />
+			android:defaultValue="@string/PREF_NOTIFICATION_VIBRATE_DEF_VALUE"
+			android:dependency="@string/PREF_NOTIFICATION_ENABLED" />
 	</PreferenceScreen>
 	<!-- Nandroid Backup -->
 	<!--
@@ -46,28 +46,28 @@
 		android:title="@string/p_rom_screen_title"
 		android:summary="@string/p_rom_screen_summary" >
 		<CheckBoxPreference
-			android:key="@string/p_display_older_rom_versions"
+			android:key="@string/PREF_DISPLAY_OLDER_ROM_VERSIONS"
 			android:title="@string/p_display_older_rom_versions_title"
 			android:summary="@string/p_display_older_rom_versions_summary"
-			android:defaultValue="@string/p_display_older_rom_versions_def_value" />
+			android:defaultValue="@string/PREF_DISPLAY_OLDER_ROM_VERSIONS_DEF_VALUE" />
 		<CheckBoxPreference
-			android:key="@string/p_allow_experimental_rom_versions"
+			android:key="@string/PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS"
 			android:title="@string/p_allow_experimental_rom_versions_title"
 			android:summary="@string/p_allow_experimental_rom_versions_summary"
-			android:defaultValue="@string/p_allow_experimental_rom_versions_def_value" />
+			android:defaultValue="@string/PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS_DEF_VALUE" />
 		<EditTextPreference
-			android:key="@string/p_update_file_url"
+			android:key="@string/PREF_ROM_UPDATE_FILE_URL"
 			android:title="@string/p_update_file_url_title"
 			android:summary="@string/p_update_file_url_summary"
 			android:dialogTitle="@string/p_update_file_url_title"
 			android:defaultValue="@string/conf_update_server_url_def"
 			android:singleLine="false" />
 		<Preference
-			android:key="@string/p_update_file_url_qr"
+			android:key="@string/PREF_ROM_UPDATE_FILE_QR"
 			android:title="@string/p_update_file_url_qr_title"
 			android:summary="@string/p_update_file_url_qr_summary" />
 		<Preference
-			android:key="@string/p_update_file_url_def"
+			android:key="@string/PREF_ROM_UPDATE_FILE_URL_DEF"
 			android:title="@string/p_update_file_url_def_title"
 			android:summary="@string/p_update_file_url_def_summary" />
 	</PreferenceScreen>
@@ -76,39 +76,39 @@
 		android:title="@string/p_theme_screen_title"
 		android:summary="@string/p_theme_screen_summary" >
 		<CheckBoxPreference
-			android:key="@string/p_display_older_theme_versions"
+			android:key="@string/PREF_DISPLAY_OLDER_THEME_VERSIONS"
 			android:title="@string/p_display_older_theme_versions_title"
 			android:summary="@string/p_display_older_theme_versions_summary"
-			android:defaultValue="@string/p_display_older_theme_versions_def_value" />
+			android:defaultValue="@string/PREF_DISPLAY_OLDER_THEME_VERSIONS_DEF_VALUE" />
 		<CheckBoxPreference
-			android:key="@string/p_allow_experimental_theme_versions"
+			android:key="@string/PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS"
 			android:title="@string/p_allow_experimental_theme_versions_title"
 			android:summary="@string/p_allow_experimental_theme_versions_summary"
-			android:defaultValue="@string/p_allow_experimental_theme_versions_def_value" />
+			android:defaultValue="@string/PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS_DEF_VALUE" />
 		<EditTextPreference
-			android:key="@string/p_theme_file_url"
+			android:key="@string/PREF_THEME_UPDATE_FILE_URL"
 			android:title="@string/p_theme_file_url_title"
 			android:summary="@string/p_theme_file_url_summary"
 			android:dialogTitle="@string/p_theme_file_url_title"
 			android:defaultValue="@string/conf_theme_server_url_def"
 			android:singleLine="false" />
 		<Preference
-			android:key="@string/p_theme_file_url_qr"
+			android:key="@string/PREF_THEME_UPDATE_FILE_QR"
 			android:title="@string/p_theme_file_url_qr_title"
 			android:summary="@string/p_theme_file_url_qr_summary" />
 		<Preference
-			android:key="@string/p_theme_file_url_def"
+			android:key="@string/PREF_THEME_UPDATE_FILE_URL_DEF"
 			android:title="@string/p_theme_file_url_def_title"
 			android:summary="@string/p_theme_file_url_def_summary" />
 		<EditTextPreference
-			android:key="@string/p_theme_file"
+			android:key="@string/PREF_THEMES_THEME_FILE"
 			android:title="@string/p_theme_file_title"
 			android:summary="@string/p_theme_file_summary"
 			android:dialogTitle="@string/p_theme_file_title"
 			android:defaultValue="@string/conf_theme_version_file_def"
 			android:singleLine="false" />
 		<Preference
-			android:key="@string/p_theme_file_def"
+			android:key="@string/PREF_THEMES_THEME_FILE_DEF"
 			android:title="@string/p_theme_file_def_title"
 			android:summary="@string/p_theme_file_def_summary" />
 	</PreferenceScreen>
@@ -117,25 +117,25 @@
 		android:title="@string/p_advanced_screen_title"
 		android:summary="@string/p_advanced_screen_summary" >
 		<EditTextPreference
-			android:key="@string/p_update_folder"
+			android:key="@string/PREF_UPDATE_FOLDER"
 			android:title="@string/p_update_folder_title"
 			android:summary="@string/p_update_folder_summary"
 			android:dialogTitle="@string/p_update_folder_title"
 			android:defaultValue="@string/conf_update_folder"
 			android:singleLine="false" />
 		<Preference
-			android:key="@string/p_update_folder_def"
+			android:key="@string/PREF_UPDATE_FOLDER_DEF"
 			android:title="@string/p_update_folder_def_title"
 			android:summary="@string/p_update_folder_def_summary" />
 		<ListPreference
-			android:key="@string/p_progress_update_frequency"
+			android:key="@string/PREF_PROGRESS_UPDATE_FREQUENCY"
 			android:title="@string/p_progress_update_frequency_title"
 			android:summary="@string/p_progress_update_frequency_summary"
-			android:defaultValue="@string/p_progress_update_frequency_def"
+			android:defaultValue="@string/PREF_PROGRESS_UPDATE_FREQUENCY_DEF_VALUE"
 			android:entryValues="@array/progress_update_freq"
 			android:entries="@array/progress_update_freq" />
 		<Preference
-			android:key="@string/p_progress_update_freq_def"
+			android:key="@string/PREF_PROGRESS_UPDATE_FREQUENCY_DEF"
 			android:title="@string/p_progress_update_freq_def_title"
 			android:summary="@string/p_progress_update_freq_def_summary" />
 	</PreferenceScreen>
