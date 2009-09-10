@@ -29,6 +29,9 @@ public class Preferences
 	private final SharedPreferences mPrefs;
 	private final Resources mRes;
 	
+	private String temp;
+	private boolean tempbool;
+	
 	private Preferences(SharedPreferences prefs, Resources res)
 	{
 		mPrefs = prefs;
@@ -42,7 +45,6 @@ public class Preferences
 			Log.d(TAG, "Preference Instance set.");
 			INSTANCE = new Preferences(PreferenceManager.getDefaultSharedPreferences(ctx), ctx.getResources());
 		}
-		
 		return INSTANCE;
 	}
 
@@ -68,14 +70,6 @@ public class Preferences
 		Editor editor = mPrefs.edit();
 		editor.putString(mRes.getString(R.string.PREF_MOD_VERSION), modString);
 		if(!editor.commit()) Log.e(TAG, "Unable to write configured mod string");
-	}
-	
-	public Uri getConfiguredRingtone()
-	{
-		String uri = mPrefs.getString(mRes.getString(R.string.PREF_NOTIFICATION_RINGTONE), null);
-		if(uri == null) return null;
-		
-		return Uri.parse(uri);
 	}
 	
 	public boolean isFirstRun()
@@ -111,6 +105,13 @@ public class Preferences
 		if(!editor.commit()) Log.e(TAG, "Unable to write last update check");
 	}
 
+	private String getSystemModString()
+	{
+		temp = SysUtils.getSystemProperty(Constants.SYS_PROP_DEVICE);
+		Log.d(TAG, "Mod Version: " + temp);
+		return temp;
+	}
+	
 	public void configureModString()
 	{
 		String modString = getSystemModString();
@@ -121,33 +122,62 @@ public class Preferences
 		}
 	}
 	
-	public boolean showDowngradesRom()
+	public String getChangelogURL()
 	{
-		return mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_OLDER_ROM_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_OLDER_ROM_VERSIONS_DEF_VALUE)));
+		temp = mRes.getString(R.string.conf_changelog_url);
+		Log.d(TAG, "ChangelogURL: " + temp);
+		return temp;
 	}
 	
-	public boolean showDowngradesTheme()
+	//Roms
+	public boolean showAllRomUpdates()
 	{
-		return mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_OLDER_THEME_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_OLDER_THEME_VERSIONS_DEF_VALUE)));
+		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_OLDER_ROM_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_OLDER_ROM_VERSIONS_DEF_VALUE))); 
+		Log.d(TAG, "Display All Rom Updates: " + tempbool);
+		return tempbool;
+	}
+	
+	public boolean showExperimentalRomUpdates()
+	{
+		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS_DEF_VALUE)));
+		Log.d(TAG, "Display Experimental Rom Updates: " + tempbool);
+		return tempbool;
 	}
 	
 	public String getRomUpdateFileURL()
 	{
-		Log.d(TAG, "Rom MetadataFile-Url: "+ mPrefs.getString(mRes.getString(R.string.PREF_ROM_UPDATE_FILE_URL),  mRes.getString(R.string.conf_update_server_url_def)));
-		return mPrefs.getString(mRes.getString(R.string.PREF_ROM_UPDATE_FILE_URL),  mRes.getString(R.string.conf_update_server_url_def));
+		temp = mPrefs.getString(mRes.getString(R.string.PREF_ROM_UPDATE_FILE_URL),  mRes.getString(R.string.conf_update_server_url_def));
+		Log.d(TAG, "Rom MetadataFile-Url: " + temp);
+		return temp;
 	}
 
-	public String getThemeUpdateFileURL()
-	{
-		Log.d(TAG, "Theme MetadataFile-Url: "+ mPrefs.getString(mRes.getString(R.string.PREF_THEME_UPDATE_FILE_URL),  mRes.getString(R.string.conf_theme_server_url_def)));
-		return mPrefs.getString(mRes.getString(R.string.PREF_THEME_UPDATE_FILE_URL),  mRes.getString(R.string.conf_theme_server_url_def));
-	}
-	
 	public void setRomUpdateFileURL(String updateFileURL)
 	{
 		Editor editor = mPrefs.edit();
 		editor.putString(mRes.getString(R.string.PREF_ROM_UPDATE_FILE_URL), updateFileURL);
 		if(!editor.commit()) Log.e(TAG, "Unable to write Rom Update File URL");
+	}
+	
+	//Themes
+	public boolean showAllThemeUpdates()
+	{
+		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_OLDER_THEME_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_OLDER_THEME_VERSIONS_DEF_VALUE)));
+		Log.d(TAG, "Display All Theme Updates: " + tempbool);
+		return tempbool;
+	}
+	
+	public boolean showExperimentalThemeUpdates()
+	{
+		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS_DEF_VALUE)));
+		Log.d(TAG, "Display Experimental Theme Updates: " + tempbool);
+		return tempbool;
+	}	
+	
+	public String getThemeUpdateFileURL()
+	{
+		temp = mPrefs.getString(mRes.getString(R.string.PREF_THEME_UPDATE_FILE_URL),  mRes.getString(R.string.conf_theme_server_url_def));
+		Log.d(TAG, "Theme MetadataFile-Url: " + temp);
+		return temp;
 	}
 
 	public void setThemeUpdateFileURL(String updateFileURL)
@@ -155,6 +185,51 @@ public class Preferences
 		Editor editor = mPrefs.edit();
 		editor.putString(mRes.getString(R.string.PREF_THEME_UPDATE_FILE_URL), updateFileURL);
 		if(!editor.commit()) Log.e(TAG, "Unable to write Theme Update File URL");
+	}
+	
+	public String getThemeFile()
+	{
+		temp = mPrefs.getString(mRes.getString(R.string.PREF_THEMES_THEME_FILE), mRes.getString(R.string.conf_theme_version_file_def));
+		Log.d(TAG, "ThemeFile: " + temp);
+		return temp;
+	}
+	
+	public void setThemeFile(String path)
+	{
+		Editor editor = mPrefs.edit();
+		editor.putString(mRes.getString(R.string.PREF_THEMES_THEME_FILE), path);
+		if(!editor.commit()) Log.e(TAG, "Unable to write Theme File Path");
+	}
+	
+	public boolean ThemeUpdateUrlSet()
+	{
+		if(getThemeUpdateFileURL().equals(""))
+			return false;
+		else
+			return true;
+	}
+	
+	//Notifications
+	public boolean notificationsEnabled()
+	{
+		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_NOTIFICATION_ENABLED), Boolean.valueOf(mRes.getString(R.string.PREF_NOTIFICATION_ENABLED_DEF_VALUE)));
+		Log.d(TAG, "Notifications Enabled: " + tempbool);
+		return tempbool;
+	}
+	
+	public boolean getVibrate()
+	{
+		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_NOTIFICATION_VIBRATE), Boolean.valueOf(mRes.getString(R.string.PREF_NOTIFICATION_VIBRATE_DEF_VALUE)));
+		Log.d(TAG, "Notification Vibrate: " + tempbool);
+		return tempbool;
+	}
+	
+	public Uri getConfiguredRingtone()
+	{
+		String uri = mPrefs.getString(mRes.getString(R.string.PREF_NOTIFICATION_RINGTONE), null);
+		if(uri == null) return null;
+		
+		return Uri.parse(uri);
 	}
 	
 	public void setNotificationRingtone(String RingTone)
@@ -165,36 +240,21 @@ public class Preferences
 		if(!editor.commit()) Log.e(TAG, "Unable to write Ringtone URI");
 	}
 	
-	public boolean allowExperimentalRom()
-	{
-		return mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS_DEF_VALUE)));
-	}
-	
-	public boolean allowExperimentalTheme()
-	{
-		return mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS_DEF_VALUE)));
-	}
-	
 	public boolean doNandroidBackup()
 	{
-		//return mPrefs.getBoolean(mRes.getString(R.string.PREF_DO_NANDROID_BACKUP), Boolean.valueOf(mRes.getString(R.string.PREF_DO_NANDROID_BACKUP_DEF)));
+		//tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DO_NANDROID_BACKUP), Boolean.valueOf(mRes.getString(R.string.PREF_DO_NANDROID_BACKUP_DEF_VALUE)));
+		//Log.d(TAG, "Do Nandroid Backup: " + tempbool);
+		//return tempbool;
 		return false;
 	}
 	
-	public boolean getVibrate()
-	{
-		return mPrefs.getBoolean(mRes.getString(R.string.PREF_NOTIFICATION_VIBRATE), Boolean.valueOf(mRes.getString(R.string.PREF_NOTIFICATION_VIBRATE_DEF_VALUE)));
-	}
 	
-	public boolean notificationsEnabled()
-	{
-		return mPrefs.getBoolean(mRes.getString(R.string.PREF_NOTIFICATION_ENABLED), Boolean.valueOf(mRes.getString(R.string.PREF_NOTIFICATION_ENABLED_DEF_VALUE)));
-	}
-	 
+	//Advanced Properties
 	public String getUpdateFolder()
 	{
-		Log.d(TAG, "UpdateFolder: "+ mPrefs.getString(mRes.getString(R.string.PREF_UPDATE_FOLDER), mRes.getString(R.string.conf_update_folder)));
-		return mPrefs.getString(mRes.getString(R.string.PREF_UPDATE_FOLDER), mRes.getString(R.string.conf_update_folder));
+		temp = mPrefs.getString(mRes.getString(R.string.PREF_UPDATE_FOLDER), mRes.getString(R.string.conf_update_folder));
+		Log.d(TAG, "UpdateFolder: " + temp);
+		return temp;
 	}
 	
 	public boolean setUpdateFolder(String folder)
@@ -223,7 +283,9 @@ public class Preferences
 	
 	public int getProgressUpdateFreq()
 	{
-		return Integer.parseInt(mPrefs.getString(mRes.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY), mRes.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY_DEF_VALUE)));
+		temp = mPrefs.getString(mRes.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY), mRes.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY_DEF_VALUE));
+		Log.d(TAG, "ProgressUpdateFrequency: " + temp);
+		return Integer.parseInt(temp);
 	}
 
 	public void setProgressUpdateFreq(String freq)
@@ -232,37 +294,6 @@ public class Preferences
 		Editor editor = mPrefs.edit();
 		editor.putString(mRes.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY), freq);
 		if(!editor.commit()) Log.e(TAG, "Unable to write Update Frequency");
-	}
-	
-	private String getSystemModString()
-	{
-		return SysUtils.getSystemProperty(Constants.SYS_PROP_DEVICE);
-	}
-	
-	public String getChangelogURL()
-	{
-		return mRes.getString(R.string.conf_changelog_url);
-	}
-	
-	public String getThemeFile()
-	{
-		Log.d(TAG, "ThemeFile: "+ mPrefs.getString(mRes.getString(R.string.PREF_THEMES_THEME_FILE), mRes.getString(R.string.conf_theme_version_file_def)));
-		return mPrefs.getString(mRes.getString(R.string.PREF_THEMES_THEME_FILE), mRes.getString(R.string.conf_theme_version_file_def));
-	}
-	
-	public void setThemeFile(String path)
-	{
-		Editor editor = mPrefs.edit();
-		editor.putString(mRes.getString(R.string.PREF_THEMES_THEME_FILE), path);
-		if(!editor.commit()) Log.e(TAG, "Unable to write Theme File Path");
-	}
-	
-	public boolean ThemeUpdateUrlSet()
-	{
-		if(getThemeUpdateFileURL().equals(""))
-			return false;
-		else
-			return true;
 	}
 
 	public ThemeInfo getThemeInformations()

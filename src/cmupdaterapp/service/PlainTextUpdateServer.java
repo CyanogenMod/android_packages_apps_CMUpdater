@@ -37,10 +37,10 @@ public class PlainTextUpdateServer implements IUpdateServer
 	private int[] sysVersion;
 	private ThemeInfo themeInfos;
 	
-	private boolean allowExperimentalRom;
-	private boolean showAllUpdatesRom;
-	private boolean allowExperimentalTheme;
-	private boolean showAllUpdatesTheme;
+	private boolean showExperimentalRomUpdates;
+	private boolean showAllRomUpdates;
+	private boolean showExperimentalThemeUpdates;
+	private boolean showAllThemeUpdates;
 	
 	private boolean WildcardUsed = false;
 	
@@ -71,10 +71,10 @@ public class PlainTextUpdateServer implements IUpdateServer
 		systemRom = SysUtils.getReadableModVersion();
 		sysVersion = SysUtils.getSystemModVersion();
 		themeInfos = mPreferences.getThemeInformations();
-		allowExperimentalRom = mPreferences.allowExperimentalRom();
-		showAllUpdatesRom = mPreferences.showDowngradesRom();
-		allowExperimentalTheme = mPreferences.allowExperimentalTheme();
-		showAllUpdatesTheme = mPreferences.showDowngradesTheme();
+		showExperimentalRomUpdates = mPreferences.showExperimentalRomUpdates();
+		showAllRomUpdates = mPreferences.showAllRomUpdates();
+		showExperimentalThemeUpdates = mPreferences.showExperimentalThemeUpdates();
+		showAllThemeUpdates = mPreferences.showAllThemeUpdates();
 		boolean ThemeUpdateUrlSet = mPreferences.ThemeUpdateUrlSet();
 		
 		//If Wildcard is used or no themes.theme file present set the variable
@@ -337,9 +337,9 @@ public class PlainTextUpdateServer implements IUpdateServer
 			{
 				if (boardMatches(ui, systemMod))
 				{
-					if(showAllUpdatesRom || updateIsNewer(ui, sysVersion, true))
+					if(showAllRomUpdates || updateIsNewer(ui, sysVersion, true))
 					{
-						if (branchMatches(ui, allowExperimentalRom))
+						if (branchMatches(ui, showExperimentalRomUpdates))
 						{
 							Log.d(TAG, "Adding Rom: " + ui.name + " Version: " + ui.version + " Filename: " + ui.fileName);
 							ret.add(ui);
@@ -384,13 +384,13 @@ public class PlainTextUpdateServer implements IUpdateServer
 					if (romMatches(ui, systemRom))
 					{
 						//Name matches or is *
-						if (WildcardUsed || showAllUpdatesTheme || (themeInfos.name != null && themeInfos.name != "" && ui.name.equalsIgnoreCase(themeInfos.name)))
+						if (WildcardUsed || showAllThemeUpdates || (themeInfos.name != null && themeInfos.name != "" && ui.name.equalsIgnoreCase(themeInfos.name)))
 						{
 							//Version matches or name is *. If *, display all Versions
-							if(WildcardUsed || showAllUpdatesTheme || updateIsNewer(ui, mPreferences.convertVersionToIntArray(themeInfos.version), true))
+							if(WildcardUsed || showAllThemeUpdates || updateIsNewer(ui, mPreferences.convertVersionToIntArray(themeInfos.version), true))
 							{
 								//Branch matches
-								if (branchMatches(ui, allowExperimentalTheme))
+								if (branchMatches(ui, showExperimentalThemeUpdates))
 								{
 									Log.d(TAG, "Adding Theme: " + ui.name + " Version: " + ui.version + " Filename: " + ui.fileName);
 									ret.add(ui);
