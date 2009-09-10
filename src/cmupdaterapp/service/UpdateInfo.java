@@ -12,13 +12,14 @@ public class UpdateInfo implements Serializable
 	public List<String> mod;
 	public List<String> board;
 	public String name;
-	public String displayVersion;
+	public String version;
 	public String type;
 	public String branchCode;
 	public String description;
 	public String fileName;
 	
 	public List<URI> updateFileUris;
+	
 	@Override
 	public String toString()
 	{

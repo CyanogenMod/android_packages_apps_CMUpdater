@@ -19,6 +19,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import cmupdaterapp.ui.Constants;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.SysUtils;
 
@@ -77,7 +78,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		boolean ThemeUpdateUrlSet = mPreferences.ThemeUpdateUrlSet();
 		
 		//If Wildcard is used or no themes.theme file present set the variable
-		if (themeInfos == null || themeInfos.name.equals("*"))
+		if (themeInfos == null || themeInfos.name.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
 		{
 			Log.d(TAG, "Wildcard is used for Theme Updates");
 			themeInfos = new ThemeInfo();
@@ -187,8 +188,8 @@ public class PlainTextUpdateServer implements IUpdateServer
 		try
 		{
 			mainJSONObject = new JSONObject(buf.toString());
-			JSONArray mirrorList = mainJSONObject.getJSONArray("MirrorList");
-			JSONArray updateList = mainJSONObject.getJSONArray("UpdateList");
+			JSONArray mirrorList = mainJSONObject.getJSONArray(Constants.JSON_MIRROR_LIST);
+			JSONArray updateList = mainJSONObject.getJSONArray(Constants.JSON_UPDATE_LIST);
 
 			for (int i = 0, max = updateList.length() ; i < max ; i++)
 			{
@@ -211,25 +212,25 @@ public class PlainTextUpdateServer implements IUpdateServer
 		try
 		{
 			ui.board = new LinkedList<String>();
-			String[] Boards = obj.getString("board").split("\\|");
+			String[] Boards = obj.getString(Constants.JSON_BOARD).split("\\|");
 			for(String item:Boards)
 			{
 				if(item!=null)
 					ui.board.add(item);
 			}
-			ui.type = obj.getString("type");
+			ui.type = obj.getString(Constants.JSON_TYPE);
 			ui.mod = new LinkedList<String>();
-			String[] mods= obj.getString("mod").split("\\|");
+			String[] mods= obj.getString(Constants.JSON_MOD).split("\\|");
 			for(String mod:mods)
 			{
 				if(mod!=null)
 					ui.mod.add(mod);
 			}
-			ui.name = obj.getString("name");
-			ui.displayVersion = obj.getString("version");
-			ui.description = obj.getString("description");
-			ui.branchCode = obj.getString("branch");
-			ui.fileName = obj.getString("filename");
+			ui.name = obj.getString(Constants.JSON_NAME);
+			ui.version = obj.getString(Constants.JSON_VERSION);
+			ui.description = obj.getString(Constants.JSON_DESCRIPTION);
+			ui.branchCode = obj.getString(Constants.JSON_BRANCH);
+			ui.fileName = obj.getString(Constants.JSON_FILENAME);
 			
 			ui.updateFileUris = new LinkedList<URI>();
 
@@ -241,8 +242,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 				}
 				catch (URISyntaxException e)
 				{
-					Log.w(TAG, "Unable to parse mirror url (" + mirrorList.getString(i) + ui.fileName
-							+ "). Ignoring this mirror", e);
+					Log.w(TAG, "Unable to parse mirror url (" + mirrorList.getString(i) + ui.fileName + "). Ignoring this mirror", e);
 				}
 			}
 		}
@@ -259,7 +259,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 
 		boolean allow = false;
 
-		if (ui.branchCode.charAt(0) == 'X')
+		if (ui.branchCode.equalsIgnoreCase(Constants.UPDATE_INFO_BRANCH_EXPERIMENTAL))
 		{
 			if (experimentalAllowed == true)
 				allow = true;
@@ -269,7 +269,6 @@ public class PlainTextUpdateServer implements IUpdateServer
 			allow = true;
 		}
 
-		//Log.d(TAG, "Update Branch:" + ui.branchCode + "; Experimental Allowed:" + experimentalAllowed);
 		return allow;
 	}
 
@@ -277,11 +276,11 @@ public class PlainTextUpdateServer implements IUpdateServer
 	{
 		if(ui == null) return false;
 		//If * is provided, all Boards are supported
-		if(ui.board.equals("*") || systemMod.equals("*")) return true;
+		if(ui.board.equals(Constants.UPDATE_INFO_WILDCARD) || systemMod.equals(Constants.UPDATE_INFO_WILDCARD)) return true;
 		//Log.d(TAG, "BoardString:" + ui.board + "; System Mod:" + systemMod);
 		for(String board:ui.board)
 		{
-			if(board.equalsIgnoreCase(systemMod))
+			if(board.equalsIgnoreCase(systemMod) || board.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
 				return true;
 		}
 		return false;
@@ -290,11 +289,11 @@ public class PlainTextUpdateServer implements IUpdateServer
 	private boolean romMatches(UpdateInfo ui, String systemRom)
 	{
 		if(ui == null) return false;
-		if(ui.mod.equals("*") || systemRom.equals("*")) return true;
+		if(ui.mod.equals(Constants.UPDATE_INFO_WILDCARD) || systemRom.equals(Constants.UPDATE_INFO_WILDCARD)) return true;
 		//Log.d(TAG, "ThemeRom:" + ui.mod + "; SystemRom:" + systemRom);
 		for(String mod:ui.mod)
 		{
-			if(mod.equalsIgnoreCase(systemRom))
+			if(mod.equalsIgnoreCase(systemRom) || mod.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
 				return true;
 		}
 		return false;
@@ -302,7 +301,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 
 	private boolean updateIsNewer(UpdateInfo ui, int[] sysVersion, boolean defaultValue)
 	{	
-		String[] updateVersion = ui.displayVersion.split("\\.");
+		String[] updateVersion = ui.version.split("\\.");
 
 		Log.d(TAG, "Update Version:" + Arrays.toString(updateVersion) + "; System Version:" + Arrays.toString(sysVersion));
 
@@ -334,7 +333,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		for (int i = 0, max = updateInfos.size() ; i < max ; i++)
 		{
 			UpdateInfo ui = updateInfos.poll();
-			if (ui.type.equalsIgnoreCase("rom"))
+			if (ui.type.equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_ROM))
 			{
 				if (boardMatches(ui, systemMod))
 				{
@@ -342,7 +341,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 					{
 						if (branchMatches(ui, allowExperimentalRom))
 						{
-							Log.d(TAG, "Adding Rom: " + ui.name + " Version: " + ui.displayVersion + " Filename: " + ui.fileName);
+							Log.d(TAG, "Adding Rom: " + ui.name + " Version: " + ui.version + " Filename: " + ui.fileName);
 							ret.add(ui);
 						}
 						else
@@ -362,7 +361,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 			}
 			else
 			{
-				Log.d(TAG, String.format("Discarding Rom %s Version %s", ui.name, ui.displayVersion));
+				Log.d(TAG, String.format("Discarding Rom %s Version %s", ui.name, ui.version));
 			}
 		}
 		return ret;
@@ -379,7 +378,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 			if (themeInfos != null)
 			{
 				//Json object is a theme
-				if (ui.type.equalsIgnoreCase("theme"))
+				if (ui.type.equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_THEME))
 				{
 					//Rom matches (must also match, if there is a * in the themes.theme file, or the file does not exist)
 					if (romMatches(ui, systemRom))
@@ -393,37 +392,37 @@ public class PlainTextUpdateServer implements IUpdateServer
 								//Branch matches
 								if (branchMatches(ui, allowExperimentalTheme))
 								{
-									Log.d(TAG, "Adding Theme: " + ui.name + " Version: " + ui.displayVersion + " Filename: " + ui.fileName);
+									Log.d(TAG, "Adding Theme: " + ui.name + " Version: " + ui.version + " Filename: " + ui.fileName);
 									ret.add(ui);
 								}
 								else
 								{
-									Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.displayVersion));
+									Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
 								}
 							}
 							else
 							{
-								Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.displayVersion));
+								Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
 							}
 						}
 						else
 						{
-							Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.displayVersion));
+							Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
 						}
 					}
 					else
 					{
-						Log.d(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.displayVersion));
+						Log.d(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
 					}
 				}
 				else
 				{
-					Log.d(TAG, String.format("Discarding Update(not a Theme) %s Version %s", ui.name, ui.displayVersion));
+					Log.d(TAG, String.format("Discarding Update(not a Theme) %s Version %s", ui.name, ui.version));
 				}
 			}
 			else
 			{
-				Log.d(TAG, String.format("Discarding Theme %s Version %s. Invalid or no Themes installed", ui.name, ui.displayVersion));
+				Log.d(TAG, String.format("Discarding Theme %s Version %s. Invalid or no Themes installed", ui.name, ui.version));
 			}
 		}
 		return ret;

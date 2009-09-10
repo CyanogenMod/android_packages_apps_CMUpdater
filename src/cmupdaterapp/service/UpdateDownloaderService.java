@@ -45,6 +45,7 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.RemoteViews;
 import cmupdaterapp.ui.ApplyUploadActivity;
+import cmupdaterapp.ui.Constants;
 import cmupdaterapp.ui.IUpdateProcessInfo;
 import cmupdaterapp.ui.R;
 import cmupdaterapp.ui.UpdateProcessInfo;
@@ -56,19 +57,56 @@ public class UpdateDownloaderService extends Service
 	//public static UpdateDownloaderService INSTANCE;
 
 	private static final String TAG = "<CM-Updater> UpdateDownloader";
-
-	public static final String KEY_REQUEST = "cmupdaterapp.request";
-	public static final String KEY_UPDATE_INFO = "cmupdaterapp.fullUpdateList";
-
-	public static final int REQUEST_DOWNLOAD_UPDATE = 1;
-
-	public static final int NOTIFICATION_DOWNLOAD_STATUS = 100;
-	public static final int NOTIFICATION_DOWNLOAD_FINISHED = 200;
 	
-	private int PROGRESS_BAR_UPDATE_INTERVALL;
+	private int progressBarUpdateInterval;
 	
 	private boolean prepareForDownloadCancel;
 
+	private Looper mServiceLooper;
+	private ServiceHandler mServiceHandler;
+	private HandlerThread mHandlerThread;
+	private NotificationManager mNM;
+	private boolean mWaitingForDataConnection = false;
+	private File mDestinationFile;
+	private File mDestinationMD5File;
+	private DefaultHttpClient mHttpClient;
+	private DefaultHttpClient mMD5HttpClient;
+	private Random mRandom;
+	private boolean mMirrorNameUpdated;
+	private String mMirrorName;
+	private String mFileName;
+
+	private boolean mDownloading = false;
+	private UpdateInfo mCurrentUpdate;
+	private ConnectivityManager mConnectivityManager;
+	private IntentFilter mConectivityManagerIntentFilter;
+	
+	private final IBinder mBinder = new LocalBinder();
+
+	private static IUpdateProcessInfo UPDATE_PROCESS_INFO;
+
+	private WifiLock mWifiLock;
+	private WifiManager mWifiManager;
+
+	private String mUpdateFolder;
+	private String mDownloadedMD5;
+
+	private volatile int mtotalDownloaded;
+	private int mSpeed;
+	private long mRemainingTime;
+	private String mstringDownloaded;
+	private String mstringSpeed;
+	private String mstringRemainingTime;
+	private String mstringComplete;
+	
+	private int mcontentLength;
+	private long mStartTime;
+	
+	private String minutesString;
+	private String secondsString;
+	
+	private Message mMsg;
+	
 	private final BroadcastReceiver mConnectivityChangesReceiver = new BroadcastReceiver()
 	{
 		@Override
@@ -86,67 +124,6 @@ public class UpdateDownloaderService extends Service
 			}
 		}
 	};
-	/*
-	private final PhoneStateListener mDataStateListener = new PhoneStateListener(){
-
-		@Override
-		public void onDataConnectionStateChanged(int state) {
-			if(state == TelephonyManager.DATA_CONNECTED) {
-				synchronized (mTelephonyManager) {
-					mTelephonyManager.notifyAll();
-					mTelephonyManager.listen(mDataStateListener, PhoneStateListener.LISTEN_NONE);
-					mWaitingForDataConnection = false;
-				}
-			}
-		}
-	};*/
-
-	private Looper mServiceLooper;
-	private ServiceHandler mServiceHandler;
-	private HandlerThread mHandlerThread;
-	private NotificationManager mNM;
-	private boolean mWaitingForDataConnection = false;
-	private File mDestinationFile;
-	private File mDestinationMD5File;
-	//private TelephonyManager mTelephonyManager;
-	private DefaultHttpClient mHttpClient;
-	private DefaultHttpClient mMD5HttpClient;
-	private Random mRandom;
-	private boolean mMirrorNameUpdated;
-	private String mMirrorName;
-	private String mFileName;
-
-	private boolean mDownloading = false;
-	private UpdateInfo mCurrentUpdate;
-	private ConnectivityManager mConnectivityManager;
-	private IntentFilter mConectivityManagerIntentFilter;
-	private final IBinder mBinder = new LocalBinder();
-
-	private static IUpdateProcessInfo UPDATE_PROCESS_INFO;
-
-	private WifiLock mWifiLock;
-	private WifiManager mWifiManager;
-
-	private String mUpdateFolder;
-	private String mDownloadedMD5;
-
-	private volatile int mtotalDownloaded;
-	private int mSpeed;
-	private long mRemainingTime;
-	String mstringDownloaded;
-	String mstringSpeed;
-	String mstringRemainingTime;
-	String mstringComplete;
-	
-	private int mcontentLength;
-	private long mStartTime;
-	
-	private String minutesString;
-	private String secondsString;
-	
-	//SimpleDateFormat df;
-	
-	private Message mMsg;
 	
 	public class LocalBinder extends Binder
 	{
@@ -170,15 +147,15 @@ public class UpdateDownloaderService extends Service
 			
 			Bundle arguments = (Bundle)msg.obj;
 
-			int request = arguments.getInt(KEY_REQUEST); 
+			int request = arguments.getInt(Constants.KEY_REQUEST); 
 			switch(request)
 			{
-				case REQUEST_DOWNLOAD_UPDATE:
+				case Constants.REQUEST_DOWNLOAD_UPDATE:
 					Log.d(TAG, "Request Download Update Message was recieved");
 					mDownloading = true;
 					try
 					{
-						UpdateInfo ui = mCurrentUpdate = (UpdateInfo) arguments.getSerializable(KEY_UPDATE_INFO);
+						UpdateInfo ui = mCurrentUpdate = (UpdateInfo) arguments.getSerializable(Constants.KEY_UPDATE_INFO);
 						File downloadedUpdate = checkForConnectionAndUpdate(ui);
 						notifyUser(ui, downloadedUpdate);
 					}
@@ -223,8 +200,8 @@ public class UpdateDownloaderService extends Service
 		mWifiLock = mWifiManager.createWifiLock("CM Updater");
 
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
-		PROGRESS_BAR_UPDATE_INTERVALL = Preferences.getPreferences(this).getProgressUpdateFreq();
-		Log.d(TAG, "ProgressBarIntervall: " + PROGRESS_BAR_UPDATE_INTERVALL);
+		progressBarUpdateInterval = Preferences.getPreferences(this).getProgressUpdateFreq();
+		Log.d(TAG, "ProgressBarIntervall: " + progressBarUpdateInterval);
 		//df = new SimpleDateFormat("HH 'hours' mm 'mins' ss 'seconds'");
 		//df.setTimeZone(TimeZone.getDefault());
 		minutesString = getResources().getString(R.string.minutes);
@@ -280,7 +257,7 @@ public class UpdateDownloaderService extends Service
 		Thread.currentThread().interrupt();
 		mHandlerThread.interrupt();
 		mDownloading = false;
-		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
+		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 		Log.d(TAG, "Download Service Destroyed");
 	}
 
@@ -367,7 +344,7 @@ public class UpdateDownloaderService extends Service
 	{
 		Resources res = getResources();
 		Intent i = new Intent(this, UpdateProcessInfo.class)
-		.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_DOWNLOAD_FAILED);
+		.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
 
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
 				PendingIntent.FLAG_ONE_SHOT);
@@ -597,7 +574,7 @@ public class UpdateDownloaderService extends Service
 			try
 			{
 				mtotalDownloaded = 0;
-				progressUpdateTimer.scheduleAtFixedRate(progressUpdateTimerTask, 100, PROGRESS_BAR_UPDATE_INTERVALL);
+				progressUpdateTimer.scheduleAtFixedRate(progressUpdateTimerTask, 100, progressBarUpdateInterval);
 				while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0 && !prepareForDownloadCancel)
 				{
 					fos.write(buff, 0, read);
@@ -695,7 +672,7 @@ public class UpdateDownloaderService extends Service
 			
 			mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloadInfos, mstringComplete);
 			mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, mcontentLength, mtotalDownloaded, false);
-			mNotificationManager.notify(NOTIFICATION_DOWNLOAD_STATUS, mNotification);
+			mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_STATUS, mNotification);
 			
 			if(UPDATE_PROCESS_INFO == null) return;
 			
@@ -718,22 +695,22 @@ public class UpdateDownloaderService extends Service
 		if(downloadedUpdate == null)
 		{
 			Log.d(TAG, "Downloaded Update was NULL");
-			DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
+			DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 			mHandlerThread.interrupt();
 			//Go to the App with a download error
 			i = new Intent(this, UpdateProcessInfo.class);
-			i.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_DOWNLOAD_FAILED);
+			i.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);
 			return;
 		}
 		
 		i = new Intent(this, ApplyUploadActivity.class);
-		i.putExtra(ApplyUploadActivity.KEY_UPDATE_INFO, ui);
+		i.putExtra(Constants.KEY_UPDATE_INFO, ui);
 		
 		//Set the Notification to finished
 		Resources res = getResources();
-		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
+		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification mNotification = new Notification(R.drawable.icon_notification, res.getString(R.string.notification_tickertext), System.currentTimeMillis());
 		Intent mNotificationIntent = new Intent(this, UpdateProcessInfo.class);
@@ -755,7 +732,7 @@ public class UpdateDownloaderService extends Service
 		{
 			mNotification.sound = notificationRingtone;
 		}
-		mNotificationManager.notify(NOTIFICATION_DOWNLOAD_FINISHED, mNotification);
+		mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_FINISHED, mNotification);
 		
 		if(UPDATE_PROCESS_INFO != null)
 		{
@@ -770,7 +747,7 @@ public class UpdateDownloaderService extends Service
 		//Thread.currentThread().interrupt();
 		prepareForDownloadCancel = true;
 		Log.d(TAG, "Download Service CancelDownload was called");
-		DeleteDownloadStatusNotification(NOTIFICATION_DOWNLOAD_STATUS);
+		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 		mDownloading = false;
 		Log.i(TAG, "Done with #" + mMsg.arg1);
 		stopSelf(mMsg.arg1);

@@ -19,9 +19,7 @@ import cmupdaterapp.service.IUpdateServer;
 import cmupdaterapp.utils.Preferences;
 
 public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
-{	
-	public static final String KEY_UPDATE_LIST = "cmupdaterapp.fullUpdateList";
-
+{
 	private static final String TAG = "<CM-Updater> CheckForUpdatesTask";
 
 	private IUpdateServer mUpdateServer;
@@ -84,8 +82,8 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 			upi.switchToUpdateChooserLayout(result);
 			
 			Intent i = new Intent(upi, UpdateProcessInfo.class)
-							.putExtra(UpdateProcessInfo.KEY_UPDATE_LIST, (Serializable)result)
-							.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_NEW_UPDATE_LIST);
+							.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)result)
+							.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_NEW_UPDATE_LIST);
 			PendingIntent contentIntent = PendingIntent.getActivity(upi, 0, i, PendingIntent.FLAG_ONE_SHOT);
 
 			Notification notification = new Notification(R.drawable.icon_notification,

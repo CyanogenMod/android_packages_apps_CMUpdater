@@ -23,9 +23,6 @@ public class ApplyUploadActivity extends Activity
 	
 	private static final String TAG = "<CM-Updater> ApplyUploadActivity";
 
-	public static final String KEY_UPDATE_INFO = "cmupdaterapp.fullUpdateList";
-
-
 	private UpdateInfo mUpdateInfo;
 	private String mUpdateFolder;
 	
@@ -131,7 +128,7 @@ public class ApplyUploadActivity extends Activity
 	{
 		super.onStart();
 		Resources res = getResources();
-		mUpdateInfo = (UpdateInfo) getIntent().getExtras().getSerializable(KEY_UPDATE_INFO);
+		mUpdateInfo = (UpdateInfo) getIntent().getExtras().getSerializable(Constants.KEY_UPDATE_INFO);
 		String template = res.getString(R.string.apply_title_textview_text);
 		mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();

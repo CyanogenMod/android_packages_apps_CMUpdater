@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import cmupdaterapp.service.ThemeInfo;
+import cmupdaterapp.ui.Constants;
 import cmupdaterapp.ui.R;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,12 +22,7 @@ import android.util.Log;
 
 public class Preferences
 {	
-	public static final int UPDATE_FREQ_AT_BOOT = -1;
-	public static final int UPDATE_FREQ_NONE = -2;
-	
 	private static final String TAG = "<CM-Updater> Preferences";
-	
-	private static final String SYS_PROP_DEVICE = "ro.product.board";
 	
 	private static Preferences INSTANCE;
 	
@@ -43,6 +39,7 @@ public class Preferences
 	{
 		if(INSTANCE == null)
 		{
+			Log.d(TAG, "Preference Instance set.");
 			INSTANCE = new Preferences(PreferenceManager.getDefaultSharedPreferences(ctx), ctx.getResources());
 		}
 		
@@ -57,7 +54,7 @@ public class Preferences
 		}
 		catch (NumberFormatException ex)
 		{
-			return UPDATE_FREQ_AT_BOOT;
+			return Constants.UPDATE_FREQ_AT_BOOT;
 		}
 	}
 	
@@ -239,7 +236,7 @@ public class Preferences
 	
 	private String getSystemModString()
 	{
-		return SysUtils.getSystemProperty(SYS_PROP_DEVICE);
+		return SysUtils.getSystemProperty(Constants.SYS_PROP_DEVICE);
 	}
 	
 	public String getAboutURL()
@@ -289,9 +286,9 @@ public class Preferences
 				if(firstLine != null)
 				{
 					ThemeInfo t = new ThemeInfo();
-					if (firstLine.equals("*"))
+					if (firstLine.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
 					{
-						t.name = "*";
+						t.name = Constants.UPDATE_INFO_WILDCARD;
 						Log.d(TAG, "Wildcard in themes.theme");
 						return t;
 					}

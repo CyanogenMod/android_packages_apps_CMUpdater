@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
 
+import cmupdaterapp.ui.Constants;
 import cmupdaterapp.ui.R;
 import cmupdaterapp.ui.UpdateProcessInfo;
 import cmupdaterapp.utils.Preferences;
@@ -27,14 +28,16 @@ import android.util.Log;
 
 
 public class UpdateCheckerService extends Service
-{
-	public static UpdateCheckerService INSTANCE;
-	
+{	
 	private static final String TAG = "<CM-Updater> UpdateService";
 	
-	public static final String KEY_REQUEST = "cmupdaterapp.request";
-	
-	public static final int REQUEST_CHECK_FOR_UPDATES = 1;
+	private Looper mServiceLooper;
+	private ServiceHandler mServiceHandler;
+	private IUpdateServer mUpdateServer;
+	private NotificationManager mNM;
+	private boolean mWaitingForDataConnection = false;
+
+	private TelephonyManager mTelephonyManager;
 	
 	private final PhoneStateListener mDataStateListener = new PhoneStateListener()
 	{
@@ -53,15 +56,6 @@ public class UpdateCheckerService extends Service
 		}
 	};
 	
-	
-	private Looper mServiceLooper;
-	private ServiceHandler mServiceHandler;
-	private IUpdateServer mUpdateServer;
-	private NotificationManager mNM;
-	private boolean mWaitingForDataConnection = false;
-
-	private TelephonyManager mTelephonyManager;
-	
 	private final class ServiceHandler extends Handler
 	{
 
@@ -75,10 +69,10 @@ public class UpdateCheckerService extends Service
 		{
             Bundle arguments = (Bundle)msg.obj;
             
-            int request = arguments.getInt(KEY_REQUEST); 
+            int request = arguments.getInt(Constants.KEY_REQUEST); 
             switch(request)
             {
-            	case REQUEST_CHECK_FOR_UPDATES:
+            	case Constants.REQUEST_CHECK_FOR_UPDATES:
 					checkForUpdates();
 					break;
             	default:
@@ -103,8 +97,6 @@ public class UpdateCheckerService extends Service
         mServiceLooper = thread.getLooper();
         mServiceHandler = new ServiceHandler(mServiceLooper);
         mUpdateServer = new PlainTextUpdateServer(this);
-		
-		INSTANCE = this;
 	}
 
 	@Override
@@ -137,7 +129,6 @@ public class UpdateCheckerService extends Service
 	public void onDestroy()
 	{
 		mServiceLooper.quit();
-		INSTANCE = null;
 	}
 
 	@Override
@@ -208,8 +199,8 @@ public class UpdateCheckerService extends Service
 		if(updateCountRoms > 0 || updateCountThemes > 0)
 		{
 			Intent i = new Intent(this, UpdateProcessInfo.class)
-							.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_NEW_UPDATE_LIST)
-							.putExtra(UpdateProcessInfo.KEY_UPDATE_LIST, (Serializable)availableUpdates);
+							.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_NEW_UPDATE_LIST)
+							.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)availableUpdates);
 			
 			PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
 												PendingIntent.FLAG_ONE_SHOT);
@@ -260,7 +251,7 @@ public class UpdateCheckerService extends Service
 	{
 		Resources res = getResources();
 		Intent i = new Intent(this, UpdateProcessInfo.class)
-						.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_UPDATE_CHECK_ERROR);
+						.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_UPDATE_CHECK_ERROR);
 
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
 															PendingIntent.FLAG_ONE_SHOT);

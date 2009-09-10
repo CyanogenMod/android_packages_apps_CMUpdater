@@ -14,7 +14,6 @@ import android.util.Log;
 public class IOUtils
 {
     private static final String TAG = "<CM-Updater> IOUtils";
-    //private static final String MD5_COMMAND = "md5sum";
     
     //Non instantiable class
     private IOUtils()

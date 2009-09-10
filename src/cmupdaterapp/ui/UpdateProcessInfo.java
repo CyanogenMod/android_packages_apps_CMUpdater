@@ -73,32 +73,6 @@ import com.google.zxing.integration.android.IntentResult;
 public class UpdateProcessInfo extends IUpdateProcessInfo
 {
 	private static final String TAG = "<CM-Updater> UpdateProcessInfo";
-	private static final String STORED_STATE_FILENAME = "CMUpdater.ser";
-
-	private static final int MENU_ID_UPDATE_NOW = 1;
-	private static final int MENU_ID_SCAN_QR = 2;
-	private static final int MENU_ID_CONFIG= 3;
-	private static final int MENU_ID_ABOUT= 4;
-	private static final int MENU_ID_CHANGELOG= 5;
-
-	private static final String KEY_AVAILABLE_UPDATES = "cmupdaterapp.availableUpdates";
-	private static final String KEY_MIRROR_NAME = "cmupdaterapp.mirrorName";
-
-	public static final int REQUEST_NEW_UPDATE_LIST = 1;
-	public static final int REQUEST_UPDATE_CHECK_ERROR = 2;
-	public static final int REQUEST_DOWNLOAD_FAILED = 3;
-	public static final int REQUEST_MD5CHECKER_CANCEL = 4;
-
-	public static final String KEY_REQUEST = "cmupdaterapp.keyRequest";
-	public static final String KEY_UPDATE_LIST = "cmupdaterapp.fullUpdateList";
-	
-	public static final int CHANGELOGTYPE_ROM = 1;
-	public static final int CHANGELOGTYPE_APP = 2;
-	public static final int CHANGELOGTYPE_THEME = 3;
-
-	public static final int FLIPPER_AVAILABLE_UPDATES = 0;
-	public static final int FLIPPER_EXISTING_UPDATES = 1;
-	public static final int FLIPPER_AVAILABLE_THEMES = 2;
 
 	private Spinner mUpdatesSpinner;
 	private Spinner mThemesSpinner;
@@ -118,10 +92,10 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	private File mUpdateFolder;
 	private Spinner mExistingUpdatesSpinner;
 
-	public static ProgressDialog ChangelogProgressDialog;
+	private ProgressDialog ChangelogProgressDialog;
 	public static Handler ChangelogProgressHandler;
-	public Thread ChangelogThread;
-	public List<Version> ChangelogList = null;
+	private Thread ChangelogThread;
+	private List<Version> ChangelogList = null;
 
 	private List<String> mfilenames;
 
@@ -153,15 +127,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 	};
 
-	//static so the reference is kept while the thread is running
-	//private static DownloadUpdateTask mDownloadUpdateTask;
-
-
 	private final View.OnClickListener mDownloadUpdateButtonListener = new View.OnClickListener()
 	{
 		public void onClick(View v)
 		{
-			if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
+			if(!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState()))
 			{
 				new AlertDialog.Builder(UpdateProcessInfo.this)
 				.setTitle(R.string.sdcard_is_not_present_dialog_title)
@@ -215,7 +185,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		public void onClick(View v)
 		{
-			if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
+			if(!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState()))
 			{
 				new AlertDialog.Builder(UpdateProcessInfo.this)
 				.setTitle(R.string.sdcard_is_not_present_dialog_title)
@@ -313,7 +283,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		public void onClick(View v)
 		{
-			getChangelog(CHANGELOGTYPE_ROM);
+			getChangelog(Constants.CHANGELOGTYPE_ROM);
 		}
 	};
 	
@@ -321,7 +291,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		public void onClick(View v)
 		{
-			getChangelog(CHANGELOGTYPE_THEME);
+			getChangelog(Constants.CHANGELOGTYPE_THEME);
 		}
 	};
 
@@ -329,7 +299,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		public void onClick(View v)
 		{
-			if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
+			if(!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState()))
 			{
 				new AlertDialog.Builder(UpdateProcessInfo.this)
 				.setTitle(R.string.sdcard_is_not_present_dialog_title)
@@ -417,7 +387,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		
 		public void onClick(View v)
 		{	
-			if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
+			if(!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState()))
 			{
 				new AlertDialog.Builder(UpdateProcessInfo.this)
 				.setTitle(R.string.sdcard_is_not_present_dialog_title)
@@ -568,7 +538,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			if(result == true)
 			{
 				Intent i = new Intent(UpdateProcessInfo.this, ApplyUploadActivity.class)
-				.putExtra(ApplyUploadActivity.KEY_UPDATE_INFO, ui);
+				.putExtra(Constants.KEY_UPDATE_INFO, ui);
 				startActivity(i);
 			}
 			else
@@ -584,7 +554,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			Log.w(TAG, "MD5Checker Task cancelled");
 			Intent i = new Intent(UpdateProcessInfo.this, UpdateProcessInfo.class);
-			i.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_MD5CHECKER_CANCEL);
+			i.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_MD5CHECKER_CANCEL);
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);
 		}
@@ -662,7 +632,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			prefs.setFirstRun(false);
 		}
 		//If an older Version was installed, the ModVersion is still ADP1. So reset it
-		if(prefs.getConfiguredModString().equals("ADP1"))
+		if(prefs.getConfiguredModString().equalsIgnoreCase("ADP1"))
 			prefs.configureModString();
 
 		try
@@ -716,11 +686,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		Intent UpdateIntent = getIntent();
 		if (UpdateIntent != null)
 		{
-			int req = UpdateIntent.getIntExtra(KEY_REQUEST, -1);
+			int req = UpdateIntent.getIntExtra(Constants.KEY_REQUEST, -1);
 			switch(req)
 			{
-				case REQUEST_NEW_UPDATE_LIST:
-					mAvailableUpdates = (FullUpdateInfo) getIntent().getSerializableExtra(KEY_UPDATE_LIST);
+				case Constants.REQUEST_NEW_UPDATE_LIST:
+					mAvailableUpdates = (FullUpdateInfo) getIntent().getSerializableExtra(Constants.KEY_UPDATE_INFO);
 					try
 					{
 						saveState();
@@ -730,16 +700,16 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 						Log.e(TAG, "Unable to save application state", e);
 					}
 					break;
-				case REQUEST_UPDATE_CHECK_ERROR:
+				case Constants.REQUEST_UPDATE_CHECK_ERROR:
 					Log.w(TAG, "Update check error");
 					Toast.makeText(this, R.string.not_update_check_error_ticker, Toast.LENGTH_SHORT).show();
 					break;
 		
-				case REQUEST_DOWNLOAD_FAILED:
+				case Constants.REQUEST_DOWNLOAD_FAILED:
 					Log.w(TAG, "Download Error");
 					Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_SHORT).show();
 					break;
-				case REQUEST_MD5CHECKER_CANCEL:
+				case Constants.REQUEST_MD5CHECKER_CANCEL:
 					Log.w(TAG, "MD5Check canceled. Switching Layout");
 					Toast.makeText(this, R.string.md5_check_cancelled, Toast.LENGTH_SHORT).show();
 					break;
@@ -834,7 +804,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 
 	private void saveState() throws IOException
 	{
-		ObjectOutputStream oos = new ObjectOutputStream(openFileOutput(STORED_STATE_FILENAME, Context.MODE_PRIVATE));
+		ObjectOutputStream oos = new ObjectOutputStream(openFileOutput(Constants.STORED_STATE_FILENAME, Context.MODE_PRIVATE));
 		try
 		{
 			Map<String,Serializable> data = new HashMap<String, Serializable>();
@@ -852,7 +822,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	@SuppressWarnings("unchecked")
 	private void loadState() throws IOException
 	{
-		ObjectInputStream ois = new ObjectInputStream(openFileInput(STORED_STATE_FILENAME));
+		ObjectInputStream ois = new ObjectInputStream(openFileInput(Constants.STORED_STATE_FILENAME));
 		try
 		{
 			Map<String,Serializable> data = (Map<String, Serializable>) ois.readObject();
@@ -876,15 +846,15 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	private void restoreSavedInstanceValues(Bundle b)
 	{
 		if(b == null) return;
-		mAvailableUpdates = (FullUpdateInfo) b.getSerializable(KEY_AVAILABLE_UPDATES);
-		mMirrorName = b.getString(KEY_MIRROR_NAME);
+		mAvailableUpdates = (FullUpdateInfo) b.getSerializable(Constants.KEY_AVAILABLE_UPDATES);
+		mMirrorName = b.getString(Constants.KEY_MIRROR_NAME);
 	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState)
 	{
-		outState.putSerializable(KEY_AVAILABLE_UPDATES, (Serializable)mAvailableUpdates);
-		outState.putString(KEY_MIRROR_NAME, mMirrorName);
+		outState.putSerializable(Constants.KEY_AVAILABLE_UPDATES, (Serializable)mAvailableUpdates);
+		outState.putString(Constants.KEY_MIRROR_NAME, mMirrorName);
 	}
 
 	/* (non-Javadoc)
@@ -895,11 +865,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		super.onNewIntent(intent);
 
-		int req = intent.getIntExtra(KEY_REQUEST, -1);
+		int req = intent.getIntExtra(Constants.KEY_REQUEST, -1);
 		switch(req)
 		{
-			case REQUEST_NEW_UPDATE_LIST:
-				switchToUpdateChooserLayout((FullUpdateInfo) intent.getSerializableExtra(KEY_UPDATE_LIST));
+			case Constants.REQUEST_NEW_UPDATE_LIST:
+				switchToUpdateChooserLayout((FullUpdateInfo) intent.getSerializableExtra(Constants.KEY_UPDATE_INFO));
 				break;
 		}
 	}
@@ -908,15 +878,15 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		super.onCreateOptionsMenu(menu);
-		menu.add(Menu.NONE, MENU_ID_UPDATE_NOW, Menu.NONE, R.string.menu_check_now)
+		menu.add(Menu.NONE, Constants.MENU_ID_UPDATE_NOW, Menu.NONE, R.string.menu_check_now)
 		.setIcon(R.drawable.check_now);
-		menu.add(Menu.NONE, MENU_ID_SCAN_QR, Menu.NONE, R.string.menu_qr_code)
+		menu.add(Menu.NONE, Constants.MENU_ID_SCAN_QR, Menu.NONE, R.string.menu_qr_code)
 		.setIcon(R.drawable.button_scanqr);
-		menu.add(Menu.NONE, MENU_ID_CONFIG, Menu.NONE, R.string.menu_config)
+		menu.add(Menu.NONE, Constants.MENU_ID_CONFIG, Menu.NONE, R.string.menu_config)
 		.setIcon(R.drawable.button_config);
-		menu.add(Menu.NONE, MENU_ID_ABOUT, Menu.NONE, R.string.menu_about)
+		menu.add(Menu.NONE, Constants.MENU_ID_ABOUT, Menu.NONE, R.string.menu_about)
 		.setIcon(R.drawable.button_about);
-		menu.add(Menu.NONE, MENU_ID_CHANGELOG, Menu.NONE, R.string.menu_changelog)
+		menu.add(Menu.NONE, Constants.MENU_ID_CHANGELOG, Menu.NONE, R.string.menu_changelog)
 		.setIcon(R.drawable.button_clog);
 		return true;
 	}
@@ -932,7 +902,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
 		{
 			//Download in progress
-			menu.findItem(MENU_ID_UPDATE_NOW).setEnabled(false);
+			menu.findItem(Constants.MENU_ID_UPDATE_NOW).setEnabled(false);
 		}
 		else if (mAvailableUpdates != null)
 		{
@@ -953,20 +923,20 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		switch(item.getItemId())
 		{
-			case MENU_ID_UPDATE_NOW:
+			case Constants.MENU_ID_UPDATE_NOW:
 				checkForUpdates();
 				return true;
-			case MENU_ID_SCAN_QR:
+			case Constants.MENU_ID_SCAN_QR:
 				scanQRURL();
 				return true;
-			case MENU_ID_CONFIG:
+			case Constants.MENU_ID_CONFIG:
 				showConfigActivity();
 				return true;
-			case MENU_ID_ABOUT:
+			case Constants.MENU_ID_ABOUT:
 				showAboutDialog();
 				return true;
-			case MENU_ID_CHANGELOG:
-				getChangelog(CHANGELOGTYPE_APP);
+			case Constants.MENU_ID_CHANGELOG:
+				getChangelog(Constants.CHANGELOGTYPE_APP);
 				//Open the Browser for Changelog
 				//Preferences prefs = Preferences.getPreferences(this);
 				//Intent i = new Intent(Intent.ACTION_VIEW);
@@ -1036,8 +1006,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			public void onClick(View view)
 			{
-				if(flipper.getDisplayedChild() != FLIPPER_AVAILABLE_UPDATES)
-					flipper.setDisplayedChild(FLIPPER_AVAILABLE_UPDATES);
+				if(flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_UPDATES)
+					flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_UPDATES);
 			}
 		});
 		Button btnExistingUpdates=(Button)findViewById(R.id.button_existing_updates);
@@ -1045,8 +1015,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			public void onClick(View view)
 			{
-				if(flipper.getDisplayedChild() != FLIPPER_EXISTING_UPDATES)
-					flipper.setDisplayedChild(FLIPPER_EXISTING_UPDATES);
+				if(flipper.getDisplayedChild() != Constants.FLIPPER_EXISTING_UPDATES)
+					flipper.setDisplayedChild(Constants.FLIPPER_EXISTING_UPDATES);
 			}
 		});
 		Button btnAvailableThemes=(Button)findViewById(R.id.button_available_themes);
@@ -1054,8 +1024,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			public void onClick(View view)
 			{
-				if(flipper.getDisplayedChild() != FLIPPER_AVAILABLE_THEMES)
-					flipper.setDisplayedChild(FLIPPER_AVAILABLE_THEMES);
+				if(flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_THEMES)
+					flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_THEMES);
 			}
 		});
 		
@@ -1193,7 +1163,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
 			CheckNowUpdateChooserThemes.setVisibility(View.GONE);
 		}
-		//Updates Found
+		//Themes
 		else if(availableThemes != null && availableThemes.size() > 0)
 		{
 			btnDownloadTheme.setOnClickListener(mDownloadThemeButtonListener);
@@ -1259,39 +1229,39 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			@SuppressWarnings("unchecked")
 			public void handleMessage(Message msg)
 			{
-				if (UpdateProcessInfo.ChangelogProgressDialog != null)
-					UpdateProcessInfo.ChangelogProgressDialog.dismiss();
+				if (ChangelogProgressDialog != null)
+					ChangelogProgressDialog.dismiss();
 				if (msg.obj instanceof String)
 				{
 					Toast.makeText(UpdateProcessInfo.this, (CharSequence) msg.obj, Toast.LENGTH_LONG).show();
 					ChangelogList = null;
 					UpdateProcessInfo.this.ChangelogThread.interrupt();
-					UpdateProcessInfo.ChangelogProgressDialog.dismiss();
-					displayChangelog(CHANGELOGTYPE_APP);
+					ChangelogProgressDialog.dismiss();
+					displayChangelog(Constants.CHANGELOGTYPE_APP);
 				}
 				else if (msg.obj instanceof List<?>)
 				{
 					ChangelogList = (List<Version>) msg.obj;
 					UpdateProcessInfo.this.ChangelogThread.interrupt();
-					UpdateProcessInfo.ChangelogProgressDialog.dismiss();
-					displayChangelog(CHANGELOGTYPE_APP);
+					ChangelogProgressDialog.dismiss();
+					displayChangelog(Constants.CHANGELOGTYPE_APP);
 				}
 	        }
 	    };
 		
 		switch (changelogType)
 		{
-			case CHANGELOGTYPE_ROM:
+			case Constants.CHANGELOGTYPE_ROM:
 				//Get the ROM Changelog and Display the Changelog
 				ChangelogList = Changelog.getRomChangelog((UpdateInfo) mUpdatesSpinner.getSelectedItem());
-				displayChangelog(CHANGELOGTYPE_ROM);
+				displayChangelog(Constants.CHANGELOGTYPE_ROM);
 				break;
-			case CHANGELOGTYPE_THEME:
+			case Constants.CHANGELOGTYPE_THEME:
 				//Get the ROM Changelog and Display the Changelog
 				ChangelogList = Changelog.getRomChangelog((UpdateInfo) mThemesSpinner.getSelectedItem());
-				displayChangelog(CHANGELOGTYPE_THEME);
+				displayChangelog(Constants.CHANGELOGTYPE_THEME);
 				break;
-			case CHANGELOGTYPE_APP:
+			case Constants.CHANGELOGTYPE_APP:
 				//Show a ProgressDialog and start the Thread. The Dialog is shown in the Handler Function
 				ChangelogProgressDialog = ProgressDialog.show(this, res.getString(R.string.changelog_progress_title), res.getString(R.string.changelog_progress_body), true);
 				ChangelogThread = new Thread(new Changelog(this));
@@ -1312,13 +1282,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		String dialogTitle;
 		switch (changelogtype)
 		{
-			case CHANGELOGTYPE_ROM:
+			case Constants.CHANGELOGTYPE_ROM:
 				dialogTitle = res.getString(R.string.changelog_title_rom);
 				break;
-			case CHANGELOGTYPE_THEME:
+			case Constants.CHANGELOGTYPE_THEME:
 				dialogTitle = res.getString(R.string.changelog_title_theme);
 				break;
-			case CHANGELOGTYPE_APP:
+			case Constants.CHANGELOGTYPE_APP:
 				dialogTitle = res.getString(R.string.changelog_title_app);
 				break;
 			default:
@@ -1455,8 +1425,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	private void downloadRequestedUpdate(UpdateInfo ui)
 	{
 		switchToDownloadingLayout(ui);
-		mUpdateDownloaderServiceIntent.putExtra(UpdateDownloaderService.KEY_REQUEST, UpdateDownloaderService.REQUEST_DOWNLOAD_UPDATE);
-		mUpdateDownloaderServiceIntent.putExtra(UpdateDownloaderService.KEY_UPDATE_INFO, ui);
+		mUpdateDownloaderServiceIntent.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_UPDATE);
+		mUpdateDownloaderServiceIntent.putExtra(Constants.KEY_UPDATE_INFO, ui);
 		startService(mUpdateDownloaderServiceIntent);
 		Toast.makeText(this, R.string.downloading_update, Toast.LENGTH_SHORT).show();
 	}

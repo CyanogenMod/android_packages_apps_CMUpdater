@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class UpdateListAdapter<T> extends ArrayAdapter<T>
 {
 	private final Context _context;
+	
 	public UpdateListAdapter(Context context, int textViewResourceId, List<T> objects)
 	{
 		super(context, textViewResourceId, objects);
@@ -42,9 +43,12 @@ public class UpdateListAdapter<T> extends ArrayAdapter<T>
 		}
 		
     	UpdateInfo info = (UpdateInfo) this.getItem(position);
-    	wrapper.getTextView().setText(info.name);
+    	if (info.type.equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_THEME))
+    		wrapper.getTextView().setText(info.name + " " + info.version);
+    	else
+    		wrapper.getTextView().setText(info.name);
     	
-    	if(info.branchCode.toLowerCase().equals("x"))
+    	if(info.branchCode.equalsIgnoreCase(Constants.UPDATE_INFO_BRANCH_EXPERIMENTAL))
     		wrapper.getImage().setImageResource(R.drawable.experimental);
     	else
     		wrapper.getImage().setImageResource(R.drawable.stable);
@@ -55,16 +59,16 @@ public class UpdateListAdapter<T> extends ArrayAdapter<T>
 //Class that Holds the Ids, so we have not to call findViewById each time which costs a lot of ressources
 class ViewWrapper
 {
-	View base;
-	TextView label = null;
-	ImageView image = null;
+	private View base;
+	private TextView label = null;
+	private ImageView image = null;
 
-	ViewWrapper(View base)
+	public ViewWrapper(View base)
 	{
 		this.base=base;
 	}
 
-	TextView getTextView()
+	public TextView getTextView()
 	{
 		if (label == null)
 		{
@@ -73,7 +77,7 @@ class ViewWrapper
 		return(label);
 	}
 
-	ImageView getImage()
+	public ImageView getImage()
 	{
 		if (image == null)
 		{

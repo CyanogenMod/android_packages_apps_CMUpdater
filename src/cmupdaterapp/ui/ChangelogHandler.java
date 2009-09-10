@@ -35,7 +35,7 @@ public class ChangelogHandler extends DefaultHandler
      * <tag attribute="attributeValue">*/ 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException
     { 
-         if (localName.equals("Version"))
+         if (localName.equalsIgnoreCase("Version"))
          {
         	 //New Version. Start a new Object
         	 currentVersion = new Version();
@@ -48,7 +48,7 @@ public class ChangelogHandler extends DefaultHandler
     @Override 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException
 	{ 
-         if (localName.equals("Version"))
+         if (localName.equalsIgnoreCase("Version"))
          { 
               //Changelog for this Version finished. Add it to the result Object
         	 co.add(currentVersion);

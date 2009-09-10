@@ -4,6 +4,7 @@ import java.security.InvalidParameterException;
 import java.util.Date;
 
 import cmupdaterapp.service.UpdateCheckerService;
+import cmupdaterapp.ui.Constants;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -20,24 +21,25 @@ public class StartupReceiver extends BroadcastReceiver
 	public void onReceive(Context ctx, Intent intent)
 	{
 		Preferences prefs = Preferences.getPreferences(ctx);
+		boolean notificationsEnabled = prefs.notificationsEnabled();
+		int updateFreq = prefs.getUpdateFrequency();
 		
 		//If older Version was installed before, the ModString is ADP1. So reset it
-		if(prefs.getConfiguredModString() == null || prefs.getConfiguredModString().equals("ADP1"))
+		if(prefs.getConfiguredModString() == null || prefs.getConfiguredModString().equalsIgnoreCase("ADP1"))
 		{
-			Preferences.getPreferences(ctx).configureModString();
+			prefs.configureModString();
 		}
-		
-		int updateFreq = prefs.getUpdateFrequency(); 
+		 
 		//Only check for updates if notifications are enabled
-		if(updateFreq == Preferences.UPDATE_FREQ_AT_BOOT && Preferences.getPreferences(ctx).notificationsEnabled())
+		if(updateFreq == Constants.UPDATE_FREQ_AT_BOOT && notificationsEnabled)
 		{
 			Intent i = new Intent(ctx, UpdateCheckerService.class)
-							.putExtra(UpdateCheckerService.KEY_REQUEST, UpdateCheckerService.REQUEST_CHECK_FOR_UPDATES);
+							.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_CHECK_FOR_UPDATES);
 			
 			Log.i(TAG, "Asking UpdateService to check for updates...");
 			ctx.startService(i);
 		}
-		else if(!(updateFreq == Preferences.UPDATE_FREQ_NONE) && Preferences.getPreferences(ctx).notificationsEnabled())
+		else if(!(updateFreq == Constants.UPDATE_FREQ_NONE) && notificationsEnabled)
 		{
 			scheduleUpdateService(ctx, updateFreq * 1000);
 		}
@@ -51,7 +53,7 @@ public class StartupReceiver extends BroadcastReceiver
 	public static void cancelUpdateChecks(Context ctx)
 	{
 		Intent i = new Intent(ctx, UpdateCheckerService.class)
-						.putExtra(UpdateCheckerService.KEY_REQUEST, UpdateCheckerService.REQUEST_CHECK_FOR_UPDATES);
+						.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_CHECK_FOR_UPDATES);
 		PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
 		
 		AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
@@ -65,7 +67,7 @@ public class StartupReceiver extends BroadcastReceiver
 			
 		Log.i(TAG, "Scheduling alarm to go off every "  + updateFrequency + " msegs");
 		Intent i = new Intent(ctx, UpdateCheckerService.class)
-						.putExtra(UpdateCheckerService.KEY_REQUEST, UpdateCheckerService.REQUEST_CHECK_FOR_UPDATES);
+						.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_CHECK_FOR_UPDATES);
 		PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
 
 		Date lastCheck = Preferences.getPreferences(ctx).getLastUpdateCheck();

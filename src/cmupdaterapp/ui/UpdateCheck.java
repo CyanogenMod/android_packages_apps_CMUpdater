@@ -23,8 +23,6 @@ import cmupdaterapp.utils.Preferences;
 
 public class UpdateCheck implements Runnable
 {
-	public static final String KEY_UPDATE_LIST = "cmupdaterapp.fullUpdateList";
-
 	private static final String TAG = "<CM-Updater> UpdateCheck";
 
 	private IUpdateServer mUpdateServer;
@@ -93,8 +91,8 @@ public class UpdateCheck implements Runnable
 				if(prefs.notificationsEnabled())
 				{	
 					Intent i = new Intent(upi, UpdateProcessInfo.class)
-							.putExtra(UpdateProcessInfo.KEY_UPDATE_LIST, (Serializable)ui)
-							.putExtra(UpdateProcessInfo.KEY_REQUEST, UpdateProcessInfo.REQUEST_NEW_UPDATE_LIST);
+							.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)ui)
+							.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_NEW_UPDATE_LIST);
 					PendingIntent contentIntent = PendingIntent.getActivity(upi, 0, i, PendingIntent.FLAG_ONE_SHOT);
 	
 					Notification notification = new Notification(R.drawable.icon_notification,

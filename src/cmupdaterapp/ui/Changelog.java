@@ -22,7 +22,7 @@ import android.util.Log;
 class Changelog implements Runnable
 {
 	private static final String TAG = "<CM-Updater> Changelog";
-	Preferences p;
+	private Preferences p;
 	
 	public Changelog(IUpdateProcessInfo upi)
 	{
@@ -34,7 +34,7 @@ class Changelog implements Runnable
 	{
 		Version v = new Version();
 		List<Version> returnValue = new LinkedList<Version>();
-		v.Version = ui.displayVersion;
+		v.Version = ui.version;
 		for (String str : ui.description.split("\\|"))
 		{
 			if(str != "")
