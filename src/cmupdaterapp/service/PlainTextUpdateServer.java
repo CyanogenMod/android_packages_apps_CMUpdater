@@ -387,7 +387,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 						if (WildcardUsed || showAllThemeUpdates || (themeInfos.name != null && themeInfos.name != "" && ui.name.equalsIgnoreCase(themeInfos.name)))
 						{
 							//Version matches or name is *. If *, display all Versions
-							if(WildcardUsed || showAllThemeUpdates || updateIsNewer(ui, mPreferences.convertVersionToIntArray(themeInfos.version), true))
+							if(WildcardUsed || showAllThemeUpdates || SysUtils.StringCompare(themeInfos.version, ui.version))
 							{
 								//Branch matches
 								if (branchMatches(ui, showExperimentalThemeUpdates))
