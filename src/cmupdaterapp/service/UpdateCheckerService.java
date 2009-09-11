@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
 
+import cmupdaterapp.customTypes.FullUpdateInfo;
+import cmupdaterapp.interfaces.IUpdateServer;
 import cmupdaterapp.ui.Constants;
 import cmupdaterapp.ui.R;
 import cmupdaterapp.ui.UpdateProcessInfo;

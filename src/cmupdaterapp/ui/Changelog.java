@@ -12,7 +12,8 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
-import cmupdaterapp.service.UpdateInfo;
+import cmupdaterapp.customTypes.UpdateInfo;
+import cmupdaterapp.interfaces.IUpdateProcessInfo;
 import cmupdaterapp.ui.UpdateProcessInfo;
 import cmupdaterapp.utils.Preferences;
 

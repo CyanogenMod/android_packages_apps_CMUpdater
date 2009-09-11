@@ -44,12 +44,13 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.RemoteViews;
+import cmupdaterapp.customTypes.UpdateInfo;
+import cmupdaterapp.interfaces.IUpdateProcessInfo;
 import cmupdaterapp.ui.ApplyUploadActivity;
 import cmupdaterapp.ui.Constants;
-import cmupdaterapp.ui.IUpdateProcessInfo;
 import cmupdaterapp.ui.R;
 import cmupdaterapp.ui.UpdateProcessInfo;
-import cmupdaterapp.utils.IOUtils;
+import cmupdaterapp.utils.MD5;
 import cmupdaterapp.utils.Preferences;
 
 public class UpdateDownloaderService extends Service
@@ -508,7 +509,7 @@ public class UpdateDownloaderService extends Service
 						if (md5Available)
 						{
 							Log.i(TAG, "Performing MD5 verification");
-							if(!IOUtils.checkMD5(mDownloadedMD5, mDestinationFile))
+							if(!MD5.checkMD5(mDownloadedMD5, mDestinationFile))
 							{
 								throw new IOException("MD5 verification failed");
 							}

@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import cmupdaterapp.service.UpdateInfo;
+import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.utils.Preferences;
 
 public class ApplyUploadActivity extends Activity

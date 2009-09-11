@@ -59,11 +59,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
-import cmupdaterapp.service.FullUpdateInfo;
+import cmupdaterapp.customTypes.FullUpdateInfo;
+import cmupdaterapp.customTypes.UpdateInfo;
+import cmupdaterapp.interfaces.IUpdateProcessInfo;
 import cmupdaterapp.service.PlainTextUpdateServer;
 import cmupdaterapp.service.UpdateDownloaderService;
-import cmupdaterapp.service.UpdateInfo;
-import cmupdaterapp.utils.IOUtils;
+import cmupdaterapp.utils.MD5;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.SysUtils;
 
@@ -488,8 +489,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			boolean MD5exists = false;
 			try
 			{
-				File MD5 = new File(params[0]+".md5sum");
-				if (MD5.exists() && MD5.canRead())
+				File MD5file = new File(params[0]+".md5sum");
+				if (MD5file.exists() && MD5file.canRead())
 					MD5exists = true;
 				if (params[0].exists() && params[0].canRead())
 				{
@@ -497,9 +498,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					if(MD5exists)
 					{
 						//Calculate MD5 of Existing Update
-						String calculatedMD5 = IOUtils.calculateMD5(params[0]);
+						String calculatedMD5 = MD5.calculateMD5(params[0]);
 						//Read the existing MD5SUM
-						FileReader input = new FileReader(MD5);
+						FileReader input = new FileReader(MD5file);
 						BufferedReader bufRead = new BufferedReader(input);
 						String firstLine = bufRead.readLine();
 						bufRead.close();

@@ -1,7 +1,9 @@
-package cmupdaterapp.service;
+package cmupdaterapp.customTypes;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+
+import cmupdaterapp.customTypes.UpdateInfo;
 
 public class FullUpdateInfo implements Serializable
 {

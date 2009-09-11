@@ -19,6 +19,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import cmupdaterapp.customTypes.FullUpdateInfo;
+import cmupdaterapp.customTypes.ThemeInfo;
+import cmupdaterapp.customTypes.UpdateInfo;
+import cmupdaterapp.interfaces.IUpdateServer;
 import cmupdaterapp.ui.Constants;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.SysUtils;

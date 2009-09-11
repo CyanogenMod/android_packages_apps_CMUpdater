@@ -38,7 +38,7 @@
 		<activity
 			android:name="cmupdaterapp.ui.ApplyUploadActivity"
 			android:configChanges="orientation|keyboardHidden" />
-		<receiver android:name="cmupdaterapp.utils.StartupReceiver">
+		<receiver android:name="cmupdaterapp.service.StartupReceiver">
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED"></action>
 				<category android:name="android.intent.category.HOME"></category>

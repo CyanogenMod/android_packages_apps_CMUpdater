@@ -13,8 +13,8 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 import android.webkit.URLUtil;
 import android.widget.Toast;
+import cmupdaterapp.service.StartupReceiver;
 import cmupdaterapp.utils.Preferences;
-import cmupdaterapp.utils.StartupReceiver;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;

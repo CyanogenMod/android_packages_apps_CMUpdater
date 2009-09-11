@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 
-import cmupdaterapp.service.ThemeInfo;
+import cmupdaterapp.customTypes.ThemeInfo;
 import cmupdaterapp.ui.Constants;
 import cmupdaterapp.ui.R;
 import android.content.Context;

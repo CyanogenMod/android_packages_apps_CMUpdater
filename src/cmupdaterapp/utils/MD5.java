@@ -11,12 +11,12 @@ import java.security.NoSuchAlgorithmException;
 
 import android.util.Log;
 
-public class IOUtils
+public class MD5
 {
-    private static final String TAG = "<CM-Updater> IOUtils";
+    private static final String TAG = "<CM-Updater> MD5";
     
     //Non instantiable class
-    private IOUtils()
+    private MD5()
     {
         //This constructor will not be called
     }
@@ -99,14 +99,14 @@ public class IOUtils
     
     public static String getRecoveryMD5()
 	{
-		String MD5 = null;
+		String MD5string = null;
 		try
 		{
 			File recovery = new File("/dev/mtd/mtd1");
 			if (recovery.exists())
 			{
-				MD5 = IOUtils.calculateMD5(recovery);
-				Log.d(TAG, "Recovery MD5: "+MD5);
+				MD5string = MD5.calculateMD5(recovery);
+				Log.d(TAG, "Recovery MD5: "+MD5string);
 			}
 			else
 				throw new IOException();
@@ -116,6 +116,6 @@ public class IOUtils
 			Log.e(TAG, "Error on checking recovery MD5. Message: ", e);
 			return null;
 		}
-		return MD5;
+		return MD5string;
 	}
 }

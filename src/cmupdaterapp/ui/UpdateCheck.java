@@ -17,8 +17,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
-import cmupdaterapp.service.FullUpdateInfo;
-import cmupdaterapp.service.IUpdateServer;
+import cmupdaterapp.customTypes.FullUpdateInfo;
+import cmupdaterapp.interfaces.IUpdateProcessInfo;
+import cmupdaterapp.interfaces.IUpdateServer;
 import cmupdaterapp.utils.Preferences;
 
 public class UpdateCheck implements Runnable

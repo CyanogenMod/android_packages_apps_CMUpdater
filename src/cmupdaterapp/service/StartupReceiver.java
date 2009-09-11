@@ -1,10 +1,11 @@
-package cmupdaterapp.utils;
+package cmupdaterapp.service;
 
 import java.security.InvalidParameterException;
 import java.util.Date;
 
 import cmupdaterapp.service.UpdateCheckerService;
 import cmupdaterapp.ui.Constants;
+import cmupdaterapp.utils.Preferences;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;

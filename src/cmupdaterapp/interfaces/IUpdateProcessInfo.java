@@ -1,7 +1,7 @@
-package cmupdaterapp.ui;
+package cmupdaterapp.interfaces;
 
-import cmupdaterapp.service.FullUpdateInfo;
-import cmupdaterapp.service.UpdateInfo;
+import cmupdaterapp.customTypes.FullUpdateInfo;
+import cmupdaterapp.customTypes.UpdateInfo;
 
 import android.app.Activity;
 

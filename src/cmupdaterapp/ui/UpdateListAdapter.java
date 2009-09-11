@@ -2,7 +2,8 @@ package cmupdaterapp.ui;
 
 import java.util.List;
 
-import cmupdaterapp.service.UpdateInfo;
+import cmupdaterapp.customTypes.UpdateInfo;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

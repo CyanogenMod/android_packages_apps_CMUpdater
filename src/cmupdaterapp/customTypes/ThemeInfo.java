@@ -1,4 +1,4 @@
-package cmupdaterapp.service;
+package cmupdaterapp.customTypes;
 
 public class ThemeInfo
 {		
