@@ -44,6 +44,7 @@
 	<string name="PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS">displayExperimentalThemeVersions</string>
 	<string name="PREF_UPDATE_FOLDER">prefUpdateFolder</string>
 	<string name="PREF_UPDATE_FOLDER_DEF">prefUpdateFolderDef</string>
+	<string name="PREF_THEMES_LIST">prefThemesList</string>
 	
 	<!-- Default Values for Preference Keys -->
 	<string name="PREF_UPDATE_CHECK_FREQUENCY_DEF_VALUE">-1</string>

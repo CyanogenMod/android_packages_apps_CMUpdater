@@ -25,7 +25,7 @@ public class ConfigActivity extends PreferenceActivity
 	private Preferences prefs;
 	private boolean RomBarcodeRequested;
 	private boolean ThemeBarcodeRequested;
-
+	
 	private final Preference.OnPreferenceChangeListener mUpdateCheckingFrequencyListener = new Preference.OnPreferenceChangeListener() {
 		public boolean onPreferenceChange(Preference preference, Object newValue)
 		{
@@ -253,6 +253,18 @@ public class ConfigActivity extends PreferenceActivity
 					Log.d(TAG, "Error on Setting UpdateFolder: " + prefs.getUpdateFolder());
 				}
 				ConfigActivity.this.finish();
+				return true;
+			}
+		});
+		
+		//Display List of Themes
+		pref = (Preference) findPreference(res.getString(R.string.PREF_THEMES_LIST));
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
+		{
+			public boolean onPreferenceClick(Preference preference)
+			{
+				Intent i = new Intent(ConfigActivity.this, ManageThemeList.class);
+				startActivity(i);
 				return true;
 			}
 		});

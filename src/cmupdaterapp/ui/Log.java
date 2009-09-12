@@ -12,21 +12,21 @@ public class Log
 
 	public static void v(String TAG, String logMe)
 	{
-		if(Config.LOGV) android.util.Log.v(LOGTAG, TAG + " " + logMe);
+		if(Config.LOGV) android.util.Log.v(LOGTAG, TAG + ": " + logMe);
 	}
 	
 	public static void d(String TAG, String logMe)
 	{
-		if(Config.LOGD) android.util.Log.d(LOGTAG, TAG + " " + logMe);
+		if(Config.LOGD) android.util.Log.d(LOGTAG, TAG + ": " + logMe);
 	}
 	
 	public static void e(String TAG, String logMe)
 	{
-		android.util.Log.e(LOGTAG, TAG + " " + logMe);
+		android.util.Log.e(LOGTAG, TAG + ": " + logMe);
 	}
 
 	public static void e(String TAG, String logMe, Exception ex)
 	{
-		android.util.Log.e(LOGTAG, TAG + " " + logMe, ex);
+		android.util.Log.e(LOGTAG, TAG + ": " + logMe, ex);
 	}
 }

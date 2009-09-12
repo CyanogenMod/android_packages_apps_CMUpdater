@@ -111,6 +111,10 @@
 			android:key="@string/PREF_THEMES_THEME_FILE_DEF"
 			android:title="@string/p_theme_file_def_title"
 			android:summary="@string/p_theme_file_def_summary" />
+		<Preference
+			android:key="@string/PREF_THEMES_LIST"
+			android:title="@string/p_theme_list_title"
+			android:summary="@string/p_theme_list_summary" />
 	</PreferenceScreen>
 	<!-- Advanced Properties -->
 	<PreferenceScreen

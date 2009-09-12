@@ -37,6 +37,9 @@
 			android:configChanges="orientation|keyboardHidden" />
 		<activity
 			android:name="cmupdaterapp.ui.ApplyUploadActivity"
+			android:configChanges="orientation|keyboardHidden" />			
+		<activity
+			android:name="cmupdaterapp.ui.ManageThemeList"
 			android:configChanges="orientation|keyboardHidden" />
 		<receiver android:name="cmupdaterapp.service.StartupReceiver">
 			<intent-filter>
