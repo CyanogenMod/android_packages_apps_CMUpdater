@@ -15,7 +15,7 @@ import android.widget.Toast;
 import cmupdaterapp.service.StartupReceiver;
 import cmupdaterapp.themelist.ManageThemeList;
 import cmupdaterapp.utils.Preferences;
-import cmupdaterapp.ui.Log;
+import cmupdaterapp.misc.Log;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;

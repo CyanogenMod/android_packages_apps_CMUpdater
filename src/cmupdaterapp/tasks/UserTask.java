@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cmupdaterapp.ui;
+package cmupdaterapp.tasks;
 
 import android.os.*;
 import android.os.Process;

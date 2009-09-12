@@ -1,4 +1,4 @@
-package cmupdaterapp.ui;
+package cmupdaterapp.misc;
 
 public class Constants
 {

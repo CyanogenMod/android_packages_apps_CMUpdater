@@ -23,8 +23,8 @@ import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.customTypes.ThemeInfo;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IUpdateServer;
-import cmupdaterapp.ui.Constants;
-import cmupdaterapp.ui.Log;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.misc.Log;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.SysUtils;
 

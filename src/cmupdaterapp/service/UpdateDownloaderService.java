@@ -44,14 +44,14 @@ import android.os.Looper;
 import android.os.Message;
 import android.widget.RemoteViews;
 import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.interfaces.IUpdateProcessInfo;
+import cmupdaterapp.interfaces.IMainActivity;
 import cmupdaterapp.ui.ApplyUpdateActivity;
-import cmupdaterapp.ui.Constants;
-import cmupdaterapp.ui.Main;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.ui.R;
 import cmupdaterapp.utils.MD5;
 import cmupdaterapp.utils.Preferences;
-import cmupdaterapp.ui.Log;
+import cmupdaterapp.misc.Log;
 
 public class UpdateDownloaderService extends Service
 {
@@ -84,7 +84,7 @@ public class UpdateDownloaderService extends Service
 	
 	private final IBinder mBinder = new LocalBinder();
 
-	private static IUpdateProcessInfo UPDATE_PROCESS_INFO;
+	private static IMainActivity UPDATE_PROCESS_INFO;
 
 	private WifiLock mWifiLock;
 	private WifiManager mWifiManager;
@@ -174,7 +174,7 @@ public class UpdateDownloaderService extends Service
 		}
 	}
 
-	public static void setUpdateProcessInfo(IUpdateProcessInfo iupi)
+	public static void setUpdateProcessInfo(IMainActivity iupi)
 	{
 		UPDATE_PROCESS_INFO = iupi;
 	}
@@ -344,7 +344,7 @@ public class UpdateDownloaderService extends Service
 	private void notificateDownloadError()
 	{
 		Resources res = getResources();
-		Intent i = new Intent(this, Main.class)
+		Intent i = new Intent(this, MainActivity.class)
 		.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
 
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
@@ -644,7 +644,7 @@ public class UpdateDownloaderService extends Service
 			mNotification.flags = Notification.FLAG_NO_CLEAR;
 			mNotification.flags = Notification.FLAG_ONGOING_EVENT;
 			RemoteViews mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
-			Intent mNotificationIntent = new Intent(this, Main.class);
+			Intent mNotificationIntent = new Intent(this, MainActivity.class);
 			PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
 			mNotification.contentView = mNotificationRemoteView;
 			mNotification.contentIntent = mNotificationContentIntent;
@@ -686,7 +686,7 @@ public class UpdateDownloaderService extends Service
 			DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 			mHandlerThread.interrupt();
 			//Go to the App with a download error
-			i = new Intent(this, Main.class);
+			i = new Intent(this, MainActivity.class);
 			i.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);
@@ -701,7 +701,7 @@ public class UpdateDownloaderService extends Service
 		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification mNotification = new Notification(R.drawable.icon_notification, res.getString(R.string.notification_tickertext), System.currentTimeMillis());
-		Intent mNotificationIntent = new Intent(this, Main.class);
+		Intent mNotificationIntent = new Intent(this, MainActivity.class);
 		PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
 		mNotification = new Notification(R.drawable.icon, res.getString(R.string.notification_finished), System.currentTimeMillis());
 		mNotification.flags = Notification.FLAG_AUTO_CANCEL;

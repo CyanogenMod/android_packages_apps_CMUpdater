@@ -1,4 +1,4 @@
-package cmupdaterapp.themelist;
+package cmupdaterapp.listadapters;
 
 import java.util.List;
 

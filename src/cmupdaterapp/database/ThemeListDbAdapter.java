@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.net.Uri;
 import cmupdaterapp.customTypes.ThemeList;
-import cmupdaterapp.ui.Log;
+import cmupdaterapp.misc.Log;
 
 public class ThemeListDbAdapter
 {

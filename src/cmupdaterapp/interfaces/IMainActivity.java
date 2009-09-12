@@ -5,7 +5,7 @@ import cmupdaterapp.customTypes.UpdateInfo;
 
 import android.app.Activity;
 
-public abstract class IUpdateProcessInfo extends Activity
+public abstract class IMainActivity extends Activity
 {
 	/**
 	 * Switches to the update chooser layout, providing the user with an UI to choose which update

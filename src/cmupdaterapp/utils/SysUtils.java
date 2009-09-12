@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import cmupdaterapp.ui.Constants;
-import cmupdaterapp.ui.Log;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.misc.Log;
 
 public class SysUtils
 {

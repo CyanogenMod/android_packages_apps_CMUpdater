@@ -1,4 +1,4 @@
-package cmupdaterapp.ui;
+package cmupdaterapp.changelog;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -15,19 +15,19 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.interfaces.IUpdateProcessInfo;
-import cmupdaterapp.ui.Main;
+import cmupdaterapp.interfaces.IMainActivity;
 import cmupdaterapp.utils.Preferences;
-import cmupdaterapp.ui.Log;
+import cmupdaterapp.misc.Log;
+import cmupdaterapp.ui.MainActivity;
 
 import android.os.Message;
 
-class Changelog implements Runnable
+public class Changelog implements Runnable
 {
 	private static final String TAG = "Changelog";
 	private Preferences p;
 	
-	public Changelog(IUpdateProcessInfo upi)
+	public Changelog(IMainActivity upi)
 	{
 		p = Preferences.getPreferences(upi);
 	}
@@ -85,6 +85,6 @@ class Changelog implements Runnable
 		{
 			Log.e(TAG, "Exception while creating SAXParser", e);
 		}
-        Main.ChangelogProgressHandler.sendMessage(m);
+		MainActivity.ChangelogProgressHandler.sendMessage(m);
 	}
 }

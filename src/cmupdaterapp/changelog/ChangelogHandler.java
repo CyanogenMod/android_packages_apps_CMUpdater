@@ -1,4 +1,4 @@
-package cmupdaterapp.ui;
+package cmupdaterapp.changelog;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -69,15 +69,4 @@ public class ChangelogHandler extends DefaultHandler
     	if (currentVersion != null && currentVersion.ChangeLogText != null && a != "")
     		currentVersion.ChangeLogText.add(a);
     }
-}
-
-class Version
-{
-	public String Version;
-	public List<String> ChangeLogText;
-	Version()
-	{
-		Version = "";
-		ChangeLogText = new LinkedList<String>();
-	}
 }

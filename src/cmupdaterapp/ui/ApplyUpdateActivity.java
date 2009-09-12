@@ -16,7 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.utils.Preferences;
-import cmupdaterapp.ui.Log;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.misc.Log;
 
 public class ApplyUpdateActivity extends Activity
 {

@@ -9,8 +9,8 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import cmupdaterapp.customTypes.ThemeInfo;
-import cmupdaterapp.ui.Constants;
-import cmupdaterapp.ui.Log;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.R;
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -4,8 +4,8 @@ import java.security.InvalidParameterException;
 import java.util.Date;
 
 import cmupdaterapp.service.UpdateCheckerService;
-import cmupdaterapp.ui.Constants;
-import cmupdaterapp.ui.Log;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.misc.Log;
 import cmupdaterapp.utils.Preferences;
 
 import android.app.AlarmManager;

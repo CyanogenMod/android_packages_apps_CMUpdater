@@ -1,8 +1,10 @@
-package cmupdaterapp.ui;
+package cmupdaterapp.listadapters;
 
 import java.util.List;
 
 import cmupdaterapp.customTypes.UpdateInfo;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.ui.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;

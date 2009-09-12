@@ -1,4 +1,4 @@
-package cmupdaterapp.ui;
+package cmupdaterapp.tasks;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -14,20 +14,23 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.widget.Toast;
 import cmupdaterapp.customTypes.FullUpdateInfo;
-import cmupdaterapp.interfaces.IUpdateProcessInfo;
+import cmupdaterapp.interfaces.IMainActivity;
 import cmupdaterapp.interfaces.IUpdateServer;
 import cmupdaterapp.utils.Preferences;
-import cmupdaterapp.ui.Log;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.misc.Log;
+import cmupdaterapp.ui.MainActivity;
+import cmupdaterapp.ui.R;
 
 public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 {
 	private static final String TAG = "CheckForUpdatesTask";
 
 	private IUpdateServer mUpdateServer;
-	private IUpdateProcessInfo mUpdateProcessInfo;	
+	private IMainActivity mUpdateProcessInfo;	
 
 	
-	public CheckForUpdatesTask(IUpdateServer updateServer, IUpdateProcessInfo upi)
+	public CheckForUpdatesTask(IUpdateServer updateServer, IMainActivity upi)
 	{
 		mUpdateServer = updateServer;
 		mUpdateProcessInfo = upi;
@@ -56,7 +59,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 	@Override
 	public void onPostExecute(FullUpdateInfo result)
 	{
-		IUpdateProcessInfo upi = mUpdateProcessInfo;
+		IMainActivity upi = mUpdateProcessInfo;
 		
 		Resources res = upi.getResources();
 		if(result == null)
@@ -82,7 +85,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 			Log.d(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
 			upi.switchToUpdateChooserLayout(result);
 			
-			Intent i = new Intent(upi, Main.class)
+			Intent i = new Intent(upi, MainActivity.class)
 							.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)result)
 							.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_NEW_UPDATE_LIST);
 			PendingIntent contentIntent = PendingIntent.getActivity(upi, 0, i, PendingIntent.FLAG_ONE_SHOT);

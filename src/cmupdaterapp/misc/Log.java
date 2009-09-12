@@ -1,4 +1,4 @@
-package cmupdaterapp.ui;
+package cmupdaterapp.misc;
 
 import android.util.Config;
 

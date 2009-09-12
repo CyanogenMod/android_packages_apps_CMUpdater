@@ -1,4 +1,4 @@
-package cmupdaterapp.ui;
+package cmupdaterapp.tasks;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -17,22 +17,25 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 import cmupdaterapp.customTypes.FullUpdateInfo;
-import cmupdaterapp.interfaces.IUpdateProcessInfo;
+import cmupdaterapp.interfaces.IMainActivity;
 import cmupdaterapp.interfaces.IUpdateServer;
 import cmupdaterapp.utils.Preferences;
-import cmupdaterapp.ui.Log;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.misc.Log;
+import cmupdaterapp.ui.MainActivity;
+import cmupdaterapp.ui.R;
 
 public class UpdateCheck implements Runnable
 {
 	private static final String TAG = "UpdateCheck";
 
 	private IUpdateServer mUpdateServer;
-	private IUpdateProcessInfo mUpdateProcessInfo;	
+	private IMainActivity mUpdateProcessInfo;	
 	private ProgressDialog p;
 	
 	private FullUpdateInfo ui = null;
 	
-	public UpdateCheck(IUpdateServer updateServer, IUpdateProcessInfo upi, ProgressDialog pg)
+	public UpdateCheck(IUpdateServer updateServer, IMainActivity upi, ProgressDialog pg)
 	{
 		mUpdateServer = updateServer;
 		mUpdateProcessInfo = upi;
@@ -59,7 +62,7 @@ public class UpdateCheck implements Runnable
 		//@Override
 		public void handleMessage(Message msg)
 		{
-			IUpdateProcessInfo upi = mUpdateProcessInfo;
+			IMainActivity upi = mUpdateProcessInfo;
 			
 			Resources res = upi.getResources();
 			if(ui == null)
@@ -91,7 +94,7 @@ public class UpdateCheck implements Runnable
 				upi.switchToUpdateChooserLayout(ui);
 				if(prefs.notificationsEnabled())
 				{	
-					Intent i = new Intent(upi, Main.class)
+					Intent i = new Intent(upi, MainActivity.class)
 							.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)ui)
 							.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_NEW_UPDATE_LIST);
 					PendingIntent contentIntent = PendingIntent.getActivity(upi, 0, i, PendingIntent.FLAG_ONE_SHOT);

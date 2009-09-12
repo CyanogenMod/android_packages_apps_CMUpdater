@@ -9,7 +9,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import cmupdaterapp.ui.Log;
+import cmupdaterapp.misc.Log;
 
 public class MD5
 {
