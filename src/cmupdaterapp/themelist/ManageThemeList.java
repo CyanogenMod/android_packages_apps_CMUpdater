@@ -1,15 +1,22 @@
-package cmupdaterapp.ui;
+package cmupdaterapp.themelist;
 
 import java.util.LinkedList;
 
 import cmupdaterapp.customTypes.FullThemeList;
 import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.database.ThemeListDbAdapter;
+import cmupdaterapp.ui.Constants;
+import cmupdaterapp.ui.Log;
+import cmupdaterapp.ui.R;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class ManageThemeList extends ListActivity
@@ -22,6 +29,7 @@ public class ManageThemeList extends ListActivity
 	private Cursor themeListCursor;
 	private FullThemeList fullThemeList;
 	private LinkedList<ThemeList> fullThemeListList;
+	private Dialog dialog; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -40,7 +48,7 @@ public class ManageThemeList extends ListActivity
 	protected void onStart()
 	{
 		super.onStart();
-		UpdateListAdapter<ThemeList> spAdapterRoms = new UpdateListAdapter<ThemeList>(
+		ThemeListAdapter<ThemeList> spAdapterRoms = new ThemeListAdapter<ThemeList>(
 				this,
 				android.R.layout.simple_list_item_1,
 				fullThemeListList);
@@ -84,11 +92,50 @@ public class ManageThemeList extends ListActivity
 	}
 	
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		super.onCreateOptionsMenu(menu);
+		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_ADD, Menu.NONE, R.string.menu_add_theme);
+		return true;
+	}
+	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item)
+	{
+		switch(item.getItemId())
+		{
+			case Constants.MENU_THEME_LIST_ADD:
+				createNewThemeList();
+				return true;
+			default:
+				Log.d(TAG, "Unknown Menu ID:" + item.getItemId());
+				break;
+		}
+
+		return super.onMenuItemSelected(featureId, item);
+	}
+	
+	@Override
 	public void onDestroy()
 	{
 		// Close the database
 		Log.d(TAG, "Closing Database");
 		themeListDb.close();
 		super.onDestroy();
+	}
+	
+	private void createNewThemeList()
+	{
+		dialog = new Dialog(this);
+		dialog.setContentView(R.layout.newthemeserver);
+		Button save = (Button) dialog.findViewById(R.id.new_theme_list_button_save);
+		save.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View v)
+			{
+				dialog.dismiss();
+			}
+		});
+		dialog.show();
 	}
 }

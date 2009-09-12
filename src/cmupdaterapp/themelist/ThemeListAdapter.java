@@ -1,8 +1,9 @@
-package cmupdaterapp.ui;
+package cmupdaterapp.themelist;
 
 import java.util.List;
 
 import cmupdaterapp.customTypes.ThemeList;
+import cmupdaterapp.ui.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;

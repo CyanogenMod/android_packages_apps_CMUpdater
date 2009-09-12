@@ -49,12 +49,15 @@ public class Constants
 	//Request Downloadservice
 	public static final int REQUEST_DOWNLOAD_UPDATE = 1;
 	
-	//Menu
+	//Menu main Layout
 	public static final int MENU_ID_UPDATE_NOW = 1;
 	public static final int MENU_ID_SCAN_QR = 2;
-	public static final int MENU_ID_CONFIG= 3;
-	public static final int MENU_ID_ABOUT= 4;
-	public static final int MENU_ID_CHANGELOG= 5;
+	public static final int MENU_ID_CONFIG = 3;
+	public static final int MENU_ID_ABOUT = 4;
+	public static final int MENU_ID_CHANGELOG = 5;
+	
+	//Menu ThemeList Layout
+	public static final int MENU_THEME_LIST_ADD = 1;
 	
 	//Filename for Instance save
 	public static final String STORED_STATE_FILENAME = "CMUpdater.ser";

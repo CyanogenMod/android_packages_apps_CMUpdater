@@ -13,6 +13,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.webkit.URLUtil;
 import android.widget.Toast;
 import cmupdaterapp.service.StartupReceiver;
+import cmupdaterapp.themelist.ManageThemeList;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.ui.Log;
 
