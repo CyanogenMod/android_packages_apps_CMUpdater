@@ -77,10 +77,10 @@ public class UpdateCheckerService extends Service
 					checkForUpdates();
 					break;
             	default:
-            		Log.v(TAG, "Unknown request ID:" + request);
+            		Log.d(TAG, "Unknown request ID:" + request);
             }
 
-            Log.v(TAG, "Done with #" + msg.arg1);
+            Log.d(TAG, "Done with #" + msg.arg1);
             stopSelf(msg.arg1);
 		}
 	}
@@ -107,17 +107,17 @@ public class UpdateCheckerService extends Service
 		{
 			if(mWaitingForDataConnection)
 			{
-				Log.v(TAG, "Another update check is waiting for data connection. Skipping");
+				Log.d(TAG, "Another update check is waiting for data connection. Skipping");
 				return;
 			}
 		}
-		Log.v(TAG, "Starting #" + startId + ": " + intent.getExtras());
+		Log.d(TAG, "Starting #" + startId + ": " + intent.getExtras());
         
         Message msg = mServiceHandler.obtainMessage();
         msg.arg1 = startId;
         msg.obj = intent.getExtras();
         mServiceHandler.sendMessage(msg);
-        Log.v(TAG, "Sending: " + msg);
+        Log.d(TAG, "Sending: " + msg);
 	}
 	
 	private boolean isDataConnected()
@@ -149,7 +149,7 @@ public class UpdateCheckerService extends Service
 			//wait for a data connection
 			while(!isDataConnected())
 			{
-				Log.v(TAG, "No data connection, waiting for a data connection");
+				Log.d(TAG, "No data connection, waiting for a data connection");
 				registerDataListener();
 				synchronized (mTelephonyManager)
 				{
@@ -167,7 +167,7 @@ public class UpdateCheckerService extends Service
 			
 			try
 			{
-				Log.v(TAG, "Checking for updates...");
+				Log.d(TAG, "Checking for updates...");
 				availableUpdates = mUpdateServer.getAvailableUpdates();
 				break;
 			}
@@ -195,7 +195,7 @@ public class UpdateCheckerService extends Service
 		int updateCountRoms = availableUpdates.getRomCount();
 		int updateCountThemes = availableUpdates.getThemeCount();
 		int updateCount = availableUpdates.getUpdateCount();
-		Log.v(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
+		Log.d(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
 		
 		if(updateCountRoms > 0 || updateCountThemes > 0)
 		{
@@ -235,7 +235,7 @@ public class UpdateCheckerService extends Service
 		}
 		else
 		{
-			Log.v(TAG, "No updates found");
+			Log.d(TAG, "No updates found");
 		}
 	}
 

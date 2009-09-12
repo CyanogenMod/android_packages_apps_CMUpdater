@@ -25,7 +25,7 @@ public class MD5
     {
     	if (md5 == null || md5 == "" || updateFile == null)
     	{
-    		Log.v(TAG, "md5 String NULL or UpdateFile NULL");
+    		Log.d(TAG, "md5 String NULL or UpdateFile NULL");
     		return false;
     	}
     	
@@ -33,12 +33,12 @@ public class MD5
     	
     	if(calculatedDigest == null)
     	{
-    		Log.v(TAG, "calculatedDigest NULL");
+    		Log.d(TAG, "calculatedDigest NULL");
     		return false;
     	}
     	
-    	Log.v(TAG, "Calculated digest: " + calculatedDigest);
-		Log.v(TAG, "Provided digest: " + md5);
+    	Log.d(TAG, "Calculated digest: " + calculatedDigest);
+		Log.d(TAG, "Provided digest: " + md5);
 		
 		return calculatedDigest.equalsIgnoreCase(md5);
 	}
@@ -106,7 +106,7 @@ public class MD5
 			if (recovery.exists())
 			{
 				MD5string = MD5.calculateMD5(recovery);
-				Log.v(TAG, "Recovery MD5: "+MD5string);
+				Log.d(TAG, "Recovery MD5: "+MD5string);
 			}
 			else
 				throw new IOException();

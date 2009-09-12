@@ -553,7 +553,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		@Override
 		public void onCancelled()
 		{
-			Log.v(TAG, "MD5Checker Task cancelled");
+			Log.d(TAG, "MD5Checker Task cancelled");
 			Intent i = new Intent(UpdateProcessInfo.this, UpdateProcessInfo.class);
 			i.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_MD5CHECKER_CANCEL);
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -571,18 +571,18 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			{
 				public void onClick(DialogInterface dialog, int which)
 				{
-					Log.v(TAG, "Positive Download Cancel Button pressed");
+					Log.d(TAG, "Positive Download Cancel Button pressed");
 					if (mUpdateDownloaderService!=null)
 					{
 						mUpdateDownloaderService.cancelDownload();
-						Log.v(TAG, "Cancel onClick Event: cancelDownload finished");
+						Log.d(TAG, "Cancel onClick Event: cancelDownload finished");
 					}
 					else
-						Log.v(TAG, "Cancel Download: mUpdateDownloaderService was NULL");
+						Log.d(TAG, "Cancel Download: mUpdateDownloaderService was NULL");
 					try
 					{
 						stopService(mUpdateDownloaderServiceIntent);
-						Log.v(TAG, "stopService(mUpdateDownloaderServiceIntent) finished");
+						Log.d(TAG, "stopService(mUpdateDownloaderServiceIntent) finished");
 					}
 					catch (Exception ex)
 					{
@@ -591,14 +591,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					try
 					{
 						unbindService(mUpdateDownloaderServiceConnection);
-						Log.v(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
+						Log.d(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
 					}
 					catch (Exception ex)
 					{
 						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceConnection unbind failed", ex);
 					}
 					//UpdateDownloaderService.setUpdateProcessInfo(null);
-					Log.v(TAG, "Download Cancel Procedure Finished. Switching Layout");
+					Log.d(TAG, "Download Cancel Procedure Finished. Switching Layout");
 					switchToUpdateChooserLayout(null);
 				}
 			})
@@ -606,7 +606,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			{
 				public void onClick(DialogInterface dialog, int which)
 				{
-					Log.v(TAG, "Negative Download Cancel Button pressed");
+					Log.d(TAG, "Negative Download Cancel Button pressed");
 					dialog.dismiss();
 				}
 			})
@@ -618,7 +618,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		Log.v(TAG, "onCreate called");
+		Log.d(TAG, "onCreate called");
 		super.onCreate(savedInstanceState);
 		prefs = Preferences.getPreferences(this);
 		res = getResources();
@@ -655,14 +655,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	@Override
 	protected void onStart()
 	{
-		Log.v(TAG, "onStart called");
+		Log.d(TAG, "onStart called");
 		super.onStart();
 		
 		//Delete any older Versions, because of the changed Signing Key
 		while (deleteOldVersionsOfUpdater()==false)
 		{
 			//User MUST uninstall old App
-			Log.v(TAG, "Old App not uninstalled, try again");
+			Log.d(TAG, "Old App not uninstalled, try again");
 		}
 		
 		try
@@ -682,7 +682,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	@Override
 	protected void onResume()
 	{
-		Log.v(TAG, "onResume called");
+		Log.d(TAG, "onResume called");
 		super.onResume();
 		Intent UpdateIntent = getIntent();
 		if (UpdateIntent != null)
@@ -702,26 +702,26 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					}
 					break;
 				case Constants.REQUEST_UPDATE_CHECK_ERROR:
-					Log.v(TAG, "Update check error");
+					Log.d(TAG, "Update check error");
 					Toast.makeText(this, R.string.not_update_check_error_ticker, Toast.LENGTH_SHORT).show();
 					break;
 		
 				case Constants.REQUEST_DOWNLOAD_FAILED:
-					Log.v(TAG, "Download Error");
+					Log.d(TAG, "Download Error");
 					Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_SHORT).show();
 					break;
 				case Constants.REQUEST_MD5CHECKER_CANCEL:
-					Log.v(TAG, "MD5Check canceled. Switching Layout");
+					Log.d(TAG, "MD5Check canceled. Switching Layout");
 					Toast.makeText(this, R.string.md5_check_cancelled, Toast.LENGTH_SHORT).show();
 					break;
 				default:
-					Log.v(TAG, "No Intent. Starting App in Default mode");
+					Log.d(TAG, "No Intent. Starting App in Default mode");
 					break;
 			}
 		}
 		else
 		{
-			Log.v(TAG, "Intent is NULL");
+			Log.d(TAG, "Intent is NULL");
 		}
 		
 		mfilenames = null;
@@ -762,13 +762,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		setWallpaper();
         super.onConfigurationChanged(newConfig); 
-        Log.v(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
+        Log.d(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
     }
 	
 	@Override
 	protected void onStop()
 	{
-		Log.v(TAG, "onStop called");
+		Log.d(TAG, "onStop called");
 		super.onStop();
 		try
 		{
@@ -778,7 +778,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			Log.e(TAG, "Unable to save state", e);
 		}
-		Log.v(TAG, "App closed");
+		Log.d(TAG, "App closed");
 
 		if(mUpdateDownloaderService != null && !mUpdateDownloaderService.isDownloading())
 		{
@@ -800,7 +800,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			}
 		}
 		else
-			Log.v(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
+			Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
 	}
 
 	private void saveState() throws IOException
@@ -945,7 +945,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				//startActivity(i);
 				return true;
 			default:
-				Log.v(TAG, "Unknown Menu ID:" + item.getItemId());
+				Log.d(TAG, "Unknown Menu ID:" + item.getItemId());
 				break;
 		}
 
@@ -1442,7 +1442,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			deleteDir(mUpdateFolder);
 			mUpdateFolder.mkdir();
-			Log.v(TAG, "Updates deleted and UpdateFolder created again");
+			Log.d(TAG, "Updates deleted and UpdateFolder created again");
 			success=true;
 			Toast.makeText(this, R.string.delete_updates_success_message, Toast.LENGTH_LONG).show();
 		}
@@ -1477,8 +1477,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			}
 			else
 			{
-				Log.v(TAG, "Update to delete not found");
-				Log.v(TAG, "Zip File: "+ZIPfiletodelete.getAbsolutePath());
+				Log.d(TAG, "Update to delete not found");
+				Log.d(TAG, "Zip File: "+ZIPfiletodelete.getAbsolutePath());
 				return false;
 			}
 			if (MD5filetodelete.exists())
@@ -1487,8 +1487,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			}
 			else
 			{
-				Log.v(TAG, "MD5 to delete not found. No Problem here.");
-				Log.v(TAG, "MD5 File: "+MD5filetodelete.getAbsolutePath());
+				Log.d(TAG, "MD5 to delete not found. No Problem here.");
+				Log.d(TAG, "MD5 File: "+MD5filetodelete.getAbsolutePath());
 			}
 			ZIPfiletodelete = null;
 			MD5filetodelete = null;
@@ -1549,7 +1549,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					ui.fileName = tmp[tmp.length-1];
 					ui.name = ui.fileName;
 
-					Log.v(TAG, "Scanned QR Code: " + scanResult.getContents());
+					Log.d(TAG, "Scanned QR Code: " + scanResult.getContents());
 					downloadRequestedUpdate(ui);
 				}
 				else
@@ -1579,13 +1579,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			PackageInfo a = p.getPackageInfo(packageName, 0);
 			if (a!=null && a.versionCode < 310)
 			{
-				Log.v(TAG, "Old VersionCode: "+a.versionCode);
+				Log.d(TAG, "Old VersionCode: "+a.versionCode);
 				Intent intent1 = new Intent(Intent.ACTION_DELETE); 
 				Uri data = Uri.fromParts("package", packageName, null); 
 				intent1.setData(data);
 				Toast.makeText(getBaseContext(), R.string.toast_uninstall_old_Version, Toast.LENGTH_LONG).show();
 				startActivity(intent1);
-				Log.v(TAG, "Uninstall Activity started");
+				Log.d(TAG, "Uninstall Activity started");
 				return true;
 			}
 			else
@@ -1596,7 +1596,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		catch (PackageManager.NameNotFoundException e)
 		{
 			//No old Version found, so we return true
-			Log.v(TAG, "No old Version found");
+			Log.d(TAG, "No old Version found");
 			return true;
 		}
 		catch (Exception e)

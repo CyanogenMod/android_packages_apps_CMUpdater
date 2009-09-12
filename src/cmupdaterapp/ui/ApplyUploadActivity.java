@@ -132,6 +132,6 @@ public class ApplyUploadActivity extends Activity
 		String template = res.getString(R.string.apply_title_textview_text);
 		mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
-		Log.v(TAG, "Filename selected to flash: " + mUpdateInfo.fileName);
+		Log.d(TAG, "Filename selected to flash: " + mUpdateInfo.fileName);
 	}
 }

@@ -37,7 +37,7 @@ public class StartupReceiver extends BroadcastReceiver
 			Intent i = new Intent(ctx, UpdateCheckerService.class)
 							.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_CHECK_FOR_UPDATES);
 			
-			Log.v(TAG, "Asking UpdateService to check for updates...");
+			Log.d(TAG, "Asking UpdateService to check for updates...");
 			ctx.startService(i);
 		}
 		else if(!(updateFreq == Constants.UPDATE_FREQ_NONE) && notificationsEnabled)
@@ -47,7 +47,7 @@ public class StartupReceiver extends BroadcastReceiver
 		else
 		{
 			// User selected no updates
-			Log.v(TAG, "No Updatecheck");
+			Log.d(TAG, "No Updatecheck");
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class StartupReceiver extends BroadcastReceiver
 		PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
 		
 		AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-		Log.v(TAG, "Canceling any previous alarms");
+		Log.d(TAG, "Canceling any previous alarms");
 		am.cancel(pi);
 	}
 
@@ -66,18 +66,18 @@ public class StartupReceiver extends BroadcastReceiver
 	{
 		if(updateFrequency < 0) throw new InvalidParameterException("updateFrequency can't be negative"); 
 			
-		Log.v(TAG, "Scheduling alarm to go off every "  + updateFrequency + " msegs");
+		Log.d(TAG, "Scheduling alarm to go off every "  + updateFrequency + " msegs");
 		Intent i = new Intent(ctx, UpdateCheckerService.class)
 						.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_CHECK_FOR_UPDATES);
 		PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
 
 		Date lastCheck = Preferences.getPreferences(ctx).getLastUpdateCheck();
-		Log.v(TAG, "Last check on " + lastCheck.toString());
+		Log.d(TAG, "Last check on " + lastCheck.toString());
 
 		cancelUpdateChecks(ctx);
 		
 		AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-		Log.v(TAG, "Setting alarm for UpdateService");
+		Log.d(TAG, "Setting alarm for UpdateService");
 		am.setRepeating(AlarmManager.RTC_WAKEUP, lastCheck.getTime() + updateFrequency, updateFrequency, pi);
 	}
 }

@@ -55,11 +55,11 @@ public class PlainTextUpdateServer implements IUpdateServer
 
 		if(sm == null)
 		{
-			Log.v(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
+			Log.d(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
 		}
 		else
 		{
-			Log.v(TAG, "System's Mod version:" + sm);
+			Log.d(TAG, "System's Mod version:" + sm);
 		}
 	}
 	public FullUpdateInfo getAvailableUpdates() throws IOException
@@ -84,7 +84,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		//If Wildcard is used or no themes.theme file present set the variable
 		if (themeInfos == null || themeInfos.name.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
 		{
-			Log.v(TAG, "Wildcard is used for Theme Updates");
+			Log.d(TAG, "Wildcard is used for Theme Updates");
 			themeInfos = new ThemeInfo();
 			WildcardUsed = true;
 		}
@@ -99,7 +99,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 			int romServerResponse = romResponse.getStatusLine().getStatusCode();
 			if (romServerResponse != 200)
 			{
-				Log.v(TAG, "Server returned status code for ROM " + romServerResponse);
+				Log.d(TAG, "Server returned status code for ROM " + romServerResponse);
 				romException = true;
 			}
 			if (!romException)
@@ -107,7 +107,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		}
 		catch (IllegalArgumentException e)
 		{
-			Log.v(TAG, "Rom Update URI wrong: " + mPreferences.getRomUpdateFileURL());
+			Log.d(TAG, "Rom Update URI wrong: " + mPreferences.getRomUpdateFileURL());
 			romException = true;
 		}
 		
@@ -123,7 +123,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 				int themeServerResponse = themeResponse.getStatusLine().getStatusCode();
 				if (themeServerResponse != 200)
 				{
-					Log.v(TAG, "Server returned status code for Themes " + themeServerResponse);
+					Log.d(TAG, "Server returned status code for Themes " + themeServerResponse);
 					themeException = true;
 				}
 				if(!themeException)
@@ -131,7 +131,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 			}
 			catch (IllegalArgumentException e)
 			{
-				Log.v(TAG, "Theme Update URI wrong: " + mPreferences.getThemeUpdateFileURL());
+				Log.d(TAG, "Theme Update URI wrong: " + mPreferences.getThemeUpdateFileURL());
 				themeException = true;
 			}
 		}
@@ -154,7 +154,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 				retValue.roms = getRomUpdates(romUpdateInfos);
 			}
 			else
-				Log.v(TAG, "There was an Exception on Downloading the Rom JSON File");
+				Log.d(TAG, "There was an Exception on Downloading the Rom JSON File");
 			if (!themeException && ThemeUpdateUrlSet)
 			{
 				//Read the Theme Infos
@@ -171,7 +171,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 				retValue.themes = getThemeUpdates(themeUpdateInfos);
 			}
 			else
-				Log.v(TAG, "There was an Exception on Downloading the Theme JSON File");
+				Log.d(TAG, "There was an Exception on Downloading the Theme JSON File");
 		}
 		finally
 		{
@@ -305,7 +305,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 	{	
 		String[] updateVersion = ui.version.split("\\.");
 
-		Log.v(TAG, "Update Version:" + Arrays.toString(updateVersion) + "; System Version:" + Arrays.toString(sysVersion));
+		Log.d(TAG, "Update Version:" + Arrays.toString(updateVersion) + "; System Version:" + Arrays.toString(sysVersion));
 
 		int sys, update;
 		int max = Math.min(sysVersion.length, updateVersion.length);
@@ -342,27 +342,27 @@ public class PlainTextUpdateServer implements IUpdateServer
 					{
 						if (branchMatches(ui, showExperimentalRomUpdates))
 						{
-							Log.v(TAG, "Adding Rom: " + ui.name + " Version: " + ui.version + " Filename: " + ui.fileName);
+							Log.d(TAG, "Adding Rom: " + ui.name + " Version: " + ui.version + " Filename: " + ui.fileName);
 							ret.add(ui);
 						}
 						else
 						{
-							Log.v(TAG, "Discarding Rom " + ui.name + " (Branch mismatch - stable/experimental)");
+							Log.d(TAG, "Discarding Rom " + ui.name + " (Branch mismatch - stable/experimental)");
 						}
 					}
 					else
 					{
-						Log.v(TAG, "Discarding Rom " + ui.name + " (older version)");
+						Log.d(TAG, "Discarding Rom " + ui.name + " (older version)");
 					}
 				}
 				else
 				{
-					Log.v(TAG, "Discarding Rom " + ui.name + " (mod mismatch)");
+					Log.d(TAG, "Discarding Rom " + ui.name + " (mod mismatch)");
 				}
 			}
 			else
 			{
-				Log.v(TAG, String.format("Discarding Rom %s Version %s", ui.name, ui.version));
+				Log.d(TAG, String.format("Discarding Rom %s Version %s", ui.name, ui.version));
 			}
 		}
 		return ret;
@@ -393,37 +393,37 @@ public class PlainTextUpdateServer implements IUpdateServer
 								//Branch matches
 								if (branchMatches(ui, showExperimentalThemeUpdates))
 								{
-									Log.v(TAG, "Adding Theme: " + ui.name + " Version: " + ui.version + " Filename: " + ui.fileName);
+									Log.d(TAG, "Adding Theme: " + ui.name + " Version: " + ui.version + " Filename: " + ui.fileName);
 									ret.add(ui);
 								}
 								else
 								{
-									Log.v(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
+									Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
 								}
 							}
 							else
 							{
-								Log.v(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
+								Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
 							}
 						}
 						else
 						{
-							Log.v(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
+							Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
 						}
 					}
 					else
 					{
-						Log.v(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
+						Log.d(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
 					}
 				}
 				else
 				{
-					Log.v(TAG, String.format("Discarding Update(not a Theme) %s Version %s", ui.name, ui.version));
+					Log.d(TAG, String.format("Discarding Update(not a Theme) %s Version %s", ui.name, ui.version));
 				}
 			}
 			else
 			{
-				Log.v(TAG, String.format("Discarding Theme %s Version %s. Invalid or no Themes installed", ui.name, ui.version));
+				Log.d(TAG, String.format("Discarding Theme %s Version %s. Invalid or no Themes installed", ui.name, ui.version));
 			}
 		}
 		return ret;

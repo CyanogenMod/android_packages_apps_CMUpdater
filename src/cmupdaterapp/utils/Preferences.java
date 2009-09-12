@@ -42,7 +42,7 @@ public class Preferences
 	{
 		if(INSTANCE == null)
 		{
-			Log.v(TAG, "Preference Instance set.");
+			Log.d(TAG, "Preference Instance set.");
 			INSTANCE = new Preferences(PreferenceManager.getDefaultSharedPreferences(ctx), ctx.getResources());
 		}
 		return INSTANCE;
@@ -108,7 +108,7 @@ public class Preferences
 	private String getSystemModString()
 	{
 		temp = SysUtils.getSystemProperty(Constants.SYS_PROP_DEVICE);
-		Log.v(TAG, "Mod Version: " + temp);
+		Log.d(TAG, "Mod Version: " + temp);
 		return temp;
 	}
 	
@@ -118,14 +118,14 @@ public class Preferences
 		if(modString != null)
 		{
 			setConfiguredModString(modString);
-			Log.v(TAG, "System mod cofigured to " + modString);
+			Log.d(TAG, "System mod cofigured to " + modString);
 		}
 	}
 	
 	public String getChangelogURL()
 	{
 		temp = mRes.getString(R.string.conf_changelog_url);
-		Log.v(TAG, "ChangelogURL: " + temp);
+		Log.d(TAG, "ChangelogURL: " + temp);
 		return temp;
 	}
 	
@@ -133,21 +133,21 @@ public class Preferences
 	public boolean showAllRomUpdates()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_OLDER_ROM_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_OLDER_ROM_VERSIONS_DEF_VALUE))); 
-		Log.v(TAG, "Display All Rom Updates: " + tempbool);
+		Log.d(TAG, "Display All Rom Updates: " + tempbool);
 		return tempbool;
 	}
 	
 	public boolean showExperimentalRomUpdates()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS_DEF_VALUE)));
-		Log.v(TAG, "Display Experimental Rom Updates: " + tempbool);
+		Log.d(TAG, "Display Experimental Rom Updates: " + tempbool);
 		return tempbool;
 	}
 	
 	public String getRomUpdateFileURL()
 	{
 		temp = mPrefs.getString(mRes.getString(R.string.PREF_ROM_UPDATE_FILE_URL),  mRes.getString(R.string.conf_update_server_url_def));
-		Log.v(TAG, "Rom MetadataFile-Url: " + temp);
+		Log.d(TAG, "Rom MetadataFile-Url: " + temp);
 		return temp;
 	}
 
@@ -162,21 +162,21 @@ public class Preferences
 	public boolean showAllThemeUpdates()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_OLDER_THEME_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_OLDER_THEME_VERSIONS_DEF_VALUE)));
-		Log.v(TAG, "Display All Theme Updates: " + tempbool);
+		Log.d(TAG, "Display All Theme Updates: " + tempbool);
 		return tempbool;
 	}
 	
 	public boolean showExperimentalThemeUpdates()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS_DEF_VALUE)));
-		Log.v(TAG, "Display Experimental Theme Updates: " + tempbool);
+		Log.d(TAG, "Display Experimental Theme Updates: " + tempbool);
 		return tempbool;
 	}	
 	
 	public String getThemeUpdateFileURL()
 	{
 		temp = mPrefs.getString(mRes.getString(R.string.PREF_THEME_UPDATE_FILE_URL),  mRes.getString(R.string.conf_theme_server_url_def));
-		Log.v(TAG, "Theme MetadataFile-Url: " + temp);
+		Log.d(TAG, "Theme MetadataFile-Url: " + temp);
 		return temp;
 	}
 
@@ -190,7 +190,7 @@ public class Preferences
 	public String getThemeFile()
 	{
 		temp = mPrefs.getString(mRes.getString(R.string.PREF_THEMES_THEME_FILE), mRes.getString(R.string.conf_theme_version_file_def));
-		Log.v(TAG, "ThemeFile: " + temp);
+		Log.d(TAG, "ThemeFile: " + temp);
 		return temp;
 	}
 	
@@ -213,14 +213,14 @@ public class Preferences
 	public boolean notificationsEnabled()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_NOTIFICATION_ENABLED), Boolean.valueOf(mRes.getString(R.string.PREF_NOTIFICATION_ENABLED_DEF_VALUE)));
-		Log.v(TAG, "Notifications Enabled: " + tempbool);
+		Log.d(TAG, "Notifications Enabled: " + tempbool);
 		return tempbool;
 	}
 	
 	public boolean getVibrate()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_NOTIFICATION_VIBRATE), Boolean.valueOf(mRes.getString(R.string.PREF_NOTIFICATION_VIBRATE_DEF_VALUE)));
-		Log.v(TAG, "Notification Vibrate: " + tempbool);
+		Log.d(TAG, "Notification Vibrate: " + tempbool);
 		return tempbool;
 	}
 	
@@ -234,7 +234,7 @@ public class Preferences
 	
 	public void setNotificationRingtone(String RingTone)
 	{
-		Log.v(TAG, "Setting RingtoneURL to " + RingTone);
+		Log.d(TAG, "Setting RingtoneURL to " + RingTone);
 		Editor editor = mPrefs.edit();
 		editor.putString(mRes.getString(R.string.PREF_NOTIFICATION_RINGTONE), RingTone);
 		if(!editor.commit()) Log.e(TAG, "Unable to write Ringtone URI");
@@ -253,7 +253,7 @@ public class Preferences
 	public String getUpdateFolder()
 	{
 		temp = mPrefs.getString(mRes.getString(R.string.PREF_UPDATE_FOLDER), mRes.getString(R.string.conf_update_folder));
-		Log.v(TAG, "UpdateFolder: " + temp);
+		Log.d(TAG, "UpdateFolder: " + temp);
 		return temp;
 	}
 	
@@ -284,13 +284,13 @@ public class Preferences
 	public int getProgressUpdateFreq()
 	{
 		temp = mPrefs.getString(mRes.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY), mRes.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY_DEF_VALUE));
-		Log.v(TAG, "ProgressUpdateFrequency: " + temp);
+		Log.d(TAG, "ProgressUpdateFrequency: " + temp);
 		return Integer.parseInt(temp);
 	}
 
 	public void setProgressUpdateFreq(String freq)
 	{
-		Log.v(TAG, "Setting ProgressUpdate Frequency to " + freq);
+		Log.d(TAG, "Setting ProgressUpdate Frequency to " + freq);
 		Editor editor = mPrefs.edit();
 		editor.putString(mRes.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY), freq);
 		if(!editor.commit()) Log.e(TAG, "Unable to write Update Frequency");
@@ -315,7 +315,7 @@ public class Preferences
 					if (firstLine.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
 					{
 						t.name = Constants.UPDATE_INFO_WILDCARD;
-						Log.v(TAG, "Wildcard in themes.theme");
+						Log.d(TAG, "Wildcard in themes.theme");
 						return t;
 					}
 					String[] Return = firstLine.split("\\|");
@@ -339,7 +339,7 @@ public class Preferences
 		}
 		else
 		{
-			Log.v(TAG, "No Theme File found. Using Wildcard for Theme Updates instead");
+			Log.d(TAG, "No Theme File found. Using Wildcard for Theme Updates instead");
 		}
 		return null;
 	}

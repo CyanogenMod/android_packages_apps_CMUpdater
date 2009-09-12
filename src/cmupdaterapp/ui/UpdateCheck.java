@@ -80,14 +80,14 @@ public class UpdateCheck implements Runnable
 			int updateCount = ui.getUpdateCount();
 			if(updateCountRoms == 0 && updateCountThemes == 0)
 			{
-				Log.v(TAG, "No updates found");
+				Log.d(TAG, "No updates found");
 				Toast.makeText(upi, R.string.no_updates_found, Toast.LENGTH_SHORT).show();
 				p.dismiss();
 				upi.switchToUpdateChooserLayout(null);
 			}
 			else
 			{
-				Log.v(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
+				Log.d(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
 				upi.switchToUpdateChooserLayout(ui);
 				if(prefs.notificationsEnabled())
 				{	
