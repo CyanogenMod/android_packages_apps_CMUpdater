@@ -3,7 +3,6 @@ package cmupdaterapp.customTypes;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-import android.net.Uri;
 import cmupdaterapp.ui.Log;
 
 public class ThemeList implements Serializable
@@ -11,7 +10,7 @@ public class ThemeList implements Serializable
 	private static final long serialVersionUID = 8861171977383611130L;
 	
 	public String name;
-	public Uri url;
+	public String url;
 }
 
 class FullThemeList implements Serializable
