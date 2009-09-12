@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 import android.net.Uri;
-import android.util.Log;
+import cmupdaterapp.ui.Log;
 
 public class ThemeList implements Serializable
 {
@@ -18,7 +18,7 @@ class FullThemeList implements Serializable
 {
 	private static final long serialVersionUID = -2577705903002871714L;
 	
-	private static final String TAG = "<CM-Updater> FullThemeList";
+	private static final String TAG = "FullThemeList";
 
 	private LinkedList<ThemeList> Themes;
 	

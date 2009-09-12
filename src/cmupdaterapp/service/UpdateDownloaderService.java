@@ -42,7 +42,6 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.widget.RemoteViews;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IUpdateProcessInfo;
@@ -52,12 +51,13 @@ import cmupdaterapp.ui.R;
 import cmupdaterapp.ui.UpdateProcessInfo;
 import cmupdaterapp.utils.MD5;
 import cmupdaterapp.utils.Preferences;
+import cmupdaterapp.ui.Log;
 
 public class UpdateDownloaderService extends Service
 {
 	//public static UpdateDownloaderService INSTANCE;
 
-	private static final String TAG = "<CM-Updater> UpdateDownloader";
+	private static final String TAG = "UpdateDownloader";
 	
 	private int progressBarUpdateInterval;
 	
@@ -152,7 +152,7 @@ public class UpdateDownloaderService extends Service
 			switch(request)
 			{
 				case Constants.REQUEST_DOWNLOAD_UPDATE:
-					Log.d(TAG, "Request Download Update Message was recieved");
+					Log.v(TAG, "Request Download Update Message was recieved");
 					mDownloading = true;
 					try
 					{
@@ -166,10 +166,10 @@ public class UpdateDownloaderService extends Service
 					}
 					break;
 				default:
-					Log.e(TAG, "Unknown request ID:" + request);
+					Log.v(TAG, "Unknown request ID:" + request);
 			}
 
-			Log.i(TAG, "Done with #" + msg.arg1);
+			Log.v(TAG, "Done with #" + msg.arg1);
 			stopSelf(msg.arg1);
 		}
 	}
@@ -182,7 +182,7 @@ public class UpdateDownloaderService extends Service
 	@Override
 	public void onCreate()
 	{
-		Log.d(TAG, "Download Service Created");
+		Log.v(TAG, "Download Service Created");
 		mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 		//mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		mConnectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
@@ -202,7 +202,7 @@ public class UpdateDownloaderService extends Service
 
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
 		progressBarUpdateInterval = Preferences.getPreferences(this).getProgressUpdateFreq();
-		Log.d(TAG, "ProgressBarIntervall: " + progressBarUpdateInterval);
+		Log.v(TAG, "ProgressBarIntervall: " + progressBarUpdateInterval);
 		//df = new SimpleDateFormat("HH 'hours' mm 'mins' ss 'seconds'");
 		//df.setTimeZone(TimeZone.getDefault());
 		minutesString = getResources().getString(R.string.minutes);
@@ -213,21 +213,21 @@ public class UpdateDownloaderService extends Service
 	public void onStart(Intent intent, int startId)
 	{
 		prepareForDownloadCancel = false;
-		Log.d(TAG, "Download Service started");
+		Log.v(TAG, "Download Service started");
 		synchronized (mConnectivityManager)
 		{
 			if(mWaitingForDataConnection)
 			{
-				Log.w(TAG, "Another update process is waiting for data connection. This should not happen");
+				Log.e(TAG, "Another update process is waiting for data connection. This should not happen");
 				return;
 			}
 		}
-		Log.i(TAG, "Starting #" + startId + ": " + intent.getExtras());
+		Log.v(TAG, "Starting #" + startId + ": " + intent.getExtras());
 		
 		Message msg = mServiceHandler.obtainMessage();
 		msg.arg1 = startId;
 		msg.obj = intent.getExtras();
-		Log.d(TAG, "Sending: " + msg);
+		Log.v(TAG, "Sending: " + msg);
 		mServiceHandler.sendMessage(msg);
 	}
 
@@ -253,19 +253,19 @@ public class UpdateDownloaderService extends Service
 	@Override
 	public void onDestroy()
 	{
-		Log.d(TAG, "Download Service onDestroy Called");
+		Log.v(TAG, "Download Service onDestroy Called");
 		mHandlerThread.getLooper().quit();
 		Thread.currentThread().interrupt();
 		mHandlerThread.interrupt();
 		mDownloading = false;
 		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
-		Log.d(TAG, "Download Service Destroyed");
+		Log.v(TAG, "Download Service Destroyed");
 	}
 
 	@Override
 	public IBinder onBind(Intent intent)
 	{
-		Log.d(TAG, "Download Service onBind was called");
+		Log.v(TAG, "Download Service onBind was called");
 		return mBinder;
 	}
 
@@ -287,19 +287,19 @@ public class UpdateDownloaderService extends Service
 
 	private File checkForConnectionAndUpdate(UpdateInfo updateToDownload)
 	{
-		Log.d(TAG, "Called CheckForConnectionAndUpdate");
+		Log.v(TAG, "Called CheckForConnectionAndUpdate");
 		File downloadedFile;
 
 		//wait for a data connection
 		while(!isDataConnected())
 		{
-			Log.d(TAG, "No data connection, waiting for a data connection");
+			Log.v(TAG, "No data connection, waiting for a data connection");
 			registerDataListener();
 			synchronized (mConnectivityManager)
 			{
 				try
 				{
-					Log.d(TAG, "No Data Connection. Waiting...");
+					Log.v(TAG, "No Data Connection. Waiting...");
 					mConnectivityManager.wait();
 					break;
 				}
@@ -314,7 +314,7 @@ public class UpdateDownloaderService extends Service
 
 		try
 		{
-			Log.i(TAG, "Downloading update...");
+			Log.v(TAG, "Downloading update...");
 			downloadedFile = downloadFile(updateToDownload);
 		}
 		catch (RuntimeException ex)
@@ -381,7 +381,7 @@ public class UpdateDownloaderService extends Service
 
 	private File downloadFile(UpdateInfo updateInfo)
 	{
-		Log.d(TAG, "Called downloadFile");
+		Log.v(TAG, "Called downloadFile");
 		HttpClient httpClient = mHttpClient;
 		HttpClient MD5httpClient = mMD5HttpClient;
 
@@ -391,7 +391,7 @@ public class UpdateDownloaderService extends Service
 		List<URI> updateMirrors = updateInfo.updateFileUris;
 		int size = updateMirrors.size();
 		int start = mRandom.nextInt(size);
-		Log.d(TAG, "Mirrorcount: " + size);
+		Log.v(TAG, "Mirrorcount: " + size);
 		URI updateURI;
 		//For every Mirror
 		for(int i = 0; i < size; i++)
@@ -400,14 +400,14 @@ public class UpdateDownloaderService extends Service
 			{
 				updateURI = updateMirrors.get((start + i)% size);
 				mMirrorName = updateURI.getHost();
-				Log.d(TAG, "Mirrorname: " + mMirrorName);
+				Log.v(TAG, "Mirrorname: " + mMirrorName);
 				
 				mFileName = updateInfo.fileName; 
 				if (null == mFileName || mFileName.length() < 1)
 				{
 					mFileName = "update.zip";
 				}
-				Log.d(TAG, "mFileName: " + mFileName);
+				Log.v(TAG, "mFileName: " + mFileName);
 				
 				boolean md5Available = true;
 	
@@ -422,9 +422,9 @@ public class UpdateDownloaderService extends Service
 					req.addHeader("Cache-Control", "no-cache");
 					md5req.addHeader("Cache-Control", "no-cache");
 	
-					Log.i(TAG, "Trying to download md5sum file from " + md5req.getURI());
+					Log.v(TAG, "Trying to download md5sum file from " + md5req.getURI());
 					md5response = MD5httpClient.execute(md5req);
-					Log.i(TAG, "Trying to download update zip from " + req.getURI());
+					Log.v(TAG, "Trying to download update zip from " + req.getURI());
 					response = httpClient.execute(req);
 	
 					int serverResponse = response.getStatusLine().getStatusCode();
@@ -433,11 +433,11 @@ public class UpdateDownloaderService extends Service
 	
 					if (serverResponse == 404)
 					{
-						Log.e(TAG, "File not found on Server. Trying next one.");
+						Log.v(TAG, "File not found on Server. Trying next one.");
 					}
 					else if(serverResponse != 200)
 					{
-						Log.e(TAG, "Server returned status code " + serverResponse + " for update zip trying next mirror");
+						Log.v(TAG, "Server returned status code " + serverResponse + " for update zip trying next mirror");
 	
 					}
 					else
@@ -445,14 +445,14 @@ public class UpdateDownloaderService extends Service
 						if (md5serverResponse != 200)
 						{
 							md5Available = false;
-							Log.e(TAG, "Server returned status code " + md5serverResponse + " for update zip md5sum trying next mirror");
+							Log.v(TAG, "Server returned status code " + md5serverResponse + " for update zip md5sum trying next mirror");
 						}
 						//If directory not exists, create it
 						File directory = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder);
 						if (!directory.exists())
 						{
 							directory.mkdirs();
-							Log.d(TAG, "UpdateFolder created");
+							Log.v(TAG, "UpdateFolder created");
 						}
 	
 						mDestinationFile = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder, mFileName);
@@ -465,12 +465,12 @@ public class UpdateDownloaderService extends Service
 	
 							try
 							{
-								Log.i(TAG, "Trying to Read MD5 hash from response");
+								Log.v(TAG, "Trying to Read MD5 hash from response");
 								HttpEntity temp = md5response.getEntity();
 								InputStreamReader isr = new InputStreamReader(temp.getContent());
 								BufferedReader br = new BufferedReader(isr);
 								mDownloadedMD5 = br.readLine().split("  ")[0];
-								Log.d(TAG, "MD5: " + mDownloadedMD5);
+								Log.v(TAG, "MD5: " + mDownloadedMD5);
 								br.close();
 								isr.close();
 	
@@ -483,7 +483,7 @@ public class UpdateDownloaderService extends Service
 									writeMD5(mDestinationMD5File, mDownloadedMD5);
 								}
 							}
-							catch (Exception e)
+							catch (IOException e)
 							{
 								Log.e(TAG, "Exception while reading MD5 response: ", e);
 								throw new IOException("MD5 Response cannot be read");
@@ -495,20 +495,20 @@ public class UpdateDownloaderService extends Service
 						dumpFile(entity, mDestinationFile);
 						if (entity != null && !prepareForDownloadCancel)
 						{
-							Log.d(TAG, "Consuming entity....");
+							Log.v(TAG, "Consuming entity....");
 							entity.consumeContent();
-							Log.d(TAG, "Entity consumed");
+							Log.v(TAG, "Entity consumed");
 						}
 						else
 						{
-							Log.d(TAG, "Entity resetted to NULL");
+							Log.v(TAG, "Entity resetted to NULL");
 							entity = null;
 						}
-						Log.i(TAG, "Update download finished");
+						Log.v(TAG, "Update download finished");
 						
 						if (md5Available)
 						{
-							Log.i(TAG, "Performing MD5 verification");
+							Log.v(TAG, "Performing MD5 verification");
 							if(!MD5.checkMD5(mDownloadedMD5, mDestinationFile))
 							{
 								throw new IOException("MD5 verification failed");
@@ -521,15 +521,15 @@ public class UpdateDownloaderService extends Service
 				}
 				catch (Exception ex)
 				{
-					Log.w(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
+					Log.e(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
 				}
 				if(Thread.currentThread().isInterrupted() || !Thread.currentThread().isAlive())
 					break;
 			}
 			else
-				Log.d(TAG, "Not trying any more mirrors, download canceled");
+				Log.v(TAG, "Not trying any more mirrors, download canceled");
 		}
-		Log.e(TAG, "Unable to download the update file from any mirror");
+		Log.v(TAG, "Unable to download the update file from any mirror");
 
 		if (null != mDestinationFile && mDestinationFile.exists())
 		{
@@ -545,17 +545,17 @@ public class UpdateDownloaderService extends Service
 
 	private void dumpFile(HttpEntity entity, File destinationFile) throws IOException
 	{
-		Log.d(TAG, "DumpFile Called");
+		Log.v(TAG, "DumpFile Called");
 		if(!prepareForDownloadCancel)
 		{
 			mcontentLength = (int) entity.getContentLength();
 			if(mcontentLength <= 0)
 			{
-				Log.w(TAG, "unable to determine the update file size, Set ContentLength to 1024");
+				Log.v(TAG, "unable to determine the update file size, Set ContentLength to 1024");
 				mcontentLength = 1024;
 			}
 			else
-				Log.i(TAG, "Update size: " + (mcontentLength/1024) + "KB" );
+				Log.v(TAG, "Update size: " + (mcontentLength/1024) + "KB" );
 	
 			mStartTime = System.currentTimeMillis(); 
 	
@@ -590,7 +590,7 @@ public class UpdateDownloaderService extends Service
 				fos.flush();
 				fos.close();
 				is.close();
-				Log.d(TAG, "Download finished");
+				Log.v(TAG, "Download finished");
 			}
 			catch(IOException e)
 			{
@@ -599,23 +599,10 @@ public class UpdateDownloaderService extends Service
 				{
 					destinationFile.delete();
 				}
-				catch (Exception ex)
+				catch (SecurityException ex)
 				{
-					Log.e(TAG, "Unable to delete downlaoded File. Continue anyway.", ex);
+					Log.e(TAG, "Unable to delete downloaded File. Continue anyway.", ex);
 				}
-			}
-			catch(Exception e)
-			{
-				fos.close();
-				try
-				{
-					destinationFile.delete();
-				}
-				catch (Exception ex)
-				{
-					Log.e(TAG, "Unable to delete downlaoded File. Continue anyway.", ex);
-				}
-				Log.e(TAG, "Exception in DumpFile", e);
 			}
 			finally
 			{
@@ -624,19 +611,19 @@ public class UpdateDownloaderService extends Service
 			}
 		}
 		else
-			Log.d(TAG, "Download Cancel in Progress. Don't start Downloading");
+			Log.v(TAG, "Download Cancel in Progress. Don't start Downloading");
 	}
 
 	private void writeMD5(File md5File, String md5) throws IOException
 	{
-		Log.d(TAG, "Writing the calculated MD5 to disk");
+		Log.v(TAG, "Writing the calculated MD5 to disk");
 		FileWriter fw = new FileWriter(md5File);
 		try
 		{
 			fw.write(md5);
 			fw.flush();
 		}
-		catch (Exception e)
+		catch (IOException e)
 		{
 			Log.e(TAG, "Exception while writing MD5 to disk", e);
 		}
@@ -685,17 +672,17 @@ public class UpdateDownloaderService extends Service
 			UPDATE_PROCESS_INFO.updateDownloadProgress(mtotalDownloaded, mcontentLength, mstringDownloaded, mstringSpeed, mstringRemainingTime);
 		}
 		else
-			Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
+			Log.v(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
 	}
 
 	private void notifyUser(UpdateInfo ui, File downloadedUpdate)
 	{
-		Log.d(TAG, "Called Notify User");
+		Log.v(TAG, "Called Notify User");
 		Intent i;
 		
 		if(downloadedUpdate == null)
 		{
-			Log.d(TAG, "Downloaded Update was NULL");
+			Log.v(TAG, "Downloaded Update was NULL");
 			DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 			mHandlerThread.interrupt();
 			//Go to the App with a download error
@@ -747,12 +734,12 @@ public class UpdateDownloaderService extends Service
 	{
 		//Thread.currentThread().interrupt();
 		prepareForDownloadCancel = true;
-		Log.d(TAG, "Download Service CancelDownload was called");
+		Log.v(TAG, "Download Service CancelDownload was called");
 		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 		mDownloading = false;
-		Log.i(TAG, "Done with #" + mMsg.arg1);
+		Log.v(TAG, "Done with #" + mMsg.arg1);
 		stopSelf(mMsg.arg1);
-		Log.d(TAG, "Download Cancel StopSelf was called");
+		Log.v(TAG, "Download Cancel StopSelf was called");
 		stopSelf();
 	}
 	
@@ -760,6 +747,6 @@ public class UpdateDownloaderService extends Service
 	{
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		mNotificationManager.cancel(id);
-		Log.d(TAG, "Download Notification removed");
+		Log.v(TAG, "Download Notification removed");
 	}
 }

@@ -6,23 +6,25 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IUpdateProcessInfo;
 import cmupdaterapp.ui.UpdateProcessInfo;
 import cmupdaterapp.utils.Preferences;
+import cmupdaterapp.ui.Log;
 
 import android.os.Message;
-import android.util.Log;
 
 class Changelog implements Runnable
 {
-	private static final String TAG = "<CM-Updater> Changelog";
+	private static final String TAG = "Changelog";
 	private Preferences p;
 	
 	public Changelog(IUpdateProcessInfo upi)
@@ -75,11 +77,14 @@ class Changelog implements Runnable
 			m.obj = e.toString();
 			Log.e(TAG, "Exception on opening Input Stream", e);
 		}
-        catch (Exception e)
-        {
-        	m.obj = e.toString();
-        	Log.e(TAG, "Exception in Reading ChangelogXMLFile", e);
-        }
+		catch (ParserConfigurationException e)
+		{
+			Log.e(TAG, "Exception on parsing XML File", e);
+		}
+		catch (SAXException e)
+		{
+			Log.e(TAG, "Exception while creating SAXParser", e);
+		}
         UpdateProcessInfo.ChangelogProgressHandler.sendMessage(m);
 	}
 }

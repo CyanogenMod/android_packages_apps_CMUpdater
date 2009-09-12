@@ -128,7 +128,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * </ul>
  */
 public abstract class UserTask<Params, Progress, Result> {
-    private static final String LOG_TAG = "<CM-Updater> UserTask";
+    private static final String LOG_TAG = "UserTask";
 
     private static final int CORE_POOL_SIZE = 1;
     private static final int MAXIMUM_POOL_SIZE = 10;

@@ -10,18 +10,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.utils.Preferences;
+import cmupdaterapp.ui.Log;
 
 public class ApplyUploadActivity extends Activity
 {
 	
-	private static final String TAG = "<CM-Updater> ApplyUploadActivity";
+	private static final String TAG = "ApplyUploadActivity";
 
 	private UpdateInfo mUpdateInfo;
 	private String mUpdateFolder;
@@ -132,6 +132,6 @@ public class ApplyUploadActivity extends Activity
 		String template = res.getString(R.string.apply_title_textview_text);
 		mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
-		Log.d(TAG, "Filename selected to flash: " + mUpdateInfo.fileName);
+		Log.v(TAG, "Filename selected to flash: " + mUpdateInfo.fileName);
 	}
 }

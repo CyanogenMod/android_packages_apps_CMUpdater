@@ -10,6 +10,7 @@ import cmupdaterapp.interfaces.IUpdateServer;
 import cmupdaterapp.ui.Constants;
 import cmupdaterapp.ui.R;
 import cmupdaterapp.ui.UpdateProcessInfo;
+import cmupdaterapp.ui.Log;
 import cmupdaterapp.utils.Preferences;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -26,12 +27,10 @@ import android.os.Looper;
 import android.os.Message;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.util.Log;
-
 
 public class UpdateCheckerService extends Service
 {	
-	private static final String TAG = "<CM-Updater> UpdateService";
+	private static final String TAG = "UpdateService";
 	
 	private Looper mServiceLooper;
 	private ServiceHandler mServiceHandler;
@@ -78,10 +77,10 @@ public class UpdateCheckerService extends Service
 					checkForUpdates();
 					break;
             	default:
-            		Log.e(TAG, "Unknown request ID:" + request);
+            		Log.v(TAG, "Unknown request ID:" + request);
             }
 
-            Log.i(TAG, "Done with #" + msg.arg1);
+            Log.v(TAG, "Done with #" + msg.arg1);
             stopSelf(msg.arg1);
 		}
 	}
@@ -108,17 +107,17 @@ public class UpdateCheckerService extends Service
 		{
 			if(mWaitingForDataConnection)
 			{
-				Log.i(TAG, "Another update check is waiting for data connection. Skipping");
+				Log.v(TAG, "Another update check is waiting for data connection. Skipping");
 				return;
 			}
 		}
-        Log.i(TAG, "Starting #" + startId + ": " + intent.getExtras());
+		Log.v(TAG, "Starting #" + startId + ": " + intent.getExtras());
         
         Message msg = mServiceHandler.obtainMessage();
         msg.arg1 = startId;
         msg.obj = intent.getExtras();
         mServiceHandler.sendMessage(msg);
-        Log.d(TAG, "Sending: " + msg);
+        Log.v(TAG, "Sending: " + msg);
 	}
 	
 	private boolean isDataConnected()
@@ -150,7 +149,7 @@ public class UpdateCheckerService extends Service
 			//wait for a data connection
 			while(!isDataConnected())
 			{
-				Log.d(TAG, "No data connection, waiting for a data connection");
+				Log.v(TAG, "No data connection, waiting for a data connection");
 				registerDataListener();
 				synchronized (mTelephonyManager)
 				{
@@ -168,7 +167,7 @@ public class UpdateCheckerService extends Service
 			
 			try
 			{
-				Log.i(TAG, "Checking for updates...");
+				Log.v(TAG, "Checking for updates...");
 				availableUpdates = mUpdateServer.getAvailableUpdates();
 				break;
 			}
@@ -196,7 +195,7 @@ public class UpdateCheckerService extends Service
 		int updateCountRoms = availableUpdates.getRomCount();
 		int updateCountThemes = availableUpdates.getThemeCount();
 		int updateCount = availableUpdates.getUpdateCount();
-		Log.i(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
+		Log.v(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
 		
 		if(updateCountRoms > 0 || updateCountThemes > 0)
 		{
@@ -236,7 +235,7 @@ public class UpdateCheckerService extends Service
 		}
 		else
 		{
-			Log.i(TAG, "No updates found");
+			Log.v(TAG, "No updates found");
 		}
 	}
 

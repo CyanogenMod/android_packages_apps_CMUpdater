@@ -10,18 +10,18 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.util.Log;
 import android.webkit.URLUtil;
 import android.widget.Toast;
 import cmupdaterapp.service.StartupReceiver;
 import cmupdaterapp.utils.Preferences;
+import cmupdaterapp.ui.Log;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 public class ConfigActivity extends PreferenceActivity
 {
-	private static final String TAG = "<CM-Updater> ConfigActivity";
+	private static final String TAG = "ConfigActivity";
 	private Preferences prefs;
 	private boolean RomBarcodeRequested;
 	private boolean ThemeBarcodeRequested;
@@ -62,7 +62,7 @@ public class ConfigActivity extends PreferenceActivity
 			{
 				RomBarcodeRequested = true;
 				IntentIntegrator.initiateScan(ConfigActivity.this);
-				Log.d(TAG, "Starting Barcodescanner for Rom Update File");
+				Log.v(TAG, "Starting Barcodescanner for Rom Update File");
 				return true;
 			}
 		});
@@ -74,7 +74,7 @@ public class ConfigActivity extends PreferenceActivity
 			{
 				ThemeBarcodeRequested = true;
 				IntentIntegrator.initiateScan(ConfigActivity.this);
-				Log.d(TAG, "Starting Barcodescanner for Theme Update File");
+				Log.v(TAG, "Starting Barcodescanner for Theme Update File");
 				return true;
 			}
 		});
@@ -87,7 +87,7 @@ public class ConfigActivity extends PreferenceActivity
 			{
 				prefs.setRomUpdateFileURL(res.getString(R.string.conf_update_server_url_def));
 				Toast.makeText(getBaseContext(), R.string.p_update_file_url_changed, Toast.LENGTH_LONG).show();
-				Log.d(TAG, "Rom Update File URL set back to default: " + prefs.getRomUpdateFileURL());
+				Log.v(TAG, "Rom Update File URL set back to default: " + prefs.getRomUpdateFileURL());
 				ConfigActivity.this.finish();
 				return true;
 			}
@@ -100,7 +100,7 @@ public class ConfigActivity extends PreferenceActivity
 			{
 				prefs.setThemeUpdateFileURL(res.getString(R.string.conf_theme_server_url_def));
 				Toast.makeText(getBaseContext(), R.string.p_theme_file_url_changed, Toast.LENGTH_LONG).show();
-				Log.d(TAG, "Theme Update File URL set back to default: " + prefs.getThemeUpdateFileURL());
+				Log.v(TAG, "Theme Update File URL set back to default: " + prefs.getThemeUpdateFileURL());
 				ConfigActivity.this.finish();
 				return true;
 			}
@@ -114,7 +114,7 @@ public class ConfigActivity extends PreferenceActivity
 			{
 				prefs.setThemeFile(res.getString(R.string.conf_theme_version_file_def));
 				Toast.makeText(getBaseContext(), R.string.p_theme_file_def_toast, Toast.LENGTH_LONG).show();
-				Log.d(TAG, "Theme File Path set back to default: " + prefs.getThemeFile());
+				Log.v(TAG, "Theme File Path set back to default: " + prefs.getThemeFile());
 				ConfigActivity.this.finish();
 				return true;
 			}
@@ -129,12 +129,12 @@ public class ConfigActivity extends PreferenceActivity
 				if(prefs.setUpdateFolder(res.getString(R.string.conf_update_folder)))
 				{
 					Toast.makeText(getBaseContext(), R.string.p_update_folder_def_toast, Toast.LENGTH_LONG).show();
-					Log.d(TAG, "UpdateFolder set back to default: " + prefs.getUpdateFolder());
+					Log.v(TAG, "UpdateFolder set back to default: " + prefs.getUpdateFolder());
 				}
 				else
 				{
 					Toast.makeText(getBaseContext(), R.string.p_update_folder_error, Toast.LENGTH_LONG).show();
-					Log.d(TAG, "Error on Setting UpdateFolder: " + prefs.getUpdateFolder());
+					Log.v(TAG, "Error on Setting UpdateFolder: " + prefs.getUpdateFolder());
 				}
 				ConfigActivity.this.finish();
 				return true;
@@ -150,12 +150,12 @@ public class ConfigActivity extends PreferenceActivity
 				if(URLUtil.isValidUrl(String.valueOf(newValue)))
 				{
 					prefs.setRomUpdateFileURL(String.valueOf(newValue));
-					Log.d(TAG, "Rom Update URL Set to: " + String.valueOf(newValue));
+					Log.v(TAG, "Rom Update URL Set to: " + String.valueOf(newValue));
 				}
 				else
 				{
 					Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
-					Log.d(TAG, "Entered Rom Update URL not valid: " + String.valueOf(newValue));
+					Log.v(TAG, "Entered Rom Update URL not valid: " + String.valueOf(newValue));
 				}
 				return true;
 			}
@@ -169,12 +169,12 @@ public class ConfigActivity extends PreferenceActivity
 				if(URLUtil.isValidUrl(String.valueOf(newValue)))
 				{
 					prefs.setThemeUpdateFileURL(String.valueOf(newValue));
-					Log.d(TAG, "Theme Update URL Set to: " + String.valueOf(newValue));
+					Log.v(TAG, "Theme Update URL Set to: " + String.valueOf(newValue));
 				}
 				else
 				{
 					Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
-					Log.d(TAG, "Entered Theme Update URL not valid: " + String.valueOf(newValue));
+					Log.v(TAG, "Entered Theme Update URL not valid: " + String.valueOf(newValue));
 				}
 				return true;
 			}
@@ -188,7 +188,7 @@ public class ConfigActivity extends PreferenceActivity
 			{
 				prefs.setProgressUpdateFreq(res.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY_DEF_VALUE));
 				Toast.makeText(getBaseContext(), R.string.p_progress_update_freq_def_toast, Toast.LENGTH_LONG).show();
-				Log.d(TAG, "ProgressUpdateFreq set back to default: " + prefs.getProgressUpdateFreq());
+				Log.v(TAG, "ProgressUpdateFreq set back to default: " + prefs.getProgressUpdateFreq());
 				return true;
 			}
 		});
@@ -245,12 +245,12 @@ public class ConfigActivity extends PreferenceActivity
 			{
 				if(prefs.setUpdateFolder((String)newValue))
 				{
-					Log.d(TAG, "UpdateFolder set to: " + prefs.getUpdateFolder());
+					Log.v(TAG, "UpdateFolder set to: " + prefs.getUpdateFolder());
 				}
 				else
 				{
 					Toast.makeText(getBaseContext(), R.string.p_update_folder_error, Toast.LENGTH_LONG).show();
-					Log.d(TAG, "Error on Setting UpdateFolder: " + prefs.getUpdateFolder());
+					Log.v(TAG, "Error on Setting UpdateFolder: " + prefs.getUpdateFolder());
 				}
 				ConfigActivity.this.finish();
 				return true;
@@ -260,7 +260,7 @@ public class ConfigActivity extends PreferenceActivity
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent)
 	{
-		Log.d(TAG, "onActivityResult requestCode: "+requestCode);
+		Log.v(TAG, "onActivityResult requestCode: "+requestCode);
 		//Switch is necessary, because RingtonePreference and QRBarcodeScanner call the same Event
 		switch (requestCode)
 		{
@@ -272,11 +272,11 @@ public class ConfigActivity extends PreferenceActivity
 					String result = scanResult.getContents();
 					if (null != result && !result.equals("") )
 					{
-						Log.d(TAG, "Requested Rom Barcodescan? " + String.valueOf(RomBarcodeRequested));
-						Log.d(TAG, "Requested Theme Barcodescan? " + String.valueOf(ThemeBarcodeRequested));
+						Log.v(TAG, "Requested Rom Barcodescan? " + String.valueOf(RomBarcodeRequested));
+						Log.v(TAG, "Requested Theme Barcodescan? " + String.valueOf(ThemeBarcodeRequested));
 						if (RomBarcodeRequested)
 						{
-							Log.d(TAG, "Setting Rom Update File to " + result);
+							Log.v(TAG, "Setting Rom Update File to " + result);
 							if(URLUtil.isValidUrl(result))
 							{
 								prefs.setRomUpdateFileURL(result);
@@ -285,12 +285,12 @@ public class ConfigActivity extends PreferenceActivity
 							else
 							{
 								Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
-								Log.d(TAG, "Entered Rom Update URL not valid: " + result);
+								Log.v(TAG, "Entered Rom Update URL not valid: " + result);
 							}
 						}
 						else if (ThemeBarcodeRequested)
 						{
-							Log.d(TAG, "Setting Theme Update File to " + result);
+							Log.v(TAG, "Setting Theme Update File to " + result);
 							if(URLUtil.isValidUrl(result))
 							{
 								prefs.setThemeUpdateFileURL(result);
@@ -299,14 +299,14 @@ public class ConfigActivity extends PreferenceActivity
 							else
 							{
 								Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
-								Log.d(TAG, "Entered Theme Update URL not valid: " + result);
+								Log.v(TAG, "Entered Theme Update URL not valid: " + result);
 							}
 						}
 						else
 						{
 							//Something wrong here. Barcodescan requested but no Variables set
 							Toast.makeText(getBaseContext(), R.string.p_barcode_scan_failure, Toast.LENGTH_LONG).show();
-							Log.d(TAG, "Something wrong here. Barcodescan requested but no Variables set");
+							Log.v(TAG, "Something wrong here. Barcodescan requested but no Variables set");
 						}
 						RomBarcodeRequested = false;
 						ThemeBarcodeRequested = false;

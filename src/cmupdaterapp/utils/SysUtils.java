@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import cmupdaterapp.ui.Constants;
-import android.util.Log;
+import cmupdaterapp.ui.Log;
 
 public class SysUtils
 {
-	private static final String TAG = "<CM-Updater> SysUtils";
+	private static final String TAG = "SysUtils";
 
 	/**
 	 * Returns (if available) a human-readable string containing current mod version

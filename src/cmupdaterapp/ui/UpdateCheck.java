@@ -15,16 +15,16 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.widget.Toast;
 import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.interfaces.IUpdateProcessInfo;
 import cmupdaterapp.interfaces.IUpdateServer;
 import cmupdaterapp.utils.Preferences;
+import cmupdaterapp.ui.Log;
 
 public class UpdateCheck implements Runnable
 {
-	private static final String TAG = "<CM-Updater> UpdateCheck";
+	private static final String TAG = "UpdateCheck";
 
 	private IUpdateServer mUpdateServer;
 	private IUpdateProcessInfo mUpdateProcessInfo;	
@@ -80,14 +80,14 @@ public class UpdateCheck implements Runnable
 			int updateCount = ui.getUpdateCount();
 			if(updateCountRoms == 0 && updateCountThemes == 0)
 			{
-				Log.i(TAG, "No updates found");
+				Log.v(TAG, "No updates found");
 				Toast.makeText(upi, R.string.no_updates_found, Toast.LENGTH_SHORT).show();
 				p.dismiss();
 				upi.switchToUpdateChooserLayout(null);
 			}
 			else
 			{
-				Log.i(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
+				Log.v(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
 				upi.switchToUpdateChooserLayout(ui);
 				if(prefs.notificationsEnabled())
 				{	

@@ -41,7 +41,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,13 +66,14 @@ import cmupdaterapp.service.UpdateDownloaderService;
 import cmupdaterapp.utils.MD5;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.SysUtils;
+import cmupdaterapp.ui.Log;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 public class UpdateProcessInfo extends IUpdateProcessInfo
 {
-	private static final String TAG = "<CM-Updater> UpdateProcessInfo";
+	private static final String TAG = "UpdateProcessInfo";
 
 	private Spinner mUpdatesSpinner;
 	private Spinner mThemesSpinner;
@@ -553,7 +553,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		@Override
 		public void onCancelled()
 		{
-			Log.w(TAG, "MD5Checker Task cancelled");
+			Log.v(TAG, "MD5Checker Task cancelled");
 			Intent i = new Intent(UpdateProcessInfo.this, UpdateProcessInfo.class);
 			i.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_MD5CHECKER_CANCEL);
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -571,18 +571,18 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			{
 				public void onClick(DialogInterface dialog, int which)
 				{
-					Log.d(TAG, "Positive Download Cancel Button pressed");
+					Log.v(TAG, "Positive Download Cancel Button pressed");
 					if (mUpdateDownloaderService!=null)
 					{
 						mUpdateDownloaderService.cancelDownload();
-						Log.d(TAG, "Cancel onClick Event: cancelDownload finished");
+						Log.v(TAG, "Cancel onClick Event: cancelDownload finished");
 					}
 					else
-						Log.d(TAG, "Cancel Download: mUpdateDownloaderService was NULL");
+						Log.v(TAG, "Cancel Download: mUpdateDownloaderService was NULL");
 					try
 					{
 						stopService(mUpdateDownloaderServiceIntent);
-						Log.d(TAG, "stopService(mUpdateDownloaderServiceIntent) finished");
+						Log.v(TAG, "stopService(mUpdateDownloaderServiceIntent) finished");
 					}
 					catch (Exception ex)
 					{
@@ -591,14 +591,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					try
 					{
 						unbindService(mUpdateDownloaderServiceConnection);
-						Log.d(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
+						Log.v(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
 					}
 					catch (Exception ex)
 					{
 						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceConnection unbind failed", ex);
 					}
 					//UpdateDownloaderService.setUpdateProcessInfo(null);
-					Log.d(TAG, "Download Cancel Procedure Finished. Switching Layout");
+					Log.v(TAG, "Download Cancel Procedure Finished. Switching Layout");
 					switchToUpdateChooserLayout(null);
 				}
 			})
@@ -606,7 +606,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			{
 				public void onClick(DialogInterface dialog, int which)
 				{
-					Log.d(TAG, "Negative Download Cancel Button pressed");
+					Log.v(TAG, "Negative Download Cancel Button pressed");
 					dialog.dismiss();
 				}
 			})
@@ -618,7 +618,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		Log.d(TAG, "onCreate called");
+		Log.v(TAG, "onCreate called");
 		super.onCreate(savedInstanceState);
 		prefs = Preferences.getPreferences(this);
 		res = getResources();
@@ -655,14 +655,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	@Override
 	protected void onStart()
 	{
-		Log.d(TAG, "onStart called");
+		Log.v(TAG, "onStart called");
 		super.onStart();
 		
 		//Delete any older Versions, because of the changed Signing Key
 		while (deleteOldVersionsOfUpdater()==false)
 		{
 			//User MUST uninstall old App
-			Log.i(TAG, "Old App not uninstalled, try again");
+			Log.v(TAG, "Old App not uninstalled, try again");
 		}
 		
 		try
@@ -675,14 +675,14 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 		catch (IOException e)
 		{
-			Log.w(TAG, "Unable to restore activity status", e);
+			Log.e(TAG, "Unable to restore activity status", e);
 		}
 	}
 
 	@Override
 	protected void onResume()
 	{
-		Log.d(TAG, "onResume called");
+		Log.v(TAG, "onResume called");
 		super.onResume();
 		Intent UpdateIntent = getIntent();
 		if (UpdateIntent != null)
@@ -702,26 +702,26 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					}
 					break;
 				case Constants.REQUEST_UPDATE_CHECK_ERROR:
-					Log.w(TAG, "Update check error");
+					Log.v(TAG, "Update check error");
 					Toast.makeText(this, R.string.not_update_check_error_ticker, Toast.LENGTH_SHORT).show();
 					break;
 		
 				case Constants.REQUEST_DOWNLOAD_FAILED:
-					Log.w(TAG, "Download Error");
+					Log.v(TAG, "Download Error");
 					Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_SHORT).show();
 					break;
 				case Constants.REQUEST_MD5CHECKER_CANCEL:
-					Log.w(TAG, "MD5Check canceled. Switching Layout");
+					Log.v(TAG, "MD5Check canceled. Switching Layout");
 					Toast.makeText(this, R.string.md5_check_cancelled, Toast.LENGTH_SHORT).show();
 					break;
 				default:
-					Log.w(TAG, "No Intent. Starting App in Default mode");
+					Log.v(TAG, "No Intent. Starting App in Default mode");
 					break;
 			}
 		}
 		else
 		{
-			Log.w(TAG, "Intent is NULL");
+			Log.v(TAG, "Intent is NULL");
 		}
 		
 		mfilenames = null;
@@ -762,13 +762,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		setWallpaper();
         super.onConfigurationChanged(newConfig); 
-        Log.i(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
+        Log.v(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
     }
 	
 	@Override
 	protected void onStop()
 	{
-		Log.d(TAG, "onStop called");
+		Log.v(TAG, "onStop called");
 		super.onStop();
 		try
 		{
@@ -776,9 +776,9 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		}
 		catch (IOException e)
 		{
-			Log.w(TAG, "Unable to save state", e);
+			Log.e(TAG, "Unable to save state", e);
 		}
-		Log.d(TAG, "App closed");
+		Log.v(TAG, "App closed");
 
 		if(mUpdateDownloaderService != null && !mUpdateDownloaderService.isDownloading())
 		{
@@ -800,7 +800,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			}
 		}
 		else
-			Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
+			Log.v(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
 	}
 
 	private void saveState() throws IOException
@@ -945,7 +945,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				//startActivity(i);
 				return true;
 			default:
-				Log.w(TAG, "Unknown Menu ID:" + item.getItemId());
+				Log.v(TAG, "Unknown Menu ID:" + item.getItemId());
 				break;
 		}
 
@@ -1442,7 +1442,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			deleteDir(mUpdateFolder);
 			mUpdateFolder.mkdir();
-			Log.e(TAG, "Updates deleted and UpdateFolder created again");
+			Log.v(TAG, "Updates deleted and UpdateFolder created again");
 			success=true;
 			Toast.makeText(this, R.string.delete_updates_success_message, Toast.LENGTH_LONG).show();
 		}
@@ -1477,8 +1477,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			}
 			else
 			{
-				Log.e(TAG, "Update to delete not found");
-				Log.e(TAG, "Zip File: "+ZIPfiletodelete.getAbsolutePath());
+				Log.v(TAG, "Update to delete not found");
+				Log.v(TAG, "Zip File: "+ZIPfiletodelete.getAbsolutePath());
 				return false;
 			}
 			if (MD5filetodelete.exists())
@@ -1487,8 +1487,8 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			}
 			else
 			{
-				Log.e(TAG, "MD5 to delete not found. No Problem here.");
-				Log.e(TAG, "MD5 File: "+MD5filetodelete.getAbsolutePath());
+				Log.v(TAG, "MD5 to delete not found. No Problem here.");
+				Log.v(TAG, "MD5 File: "+MD5filetodelete.getAbsolutePath());
 			}
 			ZIPfiletodelete = null;
 			MD5filetodelete = null;
@@ -1549,7 +1549,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					ui.fileName = tmp[tmp.length-1];
 					ui.name = ui.fileName;
 
-					Log.d(TAG, "Scanned QR Code: " + scanResult.getContents());
+					Log.v(TAG, "Scanned QR Code: " + scanResult.getContents());
 					downloadRequestedUpdate(ui);
 				}
 				else
@@ -1579,13 +1579,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			PackageInfo a = p.getPackageInfo(packageName, 0);
 			if (a!=null && a.versionCode < 310)
 			{
-				Log.i(TAG, "Old VersionCode: "+a.versionCode);
+				Log.v(TAG, "Old VersionCode: "+a.versionCode);
 				Intent intent1 = new Intent(Intent.ACTION_DELETE); 
 				Uri data = Uri.fromParts("package", packageName, null); 
 				intent1.setData(data);
 				Toast.makeText(getBaseContext(), R.string.toast_uninstall_old_Version, Toast.LENGTH_LONG).show();
 				startActivity(intent1);
-				Log.i(TAG, "Uninstall Activity started");
+				Log.v(TAG, "Uninstall Activity started");
 				return true;
 			}
 			else
@@ -1596,7 +1596,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		catch (PackageManager.NameNotFoundException e)
 		{
 			//No old Version found, so we return true
-			Log.i(TAG, "No old Version found");
+			Log.v(TAG, "No old Version found");
 			return true;
 		}
 		catch (Exception e)

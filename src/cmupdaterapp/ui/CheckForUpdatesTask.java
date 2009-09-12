@@ -12,16 +12,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.Toast;
 import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.interfaces.IUpdateProcessInfo;
 import cmupdaterapp.interfaces.IUpdateServer;
 import cmupdaterapp.utils.Preferences;
+import cmupdaterapp.ui.Log;
 
 public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 {
-	private static final String TAG = "<CM-Updater> CheckForUpdatesTask";
+	private static final String TAG = "CheckForUpdatesTask";
 
 	private IUpdateServer mUpdateServer;
 	private IUpdateProcessInfo mUpdateProcessInfo;	
@@ -38,7 +38,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 	{
 		try
 		{
-			Log.i(TAG, "Checking for updates...");
+			Log.v(TAG, "Checking for updates...");
 			return mUpdateServer.getAvailableUpdates();
 		}
 		catch (IOException ex)
@@ -73,13 +73,13 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 		int updateCount = result.getUpdateCount();
 		if(updateCountRoms == 0 && updateCountThemes == 0)
 		{
-			Log.i(TAG, "No updates found");
+			Log.v(TAG, "No updates found");
 			Toast.makeText(upi, R.string.no_updates_found, Toast.LENGTH_SHORT).show();
 			upi.switchToUpdateChooserLayout(null);
 		}
 		else
 		{
-			Log.i(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
+			Log.v(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
 			upi.switchToUpdateChooserLayout(result);
 			
 			Intent i = new Intent(upi, UpdateProcessInfo.class)
