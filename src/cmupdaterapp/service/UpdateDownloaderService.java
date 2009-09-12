@@ -519,7 +519,7 @@ public class UpdateDownloaderService extends Service
 						return mDestinationFile;
 					}
 				}
-				catch (Exception ex)
+				catch (IOException ex)
 				{
 					Log.e(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
 				}

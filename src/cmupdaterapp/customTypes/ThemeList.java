@@ -44,7 +44,7 @@ class FullThemeList implements Serializable
 			Themes.remove(Themes.indexOf(t));
 			return true;
 		}
-		catch (Exception e)
+		catch (IndexOutOfBoundsException e)
 		{
 			Log.e(TAG, "Exception on Deleting Theme from List", e);
 			return false;

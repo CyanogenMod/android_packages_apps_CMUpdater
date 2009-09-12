@@ -31,6 +31,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -584,7 +585,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 						stopService(mUpdateDownloaderServiceIntent);
 						Log.d(TAG, "stopService(mUpdateDownloaderServiceIntent) finished");
 					}
-					catch (Exception ex)
+					catch (SecurityException ex)
 					{
 						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceIntent could not be Stopped", ex);
 					}
@@ -593,7 +594,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 						unbindService(mUpdateDownloaderServiceConnection);
 						Log.d(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
 					}
-					catch (Exception ex)
+					catch (SecurityException ex)
 					{
 						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceConnection unbind failed", ex);
 					}
@@ -786,7 +787,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			{
 				unbindService(mUpdateDownloaderServiceConnection);
 			}
-			catch (Exception ex)
+			catch (SecurityException ex)
 			{
 				Log.e(TAG, "Exit App: mUpdateDownloaderServiceConnection unbind failed", ex);
 			}
@@ -794,7 +795,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			{
 				stopService(mUpdateDownloaderServiceIntent);
 			}
-			catch (Exception ex)
+			catch (SecurityException ex)
 			{
 				Log.e(TAG, "Exit App: mUpdateDownloaderServiceIntent could not be Stopped", ex);
 			}
@@ -1410,7 +1411,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);                
 			mVersionName.setText("v " + pi.versionName);
 		}
-		catch (Exception e)
+		catch (NameNotFoundException e)
 		{
 			Log.e(TAG, "Can't find version name", e);
 			mVersionName.setText("v unknown");
@@ -1593,17 +1594,11 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 				throw new PackageManager.NameNotFoundException();
 			}
 		}
-		catch (PackageManager.NameNotFoundException e)
+		catch (NameNotFoundException e)
 		{
 			//No old Version found, so we return true
 			Log.d(TAG, "No old Version found");
 			return true;
-		}
-		catch (Exception e)
-		{
-			//Other Exception
-			Log.e(TAG, "Exception while trying to uninstall old Versions of the App", e);
-			return false;
 		}
 	}
 	
