@@ -1,4 +1,4 @@
-package cmupdaterapp.themelist;
+package cmupdaterapp.ui;
 
 import java.util.LinkedList;
 
@@ -20,7 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class ManageThemeList extends ListActivity
+public class ThemeListActivity extends ListActivity
 {
 	private static final String TAG = "ManageThemeActivity";
 	

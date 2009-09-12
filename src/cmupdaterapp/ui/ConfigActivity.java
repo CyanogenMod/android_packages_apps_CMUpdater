@@ -13,7 +13,6 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.webkit.URLUtil;
 import android.widget.Toast;
 import cmupdaterapp.service.StartupReceiver;
-import cmupdaterapp.themelist.ManageThemeList;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.misc.Log;
 
@@ -264,7 +263,7 @@ public class ConfigActivity extends PreferenceActivity
 		{
 			public boolean onPreferenceClick(Preference preference)
 			{
-				Intent i = new Intent(ConfigActivity.this, ManageThemeList.class);
+				Intent i = new Intent(ConfigActivity.this, ThemeListActivity.class);
 				startActivity(i);
 				return true;
 			}
