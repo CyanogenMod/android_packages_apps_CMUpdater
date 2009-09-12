@@ -7,7 +7,8 @@ public class Log
 	private final static String LOGTAG = "cmupdater";
 
 	//static final boolean DEBUG = false;
-	//static final boolean LOGV = DEBUG ? Config.LOGD : Config.LOGV;
+	//public static final boolean LOGV = DEBUG ? Config.LOGD : Config.LOGV;
+	//Replace all Log.d with if(Log.LOGV) Log.v() to prevent Strings to be builded and to save memory
 
 	public static void v(String TAG, String logMe)
 	{
