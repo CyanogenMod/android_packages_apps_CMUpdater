@@ -72,7 +72,7 @@ import cmupdaterapp.ui.Log;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class UpdateProcessInfo extends IUpdateProcessInfo
+public class Main extends IUpdateProcessInfo
 {
 	private static final String TAG = "UpdateProcessInfo";
 
@@ -135,7 +135,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			if(!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState()))
 			{
-				new AlertDialog.Builder(UpdateProcessInfo.this)
+				new AlertDialog.Builder(Main.this)
 				.setTitle(R.string.sdcard_is_not_present_dialog_title)
 				.setMessage(R.string.sdcard_is_not_present_dialog_body)
 				.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener()
@@ -155,7 +155,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			File foo = new File(mUpdateFolder + "/" + ui.fileName);
 			if (foo.isFile() && foo.exists())
 			{
-				new AlertDialog.Builder(UpdateProcessInfo.this)
+				new AlertDialog.Builder(Main.this)
 				.setTitle(R.string.overwrite_update_title)
 				.setMessage(R.string.overwrite_update_summary)
 				.setNegativeButton(R.string.overwrite_update_negative, new DialogInterface.OnClickListener()
@@ -189,7 +189,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			if(!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState()))
 			{
-				new AlertDialog.Builder(UpdateProcessInfo.this)
+				new AlertDialog.Builder(Main.this)
 				.setTitle(R.string.sdcard_is_not_present_dialog_title)
 				.setMessage(R.string.sdcard_is_not_present_dialog_body)
 				.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener()
@@ -209,7 +209,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			File foo = new File(mUpdateFolder + "/" + ui.fileName);
 			if (foo.isFile() && foo.exists())
 			{
-				new AlertDialog.Builder(UpdateProcessInfo.this)
+				new AlertDialog.Builder(Main.this)
 				.setTitle(R.string.overwrite_update_title)
 				.setMessage(R.string.overwrite_update_summary)
 				.setNegativeButton(R.string.overwrite_update_negative, new DialogInterface.OnClickListener()
@@ -303,7 +303,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{
 			if(!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState()))
 			{
-				new AlertDialog.Builder(UpdateProcessInfo.this)
+				new AlertDialog.Builder(Main.this)
 				.setTitle(R.string.sdcard_is_not_present_dialog_title)
 				.setMessage(R.string.sdcard_is_not_present_dialog_body)
 				.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener()
@@ -318,7 +318,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			}
 			else
 			{
-				new AlertDialog.Builder(UpdateProcessInfo.this)
+				new AlertDialog.Builder(Main.this)
 				.setTitle(R.string.delete_updates_text)
 				.setMessage(R.string.confirm_delete_update_folder_dialog_message)
 				//Delete Only Selected Update
@@ -391,7 +391,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		{	
 			if(!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState()))
 			{
-				new AlertDialog.Builder(UpdateProcessInfo.this)
+				new AlertDialog.Builder(Main.this)
 				.setTitle(R.string.sdcard_is_not_present_dialog_title)
 				.setMessage(R.string.sdcard_is_not_present_dialog_body)
 				.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener()
@@ -411,7 +411,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			//IF no MD5 exists, ask the User what to do
 			if(!MD5.exists() || !MD5.canRead())
 			{
-				new AlertDialog.Builder(UpdateProcessInfo.this)
+				new AlertDialog.Builder(Main.this)
 				.setTitle(R.string.no_md5_found_title)
 				.setMessage(R.string.no_md5_found_summary)
 				.setPositiveButton(R.string.no_md5_found_positive, new DialogInterface.OnClickListener()
@@ -420,7 +420,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					{
 						Resources r = getResources();
 						mDialog = ProgressDialog.show(
-								UpdateProcessInfo.this,
+								Main.this,
 								r.getString(R.string.verify_and_apply_dialog_title),
 								r.getString(R.string.verify_and_apply_dialog_message),
 								true,
@@ -452,7 +452,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			{
 				Resources r = getResources();
 				mDialog = ProgressDialog.show(
-						UpdateProcessInfo.this,
+						Main.this,
 						r.getString(R.string.verify_and_apply_dialog_title),
 						r.getString(R.string.verify_and_apply_dialog_message),
 						true,
@@ -539,13 +539,13 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 			ui.fileName = mFilename;
 			if(result == true)
 			{
-				Intent i = new Intent(UpdateProcessInfo.this, ApplyUploadActivity.class)
+				Intent i = new Intent(Main.this, ApplyUpdateActivity.class)
 				.putExtra(Constants.KEY_UPDATE_INFO, ui);
 				startActivity(i);
 			}
 			else
 			{
-				Toast.makeText(UpdateProcessInfo.this, R.string.apply_existing_update_md5error_message, Toast.LENGTH_LONG).show();
+				Toast.makeText(Main.this, R.string.apply_existing_update_md5error_message, Toast.LENGTH_LONG).show();
 			}
 
 			mDialog.dismiss();
@@ -555,7 +555,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 		public void onCancelled()
 		{
 			Log.d(TAG, "MD5Checker Task cancelled");
-			Intent i = new Intent(UpdateProcessInfo.this, UpdateProcessInfo.class);
+			Intent i = new Intent(Main.this, Main.class);
 			i.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_MD5CHECKER_CANCEL);
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);
@@ -566,7 +566,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	{
 		public void onClick(View arg0)
 		{
-			new AlertDialog.Builder(UpdateProcessInfo.this)
+			new AlertDialog.Builder(Main.this)
 			.setMessage(R.string.confirm_download_cancelation_dialog_message)
 			.setPositiveButton(R.string.confirm_download_cancelation_dialog_yes, new DialogInterface.OnClickListener()
 			{
@@ -743,7 +743,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
             Collections.sort(mfilenames, Collections.reverseOrder()); 
 		}
 		files = null;
-		UpdateDownloaderService.setUpdateProcessInfo(UpdateProcessInfo.this);
+		UpdateDownloaderService.setUpdateProcessInfo(Main.this);
 		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
 		{
 			switchToDownloadingLayout(mUpdateDownloaderService.getCurrentUpdate());
@@ -957,7 +957,7 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 	public void switchToDownloadingLayout(UpdateInfo downloadingUpdate)
 	{
 		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
-		setContentView(R.layout.update_download_info);
+		setContentView(R.layout.download);
 		try
 		{
 			String[] temp = downloadingUpdate.updateFileUris.get(0).toURL().getFile().split("/");
@@ -1235,16 +1235,16 @@ public class UpdateProcessInfo extends IUpdateProcessInfo
 					ChangelogProgressDialog.dismiss();
 				if (msg.obj instanceof String)
 				{
-					Toast.makeText(UpdateProcessInfo.this, (CharSequence) msg.obj, Toast.LENGTH_LONG).show();
+					Toast.makeText(Main.this, (CharSequence) msg.obj, Toast.LENGTH_LONG).show();
 					ChangelogList = null;
-					UpdateProcessInfo.this.ChangelogThread.interrupt();
+					Main.this.ChangelogThread.interrupt();
 					ChangelogProgressDialog.dismiss();
 					displayChangelog(Constants.CHANGELOGTYPE_APP);
 				}
 				else if (msg.obj instanceof List<?>)
 				{
 					ChangelogList = (List<Version>) msg.obj;
-					UpdateProcessInfo.this.ChangelogThread.interrupt();
+					Main.this.ChangelogThread.interrupt();
 					ChangelogProgressDialog.dismiss();
 					displayChangelog(Constants.CHANGELOGTYPE_APP);
 				}

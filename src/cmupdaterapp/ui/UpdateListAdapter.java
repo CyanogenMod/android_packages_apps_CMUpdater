@@ -34,7 +34,7 @@ public class UpdateListAdapter<T> extends ArrayAdapter<T>
 		if (row == null)
 		{
 			LayoutInflater inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			row=inflater.inflate(R.layout.updatelist_itemtemplate, null);
+			row=inflater.inflate(R.layout.itemtemplate_updatelist, null);
 			wrapper=new ViewWrapper(row);
 			row.setTag(wrapper);
 		}

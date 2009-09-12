@@ -91,7 +91,7 @@ public class UpdateCheck implements Runnable
 				upi.switchToUpdateChooserLayout(ui);
 				if(prefs.notificationsEnabled())
 				{	
-					Intent i = new Intent(upi, UpdateProcessInfo.class)
+					Intent i = new Intent(upi, Main.class)
 							.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)ui)
 							.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_NEW_UPDATE_LIST);
 					PendingIntent contentIntent = PendingIntent.getActivity(upi, 0, i, PendingIntent.FLAG_ONE_SHOT);

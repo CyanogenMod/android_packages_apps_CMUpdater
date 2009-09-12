@@ -82,7 +82,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 			Log.d(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
 			upi.switchToUpdateChooserLayout(result);
 			
-			Intent i = new Intent(upi, UpdateProcessInfo.class)
+			Intent i = new Intent(upi, Main.class)
 							.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)result)
 							.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_NEW_UPDATE_LIST);
 			PendingIntent contentIntent = PendingIntent.getActivity(upi, 0, i, PendingIntent.FLAG_ONE_SHOT);

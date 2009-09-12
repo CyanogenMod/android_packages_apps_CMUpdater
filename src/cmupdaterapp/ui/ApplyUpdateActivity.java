@@ -18,7 +18,7 @@ import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.ui.Log;
 
-public class ApplyUploadActivity extends Activity
+public class ApplyUpdateActivity extends Activity
 {
 	
 	private static final String TAG = "ApplyUploadActivity";
@@ -38,7 +38,7 @@ public class ApplyUploadActivity extends Activity
 					getResources().getString(R.string.apply_update_dialog_text),
 					mUpdateInfo.name);
 
-			AlertDialog dialog = new AlertDialog.Builder(ApplyUploadActivity.this)
+			AlertDialog dialog = new AlertDialog.Builder(ApplyUpdateActivity.this)
 			.setTitle(R.string.apply_update_dialog_title)
 			.setMessage(dialogBody)
 			.setNeutralButton(R.string.apply_update_dialog_update_button, mBackupAndApplyUpdateListener)
@@ -112,7 +112,7 @@ public class ApplyUploadActivity extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.apply_upload);
+		setContentView(R.layout.applyupdate);
 
 		mTitle = (TextView) findViewById(R.id.apply_title_textview);
 

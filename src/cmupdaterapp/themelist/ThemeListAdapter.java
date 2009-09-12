@@ -35,7 +35,7 @@ public class ThemeListAdapter<T> extends ArrayAdapter<T>
 		if (row == null)
 		{
 			LayoutInflater inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			row=inflater.inflate(R.layout.themelist_itemtemplate, null);
+			row=inflater.inflate(R.layout.itemtemplate_themelist, null);
 			wrapper=new ThemeListViewWrapper(row);
 			row.setTag(wrapper);
 		}

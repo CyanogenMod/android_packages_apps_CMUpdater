@@ -16,7 +16,7 @@ import org.xml.sax.XMLReader;
 
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IUpdateProcessInfo;
-import cmupdaterapp.ui.UpdateProcessInfo;
+import cmupdaterapp.ui.Main;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.ui.Log;
 
@@ -85,6 +85,6 @@ class Changelog implements Runnable
 		{
 			Log.e(TAG, "Exception while creating SAXParser", e);
 		}
-        UpdateProcessInfo.ChangelogProgressHandler.sendMessage(m);
+        Main.ChangelogProgressHandler.sendMessage(m);
 	}
 }

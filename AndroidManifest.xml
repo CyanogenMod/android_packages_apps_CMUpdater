@@ -18,7 +18,7 @@
 			android:value="3" />-->
 
 		<activity
-			android:name="cmupdaterapp.ui.UpdateProcessInfo"
+			android:name="cmupdaterapp.ui.Main"
 			android:launchMode="singleTask"
 			android:configChanges="orientation|keyboardHidden"
 			android:theme="@style/Theme.loading">
@@ -36,7 +36,7 @@
 			android:name="cmupdaterapp.ui.ConfigActivity"
 			android:configChanges="orientation|keyboardHidden" />
 		<activity
-			android:name="cmupdaterapp.ui.ApplyUploadActivity"
+			android:name="cmupdaterapp.ui.ApplyUpdateActivity"
 			android:configChanges="orientation|keyboardHidden" />			
 		<activity
 			android:name="cmupdaterapp.themelist.ManageThemeList"

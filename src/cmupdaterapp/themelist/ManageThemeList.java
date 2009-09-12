@@ -111,7 +111,6 @@ public class ManageThemeList extends ListActivity
 				Log.d(TAG, "Unknown Menu ID:" + item.getItemId());
 				break;
 		}
-
 		return super.onMenuItemSelected(featureId, item);
 	}
 	
@@ -127,7 +126,7 @@ public class ManageThemeList extends ListActivity
 	private void createNewThemeList()
 	{
 		dialog = new Dialog(this);
-		dialog.setContentView(R.layout.newthemeserver);
+		dialog.setContentView(R.layout.themelist_new);
 		Button save = (Button) dialog.findViewById(R.id.new_theme_list_button_save);
 		save.setOnClickListener(new View.OnClickListener()
 		{

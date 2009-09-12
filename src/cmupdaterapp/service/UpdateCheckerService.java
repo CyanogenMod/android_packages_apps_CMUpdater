@@ -9,7 +9,7 @@ import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.interfaces.IUpdateServer;
 import cmupdaterapp.ui.Constants;
 import cmupdaterapp.ui.R;
-import cmupdaterapp.ui.UpdateProcessInfo;
+import cmupdaterapp.ui.Main;
 import cmupdaterapp.ui.Log;
 import cmupdaterapp.utils.Preferences;
 import android.app.Notification;
@@ -199,7 +199,7 @@ public class UpdateCheckerService extends Service
 		
 		if(updateCountRoms > 0 || updateCountThemes > 0)
 		{
-			Intent i = new Intent(this, UpdateProcessInfo.class)
+			Intent i = new Intent(this, Main.class)
 							.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_NEW_UPDATE_LIST)
 							.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)availableUpdates);
 			
@@ -251,7 +251,7 @@ public class UpdateCheckerService extends Service
 	private void notificateCheckError()
 	{
 		Resources res = getResources();
-		Intent i = new Intent(this, UpdateProcessInfo.class)
+		Intent i = new Intent(this, Main.class)
 						.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_UPDATE_CHECK_ERROR);
 
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
