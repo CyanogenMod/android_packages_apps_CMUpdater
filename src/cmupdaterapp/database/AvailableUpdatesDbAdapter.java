@@ -23,13 +23,31 @@ public class AvailableUpdatesDbAdapter
 	//work immediately
 //	private static final int DATABASE_VERSION = 1;
 //	public static final String KEY_ID = "id";
-//	public static final String KEY_NAME = "name";
+//	public static final int KEY_ID_COLUMN = 0;
+//	public static final String KEY_NAME = "needsWipe";
 //	public static final int KEY_NAME_COLUMN = 1;
-//	public static final String KEY_URI = "uri";
+//	public static final String KEY_URI = "mod";
 //	public static final int KEY_URI_COLUMN = 2;
-//	public static final String KEY_ENABLED = "enabled";
+//	public static final String KEY_ENABLED = "board";
 //	public static final int KEY_ENABLED_COLUMN = 3;
-//	private SQLiteDatabase db;
+//	public static final String KEY_ENABLED = "name";
+//	public static final int KEY_ENABLED_COLUMN = 4;
+//	public static final String KEY_ENABLED = "version";
+//	public static final int KEY_ENABLED_COLUMN = 5;
+//	public static final String KEY_ENABLED = "type";
+//	public static final int KEY_ENABLED_COLUMN = 6;
+//	public static final String KEY_ENABLED = "branchcode";
+//	public static final int KEY_ENABLED_COLUMN = 7;
+//	public static final String KEY_ENABLED = "description";
+//	public static final int KEY_ENABLED_COLUMN = 8;
+//	public static final String KEY_ENABLED = "filename";
+//	public static final int KEY_ENABLED_COLUMN = 9;
+//	public static final String KEY_ENABLED = "updateFileUris";
+//	public static final int KEY_ENABLED_COLUMN = 10;
+	
+	
+	
+	//	private SQLiteDatabase db;
 //	private final Context context;
 //	private ThemeListDbOpenHelper dbHelper;
 //	
