@@ -116,6 +116,9 @@ public class MainActivity extends IMainActivity
 
 	private Preferences prefs;
 	private Resources res;
+	
+	//Indicates if a Service is bound 
+	private boolean mbind = false;
 
 	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection()
 	{
@@ -596,8 +599,13 @@ public class MainActivity extends IMainActivity
 					}
 					try
 					{
-						unbindService(mUpdateDownloaderServiceConnection);
-						Log.d(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
+						if(mbind)
+						{
+							unbindService(mUpdateDownloaderServiceConnection);
+							Log.d(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
+						}
+						else
+							Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
 					}
 					catch (SecurityException ex)
 					{
@@ -790,7 +798,8 @@ public class MainActivity extends IMainActivity
 		{
 			try
 			{
-				unbindService(mUpdateDownloaderServiceConnection);
+				if(mbind)
+					unbindService(mUpdateDownloaderServiceConnection);
 			}
 			catch (SecurityException ex)
 			{
@@ -962,6 +971,7 @@ public class MainActivity extends IMainActivity
 	public void switchToDownloadingLayout(UpdateInfo downloadingUpdate)
 	{
 		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
+		mbind = true;
 		setContentView(R.layout.download);
 		try
 		{
