@@ -59,6 +59,10 @@ public class Constants
 	//Menu ThemeList Layout
 	public static final int MENU_THEME_LIST_ADD = 1;
 	
+	//Menu ThemeListContextMenu
+	public static final int MENU_THEME_LIST_CONTEXT_EDIT = 10;
+	public static final int MENU_THEME_LIST_CONTEXT_DELETE = 11;
+	
 	//Filename for Instance save
 	public static final String STORED_STATE_FILENAME = "CMUpdater.ser";
 	

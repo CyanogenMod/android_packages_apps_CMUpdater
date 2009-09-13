@@ -124,6 +124,12 @@ public class ThemeListActivity extends ListActivity
 			case Constants.MENU_THEME_LIST_ADD:
 				createNewThemeList();
 				return true;
+			case Constants.MENU_THEME_LIST_CONTEXT_EDIT:
+				Log.d(TAG, "Edit clicked");
+				break;
+			case Constants.MENU_THEME_LIST_CONTEXT_DELETE:
+				Log.d(TAG, "Delete clicked");
+				break;
 			default:
 				Log.d(TAG, "Unknown Menu ID:" + item.getItemId());
 				break;
@@ -154,8 +160,8 @@ public class ThemeListActivity extends ListActivity
 			public void onClick(View v)
 			{
 				ThemeList t = new ThemeList();
-				t.name = name.getText().toString();
-				t.url = Uri.parse(uri.getText().toString());
+				t.name = name.getText().toString().trim();
+				t.url = Uri.parse(uri.getText().toString().trim());
 				t.enabled = enabled.isChecked();
 				//TODO: Check the URI
 				//TODO: Check that there is text in every field
@@ -178,13 +184,7 @@ public class ThemeListActivity extends ListActivity
 	public void onCreateContextMenu (ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
 	{
 		menu.setHeaderTitle("TEST");
-		menu.add("Delete");
-		menu.add("Edit");
-	}
-	
-	@Override
-	public boolean onContextItemSelected(MenuItem item)
-	{
-		return super.onContextItemSelected(item);
+		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_EDIT, Menu.NONE, "Edit");
+		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_DELETE, Menu.NONE, "Delete");
 	}
 }
