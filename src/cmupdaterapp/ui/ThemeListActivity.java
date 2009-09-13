@@ -18,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 
 public class ThemeListActivity extends ListActivity
@@ -31,6 +33,15 @@ public class ThemeListActivity extends ListActivity
 	private FullThemeList fullThemeList;
 	private LinkedList<ThemeList> fullThemeListList;
 	private Dialog dialog; 
+	
+	//New Dialog
+	private Button save;
+	private Button barcode;
+	private EditText name;
+	private EditText uri;
+	private CheckBox enabled;
+	
+	private ListView lv;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -128,8 +139,27 @@ public class ThemeListActivity extends ListActivity
 	{
 		dialog = new Dialog(this);
 		dialog.setContentView(R.layout.themelist_new);
-		Button save = (Button) dialog.findViewById(R.id.new_theme_list_button_save);
+		save = (Button) dialog.findViewById(R.id.new_theme_list_button_save);
+		barcode = (Button) dialog.findViewById(R.id.new_theme_list_button_barcode);
+		name = (EditText) dialog.findViewById(R.id.new_theme_list_name);
+		uri = (EditText) dialog.findViewById(R.id.new_theme_list_uri);
+		enabled = (CheckBox) dialog.findViewById(R.id.new_theme_list_enabled);
 		save.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View v)
+			{
+				ThemeList t = new ThemeList();
+				t.name = name.getText().toString();
+				t.url = Uri.parse(uri.getText().toString());
+				t.enabled = enabled.isChecked();
+				//TODO: Check the URI
+				//TODO: Check that there is text in every field
+				themeListDb.insertTheme(t);
+				dialog.dismiss();
+				getThemeList();
+			}
+		});
+		barcode.setOnClickListener(new View.OnClickListener()
 		{
 			public void onClick(View v)
 			{

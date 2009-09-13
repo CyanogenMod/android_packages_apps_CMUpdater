@@ -87,7 +87,7 @@ class ThemeListViewWrapper
 	{
 		if (image == null)
 		{
-			image=(ImageView)base.findViewById(R.id.imgExperimentalStable);
+			image=(ImageView)base.findViewById(R.id.ThemeListImage);
 		}
 		return(image);
 	}
