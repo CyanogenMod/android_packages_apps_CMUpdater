@@ -40,6 +40,8 @@
 	<string name="menu_about">About</string>
 	<string name="menu_changelog">Changelog</string>
 	<string name="menu_add_theme">Add Theme Server</string>
+	<string name="menu_edit_theme">Edit Theme Server</string>
+	<string name="menu_delete_theme">Delete Theme Server</string>
 	
 	<string name="cancel_download_buton_text">Cancel Download</string>
 	<string name="confirm_download_cancelation_dialog_message">Are you sure you want to cancel the current download?</string>
@@ -233,4 +235,12 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	
 	<string name="p_theme_list_title">Manage Theme Servers</string>
 	<string name="p_theme_list_summary">Add, Edit, Delete Theme Servers</string>
+	
+	<string name="p_theme_list_context_menu_header">Choose Action</string>
+	
+	<string name="p_theme_list_new_name">Theme Name:</string>
+	<string name="p_theme_list_new_uri">URL:</string>
+	<string name="p_theme_list_new_enabled">Enabled:</string>
+	<string name="p_theme_list_new_barcode">Scan barcode</string>
+	<string name="p_theme_list_new_save">Save</string>
 </resources>

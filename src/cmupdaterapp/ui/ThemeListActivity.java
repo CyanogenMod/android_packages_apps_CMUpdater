@@ -11,6 +11,7 @@ import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.R;
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,13 +38,17 @@ public class ThemeListActivity extends ListActivity
 	private Dialog dialog; 
 	
 	//New Dialog
-	private Button save;
-	private Button barcode;
-	private EditText name;
-	private EditText uri;
-	private CheckBox enabled;
+	private Button btnSave;
+	private Button btnBarcode;
+	private EditText etName;
+	private EditText etUri;
+	private CheckBox cbEnabled;
 	
 	private ListView lv;
+	
+	private Resources res;
+	
+	private AdapterContextMenuInfo menuInfo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -58,6 +63,7 @@ public class ThemeListActivity extends ListActivity
 		setContentView(R.layout.themelist);
 		lv = getListView();
 		registerForContextMenu(lv);
+		res = getResources();
 	}
 	
 	@Override
@@ -76,15 +82,10 @@ public class ThemeListActivity extends ListActivity
 	{
 		themeListCursor = themeListDb.getAllThemesCursor();
 		startManagingCursor(themeListCursor);
-		udpateThemeList();
-		ThemeListAdapter<ThemeList> spAdapterRoms = new ThemeListAdapter<ThemeList>(
-				this,
-				android.R.layout.simple_list_item_1,
-				fullThemeListList);
-		setListAdapter(spAdapterRoms);
+		updateThemeList();
 	}
 	
-	private void udpateThemeList()
+	private void updateThemeList()
 	{
 		themeListCursor.requery();
 		fullThemeList = new FullThemeList();
@@ -102,6 +103,11 @@ public class ThemeListActivity extends ListActivity
 			}
 			while(themeListCursor.moveToNext());
 		fullThemeListList = fullThemeList.returnFullThemeList();
+		ThemeListAdapter<ThemeList> AdapterThemeList = new ThemeListAdapter<ThemeList>(
+				this,
+				android.R.layout.simple_list_item_1,
+				fullThemeListList);
+		setListAdapter(AdapterThemeList);
 	}
 	
 	public void onListItemClick(ListView parent, View v,int position, long id)
@@ -125,14 +131,17 @@ public class ThemeListActivity extends ListActivity
 		switch(item.getItemId())
 		{
 			case Constants.MENU_THEME_LIST_ADD:
-				createNewThemeList();
+				createNewThemeList(false, null, null, true, 0);
 				return true;
 			case Constants.MENU_THEME_LIST_CONTEXT_EDIT:
 				Log.d(TAG, "Edit clicked");
+				menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
+				ThemeList tl = ((ThemeList)lv.getAdapter().getItem(menuInfo.position));
+				createNewThemeList(true, tl.name, tl.url.toString(), tl.enabled, tl.PrimaryKey);
 				break;
 			case Constants.MENU_THEME_LIST_CONTEXT_DELETE:
 				Log.d(TAG, "Delete clicked");
-				AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
+				menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
 				DeleteTheme(((ThemeList)lv.getAdapter().getItem(menuInfo.position)).PrimaryKey);
 				break;
 			default:
@@ -151,32 +160,42 @@ public class ThemeListActivity extends ListActivity
 		super.onDestroy();
 	}
 	
-	private void createNewThemeList()
+	private void createNewThemeList(final boolean _update, String _name, String _uri, boolean _enabled, final int _primaryKey)
 	{
 		dialog = new Dialog(this);
 		dialog.setContentView(R.layout.themelist_new);
-		save = (Button) dialog.findViewById(R.id.new_theme_list_button_save);
-		barcode = (Button) dialog.findViewById(R.id.new_theme_list_button_barcode);
-		name = (EditText) dialog.findViewById(R.id.new_theme_list_name);
-		uri = (EditText) dialog.findViewById(R.id.new_theme_list_uri);
-		enabled = (CheckBox) dialog.findViewById(R.id.new_theme_list_enabled);
-		save.setOnClickListener(new View.OnClickListener()
+		btnSave = (Button) dialog.findViewById(R.id.new_theme_list_button_save);
+		btnBarcode = (Button) dialog.findViewById(R.id.new_theme_list_button_barcode);
+		etName = (EditText) dialog.findViewById(R.id.new_theme_list_name);
+		etUri = (EditText) dialog.findViewById(R.id.new_theme_list_uri);
+		cbEnabled = (CheckBox) dialog.findViewById(R.id.new_theme_list_enabled);
+		if(_name != null)
+			etName.setText(_name);
+		if(_uri != null)
+			etUri.setText(_uri);
+		cbEnabled.setChecked(_enabled);
+		btnSave.setOnClickListener(new View.OnClickListener()
 		{
 			public void onClick(View v)
 			{
 				ThemeList t = new ThemeList();
-				t.name = name.getText().toString().trim();
-				t.url = Uri.parse(uri.getText().toString().trim());
-				t.enabled = enabled.isChecked();
+				t.name = etName.getText().toString().trim();
+				t.url = Uri.parse(etUri.getText().toString().trim());
+				t.enabled = cbEnabled.isChecked();
+				if(_update == true)
+					t.PrimaryKey = _primaryKey;
 				//TODO: Check the URI
 				//TODO: Check that there is text in every field
-				if(t.name != "" && uri.getText().toString() != "")
+				//TODO: Make as startactivityforresult, so theres no dialog window
+				if(_update == false)
 					themeListDb.insertTheme(t);
+				else
+					themeListDb.updateTheme(_primaryKey, t);
 				dialog.dismiss();
-				getThemeList();
+				updateThemeList();
 			}
 		});
-		barcode.setOnClickListener(new View.OnClickListener()
+		btnBarcode.setOnClickListener(new View.OnClickListener()
 		{
 			public void onClick(View v)
 			{
@@ -189,9 +208,9 @@ public class ThemeListActivity extends ListActivity
 	@Override
 	public void onCreateContextMenu (ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
 	{
-		menu.setHeaderTitle("TEST");
-		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_EDIT, Menu.NONE, "Edit");
-		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_DELETE, Menu.NONE, "Delete");
+		menu.setHeaderTitle(res.getString(R.string.p_theme_list_context_menu_header));
+		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_EDIT, Menu.NONE, res.getString(R.string.menu_edit_theme));
+		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_DELETE, Menu.NONE, R.string.menu_delete_theme);
 	}
 	
 	private void DeleteTheme(int position)
@@ -201,6 +220,7 @@ public class ThemeListActivity extends ListActivity
 			Log.d(TAG, "Success");
 		else
 			Log.d(TAG, "Fail");
-		getThemeList();
+		//TODO: Display a toast on fail
+		updateThemeList();
 	}
 }

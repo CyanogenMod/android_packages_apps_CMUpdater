@@ -7,23 +7,23 @@
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="Theme Name:" />
+		android:text="@string/p_theme_list_new_name" />
 	<EditText
 		android:id="@+id/new_theme_list_name"
-		android:layout_width="wrap_content"
+		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"/>
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="URL:" />
+		android:text="@string/p_theme_list_new_uri" />
 	<EditText
 		android:id="@+id/new_theme_list_uri"
-		android:layout_width="wrap_content"
+		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"/>
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="Enabled:" />
+		android:text="@string/p_theme_list_new_enabled" />
 	<CheckBox
 		android:id="@+id/new_theme_list_enabled"
 		android:layout_width="wrap_content"
@@ -33,10 +33,10 @@
 		android:id="@+id/new_theme_list_button_barcode"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="Scan barcode" />
+		android:text="@string/p_theme_list_new_barcode" />
 	<Button
 		android:id="@+id/new_theme_list_button_save"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="Save" />
+		android:text="@string/p_theme_list_new_save" />
 </LinearLayout>

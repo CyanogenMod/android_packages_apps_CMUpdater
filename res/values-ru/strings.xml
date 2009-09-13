@@ -39,6 +39,8 @@
    <string name="menu_config">Настройки</string>
    <string name="menu_about">О Программе</string>
    <string name="menu_changelog">Список Изменений</string>
+   <string name="menu_add_theme">Добавить Сервер Темы</string>
+   
    <string name="cancel_download_buton_text">Отменить Загрузку</string>
    <string name="confirm_download_cancelation_dialog_message">Пожалуйста подтвердите отмену загрузки</string>
    <string name="confirm_download_cancelation_dialog_yes">Отменить</string>
@@ -161,7 +163,7 @@
    <string name="p_allow_experimental_theme_versions_changed">Необходимо проверить наличие новых версий Темы еще раз</string>
    
    <string name="p_do_nandroid_backup_title">Резервный Запас</string>
-   <string name="p_do_nandroid_backup_summary">Сохранить резервный запас системы про помощи программы Nandroid перед обновлением</string>
+   <string name="p_do_nandroid_backup_summary">Сохранить резервный запас системы при помощи программы Nandroid перед обновлением</string>
    
    <string name="p_notification_ringtone_title">Звонок Уведомления</string>
    <string name="p_notification_ringtone_summary">Выбрать звонок уведомления о новой версии</string>
@@ -229,4 +231,7 @@
    <string name="p_update_folder_def_summary">Сбросить каталог загружений на заводской</string>
    <string name="p_update_folder_def_toast">Каталог загружений сброшен на заводской</string>
    <string name="p_update_folder_error">Ошибка при установке каталога загружений</string>
+   	
+   <string name="p_theme_list_title">Сервера Тем</string>
+   <string name="p_theme_list_summary">Добавить, Удалить, редактировать Сервера</string>
 </resources>
