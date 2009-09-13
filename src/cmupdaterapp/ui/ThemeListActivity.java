@@ -14,6 +14,7 @@ import android.app.ListActivity;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,6 +55,8 @@ public class ThemeListActivity extends ListActivity
 		//Get the actual ThemeList from the Database
 		getThemeList();
 		setContentView(R.layout.themelist);
+		lv = getListView();
+		registerForContextMenu(lv);
 	}
 	
 	@Override
@@ -100,7 +103,9 @@ public class ThemeListActivity extends ListActivity
 	
 	public void onListItemClick(ListView parent, View v,int position, long id)
 	{
-		//selection.setText(items[position]);
+		super.onListItemClick(parent, v, position, id);
+		Log.d(TAG, "Item clicked. Postition: " + id);
+		//getListView().getItemAtPosition(position);
 	}
 	
 	@Override
@@ -167,5 +172,19 @@ public class ThemeListActivity extends ListActivity
 			}
 		});
 		dialog.show();
+	}
+	
+	@Override
+	public void onCreateContextMenu (ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+	{
+		menu.setHeaderTitle("TEST");
+		menu.add("Delete");
+		menu.add("Edit");
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item)
+	{
+		return super.onContextItemSelected(item);
 	}
 }
