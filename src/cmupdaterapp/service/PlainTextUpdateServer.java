@@ -230,11 +230,11 @@ public class PlainTextUpdateServer implements IUpdateServer
 				if(mod!=null)
 					ui.mod.add(mod);
 			}
-			ui.name = obj.getString(Constants.JSON_NAME);
-			ui.version = obj.getString(Constants.JSON_VERSION);
-			ui.description = obj.getString(Constants.JSON_DESCRIPTION);
-			ui.branchCode = obj.getString(Constants.JSON_BRANCH);
-			ui.fileName = obj.getString(Constants.JSON_FILENAME);
+			ui.name = obj.getString(Constants.JSON_NAME).trim();
+			ui.version = obj.getString(Constants.JSON_VERSION).trim();
+			ui.description = obj.getString(Constants.JSON_DESCRIPTION).trim();
+			ui.branchCode = obj.getString(Constants.JSON_BRANCH).trim();
+			ui.fileName = obj.getString(Constants.JSON_FILENAME).trim();
 			
 			ui.updateFileUris = new LinkedList<URI>();
 
@@ -242,7 +242,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 			{
 				try
 				{
-					ui.updateFileUris.add(new URI(mirrorList.getString(i) + ui.fileName));
+					ui.updateFileUris.add(new URI(mirrorList.getString(i).trim() + ui.fileName));
 				}
 				catch (URISyntaxException e)
 				{
