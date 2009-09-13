@@ -20,6 +20,7 @@ public class ThemeListDbAdapter
 	private static final String DATABASE_TABLE = "ThemeList";
 	private static final int DATABASE_VERSION = 1;
 	public static final String KEY_ID = "id";
+	public static final int KEY_ID_COLUMN = 0;
 	public static final String KEY_NAME = "name";
 	public static final int KEY_NAME_COLUMN = 1;
 	public static final String KEY_URI = "uri";
@@ -110,9 +111,11 @@ public class ThemeListDbAdapter
 		String name = cursor.getString(KEY_NAME_COLUMN);
 		String uri = cursor.getString(KEY_URI_COLUMN);
 		int enabled = cursor.getInt(KEY_ENABLED_COLUMN);
+		int Key = cursor.getInt(KEY_ID_COLUMN);
 		ThemeList result = new ThemeList();
 		result.name = name;
 		result.url = Uri.parse(uri);
+		result.PrimaryKey = Key;
 		if(enabled == 1) result.enabled = true;
 		else result.enabled = false;
 		return result;

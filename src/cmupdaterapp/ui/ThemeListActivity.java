@@ -93,9 +93,11 @@ public class ThemeListActivity extends ListActivity
 			{
 				String name = themeListCursor.getString(ThemeListDbAdapter.KEY_NAME_COLUMN);
 				String uri = themeListCursor.getString(ThemeListDbAdapter.KEY_URI_COLUMN);
+				int pk = themeListCursor.getInt(ThemeListDbAdapter.KEY_ID_COLUMN);
 				ThemeList newItem = new ThemeList();
 				newItem.name = name;
 				newItem.url = Uri.parse(uri);
+				newItem.PrimaryKey = pk;
 				fullThemeList.addThemeToList(newItem);
 			}
 			while(themeListCursor.moveToNext());
@@ -131,7 +133,7 @@ public class ThemeListActivity extends ListActivity
 			case Constants.MENU_THEME_LIST_CONTEXT_DELETE:
 				Log.d(TAG, "Delete clicked");
 				AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
-				DeleteTheme(menuInfo.position);
+				DeleteTheme(((ThemeList)lv.getAdapter().getItem(menuInfo.position)).PrimaryKey);
 				break;
 			default:
 				Log.d(TAG, "Unknown Menu ID:" + item.getItemId());
