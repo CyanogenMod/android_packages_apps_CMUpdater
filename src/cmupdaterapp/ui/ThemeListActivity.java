@@ -18,6 +18,7 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -63,11 +64,6 @@ public class ThemeListActivity extends ListActivity
 	protected void onStart()
 	{
 		super.onStart();
-		ThemeListAdapter<ThemeList> spAdapterRoms = new ThemeListAdapter<ThemeList>(
-				this,
-				android.R.layout.simple_list_item_1,
-				fullThemeListList);
-		setListAdapter(spAdapterRoms);
 	}
 	
 	@Override
@@ -81,6 +77,11 @@ public class ThemeListActivity extends ListActivity
 		themeListCursor = themeListDb.getAllThemesCursor();
 		startManagingCursor(themeListCursor);
 		udpateThemeList();
+		ThemeListAdapter<ThemeList> spAdapterRoms = new ThemeListAdapter<ThemeList>(
+				this,
+				android.R.layout.simple_list_item_1,
+				fullThemeListList);
+		setListAdapter(spAdapterRoms);
 	}
 	
 	private void udpateThemeList()
@@ -129,6 +130,8 @@ public class ThemeListActivity extends ListActivity
 				break;
 			case Constants.MENU_THEME_LIST_CONTEXT_DELETE:
 				Log.d(TAG, "Delete clicked");
+				AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
+				DeleteTheme(menuInfo.position);
 				break;
 			default:
 				Log.d(TAG, "Unknown Menu ID:" + item.getItemId());
@@ -165,7 +168,8 @@ public class ThemeListActivity extends ListActivity
 				t.enabled = enabled.isChecked();
 				//TODO: Check the URI
 				//TODO: Check that there is text in every field
-				themeListDb.insertTheme(t);
+				if(t.name != "" && uri.getText().toString() != "")
+					themeListDb.insertTheme(t);
 				dialog.dismiss();
 				getThemeList();
 			}
@@ -186,5 +190,15 @@ public class ThemeListActivity extends ListActivity
 		menu.setHeaderTitle("TEST");
 		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_EDIT, Menu.NONE, "Edit");
 		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_DELETE, Menu.NONE, "Delete");
+	}
+	
+	private void DeleteTheme(int position)
+	{
+		Log.d(TAG, "Remove Theme Postition: " + position);
+		if (themeListDb.removeTheme(position))
+			Log.d(TAG, "Success");
+		else
+			Log.d(TAG, "Fail");
+		getThemeList();
 	}
 }
