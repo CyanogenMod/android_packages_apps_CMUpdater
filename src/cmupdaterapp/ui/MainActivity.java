@@ -1444,7 +1444,7 @@ public class MainActivity extends IMainActivity
 		//updateFolder: Foldername
 		//mUpdateFolder: Foldername with fullpath of SDCARD
 		String updateFolder = prefs.getUpdateFolder();
-		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory() && updateFolder != "" && updateFolder != "/")
+		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory() && updateFolder.trim() != "" && updateFolder.trim() != "/")
 		{
 			deleteDir(mUpdateFolder);
 			mUpdateFolder.mkdir();
@@ -1457,7 +1457,7 @@ public class MainActivity extends IMainActivity
 			success = false;
 			Toast.makeText(this, R.string.delete_updates_noFolder_message, Toast.LENGTH_LONG).show();
 		}
-		else if(updateFolder == "" || updateFolder == "/")
+		else if(updateFolder.trim() == "" || updateFolder.trim() == "/")
 		{
 			success = false;
 			Toast.makeText(this, R.string.delete_updates_root_folder_message, Toast.LENGTH_LONG).show();

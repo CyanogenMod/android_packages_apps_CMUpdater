@@ -252,14 +252,15 @@ public class Preferences
 	//Advanced Properties
 	public String getUpdateFolder()
 	{
-		temp = mPrefs.getString(mRes.getString(R.string.PREF_UPDATE_FOLDER), mRes.getString(R.string.conf_update_folder));
+		temp = mPrefs.getString(mRes.getString(R.string.PREF_UPDATE_FOLDER), mRes.getString(R.string.conf_update_folder)).trim();
 		Log.d(TAG, "UpdateFolder: " + temp);
 		return temp;
 	}
 	
 	public boolean setUpdateFolder(String folder)
 	{
-		File f = new File(Environment.getExternalStorageDirectory() + "/" + folder);
+		String folderTrimmed = folder.trim();
+		File f = new File(Environment.getExternalStorageDirectory() + "/" + folderTrimmed);
 		if (f.isFile())
 			return false;
 		if (!f.exists())
@@ -267,7 +268,7 @@ public class Preferences
 		if (f.exists() && f.isDirectory())
 		{
 			Editor editor = mPrefs.edit();
-			editor.putString(mRes.getString(R.string.PREF_UPDATE_FOLDER), folder);
+			editor.putString(mRes.getString(R.string.PREF_UPDATE_FOLDER), folderTrimmed);
 			if(!editor.commit())
 			{
 				Log.e(TAG, "Unable to write Update Folder Path");
