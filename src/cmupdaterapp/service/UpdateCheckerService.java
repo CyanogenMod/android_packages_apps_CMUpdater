@@ -40,6 +40,8 @@ public class UpdateCheckerService extends Service
 
 	private TelephonyManager mTelephonyManager;
 	
+	private Resources res;
+	
 	private final PhoneStateListener mDataStateListener = new PhoneStateListener()
 	{
 		@Override
@@ -92,6 +94,8 @@ public class UpdateCheckerService extends Service
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         
+        res = getResources();
+        
 		HandlerThread thread = new HandlerThread(TAG);
         thread.start();
         
@@ -140,8 +144,6 @@ public class UpdateCheckerService extends Service
 
 	private void checkForUpdates()
 	{
-		Resources res = getResources();
-		
 		FullUpdateInfo availableUpdates;
 		while (true)
 		{
@@ -250,7 +252,6 @@ public class UpdateCheckerService extends Service
 
 	private void notificateCheckError()
 	{
-		Resources res = getResources();
 		Intent i = new Intent(this, MainActivity.class)
 						.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_UPDATE_CHECK_ERROR);
 
