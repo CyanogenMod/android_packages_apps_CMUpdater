@@ -505,6 +505,12 @@ public class UpdateDownloaderService extends Service
 						// Download Update ZIP if md5sum went ok
 						HttpEntity entity = response.getEntity();
 						dumpFile(entity, mDestinationFile);
+						//Was the download canceled?
+						if(prepareForDownloadCancel)
+						{
+							Log.d(TAG, "Download was canceled. Break the for loop");
+							break;
+						}
 						if (entity != null && !prepareForDownloadCancel)
 						{
 							Log.d(TAG, "Consuming entity....");
@@ -539,7 +545,10 @@ public class UpdateDownloaderService extends Service
 					break;
 			}
 			else
+			{
 				Log.d(TAG, "Not trying any more mirrors, download canceled");
+				break;
+			}
 		}
 		Log.d(TAG, "Unable to download the update file from any mirror");
 
