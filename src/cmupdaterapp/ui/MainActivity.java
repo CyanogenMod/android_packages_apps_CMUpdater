@@ -603,6 +603,7 @@ public class MainActivity extends IMainActivity
 						{
 							unbindService(mUpdateDownloaderServiceConnection);
 							Log.d(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
+							mbind = false;
 						}
 						else
 							Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
@@ -799,7 +800,13 @@ public class MainActivity extends IMainActivity
 			try
 			{
 				if(mbind)
+				{
 					unbindService(mUpdateDownloaderServiceConnection);
+					Log.d(TAG, "mUpdateDownloaderServiceConnection unbind finished");
+					mbind = false;
+				}
+				else
+					Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
 			}
 			catch (SecurityException ex)
 			{
