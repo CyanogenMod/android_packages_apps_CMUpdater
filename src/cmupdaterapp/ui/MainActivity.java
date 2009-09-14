@@ -660,7 +660,7 @@ public class MainActivity extends IMainActivity
 		super.onStart();
 		
 		//Delete any older Versions, because of the changed Signing Key
-		while (deleteOldVersionsOfUpdater()==false)
+		while (!deleteOldVersionsOfUpdater())
 		{
 			//User MUST uninstall old App
 			Log.d(TAG, "Old App not uninstalled, try again");

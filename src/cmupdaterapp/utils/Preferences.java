@@ -7,20 +7,26 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 
+import cmupdaterapp.customTypes.FullThemeList;
 import cmupdaterapp.customTypes.ThemeInfo;
+import cmupdaterapp.customTypes.ThemeList;
+import cmupdaterapp.database.ThemeListDbAdapter;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.R;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 
-public class Preferences
+public class Preferences extends Activity
 {	
 	private static final String TAG = "Preferences";
 	
@@ -31,6 +37,8 @@ public class Preferences
 	
 	private String temp;
 	private boolean tempbool;
+	
+	private static Context mainContext;
 	
 	private Preferences(SharedPreferences prefs, Resources res)
 	{
@@ -45,6 +53,7 @@ public class Preferences
 			Log.d(TAG, "Preference Instance set.");
 			INSTANCE = new Preferences(PreferenceManager.getDefaultSharedPreferences(ctx), ctx.getResources());
 		}
+		mainContext = ctx;
 		return INSTANCE;
 	}
 
@@ -178,6 +187,34 @@ public class Preferences
 		temp = mPrefs.getString(mRes.getString(R.string.PREF_THEME_UPDATE_FILE_URL),  mRes.getString(R.string.conf_theme_server_url_def));
 		Log.d(TAG, "Theme MetadataFile-Url: " + temp);
 		return temp;
+	}
+	
+	public LinkedList<ThemeList> getThemeUpdateUrls()
+	{
+		ThemeListDbAdapter themeListDb = new ThemeListDbAdapter(mainContext);
+		Log.d(TAG, "Opening Database");
+		themeListDb.open();
+		//Get the actual ThemeList from the Database
+		Cursor themeListCursor = themeListDb.getAllThemesCursor();
+		startManagingCursor(themeListCursor);
+		themeListCursor.requery();
+		FullThemeList fullThemeList = new FullThemeList();
+		if (themeListCursor.moveToFirst())
+			do
+			{
+				String name = themeListCursor.getString(ThemeListDbAdapter.KEY_NAME_COLUMN);
+				String uri = themeListCursor.getString(ThemeListDbAdapter.KEY_URI_COLUMN);
+				int pk = themeListCursor.getInt(ThemeListDbAdapter.KEY_ID_COLUMN);
+				ThemeList newItem = new ThemeList();
+				newItem.name = name;
+				newItem.url = Uri.parse(uri);
+				newItem.PrimaryKey = pk;
+				fullThemeList.addThemeToList(newItem);
+			}
+			while(themeListCursor.moveToNext());
+		Log.d(TAG, "Closing Database");
+		themeListDb.close();
+		return fullThemeList.returnFullThemeList();	
 	}
 
 	public void setThemeUpdateFileURL(String updateFileURL)
