@@ -79,7 +79,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends IMainActivity
 {
-	private static final String TAG = "UpdateProcessInfo";
+	private static final String TAG = "MainActivity";
 
 	private Spinner mUpdatesSpinner;
 	private Spinner mThemesSpinner;

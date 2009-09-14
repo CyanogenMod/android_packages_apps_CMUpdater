@@ -30,7 +30,7 @@ import android.telephony.TelephonyManager;
 
 public class UpdateCheckerService extends Service
 {	
-	private static final String TAG = "UpdateService";
+	private static final String TAG = "UpdateCheckerService";
 	
 	private Looper mServiceLooper;
 	private ServiceHandler mServiceHandler;

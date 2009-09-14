@@ -7,6 +7,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import cmupdaterapp.misc.Constants;
+
 public class ChangelogHandler extends DefaultHandler
 {
 	private List<Version> co;
@@ -35,11 +37,11 @@ public class ChangelogHandler extends DefaultHandler
      * <tag attribute="attributeValue">*/ 
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException
     { 
-         if (localName.equalsIgnoreCase("Version"))
+         if (localName.equalsIgnoreCase(Constants.VERSION_TAG))
          {
         	 //New Version. Start a new Object
         	 currentVersion = new Version();
-             currentVersion.Version = atts.getValue("name"); 
+             currentVersion.Version = atts.getValue(Constants.VERSION_NAME_TAG); 
          }
     }
      
@@ -48,7 +50,7 @@ public class ChangelogHandler extends DefaultHandler
     @Override 
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException
 	{ 
-         if (localName.equalsIgnoreCase("Version"))
+         if (localName.equalsIgnoreCase(Constants.VERSION_TAG))
          { 
               //Changelog for this Version finished. Add it to the result Object
         	 co.add(currentVersion);

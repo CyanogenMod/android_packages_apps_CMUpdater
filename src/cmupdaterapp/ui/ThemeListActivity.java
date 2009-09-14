@@ -27,7 +27,7 @@ import android.widget.ListView;
 
 public class ThemeListActivity extends ListActivity
 {
-	private static final String TAG = "ManageThemeActivity";
+	private static final String TAG = "ThemeListActivity";
 	
 	public final static int RequestCode = 1; 
 	

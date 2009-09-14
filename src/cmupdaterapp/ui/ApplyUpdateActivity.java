@@ -22,7 +22,7 @@ import cmupdaterapp.misc.Log;
 public class ApplyUpdateActivity extends Activity
 {
 	
-	private static final String TAG = "ApplyUploadActivity";
+	private static final String TAG = "ApplyUpdateActivity";
 
 	private UpdateInfo mUpdateInfo;
 	private String mUpdateFolder;

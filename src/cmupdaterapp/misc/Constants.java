@@ -80,4 +80,8 @@ public class Constants
 	//Name of the Current Rom and the Skip Chars to get the Version
 	public static final String SYS_PROP_MOD_VERSION = "ro.modversion";
 	public static final int PROP_MOD_VERSION_SKIP_CHARS = 12;
+	
+	//ChangelogHandler
+	public static final String VERSION_TAG = "Version";
+	public static final String VERSION_NAME_TAG = "name";
 }

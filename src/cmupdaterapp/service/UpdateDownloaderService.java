@@ -57,7 +57,7 @@ public class UpdateDownloaderService extends Service
 {
 	//public static UpdateDownloaderService INSTANCE;
 
-	private static final String TAG = "UpdateDownloader";
+	private static final String TAG = "UpdateDownloaderService";
 	
 	private int progressBarUpdateInterval;
 	
@@ -330,7 +330,12 @@ public class UpdateDownloaderService extends Service
 		{
 			mWifiLock.release();
 		}
-		return downloadedFile;
+		
+		//Be sure to return null if the User canceled the Download
+		if(prepareForDownloadCancel)
+			return null;
+		else
+			return downloadedFile;
 	}
 
 	private void registerDataListener()
@@ -742,9 +747,15 @@ public class UpdateDownloaderService extends Service
 		File update = new File(fullUpdateFolderPath + "/" + mCurrentUpdate.fileName);
 		File md5sum = new File(fullUpdateFolderPath + "/" + mCurrentUpdate.fileName + ".md5sum");
 		if(update.exists())
+		{
 			update.delete();
+			Log.d(TAG, update.getAbsolutePath() + " deleted");
+		}
 		if(md5sum.exists())
+		{
 			md5sum.delete();
+			Log.d(TAG, md5sum.getAbsolutePath() + " deleted");
+		}
 		mDownloading = false;
 		Log.d(TAG, "Done with #" + mMsg.arg1);
 		stopSelf(mMsg.arg1);
