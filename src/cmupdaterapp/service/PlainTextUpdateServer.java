@@ -120,6 +120,11 @@ public class PlainTextUpdateServer implements IUpdateServer
 				LinkedList<ThemeList> tl = mPreferences.getThemeUpdateUrls();
 				for(ThemeList t:tl)
 				{
+					if(!t.enabled)
+					{
+						Log.d(TAG, "Theme " + t.name + " disabled. Continuing");
+						continue;
+					}
 					Log.d(TAG, "Trying to download ThemeInfos for " + t.url.toString());
 					URI ThemeUpdateServerUri = t.url;
 					HttpUriRequest themeReq = new HttpGet(ThemeUpdateServerUri);
