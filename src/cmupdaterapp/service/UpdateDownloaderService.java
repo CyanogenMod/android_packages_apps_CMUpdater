@@ -110,6 +110,9 @@ public class UpdateDownloaderService extends Service
 	
 	private String fullUpdateFolderPath;
 	
+	private Context AppContext;
+	private Resources res;
+	
 	private final BroadcastReceiver mConnectivityChangesReceiver = new BroadcastReceiver()
 	{
 		@Override
@@ -208,8 +211,10 @@ public class UpdateDownloaderService extends Service
 		Log.d(TAG, "ProgressBarIntervall: " + progressBarUpdateInterval);
 		//df = new SimpleDateFormat("HH 'hours' mm 'mins' ss 'seconds'");
 		//df.setTimeZone(TimeZone.getDefault());
-		minutesString = getResources().getString(R.string.minutes);
-		secondsString = getResources().getString(R.string.seconds);
+		AppContext = getApplicationContext();
+		res = getResources();
+		minutesString = res.getString(R.string.minutes);
+		secondsString = res.getString(R.string.seconds);
 	}
 
 	@Override
@@ -351,7 +356,6 @@ public class UpdateDownloaderService extends Service
 
 	private void notificateDownloadError()
 	{
-		Resources res = getResources();
 		Intent i = new Intent(this, MainActivity.class)
 		.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
 
@@ -648,7 +652,7 @@ public class UpdateDownloaderService extends Service
 		{
 			// Shows Downloadstatus in Notificationbar. Initialize the Variables
 			NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-			Notification mNotification = new Notification(R.drawable.icon_notification, getResources().getString(R.string.notification_tickertext), System.currentTimeMillis());
+			Notification mNotification = new Notification(R.drawable.icon_notification, res.getString(R.string.notification_tickertext), System.currentTimeMillis());
 			mNotification.flags = Notification.FLAG_NO_CLEAR;
 			mNotification.flags = Notification.FLAG_ONGOING_EVENT;
 			RemoteViews mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
@@ -705,7 +709,6 @@ public class UpdateDownloaderService extends Service
 		i.putExtra(Constants.KEY_UPDATE_INFO, ui);
 		
 		//Set the Notification to finished
-		Resources res = getResources();
 		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification mNotification = new Notification(R.drawable.icon_notification, res.getString(R.string.notification_tickertext), System.currentTimeMillis());
@@ -713,10 +716,10 @@ public class UpdateDownloaderService extends Service
 		PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
 		mNotification = new Notification(R.drawable.icon, res.getString(R.string.notification_finished), System.currentTimeMillis());
 		mNotification.flags = Notification.FLAG_AUTO_CANCEL;
-		mNotificationContentIntent = PendingIntent.getActivity(getApplicationContext(), 0, i, 0);
-		mNotification.setLatestEventInfo(getApplicationContext(), res.getString(R.string.app_name), res.getString(R.string.notification_finished), mNotificationContentIntent);
-		Uri notificationRingtone = Preferences.getPreferences(getApplicationContext()).getConfiguredRingtone();
-		if(Preferences.getPreferences(getApplicationContext()).getVibrate())
+		mNotificationContentIntent = PendingIntent.getActivity(AppContext, 0, i, 0);
+		mNotification.setLatestEventInfo(AppContext, res.getString(R.string.app_name), res.getString(R.string.notification_finished), mNotificationContentIntent);
+		Uri notificationRingtone = Preferences.getPreferences(AppContext).getConfiguredRingtone();
+		if(Preferences.getPreferences(AppContext).getVibrate())
 			mNotification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
 		else
 			mNotification.defaults = Notification.DEFAULT_LIGHTS;
