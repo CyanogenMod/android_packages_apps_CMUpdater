@@ -426,23 +426,8 @@ public class MainActivity extends IMainActivity
 				{
 					public void onClick(DialogInterface dialog, int which)
 					{
-						Resources r = getResources();
-						mDialog = ProgressDialog.show(
-								MainActivity.this,
-								r.getString(R.string.verify_and_apply_dialog_title),
-								r.getString(R.string.verify_and_apply_dialog_message),
-								true,
-								true,
-								new DialogInterface.OnCancelListener()
-								{
-									public void onCancel(DialogInterface arg0)
-									{
-										mBgTask.cancel(true);
-									}
-								}
-						);
-			
-						mBgTask = new MD5CheckerTask(mDialog, filename).execute(Update);
+						//Directly call on Postexecute, cause we need no md5check
+						new MD5CheckerTask(null, filename).onPostExecute(true);
 						dialog.dismiss();
 					}
 				})
@@ -458,11 +443,10 @@ public class MainActivity extends IMainActivity
 			//If MD5 exists, apply the update normally
 			else
 			{
-				Resources r = getResources();
 				mDialog = ProgressDialog.show(
 						MainActivity.this,
-						r.getString(R.string.verify_and_apply_dialog_title),
-						r.getString(R.string.verify_and_apply_dialog_message),
+						res.getString(R.string.verify_and_apply_dialog_title),
+						res.getString(R.string.verify_and_apply_dialog_message),
 						true,
 						true,
 						new DialogInterface.OnCancelListener()
@@ -555,8 +539,10 @@ public class MainActivity extends IMainActivity
 			{
 				Toast.makeText(MainActivity.this, R.string.apply_existing_update_md5error_message, Toast.LENGTH_LONG).show();
 			}
-
-			mDialog.dismiss();
+			
+			//Is null when no MD5SUM is present
+			if(mDialog != null)
+				mDialog.dismiss();
 		}
 
 		@Override
@@ -640,7 +626,7 @@ public class MainActivity extends IMainActivity
 		setWallpaper();
 		
 		//Sets the Title to Appname + Mod Version
-		setTitle(getResources().getString(R.string.app_name) + " " + getResources().getString(R.string.title_running) + " " + SysUtils.getReadableModVersion());
+		setTitle(res.getString(R.string.app_name) + " " + res.getString(R.string.title_running) + " " + SysUtils.getReadableModVersion());
 		
 		if(prefs.isFirstRun())
 		{
@@ -1055,7 +1041,6 @@ public class MainActivity extends IMainActivity
 		
 		((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).cancel(R.string.not_new_updates_found_title);
 		
-		Resources res = getResources();
 		TextView experimentalBuildsRomtv = (TextView) findViewById(R.id.experimental_rom_updates_textview);
 		TextView showDowngradesRomtv = (TextView) findViewById(R.id.show_rom_downgrades_textview);
 		TextView experimentalBuildsThemetv = (TextView) findViewById(R.id.experimental_theme_updates_textview);
@@ -1244,9 +1229,7 @@ public class MainActivity extends IMainActivity
 	}
 
 	private void getChangelog(int changelogType)
-	{
-		Resources res = this.getResources(); 
-		
+	{	
 		//Handler for the ThreadClass, that downloads the AppChangelog
 		ChangelogProgressHandler = new Handler()
 		{
@@ -1299,8 +1282,7 @@ public class MainActivity extends IMainActivity
 	private void displayChangelog(int changelogtype)
 	{
 		if (ChangelogList == null)
-			return;
-		Resources res = this.getResources(); 
+			return; 
 		boolean ChangelogEmpty = true;
 		Dialog dialog = new Dialog(this);
 		String dialogTitle;
@@ -1416,7 +1398,7 @@ public class MainActivity extends IMainActivity
 
 	private void checkForUpdates()
 	{
-		ProgressDialog pg = ProgressDialog.show(this, getResources().getString(R.string.checking_for_updates), getResources().getString(R.string.checking_for_updates), true, true);	
+		ProgressDialog pg = ProgressDialog.show(this, res.getString(R.string.checking_for_updates), res.getString(R.string.checking_for_updates), true, true);	
 		UpdateCheck u = new UpdateCheck(mUpdateServer, this, pg);
 		Thread t = new Thread(u);
 		t.start();
@@ -1517,7 +1499,7 @@ public class MainActivity extends IMainActivity
 			MD5filetodelete = null;
 			
 			success=true;
-			Toast.makeText(this, MessageFormat.format(getResources().getString(R.string.delete_single_update_success_message), filename), Toast.LENGTH_LONG).show();
+			Toast.makeText(this, MessageFormat.format(res.getString(R.string.delete_single_update_success_message), filename), Toast.LENGTH_LONG).show();
 		}
 		else if (!mUpdateFolder.exists())
 		{
