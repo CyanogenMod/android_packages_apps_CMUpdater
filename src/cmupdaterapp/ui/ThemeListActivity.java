@@ -95,9 +95,12 @@ public class ThemeListActivity extends ListActivity
 				String name = themeListCursor.getString(ThemeListDbAdapter.KEY_NAME_COLUMN);
 				String uri = themeListCursor.getString(ThemeListDbAdapter.KEY_URI_COLUMN);
 				int pk = themeListCursor.getInt(ThemeListDbAdapter.KEY_ID_COLUMN);
+				int enabled = themeListCursor.getInt(ThemeListDbAdapter.KEY_ENABLED_COLUMN);
 				ThemeList newItem = new ThemeList();
 				newItem.name = name;
 				newItem.url = URI.create(uri);
+				if(enabled == 1) newItem.enabled = true;
+				else newItem.enabled = false;
 				newItem.PrimaryKey = pk;
 				fullThemeList.addThemeToList(newItem);
 			}
