@@ -84,4 +84,11 @@ public class Constants
 	//ChangelogHandler
 	public static final String VERSION_TAG = "Version";
 	public static final String VERSION_NAME_TAG = "name";
+	
+	//ThemeListNew
+	public static final String THEME_LIST_NEW_NAME = "name";
+	public static final String THEME_LIST_NEW_URI = "uri";
+	public static final String THEME_LIST_NEW_ENABLED = "enabled";
+	public static final String THEME_LIST_NEW_PRIMARYKEY = "pk";
+	public static final String THEME_LIST_NEW_UPDATE = "update";
 }

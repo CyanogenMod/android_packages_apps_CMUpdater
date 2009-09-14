@@ -10,8 +10,8 @@ import cmupdaterapp.listadapters.ThemeListAdapter;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.R;
-import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -20,29 +20,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListView;
 
 public class ThemeListActivity extends ListActivity
 {
 	private static final String TAG = "ThemeListActivity";
 	
-	public final static int RequestCode = 1; 
-	
 	private ThemeListDbAdapter themeListDb;
 	private Cursor themeListCursor;
 	private FullThemeList fullThemeList;
 	private LinkedList<ThemeList> fullThemeListList;
-	private Dialog dialog; 
+	//private Dialog dialog; 
 	
 	//New Dialog
-	private Button btnSave;
-	private Button btnBarcode;
-	private EditText etName;
-	private EditText etUri;
-	private CheckBox cbEnabled;
+	//private Button btnSave;
+	//private Button btnBarcode;
+	//private EditText etName;
+	//private EditText etUri;
+	//private CheckBox cbEnabled;
 	
 	private ListView lv;
 	
@@ -165,47 +160,54 @@ public class ThemeListActivity extends ListActivity
 	
 	private void createNewThemeList(final boolean _update, String _name, String _uri, boolean _enabled, final int _primaryKey)
 	{
-		dialog = new Dialog(this);
-		dialog.setContentView(R.layout.themelist_new);
-		btnSave = (Button) dialog.findViewById(R.id.new_theme_list_button_save);
-		btnBarcode = (Button) dialog.findViewById(R.id.new_theme_list_button_barcode);
-		etName = (EditText) dialog.findViewById(R.id.new_theme_list_name);
-		etUri = (EditText) dialog.findViewById(R.id.new_theme_list_uri);
-		cbEnabled = (CheckBox) dialog.findViewById(R.id.new_theme_list_enabled);
-		if(_name != null)
-			etName.setText(_name);
-		if(_uri != null)
-			etUri.setText(_uri);
-		cbEnabled.setChecked(_enabled);
-		btnSave.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				ThemeList t = new ThemeList();
-				t.name = etName.getText().toString().trim();
-				t.url = URI.create(etUri.getText().toString().trim());
-				t.enabled = cbEnabled.isChecked();
-				if(_update == true)
-					t.PrimaryKey = _primaryKey;
+		Intent i = new Intent(ThemeListActivity.this, ThemeListNewActivity.class);
+		i.putExtra(Constants.THEME_LIST_NEW_NAME, _name);
+		i.putExtra(Constants.THEME_LIST_NEW_URI, _uri);
+		i.putExtra(Constants.THEME_LIST_NEW_ENABLED, _enabled);
+		i.putExtra(Constants.THEME_LIST_NEW_PRIMARYKEY, _primaryKey);
+		i.putExtra(Constants.THEME_LIST_NEW_UPDATE, _update);
+		startActivityForResult(i, ThemeListNewActivity.REQUEST_CODE);
+		//dialog = new Dialog(this);
+		//dialog.setContentView(R.layout.themelist_new);
+		//btnSave = (Button) dialog.findViewById(R.id.new_theme_list_button_save);
+		//btnBarcode = (Button) dialog.findViewById(R.id.new_theme_list_button_barcode);
+		//etName = (EditText) dialog.findViewById(R.id.new_theme_list_name);
+		//etUri = (EditText) dialog.findViewById(R.id.new_theme_list_uri);
+		//cbEnabled = (CheckBox) dialog.findViewById(R.id.new_theme_list_enabled);
+		//if(_name != null)
+		//	etName.setText(_name);
+		//if(_uri != null)
+		//	etUri.setText(_uri);
+		//cbEnabled.setChecked(_enabled);
+		//btnSave.setOnClickListener(new View.OnClickListener()
+		//{
+			//public void onClick(View v)
+			//{
+				//ThemeList t = new ThemeList();
+				//t.name = etName.getText().toString().trim();
+				//t.url = URI.create(etUri.getText().toString().trim());
+				//t.enabled = cbEnabled.isChecked();
+				//if(_update == true)
+				//	t.PrimaryKey = _primaryKey;
 				//TODO: Check the URI
 				//TODO: Check that there is text in every field
 				//TODO: Make as startactivityforresult, so theres no dialog window
-				if(_update == false)
-					themeListDb.insertTheme(t);
-				else
-					themeListDb.updateTheme(_primaryKey, t);
-				dialog.dismiss();
-				updateThemeList();
-			}
-		});
-		btnBarcode.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				dialog.dismiss();
-			}
-		});
-		dialog.show();
+				//if(_update == false)
+				//	themeListDb.insertTheme(t);
+				//else
+				//	themeListDb.updateTheme(_primaryKey, t);
+				//dialog.dismiss();
+				//updateThemeList();
+			//}
+		//});
+		//btnBarcode.setOnClickListener(new View.OnClickListener()
+		//{
+		//	public void onClick(View v)
+		//	{
+		//		dialog.dismiss();
+		//	}
+		//});
+		//dialog.show();
 	}
 	
 	@Override
@@ -225,5 +227,30 @@ public class ThemeListActivity extends ListActivity
 			Log.d(TAG, "Fail");
 		//TODO: Display a toast on fail
 		updateThemeList();
+	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent intent)
+	{
+		Log.d(TAG, "RequestCode: " + requestCode + " ResultCode: " + resultCode);
+		switch(requestCode)
+		{
+			case ThemeListNewActivity.REQUEST_CODE:
+				if(resultCode == RESULT_OK)
+				{
+					Bundle b = intent.getExtras();
+					ThemeList tl = new ThemeList();
+					tl.name = b.getString(Constants.THEME_LIST_NEW_NAME);
+					tl.url = URI.create(b.getString(Constants.THEME_LIST_NEW_URI));
+					tl.enabled = b.getBoolean(Constants.THEME_LIST_NEW_ENABLED);
+					if(b.getBoolean(Constants.THEME_LIST_NEW_UPDATE))
+						tl.PrimaryKey = b.getInt(Constants.THEME_LIST_NEW_PRIMARYKEY);
+					if(!b.getBoolean(Constants.THEME_LIST_NEW_UPDATE))
+						themeListDb.insertTheme(tl);
+					else
+						themeListDb.updateTheme(b.getInt(Constants.THEME_LIST_NEW_PRIMARYKEY), tl);
+					updateThemeList();
+				}
+		}
+		super.onActivityResult(requestCode, resultCode, intent);
 	}
 }
