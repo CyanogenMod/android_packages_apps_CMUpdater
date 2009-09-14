@@ -1003,7 +1003,7 @@ public class MainActivity extends IMainActivity
 		}
 
 		//Theme Update File URL Set?
-		//boolean ThemeUpdateUrlSet = prefs.ThemeUpdateUrlSet();
+		boolean ThemeUpdateUrlSet = prefs.ThemeUpdateUrlSet();
 		
 		setContentView(R.layout.main);
 		flipper = (ViewFlipper)findViewById(R.id.Flipper);
@@ -1101,7 +1101,7 @@ public class MainActivity extends IMainActivity
 		TextView tvThemeDownloadText = (TextView) findViewById(R.id.available_themes_text);
 		LinearLayout stableExperimentalInfoThemes = (LinearLayout) findViewById(R.id.stable_experimental_description_container_themes);
 		Button btnThemechangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
-		//TextView tvNoThemeUpdateServer = (TextView) findViewById(R.id.no_theme_update_server_configured);
+		TextView tvNoThemeUpdateServer = (TextView) findViewById(R.id.no_theme_update_server_configured);
 		
 		//No ROM Updates Found Layout
 		Button CheckNowUpdateChooserUpdates = (Button) findViewById(R.id.check_now_button_update_chooser_updates);
@@ -1161,20 +1161,19 @@ public class MainActivity extends IMainActivity
 
 		//Theme Layout
 		//Update URL Set?
-//		if (!ThemeUpdateUrlSet)
-//		{
-//			tvNoThemeUpdateServer.setVisibility(View.VISIBLE);
-//			btnDownloadTheme.setVisibility(View.GONE);
-//			mThemesSpinner.setVisibility(View.GONE);
-//			tvThemeDownloadText.setVisibility(View.GONE);
-//			stableExperimentalInfoThemes.setVisibility(View.GONE);
-//			btnThemechangelogButton.setVisibility(View.GONE);
-//			CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
-//			CheckNowUpdateChooserThemes.setVisibility(View.GONE);
-//		}
+		if (!ThemeUpdateUrlSet)
+		{
+			tvNoThemeUpdateServer.setVisibility(View.VISIBLE);
+			btnDownloadTheme.setVisibility(View.GONE);
+			mThemesSpinner.setVisibility(View.GONE);
+			tvThemeDownloadText.setVisibility(View.GONE);
+			stableExperimentalInfoThemes.setVisibility(View.GONE);
+			btnThemechangelogButton.setVisibility(View.GONE);
+			CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
+			CheckNowUpdateChooserThemes.setVisibility(View.GONE);
+		}
 		//Themes
-		//else if(availableThemes != null && availableThemes.size() > 0)
-		if(availableThemes != null && availableThemes.size() > 0)
+		else if(availableThemes != null && availableThemes.size() > 0)
 		{
 			btnDownloadTheme.setOnClickListener(mDownloadThemeButtonListener);
 			btnThemechangelogButton.setOnClickListener(mThemeChangelogButtonListener);
