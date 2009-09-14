@@ -239,13 +239,13 @@ public class Preferences extends Activity
 		if(!editor.commit()) Log.e(TAG, "Unable to write Theme File Path");
 	}
 	
-	public boolean ThemeUpdateUrlSet()
-	{
-		if(getThemeUpdateFileURL().equals(""))
-			return false;
-		else
-			return true;
-	}
+//	public boolean ThemeUpdateUrlSet()
+//	{
+//		if(getThemeUpdateFileURL().equals(""))
+//			return false;
+//		else
+//			return true;
+//	}
 	
 	//Notifications
 	public boolean notificationsEnabled()

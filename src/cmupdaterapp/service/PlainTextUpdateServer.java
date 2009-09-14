@@ -80,7 +80,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		showAllRomUpdates = mPreferences.showAllRomUpdates();
 		showExperimentalThemeUpdates = mPreferences.showExperimentalThemeUpdates();
 		showAllThemeUpdates = mPreferences.showAllThemeUpdates();
-		boolean ThemeUpdateUrlSet = mPreferences.ThemeUpdateUrlSet();
+		//boolean ThemeUpdateUrlSet = mPreferences.ThemeUpdateUrlSet();
 		
 		//If Wildcard is used or no themes.theme file present set the variable
 		if (themeInfos == null || themeInfos.name.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
@@ -113,8 +113,8 @@ public class PlainTextUpdateServer implements IUpdateServer
 		}
 		
 		//Get the actual Theme Updateserver URL
-		if(ThemeUpdateUrlSet)
-		{
+		//if(ThemeUpdateUrlSet)
+		//{
 			try
 			{
 				LinkedList<ThemeList> tl = mPreferences.getThemeUpdateUrls();
@@ -158,7 +158,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 				Log.d(TAG, "Theme Update URI wrong: " + mPreferences.getThemeUpdateFileURL());
 				//themeException = true;
 			}
-		}
+		//}
 		
 		try
 		{
