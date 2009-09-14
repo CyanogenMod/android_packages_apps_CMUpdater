@@ -1,5 +1,7 @@
 package cmupdaterapp.database;
 
+import java.net.URI;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -8,7 +10,6 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
-import android.net.Uri;
 import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.misc.Log;
 
@@ -114,7 +115,7 @@ public class ThemeListDbAdapter
 		int Key = cursor.getInt(KEY_ID_COLUMN);
 		ThemeList result = new ThemeList();
 		result.name = name;
-		result.url = Uri.parse(uri);
+		result.url = URI.create(uri);
 		result.PrimaryKey = Key;
 		if(enabled == 1) result.enabled = true;
 		else result.enabled = false;

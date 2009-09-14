@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -207,7 +208,7 @@ public class Preferences extends Activity
 				int pk = themeListCursor.getInt(ThemeListDbAdapter.KEY_ID_COLUMN);
 				ThemeList newItem = new ThemeList();
 				newItem.name = name;
-				newItem.url = Uri.parse(uri);
+				newItem.url = URI.create(uri);
 				newItem.PrimaryKey = pk;
 				fullThemeList.addThemeToList(newItem);
 			}

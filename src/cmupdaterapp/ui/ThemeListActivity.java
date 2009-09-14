@@ -1,5 +1,6 @@
 package cmupdaterapp.ui;
 
+import java.net.URI;
 import java.util.LinkedList;
 
 import cmupdaterapp.customTypes.FullThemeList;
@@ -13,7 +14,6 @@ import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -97,7 +97,7 @@ public class ThemeListActivity extends ListActivity
 				int pk = themeListCursor.getInt(ThemeListDbAdapter.KEY_ID_COLUMN);
 				ThemeList newItem = new ThemeList();
 				newItem.name = name;
-				newItem.url = Uri.parse(uri);
+				newItem.url = URI.create(uri);
 				newItem.PrimaryKey = pk;
 				fullThemeList.addThemeToList(newItem);
 			}
@@ -180,7 +180,7 @@ public class ThemeListActivity extends ListActivity
 			{
 				ThemeList t = new ThemeList();
 				t.name = etName.getText().toString().trim();
-				t.url = Uri.parse(etUri.getText().toString().trim());
+				t.url = URI.create(etUri.getText().toString().trim());
 				t.enabled = cbEnabled.isChecked();
 				if(_update == true)
 					t.PrimaryKey = _primaryKey;

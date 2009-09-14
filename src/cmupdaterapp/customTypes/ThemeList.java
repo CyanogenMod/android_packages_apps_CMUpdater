@@ -1,8 +1,7 @@
 package cmupdaterapp.customTypes;
 
 import java.io.Serializable;
-
-import android.net.Uri;
+import java.net.URI;
 
 public class ThemeList implements Serializable
 {
@@ -10,6 +9,6 @@ public class ThemeList implements Serializable
 	
 	public int PrimaryKey;
 	public String name;
-	public Uri url;
+	public URI url;
 	public boolean enabled;
 }
