@@ -145,7 +145,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 					themeLineReader.close();
 					
 					LinkedList<UpdateInfo> themeUpdateInfos = parseJSON(themeBuf);
-					retValue.themes = getThemeUpdates(themeUpdateInfos);
+					retValue.themes.addAll(getThemeUpdates(themeUpdateInfos));
 				}
 			}
 			catch (IllegalArgumentException e)
