@@ -85,21 +85,10 @@
 			android:title="@string/p_allow_experimental_theme_versions_title"
 			android:summary="@string/p_allow_experimental_theme_versions_summary"
 			android:defaultValue="@string/PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS_DEF_VALUE" />
-		<EditTextPreference
-			android:key="@string/PREF_THEME_UPDATE_FILE_URL"
-			android:title="@string/p_theme_file_url_title"
-			android:summary="@string/p_theme_file_url_summary"
-			android:dialogTitle="@string/p_theme_file_url_title"
-			android:defaultValue="@string/conf_theme_server_url_def"
-			android:singleLine="false" />
 		<Preference
-			android:key="@string/PREF_THEME_UPDATE_FILE_QR"
-			android:title="@string/p_theme_file_url_qr_title"
-			android:summary="@string/p_theme_file_url_qr_summary" />
-		<Preference
-			android:key="@string/PREF_THEME_UPDATE_FILE_URL_DEF"
-			android:title="@string/p_theme_file_url_def_title"
-			android:summary="@string/p_theme_file_url_def_summary" />
+			android:key="@string/PREF_THEMES_LIST"
+			android:title="@string/p_theme_list_title"
+			android:summary="@string/p_theme_list_summary" />
 		<EditTextPreference
 			android:key="@string/PREF_THEMES_THEME_FILE"
 			android:title="@string/p_theme_file_title"
@@ -111,10 +100,6 @@
 			android:key="@string/PREF_THEMES_THEME_FILE_DEF"
 			android:title="@string/p_theme_file_def_title"
 			android:summary="@string/p_theme_file_def_summary" />
-		<Preference
-			android:key="@string/PREF_THEMES_LIST"
-			android:title="@string/p_theme_list_title"
-			android:summary="@string/p_theme_list_summary" />
 	</PreferenceScreen>
 	<!-- Advanced Properties -->
 	<PreferenceScreen

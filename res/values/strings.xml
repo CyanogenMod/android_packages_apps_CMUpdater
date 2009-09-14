@@ -180,17 +180,6 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_update_file_url_qr_title">Scan Barcode</string>
 	<string name="p_update_file_url_qr_summary">Scan QR Code for Rom Update File URL</string>
 
-	<string name="p_theme_file_url_title">Theme Update Server</string>
-	<string name="p_theme_file_url_summary">Change the Theme Update Server</string>
-	<string name="p_theme_file_url_changed">Theme Update URL set back to default</string>
-	
-
-	<string name="p_theme_file_url_def_title">Reset Theme Update Server</string>
-	<string name="p_theme_file_url_def_summary">Reset the location of the Theme Update Server back to default</string>
-
-	<string name="p_theme_file_url_qr_title">Scan Barcode</string>
-	<string name="p_theme_file_url_qr_summary">Scan QR Code for Theme Update File URL</string>
-
 	<string name="p_vibrate_title">Vibrate</string>
 	<string name="p_vibrate_summary">Vibrate on Notifications</string>
 

@@ -24,7 +24,6 @@ public class ConfigActivity extends PreferenceActivity
 	private static final String TAG = "ConfigActivity";
 	private Preferences prefs;
 	private boolean RomBarcodeRequested;
-	private boolean ThemeBarcodeRequested;
 	
 	private final Preference.OnPreferenceChangeListener mUpdateCheckingFrequencyListener = new Preference.OnPreferenceChangeListener() {
 		public boolean onPreferenceChange(Preference preference, Object newValue)
@@ -66,18 +65,6 @@ public class ConfigActivity extends PreferenceActivity
 				return true;
 			}
 		});
-
-		pref = (Preference) findPreference(res.getString(R.string.PREF_THEME_UPDATE_FILE_QR));
-		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
-		{
-			public boolean onPreferenceClick(Preference preference)
-			{
-				ThemeBarcodeRequested = true;
-				IntentIntegrator.initiateScan(ConfigActivity.this);
-				Log.d(TAG, "Starting Barcodescanner for Theme Update File");
-				return true;
-			}
-		});
 		
 		//Reset Update URLs
 		pref = (Preference) findPreference(res.getString(R.string.PREF_ROM_UPDATE_FILE_URL_DEF));
@@ -88,19 +75,6 @@ public class ConfigActivity extends PreferenceActivity
 				prefs.setRomUpdateFileURL(res.getString(R.string.conf_update_server_url_def));
 				Toast.makeText(getBaseContext(), R.string.p_update_file_url_changed, Toast.LENGTH_LONG).show();
 				Log.d(TAG, "Rom Update File URL set back to default: " + prefs.getRomUpdateFileURL());
-				ConfigActivity.this.finish();
-				return true;
-			}
-		});
-		
-		pref = (Preference) findPreference(res.getString(R.string.PREF_THEME_UPDATE_FILE_URL_DEF));
-		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
-		{
-			public boolean onPreferenceClick(Preference preference)
-			{
-				prefs.setThemeUpdateFileURL(res.getString(R.string.conf_theme_server_url_def));
-				Toast.makeText(getBaseContext(), R.string.p_theme_file_url_changed, Toast.LENGTH_LONG).show();
-				Log.d(TAG, "Theme Update File URL set back to default: " + prefs.getThemeUpdateFileURL());
 				ConfigActivity.this.finish();
 				return true;
 			}
@@ -156,25 +130,6 @@ public class ConfigActivity extends PreferenceActivity
 				{
 					Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
 					Log.d(TAG, "Entered Rom Update URL not valid: " + String.valueOf(newValue));
-				}
-				return true;
-			}
-		});
-		
-		pref = (Preference) findPreference(res.getString(R.string.PREF_THEME_UPDATE_FILE_URL));
-		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
-		{
-			public boolean onPreferenceChange(Preference preference, Object newValue)
-			{
-				if(URLUtil.isValidUrl(String.valueOf(newValue)))
-				{
-					prefs.setThemeUpdateFileURL(String.valueOf(newValue));
-					Log.d(TAG, "Theme Update URL Set to: " + String.valueOf(newValue));
-				}
-				else
-				{
-					Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
-					Log.d(TAG, "Entered Theme Update URL not valid: " + String.valueOf(newValue));
 				}
 				return true;
 			}
@@ -285,7 +240,6 @@ public class ConfigActivity extends PreferenceActivity
 					if (null != result && !result.equals("") )
 					{
 						Log.d(TAG, "Requested Rom Barcodescan? " + String.valueOf(RomBarcodeRequested));
-						Log.d(TAG, "Requested Theme Barcodescan? " + String.valueOf(ThemeBarcodeRequested));
 						if (RomBarcodeRequested)
 						{
 							Log.d(TAG, "Setting Rom Update File to " + result);
@@ -300,20 +254,6 @@ public class ConfigActivity extends PreferenceActivity
 								Log.d(TAG, "Entered Rom Update URL not valid: " + result);
 							}
 						}
-						else if (ThemeBarcodeRequested)
-						{
-							Log.d(TAG, "Setting Theme Update File to " + result);
-							if(URLUtil.isValidUrl(result))
-							{
-								prefs.setThemeUpdateFileURL(result);
-								Toast.makeText(getBaseContext(), "Theme Update File URL: " + result, Toast.LENGTH_SHORT).show();
-							}
-							else
-							{
-								Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
-								Log.d(TAG, "Entered Theme Update URL not valid: " + result);
-							}
-						}
 						else
 						{
 							//Something wrong here. Barcodescan requested but no Variables set
@@ -321,14 +261,12 @@ public class ConfigActivity extends PreferenceActivity
 							Log.d(TAG, "Something wrong here. Barcodescan requested but no Variables set");
 						}
 						RomBarcodeRequested = false;
-						ThemeBarcodeRequested = false;
 						ConfigActivity.this.finish();
 					}
 					else
 					{
 						Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
 						RomBarcodeRequested = false;
-						ThemeBarcodeRequested = false;
 					}
 					
 				}
@@ -336,7 +274,6 @@ public class ConfigActivity extends PreferenceActivity
 				{
 					Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
 					RomBarcodeRequested = false;
-					ThemeBarcodeRequested = false;
 				}
 				break;
 			//RingtonePicker

@@ -12,7 +12,6 @@
 
 	<!-- Config Strings -->
 	<string name="conf_update_server_url_def">http://cyanogen-updater.googlecode.com/files/update_file.json</string>
-	<string name="conf_theme_server_url_def"></string>
 	<string name="conf_update_folder">cm-updates</string>
 	<string name="conf_theme_version_file_def">/system/framework/themes.theme</string>
 	<string name="conf_changelog_url">http://cyanogen-updater.googlecode.com/files/changelog.xml</string>
@@ -33,9 +32,6 @@
 	<string name="PREF_LAST_UPDATE_CHECK">lastUpdateCheck</string>
 	<string name="PREF_PROGRESS_UPDATE_FREQUENCY">progressUpdateFrequ</string>
 	<string name="PREF_PROGRESS_UPDATE_FREQUENCY_DEF">progressUpdateFreqDef</string>
-	<string name="PREF_THEME_UPDATE_FILE_URL">prefThemeFileURL</string>
-	<string name="PREF_THEME_UPDATE_FILE_QR">prefThemeFileURLQr</string>
-	<string name="PREF_THEME_UPDATE_FILE_URL_DEF">prefThemeFileURLDef</string>
 	<string name="PREF_THEMES_THEME_FILE">prefThemeFile</string>
 	<string name="PREF_THEMES_THEME_FILE_DEF">prefThemeFileDef</string>
 	<string name="PREF_DISPLAY_OLDER_ROM_VERSIONS">displayOlderRomVersions</string>

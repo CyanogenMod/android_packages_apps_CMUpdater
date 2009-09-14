@@ -181,13 +181,6 @@ public class Preferences extends Activity
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS_DEF_VALUE)));
 		Log.d(TAG, "Display Experimental Theme Updates: " + tempbool);
 		return tempbool;
-	}	
-	
-	public String getThemeUpdateFileURL()
-	{
-		temp = mPrefs.getString(mRes.getString(R.string.PREF_THEME_UPDATE_FILE_URL),  mRes.getString(R.string.conf_theme_server_url_def));
-		Log.d(TAG, "Theme MetadataFile-Url: " + temp);
-		return temp;
 	}
 	
 	public LinkedList<ThemeList> getThemeUpdateUrls()
@@ -219,13 +212,6 @@ public class Preferences extends Activity
 		Log.d(TAG, "Closing Database");
 		themeListDb.close();
 		return fullThemeList.returnFullThemeList();	
-	}
-
-	public void setThemeUpdateFileURL(String updateFileURL)
-	{
-		Editor editor = mPrefs.edit();
-		editor.putString(mRes.getString(R.string.PREF_THEME_UPDATE_FILE_URL), updateFileURL);
-		if(!editor.commit()) Log.e(TAG, "Unable to write Theme Update File URL");
 	}
 	
 	public String getThemeFile()

@@ -10,6 +10,7 @@
 			android:layout_height="wrap_content"
 			android:paddingTop="10px"
 			android:paddingBottom="10px"
+			android:gravity="center_horizontal"
 			android:id="@+id/ThemeListImage"/>
 		<LinearLayout
 			xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,13 +24,13 @@
 				android:layout_gravity="center_vertical"
 				android:paddingLeft="3px"
 				android:id="@+id/txtThemeName"
-				style="@style/TextAppearance.TextSpinner"/>
+				style="@style/TextAppearance.Text"/>
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
 				android:paddingLeft="3px"
 				android:id="@+id/txtThemeUri"
-				style="@style/TextAppearance.TextSpinner"/>
+				style="@style/TextAppearance.Text"/>
 		</LinearLayout>
 </LinearLayout>

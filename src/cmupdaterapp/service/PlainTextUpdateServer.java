@@ -155,7 +155,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 			}
 			catch (IllegalArgumentException e)
 			{
-				Log.d(TAG, "Theme Update URI wrong: " + mPreferences.getThemeUpdateFileURL());
+				Log.d(TAG, "Theme Update URI wrong");
 				//themeException = true;
 			}
 		}
