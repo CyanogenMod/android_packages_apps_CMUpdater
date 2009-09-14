@@ -108,6 +108,8 @@ public class UpdateDownloaderService extends Service
 	
 	private Message mMsg;
 	
+	private String fullUpdateFolderPath;
+	
 	private final BroadcastReceiver mConnectivityChangesReceiver = new BroadcastReceiver()
 	{
 		@Override
@@ -201,6 +203,7 @@ public class UpdateDownloaderService extends Service
 		mWifiLock = mWifiManager.createWifiLock("CM Updater");
 
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
+		fullUpdateFolderPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mUpdateFolder; 
 		progressBarUpdateInterval = Preferences.getPreferences(this).getProgressUpdateFreq();
 		Log.d(TAG, "ProgressBarIntervall: " + progressBarUpdateInterval);
 		//df = new SimpleDateFormat("HH 'hours' mm 'mins' ss 'seconds'");
@@ -448,19 +451,19 @@ public class UpdateDownloaderService extends Service
 							Log.d(TAG, "Server returned status code " + md5serverResponse + " for update zip md5sum trying next mirror");
 						}
 						//If directory not exists, create it
-						File directory = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder);
+						File directory = new File(fullUpdateFolderPath);
 						if (!directory.exists())
 						{
 							directory.mkdirs();
 							Log.d(TAG, "UpdateFolder created");
 						}
 	
-						mDestinationFile = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder, mFileName);
+						mDestinationFile = new File(fullUpdateFolderPath, mFileName);
 						if(mDestinationFile.exists()) mDestinationFile.delete();
 	
 						if (md5Available)
 						{
-							mDestinationMD5File = new File(Environment.getExternalStorageDirectory()+"/"+mUpdateFolder, mFileName + ".md5sum");
+							mDestinationMD5File = new File(fullUpdateFolderPath, mFileName + ".md5sum");
 							if(mDestinationMD5File.exists()) mDestinationMD5File.delete();
 	
 							try
@@ -736,6 +739,12 @@ public class UpdateDownloaderService extends Service
 		prepareForDownloadCancel = true;
 		Log.d(TAG, "Download Service CancelDownload was called");
 		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
+		File update = new File(fullUpdateFolderPath + "/" + mCurrentUpdate.fileName);
+		File md5sum = new File(fullUpdateFolderPath + "/" + mCurrentUpdate.fileName + ".md5sum");
+		if(update.exists())
+			update.delete();
+		if(md5sum.exists())
+			md5sum.delete();
 		mDownloading = false;
 		Log.d(TAG, "Done with #" + mMsg.arg1);
 		stopSelf(mMsg.arg1);
