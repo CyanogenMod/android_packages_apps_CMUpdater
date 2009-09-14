@@ -60,7 +60,6 @@ public class ThemeListNewActivity extends Activity
 			{
 				//TODO: Check the URI
 				//TODO: Check that there is text in every field
-				//TODO: Make as startactivityforresult, so theres no dialog window
 				Intent i = new Intent();
 				i.putExtra(Constants.THEME_LIST_NEW_NAME, etName.getText().toString().trim());
 				i.putExtra(Constants.THEME_LIST_NEW_URI, etUri.getText().toString().trim());

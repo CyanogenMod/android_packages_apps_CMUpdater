@@ -30,15 +30,7 @@ public class ThemeListActivity extends ListActivity
 	private Cursor themeListCursor;
 	private FullThemeList fullThemeList;
 	private LinkedList<ThemeList> fullThemeListList;
-	//private Dialog dialog; 
-	
-	//New Dialog
-	//private Button btnSave;
-	//private Button btnBarcode;
-	//private EditText etName;
-	//private EditText etUri;
-	//private CheckBox cbEnabled;
-	
+
 	private ListView lv;
 	
 	private Resources res;
@@ -112,7 +104,6 @@ public class ThemeListActivity extends ListActivity
 	{
 		super.onListItemClick(parent, v, position, id);
 		Log.d(TAG, "Item clicked. Postition: " + id);
-		//getListView().getItemAtPosition(position);
 	}
 	
 	@Override
@@ -167,47 +158,6 @@ public class ThemeListActivity extends ListActivity
 		i.putExtra(Constants.THEME_LIST_NEW_PRIMARYKEY, _primaryKey);
 		i.putExtra(Constants.THEME_LIST_NEW_UPDATE, _update);
 		startActivityForResult(i, ThemeListNewActivity.REQUEST_CODE);
-		//dialog = new Dialog(this);
-		//dialog.setContentView(R.layout.themelist_new);
-		//btnSave = (Button) dialog.findViewById(R.id.new_theme_list_button_save);
-		//btnBarcode = (Button) dialog.findViewById(R.id.new_theme_list_button_barcode);
-		//etName = (EditText) dialog.findViewById(R.id.new_theme_list_name);
-		//etUri = (EditText) dialog.findViewById(R.id.new_theme_list_uri);
-		//cbEnabled = (CheckBox) dialog.findViewById(R.id.new_theme_list_enabled);
-		//if(_name != null)
-		//	etName.setText(_name);
-		//if(_uri != null)
-		//	etUri.setText(_uri);
-		//cbEnabled.setChecked(_enabled);
-		//btnSave.setOnClickListener(new View.OnClickListener()
-		//{
-			//public void onClick(View v)
-			//{
-				//ThemeList t = new ThemeList();
-				//t.name = etName.getText().toString().trim();
-				//t.url = URI.create(etUri.getText().toString().trim());
-				//t.enabled = cbEnabled.isChecked();
-				//if(_update == true)
-				//	t.PrimaryKey = _primaryKey;
-				//TODO: Check the URI
-				//TODO: Check that there is text in every field
-				//TODO: Make as startactivityforresult, so theres no dialog window
-				//if(_update == false)
-				//	themeListDb.insertTheme(t);
-				//else
-				//	themeListDb.updateTheme(_primaryKey, t);
-				//dialog.dismiss();
-				//updateThemeList();
-			//}
-		//});
-		//btnBarcode.setOnClickListener(new View.OnClickListener()
-		//{
-		//	public void onClick(View v)
-		//	{
-		//		dialog.dismiss();
-		//	}
-		//});
-		//dialog.show();
 	}
 	
 	@Override
