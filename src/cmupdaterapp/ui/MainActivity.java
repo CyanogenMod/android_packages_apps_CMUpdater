@@ -1304,6 +1304,10 @@ public class MainActivity extends IMainActivity
 		dialog.setContentView(R.layout.changelog);
 		LinearLayout main = (LinearLayout) dialog.findViewById(R.id.ChangelogLinearMain);
 		
+		LayoutParams lp1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams lp2 = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT);
+		LayoutParams lp3 = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		
 		//Foreach Version
 		for (Version v:ChangelogList)
 		{
@@ -1313,7 +1317,7 @@ public class MainActivity extends IMainActivity
 			}
 			ChangelogEmpty = false;
 			TextView versiontext = new TextView(this);
-			versiontext.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+			versiontext.setLayoutParams(lp1);
 			versiontext.setGravity(Gravity.CENTER);
 			versiontext.setTextColor(Color.RED);
 			versiontext.setText("Version " + v.Version);
@@ -1324,14 +1328,14 @@ public class MainActivity extends IMainActivity
 			for(String Change:v.ChangeLogText)
 			{
 				LinearLayout l = new LinearLayout(this);
-				l.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT));
+				l.setLayoutParams(lp2);
 				l.setGravity(Gravity.CENTER_VERTICAL);
 				ImageView i = new ImageView(this);
-				i.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+				i.setLayoutParams(lp3);
 				i.setImageResource(R.drawable.icon);
 				l.addView(i);
 				TextView ChangeText = new TextView(this);
-				ChangeText.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+				ChangeText.setLayoutParams(lp3);
 				ChangeText.setText(Change);
 				l.addView(ChangeText);
 				main.addView(l);
@@ -1407,7 +1411,7 @@ public class MainActivity extends IMainActivity
 	private void showAboutDialog()
 	{
 		Dialog dialog = new Dialog(this);
-		dialog.setTitle("About");
+		dialog.setTitle(res.getString(R.string.about_dialog_title));
 		dialog.setContentView(R.layout.about);
 		TextView mVersionName = (TextView) dialog.findViewById(R.id.version_name_about_text_view);            
 		try

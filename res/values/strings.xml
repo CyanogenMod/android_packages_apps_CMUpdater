@@ -109,6 +109,8 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 
 	<string name="delete_updates_root_folder_message">You can not delete the Root Folder\nPlease delete the Updates one by one</string>
 
+	<string name="about_dialog_title">About</string>
+
 	<!-- .service.* Strings -->
 	<string name="no_updates_found">No CM updates found</string>
 	<string name="not_new_updates_found_ticker">New CM updates found!</string>
