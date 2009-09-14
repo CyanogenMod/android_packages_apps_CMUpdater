@@ -177,17 +177,7 @@
    
    <string name="p_update_file_url_qr_title">Сканировка Кода</string>
    <string name="p_update_file_url_qr_summary">Сканировать штрих-код содержащий адрес обновителя Прошивок</string>
-   
-   <string name="p_theme_file_url_title">Адрес Обновителя Темы</string>
-   <string name="p_theme_file_url_summary">Установить интернет адрес обновителя Темы</string>
-   <string name="p_theme_file_url_changed">Адрес обновителя Темы сброшен на заводской</string>
-   
-   <string name="p_theme_file_url_def_title">Сброс Адреса Темы</string>
-   <string name="p_theme_file_url_def_summary">Сбросить интернет адрес обновитеня Тем на заводской</string>
-   
-   <string name="p_theme_file_url_qr_title">Сканировка Кода</string>
-   <string name="p_theme_file_url_qr_summary">Сканировать штрих-код содержащий адрес обновителя Тем</string>
-   
+
    <string name="p_vibrate_title">Вибрация</string>
    <string name="p_vibrate_summary">Вибрировать телефон при уведомлениях</string>
    
