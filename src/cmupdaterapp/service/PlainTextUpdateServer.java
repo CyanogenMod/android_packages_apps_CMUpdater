@@ -202,6 +202,9 @@ public class PlainTextUpdateServer implements IUpdateServer
 			JSONArray mirrorList = mainJSONObject.getJSONArray(Constants.JSON_MIRROR_LIST);
 			JSONArray updateList = mainJSONObject.getJSONArray(Constants.JSON_UPDATE_LIST);
 
+			Log.d(TAG, "Found "+mirrorList.length()+" mirrors in the JSON");
+			Log.d(TAG, "Found "+updateList.length()+" updates in the JSON");
+			
 			for (int i = 0, max = updateList.length() ; i < max ; i++)
 			{
 				uis.add(parseUpdateJSONObject(updateList.getJSONObject(i),mirrorList));
