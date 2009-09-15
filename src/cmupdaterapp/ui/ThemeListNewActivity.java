@@ -1,17 +1,24 @@
 package cmupdaterapp.ui;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 import cmupdaterapp.misc.Constants;
+import cmupdaterapp.misc.Log;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ThemeListNewActivity extends Activity
 {
+	private static final String TAG = "ThemeListNewActivity";
 	public final static int REQUEST_CODE = 1;
 	
 	private String intentName;
@@ -74,9 +81,44 @@ public class ThemeListNewActivity extends Activity
 		{
 			public void onClick(View v)
 			{
-				setResult(RESULT_CANCELED);
-				finish();
+				IntentIntegrator.initiateScan(ThemeListNewActivity.this);
 			}
 		});
+	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent intent)
+	{
+		Log.d(TAG, "onActivityResult requestCode: "+requestCode+" resultCode: "+resultCode);
+		switch(requestCode)
+		{
+			case IntentIntegrator.REQUEST_CODE:
+				IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+				if (null != scanResult)
+				{
+					String result = scanResult.getContents();
+					if (null != result && !result.equals("") )
+					{
+						Log.d(TAG, "Scanned URL: " + result);
+						if(URLUtil.isValidUrl(result))
+						{
+							etUri.setText(result);
+							break;
+						}
+						else
+						{
+							Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
+							Log.d(TAG, "Scanned URL not valid: " + result);
+						}
+					}
+					else
+						Toast.makeText(getBaseContext(), R.string.barcode_scan_no_result, Toast.LENGTH_LONG).show();
+				}
+				else
+					Toast.makeText(getBaseContext(), R.string.barcode_scan_no_result, Toast.LENGTH_LONG).show();
+				break;
+			default:
+				Log.d(TAG, "Wrong Request Code");
+				break;
+		}
 	}
 }

@@ -265,14 +265,14 @@ public class ConfigActivity extends PreferenceActivity
 					}
 					else
 					{
-						Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
+						Toast.makeText(getBaseContext(), R.string.barcode_scan_no_result, Toast.LENGTH_LONG).show();
 						RomBarcodeRequested = false;
 					}
 					
 				}
 				else
 				{
-					Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getBaseContext(), R.string.barcode_scan_no_result, Toast.LENGTH_LONG).show();
 					RomBarcodeRequested = false;
 				}
 				break;
