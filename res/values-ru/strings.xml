@@ -39,7 +39,9 @@
    <string name="menu_config">Настройки</string>
    <string name="menu_about">О Программе</string>
    <string name="menu_changelog">Список Изменений</string>
-   <string name="menu_add_theme">Добавить Сервер Темы</string>
+   <string name="menu_add_theme">Добавить Сервер</string>
+   <string name="menu_edit_theme">Редактировать</string>
+   <string name="menu_delete_theme">Удалить</string>
    
    <string name="cancel_download_buton_text">Отменить Загрузку</string>
    <string name="confirm_download_cancelation_dialog_message">Пожалуйста подтвердите отмену загрузки</string>
@@ -77,12 +79,12 @@
    <string name="changelog_progress_title">Загрузка ...</string>
    <string name="changelog_progress_body">Загружается файл changelog.xml</string>
    
-   <string name="changelog_button_text">Изменения Обновления</string>
-   <string name="no_changelog_found">Файл изменений не найден</string>
+   <string name="changelog_button_text">Примечания Обновления</string>
+   <string name="no_changelog_found">Файл примечаний не найден</string>
    
-   <string name="changelog_title_rom">Изменения Прошивки</string>
-   <string name="changelog_title_app">Изменения Обновителя</string>
-   <string name="changelog_title_theme">Изменения Темы</string>
+   <string name="changelog_title_rom">Примечания Прошивки</string>
+   <string name="changelog_title_app">Примечания Обновителя</string>
+   <string name="changelog_title_theme">Примечания Темы</string>
    
    <string name="true_string">да</string>
    <string name="false_string">нет</string>
@@ -95,10 +97,10 @@
     
    <string name="no_existing_updates_found">Загруженных Обновлений Не Найдено</string>
    
-	<string name="available_themes_text">Выбор Темы:</string>
-	<string name="choose_available_theme_text">Загрузить</string>
-	<string name="changelog_button_theme_text">Изменения выбранной Темы</string>
-   
+   <string name="available_themes_text">Выбор Темы:</string>
+   <string name="choose_available_theme_text">Загрузить</string>
+   <string name="changelog_button_theme_text">Примечания выбранной Версии</string>
+  
    <string name="title_running">работает</string>
    
    <string name="no_updatecheck_executed">Проверка не начата</string>
@@ -106,6 +108,10 @@
    <string name="no_theme_update_server_configured">Адрес обновлений Тем не настроен.\nУстановите интернет адрес обновителя Тем в настройках.</string>
    
    <string name="delete_updates_root_folder_message">Удаление корневого каталога запрещено\nНеобходимо удалить файлы по отдельности</string>
+   
+   <string name="about_dialog_title">О Программе</string>
+   
+   <string name="barcode_scan_no_result">Сканировка не удалась. Попробуйте заново.</string>
    
    <!-- .service.* Strings -->
    <string name="no_updates_found">Новых версий прошивки не найдено.</string>
@@ -177,7 +183,7 @@
    
    <string name="p_update_file_url_qr_title">Сканировка Кода</string>
    <string name="p_update_file_url_qr_summary">Сканировать штрих-код содержащий адрес обновителя Прошивок</string>
-
+   
    <string name="p_vibrate_title">Вибрация</string>
    <string name="p_vibrate_summary">Вибрировать телефон при уведомлениях</string>
    
@@ -223,5 +229,13 @@
    <string name="p_update_folder_error">Ошибка при установке каталога загружений</string>
    	
    <string name="p_theme_list_title">Сервера Тем</string>
-   <string name="p_theme_list_summary">Добавить, Удалить, редактировать Сервера</string>
+   <string name="p_theme_list_summary">Добавить, Удалить, Редактировать</string>
+   
+   <string name="p_theme_list_context_menu_header">Выбор Действия</string>
+   
+   <string name="p_theme_list_new_name">Имя Темы:</string>
+   <string name="p_theme_list_new_uri">Адрес:</string>
+   <string name="p_theme_list_new_enabled">Включена:</string>
+   <string name="p_theme_list_new_barcode">Сканировать Код</string>
+   <string name="p_theme_list_new_save">Сохранить</string>
 </resources>
