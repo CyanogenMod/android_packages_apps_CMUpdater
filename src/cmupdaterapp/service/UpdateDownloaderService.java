@@ -757,6 +757,8 @@ public class UpdateDownloaderService extends Service
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);
 		}
+		//Quit the DownloadActivty
+		DOWNLOAD_ACTIVITY.finish();
 	}
 
 	public void cancelDownload()
