@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
@@ -24,11 +23,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -40,7 +37,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.Message;
 import android.view.Gravity;
 import android.view.Menu;
@@ -54,7 +50,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,7 +59,6 @@ import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IMainActivity;
 import cmupdaterapp.listadapters.UpdateListAdapter;
 import cmupdaterapp.service.PlainTextUpdateServer;
-import cmupdaterapp.service.UpdateDownloaderService;
 import cmupdaterapp.tasks.UpdateCheck;
 import cmupdaterapp.tasks.UserTask;
 import cmupdaterapp.utils.MD5;
@@ -84,17 +78,7 @@ public class MainActivity extends IMainActivity
 	private Spinner mUpdatesSpinner;
 	private Spinner mThemesSpinner;
 	private PlainTextUpdateServer mUpdateServer;
-	private ProgressBar mProgressBar;
-	private TextView mDownloadedBytesTextView;
-	private TextView mDownloadMirrorTextView;
-	private TextView mDownloadFilenameTextView;
-	private TextView mDownloadSpeedTextView;
-	private TextView mRemainingTimeTextView;
 	private FullUpdateInfo mAvailableUpdates;
-	private String mMirrorName;
-	private String mFileName;
-	private UpdateDownloaderService mUpdateDownloaderService;
-	private Intent mUpdateDownloaderServiceIntent;
 
 	private File mUpdateFolder;
 	private Spinner mExistingUpdatesSpinner;
@@ -116,26 +100,6 @@ public class MainActivity extends IMainActivity
 
 	private Preferences prefs;
 	private Resources res;
-	
-	//Indicates if a Service is bound 
-	private boolean mbind = false;
-
-	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection()
-	{
-		public void onServiceConnected(ComponentName className, IBinder service)
-		{
-			mUpdateDownloaderService = ((UpdateDownloaderService.LocalBinder)service).getService();
-			if(mUpdateDownloaderService.isDownloading())
-			{
-				switchToDownloadingLayout(mUpdateDownloaderService.getCurrentUpdate());
-			}
-		}
-
-		public void onServiceDisconnected(ComponentName className)
-		{
-			mUpdateDownloaderService = null;
-		}
-	};
 
 	private final View.OnClickListener mDownloadUpdateButtonListener = new View.OnClickListener()
 	{
@@ -210,7 +174,6 @@ public class MainActivity extends IMainActivity
 				.show();
 				return;
 			}
-
 			
 			UpdateInfo ui = (UpdateInfo) mThemesSpinner.getSelectedItem();
 			//Check if the File is present, so prompt the User to overwrite it
@@ -556,66 +519,6 @@ public class MainActivity extends IMainActivity
 		}
 	};
 
-	private final View.OnClickListener mCancelDownloadListener = new View.OnClickListener()
-	{
-		public void onClick(View arg0)
-		{
-			new AlertDialog.Builder(MainActivity.this)
-			.setMessage(R.string.confirm_download_cancelation_dialog_message)
-			.setPositiveButton(R.string.confirm_download_cancelation_dialog_yes, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					Log.d(TAG, "Positive Download Cancel Button pressed");
-					if (mUpdateDownloaderService!=null)
-					{
-						mUpdateDownloaderService.cancelDownload();
-						Log.d(TAG, "Cancel onClick Event: cancelDownload finished");
-					}
-					else
-						Log.d(TAG, "Cancel Download: mUpdateDownloaderService was NULL");
-					try
-					{
-						stopService(mUpdateDownloaderServiceIntent);
-						Log.d(TAG, "stopService(mUpdateDownloaderServiceIntent) finished");
-					}
-					catch (SecurityException ex)
-					{
-						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceIntent could not be Stopped", ex);
-					}
-					try
-					{
-						if(mbind)
-						{
-							unbindService(mUpdateDownloaderServiceConnection);
-							Log.d(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
-							mbind = false;
-						}
-						else
-							Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
-					}
-					catch (SecurityException ex)
-					{
-						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceConnection unbind failed", ex);
-					}
-					//UpdateDownloaderService.setUpdateProcessInfo(null);
-					Log.d(TAG, "Download Cancel Procedure Finished. Switching Layout");
-					switchToUpdateChooserLayout(null);
-				}
-			})
-			.setNegativeButton(R.string.confirm_download_cancelation_dialog_no, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					Log.d(TAG, "Negative Download Cancel Button pressed");
-					dialog.dismiss();
-				}
-			})
-			.show();
-		}
-
-	};
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -649,8 +552,6 @@ public class MainActivity extends IMainActivity
 		restoreSavedInstanceValues(savedInstanceState);
 
 		mUpdateServer = new PlainTextUpdateServer(this);
-
-		mUpdateDownloaderServiceIntent = new Intent(this, UpdateDownloaderService.class);
 	}
 
 	@Override
@@ -743,10 +644,15 @@ public class MainActivity extends IMainActivity
             Collections.sort(mfilenames, Collections.reverseOrder()); 
 		}
 		files = null;
-		UpdateDownloaderService.setUpdateProcessInfo(MainActivity.this);
-		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
+
+		if(DownloadActivity.mUpdateDownloaderService != null && DownloadActivity.mUpdateDownloaderService.isDownloading())
 		{
-			switchToDownloadingLayout(mUpdateDownloaderService.getCurrentUpdate());
+			//TODO: Start Intent with ui
+			UpdateInfo ui = DownloadActivity.mUpdateDownloaderService.getCurrentUpdate();
+			Intent i = new Intent(MainActivity.this, DownloadActivity.class);
+			i.putExtra(Constants.UPDATE_INFO, ui);
+			startActivity(i);
+			//switchToDownloadingLayout();
 		}
 		else if (mAvailableUpdates != null || (mfilenames != null && mfilenames.size() > 0))
 		{
@@ -780,35 +686,6 @@ public class MainActivity extends IMainActivity
 			Log.e(TAG, "Unable to save state", e);
 		}
 		Log.d(TAG, "App closed");
-
-		if(mUpdateDownloaderService != null && !mUpdateDownloaderService.isDownloading())
-		{
-			try
-			{
-				if(mbind)
-				{
-					unbindService(mUpdateDownloaderServiceConnection);
-					Log.d(TAG, "mUpdateDownloaderServiceConnection unbind finished");
-					mbind = false;
-				}
-				else
-					Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
-			}
-			catch (SecurityException ex)
-			{
-				Log.e(TAG, "Exit App: mUpdateDownloaderServiceConnection unbind failed", ex);
-			}
-			try
-			{
-				stopService(mUpdateDownloaderServiceIntent);
-			}
-			catch (SecurityException ex)
-			{
-				Log.e(TAG, "Exit App: mUpdateDownloaderServiceIntent could not be Stopped", ex);
-			}
-		}
-		else
-			Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
 	}
 
 	private void saveState() throws IOException
@@ -818,7 +695,7 @@ public class MainActivity extends IMainActivity
 		{
 			Map<String,Serializable> data = new HashMap<String, Serializable>();
 			data.put("mAvailableUpdates", (Serializable)mAvailableUpdates);
-			data.put("mMirrorName", mMirrorName);
+			//data.put("mMirrorName", mMirrorName);
 			oos.writeObject(data);
 			oos.flush();
 		}
@@ -840,7 +717,7 @@ public class MainActivity extends IMainActivity
 			if(o != null) mAvailableUpdates = (FullUpdateInfo) o;
 
 			o = data.get("mMirrorName"); 
-			if(o != null) mMirrorName =  (String) o;
+			//if(o != null) mMirrorName =  (String) o;
 		}
 		catch (ClassNotFoundException e)
 		{
@@ -856,14 +733,14 @@ public class MainActivity extends IMainActivity
 	{
 		if(b == null) return;
 		mAvailableUpdates = (FullUpdateInfo) b.getSerializable(Constants.KEY_AVAILABLE_UPDATES);
-		mMirrorName = b.getString(Constants.KEY_MIRROR_NAME);
+		//mMirrorName = b.getString(Constants.KEY_MIRROR_NAME);
 	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState)
 	{
 		outState.putSerializable(Constants.KEY_AVAILABLE_UPDATES, (Serializable)mAvailableUpdates);
-		outState.putString(Constants.KEY_MIRROR_NAME, mMirrorName);
+		//outState.putString(Constants.KEY_MIRROR_NAME, mMirrorName);
 	}
 
 	/* (non-Javadoc)
@@ -908,7 +785,7 @@ public class MainActivity extends IMainActivity
 	{
 		boolean superReturn = super.onPrepareOptionsMenu(menu);
 
-		if(mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
+		if(DownloadActivity.mUpdateDownloaderService != null && DownloadActivity.mUpdateDownloaderService.isDownloading())
 		{
 			//Download in progress
 			menu.findItem(Constants.MENU_ID_UPDATE_NOW).setEnabled(false);
@@ -960,39 +837,11 @@ public class MainActivity extends IMainActivity
 		return super.onMenuItemSelected(featureId, item);
 	}
 
-	@Override
-	public void switchToDownloadingLayout(UpdateInfo downloadingUpdate)
-	{
-		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
-		mbind = true;
-		setContentView(R.layout.download);
-		try
-		{
-			String[] temp = downloadingUpdate.updateFileUris.get(0).toURL().getFile().split("/");
-			mFileName = temp[temp.length-1];
-		}
-		catch (MalformedURLException e)
-		{
-			mFileName = "Unable to get Filename";
-			Log.e(TAG, "Unable to get Filename", e);
-		}
-		
-		mProgressBar = (ProgressBar) findViewById(R.id.download_progress_bar);
-		mDownloadedBytesTextView = (TextView) findViewById(R.id.bytes_downloaded_text_view);
-
-		mDownloadMirrorTextView = (TextView) findViewById(R.id.mirror_text_view);
-
-		mDownloadFilenameTextView = (TextView) findViewById(R.id.filename_text_view);
-
-		mDownloadSpeedTextView = (TextView) findViewById(R.id.speed_text_view);
-		mRemainingTimeTextView = (TextView) findViewById(R.id.remaining_time_text_view);
-
-		if(mMirrorName != null)
-			mDownloadMirrorTextView.setText(mMirrorName);
-		if(mFileName != null)
-			mDownloadFilenameTextView.setText(mFileName);
-		((Button)findViewById(R.id.cancel_download_buton)).setOnClickListener(mCancelDownloadListener);
-	}
+//	@Override
+//	public void switchToDownloadingLayout(UpdateInfo downloadingUpdate)
+//	{
+//
+//	}
 
 	@Override
 	public void switchToUpdateChooserLayout(FullUpdateInfo availableUpdates)
@@ -1352,48 +1201,6 @@ public class MainActivity extends IMainActivity
 		System.gc();
 	}
 
-	@Override
-	public void updateDownloadProgress(final int downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
-	{
-		if(mProgressBar ==null)return;
-
-		mProgressBar.post(new Runnable()
-		{
-			public void run()
-			{
-				if(total < 0)
-				{
-					mProgressBar.setIndeterminate(true);
-				}
-				else
-				{
-					mProgressBar.setIndeterminate(false);
-					mProgressBar.setMax(total);
-				}
-				mProgressBar.setProgress(downloaded);
-
-				mDownloadedBytesTextView.setText(downloadedText);
-				mDownloadSpeedTextView.setText(speedText);
-				mRemainingTimeTextView.setText(remainingTimeText);
-			}
-		});
-	}
-	
-	@Override
-	public void updateDownloadMirror(final String mirror)
-	{
-		if(mDownloadMirrorTextView == null) return;
-
-		mDownloadMirrorTextView.post(new Runnable()
-		{
-			public void run()
-			{
-				mDownloadMirrorTextView.setText(mirror);
-				mMirrorName = mirror;
-			}
-		});
-	}
-
 	private void showConfigActivity()
 	{
 		Intent i = new Intent(this, ConfigActivity.class);
@@ -1434,10 +1241,11 @@ public class MainActivity extends IMainActivity
 
 	private void downloadRequestedUpdate(UpdateInfo ui)
 	{
-		switchToDownloadingLayout(ui);
-		mUpdateDownloaderServiceIntent.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_UPDATE);
-		mUpdateDownloaderServiceIntent.putExtra(Constants.KEY_UPDATE_INFO, ui);
-		startService(mUpdateDownloaderServiceIntent);
+		//switchToDownloadingLayout(ui);
+		//TODO: Start Activity with ui
+		Intent i = new Intent(MainActivity.this, DownloadActivity.class);
+		i.putExtra(Constants.UPDATE_INFO, ui);
+		startActivity(i);
 		Toast.makeText(this, R.string.downloading_update, Toast.LENGTH_SHORT).show();
 	}
 

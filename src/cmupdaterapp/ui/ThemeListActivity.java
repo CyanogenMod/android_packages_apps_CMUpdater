@@ -151,6 +151,8 @@ public class ThemeListActivity extends ListActivity
 	
 	private void createNewThemeList(final boolean _update, String _name, String _uri, boolean _enabled, final int _primaryKey)
 	{
+		//TODO: When no item in List: Text to hit menu to add servers
+		//TODO: Otherwise display a text at the top: Long press an item to show options
 		Intent i = new Intent(ThemeListActivity.this, ThemeListNewActivity.class);
 		i.putExtra(Constants.THEME_LIST_NEW_NAME, _name);
 		i.putExtra(Constants.THEME_LIST_NEW_URI, _uri);

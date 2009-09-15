@@ -33,6 +33,9 @@
 		</activity>
 
 		<activity
+			android:name="cmupdaterapp.ui.DownloadActivity"
+			android:configChanges="orientation|keyboardHidden" />
+		<activity
 			android:name="cmupdaterapp.ui.ConfigActivity"
 			android:configChanges="orientation|keyboardHidden" />
 		<activity

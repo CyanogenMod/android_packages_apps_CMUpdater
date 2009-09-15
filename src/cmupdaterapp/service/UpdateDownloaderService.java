@@ -44,7 +44,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.widget.RemoteViews;
 import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.interfaces.IMainActivity;
+import cmupdaterapp.interfaces.IDownloadActivity;
 import cmupdaterapp.ui.ApplyUpdateActivity;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.ui.MainActivity;
@@ -84,7 +84,7 @@ public class UpdateDownloaderService extends Service
 	
 	private final IBinder mBinder = new LocalBinder();
 
-	private static IMainActivity UPDATE_PROCESS_INFO;
+	private static IDownloadActivity DOWNLOAD_ACTIVITY;
 
 	private WifiLock mWifiLock;
 	private WifiManager mWifiManager;
@@ -179,9 +179,9 @@ public class UpdateDownloaderService extends Service
 		}
 	}
 
-	public static void setUpdateProcessInfo(IMainActivity iupi)
+	public static void setUpdateProcessInfo(IDownloadActivity iupi)
 	{
-		UPDATE_PROCESS_INFO = iupi;
+		DOWNLOAD_ACTIVITY = iupi;
 	}
 
 	@Override
@@ -683,14 +683,14 @@ public class UpdateDownloaderService extends Service
 			mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, mcontentLength, mtotalDownloaded, false);
 			mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_STATUS, mNotification);
 			
-			if(UPDATE_PROCESS_INFO == null) return;
+			if(DOWNLOAD_ACTIVITY == null) return;
 			
 			if(!mMirrorNameUpdated)
 			{
-				UPDATE_PROCESS_INFO.updateDownloadMirror(mMirrorName);
+				DOWNLOAD_ACTIVITY.updateDownloadMirror(mMirrorName);
 				mMirrorNameUpdated = true;
 			}
-			UPDATE_PROCESS_INFO.updateDownloadProgress(mtotalDownloaded, mcontentLength, mstringDownloaded, mstringSpeed, mstringRemainingTime);
+			DOWNLOAD_ACTIVITY.updateDownloadProgress(mtotalDownloaded, mcontentLength, mstringDownloaded, mstringSpeed, mstringRemainingTime);
 		}
 		else
 			Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
@@ -742,7 +742,7 @@ public class UpdateDownloaderService extends Service
 		}
 		mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_FINISHED, mNotification);
 		
-		if(UPDATE_PROCESS_INFO != null)
+		if(DOWNLOAD_ACTIVITY != null)
 		{
 			//app is active, switching layout
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
