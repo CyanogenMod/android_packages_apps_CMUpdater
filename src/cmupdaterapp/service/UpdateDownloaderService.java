@@ -47,6 +47,7 @@ import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IDownloadActivity;
 import cmupdaterapp.ui.ApplyUpdateActivity;
 import cmupdaterapp.misc.Constants;
+import cmupdaterapp.ui.DownloadActivity;
 import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.ui.R;
 import cmupdaterapp.utils.MD5;
@@ -665,7 +666,7 @@ public class UpdateDownloaderService extends Service
 			mNotification.flags = Notification.FLAG_NO_CLEAR;
 			mNotification.flags = Notification.FLAG_ONGOING_EVENT;
 			RemoteViews mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
-			Intent mNotificationIntent = new Intent(this, MainActivity.class);
+			Intent mNotificationIntent = new Intent(this, DownloadActivity.class);
 			PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
 			mNotification.contentView = mNotificationRemoteView;
 			mNotification.contentIntent = mNotificationContentIntent;
