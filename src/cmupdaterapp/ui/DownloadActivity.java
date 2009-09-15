@@ -65,14 +65,36 @@ public class DownloadActivity extends IDownloadActivity
 	{
 		Log.d(TAG, "onResume called");
 		super.onResume();
-		UpdateInfo ui = (UpdateInfo) getIntent().getExtras().get(Constants.UPDATE_INFO);
+		
+		UpdateInfo ui = null;
+		
+		if (mUpdateDownloaderService != null)
+		{
+			Log.d(TAG, "Retrieved update from DownloadService");
+			ui = mUpdateDownloaderService.getCurrentUpdate();
+			mMirrorName = mUpdateDownloaderService.getCurrentMirrorName();
+		}
+		else if (mUpdateDownloaderService == null)
+		{
+			Log.d(TAG, "Not downloading");
+			Intent i = getIntent();
+			if (i!=null)
+			{
+				Bundle b = i.getExtras();
+				if (b!=null)
+					ui = (UpdateInfo) b.get(Constants.UPDATE_INFO);	
+			}
+	
+			mUpdateDownloaderServiceIntent.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_UPDATE);
+			mUpdateDownloaderServiceIntent.putExtra(Constants.KEY_UPDATE_INFO, ui);
+			startService(mUpdateDownloaderServiceIntent);
+	
+			bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
+			mbind = true;
+		}
 
-		mUpdateDownloaderServiceIntent.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_UPDATE);
-		mUpdateDownloaderServiceIntent.putExtra(Constants.KEY_UPDATE_INFO, ui);
-		startService(mUpdateDownloaderServiceIntent);
-		bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
 		UpdateDownloaderService.setUpdateProcessInfo(DownloadActivity.this);
-		mbind = true;
+		
 		try
 		{
 			String[] temp = ui.updateFileUris.get(0).toURL().getFile().split("/");

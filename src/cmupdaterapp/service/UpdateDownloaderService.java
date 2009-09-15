@@ -293,6 +293,14 @@ public class UpdateDownloaderService extends Service
 	{
 		return mCurrentUpdate;
 	}
+	
+	/**
+	 * @return the current MirrorName
+	 */
+	public String getCurrentMirrorName()
+	{
+		return mMirrorName;
+	}
 
 	private File checkForConnectionAndUpdate(UpdateInfo updateToDownload)
 	{
