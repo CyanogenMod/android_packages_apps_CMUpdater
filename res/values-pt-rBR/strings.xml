@@ -15,7 +15,7 @@
     <string name="downloaded_update_found_text">Atualizações encontradas na Pasta de Atualizações:</string>
     <string name="checking_for_updates">Procurando Atualizações</string>
     <string name="downloading_update">Transferindo Atualização</string>
-    <string name="sdcard_is_not_present_dialog_body">É necessario inserir um cartão SD que possa ser escrito para transferir esta actualização</string>
+    <string name="sdcard_is_not_present_dialog_body">É necessario inserir um cartão SD que possa ser escrito para transferir esta Atualização</string>
     <string name="sdcard_is_not_present_dialog_title">Nenhum cartão SD encontrado</string>
     <string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
     <string name="current_version_text">Versão Atual: {0}</string>
@@ -27,7 +27,7 @@
     <string name="apply_update_dialog_title">Confirmação</string>
     <string name="apply_update_dialog_text">Você está prestes a atualizar para a versão {0}.\nSe clicar em atualizar, o celular reiniciará em modo de recuperação para aplicar a atualização.</string>
 	<string name="apply_update_dialog_update_button">Atualizar</string>
-	<string name="apply_update_dialog_backup_and_update_button">Fazer Backup &amp; Aplicar</string>
+	<string name="apply_update_dialog_backup_and_update_button">Backup &amp; Aplicar</string>
 	<string name="apply_update_dialog_cancel_button">Cancelar</string>
 
 	<string name="no_updates_no_mod_text">O seu sistema está rodando uma versão modificada do Sistema Operacional não suportada (Versão {0}).</string>
@@ -97,9 +97,12 @@ POR FAVOR REINCIE EM MODO DE RECUPERAÇÃO MANUALMENTE *ANTES* DE APLICAR A ATUA
 
 	<string name="title_running">rodando</string>
 	
-	<string name="no_updatecheck_executed">Nenhum Updatecheck executadoNo Updatecheck executed</string>
+	<string name="no_updatecheck_executed">Nenhum Updatecheck executado</string>
 	
 	<string name="no_theme_update_server_configured">Nenhum Servidor de Atualização de Temas configurado.\nSe você quiser utilizar Atualizações de Temas, vá em opções e configure o \'Update=Server\'</string>
+	<string name="delete_updates_root_folder_message">Você não pode Deletar a pasta Root\nPor favor, Delete os Updates um por um</string>
+
+	<string name="about_dialog_title">Sobre</string>
     
     <!-- .service.* Strings -->
     <string name="no_updates_found">Nenhuma atualização encontrada.</string>
@@ -174,20 +177,41 @@ POR FAVOR REINCIE EM MODO DE RECUPERAÇÃO MANUALMENTE *ANTES* DE APLICAR A ATUA
 	<string name="p_invalid_url">A URL digitada não é válida! Tente de novo.Entered URL is not valid! Please try again.</string>
 	
 	<string name="p_theme_file_title">Caminho do themes.theme</string>
-	<string name="p_theme_file_summary">Mudar o Caminho do Arquivo themes.theme</string>
+	<string name="p_theme_file_summary">Modificar o Caminho do Arquivo themes.theme</string>
 	
 	<string name="p_theme_file_def_title">Resetar o arquivo themes.theme</string>
 	<string name="p_theme_file_def_summary">Resetar o arquivo themes.theme para o padrão</string>
 	<string name="p_theme_file_def_toast">themes.theme mudado para o padrão</string>
 	
 	<string name="p_notifications_screen_title">Notificações</string>
-	<string name="p_notifications_screen_summary">Mudar as Configurações de Notificações</string>
+	<string name="p_notifications_screen_summary">Modificar as Configurações de Notificações</string>
 	
 	<string name="p_rom_screen_title">Configurações de Update de Rom</string>
-	<string name="p_rom_screen_summary">Mudar as Configurações de Update de Rom</string>
+	<string name="p_rom_screen_summary">Modificar as Configurações de Update de Rom</string>
 	
 	<string name="p_theme_screen_title">Configurações de Update de Temas</string>
-	<string name="p_theme_screen_summary">Mudar as Configurações de Update de Temas</string>
+	<string name="p_theme_screen_summary">Modificar as Configurações de Update de Temas</string>
 	
 	<string name="p_barcode_scan_failure">Ouve um erro ao tentar escanear o Código de Barras</string>
+	<string name="p_advanced_screen_title">Configurações Avançadas</string>
+	<string name="p_advanced_screen_summary">Modificar as Configurações Avançadas</string>
+	
+	<string name="p_update_folder_title">Pasta de Atualizações</string>
+	<string name="p_update_folder_summary">Modificar a Pasta de Atualizações\nDeixe em Branco para um Diretório root</string>
+	
+	<string name="p_update_folder_def_title">Resetar a Pasta de Atualizações</string>
+	<string name="p_update_folder_def_summary">Modificar a Pasta de Atualizações para o Padrão</string>
+	<string name="p_update_folder_def_toast">A Pasta de Atualizações foi modificada para o Padrão</string>
+	<string name="p_update_folder_error">Erro tentando modificar a Pasta de Atualizações</string>
+	
+	<string name="p_theme_list_title">Gerenciar Servidores de Temas</string>
+	<string name="p_theme_list_summary">Adicionar, Editar, Deletar Servidores de Temas</string>
+	
+	<string name="p_theme_list_context_menu_header">Escolha a Ação</string>
+	
+	<string name="p_theme_list_new_name">Nome do Tema:</string>
+	<string name="p_theme_list_new_uri">URL:</string>
+	<string name="p_theme_list_new_enabled">Habilitada:</string>
+	<string name="p_theme_list_new_barcode">Código de Barras</string>
+	<string name="p_theme_list_new_save">Salvar</string>
 </resources>
