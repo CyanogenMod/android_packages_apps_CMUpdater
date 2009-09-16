@@ -124,6 +124,41 @@ public class DownloadActivity extends IDownloadActivity
 	}
 	
 	@Override
+	protected void onDestroy()
+	{
+		Log.d(TAG, "onDestroy called");
+		if(mUpdateDownloaderService != null && !mUpdateDownloaderService.isDownloading())
+		{
+			try
+			{
+				if(mbind)
+				{
+					unbindService(mUpdateDownloaderServiceConnection);
+					Log.d(TAG, "mUpdateDownloaderServiceConnection unbind finished");
+					mbind = false;
+				}
+				else
+					Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
+			}
+			catch (SecurityException ex)
+			{
+				Log.e(TAG, "Exit App: mUpdateDownloaderServiceConnection unbind failed", ex);
+			}
+			try
+			{
+				stopService(mUpdateDownloaderServiceIntent);
+			}
+			catch (SecurityException ex)
+			{
+				Log.e(TAG, "Exit App: mUpdateDownloaderServiceIntent could not be Stopped", ex);
+			}
+		}
+		else
+			Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
+		super.onDestroy();
+	}
+	
+	@Override
 	public void updateDownloadProgress(final int downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
 	{
 		if(mProgressBar ==null)return;
@@ -207,10 +242,9 @@ public class DownloadActivity extends IDownloadActivity
 					{
 						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceConnection unbind failed", ex);
 					}
+					//TODO:Check
 					//UpdateDownloaderService.setUpdateProcessInfo(null);
 					Log.d(TAG, "Download Cancel Procedure Finished. Switching Layout");
-					//switchToUpdateChooserLayout(null);
-					//TODO: Check if finish works
 					finish();
 				}
 			})
@@ -232,11 +266,6 @@ public class DownloadActivity extends IDownloadActivity
 		public void onServiceConnected(ComponentName className, IBinder service)
 		{
 			mUpdateDownloaderService = ((UpdateDownloaderService.LocalBinder)service).getService();
-			if(mUpdateDownloaderService.isDownloading())
-			{
-				//TODO: Thats the Question ;)
-				//switchToDownloadingLayout(mUpdateDownloaderService.getCurrentUpdate());
-			}
 		}
 
 		public void onServiceDisconnected(ComponentName className)
@@ -252,39 +281,4 @@ public class DownloadActivity extends IDownloadActivity
         super.onConfigurationChanged(newConfig); 
         Log.d(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
     }
-	
-	@Override
-	protected void onDestroy()
-	{
-		Log.d(TAG, "onDestroy called");
-		if(mUpdateDownloaderService != null && !mUpdateDownloaderService.isDownloading())
-		{
-			try
-			{
-				if(mbind)
-				{
-					unbindService(mUpdateDownloaderServiceConnection);
-					Log.d(TAG, "mUpdateDownloaderServiceConnection unbind finished");
-					mbind = false;
-				}
-				else
-					Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
-			}
-			catch (SecurityException ex)
-			{
-				Log.e(TAG, "Exit App: mUpdateDownloaderServiceConnection unbind failed", ex);
-			}
-			try
-			{
-				stopService(mUpdateDownloaderServiceIntent);
-			}
-			catch (SecurityException ex)
-			{
-				Log.e(TAG, "Exit App: mUpdateDownloaderServiceIntent could not be Stopped", ex);
-			}
-		}
-		else
-			Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
-		super.onDestroy();
-	}
 }

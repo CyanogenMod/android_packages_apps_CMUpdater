@@ -647,12 +647,10 @@ public class MainActivity extends IMainActivity
 
 		if(DownloadActivity.mUpdateDownloaderService != null && DownloadActivity.mUpdateDownloaderService.isDownloading())
 		{
-			//TODO: Start Intent with ui
 			UpdateInfo ui = DownloadActivity.mUpdateDownloaderService.getCurrentUpdate();
 			Intent i = new Intent(MainActivity.this, DownloadActivity.class);
 			i.putExtra(Constants.UPDATE_INFO, ui);
 			startActivity(i);
-			//switchToDownloadingLayout();
 		}
 		else if (mAvailableUpdates != null || (mfilenames != null && mfilenames.size() > 0))
 		{
@@ -663,14 +661,6 @@ public class MainActivity extends IMainActivity
 			switchToUpdateChooserLayout(null);
 		}
 	}
-	
-	@Override
-	public void onConfigurationChanged(Configuration newConfig)
-	{
-		setWallpaper();
-        super.onConfigurationChanged(newConfig); 
-        Log.d(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
-    }
 	
 	@Override
 	protected void onStop()
@@ -687,6 +677,14 @@ public class MainActivity extends IMainActivity
 		}
 		Log.d(TAG, "App closed");
 	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig)
+	{
+		setWallpaper();
+        super.onConfigurationChanged(newConfig); 
+        Log.d(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
+    }
 
 	private void saveState() throws IOException
 	{
@@ -695,7 +693,6 @@ public class MainActivity extends IMainActivity
 		{
 			Map<String,Serializable> data = new HashMap<String, Serializable>();
 			data.put("mAvailableUpdates", (Serializable)mAvailableUpdates);
-			//data.put("mMirrorName", mMirrorName);
 			oos.writeObject(data);
 			oos.flush();
 		}
@@ -715,9 +712,6 @@ public class MainActivity extends IMainActivity
 
 			Object o = data.get("mAvailableUpdates"); 
 			if(o != null) mAvailableUpdates = (FullUpdateInfo) o;
-
-			o = data.get("mMirrorName"); 
-			//if(o != null) mMirrorName =  (String) o;
 		}
 		catch (ClassNotFoundException e)
 		{
@@ -733,19 +727,14 @@ public class MainActivity extends IMainActivity
 	{
 		if(b == null) return;
 		mAvailableUpdates = (FullUpdateInfo) b.getSerializable(Constants.KEY_AVAILABLE_UPDATES);
-		//mMirrorName = b.getString(Constants.KEY_MIRROR_NAME);
 	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState)
 	{
 		outState.putSerializable(Constants.KEY_AVAILABLE_UPDATES, (Serializable)mAvailableUpdates);
-		//outState.putString(Constants.KEY_MIRROR_NAME, mMirrorName);
 	}
 
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onNewIntent(android.content.Intent)
-	 */
 	@Override
 	protected void onNewIntent(Intent intent)
 	{
@@ -1241,8 +1230,6 @@ public class MainActivity extends IMainActivity
 
 	private void downloadRequestedUpdate(UpdateInfo ui)
 	{
-		//switchToDownloadingLayout(ui);
-		//TODO: Start Activity with ui
 		Intent i = new Intent(MainActivity.this, DownloadActivity.class);
 		i.putExtra(Constants.UPDATE_INFO, ui);
 		startActivity(i);
