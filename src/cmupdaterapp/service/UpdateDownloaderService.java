@@ -339,6 +339,11 @@ public class UpdateDownloaderService extends Service
 			Log.e(TAG, "RuntimeEx while checking for updates", ex);
 			notificateDownloadError();
 			return null;
+		} catch (IOException ex)
+		{
+			Log.e(TAG, "Exception while downloading update", ex);
+			notificateDownloadError();
+			return null;
 		}
 		finally
 		{
@@ -400,7 +405,7 @@ public class UpdateDownloaderService extends Service
 		mNM.notify(R.string.not_update_download_error_title, notification);
 	}
 
-	private File downloadFile(UpdateInfo updateInfo)
+	private File downloadFile(UpdateInfo updateInfo) throws IOException
 	{
 		Log.d(TAG, "Called downloadFile");
 		HttpClient httpClient = mHttpClient;
@@ -720,6 +725,7 @@ public class UpdateDownloaderService extends Service
 			i.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);
+			DOWNLOAD_ACTIVITY.finish();
 			return;
 		}
 		
