@@ -3,6 +3,7 @@ package cmupdaterapp.listadapters;
 import java.util.List;
 
 import cmupdaterapp.customTypes.ThemeList;
+import cmupdaterapp.misc.Constants;
 import cmupdaterapp.ui.R;
 
 import android.content.Context;
@@ -52,7 +53,7 @@ public class ThemeListAdapter<T> extends ArrayAdapter<T>
     	wrapper.getImage().setImageResource(R.drawable.icon);
     	if (!info.enabled)
     	{
-    		wrapper.getImageDrawable().mutate().setAlpha(70);
+    		wrapper.getImageDrawable().mutate().setAlpha(Constants.THEME_LIST_ITEM_DISABLED_ALPHA);
     		wrapper.getThemeNameView().setTextColor(Color.GRAY);
     		wrapper.getThemeUriView().setTextColor(Color.GRAY);
     	}

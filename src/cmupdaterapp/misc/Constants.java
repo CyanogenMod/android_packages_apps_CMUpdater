@@ -92,6 +92,9 @@ public class Constants
 	public static final String THEME_LIST_NEW_PRIMARYKEY = "pk";
 	public static final String THEME_LIST_NEW_UPDATE = "update";
 	
+	//ThemeListItem
+	public static final int THEME_LIST_ITEM_DISABLED_ALPHA = 70;
+	
 	//IntentExtra for DownloadActivity
 	public static final String UPDATE_INFO = "UpdateInfo";
 }
