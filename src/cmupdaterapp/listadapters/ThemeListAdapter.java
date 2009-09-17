@@ -6,6 +6,8 @@ import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.ui.R;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +50,12 @@ public class ThemeListAdapter<T> extends ArrayAdapter<T>
     	wrapper.getThemeNameView().setText(info.name);
     	wrapper.getThemeUriView().setText(info.url.toString());
     	wrapper.getImage().setImageResource(R.drawable.icon);
+    	if (!info.enabled)
+    	{
+    		wrapper.getImageDrawable().mutate().setAlpha(70);
+    		wrapper.getThemeNameView().setTextColor(Color.GRAY);
+    		wrapper.getThemeUriView().setTextColor(Color.GRAY);
+    	}
         return row;
    } 
 }
@@ -59,6 +67,7 @@ class ThemeListViewWrapper
 	private TextView ThemeListName = null;
 	private TextView ThemeListUri = null;
 	private ImageView image = null;
+	private Drawable imageDrawable = null;
 
 	public ThemeListViewWrapper(View base)
 	{
@@ -90,5 +99,16 @@ class ThemeListViewWrapper
 			image=(ImageView)base.findViewById(R.id.ThemeListImage);
 		}
 		return(image);
+	}
+	
+	public Drawable getImageDrawable()
+	{
+		if (image == null)
+			getImage();
+		if (imageDrawable == null)
+		{
+			imageDrawable = image.getDrawable();
+		}
+		return(imageDrawable);
 	}
 }
