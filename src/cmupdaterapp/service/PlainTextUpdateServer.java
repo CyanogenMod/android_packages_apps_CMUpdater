@@ -201,13 +201,16 @@ public class PlainTextUpdateServer implements IUpdateServer
 			mainJSONObject = new JSONObject(buf.toString());
 			JSONArray mirrorList = mainJSONObject.getJSONArray(Constants.JSON_MIRROR_LIST);
 			JSONArray updateList = mainJSONObject.getJSONArray(Constants.JSON_UPDATE_LIST);
-
+			
 			Log.d(TAG, "Found "+mirrorList.length()+" mirrors in the JSON");
 			Log.d(TAG, "Found "+updateList.length()+" updates in the JSON");
 			
 			for (int i = 0, max = updateList.length() ; i < max ; i++)
 			{
-				uis.add(parseUpdateJSONObject(updateList.getJSONObject(i),mirrorList));
+				if(!updateList.isNull(i))
+					uis.add(parseUpdateJSONObject(updateList.getJSONObject(i),mirrorList));
+				else
+					Log.d(TAG, "Theres an error in your JSON File. Maybe a , after the last update");
 			}
 
 		}
@@ -222,7 +225,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 	private UpdateInfo parseUpdateJSONObject(JSONObject obj, JSONArray mirrorList)
 	{
 		UpdateInfo ui = new UpdateInfo();
-
+		
 		try
 		{
 			ui.board = new LinkedList<String>();
@@ -252,7 +255,10 @@ public class PlainTextUpdateServer implements IUpdateServer
 			{
 				try
 				{
-					ui.updateFileUris.add(new URI(mirrorList.getString(i).trim() + ui.fileName));
+					if (!mirrorList.isNull(i))
+						ui.updateFileUris.add(new URI(mirrorList.getString(i).trim() + ui.fileName));
+					else
+						Log.d(TAG, "Theres an error in your JSON File. Maybe a , after the last mirror");
 				}
 				catch (URISyntaxException e)
 				{
