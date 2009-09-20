@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ThemeListActivity extends ListActivity
 {
@@ -160,8 +161,6 @@ public class ThemeListActivity extends ListActivity
 	
 	private void createNewThemeList(final boolean _update, String _name, String _uri, boolean _enabled, final int _primaryKey)
 	{
-		//TODO: When no item in List: Text to hit menu to add servers
-		//TODO: Otherwise display a text at the top: Long press an item to show options
 		Intent i = new Intent(ThemeListActivity.this, ThemeListNewActivity.class);
 		i.putExtra(Constants.THEME_LIST_NEW_NAME, _name);
 		i.putExtra(Constants.THEME_LIST_NEW_URI, _uri);
@@ -190,8 +189,10 @@ public class ThemeListActivity extends ListActivity
 		if (themeListDb.removeTheme(position))
 			Log.d(TAG, "Success");
 		else
+		{
 			Log.d(TAG, "Fail");
-		//TODO: Display a toast on fail
+			Toast.makeText(this, R.string.theme_list_delete_error, Toast.LENGTH_LONG);
+		}
 		updateThemeList();
 	}
 	

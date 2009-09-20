@@ -117,6 +117,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	
 	<string name="theme_list_long_press">Long Press an Item to show options</string>
 	<string name="theme_list_no_themes">No Theme Servers. Press Menu to add one.</string>
+	<string name="theme_list_delete_error">There was an Error deleting the Theme Server</string>
 
 	<!-- .service.* Strings -->
 	<string name="no_updates_found">No CM updates found</string>
