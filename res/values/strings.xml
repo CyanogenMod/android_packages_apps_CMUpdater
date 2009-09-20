@@ -154,6 +154,9 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="delete_single_update_success_message">Update {0} deleted</string>    
 	<string name="minutes">min</string>
 	<string name="seconds">sec</string>
+	
+	<string name="unable_to_download_file">Unable to download the update file from any mirror</string>
+	<string name="md5_verification_failed">MD5 verification failed</string>
 
 	<!-- Preferences Strings -->
 	<string name="p_update_check_freq_title">Update Checking frequency</string>

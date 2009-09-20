@@ -543,7 +543,7 @@ public class UpdateDownloaderService extends Service
 							Log.d(TAG, "Performing MD5 verification");
 							if(!MD5.checkMD5(mDownloadedMD5, mDestinationFile))
 							{
-								throw new IOException("MD5 verification failed");
+								throw new IOException(res.getString(R.string.md5_verification_failed));
 							}
 						}
 	
@@ -553,6 +553,12 @@ public class UpdateDownloaderService extends Service
 				}
 				catch (IOException ex)
 				{
+					if (DownloadActivity.DownloadserviceToastHandler != null)
+					{
+						Message msg = new Message();
+						msg.obj = ex.getMessage();
+						DownloadActivity.DownloadserviceToastHandler.sendMessage(msg);
+					}
 					Log.e(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
 				}
 				if(Thread.currentThread().isInterrupted() || !Thread.currentThread().isAlive())
@@ -563,6 +569,12 @@ public class UpdateDownloaderService extends Service
 				Log.d(TAG, "Not trying any more mirrors, download canceled");
 				break;
 			}
+		}
+		if (DownloadActivity.DownloadserviceToastHandler != null)
+		{
+			Message msg = new Message();
+			msg.obj = res.getString(R.string.unable_to_download_file);
+			DownloadActivity.DownloadserviceToastHandler.sendMessage(msg);
 		}
 		Log.d(TAG, "Unable to download the update file from any mirror");
 

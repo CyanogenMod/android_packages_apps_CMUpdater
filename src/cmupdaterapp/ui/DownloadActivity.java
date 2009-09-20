@@ -1,7 +1,6 @@
 package cmupdaterapp.ui;
 
 import java.net.MalformedURLException;
-
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IDownloadActivity;
 import cmupdaterapp.misc.Constants;
@@ -16,11 +15,14 @@ import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DownloadActivity extends IDownloadActivity
 {
@@ -42,6 +44,8 @@ public class DownloadActivity extends IDownloadActivity
 	//Indicates if a Service is bound 
 	private boolean mbind = false;
 	
+	public static Handler DownloadserviceToastHandler;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -51,6 +55,17 @@ public class DownloadActivity extends IDownloadActivity
 		mUpdateDownloaderServiceIntent = new Intent(this, UpdateDownloaderService.class);
 		res = getResources();
 		getWindow().setBackgroundDrawable(res.getDrawable(R.drawable.background));
+		
+		DownloadserviceToastHandler = new Handler()
+		{
+			public void handleMessage(Message msg)
+			{
+				if (msg.obj instanceof String)
+				{
+					Toast.makeText(DownloadActivity.this, (CharSequence) msg.obj, Toast.LENGTH_LONG).show();
+				}
+	        }
+	    };
 	}
 	
 	@Override
