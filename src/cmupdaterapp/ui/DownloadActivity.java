@@ -68,13 +68,13 @@ public class DownloadActivity extends IDownloadActivity
 		
 		UpdateInfo ui = null;
 		
-		if (mUpdateDownloaderService != null)
+		if (mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
 		{
 			Log.d(TAG, "Retrieved update from DownloadService");
 			ui = mUpdateDownloaderService.getCurrentUpdate();
 			mMirrorName = mUpdateDownloaderService.getCurrentMirrorName();
 		}
-		else if (mUpdateDownloaderService == null)
+		else
 		{
 			Log.d(TAG, "Not downloading");
 			Intent i = getIntent();
