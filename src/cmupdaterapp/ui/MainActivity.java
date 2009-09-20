@@ -121,8 +121,8 @@ public class MainActivity extends IMainActivity
 				return;
 			}
 
-			
-			UpdateInfo ui = (UpdateInfo) mUpdatesSpinner.getSelectedItem();
+			Log.d(TAG, "Download Rom Button clicked");
+			final UpdateInfo ui = (UpdateInfo) mUpdatesSpinner.getSelectedItem();
 			//Check if the File is present, so prompt the User to overwrite it
 			File foo = new File(mUpdateFolder + "/" + ui.fileName);
 			if (foo.isFile() && foo.exists())
@@ -141,7 +141,8 @@ public class MainActivity extends IMainActivity
 				{
 					public void onClick(DialogInterface dialog, int which)
 					{
-						downloadRequestedUpdate((UpdateInfo) mUpdatesSpinner.getSelectedItem());
+						Log.d(TAG, "Start downlading Rom update: " + ui.fileName);
+						downloadRequestedUpdate(ui);
 					}
 				})
 				.show();
@@ -175,7 +176,8 @@ public class MainActivity extends IMainActivity
 				return;
 			}
 			
-			UpdateInfo ui = (UpdateInfo) mThemesSpinner.getSelectedItem();
+			Log.d(TAG, "Download Theme Button clicked");
+			final UpdateInfo ui = (UpdateInfo) mThemesSpinner.getSelectedItem();
 			//Check if the File is present, so prompt the User to overwrite it
 			File foo = new File(mUpdateFolder + "/" + ui.fileName);
 			if (foo.isFile() && foo.exists())
@@ -194,6 +196,7 @@ public class MainActivity extends IMainActivity
 				{
 					public void onClick(DialogInterface dialog, int which)
 					{
+						Log.d(TAG, "Start downlading Theme update: " + ui.fileName);
 						downloadRequestedUpdate((UpdateInfo) mThemesSpinner.getSelectedItem());
 					}
 				})
@@ -256,6 +259,7 @@ public class MainActivity extends IMainActivity
 	{
 		public void onClick(View v)
 		{
+			Log.d(TAG, "Rom Changelog Button clicked");
 			getChangelog(Constants.CHANGELOGTYPE_ROM);
 		}
 	};
@@ -264,6 +268,7 @@ public class MainActivity extends IMainActivity
 	{
 		public void onClick(View v)
 		{
+			Log.d(TAG, "Theme Changelog Button clicked");
 			getChangelog(Constants.CHANGELOGTYPE_THEME);
 		}
 	};
@@ -299,6 +304,7 @@ public class MainActivity extends IMainActivity
 					{
 						//Delete Updates here
 						String f = (String) mExistingUpdatesSpinner.getSelectedItem();
+						Log.d(TAG, "Delete single Update selected: " + f);
 						if(deleteUpdate(f))
 						{
 							mfilenames.remove(f);
@@ -321,6 +327,7 @@ public class MainActivity extends IMainActivity
 				{
 					public void onClick(DialogInterface dialog, int which)
 					{
+						Log.d(TAG, "Delete all Updates selected");
 						//Delete Updates here
 						//Set the Filenames to null, so the Spinner will be empty
 						if(deleteOldUpdates())
@@ -342,6 +349,7 @@ public class MainActivity extends IMainActivity
 				{
 					public void onClick(DialogInterface dialog, int which)
 					{
+						Log.d(TAG, "Delete no updates selected");
 						dialog.dismiss();
 					}
 				})
@@ -377,6 +385,7 @@ public class MainActivity extends IMainActivity
 			}
 
 			filename = (String) mExistingUpdatesSpinner.getSelectedItem();
+			Log.d(TAG, "Selected to Apply Existing update: " + filename);
 			Update = new File(mUpdateFolder + "/" +filename);
 			File MD5 = new File(mUpdateFolder + "/" +filename + ".md5sum");
 			//IF no MD5 exists, ask the User what to do
