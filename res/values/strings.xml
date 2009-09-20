@@ -248,4 +248,5 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_theme_list_new_enabled">Enabled:</string>
 	<string name="p_theme_list_new_barcode">Scan barcode</string>
 	<string name="p_theme_list_new_save">Save</string>
+	<string name="p_theme_list_new_cancel">Cancel</string>
 </resources>

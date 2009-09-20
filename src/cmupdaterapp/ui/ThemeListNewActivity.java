@@ -28,6 +28,7 @@ public class ThemeListNewActivity extends Activity
 	private int intentPrimaryKey;
 	
 	private Button btnSave;
+	private Button btnCancel;
 	private Button btnBarcode;
 	private EditText etName;
 	private EditText etUri;
@@ -52,6 +53,7 @@ public class ThemeListNewActivity extends Activity
 	{
 		super.onStart();
 		btnSave = (Button) findViewById(R.id.new_theme_list_button_save);
+		btnCancel = (Button) findViewById(R.id.new_theme_list_button_cancel);
 		btnBarcode = (Button) findViewById(R.id.new_theme_list_button_barcode);
 		etName = (EditText) findViewById(R.id.new_theme_list_name);
 		etUri = (EditText) findViewById(R.id.new_theme_list_uri);
@@ -84,6 +86,14 @@ public class ThemeListNewActivity extends Activity
 				i.putExtra(Constants.THEME_LIST_NEW_PRIMARYKEY, intentPrimaryKey);
 				i.putExtra(Constants.THEME_LIST_NEW_UPDATE, intentUpdate);
 				setResult(RESULT_OK, i);
+				finish();
+			}
+		});
+		btnCancel.setOnClickListener(new OnClickListener()
+		{
+			public void onClick(View v)
+			{
+				setResult(RESULT_CANCELED);
 				finish();
 			}
 		});
