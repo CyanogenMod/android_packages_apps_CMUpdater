@@ -117,6 +117,9 @@ public class ThemeListActivity extends ListActivity
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item)
 	{
+		menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
+		ThemeList tl;
+		
 		switch(item.getItemId())
 		{
 			case Constants.MENU_THEME_LIST_ADD:
@@ -124,14 +127,27 @@ public class ThemeListActivity extends ListActivity
 				return true;
 			case Constants.MENU_THEME_LIST_CONTEXT_EDIT:
 				Log.d(TAG, "Edit clicked");
-				menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
-				ThemeList tl = ((ThemeList)lv.getAdapter().getItem(menuInfo.position));
+				tl = ((ThemeList)lv.getAdapter().getItem(menuInfo.position));
 				createNewThemeList(true, tl.name, tl.url.toString(), tl.enabled, tl.PrimaryKey);
 				break;
 			case Constants.MENU_THEME_LIST_CONTEXT_DELETE:
 				Log.d(TAG, "Delete clicked");
-				menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
-				DeleteTheme(((ThemeList)lv.getAdapter().getItem(menuInfo.position)).PrimaryKey);
+				tl = ((ThemeList)lv.getAdapter().getItem(menuInfo.position));
+				DeleteTheme(tl.PrimaryKey);
+				break;
+			case Constants.MENU_THEME_LIST_CONTEXT_DISABLE:
+				Log.d(TAG, "Selected to disable Theme Server");
+				tl = ((ThemeList)lv.getAdapter().getItem(menuInfo.position));
+				tl.enabled = false;
+				themeListDb.updateTheme(tl.PrimaryKey, tl);
+				updateThemeList();
+				break;
+			case Constants.MENU_THEME_LIST_CONTEXT_ENABLE:
+				Log.d(TAG, "Selected to enable Theme Server");
+				tl = ((ThemeList)lv.getAdapter().getItem(menuInfo.position));
+				tl.enabled = true;
+				themeListDb.updateTheme(tl.PrimaryKey, tl);
+				updateThemeList();
 				break;
 			default:
 				Log.d(TAG, "Unknown Menu ID:" + item.getItemId());
@@ -166,8 +182,13 @@ public class ThemeListActivity extends ListActivity
 	public void onCreateContextMenu (ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
 	{
 		menu.setHeaderTitle(res.getString(R.string.p_theme_list_context_menu_header));
-		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_EDIT, Menu.NONE, res.getString(R.string.menu_edit_theme));
+		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_EDIT, Menu.NONE, R.string.menu_edit_theme);
 		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_DELETE, Menu.NONE, R.string.menu_delete_theme);
+		ThemeList tl = ((ThemeList)lv.getAdapter().getItem(((AdapterContextMenuInfo)menuInfo).position));
+		if (tl.enabled)
+			menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_DISABLE, Menu.NONE, R.string.menu_disable_theme);
+		else
+			menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_ENABLE, Menu.NONE, R.string.menu_enable_theme);
 	}
 	
 	private void DeleteTheme(int position)

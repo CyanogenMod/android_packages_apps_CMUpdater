@@ -42,6 +42,8 @@
 	<string name="menu_add_theme">Add Theme Server</string>
 	<string name="menu_edit_theme">Edit Theme Server</string>
 	<string name="menu_delete_theme">Delete Theme Server</string>
+	<string name="menu_enable_theme">Enable Theme Server</string>
+	<string name="menu_disable_theme">Disable Theme Server</string>
 	
 	<string name="cancel_download_buton_text">Cancel Download</string>
 	<string name="confirm_download_cancelation_dialog_message">Are you sure you want to cancel the current download?</string>
