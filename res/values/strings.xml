@@ -114,6 +114,9 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="about_dialog_title">About</string>
 	
 	<string name="barcode_scan_no_result">No result was received. Please try again.</string>
+	
+	<string name="theme_list_long_press">Long Press an Item to show options</string>
+	<string name="theme_list_no_themes">No Theme Servers. Press Menu to add one.</string>
 
 	<!-- .service.* Strings -->
 	<string name="no_updates_found">No CM updates found</string>

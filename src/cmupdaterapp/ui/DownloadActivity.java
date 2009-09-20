@@ -242,8 +242,6 @@ public class DownloadActivity extends IDownloadActivity
 					{
 						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceConnection unbind failed", ex);
 					}
-					//TODO:Check
-					//UpdateDownloaderService.setUpdateProcessInfo(null);
 					Log.d(TAG, "Download Cancel Procedure Finished. Switching Layout");
 					finish();
 				}

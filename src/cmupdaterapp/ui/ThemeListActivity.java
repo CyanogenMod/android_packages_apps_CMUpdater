@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class ThemeListActivity extends ListActivity
 {
@@ -36,33 +37,21 @@ public class ThemeListActivity extends ListActivity
 	private Resources res;
 	
 	private AdapterContextMenuInfo menuInfo;
+	private TextView tv;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		//Initialize the Database for Storing the ThemesLists
 		themeListDb = new ThemeListDbAdapter(this);
 		Log.d(TAG, "Opening Database");
 		themeListDb.open();
-		//Get the actual ThemeList from the Database
-		getThemeList();
 		setContentView(R.layout.themelist);
+		tv = (TextView) findViewById(R.id.theme_list_info);
+		getThemeList();
 		lv = getListView();
 		registerForContextMenu(lv);
 		res = getResources();
-	}
-	
-	@Override
-	protected void onStart()
-	{
-		super.onStart();
-	}
-	
-	@Override
-	protected void onResume()
-	{
-		super.onResume();
 	}
 	
 	private void getThemeList()
@@ -98,6 +87,10 @@ public class ThemeListActivity extends ListActivity
 				android.R.layout.simple_list_item_1,
 				fullThemeListList);
 		setListAdapter(AdapterThemeList);
+		if (fullThemeList.getThemeCount() > 0)
+			tv.setText(R.string.theme_list_long_press);
+		else
+			tv.setText(R.string.theme_list_no_themes);
 	}
 	
 	public void onListItemClick(ListView parent, View v,int position, long id)

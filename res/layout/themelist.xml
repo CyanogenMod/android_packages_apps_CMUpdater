@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView
+<LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@android:id/android:list"
-	android:layout_width = "fill_parent"
-	android:layout_height = "fill_parent"/>
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<TextView
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/theme_list_info"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		style="@style/TextAppearance.Text"/>
+	<ListView
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@android:id/android:list"
+		android:layout_width = "fill_parent"
+		android:layout_height = "fill_parent"/>
+</LinearLayout>
