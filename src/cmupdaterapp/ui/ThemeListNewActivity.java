@@ -65,8 +65,18 @@ public class ThemeListNewActivity extends Activity
 		{
 			public void onClick(View v)
 			{
-				//TODO: Check the URI
-				//TODO: Check that there is text in every field
+				if(etName.getText().toString().trim().equalsIgnoreCase(""))
+				{
+					Log.d(TAG, "Entered name was empty");
+					Toast.makeText(ThemeListNewActivity.this, R.string.theme_list_new_wrong_name, Toast.LENGTH_LONG).show();
+					return;
+				}
+				if(!URLUtil.isValidUrl(etUri.getText().toString().trim()))
+				{
+					Log.d(TAG, "Entered URL was not valid: " + etUri.getText().toString());
+					Toast.makeText(ThemeListNewActivity.this, R.string.theme_list_new_wrong_uri, Toast.LENGTH_LONG).show();
+					return;
+				}
 				Intent i = new Intent();
 				i.putExtra(Constants.THEME_LIST_NEW_NAME, etName.getText().toString().trim());
 				i.putExtra(Constants.THEME_LIST_NEW_URI, etUri.getText().toString().trim());

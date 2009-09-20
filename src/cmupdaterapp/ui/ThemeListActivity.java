@@ -191,7 +191,7 @@ public class ThemeListActivity extends ListActivity
 		else
 		{
 			Log.d(TAG, "Fail");
-			Toast.makeText(this, R.string.theme_list_delete_error, Toast.LENGTH_LONG);
+			Toast.makeText(this, R.string.theme_list_delete_error, Toast.LENGTH_LONG).show();
 		}
 		updateThemeList();
 	}
