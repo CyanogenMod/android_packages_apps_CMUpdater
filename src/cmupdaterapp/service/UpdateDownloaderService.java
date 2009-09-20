@@ -56,8 +56,6 @@ import cmupdaterapp.misc.Log;
 
 public class UpdateDownloaderService extends Service
 {
-	//public static UpdateDownloaderService INSTANCE;
-
 	private static final String TAG = "UpdateDownloaderService";
 	
 	private int progressBarUpdateInterval;
@@ -210,8 +208,6 @@ public class UpdateDownloaderService extends Service
 		fullUpdateFolderPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mUpdateFolder; 
 		progressBarUpdateInterval = Preferences.getPreferences(this).getProgressUpdateFreq();
 		Log.d(TAG, "ProgressBarIntervall: " + progressBarUpdateInterval);
-		//df = new SimpleDateFormat("HH 'hours' mm 'mins' ss 'seconds'");
-		//df.setTimeZone(TimeZone.getDefault());
 		AppContext = getApplicationContext();
 		res = getResources();
 		minutesString = res.getString(R.string.minutes);
@@ -401,7 +397,6 @@ public class UpdateDownloaderService extends Service
 			notification.sound = notificationRingtone;
 		}
 
-		//Use a resourceId as an unique identifier
 		mNM.notify(R.string.not_update_download_error_title, notification);
 	}
 
@@ -438,7 +433,6 @@ public class UpdateDownloaderService extends Service
 				boolean md5Available = true;
 	
 				mMirrorNameUpdated = false;
-				//mUpdateProcessInfo.updateDownloadMirror(updateURI.getHost());
 				try
 				{
 					req = new HttpGet(updateURI);
@@ -700,7 +694,6 @@ public class UpdateDownloaderService extends Service
 			mRemainingTime = ((mcontentLength - mtotalDownloaded)/mSpeed);
 			mstringDownloaded = mtotalDownloaded/1048576 + "/" + mcontentLength/1048576 + " MB";
 			mstringSpeed = mSpeed + " kB/s";
-			//mstringRemainingTime = df.format(new Date(mRemainingTime));
 			mstringRemainingTime = mRemainingTime/60000 + " " + minutesString + " " + mRemainingTime%60 + " " + secondsString;
 
 			mstringComplete = mstringDownloaded + " " + mstringSpeed + " " + mstringRemainingTime;
