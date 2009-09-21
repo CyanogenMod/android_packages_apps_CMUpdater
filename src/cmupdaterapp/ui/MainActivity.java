@@ -2,7 +2,6 @@ package cmupdaterapp.ui;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -545,15 +544,6 @@ public class MainActivity extends IMainActivity
 		if(prefs.getConfiguredModString().equalsIgnoreCase("ADP1"))
 			prefs.configureModString();
 
-		try
-		{
-			mAvailableUpdates = State.loadState(this);
-		}
-		catch (IOException e)
-		{
-			Log.e(TAG, "Unable to load application state", e);
-		}
-
 		mUpdateServer = new PlainTextUpdateServer(this);
 	}
 
@@ -569,19 +559,6 @@ public class MainActivity extends IMainActivity
 			//User MUST uninstall old App
 			Log.d(TAG, "Old App not uninstalled, try again");
 		}
-		
-		try
-		{
-			mAvailableUpdates = State.loadState(this);
-		}
-		catch (FileNotFoundException e)
-		{
-			//Ignored, data was not saved
-		}
-		catch (IOException e)
-		{
-			Log.e(TAG, "Unable to restore activity status", e);
-		}
 	}
 
 	@Override
@@ -589,6 +566,14 @@ public class MainActivity extends IMainActivity
 	{
 		Log.d(TAG, "onResume called");
 		super.onResume();
+		try
+		{
+			mAvailableUpdates = State.loadState(this);
+		}
+		catch (IOException e)
+		{
+			Log.e(TAG, "Unable to restore activity status", e);
+		}
 		Intent UpdateIntent = getIntent();
 		if (UpdateIntent != null)
 		{
