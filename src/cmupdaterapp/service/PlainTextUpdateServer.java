@@ -193,7 +193,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		}
 		
 		FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(context));
-		State.saveState(context, ful);
+		State.saveState(context, retValue);
 		return ful;
 	}
 
