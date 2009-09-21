@@ -103,7 +103,16 @@ POR FAVOR REINCIE EM MODO DE RECUPERAÇÃO MANUALMENTE *ANTES* DE APLICAR A ATUA
 	<string name="delete_updates_root_folder_message">Você não pode Deletar a pasta Root\nPor favor, Delete os Updates um por um</string>
 
 	<string name="about_dialog_title">Sobre</string>
-    
+	<string name="barcode_scan_no_result">Nenhum resultado recebido. Tente de novo.</string>
+	
+	<string name="theme_list_long_press">Pressione e Mantenha em um Item para mostras as opções</string>
+	<string name="theme_list_no_themes">Nenhum servidor de Temas. Precione Menu para adicionar um</string>
+	<string name="theme_list_delete_error">Ouve um Erro tentando deletar o Servidor de Tema</string>
+	
+	<string name="theme_list_new_wrong_uri">A URL é inválida. Tente de novo</string>
+	<string name="theme_list_new_wrong_name">Entre com um Nome</string>    
+
+
     <!-- .service.* Strings -->
     <string name="no_updates_found">Nenhuma atualização encontrada.</string>
     <string name="not_new_updates_found_ticker">Encontradas Novas Atualizações!</string>
@@ -137,6 +146,8 @@ POR FAVOR REINCIE EM MODO DE RECUPERAÇÃO MANUALMENTE *ANTES* DE APLICAR A ATUA
 
 	<string name="minutes">min</string>
 	<string name="seconds">seg</string>
+	<string name="unable_to_download_file">Não foi possível transferir a Atualização de nenhum espelho</string>
+	<string name="md5_verification_failed">A verificação de MD5 falhou</string>
 
     <!-- Preferences Strings -->
     <string name="p_update_check_freq_title">Atualizar a Frequência de Verifição de novas Atualizações</string>
@@ -214,4 +225,5 @@ POR FAVOR REINCIE EM MODO DE RECUPERAÇÃO MANUALMENTE *ANTES* DE APLICAR A ATUA
 	<string name="p_theme_list_new_enabled">Habilitada:</string>
 	<string name="p_theme_list_new_barcode">Código de Barras</string>
 	<string name="p_theme_list_new_save">Salvar</string>
+	<string name="p_theme_list_new_cancel">Cancelar</string>
 </resources>
