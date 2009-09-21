@@ -191,9 +191,10 @@ public class PlainTextUpdateServer implements IUpdateServer
 			if (themeResponseEntity != null)
 				themeResponseEntity.consumeContent();
 		}
-		
+
 		FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(context));
-		State.saveState(context, retValue);
+		if(!romException)
+			State.saveState(context, retValue);
 		return ful;
 	}
 
@@ -451,15 +452,15 @@ public class PlainTextUpdateServer implements IUpdateServer
 		return ret;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private static FullUpdateInfo FilterUpdates(FullUpdateInfo newList, FullUpdateInfo oldList)
 	{
 		Log.d(TAG, "Called FilterUpdates");
-		newList.roms.removeAll(oldList.roms);
-		newList.themes.removeAll(oldList.themes);
-		//FullUpdateInfo ful = new FullUpdateInfo();
-		//ful.roms = newList.roms;
-		//ful.themes = newList.themes;
-		//return ful;
-		return newList;
+		FullUpdateInfo ful = new FullUpdateInfo();
+		ful.roms = (LinkedList<UpdateInfo>) newList.roms.clone();
+		ful.themes = (LinkedList<UpdateInfo>) newList.themes.clone();
+		ful.roms.removeAll(oldList.roms);
+		ful.themes.removeAll(oldList.themes);
+		return ful;
 	}
 }

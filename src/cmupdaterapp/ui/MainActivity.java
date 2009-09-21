@@ -553,8 +553,6 @@ public class MainActivity extends IMainActivity
 		{
 			Log.e(TAG, "Unable to load application state", e);
 		}
-		
-		mAvailableUpdates = State.restoreSavedInstanceValues(savedInstanceState);
 
 		mUpdateServer = new PlainTextUpdateServer(this);
 	}
@@ -599,14 +597,6 @@ public class MainActivity extends IMainActivity
 			{
 				case Constants.REQUEST_NEW_UPDATE_LIST:
 					mAvailableUpdates = (FullUpdateInfo) getIntent().getSerializableExtra(Constants.KEY_UPDATE_INFO);
-					try
-					{
-						State.saveState(this, mAvailableUpdates);
-					}
-					catch (IOException e)
-					{
-						Log.e(TAG, "Unable to save application state", e);
-					}
 					break;
 				case Constants.REQUEST_UPDATE_CHECK_ERROR:
 					Log.d(TAG, "Update check error");
@@ -672,14 +662,6 @@ public class MainActivity extends IMainActivity
 	{
 		Log.d(TAG, "onStop called");
 		super.onStop();
-		try
-		{
-			State.saveState(this, mAvailableUpdates);
-		}
-		catch (IOException e)
-		{
-			Log.e(TAG, "Unable to save state", e);
-		}
 		Log.d(TAG, "App closed");
 	}
 	
