@@ -26,6 +26,7 @@ import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IUpdateServer;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
+import cmupdaterapp.misc.State;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.SysUtils;
 
@@ -49,10 +50,13 @@ public class PlainTextUpdateServer implements IUpdateServer
 	
 	private boolean WildcardUsed = false;
 	
+	private Context context;
+	
 	public PlainTextUpdateServer(Context ctx)
 	{
 		Preferences p = mPreferences = Preferences.getPreferences(ctx);
 		String sm = p.getConfiguredModString();
+		context = ctx;
 
 		if(sm == null)
 		{
@@ -188,7 +192,9 @@ public class PlainTextUpdateServer implements IUpdateServer
 				themeResponseEntity.consumeContent();
 		}
 		
-		return retValue;
+		FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(context));
+		State.saveState(context, ful);
+		return ful;
 	}
 
 	private LinkedList<UpdateInfo> parseJSON(StringBuffer buf)
@@ -233,15 +239,15 @@ public class PlainTextUpdateServer implements IUpdateServer
 			for(String item:Boards)
 			{
 				if(item!=null)
-					ui.board.add(item);
+					ui.board.add(item.trim());
 			}
-			ui.type = obj.getString(Constants.JSON_TYPE);
+			ui.type = obj.getString(Constants.JSON_TYPE).trim();
 			ui.mod = new LinkedList<String>();
 			String[] mods= obj.getString(Constants.JSON_MOD).split("\\|");
 			for(String mod:mods)
 			{
 				if(mod!=null)
-					ui.mod.add(mod);
+					ui.mod.add(mod.trim());
 			}
 			ui.name = obj.getString(Constants.JSON_NAME).trim();
 			ui.version = obj.getString(Constants.JSON_VERSION).trim();
@@ -443,5 +449,17 @@ public class PlainTextUpdateServer implements IUpdateServer
 			}
 		}
 		return ret;
+	}
+	
+	private static FullUpdateInfo FilterUpdates(FullUpdateInfo newList, FullUpdateInfo oldList)
+	{
+		Log.d(TAG, "Called FilterUpdates");
+		newList.roms.removeAll(oldList.roms);
+		newList.themes.removeAll(oldList.themes);
+		//FullUpdateInfo ful = new FullUpdateInfo();
+		//ful.roms = newList.roms;
+		//ful.themes = newList.themes;
+		//return ful;
+		return newList;
 	}
 }

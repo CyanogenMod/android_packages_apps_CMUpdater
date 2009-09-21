@@ -6,24 +6,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -66,6 +61,7 @@ import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.SysUtils;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
+import cmupdaterapp.misc.State;
 import cmupdaterapp.changelog.*;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -551,14 +547,14 @@ public class MainActivity extends IMainActivity
 
 		try
 		{
-			loadState();
+			mAvailableUpdates = State.loadState(this);
 		}
 		catch (IOException e)
 		{
 			Log.e(TAG, "Unable to load application state", e);
 		}
 		
-		restoreSavedInstanceValues(savedInstanceState);
+		mAvailableUpdates = State.restoreSavedInstanceValues(savedInstanceState);
 
 		mUpdateServer = new PlainTextUpdateServer(this);
 	}
@@ -578,7 +574,7 @@ public class MainActivity extends IMainActivity
 		
 		try
 		{
-			loadState();
+			mAvailableUpdates = State.loadState(this);
 		}
 		catch (FileNotFoundException e)
 		{
@@ -605,7 +601,7 @@ public class MainActivity extends IMainActivity
 					mAvailableUpdates = (FullUpdateInfo) getIntent().getSerializableExtra(Constants.KEY_UPDATE_INFO);
 					try
 					{
-						saveState();
+						State.saveState(this, mAvailableUpdates);
 					}
 					catch (IOException e)
 					{
@@ -678,7 +674,7 @@ public class MainActivity extends IMainActivity
 		super.onStop();
 		try
 		{
-			saveState();
+			State.saveState(this, mAvailableUpdates);
 		}
 		catch (IOException e)
 		{
@@ -694,49 +690,6 @@ public class MainActivity extends IMainActivity
         super.onConfigurationChanged(newConfig); 
         Log.d(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
     }
-
-	private void saveState() throws IOException
-	{
-		ObjectOutputStream oos = new ObjectOutputStream(openFileOutput(Constants.STORED_STATE_FILENAME, Context.MODE_PRIVATE));
-		try
-		{
-			Map<String,Serializable> data = new HashMap<String, Serializable>();
-			data.put("mAvailableUpdates", (Serializable)mAvailableUpdates);
-			oos.writeObject(data);
-			oos.flush();
-		}
-		finally
-		{
-			oos.close();
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	private void loadState() throws IOException
-	{
-		ObjectInputStream ois = new ObjectInputStream(openFileInput(Constants.STORED_STATE_FILENAME));
-		try
-		{
-			Map<String,Serializable> data = (Map<String, Serializable>) ois.readObject();
-
-			Object o = data.get("mAvailableUpdates"); 
-			if(o != null) mAvailableUpdates = (FullUpdateInfo) o;
-		}
-		catch (ClassNotFoundException e)
-		{
-			Log.e(TAG, "Unable to load stored class", e);
-		}
-		finally
-		{
-			ois.close();
-		}
-	}
-
-	private void restoreSavedInstanceValues(Bundle b)
-	{
-		if(b == null) return;
-		mAvailableUpdates = (FullUpdateInfo) b.getSerializable(Constants.KEY_AVAILABLE_UPDATES);
-	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState)
