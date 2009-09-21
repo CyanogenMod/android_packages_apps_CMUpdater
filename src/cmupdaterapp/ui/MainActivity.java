@@ -566,28 +566,16 @@ public class MainActivity extends IMainActivity
 	{
 		Log.d(TAG, "onResume called");
 		super.onResume();
-		try
-		{
-			mAvailableUpdates = State.loadState(this);
-		}
-		catch (IOException e)
-		{
-			Log.e(TAG, "Unable to restore activity status", e);
-		}
 		Intent UpdateIntent = getIntent();
 		if (UpdateIntent != null)
 		{
 			int req = UpdateIntent.getIntExtra(Constants.KEY_REQUEST, -1);
 			switch(req)
 			{
-				case Constants.REQUEST_NEW_UPDATE_LIST:
-					mAvailableUpdates = (FullUpdateInfo) getIntent().getSerializableExtra(Constants.KEY_UPDATE_INFO);
-					break;
 				case Constants.REQUEST_UPDATE_CHECK_ERROR:
 					Log.d(TAG, "Update check error");
 					Toast.makeText(this, R.string.not_update_check_error_ticker, Toast.LENGTH_SHORT).show();
 					break;
-		
 				case Constants.REQUEST_DOWNLOAD_FAILED:
 					Log.d(TAG, "Download Error");
 					Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_SHORT).show();
@@ -632,10 +620,10 @@ public class MainActivity extends IMainActivity
 			i.putExtra(Constants.UPDATE_INFO, ui);
 			startActivity(i);
 		}
-		else if (mAvailableUpdates != null || (mfilenames != null && mfilenames.size() > 0))
-		{
-			switchToUpdateChooserLayout(mAvailableUpdates);
-		}
+//		else if (mAvailableUpdates != null || (mfilenames != null && mfilenames.size() > 0))
+//		{
+//			switchToUpdateChooserLayout(mAvailableUpdates);
+//		}
 		else
 		{
 			switchToUpdateChooserLayout(null);
@@ -695,9 +683,6 @@ public class MainActivity extends IMainActivity
 		return true;
 	}
 
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onPrepareOptionsMenu(android.view.Menu)
-	 */
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) 
 	{
@@ -719,9 +704,6 @@ public class MainActivity extends IMainActivity
 		return superReturn;
 	}
 
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onMenuItemSelected(int, android.view.MenuItem)
-	 */
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item)
 	{
@@ -755,12 +737,6 @@ public class MainActivity extends IMainActivity
 		return super.onMenuItemSelected(featureId, item);
 	}
 
-//	@Override
-//	public void switchToDownloadingLayout(UpdateInfo downloadingUpdate)
-//	{
-//
-//	}
-
 	@Override
 	public void switchToUpdateChooserLayout(FullUpdateInfo availableUpdates)
 	{
@@ -768,7 +744,18 @@ public class MainActivity extends IMainActivity
 		{
 			mAvailableUpdates = availableUpdates;
 		}
-
+		else
+		{
+			try
+			{
+				mAvailableUpdates = State.loadState(this);
+			}
+			catch (IOException e)
+			{
+				Log.e(TAG, "Unable to restore activity status", e);
+			}
+		}
+		
 		//Theme Update File URL Set?
 		boolean ThemeUpdateUrlSet = prefs.ThemeUpdateUrlSet();
 		
