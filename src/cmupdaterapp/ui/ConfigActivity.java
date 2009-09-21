@@ -24,6 +24,7 @@ public class ConfigActivity extends PreferenceActivity
 	private static final String TAG = "ConfigActivity";
 	private Preferences prefs;
 	private boolean RomBarcodeRequested;
+	private Resources res;
 	
 	private final Preference.OnPreferenceChangeListener mUpdateCheckingFrequencyListener = new Preference.OnPreferenceChangeListener() {
 		public boolean onPreferenceChange(Preference preference, Object newValue)
@@ -47,7 +48,7 @@ public class ConfigActivity extends PreferenceActivity
 		addPreferencesFromResource(R.layout.config);
 		
 		prefs = Preferences.getPreferences(ConfigActivity.this);
-		final Resources res = getResources();
+		res = getResources();
 
 		ListPreference updateCheckFreqPref = (ListPreference) findPreference(res.getString(R.string.PREF_UPDATE_CHECK_FREQUENCY));
 
@@ -246,7 +247,7 @@ public class ConfigActivity extends PreferenceActivity
 							if(URLUtil.isValidUrl(result))
 							{
 								prefs.setRomUpdateFileURL(result);
-								Toast.makeText(getBaseContext(), "Rom Update File URL: " + result, Toast.LENGTH_SHORT).show();
+								Toast.makeText(getBaseContext(), res.getString(R.string.p_update_file_changed_toast) + result, Toast.LENGTH_LONG).show();
 							}
 							else
 							{

@@ -573,15 +573,15 @@ public class MainActivity extends IMainActivity
 			{
 				case Constants.REQUEST_UPDATE_CHECK_ERROR:
 					Log.d(TAG, "Update check error");
-					Toast.makeText(this, R.string.not_update_check_error_ticker, Toast.LENGTH_SHORT).show();
+					Toast.makeText(this, R.string.not_update_check_error_ticker, Toast.LENGTH_LONG).show();
 					break;
 				case Constants.REQUEST_DOWNLOAD_FAILED:
 					Log.d(TAG, "Download Error");
-					Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_SHORT).show();
+					Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_LONG).show();
 					break;
 				case Constants.REQUEST_MD5CHECKER_CANCEL:
 					Log.d(TAG, "MD5Check canceled. Switching Layout");
-					Toast.makeText(this, R.string.md5_check_cancelled, Toast.LENGTH_SHORT).show();
+					Toast.makeText(this, R.string.md5_check_cancelled, Toast.LENGTH_LONG).show();
 					break;
 				default:
 					Log.d(TAG, "No Intent. Starting App in Default mode");
@@ -1077,7 +1077,7 @@ public class MainActivity extends IMainActivity
 		if(!ChangelogEmpty)
 			dialog.show();
 		else
-			Toast.makeText(this, res.getString(R.string.no_changelog_found), Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, res.getString(R.string.no_changelog_found), Toast.LENGTH_LONG).show();
 		System.gc();
 	}
 
@@ -1124,7 +1124,7 @@ public class MainActivity extends IMainActivity
 		Intent i = new Intent(MainActivity.this, DownloadActivity.class);
 		i.putExtra(Constants.UPDATE_INFO, ui);
 		startActivity(i);
-		Toast.makeText(this, R.string.downloading_update, Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, R.string.downloading_update, Toast.LENGTH_LONG).show();
 	}
 
 	private boolean deleteOldUpdates()

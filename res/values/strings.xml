@@ -193,6 +193,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 
 	<string name="p_update_file_url_qr_title">Scan Barcode</string>
 	<string name="p_update_file_url_qr_summary">Scan QR Code for Rom Update File URL</string>
+	<string name="p_update_file_changed_toast">Rom Update File URL: </string>
 
 	<string name="p_vibrate_title">Vibrate</string>
 	<string name="p_vibrate_summary">Vibrate on Notifications</string>

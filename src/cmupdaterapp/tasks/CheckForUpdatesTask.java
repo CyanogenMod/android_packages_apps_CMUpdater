@@ -62,7 +62,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 		Resources res = upi.getResources();
 		if(result == null)
 		{
-			Toast.makeText(upi, R.string.exception_while_updating, Toast.LENGTH_SHORT).show();
+			Toast.makeText(upi, R.string.exception_while_updating, Toast.LENGTH_LONG).show();
 			return;
 		}
 		
@@ -75,7 +75,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 		if(updateCountRoms == 0 && updateCountThemes == 0)
 		{
 			Log.d(TAG, "No updates found");
-			Toast.makeText(upi, R.string.no_updates_found, Toast.LENGTH_SHORT).show();
+			Toast.makeText(upi, R.string.no_updates_found, Toast.LENGTH_LONG).show();
 			upi.switchToUpdateChooserLayout(null);
 		}
 		else
