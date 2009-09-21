@@ -25,7 +25,6 @@ public class Constants
 	public static final String KEY_REQUEST = "cmupdaterapp.keyRequest";
 	public static final String KEY_UPDATE_INFO = "cmupdaterapp.fullUpdateList";
 	public static final String KEY_AVAILABLE_UPDATES = "cmupdaterapp.availableUpdates";
-	public static final String KEY_MIRROR_NAME = "cmupdaterapp.mirrorName";
 	
 	//Flipper
 	public static final int FLIPPER_AVAILABLE_UPDATES = 0;
@@ -38,10 +37,9 @@ public class Constants
 	public static final int CHANGELOGTYPE_THEME = 3;
 	
 	//Startup Requests
-	public static final int REQUEST_NEW_UPDATE_LIST = 1;
-	public static final int REQUEST_UPDATE_CHECK_ERROR = 2;
-	public static final int REQUEST_DOWNLOAD_FAILED = 3;
-	public static final int REQUEST_MD5CHECKER_CANCEL = 4;
+	public static final int REQUEST_UPDATE_CHECK_ERROR = 1;
+	public static final int REQUEST_DOWNLOAD_FAILED = 2;
+	public static final int REQUEST_MD5CHECKER_CANCEL = 3;
 	
 	//Request Updatecheck
 	public static final int REQUEST_CHECK_FOR_UPDATES = 1;

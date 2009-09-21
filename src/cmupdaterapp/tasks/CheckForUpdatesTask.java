@@ -1,7 +1,6 @@
 package cmupdaterapp.tasks;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
 
@@ -17,7 +16,6 @@ import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.interfaces.IMainActivity;
 import cmupdaterapp.interfaces.IUpdateServer;
 import cmupdaterapp.utils.Preferences;
-import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.ui.R;
@@ -85,9 +83,7 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 			Log.d(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
 			upi.switchToUpdateChooserLayout(result);
 			
-			Intent i = new Intent(upi, MainActivity.class)
-							.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)result)
-							.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_NEW_UPDATE_LIST);
+			Intent i = new Intent(upi, MainActivity.class);
 			PendingIntent contentIntent = PendingIntent.getActivity(upi, 0, i, PendingIntent.FLAG_ONE_SHOT);
 
 			Notification notification = new Notification(R.drawable.icon_notification,

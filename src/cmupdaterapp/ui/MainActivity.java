@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
@@ -620,10 +619,6 @@ public class MainActivity extends IMainActivity
 			i.putExtra(Constants.UPDATE_INFO, ui);
 			startActivity(i);
 		}
-//		else if (mAvailableUpdates != null || (mfilenames != null && mfilenames.size() > 0))
-//		{
-//			switchToUpdateChooserLayout(mAvailableUpdates);
-//		}
 		else
 		{
 			switchToUpdateChooserLayout(null);
@@ -645,26 +640,6 @@ public class MainActivity extends IMainActivity
         super.onConfigurationChanged(newConfig); 
         Log.d(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
     }
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState)
-	{
-		outState.putSerializable(Constants.KEY_AVAILABLE_UPDATES, (Serializable)mAvailableUpdates);
-	}
-
-	@Override
-	protected void onNewIntent(Intent intent)
-	{
-		super.onNewIntent(intent);
-
-		int req = intent.getIntExtra(Constants.KEY_REQUEST, -1);
-		switch(req)
-		{
-			case Constants.REQUEST_NEW_UPDATE_LIST:
-				switchToUpdateChooserLayout((FullUpdateInfo) intent.getSerializableExtra(Constants.KEY_UPDATE_INFO));
-				break;
-		}
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)

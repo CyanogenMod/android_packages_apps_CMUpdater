@@ -6,11 +6,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
 import cmupdaterapp.customTypes.FullUpdateInfo;
-
 import android.content.Context;
-import android.os.Bundle;
 
 public class State
 {
@@ -23,7 +20,7 @@ public class State
 		try
 		{
 			Map<String,Serializable> data = new HashMap<String, Serializable>();
-			data.put("mAvailableUpdates", (Serializable)mAvailableUpdates);
+			data.put(Constants.KEY_AVAILABLE_UPDATES, (Serializable)mAvailableUpdates);
 			oos.writeObject(data);
 			oos.flush();
 		}
@@ -44,7 +41,7 @@ public class State
 			ois = new ObjectInputStream(ctx.openFileInput(Constants.STORED_STATE_FILENAME));
 			Map<String,Serializable> data = (Map<String, Serializable>) ois.readObject();
 
-			Object o = data.get("mAvailableUpdates"); 
+			Object o = data.get(Constants.KEY_AVAILABLE_UPDATES); 
 			if(o != null) mAvailableUpdates = (FullUpdateInfo) o;
 		}
 		catch (ClassNotFoundException e)
@@ -61,11 +58,5 @@ public class State
 				ois.close();
 		}
 		return mAvailableUpdates;
-	}
-	
-	public static FullUpdateInfo restoreSavedInstanceValues(Bundle b)
-	{
-		if(b == null) return new FullUpdateInfo();
-		return (FullUpdateInfo) b.getSerializable(Constants.KEY_AVAILABLE_UPDATES);
 	}
 }

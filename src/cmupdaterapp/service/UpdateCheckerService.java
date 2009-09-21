@@ -1,7 +1,6 @@
 package cmupdaterapp.service;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
 
@@ -201,9 +200,7 @@ public class UpdateCheckerService extends Service
 		
 		if(updateCountRoms > 0 || updateCountThemes > 0)
 		{
-			Intent i = new Intent(this, MainActivity.class)
-							.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_NEW_UPDATE_LIST)
-							.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)availableUpdates);
+			Intent i = new Intent(this, MainActivity.class);
 			
 			PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
 												PendingIntent.FLAG_ONE_SHOT);
