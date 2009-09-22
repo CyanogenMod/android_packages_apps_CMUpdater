@@ -139,6 +139,13 @@ public class Preferences extends Activity
 		return temp;
 	}
 	
+	public String getFeaturedThemesURL()
+	{
+		temp = mRes.getString(R.string.conf_featured_themes_url);
+		Log.d(TAG, "FeaturedThemesURL: " + temp);
+		return temp;
+	}
+	
 	//Roms
 	public boolean showAllRomUpdates()
 	{

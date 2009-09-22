@@ -31,6 +31,6 @@
 				android:layout_gravity="center_vertical"
 				android:paddingLeft="3px"
 				android:id="@+id/txtThemeUri"
-				style="@style/TextAppearance.Text"/>
+				style="@style/TextAppearance.TextSmall"/>
 		</LinearLayout>
 </LinearLayout>

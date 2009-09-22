@@ -56,6 +56,7 @@ public class Constants
 	
 	//Menu ThemeList Layout
 	public static final int MENU_THEME_LIST_ADD = 1;
+	public static final int MENU_THEME_LIST_UPDATE_FEATURED = 2;
 	
 	//Menu ThemeListContextMenu
 	public static final int MENU_THEME_LIST_CONTEXT_EDIT = 10;
@@ -84,6 +85,11 @@ public class Constants
 	//ChangelogHandler
 	public static final String VERSION_TAG = "Version";
 	public static final String VERSION_NAME_TAG = "name";
+	
+	//Featured Themes Handler
+	public static final String FEATURED_THEMES_TAG = "Theme";
+	public static final String FEATURES_THEMES_TAG_NAME = "name";
+	public static final String FEATURES_THEMES_TAG_URI = "url";
 	
 	//ThemeListNew
 	public static final String THEME_LIST_NEW_NAME = "name";

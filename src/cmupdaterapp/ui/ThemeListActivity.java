@@ -6,15 +6,21 @@ import java.util.LinkedList;
 import cmupdaterapp.customTypes.FullThemeList;
 import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.database.ThemeListDbAdapter;
+import cmupdaterapp.featuredThemes.FeaturedThemes;
 import cmupdaterapp.listadapters.ThemeListAdapter;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.R;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +45,11 @@ public class ThemeListActivity extends ListActivity
 	
 	private AdapterContextMenuInfo menuInfo;
 	private TextView tv;
+	
+	private FullThemeList FeaturedThemes = null;
+	private Thread FeaturedThemesThread;
+	private ProgressDialog FeaturedThemesProgressDialog;
+	public static Handler FeaturedThemesProgressHandler;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -73,11 +84,14 @@ public class ThemeListActivity extends ListActivity
 				String uri = themeListCursor.getString(ThemeListDbAdapter.KEY_URI_COLUMN);
 				int pk = themeListCursor.getInt(ThemeListDbAdapter.KEY_ID_COLUMN);
 				int enabled = themeListCursor.getInt(ThemeListDbAdapter.KEY_ENABLED_COLUMN);
+				int featured = themeListCursor.getInt(ThemeListDbAdapter.KEY_FEATURED_COLUMN);
 				ThemeList newItem = new ThemeList();
 				newItem.name = name;
 				newItem.url = URI.create(uri);
 				if(enabled == 1) newItem.enabled = true;
 				else newItem.enabled = false;
+				if(featured == 1) newItem.featured = true;
+				else newItem.featured = false;
 				newItem.PrimaryKey = pk;
 				fullThemeList.addThemeToList(newItem);
 			}
@@ -105,6 +119,7 @@ public class ThemeListActivity extends ListActivity
 	{
 		super.onCreateOptionsMenu(menu);
 		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_ADD, Menu.NONE, R.string.menu_add_theme);
+		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_UPDATE_FEATURED, Menu.NONE, R.string.menu_update_featured);
 		return true;
 	}
 	
@@ -118,6 +133,27 @@ public class ThemeListActivity extends ListActivity
 		{
 			case Constants.MENU_THEME_LIST_ADD:
 				createNewThemeList(false, null, null, true, 0);
+				return true;
+			case Constants.MENU_THEME_LIST_UPDATE_FEATURED:
+				new AlertDialog.Builder(ThemeListActivity.this)
+				.setTitle(R.string.featured_themes_dialog_title)
+				.setMessage(R.string.featured_themes_dialog_summary)
+				.setPositiveButton(R.string.featured_themes_dialog_pos, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						dialog.dismiss();
+						updateFeaturedThemes();
+					}
+				})
+				.setNegativeButton(R.string.featured_themes_dialog_neg, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						dialog.dismiss();
+					}
+				})
+				.show();
 				return true;
 			case Constants.MENU_THEME_LIST_CONTEXT_EDIT:
 				Log.d(TAG, "Edit clicked");
@@ -209,6 +245,7 @@ public class ThemeListActivity extends ListActivity
 					tl.name = b.getString(Constants.THEME_LIST_NEW_NAME);
 					tl.url = URI.create(b.getString(Constants.THEME_LIST_NEW_URI));
 					tl.enabled = b.getBoolean(Constants.THEME_LIST_NEW_ENABLED);
+					tl.featured = false;
 					if(b.getBoolean(Constants.THEME_LIST_NEW_UPDATE))
 						tl.PrimaryKey = b.getInt(Constants.THEME_LIST_NEW_PRIMARYKEY);
 					if(!b.getBoolean(Constants.THEME_LIST_NEW_UPDATE))
@@ -219,5 +256,39 @@ public class ThemeListActivity extends ListActivity
 				}
 		}
 		super.onActivityResult(requestCode, resultCode, intent);
+	}
+	
+	private void updateFeaturedThemes()
+	{
+		Log.d(TAG, "Called Update Featured Themes");
+		FeaturedThemesProgressHandler = new Handler()
+		{
+			public void handleMessage(Message msg)
+			{
+				Log.d(TAG, "recieved Message");
+				if (FeaturedThemesProgressDialog != null)
+					FeaturedThemesProgressDialog.dismiss();
+				if (msg.obj instanceof String)
+				{
+					Toast.makeText(ThemeListActivity.this, (CharSequence) msg.obj, Toast.LENGTH_LONG).show();
+					FeaturedThemes = null;
+					ThemeListActivity.this.FeaturedThemesThread.interrupt();
+					FeaturedThemesProgressDialog.dismiss();
+				}
+				else if (msg.obj instanceof FullThemeList)
+				{
+					FeaturedThemes = (FullThemeList) msg.obj;
+					ThemeListActivity.this.FeaturedThemesThread.interrupt();
+					FeaturedThemesProgressDialog.dismiss();
+					if (FeaturedThemes != null && FeaturedThemes.getThemeCount() > 0)
+						themeListDb.UpdateFeaturedThemes(FeaturedThemes);
+					updateThemeList();
+				}
+	        }
+	    };
+
+	    FeaturedThemesProgressDialog = ProgressDialog.show(this, res.getString(R.string.featured_themes_progress_title), res.getString(R.string.featured_themes_progress_body), true);
+	    FeaturedThemesThread = new Thread(new FeaturedThemes(this));
+	    FeaturedThemesThread.start();
 	}
 }

@@ -1,53 +1,32 @@
-package cmupdaterapp.changelog;
+package cmupdaterapp.featuredThemes;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.interfaces.IMainActivity;
-import cmupdaterapp.utils.Preferences;
-import cmupdaterapp.misc.Log;
-import cmupdaterapp.ui.MainActivity;
-
+import android.content.Context;
 import android.os.Message;
+import cmupdaterapp.misc.Log;
+import cmupdaterapp.ui.ThemeListActivity;
+import cmupdaterapp.utils.Preferences;
 
-public class Changelog implements Runnable
+public class FeaturedThemes implements Runnable
 {
-	private static final String TAG = "Changelog";
+	private static final String TAG = "FeaturedThemes";
 	private Preferences p;
 	
-	public Changelog(IMainActivity upi)
+	public FeaturedThemes(Context ctx)
 	{
-		p = Preferences.getPreferences(upi);
+		p = Preferences.getPreferences(ctx);
 	}
-	
-	//Returns the RomChangelog without a Thread
-	public static List<Version> getRomChangelog(UpdateInfo ui)
-	{
-		Version v = new Version();
-		List<Version> returnValue = new LinkedList<Version>();
-		v.Version = ui.version;
-		for (String str : ui.description.split("\\|"))
-		{
-			if(str != "")
-				v.ChangeLogText.add(str);
-		}
-		returnValue.add(v);
-		return returnValue;
-	}
-	
-	//Gets the AppChangelog in a Thread
+
 	public void run()
 	{
 		URL url;
@@ -57,15 +36,15 @@ public class Changelog implements Runnable
 		try
 		{
 			m = new Message();
-			url = new URL(p.getChangelogURL());
+			url = new URL(p.getFeaturedThemesURL());
 			i = new InputSource(url.openStream());
         	SAXParserFactory spf = SAXParserFactory.newInstance(); 
         	SAXParser sp = spf.newSAXParser();
         	XMLReader xr = sp.getXMLReader(); 
-        	ChangelogHandler ch = new ChangelogHandler(); 
-        	xr.setContentHandler(ch); 
+        	FeaturedThemesHandler fth = new FeaturedThemesHandler(); 
+        	xr.setContentHandler(fth); 
         	xr.parse(i);  
-        	m.obj = ch.getParsedData();
+        	m.obj = fth.getParsedData();
         }
         catch (MalformedURLException e)
 		{
@@ -87,6 +66,6 @@ public class Changelog implements Runnable
 			m.obj = e.toString();
 			Log.e(TAG, "Exception while creating SAXParser", e);
 		}
-		MainActivity.ChangelogProgressHandler.sendMessage(m);
+		ThemeListActivity.FeaturedThemesProgressHandler.sendMessage(m);
 	}
 }

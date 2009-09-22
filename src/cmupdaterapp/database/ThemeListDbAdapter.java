@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import cmupdaterapp.customTypes.FullThemeList;
 import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.misc.Log;
 
@@ -19,7 +20,7 @@ public class ThemeListDbAdapter
 	
 	private static final String DATABASE_NAME = "cmupdater";
 	private static final String DATABASE_TABLE = "ThemeList";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 	public static final String KEY_ID = "id";
 	public static final int KEY_ID_COLUMN = 0;
 	public static final String KEY_NAME = "name";
@@ -28,6 +29,8 @@ public class ThemeListDbAdapter
 	public static final int KEY_URI_COLUMN = 2;
 	public static final String KEY_ENABLED = "enabled";
 	public static final int KEY_ENABLED_COLUMN = 3;
+	public static final String KEY_FEATURED = "featured";
+	public static final int KEY_FEATURED_COLUMN = 4;
 	private SQLiteDatabase db;
 	private final Context context;
 	private ThemeListDbOpenHelper dbHelper;
@@ -58,15 +61,13 @@ public class ThemeListDbAdapter
 	// Insert a new task
 	public long insertTheme(ThemeList _theme)
 	{
-		// 	Create a new row of values to insert.
 		ContentValues newValues = new ContentValues();
-		// Assign values for each row.
 		newValues.put(KEY_NAME, _theme.name);
 		newValues.put(KEY_URI, _theme.url.toString());
 		if(_theme.enabled) newValues.put(KEY_ENABLED, 1);
 		else newValues.put(KEY_ENABLED, 0);
-		
-		// Insert the row.
+		if(_theme.featured) newValues.put(KEY_FEATURED, 1);
+		else newValues.put(KEY_FEATURED, 0);
 		return db.insert(DATABASE_TABLE, null, newValues);
 	}
 	
@@ -84,17 +85,19 @@ public class ThemeListDbAdapter
 		newValue.put(KEY_URI, _theme.url.toString());
 		if(_theme.enabled) newValue.put(KEY_ENABLED, 1);
 		else newValue.put(KEY_ENABLED, 0);
+		if(_theme.featured) newValue.put(KEY_FEATURED, 1);
+		else newValue.put(KEY_FEATURED, 0);
 		return db.update(DATABASE_TABLE, newValue, KEY_ID + "=" + _rowIndex, null) > 0;
 	}
 	
 	public Cursor getAllThemesCursor()
 	{
-		return db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_NAME, KEY_URI, KEY_ENABLED }, null, null, null, null, null);
+		return db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_NAME, KEY_URI, KEY_ENABLED, KEY_FEATURED }, null, null, null, null, null);
 	}
 
 	public Cursor setCursorToThemeItem(long _rowIndex) throws SQLException
 	{
-		Cursor result = db.query(true, DATABASE_TABLE, new String[] {KEY_ID, KEY_NAME}, KEY_ID + "=" + _rowIndex, null, null, null, null, null);
+		Cursor result = db.query(true, DATABASE_TABLE, new String[] { KEY_ID, KEY_NAME, KEY_URI, KEY_ENABLED, KEY_FEATURED }, KEY_ID + "=" + _rowIndex, null, null, null, null, null);
 		if ((result.getCount() == 0) || !result.moveToFirst())
 		{
 			throw new SQLException("No Theme items found for row: " + _rowIndex);
@@ -104,7 +107,7 @@ public class ThemeListDbAdapter
 
 	public ThemeList getThemeItem(long _rowIndex) throws SQLException
 	{
-		Cursor cursor = db.query(true, DATABASE_TABLE, new String[] {KEY_ID, KEY_NAME}, KEY_ID + "=" + _rowIndex, null, null, null, null, null);
+		Cursor cursor = db.query(true, DATABASE_TABLE, new String[] { KEY_ID, KEY_NAME, KEY_URI, KEY_ENABLED, KEY_FEATURED }, KEY_ID + "=" + _rowIndex, null, null, null, null, null);
 		if ((cursor.getCount() == 0) || !cursor.moveToFirst())
 		{
 			throw new SQLException("No Theme item found for row: " + _rowIndex);
@@ -112,6 +115,7 @@ public class ThemeListDbAdapter
 		String name = cursor.getString(KEY_NAME_COLUMN);
 		String uri = cursor.getString(KEY_URI_COLUMN);
 		int enabled = cursor.getInt(KEY_ENABLED_COLUMN);
+		int featured = cursor.getInt(KEY_FEATURED_COLUMN);
 		int Key = cursor.getInt(KEY_ID_COLUMN);
 		ThemeList result = new ThemeList();
 		result.name = name;
@@ -119,7 +123,36 @@ public class ThemeListDbAdapter
 		result.PrimaryKey = Key;
 		if(enabled == 1) result.enabled = true;
 		else result.enabled = false;
+		if(featured == 1) result.featured = true;
+		else result.featured = false;
 		return result;
+	}
+	
+	public void UpdateFeaturedThemes(FullThemeList t)
+	{
+		FullThemeList retValue = new FullThemeList();
+		//Get the enabled state of the current Featured Themes
+		for (ThemeList tl : t.returnFullThemeList())
+		{
+			Cursor result = db.query(true, DATABASE_TABLE, new String[] { KEY_ID, KEY_NAME, KEY_URI, KEY_ENABLED, KEY_FEATURED }, KEY_NAME + "='" + tl.name + "' and " + KEY_FEATURED + "=1" , null, null, null, null, null);
+			if ((result.getCount() == 0) || !result.moveToFirst())
+			{
+				Log.d(TAG, "Theme " + tl.name + " not found in your List");
+				retValue.addThemeToList(tl);
+				continue;
+			}
+			tl.enabled = result.getInt(KEY_ENABLED_COLUMN) != 0;
+			retValue.addThemeToList(tl);
+		}
+		//Delete all featured Themes
+		db.delete(DATABASE_TABLE, KEY_FEATURED + "=1", null);
+		Log.d(TAG, "Deleted all old Featured Theme Servers");
+		//Add all Featured Themes again
+		for (ThemeList tl2 : retValue.returnFullThemeList())
+		{
+			insertTheme(tl2);
+		}
+		Log.d(TAG, "Updated Featured Theme Servers");
 	}
 
 	private static class ThemeListDbOpenHelper extends SQLiteOpenHelper
@@ -131,7 +164,7 @@ public class ThemeListDbAdapter
 		// SQL Statement to create a new database.
 		private static final String DATABASE_CREATE = "create table " +
 		DATABASE_TABLE + " (" + KEY_ID + " integer primary key autoincrement, " + KEY_NAME + " text not null, "
-		+ KEY_URI + " text not null, " + KEY_ENABLED + " integer default 0" + ");";
+		+ KEY_URI + " text not null, " + KEY_ENABLED + " integer default 0" + ", " + KEY_FEATURED + " integer default 0);";
 		
 		@Override
 		public void onCreate(SQLiteDatabase _db)

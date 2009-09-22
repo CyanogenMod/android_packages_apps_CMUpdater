@@ -11,4 +11,11 @@ public class ThemeList implements Serializable
 	public String name;
 	public URI url;
 	public boolean enabled;
+	public boolean featured;
+	
+	public ThemeList()
+	{
+		featured = false;
+		enabled = true;
+	}
 }
