@@ -42,6 +42,8 @@
    <string name="menu_add_theme">Добавить Сервер</string>
    <string name="menu_edit_theme">Редактировать</string>
    <string name="menu_delete_theme">Удалить</string>
+   <string name="menu_enable_theme">Включить Сервер Темы</string>
+   <string name="menu_disable_theme">Выключить Сервер Темы</string>
    
    <string name="cancel_download_buton_text">Отменить Загрузку</string>
    <string name="confirm_download_cancelation_dialog_message">Пожалуйста подтвердите отмену загрузки</string>
@@ -113,8 +115,15 @@
    
    <string name="barcode_scan_no_result">Сканировка не удалась. Попробуйте заново.</string>
    
+   <string name="theme_list_long_press">Нажмите и держите для показа настроек</string>
+   <string name="theme_list_no_themes">Серверов Тем не Установлено. Нажмите \'Меню\'.</string>
+   <string name="theme_list_delete_error">Ошибка при удалении сервера темы.</string>
+   
+   <string name="theme_list_new_wrong_uri">Адрес введен не правильно.  Введите заново.</string>
+   <string name="theme_list_new_wrong_name">Введите Имя.</string>
+   
    <!-- .service.* Strings -->
-   <string name="no_updates_found">Новых версий прошивки не найдено.</string>
+   <string name="no_updates_found">Новых версий не найдено.</string>
    <string name="not_new_updates_found_ticker">Найдена новая версия!</string>
    <string name="not_new_updates_found_title">Найдена новая версия</string>
    
@@ -147,6 +156,9 @@
    
    <string name="minutes">минут</string>
    <string name="seconds">секунд</string>
+   	
+   <string name="unable_to_download_file">Не удалось заргузить файл обновления ни с одного сервера</string>
+   <string name="md5_verification_failed">Проверка MD5 не удачна.</string>
    
    <!-- Preferences Strings -->
    <string name="p_update_check_freq_title">Частота Проверок</string>
@@ -183,6 +195,7 @@
    
    <string name="p_update_file_url_qr_title">Сканировка Кода</string>
    <string name="p_update_file_url_qr_summary">Сканировать штрих-код содержащий адрес обновителя Прошивок</string>
+   <string name="p_update_file_changed_toast">Адрес обновителя прошивки: </string>
    
    <string name="p_vibrate_title">Вибрация</string>
    <string name="p_vibrate_summary">Вибрировать телефон при уведомлениях</string>
@@ -238,4 +251,5 @@
    <string name="p_theme_list_new_enabled">Включена:</string>
    <string name="p_theme_list_new_barcode">Сканировать Код</string>
    <string name="p_theme_list_new_save">Сохранить</string>
+   <string name="p_theme_list_new_cancel">Отменить</string>
 </resources>
