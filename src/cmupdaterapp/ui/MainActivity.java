@@ -300,20 +300,8 @@ public class MainActivity extends IMainActivity
 						String f = (String) mExistingUpdatesSpinner.getSelectedItem();
 						Log.d(TAG, "Delete single Update selected: " + f);
 						if(deleteUpdate(f))
-						{
 							mfilenames.remove(f);
-							//mfilenames.trimToSize();
-						}
-						//If Updates are cached or Present, reload the View
-						if(mAvailableUpdates != null)
-						{
-							switchToUpdateChooserLayout(mAvailableUpdates);
-						}
-						//Otherwise switch to Updatechooserlayout. If no Updates are found and no files in Updatefolder, the Functions redirects you to NO ROMS FOUND
-						else
-						{
-							switchToUpdateChooserLayout(null);
-						}
+						switchToUpdateChooserLayout();
 					}
 				})
 				//Delete All Updates
@@ -326,16 +314,7 @@ public class MainActivity extends IMainActivity
 						//Set the Filenames to null, so the Spinner will be empty
 						if(deleteOldUpdates())
 							mfilenames = null;
-						//If Updates are cached or Present, reload the View
-						if(mAvailableUpdates != null)
-						{
-							switchToUpdateChooserLayout(mAvailableUpdates);
-						}
-						//Otherwise switch to Updatechooserlayout. If no Updates are found and no files in Updatefolder, the Functions redirects you to NO ROMS FOUND
-						else
-						{
-							switchToUpdateChooserLayout(null);
-						}
+						switchToUpdateChooserLayout();
 					}
 				})
 				//Delete no Update
@@ -621,7 +600,7 @@ public class MainActivity extends IMainActivity
 		}
 		else
 		{
-			switchToUpdateChooserLayout(null);
+			switchToUpdateChooserLayout();
 		}
 	}
 	
@@ -713,22 +692,15 @@ public class MainActivity extends IMainActivity
 	}
 
 	@Override
-	public void switchToUpdateChooserLayout(FullUpdateInfo availableUpdates)
+	public void switchToUpdateChooserLayout()
 	{
-		if(availableUpdates != null)
+		try
 		{
-			mAvailableUpdates = availableUpdates;
+			mAvailableUpdates = State.loadState(this);
 		}
-		else
+		catch (IOException e)
 		{
-			try
-			{
-				mAvailableUpdates = State.loadState(this);
-			}
-			catch (IOException e)
-			{
-				Log.e(TAG, "Unable to restore activity status", e);
-			}
+			Log.e(TAG, "Unable to restore activity status", e);
 		}
 		
 		//Theme Update File URL Set?

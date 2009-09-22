@@ -84,12 +84,12 @@ public class UpdateCheck implements Runnable
 				Log.d(TAG, "No updates found");
 				Toast.makeText(upi, R.string.no_updates_found, Toast.LENGTH_LONG).show();
 				p.dismiss();
-				upi.switchToUpdateChooserLayout(null);
+				upi.switchToUpdateChooserLayout();
 			}
 			else
 			{
 				Log.d(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
-				upi.switchToUpdateChooserLayout(ui);
+				upi.switchToUpdateChooserLayout();
 				if(prefs.notificationsEnabled())
 				{	
 					Intent i = new Intent(upi, MainActivity.class);

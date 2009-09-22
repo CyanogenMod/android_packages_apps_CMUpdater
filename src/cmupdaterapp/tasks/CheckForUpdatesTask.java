@@ -76,12 +76,12 @@ public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
 		{
 			Log.d(TAG, "No updates found");
 			Toast.makeText(upi, R.string.no_updates_found, Toast.LENGTH_LONG).show();
-			upi.switchToUpdateChooserLayout(null);
+			upi.switchToUpdateChooserLayout();
 		}
 		else
 		{
 			Log.d(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
-			upi.switchToUpdateChooserLayout(result);
+			upi.switchToUpdateChooserLayout();
 			
 			Intent i = new Intent(upi, MainActivity.class);
 			PendingIntent contentIntent = PendingIntent.getActivity(upi, 0, i, PendingIntent.FLAG_ONE_SHOT);
