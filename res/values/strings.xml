@@ -91,6 +91,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 
 	<string name="featured_themes_progress_title">Please wait ...</string>
 	<string name="featured_themes_progress_body">Trying to download the Featured Theme Servers XML</string>
+	<string name="featured_themes_finished_toast">Featured Theme Servers updated</string>
 
 	<string name="true_string">true</string>
 	<string name="false_string">false</string>

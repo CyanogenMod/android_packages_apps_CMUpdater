@@ -281,8 +281,11 @@ public class ThemeListActivity extends ListActivity
 					ThemeListActivity.this.FeaturedThemesThread.interrupt();
 					FeaturedThemesProgressDialog.dismiss();
 					if (FeaturedThemes != null && FeaturedThemes.getThemeCount() > 0)
+					{
 						themeListDb.UpdateFeaturedThemes(FeaturedThemes);
-					updateThemeList();
+						updateThemeList();
+						Toast.makeText(ThemeListActivity.this, R.string.featured_themes_finished_toast, Toast.LENGTH_LONG).show();
+					}
 				}
 	        }
 	    };
