@@ -132,7 +132,7 @@ public class ThemeListActivity extends ListActivity
 		switch(item.getItemId())
 		{
 			case Constants.MENU_THEME_LIST_ADD:
-				createNewThemeList(false, null, null, true, 0);
+				createNewThemeList(false, null, null, true, 0, false);
 				return true;
 			case Constants.MENU_THEME_LIST_UPDATE_FEATURED:
 				new AlertDialog.Builder(ThemeListActivity.this)
@@ -158,7 +158,7 @@ public class ThemeListActivity extends ListActivity
 			case Constants.MENU_THEME_LIST_CONTEXT_EDIT:
 				Log.d(TAG, "Edit clicked");
 				tl = ((ThemeList)lv.getAdapter().getItem(menuInfo.position));
-				createNewThemeList(true, tl.name, tl.url.toString(), tl.enabled, tl.PrimaryKey);
+				createNewThemeList(true, tl.name, tl.url.toString(), tl.enabled, tl.PrimaryKey, tl.featured);
 				break;
 			case Constants.MENU_THEME_LIST_CONTEXT_DELETE:
 				Log.d(TAG, "Delete clicked");
@@ -195,7 +195,7 @@ public class ThemeListActivity extends ListActivity
 		super.onDestroy();
 	}
 	
-	private void createNewThemeList(final boolean _update, String _name, String _uri, boolean _enabled, final int _primaryKey)
+	private void createNewThemeList(final boolean _update, String _name, String _uri, boolean _enabled, final int _primaryKey, boolean _featured)
 	{
 		Intent i = new Intent(ThemeListActivity.this, ThemeListNewActivity.class);
 		i.putExtra(Constants.THEME_LIST_NEW_NAME, _name);
@@ -203,6 +203,7 @@ public class ThemeListActivity extends ListActivity
 		i.putExtra(Constants.THEME_LIST_NEW_ENABLED, _enabled);
 		i.putExtra(Constants.THEME_LIST_NEW_PRIMARYKEY, _primaryKey);
 		i.putExtra(Constants.THEME_LIST_NEW_UPDATE, _update);
+		i.putExtra(Constants.THEME_LIST_NEW_FEATURED, _featured);
 		startActivityForResult(i, ThemeListNewActivity.REQUEST_CODE);
 	}
 	
@@ -245,7 +246,7 @@ public class ThemeListActivity extends ListActivity
 					tl.name = b.getString(Constants.THEME_LIST_NEW_NAME);
 					tl.url = URI.create(b.getString(Constants.THEME_LIST_NEW_URI));
 					tl.enabled = b.getBoolean(Constants.THEME_LIST_NEW_ENABLED);
-					tl.featured = false;
+					tl.featured = b.getBoolean(Constants.THEME_LIST_NEW_FEATURED);
 					if(b.getBoolean(Constants.THEME_LIST_NEW_UPDATE))
 						tl.PrimaryKey = b.getInt(Constants.THEME_LIST_NEW_PRIMARYKEY);
 					if(!b.getBoolean(Constants.THEME_LIST_NEW_UPDATE))

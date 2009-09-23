@@ -97,6 +97,7 @@ public class Constants
 	public static final String THEME_LIST_NEW_ENABLED = "enabled";
 	public static final String THEME_LIST_NEW_PRIMARYKEY = "pk";
 	public static final String THEME_LIST_NEW_UPDATE = "update";
+	public static final String THEME_LIST_NEW_FEATURED = "featured";
 	
 	//ThemeListItem
 	public static final int THEME_LIST_ITEM_DISABLED_ALPHA = 70;

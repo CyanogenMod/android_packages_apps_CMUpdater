@@ -24,6 +24,7 @@ public class ThemeListNewActivity extends Activity
 	private String intentName;
 	private String intentUri;
 	private boolean intentEnabled;
+	private boolean intentFeatured;
 	private boolean intentUpdate;
 	private int intentPrimaryKey;
 	
@@ -41,9 +42,10 @@ public class ThemeListNewActivity extends Activity
 		setContentView(R.layout.themelist_new);
 		Intent i = getIntent();
 		Bundle b = i.getExtras();
-		intentName = b.getString(Constants.THEME_LIST_NEW_NAME);
-		intentUri = b.getString(Constants.THEME_LIST_NEW_URI);
+		intentName = b.getString(Constants.THEME_LIST_NEW_NAME).trim();
+		intentUri = b.getString(Constants.THEME_LIST_NEW_URI).trim();
 		intentEnabled = b.getBoolean(Constants.THEME_LIST_NEW_ENABLED);
+		intentFeatured = b.getBoolean(Constants.THEME_LIST_NEW_FEATURED);
 		intentUpdate = b.getBoolean(Constants.THEME_LIST_NEW_UPDATE);
 		intentPrimaryKey = b.getInt(Constants.THEME_LIST_NEW_PRIMARYKEY);
 	}
@@ -80,11 +82,22 @@ public class ThemeListNewActivity extends Activity
 					return;
 				}
 				Intent i = new Intent();
-				i.putExtra(Constants.THEME_LIST_NEW_NAME, etName.getText().toString().trim());
-				i.putExtra(Constants.THEME_LIST_NEW_URI, etUri.getText().toString().trim());
+				//Check if the Theme has Changed.
+				//If the Name and the Url has changed, the theme gets updated without the featured flag
+				//If the user only changes the enabled state, the feature state will remain
+				String tempName = etName.getText().toString().trim();
+				String tempUri = etUri.getText().toString().trim();
+				if (intentFeatured &&
+						(!intentName.equalsIgnoreCase(tempName) || !intentUri.equalsIgnoreCase(tempUri)))
+				{
+					intentFeatured = false;
+				}
+				i.putExtra(Constants.THEME_LIST_NEW_NAME, tempName);
+				i.putExtra(Constants.THEME_LIST_NEW_URI, tempUri);
 				i.putExtra(Constants.THEME_LIST_NEW_ENABLED, cbEnabled.isChecked());
 				i.putExtra(Constants.THEME_LIST_NEW_PRIMARYKEY, intentPrimaryKey);
 				i.putExtra(Constants.THEME_LIST_NEW_UPDATE, intentUpdate);
+				i.putExtra(Constants.THEME_LIST_NEW_FEATURED, intentFeatured);
 				setResult(RESULT_OK, i);
 				finish();
 			}
