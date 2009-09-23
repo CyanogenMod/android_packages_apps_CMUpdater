@@ -92,7 +92,7 @@ public class ThemeListDbAdapter
 	
 	public Cursor getAllThemesCursor()
 	{
-		return db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_NAME, KEY_URI, KEY_ENABLED, KEY_FEATURED }, null, null, null, null, null);
+		return db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_NAME, KEY_URI, KEY_ENABLED, KEY_FEATURED }, null, null, null, null, KEY_NAME);
 	}
 
 	public Cursor setCursorToThemeItem(long _rowIndex) throws SQLException
