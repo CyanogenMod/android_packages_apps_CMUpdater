@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="update_frequency">
-        <item>手动</item>
-        <item>机器启动时</item>
-        <item>每小时一次</item>
-        <item>每天一次</item>
-        <item>每周一次</item>
-    </string-array>
+	<!-- Frequency times, in seconds -->
+	<string-array name="update_frequency">
+		<item>手动</item>
+		<item>每次启动</item>
+		<item>每小时</item>
+		<item>每天</item>
+		<item>每周</item>
+	</string-array>
 </resources>

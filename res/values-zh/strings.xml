@@ -1,88 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="apply_later_button_text">以后更新</string>
-    <string name="apply_update_button_text">确认 &amp; 更新</string>
-    <string name="apply_title_textview_text">{0}已经准备好更新</string>
-    <string name="apply_subtitle_textview_text">发行说明：</string>
-    <string name="apply_unable_to_reboot_toast">不能重启动到Recovery模式下</string>
-    <string name="apply_trying_to_get_root_access">尝试获得root权限以重启动至Recovery模式下</string>
-    
-    <string name="available_updates_text">请选择您需要下载的ROM：</string>
-    <string name="choose_available_update_text">下载</string>
-    <string name="no_updates_found_instructions">没有找到ROM。\n点击\'现在检查\' 来手动更新ROM列表</string>
-    <string name="downloaded_update_found_text">在更新文件夹中找到更新包：</string>
-    <string name="checking_for_updates">检查更新文件</string>
-    <string name="downloading_update">下载更新文件中</string>
-    <string name="sdcard_is_not_present_dialog_body">您需要准备一个可写入的SD卡来下载此更新</string>
-    <string name="sdcard_is_not_present_dialog_title">没有找到SD卡</string>
-    <string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
-    <string name="current_version_text">当前版本： {0}</string>
-    <string name="delete_updates_text">删除更新</string>
-    <string name="delete_updates_success_message">更新文件夹已被删除</string>
-    <string name="delete_updates_failure_message">删除更新文件夹时遇到错误</string>
-    <string name="delete_updates_noFolder_message">未找到更新文件夹</string>
-    
-    <string name="apply_update_dialog_title">确认信息</string>
-    <string name="apply_update_dialog_text">您即将更新到： {0}.\n如果您点击更新按钮，电话将会自动重启至Recovery模式下进行更新。</string>
+	<string name="apply_now_button_text">立即应用更新</string>
+	<string name="apply_later_button_text">稍后应用更新</string>
+	<string name="apply_update_button_text">应用更新</string>
+	<string name="apply_title_textview_text">{0} 已经可以使用</string>
+	<string name="apply_subtitle_textview_text">发行注释：</string>
+	<string name="apply_unable_to_reboot_toast">无法重启进入recovery模式</string>
+	<string name="apply_trying_to_get_root_access">正在尝试取得root权限以重启进入recovery模式</string>
+
+	<string name="available_updates_text">请选择需要下载的ROM：</string>
+	<string name="choose_available_update_text">下载</string>
+	<string name="no_updates_found_instructions">未找到ROM\n点击 \'立即检查\' 来手动获取更新</string>
+	<string name="no_themes_found_instructions">未找到主题\n点击 \'立即检查\' 来手动获取更新</string>
+	<string name="downloaded_update_found_text">在本地更新文件夹中找到的更新文件：</string>
+	<string name="checking_for_updates">正在检查更新</string>
+	<string name="downloading_update">正在下载更新</string>
+	<string name="sdcard_is_not_present_dialog_body">你需要一张可写入的SD卡来下载此更新</string>
+	<string name="sdcard_is_not_present_dialog_title">未找到SD卡</string>
+	<string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
+	<string name="current_version_text">当前使用版本： {0}</string>
+	<string name="delete_updates_text">删除该更新</string>
+	<string name="delete_updates_success_message">该更新已删除</string>
+	<string name="delete_updates_failure_message">删除更新时出现错误</string>
+	<string name="delete_updates_noFolder_message">未找到本地更新</string>
+
+	<string name="apply_update_dialog_title">请确认</string>
+	<string name="apply_update_dialog_text">您马上要应用此更新文件： {0}.\n如果您点击
+“更新”按钮，本设备将会自动重启进入recovery模式安装更新。</string>
 	<string name="apply_update_dialog_update_button">更新</string>
-	<string name="apply_update_dialog_backup_and_update_button">备份 &amp; 确认</string>
+	<string name="apply_update_dialog_backup_and_update_button">备份 &amp; 应用更新</string>
 	<string name="apply_update_dialog_cancel_button">取消</string>
 	
-	<string name="no_updates_no_mod_text">您正在使用系统版本不被此软件支持(Version {0}).</string>
+	<string name="no_updates_no_mod_text">您的系统是一个不被支持的系统版本(版本号 {0}).</string>
 	<string name="check_now_button_text">现在检查更新</string>
 	
 	<string name="menu_check_now">现在检查更新</string>
-    <string name="menu_config">Configuration</string><string name="menu_about">关于</string>
-    <string name="cancel_download_buton_text">取消下载</string>
-    <string name="confirm_download_cancelation_dialog_message">您确认你试图取消当前下载吗？</string>
-    <string name="confirm_download_cancelation_dialog_yes">是</string>
-    <string name="confirm_download_cancelation_dialog_no">否</string>
-    <string name="download_canceled_toast_message">下载已取消</string>
-    
-    <string name="verify_and_apply_dialog_title">正在验证下载</string>
-    <string name="verify_and_apply_dialog_message">正在对update.zip进行MD5验证</string>
-    
-    <string name="apply_existing_update_md5error_message">错误，无法通过MD5验证</string>
-    
-    <!-- .service.* Strings -->
-    <string name="no_updates_found">没有找到CM的更新包</string>
-    <string name="not_new_updates_found_ticker">CM的已经有新的更新包！</string>
-    <string name="not_new_updates_found_title">找到CM的更新包</string>
-    <string name="exception_while_updating">在试图连接CM更新服务器是出现错误</string>
-    <string name="exception_while_downloading">An error occurred while trying to download a CM Update</string>
-    
-    <string name="not_update_check_error_ticker">检查CM更新失败</string>
-    <string name="not_update_check_error_title">无法检查CM更新</string>
-    <string name="not_update_check_error_body">请稍后重试</string>
-    
-    <string name="not_update_download_error_ticker">在试图下载更新包时出现错误</string>
-    <string name="not_update_download_error_title">尝试下载更新包时出现错误</string>
-    <string name="not_update_download_error_body">请稍后重试</string>
-    
-    <string name="not_update_downloaded_ticker">CyanogenMod更新已下载</string>
-    <string name="not_update_downloaded_title">CyanogenMod更新已下载</string>
-    <string name="not_update_downloaded_body">{0}已经准备好安装</string>
-    
-    <string name="download_info_filename">文件名: </string>
-    <string name="download_info_mirror">下载站点: </string>
-    <string name="download_info_downloading">正在下载...</string>
-    <string name="download_info_speed">下载速度: </string>
-    <string name="download_info_remaining_time">剩余时间: </string>
-    
-    <string name="confirm_delete_update_folder_dialog_message">删除此更新包？</string>
-    <string name="confirm_delete_update_folder_dialog_yes">删除</string>
-    <string name="confirm_delete_update_folder_dialog_no">取消</string>
-    
-    <!-- Preferences Strings -->
-    <string name="p_update_check_freq_title">检查更新的频率</string>
-    <string name="p_update_check_freq_summary">设定多久检查一次更新y</string>
-    
-    <string name="p_update_file_url_title">更新服务器</string>
-    <string name="p_update_file_url_summary">设定更新服务器</string>
+	<string name="menu_qr_code">扫描update.zip的QR码</string>
+	<string name="menu_config">设置</string>
+	<string name="menu_about">关于</string>
+	<string name="menu_changelog">更新日志</string>
+	<string name="menu_add_theme">添加主题更新服务器</string>
+	<string name="menu_update_featured">更新特定主题服务器</string>
+	<string name="menu_edit_theme">编辑主题更新服务器</string>
+	<string name="menu_delete_theme">删除主题服务器</string>
+	<string name="menu_enable_theme">开启主题更新服务</string>
+	<string name="menu_disable_theme">关闭主题更新服务</string>
+	
+	<string name="cancel_download_buton_text">取消下载</string>
+	<string name="confirm_download_cancelation_dialog_message">您真的要取消当前下载吗？</string>
+	<string name="confirm_download_cancelation_dialog_yes">是</string>
+	<string name="confirm_download_cancelation_dialog_no">否</string>
+	<string name="download_canceled_toast_message">下载已取消</string>
 
-    <string name="p_do_nandroid_backup_title">Nandroid备份</string>
-    <string name="p_do_nandroid_backup_summary">是否在应用更新前创建Nandroid备份?</string>
-    
-    <string name="p_notification_ringtone_title">通知提示音</string>
-    <string name="p_notification_ringtone_summary">为CM Updater选择一个提示音</string>
+	<string name="verify_and_apply_dialog_title">正在确认文件完整性</string>
+	<string name="verify_and_apply_dialog_message">正在校验MD5和</string>
+
+	<string name="apply_existing_update_md5error_message">错误。MD5校验和不符。</string>
+
+	<string name="apply_upload_info_message">此版本的CM更新器已经打开自动重启选项，因此点击“现在应用”将会导致机器重启来应用更新。如果您想进行备份工作，请在应用此更新前手动重启并进入recovery模式。
+</string>
+
+	<string name="last_update_check_text">上次检查更新</string>
+	<string name="overwrite_update_title">更新已存在</string>
+	<string name="overwrite_update_summary">您选择的更新在本地已经存在，\n请问是否覆盖该文件？</string>
+	<string name="overwrite_update_positive">是</string>
+	<string name="overwrite_update_negative">否</string>
+
+	<string name="no_md5_found_title">未找到MD5校验</string>
+	<string name="no_md5_found_summary">未找到该更新的MD5校验，\n请问您真的要应用此未经校验的更新吗？</string>
+	<string name="no_md5_found_positive">应用更新</string>
+	<string name="no_md5_found_negative">取消</string>
+
+	<string name="notification_tickertext">正在下载更新</string>
+	<string name="notification_finished">下载完成</string>
+
+	<string name="toast_uninstall_old_Version">要继续执行，您需要先卸载旧版程序！</string>
+
+	<string name="stable_description"> = 稳定版</string>
+	<string name="experimental_description"> = 试验版</string>
+
+	<string name="changelog_progress_title">请稍候 ...</string>
+	<string name="changelog_progress_body">正在尝试获取changelog.xml</string>
+
+	<string name="changelog_button_text">该ROM的更新日志</string>
+	<string name="no_changelog_found">未找到更新日志</string>
+
+	<string name="changelog_title_rom">ROM更新日志</string>
+	<string name="changelog_title_app">程序更新日志</string>
+	<string name="changelog_title_theme">主题更新日志</string>
+
+	<string name="featured_themes_progress_title">请稍候 ...</string>
+	<string name="featured_themes_progress_body">正在尝试获取指定主题服务器XML文件</string>
+	<string name="featured_themes_finished_toast">主题更新服务器信息更新完毕</string>
+
+	<string name="true_string">是</string>
+	<string name="false_string">否</string>
+	
+	<string name="md5_check_cancelled">MD5校验已取消</string>
+	
+	<string name="button_available_updates">ROM</string>
+	<string name="button_available_themes">主题</string>
+	<string name="button_existing_updates">已存在文件</string>
+	
+	<string name="no_existing_updates_found">未找到已有更新</string>
+
+	<string name="available_themes_text">请选择要下载的主题：</string>
+	<string name="choose_available_theme_text">下载</string>
+	<string name="changelog_button_theme_text">该主题的更新日志</string>
+
+	<string name="title_running">运行中</string>
+	
+	<string name="no_updatecheck_executed">未执行更新检查</string>
+	
+	<string name="no_theme_update_server_configured">未配置主题更新服务器。\n如果您需要更新主题，请通过配置选项配置一个更新服务器。</string>
+
+	<string name="delete_updates_root_folder_message">您不能删除根目录\n请单独删除每个文件</string>
+
+	<string name="about_dialog_title">关于</string>
+	
+	<string name="barcode_scan_no_result">未能正确识别，请再试一次。</string>
+	
+	<string name="theme_list_long_press">长按一个项目以弹出选项菜单</string>
+	<string name="theme_list_no_themes">没有主题更新服务器。点击“目录”来添加或者更新已有的主题服务器列表。</string>
+	<string name="theme_list_delete_error">删除主题服务器时出现错误</string>
+	
+	<string name="theme_list_new_wrong_uri">输入URL无效，请重试</string>
+	<string name="theme_list_new_wrong_name">请输入名称</string>
+	
+	<string name="featured_themes_dialog_title">指定主题</string>
+	<string name="featured_themes_dialog_summary">您真的要更新主题服务器列表吗？\n您自定义的服务器不会被删除</string>
+	<string name="featured_themes_dialog_pos">是</string>
+	<string name="featured_themes_dialog_neg">否</string>
+
+
+	<string name="no_updates_found">没有CM的更新</string>
+	<string name="not_new_updates_found_ticker">CM有新的更新！</string>
+	<string name="not_new_updates_found_title">找到CM更新！</string>
+
+	<string name="exception_while_updating">与CM更新服务器通讯时出现错误</string>
+	<string name="exception_while_downloading">下载CM更新时出现错误</string>
+
+	<string name="not_update_check_error_ticker">检查CM更新失败</string>
+	<string name="not_update_check_error_title">无法检查CM更新</string>
+	<string name="not_update_check_error_body">请稍后重试。</string>
+
+	<string name="not_update_download_error_ticker">下载时出现错误</string>
+	<string name="not_update_download_error_title">下载更新时出现错误</string>
+	<string name="not_update_download_error_body">请稍后重试</string>
+
+	<string name="not_update_downloaded_ticker">CyanogenMod更新下载完毕</string>
+	<string name="not_update_downloaded_title">CyanogenMod更新下载完毕</string>
+	<string name="not_update_downloaded_body">{0} 已经准备好安装</string>
+
+	<string name="download_info_filename">文件名： </string>
+	<string name="download_info_mirror">镜像服务器： </string>
+	<string name="download_info_downloading">下载中...</string>
+	<string name="download_info_speed">下载速度： </string>
+	<string name="download_info_remaining_time">剩余时间： </string>
+
+	<string name="confirm_delete_update_folder_dialog_message">删除该更新文件夹的全部内容？</string>
+	<string name="confirm_delete_update_folder_dialog_yes">删除所有更新</string>
+	<string name="confirm_delete_update_folder_dialog_neutral">删除选定的更新</string>
+	<string name="confirm_delete_update_folder_dialog_no">取消</string>
+	<string name="delete_single_update_success_message"> {0} 已删除</string>    
+
+	<string name="minutes">分</string>
+	<string name="seconds">秒</string>
+	
+	<string name="unable_to_download_file">无法从任何一个镜像服务器获取更新文件</string>
+	<string name="md5_verification_failed">MD5校验失败</string>
+
+
+	<string name="p_update_check_freq_title">更新检查频率</string>
+	<string name="p_update_check_freq_summary">设定更新检查频率</string>
+
+	<string name="p_display_older_rom_versions_title">显示所有ROM更新</string>
+	<string name="p_display_older_rom_versions_summary">显示所有ROM更新，包括旧版本的ROM</string>
+	<string name="p_display_older_rom_versions_changed">为更新可用更新包列表，请再次检查更新</string>
+
+	<string name="p_allow_experimental_rom_versions_title">显示试验版ROM</string>
+	<string name="p_allow_experimental_rom_versions_summary">显示试验版ROM（非稳定版ROM）</string>
+	<string name="p_allow_experimental_rom_versions_changed">为更新可用更新包列表，请再次检查更新</string>
+
+	<string name="p_display_older_theme_versions_title">显示所有主题更新</string>
+	<string name="p_display_older_theme_versions_summary">显示所有主题更新，包括旧版本主题</string>
+	<string name="p_display_older_theme_versions_changed">为更新可用更新包列表，请再次检查更新</string>
+
+	<string name="p_allow_experimental_theme_versions_title">显示试验版主题</string>
+	<string name="p_allow_experimental_theme_versions_summary">显示试验版主题（非稳定版主题）</string>
+	<string name="p_allow_experimental_theme_versions_changed">为更新可用更新包列表，请再次检查更新</string>
+
+	<string name="p_do_nandroid_backup_title">Nandroid备份</string>
+	<string name="p_do_nandroid_backup_summary">是否在应用更新前备份Nandroid？</string>
+
+	<string name="p_notification_ringtone_title">提示音</string>
+	<string name="p_notification_ringtone_summary">选择一个CM Updater的通知提示音</string>
+
+	<string name="p_update_file_url_title">ROM更新服务器</string>
+	<string name="p_update_file_url_summary">修改ROM更新服务器</string>
+	<string name="p_update_file_url_changed">重设为默认的ROM更新URL地址</string>
+
+	<string name="p_update_file_url_def_title">重设ROM更新服务器</string>
+	<string name="p_update_file_url_def_summary">重设为默认的ROM更新服务器</string>
+
+	<string name="p_update_file_url_qr_title">扫描二维码</string>
+	<string name="p_update_file_url_qr_summary">扫描ROM更新包二维码</string>
+	<string name="p_update_file_changed_toast">ROM更新包地址: </string>
+
+	<string name="p_vibrate_title">振动提示</string>
+	<string name="p_vibrate_summary">在有提醒消息时振动</string>
+
+	<string name="p_notifications_title">提醒</string>
+	<string name="p_notifications_summary">开启/关闭提醒</string>
+
+	<string name="p_progress_update_frequency_title">更新进度提醒频率</string>
+	<string name="p_progress_update_frequency_summary">较高值 --> 较低提醒频率\n较低值 --> 较高提醒频率</string>
+
+	<string name="p_progress_update_freq_def_title">重设更新进度提示频率</string>
+	<string name="p_progress_update_freq_def_summary">重设下载对话框/提醒栏更新频率</string>
+	<string name="p_progress_update_freq_def_toast">更新进度提醒已经重设为初始值</string>
+	
+	<string name="p_invalid_url">输入的URL无效，请重新输入</string>
+	
+	<string name="p_theme_file_title">themes.theme路径</string>
+	<string name="p_theme_file_summary">更改themes.theme文件的路径</string>
+	
+	<string name="p_theme_file_def_title">重设themes.theme文件</string>
+	<string name="p_theme_file_def_summary">themes.theme文件设定为初始值</string>
+	<string name="p_theme_file_def_toast">themes.theme已设定为初始值</string>
+	
+	<string name="p_notifications_screen_title">消息提示</string>
+	<string name="p_notifications_screen_summary">设置消息提示选项</string>
+	
+	<string name="p_rom_screen_title">ROM更新设定</string>
+	<string name="p_rom_screen_summary">设置ROM更新</string>
+	
+	<string name="p_theme_screen_title">主题更新设定</string>
+	<string name="p_theme_screen_summary">设置主题更新</string>
+	
+	<string name="p_barcode_scan_failure">在扫描二维码时遇到错误</string>
+	
+	<string name="p_advanced_screen_title">高级选项</string>
+	<string name="p_advanced_screen_summary">设置高级选项</string>
+	
+	<string name="p_update_folder_title">更新存放文件夹</string>
+	<string name="p_update_folder_summary">设定更新存储文件夹\n留空代表设置为根目录</string>
+	
+	<string name="p_update_folder_def_title">重设更新存储文件夹</string>
+	<string name="p_update_folder_def_summary">更新存储文件夹设定为初始值</string>
+	<string name="p_update_folder_def_toast">更新存储文件夹已设为初始值</string>
+	<string name="p_update_folder_error">设定更新存储文件夹时遇到错误</string>
+	
+	<string name="p_theme_list_title">管理主题更新服务器</string>
+	<string name="p_theme_list_summary">添加、编辑、删除主题更新服务器</string>
+	
+	<string name="p_theme_list_context_menu_header">选择一个操作</string>
+	
+	<string name="p_theme_list_new_name">主题名称：</string>
+	<string name="p_theme_list_new_uri">URL:</string>
+	<string name="p_theme_list_new_enabled">开启：</string>
+	<string name="p_theme_list_new_barcode">二维码扫描</string>
+	<string name="p_theme_list_new_save">储存设定</string>
+	<string name="p_theme_list_new_cancel">取消</string>
 </resources>

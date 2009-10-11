@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="apply_now_button_text">Primjeni Sada</string>
+	<string name="apply_later_button_text">Primjeni Kasnije</string>
+	<string name="apply_update_button_text">Primjeni Nadogradnju</string>
+	<string name="apply_title_textview_text">{0} je spreman za primjenu</string>
+	<string name="apply_subtitle_textview_text">Izdanje:</string>
+	<string name="apply_unable_to_reboot_toast">Nemoguce podizanje sustava na oporavak</string>
+	<string name="apply_trying_to_get_root_access">Pokusava dobiti root pristup za podizanje sustava na oporavak </string>
+
+	<string name="available_updates_text">Odaberi ROM za preuzimanje:</string>
+	<string name="choose_available_update_text">Preuzimanje</string>
+	<string name="no_updates_found_instructions">Nije pronađen Rom.\nPritisni \'Provjeri sada\' za manualnu provjeru nadogradnje</string>
+	<string name="no_themes_found_instructions">Nije pronađena Tema.\nPritisni \'Provjeri sada\' za manualnu provjeru nadogradnje</string>
+	<string name="downloaded_update_found_text">Nadogradnja pronađena u mapi za nadogradnju:</string>
+	<string name="checking_for_updates">Provjera nadogranje</string>
+	<string name="downloading_update">Preuzimanje nadogradnje</string>
+	<string name="sdcard_is_not_present_dialog_body">Trebate imati pisajucu SD karticu za preuzimanje nadogradnje</string>
+	<string name="sdcard_is_not_present_dialog_title">SD kartica nije pronađena</string>
+	<string name="sdcard_is_not_present_dialog_ok_button">Primjeni</string>
+	<string name="current_version_text">Trenutna Verzija: {0}</string>
+	<string name="delete_updates_text">Izbriši nadogradnju</string>
+	<string name="delete_updates_success_message">Mapa za nadogradnju izbrisana</string>
+	<string name="delete_updates_failure_message">Greška pri brisanju Mape za nadogradnju</string>
+	<string name="delete_updates_noFolder_message">Mapa za nadogradnju nije pronađena</string>
+
+	<string name="apply_update_dialog_title">Potvrđivanje</string>
+	<string name="apply_update_dialog_text">Upravo cete izvrsit nadogradnju na {0}.\nAko pretisnete Nadogradnja, Uređaj ce se ponovno pokrenuti na oporavak i primjenit ce nadogradnju</string>
+	<string name="apply_update_dialog_update_button">Nadogradnja</string>
+	<string name="apply_update_dialog_backup_and_update_button">Sigurnosna kopija &amp; Primjeni</string>
+	<string name="apply_update_dialog_cancel_button">Odustani</string>
+	
+	<string name="no_updates_no_mod_text">Tvoj sustav radi na nekompaktibilnom OS (Verzija {0}).</string>
+	<string name="check_now_button_text">Provjeri sada</string>
+	
+	<string name="menu_check_now">Provjeri sada</string>
+	<string name="menu_qr_code">Skeniraj nadogradnja.zip poveznicu</string>
+	<string name="menu_config">Konfiguracija</string>
+	<string name="menu_about">O programu</string>
+	<string name="menu_changelog">Changelog</string>
+	<string name="menu_add_theme">Dodaj server tema</string>
+	<string name="menu_update_featured">Nadogradnja Server Tema</string>
+	<string name="menu_edit_theme">Uredi Server Tema</string>
+	<string name="menu_delete_theme">Izbriši Server Tema</string>
+	<string name="menu_enable_theme">Omoguci Server Tema</string>
+	<string name="menu_disable_theme">Onemoguci Server Tema</string>
+	
+	<string name="cancel_download_buton_text">Prekini preuzimanje</string>
+	<string name="confirm_download_cancelation_dialog_message">Jeste li sigurni da želite prekinuti trenutno preuzimanje?</string>
+	<string name="confirm_download_cancelation_dialog_yes">Da</string>
+	<string name="confirm_download_cancelation_dialog_no">Ne</string>
+	<string name="download_canceled_toast_message">Preuzimanje prekinuto</string>
+
+	<string name="verify_and_apply_dialog_title">Verifikacija</string>
+	<string name="verify_and_apply_dialog_message">Verifikacija nadogradnje MD5 sume</string>
+
+	<string name="apply_existing_update_md5error_message">Greška. MD5 provjera sume razlicita</string>
+
+	<string name="apply_upload_info_message">OVA VERZIJA CM UPDATERA IMA UKLJUCENU OPCIJU ZA PONOVNO POKRETANJE, PRITISKOM NA PRIMJENI CE SE ZAPRAVO TO IZVRSITI
+MOLIM MANUALNO PONOVNO POKRENITE U OPORAVAK TE PRIJE PRIMJENE NADOGRADNJE SAPRAVITE SIGURNOSNU KOPIJU</string>
+
+	<string name="last_update_check_text">Provjeri zadnju nadogradnju</string>
+	<string name="overwrite_update_title">Nadogradnja Postoji</string>
+	<string name="overwrite_update_summary">Odabrana nadogradnja vec postoji u Mapi za nadogradnju.\nŽelite li je prekopirati?</string>
+	<string name="overwrite_update_positive">Da</string>
+	<string name="overwrite_update_negative">Ne</string>
+
+	<string name="no_md5_found_title">Nije pronađen MD5</string>
+	<string name="no_md5_found_summary">Nije pronadena MD5 datoteka prema nadogradnji.\nZelite li primjeniti bez provjere</string>
+	<string name="no_md5_found_positive">Primjeni</string>
+	<string name="no_md5_found_negative">Otkazi</string>
+
+	<string name="notification_tickertext">Preuziman Nadogradnje</string>
+	<string name="notification_finished">Preuzimanje Završeno</string>
+
+	<string name="toast_uninstall_old_Version">Morate izbrisati staru verziju aplikacije za nastavak!</string>
+
+	<string name="stable_description"> = Stabilno</string>
+	<string name="experimental_description"> = Eksperimentalno</string>
+
+	<string name="changelog_progress_title">Molim pricekajte ...</string>
+	<string name="changelog_progress_body">Pokusavam preuzeti changelog.xml</string>
+
+	<string name="changelog_button_text">Izmjene odabranog Rom-a</string>
+	<string name="no_changelog_found">Izmjene nisu pronađene</string>
+
+	<string name="changelog_title_rom">Izmjene Nadogradnje</string>
+	<string name="changelog_title_app">Izmjene Aplikacije</string>
+	<string name="changelog_title_theme">Izmjene Teme</string>
+
+	<string name="featured_themes_progress_title">Molim pricekajte ...</string>
+	<string name="featured_themes_progress_body">Pokusavam preuzeti server karakteristicnih Tema XML</string>
+	<string name="featured_themes_finished_toast">Featured Theme Servers updated</string>
+
+	<string name="true_string">Ukljuceno</string>
+	<string name="false_string">Iskljuceno</string>
+	
+	<string name="md5_check_cancelled">MD5 provjera je otkazana</string>
+	
+	<string name="button_available_updates">Rom</string>
+	<string name="button_available_themes">Teme</string>
+	<string name="button_existing_updates">Postojeci</string>
+	
+	<string name="no_existing_updates_found">Ne postoji nadogradnja</string>
+
+	<string name="available_themes_text">Molim odaberite Temu preuzimanje:</string>
+	<string name="choose_available_theme_text">Nadogradnja</string>
+	<string name="changelog_button_theme_text">Izmjene odabrane Teme</string>
+
+	<string name="title_running">Obrađujem</string>
+	
+	<string name="no_updatecheck_executed">Nije izvrsena provjera Nadogradnje</string>
+	
+	<string name="no_theme_update_server_configured">Nije konfiguriran Server Tema.\nAko zelite nadogradnju Tema, postavite Server za nadogradnju Tema</string>
+
+	<string name="delete_updates_root_folder_message">Ne mozete izbrisati korjensku mapu\nIzbrišite nadogradnju jednu po jednu</string>
+
+	<string name="about_dialog_title">O programu</string>
+	
+	<string name="barcode_scan_no_result">Nije primljen rezultat. Pokusajte ponovno.</string>
+	
+	<string name="theme_list_long_press">Dugim pritiskom na Item za prikaz opcija</string>
+	<string name="theme_list_no_themes">Nema Servera Tema. Pretisnite Menu za dodavanje liste servera karakteristicnih Tema</string>
+	<string name="theme_list_delete_error">Greska pri brisanju Servera Tema</string>
+	
+	<string name="theme_list_new_wrong_uri">Unesena poveznica je nevaljana. Unestie ponovno.</string>
+	<string name="theme_list_new_wrong_name">Molim upisite ime.</string>
+	
+	<string name="featured_themes_dialog_title">Karakteristicne Teme</string>
+	<string name="featured_themes_dialog_summary">Zelite li stvarno nadograditi Listu servera karakteristicnih tema?\nVas server nece biti izbrisan.</string>
+	<string name="featured_themes_dialog_pos">Da</string>
+	<string name="featured_themes_dialog_neg">Ne</string>
+
+	<string name="no_updates_found">Nije pronađena CM nadogradnja</string>
+	<string name="not_new_updates_found_ticker">Pronađena je nova CM nadogradnja!</string>
+	<string name="not_new_updates_found_title">Pronađena je nova CM nadogradnja</string>
+	<string name="exception_while_updating">Greska pri povezivanju s Serverom CM nadogradnje</string>
+	<string name="exception_while_downloading">Greska pri preuzimanju CM nadogradnje</string>
+
+	<string name="not_update_check_error_ticker">Neuspjesna provjera CM nadogradnje</string>
+	<string name="not_update_check_error_title">Nemoguca provjera nadogradnje CM OS-a</string>
+	<string name="not_update_check_error_body">Ponovno pokusajte kasnije</string>
+
+	<string name="not_update_download_error_ticker">Greska pri preuzimanje nadogradnje</string>
+	<string name="not_update_download_error_title">Greska pri preuzimanje nadogradnje</string>
+	<string name="not_update_download_error_body">Pokusjte ponovno kasnije</string>
+
+	<string name="not_update_downloaded_ticker">CyanogenMod nadogradnja preuzeta</string>
+	<string name="not_update_downloaded_title">CyanogenMod nadogradnja preuzeta</string>
+	<string name="not_update_downloaded_body">{0} je spemno za instalaciju</string>
+
+	<string name="download_info_filename">Ime Datoteke: </string>
+	<string name="download_info_mirror">Kopije: </string>
+	<string name="download_info_downloading">Preuzimanje...</string>
+	<string name="download_info_speed">Brzina: </string>
+	<string name="download_info_remaining_time">Preostalo vrijeme: </string>
+
+	<string name="confirm_delete_update_folder_dialog_message">Izbrisi mapu za preuzimanje?</string>
+	<string name="confirm_delete_update_folder_dialog_yes">Izbrisi sve nadogradnje</string>
+	<string name="confirm_delete_update_folder_dialog_neutral">Izbrisi određenu nadogradnju</string>
+	<string name="confirm_delete_update_folder_dialog_no">Odustani</string>
+	<string name="delete_single_update_success_message">Nadogradnja {0} je izbrisana</string>    
+	<string name="minutes">min</string>
+	<string name="seconds">sec</string>
+	
+	<string name="unable_to_download_file">Nemoguce preuzimanje datoteke nadogradnje sa svih kopija</string>
+	<string name="md5_verification_failed">MD5 verifikacija neuspjela</string>
+
+	<!-- Preferences Strings -->
+	<string name="p_update_check_freq_title">Ucestalost provjere nadogradn</string>
+	<string name="p_update_check_freq_summary">Postavljanje ucestalosti provjere nadogradnje</string>
+
+	<string name="p_display_older_rom_versions_title">Prikazi sve Rom nadogradnje</string>
+	<string name="p_display_older_rom_versions_summary">Prikazi sve Rom nadogradnje ukljucujuci stare verzje</string>
+	<string name="p_display_older_rom_versions_changed">Molim provjerite kasnije za nadogradnju liste s raspolozljivim nadogradnjama</string>
+
+	<string name="p_allow_experimental_rom_versions_title">Prikazi eksperimentalni Rom</string>
+	<string name="p_allow_experimental_rom_versions_summary">Prikazi nadogradnju eksperimentalnog Rom-a (nestabilnog)</string>
+	<string name="p_allow_experimental_rom_versions_changed">Molim provjerite kasnije za nadogradnju liste s raspolozljivim nadogradnjama</string>
+
+	<string name="p_display_older_theme_versions_title">Prikazi sve nadogradnje Tema</string>
+	<string name="p_display_older_theme_versions_summary">Prikazi sve nadogradnje Tema ukljucujuci stare verzje</string>
+	<string name="p_display_older_theme_versions_changed">Molim provjerite kasnije za nadogradnju liste s raspolozljivim nadogradnjama</string>
+
+	<string name="p_allow_experimental_theme_versions_title">Prikazi eksperimentalne Teme</string>
+	<string name="p_allow_experimental_theme_versions_summary">Prikazi nadogradnju eksperimentalnih Tema (nestabilnih)</string>
+	<string name="p_allow_experimental_theme_versions_changed">Molim provjerite kasnije za nadogradnju liste s raspolozljivim nadogradnjama</string>
+
+	<string name="p_do_nandroid_backup_title">Nandroid sigurnosna kopija</string>
+	<string name="p_do_nandroid_backup_summary">Napravi Nnandroid sigurnosnu kopiju prije nadogradnje?</string>
+
+	<string name="p_notification_ringtone_title">Zvuk upozorenja</string>
+	<string name="p_notification_ringtone_summary">Odaberite zvuk za upozorenje CM nadogradnje</string>
+
+	<string name="p_update_file_url_title">Server Rom nadogradnje</string>
+	<string name="p_update_file_url_summary">Promjeni server Rom nadogradnje</string>
+	<string name="p_update_file_url_changed">Vracanje poveznice nadogradnje u pocetno stanje</string>
+
+	<string name="p_update_file_url_def_title">Resetiraj Server Rom nadogradnje</string>
+	<string name="p_update_file_url_def_summary">Vracanje lokacije Servera Rom nadogradnje u pocetno stanje</string>
+
+	<string name="p_update_file_url_qr_title">Skeniraj Barkod</string>
+	<string name="p_update_file_url_qr_summary">Skeniraj QR kod za poveznicu Rom nadogradnje </string>
+	<string name="p_update_file_changed_toast">Poveznica datoteke Rom nadogradnje: </string>
+
+	<string name="p_vibrate_title">Vibracija</string>
+	<string name="p_vibrate_summary">Vibriraj pri Upozorenju</string>
+
+	<string name="p_notifications_title">Upozorenja</string>
+	<string name="p_notifications_summary">Ukljuci/Iskljuci Upozorenja</string>
+
+	<string name="p_progress_update_frequency_title">Postizanje Ucestalosti Nadogradnje</string>
+	<string name="p_progress_update_frequency_summary">Veca vrijednost --> Manja ucestalost Nadogradnje\nManja Vrijednost --> Cesca Nadogradnja</string>
+
+	<string name="p_progress_update_freq_def_title">Resetriaj Ucestalost Nadogradnje</string>
+	<string name="p_progress_update_freq_def_summary">Resetiraj Ucestalost Nadogradnje dialogaPreuzimanja/trakeUpozorenja</string>
+	<string name="p_progress_update_freq_def_toast">Postavi Postizanje Ucestalost Nadogradnje u pocetno stanje</string>
+	
+	<string name="p_invalid_url">Upisana poveznica nije ispravna. Pokusate ponovno.</string>
+	
+	<string name="p_theme_file_title">themes.theme Putanja</string>
+	<string name="p_theme_file_summary">Promijeni putanju themes.theme Datoteke</string>
+	
+	<string name="p_theme_file_def_title">Resetiraj themes.theme Datoteku</string>
+	<string name="p_theme_file_def_summary">Postavi putanju za themes.theme u pocetno stanje</string>
+	<string name="p_theme_file_def_toast">themes.theme postavi u pocetno stanje</string>
+	
+	<string name="p_notifications_screen_title">Upozorenja</string>
+	<string name="p_notifications_screen_summary">Postavi Opcije Upozorenja</string>
+	
+	<string name="p_rom_screen_title">Nadogradnje Rom-a</string>
+	<string name="p_rom_screen_summary">Postavi Opcije za nadogradnju Rom-a</string>
+	
+	<string name="p_theme_screen_title">Nadogradnje Tema</string>
+	<string name="p_theme_screen_summary">Postavi Opcije za nadogradnju Tema</string>
+	
+	<string name="p_barcode_scan_failure">Greska pri skeniranju Barkoda</string>
+	
+	<string name="p_advanced_screen_title">Napredne Opcije</string>
+	<string name="p_advanced_screen_summary">Postavi Napredne Opcije</string>
+	
+	<string name="p_update_folder_title">Mapa za nadogradnju</string>
+	<string name="p_update_folder_summary">Postavi mapu za nadogradnju\nPostavi prazno za korjenski direktorij</string>
+	
+	<string name="p_update_folder_def_title">Resetiraj Mapu za nadogradnju</string>
+	<string name="p_update_folder_def_summary">Postavi Mapu za nadogradnju u pocetno stanje</string>
+	<string name="p_update_folder_def_toast">Mapa za nadogradnju vracena u pocetno stanje</string>
+	<string name="p_update_folder_error">Greska na postavkama Mape za nadogradnju</string>
+	
+	<string name="p_theme_list_title">Upravljanje Serverima Tema</string>
+	<string name="p_theme_list_summary">Dodaj, Uredi, Izbrisi Server Tema</string>
+	
+	<string name="p_theme_list_context_menu_header">Odaberi Akciju</string>
+	
+	<string name="p_theme_list_new_name">Ime Teme:</string>
+	<string name="p_theme_list_new_uri">Poveznica:</string>
+	<string name="p_theme_list_new_enabled">Omoguce:</string>
+	<string name="p_theme_list_new_barcode">Skeniraj barkod</string>
+	<string name="p_theme_list_new_save">Spremi</string>
+	<string name="p_theme_list_new_cancel">Odustani</string>
+</resources>

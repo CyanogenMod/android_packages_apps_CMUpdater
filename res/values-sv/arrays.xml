@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="update_frequency">
-        <item>Manuellt</item>
-        <item>Varje start</item>
-        <item>Varje timme</item>
-        <item>Varje dag</item>
-        <item>Varje vecka</item>
-    </string-array>
+	<string-array name="update_frequency">
+		<item>Manuell</item>
+		<item>Varje uppstart</item>
+		<item>Varje timme</item>
+		<item>Varje dag</item>
+		<item>Varje vecka</item>
+	</string-array>
 </resources>

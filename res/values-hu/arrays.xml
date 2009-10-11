@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="update_frequency">
+		<item>Manualno</item>
+		<item>Svako startanje</item>
+		<item>Svaki sat</item>
+		<item>Svaki dan</item>
+		<item>Svaki tjedan</item>
+	</string-array>
+</resources>
