@@ -48,12 +48,7 @@ public class ThemeListNewActivity extends Activity
 		intentFeatured = b.getBoolean(Constants.THEME_LIST_NEW_FEATURED);
 		intentUpdate = b.getBoolean(Constants.THEME_LIST_NEW_UPDATE);
 		intentPrimaryKey = b.getInt(Constants.THEME_LIST_NEW_PRIMARYKEY);
-	}
-	
-	@Override
-	protected void onStart()
-	{
-		super.onStart();
+		
 		btnSave = (Button) findViewById(R.id.new_theme_list_button_save);
 		btnCancel = (Button) findViewById(R.id.new_theme_list_button_cancel);
 		btnBarcode = (Button) findViewById(R.id.new_theme_list_button_barcode);
@@ -117,6 +112,12 @@ public class ThemeListNewActivity extends Activity
 				IntentIntegrator.initiateScan(ThemeListNewActivity.this);
 			}
 		});
+	}
+	
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
 	}
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent intent)
