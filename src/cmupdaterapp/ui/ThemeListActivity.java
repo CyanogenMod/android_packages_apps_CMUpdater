@@ -132,7 +132,7 @@ public class ThemeListActivity extends ListActivity
 		switch(item.getItemId())
 		{
 			case Constants.MENU_THEME_LIST_ADD:
-				createNewThemeList(false, null, null, true, 0, false);
+				createNewThemeList(false, "", "", true, 0, false);
 				return true;
 			case Constants.MENU_THEME_LIST_UPDATE_FEATURED:
 				new AlertDialog.Builder(ThemeListActivity.this)
