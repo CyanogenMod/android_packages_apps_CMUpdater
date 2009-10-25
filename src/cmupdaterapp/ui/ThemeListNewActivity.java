@@ -114,12 +114,6 @@ public class ThemeListNewActivity extends Activity
 		});
 	}
 	
-	@Override
-	protected void onStart()
-	{
-		super.onStart();
-	}
-	
 	public void onActivityResult(int requestCode, int resultCode, Intent intent)
 	{
 		Log.d(TAG, "onActivityResult requestCode: "+requestCode+" resultCode: "+resultCode);
