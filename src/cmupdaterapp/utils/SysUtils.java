@@ -16,7 +16,7 @@ public class SysUtils
 	 * 
 	 * @return a human-readable string containing current mod version
 	 */
-	public static String getReadableModVersion()
+	public static String getModVersion()
 	{
 		String modVer = getSystemProperty(Constants.SYS_PROP_MOD_VERSION);
 		

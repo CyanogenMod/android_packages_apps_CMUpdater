@@ -70,15 +70,15 @@ public class Preferences extends Activity
 		}
 	}
 	
-	public String getConfiguredModString()
+	public String getBoardString()
 	{
-		return mPrefs.getString(mRes.getString(R.string.PREF_MOD_VERSION), null);
+		return mPrefs.getString(mRes.getString(R.string.PREF_BOARD), "");
 	}
 
-	public void setConfiguredModString(String modString)
+	public void setBoardString(String modString)
 	{
 		Editor editor = mPrefs.edit();
-		editor.putString(mRes.getString(R.string.PREF_MOD_VERSION), modString);
+		editor.putString(mRes.getString(R.string.PREF_BOARD), modString);
 		if(!editor.commit()) Log.e(TAG, "Unable to write configured mod string");
 	}
 	
@@ -127,7 +127,7 @@ public class Preferences extends Activity
 		String modString = getSystemModString();
 		if(modString != null)
 		{
-			setConfiguredModString(modString);
+			setBoardString(modString);
 			Log.d(TAG, "System mod cofigured to " + modString);
 		}
 	}

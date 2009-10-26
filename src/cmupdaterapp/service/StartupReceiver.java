@@ -26,7 +26,7 @@ public class StartupReceiver extends BroadcastReceiver
 		int updateFreq = prefs.getUpdateFrequency();
 		
 		//If older Version was installed before, the ModString is ADP1. So reset it
-		if(prefs.getConfiguredModString() == null || prefs.getConfiguredModString().equalsIgnoreCase("ADP1"))
+		if(prefs.getBoardString() == null || prefs.getBoardString().equalsIgnoreCase("ADP1"))
 		{
 			prefs.configureModString();
 		}

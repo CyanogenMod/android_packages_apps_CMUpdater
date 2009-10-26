@@ -260,4 +260,12 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_theme_list_new_barcode">Scan barcode</string>
 	<string name="p_theme_list_new_save">Save</string>
 	<string name="p_theme_list_new_cancel">Cancel</string>
+	
+	<!--  new Strings -->
+	<string name="alert_old_version_title">Old Version</string>
+	<string name="alert_old_version_summary">You are running an old Version of Cyanogens Roms.
+	To use the Updater, you have to upgrade manually.
+	You can click on the open Browser Button below, to open up the Insturctions, or visit www.cyanogenmod.com</string>
+	<string name="alert_old_version_ok">Ok</string>
+	<string name="alert_old_version_browser">Open Browser</string>
 </resources>

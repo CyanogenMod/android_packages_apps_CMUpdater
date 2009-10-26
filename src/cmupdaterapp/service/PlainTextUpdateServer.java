@@ -53,7 +53,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 	public PlainTextUpdateServer(Context ctx)
 	{
 		Preferences p = mPreferences = Preferences.getPreferences(ctx);
-		String sm = p.getConfiguredModString();
+		String sm = p.getBoardString();
 		context = ctx;
 
 		if(sm == null)
@@ -74,8 +74,8 @@ public class PlainTextUpdateServer implements IUpdateServer
 		HttpClient themeHttpClient = new DefaultHttpClient();
 		HttpEntity romResponseEntity = null;
 		HttpEntity themeResponseEntity = null;
-		systemMod = mPreferences.getConfiguredModString();
-		systemRom = SysUtils.getReadableModVersion();
+		systemMod = mPreferences.getBoardString();
+		systemRom = SysUtils.getModVersion();
 		themeInfos = mPreferences.getThemeInformations();
 		showExperimentalRomUpdates = mPreferences.showExperimentalRomUpdates();
 		showAllRomUpdates = mPreferences.showAllRomUpdates();

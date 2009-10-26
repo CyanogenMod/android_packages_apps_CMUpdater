@@ -95,6 +95,8 @@ public class MainActivity extends IMainActivity
 	private Preferences prefs;
 	private Resources res;
 
+	private Boolean runningOldVersion = false;
+	
 	private final View.OnClickListener mDownloadUpdateButtonListener = new View.OnClickListener()
 	{
 		public void onClick(View v)
@@ -511,7 +513,7 @@ public class MainActivity extends IMainActivity
 		setWallpaper();
 		
 		//Sets the Title to Appname + Mod Version
-		setTitle(res.getString(R.string.app_name) + " " + res.getString(R.string.title_running) + " " + SysUtils.getReadableModVersion());
+		setTitle(res.getString(R.string.app_name) + " " + res.getString(R.string.title_running) + " " + SysUtils.getModVersion());
 		
 		if(prefs.isFirstRun())
 		{
@@ -519,7 +521,7 @@ public class MainActivity extends IMainActivity
 			prefs.setFirstRun(false);
 		}
 		//If an older Version was installed, the ModVersion is still ADP1. So reset it
-		if(prefs.getConfiguredModString().equalsIgnoreCase("ADP1"))
+		if(prefs.getBoardString().equalsIgnoreCase("ADP1"))
 			prefs.configureModString();
 
 		mUpdateServer = new PlainTextUpdateServer(this);
@@ -536,6 +538,37 @@ public class MainActivity extends IMainActivity
 		{
 			//User MUST uninstall old App
 			Log.d(TAG, "Old App not uninstalled, try again");
+		}
+		
+		//Show a Dialog that the User runs an old rom.
+		String mod = SysUtils.getModVersion();
+		if (!SysUtils.StringCompare(Constants.MIN_SUPPORTED_VERSION_STRING, mod))
+		{
+			runningOldVersion = true;
+			
+			new AlertDialog.Builder(MainActivity.this)
+			.setTitle(R.string.alert_old_version_title)
+			.setMessage(R.string.alert_old_version_summary)
+			.setPositiveButton(R.string.alert_old_version_ok, new DialogInterface.OnClickListener()
+			{
+				public void onClick(DialogInterface dialog, int which)
+				{
+					dialog.dismiss();
+				}
+			})
+			.setNegativeButton(R.string.alert_old_version_browser, new DialogInterface.OnClickListener()
+			{
+				public void onClick(DialogInterface dialog, int which)
+				{
+					//Open the Browser for Instructions
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(Constants.UPDATE_INSTRUCTIONS_URL));
+                    startActivity(i);
+                    dialog.dismiss();
+				}
+			})
+			.show();
+			return;
 		}
 	}
 
@@ -859,7 +892,11 @@ public class MainActivity extends IMainActivity
 				}
 			});
 		}
-
+		
+		//Disable the download Button when running an old ROM
+		if (runningOldVersion)
+			selectUploadButton.setEnabled(false);
+		
 		//Theme Layout
 		//Update URL Set?
 		if (!ThemeUpdateUrlSet)

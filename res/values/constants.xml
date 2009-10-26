@@ -21,7 +21,7 @@
 
 	<!-- Preferences keys -->
 	<string name="PREF_UPDATE_CHECK_FREQUENCY">prefUpdateCheckFrequency</string>
-	<string name="PREF_MOD_VERSION">updatesModVersion</string>
+	<string name="PREF_BOARD">updatesBoard</string>
 	<string name="PREF_DO_NANDROID_BACKUP">doNandroidBackup</string>
 	<string name="PREF_NOTIFICATION_RINGTONE">prefNotificationRingtone</string>
 	<string name="PREF_ROM_UPDATE_FILE_URL">prefUpdateFileURL</string>
