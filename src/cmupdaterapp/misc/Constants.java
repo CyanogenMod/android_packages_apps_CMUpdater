@@ -2,6 +2,9 @@ package cmupdaterapp.misc;
 
 public class Constants
 {
+	//System Infos
+	//The String from the build.prop before the Version
+	public static final String RO_MOD_START_STRING = "CyanogenMod-";
 	//UpdateInfo
 	public static final String UPDATE_INFO_TYPE_ROM = "rom";
 	public static final String UPDATE_INFO_TYPE_THEME = "theme";
@@ -78,9 +81,8 @@ public class Constants
 	public static final int UPDATE_FREQ_AT_BOOT = -1;
 	public static final int UPDATE_FREQ_NONE = -2;
 	
-	//Name of the Current Rom and the Skip Chars to get the Version
+	//Name of the Current Rom
 	public static final String SYS_PROP_MOD_VERSION = "ro.modversion";
-	public static final int PROP_MOD_VERSION_SKIP_CHARS = 12;
 	
 	//ChangelogHandler
 	public static final String VERSION_TAG = "Version";

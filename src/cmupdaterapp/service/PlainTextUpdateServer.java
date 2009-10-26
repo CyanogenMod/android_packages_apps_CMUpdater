@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 import org.json.JSONArray;
@@ -40,7 +39,6 @@ public class PlainTextUpdateServer implements IUpdateServer
 
 	private String systemMod;
 	private String systemRom;
-	private int[] sysVersion;
 	private ThemeInfo themeInfos;
 	
 	private boolean showExperimentalRomUpdates;
@@ -78,7 +76,6 @@ public class PlainTextUpdateServer implements IUpdateServer
 		HttpEntity themeResponseEntity = null;
 		systemMod = mPreferences.getConfiguredModString();
 		systemRom = SysUtils.getReadableModVersion();
-		sysVersion = SysUtils.getSystemModVersion();
 		themeInfos = mPreferences.getThemeInformations();
 		showExperimentalRomUpdates = mPreferences.showExperimentalRomUpdates();
 		showAllRomUpdates = mPreferences.showAllRomUpdates();
@@ -324,33 +321,6 @@ public class PlainTextUpdateServer implements IUpdateServer
 		return false;
 	}
 
-	private boolean updateIsNewer(UpdateInfo ui, int[] sysVersion, boolean defaultValue)
-	{	
-		String[] updateVersion = ui.version.split("\\.");
-
-		Log.d(TAG, "Update Version:" + Arrays.toString(updateVersion) + "; System Version:" + Arrays.toString(sysVersion));
-
-		int sys, update;
-		int max = Math.min(sysVersion.length, updateVersion.length);
-		for(int i = 0; i < max; i++)
-		{
-			try
-			{
-				sys = sysVersion[i];
-				update = Integer.parseInt(updateVersion[i]);
-
-				if(sys != update) return sys < update;
-			}
-			catch (NumberFormatException ex)
-			{
-				Log.e(TAG, "NumberFormatException while parsing version values:", ex);
-				return defaultValue;
-			}
-		}
-
-		return sysVersion.length < updateVersion.length;
-	}
-	
 	private LinkedList<UpdateInfo> getRomUpdates(LinkedList<UpdateInfo> updateInfos)
 	{
 		LinkedList<UpdateInfo> ret = new LinkedList<UpdateInfo>();
@@ -361,7 +331,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 			{
 				if (boardMatches(ui, systemMod))
 				{
-					if(showAllRomUpdates || updateIsNewer(ui, sysVersion, true))
+					if(showAllRomUpdates || SysUtils.StringCompare(systemRom, Constants.RO_MOD_START_STRING + ui.version))
 					{
 						if (branchMatches(ui, showExperimentalRomUpdates))
 						{

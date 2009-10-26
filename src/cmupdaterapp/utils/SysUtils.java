@@ -56,34 +56,6 @@ public class SysUtils
         return line;
 	}
 	
-	/**
-	 * 
-	 * @return the system mod version or a int[0] if the property is not found or not parseable
-	 */
-	public static int[] getSystemModVersion()
-	{
-		String modVersion = getSystemProperty(Constants.SYS_PROP_MOD_VERSION);
-		
-		if(modVersion == null || modVersion.length() < Constants.PROP_MOD_VERSION_SKIP_CHARS) return new int[0];
-		
-		String version[] = modVersion.substring(Constants.PROP_MOD_VERSION_SKIP_CHARS).split("\\.");
-		
-		int[] retValue = new int[version.length];
-		try
-		{
-			for(int i = 0; i < version.length; i++)
-			{
-				retValue[i] = Integer.parseInt(version[i]);
-			}
-		}
-		catch (NumberFormatException e)
-		{
-			return new int[0];
-		}
-
-		return retValue;
-	}
-	
 	public static boolean StringCompare(String a, String b)
 	{
 		if (a.compareToIgnoreCase(b) < 0)
