@@ -358,6 +358,32 @@ public class MainActivity extends IMainActivity
 				.show();
 				return;
 			}
+			
+			if (runningOldVersion)
+			{
+				new AlertDialog.Builder(MainActivity.this)
+				.setTitle(R.string.alert_old_version_title)
+				.setMessage(R.string.alert_old_version_summary)
+				.setPositiveButton(R.string.alert_old_version_ok, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						dialog.dismiss();
+					}
+				})
+				.setNegativeButton(R.string.alert_old_version_browser, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						//Open the Browser for Instructions
+	                    Intent i = new Intent(Intent.ACTION_VIEW);
+	                    i.setData(Uri.parse(Constants.UPDATE_INSTRUCTIONS_URL));
+	                    startActivity(i);
+	                    dialog.dismiss();
+					}
+				})
+				.show();
+			}
 
 			filename = (String) mExistingUpdatesSpinner.getSelectedItem();
 			Log.d(TAG, "Selected to Apply Existing update: " + filename);
