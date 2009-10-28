@@ -69,31 +69,7 @@ public class Preferences extends Activity
 			return Constants.UPDATE_FREQ_AT_BOOT;
 		}
 	}
-	
-	public String getBoardString()
-	{
-		return mPrefs.getString(mRes.getString(R.string.PREF_BOARD), "");
-	}
 
-	public void setBoardString(String modString)
-	{
-		Editor editor = mPrefs.edit();
-		editor.putString(mRes.getString(R.string.PREF_BOARD), modString);
-		if(!editor.commit()) Log.e(TAG, "Unable to write configured mod string");
-	}
-	
-	public boolean isFirstRun()
-	{
-		return mPrefs.getBoolean(mRes.getString(R.string.PREF_FIRST_RUN), true);
-	}
-	
-	public void setFirstRun(boolean firstRun)
-	{
-		Editor editor = mPrefs.edit();
-		editor.putBoolean(mRes.getString(R.string.PREF_FIRST_RUN), firstRun);
-		if(!editor.commit()) Log.e(TAG, "Unable to write first run bit");
-	}
-	
 	public Date getLastUpdateCheck()
 	{
 		return new Date(mPrefs.getLong(mRes.getString(R.string.PREF_LAST_UPDATE_CHECK), 0));
@@ -115,23 +91,13 @@ public class Preferences extends Activity
 		if(!editor.commit()) Log.e(TAG, "Unable to write last update check");
 	}
 
-	private String getSystemModString()
+	public String getBoardString()
 	{
-		temp = SysUtils.getSystemProperty(Constants.SYS_PROP_DEVICE);
-		Log.d(TAG, "Mod Version: " + temp);
+		temp = SysUtils.getSystemProperty(Constants.BOARD);
+		Log.d(TAG, "Board: " + temp);
 		return temp;
 	}
-	
-	public void configureModString()
-	{
-		String modString = getSystemModString();
-		if(modString != null)
-		{
-			setBoardString(modString);
-			Log.d(TAG, "System mod cofigured to " + modString);
-		}
-	}
-	
+
 	public String getChangelogURL()
 	{
 		temp = mRes.getString(R.string.conf_changelog_url);

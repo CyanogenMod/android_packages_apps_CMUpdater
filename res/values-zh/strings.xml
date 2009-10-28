@@ -107,7 +107,7 @@
 	<string name="choose_available_theme_text">下载</string>
 	<string name="changelog_button_theme_text">该主题的更新日志</string>
 
-	<string name="title_running">运行中</string>
+	<string name="title_running">当前版本</string>
 	
 	<string name="no_updatecheck_executed">未执行更新检查</string>
 	

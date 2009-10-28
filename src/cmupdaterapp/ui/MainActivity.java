@@ -534,15 +534,6 @@ public class MainActivity extends IMainActivity
 		
 		//Sets the Title to Appname + Mod Version
 		setTitle(res.getString(R.string.app_name) + " " + res.getString(R.string.title_running) + " " + SysUtils.getModVersion());
-		
-		if(prefs.isFirstRun())
-		{
-			prefs.configureModString();
-			prefs.setFirstRun(false);
-		}
-		//If an older Version was installed, the ModVersion is still ADP1. So reset it
-		if(prefs.getBoardString().equalsIgnoreCase("ADP1"))
-			prefs.configureModString();
 
 		mUpdateServer = new PlainTextUpdateServer(this);
 	}

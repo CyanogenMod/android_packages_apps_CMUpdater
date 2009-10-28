@@ -70,14 +70,14 @@ public class Constants
 	public static final int MENU_THEME_LIST_CONTEXT_DISABLE = 13;
 	
 	//Filename for Instance save
-	public static final String STORED_STATE_FILENAME = "CMUpdater.ser";
+	public static final String STORED_STATE_FILENAME = "cmupdater.sst";
 	
 	//Notifications
 	public static final int NOTIFICATION_DOWNLOAD_STATUS = 100;
 	public static final int NOTIFICATION_DOWNLOAD_FINISHED = 200;
 	
 	//Android Board type
-	public static final String SYS_PROP_DEVICE = "ro.product.board";
+	public static final String BOARD = "ro.product.board";
 	
 	//Update Check Frequencies
 	public static final int UPDATE_FREQ_AT_BOOT = -1;

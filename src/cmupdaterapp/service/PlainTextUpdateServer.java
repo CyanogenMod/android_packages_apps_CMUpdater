@@ -53,28 +53,26 @@ public class PlainTextUpdateServer implements IUpdateServer
 	public PlainTextUpdateServer(Context ctx)
 	{
 		Preferences p = mPreferences = Preferences.getPreferences(ctx);
-		String sm = p.getBoardString();
+		systemMod = p.getBoardString();
 		context = ctx;
 
-		if(sm == null)
+		if(systemMod == null)
 		{
 			Log.d(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
 		}
 		else
 		{
-			Log.d(TAG, "System's Mod version:" + sm);
+			Log.d(TAG, "System's Mod version:" + systemMod);
 		}
 	}
 	public FullUpdateInfo getAvailableUpdates() throws IOException
 	{
 		FullUpdateInfo retValue = new FullUpdateInfo();
 		boolean romException = false;
-		//boolean themeException = false;
 		HttpClient romHttpClient = new DefaultHttpClient();
 		HttpClient themeHttpClient = new DefaultHttpClient();
 		HttpEntity romResponseEntity = null;
 		HttpEntity themeResponseEntity = null;
-		systemMod = mPreferences.getBoardString();
 		systemRom = SysUtils.getModVersion();
 		themeInfos = mPreferences.getThemeInformations();
 		showExperimentalRomUpdates = mPreferences.showExperimentalRomUpdates();

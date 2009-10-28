@@ -24,12 +24,6 @@ public class StartupReceiver extends BroadcastReceiver
 		Preferences prefs = Preferences.getPreferences(ctx);
 		boolean notificationsEnabled = prefs.notificationsEnabled();
 		int updateFreq = prefs.getUpdateFrequency();
-		
-		//If older Version was installed before, the ModString is ADP1. So reset it
-		if(prefs.getBoardString() == null || prefs.getBoardString().equalsIgnoreCase("ADP1"))
-		{
-			prefs.configureModString();
-		}
 		 
 		//Only check for updates if notifications are enabled
 		if(updateFreq == Constants.UPDATE_FREQ_AT_BOOT && notificationsEnabled)
