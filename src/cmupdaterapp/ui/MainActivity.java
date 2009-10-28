@@ -5,12 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -61,9 +58,6 @@ import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.misc.State;
 import cmupdaterapp.changelog.*;
-
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends IMainActivity
 {
@@ -685,8 +679,6 @@ public class MainActivity extends IMainActivity
 		super.onCreateOptionsMenu(menu);
 		menu.add(Menu.NONE, Constants.MENU_ID_UPDATE_NOW, Menu.NONE, R.string.menu_check_now)
 		.setIcon(R.drawable.check_now);
-		menu.add(Menu.NONE, Constants.MENU_ID_SCAN_QR, Menu.NONE, R.string.menu_qr_code)
-		.setIcon(R.drawable.button_scanqr);
 		menu.add(Menu.NONE, Constants.MENU_ID_CONFIG, Menu.NONE, R.string.menu_config)
 		.setIcon(R.drawable.button_config);
 		menu.add(Menu.NONE, Constants.MENU_ID_ABOUT, Menu.NONE, R.string.menu_about)
@@ -725,9 +717,6 @@ public class MainActivity extends IMainActivity
 			case Constants.MENU_ID_UPDATE_NOW:
 				checkForUpdates();
 				return true;
-			case Constants.MENU_ID_SCAN_QR:
-				scanQRURL();
-				return true;
 			case Constants.MENU_ID_CONFIG:
 				showConfigActivity();
 				return true;
@@ -736,11 +725,6 @@ public class MainActivity extends IMainActivity
 				return true;
 			case Constants.MENU_ID_CHANGELOG:
 				getChangelog(Constants.CHANGELOGTYPE_APP);
-				//Open the Browser for Changelog
-				//Preferences prefs = Preferences.getPreferences(this);
-				//Intent i = new Intent(Intent.ACTION_VIEW);
-				//i.setData(Uri.parse(prefs.getAboutURL()));
-				//startActivity(i);
 				return true;
 			default:
 				Log.d(TAG, "Unknown Menu ID:" + item.getItemId());
@@ -1149,11 +1133,6 @@ public class MainActivity extends IMainActivity
 		dialog.show();			
 	}
 
-	private void scanQRURL()
-	{
-		IntentIntegrator.initiateScan(this);
-	}
-
 	private void downloadRequestedUpdate(UpdateInfo ui)
 	{
 		Intent i = new Intent(MainActivity.this, DownloadActivity.class);
@@ -1253,50 +1232,6 @@ public class MainActivity extends IMainActivity
 		}
 		// The directory is now empty so delete it
 		return dir.delete();
-	}
-
-	public void onActivityResult(int requestCode, int resultCode, Intent intent)
-	{
-		IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-		if (null != scanResult)
-		{
-			String result = scanResult.getContents();
-			if (null != result && !result.equals("") )
-			{
-				if (result.contains("zip"))
-				{
-					UpdateInfo ui = new UpdateInfo();
-					ui.updateFileUris = new LinkedList<URI>();
-					try
-					{
-						ui.updateFileUris.add(new URI(result));
-					}
-					catch (URISyntaxException e)
-					{
-						Log.e(TAG, "Exception while adding URL from QR Scan", e);
-					}
-					String[] tmp = result.split("/");
-					ui.fileName = tmp[tmp.length-1];
-					ui.name = ui.fileName;
-
-					Log.d(TAG, "Scanned QR Code: " + scanResult.getContents());
-					downloadRequestedUpdate(ui);
-				}
-				else
-				{
-					Toast.makeText(getBaseContext(), "Scanned result is not a zip. Please check.", Toast.LENGTH_LONG).show();
-				}
-			}
-			else
-			{
-				Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
-			}
-
-		}
-		else
-		{
-			Toast.makeText(getBaseContext(), "No result was received. Please try again.", Toast.LENGTH_LONG).show();
-		}
 	}
 
 	private boolean deleteOldVersionsOfUpdater()

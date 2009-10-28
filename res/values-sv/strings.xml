@@ -34,7 +34,6 @@
 	<string name="check_now_button_text">Kontrollera nu</string>
 	
 	<string name="menu_check_now">Kontrollera nu</string>
-	<string name="menu_qr_code">Skanna QR-URL för ROM</string>
 	<string name="menu_config">Konfigurera</string>
 	<string name="menu_about">Om...</string>
 	<string name="menu_changelog">Förändringslogg</string>

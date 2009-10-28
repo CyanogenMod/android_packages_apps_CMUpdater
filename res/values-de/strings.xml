@@ -34,7 +34,6 @@
 	<string name="check_now_button_text">Jetzt prüfen</string>
 	
 	<string name="menu_check_now">Jetzt prüfen</string>
-	<string name="menu_qr_code">update.zip QR URL scannen</string>
 	<string name="menu_config">Einstellungen</string>
 	<string name="menu_about">Über</string>
 	<string name="menu_changelog">Changelog</string>

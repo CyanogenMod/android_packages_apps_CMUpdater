@@ -35,7 +35,6 @@
    <string name="check_now_button_text">Проверить</string>
       
    <string name="menu_check_now">Проверить</string>
-   <string name="menu_qr_code">Штрих-Код</string>
    <string name="menu_config">Настройки</string>
    <string name="menu_about">О Программе</string>
    <string name="menu_changelog">Список Изменений</string>

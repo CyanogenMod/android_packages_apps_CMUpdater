@@ -34,7 +34,6 @@
 	<string name="check_now_button_text">Zkontroluj teÔ</string>
 	
 	<string name="menu_check_now">Zkontroluj ted</string>
-	<string name="menu_qr_code">Sejmout update.zip QR URL</string>
 	<string name="menu_config">Potvrzeni</string>
 	<string name="menu_about">O nas</string>
 	<string name="menu_changelog">seznam zmen</string>

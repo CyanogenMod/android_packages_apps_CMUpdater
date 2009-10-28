@@ -33,7 +33,6 @@
 	<string name="check_now_button_text">Verificar agora</string>
 
 	<string name="menu_check_now">Verificar agora</string>
-	<string name="menu_qr_code">Scannear URL de QR</string>
     <string name="menu_config">ConfiguraÁıes</string>
     <string name="menu_about">Sobre</string>
     <string name="cancel_download_buton_text">Cancelar TransferÍncia</string>

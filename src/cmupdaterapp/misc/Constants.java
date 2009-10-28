@@ -55,10 +55,9 @@ public class Constants
 	
 	//Menu main Layout
 	public static final int MENU_ID_UPDATE_NOW = 1;
-	public static final int MENU_ID_SCAN_QR = 2;
-	public static final int MENU_ID_CONFIG = 3;
-	public static final int MENU_ID_ABOUT = 4;
-	public static final int MENU_ID_CHANGELOG = 5;
+	public static final int MENU_ID_CONFIG = 2;
+	public static final int MENU_ID_ABOUT = 3;
+	public static final int MENU_ID_CHANGELOG = 4;
 	
 	//Menu ThemeList Layout
 	public static final int MENU_THEME_LIST_ADD = 1;

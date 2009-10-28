@@ -34,7 +34,6 @@
 	<string name="check_now_button_text">Provjeri sada</string>
 	
 	<string name="menu_check_now">Provjeri sada</string>
-	<string name="menu_qr_code">Skeniraj nadogradnja.zip poveznicu</string>
 	<string name="menu_config">Konfiguracija</string>
 	<string name="menu_about">O programu</string>
 	<string name="menu_changelog">Changelog</string>
