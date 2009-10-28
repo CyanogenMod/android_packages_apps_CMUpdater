@@ -1,261 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="apply_now_button_text">Použít Teï</string>
-	<string name="apply_later_button_text">Použít Pozdìji</string>
-	<string name="apply_update_button_text">Použít Aktualizaci</string>
-	<string name="apply_title_textview_text">{0} pøipraveno k použití</string>
-	<string name="apply_subtitle_textview_text">Release notes:</string>
+	<string name="apply_now_button_text">Instalovat</string>
+	<string name="apply_later_button_text">Instalovat později</string>
+	<string name="apply_update_button_text">Instalovat aktualizaci</string>
+	<string name="apply_title_textview_text">{0} připraveno k instalaci</string>
+	<string name="apply_subtitle_textview_text">Poznámky k vydání:</string>
 	<string name="apply_unable_to_reboot_toast">Nelze restartovat do recovery</string>
-	<string name="apply_trying_to_get_root_access">Zkouším dostat root práva na srestart do recovery módu</string>
+	<string name="apply_trying_to_get_root_access">Zkouším dostat root práva na restart do recovery módu</string>
 
-	<string name="available_updates_text">Prosím vyberte Rom ke stahnutí :</string>
+	<string name="available_updates_text">Prosím vyberte Rom ke stážení:</string>
 	<string name="choose_available_update_text">Stáhnout</string>
-	<string name="no_updates_found_instructions">žádné ROM nenalezeny.\nPress \'Check now\' to manually check for new updates</string>
-	<string name="no_themes_found_instructions">žádné motivy nenalezen.\nPress \'Check now\' to manually check for new updates</string>
-	<string name="downloaded_update_found_text">Aktualizace nalezeny ve slozce Aktualizace:</string>
+	<string name="no_updates_found_instructions">žádné ROM nenalezeny.\nPro kontrolu nových aktualizací stiskněte \'Zkontrolovat\'</string>
+	<string name="no_themes_found_instructions">žádné motivy nenalezeny.\nPro kontrolu nových aktualizací stiskněte \'Zkontrolovat\'</string>
+	<string name="downloaded_update_found_text">Aktualizace nalezené ve složce aktualizací:</string>
 	<string name="checking_for_updates">Kontroluji aktualizace</string>
 	<string name="downloading_update">Stahuji aktualizace</string>
-	<string name="sdcard_is_not_present_dialog_body">Potrebujete zapisovatelnou SD kartu ke stahnuti teto aktualizace</string>
+	<string name="sdcard_is_not_present_dialog_body">Ke stažení této aktualizace potřebujete zapisovatelnou SD kartu</string>
 	<string name="sdcard_is_not_present_dialog_title">SD karta nenalezena</string>
 	<string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
-	<string name="current_version_text">Bìžící verze: {0}</string>
+	<string name="current_version_text">Běžící verze: {0}</string>
 	<string name="delete_updates_text">Smazat aktualizace</string>
-	<string name="delete_updates_success_message">Složka aktualizace smazána</string>
-	<string name="delete_updates_failure_message">Chyba v mazani složky aktualizace</string>
-	<string name="delete_updates_noFolder_message">Složka s aktualizacemi nenalezena</string>
+	<string name="delete_updates_success_message">Složka aktualizací smazána</string>
+	<string name="delete_updates_failure_message">Chyba při mazání složky aktualizací</string>
+	<string name="delete_updates_noFolder_message">Složka aktualizací nenalezena</string>
 
 	<string name="apply_update_dialog_title">Potvrzení</string>
-	<string name="apply_update_dialog_text">Chystáte se upgradovat do {0}.\nStisknete-li aktualizovat, telefon se restartuje do recovery módu aby se to mohlo stat.</string>
+	<string name="apply_update_dialog_text">Chystáte se aktualizovat na {0}.\nStisknete-li Aktualizovat, telefon se pro dokončení instalace aktualizace restartuje do recovery módu.</string>
 	<string name="apply_update_dialog_update_button">Aktualizovat</string>
-	<string name="apply_update_dialog_backup_and_update_button">Zaloha &amp; Aplikovat</string>
-	<string name="apply_update_dialog_cancel_button">Storno</string>
+	<string name="apply_update_dialog_backup_and_update_button">Zálohovat a instalovat</string>
+	<string name="apply_update_dialog_cancel_button">Zrušit</string>
 	
-	<string name="no_updates_no_mod_text">Váš systém bìží na nepodporovaném OS módu (Version {0}).</string>
-	<string name="check_now_button_text">Zkontroluj teï</string>
+	<string name="no_updates_no_mod_text">Váš systém běží na nepodporovaném modifikaci OS (Version {0}).</string>
+	<string name="check_now_button_text">Zkontrolovat</string>
 	
-	<string name="menu_check_now">Zkontroluj ted</string>
-	<string name="menu_config">Potvrzeni</string>
-	<string name="menu_about">O nas</string>
-	<string name="menu_changelog">seznam zmen</string>
-	<string name="menu_add_theme">Pøidat Zdroj Motivù</string>
-	<string name="menu_update_featured">Aktualizovat Zdroj Motivu</string>
-	<string name="menu_edit_theme">Upravit Zdroj Motivù</string>
-	<string name="menu_delete_theme">Smazat Zdroj Motivù</string>
-	<string name="menu_enable_theme">Povolit Zdroj Motivù</string>
-	<string name="menu_disable_theme">Zakázat Zdroj Motivù</string>
+	<string name="menu_check_now">Zkontrolovat</string>
+	<string name="menu_config">Nastavení</string>
+	<string name="menu_about">O nás</string>
+	<string name="menu_changelog">Seznam změn</string>
+	<string name="menu_add_theme">Přidat zdroj motivů</string>
+	<string name="menu_update_featured">Aktualizovat zdroj motivu</string>
+	<string name="menu_edit_theme">Upravit zdroj motivů</string>
+	<string name="menu_delete_theme">Smazat zdroj motivů</string>
+	<string name="menu_enable_theme">Povolit zdroj motivů</string>
+	<string name="menu_disable_theme">Zakázat zdroj motivů</string>
 	
-	<string name="cancel_download_buton_text">Stornovat Stahování</string>
+	<string name="cancel_download_buton_text">Zrušit stahování</string>
 	<string name="confirm_download_cancelation_dialog_message">Jste si jisti že chcete zrušit stahování?</string>
 	<string name="confirm_download_cancelation_dialog_yes">Ano</string>
 	<string name="confirm_download_cancelation_dialog_no">Ne</string>
-	<string name="download_canceled_toast_message">Stahování stornováno</string>
+	<string name="download_canceled_toast_message">Stahování zrušeno</string>
 
-	<string name="verify_and_apply_dialog_title">Ovìøování</string>
-	<string name="verify_and_apply_dialog_message">Ovìøování aktualizací MD5 sum</string>
+	<string name="verify_and_apply_dialog_title">Ověřování</string>
+	<string name="verify_and_apply_dialog_message">Ověřování MD5 součtu aktualizace</string>
 
-	<string name="apply_existing_update_md5error_message">Chyba. MD5 zkontrolování nesouhlasí</string>
+	<string name="apply_existing_update_md5error_message">Chyba. MD5 součet nesouhlasí</string>
 
-	<string name="apply_upload_info_message">TATO VERZE CM AKTUALIZACE Má POVOLENOU FUNKCI RESTARTOVANí, KLIKáNíM NA APLIKOVAT STANE SE TAK.
-PROSíM RESTARTUJTE DO RECOVERZ MANUALNE *PøEDTíM* APLIKUJETE TUTO AKTUALIZACI JESTLI CHCETE UDELEJTE SI ZALOHU</string>
-
-	<string name="last_update_check_text">Poslední aktualizace zkontrolována</string>
+	<string name="apply_upload_info_message">TATO VERZE CM AKTUALIZACE MÁ POVOLENOU FUNKCI RESTARTOVANÍ, TAKŽE KLIKNUTÍM NA INSTALOVAT SE TELEFON RESTARTUJE. PROSÍM RESTARTUJTE DO RECOVERY *PŘED* INSTALACÍ AKTUALIZACE, ABYSTE MOHLI UDĚLAT ZÁLOHU.</string> 
+	<string name="last_update_check_text">Poslední kontrola aktualizací</string>
 	<string name="overwrite_update_title">Aktualizace existuje</string>
-	<string name="overwrite_update_summary">Zvolená aktualizace existuje ve Slozce Aktualizací.\Chcete ji prepsat?</string>
+	<string name="overwrite_update_summary">Zvolená aktualizace již existuje ve složce aktualizací.\nChcete ji přepsat?</string>
 	<string name="overwrite_update_positive">Ano</string>
 	<string name="overwrite_update_negative">Ne</string>
 
-	<string name="no_md5_found_title">Zadne MD5 nebylo nalezeno</string>
-	<string name="no_md5_found_summary">Zadne MD5 soubor according to the Aktualizace byla nalezena.\nChcete aplikovat bez kontroly?</string>
-	<string name="no_md5_found_positive">Použít</string>
+	<string name="no_md5_found_title">MD5 nebylo nalezeno</string>
+	<string name="no_md5_found_summary">Žádný MD5 soubor příslušný k aktualizaci nebyl nalezen.\nChcete instalovat bez ověření?</string>
+	<string name="no_md5_found_positive">Instalovat</string>
 	<string name="no_md5_found_negative">Zrušit</string>
 
-	<string name="notification_tickertext">Stahování Aktualizace</string>
-	<string name="notification_finished">Stahování Dokonèeno</string>
+	<string name="notification_tickertext">Stahování aktualizace</string>
+	<string name="notification_finished">Stahování dokončeno</string>
 
-	<string name="toast_uninstall_old_Version">Musíte odinstalovat všechny staré verze aplikace abyste mohli pokraèovat!</string>
+	<string name="toast_uninstall_old_Version">Musíte odinstalovat všechny staré verze aplikace abyste mohli pokračovat!</string>
 
 	<string name="stable_description"> = Stabilní</string>
 	<string name="experimental_description"> = Testovací</string>
 
-	<string name="changelog_progress_title">Prosím èekejte ...</string>
+	<string name="changelog_progress_title">Prosím čekejte ...</string>
 	<string name="changelog_progress_body">Zkouším stáhnout changelog.xml</string>
 
-	<string name="changelog_button_text">Seznam zmen Zvolene ROM</string>
-	<string name="no_changelog_found">Seznam zmen nenalezen</string>
+	<string name="changelog_button_text">Seznam změn zvolené ROM</string>
+	<string name="no_changelog_found">Seznam změn nenalezen</string>
 
-	<string name="changelog_title_rom">Aktualizovat Seznam Zmen</string>
-	<string name="changelog_title_app">Aplikace Seznam Zmen</string>
-	<string name="changelog_title_theme">Motiv Seznamu Zmen</string>
+	<string name="changelog_title_rom">Seznam změn aktualizace</string>
+	<string name="changelog_title_app">Seznam změn aplikace</string>
+	<string name="changelog_title_theme">Seznamu změn motivu</string>
 
-	<string name="featured_themes_progress_title">Prosím èekejte ...</string>
-	<string name="featured_themes_progress_body">Trying to download the Featured Theme Servers XML</string>
-	<string name="featured_themes_finished_toast">Featured Theme Servers updated</string>
+	<string name="featured_themes_progress_title">Prosím čekejte ...</string>
+	<string name="featured_themes_progress_body">Zkouším stáhnout XML výchozích serverů s motivy</string>
+	<string name="featured_themes_finished_toast">Výchozí servery s motivy aktualizovány</string>
 
-	<string name="true_string">spravne</string>
-	<string name="false_string">spatne</string>
+	<string name="true_string">true</string>
+	<string name="false_string">false</string>
 	
-	<string name="md5_check_cancelled">MD5 Kontrola byla Stornována</string>
+	<string name="md5_check_cancelled">Kontrola MD5 byla zrušena</string>
 	
-	<string name="button_available_updates">ROMs</string>
+	<string name="button_available_updates">ROMy</string>
 	<string name="button_available_themes">Motivy</string>
 	<string name="button_existing_updates">Existující</string>
 	
-	<string name="no_existing_updates_found">žádné Aktualizace nebyly nalezeny</string>
+	<string name="no_existing_updates_found">Nenalezeny žádné existující aktualizace</string>
 
-	<string name="available_themes_text">Prosím Vyberte Motiv ke Stahnutí:</string>
+	<string name="available_themes_text">Vyberte motiv ke stažení:</string>
 	<string name="choose_available_theme_text">Stáhnout</string>
-	<string name="changelog_button_theme_text">Seznam Zmen Zvoleného Motivu</string>
+	<string name="changelog_button_theme_text">Seznam změn zvoleného motivu</string>
 
-	<string name="title_running">beží</string>
+	<string name="title_running">beží na</string>
 	
-	<string name="no_updatecheck_executed">Nebyla vykonána kontrola aktualizací</string>
+	<string name="no_updatecheck_executed">Kontrola aktualizací se neprovedla</string>
 	
-	<string name="no_theme_update_server_configured">Není nastaven zdroj pro Motivy.\nChcete-li použít aktualizaci motivù, v Nastavení nastavte Aktualizace-Zdroje</string>
+	<string name="no_theme_update_server_configured">Není nastaven zdroj pro motivy.\nChcete-li používat aktualizace motivů, běžte do nastavení a nastavte zdroje</string>
 
-	<string name="delete_updates_root_folder_message">Nemožete smazat Root Sožku\nProsím mažte aktualizace postupne</string>
+	<string name="delete_updates_root_folder_message">Nemůžete smazat kořenovou složku\nSmažte prosím aktualizace postupně</string>
 
 	<string name="about_dialog_title">O nás</string>
 	
-	<string name="barcode_scan_no_result">Žádné výsledky nebyly pøijaty.Zkuste to znovu.</string>
+	<string name="barcode_scan_no_result">Žádné výsledky nebyly přijaty. Zkuste to znovu.</string>
 	
-	<string name="theme_list_long_press">Long Press an Item to show options</string>
-	<string name="theme_list_no_themes">No Theme Servers. Press Menu to add one or update the List of Featured Theme Servers</string>
-	<string name="theme_list_delete_error">There was an Error deleting the Theme Server</string>
+	<string name="theme_list_long_press">Delším stiskem u položky zobrazíte možnosti</string>
+	<string name="theme_list_no_themes">Žádné servery motivů. Pro jejich úpravu nebo přidání dalších přejděte do nastavení</string>
+	<string name="theme_list_delete_error">Při mazání serveru motivů došlo k chybě</string>
 	
-	<string name="theme_list_new_wrong_uri">Vložené URL je nesprávné. Prosím Zkuste to Znovu</string>
-	<string name="theme_list_new_wrong_name">Prosím Vložte Jméno.</string>
+	<string name="theme_list_new_wrong_uri">Vložené URL je nesprávné. Prosím zkuste to znovu</string>
+	<string name="theme_list_new_wrong_name">Prosím vložte název.</string>
 	
 	<string name="featured_themes_dialog_title">Výchozí Motivy</string>
-	<string name="featured_themes_dialog_summary">Opravdu chcete aktualizovat váš seznam Výchozích Motivù Zdrojù?\nVaše vlastní servery byly smazány.</string>
+	<string name="featured_themes_dialog_summary">Opravdu chcete aktualizovat váš seznam zdrojů výchozích motivů?\nVaše vlastní servery nebudou smazány.</string>
 	<string name="featured_themes_dialog_pos">Ano</string>
 	<string name="featured_themes_dialog_neg">Ne</string>
 
 
-	<string name="no_updates_found">žádné CM aktualizace nebyly nalezeny</string>
-	<string name="not_new_updates_found_ticker">Nové CM aktualizace nalezeny!</string>
-	<string name="not_new_updates_found_title">Nové CM aktualizace nalezeny</string>
-	<string name="exception_while_updating">Chyba se vyskytla pøi pokusu o kontakt CM Aktualizaèního Serveru</string>
-	<string name="exception_while_downloading">An error occurred while trying to download a CM Update</string>
+	<string name="no_updates_found">Žádné aktualizace CM nebyly nalezeny</string>
+	<string name="not_new_updates_found_ticker">Nové aktualizace CM nalezeny!</string>
+	<string name="not_new_updates_found_title">Nové aktualizace CM nalezeny</string>
+	<string name="exception_while_updating">Vyskytla se chyba při pokusu o kontakt aktualizačního serveru CM</string>
+	<string name="exception_while_downloading">Vyskytla se chyba při pokusu o stažení aktualizace CM</string>
 
-	<string name="not_update_check_error_ticker">Kontrola CM aktualizaci se nepovedla</string>
-	<string name="not_update_check_error_title">Není možné zkontrolovat CM OS aktualizace</string>
-	<string name="not_update_check_error_body">Prosím zkuste to pozdìji.</string>
+	<string name="not_update_check_error_ticker">Kontrola aktualizací CM selhala</string>
+	<string name="not_update_check_error_title">Není možné zkontrolovat aktualizace CM OS</string>
+	<string name="not_update_check_error_body">Prosím zkuste to později.</string>
 
-	<string name="not_update_download_error_ticker">Chyba se vyskytla pøi stahování aktualizace</string>
-	<string name="not_update_download_error_title">Chyba se vyskytla pøi stahování aktualizace</string>
-	<string name="not_update_download_error_body">Prosím zkuste to pozdìji.</string>
+	<string name="not_update_download_error_ticker">Vyskytla se chyba při stahování aktualizace</string>
+	<string name="not_update_download_error_title">Vyskytla se chyba při stahování aktualizace</string>
+	<string name="not_update_download_error_body">Prosím zkuste to později.</string>
 
-	<string name="not_update_downloaded_ticker">CyanogenMod aktualizace stáhnuta</string>
-	<string name="not_update_downloaded_title">CyanogenMod aktualizace stáhnuta</string>
-	<string name="not_update_downloaded_body">{0} pøipraveno k instalaci</string>
+	<string name="not_update_downloaded_ticker">Aktualizace CyanogenMod stažena</string>
+	<string name="not_update_downloaded_title">Aktualizace CyanogenMod stažena</string>
+	<string name="not_update_downloaded_body">{0} připraveno k instalaci</string>
 
 	<string name="download_info_filename">Jméno složky: </string>
-	<string name="download_info_mirror">Okno: </string>
+	<string name="download_info_mirror">Zrcadlo: </string>
 	<string name="download_info_downloading">Stahuji...</string>
 	<string name="download_info_speed">Rychlost: </string>
-	<string name="download_info_remaining_time">Zbývající èas: </string>
+	<string name="download_info_remaining_time">Zbývající čas: </string>
 
-	<string name="confirm_delete_update_folder_dialog_message">Smazat Složku Aktualizací?</string>
-	<string name="confirm_delete_update_folder_dialog_yes">Smazat Všechny Aktualizace</string>
-	<string name="confirm_delete_update_folder_dialog_neutral">Smazat Zvolené Aktualizace</string>
-	<string name="confirm_delete_update_folder_dialog_no">Storno</string>
+	<string name="confirm_delete_update_folder_dialog_message">Smazat složku aktualizací?</string>
+	<string name="confirm_delete_update_folder_dialog_yes">Smazat všechny aktualizace</string>
+	<string name="confirm_delete_update_folder_dialog_neutral">Smazat zvolené aktualizace</string>
+	<string name="confirm_delete_update_folder_dialog_no">Zrušit</string>
 	<string name="delete_single_update_success_message">Aktualizace {0} smazána</string>    
 	<string name="minutes">min</string>
-	<string name="seconds">sec</string>
+	<string name="seconds">sek</string>
 	
-	<string name="unable_to_download_file">Nené možné stáhanout aktaulizaèní soubor z žádného zdroje</string>
-	<string name="md5_verification_failed">MD5 ovìøování selhalo</string>
+	<string name="unable_to_download_file">Není možné stáhnout aktualizační soubor z žádného zdroje</string>
+	<string name="md5_verification_failed">Ověřování MD5 selhalo</string>
 
 
-	<string name="p_update_check_freq_title">Kontrola Aktualizaci Pravidelne</string>
-	<string name="p_update_check_freq_summary">Nastavení aktualizace, kontrolovat pravidelne</string>
+        <!-- Preferences Strings -->
+	<string name="p_update_check_freq_title">Četnost kontroly aktualizací</string>
+	<string name="p_update_check_freq_summary">Nastavení četnosti kontroly aktualizací</string>
 
-	<string name="p_display_older_rom_versions_title">Zobrazit Všechny Aktualizace ROM</string>
-	<string name="p_display_older_rom_versions_summary">Zobrazit Všechny Aktualizace ROM, vèetnì starých verzí</string>
-	<string name="p_display_older_rom_versions_changed">Please check for updates again, to update the List of available updates</string>
+	<string name="p_display_older_rom_versions_title">Všechny aktualizace ROM</string>
+	<string name="p_display_older_rom_versions_summary">Zobrazit všechny aktualizace ROM, včetně starých verzí</string>
+	<string name="p_display_older_rom_versions_changed">K obnovení seznamu dostupných aktualizací prosím prověďte novou kontrolu</string>
 
-	<string name="p_allow_experimental_rom_versions_title">Zobrazit Experimentální ROMs</string>
-	<string name="p_allow_experimental_rom_versions_summary">Zobrazit ROM aktualizace které jsou Experimentální (nestabylní)</string>
-	<string name="p_allow_experimental_rom_versions_changed">Prosím zkontrolujte znovu aktualizace, k aktualizaci seznamu aktuálních aktualizací</string>
+	<string name="p_allow_experimental_rom_versions_title">Experimentální ROM</string>
+	<string name="p_allow_experimental_rom_versions_summary">Zobrazit aktualiace ROM, které jsou experimentální (nestabilní)</string>
+	<string name="p_allow_experimental_rom_versions_changed">K obnovení seznamu dostupných aktualizací prosím prověďte novou kontrolu</string>
 
-	<string name="p_display_older_theme_versions_title">Zobrazit Vsechyn aktualizace Motivù</string>
-	<string name="p_display_older_theme_versions_summary">Zobrazit Vsechyn aktualizace Motivù, obsahující starou verzi</string>
-	<string name="p_display_older_theme_versions_changed">Prosím zkontrolujte znovu aktualizace, k aktualizaci seznamu aktuálních aktualizací</string>
+	<string name="p_display_older_theme_versions_title">Všechny aktualizace motivů</string>
+	<string name="p_display_older_theme_versions_summary">Zobrazit všechny aktualizace motivů včetně starších verzí</string>
+	<string name="p_display_older_theme_versions_changed">K obnovení seznamu dostupných aktualizací prosím prověďte novou kontrolu</string>
 
-	<string name="p_allow_experimental_theme_versions_title">Zobrazit Experimentální Motivy</string>
-	<string name="p_allow_experimental_theme_versions_summary">Zobrazit Aktualizace Motivù které jsou Experimentální (nestabylní)</string>
-	<string name="p_allow_experimental_theme_versions_changed">Prosím zkontrolujte znovu aktualizace, k aktualizaci seznamu aktuálních aktualizací</string>
+	<string name="p_allow_experimental_theme_versions_title">Experimentální motivy</string>
+	<string name="p_allow_experimental_theme_versions_summary">Zobrazit aktualizace motivů, které jsou experimentální (nestabilní)</string>
+	<string name="p_allow_experimental_theme_versions_changed">K obnovení seznamu dostupných aktualizací prosím prověďte novou kontrolu</string>
 
-	<string name="p_do_nandroid_backup_title">Nandroid Záloha</string>
-	<string name="p_do_nandroid_backup_summary">Vytvoøit Nandroid Zálohu pøed aplikováním aktulizace?</string>
+	<string name="p_do_nandroid_backup_title">Nandroid záloha</string>
+	<string name="p_do_nandroid_backup_summary">Vytvořit zálohu pomocí Nandroid před aplikováním aktulizace?</string>
 
-	<string name="p_notification_ringtone_title">Melodie Upozornìní</string>
-	<string name="p_notification_ringtone_summary">Zvolte upozorneni pro CM aktualizaèní výstrahu</string>
+	<string name="p_notification_ringtone_title">Melodie upozornění</string>
+	<string name="p_notification_ringtone_summary">Zvolte upozorneni pro aktualizační výstrahu CM</string>
 
-	<string name="p_update_file_url_title">Server Aktualizací ROM</string>
-	<string name="p_update_file_url_summary">Zmìnit Rom Aktualizaèní Zdroj</string>
-	<string name="p_update_file_url_changed">Rom Aktualizace URL se vrátila do výchozího nastavení</string>
+	<string name="p_update_file_url_title">Server aktualizací ROM</string>
+	<string name="p_update_file_url_summary">Změnit zdroj aktualizací ROM</string>
+	<string name="p_update_file_url_changed">URL pro aktualizace ROM vrácena do výchozího nastavení</string>
 
-	<string name="p_update_file_url_def_title">Reset Aktualizaèního Serveru ROM</string>
-	<string name="p_update_file_url_def_summary">Reset the location of the Rom Update Server back to default</string>
+	<string name="p_update_file_url_def_title">Výchozí nastavení aktualizačního serveru ROM</string>
+	<string name="p_update_file_url_def_summary">Vrátí nastavení umístění aktualizačního serveru ROM na výchozí hodnoty</string>
 
-	<string name="p_update_file_url_qr_title">Sejmout èárový kód</string>
-	<string name="p_update_file_url_qr_summary">Sejmout QR kód pro ROM Aktalizaèní soubor URL</string>
-	<string name="p_update_file_changed_toast">Rom Update File URL: </string>
+	<string name="p_update_file_url_qr_title">Načíst čárový kód</string>
+	<string name="p_update_file_url_qr_summary">Načíst QR kód pro URL serveru aktualizací</string>
+	<string name="p_update_file_changed_toast">URL souboru aktualizací ROM: </string>
 
 	<string name="p_vibrate_title">Vibrovat</string>
-	<string name="p_vibrate_summary">Vibrovat pøi Upozornìní</string>
+	<string name="p_vibrate_summary">Vibrovat při upozornění</string>
 
-	<string name="p_notifications_title">Upozornìní</string>
-	<string name="p_notifications_summary">Zapnout/Vypnout Upozornìní</string>
+	<string name="p_notifications_title">Upozornění</string>
+	<string name="p_notifications_summary">Zapnout/vypnout upozornění</string>
 
-	<string name="p_progress_update_frequency_title">Progress Update Frequency</string>
-	<string name="p_progress_update_frequency_summary">Higher Values --> Less updating\nLower Values --> More updating</string>
+	<string name="p_progress_update_frequency_title">Obnovování průběhu stahování</string>
+	<string name="p_progress_update_frequency_summary">Vyšší hodnoty --> méně časté obnovování\nNižší hodnoty --> častější obnovování</string>
 
-	<string name="p_progress_update_freq_def_title">Reset Aktualizaèní prodlevy</string>
-	<string name="p_progress_update_freq_def_summary">Reset Aktualizaèní prodlevy dialogu stahování/Lista upozornení</string>
-	<string name="p_progress_update_freq_def_toast">Proces Prodlevy Aktualizací vrátit do výchozího nastavení</string>
+	<string name="p_progress_update_freq_def_title">Nastavit výchozí obnovování průběhu stahování</string>
+	<string name="p_progress_update_freq_def_summary">Nastaví výchozí obnovování dialogu stahování a lišty upozornění</string>
+	<string name="p_progress_update_freq_def_toast">Výchozí obnovování průběhu stahování nastaveno</string>
 		
-	<string name="p_invalid_url">Vložená URL není platná! Zkuste to znovu.</string>
+	<string name="p_invalid_url">Vložené URL je neplatné! Zkuste to znovu.</string>
 	
-	<string name="p_theme_file_title">Motivy.Cesta Motivù</string>
-	<string name="p_theme_file_summary">Zmenit cestu k motivùm.Slozka Motivù</string>
+	<string name="p_theme_file_title">Cesta themes.theme</string>
+	<string name="p_theme_file_summary">Změnit cestu k souboru themes.theme</string>
 	
-	<string name="p_theme_file_def_title">Reset motivù.Složka Motivù</string>
-	<string name="p_theme_file_def_summary">Zvolte cestu k motivùm.vrátiti motivy do výchozího nastavení</string>
-	<string name="p_theme_file_def_toast">themes.theme set back to default</string>
+	<string name="p_theme_file_def_title">Výchozí cesta k themes.theme</string>
+	<string name="p_theme_file_def_summary">Vrátí výchozí nastavení pro cestu k souboru themes.theme</string>
+	<string name="p_theme_file_def_toast">themes.theme cesta nastavena na výchozí hodnotu</string>
 	
-	<string name="p_notifications_screen_title">Upozornìní</string>
-	<string name="p_notifications_screen_summary">Nastavení Upozoròování</string>
+	<string name="p_notifications_screen_title">Upozornění</string>
+	<string name="p_notifications_screen_summary">Nastavení upozornění</string>
 	
-	<string name="p_rom_screen_title">ROM Nastavení Aktualizace</string>
-	<string name="p_rom_screen_summary">Nastavení pro ROM Aktualizace</string>
+	<string name="p_rom_screen_title">Nastavení aktualizace ROM</string>
+	<string name="p_rom_screen_summary">Nastaveni pro aktualizace ROM</string>
 	
-	<string name="p_theme_screen_title">Nastavení Aktualizace Motivù</string>
-	<string name="p_theme_screen_summary">Konfigurovat pro Aktualizace Motivù</string>
+	<string name="p_theme_screen_title">Nastavení aktualizace Motivů</string>
+	<string name="p_theme_screen_summary">Nastavení pro aktualizace motivů</string>
 	
-	<string name="p_barcode_scan_failure">Vyskytla se chyba pøi sejmutí Barcode</string>
+	<string name="p_barcode_scan_failure">Vyskytla se chyba při načtení čárového kódu</string>
 	
-	<string name="p_advanced_screen_title">Rozšíøené Nastavení</string>
-	<string name="p_advanced_screen_summary">Konfigurovat Rozšíøené Nastavení</string>
+	<string name="p_advanced_screen_title">Rozšířené nastavení</string>
+	<string name="p_advanced_screen_summary">Konfigurovat rozšířené nastavení</string>
 	
-	<string name="p_update_folder_title">SLožka Aktualizací</string>
-	<string name="p_update_folder_summary">Nastavení složky Aktualizací\nNastavení prázdné ROOT složky </string>
+	<string name="p_update_folder_title">Složka aktualizací</string>
+	<string name="p_update_folder_summary">Nastavení složky aktualizací\nPonechte prázdné pro kořenovou složku</string>
 	
-	<string name="p_update_folder_def_title">Reset Složky Aktualizací</string>
-	<string name="p_update_folder_def_summary">Konfigurovat složku aktualizací do výchozího nastavení</string>
-	<string name="p_update_folder_def_toast">Aktualizaèní složku vrátit do výchozího nastavení</string>
-	<string name="p_update_folder_error">Chyba pøi nastavení Složky Aktualizací</string>
+	<string name="p_update_folder_def_title">Výchozí složka aktualizací</string>
+	<string name="p_update_folder_def_summary">Nastavit složku aktualizací na výchozí</string>
+	<string name="p_update_folder_def_toast">Složka aktualizací byla nastavena na výchozí hodnotu</string>
+	<string name="p_update_folder_error">Chyba při nastavení složky aktualizací</string>
 	
-	<string name="p_theme_list_title">úprava zdroje motivù</string>
-	<string name="p_theme_list_summary">Pøidat, Upravovat, Mazat Theme Servers</string>
+	<string name="p_theme_list_title">Správa zdrojů motivů</string>
+	<string name="p_theme_list_summary">Přidání, úprava a mazání serverů motivů</string>
 	
-	<string name="p_theme_list_context_menu_header">Zvolte Akci</string>
+	<string name="p_theme_list_context_menu_header">Vyberte akci</string>
 	
 	<string name="p_theme_list_new_name">Název Motivu:</string>
 	<string name="p_theme_list_new_uri">URL:</string>
 	<string name="p_theme_list_new_enabled">Povoleno:</string>
-	<string name="p_theme_list_new_barcode">Sejmout èárový kód</string>
+	<string name="p_theme_list_new_barcode">Sejmout čárový kód</string>
 	<string name="p_theme_list_new_save">Uložit</string>
-	<string name="p_theme_list_new_cancel">Storno</string>
+	<string name="p_theme_list_new_cancel">Zrušit</string>
 </resources>
