@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string-array name="update_frequency">
-		<item>RuËnÏ</item>
-		<item>KaûdÈ spuötÏnÌ</item>
-		<item>Kaûdou hodinu</item>
-		<item>Kaûd˝ den</item>
-		<item>Kaûd˝ t˝den</item>
+		<item>Ručně</item>
+		<item>Každé spuštění</item>
+		<item>Každou hodinu</item>
+		<item>Každý den</item>
+		<item>Každý týden</item>
 	</string-array>
 </resources>
