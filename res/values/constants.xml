@@ -28,7 +28,6 @@
 	<string name="PREF_ROM_UPDATE_FILE_URL_DEF">prefUpdateFileURLDef</string>
 	<string name="PREF_NOTIFICATION_VIBRATE">prefVibrate</string>
 	<string name="PREF_NOTIFICATION_ENABLED">prefNotifications</string>
-	<string name="PREF_FIRST_RUN">firstRun</string>
 	<string name="PREF_LAST_UPDATE_CHECK">lastUpdateCheck</string>
 	<string name="PREF_PROGRESS_UPDATE_FREQUENCY">progressUpdateFrequ</string>
 	<string name="PREF_PROGRESS_UPDATE_FREQUENCY_DEF">progressUpdateFreqDef</string>
