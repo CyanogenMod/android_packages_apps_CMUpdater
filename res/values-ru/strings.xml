@@ -56,7 +56,7 @@
    
    <string name="apply_existing_update_md5error_message">Ошибка: контрольная сумма MD5 загруженного файла не соответствует с источным</string>
    
-   <string name="apply_upload_info_message">ВНИМАНИЕ! КЛЮЧ ПЕРЕЗАГРУЗКИ ВКЛЮЧЕН ПО УМОЛЧАНИЮ. НАЖАТИЕ КНОПКИ \'ПРОШИТЬ\' ПЕРЕЗАПУСТИТ ТЕЛЕФОН И НАЧНЕТ ОПЕРАЦИЮ АВТОМАТИЧЕСКИ.
+   <string name="apply_upload_info_message">ВНИМАНИЕ! КЛЮЧ ПЕРЕЗАГРУЗКИ ВКЛЮЧЕН ПО УМОЛЧАНИЮ. НАЖАТИЕ КНОПКИ \'ПРОШИТЬ\' ПЕРЕЗАПУСТИТ ТЕЛЕФОН И НАЧНЕТ ОПЕРАЦИЮ АВТОМАТИЧЕСКИ, БЕЗ РЕЗЕРВНОГО ЗАПАСА.
 ПОЖАЛУЙСТА ПЕРЕЗАПУСТИТЕ ВРУЧНУЮ В РЕЖИМ ВОССТАНОВЛЕНИЯ, ДЛЯ СОХРАНЕНИЯ РЕЗЕРВНОГО ЗАПАСА.</string>
    
    <string name="last_update_check_text">Предыдущая проверка</string>
@@ -261,4 +261,12 @@
    <string name="p_theme_list_new_barcode">Сканировать Код</string>
    <string name="p_theme_list_new_save">Сохранить</string>
    <string name="p_theme_list_new_cancel">Отменить</string>
+   
+   <!--  new Strings -->
+   <string name="alert_old_version_title">Старая Версия</string>
+   <string name="alert_old_version_summary">Текущая версия прошивки CyanogenMOD не подлежит автоматическому обновлению.
+   Для продолжения использования обновителя необходимо установить новую версию прошивки вручную.
+   Нажмите кнопку \'Запустить Браузер\' для получения инструкций, или посетите www.cyanogenmod.com</string>
+   <string name="alert_old_version_ok">Ок</string>
+   <string name="alert_old_version_browser">Запустить Браузер</string>
 </resources>
