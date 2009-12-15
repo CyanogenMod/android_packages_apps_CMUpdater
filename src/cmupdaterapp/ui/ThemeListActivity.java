@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 import cmupdaterapp.customTypes.FullThemeList;
 import cmupdaterapp.customTypes.ThemeList;
-import cmupdaterapp.database.ThemeListDbAdapter;
+import cmupdaterapp.database.DbAdapter;
 import cmupdaterapp.featuredThemes.FeaturedThemes;
 import cmupdaterapp.listadapters.ThemeListAdapter;
 import cmupdaterapp.misc.Constants;
@@ -34,7 +34,7 @@ public class ThemeListActivity extends ListActivity
 {
 	private static final String TAG = "ThemeListActivity";
 	
-	private ThemeListDbAdapter themeListDb;
+	private DbAdapter themeListDb;
 	private Cursor themeListCursor;
 	private FullThemeList fullThemeList;
 	private LinkedList<ThemeList> fullThemeListList;
@@ -55,7 +55,7 @@ public class ThemeListActivity extends ListActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		themeListDb = new ThemeListDbAdapter(this);
+		themeListDb = new DbAdapter(this);
 		Log.d(TAG, "Opening Database");
 		themeListDb.open();
 		setContentView(R.layout.themelist);
@@ -80,11 +80,11 @@ public class ThemeListActivity extends ListActivity
 		if (themeListCursor.moveToFirst())
 			do
 			{
-				String name = themeListCursor.getString(ThemeListDbAdapter.KEY_NAME_COLUMN);
-				String uri = themeListCursor.getString(ThemeListDbAdapter.KEY_URI_COLUMN);
-				int pk = themeListCursor.getInt(ThemeListDbAdapter.KEY_ID_COLUMN);
-				int enabled = themeListCursor.getInt(ThemeListDbAdapter.KEY_ENABLED_COLUMN);
-				int featured = themeListCursor.getInt(ThemeListDbAdapter.KEY_FEATURED_COLUMN);
+				String name = themeListCursor.getString(DbAdapter.KEY_THEMELIST_NAME_COLUMN);
+				String uri = themeListCursor.getString(DbAdapter.KEY_THEMELIST_URI_COLUMN);
+				int pk = themeListCursor.getInt(DbAdapter.KEY_THEMELIST_ID_COLUMN);
+				int enabled = themeListCursor.getInt(DbAdapter.KEY_THEMELIST_ENABLED_COLUMN);
+				int featured = themeListCursor.getInt(DbAdapter.KEY_THEMELIST_FEATURED_COLUMN);
 				ThemeList newItem = new ThemeList();
 				newItem.name = name;
 				newItem.url = URI.create(uri);

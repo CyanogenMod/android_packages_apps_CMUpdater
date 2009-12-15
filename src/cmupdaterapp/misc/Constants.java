@@ -109,4 +109,7 @@ public class Constants
 	
 	//IntentExtra for DownloadActivity
 	public static final String UPDATE_INFO = "UpdateInfo";
+	
+	//Screenshots
+	public static final String SCREENSHOTS_UPDATE = "Screenshots";
 }

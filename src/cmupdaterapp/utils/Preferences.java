@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import cmupdaterapp.customTypes.FullThemeList;
 import cmupdaterapp.customTypes.ThemeInfo;
 import cmupdaterapp.customTypes.ThemeList;
-import cmupdaterapp.database.ThemeListDbAdapter;
+import cmupdaterapp.database.DbAdapter;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.R;
@@ -158,7 +158,7 @@ public class Preferences extends Activity
 	
 	public LinkedList<ThemeList> getThemeUpdateUrls()
 	{
-		ThemeListDbAdapter themeListDb = new ThemeListDbAdapter(mainContext);
+		DbAdapter themeListDb = new DbAdapter(mainContext);
 		Log.d(TAG, "Opening Database");
 		themeListDb.open();
 		//Get the actual ThemeList from the Database
@@ -169,10 +169,10 @@ public class Preferences extends Activity
 		if (themeListCursor.moveToFirst())
 			do
 			{
-				String name = themeListCursor.getString(ThemeListDbAdapter.KEY_NAME_COLUMN);
-				String uri = themeListCursor.getString(ThemeListDbAdapter.KEY_URI_COLUMN);
-				int pk = themeListCursor.getInt(ThemeListDbAdapter.KEY_ID_COLUMN);
-				int enabled = themeListCursor.getInt(ThemeListDbAdapter.KEY_ENABLED_COLUMN);
+				String name = themeListCursor.getString(DbAdapter.KEY_THEMELIST_NAME_COLUMN);
+				String uri = themeListCursor.getString(DbAdapter.KEY_THEMELIST_URI_COLUMN);
+				int pk = themeListCursor.getInt(DbAdapter.KEY_THEMELIST_ID_COLUMN);
+				int enabled = themeListCursor.getInt(DbAdapter.KEY_THEMELIST_ENABLED_COLUMN);
 				ThemeList newItem = new ThemeList();
 				newItem.name = name;
 				newItem.url = URI.create(uri);

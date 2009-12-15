@@ -97,8 +97,11 @@ public class MainActivity extends IMainActivity
 		public void onClick(View v)
 		{
 			Log.d(TAG, "Theme Screenshot Button clicked");
-			final UpdateInfo ui = (UpdateInfo) mUpdatesSpinner.getSelectedItem();
-			//TODO: Start new Activity for Screenshots
+			final UpdateInfo ui = (UpdateInfo) mThemesSpinner.getSelectedItem();
+			Intent i = new Intent(MainActivity.this, ScreenshotActivity.class);
+			i.putExtra(Constants.SCREENSHOTS_UPDATE, ui);
+			startActivity(i);
+			return;
 		}
 	};
 	

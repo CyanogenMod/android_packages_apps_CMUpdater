@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -97,7 +98,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 			romReq.addHeader("Cache-Control", "no-cache");
 			HttpResponse romResponse = romHttpClient.execute(romReq);
 			int romServerResponse = romResponse.getStatusLine().getStatusCode();
-			if (romServerResponse != 200)
+			if (romServerResponse != HttpStatus.SC_OK)
 			{
 				Log.d(TAG, "Server returned status code for ROM " + romServerResponse);
 				romException = true;
@@ -130,7 +131,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 					themeReq.addHeader("Cache-Control", "no-cache");
 					HttpResponse themeResponse = themeHttpClient.execute(themeReq);
 					int themeServerResponse = themeResponse.getStatusLine().getStatusCode();
-					if (themeServerResponse != 200)
+					if (themeServerResponse != HttpStatus.SC_OK)
 					{
 						Log.d(TAG, "Server returned status code for Themes " + themeServerResponse);
 						//themeException = true;
