@@ -198,6 +198,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		LinkedList<UpdateInfo> uis = new LinkedList<UpdateInfo>();
 
 		JSONObject mainJSONObject;
+		
 		try
 		{
 			mainJSONObject = new JSONObject(buf.toString());
@@ -265,6 +266,31 @@ public class PlainTextUpdateServer implements IUpdateServer
 				catch (URISyntaxException e)
 				{
 					Log.e(TAG, "Unable to parse mirror url (" + mirrorList.getString(i) + ui.fileName + "). Ignoring this mirror", e);
+				}
+			}
+			
+			//Screenshots (only Themes)
+			ui.screenshots = new LinkedList<URI>();
+			//Only if there is a Screenshot Array in the JSON
+			if (obj.has(Constants.JSON_SCREENSHOTS))
+			{
+				JSONArray screenshots = obj.getJSONArray(Constants.JSON_SCREENSHOTS);
+				if (screenshots != null && screenshots.length() > 0)
+				{
+					for (int screenshotcounter = 0; screenshotcounter < screenshots.length(); screenshotcounter++)
+					{
+						try
+						{
+							if (!screenshots.isNull(screenshotcounter))
+								ui.screenshots.add(new URI(screenshots.getString(screenshotcounter)));
+							else
+								Log.d(TAG, "Theres an error in your JSON File. Maybe a , after the last screenshot");
+						}
+						catch (URISyntaxException e)
+						{
+							Log.e(TAG, "Unable to parse Screenshot url (" + screenshots.getString(screenshotcounter) + ") Theme: " + ui.name + ". Ignoring this Screenshot", e);
+						}
+					}
 				}
 			}
 		}

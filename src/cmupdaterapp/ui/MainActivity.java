@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.net.URI;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -90,6 +91,16 @@ public class MainActivity extends IMainActivity
 	private Resources res;
 
 	private Boolean runningOldVersion = false;
+	
+	private final View.OnClickListener mScreenshotThemesListener = new View.OnClickListener()
+	{
+		public void onClick(View v)
+		{
+			Log.d(TAG, "Theme Screenshot Button clicked");
+			final UpdateInfo ui = (UpdateInfo) mUpdatesSpinner.getSelectedItem();
+			//TODO: Start new Activity for Screenshots
+		}
+	};
 	
 	private final View.OnClickListener mDownloadUpdateButtonListener = new View.OnClickListener()
 	{
@@ -228,7 +239,12 @@ public class MainActivity extends IMainActivity
 		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3)
 		{
 			Button themeChangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
-			String changelog = ((UpdateInfo) mThemesSpinner.getSelectedItem()).description;
+			Button ScreenshotThemeButton = (Button) findViewById(R.id.theme_screenshots_button);
+			UpdateInfo item = (UpdateInfo) mThemesSpinner.getSelectedItem();
+			String changelog = item.description;
+			List<URI> screenshots = item.screenshots;
+			int ScreenshotCount = item.screenshots.size();
+			
 			if (changelog == null || changelog == "")
 			{
 				themeChangelogButton.setVisibility(View.GONE);
@@ -236,6 +252,14 @@ public class MainActivity extends IMainActivity
 			else
 			{
 				themeChangelogButton.setVisibility(View.VISIBLE);
+			}
+			if (screenshots == null || ScreenshotCount < 1)
+			{
+				ScreenshotThemeButton.setVisibility(View.GONE);
+			}
+			else
+			{
+				ScreenshotThemeButton.setVisibility(View.VISIBLE);
 			}
 		}
 
@@ -836,6 +860,7 @@ public class MainActivity extends IMainActivity
 		TextView tvThemeDownloadText = (TextView) findViewById(R.id.available_themes_text);
 		LinearLayout stableExperimentalInfoThemes = (LinearLayout) findViewById(R.id.stable_experimental_description_container_themes);
 		Button btnThemechangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
+		Button btnThemeScreenshotButton = (Button) findViewById(R.id.theme_screenshots_button);
 		TextView tvNoThemeUpdateServer = (TextView) findViewById(R.id.no_theme_update_server_configured);
 		
 		//No ROM Updates Found Layout
@@ -908,6 +933,7 @@ public class MainActivity extends IMainActivity
 			tvThemeDownloadText.setVisibility(View.GONE);
 			stableExperimentalInfoThemes.setVisibility(View.GONE);
 			btnThemechangelogButton.setVisibility(View.GONE);
+			btnThemeScreenshotButton.setVisibility(View.GONE);
 			CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
 			CheckNowUpdateChooserThemes.setVisibility(View.GONE);
 		}
@@ -916,6 +942,7 @@ public class MainActivity extends IMainActivity
 		{
 			btnDownloadTheme.setOnClickListener(mDownloadThemeButtonListener);
 			btnThemechangelogButton.setOnClickListener(mThemeChangelogButtonListener);
+			btnThemeScreenshotButton.setOnClickListener(mScreenshotThemesListener);
 			mThemesSpinner.setOnItemSelectedListener(mThemeSpinnerChanged);
 			
 			UpdateListAdapter<UpdateInfo> spAdapterThemes = new UpdateListAdapter<UpdateInfo>(
@@ -934,6 +961,7 @@ public class MainActivity extends IMainActivity
 			tvThemeDownloadText.setVisibility(View.GONE);
 			stableExperimentalInfoThemes.setVisibility(View.GONE);
 			btnThemechangelogButton.setVisibility(View.GONE);
+			btnThemeScreenshotButton.setVisibility(View.GONE);
 			CheckNowUpdateChooserTextThemes.setVisibility(View.VISIBLE);
 			CheckNowUpdateChooserThemes.setVisibility(View.VISIBLE);
 			CheckNowUpdateChooserThemes.setOnClickListener(new View.OnClickListener()

@@ -277,6 +277,13 @@
 					android:layout_marginTop="20sp"
 				    style="@style/TextAppearance.Button"
 				    android:drawableLeft="@drawable/icon" />
+				<Button
+			    	android:id="@+id/theme_screenshots_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/screenshot_button_theme_text"
+					android:layout_marginTop="20sp"
+				    style="@style/TextAppearance.Button" />
 				<TextView
 			    	android:id="@+id/check_now_update_chooser_text_themes"
 			    	android:layout_width="fill_parent"

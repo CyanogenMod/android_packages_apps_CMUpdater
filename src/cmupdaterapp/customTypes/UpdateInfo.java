@@ -17,6 +17,7 @@ public class UpdateInfo implements Serializable
 	public String branchCode;
 	public String description;
 	public String fileName;
+	public List<URI> screenshots;
 	
 	public List<URI> updateFileUris;
 	
@@ -41,7 +42,8 @@ public class UpdateInfo implements Serializable
 				&& ui.type.equals(type)
 				&& ui.branchCode.equals(branchCode)
 				&& ui.description.equals(description)
-				&& ui.fileName.equals(fileName))
+				&& ui.fileName.equals(fileName)
+				&& ui.screenshots.equals(screenshots))
 			return true;
 		return false;
 	}

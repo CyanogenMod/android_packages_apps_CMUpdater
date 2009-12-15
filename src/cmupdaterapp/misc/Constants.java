@@ -18,6 +18,7 @@ public class Constants
 	//JSON Objects
 	public static final String JSON_MIRROR_LIST = "MirrorList"; 
 	public static final String JSON_UPDATE_LIST = "UpdateList";
+	public static final String JSON_SCREENSHOTS = "Screenshots";
 	public static final String JSON_BOARD = "board";
 	public static final String JSON_TYPE = "type";
 	public static final String JSON_MOD = "mod";

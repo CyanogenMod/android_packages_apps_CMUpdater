@@ -267,4 +267,5 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	You can click on the open Browser Button below, to open up the Insturctions, or visit www.cyanogenmod.com</string>
 	<string name="alert_old_version_ok">Ok</string>
 	<string name="alert_old_version_browser">Open Browser</string>
+	<string name="screenshot_button_theme_text">Screenshots</string>
 </resources>
