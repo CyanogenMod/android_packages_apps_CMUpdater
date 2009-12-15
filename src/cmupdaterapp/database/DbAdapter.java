@@ -18,7 +18,7 @@ public class DbAdapter
 {
 	private static final String TAG = "DbAdapter";
 	
-	private static final String DATABASE_NAME = "cmupdater";
+	private static final String DATABASE_NAME = "cmupdater.db";
 	private static final int DATABASE_VERSION = 3;
 	//Themelist
 	private static final String DATABASE_TABLE_THEMELIST = "ThemeList";
