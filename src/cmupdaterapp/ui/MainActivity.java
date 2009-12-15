@@ -25,6 +25,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -51,7 +52,6 @@ import cmupdaterapp.interfaces.IMainActivity;
 import cmupdaterapp.listadapters.UpdateListAdapter;
 import cmupdaterapp.service.PlainTextUpdateServer;
 import cmupdaterapp.tasks.UpdateCheck;
-import cmupdaterapp.tasks.UserTask;
 import cmupdaterapp.utils.MD5;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.SysUtils;
@@ -355,7 +355,7 @@ public class MainActivity extends IMainActivity
 	private final class mApplyExistingButtonListener implements View.OnClickListener
 	{
 		private ProgressDialog mDialog;
-		private UserTask<File, Void, Boolean> mBgTask;
+		private AsyncTask<File, Void, Boolean> mBgTask;
 		private String filename;
 		private File Update;
 		
@@ -454,7 +454,7 @@ public class MainActivity extends IMainActivity
 		}
 	}
 
-	private final class MD5CheckerTask extends UserTask<File, Void, Boolean>
+	private final class MD5CheckerTask extends AsyncTask<File, Void, Boolean>
 	{	
 		private ProgressDialog mDialog;
 		private String mFilename;

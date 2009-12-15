@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.widget.Toast;
 import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.interfaces.IMainActivity;
@@ -20,7 +21,7 @@ import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.ui.R;
 
-public class CheckForUpdatesTask extends UserTask<Void, Integer, FullUpdateInfo>
+public class CheckForUpdatesTask extends AsyncTask<Void, Integer, FullUpdateInfo>
 {
 	private static final String TAG = "CheckForUpdatesTask";
 
