@@ -18,7 +18,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -570,14 +569,7 @@ public class MainActivity extends IMainActivity
 	{
 		Log.d(TAG, "onStart called");
 		super.onStart();
-		
-		//Delete any older Versions, because of the changed Signing Key
-		while (!deleteOldVersionsOfUpdater())
-		{
-			//User MUST uninstall old App
-			Log.d(TAG, "Old App not uninstalled, try again");
-		}
-		
+
 		//Show a Dialog that the User runs an old rom.
 		String mod = SysUtils.getModVersion();
 		if (!SysUtils.StringCompare(Constants.MIN_SUPPORTED_VERSION_STRING, mod))
@@ -1254,38 +1246,6 @@ public class MainActivity extends IMainActivity
 		}
 		// The directory is now empty so delete it
 		return dir.delete();
-	}
-
-	private boolean deleteOldVersionsOfUpdater()
-	{
-		try
-		{
-			String packageName = "cmupdater.ui";
-			PackageManager p = getPackageManager();
-			//This throws an Exception, when the Package is not found
-			PackageInfo a = p.getPackageInfo(packageName, 0);
-			if (a!=null && a.versionCode < 310)
-			{
-				Log.d(TAG, "Old VersionCode: "+a.versionCode);
-				Intent intent1 = new Intent(Intent.ACTION_DELETE); 
-				Uri data = Uri.fromParts("package", packageName, null); 
-				intent1.setData(data);
-				Toast.makeText(getBaseContext(), R.string.toast_uninstall_old_Version, Toast.LENGTH_LONG).show();
-				startActivity(intent1);
-				Log.d(TAG, "Uninstall Activity started");
-				return true;
-			}
-			else
-			{
-				throw new PackageManager.NameNotFoundException();
-			}
-		}
-		catch (NameNotFoundException e)
-		{
-			//No old Version found, so we return true
-			Log.d(TAG, "No old Version found");
-			return true;
-		}
 	}
 	
 	private void setWallpaper()

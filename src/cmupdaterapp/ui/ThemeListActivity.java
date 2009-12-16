@@ -55,7 +55,7 @@ public class ThemeListActivity extends ListActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		themeListDb = new DbAdapter(this);
+		themeListDb = new DbAdapter();
 		Log.d(TAG, "Opening Database");
 		themeListDb.open();
 		setContentView(R.layout.themelist);
@@ -69,7 +69,6 @@ public class ThemeListActivity extends ListActivity
 	private void getThemeList()
 	{
 		themeListCursor = themeListDb.getAllThemesCursor();
-		startManagingCursor(themeListCursor);
 		updateThemeList();
 	}
 	
@@ -106,6 +105,7 @@ public class ThemeListActivity extends ListActivity
 			tv.setText(R.string.theme_list_long_press);
 		else
 			tv.setText(R.string.theme_list_no_themes);
+		themeListCursor.deactivate();
 	}
 	
 	public void onListItemClick(ListView parent, View v,int position, long id)
@@ -191,6 +191,7 @@ public class ThemeListActivity extends ListActivity
 	{
 		// Close the database
 		Log.d(TAG, "Closing Database");
+		themeListCursor.close();
 		themeListDb.close();
 		super.onDestroy();
 	}

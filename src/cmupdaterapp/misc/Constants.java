@@ -7,6 +7,7 @@ public class Constants
 	public static final String RO_MOD_START_STRING = "CyanogenMod-";
 	public static final String MIN_SUPPORTED_VERSION_STRING = RO_MOD_START_STRING + "4.1.99";
 	public static final String UPDATE_INSTRUCTIONS_URL = "http://www.simplehelp.net/2009/10/04/how-to-install-cyanogenmod-4-1-99-on-your-g1-android-phone/";
+	public static final String EXTERNAL_DATA_DIRECTORY = "cmupdater/data";
 
 	//UpdateInfo
 	public static final String UPDATE_INFO_TYPE_ROM = "rom";

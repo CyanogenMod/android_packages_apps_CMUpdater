@@ -39,8 +39,6 @@ public class Preferences extends Activity
 	private String temp;
 	private boolean tempbool;
 	
-	private static Context mainContext;
-	
 	private Preferences(SharedPreferences prefs, Resources res)
 	{
 		mPrefs = prefs;
@@ -54,7 +52,6 @@ public class Preferences extends Activity
 			Log.d(TAG, "Preference Instance set.");
 			INSTANCE = new Preferences(PreferenceManager.getDefaultSharedPreferences(ctx), ctx.getResources());
 		}
-		mainContext = ctx;
 		return INSTANCE;
 	}
 
@@ -158,7 +155,7 @@ public class Preferences extends Activity
 	
 	public LinkedList<ThemeList> getThemeUpdateUrls()
 	{
-		DbAdapter themeListDb = new DbAdapter(mainContext);
+		DbAdapter themeListDb = new DbAdapter();
 		Log.d(TAG, "Opening Database");
 		themeListDb.open();
 		//Get the actual ThemeList from the Database
