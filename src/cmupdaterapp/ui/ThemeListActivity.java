@@ -69,6 +69,7 @@ public class ThemeListActivity extends ListActivity
 	private void getThemeList()
 	{
 		themeListCursor = themeListDb.getAllThemesCursor();
+		startManagingCursor(themeListCursor);
 		updateThemeList();
 	}
 	
@@ -79,11 +80,11 @@ public class ThemeListActivity extends ListActivity
 		if (themeListCursor.moveToFirst())
 			do
 			{
-				String name = themeListCursor.getString(DbAdapter.KEY_THEMELIST_NAME_COLUMN);
-				String uri = themeListCursor.getString(DbAdapter.KEY_THEMELIST_URI_COLUMN);
-				int pk = themeListCursor.getInt(DbAdapter.KEY_THEMELIST_ID_COLUMN);
-				int enabled = themeListCursor.getInt(DbAdapter.KEY_THEMELIST_ENABLED_COLUMN);
-				int featured = themeListCursor.getInt(DbAdapter.KEY_THEMELIST_FEATURED_COLUMN);
+				String name = themeListCursor.getString(DbAdapter.COLUMN_THEMELIST_NAME);
+				String uri = themeListCursor.getString(DbAdapter.COLUMN_THEMELIST_URI);
+				int pk = themeListCursor.getInt(DbAdapter.COLUMN_THEMELIST_ID);
+				int enabled = themeListCursor.getInt(DbAdapter.COLUMN_THEMELIST_ENABLED);
+				int featured = themeListCursor.getInt(DbAdapter.COLUMN_THEMELIST_FEATURED);
 				ThemeList newItem = new ThemeList();
 				newItem.name = name;
 				newItem.url = URI.create(uri);

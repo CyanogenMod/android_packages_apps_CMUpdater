@@ -166,10 +166,10 @@ public class Preferences extends Activity
 		if (themeListCursor.moveToFirst())
 			do
 			{
-				String name = themeListCursor.getString(DbAdapter.KEY_THEMELIST_NAME_COLUMN);
-				String uri = themeListCursor.getString(DbAdapter.KEY_THEMELIST_URI_COLUMN);
-				int pk = themeListCursor.getInt(DbAdapter.KEY_THEMELIST_ID_COLUMN);
-				int enabled = themeListCursor.getInt(DbAdapter.KEY_THEMELIST_ENABLED_COLUMN);
+				String name = themeListCursor.getString(DbAdapter.COLUMN_THEMELIST_NAME);
+				String uri = themeListCursor.getString(DbAdapter.COLUMN_THEMELIST_URI);
+				int pk = themeListCursor.getInt(DbAdapter.COLUMN_THEMELIST_ID);
+				int enabled = themeListCursor.getInt(DbAdapter.COLUMN_THEMELIST_ENABLED);
 				ThemeList newItem = new ThemeList();
 				newItem.name = name;
 				newItem.url = URI.create(uri);

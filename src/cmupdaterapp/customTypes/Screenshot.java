@@ -14,7 +14,7 @@ public class Screenshot implements Serializable
 {	
 	private static final long serialVersionUID = 6238950270313891695L;
 
-	private static final DateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mi:ss");
+	private static final DateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 	
 	public int PrimaryKey;
 	public int ForeignThemeListKey;
