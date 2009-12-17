@@ -2,12 +2,16 @@ package cmupdaterapp.database;
 
 import java.io.File;
 import java.net.URI;
+import java.util.LinkedList;
+import java.util.List;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import cmupdaterapp.customTypes.FullThemeList;
+import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
@@ -67,7 +71,7 @@ public class DbAdapter
 		db = dbHelper.open(f.toString(), DATABASE_NAME, DATABASE_VERSION);
 	}
 	
-	// Insert a new task
+	// Insert a new Theme
 	public long insertTheme(ThemeList _theme)
 	{
 		ContentValues newValues = new ContentValues();
@@ -156,6 +160,108 @@ public class DbAdapter
 		}
 		Log.d(TAG, "Updated Featured Theme Servers");
 	}
+	
+	
+	//SCREENSHOTS
+	
+	// Remove a Screenshot based on its index
+	public boolean removeScreenshot(long _rowIndex)
+	{
+		return db.delete(DATABASE_TABLE_SCREENSHOTS, KEY_SCREENSHOTS_ID + "=" + _rowIndex, null) > 0;
+	}
+	
+	// Remove a Screenshot based on its FeaturedThemeIndex
+	public boolean removeAllScreenshotsForTheme(long FeaturedThemeId)
+	{
+		return db.delete(DATABASE_TABLE_SCREENSHOTS, KEY_SCREENSHOTS_THEMELIST_ID + "=" + FeaturedThemeId, null) > 0;
+	}
+	
+	// Insert a new Screenshot
+	public long insertScreenshot(Screenshot _screenshot)
+	{
+		
+		ContentValues newValues = new ContentValues();
+		newValues.put(KEY_SCREENSHOTS_THEMELIST_ID, _screenshot.ForeignThemeListKey);
+		newValues.put(KEY_SCREENSHOTS_URI, _screenshot.url.toString());
+		newValues.put(KEY_SCREENSHOTS_MODIFYDATE, Screenshot.DateToString(_screenshot.ModifyDate));
+		newValues.put(KEY_SCREENSHOTS_SCREENSHOT, _screenshot.Picture);
+		return db.insert(DATABASE_TABLE_SCREENSHOTS, null, newValues);
+	}
+	
+	//Get all Screenshots for a Theme
+	public List<Screenshot> getAllScreenshotsForTheme(long _themeIndex)
+	{
+		Cursor cursor = db.query(true, DATABASE_TABLE_SCREENSHOTS,
+				new String[]
+				           {
+							KEY_SCREENSHOTS_ID,
+							KEY_SCREENSHOTS_THEMELIST_ID,
+							KEY_SCREENSHOTS_URI,
+							KEY_SCREENSHOTS_MODIFYDATE,
+							KEY_SCREENSHOTS_SCREENSHOT
+				           }, KEY_SCREENSHOTS_THEMELIST_ID + "=" + _themeIndex, null, null, null, null, null);
+		if ((cursor.getCount() == 0) || !cursor.moveToFirst())
+		{
+			cursor.close();
+			throw new SQLException("No Theme item found for ThemeKey: " + _themeIndex);
+		}
+		
+		List<Screenshot> result = new LinkedList<Screenshot>();
+		
+		do
+		{
+			Screenshot item = new Screenshot();
+			item.PrimaryKey = cursor.getInt(KEY_SCREENSHOTS_ID_COLUMN);
+			item.ForeignThemeListKey = cursor.getInt(KEY_SCREENSHOTS_THEMELIST_ID_COLUMN);
+			item.url = URI.create(cursor.getString(KEY_SCREENSHOTS_URI_COLUMN));
+			item.ModifyDate = Screenshot.StringToDate(cursor.getString(KEY_SCREENSHOTS_MODIFYDATE_COLUMN));
+			item.Picture = cursor.getBlob(KEY_SCREENSHOTS_SCREENSHOT_COLUMN);
+			result.add(item);
+		} while (cursor.moveToNext());
+		cursor.close();
+		return result;
+	}
+	
+	//Get single Screenshots by Id
+	public Screenshot getScreenshotById(long _index)
+	{
+		Cursor cursor = db.query(true, DATABASE_TABLE_SCREENSHOTS,
+				new String[]
+				           {
+							KEY_SCREENSHOTS_ID,
+							KEY_SCREENSHOTS_THEMELIST_ID,
+							KEY_SCREENSHOTS_URI,
+							KEY_SCREENSHOTS_MODIFYDATE,
+							KEY_SCREENSHOTS_SCREENSHOT
+				           }, KEY_SCREENSHOTS_ID + "=" + _index, null, null, null, null, null);
+		if ((cursor.getCount() == 0) || !cursor.moveToFirst())
+		{
+			cursor.close();
+			throw new SQLException("No Screenshot found for Key: " + _index);
+		}
+		
+		Screenshot result = new Screenshot();
+		result.PrimaryKey = cursor.getInt(KEY_SCREENSHOTS_ID_COLUMN);
+		result.ForeignThemeListKey = cursor.getInt(KEY_SCREENSHOTS_THEMELIST_ID_COLUMN);
+		result.url = URI.create(cursor.getString(KEY_SCREENSHOTS_URI_COLUMN));
+		result.ModifyDate = Screenshot.StringToDate(cursor.getString(KEY_SCREENSHOTS_MODIFYDATE_COLUMN));
+		result.Picture = cursor.getBlob(KEY_SCREENSHOTS_SCREENSHOT_COLUMN);
+		cursor.close();
+		return result;
+	}
+	
+	// Update a Screenshot
+	public boolean updateScreenshot(long _rowIndex, Screenshot _screenshot)
+	{
+		ContentValues newValue = new ContentValues();
+		newValue.put(KEY_SCREENSHOTS_THEMELIST_ID, _screenshot.ForeignThemeListKey);
+		newValue.put(KEY_SCREENSHOTS_URI, _screenshot.url.toString());
+		newValue.put(KEY_SCREENSHOTS_MODIFYDATE, Screenshot.DateToString(_screenshot.ModifyDate));
+		newValue.put(KEY_SCREENSHOTS_SCREENSHOT, _screenshot.Picture);
+		return db.update(DATABASE_TABLE_THEMELIST, newValue, KEY_SCREENSHOTS_ID + "=" + _rowIndex, null) > 0;
+	}
+
+
 
 	//Helper Class for opening/creating a Database
 	private static class DbOpenHelper
