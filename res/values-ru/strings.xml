@@ -269,4 +269,5 @@
    Нажмите кнопку \'Запустить Браузер\' для получения инструкций, или посетите www.cyanogenmod.com</string>
    <string name="alert_old_version_ok">Ок</string>
    <string name="alert_old_version_browser">Запустить Браузер</string>
+   <string name="screenshot_button_theme_text">Просмотр Скриншотов</string>
 </resources>

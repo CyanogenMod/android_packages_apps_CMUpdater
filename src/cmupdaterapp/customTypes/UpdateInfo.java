@@ -2,6 +2,7 @@ package cmupdaterapp.customTypes;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.util.LinkedList;
 import java.util.List;
 
 public class UpdateInfo implements Serializable
@@ -35,6 +36,11 @@ public class UpdateInfo implements Serializable
 		if (!(o instanceof UpdateInfo))
 			return false;
 		UpdateInfo ui = (UpdateInfo)o;
+		//For the old stored updates
+		if (ui.screenshots == null)
+			ui.screenshots = new LinkedList<URI>();
+		if (screenshots == null)
+			screenshots = new LinkedList<URI>();
 		if (ui.mod.equals(mod)
 				&& ui.board.equals(board)
 				&& ui.name.equals(name)
