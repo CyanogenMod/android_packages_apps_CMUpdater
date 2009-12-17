@@ -21,11 +21,11 @@ public class DbAdapter
 	private static final String TAG = "DbAdapter";
 	
 	private static final String DATABASE_NAME = "cmupdater.db";
-	private static final int DATABASE_VERSION = 4;
+	private static final int DATABASE_VERSION = 5;
 	//Themelist
 	private static final String DATABASE_TABLE_THEMELIST = "ThemeList";
 	public static final String KEY_THEMELIST_ID = "id";
-	public static final String INDEX_THEMELIST_ID = "idx_themelist_id";
+	public static final String INDEX_THEMELIST_ID = "uidx_themelist_id";
 	public static final int COLUMN_THEMELIST_ID = 0;
 	public static final String KEY_THEMELIST_NAME = "name";
 	public static final String INDEX_THEMELIST_NAME = "idx_themelist_name";
@@ -46,7 +46,7 @@ public class DbAdapter
 	private static final String TRIGGER_THEMELIST_ID_UPDATE = "fku_themelist_id";
 	private static final String TRIGGER_THEMELIST_ID_DELETE = "fkd_themelist_id";
 	public static final String KEY_SCREENSHOT_ID = "id";
-	public static final String INDEX_SCREENSHOT_ID = "idx_screenshot_id";
+	public static final String INDEX_SCREENSHOT_ID = "uidx_screenshot_id";
 	public static final int COLUMN_SCREENSHOT_ID = 0;
 	public static final String KEY_SCREENSHOT_THEMELIST_ID = "themelist_id";
 	public static final String INDEX_SCREENSHOT_THEMELIST_ID = "idx_screenshot_themelist_id";
