@@ -189,7 +189,7 @@ public class DbAdapter
 	}
 	
 	//Get all Screenshots for a Theme
-	public List<Screenshot> getAllScreenshotsForTheme(long _themeIndex)
+	public List<Screenshot> getAllScreenshotsForTheme(long _themeIndex) throws SQLException
 	{
 		Cursor cursor = db.query(true, DATABASE_TABLE_SCREENSHOTS,
 				new String[]
@@ -223,7 +223,7 @@ public class DbAdapter
 	}
 	
 	//Get single Screenshots by Id
-	public Screenshot getScreenshotById(long _index)
+	public Screenshot getScreenshotById(long _index) throws SQLException
 	{
 		Cursor cursor = db.query(true, DATABASE_TABLE_SCREENSHOTS,
 				new String[]
@@ -258,7 +258,13 @@ public class DbAdapter
 		newValue.put(KEY_SCREENSHOTS_URI, _screenshot.url.toString());
 		newValue.put(KEY_SCREENSHOTS_MODIFYDATE, Screenshot.DateToString(_screenshot.ModifyDate));
 		newValue.put(KEY_SCREENSHOTS_SCREENSHOT, _screenshot.Picture);
-		return db.update(DATABASE_TABLE_THEMELIST, newValue, KEY_SCREENSHOTS_ID + "=" + _rowIndex, null) > 0;
+		return db.update(DATABASE_TABLE_SCREENSHOTS, newValue, KEY_SCREENSHOTS_ID + "=" + _rowIndex, null) > 0;
+	}
+	
+	// Delete All Screenshots
+	public void deleteAllScreenshot()
+	{
+		db.execSQL("DELETE FROM " + DATABASE_TABLE_SCREENSHOTS + ";");
 	}
 
 
