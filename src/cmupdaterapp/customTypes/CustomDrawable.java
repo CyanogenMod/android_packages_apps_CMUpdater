@@ -24,7 +24,7 @@ public class CustomDrawable implements Serializable
 
 	public byte[] Picture;
 
-	private Calendar ModifyDate;
+	public Calendar ModifyDate;
 	
 	public String getModifyDate()
 	{

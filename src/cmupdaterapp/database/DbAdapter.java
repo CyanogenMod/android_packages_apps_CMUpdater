@@ -213,7 +213,7 @@ public class DbAdapter
 		if ((cursor.getCount() == 0) || !cursor.moveToFirst())
 		{
 			cursor.close();
-			throw new SQLException("No Theme item found for ThemeKey: " + _themeIndex);
+			return null;
 		}
 		
 		List<Screenshot> result = new LinkedList<Screenshot>();
@@ -259,6 +259,35 @@ public class DbAdapter
 		result.Screenshot.Picture = cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT);
 		cursor.close();
 		return result;
+	}
+	
+	//Checks if a Screenshot already exists. Cause the Primary Key is Stored in the Screenshot Object
+	//The contains() Method will not work cause theres no Primary Key on Download
+	//Will return a Screenshotobject with only the PrimaryKey if found, otherwise -1,the Modifydate and the blob
+	public Screenshot ScreenshotExists(int ForeignKey, String Url) throws SQLException
+	{
+		Screenshot retValue = new Screenshot();
+		Cursor cursor = db.query(true, DATABASE_TABLE_SCREENSHOT,
+				new String[]
+				           {
+							KEY_SCREENSHOT_ID,
+							KEY_SCREENSHOT_THEMELIST_ID,
+							KEY_SCREENSHOT_URI,
+							KEY_SCREENSHOT_MODIFYDATE,
+							KEY_SCREENSHOT_SCREENSHOT
+				           }, KEY_SCREENSHOT_THEMELIST_ID + "=" + ForeignKey + " AND " +
+				           KEY_SCREENSHOT_URI + "='" + Url + "'",
+				           null, null, null, null, null);
+		if ((cursor.getCount() != 0) && cursor.moveToFirst())
+		{
+			retValue.PrimaryKey = cursor.getInt(COLUMN_SCREENSHOT_ID);
+			retValue.ForeignThemeListKey = cursor.getInt(COLUMN_SCREENSHOT_THEMELIST_ID);
+			retValue.url = URI.create(cursor.getString(COLUMN_SCREENSHOT_URI));
+			retValue.Screenshot.setModifyDate(cursor.getString(COLUMN_SCREENSHOT_MODIFYDATE));
+			retValue.Screenshot.Picture = cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT);
+		}
+		cursor.close();
+		return retValue;
 	}
 	
 	// Update a Screenshot

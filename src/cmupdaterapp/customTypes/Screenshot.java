@@ -7,7 +7,7 @@ public class Screenshot implements Serializable
 {	
 	private static final long serialVersionUID = 6238950270313891695L;
 
-	public int PrimaryKey;
+	public long PrimaryKey = -1;
 	public int ForeignThemeListKey;
 	public URI url;
 	public CustomDrawable Screenshot;
