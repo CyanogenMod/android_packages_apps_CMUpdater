@@ -68,7 +68,7 @@ public class ScreenshotActivity extends Activity
 					screeni.url = s;
 					//Instantiate Modifydate with today, if not found in DB
 					screeni.Screenshot.ModifyDate = Calendar.getInstance();
-					db.insertScreenshot(screeni);
+					screeni.PrimaryKey = db.insertScreenshot(screeni);
 				}
 				//Only Update if Screenshot was there
 				else if (ScreenFound && NeedsUpdate)
