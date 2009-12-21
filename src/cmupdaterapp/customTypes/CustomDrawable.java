@@ -24,7 +24,7 @@ public class CustomDrawable implements Serializable
 
 	public byte[] Picture;
 
-	public Calendar ModifyDate;
+	private Calendar ModifyDate;
 	
 	public String getModifyDate()
 	{
@@ -65,5 +65,12 @@ public class CustomDrawable implements Serializable
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();  
 		b.compress(Bitmap.CompressFormat.PNG, 100, baos);   
 		Picture = baos.toByteArray();
+	}
+	
+	public long getModifyDateAsMillis()
+	{
+		if (ModifyDate == null)
+			ModifyDate = GregorianCalendar.getInstance();
+		return ModifyDate.getTimeInMillis();
 	}
 }

@@ -1,7 +1,6 @@
 package cmupdaterapp.ui;
 
 import java.net.URI;
-import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -50,7 +49,7 @@ public class ScreenshotActivity extends Activity
 					ScreenFound = true;
 					screeni = temp;
 				}
-				CustomDrawable cd = ImageUtilities.load(s.toString(), screeni.Screenshot.ModifyDate);
+				CustomDrawable cd = ImageUtilities.load(s.toString(), screeni.Screenshot.getModifyDateAsMillis());
 				//Null when Modifydate not changed
 				if (cd != null)
 				{
@@ -63,8 +62,6 @@ public class ScreenshotActivity extends Activity
 					screeni.ForeignThemeListKey = ui.PrimaryKey;
 					screeni.Screenshot = cd;
 					screeni.url = s;
-					//Instantiate Modifydate with today, if not found in DB
-					screeni.Screenshot.ModifyDate = Calendar.getInstance();
 					screeni.PrimaryKey = db.insertScreenshot(screeni);
 				}
 				//Only Update if Screenshot was there

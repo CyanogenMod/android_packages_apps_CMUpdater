@@ -2,7 +2,6 @@ package cmupdaterapp.utils;
 
 import java.io.InputStream;
 import java.io.IOException;
-import java.util.Calendar;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -19,7 +18,7 @@ public class ImageUtilities
 {
     private static final String TAG = "ImageUtilities";
 
-    public static CustomDrawable load(String url, Calendar lastModified)
+    public static CustomDrawable load(String url, long lastModifiedInMillis)
     {
     	CustomDrawable cd = new CustomDrawable();
 
@@ -42,7 +41,7 @@ public class ImageUtilities
     			cd.setModifyDate(null);
     		
     		//Do not Download if not changed
-    		if ((lastModified != null) && (lastModified.getTimeInMillis() == cd.ModifyDate.getTimeInMillis()))
+    		if (lastModifiedInMillis == cd.getModifyDateAsMillis())
     			return null;
     		
     		if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)
