@@ -15,6 +15,7 @@ import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
+import cmupdaterapp.utils.StringUtils;
 
 public class DbAdapter
 {
@@ -178,6 +179,16 @@ public class DbAdapter
 	public boolean removeScreenshot(long _rowIndex)
 	{
 		return db.delete(DATABASE_TABLE_SCREENSHOT, KEY_SCREENSHOT_ID + "=" + _rowIndex, null) > 0;
+	}
+	
+	// Remove all Screenshots for given Theme except the ones in the parameter
+	public boolean removeScreenshotExcept(int ForeignKey, String[] primaryKeysNotToRemove)
+	{
+		if (primaryKeysNotToRemove == null || primaryKeysNotToRemove.length == 0)
+			return false;
+		String temp = StringUtils.arrayToString(primaryKeysNotToRemove, ",");
+		return db.delete(DATABASE_TABLE_SCREENSHOT, KEY_SCREENSHOT_THEMELIST_ID + "=" + ForeignKey +
+				" AND " + KEY_SCREENSHOT_ID + " not in (" + temp + ")", null) > 0;
 	}
 	
 	// Remove a Screenshot based on its FeaturedThemeIndex
