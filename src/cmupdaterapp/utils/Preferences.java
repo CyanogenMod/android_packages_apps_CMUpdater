@@ -249,7 +249,7 @@ public class Preferences extends Activity
 	//Advanced Properties
 	public String getUpdateFolder()
 	{
-		temp = mPrefs.getString(mRes.getString(R.string.PREF_UPDATE_FOLDER_NEW), mRes.getString(R.string.conf_update_folder)).trim();
+		temp = mPrefs.getString(mRes.getString(R.string.PREF_UPDATE_FOLDER), mRes.getString(R.string.conf_update_folder)).trim();
 		Log.d(TAG, "UpdateFolder: " + temp);
 		return temp;
 	}
@@ -265,7 +265,7 @@ public class Preferences extends Activity
 		if (f.exists() && f.isDirectory())
 		{
 			Editor editor = mPrefs.edit();
-			editor.putString(mRes.getString(R.string.PREF_UPDATE_FOLDER_NEW), folderTrimmed);
+			editor.putString(mRes.getString(R.string.PREF_UPDATE_FOLDER), folderTrimmed);
 			if(!editor.commit())
 			{
 				Log.e(TAG, "Unable to write Update Folder Path");

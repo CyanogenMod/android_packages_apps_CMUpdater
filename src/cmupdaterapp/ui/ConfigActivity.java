@@ -194,7 +194,7 @@ public class ConfigActivity extends PreferenceActivity
 		});
 		
 		//Change Update Folder
-		pref = (Preference) findPreference(res.getString(R.string.PREF_UPDATE_FOLDER_NEW));
+		pref = (Preference) findPreference(res.getString(R.string.PREF_UPDATE_FOLDER));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			public boolean onPreferenceChange(Preference preference, Object newValue)

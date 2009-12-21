@@ -106,7 +106,7 @@
 		android:title="@string/p_advanced_screen_title"
 		android:summary="@string/p_advanced_screen_summary" >
 		<EditTextPreference
-			android:key="@string/PREF_UPDATE_FOLDER_NEW"
+			android:key="@string/PREF_UPDATE_FOLDER"
 			android:title="@string/p_update_folder_title"
 			android:summary="@string/p_update_folder_summary"
 			android:dialogTitle="@string/p_update_folder_title"

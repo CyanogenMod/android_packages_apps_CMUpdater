@@ -37,7 +37,7 @@
 	<string name="PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS">displayExperimentalRomVersions</string>
 	<string name="PREF_DISPLAY_OLDER_THEME_VERSIONS">displayOlderThemeVersions</string>
 	<string name="PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS">displayExperimentalThemeVersions</string>
-	<string name="PREF_UPDATE_FOLDER_NEW">prefUpdateFolder</string>
+	<string name="PREF_UPDATE_FOLDER">prefUpdateFolderNew</string>
 	<string name="PREF_UPDATE_FOLDER_DEF">prefUpdateFolderDef</string>
 	<string name="PREF_THEMES_LIST">prefThemesList</string>
 	
