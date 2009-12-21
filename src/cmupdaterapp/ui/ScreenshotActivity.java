@@ -36,10 +36,7 @@ public class ScreenshotActivity extends Activity
 		try
 		{
 			db.open();
-			List<Screenshot> dbScreens = db.getAllScreenshotsForTheme(ui.PrimaryKey);
 			String[] PrimaryKeys = new String[ui.screenshots.size()];
-			if (dbScreens == null)
-				dbScreens = new LinkedList<Screenshot>();
 			boolean ScreenFound = false;
 			boolean NeedsUpdate = false;
 			int counter = 0;
