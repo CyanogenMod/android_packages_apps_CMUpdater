@@ -42,7 +42,7 @@ public class ImageUtilities
     			cd.setModifyDate(null);
     		
     		//Do not Download if not changed
-    		if (lastModified.getTimeInMillis() == cd.ModifyDate.getTimeInMillis())
+    		if ((lastModified != null) && (lastModified.getTimeInMillis() == cd.ModifyDate.getTimeInMillis()))
     			return null;
     		
     		if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)
