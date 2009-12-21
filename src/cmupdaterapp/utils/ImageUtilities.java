@@ -1,9 +1,9 @@
 package cmupdaterapp.utils;
 
-import android.graphics.drawable.Drawable;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.IOException;
+
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -11,15 +11,16 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import cmupdaterapp.customTypes.CustomDrawable;
 import cmupdaterapp.misc.Log;
 
 public class ImageUtilities
 {
     private static final String TAG = "ImageUtilities";
 
-    public static Drawable load(String url)
+    public static CustomDrawable load(String url)
     {
-    	Drawable d = null;
+    	CustomDrawable cd = new CustomDrawable();
 
     	HttpClient httpCrap = new DefaultHttpClient();
 
@@ -30,17 +31,25 @@ public class ImageUtilities
     	try
     	{
     		final HttpResponse response = httpCrap.execute(get);
+    		
+    		//Set last ModifyDate
+    		final Header header = response.getFirstHeader("Last-Modified");
+    		if (header != null)
+    			cd.setModifyDate(header.getValue());
+    		//If null set to today
+    		else
+    			cd.setModifyDate(null);
+    		
     		if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)
     		{
     			entity = response.getEntity();
 
     			InputStream in = null;
-    			OutputStream out = null;
 
     			try
-    			{
+    			{    			
     				in = entity.getContent();
-    				d = Drawable.createFromStream(in, "Image");
+    				cd.setPictureFromInputstream(in);
     			}
     			catch (IOException e)
     			{
@@ -49,7 +58,6 @@ public class ImageUtilities
     			finally
     			{
     				if (in != null) in.close();
-    				if (out != null) out.close();
     			}
     		}
     	}
@@ -71,6 +79,6 @@ public class ImageUtilities
     			}
     		}
     	}
-    	return d;
+    	return cd;
     }
 }

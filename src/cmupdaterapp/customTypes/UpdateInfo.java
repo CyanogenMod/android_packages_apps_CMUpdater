@@ -9,7 +9,7 @@ public class UpdateInfo implements Serializable
 {
 	private static final long serialVersionUID = 8671456102755862106L;
 	
-	//public boolean needsWipe;
+	public int PrimaryKey = -1;
 	public List<String> mod;
 	public List<String> board;
 	public String name;
@@ -49,7 +49,8 @@ public class UpdateInfo implements Serializable
 				&& ui.branchCode.equals(branchCode)
 				&& ui.description.equals(description)
 				&& ui.fileName.equals(fileName)
-				&& ui.screenshots.equals(screenshots))
+				&& ui.screenshots.equals(screenshots)
+				&& ui.PrimaryKey == PrimaryKey)
 			return true;
 		return false;
 	}

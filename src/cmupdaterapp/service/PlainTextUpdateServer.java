@@ -51,6 +51,8 @@ public class PlainTextUpdateServer implements IUpdateServer
 	
 	private Context context;
 	
+	private int PrimaryKeyTheme = -1;
+	
 	public PlainTextUpdateServer(Context ctx)
 	{
 		Preferences p = mPreferences = Preferences.getPreferences(ctx);
@@ -125,6 +127,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 						Log.d(TAG, "Theme " + t.name + " disabled. Continuing");
 						continue;
 					}
+					PrimaryKeyTheme = -1;
 					Log.d(TAG, "Trying to download ThemeInfos for " + t.url.toString());
 					URI ThemeUpdateServerUri = t.url;
 					HttpUriRequest themeReq = new HttpGet(ThemeUpdateServerUri);
@@ -149,6 +152,10 @@ public class PlainTextUpdateServer implements IUpdateServer
 					}
 					themeLineReader.close();
 					
+					//Set the PrimaryKey for the Database
+					if (t.PrimaryKey > 0)
+						PrimaryKeyTheme = t.PrimaryKey;
+					
 					LinkedList<UpdateInfo> themeUpdateInfos = parseJSON(themeBuf);
 					retValue.themes.addAll(getThemeUpdates(themeUpdateInfos));
 				}
@@ -164,6 +171,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		{
 			if (!romException)
 			{
+				PrimaryKeyTheme = -1;
 				//Read the Rom Infos
 				BufferedReader romLineReader = new BufferedReader(new InputStreamReader(romResponseEntity.getContent()),2 * 1024);
 				StringBuffer romBuf = new StringBuffer();
@@ -232,6 +240,9 @@ public class PlainTextUpdateServer implements IUpdateServer
 		
 		try
 		{
+			if (PrimaryKeyTheme > 0)
+				ui.PrimaryKey = PrimaryKeyTheme;
+
 			ui.board = new LinkedList<String>();
 			String[] Boards = obj.getString(Constants.JSON_BOARD).split("\\|");
 			for(String item:Boards)
