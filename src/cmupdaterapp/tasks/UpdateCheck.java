@@ -73,6 +73,14 @@ public class UpdateCheck implements Runnable
 				return;
 			}
 			
+			if (mUpdateServer != null && IUpdateServer.Exceptions != null && IUpdateServer.Exceptions.size() > 0)
+			{
+				for (String e : IUpdateServer.Exceptions)
+				{
+					Toast.makeText(upi, e, Toast.LENGTH_LONG).show();
+				}
+			}
+			
 			Preferences prefs = Preferences.getPreferences(upi);
 			prefs.setLastUpdateCheck(new Date());
 			

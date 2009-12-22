@@ -25,7 +25,7 @@ public class Log
 		android.util.Log.e(LOGTAG, TAG + ": " + logMe);
 	}
 
-	public static void e(String TAG, String logMe, Exception ex)
+	public static void e(String TAG, String logMe, Throwable ex)
 	{
 		android.util.Log.e(LOGTAG, TAG + ": " + logMe, ex);
 	}

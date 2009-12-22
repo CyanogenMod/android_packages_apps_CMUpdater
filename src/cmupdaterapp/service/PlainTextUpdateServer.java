@@ -27,16 +27,19 @@ import cmupdaterapp.interfaces.IUpdateServer;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.misc.State;
+import cmupdaterapp.ui.R;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.SysUtils;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 public class PlainTextUpdateServer implements IUpdateServer
 {
 	private static final String TAG = "PlainTextUpdateServer";
 
 	private Preferences mPreferences;
+	private Resources res;
 
 	private String systemMod;
 	private String systemRom;
@@ -58,6 +61,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 		Preferences p = mPreferences = Preferences.getPreferences(ctx);
 		systemMod = p.getBoardString();
 		context = ctx;
+		res = context.getResources();
 
 		if(systemMod == null)
 		{
@@ -132,16 +136,25 @@ public class PlainTextUpdateServer implements IUpdateServer
 					URI ThemeUpdateServerUri = t.url;
 					HttpUriRequest themeReq = new HttpGet(ThemeUpdateServerUri);
 					themeReq.addHeader("Cache-Control", "no-cache");
-					HttpResponse themeResponse = themeHttpClient.execute(themeReq);
-					int themeServerResponse = themeResponse.getStatusLine().getStatusCode();
-					if (themeServerResponse != HttpStatus.SC_OK)
+					try
 					{
-						Log.d(TAG, "Server returned status code for Themes " + themeServerResponse);
-						//themeException = true;
+						HttpResponse themeResponse = themeHttpClient.execute(themeReq);
+						int themeServerResponse = themeResponse.getStatusLine().getStatusCode();
+						if (themeServerResponse != HttpStatus.SC_OK)
+						{
+							Log.d(TAG, "Server returned status code for Themes " + themeServerResponse);
+							themeResponseEntity = themeResponse.getEntity();
+							continue;
+						}
 						themeResponseEntity = themeResponse.getEntity();
+					}
+					catch (IOException ex)
+					{
+						//when theres an Exception Downloading the Theme, continue
+						Exceptions.add(res.getString(R.string.theme_download_exception) + t.name + ": " + ex.getMessage());
+						Log.e(TAG, "There was an error downloading Theme " + t.name + ": ", ex);
 						continue;
 					}
-					themeResponseEntity = themeResponse.getEntity();
 					//Read the Theme Infos
 					BufferedReader themeLineReader = new BufferedReader(new InputStreamReader(themeResponseEntity.getContent()),2 * 1024);
 					StringBuffer themeBuf = new StringBuffer();
