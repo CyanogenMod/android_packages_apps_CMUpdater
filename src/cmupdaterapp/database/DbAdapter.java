@@ -101,6 +101,50 @@ public class DbAdapter
 		return db.delete(DATABASE_TABLE_THEMELIST, KEY_THEMELIST_ID + "=" + _rowIndex, null) > 0;
 	}
 	
+	// Removes all themes
+	public boolean removeAllThemes()
+	{
+		return db.delete(DATABASE_TABLE_THEMELIST, null, null) > 0;
+	}
+	
+	// Removes all themes
+	public boolean removeAllFeaturedThemes()
+	{
+		return db.delete(DATABASE_TABLE_THEMELIST, KEY_THEMELIST_FEATURED + "=1", null) > 0;
+	}
+	
+	// Disable all Themes
+	public boolean disableAllThemes()
+	{
+		ContentValues newValue = new ContentValues();
+		newValue.put(KEY_THEMELIST_ENABLED, 0);
+		return db.update(DATABASE_TABLE_THEMELIST, newValue, null, null) > 0;
+	}
+	
+	// Disable all Featured Themes
+	public boolean disableAllFeaturedThemes()
+	{
+		ContentValues newValue = new ContentValues();
+		newValue.put(KEY_THEMELIST_ENABLED, 0);
+		return db.update(DATABASE_TABLE_THEMELIST, newValue, KEY_THEMELIST_FEATURED + "=1", null) > 0;
+	}
+	
+	// Enable all Themes
+	public boolean enableAllThemes()
+	{
+		ContentValues newValue = new ContentValues();
+		newValue.put(KEY_THEMELIST_ENABLED, 1);
+		return db.update(DATABASE_TABLE_THEMELIST, newValue, null, null) > 0;
+	}
+	
+	// enable all Featured Themes
+	public boolean enableAllFeaturedThemes()
+	{
+		ContentValues newValue = new ContentValues();
+		newValue.put(KEY_THEMELIST_ENABLED, 1);
+		return db.update(DATABASE_TABLE_THEMELIST, newValue, KEY_THEMELIST_FEATURED + "=1", null) > 0;
+	}
+	
 	// Update a Theme
 	public boolean updateTheme(long _rowIndex, ThemeList _theme)
 	{

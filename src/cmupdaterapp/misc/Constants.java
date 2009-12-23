@@ -65,6 +65,12 @@ public class Constants
 	//Menu ThemeList Layout
 	public static final int MENU_THEME_LIST_ADD = 1;
 	public static final int MENU_THEME_LIST_UPDATE_FEATURED = 2;
+	public static final int MENU_THEME_DELETE_ALL = 3;
+	public static final int MENU_THEME_DELETE_ALL_FEATURED = 4;
+	public static final int MENU_THEME_DISABLE_ALL = 5;
+	public static final int MENU_THEME_DISABLE_ALL_FEATURED = 6;
+	public static final int MENU_THEME_ENABLE_ALL = 7;
+	public static final int MENU_THEME_ENABLE_ALL_FEATURED = 8;
 	
 	//Menu ThemeListContextMenu
 	public static final int MENU_THEME_LIST_CONTEXT_EDIT = 10;

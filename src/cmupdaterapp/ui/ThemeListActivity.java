@@ -24,6 +24,7 @@ import android.os.Message;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
@@ -119,8 +120,20 @@ public class ThemeListActivity extends ListActivity
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		super.onCreateOptionsMenu(menu);
-		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_ADD, Menu.NONE, R.string.menu_add_theme);
 		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_UPDATE_FEATURED, Menu.NONE, R.string.menu_update_featured);
+		menu.add(Menu.NONE, Constants.MENU_THEME_LIST_ADD, Menu.NONE, R.string.menu_add_theme);
+		SubMenu deleteMenu = menu.addSubMenu(R.string.theme_submenu_delete);
+		deleteMenu.setIcon(android.R.drawable.ic_menu_more);
+		deleteMenu.add(Menu.NONE, Constants.MENU_THEME_DELETE_ALL, Menu.NONE, R.string.menu_delete_all_themes);
+		deleteMenu.add(Menu.NONE, Constants.MENU_THEME_DELETE_ALL_FEATURED, Menu.NONE, R.string.menu_delete_all_featured_themes);
+		SubMenu disableMenu = menu.addSubMenu(R.string.theme_submenu_disable);
+		disableMenu.setIcon(android.R.drawable.ic_menu_more);
+		disableMenu.add(Menu.NONE, Constants.MENU_THEME_DISABLE_ALL, Menu.NONE, R.string.menu_disable_all_themes);
+		disableMenu.add(Menu.NONE, Constants.MENU_THEME_DISABLE_ALL_FEATURED, Menu.NONE, R.string.menu_disable_all_featured_themes);
+		SubMenu enableMenu = menu.addSubMenu(R.string.theme_submenu_enable);
+		enableMenu.setIcon(android.R.drawable.ic_menu_more);
+		enableMenu.add(Menu.NONE, Constants.MENU_THEME_ENABLE_ALL, Menu.NONE, R.string.menu_enable_all_themes);
+		enableMenu.add(Menu.NONE, Constants.MENU_THEME_ENABLE_ALL_FEATURED, Menu.NONE, R.string.menu_enable_all_featured_themes);
 		return true;
 	}
 	
@@ -178,6 +191,36 @@ public class ThemeListActivity extends ListActivity
 				tl = ((ThemeList)lv.getAdapter().getItem(menuInfo.position));
 				tl.enabled = true;
 				themeListDb.updateTheme(tl.PrimaryKey, tl);
+				updateThemeList();
+				break;
+			case Constants.MENU_THEME_DELETE_ALL:
+				Log.d(TAG, "Selected to delete all Theme Servers");
+				themeListDb.removeAllThemes();
+				updateThemeList();
+				break;
+			case Constants.MENU_THEME_DELETE_ALL_FEATURED:
+				Log.d(TAG, "Selected to delete all Featured Theme Servers");
+				themeListDb.removeAllFeaturedThemes();
+				updateThemeList();
+				break;
+			case Constants.MENU_THEME_DISABLE_ALL:
+				Log.d(TAG, "Selected to disable all Theme Servers");
+				themeListDb.disableAllThemes();
+				updateThemeList();
+				break;
+			case Constants.MENU_THEME_DISABLE_ALL_FEATURED:
+				Log.d(TAG, "Selected to disable all Featured Theme Servers");
+				themeListDb.disableAllFeaturedThemes();
+				updateThemeList();
+				break;
+			case Constants.MENU_THEME_ENABLE_ALL:
+				Log.d(TAG, "Selected to enable all Theme Servers");
+				themeListDb.enableAllThemes();
+				updateThemeList();
+				break;
+			case Constants.MENU_THEME_ENABLE_ALL_FEATURED:
+				Log.d(TAG, "Selected to enable all Featured Theme Servers");
+				themeListDb.enableAllFeaturedThemes();
 				updateThemeList();
 				break;
 			default:
