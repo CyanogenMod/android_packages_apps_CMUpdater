@@ -1,4 +1,4 @@
-package cmupdaterapp.service;
+package cmupdaterapp.misc;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.customTypes.ThemeInfo;
 import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.interfaces.IUpdateServer;
+import cmupdaterapp.interfaces.IUpdateCheckHelper;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.misc.State;
@@ -34,7 +34,7 @@ import cmupdaterapp.utils.SysUtils;
 import android.content.Context;
 import android.content.res.Resources;
 
-public class PlainTextUpdateServer implements IUpdateServer
+public class UpdateCheckHelper implements IUpdateCheckHelper
 {
 	private static final String TAG = "PlainTextUpdateServer";
 
@@ -56,7 +56,7 @@ public class PlainTextUpdateServer implements IUpdateServer
 	
 	private int PrimaryKeyTheme = -1;
 	
-	public PlainTextUpdateServer(Context ctx)
+	public UpdateCheckHelper(Context ctx)
 	{
 		Preferences p = mPreferences = Preferences.getPreferences(ctx);
 		systemMod = p.getBoardString();

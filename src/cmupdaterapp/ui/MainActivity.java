@@ -49,8 +49,8 @@ import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IMainActivity;
 import cmupdaterapp.listadapters.UpdateListAdapter;
-import cmupdaterapp.service.PlainTextUpdateServer;
-import cmupdaterapp.tasks.UpdateCheck;
+import cmupdaterapp.misc.UpdateCheckHelper;
+import cmupdaterapp.tasks.UpdateCheckTask;
 import cmupdaterapp.utils.MD5;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.SysUtils;
@@ -65,7 +65,7 @@ public class MainActivity extends IMainActivity
 
 	private Spinner mUpdatesSpinner;
 	private Spinner mThemesSpinner;
-	private PlainTextUpdateServer mUpdateServer;
+	private UpdateCheckHelper mUpdateServer;
 	private FullUpdateInfo mAvailableUpdates;
 
 	private File mUpdateFolder;
@@ -561,7 +561,7 @@ public class MainActivity extends IMainActivity
 		//Sets the Title to Appname + Mod Version
 		setTitle(res.getString(R.string.app_name) + " " + res.getString(R.string.title_running) + " " + SysUtils.getModVersion());
 
-		mUpdateServer = new PlainTextUpdateServer(this);
+		mUpdateServer = new UpdateCheckHelper(this);
 	}
 
 	@Override
@@ -1123,7 +1123,7 @@ public class MainActivity extends IMainActivity
 	private void checkForUpdates()
 	{
 		ProgressDialog pg = ProgressDialog.show(this, res.getString(R.string.checking_for_updates), res.getString(R.string.checking_for_updates), true, true);	
-		UpdateCheck u = new UpdateCheck(mUpdateServer, this, pg);
+		UpdateCheckTask u = new UpdateCheckTask(mUpdateServer, this, pg);
 		Thread t = new Thread(u);
 		t.start();
 	}

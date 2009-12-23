@@ -6,7 +6,7 @@ import java.util.List;
 
 import cmupdaterapp.customTypes.FullUpdateInfo;
 
-public interface IUpdateServer
+public interface IUpdateCheckHelper
 {
 	public FullUpdateInfo getAvailableUpdates() throws IOException;
 	public List<String> Exceptions = new LinkedList<String>();
