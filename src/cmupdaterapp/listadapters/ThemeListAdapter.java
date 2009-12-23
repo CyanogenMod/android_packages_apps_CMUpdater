@@ -50,7 +50,6 @@ public class ThemeListAdapter<T> extends ArrayAdapter<T>
     	ThemeList info = (ThemeList) this.getItem(position);
     	wrapper.getThemeNameView().setText(info.name);
     	wrapper.getThemeUriView().setText(info.url.toString());
-    	wrapper.getImage().setImageResource(R.drawable.icon);
     	if (!info.enabled)
     	{
     		wrapper.getImageDrawable().mutate().setAlpha(Constants.THEME_LIST_ITEM_DISABLED_ALPHA);
