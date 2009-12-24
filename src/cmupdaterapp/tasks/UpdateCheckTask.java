@@ -25,7 +25,7 @@ import cmupdaterapp.ui.R;
 
 public class UpdateCheckTask implements Runnable
 {
-	private static final String TAG = "UpdateCheck";
+	private static final String TAG = "UpdateCheckTask";
 
 	private IUpdateCheckHelper mUpdateServer;
 	private IMainActivity mUpdateProcessInfo;	

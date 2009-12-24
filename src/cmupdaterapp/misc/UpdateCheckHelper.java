@@ -36,7 +36,7 @@ import android.content.res.Resources;
 
 public class UpdateCheckHelper implements IUpdateCheckHelper
 {
-	private static final String TAG = "PlainTextUpdateServer";
+	private static final String TAG = "UpdateCheckHelper";
 
 	private Preferences mPreferences;
 	private Resources res;
