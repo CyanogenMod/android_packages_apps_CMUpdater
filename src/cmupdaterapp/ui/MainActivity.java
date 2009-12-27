@@ -53,6 +53,7 @@ import cmupdaterapp.misc.UpdateCheckHelper;
 import cmupdaterapp.tasks.UpdateCheckTask;
 import cmupdaterapp.utils.MD5;
 import cmupdaterapp.utils.Preferences;
+import cmupdaterapp.utils.StringUtils;
 import cmupdaterapp.utils.SysUtils;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
@@ -572,7 +573,7 @@ public class MainActivity extends IMainActivity
 
 		//Show a Dialog that the User runs an old rom.
 		String mod = SysUtils.getModVersion();
-		if (!SysUtils.StringCompare(Constants.MIN_SUPPORTED_VERSION_STRING, mod))
+		if (StringUtils.compareVersions(Constants.MIN_SUPPORTED_VERSION_STRING, mod))
 		{
 			runningOldVersion = true;
 			

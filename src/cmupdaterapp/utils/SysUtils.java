@@ -23,6 +23,13 @@ public class SysUtils
 		return (modVer == null || modVer.length() == 0 ? "Unknown" : modVer);
 	}
 	
+	/**
+	 * Returns a SystemProperty
+	 * 
+	 * @param propName
+	 *            The Property to retrieve
+	 * @return The Property, or NULL if not found
+	 */
 	public static String getSystemProperty(String propName)
 	{
 		String line;
@@ -54,13 +61,5 @@ public class SysUtils
         	}
         }
         return line;
-	}
-	
-	public static boolean StringCompare(String a, String b)
-	{
-		if (a.compareToIgnoreCase(b) < 0)
-			return true;
-		else
-			return false;
 	}
 }
