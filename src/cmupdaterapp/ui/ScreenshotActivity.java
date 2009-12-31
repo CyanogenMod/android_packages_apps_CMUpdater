@@ -8,20 +8,26 @@ import cmupdaterapp.customTypes.CustomDrawable;
 import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.database.DbAdapter;
+import cmupdaterapp.listadapters.ImageAdapter;
 import cmupdaterapp.misc.Constants;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 import cmupdaterapp.utils.ImageUtilities;
 
 public class ScreenshotActivity extends Activity
 {
+	private List<Screenshot> ss;
+	private DbAdapter db;
+	private UpdateInfo ui;
+	private GridView gridview;
+	private ImageAdapter imageAdapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -29,9 +35,28 @@ public class ScreenshotActivity extends Activity
 		setContentView(R.layout.screenshots);
 		Intent i = getIntent();
 		Bundle b = i.getExtras();
-		UpdateInfo ui = (UpdateInfo) b.get(Constants.SCREENSHOTS_UPDATE);
-		List<Screenshot> ss = new LinkedList<Screenshot>();
-		DbAdapter db = new DbAdapter();
+		ui = (UpdateInfo) b.get(Constants.SCREENSHOTS_UPDATE);
+		
+		gridview = (GridView) findViewById(R.id.gridview);
+		imageAdapter = new ImageAdapter(this, ui.screenshots);
+	    gridview.setAdapter(imageAdapter);
+	    // Set a item click listener, and just Toast the clicked position
+        gridview.setOnItemClickListener(new OnItemClickListener()
+        {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+            {
+                Toast.makeText(ScreenshotActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+	    
+		ss = new LinkedList<Screenshot>();
+		db = new DbAdapter();
+	}
+	
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
 		try
 		{
 			db.open();
@@ -84,22 +109,6 @@ public class ScreenshotActivity extends Activity
 			if(db != null)
 				db.close();
 		}
-
-		LinearLayout main = (LinearLayout) findViewById(R.id.ScreenshotLinearMain);
-		LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		//Foreach Screenshot
-		for (Screenshot s:ss)
-		{
-			if (s == null)
-				continue;
-			ImageView iv = new ImageView(this);
-			iv.setLayoutParams(lp);
-			iv.setImageDrawable(s.Screenshot.getPictureAsDrawable());
-			main.addView(iv);
-			//Horizontal Line
-			View ruler = new View(this);
-			ruler.setBackgroundColor(Color.WHITE);
-			main.addView(ruler, new ViewGroup.LayoutParams( ViewGroup.LayoutParams.FILL_PARENT, 1));
-		}
+		imageAdapter.items = ss;
 	}
 }

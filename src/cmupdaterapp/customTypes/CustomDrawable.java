@@ -54,8 +54,10 @@ public class CustomDrawable implements Serializable
 		}
 	}
 
-	public Drawable getPictureAsDrawable()
+	public Drawable getPictureAsDrawable() throws InvalidPictureException
 	{
+		if (Picture == null)
+			throw new InvalidPictureException();
 		return Drawable.createFromStream(new ByteArrayInputStream(Picture), "Screenshot");
 	}
 	
