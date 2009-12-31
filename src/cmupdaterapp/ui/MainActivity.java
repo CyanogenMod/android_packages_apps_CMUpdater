@@ -19,7 +19,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -557,7 +556,6 @@ public class MainActivity extends IMainActivity
 		super.onCreate(savedInstanceState);
 		prefs = Preferences.getPreferences(this);
 		res = getResources();
-		setWallpaper();
 		
 		//Sets the Title to Appname + Mod Version
 		setTitle(res.getString(R.string.app_name) + " " + res.getString(R.string.title_running) + " " + SysUtils.getModVersion());
@@ -675,14 +673,6 @@ public class MainActivity extends IMainActivity
 		super.onStop();
 		Log.d(TAG, "App closed");
 	}
-	
-	@Override
-	public void onConfigurationChanged(Configuration newConfig)
-	{
-		setWallpaper();
-        super.onConfigurationChanged(newConfig); 
-        Log.d(TAG, "Orientation Changed. New Orientation: "+newConfig.orientation);
-    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
@@ -1247,11 +1237,6 @@ public class MainActivity extends IMainActivity
 		}
 		// The directory is now empty so delete it
 		return dir.delete();
-	}
-	
-	private void setWallpaper()
-	{
-		getWindow().setBackgroundDrawable(res.getDrawable(R.drawable.background));
 	}
 }
 
