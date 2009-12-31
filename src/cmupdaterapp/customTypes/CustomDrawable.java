@@ -22,7 +22,8 @@ public class CustomDrawable implements Serializable
 
 	private static final DateFormat df = new SimpleDateFormat(Constants.DATE_FORMAT);
 
-	public byte[] Picture;
+	private byte[] Picture;
+	private Drawable PictureAsDrawable = null;
 
 	private Calendar ModifyDate;
 	
@@ -56,9 +57,14 @@ public class CustomDrawable implements Serializable
 
 	public Drawable getPictureAsDrawable() throws InvalidPictureException
 	{
-		if (Picture == null)
+		if (Picture == null || PictureAsDrawable == null)
 			throw new InvalidPictureException();
-		return Drawable.createFromStream(new ByteArrayInputStream(Picture), "Screenshot");
+		return PictureAsDrawable;
+	}
+	
+	public byte[] getPictureAsByteArray()
+	{
+		return Picture;
 	}
 	
 	public void setPictureFromInputstream(InputStream is)
@@ -67,6 +73,15 @@ public class CustomDrawable implements Serializable
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();  
 		b.compress(Bitmap.CompressFormat.PNG, 100, baos);   
 		Picture = baos.toByteArray();
+		if (Picture != null)
+			PictureAsDrawable = Drawable.createFromStream(new ByteArrayInputStream(Picture), "Screenshot");
+	}
+	
+	public void setPicture(byte[] p)
+	{
+		Picture = p;
+		if (Picture != null)
+			PictureAsDrawable = Drawable.createFromStream(new ByteArrayInputStream(Picture), "Screenshot");		
 	}
 	
 	public long getModifyDateAsMillis()

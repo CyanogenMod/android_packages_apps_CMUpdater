@@ -249,7 +249,7 @@ public class DbAdapter
 		newValues.put(KEY_SCREENSHOT_THEMELIST_ID, _screenshot.ForeignThemeListKey);
 		newValues.put(KEY_SCREENSHOT_URI, _screenshot.url.toString());
 		newValues.put(KEY_SCREENSHOT_MODIFYDATE, _screenshot.Screenshot.getModifyDate());
-		newValues.put(KEY_SCREENSHOT_SCREENSHOT, _screenshot.Screenshot.Picture);
+		newValues.put(KEY_SCREENSHOT_SCREENSHOT, _screenshot.Screenshot.getPictureAsByteArray());
 		return db.insert(DATABASE_TABLE_SCREENSHOT, null, newValues);
 	}
 	
@@ -281,7 +281,7 @@ public class DbAdapter
 			item.ForeignThemeListKey = cursor.getInt(COLUMN_SCREENSHOT_THEMELIST_ID);
 			item.url = URI.create(cursor.getString(COLUMN_SCREENSHOT_URI));
 			item.Screenshot.setModifyDate(cursor.getString(COLUMN_SCREENSHOT_MODIFYDATE));
-			item.Screenshot.Picture = cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT);
+			item.Screenshot.setPicture(cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT));
 			result.add(item);
 		} while (cursor.moveToNext());
 		cursor.close();
@@ -311,7 +311,7 @@ public class DbAdapter
 		result.ForeignThemeListKey = cursor.getInt(COLUMN_SCREENSHOT_THEMELIST_ID);
 		result.url = URI.create(cursor.getString(COLUMN_SCREENSHOT_URI));
 		result.Screenshot.setModifyDate(cursor.getString(COLUMN_SCREENSHOT_MODIFYDATE));
-		result.Screenshot.Picture = cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT);
+		result.Screenshot.setPicture(cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT));
 		cursor.close();
 		return result;
 	}
@@ -339,7 +339,7 @@ public class DbAdapter
 			retValue.ForeignThemeListKey = cursor.getInt(COLUMN_SCREENSHOT_THEMELIST_ID);
 			retValue.url = URI.create(cursor.getString(COLUMN_SCREENSHOT_URI));
 			retValue.Screenshot.setModifyDate(cursor.getString(COLUMN_SCREENSHOT_MODIFYDATE));
-			retValue.Screenshot.Picture = cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT);
+			retValue.Screenshot.setPicture(cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT));
 		}
 		cursor.close();
 		return retValue;
@@ -352,7 +352,7 @@ public class DbAdapter
 		newValue.put(KEY_SCREENSHOT_THEMELIST_ID, _screenshot.ForeignThemeListKey);
 		newValue.put(KEY_SCREENSHOT_URI, _screenshot.url.toString());
 		newValue.put(KEY_SCREENSHOT_MODIFYDATE, _screenshot.Screenshot.getModifyDate());
-		newValue.put(KEY_SCREENSHOT_SCREENSHOT, _screenshot.Screenshot.Picture);
+		newValue.put(KEY_SCREENSHOT_SCREENSHOT, _screenshot.Screenshot.getPictureAsByteArray());
 		return db.update(DATABASE_TABLE_SCREENSHOT, newValue, KEY_SCREENSHOT_ID + "=" + _rowIndex, null) > 0;
 	}
 	
