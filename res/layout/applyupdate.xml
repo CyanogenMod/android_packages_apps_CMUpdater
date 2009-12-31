@@ -20,7 +20,7 @@
     <EditText
     	android:id="@+id/apply_release_notes"
     	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent"
+    	android:layout_height="0dip"
     	android:layout_weight="1" 
 		android:layout_margin="10px"
 		android:editable="false"

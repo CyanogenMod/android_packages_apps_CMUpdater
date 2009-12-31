@@ -47,7 +47,7 @@
 		    <LinearLayout 
 		    	android:orientation="vertical"
 		    	android:layout_width="fill_parent"
-		    	android:layout_height="fill_parent"
+		    	android:layout_height="wrap_content"
 		    	android:gravity="center_horizontal">
 			    <TextView
 			    	android:id="@+id/available_updates_text"
@@ -122,7 +122,7 @@
 				<Button
 				    android:id="@+id/check_now_button_update_chooser_updates"
 					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
+					android:layout_height="0dip"
 					android:text="@string/check_now_button_text"
 					android:layout_weight="0"
 					android:layout_marginTop="20sp"
@@ -158,7 +158,7 @@
 			<LinearLayout 
 		    	android:orientation="vertical"
 		    	android:layout_width="fill_parent"
-		    	android:layout_height="fill_parent"
+		    	android:layout_height="wrap_content"
 		    	android:gravity="center_horizontal">
 				<TextView
 					android:id="@+id/no_existing_updates_found_textview"
@@ -205,7 +205,7 @@
 		    <LinearLayout 
 		    	android:orientation="vertical"
 		    	android:layout_width="fill_parent"
-		    	android:layout_height="fill_parent"
+		    	android:layout_height="wrap_content"
 		    	android:gravity="center_horizontal">
 			    <TextView
 			    	android:id="@+id/no_theme_update_server_configured"
@@ -296,7 +296,7 @@
 				<Button
 				    android:id="@+id/check_now_button_update_chooser_themes"
 					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
+					android:layout_height="0dip"
 					android:text="@string/check_now_button_text"
 					android:layout_weight="0"
 					android:layout_marginTop="20sp"
