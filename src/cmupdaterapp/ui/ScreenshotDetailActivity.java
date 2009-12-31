@@ -6,7 +6,7 @@ import cmupdaterapp.misc.Constants;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,8 +26,8 @@ public class ScreenshotDetailActivity extends Activity
 		
 		showScreenshot(mCurrentScreenshotIndex);
 
-        Button nextButton = (Button) findViewById(R.id.next_button);
-        Button prevButton = (Button) findViewById(R.id.previous_button);
+        ImageButton nextButton = (ImageButton) findViewById(R.id.next_button);
+        ImageButton prevButton = (ImageButton) findViewById(R.id.previous_button);
         
         nextButton.setOnClickListener(new View.OnClickListener()
         {

@@ -278,6 +278,4 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="theme_submenu_delete">Delete</string>
 	<string name="theme_submenu_enable">Enable</string>
 	<string name="theme_submenu_disable">Disable</string>
-	<string name="screenshot_next">Next</string>
-	<string name="screenshot_previous">Previous</string>
 </resources>

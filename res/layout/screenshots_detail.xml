@@ -1,51 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:orientation="vertical"
 	android:background="@drawable/screenshot_background">
-	<FrameLayout
-		android:layout_weight="1"
+	<ImageView
 		android:layout_width="fill_parent"
-		android:layout_height="0dip"
-		android:id="@+id/image_container"
-		android:background="@drawable/image_container">
-		<ImageView
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:id="@+id/image_view"
-			android:scaleType="fitCenter"/>
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="bottom|center_horizontal"
-			android:id="@+id/status_text"
-			android:textColor="@android:color/primary_text_dark"
-			android:textSize="16sp"
-			android:shadowDx="1.0"
-			android:shadowDy="1.0"
-			android:shadowRadius="1"
-			android:layout_margin="5dip"
-			android:shadowColor="@android:color/background_dark"/>
-	</FrameLayout>
-	<LinearLayout
-		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:id="@+id/image_view"
+		android:scaleType="fitCenter"/>
+	<TextView
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="10dip"
-		android:orientation="horizontal"
-		android:gravity="center">
-    	<Button
-      		android:text="@string/screenshot_previous"
-      		android:id="@+id/previous_button"
-      		android:layout_width="wrap_content"
-      		android:layout_height="wrap_content"
-      		style="@style/TextAppearance.Button"/>
-      	<Button
-      		android:text="@string/screenshot_next"
-      		android:id="@+id/next_button"
-      		android:layout_width="wrap_content"
-      		android:layout_height="wrap_content"
-      		style="@style/TextAppearance.Button"/>
-  </LinearLayout>
-</LinearLayout>
+		android:layout_gravity="bottom|center_horizontal"
+		android:id="@+id/status_text"
+		android:textColor="@android:color/primary_text_dark"
+		android:textSize="16sp"
+		android:shadowDx="1.0"
+		android:shadowDy="1.0"
+		android:shadowRadius="1"
+		android:layout_margin="5dip"
+		android:shadowColor="@android:color/background_dark"/>
+	<ImageButton
+		android:id="@+id/previous_button"
+		android:layout_gravity="left|center_vertical"
+		android:src="@drawable/imagebutton_left"
+		android:background="@null"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"/>
+	<ImageButton
+		android:id="@+id/next_button"
+		android:layout_gravity="right|center_vertical"
+		android:src="@drawable/imagebutton_right"
+		android:background="@null"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"/>
+</FrameLayout>
