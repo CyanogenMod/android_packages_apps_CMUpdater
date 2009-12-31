@@ -1,6 +1,5 @@
 package cmupdaterapp.listadapters;
 
-import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,10 +21,10 @@ public class ImageAdapter extends BaseAdapter
     
     public List<Screenshot> items = new LinkedList<Screenshot>();
 
-    public ImageAdapter(Context c, List<URI> screenshots)
+    public ImageAdapter(Context c, int numberOfItems)
     {
     	mContext = c;
-    	length = screenshots.size();
+    	length = numberOfItems;
     }
 
     public int getCount()

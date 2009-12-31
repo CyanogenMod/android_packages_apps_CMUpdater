@@ -38,7 +38,7 @@ public class ScreenshotActivity extends Activity
 		ui = (UpdateInfo) b.get(Constants.SCREENSHOTS_UPDATE);
 		
 		gridview = (GridView) findViewById(R.id.gridview);
-		imageAdapter = new ImageAdapter(this, ui.screenshots);
+		imageAdapter = new ImageAdapter(this, ui.screenshots.size());
 	    gridview.setAdapter(imageAdapter);
 	    // Set a item click listener, and just Toast the clicked position
         gridview.setOnItemClickListener(new OnItemClickListener()
