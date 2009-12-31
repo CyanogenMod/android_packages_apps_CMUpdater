@@ -75,7 +75,7 @@ public class Screenshot implements Serializable
 		if (Picture == null)
 			return null;
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		Picture.compress(CompressFormat.PNG, 100, bos);
+		Picture.compress(CompressFormat.PNG, 10, bos);
 		return bos.toByteArray();
 	}
 	

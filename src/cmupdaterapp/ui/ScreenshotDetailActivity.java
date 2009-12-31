@@ -1,5 +1,8 @@
 package cmupdaterapp.ui;
 
+import cmupdaterapp.customTypes.InvalidPictureException;
+import cmupdaterapp.listadapters.ScreenshotGridViewAdapter;
+import cmupdaterapp.misc.Constants;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,49 +12,59 @@ import android.widget.TextView;
 
 public class ScreenshotDetailActivity extends Activity
 {
-	private int mCurrentPhotoIndex = 0;
+	private int mCurrentScreenshotIndex = 0;
 	private ImageView imageView;
 	private TextView statusText;
-    private int[] mPhotoIds = new int[]
-    {
-    		R.drawable.apply_later,
-            R.drawable.background, R.drawable.check_now, R.drawable.loading,
-            R.drawable.experimental, R.drawable.download
-    };
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.screenshots_detail);
 		imageView = (ImageView) findViewById(R.id.image_view);
 		statusText = (TextView) findViewById(R.id.status_text);
 		
-		showPhoto(mCurrentPhotoIndex);
+		showScreenshot(mCurrentScreenshotIndex);
 
         Button nextButton = (Button) findViewById(R.id.next_button);
+        Button prevButton = (Button) findViewById(R.id.previous_button);
+        
         nextButton.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-                mCurrentPhotoIndex = (mCurrentPhotoIndex + 1) % mPhotoIds.length;
-                showPhoto(mCurrentPhotoIndex);
+            	mCurrentScreenshotIndex = (mCurrentScreenshotIndex < (ScreenshotGridViewAdapter.items.size() - 1)) ?
+            			(mCurrentScreenshotIndex + 1) : (ScreenshotGridViewAdapter.items.size() - 1);
+            	showScreenshot(mCurrentScreenshotIndex);
+            }
+        });
+        prevButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+            	mCurrentScreenshotIndex = (mCurrentScreenshotIndex == 0) ? 0 : (mCurrentScreenshotIndex - 1);
+            	showScreenshot(mCurrentScreenshotIndex);
             }
         });
 	}
 	
-	private void showPhoto(int photoIndex)
+	private void showScreenshot(int _screenshotIndex)
 	{
-        imageView.setImageResource(mPhotoIds[photoIndex]);
-        statusText.setText(String.format("%d/%d", photoIndex + 1, mPhotoIds.length));
+        try
+        {
+			imageView.setImageBitmap((ScreenshotGridViewAdapter.items.get(_screenshotIndex)).getBitmap());
+		}
+        catch (InvalidPictureException e)
+        {
+        	imageView.setImageResource(Constants.SCREENSHOTS_FALLBACK_IMAGE);
+		}
+        statusText.setText(String.format("%d/%d", _screenshotIndex + 1, ScreenshotGridViewAdapter.items.size()));
     }
-	
+
 	@Override
 	protected void onStop()
 	{
 		super.onStop();
-		//Call the Garbage Collector to free the Image Ressources
 		System.gc();
 	}
 }

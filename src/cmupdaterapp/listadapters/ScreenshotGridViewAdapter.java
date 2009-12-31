@@ -19,7 +19,7 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
     private Context mContext;
     private int length;
     
-    public List<Screenshot> items = new LinkedList<Screenshot>();
+    public static List<Screenshot> items = new LinkedList<Screenshot>();
 
     public ScreenshotGridViewAdapter(Context c, int numberOfItems)
     {

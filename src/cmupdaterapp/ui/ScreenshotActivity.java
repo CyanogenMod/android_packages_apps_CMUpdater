@@ -1,8 +1,6 @@
 package cmupdaterapp.ui;
 
 import java.net.URI;
-import java.util.LinkedList;
-import java.util.List;
 
 import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.customTypes.UpdateInfo;
@@ -15,17 +13,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import cmupdaterapp.utils.ImageUtilities;
 
 public class ScreenshotActivity extends Activity
 {
-	private DbAdapter db;
-	private UpdateInfo ui;
-	private GridView gridview;
-	private ScreenshotGridViewAdapter imageAdapter;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -33,25 +25,22 @@ public class ScreenshotActivity extends Activity
 		setContentView(R.layout.screenshots);
 		Intent i = getIntent();
 		Bundle b = i.getExtras();
-		ui = (UpdateInfo) b.get(Constants.SCREENSHOTS_UPDATE);
+		final UpdateInfo ui = (UpdateInfo) b.get(Constants.SCREENSHOTS_UPDATE);
 		
-		gridview = (GridView) findViewById(R.id.gridview);
-		imageAdapter = new ScreenshotGridViewAdapter(this, ui.screenshots.size());
+		GridView gridview = (GridView) findViewById(R.id.gridview);
+		ScreenshotGridViewAdapter imageAdapter = new ScreenshotGridViewAdapter(this, ui.screenshots.size());
 	    gridview.setAdapter(imageAdapter);
-	    // Set a item click listener, and just Toast the clicked position
         gridview.setOnItemClickListener(new OnItemClickListener()
         {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
-                Toast.makeText(ScreenshotActivity.this, "" + position, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(ScreenshotActivity.this, ScreenshotDetailActivity.class);
         		startActivity(i);
             }
         });
 
-		db = new DbAdapter();
-		
-		List<Screenshot> ss = new LinkedList<Screenshot>();
+        DbAdapter db = new DbAdapter();
+
 		try
 		{
 			db.open();
@@ -89,7 +78,7 @@ public class ScreenshotActivity extends Activity
 				{
 					db.updateScreenshot(screeni.PrimaryKey, screeni);
 				}
-				ss.add(screeni);
+				ScreenshotGridViewAdapter.items.add(screeni);
 				PrimaryKeys[counter] = Long.toString(screeni.PrimaryKey);
 				counter++;
 				ScreenFound = false;
@@ -106,7 +95,6 @@ public class ScreenshotActivity extends Activity
 			if(db != null)
 				db.close();
 		}
-		imageAdapter.items = ss;
 	}
 	
 	@Override
@@ -114,6 +102,5 @@ public class ScreenshotActivity extends Activity
 	{
 		super.onStart();
 		System.gc();
-
 	}
 }
