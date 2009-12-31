@@ -14,14 +14,14 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-public class ImageAdapter extends BaseAdapter
+public class ScreenshotGridViewAdapter extends BaseAdapter
 {
     private Context mContext;
     private int length;
     
     public List<Screenshot> items = new LinkedList<Screenshot>();
 
-    public ImageAdapter(Context c, int numberOfItems)
+    public ScreenshotGridViewAdapter(Context c, int numberOfItems)
     {
     	mContext = c;
     	length = numberOfItems;

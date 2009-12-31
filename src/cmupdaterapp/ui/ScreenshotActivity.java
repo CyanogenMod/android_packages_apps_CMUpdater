@@ -8,7 +8,7 @@ import cmupdaterapp.customTypes.CustomDrawable;
 import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.database.DbAdapter;
-import cmupdaterapp.listadapters.ImageAdapter;
+import cmupdaterapp.listadapters.ScreenshotGridViewAdapter;
 import cmupdaterapp.misc.Constants;
 import android.app.Activity;
 import android.content.Intent;
@@ -26,7 +26,7 @@ public class ScreenshotActivity extends Activity
 	private DbAdapter db;
 	private UpdateInfo ui;
 	private GridView gridview;
-	private ImageAdapter imageAdapter;
+	private ScreenshotGridViewAdapter imageAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -38,7 +38,7 @@ public class ScreenshotActivity extends Activity
 		ui = (UpdateInfo) b.get(Constants.SCREENSHOTS_UPDATE);
 		
 		gridview = (GridView) findViewById(R.id.gridview);
-		imageAdapter = new ImageAdapter(this, ui.screenshots.size());
+		imageAdapter = new ScreenshotGridViewAdapter(this, ui.screenshots.size());
 	    gridview.setAdapter(imageAdapter);
 	    // Set a item click listener, and just Toast the clicked position
         gridview.setOnItemClickListener(new OnItemClickListener()
@@ -46,6 +46,8 @@ public class ScreenshotActivity extends Activity
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
                 Toast.makeText(ScreenshotActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(ScreenshotActivity.this, ScreenshotDetailActivity.class);
+        		startActivity(i);
             }
         });
 	    
