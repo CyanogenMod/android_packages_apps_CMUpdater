@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
 
-import cmupdaterapp.customTypes.CustomDrawable;
 import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.database.DbAdapter;
@@ -22,7 +21,6 @@ import cmupdaterapp.utils.ImageUtilities;
 
 public class ScreenshotActivity extends Activity
 {
-	private List<Screenshot> ss;
 	private DbAdapter db;
 	private UpdateInfo ui;
 	private GridView gridview;
@@ -50,15 +48,10 @@ public class ScreenshotActivity extends Activity
         		startActivity(i);
             }
         });
-	    
-		ss = new LinkedList<Screenshot>();
+
 		db = new DbAdapter();
-	}
-	
-	@Override
-	protected void onStart()
-	{
-		super.onStart();
+		
+		List<Screenshot> ss = new LinkedList<Screenshot>();
 		try
 		{
 			db.open();
@@ -66,29 +59,29 @@ public class ScreenshotActivity extends Activity
 			boolean ScreenFound = false;
 			boolean NeedsUpdate = false;
 			int counter = 0;
-			for (URI s : ui.screenshots)
+			for (URI uri : ui.screenshots)
 			{
 				Screenshot screeni = new Screenshot();
 				//Add to DB if not there, otherwise get the DatabaseObject
-				Screenshot temp = db.ScreenshotExists(ui.PrimaryKey, s.toString());
+				Screenshot temp = db.ScreenshotExists(ui.PrimaryKey, uri.toString());
 				if (temp.PrimaryKey != -1)
 				{
 					ScreenFound = true;
 					screeni = temp;
 				}
-				CustomDrawable cd = ImageUtilities.load(s.toString(), screeni.Screenshot.getModifyDateAsMillis());
+				Screenshot s = ImageUtilities.load(uri.toString(), screeni.getModifyDateAsMillis(), ui.PrimaryKey);
 				//Null when Modifydate not changed
-				if (cd != null)
+				if (s != null)
 				{
 					NeedsUpdate = true;
-					screeni.Screenshot = cd;
+					screeni = s;
 				}
 				//When not found insert in DB
 				if (!ScreenFound)
 				{
 					screeni.ForeignThemeListKey = ui.PrimaryKey;
-					screeni.Screenshot = cd;
-					screeni.url = s;
+					screeni = s;
+					screeni.url = uri;
 					screeni.PrimaryKey = db.insertScreenshot(screeni);
 				}
 				//Only Update if Screenshot was there
@@ -101,6 +94,8 @@ public class ScreenshotActivity extends Activity
 				counter++;
 				ScreenFound = false;
 				NeedsUpdate = false;
+				temp = null;
+				screeni = null;
 			}
 			
 			//Delete old Screenshots from DB
@@ -112,5 +107,13 @@ public class ScreenshotActivity extends Activity
 				db.close();
 		}
 		imageAdapter.items = ss;
+	}
+	
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		System.gc();
+
 	}
 }

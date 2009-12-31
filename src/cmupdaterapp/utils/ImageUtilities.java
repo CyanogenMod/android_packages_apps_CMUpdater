@@ -2,6 +2,7 @@ package cmupdaterapp.utils;
 
 import java.io.InputStream;
 import java.io.IOException;
+import java.net.URI;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -11,17 +12,19 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import cmupdaterapp.customTypes.CustomDrawable;
+import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.misc.Log;
 
 public class ImageUtilities
 {
     private static final String TAG = "ImageUtilities";
 
-    public static CustomDrawable load(String url, long lastModifiedInMillis)
+    public static Screenshot load(String url, long lastModifiedInMillis, int foreignKey)
     {
-    	CustomDrawable cd = new CustomDrawable();
-
+    	Screenshot s = new Screenshot();
+    	s.ForeignThemeListKey = foreignKey;
+    	s.url = URI.create(url);
+    	
     	HttpClient httpCrap = new DefaultHttpClient();
 
     	final HttpGet get = new HttpGet(url);
@@ -35,13 +38,13 @@ public class ImageUtilities
     		//Set last ModifyDate
     		final Header header = response.getFirstHeader("Last-Modified");
     		if (header != null)
-    			cd.setModifyDate(header.getValue());
+    			s.setModifyDate(header.getValue());
     		//If null set to today
     		else
-    			cd.setModifyDate(null);
+    			s.setModifyDate(null);
     		
     		//Do not Download if not changed
-    		if (lastModifiedInMillis == cd.getModifyDateAsMillis())
+    		if (lastModifiedInMillis == s.getModifyDateAsMillis())
     			return null;
     		
     		if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)
@@ -53,7 +56,7 @@ public class ImageUtilities
     			try
     			{    			
     				in = entity.getContent();
-    				cd.setPictureFromInputstream(in);
+    				s.setPictureFromInputstream(in);
     			}
     			catch (IOException e)
     			{
@@ -83,6 +86,6 @@ public class ImageUtilities
     			}
     		}
     	}
-    	return cd;
+    	return s;
     }
 }

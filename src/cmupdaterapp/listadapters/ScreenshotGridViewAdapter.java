@@ -61,13 +61,12 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
         //When there is an invalid url or image, set to Fallbackimage
         try
         {
-        	imageView.setImageDrawable(items.get(position).Screenshot.getPictureAsDrawable());
+        	imageView.setImageBitmap(items.get(position).getBitmap());
         }
         catch (InvalidPictureException ex)
         {
         	imageView.setImageResource(Constants.SCREENSHOTS_FALLBACK_IMAGE);
         }
-        
         return imageView;
     }
 }

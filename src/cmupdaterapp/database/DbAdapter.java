@@ -248,8 +248,8 @@ public class DbAdapter
 		ContentValues newValues = new ContentValues();
 		newValues.put(KEY_SCREENSHOT_THEMELIST_ID, _screenshot.ForeignThemeListKey);
 		newValues.put(KEY_SCREENSHOT_URI, _screenshot.url.toString());
-		newValues.put(KEY_SCREENSHOT_MODIFYDATE, _screenshot.Screenshot.getModifyDate());
-		newValues.put(KEY_SCREENSHOT_SCREENSHOT, _screenshot.Screenshot.getPictureAsByteArray());
+		newValues.put(KEY_SCREENSHOT_MODIFYDATE, _screenshot.getModifyDate());
+		newValues.put(KEY_SCREENSHOT_SCREENSHOT, _screenshot.getPictureAsByteArray());
 		return db.insert(DATABASE_TABLE_SCREENSHOT, null, newValues);
 	}
 	
@@ -280,8 +280,8 @@ public class DbAdapter
 			item.PrimaryKey = cursor.getInt(COLUMN_SCREENSHOT_ID);
 			item.ForeignThemeListKey = cursor.getInt(COLUMN_SCREENSHOT_THEMELIST_ID);
 			item.url = URI.create(cursor.getString(COLUMN_SCREENSHOT_URI));
-			item.Screenshot.setModifyDate(cursor.getString(COLUMN_SCREENSHOT_MODIFYDATE));
-			item.Screenshot.setPicture(cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT));
+			item.setModifyDate(cursor.getString(COLUMN_SCREENSHOT_MODIFYDATE));
+			item.setBitmapFromByteArray(cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT));
 			result.add(item);
 		} while (cursor.moveToNext());
 		cursor.close();
@@ -310,8 +310,8 @@ public class DbAdapter
 		result.PrimaryKey = cursor.getInt(COLUMN_SCREENSHOT_ID);
 		result.ForeignThemeListKey = cursor.getInt(COLUMN_SCREENSHOT_THEMELIST_ID);
 		result.url = URI.create(cursor.getString(COLUMN_SCREENSHOT_URI));
-		result.Screenshot.setModifyDate(cursor.getString(COLUMN_SCREENSHOT_MODIFYDATE));
-		result.Screenshot.setPicture(cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT));
+		result.setModifyDate(cursor.getString(COLUMN_SCREENSHOT_MODIFYDATE));
+		result.setBitmapFromByteArray(cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT));
 		cursor.close();
 		return result;
 	}
@@ -338,8 +338,8 @@ public class DbAdapter
 			retValue.PrimaryKey = cursor.getInt(COLUMN_SCREENSHOT_ID);
 			retValue.ForeignThemeListKey = cursor.getInt(COLUMN_SCREENSHOT_THEMELIST_ID);
 			retValue.url = URI.create(cursor.getString(COLUMN_SCREENSHOT_URI));
-			retValue.Screenshot.setModifyDate(cursor.getString(COLUMN_SCREENSHOT_MODIFYDATE));
-			retValue.Screenshot.setPicture(cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT));
+			retValue.setModifyDate(cursor.getString(COLUMN_SCREENSHOT_MODIFYDATE));
+			retValue.setBitmapFromByteArray(cursor.getBlob(COLUMN_SCREENSHOT_SCREENSHOT));
 		}
 		cursor.close();
 		return retValue;
@@ -351,8 +351,8 @@ public class DbAdapter
 		ContentValues newValue = new ContentValues();
 		newValue.put(KEY_SCREENSHOT_THEMELIST_ID, _screenshot.ForeignThemeListKey);
 		newValue.put(KEY_SCREENSHOT_URI, _screenshot.url.toString());
-		newValue.put(KEY_SCREENSHOT_MODIFYDATE, _screenshot.Screenshot.getModifyDate());
-		newValue.put(KEY_SCREENSHOT_SCREENSHOT, _screenshot.Screenshot.getPictureAsByteArray());
+		newValue.put(KEY_SCREENSHOT_MODIFYDATE, _screenshot.getModifyDate());
+		newValue.put(KEY_SCREENSHOT_SCREENSHOT, _screenshot.getPictureAsByteArray());
 		return db.update(DATABASE_TABLE_SCREENSHOT, newValue, KEY_SCREENSHOT_ID + "=" + _rowIndex, null) > 0;
 	}
 	
