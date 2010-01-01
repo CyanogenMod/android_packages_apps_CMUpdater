@@ -91,4 +91,10 @@ public class Screenshot implements Serializable
 		else
 			Picture = BitmapFactory.decodeByteArray(bitmap, 0, bitmap.length);
 	}
+	
+	public void DestroyImage()
+	{
+		if (Picture != null)
+			Picture.recycle();
+	}
 }

@@ -27,6 +27,12 @@ public class ScreenshotActivity extends Activity
 		Bundle b = i.getExtras();
 		final UpdateInfo ui = (UpdateInfo) b.get(Constants.SCREENSHOTS_UPDATE);
 		
+		for(Screenshot s : ScreenshotGridViewAdapter.items)
+		{
+			s.DestroyImage();
+		}
+		ScreenshotGridViewAdapter.items.clear();
+		
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 		ScreenshotGridViewAdapter imageAdapter = new ScreenshotGridViewAdapter(this, ui.screenshots.size());
 	    gridview.setAdapter(imageAdapter);
@@ -53,13 +59,12 @@ public class ScreenshotActivity extends Activity
 			{
 				Screenshot screeni = new Screenshot();
 				//Add to DB if not there, otherwise get the DatabaseObject
-				Screenshot temp = db.ScreenshotExists(ui.PrimaryKey, uri.toString());
-				if (temp.PrimaryKey != -1)
+				screeni = db.ScreenshotExists(ui.PrimaryKey, uri.toString());
+				if (screeni.PrimaryKey != -1)
 				{
 					ScreenFound = true;
-					screeni = temp;
 				}
-				Screenshot s = ImageUtilities.load(uri.toString(), screeni.getModifyDateAsMillis(), ui.PrimaryKey);
+				Screenshot s = ImageUtilities.load(uri.toString(), screeni.getModifyDateAsMillis(), screeni.PrimaryKey, ui.PrimaryKey);
 				//Null when Modifydate not changed
 				if (s != null)
 				{
@@ -69,8 +74,8 @@ public class ScreenshotActivity extends Activity
 				//When not found insert in DB
 				if (!ScreenFound)
 				{
-					screeni.ForeignThemeListKey = ui.PrimaryKey;
 					screeni = s;
+					screeni.ForeignThemeListKey = ui.PrimaryKey;
 					screeni.url = uri;
 					screeni.PrimaryKey = db.insertScreenshot(screeni);
 				}
@@ -84,8 +89,6 @@ public class ScreenshotActivity extends Activity
 				counter++;
 				ScreenFound = false;
 				NeedsUpdate = false;
-				temp = null;
-				screeni = null;
 			}
 			
 			//Delete old Screenshots from DB

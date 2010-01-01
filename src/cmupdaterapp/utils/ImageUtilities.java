@@ -19,11 +19,12 @@ public class ImageUtilities
 {
     private static final String TAG = "ImageUtilities";
 
-    public static Screenshot load(String url, long lastModifiedInMillis, int foreignKey)
+    public static Screenshot load(String url, long lastModifiedInMillis, long primaryKey, int foreignKey)
     {
     	Screenshot s = new Screenshot();
     	s.ForeignThemeListKey = foreignKey;
     	s.url = URI.create(url);
+    	s.PrimaryKey = primaryKey;
     	
     	HttpClient httpCrap = new DefaultHttpClient();
 
