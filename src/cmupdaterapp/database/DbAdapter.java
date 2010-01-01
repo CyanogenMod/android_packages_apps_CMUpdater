@@ -98,7 +98,7 @@ public class DbAdapter
 	// Remove a theme based on its index
 	public boolean removeTheme(long _rowIndex)
 	{
-		return db.delete(DATABASE_TABLE_THEMELIST, KEY_THEMELIST_ID + "=" + _rowIndex, null) > 0;
+		return db.delete(DATABASE_TABLE_THEMELIST, KEY_THEMELIST_ID + "= ?", new String[]{ Long.toString(_rowIndex) }) > 0;
 	}
 	
 	// Removes all themes
@@ -110,7 +110,7 @@ public class DbAdapter
 	// Removes all themes
 	public boolean removeAllFeaturedThemes()
 	{
-		return db.delete(DATABASE_TABLE_THEMELIST, KEY_THEMELIST_FEATURED + "=1", null) > 0;
+		return db.delete(DATABASE_TABLE_THEMELIST, KEY_THEMELIST_FEATURED + "= ?", new String[]{ "1" }) > 0;
 	}
 	
 	// Disable all Themes
@@ -126,7 +126,7 @@ public class DbAdapter
 	{
 		ContentValues newValue = new ContentValues();
 		newValue.put(KEY_THEMELIST_ENABLED, 0);
-		return db.update(DATABASE_TABLE_THEMELIST, newValue, KEY_THEMELIST_FEATURED + "=1", null) > 0;
+		return db.update(DATABASE_TABLE_THEMELIST, newValue, KEY_THEMELIST_FEATURED + "= ?", new String[]{ "1" }) > 0;
 	}
 	
 	// Enable all Themes
@@ -142,7 +142,7 @@ public class DbAdapter
 	{
 		ContentValues newValue = new ContentValues();
 		newValue.put(KEY_THEMELIST_ENABLED, 1);
-		return db.update(DATABASE_TABLE_THEMELIST, newValue, KEY_THEMELIST_FEATURED + "=1", null) > 0;
+		return db.update(DATABASE_TABLE_THEMELIST, newValue, KEY_THEMELIST_FEATURED + "= ?", new String[]{ "1" }) > 0;
 	}
 	
 	// Update a Theme
@@ -155,7 +155,7 @@ public class DbAdapter
 		else newValue.put(KEY_THEMELIST_ENABLED, 0);
 		if(_theme.featured) newValue.put(KEY_THEMELIST_FEATURED, 1);
 		else newValue.put(KEY_THEMELIST_FEATURED, 0);
-		return db.update(DATABASE_TABLE_THEMELIST, newValue, KEY_THEMELIST_ID + "=" + _rowIndex, null) > 0;
+		return db.update(DATABASE_TABLE_THEMELIST, newValue, KEY_THEMELIST_ID + "= ?", new String[]{ Long.toString(_rowIndex) }) > 0;
 	}
 	
 	public Cursor getAllThemesCursor()
@@ -165,7 +165,7 @@ public class DbAdapter
 
 	public ThemeList getThemeItem(long _rowIndex) throws SQLException
 	{
-		Cursor cursor = db.query(true, DATABASE_TABLE_THEMELIST, new String[] { KEY_THEMELIST_ID, KEY_THEMELIST_NAME, KEY_THEMELIST_URI, KEY_THEMELIST_ENABLED, KEY_THEMELIST_FEATURED }, KEY_THEMELIST_ID + "=" + _rowIndex, null, null, null, null, null);
+		Cursor cursor = db.query(true, DATABASE_TABLE_THEMELIST, new String[] { KEY_THEMELIST_ID, KEY_THEMELIST_NAME, KEY_THEMELIST_URI, KEY_THEMELIST_ENABLED, KEY_THEMELIST_FEATURED }, KEY_THEMELIST_ID + "= ?", new String[]{ Long.toString(_rowIndex) }, null, null, null, null);
 		if ((cursor.getCount() == 0) || !cursor.moveToFirst())
 		{
 			cursor.close();
@@ -194,7 +194,7 @@ public class DbAdapter
 		//Get the enabled state of the current Featured Themes
 		for (ThemeList tl : t.returnFullThemeList())
 		{
-			Cursor result = db.query(true, DATABASE_TABLE_THEMELIST, new String[] { KEY_THEMELIST_ID, KEY_THEMELIST_NAME, KEY_THEMELIST_URI, KEY_THEMELIST_ENABLED, KEY_THEMELIST_FEATURED }, KEY_THEMELIST_NAME + "='" + tl.name + "' and " + KEY_THEMELIST_FEATURED + "=1" , null, null, null, null, null);
+			Cursor result = db.query(true, DATABASE_TABLE_THEMELIST, new String[] { KEY_THEMELIST_ID, KEY_THEMELIST_NAME, KEY_THEMELIST_URI, KEY_THEMELIST_ENABLED, KEY_THEMELIST_FEATURED }, KEY_THEMELIST_NAME + "= ? and " + KEY_THEMELIST_FEATURED + "= ?" , new String[]{ tl.name, "1" }, null, null, null, null);
 			if ((result.getCount() == 0) || !result.moveToFirst())
 			{
 				Log.d(TAG, "Theme " + tl.name + " not found in your List");
@@ -206,7 +206,7 @@ public class DbAdapter
 			result.close();
 		}
 		//Delete all featured Themes
-		db.delete(DATABASE_TABLE_THEMELIST, KEY_THEMELIST_FEATURED + "=1", null);
+		db.delete(DATABASE_TABLE_THEMELIST, KEY_THEMELIST_FEATURED + "= ?", new String[]{ "1" });
 		Log.d(TAG, "Deleted all old Featured Theme Servers");
 		//Add all Featured Themes again
 		for (ThemeList tl2 : retValue.returnFullThemeList())
@@ -222,7 +222,7 @@ public class DbAdapter
 	// Remove a Screenshot based on its index
 	public boolean removeScreenshot(long _rowIndex)
 	{
-		return db.delete(DATABASE_TABLE_SCREENSHOT, KEY_SCREENSHOT_ID + "=" + _rowIndex, null) > 0;
+		return db.delete(DATABASE_TABLE_SCREENSHOT, KEY_SCREENSHOT_ID + "= ?", new String[]{ Long.toString(_rowIndex) }) > 0;
 	}
 	
 	// Remove all Screenshots for given Theme except the ones in the parameter
@@ -231,14 +231,14 @@ public class DbAdapter
 		if (primaryKeysNotToRemove == null || primaryKeysNotToRemove.length == 0)
 			return false;
 		String temp = StringUtils.arrayToString(primaryKeysNotToRemove, ",");
-		return db.delete(DATABASE_TABLE_SCREENSHOT, KEY_SCREENSHOT_THEMELIST_ID + "=" + ForeignKey +
-				" AND " + KEY_SCREENSHOT_ID + " not in (" + temp + ")", null) > 0;
+		return db.delete(DATABASE_TABLE_SCREENSHOT, KEY_SCREENSHOT_THEMELIST_ID + "= ? AND "
+				+ KEY_SCREENSHOT_ID + " not in (?)", new String[]{ Integer.toString(ForeignKey), temp }) > 0;
 	}
 	
 	// Remove a Screenshot based on its FeaturedThemeIndex
 	public boolean removeAllScreenshotsForTheme(long FeaturedThemeId)
 	{
-		return db.delete(DATABASE_TABLE_SCREENSHOT, KEY_SCREENSHOT_THEMELIST_ID + "=" + FeaturedThemeId, null) > 0;
+		return db.delete(DATABASE_TABLE_SCREENSHOT, KEY_SCREENSHOT_THEMELIST_ID + "= ?", new String[]{ Long.toString(FeaturedThemeId) }) > 0;
 	}
 	
 	// Insert a new Screenshot
@@ -264,7 +264,7 @@ public class DbAdapter
 							KEY_SCREENSHOT_URI,
 							KEY_SCREENSHOT_MODIFYDATE,
 							KEY_SCREENSHOT_SCREENSHOT
-				           }, KEY_SCREENSHOT_THEMELIST_ID + "=" + _themeIndex, null, null, null, null, null);
+				           }, KEY_SCREENSHOT_THEMELIST_ID + "= ?", new String[]{ Long.toString(_themeIndex) }, null, null, null, null);
 		if ((cursor.getCount() == 0) || !cursor.moveToFirst())
 		{
 			cursor.close();
@@ -299,7 +299,7 @@ public class DbAdapter
 							KEY_SCREENSHOT_URI,
 							KEY_SCREENSHOT_MODIFYDATE,
 							KEY_SCREENSHOT_SCREENSHOT
-				           }, KEY_SCREENSHOT_ID + "=" + _index, null, null, null, null, null);
+				           }, KEY_SCREENSHOT_ID + "= ?", new String[]{ Long.toString(_index) }, null, null, null, null);
 		if ((cursor.getCount() == 0) || !cursor.moveToFirst())
 		{
 			cursor.close();
@@ -330,9 +330,9 @@ public class DbAdapter
 							KEY_SCREENSHOT_URI,
 							KEY_SCREENSHOT_MODIFYDATE,
 							KEY_SCREENSHOT_SCREENSHOT
-				           }, KEY_SCREENSHOT_THEMELIST_ID + "=" + ForeignKey + " AND " +
-				           KEY_SCREENSHOT_URI + "='" + Url + "'",
-				           null, null, null, null, null);
+				           }, KEY_SCREENSHOT_THEMELIST_ID + "= ? AND " +
+				           KEY_SCREENSHOT_URI + "= ?",
+				           new String[]{ Integer.toString(ForeignKey), Url }, null, null, null, null);
 		if ((cursor.getCount() != 0) && cursor.moveToFirst())
 		{
 			retValue.PrimaryKey = cursor.getInt(COLUMN_SCREENSHOT_ID);
@@ -353,7 +353,7 @@ public class DbAdapter
 		newValue.put(KEY_SCREENSHOT_URI, _screenshot.url.toString());
 		newValue.put(KEY_SCREENSHOT_MODIFYDATE, _screenshot.getModifyDate());
 		newValue.put(KEY_SCREENSHOT_SCREENSHOT, _screenshot.getPictureAsByteArray());
-		return db.update(DATABASE_TABLE_SCREENSHOT, newValue, KEY_SCREENSHOT_ID + "=" + _rowIndex, null) > 0;
+		return db.update(DATABASE_TABLE_SCREENSHOT, newValue, KEY_SCREENSHOT_ID + "= ?", new String[]{ Long.toString(_rowIndex) }) > 0;
 	}
 	
 	// Delete All Screenshots
