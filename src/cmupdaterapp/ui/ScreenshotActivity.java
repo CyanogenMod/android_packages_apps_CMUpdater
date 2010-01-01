@@ -35,6 +35,7 @@ public class ScreenshotActivity extends Activity
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
                 Intent i = new Intent(ScreenshotActivity.this, ScreenshotDetailActivity.class);
+                i.putExtra(Constants.SCREENSHOTS_POSITION, position);
         		startActivity(i);
             }
         });

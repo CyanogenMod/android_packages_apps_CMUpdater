@@ -4,6 +4,7 @@ import cmupdaterapp.customTypes.InvalidPictureException;
 import cmupdaterapp.listadapters.ScreenshotGridViewAdapter;
 import cmupdaterapp.misc.Constants;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -23,6 +24,11 @@ public class ScreenshotDetailActivity extends Activity
 		setContentView(R.layout.screenshots_detail);
 		imageView = (ImageView) findViewById(R.id.image_view);
 		statusText = (TextView) findViewById(R.id.status_text);
+		
+		Intent i = getIntent();
+		Bundle b = i.getExtras();
+		
+		mCurrentScreenshotIndex = b.getInt(Constants.SCREENSHOTS_POSITION, 0);
 		
 		showScreenshot(mCurrentScreenshotIndex);
 
