@@ -13,9 +13,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 public class ScreenshotGridViewAdapter extends BaseAdapter
 {
+	public final static String TAG_IMAGE = "Image";
+	public final static String TAG_PROGRESS = "Progress";
+	
     private Context mContext;
     private int length;
     
@@ -31,10 +35,10 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
     {
     	return length;
     }
-
+    
     public Object getItem(int position)
     {
-    	return getView(position, null, null);
+    	return position;
     }
 
     public long getItemId(int position)
@@ -45,20 +49,53 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        ImageView imageView;
+    	boolean ImageLoaded = false;
+    	try
+    	{
+	    	//This will throw an IndexOutOfBoundsException when the image is not loaded yet
+			//So we will Display an Progressbar
+			items.get(position);
+			ImageLoaded = true;
+    	}
+    	catch (IndexOutOfBoundsException ex)
+    	{
+    		ImageLoaded = false;
+    	}
+    	
+        ImageView imageView = null;
+        ProgressBar pg = null;
         if (convertView == null) // if it's not recycled, initialize some attributes
         {
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+        	if (ImageLoaded)
+        	{
+	            imageView = createNewImageView();
+        	}
+        	else
+        	{
+        		pg = new ProgressBar(mContext);
+        		pg.setIndeterminate(true);
+        		pg.setTag(TAG_PROGRESS);
+        		pg.setLayoutParams(new GridView.LayoutParams(85, 85));
+        		pg.setPadding(8, 8, 8, 8);
+        		pg.setVisibility(View.VISIBLE);
+        	}
         }
         else
         {
-            imageView = (ImageView) convertView;
+        	//If its a Progressbar, and the Image is loaded, we have to Convert it to an ImageView
+        	if (ImageLoaded && ((String)convertView.getTag()).equals(TAG_PROGRESS))
+        		imageView = createNewImageView();
+        	//If its not loaded and the existing View is a ProgressBar, leave it
+        	else if (!ImageLoaded && ((String)convertView.getTag()).equals(TAG_PROGRESS))
+        		pg = (ProgressBar) convertView;
+        	//Otherwise its an ImageView
+        	else
+        		imageView = (ImageView) convertView;
         }
 
-        //When there is an invalid url or image, set to Fallbackimage
+        if (!ImageLoaded)
+        	return pg;
+
         try
         {
         	imageView.setImageBitmap(items.get(position).getBitmap());
@@ -69,4 +106,14 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
         }
         return imageView;
     }
+
+	private ImageView createNewImageView()
+	{
+		ImageView imageView = new ImageView(mContext);
+		imageView.setTag(TAG_IMAGE);
+		imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+		imageView.setPadding(8, 8, 8, 8);
+		return imageView;
+	}
 }
