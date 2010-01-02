@@ -16,6 +16,9 @@ public class ScreenshotDetailActivity extends Activity
 	private int mCurrentScreenshotIndex = 0;
 	private ImageView imageView;
 	private TextView statusText;
+	private ImageButton nextButton;
+	private ImageButton prevButton;
+	private int maxIndexSize;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -30,41 +33,61 @@ public class ScreenshotDetailActivity extends Activity
 		
 		mCurrentScreenshotIndex = b.getInt(Constants.SCREENSHOTS_POSITION, 0);
 		
-		showScreenshot(mCurrentScreenshotIndex);
+		maxIndexSize = ScreenshotGridViewAdapter.items.size() - 1;
 
-        ImageButton nextButton = (ImageButton) findViewById(R.id.next_button);
-        ImageButton prevButton = (ImageButton) findViewById(R.id.previous_button);
+        nextButton = (ImageButton) findViewById(R.id.next_button);
+        prevButton = (ImageButton) findViewById(R.id.previous_button);
         
         nextButton.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-            	mCurrentScreenshotIndex = (mCurrentScreenshotIndex < (ScreenshotGridViewAdapter.items.size() - 1)) ?
-            			(mCurrentScreenshotIndex + 1) : (ScreenshotGridViewAdapter.items.size() - 1);
-            	showScreenshot(mCurrentScreenshotIndex);
+            	mCurrentScreenshotIndex++;
+            	showScreenshot();
             }
         });
         prevButton.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-            	mCurrentScreenshotIndex = (mCurrentScreenshotIndex == 0) ? 0 : (mCurrentScreenshotIndex - 1);
-            	showScreenshot(mCurrentScreenshotIndex);
+            	mCurrentScreenshotIndex--;
+            	showScreenshot();
             }
         });
 	}
 	
-	private void showScreenshot(int _screenshotIndex)
+	@Override
+	protected void onStart()
 	{
+		super.onStart();
+		showScreenshot();
+	}
+	
+	private void showScreenshot()
+	{
+		//Reenable the Buttons, they will be removed in the following ifs
+		nextButton.setVisibility(View.VISIBLE);
+		prevButton.setVisibility(View.VISIBLE);
+		if (mCurrentScreenshotIndex >= maxIndexSize)
+		{
+			mCurrentScreenshotIndex = maxIndexSize;
+			nextButton.setVisibility(View.GONE);
+		}
+		if (mCurrentScreenshotIndex <= 0)
+		{
+			mCurrentScreenshotIndex = 0;
+			prevButton.setVisibility(View.GONE);
+		}
+		
         try
         {
-			imageView.setImageBitmap((ScreenshotGridViewAdapter.items.get(_screenshotIndex)).getBitmap());
+			imageView.setImageBitmap((ScreenshotGridViewAdapter.items.get(mCurrentScreenshotIndex)).getBitmap());
 		}
         catch (InvalidPictureException e)
         {
         	imageView.setImageResource(Constants.SCREENSHOTS_FALLBACK_IMAGE);
 		}
-        statusText.setText(String.format("%d/%d", _screenshotIndex + 1, ScreenshotGridViewAdapter.items.size()));
+        statusText.setText(String.format("%d/%d", mCurrentScreenshotIndex + 1, maxIndexSize + 1));
     }
 
 	@Override
