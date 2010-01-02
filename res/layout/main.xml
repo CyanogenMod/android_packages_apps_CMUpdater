@@ -122,7 +122,7 @@
 				<Button
 				    android:id="@+id/check_now_button_update_chooser_updates"
 					android:layout_width="wrap_content"
-					android:layout_height="0dip"
+					android:layout_height="wrap_content"
 					android:text="@string/check_now_button_text"
 					android:layout_weight="0"
 					android:layout_marginTop="20sp"
@@ -296,7 +296,7 @@
 				<Button
 				    android:id="@+id/check_now_button_update_chooser_themes"
 					android:layout_width="wrap_content"
-					android:layout_height="0dip"
+					android:layout_height="wrap_content"
 					android:text="@string/check_now_button_text"
 					android:layout_weight="0"
 					android:layout_marginTop="20sp"
