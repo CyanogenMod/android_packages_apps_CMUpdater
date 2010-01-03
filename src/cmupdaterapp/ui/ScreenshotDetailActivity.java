@@ -87,6 +87,11 @@ public class ScreenshotDetailActivity extends Activity
         {
         	imageView.setImageResource(Constants.SCREENSHOTS_FALLBACK_IMAGE);
 		}
+        //Image not yet loaded
+        catch (IndexOutOfBoundsException e)
+        {
+        	imageView.setImageResource(Constants.SCREENSHOTS_FALLBACK_IMAGE);
+		}
         statusText.setText(String.format("%d/%d", mCurrentScreenshotIndex + 1, maxIndexSize + 1));
     }
 

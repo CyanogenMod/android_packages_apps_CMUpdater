@@ -41,17 +41,20 @@ public class ScreenshotActivity extends Activity
         {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
-                Intent i = new Intent(ScreenshotActivity.this, ScreenshotDetailActivity.class);
-                i.putExtra(Constants.SCREENSHOTS_POSITION, position);
-        		startActivity(i);
+            	//Only start the Activity, when the Image is loaded
+            	try
+            	{
+            		//This will throw an IndexOutOfBoundsException if the Image is not Loaded
+            		ScreenshotGridViewAdapter.items.get(position);
+            		Intent i = new Intent(ScreenshotActivity.this, ScreenshotDetailActivity.class);
+                    i.putExtra(Constants.SCREENSHOTS_POSITION, position);
+            		startActivity(i);
+            	}
+            	catch (IndexOutOfBoundsException ex) { }
             }
         });
-	}
-	
-	@Override
-	protected void onStart()
-	{
-		super.onStart();
-		new DownloadImageTask().execute(ui);		
+        
+        //In onCreate, cause when pressing back from Detail, the old Screenshots remain in the List
+        new DownloadImageTask().execute(ui);
 	}
 }
