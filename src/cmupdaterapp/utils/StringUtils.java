@@ -59,7 +59,7 @@ public class StringUtils
 		}
 		catch(NumberFormatException ex)
 		{
-			Log.e(TAG, "Exception on Parsing Version String. newVersion: "+newVersion+" oldVersion: "+oldVersion, ex);
+			Log.e(TAG, "Exception on Parsing Version String. newVersion: "+newVersion+" oldVersion: "+oldVersion);
 			return false;
 		}
 		if (lNewVersion == lOldVersion)
