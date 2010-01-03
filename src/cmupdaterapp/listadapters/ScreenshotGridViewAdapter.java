@@ -49,18 +49,7 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent)
     {
-    	boolean ImageLoaded = false;
-    	try
-    	{
-	    	//This will throw an IndexOutOfBoundsException when the image is not loaded yet
-			//So we will Display an Progressbar
-			items.get(position);
-			ImageLoaded = true;
-    	}
-    	catch (IndexOutOfBoundsException ex)
-    	{
-    		ImageLoaded = false;
-    	}
+    	boolean ImageLoaded = ScreenshotGridViewAdapter.items.size() > position;
     	
         ImageView imageView = null;
         ProgressBar pg = null;

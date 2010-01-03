@@ -42,15 +42,13 @@ public class ScreenshotActivity extends Activity
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
             	//Only start the Activity, when the Image is loaded
-            	try
+            	if (ScreenshotGridViewAdapter.items.size() > position)
             	{
-            		//This will throw an IndexOutOfBoundsException if the Image is not Loaded
-            		ScreenshotGridViewAdapter.items.get(position);
             		Intent i = new Intent(ScreenshotActivity.this, ScreenshotDetailActivity.class);
                     i.putExtra(Constants.SCREENSHOTS_POSITION, position);
             		startActivity(i);
             	}
-            	catch (IndexOutOfBoundsException ex) { }
+            	else { }
             }
         });
         
