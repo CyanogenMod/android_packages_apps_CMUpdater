@@ -11,12 +11,12 @@ import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.ScreenshotActivity;
 import cmupdaterapp.utils.ImageUtilities;
 
-public class DownloadImageTask extends AsyncTask<UpdateInfo, Void, Boolean>
+public class DownloadImageTask extends AsyncTask<UpdateInfo, Screenshot, Void>
 {
 	private static final String TAG = "DownloadImageTask";
 
 	@Override
-	protected Boolean doInBackground(UpdateInfo... params)
+	protected Void doInBackground(UpdateInfo... params)
 	{
 		DbAdapter db = new DbAdapter();
 
@@ -59,9 +59,8 @@ public class DownloadImageTask extends AsyncTask<UpdateInfo, Void, Boolean>
 				{
 					db.updateScreenshot(screeni.PrimaryKey, screeni);
 				}
-				ScreenshotGridViewAdapter.items.add(screeni);
 				//Calls onProgressUpdate (runs in UI Thread)
-				publishProgress();
+				publishProgress(screeni);
 				PrimaryKeys[counter] = Long.toString(screeni.PrimaryKey);
 				counter++;
 				ScreenFound = false;
@@ -76,13 +75,14 @@ public class DownloadImageTask extends AsyncTask<UpdateInfo, Void, Boolean>
 			if(db != null)
 				db.close();
 		}
-		return true;
+		return null;
 	}
 
 	@Override
-	protected void onProgressUpdate(Void... unused)
+	protected void onProgressUpdate(Screenshot... screeni)
 	{
 		//This runs in the UI Thread
+		ScreenshotGridViewAdapter.items.add(screeni[0]);
 		ScreenshotActivity.imageAdapter.notifyDataSetChanged();
 	}
 }
