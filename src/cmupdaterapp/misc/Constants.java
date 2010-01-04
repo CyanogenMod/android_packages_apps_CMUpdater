@@ -121,5 +121,6 @@ public class Constants
 	//Screenshots
 	public static final String SCREENSHOTS_UPDATE = "Screenshots";
 	public static final int SCREENSHOTS_FALLBACK_IMAGE = android.R.drawable.ic_delete;
+	public static final int SCREENSHOTS_LOADING_IMAGE = android.R.drawable.ic_menu_recent_history;
 	public static final String SCREENSHOTS_POSITION = "ScreenshotPosition";
 }

@@ -13,13 +13,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 public class ScreenshotGridViewAdapter extends BaseAdapter
 {
-	public final static String TAG_IMAGE = "Image";
-	public final static String TAG_PROGRESS = "Progress";
-	
     private Context mContext;
     private int length;
     
@@ -52,57 +48,33 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
     	boolean ImageLoaded = ScreenshotGridViewAdapter.items.size() > position;
     	
         ImageView imageView = null;
-        ProgressBar pg = null;
         if (convertView == null) // if it's not recycled, initialize some attributes
         {
-        	if (ImageLoaded)
-        	{
-	            imageView = createNewImageView();
-        	}
-        	else
-        	{
-        		pg = new ProgressBar(mContext);
-        		pg.setIndeterminate(true);
-        		pg.setTag(TAG_PROGRESS);
-        		pg.setLayoutParams(new GridView.LayoutParams(85, 85));
-        		pg.setPadding(8, 8, 8, 8);
-        		pg.setVisibility(View.VISIBLE);
-        	}
+	            imageView = new ImageView(mContext);
+	    		imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+	    		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+	    		imageView.setPadding(8, 8, 8, 8);
         }
         else
         {
-        	//If its a Progressbar, and the Image is loaded, we have to Convert it to an ImageView
-        	if (ImageLoaded && ((String)convertView.getTag()).equals(TAG_PROGRESS))
-        		imageView = createNewImageView();
-        	//If its not loaded and the existing View is a ProgressBar, leave it
-        	else if (!ImageLoaded && ((String)convertView.getTag()).equals(TAG_PROGRESS))
-        		pg = (ProgressBar) convertView;
-        	//Otherwise its an ImageView
-        	else
         		imageView = (ImageView) convertView;
         }
 
         if (!ImageLoaded)
-        	return pg;
-
-        try
         {
-        	imageView.setImageBitmap(items.get(position).getBitmap());
+        	imageView.setImageResource(Constants.SCREENSHOTS_LOADING_IMAGE);
         }
-        catch (InvalidPictureException ex)
+        else
         {
-        	imageView.setImageResource(Constants.SCREENSHOTS_FALLBACK_IMAGE);
+	        try
+	        {
+	        	imageView.setImageBitmap(items.get(position).getBitmap());
+	        }
+	        catch (InvalidPictureException ex)
+	        {
+	        	imageView.setImageResource(Constants.SCREENSHOTS_FALLBACK_IMAGE);
+	        }
         }
         return imageView;
     }
-
-	private ImageView createNewImageView()
-	{
-		ImageView imageView = new ImageView(mContext);
-		imageView.setTag(TAG_IMAGE);
-		imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-		imageView.setPadding(8, 8, 8, 8);
-		return imageView;
-	}
 }
