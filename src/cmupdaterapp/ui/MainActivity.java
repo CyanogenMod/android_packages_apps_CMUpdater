@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URI;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.RemoteException;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -98,7 +100,7 @@ public class MainActivity extends IMainActivity
 			Log.d(TAG, "Theme Screenshot Button clicked");
 			final UpdateInfo ui = (UpdateInfo) mThemesSpinner.getSelectedItem();
 			Intent i = new Intent(MainActivity.this, ScreenshotActivity.class);
-			i.putExtra(Constants.SCREENSHOTS_UPDATE, ui);
+			i.putExtra(Constants.SCREENSHOTS_UPDATE, (Serializable)ui);
 			startActivity(i);
 			return;
 		}
@@ -127,7 +129,7 @@ public class MainActivity extends IMainActivity
 			Log.d(TAG, "Download Rom Button clicked");
 			final UpdateInfo ui = (UpdateInfo) mUpdatesSpinner.getSelectedItem();
 			//Check if the File is present, so prompt the User to overwrite it
-			File foo = new File(mUpdateFolder + "/" + ui.fileName);
+			File foo = new File(mUpdateFolder + "/" + ui.getFileName());
 			if (foo.isFile() && foo.exists())
 			{
 				new AlertDialog.Builder(MainActivity.this)
@@ -144,7 +146,7 @@ public class MainActivity extends IMainActivity
 				{
 					public void onClick(DialogInterface dialog, int which)
 					{
-						Log.d(TAG, "Start downlading Rom update: " + ui.fileName);
+						Log.d(TAG, "Start downlading Rom update: " + ui.getFileName());
 						downloadRequestedUpdate(ui);
 					}
 				})
@@ -182,7 +184,7 @@ public class MainActivity extends IMainActivity
 			Log.d(TAG, "Download Theme Button clicked");
 			final UpdateInfo ui = (UpdateInfo) mThemesSpinner.getSelectedItem();
 			//Check if the File is present, so prompt the User to overwrite it
-			File foo = new File(mUpdateFolder + "/" + ui.fileName);
+			File foo = new File(mUpdateFolder + "/" + ui.getFileName());
 			if (foo.isFile() && foo.exists())
 			{
 				new AlertDialog.Builder(MainActivity.this)
@@ -199,7 +201,7 @@ public class MainActivity extends IMainActivity
 				{
 					public void onClick(DialogInterface dialog, int which)
 					{
-						Log.d(TAG, "Start downlading Theme update: " + ui.fileName);
+						Log.d(TAG, "Start downlading Theme update: " + ui.getFileName());
 						downloadRequestedUpdate((UpdateInfo) mThemesSpinner.getSelectedItem());
 					}
 				})
@@ -219,7 +221,7 @@ public class MainActivity extends IMainActivity
 		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3)
 		{
 			Button updateChangelogButton = (Button) findViewById(R.id.show_changelog_button);
-			String changelog = ((UpdateInfo) mUpdatesSpinner.getSelectedItem()).description;
+			String changelog = ((UpdateInfo) mUpdatesSpinner.getSelectedItem()).getDescription();
 			if (changelog == null || changelog == "")
 			{
 				updateChangelogButton.setVisibility(View.GONE);
@@ -243,7 +245,7 @@ public class MainActivity extends IMainActivity
 			Button themeChangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
 			Button ScreenshotThemeButton = (Button) findViewById(R.id.theme_screenshots_button);
 			UpdateInfo item = (UpdateInfo) mThemesSpinner.getSelectedItem();
-			String changelog = item.description;
+			String changelog = item.getDescription();
 			List<URI> screenshots = item.screenshots;
 			int ScreenshotCount = item.screenshots.size();
 			
@@ -520,12 +522,12 @@ public class MainActivity extends IMainActivity
 		{
 			UpdateInfo ui = new UpdateInfo();
 			String[] temp = mFilename.split("\\\\");
-			ui.name = temp[temp.length-1];
-			ui.fileName = mFilename;
+			ui.setName(temp[temp.length-1]);
+			ui.setFileName(mFilename);
 			if(result == true)
 			{
 				Intent i = new Intent(MainActivity.this, ApplyUpdateActivity.class)
-				.putExtra(Constants.KEY_UPDATE_INFO, ui);
+				.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)ui);
 				startActivity(i);
 			}
 			else
@@ -653,16 +655,21 @@ public class MainActivity extends IMainActivity
 		}
 		files = null;
 
-		if(DownloadActivity.mUpdateDownloaderService != null && DownloadActivity.mUpdateDownloaderService.isDownloading())
-		{
-			UpdateInfo ui = DownloadActivity.mUpdateDownloaderService.getCurrentUpdate();
-			Intent i = new Intent(MainActivity.this, DownloadActivity.class);
-			i.putExtra(Constants.UPDATE_INFO, ui);
-			startActivity(i);
-		}
-		else
-		{
-			switchToUpdateChooserLayout();
+		try {
+			if(DownloadActivity.myService != null && DownloadActivity.myService.DownloadRunning())
+			{
+				UpdateInfo ui = DownloadActivity.myService.getCurrentUpdate();
+				Intent i = new Intent(MainActivity.this, DownloadActivity.class);
+				i.putExtra(Constants.UPDATE_INFO, (Serializable)ui);
+				startActivity(i);
+			}
+			else
+			{
+				switchToUpdateChooserLayout();
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -694,18 +701,23 @@ public class MainActivity extends IMainActivity
 	{
 		boolean superReturn = super.onPrepareOptionsMenu(menu);
 
-		if(DownloadActivity.mUpdateDownloaderService != null && DownloadActivity.mUpdateDownloaderService.isDownloading())
-		{
-			//Download in progress
-			menu.findItem(Constants.MENU_ID_UPDATE_NOW).setEnabled(false);
-		}
-		else if (mAvailableUpdates != null)
-		{
-			//Available updates
-		}
-		else
-		{
-			//No available updates
+		try {
+			if(DownloadActivity.myService != null && DownloadActivity.myService.DownloadRunning())
+			{
+				//Download in progress
+				menu.findItem(Constants.MENU_ID_UPDATE_NOW).setEnabled(false);
+			}
+			else if (mAvailableUpdates != null)
+			{
+				//Available updates
+			}
+			else
+			{
+				//No available updates
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return superReturn;
 	}
@@ -1141,7 +1153,7 @@ public class MainActivity extends IMainActivity
 	private void downloadRequestedUpdate(UpdateInfo ui)
 	{
 		Intent i = new Intent(MainActivity.this, DownloadActivity.class);
-		i.putExtra(Constants.UPDATE_INFO, ui);
+		i.putExtra(Constants.UPDATE_INFO, (Serializable)ui);
 		startActivity(i);
 		Toast.makeText(this, R.string.downloading_update, Toast.LENGTH_LONG).show();
 	}

@@ -37,8 +37,8 @@ public class Changelog implements Runnable
 	{
 		Version v = new Version();
 		List<Version> returnValue = new LinkedList<Version>();
-		v.Version = ui.version;
-		for (String str : ui.description.split("\\|"))
+		v.Version = ui.getVersion();
+		for (String str : ui.getDescription().split("\\|"))
 		{
 			if(str != "")
 				v.ChangeLogText.add(str);

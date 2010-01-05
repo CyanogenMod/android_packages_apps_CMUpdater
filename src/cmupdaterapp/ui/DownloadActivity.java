@@ -2,10 +2,11 @@ package cmupdaterapp.ui;
 
 import java.net.MalformedURLException;
 import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.interfaces.IDownloadActivity;
+import cmupdaterapp.interfaces.IDownloadService;
+import cmupdaterapp.interfaces.IDownloadServiceCallback;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
-import cmupdaterapp.service.UpdateDownloaderService;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,16 +14,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
+import android.os.RemoteException;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class DownloadActivity extends IDownloadActivity
+public class DownloadActivity extends Activity implements IDownloadServiceCallback
 {
 	private static final String TAG = "DownloadActivity";
 	
@@ -34,13 +33,9 @@ public class DownloadActivity extends IDownloadActivity
 	private TextView mRemainingTimeTextView;
 	private String mMirrorName;
 	private String mFileName;
-	public static UpdateDownloaderService mUpdateDownloaderService;
-	private Intent mUpdateDownloaderServiceIntent;
 	
 	//Indicates if a Service is bound 
-	private boolean mbind = false;
-	
-	public static Handler DownloadserviceToastHandler;
+	private boolean mbound = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -48,25 +43,6 @@ public class DownloadActivity extends IDownloadActivity
 		Log.d(TAG, "onCreate called");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.download);
-		mUpdateDownloaderServiceIntent = new Intent(this, UpdateDownloaderService.class);
-		
-		DownloadserviceToastHandler = new Handler()
-		{
-			public void handleMessage(Message msg)
-			{
-				if (msg.obj instanceof String)
-				{
-					Toast.makeText(DownloadActivity.this, (CharSequence) msg.obj, Toast.LENGTH_LONG).show();
-				}
-	        }
-	    };
-	}
-	
-	@Override
-	protected void onStart()
-	{
-		Log.d(TAG, "onStart called");
-		super.onStart();
 	}
 	
 	@Override
@@ -77,33 +53,31 @@ public class DownloadActivity extends IDownloadActivity
 		
 		UpdateInfo ui = null;
 		
-		if (mUpdateDownloaderService != null && mUpdateDownloaderService.isDownloading())
-		{
-			Log.d(TAG, "Retrieved update from DownloadService");
-			ui = mUpdateDownloaderService.getCurrentUpdate();
-			mMirrorName = mUpdateDownloaderService.getCurrentMirrorName();
-		}
-		else
-		{
-			Log.d(TAG, "Not downloading");
-			Intent i = getIntent();
-			if (i!=null)
+		try {
+			if (myService != null && myService.DownloadRunning())
 			{
-				Bundle b = i.getExtras();
-				if (b!=null)
-					ui = (UpdateInfo) b.get(Constants.UPDATE_INFO);	
+				ui = myService.getCurrentUpdate();
+				Log.d(TAG, "Retrieved update from DownloadService");
+				mMirrorName = myService.getCurrentMirrorName();
 			}
-	
-			mUpdateDownloaderServiceIntent.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_UPDATE);
-			mUpdateDownloaderServiceIntent.putExtra(Constants.KEY_UPDATE_INFO, ui);
-			startService(mUpdateDownloaderServiceIntent);
-	
-			bindService(mUpdateDownloaderServiceIntent, mUpdateDownloaderServiceConnection, Context.BIND_AUTO_CREATE);
-			mbind = true;
+			else
+			{
+				Log.d(TAG, "Not downloading");
+				Intent i = getIntent();
+				if (i!=null)
+				{
+					Bundle b = i.getExtras();
+					if (b!=null)
+						ui = (UpdateInfo) b.get(Constants.UPDATE_INFO);	
+				}
+				mbound = bindService(new Intent(IDownloadService.class.getName()), mConnection, Context.BIND_AUTO_CREATE);
+			}
+		} catch (RemoteException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
-		UpdateDownloaderService.setUpdateProcessInfo(DownloadActivity.this);
-		
 		try
 		{
 			String[] temp = ui.updateFileUris.get(0).toURL().getFile().split("/");
@@ -136,41 +110,31 @@ public class DownloadActivity extends IDownloadActivity
 	protected void onDestroy()
 	{
 		Log.d(TAG, "onDestroy called");
-		if(mUpdateDownloaderService != null && !mUpdateDownloaderService.isDownloading())
-		{
-			try
+		try {
+			if(myService != null && !myService.DownloadRunning())
 			{
-				if(mbind)
+				if(mbound)
 				{
-					unbindService(mUpdateDownloaderServiceConnection);
+					unbindService(mConnection);
 					Log.d(TAG, "mUpdateDownloaderServiceConnection unbind finished");
-					mbind = false;
+					mbound = false;
 				}
 				else
 					Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
 			}
-			catch (SecurityException ex)
-			{
-				Log.e(TAG, "Exit App: mUpdateDownloaderServiceConnection unbind failed", ex);
-			}
-			try
-			{
-				stopService(mUpdateDownloaderServiceIntent);
-			}
-			catch (SecurityException ex)
-			{
-				Log.e(TAG, "Exit App: mUpdateDownloaderServiceIntent could not be Stopped", ex);
-			}
+			else
+				Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
+		} catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else
-			Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
 		super.onDestroy();
 	}
-	
-	@Override
+
 	public void updateDownloadProgress(final int downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
 	{
-		if(mProgressBar ==null)return;
+		if(mProgressBar == null) return;
 
 		mProgressBar.post(new Runnable()
 		{
@@ -193,8 +157,7 @@ public class DownloadActivity extends IDownloadActivity
 			}
 		});
 	}
-	
-	@Override
+
 	public void updateDownloadMirror(final String mirror)
 	{
 		if(mDownloadMirrorTextView == null) return;
@@ -220,37 +183,29 @@ public class DownloadActivity extends IDownloadActivity
 				public void onClick(DialogInterface dialog, int which)
 				{
 					Log.d(TAG, "Positive Download Cancel Button pressed");
-					if (mUpdateDownloaderService!=null)
+					if (myService!=null)
 					{
-						mUpdateDownloaderService.cancelDownload();
+						try
+						{
+							myService.cancelDownload();
+						}
+						catch (RemoteException e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						Log.d(TAG, "Cancel onClick Event: cancelDownload finished");
 					}
 					else
 						Log.d(TAG, "Cancel Download: mUpdateDownloaderService was NULL");
-					try
+					if(mbound)
 					{
-						stopService(mUpdateDownloaderServiceIntent);
-						Log.d(TAG, "stopService(mUpdateDownloaderServiceIntent) finished");
+						unbindService(mConnection);
+						Log.d(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
+						mbound = false;
 					}
-					catch (SecurityException ex)
-					{
-						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceIntent could not be Stopped", ex);
-					}
-					try
-					{
-						if(mbind)
-						{
-							unbindService(mUpdateDownloaderServiceConnection);
-							Log.d(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
-							mbind = false;
-						}
-						else
-							Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
-					}
-					catch (SecurityException ex)
-					{
-						Log.e(TAG, "Cancel Download: mUpdateDownloaderServiceConnection unbind failed", ex);
-					}
+					else
+						Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
 					Log.d(TAG, "Download Cancel Procedure Finished. Switching Layout");
 					finish();
 				}
@@ -268,16 +223,30 @@ public class DownloadActivity extends IDownloadActivity
 
 	};
 	
-	private final ServiceConnection mUpdateDownloaderServiceConnection = new ServiceConnection()
-	{
-		public void onServiceConnected(ComponentName className, IBinder service)
-		{
-			mUpdateDownloaderService = ((UpdateDownloaderService.LocalBinder)service).getService();
-		}
+	public static IDownloadService myService;
+	
+	/**
+	 * Class for interacting with the main interface of the service.
+	 */
+    private ServiceConnection mConnection = new ServiceConnection()
+    {
+    	public void onServiceConnected(ComponentName name, IBinder service)
+    	{
+    		myService = IDownloadService.Stub.asInterface(service);
+    	}
+    	public void onServiceDisconnected(ComponentName name)
+    	{
+    		myService = null;
+    	}
+    };
 
-		public void onServiceDisconnected(ComponentName className)
-		{
-			mUpdateDownloaderService = null;
-		}
-	};
+	public void sendToastMessage(String msg) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public IBinder asBinder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

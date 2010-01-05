@@ -264,7 +264,7 @@ public class UpdateCheckHelper implements IUpdateCheckHelper
 				if(item!=null)
 					ui.board.add(item.trim());
 			}
-			ui.type = obj.getString(Constants.JSON_TYPE).trim();
+			ui.setType(obj.getString(Constants.JSON_TYPE).trim());
 			ui.mod = new LinkedList<String>();
 			String[] mods= obj.getString(Constants.JSON_MOD).split("\\|");
 			for(String mod:mods)
@@ -272,11 +272,11 @@ public class UpdateCheckHelper implements IUpdateCheckHelper
 				if(mod!=null)
 					ui.mod.add(mod.trim());
 			}
-			ui.name = obj.getString(Constants.JSON_NAME).trim();
-			ui.version = obj.getString(Constants.JSON_VERSION).trim();
-			ui.description = obj.getString(Constants.JSON_DESCRIPTION).trim();
-			ui.branchCode = obj.getString(Constants.JSON_BRANCH).trim();
-			ui.fileName = obj.getString(Constants.JSON_FILENAME).trim();
+			ui.setName(obj.getString(Constants.JSON_NAME).trim());
+			ui.setVersion(obj.getString(Constants.JSON_VERSION).trim());
+			ui.setDescription(obj.getString(Constants.JSON_DESCRIPTION).trim());
+			ui.setBranchCode(obj.getString(Constants.JSON_BRANCH).trim());
+			ui.setFileName(obj.getString(Constants.JSON_FILENAME).trim());
 			
 			ui.updateFileUris = new LinkedList<URI>();
 
@@ -285,13 +285,13 @@ public class UpdateCheckHelper implements IUpdateCheckHelper
 				try
 				{
 					if (!mirrorList.isNull(i))
-						ui.updateFileUris.add(new URI(mirrorList.getString(i).trim() + ui.fileName));
+						ui.updateFileUris.add(new URI(mirrorList.getString(i).trim() + ui.getFileName()));
 					else
 						Log.d(TAG, "Theres an error in your JSON File. Maybe a , after the last mirror");
 				}
 				catch (URISyntaxException e)
 				{
-					Log.e(TAG, "Unable to parse mirror url (" + mirrorList.getString(i) + ui.fileName + "). Ignoring this mirror", e);
+					Log.e(TAG, "Unable to parse mirror url (" + mirrorList.getString(i) + ui.getFileName() + "). Ignoring this mirror", e);
 				}
 			}
 			
@@ -314,7 +314,7 @@ public class UpdateCheckHelper implements IUpdateCheckHelper
 						}
 						catch (URISyntaxException e)
 						{
-							Log.e(TAG, "Unable to parse Screenshot url (" + screenshots.getString(screenshotcounter) + ") Theme: " + ui.name + ". Ignoring this Screenshot", e);
+							Log.e(TAG, "Unable to parse Screenshot url (" + screenshots.getString(screenshotcounter) + ") Theme: " + ui.getName() + ". Ignoring this Screenshot", e);
 						}
 					}
 				}
@@ -333,7 +333,7 @@ public class UpdateCheckHelper implements IUpdateCheckHelper
 
 		boolean allow = false;
 
-		if (ui.branchCode.equalsIgnoreCase(Constants.UPDATE_INFO_BRANCH_EXPERIMENTAL))
+		if (ui.getBranchCode().equalsIgnoreCase(Constants.UPDATE_INFO_BRANCH_EXPERIMENTAL))
 		{
 			if (experimentalAllowed == true)
 				allow = true;
@@ -377,35 +377,35 @@ public class UpdateCheckHelper implements IUpdateCheckHelper
 		for (int i = 0, max = updateInfos.size() ; i < max ; i++)
 		{
 			UpdateInfo ui = updateInfos.poll();
-			if (ui.type.equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_ROM))
+			if (ui.getType().equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_ROM))
 			{
 				if (boardMatches(ui, systemMod))
 				{
-					if(showAllRomUpdates || StringUtils.compareVersions(Constants.RO_MOD_START_STRING + ui.version, systemRom))
+					if(showAllRomUpdates || StringUtils.compareVersions(Constants.RO_MOD_START_STRING + ui.getVersion(), systemRom))
 					{
 						if (branchMatches(ui, showExperimentalRomUpdates))
 						{
-							Log.d(TAG, "Adding Rom: " + ui.name + " Version: " + ui.version + " Filename: " + ui.fileName);
+							Log.d(TAG, "Adding Rom: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
 							ret.add(ui);
 						}
 						else
 						{
-							Log.d(TAG, "Discarding Rom " + ui.name + " (Branch mismatch - stable/experimental)");
+							Log.d(TAG, "Discarding Rom " + ui.getName() + " (Branch mismatch - stable/experimental)");
 						}
 					}
 					else
 					{
-						Log.d(TAG, "Discarding Rom " + ui.name + " (older version)");
+						Log.d(TAG, "Discarding Rom " + ui.getName() + " (older version)");
 					}
 				}
 				else
 				{
-					Log.d(TAG, "Discarding Rom " + ui.name + " (mod mismatch)");
+					Log.d(TAG, "Discarding Rom " + ui.getName() + " (mod mismatch)");
 				}
 			}
 			else
 			{
-				Log.d(TAG, String.format("Discarding Rom %s Version %s", ui.name, ui.version));
+				Log.d(TAG, String.format("Discarding Rom %s Version %s", ui.getName(), ui.getVersion()));
 			}
 		}
 		return ret;
@@ -422,51 +422,51 @@ public class UpdateCheckHelper implements IUpdateCheckHelper
 			if (themeInfos != null)
 			{
 				//Json object is a theme
-				if (ui.type.equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_THEME))
+				if (ui.getType().equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_THEME))
 				{
 					//Rom matches (must also match, if there is a * in the themes.theme file, or the file does not exist)
 					if (romMatches(ui, systemRom))
 					{
 						//Name matches or is *
-						if (WildcardUsed || showAllThemeUpdates || (themeInfos.name != null && themeInfos.name != "" && ui.name.equalsIgnoreCase(themeInfos.name)))
+						if (WildcardUsed || showAllThemeUpdates || (themeInfos.name != null && themeInfos.name != "" && ui.getName().equalsIgnoreCase(themeInfos.name)))
 						{
 							//Version matches or name is *. If *, display all Versions
-							if(WildcardUsed || showAllThemeUpdates || StringUtils.compareVersions(ui.version, themeInfos.version))
+							if(WildcardUsed || showAllThemeUpdates || StringUtils.compareVersions(ui.getVersion(), themeInfos.version))
 							{
 								//Branch matches
 								if (branchMatches(ui, showExperimentalThemeUpdates))
 								{
-									Log.d(TAG, "Adding Theme: " + ui.name + " Version: " + ui.version + " Filename: " + ui.fileName);
+									Log.d(TAG, "Adding Theme: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
 									ret.add(ui);
 								}
 								else
 								{
-									Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
+									Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
 								}
 							}
 							else
 							{
-								Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
+								Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
 							}
 						}
 						else
 						{
-							Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
+							Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
 						}
 					}
 					else
 					{
-						Log.d(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.name, themeInfos.name, themeInfos.version, ui.name, ui.version));
+						Log.d(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
 					}
 				}
 				else
 				{
-					Log.d(TAG, String.format("Discarding Update(not a Theme) %s Version %s", ui.name, ui.version));
+					Log.d(TAG, String.format("Discarding Update(not a Theme) %s Version %s", ui.getName(), ui.getVersion()));
 				}
 			}
 			else
 			{
-				Log.d(TAG, String.format("Discarding Theme %s Version %s. Invalid or no Themes installed", ui.name, ui.version));
+				Log.d(TAG, String.format("Discarding Theme %s Version %s. Invalid or no Themes installed", ui.getName(), ui.getVersion()));
 			}
 		}
 		return ret;

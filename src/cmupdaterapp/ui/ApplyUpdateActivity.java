@@ -37,7 +37,7 @@ public class ApplyUpdateActivity extends Activity
 		{
 			String dialogBody = MessageFormat.format(
 					getResources().getString(R.string.apply_update_dialog_text),
-					mUpdateInfo.name);
+					mUpdateInfo.getName());
 
 			AlertDialog dialog = new AlertDialog.Builder(ApplyUpdateActivity.this)
 			.setTitle(R.string.apply_update_dialog_title)
@@ -85,7 +85,7 @@ public class ApplyUpdateActivity extends Activity
 				os.write("mkdir -p /cache/recovery/\n".getBytes());
 				os.write("echo 'boot-recovery' >/cache/recovery/command\n".getBytes());
 				if(mBackup) os.write("echo '--nandroid'  >> /cache/recovery/command\n".getBytes());
-				String cmd = "echo '--update_package=SDCARD:" + mUpdateFolder + "/" + mUpdateInfo.fileName + "' >> /cache/recovery/command\n";
+				String cmd = "echo '--update_package=SDCARD:" + mUpdateFolder + "/" + mUpdateInfo.getFileName() + "' >> /cache/recovery/command\n";
 				os.write(cmd.getBytes());
 				os.write("reboot recovery\n".getBytes());
 
@@ -131,8 +131,8 @@ public class ApplyUpdateActivity extends Activity
 		Resources res = getResources();
 		mUpdateInfo = (UpdateInfo) getIntent().getExtras().getSerializable(Constants.KEY_UPDATE_INFO);
 		String template = res.getString(R.string.apply_title_textview_text);
-		mTitle.setText(MessageFormat.format(template, mUpdateInfo.name));
+		mTitle.setText(MessageFormat.format(template, mUpdateInfo.getName()));
 		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
-		Log.d(TAG, "Filename selected to flash: " + mUpdateInfo.fileName);
+		Log.d(TAG, "Filename selected to flash: " + mUpdateInfo.getFileName());
 	}
 }

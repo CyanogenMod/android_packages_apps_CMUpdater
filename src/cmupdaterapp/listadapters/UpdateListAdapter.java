@@ -46,12 +46,12 @@ public class UpdateListAdapter<T> extends ArrayAdapter<T>
 		}
 		
     	UpdateInfo info = (UpdateInfo) this.getItem(position);
-    	if (info.type.equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_THEME))
-    		wrapper.getTextView().setText(info.name + " " + info.version);
+    	if (info.getType().equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_THEME))
+    		wrapper.getTextView().setText(info.getName() + " " + info.getVersion());
     	else
-    		wrapper.getTextView().setText(info.name);
+    		wrapper.getTextView().setText(info.getName());
     	
-    	if(info.branchCode.equalsIgnoreCase(Constants.UPDATE_INFO_BRANCH_EXPERIMENTAL))
+    	if(info.getBranchCode().equalsIgnoreCase(Constants.UPDATE_INFO_BRANCH_EXPERIMENTAL))
     		wrapper.getImage().setImageResource(R.drawable.experimental);
     	else
     		wrapper.getImage().setImageResource(R.drawable.stable);

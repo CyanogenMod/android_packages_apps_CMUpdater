@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	android:versionName="4.5.1" android:versionCode="451" package="cmupdaterapp.ui">
+	android:versionName="4.5.2" android:versionCode="452" package="cmupdaterapp.ui">
 
 	<uses-sdk android:minSdkVersion="3"/>
 
@@ -57,7 +57,11 @@
 		</receiver>
 
 		<service android:name="cmupdaterapp.service.UpdateCheckerService" />
-		<service android:name="cmupdaterapp.service.UpdateDownloaderService" />
+		<service android:name="cmupdaterapp.service.DownloadService">
+			<intent-filter>
+				<action android:name="cmupdaterapp.interfaces.IDownloadService" />
+			</intent-filter>
+		</service>
 	</application>
 
 	<uses-permission android:name="android.permission.INTERNET" />
