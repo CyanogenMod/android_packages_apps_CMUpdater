@@ -227,7 +227,6 @@ public class DownloadActivity extends Activity
 	};
 	
 	public static IDownloadService myService;
-	private final Handler handler = new Handler();
 	
 	/**
 	 * Class for interacting with the main interface of the service.
@@ -244,7 +243,7 @@ public class DownloadActivity extends Activity
     		catch (RemoteException e)
     		{ }
     		//Start Downloading
-    		Runnable r = new Runnable()
+    		Thread t = new Thread()
             {
     			public void run()
     			{
@@ -259,7 +258,7 @@ public class DownloadActivity extends Activity
 	    			}
     			}
             };
-            handler.post(r);
+            t.start();
     	}
     	public void onServiceDisconnected(ComponentName name)
     	{
@@ -275,9 +274,9 @@ public class DownloadActivity extends Activity
 	
 	private IDownloadServiceCallback mCallback = new IDownloadServiceCallback.Stub()
 	{
-		public void updateDownloadProgress(int downloaded, int total,
-				String downloadedText, String speedText,
-				String remainingTimeText) throws RemoteException
+		public void updateDownloadProgress(final int downloaded, final int total,
+				final String downloadedText, final String speedText,
+				final String remainingTimeText) throws RemoteException
 				{
 			mHandler.sendMessage(mHandler.obtainMessage(UPDATE_DOWNLOAD_PROGRESS, new DownloadProgress(
 					downloaded, total, downloadedText, speedText, remainingTimeText)));

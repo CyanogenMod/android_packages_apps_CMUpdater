@@ -114,7 +114,6 @@ public class DownloadService extends Service
     {
     	Log.d(TAG, "Download Service Created");
 		mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-		//mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 
 		mHttpClient = new DefaultHttpClient();
 		mMD5HttpClient = new DefaultHttpClient();
@@ -547,11 +546,11 @@ public class DownloadService extends Service
 
 			if(!mMirrorNameUpdated)
 			{
-				mHandler.sendMessage(mHandler.obtainMessage(UPDATE_DOWNLOAD_MIRROR, mMirrorName));
+				UpdateDownloadMirror(mMirrorName);
 				mMirrorNameUpdated = true;
 			}
 			//Update the DownloadProgress
-			mHandler.sendMessage(mHandler.obtainMessage(UPDATE_DOWNLOAD_PROGRESS, new DownloadProgress(mtotalDownloaded, mcontentLength, mstringDownloaded, mstringSpeed, mstringRemainingTime)));
+			UpdateDownloadProgress(mtotalDownloaded, mcontentLength, mstringDownloaded, mstringSpeed, mstringRemainingTime);
 		}
 		else
 			Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
@@ -622,53 +621,39 @@ public class DownloadService extends Service
 		Log.d(TAG, "Download Notification removed");
 	}
 	
-	private static final int UPDATE_DOWNLOAD_PROGRESS = 1;
-	private static final int UPDATE_DOWNLOAD_MIRROR = 2;
+	private void UpdateDownloadProgress(final int downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
+	{
+		final int N = mCallbacks.beginBroadcast();
+		for (int i=0; i<N; i++)
+		{
+			try
+			{
+				mCallbacks.getBroadcastItem(i).updateDownloadProgress(downloaded, total, downloadedText, speedText, remainingTimeText);
+			}
+			catch (RemoteException e)
+			{
+				// The RemoteCallbackList will take care of removing
+				// the dead object for us.
+			}
+		}
+		mCallbacks.finishBroadcast();
+	}
 	
-    private final Handler mHandler = new Handler()
-    {
-    	@Override
-    	public void handleMessage(Message msg)
-    	{
-    		switch (msg.what)
-    		{
-    			case UPDATE_DOWNLOAD_PROGRESS:
-    				DownloadProgress pg = (DownloadProgress) msg.obj;
-    				//Broadcast to all clients the new value.
-    				final int N = mCallbacks.beginBroadcast();
-    				for (int i=0; i<N; i++)
-    				{
-    					try
-    					{
-    						mCallbacks.getBroadcastItem(i).updateDownloadProgress(pg.getDownloaded(), pg.getTotal(), pg.getDownloadedText(), pg.getSpeedText(), pg.getRemainingTimeText());
-    					}
-    					catch (RemoteException e)
-    					{
-    						// The RemoteCallbackList will take care of removing
-    						// the dead object for us.
-    					}
-    				}
-    				mCallbacks.finishBroadcast();
-    				break;
-    			case UPDATE_DOWNLOAD_MIRROR:
-    				final int M = mCallbacks.beginBroadcast();
-					for (int i=0; i<M; i++)
-					{
-						try
-						{
-							mCallbacks.getBroadcastItem(i).UpdateDownloadMirror((String)msg.obj);
-						}
-						catch (RemoteException e)
-						{
-							// The RemoteCallbackList will take care of removing
-							// the dead object for us.
-						}
-					}
-					mCallbacks.finishBroadcast();
-    				break;
-    			default:
-    				super.handleMessage(msg);
-    		}
-    	}
-	};
+	private void UpdateDownloadMirror(String mirrorName)
+	{
+		final int M = mCallbacks.beginBroadcast();
+		for (int i=0; i<M; i++)
+		{
+			try
+			{
+				mCallbacks.getBroadcastItem(i).UpdateDownloadMirror(mirrorName);
+			}
+			catch (RemoteException e)
+			{
+				// The RemoteCallbackList will take care of removing
+				// the dead object for us.
+			}
+		}
+		mCallbacks.finishBroadcast();
+	}
 }
