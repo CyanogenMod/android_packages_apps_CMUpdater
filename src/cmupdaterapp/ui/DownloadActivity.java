@@ -58,7 +58,8 @@ public class DownloadActivity extends Activity
 		Log.d(TAG, "onResume called");
 		super.onResume();
 		
-		try {
+		try
+		{
 			if (myService != null && myService.DownloadRunning())
 			{
 				ui = myService.getCurrentUpdate();
@@ -79,7 +80,8 @@ public class DownloadActivity extends Activity
 				}
 				mbound = bindService(new Intent(IDownloadService.class.getName()), mConnection, Context.BIND_AUTO_CREATE);
 			}
-		} catch (RemoteException e1)
+		}
+		catch (RemoteException e1)
 		{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -117,7 +119,8 @@ public class DownloadActivity extends Activity
 	protected void onDestroy()
 	{
 		Log.d(TAG, "onDestroy called");
-		try {
+		try
+		{
 			if(myService != null && !myService.DownloadRunning())
 			{
 				if(mbound)
@@ -131,7 +134,8 @@ public class DownloadActivity extends Activity
 			}
 			else
 				Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
-		} catch (RemoteException e)
+		}
+		catch (RemoteException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();

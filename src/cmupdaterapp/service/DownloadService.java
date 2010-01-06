@@ -43,7 +43,9 @@ import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.WifiLock;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.widget.RemoteViews;
@@ -407,7 +409,7 @@ public class DownloadService extends Service
 				}
 				catch (IOException ex)
 				{
-					Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
+					ToastHandler.sendMessage(ToastHandler.obtainMessage(0, ex.getMessage()));
 					Log.e(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
 				}
 				if(Thread.currentThread().isInterrupted() || !Thread.currentThread().isAlive())
@@ -419,7 +421,7 @@ public class DownloadService extends Service
 				break;
 			}
 		}
-		Toast.makeText(this, R.string.unable_to_download_file, Toast.LENGTH_LONG).show();
+		ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.unable_to_download_file, 0));
 		Log.d(TAG, "Unable to download the update file from any mirror");
 
 		if (null != mDestinationFile && mDestinationFile.exists())
@@ -708,4 +710,15 @@ public class DownloadService extends Service
 		Log.d(TAG, "Download Cancel StopSelf was called");
 		stopSelf();
 	}
+	
+	private Handler ToastHandler = new Handler()
+	{
+		public void handleMessage(Message msg)
+		{
+			if (msg.arg1 != 0)
+				Toast.makeText(DownloadService.this, msg.arg1, Toast.LENGTH_LONG).show();
+			else
+				Toast.makeText(DownloadService.this, (String)msg.obj, Toast.LENGTH_LONG).show();
+		}
+	};
 }
