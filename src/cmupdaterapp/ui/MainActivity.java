@@ -1126,9 +1126,7 @@ public class MainActivity extends IMainActivity
 	private void checkForUpdates()
 	{
 		ProgressDialog pg = ProgressDialog.show(this, res.getString(R.string.checking_for_updates), res.getString(R.string.checking_for_updates), true, true);	
-		UpdateCheckTask u = new UpdateCheckTask(mUpdateServer, this, pg);
-		Thread t = new Thread(u);
-		t.start();
+		new UpdateCheckTask(mUpdateServer, this, pg).execute((Void) null);
 	}
 
 	private void showAboutDialog()
