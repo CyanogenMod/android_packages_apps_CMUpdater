@@ -43,7 +43,13 @@
    <string name="menu_edit_theme">Редактировать</string>
    <string name="menu_delete_theme">Удалить</string>
    <string name="menu_enable_theme">Включить Сервер Темы</string>
-   <string name="menu_disable_theme">Выключить Сервер Темы</string>
+   <string name="menu_disable_theme">Отключить Сервер Темы</string>
+   <string name="menu_delete_all_themes">Удалить Все Сервера Тем</string>
+   <string name="menu_delete_all_featured_themes">Удалить Все Рекомендуемые Сервера Тем</string>
+   <string name="menu_disable_all_themes">Отключить Все Сервера Тем</string>
+   <string name="menu_disable_all_featured_themes">Отключить Все Рекомендуемые Сервера Тем</string>
+   <string name="menu_enable_all_themes">Включить Все Сервера Тем</string>
+   <string name="menu_enable_all_featured_themes">Включить Все Рекомендуемые Сервера Тем</string>
    
    <string name="cancel_download_buton_text">Отменить Загрузку</string>
    <string name="confirm_download_cancelation_dialog_message">Пожалуйста подтвердите отмену загрузки</string>
@@ -210,7 +216,7 @@
    <string name="p_vibrate_summary">Вибрировать телефон при уведомлениях</string>
    
    <string name="p_notifications_title">Уведомления</string>
-   <string name="p_notifications_summary">Включить/Выключить Все Уведомления</string>
+   <string name="p_notifications_summary">Включить/Отключить Все Уведомления</string>
    
    <string name="p_progress_update_frequency_title">Частота Уведомлений</string>
    <string name="p_progress_update_frequency_summary">Выше числа = Реже обновлять\nНиже числа = Чаще обновлять</string>
@@ -270,4 +276,8 @@
    <string name="alert_old_version_ok">Ок</string>
    <string name="alert_old_version_browser">Запустить Браузер</string>
    <string name="screenshot_button_theme_text">Просмотр Скриншотов</string>
+   <string name="theme_download_exception">Ошибка при загрузке Темы: </string>
+   <string name="theme_submenu_delete">Удалить</string>
+   <string name="theme_submenu_enable">Включить</string>
+   <string name="theme_submenu_disable">Отключить</string>
 </resources>
