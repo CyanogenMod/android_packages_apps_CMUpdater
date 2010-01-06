@@ -57,7 +57,7 @@
 		</receiver>
 
 		<service android:name="cmupdaterapp.service.UpdateCheckerService" />
-		<service android:name="cmupdaterapp.service.DownloadService">
+		<service android:name="cmupdaterapp.service.DownloadService" android:process="cmupdaterapp.service.DownloadService">
 			<intent-filter>
 				<action android:name="cmupdaterapp.interfaces.IDownloadService" />
 			</intent-filter>
