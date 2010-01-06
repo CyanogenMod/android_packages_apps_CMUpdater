@@ -225,6 +225,7 @@ public class DownloadService extends Service
     
     private void notificateDownloadError()
 	{
+    	mDownloading = false;
 		Intent i = new Intent(this, MainActivity.class)
 		.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
 
@@ -572,13 +573,7 @@ public class DownloadService extends Service
 		{
 			Log.d(TAG, "Downloaded Update was NULL");
 			DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
-			//Go to the App with a download error
-			i = new Intent(this, MainActivity.class);
-			i.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
-			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(i);
-			//TODO: ????
-			//DOWNLOAD_ACTIVITY.finish();
+			DownloadError();
 			return;
 		}
 		
@@ -610,15 +605,7 @@ public class DownloadService extends Service
 		}
 		mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_FINISHED, mNotification);
 		
-		//TODO: Switch Layout to Apply Update and Finish the DownloadActivity
-//		if(DOWNLOAD_ACTIVITY != null)
-//		{
-//			//app is active, switching layout
-//			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//			startActivity(i);
-//		}
-//		//Quit the DownloadActivty
-//		DOWNLOAD_ACTIVITY.finish();
+		DownloadFinished();
 	}
 	
 	private void DeleteDownloadStatusNotification(int id)
@@ -654,6 +641,42 @@ public class DownloadService extends Service
 			try
 			{
 				mCallbacks.getBroadcastItem(i).UpdateDownloadMirror(mirrorName);
+			}
+			catch (RemoteException e)
+			{
+				// The RemoteCallbackList will take care of removing
+				// the dead object for us.
+			}
+		}
+		mCallbacks.finishBroadcast();
+	}
+	
+	private void DownloadFinished()
+	{
+		final int M = mCallbacks.beginBroadcast();
+		for (int i=0; i<M; i++)
+		{
+			try
+			{
+				mCallbacks.getBroadcastItem(i).DownloadFinished(mCurrentUpdate);
+			}
+			catch (RemoteException e)
+			{
+				// The RemoteCallbackList will take care of removing
+				// the dead object for us.
+			}
+		}
+		mCallbacks.finishBroadcast();
+	}
+	
+	private void DownloadError()
+	{
+		final int M = mCallbacks.beginBroadcast();
+		for (int i=0; i<M; i++)
+		{
+			try
+			{
+				mCallbacks.getBroadcastItem(i).DownloadError();
 			}
 			catch (RemoteException e)
 			{

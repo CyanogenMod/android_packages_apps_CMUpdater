@@ -1,5 +1,6 @@
 package cmupdaterapp.ui;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 
 import cmupdaterapp.customTypes.DownloadProgress;
@@ -285,13 +286,26 @@ public class DownloadActivity extends Activity
 					downloaded, total, downloadedText, speedText, remainingTimeText)));
 		}
 
-		public void UpdateDownloadMirror(String mirror) throws RemoteException {
+		public void UpdateDownloadMirror(String mirror) throws RemoteException
+		{
 			mHandler.sendMessage(mHandler.obtainMessage(UPDATE_DOWNLOAD_MIRROR, mirror));
+		}
+
+		public void DownloadFinished(UpdateInfo u) throws RemoteException
+		{
+			mHandler.sendMessage(mHandler.obtainMessage(DOWNLOAD_FINISHED, u));
+		}
+
+		public void DownloadError() throws RemoteException
+		{
+			mHandler.sendMessage(mHandler.obtainMessage(DOWNLOAD_ERROR));
 		}
 	};
 	
 	private static final int UPDATE_DOWNLOAD_PROGRESS = 1;
 	private static final int UPDATE_DOWNLOAD_MIRROR = 2;
+	private static final int DOWNLOAD_FINISHED = 3;
+	private static final int DOWNLOAD_ERROR = 4;
 
 	private Handler mHandler = new Handler()
 	{
@@ -305,6 +319,21 @@ public class DownloadActivity extends Activity
 					break;
 				case UPDATE_DOWNLOAD_MIRROR:
 					updateDownloadMirror((String)msg.obj);
+					break;
+				case DOWNLOAD_FINISHED:
+					UpdateInfo u = (UpdateInfo) msg.obj;
+					Intent i = new Intent(DownloadActivity.this, ApplyUpdateActivity.class);
+					i.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)u);
+					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(i);
+					finish();
+					break;
+				case DOWNLOAD_ERROR:
+					Intent i2 = new Intent(DownloadActivity.this, MainActivity.class);
+					i2.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
+					i2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(i2);
+					finish();
 					break;
 				default:
 					super.handleMessage(msg);
