@@ -20,6 +20,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -60,8 +61,10 @@ public class DownloadActivity extends Activity
 			if (myService != null && myService.DownloadRunning())
 			{
 				ui = myService.getCurrentUpdate();
+				myService.registerCallback(mCallback);
 				Log.d(TAG, "Retrieved update from DownloadService");
 				mMirrorName = myService.getCurrentMirrorName();
+				mbound = true;
 			}
 			else
 			{
@@ -308,4 +311,27 @@ public class DownloadActivity extends Activity
 			}
 		}
 	};
+
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event)
+	{
+		int keyCode = event.getKeyCode();
+	    if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0)
+	    {
+	    	try
+	    	{
+	    		//Disable the Back Key when Download is running
+				if (myService != null && myService.DownloadRunning())
+					return false;
+				else
+					return true;
+			}
+	    	catch (RemoteException e)
+	    	{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	    return super.dispatchKeyEvent(event);
+	} 
 }

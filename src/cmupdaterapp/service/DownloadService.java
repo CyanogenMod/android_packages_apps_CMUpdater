@@ -21,7 +21,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import cmupdaterapp.customTypes.DownloadProgress;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IDownloadService;
 import cmupdaterapp.interfaces.IDownloadServiceCallback;
@@ -44,9 +43,7 @@ import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.WifiLock;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.widget.RemoteViews;
@@ -66,34 +63,44 @@ public class DownloadService extends Service
 
     private final IDownloadService.Stub mBinder = new IDownloadService.Stub()
     {
-		public void Download(UpdateInfo ui) throws RemoteException {
+		public void Download(UpdateInfo ui) throws RemoteException
+		{
+			mDownloading = true;
 			boolean success = checkForConnectionAndUpdate(ui);
 			notifyUser(ui, success);
+			mDownloading = false;
 		}
-		public boolean DownloadRunning() throws RemoteException {
+		public boolean DownloadRunning() throws RemoteException
+		{
 			// TODO Auto-generated method stub
 			return mDownloading;
 		}
-		public boolean PauseDownload() throws RemoteException {
+		public boolean PauseDownload() throws RemoteException
+		{
 			// TODO Auto-generated method stub
 			return false;
 		}
-		public boolean ResumeDownload() throws RemoteException {
+		public boolean ResumeDownload() throws RemoteException
+		{
 			// TODO Auto-generated method stub
 			return false;
 		}
-		public boolean cancelDownload() throws RemoteException {
+		public boolean cancelDownload() throws RemoteException
+		{
 			// TODO Auto-generated method stub
+			cancelCurrentDownload();
 			return false;
 		}
-		public UpdateInfo getCurrentUpdate() throws RemoteException {
+		public UpdateInfo getCurrentUpdate() throws RemoteException
+		{
 			return mCurrentUpdate;
 		}
-		public String getCurrentMirrorName() throws RemoteException {
-			// TODO Auto-generated method stub
-			return "";
+		public String getCurrentMirrorName() throws RemoteException
+		{
+			return mMirrorName;
 		}
-		public boolean isPaused() throws RemoteException {
+		public boolean isPaused() throws RemoteException
+		{
 			// TODO Auto-generated method stub
 			return false;
 		}
@@ -655,5 +662,27 @@ public class DownloadService extends Service
 			}
 		}
 		mCallbacks.finishBroadcast();
+	}
+	
+	private void cancelCurrentDownload()
+	{
+		prepareForDownloadCancel = true;
+		Log.d(TAG, "Download Service CancelDownload was called");
+		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
+		File update = new File(fullUpdateFolderPath + "/" + mCurrentUpdate.getFileName());
+		File md5sum = new File(fullUpdateFolderPath + "/" + mCurrentUpdate.getFileName() + ".md5sum");
+		if(update.exists())
+		{
+			update.delete();
+			Log.d(TAG, update.getAbsolutePath() + " deleted");
+		}
+		if(md5sum.exists())
+		{
+			md5sum.delete();
+			Log.d(TAG, md5sum.getAbsolutePath() + " deleted");
+		}
+		mDownloading = false;
+		Log.d(TAG, "Download Cancel StopSelf was called");
+		stopSelf();
 	}
 }
