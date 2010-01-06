@@ -15,11 +15,11 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.interfaces.IMainActivity;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.MainActivity;
 
+import android.app.Activity;
 import android.os.Message;
 
 public class Changelog implements Runnable
@@ -27,7 +27,7 @@ public class Changelog implements Runnable
 	private static final String TAG = "Changelog";
 	private Preferences p;
 	
-	public Changelog(IMainActivity upi)
+	public Changelog(Activity upi)
 	{
 		p = Preferences.getPreferences(upi);
 	}

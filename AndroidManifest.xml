@@ -56,7 +56,11 @@
 			</intent-filter>
 		</receiver>
 
-		<service android:name="cmupdaterapp.service.UpdateCheckerService" />
+		<service android:name="cmupdaterapp.service.UpdateCheckService"  android:process="cmupdaterapp.service.UpdateCheckService">
+			<intent-filter>
+				<action android:name="cmupdaterapp.interfaces.IUpdateCheckService" />
+			</intent-filter>
+		</service>
 		<service android:name="cmupdaterapp.service.DownloadService" android:process="cmupdaterapp.service.DownloadService">
 			<intent-filter>
 				<action android:name="cmupdaterapp.interfaces.IDownloadService" />

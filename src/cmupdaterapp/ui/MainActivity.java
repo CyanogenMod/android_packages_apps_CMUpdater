@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationManager;
@@ -48,9 +49,7 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.interfaces.IMainActivity;
 import cmupdaterapp.listadapters.UpdateListAdapter;
-import cmupdaterapp.misc.UpdateCheckHelper;
 import cmupdaterapp.tasks.UpdateCheckTask;
 import cmupdaterapp.utils.MD5;
 import cmupdaterapp.utils.Preferences;
@@ -61,36 +60,28 @@ import cmupdaterapp.misc.Log;
 import cmupdaterapp.misc.State;
 import cmupdaterapp.changelog.*;
 
-public class MainActivity extends IMainActivity
+public class MainActivity extends Activity
 {
 	private static final String TAG = "MainActivity";
 
 	private Spinner mUpdatesSpinner;
 	private Spinner mThemesSpinner;
-	private UpdateCheckHelper mUpdateServer;
 	private FullUpdateInfo mAvailableUpdates;
-
 	private File mUpdateFolder;
 	private Spinner mExistingUpdatesSpinner;
-
 	private ProgressDialog ChangelogProgressDialog;
 	public static Handler ChangelogProgressHandler;
 	private Thread ChangelogThread;
 	private List<Version> ChangelogList = null;
-
 	private List<String> mfilenames;
-
 	private TextView mdownloadedUpdateText;
 	private Spinner mspFoundUpdates;
 	private Button mdeleteOldUpdatesButton;
 	private Button mapplyUpdateButton;
 	private TextView mNoExistingUpdatesFound;
-
 	private ViewFlipper flipper;
-
 	private Preferences prefs;
 	private Resources res;
-
 	private Boolean runningOldVersion = false;
 	
 	private final View.OnClickListener mScreenshotThemesListener = new View.OnClickListener()
@@ -561,8 +552,6 @@ public class MainActivity extends IMainActivity
 		
 		//Sets the Title to Appname + Mod Version
 		setTitle(res.getString(R.string.app_name) + " " + res.getString(R.string.title_running) + " " + SysUtils.getModVersion());
-
-		mUpdateServer = new UpdateCheckHelper(this);
 	}
 
 	@Override
@@ -747,7 +736,6 @@ public class MainActivity extends IMainActivity
 		return super.onMenuItemSelected(featureId, item);
 	}
 
-	@Override
 	public void switchToUpdateChooserLayout()
 	{
 		try
@@ -1126,7 +1114,7 @@ public class MainActivity extends IMainActivity
 	private void checkForUpdates()
 	{
 		ProgressDialog pg = ProgressDialog.show(this, res.getString(R.string.checking_for_updates), res.getString(R.string.checking_for_updates), true, true);	
-		new UpdateCheckTask(mUpdateServer, this, pg).execute((Void) null);
+		new UpdateCheckTask(this, pg).execute((Void) null);
 	}
 
 	private void showAboutDialog()

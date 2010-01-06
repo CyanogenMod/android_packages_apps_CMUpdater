@@ -1,15 +1,13 @@
-package cmupdaterapp.misc;
+package cmupdaterapp.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.MessageFormat;
+import java.util.Date;
 import java.util.LinkedList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -18,51 +16,71 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.customTypes.ThemeInfo;
 import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.interfaces.IUpdateCheckHelper;
+import cmupdaterapp.interfaces.IUpdateCheckService;
+import cmupdaterapp.interfaces.IUpdateCheckServiceCallback;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.misc.State;
+import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.ui.R;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.StringUtils;
 import cmupdaterapp.utils.SysUtils;
-
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
+import android.os.IBinder;
+import android.os.RemoteCallbackList;
+import android.os.RemoteException;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 
-public class UpdateCheckHelper implements IUpdateCheckHelper
+public class UpdateCheckService extends Service
 {
-	private static final String TAG = "UpdateCheckHelper";
-
-	private Preferences mPreferences;
+	private static final String TAG = "UpdateCheckService";
+	
+	private final RemoteCallbackList<IUpdateCheckServiceCallback> mCallbacks = new RemoteCallbackList<IUpdateCheckServiceCallback>();
+	private Context AppContext;
+	private NotificationManager mNM;
+	private TelephonyManager mTelephonyManager;
 	private Resources res;
-
+	private Preferences mPreferences;
 	private String systemMod;
 	private String systemRom;
 	private ThemeInfo themeInfos;
-	
 	private boolean showExperimentalRomUpdates;
 	private boolean showAllRomUpdates;
 	private boolean showExperimentalThemeUpdates;
 	private boolean showAllThemeUpdates;
-	
 	private boolean WildcardUsed = false;
-	
-	private Context context;
-	
 	private int PrimaryKeyTheme = -1;
 	
-	public UpdateCheckHelper(Context ctx)
+	@Override
+	public IBinder onBind(Intent intent)
 	{
-		Preferences p = mPreferences = Preferences.getPreferences(ctx);
-		systemMod = p.getBoardString();
-		context = ctx;
-		res = context.getResources();
+		return mBinder;
+	}
+	
+	@Override
+	public void onCreate()
+	{
+		AppContext = getApplicationContext();
+		mPreferences = Preferences.getPreferences(AppContext);
+		systemMod = mPreferences.getBoardString();
+		res = AppContext.getResources();
 
 		if(systemMod == null)
 		{
@@ -72,8 +90,217 @@ public class UpdateCheckHelper implements IUpdateCheckHelper
 		{
 			Log.d(TAG, "System's Mod version:" + systemMod);
 		}
+        mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 	}
-	public FullUpdateInfo getAvailableUpdates() throws IOException
+	
+	@Override
+	public void onDestroy()
+	{
+		mCallbacks.kill();
+    	super.onDestroy();
+	}
+	
+	private final IUpdateCheckService.Stub mBinder = new IUpdateCheckService.Stub()
+    {
+		public void registerCallback(IUpdateCheckServiceCallback cb) throws RemoteException
+		{
+			if (cb != null) mCallbacks.register(cb);
+		}
+		public void unregisterCallback(IUpdateCheckServiceCallback cb) throws RemoteException
+		{
+			if (cb != null) mCallbacks.unregister(cb);
+		}
+		public void checkForUpdates() throws RemoteException
+		{
+			checkForNewUpdates();
+		}
+    };
+    
+    private void AddException(String ex)
+	{
+		final int M = mCallbacks.beginBroadcast();
+		for (int i=0; i<M; i++)
+		{
+			try
+			{
+				mCallbacks.getBroadcastItem(i).addException(ex);
+			}
+			catch (RemoteException e)
+			{
+				// The RemoteCallbackList will take care of removing
+				// the dead object for us.
+			}
+		}
+		mCallbacks.finishBroadcast();
+	}
+
+	private final PhoneStateListener mDataStateListener = new PhoneStateListener()
+	{
+		@Override
+		public void onDataConnectionStateChanged(int state)
+		{
+			if(state == TelephonyManager.DATA_CONNECTED)
+			{
+				synchronized (mTelephonyManager)
+				{
+					mTelephonyManager.notifyAll();
+					mTelephonyManager.listen(mDataStateListener, PhoneStateListener.LISTEN_NONE);
+				}
+			}
+		}
+	};
+	
+	private boolean isDataConnected()
+	{
+		int state = mTelephonyManager.getDataState(); 
+		return state == TelephonyManager.DATA_CONNECTED || state == TelephonyManager.DATA_SUSPENDED;
+	}
+
+	private void checkForNewUpdates()
+	{
+		FullUpdateInfo availableUpdates;
+		while (true)
+		{	
+			//wait for a data connection
+			while(!isDataConnected())
+			{
+				Log.d(TAG, "No data connection, waiting for a data connection");
+				registerDataListener();
+				synchronized (mTelephonyManager)
+				{
+					try
+					{
+						mTelephonyManager.wait();
+						break;
+					}
+					catch (InterruptedException e)
+					{
+						Log.e(TAG, "Error in TelephonyManager.wait", e);
+					}
+				}
+			}
+			
+			try
+			{
+				Log.d(TAG, "Checking for updates...");
+				availableUpdates = getAvailableUpdates();
+				break;
+			}
+			catch (IOException ex)
+			{
+				Log.e(TAG, "IOEx while checking for updates", ex);
+				if(isDataConnected())
+				{
+					notificateCheckError();
+					AddException(ex.getMessage());
+					return;
+				}
+			}
+			catch (RuntimeException ex)
+			{
+				Log.e(TAG, "RuntimeEx while checking for updates", ex);
+				notificateCheckError();
+				return;
+			}
+		}
+
+		Preferences prefs = Preferences.getPreferences(this);
+		prefs.setLastUpdateCheck(new Date());
+		
+		
+		int updateCountRoms = availableUpdates.getRomCount();
+		int updateCountThemes = availableUpdates.getThemeCount();
+		int updateCount = availableUpdates.getUpdateCount();
+		Log.d(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
+		
+		if(updateCountRoms > 0 || updateCountThemes > 0)
+		{
+			Intent i = new Intent(this, MainActivity.class);
+			
+			PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
+												PendingIntent.FLAG_ONE_SHOT);
+			
+			Notification notification = new Notification(R.drawable.icon_notification,
+												res.getString(R.string.not_new_updates_found_ticker),
+												System.currentTimeMillis());
+			
+			//To remove the Notification, when the User clicks on it
+			notification.flags = Notification.FLAG_AUTO_CANCEL;
+			
+			String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
+			notification.setLatestEventInfo(this, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
+			
+			Uri notificationRingtone = prefs.getConfiguredRingtone();
+			if(prefs.getVibrate())
+				notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
+			else
+				notification.defaults = Notification.DEFAULT_LIGHTS;
+			if(notificationRingtone == null)
+			{
+				notification.sound = null;
+			}
+			else
+			{
+				notification.sound = notificationRingtone;
+			}
+			
+			//Use a resourceId as an unique identifier
+			mNM.notify(R.string.not_new_updates_found_title, notification);
+		}
+		else
+		{
+			Log.d(TAG, "No updates found");
+		}
+	}
+
+	private void registerDataListener()
+	{
+		synchronized (mTelephonyManager)
+		{
+			mTelephonyManager.listen(mDataStateListener, PhoneStateListener.LISTEN_DATA_CONNECTION_STATE);
+		}
+	}
+
+	private void notificateCheckError()
+	{
+		Intent i = new Intent(this, MainActivity.class)
+						.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_UPDATE_CHECK_ERROR);
+
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
+															PendingIntent.FLAG_ONE_SHOT);
+		
+		Notification notification = new Notification(android.R.drawable.stat_notify_error,
+												res.getString(R.string.not_update_check_error_ticker),
+												System.currentTimeMillis());
+		
+		notification.flags = Notification.FLAG_AUTO_CANCEL;
+		
+		notification.setLatestEventInfo(
+							this,
+							res.getString(R.string.not_update_check_error_title),
+							res.getString(R.string.not_update_check_error_body),
+							contentIntent);
+		
+		Uri notificationRingtone = Preferences.getPreferences(this).getConfiguredRingtone();
+		if(Preferences.getPreferences(this).getVibrate())
+			notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
+		else
+			notification.defaults = Notification.DEFAULT_LIGHTS;
+		if(notificationRingtone == null)
+		{
+			notification.sound = null;
+		}
+		else
+		{
+			notification.sound = notificationRingtone;
+		}
+		
+		//Use a resourceId as an unique identifier
+		mNM.notify(R.string.not_update_downloaded_title, notification);
+	}
+
+	private FullUpdateInfo getAvailableUpdates() throws IOException
 	{
 		FullUpdateInfo retValue = new FullUpdateInfo();
 		boolean romException = false;
@@ -152,7 +379,7 @@ public class UpdateCheckHelper implements IUpdateCheckHelper
 					catch (IOException ex)
 					{
 						//when theres an Exception Downloading the Theme, continue
-						Exceptions.add(res.getString(R.string.theme_download_exception) + t.name + ": " + ex.getMessage());
+						AddException(res.getString(R.string.theme_download_exception) + t.name + ": " + ex.getMessage());
 						Log.e(TAG, "There was an error downloading Theme " + t.name + ": ", ex);
 						continue;
 					}
@@ -210,9 +437,10 @@ public class UpdateCheckHelper implements IUpdateCheckHelper
 				themeResponseEntity.consumeContent();
 		}
 
-		FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(context));
+		//TODO: Save State in mainActivity
+		FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(AppContext));
 		if(!romException)
-			State.saveState(context, retValue);
+			State.saveState(AppContext, retValue);
 		return ful;
 	}
 
