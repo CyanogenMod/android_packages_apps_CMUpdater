@@ -50,6 +50,7 @@ import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 public class DownloadService extends Service
 {
@@ -66,11 +67,12 @@ public class DownloadService extends Service
     private final IDownloadService.Stub mBinder = new IDownloadService.Stub()
     {
 		public void Download(UpdateInfo ui) throws RemoteException {
-			checkForConnectionAndUpdate(ui);
+			boolean success = checkForConnectionAndUpdate(ui);
+			notifyUser(ui, success);
 		}
 		public boolean DownloadRunning() throws RemoteException {
 			// TODO Auto-generated method stub
-			return false;
+			return mDownloading;
 		}
 		public boolean PauseDownload() throws RemoteException {
 			// TODO Auto-generated method stub
@@ -180,39 +182,39 @@ public class DownloadService extends Service
 	private Context AppContext;
 	private Resources res;
     
-    private File checkForConnectionAndUpdate(UpdateInfo updateToDownload)
+    private boolean checkForConnectionAndUpdate(UpdateInfo updateToDownload)
 	{
     	mCurrentUpdate = updateToDownload;
 		Log.d(TAG, "Called CheckForConnectionAndUpdate");
-		File downloadedFile;
+		boolean success;
 		mWifiLock.acquire();
 
 		try
 		{
 			Log.d(TAG, "Downloading update...");
-			downloadedFile = downloadFile(updateToDownload);
+			success = downloadFile(updateToDownload);
 		}
 		catch (RuntimeException ex)
 		{
 			Log.e(TAG, "RuntimeEx while checking for updates", ex);
 			notificateDownloadError();
-			return null;
+			return false;
 		} catch (IOException ex)
 		{
 			Log.e(TAG, "Exception while downloading update", ex);
 			notificateDownloadError();
-			return null;
+			return false;
 		}
 		finally
 		{
 			mWifiLock.release();
 		}
 		
-		//Be sure to return null if the User canceled the Download
+		//Be sure to return false if the User canceled the Download
 		if(prepareForDownloadCancel)
-			return null;
+			return false;
 		else
-			return downloadedFile;
+			return success;
 	}
     
     private void notificateDownloadError()
@@ -251,7 +253,7 @@ public class DownloadService extends Service
 		mNM.notify(R.string.not_update_download_error_title, notification);
 	}
 
-	private File downloadFile(UpdateInfo updateInfo) throws IOException
+	private boolean downloadFile(UpdateInfo updateInfo) throws IOException
 	{
 		Log.d(TAG, "Called downloadFile");
 		HttpClient httpClient = mHttpClient;
@@ -393,12 +395,12 @@ public class DownloadService extends Service
 						}
 	
 						//If we reach here, download & MD5 check went fine :)
-						return mDestinationFile;
+						return true;
 					}
 				}
 				catch (IOException ex)
 				{
-					mHandler.sendMessage(mHandler.obtainMessage(SEND_TOAST_MESSAGE, ex.getMessage()));
+					Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
 					Log.e(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
 				}
 				if(Thread.currentThread().isInterrupted() || !Thread.currentThread().isAlive())
@@ -410,7 +412,7 @@ public class DownloadService extends Service
 				break;
 			}
 		}
-		mHandler.sendMessage(mHandler.obtainMessage(SEND_TOAST_MESSAGE, res.getString(R.string.unable_to_download_file)));
+		Toast.makeText(this, R.string.unable_to_download_file, Toast.LENGTH_LONG).show();
 		Log.d(TAG, "Unable to download the update file from any mirror");
 
 		if (null != mDestinationFile && mDestinationFile.exists())
@@ -422,7 +424,7 @@ public class DownloadService extends Service
 			mDestinationMD5File.delete();
 		}
 
-		return null;
+		return false;
 	}
 
 	private void dumpFile(HttpEntity entity, File destinationFile) throws IOException
@@ -555,12 +557,12 @@ public class DownloadService extends Service
 			Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
 	}
 
-	private void notifyUser(UpdateInfo ui, File downloadedUpdate)
+	private void notifyUser(UpdateInfo ui, boolean success)
 	{
 		Log.d(TAG, "Called Notify User");
 		Intent i;
 		
-		if(downloadedUpdate == null)
+		if(!success)
 		{
 			Log.d(TAG, "Downloaded Update was NULL");
 			DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
@@ -621,8 +623,7 @@ public class DownloadService extends Service
 	}
 	
 	private static final int UPDATE_DOWNLOAD_PROGRESS = 1;
-	private static final int SEND_TOAST_MESSAGE = 2;
-	private static final int UPDATE_DOWNLOAD_MIRROR = 3;
+	private static final int UPDATE_DOWNLOAD_MIRROR = 2;
 	
     private final Handler mHandler = new Handler()
     {
@@ -648,8 +649,6 @@ public class DownloadService extends Service
     					}
     				}
     				mCallbacks.finishBroadcast();
-    				break;
-    			case SEND_TOAST_MESSAGE:
     				break;
     			case UPDATE_DOWNLOAD_MIRROR:
     				final int M = mCallbacks.beginBroadcast();

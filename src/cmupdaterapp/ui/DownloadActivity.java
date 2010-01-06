@@ -275,11 +275,6 @@ public class DownloadActivity extends Activity
 	
 	private IDownloadServiceCallback mCallback = new IDownloadServiceCallback.Stub()
 	{
-
-		public void sendToastMessage(String msg) throws RemoteException {
-			mHandler.sendMessage(mHandler.obtainMessage(SEND_TOAST_MESSAGE, msg));
-		}
-
 		public void updateDownloadProgress(int downloaded, int total,
 				String downloadedText, String speedText,
 				String remainingTimeText) throws RemoteException
@@ -294,8 +289,7 @@ public class DownloadActivity extends Activity
 	};
 	
 	private static final int UPDATE_DOWNLOAD_PROGRESS = 1;
-	private static final int SEND_TOAST_MESSAGE = 2;
-	private static final int UPDATE_DOWNLOAD_MIRROR = 3;
+	private static final int UPDATE_DOWNLOAD_MIRROR = 2;
 
 	private Handler mHandler = new Handler()
 	{
@@ -306,8 +300,6 @@ public class DownloadActivity extends Activity
 				case UPDATE_DOWNLOAD_PROGRESS:
 					DownloadProgress dp = (DownloadProgress) msg.obj;
 					updateDownloadProgress(dp.getDownloaded(), dp.getTotal(), dp.getDownloadedText(), dp.getSpeedText(), dp.getRemainingTimeText());
-					break;
-				case SEND_TOAST_MESSAGE:
 					break;
 				case UPDATE_DOWNLOAD_MIRROR:
 					updateDownloadMirror((String)msg.obj);
