@@ -55,7 +55,22 @@ public class DownloadService extends Service
 {
 	private static final String TAG = "DownloadService";
 
-	final RemoteCallbackList<IDownloadServiceCallback> mCallbacks = new RemoteCallbackList<IDownloadServiceCallback>();
+	private final RemoteCallbackList<IDownloadServiceCallback> mCallbacks = new RemoteCallbackList<IDownloadServiceCallback>();
+	
+	private boolean prepareForDownloadCancel;
+	private boolean mMirrorNameUpdated;
+	private String mMirrorName;
+	private boolean mDownloading = false;
+	private UpdateInfo mCurrentUpdate;
+	private WifiLock mWifiLock;
+	private volatile int mtotalDownloaded;
+	private int mcontentLength;
+	private long mStartTime;
+	private String minutesString;
+	private String secondsString;
+	private String fullUpdateFolderPath;
+	private Context AppContext;
+	private Resources res;
 	
     @Override
     public IBinder onBind(Intent arg0)
@@ -122,19 +137,11 @@ public class DownloadService extends Service
 	public void onCreate()
     {
     	Log.d(TAG, "Download Service Created");
-		mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
-		mHttpClient = new DefaultHttpClient();
-		mMD5HttpClient = new DefaultHttpClient();
-		mRandom = new Random();
+		mWifiLock = ((WifiManager) getSystemService(WIFI_SERVICE)).createWifiLock("CM Updater");
 
-		mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-		mWifiLock = mWifiManager.createWifiLock("CM Updater");
+		fullUpdateFolderPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Preferences.getPreferences(this).getUpdateFolder();
 
-		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
-		fullUpdateFolderPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mUpdateFolder; 
-		progressBarUpdateInterval = Preferences.getPreferences(this).getProgressUpdateFreq();
-		Log.d(TAG, "ProgressBarIntervall: " + progressBarUpdateInterval);
 		AppContext = getApplicationContext();
 		res = getResources();
 		minutesString = res.getString(R.string.minutes);
@@ -148,47 +155,7 @@ public class DownloadService extends Service
     	super.onDestroy();
     }
     
-	private int progressBarUpdateInterval;
 	
-	private boolean prepareForDownloadCancel;
-
-	private NotificationManager mNM;
-	private File mDestinationFile;
-	private File mDestinationMD5File;
-	private DefaultHttpClient mHttpClient;
-	private DefaultHttpClient mMD5HttpClient;
-	private Random mRandom;
-	private boolean mMirrorNameUpdated;
-	private String mMirrorName;
-	private String mFileName;
-
-	private boolean mDownloading = false;
-	private UpdateInfo mCurrentUpdate;
-
-	private WifiLock mWifiLock;
-	private WifiManager mWifiManager;
-
-	private String mUpdateFolder;
-	private String mDownloadedMD5;
-
-	private volatile int mtotalDownloaded;
-	private int mSpeed;
-	private long mRemainingTime;
-	private String mstringDownloaded;
-	private String mstringSpeed;
-	private String mstringRemainingTime;
-	private String mstringComplete;
-	
-	private int mcontentLength;
-	private long mStartTime;
-	
-	private String minutesString;
-	private String secondsString;
-	
-	private String fullUpdateFolderPath;
-	
-	private Context AppContext;
-	private Resources res;
     
     private boolean checkForConnectionAndUpdate(UpdateInfo updateToDownload)
 	{
@@ -224,58 +191,24 @@ public class DownloadService extends Service
 		else
 			return success;
 	}
-    
-    private void notificateDownloadError()
-	{
-    	mDownloading = false;
-		Intent i = new Intent(this, MainActivity.class)
-		.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
-
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
-				PendingIntent.FLAG_ONE_SHOT);
-
-		Notification notification = new Notification(android.R.drawable.stat_notify_error,
-				res.getString(R.string.not_update_download_error_ticker),
-				System.currentTimeMillis());
-
-		notification.flags = Notification.FLAG_AUTO_CANCEL;
-		notification.setLatestEventInfo(
-				this,
-				res.getString(R.string.not_update_download_error_title),
-				res.getString(R.string.not_update_download_error_body),
-				contentIntent);
-
-		Uri notificationRingtone = Preferences.getPreferences(this).getConfiguredRingtone();
-		if(Preferences.getPreferences(this).getVibrate())
-			notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
-		else
-			notification.defaults = Notification.DEFAULT_LIGHTS;
-		if(notificationRingtone == null)
-		{
-			notification.sound = null;
-		}
-		else
-		{
-			notification.sound = notificationRingtone;
-		}
-
-		mNM.notify(R.string.not_update_download_error_title, notification);
-	}
 
 	private boolean downloadFile(UpdateInfo updateInfo) throws IOException
 	{
 		Log.d(TAG, "Called downloadFile");
-		HttpClient httpClient = mHttpClient;
-		HttpClient MD5httpClient = mMD5HttpClient;
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpClient MD5httpClient = new DefaultHttpClient();
 
 		HttpUriRequest req, md5req;
 		HttpResponse response, md5response;
 
 		List<URI> updateMirrors = updateInfo.updateFileUris;
 		int size = updateMirrors.size();
-		int start = mRandom.nextInt(size);
+		int start = new Random().nextInt(size);
 		Log.d(TAG, "Mirrorcount: " + size);
 		URI updateURI;
+		File destinationFile = null;
+		File destinationMD5File = null;
+		String downloadedMD5 = null;
 		//For every Mirror
 		for(int i = 0; i < size; i++)
 		{
@@ -285,12 +218,12 @@ public class DownloadService extends Service
 				mMirrorName = updateURI.getHost();
 				Log.d(TAG, "Mirrorname: " + mMirrorName);
 				
-				mFileName = updateInfo.getFileName(); 
-				if (null == mFileName || mFileName.length() < 1)
+				String fileName = updateInfo.getFileName(); 
+				if (null == fileName || fileName.length() < 1)
 				{
-					mFileName = "update.zip";
+					fileName = "update.zip";
 				}
-				Log.d(TAG, "mFileName: " + mFileName);
+				Log.d(TAG, "mFileName: " + fileName);
 				
 				boolean md5Available = true;
 	
@@ -337,13 +270,13 @@ public class DownloadService extends Service
 							Log.d(TAG, "UpdateFolder created");
 						}
 	
-						mDestinationFile = new File(fullUpdateFolderPath, mFileName);
-						if(mDestinationFile.exists()) mDestinationFile.delete();
+						destinationFile = new File(fullUpdateFolderPath, fileName);
+						if(destinationFile.exists()) destinationFile.delete();
 	
 						if (md5Available)
 						{
-							mDestinationMD5File = new File(fullUpdateFolderPath, mFileName + ".md5sum");
-							if(mDestinationMD5File.exists()) mDestinationMD5File.delete();
+							destinationMD5File = new File(fullUpdateFolderPath, fileName + ".md5sum");
+							if(destinationMD5File.exists()) destinationMD5File.delete();
 	
 							try
 							{
@@ -351,8 +284,8 @@ public class DownloadService extends Service
 								HttpEntity temp = md5response.getEntity();
 								InputStreamReader isr = new InputStreamReader(temp.getContent());
 								BufferedReader br = new BufferedReader(isr);
-								mDownloadedMD5 = br.readLine().split("  ")[0];
-								Log.d(TAG, "MD5: " + mDownloadedMD5);
+								downloadedMD5 = br.readLine().split("  ")[0];
+								Log.d(TAG, "MD5: " + downloadedMD5);
 								br.close();
 								isr.close();
 	
@@ -360,9 +293,9 @@ public class DownloadService extends Service
 									temp.consumeContent();
 	
 								//Write the String in a .md5 File
-								if (mDownloadedMD5 != null || !mDownloadedMD5.equals(""))
+								if (downloadedMD5 != null && !downloadedMD5.equals(""))
 								{
-									writeMD5(mDestinationMD5File, mDownloadedMD5);
+									writeMD5(destinationMD5File, downloadedMD5);
 								}
 							}
 							catch (IOException e)
@@ -374,7 +307,7 @@ public class DownloadService extends Service
 	
 						// Download Update ZIP if md5sum went ok
 						HttpEntity entity = response.getEntity();
-						dumpFile(entity, mDestinationFile);
+						dumpFile(entity, destinationFile);
 						//Was the download canceled?
 						if(prepareForDownloadCancel)
 						{
@@ -397,7 +330,7 @@ public class DownloadService extends Service
 						if (md5Available)
 						{
 							Log.d(TAG, "Performing MD5 verification");
-							if(!MD5.checkMD5(mDownloadedMD5, mDestinationFile))
+							if(!MD5.checkMD5(downloadedMD5, destinationFile))
 							{
 								throw new IOException(res.getString(R.string.md5_verification_failed));
 							}
@@ -424,13 +357,13 @@ public class DownloadService extends Service
 		ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.unable_to_download_file, 0));
 		Log.d(TAG, "Unable to download the update file from any mirror");
 
-		if (null != mDestinationFile && mDestinationFile.exists())
+		if (null != destinationFile && destinationFile.exists())
 		{
-			mDestinationFile.delete();
+			destinationFile.delete();
 		}
-		if (null != mDestinationMD5File && mDestinationMD5File.exists())
+		if (null != destinationMD5File && destinationMD5File.exists())
 		{
-			mDestinationMD5File.delete();
+			destinationMD5File.delete();
 		}
 
 		return false;
@@ -468,7 +401,7 @@ public class DownloadService extends Service
 			try
 			{
 				mtotalDownloaded = 0;
-				progressUpdateTimer.scheduleAtFixedRate(progressUpdateTimerTask, 100, progressBarUpdateInterval);
+				progressUpdateTimer.scheduleAtFixedRate(progressUpdateTimerTask, 100, Preferences.getPreferences(this).getProgressUpdateFreq());
 				while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0 && !prepareForDownloadCancel)
 				{
 					fos.write(buff, 0, read);
@@ -541,16 +474,16 @@ public class DownloadService extends Service
 			PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
 			mNotification.contentView = mNotificationRemoteView;
 			mNotification.contentIntent = mNotificationContentIntent;
-			mSpeed = (mtotalDownloaded/(int)(System.currentTimeMillis() - mStartTime));
-			mSpeed = (mSpeed > 0) ? mSpeed : 1;
-			mRemainingTime = ((mcontentLength - mtotalDownloaded)/mSpeed);
-			mstringDownloaded = mtotalDownloaded/1048576 + "/" + mcontentLength/1048576 + " MB";
-			mstringSpeed = mSpeed + " kB/s";
-			mstringRemainingTime = mRemainingTime/60000 + " " + minutesString + " " + mRemainingTime%60 + " " + secondsString;
+			int speed = (mtotalDownloaded/(int)(System.currentTimeMillis() - mStartTime));
+			speed = (speed > 0) ? speed : 1;
+			int remainingTime = ((mcontentLength - mtotalDownloaded)/speed);
+			String stringDownloaded = mtotalDownloaded/1048576 + "/" + mcontentLength/1048576 + " MB";
+			String stringSpeed = speed + " kB/s";
+			String stringRemainingTime = remainingTime/60000 + " " + minutesString + " " + remainingTime%60 + " " + secondsString;
 
-			mstringComplete = mstringDownloaded + " " + mstringSpeed + " " + mstringRemainingTime;
+			String stringComplete = stringDownloaded + " " + stringSpeed + " " + stringRemainingTime;
 			
-			mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloadInfos, mstringComplete);
+			mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloadInfos, stringComplete);
 			mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, mcontentLength, mtotalDownloaded, false);
 			mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_STATUS, mNotification);
 
@@ -560,7 +493,7 @@ public class DownloadService extends Service
 				mMirrorNameUpdated = true;
 			}
 			//Update the DownloadProgress
-			UpdateDownloadProgress(mtotalDownloaded, mcontentLength, mstringDownloaded, mstringSpeed, mstringRemainingTime);
+			UpdateDownloadProgress(mtotalDownloaded, mcontentLength, stringDownloaded, stringSpeed, stringRemainingTime);
 		}
 		else
 			Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
@@ -608,6 +541,43 @@ public class DownloadService extends Service
 		mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_FINISHED, mNotification);
 		
 		DownloadFinished();
+	}
+	
+    private void notificateDownloadError()
+	{
+    	mDownloading = false;
+		Intent i = new Intent(this, MainActivity.class)
+		.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
+
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
+				PendingIntent.FLAG_ONE_SHOT);
+
+		Notification notification = new Notification(android.R.drawable.stat_notify_error,
+				res.getString(R.string.not_update_download_error_ticker),
+				System.currentTimeMillis());
+
+		notification.flags = Notification.FLAG_AUTO_CANCEL;
+		notification.setLatestEventInfo(
+				this,
+				res.getString(R.string.not_update_download_error_title),
+				res.getString(R.string.not_update_download_error_body),
+				contentIntent);
+
+		Uri notificationRingtone = Preferences.getPreferences(this).getConfiguredRingtone();
+		if(Preferences.getPreferences(this).getVibrate())
+			notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
+		else
+			notification.defaults = Notification.DEFAULT_LIGHTS;
+		if(notificationRingtone == null)
+		{
+			notification.sound = null;
+		}
+		else
+		{
+			notification.sound = notificationRingtone;
+		}
+
+		((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).notify(R.string.not_update_download_error_title, notification);
 	}
 	
 	private void DeleteDownloadStatusNotification(int id)
