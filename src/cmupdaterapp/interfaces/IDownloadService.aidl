@@ -1,5 +1,6 @@
 package cmupdaterapp.interfaces;
 import cmupdaterapp.customTypes.UpdateInfo;
+import cmupdaterapp.interfaces.IDownloadServiceCallback;
 
 interface IDownloadService
 {    
@@ -11,4 +12,6 @@ interface IDownloadService
     boolean ResumeDownload();
     boolean isPaused();
     boolean cancelDownload();
+    void registerCallback(in IDownloadServiceCallback cb);
+    void unregisterCallback(in IDownloadServiceCallback cb);
 }

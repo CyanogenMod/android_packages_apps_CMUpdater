@@ -21,8 +21,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import cmupdaterapp.customTypes.DownloadProgress;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IDownloadService;
+import cmupdaterapp.interfaces.IDownloadServiceCallback;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.ApplyUpdateActivity;
@@ -35,28 +37,25 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.WifiLock;
 import android.os.Environment;
-import android.os.HandlerThread;
+import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.os.Message;
-import android.os.Parcelable;
+import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.widget.RemoteViews;
 
 public class DownloadService extends Service
 {
 	private static final String TAG = "DownloadService";
+
+	final RemoteCallbackList<IDownloadServiceCallback> mCallbacks = new RemoteCallbackList<IDownloadServiceCallback>();
 	
     @Override
     public IBinder onBind(Intent arg0)
@@ -96,6 +95,16 @@ public class DownloadService extends Service
 			// TODO Auto-generated method stub
 			return false;
 		}
+		public void registerCallback(IDownloadServiceCallback cb)
+				throws RemoteException {
+			if (cb != null) mCallbacks.register(cb);
+			
+		}
+		public void unregisterCallback(IDownloadServiceCallback cb)
+				throws RemoteException {
+			if (cb != null) mCallbacks.unregister(cb);
+			
+		}
     };
     
     @Override
@@ -104,8 +113,6 @@ public class DownloadService extends Service
     	Log.d(TAG, "Download Service Created");
 		mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 		//mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-		mConnectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-		mConectivityManagerIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
 
 		mHttpClient = new DefaultHttpClient();
 		mMD5HttpClient = new DefaultHttpClient();
@@ -124,12 +131,18 @@ public class DownloadService extends Service
 		secondsString = res.getString(R.string.seconds);
     }
     
+    @Override
+    public void onDestroy()
+    {
+    	mCallbacks.kill();
+    	super.onDestroy();
+    }
+    
 	private int progressBarUpdateInterval;
 	
 	private boolean prepareForDownloadCancel;
 
 	private NotificationManager mNM;
-	private boolean mWaitingForDataConnection = false;
 	private File mDestinationFile;
 	private File mDestinationMD5File;
 	private DefaultHttpClient mHttpClient;
@@ -141,8 +154,6 @@ public class DownloadService extends Service
 
 	private boolean mDownloading = false;
 	private UpdateInfo mCurrentUpdate;
-	private ConnectivityManager mConnectivityManager;
-	private IntentFilter mConectivityManagerIntentFilter;
 
 	private WifiLock mWifiLock;
 	private WifiManager mWifiManager;
@@ -174,27 +185,6 @@ public class DownloadService extends Service
     	mCurrentUpdate = updateToDownload;
 		Log.d(TAG, "Called CheckForConnectionAndUpdate");
 		File downloadedFile;
-
-		//wait for a data connection
-		while(!isDataConnected())
-		{
-			Log.d(TAG, "No data connection, waiting for a data connection");
-			registerDataListener();
-			synchronized (mConnectivityManager)
-			{
-				try
-				{
-					Log.d(TAG, "No Data Connection. Waiting...");
-					mConnectivityManager.wait();
-					break;
-				}
-				catch (InterruptedException e)
-				{
-					Log.e(TAG, "Exception in ConnectivityManager.wait", e);
-				}
-			}
-		}
-
 		mWifiLock.acquire();
 
 		try
@@ -408,12 +398,7 @@ public class DownloadService extends Service
 				}
 				catch (IOException ex)
 				{
-					if (DownloadActivity.DownloadserviceToastHandler != null)
-					{
-						Message msg = new Message();
-						msg.obj = ex.getMessage();
-						DownloadActivity.DownloadserviceToastHandler.sendMessage(msg);
-					}
+					mHandler.sendMessage(mHandler.obtainMessage(SEND_TOAST_MESSAGE, ex.getMessage()));
 					Log.e(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
 				}
 				if(Thread.currentThread().isInterrupted() || !Thread.currentThread().isAlive())
@@ -425,12 +410,7 @@ public class DownloadService extends Service
 				break;
 			}
 		}
-		if (DownloadActivity.DownloadserviceToastHandler != null)
-		{
-			Message msg = new Message();
-			msg.obj = res.getString(R.string.unable_to_download_file);
-			DownloadActivity.DownloadserviceToastHandler.sendMessage(msg);
-		}
+		mHandler.sendMessage(mHandler.obtainMessage(SEND_TOAST_MESSAGE, res.getString(R.string.unable_to_download_file)));
 		Log.d(TAG, "Unable to download the update file from any mirror");
 
 		if (null != mDestinationFile && mDestinationFile.exists())
@@ -562,15 +542,14 @@ public class DownloadService extends Service
 			mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloadInfos, mstringComplete);
 			mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, mcontentLength, mtotalDownloaded, false);
 			mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_STATUS, mNotification);
-			
-			if(DOWNLOAD_ACTIVITY == null) return;
-			
+
 			if(!mMirrorNameUpdated)
 			{
-				DOWNLOAD_ACTIVITY.updateDownloadMirror(mMirrorName);
+				mHandler.sendMessage(mHandler.obtainMessage(UPDATE_DOWNLOAD_MIRROR, mMirrorName));
 				mMirrorNameUpdated = true;
 			}
-			//DOWNLOAD_ACTIVITY.updateDownloadProgress(mtotalDownloaded, mcontentLength, mstringDownloaded, mstringSpeed, mstringRemainingTime);
+			//Update the DownloadProgress
+			mHandler.sendMessage(mHandler.obtainMessage(UPDATE_DOWNLOAD_PROGRESS, new DownloadProgress(mtotalDownloaded, mcontentLength, mstringDownloaded, mstringSpeed, mstringRemainingTime)));
 		}
 		else
 			Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
@@ -590,7 +569,8 @@ public class DownloadService extends Service
 			i.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(i);
-			DOWNLOAD_ACTIVITY.finish();
+			//TODO: ????
+			//DOWNLOAD_ACTIVITY.finish();
 			return;
 		}
 		
@@ -622,14 +602,15 @@ public class DownloadService extends Service
 		}
 		mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_FINISHED, mNotification);
 		
-		if(DOWNLOAD_ACTIVITY != null)
-		{
-			//app is active, switching layout
-			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(i);
-		}
-		//Quit the DownloadActivty
-		DOWNLOAD_ACTIVITY.finish();
+		//TODO: Switch Layout to Apply Update and Finish the DownloadActivity
+//		if(DOWNLOAD_ACTIVITY != null)
+//		{
+//			//app is active, switching layout
+//			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//			startActivity(i);
+//		}
+//		//Quit the DownloadActivty
+//		DOWNLOAD_ACTIVITY.finish();
 	}
 	
 	private void DeleteDownloadStatusNotification(int id)
@@ -639,44 +620,56 @@ public class DownloadService extends Service
 		Log.d(TAG, "Download Notification removed");
 	}
 	
-	private boolean isDataConnected()
-	{
-		if (mConnectivityManager.getActiveNetworkInfo() == null)
-		{
-			return false;
-		}
-		else
-		{
-			return mConnectivityManager.getActiveNetworkInfo().isConnected();
-		}
-	}
+	private static final int UPDATE_DOWNLOAD_PROGRESS = 1;
+	private static final int SEND_TOAST_MESSAGE = 2;
+	private static final int UPDATE_DOWNLOAD_MIRROR = 3;
 	
-	private void registerDataListener()
-	{
-		synchronized (mConnectivityManager)
-		{
-			//mTelephonyManager.listen(mDataStateListener, PhoneStateListener.LISTEN_DATA_CONNECTION_STATE);
-
-			registerReceiver(mConnectivityChangesReceiver, mConectivityManagerIntentFilter);
-			mWaitingForDataConnection = true;
-		}
-	}
-	
-	private final BroadcastReceiver mConnectivityChangesReceiver = new BroadcastReceiver()
-	{
-		@Override
-		public void onReceive(Context context, Intent intent)
-		{
-			NetworkInfo netInfo = (NetworkInfo) intent.getSerializableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
-			if(netInfo != null && netInfo.isConnected())
-			{
-				synchronized (mConnectivityManager)
-				{
-					mConnectivityManager.notifyAll();
-					mWaitingForDataConnection = false;
-					unregisterReceiver(this);
-				}
-			}
-		}
+    private final Handler mHandler = new Handler()
+    {
+    	@Override
+    	public void handleMessage(Message msg)
+    	{
+    		switch (msg.what)
+    		{
+    			case UPDATE_DOWNLOAD_PROGRESS:
+    				DownloadProgress pg = (DownloadProgress) msg.obj;
+    				//Broadcast to all clients the new value.
+    				final int N = mCallbacks.beginBroadcast();
+    				for (int i=0; i<N; i++)
+    				{
+    					try
+    					{
+    						mCallbacks.getBroadcastItem(i).updateDownloadProgress(pg.getDownloaded(), pg.getTotal(), pg.getDownloadedText(), pg.getSpeedText(), pg.getRemainingTimeText());
+    					}
+    					catch (RemoteException e)
+    					{
+    						// The RemoteCallbackList will take care of removing
+    						// the dead object for us.
+    					}
+    				}
+    				mCallbacks.finishBroadcast();
+    				break;
+    			case SEND_TOAST_MESSAGE:
+    				break;
+    			case UPDATE_DOWNLOAD_MIRROR:
+    				final int M = mCallbacks.beginBroadcast();
+					for (int i=0; i<M; i++)
+					{
+						try
+						{
+							mCallbacks.getBroadcastItem(i).UpdateDownloadMirror((String)msg.obj);
+						}
+						catch (RemoteException e)
+						{
+							// The RemoteCallbackList will take care of removing
+							// the dead object for us.
+						}
+					}
+					mCallbacks.finishBroadcast();
+    				break;
+    			default:
+    				super.handleMessage(msg);
+    		}
+    	}
 	};
 }

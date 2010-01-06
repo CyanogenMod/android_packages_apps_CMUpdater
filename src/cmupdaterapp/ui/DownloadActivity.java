@@ -1,6 +1,8 @@
 package cmupdaterapp.ui;
 
 import java.net.MalformedURLException;
+
+import cmupdaterapp.customTypes.DownloadProgress;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IDownloadService;
 import cmupdaterapp.interfaces.IDownloadServiceCallback;
@@ -14,14 +16,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.RemoteException;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class DownloadActivity extends Activity implements IDownloadServiceCallback
+public class DownloadActivity extends Activity
 {
 	private static final String TAG = "DownloadActivity";
 	
@@ -33,6 +37,7 @@ public class DownloadActivity extends Activity implements IDownloadServiceCallba
 	private TextView mRemainingTimeTextView;
 	private String mMirrorName;
 	private String mFileName;
+	private UpdateInfo ui;
 	
 	//Indicates if a Service is bound 
 	private boolean mbound = false;
@@ -50,8 +55,6 @@ public class DownloadActivity extends Activity implements IDownloadServiceCallba
 	{
 		Log.d(TAG, "onResume called");
 		super.onResume();
-		
-		UpdateInfo ui = null;
 		
 		try {
 			if (myService != null && myService.DownloadRunning())
@@ -224,6 +227,7 @@ public class DownloadActivity extends Activity implements IDownloadServiceCallba
 	};
 	
 	public static IDownloadService myService;
+	private final Handler handler = new Handler();
 	
 	/**
 	 * Class for interacting with the main interface of the service.
@@ -233,20 +237,84 @@ public class DownloadActivity extends Activity implements IDownloadServiceCallba
     	public void onServiceConnected(ComponentName name, IBinder service)
     	{
     		myService = IDownloadService.Stub.asInterface(service);
+    		try
+    		{
+    			myService.registerCallback(mCallback);
+    		}
+    		catch (RemoteException e)
+    		{ }
+    		//Start Downloading
+    		Runnable r = new Runnable()
+            {
+    			public void run()
+    			{
+	    			try
+	    			{
+	    				myService.Download(ui);
+	    			}
+	    			catch (RemoteException e)
+	    			{
+	    				//TODO Auto-generated catch block
+	    				e.printStackTrace();
+	    			}
+    			}
+            };
+            handler.post(r);
     	}
     	public void onServiceDisconnected(ComponentName name)
     	{
+    		try
+    		{
+    			myService.unregisterCallback(mCallback);
+    		}
+    		catch (RemoteException e)
+    		{ }
     		myService = null;
     	}
     };
+	
+	private IDownloadServiceCallback mCallback = new IDownloadServiceCallback.Stub()
+	{
 
-	public void sendToastMessage(String msg) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
+		public void sendToastMessage(String msg) throws RemoteException {
+			mHandler.sendMessage(mHandler.obtainMessage(SEND_TOAST_MESSAGE, msg));
+		}
 
-	public IBinder asBinder() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		public void updateDownloadProgress(int downloaded, int total,
+				String downloadedText, String speedText,
+				String remainingTimeText) throws RemoteException
+				{
+			mHandler.sendMessage(mHandler.obtainMessage(UPDATE_DOWNLOAD_PROGRESS, new DownloadProgress(
+					downloaded, total, downloadedText, speedText, remainingTimeText)));
+		}
+
+		public void UpdateDownloadMirror(String mirror) throws RemoteException {
+			mHandler.sendMessage(mHandler.obtainMessage(UPDATE_DOWNLOAD_MIRROR, mirror));
+		}
+	};
+	
+	private static final int UPDATE_DOWNLOAD_PROGRESS = 1;
+	private static final int SEND_TOAST_MESSAGE = 2;
+	private static final int UPDATE_DOWNLOAD_MIRROR = 3;
+
+	private Handler mHandler = new Handler()
+	{
+		public void handleMessage(Message msg)
+		{
+			switch (msg.what)
+			{
+				case UPDATE_DOWNLOAD_PROGRESS:
+					DownloadProgress dp = (DownloadProgress) msg.obj;
+					updateDownloadProgress(dp.getDownloaded(), dp.getTotal(), dp.getDownloadedText(), dp.getSpeedText(), dp.getRemainingTimeText());
+					break;
+				case SEND_TOAST_MESSAGE:
+					break;
+				case UPDATE_DOWNLOAD_MIRROR:
+					updateDownloadMirror((String)msg.obj);
+					break;
+				default:
+					super.handleMessage(msg);
+			}
+		}
+	};
 }
