@@ -42,14 +42,14 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
 public class UpdateCheckService extends Service
@@ -59,7 +59,7 @@ public class UpdateCheckService extends Service
 	private final RemoteCallbackList<IUpdateCheckServiceCallback> mCallbacks = new RemoteCallbackList<IUpdateCheckServiceCallback>();
 	private Context AppContext;
 	private NotificationManager mNM;
-	private TelephonyManager mTelephonyManager;
+	private ConnectivityManager mConnectivityManager;
 	private Resources res;
 	private Preferences mPreferences;
 	private String systemMod;
@@ -71,6 +71,7 @@ public class UpdateCheckService extends Service
 	private boolean showAllThemeUpdates;
 	private boolean WildcardUsed = false;
 	private int PrimaryKeyTheme = -1;
+	private boolean mWaitingForDataConnection = false;
 	
 	@Override
 	public IBinder onBind(Intent intent)
@@ -95,7 +96,7 @@ public class UpdateCheckService extends Service
 			Log.d(TAG, "System's Mod version:" + systemMod);
 		}
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        mConnectivityManager = (ConnectivityManager) AppContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 	}
 	
 	@Override
@@ -117,6 +118,14 @@ public class UpdateCheckService extends Service
 		}
 		public void checkForUpdates() throws RemoteException
 		{
+			synchronized (mConnectivityManager)
+			{
+				if(mWaitingForDataConnection)
+				{
+					Log.d(TAG, "Another update check is waiting for data connection. Skipping");
+					return;
+				}
+            }
 			checkForNewUpdates();
 		}
     };
@@ -125,27 +134,11 @@ public class UpdateCheckService extends Service
 	{
     	ToastHandler.sendMessage(ToastHandler.obtainMessage(0, ex));
 	}
-
-	private final PhoneStateListener mDataStateListener = new PhoneStateListener()
-	{
-		@Override
-		public void onDataConnectionStateChanged(int state)
-		{
-			if(state == TelephonyManager.DATA_CONNECTED)
-			{
-				synchronized (mTelephonyManager)
-				{
-					mTelephonyManager.notifyAll();
-					mTelephonyManager.listen(mDataStateListener, PhoneStateListener.LISTEN_NONE);
-				}
-			}
-		}
-	};
 	
 	private boolean isDataConnected()
 	{
-		int state = mTelephonyManager.getDataState(); 
-		return state == TelephonyManager.DATA_CONNECTED || state == TelephonyManager.DATA_SUSPENDED;
+		android.net.NetworkInfo.State state = mConnectivityManager.getActiveNetworkInfo().getState();
+		return state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED;
 	}
 
 	private void checkForNewUpdates()
@@ -157,12 +150,11 @@ public class UpdateCheckService extends Service
 			while(!isDataConnected())
 			{
 				Log.d(TAG, "No data connection, waiting for a data connection");
-				registerDataListener();
-				synchronized (mTelephonyManager)
+				synchronized (mConnectivityManager)
 				{
 					try
 					{
-						mTelephonyManager.wait();
+						mConnectivityManager.wait();
 						break;
 					}
 					catch (InterruptedException e)
@@ -210,8 +202,6 @@ public class UpdateCheckService extends Service
 			Log.d(TAG, "No updates found");
 			ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.no_updates_found, 0));
 			FinishUpdateCheck();
-			//upi.switchToUpdateChooserLayout();
-			//TODO: switch To Udpate Chooser Layout
 		}
 		else
 		{
@@ -247,14 +237,7 @@ public class UpdateCheckService extends Service
 				//Use a resourceId as an unique identifier
 				mNM.notify(R.string.not_new_updates_found_title, notification);
 			}
-		}
-	}
-
-	private void registerDataListener()
-	{
-		synchronized (mTelephonyManager)
-		{
-			mTelephonyManager.listen(mDataStateListener, PhoneStateListener.LISTEN_DATA_CONNECTION_STATE);
+			FinishUpdateCheck();
 		}
 	}
 
@@ -435,7 +418,6 @@ public class UpdateCheckService extends Service
 				themeResponseEntity.consumeContent();
 		}
 
-		//TODO: Save State in mainActivity
 		FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(AppContext));
 		if(!romException)
 			State.saveState(AppContext, (Serializable)retValue);
@@ -737,5 +719,5 @@ public class UpdateCheckService extends Service
 			}
 		}
 		mCallbacks.finishBroadcast();
-	}
+	} 
 }

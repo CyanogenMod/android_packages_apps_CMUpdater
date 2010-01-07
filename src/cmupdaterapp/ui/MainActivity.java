@@ -1113,7 +1113,15 @@ public class MainActivity extends Activity
 
 	private void checkForUpdates()
 	{
-		ProgressDialog pg = ProgressDialog.show(this, res.getString(R.string.checking_for_updates), res.getString(R.string.checking_for_updates), true, true);	
+		ProgressDialog pg = ProgressDialog.show(this, res.getString(R.string.checking_for_updates), res.getString(R.string.checking_for_updates), true, true);
+		//Refresh the Layout when UpdateCheck finished
+		pg.setOnDismissListener(new DialogInterface.OnDismissListener()
+		{
+			public void onDismiss (DialogInterface dialog)
+			{
+				switchToUpdateChooserLayout();
+			}
+		});
 		new UpdateCheckTask(this, pg).execute((Void) null);
 	}
 
