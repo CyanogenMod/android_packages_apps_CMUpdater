@@ -728,9 +728,10 @@ public class MainActivity extends Activity
 			{
 				switchToUpdateChooserLayout();
 			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			Log.e(TAG, "Exception on calling DownloadService", e);
 		}
 	}
 	
@@ -762,7 +763,8 @@ public class MainActivity extends Activity
 	{
 		boolean superReturn = super.onPrepareOptionsMenu(menu);
 
-		try {
+		try
+		{
 			if(DownloadActivity.myService != null && DownloadActivity.myService.DownloadRunning())
 			{
 				//Download in progress
@@ -776,9 +778,10 @@ public class MainActivity extends Activity
 			{
 				//No available updates
 			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			Log.e(TAG, "Exception on calling DownloadService", e);
 		}
 		return superReturn;
 	}

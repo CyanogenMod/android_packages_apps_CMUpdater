@@ -10,9 +10,12 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import cmupdaterapp.interfaces.IUpdateCheckService;
 import cmupdaterapp.interfaces.IUpdateCheckServiceCallback;
+import cmupdaterapp.misc.Log;
 
 public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 {
+	private static final String TAG = "UpdateCheckTask";
+	
 	private IUpdateCheckService myService;	
 	private ProgressDialog p;
 	private Context context;
@@ -44,8 +47,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 		}
 		catch (RemoteException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG, "Exception on calling UpdateCheckService", e);
 		}
 		return null;
 	}

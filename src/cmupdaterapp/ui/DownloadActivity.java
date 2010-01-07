@@ -81,10 +81,9 @@ public class DownloadActivity extends Activity
 				mbound = bindService(new Intent(IDownloadService.class.getName()), mConnection, Context.BIND_AUTO_CREATE);
 			}
 		}
-		catch (RemoteException e1)
+		catch (RemoteException ex)
 		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			Log.e(TAG, "Error on DownloadService call", ex);
 		}
 
 		try
@@ -137,8 +136,7 @@ public class DownloadActivity extends Activity
 		}
 		catch (RemoteException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG, "Exception on calling DownloadService", e);
 		}
 		super.onDestroy();
 	}
@@ -202,8 +200,7 @@ public class DownloadActivity extends Activity
 						}
 						catch (RemoteException e)
 						{
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							Log.e(TAG, "Exception on calling DownloadService", e);
 						}
 						Log.d(TAG, "Cancel onClick Event: cancelDownload finished");
 					}
@@ -261,8 +258,7 @@ public class DownloadActivity extends Activity
 	    			}
 	    			catch (RemoteException e)
 	    			{
-	    				//TODO Auto-generated catch block
-	    				e.printStackTrace();
+	    				Log.e(TAG, "Exception on calling DownloadService", e);
 	    			}
     			}
             };
@@ -361,8 +357,7 @@ public class DownloadActivity extends Activity
 			}
 	    	catch (RemoteException e)
 	    	{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	    		Log.e(TAG, "Exception on calling DownloadService", e);
 			}
 	    }
 	    return super.dispatchKeyEvent(event);

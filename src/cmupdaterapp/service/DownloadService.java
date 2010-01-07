@@ -78,6 +78,7 @@ public class DownloadService extends Service
 	private ConnectivityManager mConnectivityManager;
 	private ConnectionChangeReceiver myConnectionChangeReceiver;
 	private boolean connected;
+	private boolean isPaused;
 	
     @Override
     public IBinder onBind(Intent arg0)
@@ -96,7 +97,6 @@ public class DownloadService extends Service
 		}
 		public boolean DownloadRunning() throws RemoteException
 		{
-			// TODO Auto-generated method stub
 			return mDownloading;
 		}
 		public boolean PauseDownload() throws RemoteException
@@ -112,8 +112,7 @@ public class DownloadService extends Service
 		public boolean cancelDownload() throws RemoteException
 		{
 			// TODO Auto-generated method stub
-			cancelCurrentDownload();
-			return false;
+			return cancelCurrentDownload();
 		}
 		public UpdateInfo getCurrentUpdate() throws RemoteException
 		{
@@ -125,8 +124,7 @@ public class DownloadService extends Service
 		}
 		public boolean isPaused() throws RemoteException
 		{
-			// TODO Auto-generated method stub
-			return false;
+			return isPaused;
 		}
 		public void registerCallback(IDownloadServiceCallback cb)
 				throws RemoteException {
@@ -690,7 +688,7 @@ public class DownloadService extends Service
 		mCallbacks.finishBroadcast();
 	}
 	
-	private void cancelCurrentDownload()
+	private boolean cancelCurrentDownload()
 	{
 		prepareForDownloadCancel = true;
 		Log.d(TAG, "Download Service CancelDownload was called");
@@ -710,6 +708,7 @@ public class DownloadService extends Service
 		mDownloading = false;
 		Log.d(TAG, "Download Cancel StopSelf was called");
 		stopSelf();
+		return true;
 	}
 	
 	private Handler ToastHandler = new Handler()
