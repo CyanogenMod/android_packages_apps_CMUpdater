@@ -83,6 +83,29 @@ public class MainActivity extends Activity
 	private Preferences prefs;
 	private Resources res;
 	private Boolean runningOldVersion = false;
+	private Button btnAvailableUpdates;
+	private Button btnExistingUpdates;
+	private Button btnAvailableThemes;
+	private TextView experimentalBuildsRomtv;
+	private TextView showDowngradesRomtv;
+	private TextView experimentalBuildsThemetv;
+	private TextView showDowngradesThemetv;
+	private TextView lastRomUpdateChecktv;
+	private TextView lastThemeUpdateChecktv;
+	private Button selectUploadButton;
+	private TextView DownloadText;
+	private LinearLayout stableExperimentalInfoUpdates;
+	private Button changelogButton;
+	private Button btnDownloadTheme;
+	private TextView tvThemeDownloadText;
+	private LinearLayout stableExperimentalInfoThemes;
+	private Button btnThemechangelogButton;
+	private Button btnThemeScreenshotButton;
+	private TextView tvNoThemeUpdateServer;
+	private Button CheckNowUpdateChooserUpdates;
+	private TextView CheckNowUpdateChooserTextUpdates;
+	private Button CheckNowUpdateChooserThemes;
+	private TextView CheckNowUpdateChooserTextThemes;
 	
 	private final View.OnClickListener mScreenshotThemesListener = new View.OnClickListener()
 	{
@@ -552,6 +575,55 @@ public class MainActivity extends Activity
 		
 		//Sets the Title to Appname + Mod Version
 		setTitle(res.getString(R.string.app_name) + " " + res.getString(R.string.title_running) + " " + SysUtils.getModVersion());
+		setContentView(R.layout.main);
+		flipper = (ViewFlipper)findViewById(R.id.Flipper);
+		flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_in));
+		flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_out));
+		btnAvailableUpdates = (Button)findViewById(R.id.button_available_updates);
+		btnExistingUpdates = (Button)findViewById(R.id.button_existing_updates);
+		btnAvailableThemes = (Button)findViewById(R.id.button_available_themes);
+
+		experimentalBuildsRomtv = (TextView) findViewById(R.id.experimental_rom_updates_textview);
+		showDowngradesRomtv = (TextView) findViewById(R.id.show_rom_downgrades_textview);
+		experimentalBuildsThemetv = (TextView) findViewById(R.id.experimental_theme_updates_textview);
+		showDowngradesThemetv = (TextView) findViewById(R.id.show_theme_downgrades_textview);
+		lastRomUpdateChecktv = (TextView) findViewById(R.id.last_rom_update_check);
+		lastThemeUpdateChecktv = (TextView) findViewById(R.id.last_theme_update_check);
+
+		//Existing Updates Layout
+		mdownloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
+		mspFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
+		mdeleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
+		mapplyUpdateButton = (Button) findViewById(R.id.apply_update_button);
+		mNoExistingUpdatesFound = (TextView) findViewById(R.id.no_existing_updates_found_textview);
+		
+		//Rom Layout
+		selectUploadButton = (Button) findViewById(R.id.download_update_button);
+		mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
+		DownloadText = (TextView) findViewById(R.id.available_updates_text);
+		stableExperimentalInfoUpdates = (LinearLayout) findViewById(R.id.stable_experimental_description_container_updates);
+		changelogButton = (Button) findViewById(R.id.show_changelog_button);
+		
+		//Theme Layout
+		btnDownloadTheme = (Button) findViewById(R.id.download_theme_button);
+		mThemesSpinner = (Spinner) findViewById(R.id.available_themes_list);
+		tvThemeDownloadText = (TextView) findViewById(R.id.available_themes_text);
+		stableExperimentalInfoThemes = (LinearLayout) findViewById(R.id.stable_experimental_description_container_themes);
+		btnThemechangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
+		btnThemeScreenshotButton = (Button) findViewById(R.id.theme_screenshots_button);
+		tvNoThemeUpdateServer = (TextView) findViewById(R.id.no_theme_update_server_configured);
+		
+		//No ROM Updates Found Layout
+		CheckNowUpdateChooserUpdates = (Button) findViewById(R.id.check_now_button_update_chooser_updates);
+		CheckNowUpdateChooserTextUpdates = (TextView) findViewById(R.id.check_now_update_chooser_text_updates);
+		CheckNowUpdateChooserTextUpdates.setVisibility(View.GONE);
+		CheckNowUpdateChooserUpdates.setVisibility(View.GONE);
+
+		//No Theme Updates Found Layout
+		CheckNowUpdateChooserThemes = (Button) findViewById(R.id.check_now_button_update_chooser_themes);
+		CheckNowUpdateChooserTextThemes = (TextView) findViewById(R.id.check_now_update_chooser_text_themes);
+		CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
+		CheckNowUpdateChooserThemes.setVisibility(View.GONE);
 	}
 
 	@Override
@@ -750,13 +822,7 @@ public class MainActivity extends Activity
 		//Theme Update File URL Set?
 		boolean ThemeUpdateUrlSet = prefs.ThemeUpdateUrlSet();
 		
-		setContentView(R.layout.main);
-		flipper = (ViewFlipper)findViewById(R.id.Flipper);
-		flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_in));
-		flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_out));
-		
 		//Flipper Buttons
-		Button btnAvailableUpdates=(Button)findViewById(R.id.button_available_updates);
 		btnAvailableUpdates.setOnClickListener(new View.OnClickListener()
 		{
 			public void onClick(View view)
@@ -765,7 +831,6 @@ public class MainActivity extends Activity
 					flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_UPDATES);
 			}
 		});
-		Button btnExistingUpdates=(Button)findViewById(R.id.button_existing_updates);
 		btnExistingUpdates.setOnClickListener(new View.OnClickListener()
 		{
 			public void onClick(View view)
@@ -774,7 +839,6 @@ public class MainActivity extends Activity
 					flipper.setDisplayedChild(Constants.FLIPPER_EXISTING_UPDATES);
 			}
 		});
-		Button btnAvailableThemes=(Button)findViewById(R.id.button_available_themes);
 		btnAvailableThemes.setOnClickListener(new View.OnClickListener()
 		{
 			public void onClick(View view)
@@ -785,13 +849,6 @@ public class MainActivity extends Activity
 		});
 		
 		((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).cancel(R.string.not_new_updates_found_title);
-		
-		TextView experimentalBuildsRomtv = (TextView) findViewById(R.id.experimental_rom_updates_textview);
-		TextView showDowngradesRomtv = (TextView) findViewById(R.id.show_rom_downgrades_textview);
-		TextView experimentalBuildsThemetv = (TextView) findViewById(R.id.experimental_theme_updates_textview);
-		TextView showDowngradesThemetv = (TextView) findViewById(R.id.show_theme_downgrades_textview);
-		TextView lastRomUpdateChecktv = (TextView) findViewById(R.id.last_rom_update_check);
-		TextView lastThemeUpdateChecktv = (TextView) findViewById(R.id.last_theme_update_check);
 		
 		//Experimental and All
 		String showExperimentalRomUpdates;
@@ -826,40 +883,7 @@ public class MainActivity extends Activity
 		lastRomUpdateChecktv.setText(res.getString(R.string.last_update_check_text) + ": " + prefs.getLastUpdateCheckString());
 		lastThemeUpdateChecktv.setText(res.getString(R.string.last_update_check_text) + ": " + prefs.getLastUpdateCheckString());
 		
-		//Existing Updates Layout
-		mdownloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
-		mspFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
-		mdeleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
-		mapplyUpdateButton = (Button) findViewById(R.id.apply_update_button);
-		mNoExistingUpdatesFound = (TextView) findViewById(R.id.no_existing_updates_found_textview);
 		
-		//Rom Layout
-		Button selectUploadButton = (Button) findViewById(R.id.download_update_button);
-		mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
-		TextView DownloadText = (TextView) findViewById(R.id.available_updates_text);
-		LinearLayout stableExperimentalInfoUpdates = (LinearLayout) findViewById(R.id.stable_experimental_description_container_updates);
-		Button changelogButton = (Button) findViewById(R.id.show_changelog_button);
-		
-		//Theme Layout
-		Button btnDownloadTheme = (Button) findViewById(R.id.download_theme_button);
-		mThemesSpinner = (Spinner) findViewById(R.id.available_themes_list);
-		TextView tvThemeDownloadText = (TextView) findViewById(R.id.available_themes_text);
-		LinearLayout stableExperimentalInfoThemes = (LinearLayout) findViewById(R.id.stable_experimental_description_container_themes);
-		Button btnThemechangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
-		Button btnThemeScreenshotButton = (Button) findViewById(R.id.theme_screenshots_button);
-		TextView tvNoThemeUpdateServer = (TextView) findViewById(R.id.no_theme_update_server_configured);
-		
-		//No ROM Updates Found Layout
-		Button CheckNowUpdateChooserUpdates = (Button) findViewById(R.id.check_now_button_update_chooser_updates);
-		TextView CheckNowUpdateChooserTextUpdates = (TextView) findViewById(R.id.check_now_update_chooser_text_updates);
-		CheckNowUpdateChooserTextUpdates.setVisibility(View.GONE);
-		CheckNowUpdateChooserUpdates.setVisibility(View.GONE);
-
-		//No Theme Updates Found Layout
-		Button CheckNowUpdateChooserThemes = (Button) findViewById(R.id.check_now_button_update_chooser_themes);
-		TextView CheckNowUpdateChooserTextThemes = (TextView) findViewById(R.id.check_now_update_chooser_text_themes);
-		CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
-		CheckNowUpdateChooserThemes.setVisibility(View.GONE);
 		
 		//Sets the Theme and Rom Variables
 		List<UpdateInfo> availableRoms = null;
