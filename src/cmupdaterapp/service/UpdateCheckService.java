@@ -117,7 +117,7 @@ public class UpdateCheckService extends Service
 		}
 		public void checkForUpdates() throws RemoteException
 		{
-			FinishUpdateCheck(checkForNewUpdates());
+			checkForNewUpdates();
 		}
     };
     
@@ -148,7 +148,7 @@ public class UpdateCheckService extends Service
 		return state == TelephonyManager.DATA_CONNECTED || state == TelephonyManager.DATA_SUSPENDED;
 	}
 
-	private FullUpdateInfo checkForNewUpdates()
+	private void checkForNewUpdates()
 	{
 		FullUpdateInfo availableUpdates;
 		while (true)
@@ -185,14 +185,14 @@ public class UpdateCheckService extends Service
 				{
 					notificateCheckError();
 					DisplayExceptionToast(ex.getMessage());
-					return null;
+					return;
 				}
 			}
 			catch (RuntimeException ex)
 			{
 				Log.e(TAG, "RuntimeEx while checking for updates", ex);
 				notificateCheckError();
-				return null;
+				return;
 			}
 		}
 
@@ -204,46 +204,49 @@ public class UpdateCheckService extends Service
 		int updateCountThemes = availableUpdates.getThemeCount();
 		int updateCount = availableUpdates.getUpdateCount();
 		Log.d(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
-		
-		if(updateCountRoms > 0 || updateCountThemes > 0)
+
+		if(updateCountRoms == 0 && updateCountThemes == 0)
 		{
-			Intent i = new Intent(this, MainActivity.class);
-			
-			PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
-												PendingIntent.FLAG_ONE_SHOT);
-			
-			Notification notification = new Notification(R.drawable.icon_notification,
-												res.getString(R.string.not_new_updates_found_ticker),
-												System.currentTimeMillis());
-			
-			//To remove the Notification, when the User clicks on it
-			notification.flags = Notification.FLAG_AUTO_CANCEL;
-			
-			String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
-			notification.setLatestEventInfo(this, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
-			
-			Uri notificationRingtone = prefs.getConfiguredRingtone();
-			if(prefs.getVibrate())
-				notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
-			else
-				notification.defaults = Notification.DEFAULT_LIGHTS;
-			if(notificationRingtone == null)
-			{
-				notification.sound = null;
-			}
-			else
-			{
-				notification.sound = notificationRingtone;
-			}
-			
-			//Use a resourceId as an unique identifier
-			mNM.notify(R.string.not_new_updates_found_title, notification);
-			return availableUpdates;
+			Log.d(TAG, "No updates found");
+			ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.no_updates_found, 0));
+			FinishUpdateCheck();
+			//upi.switchToUpdateChooserLayout();
+			//TODO: switch To Udpate Chooser Layout
 		}
 		else
 		{
-			Log.d(TAG, "No updates found");
-			return new FullUpdateInfo();
+			if(prefs.notificationsEnabled())
+			{	
+				Intent i = new Intent(AppContext, MainActivity.class);
+				PendingIntent contentIntent = PendingIntent.getActivity(AppContext, 0, i, PendingIntent.FLAG_ONE_SHOT);
+
+				Notification notification = new Notification(R.drawable.icon_notification,
+									res.getString(R.string.not_new_updates_found_ticker),
+									System.currentTimeMillis());
+	
+				//To remove the Notification, when the User clicks on it
+				notification.flags = Notification.FLAG_AUTO_CANCEL;
+				
+				String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
+				notification.setLatestEventInfo(AppContext, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
+
+				Uri notificationRingtone = prefs.getConfiguredRingtone();
+				if(prefs.getVibrate())
+					notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
+				else
+					notification.defaults = Notification.DEFAULT_LIGHTS;
+				if(notificationRingtone == null)
+				{
+					notification.sound = null;
+				}
+				else
+				{
+					notification.sound = notificationRingtone;
+				}
+	
+				//Use a resourceId as an unique identifier
+				mNM.notify(R.string.not_new_updates_found_title, notification);
+			}
 		}
 	}
 
@@ -291,6 +294,8 @@ public class UpdateCheckService extends Service
 		
 		//Use a resourceId as an unique identifier
 		mNM.notify(R.string.not_update_downloaded_title, notification);
+		ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.exception_while_updating, 0));
+		FinishUpdateCheck();
 	}
 
 	private FullUpdateInfo getAvailableUpdates() throws IOException
@@ -716,14 +721,14 @@ public class UpdateCheckService extends Service
 		}
 	};
 	
-	private void FinishUpdateCheck(FullUpdateInfo fui)
+	private void FinishUpdateCheck()
 	{
 		final int M = mCallbacks.beginBroadcast();
 		for (int i=0; i<M; i++)
 		{
 			try
 			{
-				mCallbacks.getBroadcastItem(i).UpdateCheckFinished(fui);
+				mCallbacks.getBroadcastItem(i).UpdateCheckFinished();
 			}
 			catch (RemoteException e)
 			{
