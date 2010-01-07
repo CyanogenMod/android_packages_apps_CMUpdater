@@ -3,6 +3,7 @@ package cmupdaterapp.service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
@@ -42,11 +43,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.widget.Toast;
 
 public class UpdateCheckService extends Service
 {
@@ -113,26 +117,13 @@ public class UpdateCheckService extends Service
 		}
 		public void checkForUpdates() throws RemoteException
 		{
-			checkForNewUpdates();
+			FinishUpdateCheck(checkForNewUpdates());
 		}
     };
     
-    private void AddException(String ex)
+    private void DisplayExceptionToast(String ex)
 	{
-		final int M = mCallbacks.beginBroadcast();
-		for (int i=0; i<M; i++)
-		{
-			try
-			{
-				mCallbacks.getBroadcastItem(i).addException(ex);
-			}
-			catch (RemoteException e)
-			{
-				// The RemoteCallbackList will take care of removing
-				// the dead object for us.
-			}
-		}
-		mCallbacks.finishBroadcast();
+    	ToastHandler.sendMessage(ToastHandler.obtainMessage(0, ex));
 	}
 
 	private final PhoneStateListener mDataStateListener = new PhoneStateListener()
@@ -157,7 +148,7 @@ public class UpdateCheckService extends Service
 		return state == TelephonyManager.DATA_CONNECTED || state == TelephonyManager.DATA_SUSPENDED;
 	}
 
-	private void checkForNewUpdates()
+	private FullUpdateInfo checkForNewUpdates()
 	{
 		FullUpdateInfo availableUpdates;
 		while (true)
@@ -193,15 +184,15 @@ public class UpdateCheckService extends Service
 				if(isDataConnected())
 				{
 					notificateCheckError();
-					AddException(ex.getMessage());
-					return;
+					DisplayExceptionToast(ex.getMessage());
+					return null;
 				}
 			}
 			catch (RuntimeException ex)
 			{
 				Log.e(TAG, "RuntimeEx while checking for updates", ex);
 				notificateCheckError();
-				return;
+				return null;
 			}
 		}
 
@@ -247,10 +238,12 @@ public class UpdateCheckService extends Service
 			
 			//Use a resourceId as an unique identifier
 			mNM.notify(R.string.not_new_updates_found_title, notification);
+			return availableUpdates;
 		}
 		else
 		{
 			Log.d(TAG, "No updates found");
+			return new FullUpdateInfo();
 		}
 	}
 
@@ -379,7 +372,7 @@ public class UpdateCheckService extends Service
 					catch (IOException ex)
 					{
 						//when theres an Exception Downloading the Theme, continue
-						AddException(res.getString(R.string.theme_download_exception) + t.name + ": " + ex.getMessage());
+						DisplayExceptionToast(res.getString(R.string.theme_download_exception) + t.name + ": " + ex.getMessage());
 						Log.e(TAG, "There was an error downloading Theme " + t.name + ": ", ex);
 						continue;
 					}
@@ -440,7 +433,7 @@ public class UpdateCheckService extends Service
 		//TODO: Save State in mainActivity
 		FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(AppContext));
 		if(!romException)
-			State.saveState(AppContext, retValue);
+			State.saveState(AppContext, (Serializable)retValue);
 		return ful;
 	}
 
@@ -710,5 +703,34 @@ public class UpdateCheckService extends Service
 		ful.roms.removeAll(oldList.roms);
 		ful.themes.removeAll(oldList.themes);
 		return ful;
+	}
+	
+	private Handler ToastHandler = new Handler()
+	{
+		public void handleMessage(Message msg)
+		{
+			if (msg.arg1 != 0)
+				Toast.makeText(UpdateCheckService.this, msg.arg1, Toast.LENGTH_LONG).show();
+			else
+				Toast.makeText(UpdateCheckService.this, (String)msg.obj, Toast.LENGTH_LONG).show();
+		}
+	};
+	
+	private void FinishUpdateCheck(FullUpdateInfo fui)
+	{
+		final int M = mCallbacks.beginBroadcast();
+		for (int i=0; i<M; i++)
+		{
+			try
+			{
+				mCallbacks.getBroadcastItem(i).UpdateCheckFinished(fui);
+			}
+			catch (RemoteException e)
+			{
+				// The RemoteCallbackList will take care of removing
+				// the dead object for us.
+			}
+		}
+		mCallbacks.finishBroadcast();
 	}
 }

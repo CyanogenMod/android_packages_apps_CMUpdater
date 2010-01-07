@@ -2,8 +2,6 @@ package cmupdaterapp.tasks;
 
 import java.text.MessageFormat;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -27,18 +25,16 @@ import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.ui.R;
 
-public class UpdateCheckTask extends AsyncTask<Void, Void, String>
+public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 {
 	private static final String TAG = "UpdateCheckTask";
 
-	private List<String> UpdateCheckExceptions = new LinkedList<String>();
 	private IUpdateCheckService myService;	
 	private ProgressDialog p;
 	private Context context;
 	private FullUpdateInfo ui = null;
 	private boolean mbound;
-	private boolean firstException = true;
-	
+
 	public UpdateCheckTask(Context ctx, ProgressDialog pg)
 	{
 		context = ctx;
@@ -52,7 +48,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, String>
 	}
 	
 	@Override
-	protected String doInBackground(Void... arg0)
+	protected Void doInBackground(Void... arg0)
 	{
 		try
 		{
@@ -73,27 +69,16 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, String>
 	}
 	
 	@Override
-	protected void onPostExecute (String result)
+	protected void onPostExecute (Void result)
 	{
 		try
 		{
 			Resources res = context.getResources();
 			if(ui == null)
 			{
-				if (result != null)
-					Toast.makeText(context, (String) result, Toast.LENGTH_LONG).show();
-				else
-					Toast.makeText(context, R.string.exception_while_updating, Toast.LENGTH_LONG).show();
+				Toast.makeText(context, R.string.exception_while_updating, Toast.LENGTH_LONG).show();
 				p.dismiss();
 				return;
-			}
-			
-			if (myService != null && UpdateCheckExceptions != null && UpdateCheckExceptions.size() > 0)
-			{
-				for (String e : UpdateCheckExceptions)
-				{
-					Toast.makeText(context, e, Toast.LENGTH_LONG).show();
-				}
 			}
 			
 			Preferences prefs = Preferences.getPreferences(context);
@@ -186,17 +171,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, String>
 	{
 		public void UpdateCheckFinished(FullUpdateInfo fui) throws RemoteException
 		{
-			
-		}
-
-		public void addException(String exception) throws RemoteException
-		{
-			if (firstException)
-			{
-				UpdateCheckExceptions.clear();
-				firstException = false;
-			}
-			UpdateCheckExceptions.add(exception);
+			ui = fui;
 		}
 	};
 }

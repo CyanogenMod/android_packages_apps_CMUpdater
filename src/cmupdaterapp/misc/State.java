@@ -13,7 +13,7 @@ public class State
 {
 	private static final String TAG = "State";
 	
-	public static void saveState(Context ctx, FullUpdateInfo mAvailableUpdates) throws IOException
+	public static void saveState(Context ctx, Serializable mAvailableUpdates) throws IOException
 	{
 		Log.d(TAG, "Called SaveState");
 		ObjectOutputStream oos = new ObjectOutputStream(ctx.openFileOutput(Constants.STORED_STATE_FILENAME, Context.MODE_PRIVATE));
