@@ -50,9 +50,6 @@ public class Constants
 	public static final int REQUEST_DOWNLOAD_FAILED = 2;
 	public static final int REQUEST_MD5CHECKER_CANCEL = 3;
 	
-	//Request Updatecheck
-	public static final int REQUEST_CHECK_FOR_UPDATES = 1;
-	
 	//Request Downloadservice
 	public static final int REQUEST_DOWNLOAD_UPDATE = 1;
 	

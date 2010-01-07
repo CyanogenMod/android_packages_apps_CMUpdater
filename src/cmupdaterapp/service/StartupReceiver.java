@@ -28,8 +28,7 @@ public class StartupReceiver extends BroadcastReceiver
 		//Only check for updates if notifications are enabled
 		if(updateFreq == Constants.UPDATE_FREQ_AT_BOOT && notificationsEnabled)
 		{
-			Intent i = new Intent(ctx, UpdateCheckService.class)
-							.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_CHECK_FOR_UPDATES);
+			Intent i = new Intent(ctx, UpdateCheckService.class);
 			
 			Log.d(TAG, "Asking UpdateService to check for updates...");
 			ctx.startService(i);
@@ -47,8 +46,7 @@ public class StartupReceiver extends BroadcastReceiver
 	
 	public static void cancelUpdateChecks(Context ctx)
 	{
-		Intent i = new Intent(ctx, UpdateCheckService.class)
-						.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_CHECK_FOR_UPDATES);
+		Intent i = new Intent(ctx, UpdateCheckService.class);
 		PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
 		
 		AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
@@ -61,8 +59,7 @@ public class StartupReceiver extends BroadcastReceiver
 		if(updateFrequency < 0) throw new InvalidParameterException("updateFrequency can't be negative"); 
 			
 		Log.d(TAG, "Scheduling alarm to go off every "  + updateFrequency + " msegs");
-		Intent i = new Intent(ctx, UpdateCheckService.class)
-						.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_CHECK_FOR_UPDATES);
+		Intent i = new Intent(ctx, UpdateCheckService.class);
 		PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
 
 		Date lastCheck = Preferences.getPreferences(ctx).getLastUpdateCheck();
