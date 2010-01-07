@@ -49,10 +49,11 @@
 		<activity
 			android:name="cmupdaterapp.ui.ScreenshotDetailActivity"
 			android:configChanges="orientation|keyboardHidden" />	
-		<receiver android:name="cmupdaterapp.service.StartupReceiver">
+		
+		<receiver android:name="cmupdaterapp.receiver.StartupReceiver">
 			<intent-filter>
-				<action android:name="android.intent.action.BOOT_COMPLETED"></action>
-				<category android:name="android.intent.category.HOME"></category>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+				<category android:name="android.intent.category.HOME" />
 			</intent-filter>
 		</receiver>
 

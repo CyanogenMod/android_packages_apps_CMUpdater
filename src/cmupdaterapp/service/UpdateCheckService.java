@@ -39,8 +39,10 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -72,6 +74,8 @@ public class UpdateCheckService extends Service
 	private boolean WildcardUsed = false;
 	private int PrimaryKeyTheme = -1;
 	private boolean mWaitingForDataConnection = false;
+	private ConnectionChangeReceiver myConnectionChangeReceiver;
+	private boolean connected;
 	
 	@Override
 	public IBinder onBind(Intent intent)
@@ -86,7 +90,13 @@ public class UpdateCheckService extends Service
 		mPreferences = Preferences.getPreferences(AppContext);
 		systemMod = mPreferences.getBoardString();
 		res = AppContext.getResources();
-
+		mConnectivityManager = (ConnectivityManager) AppContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+		myConnectionChangeReceiver = new ConnectionChangeReceiver();
+		registerReceiver(myConnectionChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+		
+		android.net.NetworkInfo.State state = mConnectivityManager.getActiveNetworkInfo().getState();
+		connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
+		
 		if(systemMod == null)
 		{
 			Log.d(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
@@ -96,13 +106,13 @@ public class UpdateCheckService extends Service
 			Log.d(TAG, "System's Mod version:" + systemMod);
 		}
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        mConnectivityManager = (ConnectivityManager) AppContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 	}
 	
 	@Override
 	public void onDestroy()
 	{
 		mCallbacks.kill();
+		unregisterReceiver(myConnectionChangeReceiver);
     	super.onDestroy();
 	}
 	
@@ -137,8 +147,7 @@ public class UpdateCheckService extends Service
 	
 	private boolean isDataConnected()
 	{
-		android.net.NetworkInfo.State state = mConnectivityManager.getActiveNetworkInfo().getState();
-		return state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED;
+		return connected;
 	}
 
 	private void checkForNewUpdates()
@@ -190,7 +199,6 @@ public class UpdateCheckService extends Service
 
 		Preferences prefs = Preferences.getPreferences(this);
 		prefs.setLastUpdateCheck(new Date());
-		
 		
 		int updateCountRoms = availableUpdates.getRomCount();
 		int updateCountThemes = availableUpdates.getThemeCount();
@@ -719,5 +727,16 @@ public class UpdateCheckService extends Service
 			}
 		}
 		mCallbacks.finishBroadcast();
-	} 
+	}
+	
+	//Is called when Network Connection Changes
+	class ConnectionChangeReceiver extends BroadcastReceiver
+	{
+		@Override
+		public void onReceive(Context context, Intent intent)
+		{
+			android.net.NetworkInfo.State state = mConnectivityManager.getActiveNetworkInfo().getState();
+			connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
+		}
+	}
 }

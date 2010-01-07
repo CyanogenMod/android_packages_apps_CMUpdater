@@ -1,4 +1,4 @@
-package cmupdaterapp.service;
+package cmupdaterapp.receiver;
 
 import java.security.InvalidParameterException;
 import java.util.Date;

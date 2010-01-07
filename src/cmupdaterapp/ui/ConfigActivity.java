@@ -12,7 +12,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.webkit.URLUtil;
 import android.widget.Toast;
-import cmupdaterapp.service.StartupReceiver;
+import cmupdaterapp.receiver.StartupReceiver;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.misc.Log;
 
