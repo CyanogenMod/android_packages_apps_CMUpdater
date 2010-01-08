@@ -141,7 +141,7 @@ public class DownloadActivity extends Activity
 		super.onDestroy();
 	}
 
-	public void updateDownloadProgress(final int downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
+	public void updateDownloadProgress(final long downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
 	{
 		if(mProgressBar == null) return;
 
@@ -158,7 +158,7 @@ public class DownloadActivity extends Activity
 					mProgressBar.setIndeterminate(false);
 					mProgressBar.setMax(total);
 				}
-				mProgressBar.setProgress(downloaded);
+				mProgressBar.setProgress((int) downloaded);
 
 				mDownloadedBytesTextView.setText(downloadedText);
 				mDownloadSpeedTextView.setText(speedText);
@@ -278,7 +278,7 @@ public class DownloadActivity extends Activity
 	
 	private IDownloadServiceCallback mCallback = new IDownloadServiceCallback.Stub()
 	{
-		public void updateDownloadProgress(final int downloaded, final int total,
+		public void updateDownloadProgress(final long downloaded, final int total,
 				final String downloadedText, final String speedText,
 				final String remainingTimeText) throws RemoteException
 				{

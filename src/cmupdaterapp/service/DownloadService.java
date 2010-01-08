@@ -68,7 +68,7 @@ public class DownloadService extends Service
 	private boolean mDownloading = false;
 	private UpdateInfo mCurrentUpdate;
 	private WifiLock mWifiLock;
-	private volatile int mtotalDownloaded;
+	private volatile long mtotalDownloaded;
 	private int mcontentLength;
 	private long mStartTime;
 	private String minutesString;
@@ -305,8 +305,11 @@ public class DownloadService extends Service
 					md5response = MD5httpClient.execute(md5req);
 					Log.d(TAG, "Trying to download update zip from " + req.getURI());
 	
-					if (localFileSize > 0)  
-	                    req.addHeader("Range", "bytes=" + localFileSize + "-"); 
+					if (localFileSize > 0)
+					{
+						Log.d(TAG, "localFileSize for Resume: " + localFileSize);
+	                    req.addHeader("Range", "bytes=" + localFileSize + "-");
+					}
 					response = httpClient.execute(req);
 					
 					int serverResponse = response.getStatusLine().getStatusCode();
@@ -436,7 +439,6 @@ public class DownloadService extends Service
 //		{
 //			destinationMD5File.delete();
 //		}
-
 		return false;
 	}
 
@@ -456,7 +458,7 @@ public class DownloadService extends Service
 	
 			mStartTime = System.currentTimeMillis(); 
 	
-			byte[] buff = new byte[1024];
+			byte[] buff = new byte[64 * 1024];
 			int read = 0;
 			RandomAccessFile out = new RandomAccessFile(partialDestinationFile, "rw");
 			out.seek(localFileSize);
@@ -473,7 +475,8 @@ public class DownloadService extends Service
 			status = DownloadStatus.DOWNLOADING;
 			try
 			{
-				mtotalDownloaded = 0;
+				//If File exists, set the Progress to it. Otherwise it will be initial 0
+				mtotalDownloaded = localFileSize;
 				progressUpdateTimer.scheduleAtFixedRate(progressUpdateTimerTask, 100, Preferences.getPreferences(this).getProgressUpdateFreq());
 				while((read = is.read(buff)) > 0 && !prepareForDownloadCancel)
 				{
@@ -552,9 +555,9 @@ public class DownloadService extends Service
 			PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
 			mNotification.contentView = mNotificationRemoteView;
 			mNotification.contentIntent = mNotificationContentIntent;
-			int speed = (mtotalDownloaded/(int)(System.currentTimeMillis() - mStartTime));
+			long speed = (mtotalDownloaded/(System.currentTimeMillis() - mStartTime));
 			speed = (speed > 0) ? speed : 1;
-			int remainingTime = ((mcontentLength - mtotalDownloaded)/speed);
+			long remainingTime = ((mcontentLength - mtotalDownloaded)/speed);
 			String stringDownloaded = mtotalDownloaded/1048576 + "/" + mcontentLength/1048576 + " MB";
 			String stringSpeed = speed + " kB/s";
 			String stringRemainingTime = remainingTime/60000 + " " + minutesString + " " + remainingTime%60 + " " + secondsString;
@@ -562,7 +565,7 @@ public class DownloadService extends Service
 			String stringComplete = stringDownloaded + " " + stringSpeed + " " + stringRemainingTime;
 			
 			mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloadInfos, stringComplete);
-			mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, mcontentLength, mtotalDownloaded, false);
+			mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, mcontentLength, (int) mtotalDownloaded, false);
 			mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_STATUS, mNotification);
 
 			if(!mMirrorNameUpdated)
@@ -665,7 +668,7 @@ public class DownloadService extends Service
 		Log.d(TAG, "Download Notification removed");
 	}
 	
-	private void UpdateDownloadProgress(final int downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
+	private void UpdateDownloadProgress(final long downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
 	{
 		final int N = mCallbacks.beginBroadcast();
 		for (int i=0; i<N; i++)
