@@ -2,11 +2,11 @@ package cmupdaterapp.service;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.List;
@@ -16,6 +16,7 @@ import java.util.TimerTask;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -79,6 +80,21 @@ public class DownloadService extends Service
 	private ConnectionChangeReceiver myConnectionChangeReceiver;
 	private boolean connected;
 	private boolean isPaused;
+	private DownloadStatus status;
+	private String fileName;
+	private boolean resumeSupported = true;
+	private long localFileSize = 0;
+	
+	private enum DownloadStatus
+	{
+	    WAITING_CONNECTION,
+	    READY,
+	    DOWNLOADING,
+	    PAUSED,
+	    FINISHED,
+	    CANCELLED,
+	    ERROR
+	}
 	
     @Override
     public IBinder onBind(Intent arg0)
@@ -157,6 +173,7 @@ public class DownloadService extends Service
 		registerReceiver(myConnectionChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 		android.net.NetworkInfo.State state = mConnectivityManager.getActiveNetworkInfo().getState();
 		connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
+		status = DownloadStatus.WAITING_CONNECTION;
     }
     
     @Override
@@ -229,7 +246,7 @@ public class DownloadService extends Service
 
 		HttpUriRequest req, md5req;
 		HttpResponse response, md5response;
-
+		
 		List<URI> updateMirrors = updateInfo.updateFileUris;
 		int size = updateMirrors.size();
 		int start = new Random().nextInt(size);
@@ -247,7 +264,7 @@ public class DownloadService extends Service
 				mMirrorName = updateURI.getHost();
 				Log.d(TAG, "Mirrorname: " + mMirrorName);
 				
-				String fileName = updateInfo.getFileName(); 
+				fileName = updateInfo.getFileName(); 
 				if (null == fileName || fileName.length() < 1)
 				{
 					fileName = "update.zip";
@@ -262,6 +279,19 @@ public class DownloadService extends Service
 					req = new HttpGet(updateURI);
 					md5req = new HttpGet(updateURI+".md5sum");
 	
+					//If directory not exists, create it
+					File directory = new File(fullUpdateFolderPath);
+					if (!directory.exists())
+					{
+						directory.mkdirs();
+						Log.d(TAG, "UpdateFolder created");
+					}
+
+					//Set the Filename to update.zip.partial
+					destinationFile = new File(fullUpdateFolderPath, fileName + ".partial");
+					if(destinationFile.exists()) 
+	                     localFileSize = destinationFile.length(); 
+					
 					// Add no-cache Header, so the File gets downloaded each time
 					req.addHeader("Cache-Control", "no-cache");
 					md5req.addHeader("Cache-Control", "no-cache");
@@ -269,38 +299,38 @@ public class DownloadService extends Service
 					Log.d(TAG, "Trying to download md5sum file from " + md5req.getURI());
 					md5response = MD5httpClient.execute(md5req);
 					Log.d(TAG, "Trying to download update zip from " + req.getURI());
-					response = httpClient.execute(req);
 	
+					if (localFileSize > 0)  
+	                    req.addHeader("Range", "bytes=" + localFileSize + "-"); 
+					response = httpClient.execute(req);
+					
 					int serverResponse = response.getStatusLine().getStatusCode();
 					int md5serverResponse = md5response.getStatusLine().getStatusCode();
 					
-	
-					if (serverResponse == 404)
+                    // server must support partial content for resume
+					if (serverResponse != HttpStatus.SC_PARTIAL_CONTENT)
+					{
+						//TODO: continue to next mirror if resume not supported
+						Log.d(TAG, "Resume not supported");
+						ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.download_resume_not_supported, 0));
+						resumeSupported = false;
+					}
+					
+					if (serverResponse == HttpStatus.SC_NOT_FOUND)
 					{
 						Log.d(TAG, "File not found on Server. Trying next one.");
 					}
-					else if(serverResponse != 200)
+					else if(serverResponse != HttpStatus.SC_OK)
 					{
 						Log.d(TAG, "Server returned status code " + serverResponse + " for update zip trying next mirror");
-	
 					}
 					else
 					{
-						if (md5serverResponse != 200)
+						if (md5serverResponse != HttpStatus.SC_OK)
 						{
 							md5Available = false;
 							Log.d(TAG, "Server returned status code " + md5serverResponse + " for update zip md5sum trying next mirror");
 						}
-						//If directory not exists, create it
-						File directory = new File(fullUpdateFolderPath);
-						if (!directory.exists())
-						{
-							directory.mkdirs();
-							Log.d(TAG, "UpdateFolder created");
-						}
-	
-						destinationFile = new File(fullUpdateFolderPath, fileName);
-						if(destinationFile.exists()) destinationFile.delete();
 	
 						if (md5Available)
 						{
@@ -334,6 +364,7 @@ public class DownloadService extends Service
 							}
 						}
 	
+						
 						// Download Update ZIP if md5sum went ok
 						HttpEntity entity = response.getEntity();
 						dumpFile(entity, destinationFile);
@@ -414,9 +445,10 @@ public class DownloadService extends Service
 	
 			mStartTime = System.currentTimeMillis(); 
 	
-			byte[] buff = new byte[64 * 1024];
+			byte[] buff = new byte[1024];
 			int read = 0;
-			FileOutputStream fos = new FileOutputStream(destinationFile);
+			RandomAccessFile out = new RandomAccessFile(destinationFile, "rw");
+			out.seek(localFileSize);
 			InputStream is = entity.getContent();
 			TimerTask progressUpdateTimerTask = new TimerTask()
 			{
@@ -427,13 +459,14 @@ public class DownloadService extends Service
 				}
 			};
 			Timer progressUpdateTimer = new Timer();
+			status = DownloadStatus.DOWNLOADING;
 			try
 			{
 				mtotalDownloaded = 0;
 				progressUpdateTimer.scheduleAtFixedRate(progressUpdateTimerTask, 100, Preferences.getPreferences(this).getProgressUpdateFreq());
-				while(!Thread.currentThread().isInterrupted() && (read = is.read(buff)) > 0 && !prepareForDownloadCancel)
+				while((read = is.read(buff)) > 0 && !prepareForDownloadCancel)
 				{
-					fos.write(buff, 0, read);
+					out.write(buff, 0, read);
 					mtotalDownloaded += read;
 				}
 
@@ -441,15 +474,17 @@ public class DownloadService extends Service
 				{
 					throw new IOException("Download Canceled");
 				}
-	
-				fos.flush();
-				fos.close();
+
+				out.close();
 				is.close();
+				destinationFile.renameTo(new File(fullUpdateFolderPath, fileName));
+				status = DownloadStatus.FINISHED;
 				Log.d(TAG, "Download finished");
 			}
 			catch(IOException e)
 			{
-				fos.close();
+				out.close();
+				status = DownloadStatus.ERROR;
 				try
 				{
 					destinationFile.delete();

@@ -53,10 +53,9 @@ public class Changelog implements Runnable
 		URL url;
 		InputSource i;
 		
-		Message m = null;
+		Message m = MainActivity.ChangelogProgressHandler.obtainMessage();
 		try
 		{
-			m = new Message();
 			url = new URL(p.getChangelogURL());
 			i = new InputSource(url.openStream());
         	SAXParserFactory spf = SAXParserFactory.newInstance(); 

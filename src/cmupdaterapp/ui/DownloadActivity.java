@@ -300,6 +300,16 @@ public class DownloadActivity extends Activity
 		{
 			mHandler.sendMessage(mHandler.obtainMessage(DOWNLOAD_ERROR));
 		}
+
+		public void ResumeSupported(boolean supported) throws RemoteException
+		{
+			// TODO Auto-generated method stub	
+		}
+
+		public void noMD5Found() throws RemoteException
+		{
+			// TODO Auto-generated method stub	
+		}
 	};
 	
 	private static final int UPDATE_DOWNLOAD_PROGRESS = 1;

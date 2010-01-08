@@ -143,7 +143,7 @@ public class MainActivity extends Activity
 			Log.d(TAG, "Download Rom Button clicked");
 			final UpdateInfo ui = (UpdateInfo) mUpdatesSpinner.getSelectedItem();
 			//Check if the File is present, so prompt the User to overwrite it
-			File foo = new File(mUpdateFolder + "/" + ui.getFileName());
+			final File foo = new File(mUpdateFolder + "/" + ui.getFileName());
 			if (foo.isFile() && foo.exists())
 			{
 				new AlertDialog.Builder(MainActivity.this)
@@ -161,6 +161,7 @@ public class MainActivity extends Activity
 					public void onClick(DialogInterface dialog, int which)
 					{
 						Log.d(TAG, "Start downlading Rom update: " + ui.getFileName());
+						foo.delete();
 						downloadRequestedUpdate(ui);
 					}
 				})

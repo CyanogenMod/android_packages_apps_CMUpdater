@@ -7,4 +7,6 @@ interface IDownloadServiceCallback
     void UpdateDownloadMirror(String mirror);
     void DownloadFinished(in UpdateInfo u);
     void DownloadError();
+    void ResumeSupported(boolean supported);
+    void noMD5Found();
 }

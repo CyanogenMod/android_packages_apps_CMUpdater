@@ -32,10 +32,9 @@ public class FeaturedThemes implements Runnable
 		URL url;
 		InputSource i;
 		
-		Message m = null;
+		Message m = ThemeListActivity.FeaturedThemesProgressHandler.obtainMessage();
 		try
 		{
-			m = new Message();
 			url = new URL(p.getFeaturedThemesURL());
 			i = new InputSource(url.openStream());
         	SAXParserFactory spf = SAXParserFactory.newInstance(); 
