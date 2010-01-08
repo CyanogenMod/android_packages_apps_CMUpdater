@@ -333,6 +333,8 @@ public class DownloadService extends Service
 							//TODO: continue to next mirror if resume not supported
 							Log.d(TAG, "Resume not supported");
 							ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.download_resume_not_supported, 0));
+							//To get the UdpateProgressBar working correctly, when server does not support resume
+							localFileSize = 0;
 							resumeSupported = false;
 						}
 						else if (localFileSize > 0 && serverResponse == HttpStatus.SC_PARTIAL_CONTENT)
@@ -559,17 +561,19 @@ public class DownloadService extends Service
 			PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
 			mNotification.contentView = mNotificationRemoteView;
 			mNotification.contentIntent = mNotificationContentIntent;
-			long speed = (mtotalDownloaded/(System.currentTimeMillis() - mStartTime));
+			//lcoalFileSize because the contentLength will only be the missing bytes and not the whole file
+			long contentLengthOfFullDownload = mcontentLength + localFileSize;
+			long speed = ((mtotalDownloaded - localFileSize)/(System.currentTimeMillis() - mStartTime));
 			speed = (speed > 0) ? speed : 1;
-			long remainingTime = ((mcontentLength - mtotalDownloaded)/speed);
-			String stringDownloaded = mtotalDownloaded/1048576 + "/" + mcontentLength/1048576 + " MB";
+			long remainingTime = ((contentLengthOfFullDownload - mtotalDownloaded)/speed);
+			String stringDownloaded = mtotalDownloaded/1048576 + "/" + contentLengthOfFullDownload/1048576 + " MB";
 			String stringSpeed = speed + " kB/s";
 			String stringRemainingTime = remainingTime/60000 + " " + minutesString + " " + remainingTime%60 + " " + secondsString;
 
 			String stringComplete = stringDownloaded + " " + stringSpeed + " " + stringRemainingTime;
 			
 			mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloadInfos, stringComplete);
-			mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, mcontentLength, (int) mtotalDownloaded, false);
+			mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, (int) contentLengthOfFullDownload, (int) mtotalDownloaded, false);
 			mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_STATUS, mNotification);
 
 			if(!mMirrorNameUpdated)
@@ -578,7 +582,7 @@ public class DownloadService extends Service
 				mMirrorNameUpdated = true;
 			}
 			//Update the DownloadProgress
-			UpdateDownloadProgress(mtotalDownloaded, mcontentLength, stringDownloaded, stringSpeed, stringRemainingTime);
+			UpdateDownloadProgress(mtotalDownloaded, (int) contentLengthOfFullDownload, stringDownloaded, stringSpeed, stringRemainingTime);
 		}
 		else
 			Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
