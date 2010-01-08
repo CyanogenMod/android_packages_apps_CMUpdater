@@ -22,6 +22,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import cmupdaterapp.customTypes.NotEnoughSpaceException;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IDownloadService;
 import cmupdaterapp.interfaces.IDownloadServiceCallback;
@@ -33,6 +34,7 @@ import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.ui.R;
 import cmupdaterapp.utils.MD5;
 import cmupdaterapp.utils.Preferences;
+import cmupdaterapp.utils.SysUtils;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -419,6 +421,12 @@ public class DownloadService extends Service
 					ToastHandler.sendMessage(ToastHandler.obtainMessage(0, ex.getMessage()));
 					Log.e(TAG, "An error occured while downloading the update file. Trying next mirror", ex);
 				}
+				catch (NotEnoughSpaceException ex)
+				{
+					ToastHandler.sendMessage(ToastHandler.obtainMessage(0, ex.getMessage()));
+					Log.e(TAG, "Not enough Space on SDCard to download the Update");
+					return false;
+				}
 				if(Thread.currentThread().isInterrupted() || !Thread.currentThread().isAlive())
 					break;
 			}
@@ -431,18 +439,10 @@ public class DownloadService extends Service
 		ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.unable_to_download_file, 0));
 		Log.d(TAG, "Unable to download the update file from any mirror");
 
-//		if (null != partialDestinationFile && partialDestinationFile.exists())
-//		{
-//			partialDestinationFile.delete();
-//		}
-//		if (null != destinationMD5File && destinationMD5File.exists())
-//		{
-//			destinationMD5File.delete();
-//		}
 		return false;
 	}
 
-	private void dumpFile(HttpEntity entity, File partialDestinationFile, File destinationFile) throws IOException
+	private void dumpFile(HttpEntity entity, File partialDestinationFile, File destinationFile) throws IOException, NotEnoughSpaceException
 	{
 		Log.d(TAG, "DumpFile Called");
 		if(!prepareForDownloadCancel)
@@ -455,6 +455,10 @@ public class DownloadService extends Service
 			}
 			else
 				Log.d(TAG, "Update size: " + (mcontentLength/1024) + "KB" );
+			
+			//Check if there is enough Space on SDCard for Downloading the Update
+			if (!SysUtils.EnoughSpaceOnSdCard(mcontentLength))
+				throw new NotEnoughSpaceException(res.getString(R.string.download_not_enough_space));
 	
 			mStartTime = System.currentTimeMillis(); 
 	
@@ -775,7 +779,7 @@ public class DownloadService extends Service
 	};
 	
 	//Is called when Network Connection Changes
-	class ConnectionChangeReceiver extends BroadcastReceiver
+	private class ConnectionChangeReceiver extends BroadcastReceiver
 	{
 		@Override
 		public void onReceive(Context context, Intent intent)

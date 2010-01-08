@@ -1,8 +1,12 @@
 package cmupdaterapp.utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import android.os.Environment;
+import android.os.StatFs;
 
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
@@ -61,5 +65,25 @@ public class SysUtils
         	}
         }
         return line;
+	}
+	
+	/**
+	 * Checks if there is enough Space on SDCard
+	 * 
+	 * @param UpdateSize
+	 *            Size to Check
+	 * @return True if the Update will fit on SDCard, false if not enough space on SDCard
+	 * 		Will also return false, if the SDCard is not mounted as read/write
+	 */
+	public static boolean EnoughSpaceOnSdCard(long UpdateSize)
+	{
+		String status = Environment.getExternalStorageState();
+		if (!status.equals(Environment.MEDIA_MOUNTED))
+			return false;
+		File path = Environment.getExternalStorageDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSize();
+        long availableBlocks = stat.getAvailableBlocks();
+        return (UpdateSize < availableBlocks * blockSize);
 	}
 }
