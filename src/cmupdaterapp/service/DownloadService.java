@@ -22,7 +22,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import cmupdaterapp.customTypes.NotEnoughSpaceException;
+import cmupdaterapp.customExceptions.NotEnoughSpaceException;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IDownloadService;
 import cmupdaterapp.interfaces.IDownloadServiceCallback;

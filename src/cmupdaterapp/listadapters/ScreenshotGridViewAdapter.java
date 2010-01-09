@@ -3,7 +3,7 @@ package cmupdaterapp.listadapters;
 import java.util.LinkedList;
 import java.util.List;
 
-import cmupdaterapp.customTypes.InvalidPictureException;
+import cmupdaterapp.customExceptions.InvalidPictureException;
 import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.misc.Constants;
 

@@ -1,6 +1,6 @@
 package cmupdaterapp.ui;
 
-import cmupdaterapp.customTypes.InvalidPictureException;
+import cmupdaterapp.customExceptions.InvalidPictureException;
 import cmupdaterapp.listadapters.ScreenshotGridViewAdapter;
 import cmupdaterapp.misc.Constants;
 import android.app.Activity;

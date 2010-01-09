@@ -13,6 +13,7 @@ import java.util.GregorianCalendar;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.CompressFormat;
+import cmupdaterapp.customExceptions.InvalidPictureException;
 import cmupdaterapp.misc.Constants;
 
 public class Screenshot implements Serializable

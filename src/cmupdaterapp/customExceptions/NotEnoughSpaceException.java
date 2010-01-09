@@ -1,4 +1,4 @@
-package cmupdaterapp.customTypes;
+package cmupdaterapp.customExceptions;
 
 public class NotEnoughSpaceException extends Exception
 {
