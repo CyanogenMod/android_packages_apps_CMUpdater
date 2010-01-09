@@ -90,10 +90,14 @@ public class UpdateCheckService extends Service
 		mPreferences = Preferences.getPreferences(AppContext);
 		systemMod = mPreferences.getBoardString();
 		res = AppContext.getResources();
-		mConnectivityManager = (ConnectivityManager) AppContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 		myConnectionChangeReceiver = new ConnectionChangeReceiver();
 		registerReceiver(myConnectionChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 		
+		//Can be null on Startup, when System not available. So try it, till we get it. Before there is no DataConnection available
+		while(mConnectivityManager == null)
+		{
+			mConnectivityManager = (ConnectivityManager) AppContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+		}
 		android.net.NetworkInfo.State state = mConnectivityManager.getActiveNetworkInfo().getState();
 		connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
 		
