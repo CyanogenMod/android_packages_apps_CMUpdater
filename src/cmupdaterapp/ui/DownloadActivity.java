@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DownloadActivity extends Activity
 {
@@ -141,7 +142,7 @@ public class DownloadActivity extends Activity
 		super.onDestroy();
 	}
 
-	public void updateDownloadProgress(final long downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
+	private void updateDownloadProgress(final long downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
 	{
 		if(mProgressBar == null) return;
 
@@ -167,7 +168,7 @@ public class DownloadActivity extends Activity
 		});
 	}
 
-	public void updateDownloadMirror(final String mirror)
+	private void updateDownloadMirror(final String mirror)
 	{
 		if(mDownloadMirrorTextView == null) return;
 
@@ -339,8 +340,8 @@ public class DownloadActivity extends Activity
 					finish();
 					break;
 				case DOWNLOAD_ERROR:
+					Toast.makeText(DownloadActivity.this, R.string.exception_while_downloading, Toast.LENGTH_LONG).show();
 					Intent i2 = new Intent(DownloadActivity.this, MainActivity.class);
-					i2.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
 					i2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(i2);
 					finish();

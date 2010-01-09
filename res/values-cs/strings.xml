@@ -132,7 +132,7 @@
 	<string name="no_updates_found">Žádné aktualizace CM nebyly nalezeny</string>
 	<string name="not_new_updates_found_ticker">Nové aktualizace CM nalezeny!</string>
 	<string name="not_new_updates_found_title">Nové aktualizace CM nalezeny</string>
-	<string name="exception_while_updating">Vyskytla se chyba při pokusu o kontakt aktualizačního serveru CM</string>
+
 	<string name="exception_while_downloading">Vyskytla se chyba při pokusu o stažení aktualizace CM</string>
 
 	<string name="not_update_check_error_ticker">Kontrola aktualizací CM selhala</string>

@@ -141,7 +141,6 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="no_updates_found">No CM updates found</string>
 	<string name="not_new_updates_found_ticker">New CM updates found!</string>
 	<string name="not_new_updates_found_title">New CM updates found</string>
-	<string name="exception_while_updating">An error occurred while trying to contact CM Update Server</string>
 	<string name="exception_while_downloading">An error occurred while trying to download a CM Update</string>
 
 	<string name="not_update_check_error_ticker">Check for CM updates failed</string>

@@ -114,7 +114,7 @@ POR FAVOR REINCIE EM MODO DE RECUPERAÇÃO MANUALMENTE *ANTES* DE APLICAR A ATUA
     <string name="no_updates_found">Nenhuma atualização encontrada.</string>
     <string name="not_new_updates_found_ticker">Encontradas Novas Atualizações!</string>
     <string name="not_new_updates_found_title">Novas Atualizações Encontradas.</string>
-    <string name="exception_while_updating">Ocorreu um erro ao tentar conectar ao Servidor de Atualizações CM</string>
+
     <string name="exception_while_downloading">Ocorreu um erro ao tentar Baixar a Atualização CM</string>
     
     <string name="not_update_check_error_ticker">A verificação de Atualizações CM falhou.</string>

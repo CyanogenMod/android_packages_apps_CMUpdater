@@ -635,23 +635,18 @@ public class DownloadService extends Service
     private void notificateDownloadError()
 	{
     	mDownloading = false;
-		Intent i = new Intent(this, MainActivity.class)
-		.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_DOWNLOAD_FAILED);
-
+		Intent i = new Intent(this, MainActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
 				PendingIntent.FLAG_ONE_SHOT);
-
 		Notification notification = new Notification(android.R.drawable.stat_notify_error,
 				res.getString(R.string.not_update_download_error_ticker),
 				System.currentTimeMillis());
-
 		notification.flags = Notification.FLAG_AUTO_CANCEL;
 		notification.setLatestEventInfo(
 				this,
 				res.getString(R.string.not_update_download_error_title),
 				res.getString(R.string.not_update_download_error_body),
 				contentIntent);
-
 		Uri notificationRingtone = Preferences.getPreferences(this).getConfiguredRingtone();
 		if(Preferences.getPreferences(this).getVibrate())
 			notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
@@ -665,8 +660,9 @@ public class DownloadService extends Service
 		{
 			notification.sound = notificationRingtone;
 		}
-
 		((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).notify(R.string.not_update_download_error_title, notification);
+		Log.d(TAG, "Download Error");
+		ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.exception_while_downloading, 0));
 	}
 	
 	private void DeleteDownloadStatusNotification(int id)

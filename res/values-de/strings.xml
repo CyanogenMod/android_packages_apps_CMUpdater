@@ -135,7 +135,6 @@ WENN SIE EIN BACKUP MACHEN WOLLEN, BOOTEN SIE BITTE MANUELL IN DEN RECOVERY MODU
 	<string name="not_new_updates_found_ticker">Neue Updates gefunden!</string>
 	<string name="not_new_updates_found_title">Neue Updates gefunden</string>
 
-	<string name="exception_while_updating">Es ist ein Fehler beim Versuch den Update Server zu kontaktieren aufgetreten</string>
 	<string name="exception_while_downloading">Es ist ein Fehler beim Versuch ein Update herunterzuladen aufgetreten</string>
 
 	<string name="not_update_check_error_ticker">Update Check fehlgeschlagen</string>

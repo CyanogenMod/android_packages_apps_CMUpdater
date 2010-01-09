@@ -44,12 +44,7 @@ public class Constants
 	public static final int CHANGELOGTYPE_ROM = 1;
 	public static final int CHANGELOGTYPE_APP = 2;
 	public static final int CHANGELOGTYPE_THEME = 3;
-	
-	//Startup Requests
-	public static final int REQUEST_UPDATE_CHECK_ERROR = 1;
-	public static final int REQUEST_DOWNLOAD_FAILED = 2;
-	public static final int REQUEST_MD5CHECKER_CANCEL = 3;
-	
+
 	//Request Downloadservice
 	public static final int REQUEST_DOWNLOAD_UPDATE = 1;
 	

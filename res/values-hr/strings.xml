@@ -134,7 +134,7 @@ MOLIM MANUALNO PONOVNO POKRENITE U OPORAVAK TE PRIJE PRIMJENE NADOGRADNJE SAPRAV
 	<string name="no_updates_found">Nije pronađena CM nadogradnja</string>
 	<string name="not_new_updates_found_ticker">Pronađena je nova CM nadogradnja!</string>
 	<string name="not_new_updates_found_title">Pronađena je nova CM nadogradnja</string>
-	<string name="exception_while_updating">Greska pri povezivanju s Serverom CM nadogradnje</string>
+
 	<string name="exception_while_downloading">Greska pri preuzimanju CM nadogradnje</string>
 
 	<string name="not_update_check_error_ticker">Neuspjesna provjera CM nadogradnje</string>

@@ -142,7 +142,6 @@
    <string name="not_new_updates_found_ticker">Найдена новая версия!</string>
    <string name="not_new_updates_found_title">Найдена новая версия</string>
    
-   <string name="exception_while_updating">Ошибка в связи с сервером обновления</string>
    <string name="exception_while_downloading">Ошибка при загрузке файла</string>
    
    <string name="not_update_check_error_ticker">Ошибка при проверке новых версий</string>

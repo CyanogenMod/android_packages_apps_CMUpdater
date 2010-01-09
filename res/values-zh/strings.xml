@@ -136,7 +136,6 @@
 	<string name="not_new_updates_found_ticker">CM有新的更新！</string>
 	<string name="not_new_updates_found_title">找到CM更新！</string>
 
-	<string name="exception_while_updating">与CM更新服务器通讯时出现错误</string>
 	<string name="exception_while_downloading">下载CM更新时出现错误</string>
 
 	<string name="not_update_check_error_ticker">检查CM更新失败</string>

@@ -1,8 +1,6 @@
 package cmupdaterapp.ui;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.Serializable;
@@ -50,11 +48,12 @@ import android.widget.ViewFlipper;
 import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.listadapters.UpdateListAdapter;
+import cmupdaterapp.tasks.MD5CheckerTask;
 import cmupdaterapp.tasks.UpdateCheckTask;
-import cmupdaterapp.utils.MD5;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.StringUtils;
 import cmupdaterapp.utils.SysUtils;
+import cmupdaterapp.utils.UpdateFilter;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.misc.State;
@@ -306,6 +305,14 @@ public class MainActivity extends Activity
 		}
 	};
 
+	private final View.OnClickListener mUpdateCheckListener = new View.OnClickListener()
+	{
+		public void onClick(View v)
+		{
+			checkForUpdates();
+		}
+	};
+	
 	private final View.OnClickListener mDeleteUpdatesButtonListener = new View.OnClickListener()
 	{
 		public void onClick(View v)
@@ -437,7 +444,7 @@ public class MainActivity extends Activity
 					public void onClick(DialogInterface dialog, int which)
 					{
 						//Directly call on Postexecute, cause we need no md5check
-						new MD5CheckerTask(null, filename).onPostExecute(true);
+						new MD5CheckerTask(MainActivity.this, null, filename).onPostExecute(true);
 						dialog.dismiss();
 					}
 				})
@@ -468,103 +475,12 @@ public class MainActivity extends Activity
 						}
 				);
 	
-				mBgTask = new MD5CheckerTask(mDialog, filename).execute(Update);
+				mBgTask = new MD5CheckerTask(MainActivity.this, mDialog, filename).execute(Update);
 			}
 		}
 	}
 
-	private final class MD5CheckerTask extends AsyncTask<File, Void, Boolean>
-	{	
-		private ProgressDialog mDialog;
-		private String mFilename;
-		private boolean mreturnvalue;
-
-		public MD5CheckerTask(ProgressDialog dialog, String filename)
-		{
-			mDialog = dialog;
-			mFilename = filename;
-		}
-
-		@Override
-		public Boolean doInBackground(File... params)
-		{
-			
-			boolean MD5exists = false;
-			try
-			{
-				File MD5file = new File(params[0]+".md5sum");
-				if (MD5file.exists() && MD5file.canRead())
-					MD5exists = true;
-				if (params[0].exists() && params[0].canRead())
-				{
-					//If MD5 File exists, check it
-					if(MD5exists)
-					{
-						//Calculate MD5 of Existing Update
-						String calculatedMD5 = MD5.calculateMD5(params[0]);
-						//Read the existing MD5SUM
-						FileReader input = new FileReader(MD5file);
-						BufferedReader bufRead = new BufferedReader(input);
-						String firstLine = bufRead.readLine();
-						bufRead.close();
-						input.close();
-						//If the content of the File is not empty, compare it
-						if (firstLine != null)
-						{
-							String[] SplittedString = firstLine.split("  ");
-							if(SplittedString[0].equalsIgnoreCase(calculatedMD5))
-								mreturnvalue = true;
-						}
-						else
-							mreturnvalue = false;
-					}
-					else
-					{
-						return true;
-					}
-				}
-			}
-			catch (IOException e)
-			{
-				Log.e(TAG, "IOEx while checking MD5 sum", e);
-				mreturnvalue = false;
-			}
-			return mreturnvalue;
-		}
-
-		@Override
-		public void onPostExecute(Boolean result)
-		{
-			UpdateInfo ui = new UpdateInfo();
-			String[] temp = mFilename.split("\\\\");
-			ui.setName(temp[temp.length-1]);
-			ui.setFileName(mFilename);
-			if(result == true)
-			{
-				Intent i = new Intent(MainActivity.this, ApplyUpdateActivity.class)
-				.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)ui);
-				startActivity(i);
-			}
-			else
-			{
-				Toast.makeText(MainActivity.this, R.string.apply_existing_update_md5error_message, Toast.LENGTH_LONG).show();
-			}
-			
-			//Is null when no MD5SUM is present
-			if(mDialog != null)
-				mDialog.dismiss();
-		}
-
-		@Override
-		public void onCancelled()
-		{
-			Log.d(TAG, "MD5Checker Task cancelled");
-			Intent i = new Intent(MainActivity.this, MainActivity.class);
-			i.putExtra(Constants.KEY_REQUEST, Constants.REQUEST_MD5CHECKER_CANCEL);
-			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(i);
-		}
-	};
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -625,6 +541,32 @@ public class MainActivity extends Activity
 		CheckNowUpdateChooserTextThemes = (TextView) findViewById(R.id.check_now_update_chooser_text_themes);
 		CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
 		CheckNowUpdateChooserThemes.setVisibility(View.GONE);
+		
+		//Flipper Buttons
+		btnAvailableUpdates.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View view)
+			{
+				if(flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_UPDATES)
+					flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_UPDATES);
+			}
+		});
+		btnExistingUpdates.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View view)
+			{
+				if(flipper.getDisplayedChild() != Constants.FLIPPER_EXISTING_UPDATES)
+					flipper.setDisplayedChild(Constants.FLIPPER_EXISTING_UPDATES);
+			}
+		});
+		btnAvailableThemes.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View view)
+			{
+				if(flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_THEMES)
+					flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_THEMES);
+			}
+		});
 	}
 
 	@Override
@@ -670,33 +612,6 @@ public class MainActivity extends Activity
 	{
 		Log.d(TAG, "onResume called");
 		super.onResume();
-		Intent UpdateIntent = getIntent();
-		if (UpdateIntent != null)
-		{
-			int req = UpdateIntent.getIntExtra(Constants.KEY_REQUEST, -1);
-			switch(req)
-			{
-				case Constants.REQUEST_UPDATE_CHECK_ERROR:
-					Log.d(TAG, "Update check error");
-					Toast.makeText(this, R.string.not_update_check_error_ticker, Toast.LENGTH_LONG).show();
-					break;
-				case Constants.REQUEST_DOWNLOAD_FAILED:
-					Log.d(TAG, "Download Error");
-					Toast.makeText(this, R.string.exception_while_downloading, Toast.LENGTH_LONG).show();
-					break;
-				case Constants.REQUEST_MD5CHECKER_CANCEL:
-					Log.d(TAG, "MD5Check canceled. Switching Layout");
-					Toast.makeText(this, R.string.md5_check_cancelled, Toast.LENGTH_LONG).show();
-					break;
-				default:
-					Log.d(TAG, "No Intent. Starting App in Default mode");
-					break;
-			}
-		}
-		else
-		{
-			Log.d(TAG, "Intent is NULL");
-		}
 		
 		mfilenames = null;
 		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
@@ -812,7 +727,7 @@ public class MainActivity extends Activity
 		return super.onMenuItemSelected(featureId, item);
 	}
 
-	public void switchToUpdateChooserLayout()
+	private void switchToUpdateChooserLayout()
 	{
 		try
 		{
@@ -826,32 +741,6 @@ public class MainActivity extends Activity
 		//Theme Update File URL Set?
 		boolean ThemeUpdateUrlSet = prefs.ThemeUpdateUrlSet();
 		
-		//Flipper Buttons
-		btnAvailableUpdates.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View view)
-			{
-				if(flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_UPDATES)
-					flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_UPDATES);
-			}
-		});
-		btnExistingUpdates.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View view)
-			{
-				if(flipper.getDisplayedChild() != Constants.FLIPPER_EXISTING_UPDATES)
-					flipper.setDisplayedChild(Constants.FLIPPER_EXISTING_UPDATES);
-			}
-		});
-		btnAvailableThemes.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View view)
-			{
-				if(flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_THEMES)
-					flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_THEMES);
-			}
-		});
-		
 		((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).cancel(R.string.not_new_updates_found_title);
 		
 		//Experimental and All
@@ -860,25 +749,28 @@ public class MainActivity extends Activity
 		String showExperimentalThemeUpdates;
 		String showAllThemeUpdates;
 		
+		String trueString = res.getString(R.string.true_string);
+		String falseString = res.getString(R.string.false_string);
+		
 		if(prefs.showExperimentalRomUpdates())
-			showExperimentalRomUpdates = res.getString(R.string.true_string);
+			showExperimentalRomUpdates = trueString;
 		else
-			showExperimentalRomUpdates = res.getString(R.string.false_string);
+			showExperimentalRomUpdates = falseString;
 		
 		if(prefs.showAllRomUpdates())
-			showAllRomUpdates = res.getString(R.string.true_string);
+			showAllRomUpdates = trueString;
 		else
-			showAllRomUpdates = res.getString(R.string.false_string);
+			showAllRomUpdates = falseString;
 		
 		if(prefs.showExperimentalThemeUpdates())
-			showExperimentalThemeUpdates = res.getString(R.string.true_string);
+			showExperimentalThemeUpdates = trueString;
 		else
-			showExperimentalThemeUpdates = res.getString(R.string.false_string);
+			showExperimentalThemeUpdates = falseString;
 		
 		if(prefs.showAllThemeUpdates())
-			showAllThemeUpdates = res.getString(R.string.true_string);
+			showAllThemeUpdates = trueString;
 		else
-			showAllThemeUpdates = res.getString(R.string.false_string);
+			showAllThemeUpdates = falseString;
 		
 		experimentalBuildsRomtv.setText(MessageFormat.format(res.getString(R.string.p_allow_experimental_rom_versions_title)+": {0}", showExperimentalRomUpdates));
 		showDowngradesRomtv.setText(MessageFormat.format(res.getString(R.string.p_display_older_rom_versions_title)+": {0}", showAllRomUpdates));
@@ -924,13 +816,7 @@ public class MainActivity extends Activity
 			changelogButton.setVisibility(View.GONE);
 			CheckNowUpdateChooserTextUpdates.setVisibility(View.VISIBLE);
 			CheckNowUpdateChooserUpdates.setVisibility(View.VISIBLE);
-			CheckNowUpdateChooserUpdates.setOnClickListener(new View.OnClickListener()
-			{
-				public void onClick(View v)
-				{
-					checkForUpdates();
-				}
-			});
+			CheckNowUpdateChooserUpdates.setOnClickListener(mUpdateCheckListener);
 		}
 		
 		//Disable the download Button when running an old ROM
@@ -978,13 +864,7 @@ public class MainActivity extends Activity
 			btnThemeScreenshotButton.setVisibility(View.GONE);
 			CheckNowUpdateChooserTextThemes.setVisibility(View.VISIBLE);
 			CheckNowUpdateChooserThemes.setVisibility(View.VISIBLE);
-			CheckNowUpdateChooserThemes.setOnClickListener(new View.OnClickListener()
-			{
-				public void onClick(View v)
-				{
-					checkForUpdates();
-				}
-			});
+			CheckNowUpdateChooserThemes.setOnClickListener(mUpdateCheckListener);
 		}
 
 		//Existing Updates Layout
@@ -1255,7 +1135,7 @@ public class MainActivity extends Activity
 		return success;
 	}
 
-	public static boolean deleteDir(File dir)
+	private static boolean deleteDir(File dir)
 	{
 		if (dir.isDirectory())
 		{ 	
@@ -1271,33 +1151,5 @@ public class MainActivity extends Activity
 		}
 		// The directory is now empty so delete it
 		return dir.delete();
-	}
-}
-
-/**
- * Filename Filter for getting only Files that matches the Given Extensions 
- * Extensions can be split with |
- * Example: .zip|.md5sum  
- *
- * @param  Extensions  String with supported Extensions. Split multiple Extensions with |
- * @return      true when file Matches Extension, otherwise false
- */
-class UpdateFilter implements FilenameFilter
-{
-	private String[] mExtension;
-	
-	public UpdateFilter(String Extensions)
-	{
-		mExtension = Extensions.split("\\|");
-	}
-	
-	public boolean accept(File dir, String name)
-	{
-		for (String Ext : mExtension)
-		{
-			if (name.endsWith(Ext))
-				return true;
-		}
-		return false;
 	}
 }

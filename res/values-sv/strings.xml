@@ -133,7 +133,6 @@ STARTA SJÄLV OM I ÅTERSTÄLLNINGSLÄGE INNAN DU INSTALLERAR UPPDATERINGEN OM D
 	<string name="not_new_updates_found_ticker">Nya CM-uppdateringar hittade!</string>
 	<string name="not_new_updates_found_title">Nya CM-uppdateringar hittade</string>
 
-	<string name="exception_while_updating">Ett fel inträffade när CM uppdateringsserver skulle kontaktas</string>
 	<string name="exception_while_downloading">Ett fel inträffade när CM-uppdatering skulle hämtas</string>
 
 	<string name="not_update_check_error_ticker">Kontroll av CM-uppdateringar misslyckades</string>
