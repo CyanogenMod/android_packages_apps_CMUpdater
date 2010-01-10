@@ -63,7 +63,7 @@ public class Constants
 	public static final int MENU_THEME_LIST_CONTEXT_DISABLE = 13;
 
 	//Filename for Instance save
-	public static final String STORED_STATE_FILENAME = "cmupdater.sst";
+	public static final String STORED_STATE_FILENAME = "cmupdater.state";
 
 	//Notifications
 	public static final int NOTIFICATION_DOWNLOAD_STATUS = 100;

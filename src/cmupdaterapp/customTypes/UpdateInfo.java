@@ -22,7 +22,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	private String description;
 	private String fileName;
 	public List<URI> screenshots;
-	public List<URI> updateFileUris;
+	public List<URI> updateMirrors;
 
 	/**
 	 * Set Name
@@ -156,7 +156,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	public UpdateInfo()
 	{
 		screenshots = new LinkedList<URI>();
-		updateFileUris = new LinkedList<URI>();
+		updateMirrors = new LinkedList<URI>();
 		mod = new LinkedList<String>();
 		board = new LinkedList<String>();
 	}
@@ -164,7 +164,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	private UpdateInfo(Parcel in)
 	{
 		screenshots = new LinkedList<URI>();
-		updateFileUris = new LinkedList<URI>();
+		updateMirrors = new LinkedList<URI>();
 		mod = new LinkedList<String>();
 		board = new LinkedList<String>();
 		readFromParcel(in);
@@ -199,7 +199,7 @@ public class UpdateInfo implements Parcelable, Serializable
 		arg0.writeString(description);
 		arg0.writeString(fileName);
 		arg0.writeList(screenshots);
-		arg0.writeList(updateFileUris);
+		arg0.writeList(updateMirrors);
 	}
 	
 	public void readFromParcel(Parcel in)
@@ -214,6 +214,19 @@ public class UpdateInfo implements Parcelable, Serializable
 		description = in.readString();
 		fileName = in.readString();
 		in.readList(screenshots, null);
-		in.readList(updateFileUris, null);
+		in.readList(updateMirrors, null);
+	}
+	
+	public List<URI> updateFileUris()
+	{
+		List<URI> retValue = new LinkedList<URI>();
+		for(URI u : updateMirrors)
+		{
+			String mirror = u.toString();
+			if(!mirror.endsWith("/"))
+				mirror += "/";
+			retValue.add(URI.create(mirror + fileName));
+		}
+		return retValue;
 	}
 }

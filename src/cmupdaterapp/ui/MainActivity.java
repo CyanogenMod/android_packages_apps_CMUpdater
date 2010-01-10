@@ -637,7 +637,8 @@ public class MainActivity extends Activity
 		}
 		files = null;
 
-		try {
+		try
+		{
 			if(DownloadActivity.myService != null && DownloadActivity.myService.DownloadRunning())
 			{
 				UpdateInfo ui = DownloadActivity.myService.getCurrentUpdate();

@@ -105,6 +105,7 @@ public class ApplyUpdateActivity extends Activity
 	{
 		public void onClick(View v)
 		{
+			//TODO: Should start main activity here to refresh layout (existing updates)
 			finish();
 		}
 	};

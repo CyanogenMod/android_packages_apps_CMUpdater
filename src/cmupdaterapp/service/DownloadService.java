@@ -250,7 +250,7 @@ public class DownloadService extends Service
 		HttpUriRequest req, md5req;
 		HttpResponse response, md5response;
 		
-		List<URI> updateMirrors = updateInfo.updateFileUris;
+		List<URI> updateMirrors = updateInfo.updateFileUris();
 		int size = updateMirrors.size();
 		int start = new Random().nextInt(size);
 		Log.d(TAG, "Mirrorcount: " + size);
@@ -558,7 +558,7 @@ public class DownloadService extends Service
 			mNotification.flags = Notification.FLAG_ONGOING_EVENT;
 			RemoteViews mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
 			Intent mNotificationIntent = new Intent(this, DownloadActivity.class);
-			PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
+ 			PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 			mNotification.contentView = mNotificationRemoteView;
 			mNotification.contentIntent = mNotificationContentIntent;
 			//lcoalFileSize because the contentLength will only be the missing bytes and not the whole file

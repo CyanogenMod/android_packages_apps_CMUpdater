@@ -472,7 +472,6 @@ public class UpdateCheckService extends Service
 			if (PrimaryKeyTheme > 0)
 				ui.PrimaryKey = PrimaryKeyTheme;
 
-			ui.board = new LinkedList<String>();
 			String[] Boards = obj.getString(Constants.JSON_BOARD).split("\\|");
 			for(String item:Boards)
 			{
@@ -480,7 +479,6 @@ public class UpdateCheckService extends Service
 					ui.board.add(item.trim());
 			}
 			ui.setType(obj.getString(Constants.JSON_TYPE).trim());
-			ui.mod = new LinkedList<String>();
 			String[] mods= obj.getString(Constants.JSON_MOD).split("\\|");
 			for(String mod:mods)
 			{
@@ -492,15 +490,13 @@ public class UpdateCheckService extends Service
 			ui.setDescription(obj.getString(Constants.JSON_DESCRIPTION).trim());
 			ui.setBranchCode(obj.getString(Constants.JSON_BRANCH).trim());
 			ui.setFileName(obj.getString(Constants.JSON_FILENAME).trim());
-			
-			ui.updateFileUris = new LinkedList<URI>();
 
 			for (int i = 0, max = mirrorList.length() ; i < max ; i++)
 			{
 				try
 				{
 					if (!mirrorList.isNull(i))
-						ui.updateFileUris.add(new URI(mirrorList.getString(i).trim() + ui.getFileName()));
+						ui.updateMirrors.add(new URI(mirrorList.getString(i).trim()));
 					else
 						Log.d(TAG, "Theres an error in your JSON File. Maybe a , after the last mirror");
 				}
@@ -511,7 +507,6 @@ public class UpdateCheckService extends Service
 			}
 			
 			//Screenshots (only Themes)
-			ui.screenshots = new LinkedList<URI>();
 			//Only if there is a Screenshot Array in the JSON
 			if (obj.has(Constants.JSON_SCREENSHOTS))
 			{

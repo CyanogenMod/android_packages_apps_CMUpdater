@@ -1,7 +1,6 @@
 package cmupdaterapp.ui;
 
 import java.io.Serializable;
-import java.net.MalformedURLException;
 
 import cmupdaterapp.customTypes.DownloadProgress;
 import cmupdaterapp.customTypes.UpdateInfo;
@@ -50,6 +49,21 @@ public class DownloadActivity extends Activity
 	{
 		Log.d(TAG, "onCreate called");
 		super.onCreate(savedInstanceState);
+		Intent i = getIntent();
+		Bundle b = i.getExtras();
+		if (b!=null)
+		{
+			ui = (UpdateInfo) b.get(Constants.UPDATE_INFO);
+			Log.d(TAG, "Got UpdateInfo from Intent");
+		}
+		//If no Intent, ui will be null so get the UpdateInfo from State
+		if (savedInstanceState != null)
+		{
+			ui = savedInstanceState.getParcelable(Constants.KEY_UPDATE_INFO);
+			Log.d(TAG, "Restored UpdateInfo from State");
+		}
+		else
+			Log.d(TAG, "savedInstanceState was null");
 		setContentView(R.layout.download);
 	}
 	
@@ -72,13 +86,6 @@ public class DownloadActivity extends Activity
 			else
 			{
 				Log.d(TAG, "Not downloading");
-				Intent i = getIntent();
-				if (i!=null)
-				{
-					Bundle b = i.getExtras();
-					if (b!=null)
-						ui = (UpdateInfo) b.get(Constants.UPDATE_INFO);	
-				}
 				mbound = bindService(new Intent(IDownloadService.class.getName()), mConnection, Context.BIND_AUTO_CREATE);
 			}
 		}
@@ -87,16 +94,7 @@ public class DownloadActivity extends Activity
 			Log.e(TAG, "Error on DownloadService call", ex);
 		}
 
-		try
-		{
-			String[] temp = ui.updateFileUris.get(0).toURL().getFile().split("/");
-			mFileName = temp[temp.length-1];
-		}
-		catch (MalformedURLException e)
-		{
-			mFileName = "Unable to get Filename";
-			Log.e(TAG, "Unable to get Filename", e);
-		}
+		mFileName = ui.getFileName();
 		
 		mProgressBar = (ProgressBar) findViewById(R.id.download_progress_bar);
 		mDownloadedBytesTextView = (TextView) findViewById(R.id.bytes_downloaded_text_view);
@@ -142,6 +140,15 @@ public class DownloadActivity extends Activity
 		super.onDestroy();
 	}
 
+	@Override
+	protected void onPause()
+	{
+		super.onPause();
+//		Bundle b = new Bundle(); 
+//		b.putParcelable(Constants.KEY_UPDATE_INFO, ui); 
+//		onSaveInstanceState(b);
+	}
+	
 	private void updateDownloadProgress(final long downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
 	{
 		if(mProgressBar == null) return;
@@ -372,5 +379,14 @@ public class DownloadActivity extends Activity
 			}
 	    }
 	    return super.dispatchKeyEvent(event);
-	} 
+	}
+
+	//When the Activity is killed, save the UpdateInfo to state so we can restore it
+	@Override
+	protected void onSaveInstanceState(Bundle outState)
+	{
+		super.onSaveInstanceState(outState);
+		Log.d(TAG, "Called onSaveInstanceState");
+		outState.putParcelable(Constants.KEY_UPDATE_INFO, ui);
+	}
 }
