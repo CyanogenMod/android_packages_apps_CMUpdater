@@ -25,7 +25,15 @@ import android.os.Message;
 public class Changelog implements Runnable
 {
 	private static final String TAG = "Changelog";
+	
 	private Preferences p;
+	
+	public enum ChangelogType
+	{
+		ROM,
+		APP,
+		THEME
+	}
 	
 	public Changelog(Activity upi)
 	{

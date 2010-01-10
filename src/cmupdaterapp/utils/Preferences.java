@@ -28,7 +28,7 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 
 public class Preferences extends Activity
-{	
+{
 	private static final String TAG = "Preferences";
 	
 	private static Preferences INSTANCE;
