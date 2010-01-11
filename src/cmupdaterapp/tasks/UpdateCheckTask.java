@@ -11,8 +11,6 @@ import android.os.RemoteException;
 import cmupdaterapp.interfaces.IUpdateCheckService;
 import cmupdaterapp.interfaces.IUpdateCheckServiceCallback;
 import cmupdaterapp.misc.Log;
-import cmupdaterapp.service.DownloadService;
-import cmupdaterapp.ui.DownloadActivity;
 
 public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 {

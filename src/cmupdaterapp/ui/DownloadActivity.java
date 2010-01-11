@@ -8,11 +8,9 @@ import cmupdaterapp.interfaces.IDownloadService;
 import cmupdaterapp.interfaces.IDownloadServiceCallback;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
-import cmupdaterapp.service.DownloadService;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -92,6 +90,7 @@ public class DownloadActivity extends Activity
 				if (comp == null)
 					Log.e(TAG, "startService failed");
 				mbound = bindService(serviceIntent, mConnection, 0);
+				//TODO: while service == null continue, then start downloading
 			}
 		}
 		catch (RemoteException ex)
@@ -266,6 +265,7 @@ public class DownloadActivity extends Activity
     			{
 	    			try
 	    			{
+	    				//TODO: Move outer scope so we can resume downloads when there is an ui
 	    				myService.Download(ui);
 	    			}
 	    			catch (RemoteException e)
