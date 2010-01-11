@@ -8,6 +8,7 @@ import cmupdaterapp.interfaces.IDownloadService;
 import cmupdaterapp.interfaces.IDownloadServiceCallback;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
+import cmupdaterapp.service.DownloadService;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -42,6 +43,7 @@ public class DownloadActivity extends Activity
 	private UpdateInfo ui;
 	//Indicates if a Service is bound 
 	private boolean mbound = false;
+	private Intent serviceIntent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -85,7 +87,11 @@ public class DownloadActivity extends Activity
 			else
 			{
 				Log.d(TAG, "Not downloading");
-				mbound = bindService(new Intent(IDownloadService.class.getName()), mConnection, Context.BIND_AUTO_CREATE);
+				serviceIntent = new Intent(IDownloadService.class.getName());
+				ComponentName comp = startService(serviceIntent);
+				if (comp == null)
+					Log.e(TAG, "startService failed");
+				mbound = bindService(serviceIntent, mConnection, 0);
 			}
 		}
 		catch (RemoteException ex)
@@ -136,6 +142,8 @@ public class DownloadActivity extends Activity
 		{
 			Log.e(TAG, "Exception on calling DownloadService", e);
 		}
+		boolean stopped = stopService(serviceIntent);
+		Log.d(TAG, "DownloadService stopped: " + stopped);
 		super.onDestroy();
 	}
 

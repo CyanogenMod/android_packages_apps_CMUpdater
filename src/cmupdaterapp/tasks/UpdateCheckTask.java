@@ -11,6 +11,8 @@ import android.os.RemoteException;
 import cmupdaterapp.interfaces.IUpdateCheckService;
 import cmupdaterapp.interfaces.IUpdateCheckServiceCallback;
 import cmupdaterapp.misc.Log;
+import cmupdaterapp.service.DownloadService;
+import cmupdaterapp.ui.DownloadActivity;
 
 public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 {
@@ -20,6 +22,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 	private ProgressDialog p;
 	private Context context;
 	private boolean mbound;
+	private Intent serviceIntent;
 
 	public UpdateCheckTask(Context ctx, ProgressDialog pg)
 	{
@@ -30,7 +33,11 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 	@Override
 	protected void onPreExecute()
 	{
-		mbound = context.bindService(new Intent(IUpdateCheckService.class.getName()), mConnection, Context.BIND_AUTO_CREATE);
+		serviceIntent = new Intent(IUpdateCheckService.class.getName());
+		ComponentName comp = context.startService(serviceIntent);
+		if (comp == null)
+			Log.e(TAG, "startService failed");
+		mbound = context.bindService(serviceIntent, mConnection, 0);
 	}
 
 	@Override
@@ -60,6 +67,8 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 			context.unbindService(mConnection);
 			mbound = false;
 		}
+		boolean stopped = context.stopService(serviceIntent);
+		Log.d(TAG, "UpdateCheckService stopped: " + stopped);
 	}
 
 	/**
