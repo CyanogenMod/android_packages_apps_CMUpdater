@@ -137,11 +137,9 @@ STARTA SJÄLV OM I ÅTERSTÄLLNINGSLÄGE INNAN DU INSTALLERAR UPPDATERINGEN OM D
 
 	<string name="not_update_check_error_ticker">Kontroll av CM-uppdateringar misslyckades</string>
 	<string name="not_update_check_error_title">Kunde inte söka efter nya CM-uppdateringar</string>
-	<string name="not_update_check_error_body">Försök igen senare.</string>
 
 	<string name="not_update_download_error_ticker">Ett fel inträffade när uppdateringen hämtades</string>
 	<string name="not_update_download_error_title">Ett fel inträffade när uppdateringen hämtades</string>
-	<string name="not_update_download_error_body">Försök igen senare.</string>
 
 	<string name="not_update_downloaded_ticker">CyanogenMod-uppdatering hämtad</string>
 	<string name="not_update_downloaded_title">CyanogenMod-uppdatering hämtad</string>

@@ -119,11 +119,9 @@ POR FAVOR REINCIE EM MODO DE RECUPERAÇÃO MANUALMENTE *ANTES* DE APLICAR A ATUA
     
     <string name="not_update_check_error_ticker">A verificação de Atualizações CM falhou.</string>
     <string name="not_update_check_error_title">Incapaz de verificar novas Atualizações do Sistema Operacional CM</string>
-    <string name="not_update_check_error_body">Por favor, tente mais tarde.</string>
     
     <string name="not_update_download_error_ticker">Ocorreu um erro ao transferir a Atualização</string>
     <string name="not_update_download_error_title">Ocorreu um erro ao transferir a Atualização!</string>
-    <string name="not_update_download_error_body">Por favor, tente mais tarde.</string>
     
     <string name="not_update_downloaded_ticker">Atualização CyanogenMod transferida com Sucesso.</string>
     <string name="not_update_downloaded_title">Atualização CyanogenMod transferida com Sucesso!</string>

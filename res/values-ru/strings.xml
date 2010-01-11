@@ -146,11 +146,9 @@
    
    <string name="not_update_check_error_ticker">Ошибка при проверке новых версий</string>
    <string name="not_update_check_error_title">Ошибка при проверке новых версий CM ОС</string>
-   <string name="not_update_check_error_body">Попробуйте позже.</string>
    
    <string name="not_update_download_error_ticker">Ошибка при загрузке файла обновления прошивки</string>
    <string name="not_update_download_error_title">Ошибка При Загрузке</string>
-   <string name="not_update_download_error_body">Попробуйте позже.</string>
    
    <string name="not_update_downloaded_ticker">Файл обновления загружен успешно</string>
    <string name="not_update_downloaded_title">Файл Обновления Загружен</string>

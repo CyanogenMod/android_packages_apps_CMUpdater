@@ -139,11 +139,9 @@ WENN SIE EIN BACKUP MACHEN WOLLEN, BOOTEN SIE BITTE MANUELL IN DEN RECOVERY MODU
 
 	<string name="not_update_check_error_ticker">Update Check fehlgeschlagen</string>
 	<string name="not_update_check_error_title">Derzeit nicht möglich nach neuen Updates zu überprüfen</string>
-	<string name="not_update_check_error_body">Bitte probieren sie es später noch einmal.</string>
 
 	<string name="not_update_download_error_ticker">Es ist ein Fehler beim downloaden des Updates aufgetreten</string>
 	<string name="not_update_download_error_title">Es ist ein Fehler beim downloaden des Updates aufgetreten</string>
-	<string name="not_update_download_error_body">Bitte probieren sie es später noch einmal.</string>
 
 	<string name="not_update_downloaded_ticker">CyanogenMod update heruntergeladen</string>
 	<string name="not_update_downloaded_title">CyanogenMod update heruntergeladen</string>

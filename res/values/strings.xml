@@ -145,11 +145,9 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 
 	<string name="not_update_check_error_ticker">Check for CM updates failed</string>
 	<string name="not_update_check_error_title">Unable to check for new CM OS updates</string>
-	<string name="not_update_check_error_body">Please try again later.</string>
 
 	<string name="not_update_download_error_ticker">An error occurred while downloading the update</string>
 	<string name="not_update_download_error_title">An error occurred while downloading the update</string>
-	<string name="not_update_download_error_body">Please try again later.</string>
 
 	<string name="not_update_downloaded_ticker">CyanogenMod update downloaded</string>
 	<string name="not_update_downloaded_title">CyanogenMod update downloaded</string>

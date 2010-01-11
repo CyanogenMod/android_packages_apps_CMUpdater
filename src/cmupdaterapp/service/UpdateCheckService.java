@@ -98,8 +98,14 @@ public class UpdateCheckService extends Service
 		{
 			mConnectivityManager = (ConnectivityManager) AppContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 		}
-		android.net.NetworkInfo.State state = mConnectivityManager.getActiveNetworkInfo().getState();
+		while (mConnectivityManager.getActiveNetworkInfo() == null)
+		{
+			continue;
+		}
+		NetworkInfo nwi = mConnectivityManager.getActiveNetworkInfo();
+		android.net.NetworkInfo.State state = nwi.getState();
 		connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
+		Log.d(TAG, "OnCreate connected: " + connected);
 		
 		if(systemMod == null)
 		{
@@ -188,7 +194,7 @@ public class UpdateCheckService extends Service
 				Log.e(TAG, "IOEx while checking for updates", ex);
 				if(isDataConnected())
 				{
-					notificateCheckError();
+					notificateCheckError(ex.getMessage());
 					DisplayExceptionToast(ex.getMessage());
 					return;
 				}
@@ -196,7 +202,7 @@ public class UpdateCheckService extends Service
 			catch (RuntimeException ex)
 			{
 				Log.e(TAG, "RuntimeEx while checking for updates", ex);
-				notificateCheckError();
+				notificateCheckError(ex.getMessage());
 				return;
 			}
 		}
@@ -253,7 +259,7 @@ public class UpdateCheckService extends Service
 		}
 	}
 
-	private void notificateCheckError()
+	private void notificateCheckError(String ExceptionText)
 	{
 		Intent i = new Intent(this, MainActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
@@ -265,7 +271,7 @@ public class UpdateCheckService extends Service
 		notification.setLatestEventInfo(
 							this,
 							res.getString(R.string.not_update_check_error_title),
-							res.getString(R.string.not_update_check_error_body),
+							ExceptionText,
 							contentIntent);
 		Uri notificationRingtone = Preferences.getPreferences(this).getConfiguredRingtone();
 		if(Preferences.getPreferences(this).getVibrate())
@@ -729,8 +735,14 @@ public class UpdateCheckService extends Service
 		@Override
 		public void onReceive(Context context, Intent intent)
 		{
-			android.net.NetworkInfo.State state = mConnectivityManager.getActiveNetworkInfo().getState();
+			while (mConnectivityManager.getActiveNetworkInfo() == null)
+			{
+				continue;
+			}
+			NetworkInfo nwi = mConnectivityManager.getActiveNetworkInfo();
+			android.net.NetworkInfo.State state = nwi.getState();
 			connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
+			Log.d(TAG, "ConnectionChangeReciever connected: " + connected);
 		}
 	}
 }

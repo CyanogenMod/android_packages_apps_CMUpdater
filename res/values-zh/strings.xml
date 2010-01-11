@@ -140,11 +140,9 @@
 
 	<string name="not_update_check_error_ticker">检查CM更新失败</string>
 	<string name="not_update_check_error_title">无法检查CM更新</string>
-	<string name="not_update_check_error_body">请稍后重试。</string>
 
 	<string name="not_update_download_error_ticker">下载时出现错误</string>
 	<string name="not_update_download_error_title">下载更新时出现错误</string>
-	<string name="not_update_download_error_body">请稍后重试</string>
 
 	<string name="not_update_downloaded_ticker">CyanogenMod更新下载完毕</string>
 	<string name="not_update_downloaded_title">CyanogenMod更新下载完毕</string>

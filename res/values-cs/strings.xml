@@ -137,11 +137,9 @@
 
 	<string name="not_update_check_error_ticker">Kontrola aktualizací CM selhala</string>
 	<string name="not_update_check_error_title">Není možné zkontrolovat aktualizace CM OS</string>
-	<string name="not_update_check_error_body">Prosím zkuste to později.</string>
 
 	<string name="not_update_download_error_ticker">Vyskytla se chyba při stahování aktualizace</string>
 	<string name="not_update_download_error_title">Vyskytla se chyba při stahování aktualizace</string>
-	<string name="not_update_download_error_body">Prosím zkuste to později.</string>
 
 	<string name="not_update_downloaded_ticker">Aktualizace CyanogenMod stažena</string>
 	<string name="not_update_downloaded_title">Aktualizace CyanogenMod stažena</string>

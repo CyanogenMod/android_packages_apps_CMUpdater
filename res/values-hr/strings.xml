@@ -139,11 +139,9 @@ MOLIM MANUALNO PONOVNO POKRENITE U OPORAVAK TE PRIJE PRIMJENE NADOGRADNJE SAPRAV
 
 	<string name="not_update_check_error_ticker">Neuspjesna provjera CM nadogradnje</string>
 	<string name="not_update_check_error_title">Nemoguca provjera nadogradnje CM OS-a</string>
-	<string name="not_update_check_error_body">Ponovno pokusajte kasnije</string>
 
 	<string name="not_update_download_error_ticker">Greska pri preuzimanje nadogradnje</string>
 	<string name="not_update_download_error_title">Greska pri preuzimanje nadogradnje</string>
-	<string name="not_update_download_error_body">Pokusjte ponovno kasnije</string>
 
 	<string name="not_update_downloaded_ticker">CyanogenMod nadogradnja preuzeta</string>
 	<string name="not_update_downloaded_title">CyanogenMod nadogradnja preuzeta</string>

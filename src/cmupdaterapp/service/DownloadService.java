@@ -221,12 +221,13 @@ public class DownloadService extends Service
 		catch (RuntimeException ex)
 		{
 			Log.e(TAG, "RuntimeEx while checking for updates", ex);
-			notificateDownloadError();
+			notificateDownloadError(ex.getMessage());
 			return false;
-		} catch (IOException ex)
+		}
+		catch (IOException ex)
 		{
 			Log.e(TAG, "Exception while downloading update", ex);
-			notificateDownloadError();
+			notificateDownloadError(ex.getMessage());
 			return false;
 		}
 		finally
@@ -632,7 +633,7 @@ public class DownloadService extends Service
 		DownloadFinished();
 	}
 	
-    private void notificateDownloadError()
+    private void notificateDownloadError(String ExceptionText)
 	{
     	mDownloading = false;
 		Intent i = new Intent(this, MainActivity.class);
@@ -645,7 +646,7 @@ public class DownloadService extends Service
 		notification.setLatestEventInfo(
 				this,
 				res.getString(R.string.not_update_download_error_title),
-				res.getString(R.string.not_update_download_error_body),
+				ExceptionText,
 				contentIntent);
 		Uri notificationRingtone = Preferences.getPreferences(this).getConfiguredRingtone();
 		if(Preferences.getPreferences(this).getVibrate())

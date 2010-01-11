@@ -116,6 +116,7 @@ public class MainActivity extends Activity
 			{
 				case R.id.theme_screenshots_button:
 					ScreenshotThemesListener();
+					break;
 				case R.id.download_update_button:
 					DownloadUpdateButtonListener();
 					break;
