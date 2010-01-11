@@ -34,12 +34,12 @@ public class Screenshot implements Serializable
 			ModifyDate = GregorianCalendar.getInstance();
 		return df.format(ModifyDate.getTime());
 	}
-	
+
 	public void setModifyDate(String s)
 	{
 		if (ModifyDate == null)
 			ModifyDate = GregorianCalendar.getInstance();
-		
+
 		//When no Date is given, set to today
 		if (s == null)
 			ModifyDate = GregorianCalendar.getInstance();
@@ -55,14 +55,14 @@ public class Screenshot implements Serializable
 			}
 		}
 	}
-	
+
 	public long getModifyDateAsMillis()
 	{
 		if (ModifyDate == null)
 			ModifyDate = GregorianCalendar.getInstance();
 		return ModifyDate.getTimeInMillis();
 	}
-	
+
 	//Bitmap
 	public Bitmap getBitmap() throws InvalidPictureException
 	{
@@ -70,7 +70,7 @@ public class Screenshot implements Serializable
 			throw new InvalidPictureException();
 		return Picture;
 	}
-	
+
 	public byte[] getPictureAsByteArray()
 	{
 		if (Picture == null)
@@ -79,12 +79,12 @@ public class Screenshot implements Serializable
 		Picture.compress(CompressFormat.PNG, 10, bos);
 		return bos.toByteArray();
 	}
-	
+
 	public void setPictureFromInputstream(InputStream is)
 	{
 		Picture = BitmapFactory.decodeStream(is);
 	}
-	
+
 	public void setBitmapFromByteArray(byte[] bitmap)
 	{
 		if (bitmap == null)
@@ -92,7 +92,7 @@ public class Screenshot implements Serializable
 		else
 			Picture = BitmapFactory.decodeByteArray(bitmap, 0, bitmap.length);
 	}
-	
+
 	public void DestroyImage()
 	{
 		if (Picture != null)

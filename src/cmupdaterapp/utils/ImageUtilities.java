@@ -25,7 +25,7 @@ public class ImageUtilities
     	s.ForeignThemeListKey = foreignKey;
     	s.url = URI.create(url);
     	s.PrimaryKey = primaryKey;
-    	
+
     	HttpClient httpCrap = new DefaultHttpClient();
 
     	final HttpGet get = new HttpGet(url);
@@ -35,7 +35,7 @@ public class ImageUtilities
     	try
     	{
     		final HttpResponse response = httpCrap.execute(get);
-    		
+
     		//Set last ModifyDate
     		final Header header = response.getFirstHeader("Last-Modified");
     		if (header != null)
@@ -43,11 +43,11 @@ public class ImageUtilities
     		//If null set to today
     		else
     			s.setModifyDate(null);
-    		
+
     		//Do not Download if not changed
     		if (lastModifiedInMillis == s.getModifyDateAsMillis())
     			return null;
-    		
+
     		if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)
     		{
     			entity = response.getEntity();

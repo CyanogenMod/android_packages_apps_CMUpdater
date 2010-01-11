@@ -48,7 +48,6 @@ public class ScreenshotActivity extends Activity
                     i.putExtra(Constants.SCREENSHOTS_POSITION, position);
             		startActivity(i);
             	}
-            	else { }
             }
         });
         

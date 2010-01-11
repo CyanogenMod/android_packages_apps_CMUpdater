@@ -49,7 +49,7 @@
 		<activity
 			android:name="cmupdaterapp.ui.ScreenshotDetailActivity"
 			android:configChanges="orientation|keyboardHidden" />	
-		
+
 		<receiver android:name="cmupdaterapp.receiver.StartupReceiver">
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />

@@ -57,7 +57,7 @@ import android.widget.Toast;
 public class UpdateCheckService extends Service
 {
 	private static final String TAG = "UpdateCheckService";
-	
+
 	private final RemoteCallbackList<IUpdateCheckServiceCallback> mCallbacks = new RemoteCallbackList<IUpdateCheckServiceCallback>();
 	private Context AppContext;
 	private NotificationManager mNM;
@@ -76,13 +76,13 @@ public class UpdateCheckService extends Service
 	private boolean mWaitingForDataConnection = false;
 	private ConnectionChangeReceiver myConnectionChangeReceiver;
 	private boolean connected;
-	
+
 	@Override
 	public IBinder onBind(Intent intent)
 	{
 		return mBinder;
 	}
-	
+
 	@Override
 	public void onCreate()
 	{
@@ -92,7 +92,7 @@ public class UpdateCheckService extends Service
 		res = AppContext.getResources();
 		myConnectionChangeReceiver = new ConnectionChangeReceiver();
 		registerReceiver(myConnectionChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-		
+
 		//Can be null on Startup, when System not available. So try it, till we get it. Before there is no DataConnection available
 		while(mConnectivityManager == null)
 		{
@@ -117,7 +117,7 @@ public class UpdateCheckService extends Service
 		}
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 	}
-	
+
 	@Override
 	public void onDestroy()
 	{
@@ -125,7 +125,7 @@ public class UpdateCheckService extends Service
 		unregisterReceiver(myConnectionChangeReceiver);
     	super.onDestroy();
 	}
-	
+
 	private final IUpdateCheckService.Stub mBinder = new IUpdateCheckService.Stub()
     {
 		public void registerCallback(IUpdateCheckServiceCallback cb) throws RemoteException
@@ -149,12 +149,12 @@ public class UpdateCheckService extends Service
 			checkForNewUpdates();
 		}
     };
-    
+
     private void DisplayExceptionToast(String ex)
 	{
     	ToastHandler.sendMessage(ToastHandler.obtainMessage(0, ex));
 	}
-	
+
 	private boolean isDataConnected()
 	{
 		return connected;
@@ -182,7 +182,6 @@ public class UpdateCheckService extends Service
 					}
 				}
 			}
-			
 			try
 			{
 				Log.d(TAG, "Checking for updates...");
@@ -209,7 +208,7 @@ public class UpdateCheckService extends Service
 
 		Preferences prefs = Preferences.getPreferences(this);
 		prefs.setLastUpdateCheck(new Date());
-		
+
 		int updateCountRoms = availableUpdates.getRomCount();
 		int updateCountThemes = availableUpdates.getThemeCount();
 		int updateCount = availableUpdates.getUpdateCount();
@@ -231,10 +230,10 @@ public class UpdateCheckService extends Service
 				Notification notification = new Notification(R.drawable.icon_notification,
 									res.getString(R.string.not_new_updates_found_ticker),
 									System.currentTimeMillis());
-	
+
 				//To remove the Notification, when the User clicks on it
 				notification.flags = Notification.FLAG_AUTO_CANCEL;
-				
+
 				String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
 				notification.setLatestEventInfo(AppContext, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
 
@@ -251,7 +250,7 @@ public class UpdateCheckService extends Service
 				{
 					notification.sound = notificationRingtone;
 				}
-	
+
 				//Use a resourceId as an unique identifier
 				mNM.notify(R.string.not_new_updates_found_title, notification);
 			}
@@ -286,7 +285,7 @@ public class UpdateCheckService extends Service
 		{
 			notification.sound = notificationRingtone;
 		}
-		
+
 		//Use a resourceId as an unique identifier
 		mNM.notify(R.string.not_update_downloaded_title, notification);
 		ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.not_update_check_error_ticker, 0));
@@ -309,7 +308,7 @@ public class UpdateCheckService extends Service
 		showExperimentalThemeUpdates = mPreferences.showExperimentalThemeUpdates();
 		showAllThemeUpdates = mPreferences.showAllThemeUpdates();
 		boolean ThemeUpdateUrlSet = mPreferences.ThemeUpdateUrlSet();
-		
+
 		//If Wildcard is used or no themes.theme file present set the variable
 		if (themeInfos == null || themeInfos.name.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
 		{
@@ -317,7 +316,7 @@ public class UpdateCheckService extends Service
 			themeInfos = new ThemeInfo();
 			WildcardUsed = true;
 		}
-		
+
 		//Get the actual Rom Updateserver URL
 		try
 		{
@@ -339,7 +338,7 @@ public class UpdateCheckService extends Service
 			Log.d(TAG, "Rom Update URI wrong: " + mPreferences.getRomUpdateFileURL());
 			romException = true;
 		}
-		
+
 		//Get the actual Theme Updateserver URL
 		if(ThemeUpdateUrlSet)
 		{
@@ -386,7 +385,7 @@ public class UpdateCheckService extends Service
 						themeBuf.append(themeLine);
 					}
 					themeLineReader.close();
-					
+
 					//Set the PrimaryKey for the Database
 					if (t.PrimaryKey > 0)
 						PrimaryKeyTheme = t.PrimaryKey;
@@ -401,7 +400,7 @@ public class UpdateCheckService extends Service
 				//themeException = true;
 			}
 		}
-		
+
 		try
 		{
 			if (!romException)
@@ -416,7 +415,7 @@ public class UpdateCheckService extends Service
 					romBuf.append(romLine);
 				}
 				romLineReader.close();
-	
+
 				LinkedList<UpdateInfo> romUpdateInfos = parseJSON(romBuf);
 				retValue.roms = getRomUpdates(romUpdateInfos);
 			}
@@ -442,16 +441,16 @@ public class UpdateCheckService extends Service
 		LinkedList<UpdateInfo> uis = new LinkedList<UpdateInfo>();
 
 		JSONObject mainJSONObject;
-		
+
 		try
 		{
 			mainJSONObject = new JSONObject(buf.toString());
 			JSONArray mirrorList = mainJSONObject.getJSONArray(Constants.JSON_MIRROR_LIST);
 			JSONArray updateList = mainJSONObject.getJSONArray(Constants.JSON_UPDATE_LIST);
-			
+
 			Log.d(TAG, "Found "+mirrorList.length()+" mirrors in the JSON");
 			Log.d(TAG, "Found "+updateList.length()+" updates in the JSON");
-			
+
 			for (int i = 0, max = updateList.length() ; i < max ; i++)
 			{
 				if(!updateList.isNull(i))
@@ -459,20 +458,18 @@ public class UpdateCheckService extends Service
 				else
 					Log.d(TAG, "Theres an error in your JSON File. Maybe a , after the last update");
 			}
-
 		}
 		catch (JSONException e)
 		{
 			Log.e(TAG, "Error in JSON File: ", e);
 		}
-
 		return uis;
 	}
 
 	private UpdateInfo parseUpdateJSONObject(JSONObject obj, JSONArray mirrorList)
 	{
 		UpdateInfo ui = new UpdateInfo();
-		
+
 		try
 		{
 			if (PrimaryKeyTheme > 0)
@@ -511,7 +508,7 @@ public class UpdateCheckService extends Service
 					Log.e(TAG, "Unable to parse mirror url (" + mirrorList.getString(i) + ui.getFileName() + "). Ignoring this mirror", e);
 				}
 			}
-			
+
 			//Screenshots (only Themes)
 			//Only if there is a Screenshot Array in the JSON
 			if (obj.has(Constants.JSON_SCREENSHOTS))
@@ -558,7 +555,6 @@ public class UpdateCheckService extends Service
 		{
 			allow = true;
 		}
-
 		return allow;
 	}
 
@@ -574,7 +570,7 @@ public class UpdateCheckService extends Service
 		}
 		return false;
 	}
-	
+
 	private boolean romMatches(UpdateInfo ui, String systemRom)
 	{
 		if(ui == null) return false;
@@ -626,14 +622,14 @@ public class UpdateCheckService extends Service
 		}
 		return ret;
 	}
-	
+
 	private LinkedList<UpdateInfo> getThemeUpdates(LinkedList<UpdateInfo> updateInfos)
 	{
 		LinkedList<UpdateInfo> ret = new LinkedList<UpdateInfo>();
 		for (int i = 0, max = updateInfos.size() ; i < max ; i++)
 		{
 			UpdateInfo ui = updateInfos.poll();
-			
+
 			//Theme installed and in correct format?
 			if (themeInfos != null)
 			{
@@ -687,7 +683,7 @@ public class UpdateCheckService extends Service
 		}
 		return ret;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private static FullUpdateInfo FilterUpdates(FullUpdateInfo newList, FullUpdateInfo oldList)
 	{
@@ -699,7 +695,7 @@ public class UpdateCheckService extends Service
 		ful.themes.removeAll(oldList.themes);
 		return ful;
 	}
-	
+
 	private Handler ToastHandler = new Handler()
 	{
 		public void handleMessage(Message msg)
@@ -710,7 +706,7 @@ public class UpdateCheckService extends Service
 				Toast.makeText(UpdateCheckService.this, (String)msg.obj, Toast.LENGTH_LONG).show();
 		}
 	};
-	
+
 	private void FinishUpdateCheck()
 	{
 		final int M = mCallbacks.beginBroadcast();
@@ -728,7 +724,7 @@ public class UpdateCheckService extends Service
 		}
 		mCallbacks.finishBroadcast();
 	}
-	
+
 	//Is called when Network Connection Changes
 	class ConnectionChangeReceiver extends BroadcastReceiver
 	{

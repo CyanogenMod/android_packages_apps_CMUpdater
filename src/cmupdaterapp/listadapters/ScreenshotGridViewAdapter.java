@@ -18,7 +18,7 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
 {
     private Context mContext;
     private int length;
-    
+
     public static List<Screenshot> items = new LinkedList<Screenshot>();
 
     public ScreenshotGridViewAdapter(Context c, int numberOfItems)
@@ -31,7 +31,7 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
     {
     	return length;
     }
-    
+
     public Object getItem(int position)
     {
     	return position;
@@ -46,7 +46,7 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
     public View getView(int position, View convertView, ViewGroup parent)
     {
     	boolean ImageLoaded = ScreenshotGridViewAdapter.items.size() > position;
-    	
+
         ImageView imageView = null;
         if (convertView == null) // if it's not recycled, initialize some attributes
         {

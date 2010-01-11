@@ -39,19 +39,15 @@ public class ThemeListActivity extends ListActivity
 	private Cursor themeListCursor;
 	private FullThemeList fullThemeList;
 	private LinkedList<ThemeList> fullThemeListList;
-
 	private ListView lv;
-	
 	private Resources res;
-	
 	private AdapterContextMenuInfo menuInfo;
 	private TextView tv;
-	
 	private FullThemeList FeaturedThemes = null;
 	private Thread FeaturedThemesThread;
 	private ProgressDialog FeaturedThemesProgressDialog;
 	public static Handler FeaturedThemesProgressHandler;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -66,19 +62,20 @@ public class ThemeListActivity extends ListActivity
 		registerForContextMenu(lv);
 		res = getResources();
 	}
-	
+
 	private void getThemeList()
 	{
 		themeListCursor = themeListDb.getAllThemesCursor();
 		startManagingCursor(themeListCursor);
 		updateThemeList();
 	}
-	
+
 	private void updateThemeList()
 	{
 		themeListCursor.requery();
 		fullThemeList = new FullThemeList();
 		if (themeListCursor.moveToFirst())
+		{
 			do
 			{
 				String name = themeListCursor.getString(DbAdapter.COLUMN_THEMELIST_NAME);
@@ -97,6 +94,7 @@ public class ThemeListActivity extends ListActivity
 				fullThemeList.addThemeToList(newItem);
 			}
 			while(themeListCursor.moveToNext());
+		}
 		fullThemeListList = fullThemeList.returnFullThemeList();
 		ThemeListAdapter<ThemeList> AdapterThemeList = new ThemeListAdapter<ThemeList>(
 				this,
@@ -109,13 +107,13 @@ public class ThemeListActivity extends ListActivity
 			tv.setText(R.string.theme_list_no_themes);
 		themeListCursor.deactivate();
 	}
-	
+
 	public void onListItemClick(ListView parent, View v,int position, long id)
 	{
 		super.onListItemClick(parent, v, position, id);
 		Log.d(TAG, "Item clicked. Postition: " + id);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -136,13 +134,13 @@ public class ThemeListActivity extends ListActivity
 		enableMenu.add(Menu.NONE, Constants.MENU_THEME_ENABLE_ALL_FEATURED, Menu.NONE, R.string.menu_enable_all_featured_themes);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item)
 	{
 		menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
 		ThemeList tl;
-		
+
 		switch(item.getItemId())
 		{
 			case Constants.MENU_THEME_LIST_ADD:
@@ -229,7 +227,7 @@ public class ThemeListActivity extends ListActivity
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}
-	
+
 	@Override
 	public void onDestroy()
 	{
@@ -239,7 +237,7 @@ public class ThemeListActivity extends ListActivity
 		themeListDb.close();
 		super.onDestroy();
 	}
-	
+
 	private void createNewThemeList(final boolean _update, String _name, String _uri, boolean _enabled, final int _primaryKey, boolean _featured)
 	{
 		Intent i = new Intent(ThemeListActivity.this, ThemeListNewActivity.class);
@@ -251,7 +249,7 @@ public class ThemeListActivity extends ListActivity
 		i.putExtra(Constants.THEME_LIST_NEW_FEATURED, _featured);
 		startActivityForResult(i, ThemeListNewActivity.REQUEST_CODE);
 	}
-	
+
 	@Override
 	public void onCreateContextMenu (ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
 	{
@@ -264,7 +262,7 @@ public class ThemeListActivity extends ListActivity
 		else
 			menu.add(Menu.NONE, Constants.MENU_THEME_LIST_CONTEXT_ENABLE, Menu.NONE, R.string.menu_enable_theme);
 	}
-	
+
 	private void DeleteTheme(int position)
 	{
 		Log.d(TAG, "Remove Theme Postition: " + position);
@@ -277,7 +275,7 @@ public class ThemeListActivity extends ListActivity
 		}
 		updateThemeList();
 	}
-	
+
 	public void onActivityResult(int requestCode, int resultCode, Intent intent)
 	{
 		Log.d(TAG, "RequestCode: " + requestCode + " ResultCode: " + resultCode);
@@ -303,7 +301,7 @@ public class ThemeListActivity extends ListActivity
 		}
 		super.onActivityResult(requestCode, resultCode, intent);
 	}
-	
+
 	private void updateFeaturedThemes()
 	{
 		Log.d(TAG, "Called Update Featured Themes");
@@ -335,7 +333,6 @@ public class ThemeListActivity extends ListActivity
 				}
 	        }
 	    };
-
 	    FeaturedThemesProgressDialog = ProgressDialog.show(this, res.getString(R.string.featured_themes_progress_title), res.getString(R.string.featured_themes_progress_body), true);
 	    FeaturedThemesThread = new Thread(new FeaturedThemes(this));
 	    FeaturedThemesThread.start();

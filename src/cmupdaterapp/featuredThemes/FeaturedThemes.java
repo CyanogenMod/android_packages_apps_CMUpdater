@@ -21,7 +21,7 @@ public class FeaturedThemes implements Runnable
 {
 	private static final String TAG = "FeaturedThemes";
 	private Preferences p;
-	
+
 	public FeaturedThemes(Context ctx)
 	{
 		p = Preferences.getPreferences(ctx);

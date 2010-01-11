@@ -25,7 +25,7 @@ public class ConfigActivity extends PreferenceActivity
 	private Preferences prefs;
 	private boolean RomBarcodeRequested;
 	private Resources res;
-	
+
 	private final Preference.OnPreferenceChangeListener mUpdateCheckingFrequencyListener = new Preference.OnPreferenceChangeListener() {
 		public boolean onPreferenceChange(Preference preference, Object newValue)
 		{
@@ -46,14 +46,14 @@ public class ConfigActivity extends PreferenceActivity
 	{
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.layout.config);
-		
+
 		prefs = Preferences.getPreferences(ConfigActivity.this);
 		res = getResources();
 
 		ListPreference updateCheckFreqPref = (ListPreference) findPreference(res.getString(R.string.PREF_UPDATE_CHECK_FREQUENCY));
 
 		updateCheckFreqPref.setOnPreferenceChangeListener(mUpdateCheckingFrequencyListener);
-		
+
 		//Barcodescanning Stuff
 		Preference pref = (Preference) findPreference(res.getString(R.string.PREF_ROM_UPDATE_FILE_QR));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
@@ -66,7 +66,7 @@ public class ConfigActivity extends PreferenceActivity
 				return true;
 			}
 		});
-		
+
 		//Reset Update URLs
 		pref = (Preference) findPreference(res.getString(R.string.PREF_ROM_UPDATE_FILE_URL_DEF));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
@@ -80,7 +80,7 @@ public class ConfigActivity extends PreferenceActivity
 				return true;
 			}
 		});
-		
+
 		//Reset themes.theme
 		pref = (Preference) findPreference(res.getString(R.string.PREF_THEMES_THEME_FILE_DEF));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
@@ -115,7 +115,7 @@ public class ConfigActivity extends PreferenceActivity
 				return true;
 			}
 		});
-		
+
 		//URL Validation checkers
 		pref = (Preference) findPreference(res.getString(R.string.PREF_ROM_UPDATE_FILE_URL));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
@@ -135,7 +135,7 @@ public class ConfigActivity extends PreferenceActivity
 				return true;
 			}
 		});
-		
+
 		//Progress Update Frequency
 		pref = (Preference) findPreference(res.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY_DEF));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
@@ -148,7 +148,7 @@ public class ConfigActivity extends PreferenceActivity
 				return true;
 			}
 		});
-		
+
 		//Display All Rom Updates
 		pref = (Preference) findPreference(res.getString(R.string.PREF_DISPLAY_OLDER_ROM_VERSIONS));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
@@ -159,7 +159,7 @@ public class ConfigActivity extends PreferenceActivity
 				return true;
 			}
 		});
-		
+
 		//Show Experimental Roms
 		pref = (Preference) findPreference(res.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
@@ -170,7 +170,7 @@ public class ConfigActivity extends PreferenceActivity
 				return true;
 			}
 		});
-		
+
 		//Display All Theme Updates
 		pref = (Preference) findPreference(res.getString(R.string.PREF_DISPLAY_OLDER_THEME_VERSIONS));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
@@ -181,7 +181,7 @@ public class ConfigActivity extends PreferenceActivity
 				return true;
 			}
 		});
-		
+
 		//Show Experimental Themes
 		pref = (Preference) findPreference(res.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
@@ -192,7 +192,7 @@ public class ConfigActivity extends PreferenceActivity
 				return true;
 			}
 		});
-		
+
 		//Change Update Folder
 		pref = (Preference) findPreference(res.getString(R.string.PREF_UPDATE_FOLDER));
 		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
@@ -212,7 +212,7 @@ public class ConfigActivity extends PreferenceActivity
 				return true;
 			}
 		});
-		
+
 		//Display List of Themes
 		pref = (Preference) findPreference(res.getString(R.string.PREF_THEMES_LIST));
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener()
@@ -269,7 +269,6 @@ public class ConfigActivity extends PreferenceActivity
 						Toast.makeText(getBaseContext(), R.string.barcode_scan_no_result, Toast.LENGTH_LONG).show();
 						RomBarcodeRequested = false;
 					}
-					
 				}
 				else
 				{

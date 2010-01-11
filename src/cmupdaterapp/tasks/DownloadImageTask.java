@@ -19,9 +19,8 @@ public class DownloadImageTask extends AsyncTask<UpdateInfo, Screenshot, Void>
 	protected Void doInBackground(UpdateInfo... params)
 	{
 		DbAdapter db = new DbAdapter();
-
 		UpdateInfo ui = params[0];
-		
+
 		try
 		{
 			db.open();
@@ -66,7 +65,6 @@ public class DownloadImageTask extends AsyncTask<UpdateInfo, Screenshot, Void>
 				ScreenFound = false;
 				NeedsUpdate = false;
 			}
-			
 			//Delete old Screenshots from DB
 			db.removeScreenshotExcept(ui.PrimaryKey, PrimaryKeys);
 		}

@@ -30,7 +30,7 @@ import android.widget.Toast;
 public class DownloadActivity extends Activity
 {
 	private static final String TAG = "DownloadActivity";
-	
+
 	private ProgressBar mProgressBar;
 	private TextView mDownloadedBytesTextView;
 	private TextView mDownloadMirrorTextView;
@@ -40,10 +40,9 @@ public class DownloadActivity extends Activity
 	private String mMirrorName;
 	private String mFileName;
 	private UpdateInfo ui;
-	
 	//Indicates if a Service is bound 
 	private boolean mbound = false;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -66,13 +65,13 @@ public class DownloadActivity extends Activity
 			Log.d(TAG, "savedInstanceState was null");
 		setContentView(R.layout.download);
 	}
-	
+
 	@Override
 	protected void onResume()
 	{
 		Log.d(TAG, "onResume called");
 		super.onResume();
-		
+
 		try
 		{
 			if (myService != null && myService.DownloadRunning())
@@ -95,7 +94,7 @@ public class DownloadActivity extends Activity
 		}
 
 		mFileName = ui.getFileName();
-		
+
 		mProgressBar = (ProgressBar) findViewById(R.id.download_progress_bar);
 		mDownloadedBytesTextView = (TextView) findViewById(R.id.bytes_downloaded_text_view);
 
@@ -112,7 +111,7 @@ public class DownloadActivity extends Activity
 			mDownloadFilenameTextView.setText(mFileName);
 		((Button)findViewById(R.id.cancel_download_buton)).setOnClickListener(mCancelDownloadListener);
 	}
-	
+
 	@Override
 	protected void onDestroy()
 	{
@@ -144,11 +143,8 @@ public class DownloadActivity extends Activity
 	protected void onPause()
 	{
 		super.onPause();
-//		Bundle b = new Bundle(); 
-//		b.putParcelable(Constants.KEY_UPDATE_INFO, ui); 
-//		onSaveInstanceState(b);
 	}
-	
+
 	private void updateDownloadProgress(final long downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
 	{
 		if(mProgressBar == null) return;
@@ -188,7 +184,7 @@ public class DownloadActivity extends Activity
 			}
 		});
 	}
-	
+
 	private final View.OnClickListener mCancelDownloadListener = new View.OnClickListener()
 	{
 		public void onClick(View arg0)
@@ -238,7 +234,7 @@ public class DownloadActivity extends Activity
 		}
 
 	};
-	
+
 	public static IDownloadService myService;
 	
 	/**
@@ -283,7 +279,7 @@ public class DownloadActivity extends Activity
     		myService = null;
     	}
     };
-	
+
 	private IDownloadServiceCallback mCallback = new IDownloadServiceCallback.Stub()
 	{
 		public void updateDownloadProgress(final long downloaded, final int total,
@@ -319,7 +315,7 @@ public class DownloadActivity extends Activity
 			// TODO Auto-generated method stub	
 		}
 	};
-	
+
 	private static final int UPDATE_DOWNLOAD_PROGRESS = 1;
 	private static final int UPDATE_DOWNLOAD_MIRROR = 2;
 	private static final int DOWNLOAD_FINISHED = 3;

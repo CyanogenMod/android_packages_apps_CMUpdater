@@ -30,21 +30,19 @@ import android.preference.PreferenceManager;
 public class Preferences extends Activity
 {
 	private static final String TAG = "Preferences";
-	
+
 	private static Preferences INSTANCE;
-	
 	private final SharedPreferences mPrefs;
 	private final Resources mRes;
-	
 	private String temp;
 	private boolean tempbool;
-	
+
 	private Preferences(SharedPreferences prefs, Resources res)
 	{
 		mPrefs = prefs;
 		mRes = res;
 	}
-	
+
 	public static synchronized Preferences getPreferences(Context ctx)
 	{
 		if(INSTANCE == null)
@@ -71,7 +69,7 @@ public class Preferences extends Activity
 	{
 		return new Date(mPrefs.getLong(mRes.getString(R.string.PREF_LAST_UPDATE_CHECK), 0));
 	}
-	
+
 	public String getLastUpdateCheckString()
 	{
 		Date d = getLastUpdateCheck();
@@ -80,7 +78,7 @@ public class Preferences extends Activity
 		else
 			return DateFormat.getDateTimeInstance().format(d);
 	}
-	
+
 	public void setLastUpdateCheck(Date d)
 	{
 		Editor editor = mPrefs.edit();
@@ -101,14 +99,14 @@ public class Preferences extends Activity
 		Log.d(TAG, "ChangelogURL: " + temp);
 		return temp;
 	}
-	
+
 	public String getFeaturedThemesURL()
 	{
 		temp = mRes.getString(R.string.conf_featured_themes_url);
 		Log.d(TAG, "FeaturedThemesURL: " + temp);
 		return temp;
 	}
-	
+
 	//Roms
 	public boolean showAllRomUpdates()
 	{
@@ -116,14 +114,14 @@ public class Preferences extends Activity
 		Log.d(TAG, "Display All Rom Updates: " + tempbool);
 		return tempbool;
 	}
-	
+
 	public boolean showExperimentalRomUpdates()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS_DEF_VALUE)));
 		Log.d(TAG, "Display Experimental Rom Updates: " + tempbool);
 		return tempbool;
 	}
-	
+
 	public String getRomUpdateFileURL()
 	{
 		temp = mPrefs.getString(mRes.getString(R.string.PREF_ROM_UPDATE_FILE_URL),  mRes.getString(R.string.conf_update_server_url_def));
@@ -137,7 +135,7 @@ public class Preferences extends Activity
 		editor.putString(mRes.getString(R.string.PREF_ROM_UPDATE_FILE_URL), updateFileURL);
 		if(!editor.commit()) Log.e(TAG, "Unable to write Rom Update File URL");
 	}
-	
+
 	//Themes
 	public boolean showAllThemeUpdates()
 	{
@@ -145,14 +143,14 @@ public class Preferences extends Activity
 		Log.d(TAG, "Display All Theme Updates: " + tempbool);
 		return tempbool;
 	}
-	
+
 	public boolean showExperimentalThemeUpdates()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS_DEF_VALUE)));
 		Log.d(TAG, "Display Experimental Theme Updates: " + tempbool);
 		return tempbool;
 	}
-	
+
 	public LinkedList<ThemeList> getThemeUpdateUrls()
 	{
 		DbAdapter themeListDb = new DbAdapter();
@@ -164,6 +162,7 @@ public class Preferences extends Activity
 		themeListCursor.requery();
 		FullThemeList fullThemeList = new FullThemeList();
 		if (themeListCursor.moveToFirst())
+		{
 			do
 			{
 				String name = themeListCursor.getString(DbAdapter.COLUMN_THEMELIST_NAME);
@@ -179,25 +178,26 @@ public class Preferences extends Activity
 				fullThemeList.addThemeToList(newItem);
 			}
 			while(themeListCursor.moveToNext());
+		}
 		Log.d(TAG, "Closing Database");
 		themeListDb.close();
 		return fullThemeList.returnFullThemeList();	
 	}
-	
+
 	public String getThemeFile()
 	{
 		temp = mPrefs.getString(mRes.getString(R.string.PREF_THEMES_THEME_FILE), mRes.getString(R.string.conf_theme_version_file_def));
 		Log.d(TAG, "ThemeFile: " + temp);
 		return temp;
 	}
-	
+
 	public void setThemeFile(String path)
 	{
 		Editor editor = mPrefs.edit();
 		editor.putString(mRes.getString(R.string.PREF_THEMES_THEME_FILE), path);
 		if(!editor.commit()) Log.e(TAG, "Unable to write Theme File Path");
 	}
-	
+
 	public boolean ThemeUpdateUrlSet()
 	{
 		if(getThemeUpdateUrls().size()==0)
@@ -205,7 +205,7 @@ public class Preferences extends Activity
 		else
 			return true;
 	}
-	
+
 	//Notifications
 	public boolean notificationsEnabled()
 	{
@@ -213,14 +213,14 @@ public class Preferences extends Activity
 		Log.d(TAG, "Notifications Enabled: " + tempbool);
 		return tempbool;
 	}
-	
+
 	public boolean getVibrate()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_NOTIFICATION_VIBRATE), Boolean.valueOf(mRes.getString(R.string.PREF_NOTIFICATION_VIBRATE_DEF_VALUE)));
 		Log.d(TAG, "Notification Vibrate: " + tempbool);
 		return tempbool;
 	}
-	
+
 	public Uri getConfiguredRingtone()
 	{
 		String uri = mPrefs.getString(mRes.getString(R.string.PREF_NOTIFICATION_RINGTONE), null);
@@ -228,7 +228,7 @@ public class Preferences extends Activity
 		
 		return Uri.parse(uri);
 	}
-	
+
 	public void setNotificationRingtone(String RingTone)
 	{
 		Log.d(TAG, "Setting RingtoneURL to " + RingTone);
@@ -236,7 +236,7 @@ public class Preferences extends Activity
 		editor.putString(mRes.getString(R.string.PREF_NOTIFICATION_RINGTONE), RingTone);
 		if(!editor.commit()) Log.e(TAG, "Unable to write Ringtone URI");
 	}
-	
+
 	public boolean doNandroidBackup()
 	{
 		//tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DO_NANDROID_BACKUP), Boolean.valueOf(mRes.getString(R.string.PREF_DO_NANDROID_BACKUP_DEF_VALUE)));
@@ -244,8 +244,7 @@ public class Preferences extends Activity
 		//return tempbool;
 		return false;
 	}
-	
-	
+
 	//Advanced Properties
 	public String getUpdateFolder()
 	{
@@ -253,7 +252,7 @@ public class Preferences extends Activity
 		Log.d(TAG, "UpdateFolder: " + temp);
 		return temp;
 	}
-	
+
 	public boolean setUpdateFolder(String folder)
 	{
 		String folderTrimmed = folder.trim();
@@ -278,7 +277,7 @@ public class Preferences extends Activity
 			return false;
 		}
 	}
-	
+
 	public int getProgressUpdateFreq()
 	{
 		temp = mPrefs.getString(mRes.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY), mRes.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY_DEF_VALUE));

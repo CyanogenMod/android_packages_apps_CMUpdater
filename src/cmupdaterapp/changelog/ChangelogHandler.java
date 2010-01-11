@@ -16,51 +16,51 @@ public class ChangelogHandler extends DefaultHandler
 
     public List<Version> getParsedData()
     { 
-         return this.co; 
-    } 
+         return this.co;
+    }
 
-    @Override 
+    @Override
     public void startDocument() throws SAXException
-    { 
+    {
          this.co = new LinkedList<Version>();
-    } 
+    }
 
-    @Override 
+    @Override
     public void endDocument() throws SAXException
-    { 
-         // Nothing to do 
-    } 
+    {
+         // Nothing to do
+    }
 
-    /** Gets be called on opening tags like: 
-     * <tag> 
-     * Can provide attribute(s), when xml was like: 
-     * <tag attribute="attributeValue">*/ 
+    /** Gets be called on opening tags like:
+     * <tag>
+     * Can provide attribute(s), when xml was like:
+     * <tag attribute="attributeValue">*/
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException
-    { 
+    {
          if (localName.equalsIgnoreCase(Constants.VERSION_TAG))
          {
         	 //New Version. Start a new Object
         	 currentVersion = new Version();
-             currentVersion.Version = atts.getValue(Constants.VERSION_NAME_TAG); 
+             currentVersion.Version = atts.getValue(Constants.VERSION_NAME_TAG);
          }
     }
-     
-    /** Gets be called on closing tags like: 
-     * </tag> */ 
-    @Override 
+
+    /** Gets be called on closing tags like:
+     * </tag> */
+    @Override
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException
-	{ 
+	{
          if (localName.equalsIgnoreCase(Constants.VERSION_TAG))
-         { 
+         {
               //Changelog for this Version finished. Add it to the result Object
         	 co.add(currentVersion);
         	 currentVersion = null;
          }
     }
-     
-    /** Gets be called on the following structure: 
-     * <tag>characters</tag> */ 
-    @Override 
+
+    /** Gets be called on the following structure:
+     * <tag>characters</tag> */
+    @Override
 	public void characters(char ch[], int start, int length)
     {
     	String a = new String(ch, start, length);

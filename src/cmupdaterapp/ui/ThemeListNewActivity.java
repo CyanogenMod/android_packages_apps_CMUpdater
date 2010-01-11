@@ -27,14 +27,13 @@ public class ThemeListNewActivity extends Activity
 	private boolean intentFeatured;
 	private boolean intentUpdate;
 	private int intentPrimaryKey;
-	
 	private Button btnSave;
 	private Button btnCancel;
 	private Button btnBarcode;
 	private EditText etName;
 	private EditText etUri;
 	private CheckBox cbEnabled;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -48,7 +47,7 @@ public class ThemeListNewActivity extends Activity
 		intentFeatured = b.getBoolean(Constants.THEME_LIST_NEW_FEATURED);
 		intentUpdate = b.getBoolean(Constants.THEME_LIST_NEW_UPDATE);
 		intentPrimaryKey = b.getInt(Constants.THEME_LIST_NEW_PRIMARYKEY);
-		
+	
 		btnSave = (Button) findViewById(R.id.new_theme_list_button_save);
 		btnCancel = (Button) findViewById(R.id.new_theme_list_button_cancel);
 		btnBarcode = (Button) findViewById(R.id.new_theme_list_button_barcode);
@@ -113,7 +112,7 @@ public class ThemeListNewActivity extends Activity
 			}
 		});
 	}
-	
+
 	public void onActivityResult(int requestCode, int resultCode, Intent intent)
 	{
 		Log.d(TAG, "onActivityResult requestCode: "+requestCode+" resultCode: "+resultCode);

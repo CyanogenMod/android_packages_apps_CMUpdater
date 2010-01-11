@@ -14,12 +14,12 @@ public class Log
 	{
 		if(Config.LOGV) android.util.Log.v(LOGTAG, TAG + ": " + logMe);
 	}
-	
+
 	public static void d(String TAG, String logMe)
 	{
 		if(Config.LOGD) android.util.Log.d(LOGTAG, TAG + ": " + logMe);
 	}
-	
+
 	public static void e(String TAG, String logMe)
 	{
 		android.util.Log.e(LOGTAG, TAG + ": " + logMe);

@@ -14,13 +14,13 @@ import cmupdaterapp.misc.Log;
 public class MD5
 {
     private static final String TAG = "MD5";
-    
+
     //Non instantiable class
     private MD5()
     {
         //This constructor will not be called
     }
-    
+
     public static boolean checkMD5(String md5, File updateFile) throws IOException
     {
     	if (md5 == null || md5 == "" || updateFile == null)
@@ -28,15 +28,15 @@ public class MD5
     		Log.d(TAG, "md5 String NULL or UpdateFile NULL");
     		return false;
     	}
-    	
+
     	String calculatedDigest = calculateMD5(updateFile);
-    	
+
     	if(calculatedDigest == null)
     	{
     		Log.d(TAG, "calculatedDigest NULL");
     		return false;
     	}
-    	
+
     	Log.d(TAG, "Calculated digest: " + calculatedDigest);
 		Log.d(TAG, "Provided digest: " + md5);
 		
@@ -96,7 +96,7 @@ public class MD5
     		}
     	}
     }
-    
+
     public static String getRecoveryMD5()
 	{
 		String MD5string = null;

@@ -15,7 +15,7 @@ import cmupdaterapp.misc.Log;
 public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 {
 	private static final String TAG = "UpdateCheckTask";
-	
+
 	private IUpdateCheckService myService;	
 	private ProgressDialog p;
 	private Context context;
@@ -32,7 +32,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 	{
 		mbound = context.bindService(new Intent(IUpdateCheckService.class.getName()), mConnection, Context.BIND_AUTO_CREATE);
 	}
-	
+
 	@Override
 	protected Void doInBackground(Void... arg0)
 	{
@@ -51,7 +51,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 		}
 		return null;
 	}
-	
+
 	@Override
 	protected void onPostExecute (Void result)
 	{
@@ -61,7 +61,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 			mbound = false;
 		}
 	}
-	
+
 	/**
 	 * Class for interacting with the main interface of the service.
 	 */
@@ -88,7 +88,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
     		myService = null;
     	}
     };
-    
+
     private IUpdateCheckServiceCallback mCallback = new IUpdateCheckServiceCallback.Stub()
 	{
 		public void UpdateCheckFinished() throws RemoteException

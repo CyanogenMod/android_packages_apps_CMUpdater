@@ -20,13 +20,12 @@ import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 
 public class ApplyUpdateActivity extends Activity
-{
-	
+{	
 	private static final String TAG = "ApplyUpdateActivity";
 
 	private UpdateInfo mUpdateInfo;
 	private String mUpdateFolder;
-	
+
 	private TextView mTitle;
 	private Button mApplyButton;
 	private Button mPostponeButton;

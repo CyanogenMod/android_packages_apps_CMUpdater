@@ -17,7 +17,7 @@ import android.content.Intent;
 public class StartupReceiver extends BroadcastReceiver
 {
 	private static final String TAG = "StartupReceiver";
-	
+
 	@Override
 	public void onReceive(Context ctx, Intent intent)
 	{
@@ -43,7 +43,7 @@ public class StartupReceiver extends BroadcastReceiver
 			Log.d(TAG, "No Updatecheck");
 		}
 	}
-	
+
 	public static void cancelUpdateChecks(Context ctx)
 	{
 		Intent i = new Intent(ctx, UpdateCheckService.class);
@@ -57,7 +57,7 @@ public class StartupReceiver extends BroadcastReceiver
 	public static void scheduleUpdateService(Context ctx, int updateFrequency)
 	{
 		if(updateFrequency < 0) throw new InvalidParameterException("updateFrequency can't be negative"); 
-			
+
 		Log.d(TAG, "Scheduling alarm to go off every "  + updateFrequency + " msegs");
 		Intent i = new Intent(ctx, UpdateCheckService.class);
 		PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
@@ -66,7 +66,7 @@ public class StartupReceiver extends BroadcastReceiver
 		Log.d(TAG, "Last check on " + lastCheck.toString());
 
 		cancelUpdateChecks(ctx);
-		
+
 		AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
 		Log.d(TAG, "Setting alarm for UpdateService");
 		am.setRepeating(AlarmManager.RTC_WAKEUP, lastCheck.getTime() + updateFrequency, updateFrequency, pi);

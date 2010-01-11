@@ -14,11 +14,11 @@ import cmupdaterapp.misc.Log;
 public class FeaturedThemesHandler extends DefaultHandler
 {
 	private static final String TAG = "FeaturedThemesHandler";
-	
+
 	private FullThemeList fullThemeList;
 	private ThemeList currentTheme;
 	private boolean error = false;
-	
+
     public FullThemeList getParsedData()
     {
          return this.fullThemeList;

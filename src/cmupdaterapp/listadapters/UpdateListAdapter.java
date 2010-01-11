@@ -17,13 +17,13 @@ import android.widget.TextView;
 public class UpdateListAdapter<T> extends ArrayAdapter<T>
 {
 	private final Context _context;
-	
+
 	public UpdateListAdapter(Context context, int textViewResourceId, List<T> objects)
 	{
 		super(context, textViewResourceId, objects);
 		_context = context;
 	}
-	
+
 	public View getDropDownView(int position, View convertView, ViewGroup parent)
 	{
 		return getView(position, convertView, parent);
@@ -44,7 +44,7 @@ public class UpdateListAdapter<T> extends ArrayAdapter<T>
 		{
 			wrapper=(ViewWrapper)row.getTag();
 		}
-		
+
     	UpdateInfo info = (UpdateInfo) this.getItem(position);
     	if (info.getType().equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_THEME))
     		wrapper.getTextView().setText(info.getName() + " " + info.getVersion());

@@ -19,13 +19,13 @@ import android.widget.TextView;
 public class ThemeListAdapter<T> extends ArrayAdapter<T>
 {
 	private final Context _context;
-	
+
 	public ThemeListAdapter(Context context, int textViewResourceId, List<T> objects)
 	{
 		super(context, textViewResourceId, objects);
 		_context = context;
 	}
-	
+
 	public View getDropDownView(int position, View convertView, ViewGroup parent)
 	{
 		return getView(position, convertView, parent);
@@ -46,7 +46,7 @@ public class ThemeListAdapter<T> extends ArrayAdapter<T>
 		{
 			wrapper=(ThemeListViewWrapper)row.getTag();
 		}
-		
+
     	ThemeList info = (ThemeList) this.getItem(position);
     	wrapper.getThemeNameView().setText(info.name);
     	wrapper.getThemeUriView().setText(info.url.toString());
@@ -82,7 +82,7 @@ class ThemeListViewWrapper
 		}
 		return(ThemeListName);
 	}
-	
+
 	public TextView getThemeUriView()
 	{
 		if (ThemeListUri == null)
@@ -100,7 +100,7 @@ class ThemeListViewWrapper
 		}
 		return(image);
 	}
-	
+
 	public Drawable getImageDrawable()
 	{
 		if (image == null)

@@ -63,7 +63,7 @@ public class DownloadService extends Service
 	private static final String TAG = "DownloadService";
 
 	private final RemoteCallbackList<IDownloadServiceCallback> mCallbacks = new RemoteCallbackList<IDownloadServiceCallback>();
-	
+
 	private boolean prepareForDownloadCancel;
 	private boolean mMirrorNameUpdated;
 	private String mMirrorName;
@@ -86,7 +86,7 @@ public class DownloadService extends Service
 	private String fileName;
 	private boolean resumeSupported = true;
 	private long localFileSize = 0;
-	
+
 	private enum DownloadStatus
 	{
 	    WAITING_CONNECTION,
@@ -97,7 +97,7 @@ public class DownloadService extends Service
 	    CANCELLED,
 	    ERROR
 	}
-	
+
     @Override
     public IBinder onBind(Intent arg0)
     {
@@ -155,7 +155,7 @@ public class DownloadService extends Service
 			
 		}
     };
-    
+
     @Override
 	public void onCreate()
     {
@@ -169,7 +169,7 @@ public class DownloadService extends Service
 		res = getResources();
 		minutesString = res.getString(R.string.minutes);
 		secondsString = res.getString(R.string.seconds);
-		
+
 		mConnectivityManager = (ConnectivityManager) AppContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 		myConnectionChangeReceiver = new ConnectionChangeReceiver();
 		registerReceiver(myConnectionChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
@@ -177,7 +177,7 @@ public class DownloadService extends Service
 		connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
 		status = DownloadStatus.WAITING_CONNECTION;
     }
-    
+
     @Override
     public void onDestroy()
     {
@@ -185,16 +185,14 @@ public class DownloadService extends Service
     	unregisterReceiver(myConnectionChangeReceiver);
     	super.onDestroy();
     }
-    
-	
-    
+
     private boolean checkForConnectionAndUpdate(UpdateInfo updateToDownload)
 	{
     	mCurrentUpdate = updateToDownload;
 		Log.d(TAG, "Called CheckForConnectionAndUpdate");
 		boolean success;
 		mWifiLock.acquire();
-		
+
 		//wait for a data connection
 		while(!connected)
 		{
@@ -212,7 +210,6 @@ public class DownloadService extends Service
 				}
 			}
 		}
-
 		try
 		{
 			Log.d(TAG, "Downloading update...");
@@ -234,7 +231,6 @@ public class DownloadService extends Service
 		{
 			mWifiLock.release();
 		}
-		
 		//Be sure to return false if the User canceled the Download
 		if(prepareForDownloadCancel)
 			return false;
@@ -250,7 +246,7 @@ public class DownloadService extends Service
 
 		HttpUriRequest req, md5req;
 		HttpResponse response, md5response;
-		
+
 		List<URI> updateMirrors = updateInfo.updateFileUris();
 		int size = updateMirrors.size();
 		int start = new Random().nextInt(size);
@@ -260,7 +256,7 @@ public class DownloadService extends Service
 		File partialDestinationFile = null;
 		File destinationMD5File = null;
 		String downloadedMD5 = null;
-		
+
 		//If directory not exists, create it
 		File directory = new File(fullUpdateFolderPath);
 		if (!directory.exists())
@@ -275,7 +271,7 @@ public class DownloadService extends Service
 			fileName = "update.zip";
 		}
 		Log.d(TAG, "fileName: " + fileName);
-		
+
 		//Set the Filename to update.zip.partial
 		partialDestinationFile = new File(fullUpdateFolderPath, fileName + ".partial");
 		destinationFile = new File(fullUpdateFolderPath, fileName);
@@ -291,33 +287,33 @@ public class DownloadService extends Service
 				updateURI = updateMirrors.get((start + i)% size);
 				mMirrorName = updateURI.getHost();
 				Log.d(TAG, "Mirrorname: " + mMirrorName);
-				
+
 				boolean md5Available = true;
-	
+
 				mMirrorNameUpdated = false;
 				try
 				{
 					req = new HttpGet(updateURI);
 					md5req = new HttpGet(updateURI+".md5sum");
-					
+
 					// Add no-cache Header, so the File gets downloaded each time
 					req.addHeader("Cache-Control", "no-cache");
 					md5req.addHeader("Cache-Control", "no-cache");
-	
+
 					Log.d(TAG, "Trying to download md5sum file from " + md5req.getURI());
 					md5response = MD5httpClient.execute(md5req);
 					Log.d(TAG, "Trying to download update zip from " + req.getURI());
-	
+
 					if (localFileSize > 0)
 					{
 						Log.d(TAG, "localFileSize for Resume: " + localFileSize);
 	                    req.addHeader("Range", "bytes=" + localFileSize + "-");
 					}
 					response = httpClient.execute(req);
-					
+
 					int serverResponse = response.getStatusLine().getStatusCode();
 					int md5serverResponse = md5response.getStatusLine().getStatusCode();
-					
+
 					if (serverResponse == HttpStatus.SC_NOT_FOUND)
 					{
 						Log.d(TAG, "File not found on Server. Trying next one.");
@@ -350,12 +346,12 @@ public class DownloadService extends Service
 							md5Available = false;
 							Log.d(TAG, "Server returned status code " + md5serverResponse + " for update zip md5sum. Downloading without it");
 						}
-	
+
 						if (md5Available)
 						{
 							destinationMD5File = new File(fullUpdateFolderPath, fileName + ".md5sum");
 							if(destinationMD5File.exists()) destinationMD5File.delete();
-	
+
 							try
 							{
 								Log.d(TAG, "Trying to Read MD5 hash from response");
@@ -366,10 +362,10 @@ public class DownloadService extends Service
 								Log.d(TAG, "MD5: " + downloadedMD5);
 								br.close();
 								isr.close();
-	
+
 								if (temp != null)
 									temp.consumeContent();
-	
+
 								//Write the String in a .md5 File
 								if (downloadedMD5 != null && !downloadedMD5.equals(""))
 								{
@@ -382,8 +378,7 @@ public class DownloadService extends Service
 								throw new IOException("MD5 Response cannot be read");
 							}
 						}
-	
-						
+
 						// Download Update ZIP if md5sum went ok
 						HttpEntity entity = response.getEntity();
 						dumpFile(entity, partialDestinationFile, destinationFile);
@@ -405,7 +400,7 @@ public class DownloadService extends Service
 							entity = null;
 						}
 						Log.d(TAG, "Update download finished");
-						
+
 						if (md5Available)
 						{
 							Log.d(TAG, "Performing MD5 verification");
@@ -414,7 +409,7 @@ public class DownloadService extends Service
 								throw new IOException(res.getString(R.string.md5_verification_failed));
 							}
 						}
-	
+
 						//If we reach here, download & MD5 check went fine :)
 						return true;
 					}
@@ -441,7 +436,6 @@ public class DownloadService extends Service
 		}
 		ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.unable_to_download_file, 0));
 		Log.d(TAG, "Unable to download the update file from any mirror");
-
 		return false;
 	}
 
@@ -458,13 +452,13 @@ public class DownloadService extends Service
 			}
 			else
 				Log.d(TAG, "Update size: " + (mcontentLength/1024) + "KB" );
-			
+
 			//Check if there is enough Space on SDCard for Downloading the Update
 			if (!SysUtils.EnoughSpaceOnSdCard(mcontentLength))
 				throw new NotEnoughSpaceException(res.getString(R.string.download_not_enough_space));
-	
+
 			mStartTime = System.currentTimeMillis(); 
-	
+
 			byte[] buff = new byte[64 * 1024];
 			int read = 0;
 			RandomAccessFile out = new RandomAccessFile(partialDestinationFile, "rw");
@@ -490,7 +484,6 @@ public class DownloadService extends Service
 					out.write(buff, 0, read);
 					mtotalDownloaded += read;
 				}
-
 				out.close();
 				is.close();
 				if (!prepareForDownloadCancel)
@@ -570,9 +563,7 @@ public class DownloadService extends Service
 			String stringDownloaded = mtotalDownloaded/1048576 + "/" + contentLengthOfFullDownload/1048576 + " MB";
 			String stringSpeed = speed + " kB/s";
 			String stringRemainingTime = remainingTime/60000 + " " + minutesString + " " + remainingTime%60 + " " + secondsString;
-
 			String stringComplete = stringDownloaded + " " + stringSpeed + " " + stringRemainingTime;
-			
 			mNotificationRemoteView.setTextViewText(R.id.notificationTextDownloadInfos, stringComplete);
 			mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, (int) contentLengthOfFullDownload, (int) mtotalDownloaded, false);
 			mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_STATUS, mNotification);
@@ -593,7 +584,7 @@ public class DownloadService extends Service
 	{
 		Log.d(TAG, "Called Notify User");
 		Intent i;
-		
+
 		if(!success)
 		{
 			Log.d(TAG, "Downloaded Update was NULL");
@@ -601,10 +592,10 @@ public class DownloadService extends Service
 			DownloadError();
 			return;
 		}
-		
+
 		i = new Intent(this, ApplyUpdateActivity.class);
 		i.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)ui);
-		
+
 		//Set the Notification to finished
 		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -629,10 +620,10 @@ public class DownloadService extends Service
 			mNotification.sound = notificationRingtone;
 		}
 		mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_FINISHED, mNotification);
-		
+
 		DownloadFinished();
 	}
-	
+
     private void notificateDownloadError(String ExceptionText)
 	{
     	mDownloading = false;
@@ -708,7 +699,7 @@ public class DownloadService extends Service
 		}
 		mCallbacks.finishBroadcast();
 	}
-	
+
 	private void DownloadFinished()
 	{
 		final int M = mCallbacks.beginBroadcast();
@@ -726,7 +717,7 @@ public class DownloadService extends Service
 		}
 		mCallbacks.finishBroadcast();
 	}
-	
+
 	private void DownloadError()
 	{
 		final int M = mCallbacks.beginBroadcast();
@@ -744,7 +735,7 @@ public class DownloadService extends Service
 		}
 		mCallbacks.finishBroadcast();
 	}
-	
+
 	private boolean cancelCurrentDownload()
 	{
 		prepareForDownloadCancel = true;
@@ -767,7 +758,7 @@ public class DownloadService extends Service
 		stopSelf();
 		return true;
 	}
-	
+
 	private Handler ToastHandler = new Handler()
 	{
 		public void handleMessage(Message msg)
@@ -778,7 +769,7 @@ public class DownloadService extends Service
 				Toast.makeText(DownloadService.this, (String)msg.obj, Toast.LENGTH_LONG).show();
 		}
 	};
-	
+
 	//Is called when Network Connection Changes
 	private class ConnectionChangeReceiver extends BroadcastReceiver
 	{

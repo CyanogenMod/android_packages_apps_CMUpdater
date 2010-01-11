@@ -22,7 +22,7 @@ import cmupdaterapp.utils.MD5;
 public class MD5CheckerTask extends AsyncTask<File, Void, Boolean>
 {
 	private static final String TAG = "MD5CheckerTask";
-	
+
 	private ProgressDialog mDialog;
 	private String mFilename;
 	private boolean mreturnvalue;
@@ -98,7 +98,7 @@ public class MD5CheckerTask extends AsyncTask<File, Void, Boolean>
 		{
 			Toast.makeText(mCtx, R.string.apply_existing_update_md5error_message, Toast.LENGTH_LONG).show();
 		}
-		
+
 		//Is null when no MD5SUM is present
 		if(mDialog != null)
 			mDialog.dismiss();

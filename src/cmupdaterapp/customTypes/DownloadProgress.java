@@ -7,7 +7,7 @@ public class DownloadProgress
 	private final String downloadedText;
 	private final String speedText;
 	private final String remainingTimeText;
-	
+
 	public DownloadProgress(long _downloaded, int _total, String _downloadedText, String _speedText, String _remainingTimeText)
 	{
 		downloaded = _downloaded;
@@ -16,7 +16,7 @@ public class DownloadProgress
 		speedText = _speedText;
 		remainingTimeText = _remainingTimeText;
 	}
-	
+
 	public long getDownloaded() { return downloaded; }
 	public int getTotal() { return total; }
 	public String getDownloadedText() { return downloadedText; }

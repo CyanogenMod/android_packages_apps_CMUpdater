@@ -25,21 +25,21 @@ import android.os.Message;
 public class Changelog implements Runnable
 {
 	private static final String TAG = "Changelog";
-	
+
 	private Preferences p;
-	
+
 	public enum ChangelogType
 	{
 		ROM,
 		APP,
 		THEME
 	}
-	
+
 	public Changelog(Activity upi)
 	{
 		p = Preferences.getPreferences(upi);
 	}
-	
+
 	//Returns the RomChangelog without a Thread
 	public static List<Version> getRomChangelog(UpdateInfo ui)
 	{
@@ -54,13 +54,13 @@ public class Changelog implements Runnable
 		returnValue.add(v);
 		return returnValue;
 	}
-	
+
 	//Gets the AppChangelog in a Thread
 	public void run()
 	{
 		URL url;
 		InputSource i;
-		
+
 		Message m = MainActivity.ChangelogProgressHandler.obtainMessage();
 		try
 		{

@@ -34,12 +34,12 @@ public class UpdateInfo implements Parcelable, Serializable
 		else
 			name = "";
 	}
-	
+
 	/**
 	 * Get Name
 	 */
 	public String getName() { return name; }
-	
+
 	/**
 	 * Set Version
 	 */
@@ -50,12 +50,12 @@ public class UpdateInfo implements Parcelable, Serializable
 		else
 			version = "";
 	}
-	
+
 	/**
 	 * Get Version
 	 */
 	public String getVersion() { return version; }
-	
+
 	/**
 	 * Set Type
 	 */
@@ -66,12 +66,12 @@ public class UpdateInfo implements Parcelable, Serializable
 		else
 			type = "";
 	}
-	
+
 	/**
 	 * Get Type
 	 */
 	public String getType() { return type; }
-	
+
 	/**
 	 * Set BranchCode
 	 */
@@ -82,12 +82,12 @@ public class UpdateInfo implements Parcelable, Serializable
 		else
 			branchCode = "";
 	}
-	
+
 	/**
 	 * Get BranchCode
 	 */
 	public String getBranchCode() { return branchCode; }
-	
+
 	/**
 	 * Set Descrition
 	 */
@@ -98,12 +98,12 @@ public class UpdateInfo implements Parcelable, Serializable
 		else
 			description = "";
 	}
-	
+
 	/**
 	 * Get Description
 	 */
 	public String getDescription() { return description; }
-	
+
 	/**
 	 * Set Filename
 	 */
@@ -114,18 +114,18 @@ public class UpdateInfo implements Parcelable, Serializable
 		else
 			fileName = "";
 	}
-	
+
 	/**
 	 * Get Filename
 	 */
 	public String getFileName() { return fileName; }
-	
+
 	@Override
 	public String toString()
 	{
 		return name;
 	}
-	
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -160,7 +160,7 @@ public class UpdateInfo implements Parcelable, Serializable
 		mod = new LinkedList<String>();
 		board = new LinkedList<String>();
 	}
-	
+
 	private UpdateInfo(Parcel in)
 	{
 		screenshots = new LinkedList<URI>();
@@ -169,7 +169,7 @@ public class UpdateInfo implements Parcelable, Serializable
 		board = new LinkedList<String>();
 		readFromParcel(in);
 	}
-	
+
 	public static final Parcelable.Creator<UpdateInfo> CREATOR = new Parcelable.Creator<UpdateInfo>()
 	{
 		public UpdateInfo createFromParcel(Parcel in)
@@ -181,7 +181,7 @@ public class UpdateInfo implements Parcelable, Serializable
 			return new UpdateInfo[size];
 		}
 	};
-	
+
 	public int describeContents()
 	{
 		return 0;
@@ -201,7 +201,7 @@ public class UpdateInfo implements Parcelable, Serializable
 		arg0.writeList(screenshots);
 		arg0.writeList(updateMirrors);
 	}
-	
+
 	public void readFromParcel(Parcel in)
 	{
 		PrimaryKey = in.readInt();
@@ -216,7 +216,7 @@ public class UpdateInfo implements Parcelable, Serializable
 		in.readList(screenshots, null);
 		in.readList(updateMirrors, null);
 	}
-	
+
 	public List<URI> updateFileUris()
 	{
 		List<URI> retValue = new LinkedList<URI>();

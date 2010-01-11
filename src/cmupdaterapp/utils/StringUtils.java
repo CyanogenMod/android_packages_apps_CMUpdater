@@ -5,8 +5,7 @@ import cmupdaterapp.misc.Log;
 public class StringUtils
 {
 	private static final String TAG = "StringUtils";
-	
-	
+
 	/**
 	 * Converts a String array to an String, joined by the Seperator
 	 * 
@@ -33,7 +32,7 @@ public class StringUtils
 			return buffer.toString();
 		}
 	}
-	
+
 	/**
 	 * Compare two versions. Will strip off any alphabets in the version number
 	 * and then do a number comparison

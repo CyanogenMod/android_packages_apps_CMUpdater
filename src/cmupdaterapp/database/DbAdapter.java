@@ -20,7 +20,7 @@ import cmupdaterapp.utils.StringUtils;
 public class DbAdapter
 {
 	private static final String TAG = "DbAdapter";
-	
+
 	private static final String DATABASE_NAME = "cmupdater.db";
 	private static final int DATABASE_VERSION = 5;
 	//Themelist
@@ -64,24 +64,24 @@ public class DbAdapter
 
 	private SQLiteDatabase db;
 	private DbOpenHelper dbHelper;
-	
+
 	public DbAdapter()
 	{
 		dbHelper = new DbOpenHelper();
 	}
-	
+
 	public void close()
 	{
 		db.close();
 	}
-	
+
 	public void open()
 	{
 		File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Constants.EXTERNAL_DATA_DIRECTORY + "/");
 		f.mkdirs();
 		db = dbHelper.open(f.toString(), DATABASE_NAME, DATABASE_VERSION);
 	}
-	
+
 	// Insert a new Theme
 	public long insertTheme(ThemeList _theme)
 	{
@@ -94,25 +94,25 @@ public class DbAdapter
 		else newValues.put(KEY_THEMELIST_FEATURED, 0);
 		return db.insert(DATABASE_TABLE_THEMELIST, null, newValues);
 	}
-	
+
 	// Remove a theme based on its index
 	public boolean removeTheme(long _rowIndex)
 	{
 		return db.delete(DATABASE_TABLE_THEMELIST, KEY_THEMELIST_ID + "= ?", new String[]{ Long.toString(_rowIndex) }) > 0;
 	}
-	
+
 	// Removes all themes
 	public boolean removeAllThemes()
 	{
 		return db.delete(DATABASE_TABLE_THEMELIST, null, null) > 0;
 	}
-	
+
 	// Removes all themes
 	public boolean removeAllFeaturedThemes()
 	{
 		return db.delete(DATABASE_TABLE_THEMELIST, KEY_THEMELIST_FEATURED + "= ?", new String[]{ "1" }) > 0;
 	}
-	
+
 	// Disable all Themes
 	public boolean disableAllThemes()
 	{
@@ -120,7 +120,7 @@ public class DbAdapter
 		newValue.put(KEY_THEMELIST_ENABLED, 0);
 		return db.update(DATABASE_TABLE_THEMELIST, newValue, null, null) > 0;
 	}
-	
+
 	// Disable all Featured Themes
 	public boolean disableAllFeaturedThemes()
 	{
@@ -128,7 +128,7 @@ public class DbAdapter
 		newValue.put(KEY_THEMELIST_ENABLED, 0);
 		return db.update(DATABASE_TABLE_THEMELIST, newValue, KEY_THEMELIST_FEATURED + "= ?", new String[]{ "1" }) > 0;
 	}
-	
+
 	// Enable all Themes
 	public boolean enableAllThemes()
 	{
@@ -136,7 +136,7 @@ public class DbAdapter
 		newValue.put(KEY_THEMELIST_ENABLED, 1);
 		return db.update(DATABASE_TABLE_THEMELIST, newValue, null, null) > 0;
 	}
-	
+
 	// enable all Featured Themes
 	public boolean enableAllFeaturedThemes()
 	{
@@ -144,7 +144,7 @@ public class DbAdapter
 		newValue.put(KEY_THEMELIST_ENABLED, 1);
 		return db.update(DATABASE_TABLE_THEMELIST, newValue, KEY_THEMELIST_FEATURED + "= ?", new String[]{ "1" }) > 0;
 	}
-	
+
 	// Update a Theme
 	public boolean updateTheme(long _rowIndex, ThemeList _theme)
 	{
@@ -157,7 +157,7 @@ public class DbAdapter
 		else newValue.put(KEY_THEMELIST_FEATURED, 0);
 		return db.update(DATABASE_TABLE_THEMELIST, newValue, KEY_THEMELIST_ID + "= ?", new String[]{ Long.toString(_rowIndex) }) > 0;
 	}
-	
+
 	public Cursor getAllThemesCursor()
 	{
 		return db.query(DATABASE_TABLE_THEMELIST, new String[] { KEY_THEMELIST_ID, KEY_THEMELIST_NAME, KEY_THEMELIST_URI, KEY_THEMELIST_ENABLED, KEY_THEMELIST_FEATURED }, null, null, null, null, KEY_THEMELIST_NAME);
@@ -187,7 +187,7 @@ public class DbAdapter
 		cursor.close();
 		return result;
 	}
-	
+
 	public void UpdateFeaturedThemes(FullThemeList t)
 	{
 		FullThemeList retValue = new FullThemeList();
@@ -215,16 +215,15 @@ public class DbAdapter
 		}
 		Log.d(TAG, "Updated Featured Theme Servers");
 	}
-	
-	
+
 	//SCREENSHOTS
-	
+
 	// Remove a Screenshot based on its index
 	public boolean removeScreenshot(long _rowIndex)
 	{
 		return db.delete(DATABASE_TABLE_SCREENSHOT, KEY_SCREENSHOT_ID + "= ?", new String[]{ Long.toString(_rowIndex) }) > 0;
 	}
-	
+
 	// Remove all Screenshots for given Theme except the ones in the parameter
 	public boolean removeScreenshotExcept(int ForeignKey, String[] primaryKeysNotToRemove)
 	{
@@ -234,13 +233,13 @@ public class DbAdapter
 		return db.delete(DATABASE_TABLE_SCREENSHOT, KEY_SCREENSHOT_THEMELIST_ID + "= ? AND "
 				+ KEY_SCREENSHOT_ID + " not in (?)", new String[]{ Integer.toString(ForeignKey), temp }) > 0;
 	}
-	
+
 	// Remove a Screenshot based on its FeaturedThemeIndex
 	public boolean removeAllScreenshotsForTheme(long FeaturedThemeId)
 	{
 		return db.delete(DATABASE_TABLE_SCREENSHOT, KEY_SCREENSHOT_THEMELIST_ID + "= ?", new String[]{ Long.toString(FeaturedThemeId) }) > 0;
 	}
-	
+
 	// Insert a new Screenshot
 	public long insertScreenshot(Screenshot _screenshot)
 	{
@@ -252,7 +251,7 @@ public class DbAdapter
 		newValues.put(KEY_SCREENSHOT_SCREENSHOT, _screenshot.getPictureAsByteArray());
 		return db.insert(DATABASE_TABLE_SCREENSHOT, null, newValues);
 	}
-	
+
 	//Get all Screenshots for a Theme
 	public List<Screenshot> getAllScreenshotsForTheme(long _themeIndex) throws SQLException
 	{
@@ -270,9 +269,9 @@ public class DbAdapter
 			cursor.close();
 			return null;
 		}
-		
+
 		List<Screenshot> result = new LinkedList<Screenshot>();
-		
+
 		cursor.moveToFirst();
 		do
 		{
@@ -287,7 +286,7 @@ public class DbAdapter
 		cursor.close();
 		return result;
 	}
-	
+
 	//Get single Screenshots by Id
 	public Screenshot getScreenshotById(long _index) throws SQLException
 	{
@@ -305,7 +304,7 @@ public class DbAdapter
 			cursor.close();
 			throw new SQLException("No Screenshot found for Key: " + _index);
 		}
-		
+
 		Screenshot result = new Screenshot();
 		result.PrimaryKey = cursor.getInt(COLUMN_SCREENSHOT_ID);
 		result.ForeignThemeListKey = cursor.getInt(COLUMN_SCREENSHOT_THEMELIST_ID);
@@ -315,7 +314,7 @@ public class DbAdapter
 		cursor.close();
 		return result;
 	}
-	
+
 	//Checks if a Screenshot already exists. Cause the Primary Key is Stored in the Screenshot Object
 	//The contains() Method will not work cause theres no Primary Key on Download
 	//Will return a Screenshotobject with only the PrimaryKey if found, otherwise -1,the Modifydate and the blob
@@ -344,7 +343,7 @@ public class DbAdapter
 		cursor.close();
 		return retValue;
 	}
-	
+
 	// Update a Screenshot
 	public boolean updateScreenshot(long _rowIndex, Screenshot _screenshot)
 	{
@@ -355,14 +354,12 @@ public class DbAdapter
 		newValue.put(KEY_SCREENSHOT_SCREENSHOT, _screenshot.getPictureAsByteArray());
 		return db.update(DATABASE_TABLE_SCREENSHOT, newValue, KEY_SCREENSHOT_ID + "= ?", new String[]{ Long.toString(_rowIndex) }) > 0;
 	}
-	
+
 	// Delete All Screenshots
 	public void deleteAllScreenshot()
 	{
 		db.execSQL("DELETE FROM " + DATABASE_TABLE_SCREENSHOT + ";");
 	}
-
-
 
 	//Helper Class for opening/creating a Database
 	private static class DbOpenHelper
@@ -378,7 +375,7 @@ public class DbAdapter
 			s.setVersion(version);
 			return s;
 		}
-		
+
 		private void update(SQLiteDatabase s, int _oldVersion, int _newVersion)
 		{
 			Log.d(TAG, "Upgrading from version " + _oldVersion + " to " + _newVersion + ", which will destroy all old data");
@@ -387,7 +384,7 @@ public class DbAdapter
 			s.execSQL("DROP TRIGGER IF EXISTS " + TRIGGER_THEMELIST_ID_INSERT);
 			s.execSQL("DROP TRIGGER IF EXISTS " + TRIGGER_THEMELIST_ID_UPDATE);
 			s.execSQL("DROP TRIGGER IF EXISTS " + TRIGGER_THEMELIST_ID_DELETE);
-			
+
 			s.execSQL("DROP INDEX IF EXISTS " + INDEX_THEMELIST_ID);
 			s.execSQL("DROP INDEX IF EXISTS " + INDEX_THEMELIST_NAME);
 			s.execSQL("DROP INDEX IF EXISTS " + INDEX_THEMELIST_URI);
@@ -398,15 +395,15 @@ public class DbAdapter
 			s.execSQL("DROP INDEX IF EXISTS " + INDEX_SCREENSHOT_URI);
 			s.execSQL("DROP INDEX IF EXISTS " + INDEX_SCREENSHOT_MODIFYDATE);
 			s.execSQL("DROP INDEX IF EXISTS " + INDEX_SCREENSHOT_SCREENSHOT);
-			
+
 			s.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_SCREENSHOT);
 			s.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_THEMELIST);
-			
+
 			// Create a new one.
 			Log.d(TAG, "Create Database");
 			s.execSQL(DATABASE_CREATE_THEMELIST);
 			s.execSQL(DATABASE_CREATE_SCREENSHOTS);
-			
+
 			s.execSQL(INDEX_THEMELIST_THEMELIST_ID);
 			s.execSQL(INDEX_THEMELIST_THEMELIST_NAME);
 			s.execSQL(INDEX_THEMELIST_THEMELIST_URI);
@@ -417,12 +414,12 @@ public class DbAdapter
 			s.execSQL(INDEX_SCREENSHOT_SCREENSHOT_URI);
 			s.execSQL(INDEX_SCREENSHOT_SCREENSHOT_MODIFYDATE);
 			s.execSQL(INDEX_SCREENSHOT_SCREENSHOT_SCREENSHOT);
-			
+
 			s.execSQL(TRIGGER_THEMELISTID_INSERT);
 			s.execSQL(TRIGGER_THEMELISTID_UPDATE);
 			s.execSQL(TRIGGER_THEMELISTID_DELETE);
 		}
-		
+
 		// SQL Statements to create a new database.
 		private static final String DATABASE_CREATE_THEMELIST =
 			"create table " +
@@ -433,7 +430,7 @@ public class DbAdapter
 			KEY_THEMELIST_URI + " text not null, " +
 			KEY_THEMELIST_ENABLED + " integer default 0, " +
 			KEY_THEMELIST_FEATURED + " integer default 0);";
-		
+
 		private static final String DATABASE_CREATE_SCREENSHOTS =
 			"create table " +
 			DATABASE_TABLE_SCREENSHOT +
@@ -444,7 +441,7 @@ public class DbAdapter
 			KEY_SCREENSHOT_URI + " text not null, " +
 			KEY_SCREENSHOT_MODIFYDATE + " date not null, " +
 			KEY_SCREENSHOT_SCREENSHOT + " blob);";
-		
+
 		//Trigger for foreign Key Constraints (i hate sqlite, hail to ORACLE!)
 		private static final String TRIGGER_THEMELISTID_INSERT = 
 		"CREATE TRIGGER " + TRIGGER_THEMELIST_ID_INSERT +
@@ -458,7 +455,7 @@ public class DbAdapter
 		" violates foreign key constraint " + THEMELIST_ID_FOREIGNKEYCONSTRAINT + "')" +
 		" END;" +
 		" END;";
-		
+
 		private static final String TRIGGER_THEMELISTID_UPDATE =
 		"CREATE TRIGGER " + TRIGGER_THEMELIST_ID_UPDATE +
 		" BEFORE UPDATE ON " + DATABASE_TABLE_SCREENSHOT +
@@ -470,7 +467,7 @@ public class DbAdapter
 		" violates foreign key constraint " + THEMELIST_ID_FOREIGNKEYCONSTRAINT + "')" +
 		" END;" +
 		" END;";
-		
+
 		//Delete cached Screenshots, when ThemeList is removed
 		private static final String TRIGGER_THEMELISTID_DELETE =
 		"CREATE TRIGGER " + TRIGGER_THEMELIST_ID_DELETE +
@@ -479,45 +476,45 @@ public class DbAdapter
 		" DELETE FROM " + DATABASE_TABLE_SCREENSHOT +
 		" WHERE " + KEY_SCREENSHOT_THEMELIST_ID + " = old." + KEY_THEMELIST_ID + ";" +
 		" END;";
-		
+
 		//Indeces ThemeList
 		private static final String INDEX_THEMELIST_THEMELIST_ID =
 		"CREATE UNIQUE INDEX IF NOT EXISTS " + INDEX_THEMELIST_ID +
 		" ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_ID + ");";
-		
+
 		private static final String INDEX_THEMELIST_THEMELIST_NAME =
 		"CREATE INDEX IF NOT EXISTS " + INDEX_THEMELIST_NAME +
 		" ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_NAME + ");";
-		
+
 		private static final String INDEX_THEMELIST_THEMELIST_URI =
 		"CREATE INDEX IF NOT EXISTS " + INDEX_THEMELIST_URI +
 		" ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_URI + ");";
-		
+
 		private static final String INDEX_THEMELIST_THEMELIST_ENABLED =
 		"CREATE INDEX IF NOT EXISTS " + INDEX_THEMELIST_ENABLED +
 		" ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_ENABLED + ");";
-		
+
 		private static final String INDEX_THEMELIST_THEMELIST_FEATURED =
 		"CREATE INDEX IF NOT EXISTS " + INDEX_THEMELIST_FEATURED +
 		" ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_FEATURED + ");";
-		
+
 		//Indeces Screenshots
 		private static final String INDEX_SCREENSHOT_SCREENSHOT_ID =
 		"CREATE UNIQUE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_ID +
 		" ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_ID + ");";
-		
+
 		private static final String INDEX_SCREENSHOT_SCREENSHOT_THEMELIST_ID =
 		"CREATE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_THEMELIST_ID +
 		" ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_THEMELIST_ID + ");";
-		
+
 		private static final String INDEX_SCREENSHOT_SCREENSHOT_URI =
 		"CREATE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_URI +
 		" ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_URI + ");";
-		
+
 		private static final String INDEX_SCREENSHOT_SCREENSHOT_MODIFYDATE =
 		"CREATE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_MODIFYDATE +
 		" ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_MODIFYDATE + ");";
-		
+
 		private static final String INDEX_SCREENSHOT_SCREENSHOT_SCREENSHOT =
 		"CREATE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_SCREENSHOT +
 		" ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_SCREENSHOT + ");";

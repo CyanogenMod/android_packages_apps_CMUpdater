@@ -8,26 +8,26 @@ import cmupdaterapp.misc.Log;
 public class FullThemeList implements Serializable
 {
 	private static final long serialVersionUID = -2577705903002871714L;
-	
+
 	private static final String TAG = "FullThemeList";
 
 	private LinkedList<ThemeList> Themes;
-	
+
 	public FullThemeList()
 	{
 		Themes = new LinkedList<ThemeList>();
 	}
-	
+
 	public LinkedList<ThemeList> returnFullThemeList()
 	{
 		return Themes;
 	}
-	
+
 	public void addThemeToList(ThemeList t)
 	{
 		Themes.add(t);
 	}
-	
+
 	public boolean removeThemeFromList(ThemeList t)
 	{
 		try
@@ -41,7 +41,7 @@ public class FullThemeList implements Serializable
 			return false;
 		}
 	}
-	
+
 	public int getThemeCount()
 	{
 		return Themes.size();

@@ -12,7 +12,7 @@ import android.content.Context;
 public class State
 {
 	private static final String TAG = "State";
-	
+
 	public static void saveState(Context ctx, Serializable mAvailableUpdates) throws IOException
 	{
 		Log.d(TAG, "Called SaveState");
@@ -29,7 +29,7 @@ public class State
 			oos.close();
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static FullUpdateInfo loadState(Context ctx) throws IOException
 	{

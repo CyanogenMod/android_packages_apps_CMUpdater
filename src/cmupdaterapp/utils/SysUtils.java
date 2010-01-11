@@ -26,7 +26,7 @@ public class SysUtils
 		
 		return (modVer == null || modVer.length() == 0 ? "Unknown" : modVer);
 	}
-	
+
 	/**
 	 * Returns a SystemProperty
 	 * 
@@ -66,7 +66,7 @@ public class SysUtils
         }
         return line;
 	}
-	
+
 	/**
 	 * Checks if there is enough Space on SDCard
 	 * 

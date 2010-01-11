@@ -586,7 +586,7 @@ public class MainActivity extends Activity
 		if (StringUtils.compareVersions(Constants.MIN_SUPPORTED_VERSION_STRING, mod))
 		{
 			runningOldVersion = true;
-			
+
 			new AlertDialog.Builder(MainActivity.this)
 			.setTitle(R.string.alert_old_version_title)
 			.setMessage(R.string.alert_old_version_summary)
@@ -618,7 +618,7 @@ public class MainActivity extends Activity
 	{
 		Log.d(TAG, "onResume called");
 		super.onResume();
-		
+
 		mfilenames = null;
 		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
 		FilenameFilter f = new UpdateFilter(".zip");
@@ -657,13 +657,12 @@ public class MainActivity extends Activity
 			Log.e(TAG, "Exception on calling DownloadService", e);
 		}
 	}
-	
+
 	@Override
 	protected void onStop()
 	{
 		Log.d(TAG, "onStop called");
 		super.onStop();
-		Log.d(TAG, "App closed");
 	}
 
 	@Override
@@ -692,14 +691,6 @@ public class MainActivity extends Activity
 			{
 				//Download in progress
 				menu.findItem(Constants.MENU_ID_UPDATE_NOW).setEnabled(false);
-			}
-			else if (mAvailableUpdates != null)
-			{
-				//Available updates
-			}
-			else
-			{
-				//No available updates
 			}
 		}
 		catch (RemoteException e)
@@ -730,7 +721,6 @@ public class MainActivity extends Activity
 				Log.d(TAG, "Unknown Menu ID:" + item.getItemId());
 				break;
 		}
-
 		return super.onMenuItemSelected(featureId, item);
 	}
 
@@ -744,41 +734,41 @@ public class MainActivity extends Activity
 		{
 			Log.e(TAG, "Unable to restore activity status", e);
 		}
-		
+
 		//Theme Update File URL Set?
 		boolean ThemeUpdateUrlSet = prefs.ThemeUpdateUrlSet();
-		
+
 		((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).cancel(R.string.not_new_updates_found_title);
-		
+
 		//Experimental and All
 		String showExperimentalRomUpdates;
 		String showAllRomUpdates;
 		String showExperimentalThemeUpdates;
 		String showAllThemeUpdates;
-		
+
 		String trueString = res.getString(R.string.true_string);
 		String falseString = res.getString(R.string.false_string);
-		
+
 		if(prefs.showExperimentalRomUpdates())
 			showExperimentalRomUpdates = trueString;
 		else
 			showExperimentalRomUpdates = falseString;
-		
+
 		if(prefs.showAllRomUpdates())
 			showAllRomUpdates = trueString;
 		else
 			showAllRomUpdates = falseString;
-		
+
 		if(prefs.showExperimentalThemeUpdates())
 			showExperimentalThemeUpdates = trueString;
 		else
 			showExperimentalThemeUpdates = falseString;
-		
+
 		if(prefs.showAllThemeUpdates())
 			showAllThemeUpdates = trueString;
 		else
 			showAllThemeUpdates = falseString;
-		
+
 		experimentalBuildsRomtv.setText(MessageFormat.format(res.getString(R.string.p_allow_experimental_rom_versions_title)+": {0}", showExperimentalRomUpdates));
 		showDowngradesRomtv.setText(MessageFormat.format(res.getString(R.string.p_display_older_rom_versions_title)+": {0}", showAllRomUpdates));
 		experimentalBuildsThemetv.setText(MessageFormat.format(res.getString(R.string.p_allow_experimental_theme_versions_title)+": {0}", showExperimentalThemeUpdates));
@@ -796,21 +786,20 @@ public class MainActivity extends Activity
 			if (mAvailableUpdates.themes != null)
 				availableThemes = mAvailableUpdates.themes;
 		}
-		
+
 		//Rom Layout
 		if(availableRoms != null && availableRoms.size() > 0)
 		{
 			selectUploadButton.setOnClickListener(ButtonOnClickListener);
 			changelogButton.setOnClickListener(ButtonOnClickListener);
 			mUpdatesSpinner.setOnItemSelectedListener(mUpdateSpinnerChanged);
-			
+
 			UpdateListAdapter<UpdateInfo> spAdapterRoms = new UpdateListAdapter<UpdateInfo>(
 					this,
 					android.R.layout.simple_spinner_item,
 					availableRoms);
 			spAdapterRoms.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			mUpdatesSpinner.setAdapter(spAdapterRoms);
-
 		}
 		else
 		{
@@ -823,11 +812,11 @@ public class MainActivity extends Activity
 			CheckNowUpdateChooserUpdates.setVisibility(View.VISIBLE);
 			CheckNowUpdateChooserUpdates.setOnClickListener(ButtonOnClickListener);
 		}
-		
+
 		//Disable the download Button when running an old ROM
 		if (runningOldVersion)
 			selectUploadButton.setEnabled(false);
-		
+
 		//Theme Layout
 		//Update URL Set?
 		if (!ThemeUpdateUrlSet)
@@ -849,14 +838,13 @@ public class MainActivity extends Activity
 			btnThemechangelogButton.setOnClickListener(ButtonOnClickListener);
 			btnThemeScreenshotButton.setOnClickListener(ButtonOnClickListener);
 			mThemesSpinner.setOnItemSelectedListener(mThemeSpinnerChanged);
-			
+
 			UpdateListAdapter<UpdateInfo> spAdapterThemes = new UpdateListAdapter<UpdateInfo>(
 					this,
 					android.R.layout.simple_spinner_item,
 					availableThemes);
 			spAdapterThemes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			mThemesSpinner.setAdapter(spAdapterThemes);
-
 		}
 		//No Updates Found
 		else
@@ -921,7 +909,7 @@ public class MainActivity extends Activity
 				}
 	        }
 	    };
-		
+
 		switch (changelogType)
 		{
 			case ROM:
@@ -930,7 +918,7 @@ public class MainActivity extends Activity
 				displayChangelog(ChangelogType.ROM);
 				break;
 			case THEME:
-				//Get the ROM Changelog and Display the Changelog
+				//Get the THEME Changelog and Display the Changelog
 				ChangelogList = Changelog.getRomChangelog((UpdateInfo) mThemesSpinner.getSelectedItem());
 				displayChangelog(ChangelogType.THEME);
 				break;
@@ -944,7 +932,7 @@ public class MainActivity extends Activity
 				return;
 		}
 	}
-	
+
 	private void displayChangelog(ChangelogType changelogtype)
 	{
 		if (ChangelogList == null)
@@ -969,11 +957,11 @@ public class MainActivity extends Activity
 		dialog.setTitle(dialogTitle);
 		dialog.setContentView(R.layout.changelog);
 		LinearLayout main = (LinearLayout) dialog.findViewById(R.id.ChangelogLinearMain);
-		
+
 		LayoutParams lp1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 		LayoutParams lp2 = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT);
 		LayoutParams lp3 = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		
+
 		//Foreach Version
 		for (Version v:ChangelogList)
 		{
@@ -1096,7 +1084,7 @@ public class MainActivity extends Activity
 		}
 		return success;
 	}
-	
+
 	private boolean deleteUpdate(String filename)
 	{
 		boolean success = false;
@@ -1125,7 +1113,7 @@ public class MainActivity extends Activity
 			}
 			ZIPfiletodelete = null;
 			MD5filetodelete = null;
-			
+
 			success=true;
 			Toast.makeText(this, MessageFormat.format(res.getString(R.string.delete_single_update_success_message), filename), Toast.LENGTH_LONG).show();
 		}
