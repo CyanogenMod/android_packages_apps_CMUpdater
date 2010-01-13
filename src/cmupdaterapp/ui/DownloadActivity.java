@@ -265,6 +265,8 @@ public class DownloadActivity extends Activity
     			{
 	    			try
 	    			{
+	    				if (myService.DownloadRunning())
+	    					ui = myService.getCurrentUpdate();
 	    				//TODO: Move outer scope so we can resume downloads when there is an ui
 	    				myService.Download(ui);
 	    			}

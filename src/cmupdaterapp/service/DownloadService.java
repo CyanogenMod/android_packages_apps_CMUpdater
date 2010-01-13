@@ -188,8 +188,9 @@ public class DownloadService extends Service
 
     private boolean checkForConnectionAndUpdate(UpdateInfo updateToDownload)
 	{
-    	mCurrentUpdate = updateToDownload;
 		Log.d(TAG, "Called CheckForConnectionAndUpdate");
+		mCurrentUpdate = updateToDownload;
+
 		boolean success;
 		mWifiLock.acquire();
 
@@ -545,16 +546,17 @@ public class DownloadService extends Service
 		//Only update the Notification and DownloadLayout, when no downloadcancel is in progress, so the notification will not pop up again
 		if (!prepareForDownloadCancel)
 		{
-			// Shows Downloadstatus in Notificationbar. Initialize the Variables
 			NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 			Notification mNotification = new Notification(R.drawable.icon_notification, res.getString(R.string.notification_tickertext), System.currentTimeMillis());
 			mNotification.flags = Notification.FLAG_NO_CLEAR;
 			mNotification.flags = Notification.FLAG_ONGOING_EVENT;
 			RemoteViews mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
 			Intent mNotificationIntent = new Intent(this, DownloadActivity.class);
- 			PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+			mNotificationIntent.putExtra(Constants.UPDATE_INFO, (Serializable)mCurrentUpdate);
+			PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 			mNotification.contentView = mNotificationRemoteView;
 			mNotification.contentIntent = mNotificationContentIntent;
+			
 			//lcoalFileSize because the contentLength will only be the missing bytes and not the whole file
 			long contentLengthOfFullDownload = mcontentLength + localFileSize;
 			long speed = ((mtotalDownloaded - localFileSize)/(System.currentTimeMillis() - mStartTime));
