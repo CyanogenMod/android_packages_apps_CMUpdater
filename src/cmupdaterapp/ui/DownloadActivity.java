@@ -90,7 +90,6 @@ public class DownloadActivity extends Activity
 				if (comp == null)
 					Log.e(TAG, "startService failed");
 				mbound = bindService(serviceIntent, mConnection, 0);
-				//TODO: while service == null continue, then start downloading
 			}
 		}
 		catch (RemoteException ex)
