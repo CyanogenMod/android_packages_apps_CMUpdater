@@ -25,6 +25,7 @@ import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.customTypes.ThemeInfo;
 import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.customTypes.UpdateInfo;
+import cmupdaterapp.customization.Customization;
 import cmupdaterapp.interfaces.IUpdateCheckService;
 import cmupdaterapp.interfaces.IUpdateCheckServiceCallback;
 import cmupdaterapp.misc.Constants;
@@ -593,7 +594,7 @@ public class UpdateCheckService extends Service
 			{
 				if (boardMatches(ui, systemMod))
 				{
-					if(showAllRomUpdates || StringUtils.compareVersions(Constants.RO_MOD_START_STRING + ui.getVersion(), systemRom))
+					if(showAllRomUpdates || StringUtils.compareVersions(Customization.RO_MOD_START_STRING + ui.getVersion(), systemRom))
 					{
 						if (branchMatches(ui, showExperimentalRomUpdates))
 						{

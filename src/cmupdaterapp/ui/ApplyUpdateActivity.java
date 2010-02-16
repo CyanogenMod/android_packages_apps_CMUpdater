@@ -30,6 +30,34 @@ public class ApplyUpdateActivity extends Activity
 	private Button mApplyButton;
 	private Button mPostponeButton;
 
+
+	@Override
+	public void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.applyupdate);
+
+		mTitle = (TextView) findViewById(R.id.apply_title_textview);
+
+		mApplyButton = (Button) findViewById(R.id.apply_now_button);
+		mApplyButton.setOnClickListener(mApplyButtonListener);
+
+		mPostponeButton = (Button) findViewById(R.id.apply_later_button);
+		mPostponeButton.setOnClickListener(mPostponeButtonListener);
+	}
+
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		Resources res = getResources();
+		mUpdateInfo = (UpdateInfo) getIntent().getExtras().getSerializable(Constants.KEY_UPDATE_INFO);
+		String template = res.getString(R.string.apply_title_textview_text);
+		mTitle.setText(MessageFormat.format(template, mUpdateInfo.getName()));
+		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
+		Log.d(TAG, "Filename selected to flash: " + mUpdateInfo.getFileName());
+	}
+	
 	private final View.OnClickListener mApplyButtonListener = new View.OnClickListener()
 	{
 		public void onClick(View v)
@@ -108,31 +136,4 @@ public class ApplyUpdateActivity extends Activity
 			finish();
 		}
 	};
-
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.applyupdate);
-
-		mTitle = (TextView) findViewById(R.id.apply_title_textview);
-
-		mApplyButton = (Button) findViewById(R.id.apply_now_button);
-		mApplyButton.setOnClickListener(mApplyButtonListener);
-
-		mPostponeButton = (Button) findViewById(R.id.apply_later_button);
-		mPostponeButton.setOnClickListener(mPostponeButtonListener);
-	}
-
-	@Override
-	protected void onStart()
-	{
-		super.onStart();
-		Resources res = getResources();
-		mUpdateInfo = (UpdateInfo) getIntent().getExtras().getSerializable(Constants.KEY_UPDATE_INFO);
-		String template = res.getString(R.string.apply_title_textview_text);
-		mTitle.setText(MessageFormat.format(template, mUpdateInfo.getName()));
-		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
-		Log.d(TAG, "Filename selected to flash: " + mUpdateInfo.getFileName());
-	}
 }

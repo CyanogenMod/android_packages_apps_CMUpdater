@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import android.os.Environment;
 import android.os.StatFs;
 
-import cmupdaterapp.misc.Constants;
+import cmupdaterapp.customization.Customization;
 import cmupdaterapp.misc.Log;
 
 public class SysUtils
@@ -22,7 +22,7 @@ public class SysUtils
 	 */
 	public static String getModVersion()
 	{
-		String modVer = getSystemProperty(Constants.SYS_PROP_MOD_VERSION);
+		String modVer = getSystemProperty(Customization.SYS_PROP_MOD_VERSION);
 		
 		return (modVer == null || modVer.length() == 0 ? "Unknown" : modVer);
 	}

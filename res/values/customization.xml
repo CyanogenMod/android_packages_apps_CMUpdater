@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">CM Updater</string>
+	<!-- About Strings -->
+	<string name="about_comments">Auto-updater for the CyanogenMod Android OS.</string>
+	<string name="about_credits">Thanks to Sergi Vélez for the original JFUpdater.\nThread Starter: garok89 - Ross McAusland\nProgrammer: FireFart - Christian Mehlmauer\nProgrammer: senab - Chris Banes\nGraphics: prash\nGraphics: matt_stang\nBeta-Testers: willmav5000, tuxfoo, DirectMatrix, amarkow2\nAnd big thanks to all the guys @ XDA for the translations and other stuff ;)\n\nBig thanks to Cyanogen for his superb builds!\n\n</string>
+	<string name="about_copyright">Copyright © 2009 Sergi Vélez</string><!-- Add your name here, separated with comma's, if you helped out --> 
+	<string name="about_website_label">CM Updater at Google Code</string> 
+	<string name="about_website_url">http://code.google.com/p/cyanogen-updater/</string>
+	<string name="about_email">http://forum.xda-developers.com/forumdisplay.php?f=448</string>
+
+	<!-- Config Strings -->
+	<string name="conf_update_server_url_def">http://cyanogen-updater.googlecode.com/files/update_file.json</string>
+	<string name="conf_update_folder">cmupdater/updates</string>
+	<string name="conf_theme_version_file_def">/system/framework/themes.theme</string>
+	<string name="conf_changelog_url">http://cyanogen-updater.googlecode.com/files/changelog.xml</string>
+	<string name="conf_featured_themes_url">http://cyanogen-updater.googlecode.com/files/FeaturedThemes.xml</string>
+	
+	<!-- About dialog -->
+	<string-array name="about_authors">
+        	<item>Sergi Vélez http://code.google.com/p/jfupdater</item>
+        	<item>Darkrift http://android-dls.com</item>
+        	<item>Dan Poulsen</item>
+		<item>FireFart</item>
+		<item>senab</item>
+	</string-array>
+    
+	<string-array name="about_translators">
+		<item>FireFart</item>
+		<item>DavidChill</item>
+		<item>Moksha</item>
+		<item>Gamempire</item>
+		<item>Wiebbe</item>
+		<item>Chahk</item>
+		<item>Offcina</item>
+		<item>ss1271</item>
+		<item>baggus</item>
+		<item>kog</item>
+		<item>ZilverZurfan</item>
+		<item>Jar0b_</item>
+		<item>zezol</item>
+	</string-array>
+
+	<string-array name="about_artists">
+		<item>prash</item>
+		<item>matt_stang</item>
+	</string-array>
+</resources>

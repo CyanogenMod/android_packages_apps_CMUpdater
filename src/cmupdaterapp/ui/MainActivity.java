@@ -47,6 +47,7 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.customTypes.UpdateInfo;
+import cmupdaterapp.customization.Customization;
 import cmupdaterapp.listadapters.UpdateListAdapter;
 import cmupdaterapp.tasks.MD5CheckerTask;
 import cmupdaterapp.tasks.UpdateCheckTask;
@@ -372,7 +373,7 @@ public class MainActivity extends Activity
 				{
 					//Open the Browser for Instructions
                     Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(Constants.UPDATE_INSTRUCTIONS_URL));
+                    i.setData(Uri.parse(Customization.UPDATE_INSTRUCTIONS_URL));
                     startActivity(i);
                     dialog.dismiss();
 				}
@@ -492,7 +493,8 @@ public class MainActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		Log.d(TAG, "onCreate called");
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);		
+		
 		prefs = Preferences.getPreferences(this);
 		res = getResources();
 		
@@ -583,7 +585,7 @@ public class MainActivity extends Activity
 
 		//Show a Dialog that the User runs an old rom.
 		String mod = SysUtils.getModVersion();
-		if (StringUtils.compareVersions(Constants.MIN_SUPPORTED_VERSION_STRING, mod))
+		if (StringUtils.compareVersions(Customization.MIN_SUPPORTED_VERSION_STRING, mod))
 		{
 			runningOldVersion = true;
 
@@ -603,7 +605,7 @@ public class MainActivity extends Activity
 				{
 					//Open the Browser for Instructions
                     Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(Constants.UPDATE_INSTRUCTIONS_URL));
+                    i.setData(Uri.parse(Customization.UPDATE_INSTRUCTIONS_URL));
                     startActivity(i);
                     dialog.dismiss();
 				}
@@ -644,7 +646,7 @@ public class MainActivity extends Activity
 			{
 				UpdateInfo ui = DownloadActivity.myService.getCurrentUpdate();
 				Intent i = new Intent(MainActivity.this, DownloadActivity.class);
-				i.putExtra(Constants.UPDATE_INFO, (Serializable)ui);
+				i.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)ui);
 				startActivity(i);
 			}
 			else
@@ -1048,7 +1050,7 @@ public class MainActivity extends Activity
 	private void downloadRequestedUpdate(UpdateInfo ui)
 	{
 		Intent i = new Intent(MainActivity.this, DownloadActivity.class);
-		i.putExtra(Constants.UPDATE_INFO, (Serializable)ui);
+		i.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)ui);
 		startActivity(i);
 		Toast.makeText(this, R.string.downloading_update, Toast.LENGTH_LONG).show();
 	}

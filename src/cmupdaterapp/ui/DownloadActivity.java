@@ -52,7 +52,7 @@ public class DownloadActivity extends Activity
 		Bundle b = i.getExtras();
 		if (b!=null)
 		{
-			ui = (UpdateInfo) b.get(Constants.UPDATE_INFO);
+			ui = (UpdateInfo) b.get(Constants.KEY_UPDATE_INFO);
 			Log.d(TAG, "Got UpdateInfo from Intent");
 		}
 		//If no Intent, ui will be null so get the UpdateInfo from State

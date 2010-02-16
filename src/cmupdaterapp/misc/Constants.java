@@ -1,13 +1,10 @@
 package cmupdaterapp.misc;
 
+import cmupdaterapp.customization.Customization;
+
 public class Constants
 {
 	//System Infos
-	//The String from the build.prop before the Version
-	public static final String RO_MOD_START_STRING = "CyanogenMod-";
-	public static final String MIN_SUPPORTED_VERSION_STRING = RO_MOD_START_STRING + "4.1.99";
-	public static final String UPDATE_INSTRUCTIONS_URL = "http://www.simplehelp.net/2009/10/04/how-to-install-cyanogenmod-4-1-99-on-your-g1-android-phone/";
-	public static final String EXTERNAL_DATA_DIRECTORY = "cmupdater/data";
 	public static final String DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z"; 
 
 	//UpdateInfo
@@ -31,9 +28,9 @@ public class Constants
 	public static final String JSON_FILENAME = "filename";
 
 	//Keys
-	public static final String KEY_REQUEST = "cmupdaterapp.keyRequest";
-	public static final String KEY_UPDATE_INFO = "cmupdaterapp.fullUpdateList";
-	public static final String KEY_AVAILABLE_UPDATES = "cmupdaterapp.availableUpdates";
+	public static final String KEY_REQUEST = Customization.PACKAGE_FIRST_NAME + ".keyRequest";
+	public static final String KEY_UPDATE_INFO = Customization.PACKAGE_FIRST_NAME + ".fullUpdateList";
+	public static final String KEY_AVAILABLE_UPDATES = Customization.PACKAGE_FIRST_NAME + ".availableUpdates";
 
 	//Flipper
 	public static final int FLIPPER_AVAILABLE_UPDATES = 0;
@@ -62,22 +59,13 @@ public class Constants
 	public static final int MENU_THEME_LIST_CONTEXT_ENABLE = 12;
 	public static final int MENU_THEME_LIST_CONTEXT_DISABLE = 13;
 
-	//Filename for Instance save
-	public static final String STORED_STATE_FILENAME = "cmupdater.state";
-
 	//Notifications
 	public static final int NOTIFICATION_DOWNLOAD_STATUS = 100;
 	public static final int NOTIFICATION_DOWNLOAD_FINISHED = 200;
 
-	//Android Board type
-	public static final String BOARD = "ro.product.board";
-
 	//Update Check Frequencies
 	public static final int UPDATE_FREQ_AT_BOOT = -1;
 	public static final int UPDATE_FREQ_NONE = -2;
-
-	//Name of the Current Rom
-	public static final String SYS_PROP_MOD_VERSION = "ro.modversion";
 
 	//ChangelogHandler
 	public static final String VERSION_TAG = "Version";
@@ -98,9 +86,6 @@ public class Constants
 
 	//ThemeListItem
 	public static final int THEME_LIST_ITEM_DISABLED_ALPHA = 70;
-
-	//IntentExtra for DownloadActivity
-	public static final String UPDATE_INFO = "UpdateInfo";
 
 	//Screenshots
 	public static final String SCREENSHOTS_UPDATE = "Screenshots";

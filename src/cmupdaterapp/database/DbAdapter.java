@@ -13,7 +13,7 @@ import android.os.Environment;
 import cmupdaterapp.customTypes.FullThemeList;
 import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.customTypes.ThemeList;
-import cmupdaterapp.misc.Constants;
+import cmupdaterapp.customization.Customization;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.utils.StringUtils;
 
@@ -77,7 +77,7 @@ public class DbAdapter
 
 	public void open()
 	{
-		File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Constants.EXTERNAL_DATA_DIRECTORY + "/");
+		File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Customization.EXTERNAL_DATA_DIRECTORY + "/");
 		f.mkdirs();
 		db = dbHelper.open(f.toString(), DATABASE_NAME, DATABASE_VERSION);
 	}

@@ -552,7 +552,7 @@ public class DownloadService extends Service
 			mNotification.flags = Notification.FLAG_ONGOING_EVENT;
 			RemoteViews mNotificationRemoteView = new RemoteViews(getPackageName(), R.layout.notification);
 			Intent mNotificationIntent = new Intent(this, DownloadActivity.class);
-			mNotificationIntent.putExtra(Constants.UPDATE_INFO, (Serializable)mCurrentUpdate);
+			mNotificationIntent.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)mCurrentUpdate);
 			PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 			mNotification.contentView = mNotificationRemoteView;
 			mNotification.contentIntent = mNotificationContentIntent;

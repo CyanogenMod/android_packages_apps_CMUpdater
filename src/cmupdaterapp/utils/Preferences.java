@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import cmupdaterapp.customTypes.FullThemeList;
 import cmupdaterapp.customTypes.ThemeInfo;
 import cmupdaterapp.customTypes.ThemeList;
+import cmupdaterapp.customization.Customization;
 import cmupdaterapp.database.DbAdapter;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
@@ -47,8 +48,8 @@ public class Preferences extends Activity
 	{
 		if(INSTANCE == null)
 		{
-			Log.d(TAG, "Preference Instance set.");
 			INSTANCE = new Preferences(PreferenceManager.getDefaultSharedPreferences(ctx), ctx.getResources());
+			Log.d(TAG, "Preference Instance set.");
 		}
 		return INSTANCE;
 	}
@@ -88,7 +89,7 @@ public class Preferences extends Activity
 
 	public String getBoardString()
 	{
-		temp = SysUtils.getSystemProperty(Constants.BOARD);
+		temp = SysUtils.getSystemProperty(Customization.BOARD);
 		Log.d(TAG, "Board: " + temp);
 		return temp;
 	}

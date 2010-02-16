@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import cmupdaterapp.customTypes.FullUpdateInfo;
+import cmupdaterapp.customization.Customization;
 import android.content.Context;
 
 public class State
@@ -16,7 +17,7 @@ public class State
 	public static void saveState(Context ctx, Serializable mAvailableUpdates) throws IOException
 	{
 		Log.d(TAG, "Called SaveState");
-		ObjectOutputStream oos = new ObjectOutputStream(ctx.openFileOutput(Constants.STORED_STATE_FILENAME, Context.MODE_PRIVATE));
+		ObjectOutputStream oos = new ObjectOutputStream(ctx.openFileOutput(Customization.STORED_STATE_FILENAME, Context.MODE_PRIVATE));
 		try
 		{
 			Map<String,Serializable> data = new HashMap<String, Serializable>();
@@ -38,7 +39,7 @@ public class State
 		ObjectInputStream ois = null;
 		try
 		{
-			ois = new ObjectInputStream(ctx.openFileInput(Constants.STORED_STATE_FILENAME));
+			ois = new ObjectInputStream(ctx.openFileInput(Customization.STORED_STATE_FILENAME));
 			Map<String,Serializable> data = (Map<String, Serializable>) ois.readObject();
 
 			Object o = data.get(Constants.KEY_AVAILABLE_UPDATES); 
