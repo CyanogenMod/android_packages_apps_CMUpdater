@@ -62,7 +62,7 @@
 
 	<string name="apply_existing_update_md5error_message">Error. MD5 checksum missmatch</string>
 
-	<string name="apply_upload_info_message">THIS VERSION OF CM UPDATER HAS THE REBOOT OPTION ENABLED, SO CLICKING ON APPLY NOW WILL ACTUALLY DO SO.
+	<string name="apply_upload_info_message">THIS VERSION OF THE UPDATER HAS THE REBOOT OPTION ENABLED, SO CLICKING ON APPLY NOW WILL ACTUALLY DO SO.
 PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT TO PERFORM A BACKUP</string>
 
 	<string name="last_update_check_text">Last update check</string>
@@ -138,19 +138,19 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="featured_themes_dialog_neg">No</string>
 
 	<!-- .service.* Strings -->
-	<string name="no_updates_found">No CM updates found</string>
-	<string name="not_new_updates_found_ticker">New CM updates found!</string>
-	<string name="not_new_updates_found_title">New CM updates found</string>
-	<string name="exception_while_downloading">An error occurred while trying to download a CM Update</string>
+	<string name="no_updates_found">No updates found</string>
+	<string name="not_new_updates_found_ticker">New updates found!</string>
+	<string name="not_new_updates_found_title">New updates found</string>
+	<string name="exception_while_downloading">An error occurred while trying to download an update</string>
 
-	<string name="not_update_check_error_ticker">Check for CM updates failed</string>
-	<string name="not_update_check_error_title">Unable to check for new CM OS updates</string>
+	<string name="not_update_check_error_ticker">Check for updates failed</string>
+	<string name="not_update_check_error_title">Unable to check for new updates</string>
 
 	<string name="not_update_download_error_ticker">An error occurred while downloading the update</string>
 	<string name="not_update_download_error_title">An error occurred while downloading the update</string>
 
-	<string name="not_update_downloaded_ticker">CyanogenMod update downloaded</string>
-	<string name="not_update_downloaded_title">CyanogenMod update downloaded</string>
+	<string name="not_update_downloaded_ticker">Update downloaded</string>
+	<string name="not_update_downloaded_title">Ipdate downloaded</string>
 	<string name="not_update_downloaded_body">{0} is ready to install</string>
 
 	<string name="download_info_filename">Filename: </string>
@@ -194,7 +194,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_do_nandroid_backup_summary">Create Nandroid backup before applying update?</string>
 
 	<string name="p_notification_ringtone_title">Notification Ringtone</string>
-	<string name="p_notification_ringtone_summary">Choose a ringtone for CM Updater alerts</string>
+	<string name="p_notification_ringtone_summary">Choose a ringtone for Updater alerts</string>
 
 	<string name="p_update_file_url_title">Rom Update Server</string>
 	<string name="p_update_file_url_summary">Change the Rom Update Server</string>
@@ -265,9 +265,9 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	
 	<!--  new Strings -->
 	<string name="alert_old_version_title">Old Version</string>
-	<string name="alert_old_version_summary">You are running an old Version of Cyanogens Roms.
+	<string name="alert_old_version_summary">You are running an old Rom-Version.
 	To use the Updater, you have to upgrade manually.
-	You can click on the open Browser Button below, to open up the Insturctions, or visit www.cyanogenmod.com</string>
+	Click the open Browser Button below, to open up the Instructions</string>
 	<string name="alert_old_version_ok">Ok</string>
 	<string name="alert_old_version_browser">Open Browser</string>
 	<string name="screenshot_button_theme_text">Screenshots</string>
