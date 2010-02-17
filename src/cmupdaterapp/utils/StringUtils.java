@@ -36,8 +36,7 @@ public class StringUtils
 	}
 	
 	/**
-	 * Compare two versions. Will strip off any alphabets in the version number
-	 * and then do a number comparison
+	 * Compare two versions.
 	 * 
 	 * @param newVersion
 	 *            new version to be compared
@@ -56,17 +55,17 @@ public class StringUtils
 		newVersion = newVersion.replaceAll("-","\\.");
 		oldVersion = oldVersion.replaceAll("-","\\.");
 		
-		String[] sNewVersion2 = newVersion.split("\\.");
-		String[] sOldVersion2 = oldVersion.split("\\.");
+		String[] sNewVersion = newVersion.split("\\.");
+		String[] sOldVersion = oldVersion.split("\\.");
 	
 		ArrayList<String> newVersionArray = new ArrayList<String>();
 		ArrayList<String> oldVersionArray = new ArrayList<String>();
 		
-		for (String s : sNewVersion2)
+		for (String s : sNewVersion)
 		{
 			newVersionArray.add(s);
 		}
-		for (String s : sOldVersion2)
+		for (String s : sOldVersion)
 		{
 			oldVersionArray.add(s);
 		}
@@ -75,7 +74,7 @@ public class StringUtils
 		if (newVersionArray.size() > oldVersionArray.size())
 		{
 			int difference = newVersionArray.size() - oldVersionArray.size();
-			for(int i=0;i<difference;i++)
+			for(int i = 0; i < difference; i++)
 			{
 				oldVersionArray.add("0");
 			}
@@ -83,7 +82,7 @@ public class StringUtils
 		else
 		{
 			int difference = oldVersionArray.size() - newVersionArray.size();
-			for(int i=0;i<difference;i++)
+			for(int i = 0; i < difference; i++)
 			{
 				newVersionArray.add("0");
 			}

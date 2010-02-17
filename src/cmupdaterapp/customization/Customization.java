@@ -7,7 +7,7 @@ public class Customization
 	//Minimum Supported Version (So the User has to install google apps and so before)
 	public static final String MIN_SUPPORTED_VERSION_STRING = RO_MOD_START_STRING + "4.1.99";
 	//Updateinstructions for the min supported Version
-	public static final String UPDATE_INSTRUCTIONS_URL = "http://www.simplehelp.net/2009/10/04/how-to-install-cyanogenmod-4-1-99-on-your-g1-android-phone/";
+	public static final String UPDATE_INSTRUCTIONS_URL = "http://wiki.cyanogenmod.com/index.php/Upgrading_From_Older_CyanogenMod_or_other_rooted_ROMs";
 	//Data Firectory on SDCard
 	public static final String EXTERNAL_DATA_DIRECTORY = "cmupdater/data";
 	//MUST be the first package name.
