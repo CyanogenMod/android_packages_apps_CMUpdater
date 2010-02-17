@@ -495,7 +495,7 @@ public class MainActivity extends Activity
 		Log.d(TAG, "onCreate called");
 		super.onCreate(savedInstanceState);		
 		
-		prefs = Preferences.getPreferences(this);
+		prefs = new Preferences(this);
 		res = getResources();
 		
 		//Sets the Title to Appname + Mod Version
@@ -622,7 +622,7 @@ public class MainActivity extends Activity
 		super.onResume();
 
 		mfilenames = null;
-		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Preferences.getPreferences(this).getUpdateFolder());
+		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + prefs.getUpdateFolder());
 		FilenameFilter f = new UpdateFilter(".zip");
 		File[] files = mUpdateFolder.listFiles(f);
 		//If Folder Exists and Updates are present(with md5files)
@@ -737,6 +737,23 @@ public class MainActivity extends Activity
 			Log.e(TAG, "Unable to restore activity status", e);
 		}
 
+		//Reset all Visibilities
+		CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
+		CheckNowUpdateChooserThemes.setVisibility(View.GONE);
+		CheckNowUpdateChooserTextUpdates.setVisibility(View.GONE);
+		CheckNowUpdateChooserUpdates.setVisibility(View.GONE);
+		selectUploadButton.setVisibility(View.VISIBLE);
+		mUpdatesSpinner.setVisibility(View.VISIBLE);
+		DownloadText.setVisibility(View.VISIBLE);
+		stableExperimentalInfoUpdates.setVisibility(View.VISIBLE);
+		changelogButton.setVisibility(View.VISIBLE);
+		btnDownloadTheme.setVisibility(View.VISIBLE);
+		mThemesSpinner.setVisibility(View.VISIBLE);
+		tvThemeDownloadText.setVisibility(View.VISIBLE);
+		stableExperimentalInfoThemes.setVisibility(View.VISIBLE);
+		btnThemechangelogButton.setVisibility(View.VISIBLE);
+		btnThemeScreenshotButton.setVisibility(View.VISIBLE);
+		
 		//Theme Update File URL Set?
 		boolean ThemeUpdateUrlSet = prefs.ThemeUpdateUrlSet();
 

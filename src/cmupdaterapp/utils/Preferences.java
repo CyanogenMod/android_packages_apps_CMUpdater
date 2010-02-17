@@ -32,26 +32,16 @@ public class Preferences extends Activity
 {
 	private static final String TAG = "Preferences";
 
-	private static Preferences INSTANCE;
 	private final SharedPreferences mPrefs;
 	private final Resources mRes;
 	private String temp;
 	private boolean tempbool;
 
-	private Preferences(SharedPreferences prefs, Resources res)
+	public Preferences(Context ctx)
 	{
-		mPrefs = prefs;
-		mRes = res;
-	}
-
-	public static synchronized Preferences getPreferences(Context ctx)
-	{
-		if(INSTANCE == null)
-		{
-			INSTANCE = new Preferences(PreferenceManager.getDefaultSharedPreferences(ctx), ctx.getResources());
-			Log.d(TAG, "Preference Instance set.");
-		}
-		return INSTANCE;
+		mPrefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+		mRes = ctx.getResources();
+		Log.d(TAG, "Preference Instance set.");
 	}
 
 	public int getUpdateFrequency()

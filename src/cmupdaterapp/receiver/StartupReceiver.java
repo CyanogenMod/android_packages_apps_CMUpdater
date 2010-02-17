@@ -21,7 +21,7 @@ public class StartupReceiver extends BroadcastReceiver
 	@Override
 	public void onReceive(Context ctx, Intent intent)
 	{
-		Preferences prefs = Preferences.getPreferences(ctx);
+		Preferences prefs = new Preferences(ctx);
 		boolean notificationsEnabled = prefs.notificationsEnabled();
 		int updateFreq = prefs.getUpdateFrequency();
 		 
@@ -58,11 +58,13 @@ public class StartupReceiver extends BroadcastReceiver
 	{
 		if(updateFrequency < 0) throw new InvalidParameterException("updateFrequency can't be negative"); 
 
+		Preferences prefs = new Preferences(ctx);
+		
 		Log.d(TAG, "Scheduling alarm to go off every "  + updateFrequency + " msegs");
 		Intent i = new Intent(ctx, UpdateCheckService.class);
 		PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
 
-		Date lastCheck = Preferences.getPreferences(ctx).getLastUpdateCheck();
+		Date lastCheck = prefs.getLastUpdateCheck();
 		Log.d(TAG, "Last check on " + lastCheck.toString());
 
 		cancelUpdateChecks(ctx);

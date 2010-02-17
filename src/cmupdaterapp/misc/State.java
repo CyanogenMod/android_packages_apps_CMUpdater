@@ -17,6 +17,7 @@ public class State
 	public static void saveState(Context ctx, Serializable mAvailableUpdates) throws IOException
 	{
 		Log.d(TAG, "Called SaveState");
+		Log.d(TAG, "Updatecount: " + ((FullUpdateInfo)mAvailableUpdates).getUpdateCount());
 		ObjectOutputStream oos = new ObjectOutputStream(ctx.openFileOutput(Customization.STORED_STATE_FILENAME, Context.MODE_PRIVATE));
 		try
 		{
@@ -24,6 +25,10 @@ public class State
 			data.put(Constants.KEY_AVAILABLE_UPDATES, (Serializable)mAvailableUpdates);
 			oos.writeObject(data);
 			oos.flush();
+		}
+		catch (Exception ex)
+		{
+			Log.e(TAG, "Exception on saving Instance State", ex);
 		}
 		finally
 		{
@@ -40,7 +45,7 @@ public class State
 		try
 		{
 			ois = new ObjectInputStream(ctx.openFileInput(Customization.STORED_STATE_FILENAME));
-			Map<String,Serializable> data = (Map<String, Serializable>) ois.readObject();
+			Map<String,Serializable> data = (HashMap<String, Serializable>) ois.readObject();
 
 			Object o = data.get(Constants.KEY_AVAILABLE_UPDATES); 
 			if(o != null) mAvailableUpdates = (FullUpdateInfo) o;
@@ -51,13 +56,14 @@ public class State
 		}
 		catch (IOException e)
 		{
-			Log.e(TAG, e.getMessage());
+			Log.e(TAG, "Exception on Loading State", e);
 		}
 		finally
 		{
 			if(ois != null)
 				ois.close();
 		}
+		Log.d(TAG, "LoadedUpdates: " + mAvailableUpdates.getUpdateCount());
 		return mAvailableUpdates;
 	}
 }

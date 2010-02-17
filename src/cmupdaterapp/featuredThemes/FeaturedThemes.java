@@ -24,7 +24,7 @@ public class FeaturedThemes implements Runnable
 
 	public FeaturedThemes(Context ctx)
 	{
-		p = Preferences.getPreferences(ctx);
+		p = new Preferences(ctx);
 	}
 
 	public void run()

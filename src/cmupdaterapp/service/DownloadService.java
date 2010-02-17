@@ -76,7 +76,6 @@ public class DownloadService extends Service
 	private String minutesString;
 	private String secondsString;
 	private String fullUpdateFolderPath;
-	private Context AppContext;
 	private Resources res;
 	private ConnectivityManager mConnectivityManager;
 	private ConnectionChangeReceiver myConnectionChangeReceiver;
@@ -86,6 +85,7 @@ public class DownloadService extends Service
 	private String fileName;
 	private boolean resumeSupported = true;
 	private long localFileSize = 0;
+	private Preferences prefs;
 
 	private enum DownloadStatus
 	{
@@ -101,7 +101,7 @@ public class DownloadService extends Service
     @Override
     public IBinder onBind(Intent arg0)
     {
-            return mBinder;
+    	return mBinder;
     }
 
     private final IDownloadService.Stub mBinder = new IDownloadService.Stub()
@@ -161,16 +161,17 @@ public class DownloadService extends Service
     {
     	Log.d(TAG, "Download Service Created");
 
+    	prefs = new Preferences(this);
+    	
 		mWifiLock = ((WifiManager) getSystemService(WIFI_SERVICE)).createWifiLock("CM Updater");
 
-		fullUpdateFolderPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Preferences.getPreferences(this).getUpdateFolder();
-
-		AppContext = getApplicationContext();
+		fullUpdateFolderPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + prefs.getUpdateFolder();
+	
 		res = getResources();
 		minutesString = res.getString(R.string.minutes);
 		secondsString = res.getString(R.string.seconds);
 
-		mConnectivityManager = (ConnectivityManager) AppContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+		mConnectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
 		myConnectionChangeReceiver = new ConnectionChangeReceiver();
 		registerReceiver(myConnectionChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 		android.net.NetworkInfo.State state = mConnectivityManager.getActiveNetworkInfo().getState();
@@ -479,7 +480,7 @@ public class DownloadService extends Service
 			{
 				//If File exists, set the Progress to it. Otherwise it will be initial 0
 				mtotalDownloaded = localFileSize;
-				progressUpdateTimer.scheduleAtFixedRate(progressUpdateTimerTask, 100, Preferences.getPreferences(this).getProgressUpdateFreq());
+				progressUpdateTimer.scheduleAtFixedRate(progressUpdateTimerTask, 100, prefs.getProgressUpdateFreq());
 				while((read = is.read(buff)) > 0 && !prepareForDownloadCancel)
 				{
 					out.write(buff, 0, read);
@@ -606,10 +607,10 @@ public class DownloadService extends Service
 		PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
 		mNotification = new Notification(R.drawable.icon, res.getString(R.string.notification_finished), System.currentTimeMillis());
 		mNotification.flags = Notification.FLAG_AUTO_CANCEL;
-		mNotificationContentIntent = PendingIntent.getActivity(AppContext, 0, i, 0);
-		mNotification.setLatestEventInfo(AppContext, res.getString(R.string.app_name), res.getString(R.string.notification_finished), mNotificationContentIntent);
-		Uri notificationRingtone = Preferences.getPreferences(AppContext).getConfiguredRingtone();
-		if(Preferences.getPreferences(AppContext).getVibrate())
+		mNotificationContentIntent = PendingIntent.getActivity(this, 0, i, 0);
+		mNotification.setLatestEventInfo(this, res.getString(R.string.app_name), res.getString(R.string.notification_finished), mNotificationContentIntent);
+		Uri notificationRingtone = prefs.getConfiguredRingtone();
+		if(prefs.getVibrate())
 			mNotification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
 		else
 			mNotification.defaults = Notification.DEFAULT_LIGHTS;
@@ -641,8 +642,8 @@ public class DownloadService extends Service
 				res.getString(R.string.not_update_download_error_title),
 				ExceptionText,
 				contentIntent);
-		Uri notificationRingtone = Preferences.getPreferences(this).getConfiguredRingtone();
-		if(Preferences.getPreferences(this).getVibrate())
+		Uri notificationRingtone = prefs.getConfiguredRingtone();
+		if(prefs.getVibrate())
 			notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
 		else
 			notification.defaults = Notification.DEFAULT_LIGHTS;

@@ -29,6 +29,8 @@ public class ApplyUpdateActivity extends Activity
 	private TextView mTitle;
 	private Button mApplyButton;
 	private Button mPostponeButton;
+	
+	private Preferences pref;
 
 
 	@Override
@@ -44,6 +46,8 @@ public class ApplyUpdateActivity extends Activity
 
 		mPostponeButton = (Button) findViewById(R.id.apply_later_button);
 		mPostponeButton.setOnClickListener(mPostponeButtonListener);
+		
+		pref = new Preferences(this);
 	}
 
 	@Override
@@ -54,7 +58,7 @@ public class ApplyUpdateActivity extends Activity
 		mUpdateInfo = (UpdateInfo) getIntent().getExtras().getSerializable(Constants.KEY_UPDATE_INFO);
 		String template = res.getString(R.string.apply_title_textview_text);
 		mTitle.setText(MessageFormat.format(template, mUpdateInfo.getName()));
-		mUpdateFolder = Preferences.getPreferences(this).getUpdateFolder();
+		mUpdateFolder = pref.getUpdateFolder();
 		Log.d(TAG, "Filename selected to flash: " + mUpdateInfo.getFileName());
 	}
 	
@@ -89,7 +93,7 @@ public class ApplyUpdateActivity extends Activity
 
 		public ApplyUpdateListener(Context ctx)
 		{
-			mBackup = Preferences.getPreferences(ctx).doNandroidBackup();
+			mBackup = pref.doNandroidBackup();
 			mCtx = ctx;
 		}
 

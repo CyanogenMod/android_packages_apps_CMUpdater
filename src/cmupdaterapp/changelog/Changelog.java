@@ -37,7 +37,7 @@ public class Changelog implements Runnable
 
 	public Changelog(Activity upi)
 	{
-		p = Preferences.getPreferences(upi);
+		p = new Preferences(upi);
 	}
 
 	//Returns the RomChangelog without a Thread

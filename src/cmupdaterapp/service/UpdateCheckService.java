@@ -60,7 +60,6 @@ public class UpdateCheckService extends Service
 	private static final String TAG = "UpdateCheckService";
 
 	private final RemoteCallbackList<IUpdateCheckServiceCallback> mCallbacks = new RemoteCallbackList<IUpdateCheckServiceCallback>();
-	private Context AppContext;
 	private NotificationManager mNM;
 	private ConnectivityManager mConnectivityManager;
 	private Resources res;
@@ -87,17 +86,16 @@ public class UpdateCheckService extends Service
 	@Override
 	public void onCreate()
 	{
-		AppContext = getApplicationContext();
-		mPreferences = Preferences.getPreferences(AppContext);
+		mPreferences = new Preferences(this);
 		systemMod = mPreferences.getBoardString();
-		res = AppContext.getResources();
+		res = this.getResources();
 		myConnectionChangeReceiver = new ConnectionChangeReceiver();
 		registerReceiver(myConnectionChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
 		//Can be null on Startup, when System not available. So try it, till we get it. Before there is no DataConnection available
 		while(mConnectivityManager == null)
 		{
-			mConnectivityManager = (ConnectivityManager) AppContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+			mConnectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
 		}
 		while (mConnectivityManager.getActiveNetworkInfo() == null)
 		{
@@ -207,8 +205,7 @@ public class UpdateCheckService extends Service
 			}
 		}
 
-		Preferences prefs = Preferences.getPreferences(this);
-		prefs.setLastUpdateCheck(new Date());
+		mPreferences.setLastUpdateCheck(new Date());
 
 		int updateCountRoms = availableUpdates.getRomCount();
 		int updateCountThemes = availableUpdates.getThemeCount();
@@ -223,10 +220,10 @@ public class UpdateCheckService extends Service
 		}
 		else
 		{
-			if(prefs.notificationsEnabled())
+			if(mPreferences.notificationsEnabled())
 			{	
-				Intent i = new Intent(AppContext, MainActivity.class);
-				PendingIntent contentIntent = PendingIntent.getActivity(AppContext, 0, i, PendingIntent.FLAG_ONE_SHOT);
+				Intent i = new Intent(this, MainActivity.class);
+				PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_ONE_SHOT);
 
 				Notification notification = new Notification(R.drawable.icon_notification,
 									res.getString(R.string.not_new_updates_found_ticker),
@@ -236,10 +233,10 @@ public class UpdateCheckService extends Service
 				notification.flags = Notification.FLAG_AUTO_CANCEL;
 
 				String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
-				notification.setLatestEventInfo(AppContext, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
+				notification.setLatestEventInfo(this, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
 
-				Uri notificationRingtone = prefs.getConfiguredRingtone();
-				if(prefs.getVibrate())
+				Uri notificationRingtone = mPreferences.getConfiguredRingtone();
+				if(mPreferences.getVibrate())
 					notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
 				else
 					notification.defaults = Notification.DEFAULT_LIGHTS;
@@ -273,8 +270,8 @@ public class UpdateCheckService extends Service
 							res.getString(R.string.not_update_check_error_title),
 							ExceptionText,
 							contentIntent);
-		Uri notificationRingtone = Preferences.getPreferences(this).getConfiguredRingtone();
-		if(Preferences.getPreferences(this).getVibrate())
+		Uri notificationRingtone = mPreferences.getConfiguredRingtone();
+		if(mPreferences.getVibrate())
 			notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
 		else
 			notification.defaults = Notification.DEFAULT_LIGHTS;
@@ -431,9 +428,9 @@ public class UpdateCheckService extends Service
 				themeResponseEntity.consumeContent();
 		}
 
-		FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(AppContext));
+		FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(this));
 		if(!romException)
-			State.saveState(AppContext, (Serializable)retValue);
+			State.saveState(this, (Serializable)retValue);
 		return ful;
 	}
 
@@ -689,11 +686,14 @@ public class UpdateCheckService extends Service
 	private static FullUpdateInfo FilterUpdates(FullUpdateInfo newList, FullUpdateInfo oldList)
 	{
 		Log.d(TAG, "Called FilterUpdates");
+		Log.d(TAG, "newList Length: " + newList.getUpdateCount());
+		Log.d(TAG, "oldList Length: " + oldList.getUpdateCount());
 		FullUpdateInfo ful = new FullUpdateInfo();
 		ful.roms = (LinkedList<UpdateInfo>) newList.roms.clone();
 		ful.themes = (LinkedList<UpdateInfo>) newList.themes.clone();
 		ful.roms.removeAll(oldList.roms);
 		ful.themes.removeAll(oldList.themes);
+		Log.d(TAG, "fulList Length: " + ful.getUpdateCount());
 		return ful;
 	}
 

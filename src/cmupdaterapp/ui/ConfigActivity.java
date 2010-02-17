@@ -47,7 +47,7 @@ public class ConfigActivity extends PreferenceActivity
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.layout.config);
 
-		prefs = Preferences.getPreferences(ConfigActivity.this);
+		prefs = new Preferences(this);
 		res = getResources();
 
 		ListPreference updateCheckFreqPref = (ListPreference) findPreference(res.getString(R.string.PREF_UPDATE_CHECK_FREQUENCY));
