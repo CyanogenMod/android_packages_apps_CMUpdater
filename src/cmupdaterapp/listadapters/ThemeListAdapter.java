@@ -33,18 +33,18 @@ public class ThemeListAdapter<T> extends ArrayAdapter<T>
 
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		View row=convertView;
+		View row = convertView;
 		ThemeListViewWrapper wrapper=null;
 		if (row == null)
 		{
 			LayoutInflater inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			row=inflater.inflate(R.layout.itemtemplate_themelist, null);
-			wrapper=new ThemeListViewWrapper(row);
+			row = inflater.inflate(R.layout.itemtemplate_themelist, null);
+			wrapper = new ThemeListViewWrapper(row);
 			row.setTag(wrapper);
 		}
 		else
 		{
-			wrapper=(ThemeListViewWrapper)row.getTag();
+			wrapper = (ThemeListViewWrapper)row.getTag();
 		}
 
     	ThemeList info = (ThemeList) this.getItem(position);
@@ -56,8 +56,20 @@ public class ThemeListAdapter<T> extends ArrayAdapter<T>
     		wrapper.getThemeNameView().setTextColor(Color.GRAY);
     		wrapper.getThemeUriView().setTextColor(Color.GRAY);
     	}
+    	//We need an else if otherwise the disabled themes will also be yellow
+    	else if (info.featured)
+    	{
+    		//Mark featured Themes
+    		wrapper.getThemeNameView().setTextColor(Color.YELLOW);
+    		wrapper.getThemeUriView().setTextColor(Color.YELLOW);
+    	}
+    	else
+    	{
+    		wrapper.getThemeNameView().setTextColor(Color.WHITE);
+    		wrapper.getThemeUriView().setTextColor(Color.WHITE);
+    	}
         return row;
-   } 
+   }
 }
 
 //Class that Holds the Ids, so we have not to call findViewById each time which costs a lot of ressources
@@ -71,34 +83,34 @@ class ThemeListViewWrapper
 
 	public ThemeListViewWrapper(View base)
 	{
-		this.base=base;
+		this.base = base;
 	}
 
 	public TextView getThemeNameView()
 	{
 		if (ThemeListName == null)
 		{
-			ThemeListName=(TextView)base.findViewById(R.id.txtThemeName);
+			ThemeListName = (TextView)base.findViewById(R.id.txtThemeName);
 		}
-		return(ThemeListName);
+		return ThemeListName;
 	}
 
 	public TextView getThemeUriView()
 	{
 		if (ThemeListUri == null)
 		{
-			ThemeListUri=(TextView)base.findViewById(R.id.txtThemeUri);
+			ThemeListUri = (TextView)base.findViewById(R.id.txtThemeUri);
 		}
-		return(ThemeListUri);
+		return ThemeListUri;
 	}
 
 	public ImageView getImage()
 	{
 		if (image == null)
 		{
-			image=(ImageView)base.findViewById(R.id.ThemeListImage);
+			image = (ImageView)base.findViewById(R.id.ThemeListImage);
 		}
-		return(image);
+		return image;
 	}
 
 	public Drawable getImageDrawable()
@@ -109,6 +121,6 @@ class ThemeListViewWrapper
 		{
 			imageDrawable = image.getDrawable();
 		}
-		return(imageDrawable);
+		return imageDrawable;
 	}
 }

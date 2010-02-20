@@ -1,6 +1,7 @@
 package cmupdaterapp.customTypes;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.LinkedList;
 
 import cmupdaterapp.misc.Log;
@@ -20,6 +21,7 @@ public class FullThemeList implements Serializable
 
 	public LinkedList<ThemeList> returnFullThemeList()
 	{
+		Collections.sort(Themes);
 		return Themes;
 	}
 
