@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.database.DbAdapter;
-import cmupdaterapp.listadapters.ScreenshotGridViewAdapter;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.ScreenshotActivity;
 import cmupdaterapp.utils.ImageUtilities;
@@ -14,7 +13,7 @@ import cmupdaterapp.utils.ImageUtilities;
 public class DownloadImageTask extends AsyncTask<UpdateInfo, Screenshot, Void>
 {
 	private static final String TAG = "DownloadImageTask";
-
+	
 	@Override
 	protected Void doInBackground(UpdateInfo... params)
 	{
@@ -32,12 +31,16 @@ public class DownloadImageTask extends AsyncTask<UpdateInfo, Screenshot, Void>
 			{
 				Log.d(TAG, "Started Downloading Image number " + counter);
 				Screenshot screeni = new Screenshot();
+				if (isCancelled())
+					return null;
 				//Add to DB if not there, otherwise get the DatabaseObject
 				screeni = db.ScreenshotExists(ui.PrimaryKey, uri.toString());
 				if (screeni.PrimaryKey != -1)
 				{
 					ScreenFound = true;
 				}
+				if (isCancelled())
+					return null;
 				Screenshot s = ImageUtilities.load(uri.toString(), screeni.getModifyDateAsMillis(), screeni.PrimaryKey, ui.PrimaryKey);
 				//Null when Modifydate not changed
 				if (s != null)
@@ -45,6 +48,8 @@ public class DownloadImageTask extends AsyncTask<UpdateInfo, Screenshot, Void>
 					NeedsUpdate = true;
 					screeni = s;
 				}
+				if (isCancelled())
+					return null;
 				//When not found insert in DB
 				if (!ScreenFound)
 				{
@@ -53,11 +58,15 @@ public class DownloadImageTask extends AsyncTask<UpdateInfo, Screenshot, Void>
 					screeni.url = uri;
 					screeni.PrimaryKey = db.insertScreenshot(screeni);
 				}
+				if (isCancelled())
+					return null;
 				//Only Update if Screenshot was there
 				else if (ScreenFound && NeedsUpdate)
 				{
 					db.updateScreenshot(screeni.PrimaryKey, screeni);
 				}
+				if (isCancelled())
+					return null;
 				//Calls onProgressUpdate (runs in UI Thread)
 				publishProgress(screeni);
 				PrimaryKeys[counter] = Long.toString(screeni.PrimaryKey);
@@ -65,6 +74,8 @@ public class DownloadImageTask extends AsyncTask<UpdateInfo, Screenshot, Void>
 				ScreenFound = false;
 				NeedsUpdate = false;
 			}
+			if (isCancelled())
+				return null;
 			//Delete old Screenshots from DB
 			db.removeScreenshotExcept(ui.PrimaryKey, PrimaryKeys);
 		}
@@ -80,7 +91,23 @@ public class DownloadImageTask extends AsyncTask<UpdateInfo, Screenshot, Void>
 	protected void onProgressUpdate(Screenshot... screeni)
 	{
 		//This runs in the UI Thread
-		ScreenshotGridViewAdapter.items.add(screeni[0]);
-		ScreenshotActivity.imageAdapter.notifyDataSetChanged();
+		if (!isCancelled())
+		{
+			ScreenshotActivity.AddScreenshot(screeni[0]);
+			ScreenshotActivity.NotifyChange();
+		}
+	}
+	
+	@Override
+	protected void onCancelled()
+	{
+		try
+		{
+			this.finalize();
+		}
+		catch (Throwable e)
+		{
+			Log.e(TAG, "Exception in finalize", e);
+		}
 	}
 }

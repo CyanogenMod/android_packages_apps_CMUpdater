@@ -8,6 +8,7 @@ import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.misc.Constants;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,7 +20,7 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
     private Context mContext;
     private int length;
 
-    public static List<Screenshot> items = new LinkedList<Screenshot>();
+    private static List<Screenshot> items = new LinkedList<Screenshot>();
 
     public ScreenshotGridViewAdapter(Context c, int numberOfItems)
     {
@@ -34,7 +35,7 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
 
     public Object getItem(int position)
     {
-    	return position;
+    	return items.get(position);
     }
 
     public long getItemId(int position)
@@ -45,7 +46,7 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent)
     {
-    	boolean ImageLoaded = ScreenshotGridViewAdapter.items.size() > position;
+    	boolean ImageLoaded = items.size() > position;
 
         ImageView imageView = null;
         if (convertView == null) // if it's not recycled, initialize some attributes
@@ -57,7 +58,7 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
         }
         else
         {
-        		imageView = (ImageView) convertView;
+        	imageView = (ImageView) convertView;
         }
 
         if (!ImageLoaded)
@@ -68,7 +69,11 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
         {
 	        try
 	        {
-	        	imageView.setImageBitmap(items.get(position).getBitmap());
+	        	Bitmap temp = items.get(position).getBitmap();
+	        	if (!temp.isRecycled())
+	        		imageView.setImageBitmap(temp);
+	        	else
+	        		imageView.setImageResource(Constants.SCREENSHOTS_FALLBACK_IMAGE);
 	        }
 	        catch (InvalidPictureException ex)
 	        {
@@ -76,5 +81,28 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
 	        }
         }
         return imageView;
+    }
+    
+    public void Destroy()
+    {
+    	for(Screenshot s : items)
+		{
+			s.DestroyImage();
+		}
+    }
+    
+    public void ClearScreenshots()
+    {
+    	items.clear();
+    }
+    
+    public int GetRealScreenshotSize()
+    {
+    	return items.size();
+    }
+    
+    public void AddScreenshot(Screenshot s)
+    {
+    	items.add(s);
     }
 }

@@ -7,6 +7,7 @@ import cmupdaterapp.misc.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -16,7 +17,28 @@ import cmupdaterapp.tasks.DownloadImageTask;
 public class ScreenshotActivity extends Activity
 {	
 	private UpdateInfo ui;
-	public static ScreenshotGridViewAdapter imageAdapter;
+	private static ScreenshotGridViewAdapter imageAdapter;
+	private DownloadImageTask downloadImageTask;
+	
+	public static void NotifyChange()
+	{
+		imageAdapter.notifyDataSetChanged();
+	}
+	
+	public static Screenshot getItem(int position)
+	{
+		return (Screenshot)imageAdapter.getItem(position);
+	}
+	
+	public static int getScreenshotSize()
+	{
+		return imageAdapter.getCount();
+	}
+	
+	public static void AddScreenshot(Screenshot s)
+	{
+		imageAdapter.AddScreenshot(s);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -27,12 +49,6 @@ public class ScreenshotActivity extends Activity
 		Bundle b = i.getExtras();
 		ui = (UpdateInfo) b.get(Constants.SCREENSHOTS_UPDATE);
 		
-		for(Screenshot s : ScreenshotGridViewAdapter.items)
-		{
-			s.DestroyImage();
-		}
-		ScreenshotGridViewAdapter.items.clear();
-		
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 		imageAdapter = new ScreenshotGridViewAdapter(this, ui.screenshots.size());
 
@@ -42,7 +58,7 @@ public class ScreenshotActivity extends Activity
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
             	//Only start the Activity, when the Image is loaded
-            	if (ScreenshotGridViewAdapter.items.size() > position)
+            	if (imageAdapter.GetRealScreenshotSize() > position)
             	{
             		Intent i = new Intent(ScreenshotActivity.this, ScreenshotDetailActivity.class);
                     i.putExtra(Constants.SCREENSHOTS_POSITION, position);
@@ -52,6 +68,31 @@ public class ScreenshotActivity extends Activity
         });
         
         //In onCreate, cause when pressing back from Detail, the old Screenshots remain in the List
-        new DownloadImageTask().execute(ui);
+        downloadImageTask = new DownloadImageTask();
+        downloadImageTask.execute(ui);
+	}
+	
+	@Override
+	protected void onDestroy()
+	{
+		super.onDestroy();
+		//Stop image downloading
+		downloadImageTask.cancel(true);
+		imageAdapter.Destroy();
+		imageAdapter.ClearScreenshots();
+	}
+	
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event)
+	{
+		int keyCode = event.getKeyCode();
+	    if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0)
+	    {
+	    	//Stop the Activity on BackKey
+	    	onDestroy();
+	    	finish();
+	    	return true;
+	    }
+	    return super.dispatchKeyEvent(event);
 	}
 }

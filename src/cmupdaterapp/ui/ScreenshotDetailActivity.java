@@ -1,7 +1,6 @@
 package cmupdaterapp.ui;
 
 import cmupdaterapp.customExceptions.InvalidPictureException;
-import cmupdaterapp.listadapters.ScreenshotGridViewAdapter;
 import cmupdaterapp.misc.Constants;
 import android.app.Activity;
 import android.content.Intent;
@@ -33,7 +32,7 @@ public class ScreenshotDetailActivity extends Activity
 
 		mCurrentScreenshotIndex = b.getInt(Constants.SCREENSHOTS_POSITION, 0);
 
-		maxIndexSize = ScreenshotGridViewAdapter.items.size() - 1;
+		maxIndexSize = ScreenshotActivity.getScreenshotSize() - 1;
 
         nextButton = (ImageButton) findViewById(R.id.next_button);
         prevButton = (ImageButton) findViewById(R.id.previous_button);
@@ -81,7 +80,7 @@ public class ScreenshotDetailActivity extends Activity
 
         try
         {
-			imageView.setImageBitmap((ScreenshotGridViewAdapter.items.get(mCurrentScreenshotIndex)).getBitmap());
+			imageView.setImageBitmap((ScreenshotActivity.getItem(mCurrentScreenshotIndex)).getBitmap());
 		}
         catch (InvalidPictureException e)
         {
@@ -90,7 +89,7 @@ public class ScreenshotDetailActivity extends Activity
         //Image not yet loaded
         catch (IndexOutOfBoundsException e)
         {
-        	imageView.setImageResource(Constants.SCREENSHOTS_FALLBACK_IMAGE);
+        	imageView.setImageResource(Constants.SCREENSHOTS_LOADING_IMAGE);
 		}
         statusText.setText(String.format("%d/%d", mCurrentScreenshotIndex + 1, maxIndexSize + 1));
     }
@@ -99,6 +98,7 @@ public class ScreenshotDetailActivity extends Activity
 	protected void onStop()
 	{
 		super.onStop();
+		imageView.getDrawable().setCallback(null);
 		System.gc();
 	}
 }
