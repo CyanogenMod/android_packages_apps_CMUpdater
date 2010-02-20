@@ -86,13 +86,16 @@ public class ScreenshotActivity extends Activity
 	public boolean dispatchKeyEvent(KeyEvent event)
 	{
 		int keyCode = event.getKeyCode();
-	    if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0)
+		//We need the ACTION_DOWN here, cause otherwise when you press back on the screenshotdetailactivity,
+		//the ACTION_UP event is sent to this activity, and this will result in going back twice
+	    if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 && event.getAction() == KeyEvent.ACTION_DOWN)
 	    {
 	    	//Stop the Activity on BackKey
 	    	onDestroy();
 	    	finish();
 	    	return true;
 	    }
-	    return super.dispatchKeyEvent(event);
+	    else
+	    	return super.dispatchKeyEvent(event);
 	}
 }
