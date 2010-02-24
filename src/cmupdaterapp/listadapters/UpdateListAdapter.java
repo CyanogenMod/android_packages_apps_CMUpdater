@@ -31,13 +31,13 @@ public class UpdateListAdapter<T> extends ArrayAdapter<T>
 
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		View row=convertView;
+		View row = convertView;
 		ViewWrapper wrapper=null;
 		if (row == null)
 		{
 			LayoutInflater inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			row=inflater.inflate(R.layout.itemtemplate_updatelist, null);
-			wrapper=new ViewWrapper(row);
+			row = inflater.inflate(R.layout.itemtemplate_updatelist, null);
+			wrapper = new ViewWrapper(row);
 			row.setTag(wrapper);
 		}
 		else
@@ -68,24 +68,24 @@ class ViewWrapper
 
 	public ViewWrapper(View base)
 	{
-		this.base=base;
+		this.base = base;
 	}
 
 	public TextView getTextView()
 	{
 		if (label == null)
 		{
-			label=(TextView)base.findViewById(R.id.txtDisplay);
+			label = (TextView)base.findViewById(R.id.txtDisplay);
 		}
-		return(label);
+		return label;
 	}
 
 	public ImageView getImage()
 	{
 		if (image == null)
 		{
-			image=(ImageView)base.findViewById(R.id.imgExperimentalStable);
+			image = (ImageView)base.findViewById(R.id.imgExperimentalStable);
 		}
-		return(image);
+		return image;
 	}
 }

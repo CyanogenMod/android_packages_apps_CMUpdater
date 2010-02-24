@@ -145,7 +145,7 @@
    <string name="exception_while_downloading">Ошибка при загрузке файла</string>
    
    <string name="not_update_check_error_ticker">Ошибка при проверке новых версий</string>
-   <string name="not_update_check_error_title">Ошибка при проверке новых версий CM ОС</string>
+   <string name="not_update_check_error_title">Ошибка при проверке новых версий прошивки</string>
    
    <string name="not_update_download_error_ticker">Ошибка при загрузке файла обновления прошивки</string>
    <string name="not_update_download_error_title">Ошибка При Загрузке</string>
@@ -267,9 +267,9 @@
    
    <!--  new Strings -->
    <string name="alert_old_version_title">Старая Версия</string>
-   <string name="alert_old_version_summary">Текущая версия прошивки CyanogenMOD не подлежит автоматическому обновлению.
+   <string name="alert_old_version_summary">Текущая версия вашей прошивки не подлежит автоматическому обновлению.
    Для продолжения использования обновителя необходимо установить новую версию прошивки вручную.
-   Нажмите кнопку \'Запустить Браузер\' для получения инструкций, или посетите www.cyanogenmod.com</string>
+   Нажмите кнопку \'Запустить Браузер\' для получения инструкций.</string>
    <string name="alert_old_version_ok">Ок</string>
    <string name="alert_old_version_browser">Запустить Браузер</string>
    <string name="screenshot_button_theme_text">Просмотр Скриншотов</string>
@@ -277,4 +277,7 @@
    <string name="theme_submenu_delete">Удалить</string>
    <string name="theme_submenu_enable">Включить</string>
    <string name="theme_submenu_disable">Отключить</string>
+   <string name="download_resume_not_supported">Возобновление загрузки не поддерживается сервером</string>
+   <string name="download_resume_download">Загрузка Возобновляется</string>
+   <string name="download_not_enough_space">На SD карте недостаточно места для заргузки</string>
 </resources>
