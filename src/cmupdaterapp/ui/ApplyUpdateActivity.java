@@ -38,6 +38,8 @@ public class ApplyUpdateActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.applyupdate);
+		
+		pref = new Preferences(this);
 
 		mTitle = (TextView) findViewById(R.id.apply_title_textview);
 
@@ -46,8 +48,6 @@ public class ApplyUpdateActivity extends Activity
 
 		mPostponeButton = (Button) findViewById(R.id.apply_later_button);
 		mPostponeButton.setOnClickListener(mPostponeButtonListener);
-		
-		pref = new Preferences(this);
 	}
 
 	@Override
