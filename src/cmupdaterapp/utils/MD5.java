@@ -1,10 +1,13 @@
 package cmupdaterapp.utils;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -99,23 +102,29 @@ public class MD5
 
     public static String getRecoveryMD5()
 	{
-		String MD5string = null;
+		String MD5string = "";
+		String recoveryFilename = "/dev/mtd/mtd1";
 		try
 		{
-			File recovery = new File("/dev/mtd/mtd1");
-			if (recovery.exists())
-			{
-				MD5string = MD5.calculateMD5(recovery);
-				Log.d(TAG, "Recovery MD5: "+MD5string);
-			}
-			else
-				throw new IOException();
+			Process p = Runtime.getRuntime().exec("su");
+			OutputStream os = p.getOutputStream();
+			os.write(("md5sum " + recoveryFilename).getBytes());
+			os.flush();
+			os.close();
+			InputStream is = p.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			String str = br.readLine();
+			MD5string = str.split("  ")[0].trim();
+			is.close();
+			br.close();
+			p.destroy();
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
-			Log.e(TAG, "Error on checking recovery MD5. Message: ", e);
+			Log.e(TAG, "Exception on getting Recovery MD5", e);
 			return null;
 		}
+		Log.d(TAG, "Recovery MD5: " + MD5string);
 		return MD5string;
 	}
 }
