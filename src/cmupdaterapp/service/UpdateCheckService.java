@@ -660,25 +660,32 @@ public class UpdateCheckService extends Service
 		for (int i = 0, max = updateInfos.size() ; i < max ; i++)
 		{
 			UpdateInfo ui = updateInfos.poll();
+			//Only Incremental Updates here. If theres a standard Update in there, remove it
+			if (!ui.isIncremental())
+			{
+				Log.d(TAG, "Update " + ui.getName() + " is not an incremental update. Discarding it");
+				return ret;
+			}
+			//Only Use this Update, if the ForApply Version is the current running one
+			if (!(Customization.RO_MOD_START_STRING + ui.getVersionForApply()).equalsIgnoreCase(systemRom))
+			{
+				Log.d(TAG, String.format("Update %s discarded, because the VersionForAppy (%s)" +
+						" doesn't match the current System Rom (%s).",
+						ui.getName(), Customization.RO_MOD_START_STRING + ui.getVersionForApply(), systemRom));
+				return ret;
+			}
 			if (ui.getType().equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_ROM))
 			{
 				if (boardMatches(ui, systemMod))
 				{
-					if(showAllRomUpdates || StringUtils.compareVersions(Customization.RO_MOD_START_STRING + ui.getVersion(), systemRom))
+					if (branchMatches(ui, showExperimentalRomUpdates))
 					{
-						if (branchMatches(ui, showExperimentalRomUpdates))
-						{
-							Log.d(TAG, "Adding Rom: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
-							ret.add(ui);
-						}
-						else
-						{
-							Log.d(TAG, "Discarding Rom " + ui.getName() + " (Branch mismatch - stable/experimental)");
-						}
+						Log.d(TAG, "Adding Rom: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
+						ret.add(ui);
 					}
 					else
 					{
-						Log.d(TAG, "Discarding Rom " + ui.getName() + " (older version)");
+						Log.d(TAG, "Discarding Rom " + ui.getName() + " (Branch mismatch - stable/experimental)");
 					}
 				}
 				else
