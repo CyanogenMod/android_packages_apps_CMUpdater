@@ -647,7 +647,7 @@ public class UpdateCheckService extends Service
 			}
 			else
 			{
-				Log.d(TAG, String.format("Discarding Rom %s Version %s", ui.getName(), ui.getVersion()));
+				Log.d(TAG, String.format("Discarding Rom %s Version %s (not a ROM)", ui.getName(), ui.getVersion()));
 			}
 		}
 		return ret;
@@ -664,15 +664,15 @@ public class UpdateCheckService extends Service
 			if (!ui.isIncremental())
 			{
 				Log.d(TAG, "Update " + ui.getName() + " is not an incremental update. Discarding it");
-				return ret;
+				continue;
 			}
 			//Only Use this Update, if the ForApply Version is the current running one
 			if (!(Customization.RO_MOD_START_STRING + ui.getVersionForApply()).equalsIgnoreCase(systemRom))
 			{
-				Log.d(TAG, String.format("Update %s discarded, because the VersionForAppy (%s)" +
+				Log.d(TAG, String.format("Incremental Update %s discarded, because the VersionForAppy (%s)" +
 						" doesn't match the current System Rom (%s).",
 						ui.getName(), Customization.RO_MOD_START_STRING + ui.getVersionForApply(), systemRom));
-				return ret;
+				continue;
 			}
 			if (ui.getType().equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_ROM))
 			{
@@ -680,22 +680,22 @@ public class UpdateCheckService extends Service
 				{
 					if (branchMatches(ui, showExperimentalRomUpdates))
 					{
-						Log.d(TAG, "Adding Rom: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
+						Log.d(TAG, "Adding Incremental Rom: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
 						ret.add(ui);
 					}
 					else
 					{
-						Log.d(TAG, "Discarding Rom " + ui.getName() + " (Branch mismatch - stable/experimental)");
+						Log.d(TAG, "Discarding Incremental Rom " + ui.getName() + " (Branch mismatch - stable/experimental)");
 					}
 				}
 				else
 				{
-					Log.d(TAG, "Discarding Rom " + ui.getName() + " (mod mismatch)");
+					Log.d(TAG, "Discarding Incremental Rom " + ui.getName() + " (mod mismatch)");
 				}
 			}
 			else
 			{
-				Log.d(TAG, String.format("Discarding Rom %s Version %s", ui.getName(), ui.getVersion()));
+				Log.d(TAG, String.format("Discarding Incremental Rom %s Version %s(not a ROM)", ui.getName(), ui.getVersion()));
 			}
 		}
 		return ret;

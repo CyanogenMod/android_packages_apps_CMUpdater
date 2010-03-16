@@ -70,21 +70,27 @@ public class FullUpdateInfo implements Parcelable, Serializable
 
 	public int getRomCount()
 	{
+		if (roms == null) return 0;
 		return roms.size();
 	}
 	
 	public int getIncrementalRomCount()
 	{
+		if (incrementalRoms == null) return 0;
 		return incrementalRoms.size();
 	}
 
 	public int getThemeCount()
 	{
+		if (themes == null) return 0;
 		return themes.size();
 	}
 
 	public int getUpdateCount()
 	{
-		return themes.size() + roms.size() + incrementalRoms.size();
+		int themessize = themes == null ? 0 : themes.size();
+		int romssize = roms == null ? 0 : roms.size();
+		int incrementalromssize = incrementalRoms == null ? 0 : incrementalRoms.size();
+		return themessize + romssize + incrementalromssize;
 	}
 }

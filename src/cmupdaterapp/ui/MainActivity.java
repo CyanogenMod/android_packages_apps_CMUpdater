@@ -804,6 +804,9 @@ public class MainActivity extends Activity
 				availableRoms = mAvailableUpdates.roms;
 			if (mAvailableUpdates.themes != null)
 				availableThemes = mAvailableUpdates.themes;
+			//Add the incrementalUpdates
+			if (mAvailableUpdates.incrementalRoms != null)
+				availableRoms.addAll(mAvailableUpdates.incrementalRoms);
 		}
 
 		//Rom Layout

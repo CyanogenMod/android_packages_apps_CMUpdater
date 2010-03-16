@@ -38,8 +38,13 @@ public class UpdateInfo implements Parcelable, Serializable
 
 	/**
 	 * Get Name
+	 * returns INCR: + name, if its an incremental udpate
 	 */
-	public String getName() { return name; }
+	public String getName()
+	{
+		if (this.isIncremental()) return "INCR: " + name;
+		return name;
+	}
 
 	/**
 	 * Set Version
