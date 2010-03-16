@@ -208,11 +208,14 @@ public class UpdateCheckService extends Service
 		mPreferences.setLastUpdateCheck(new Date());
 
 		int updateCountRoms = availableUpdates.getRomCount();
+		int updateCountIncrementalRoms = availableUpdates.getIncrementalRomCount();
 		int updateCountThemes = availableUpdates.getThemeCount();
 		int updateCount = availableUpdates.getUpdateCount();
-		Log.d(TAG, updateCountRoms + " ROM update(s) found; " + updateCountThemes + " Theme update(s) found");
+		Log.d(TAG, updateCountRoms + " ROM update(s) found; " +
+				updateCountIncrementalRoms + " incremental ROM udpate(s) found; "+
+				updateCountThemes + " Theme update(s) found");
 
-		if(updateCountRoms == 0 && updateCountThemes == 0)
+		if(updateCountRoms == 0 && updateCountThemes == 0 && updateCountIncrementalRoms == 0)
 		{
 			Log.d(TAG, "No updates found");
 			ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.no_updates_found, 0));
@@ -388,7 +391,7 @@ public class UpdateCheckService extends Service
 					if (t.PrimaryKey > 0)
 						PrimaryKeyTheme = t.PrimaryKey;
 					
-					LinkedList<UpdateInfo> themeUpdateInfos = parseJSON(themeBuf);
+					LinkedList<UpdateInfo> themeUpdateInfos = parseJSON(themeBuf, RomType.Update);
 					retValue.themes.addAll(getThemeUpdates(themeUpdateInfos));
 				}
 			}
@@ -414,8 +417,10 @@ public class UpdateCheckService extends Service
 				}
 				romLineReader.close();
 
-				LinkedList<UpdateInfo> romUpdateInfos = parseJSON(romBuf);
+				LinkedList<UpdateInfo> romUpdateInfos = parseJSON(romBuf, RomType.Update);
 				retValue.roms = getRomUpdates(romUpdateInfos);
+				LinkedList<UpdateInfo> incrementalRomUpdateInfos = parseJSON(romBuf, RomType.IncrementalUpdate);
+				retValue.incrementalRoms = getIncrementalRomUpdates(incrementalRomUpdateInfos);
 			}
 			else
 				Log.d(TAG, "There was an Exception on Downloading the Rom JSON File");
@@ -434,7 +439,9 @@ public class UpdateCheckService extends Service
 		return ful;
 	}
 
-	private LinkedList<UpdateInfo> parseJSON(StringBuffer buf)
+	private enum RomType { Update, IncrementalUpdate }
+	
+	private LinkedList<UpdateInfo> parseJSON(StringBuffer buf, RomType type)
 	{
 		LinkedList<UpdateInfo> uis = new LinkedList<UpdateInfo>();
 
@@ -444,27 +451,36 @@ public class UpdateCheckService extends Service
 		{
 			mainJSONObject = new JSONObject(buf.toString());
 			JSONArray mirrorList = mainJSONObject.getJSONArray(Constants.JSON_MIRROR_LIST);
-			JSONArray updateList = mainJSONObject.getJSONArray(Constants.JSON_UPDATE_LIST);
-			JSONArray incrementalUpdateList = mainJSONObject.getJSONArray(Constants.JSON_INCREMENTAL_UPDATES);
-
 			Log.d(TAG, "Found "+mirrorList.length()+" mirrors in the JSON");
-			Log.d(TAG, "Found "+updateList.length()+" updates in the JSON");
-			Log.d(TAG, "Found "+incrementalUpdateList.length()+" incremental updates in the JSON");
 
-			for (int i = 0, max = updateList.length() ; i < max ; i++)
+			switch(type)
 			{
-				if(!updateList.isNull(i))
-					uis.add(parseUpdateJSONObject(updateList.getJSONObject(i),mirrorList));
-				else
-					Log.d(TAG, "Theres an error in your JSON File(update part). Maybe a , after the last update");
-			}
-			//Incremental Updates. Own JSON Section for backward compatibility
-			for (int i = 0, max = incrementalUpdateList.length() ; i < max ; i++)
-			{
-				if(!incrementalUpdateList.isNull(i))
-					uis.add(parseUpdateJSONObject(incrementalUpdateList.getJSONObject(i),mirrorList));
-				else
-					Log.d(TAG, "Theres an error in your JSON File(incremental part). Maybe a , after the last update");
+				case Update:
+					JSONArray updateList = mainJSONObject.getJSONArray(Constants.JSON_UPDATE_LIST);
+					Log.d(TAG, "Found "+updateList.length()+" updates in the JSON");
+					for (int i = 0, max = updateList.length() ; i < max ; i++)
+					{
+						if(!updateList.isNull(i))
+							uis.add(parseUpdateJSONObject(updateList.getJSONObject(i), mirrorList));
+						else
+							Log.d(TAG, "Theres an error in your JSON File(update part). Maybe a , after the last update");
+					}
+					break;
+				case IncrementalUpdate:
+					JSONArray incrementalUpdateList = mainJSONObject.getJSONArray(Constants.JSON_INCREMENTAL_UPDATES);
+					Log.d(TAG, "Found "+incrementalUpdateList.length()+" incremental updates in the JSON");
+					//Incremental Updates. Own JSON Section for backward compatibility
+					for (int i = 0, max = incrementalUpdateList.length() ; i < max ; i++)
+					{
+						if(!incrementalUpdateList.isNull(i))
+							uis.add(parseUpdateJSONObject(incrementalUpdateList.getJSONObject(i), mirrorList));
+						else
+							Log.d(TAG, "Theres an error in your JSON File(incremental part). Maybe a , after the last update");
+					}
+					break;
+				default:
+					Log.e(TAG, "Wrong RomType!");
+					break;
 			}
 		}
 		catch (JSONException e)
@@ -636,6 +652,47 @@ public class UpdateCheckService extends Service
 		}
 		return ret;
 	}
+	
+	//TODO: Udpatecheck on Incremental Updates
+	private LinkedList<UpdateInfo> getIncrementalRomUpdates(LinkedList<UpdateInfo> updateInfos)
+	{
+		LinkedList<UpdateInfo> ret = new LinkedList<UpdateInfo>();
+		for (int i = 0, max = updateInfos.size() ; i < max ; i++)
+		{
+			UpdateInfo ui = updateInfos.poll();
+			if (ui.getType().equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_ROM))
+			{
+				if (boardMatches(ui, systemMod))
+				{
+					if(showAllRomUpdates || StringUtils.compareVersions(Customization.RO_MOD_START_STRING + ui.getVersion(), systemRom))
+					{
+						if (branchMatches(ui, showExperimentalRomUpdates))
+						{
+							Log.d(TAG, "Adding Rom: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
+							ret.add(ui);
+						}
+						else
+						{
+							Log.d(TAG, "Discarding Rom " + ui.getName() + " (Branch mismatch - stable/experimental)");
+						}
+					}
+					else
+					{
+						Log.d(TAG, "Discarding Rom " + ui.getName() + " (older version)");
+					}
+				}
+				else
+				{
+					Log.d(TAG, "Discarding Rom " + ui.getName() + " (mod mismatch)");
+				}
+			}
+			else
+			{
+				Log.d(TAG, String.format("Discarding Rom %s Version %s", ui.getName(), ui.getVersion()));
+			}
+		}
+		return ret;
+	}
 
 	private LinkedList<UpdateInfo> getThemeUpdates(LinkedList<UpdateInfo> updateInfos)
 	{
@@ -707,8 +764,10 @@ public class UpdateCheckService extends Service
 		FullUpdateInfo ful = new FullUpdateInfo();
 		ful.roms = (LinkedList<UpdateInfo>) newList.roms.clone();
 		ful.themes = (LinkedList<UpdateInfo>) newList.themes.clone();
+		ful.incrementalRoms = (LinkedList<UpdateInfo>) newList.incrementalRoms.clone();
 		ful.roms.removeAll(oldList.roms);
 		ful.themes.removeAll(oldList.themes);
+		ful.incrementalRoms.removeAll(oldList.incrementalRoms);
 		Log.d(TAG, "fulList Length: " + ful.getUpdateCount());
 		return ful;
 	}

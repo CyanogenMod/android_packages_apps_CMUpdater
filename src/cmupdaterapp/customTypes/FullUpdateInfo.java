@@ -13,17 +13,20 @@ public class FullUpdateInfo implements Parcelable, Serializable
 	private static final long serialVersionUID = -2719765435535504941L;
 
 	public LinkedList<UpdateInfo> roms;
+	public LinkedList<UpdateInfo> incrementalRoms;
 	public LinkedList<UpdateInfo> themes;
 
 	public FullUpdateInfo()
 	{
 		roms = new LinkedList<UpdateInfo>();
+		incrementalRoms = new LinkedList<UpdateInfo>();
 		themes = new LinkedList<UpdateInfo>();
 	}
 
 	private FullUpdateInfo(Parcel in)
 	{
 		roms = new LinkedList<UpdateInfo>();
+		incrementalRoms = new LinkedList<UpdateInfo>();
 		themes = new LinkedList<UpdateInfo>();
 		readFromParcel(in);
 	}
@@ -48,12 +51,14 @@ public class FullUpdateInfo implements Parcelable, Serializable
 	public void writeToParcel(Parcel arg0, int arg1)
 	{
 		arg0.writeList(roms);
+		arg0.writeList(incrementalRoms);
 		arg0.writeList(themes);
 	}
 
 	public void readFromParcel(Parcel in)
 	{
 		in.readList(roms, null);
+		in.readList(incrementalRoms, null);
 		in.readList(themes, null);
 	}
 
@@ -67,6 +72,11 @@ public class FullUpdateInfo implements Parcelable, Serializable
 	{
 		return roms.size();
 	}
+	
+	public int getIncrementalRomCount()
+	{
+		return incrementalRoms.size();
+	}
 
 	public int getThemeCount()
 	{
@@ -75,6 +85,6 @@ public class FullUpdateInfo implements Parcelable, Serializable
 
 	public int getUpdateCount()
 	{
-		return themes.size() + roms.size();
+		return themes.size() + roms.size() + incrementalRoms.size();
 	}
 }
