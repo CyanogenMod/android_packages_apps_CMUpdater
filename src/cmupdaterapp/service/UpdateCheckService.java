@@ -652,8 +652,7 @@ public class UpdateCheckService extends Service
 		}
 		return ret;
 	}
-	
-	//TODO: Udpatecheck on Incremental Updates
+
 	private LinkedList<UpdateInfo> getIncrementalRomUpdates(LinkedList<UpdateInfo> updateInfos)
 	{
 		LinkedList<UpdateInfo> ret = new LinkedList<UpdateInfo>();
