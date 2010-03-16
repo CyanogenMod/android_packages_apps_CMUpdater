@@ -278,4 +278,6 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="download_resume_not_supported">Resume not supported by Server</string>
 	<string name="download_resume_download">Resuming Download</string>
 	<string name="download_not_enough_space">Not Enough Space on SDCard to download the Udpate</string>
+	<string name="download_stop_download_Button">Pause/Stop Download</string>
+	<string name="download_resume_download_Button">Resume Download</string>
 </resources>

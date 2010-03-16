@@ -21,6 +21,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	private String branchCode;
 	private String description;
 	private String fileName;
+	private String versionForApply;
 	public List<URI> screenshots;
 	public List<URI> updateMirrors;
 
@@ -55,6 +56,22 @@ public class UpdateInfo implements Parcelable, Serializable
 	 * Get Version
 	 */
 	public String getVersion() { return version; }
+	
+	/**
+	 * Set VersionForApply
+	 */
+	public void setVersionForApply(String _version)
+	{
+		if (_version != null)
+			versionForApply = _version;
+		else
+			versionForApply = "";
+	}
+	
+	/**
+	 * Get VersionForApply
+	 */
+	public String getVersionForApply() { return versionForApply; }
 
 	/**
 	 * Set Type
@@ -120,6 +137,14 @@ public class UpdateInfo implements Parcelable, Serializable
 	 */
 	public String getFileName() { return fileName; }
 
+	/**
+	 * Is this Update for Incremental Updates?
+	 */
+	public Boolean isIncremental()
+	{
+		return (this.versionForApply != null && this.versionForApply != "");
+	}
+	
 	@Override
 	public String toString()
 	{
@@ -148,7 +173,8 @@ public class UpdateInfo implements Parcelable, Serializable
 				&& ui.description.equals(description)
 				&& ui.fileName.equals(fileName)
 				&& ui.screenshots.equals(screenshots)
-				&& ui.PrimaryKey == PrimaryKey)
+				&& ui.PrimaryKey == PrimaryKey
+				&& ui.versionForApply == versionForApply)
 			return true;
 		return false;
 	}
@@ -194,6 +220,7 @@ public class UpdateInfo implements Parcelable, Serializable
 		arg0.writeList(board);
 		arg0.writeString(name);
 		arg0.writeString(version);
+		arg0.writeString(versionForApply);
 		arg0.writeString(type);
 		arg0.writeString(branchCode);
 		arg0.writeString(description);
@@ -209,6 +236,7 @@ public class UpdateInfo implements Parcelable, Serializable
 		in.readList(board, null);
 		name = in.readString();
 		version = in.readString();
+		versionForApply = in.readString();
 		type = in.readString();
 		branchCode = in.readString();
 		description = in.readString();

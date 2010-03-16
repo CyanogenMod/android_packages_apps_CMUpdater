@@ -9,8 +9,6 @@ interface IDownloadService
     String getCurrentMirrorName();
     boolean DownloadRunning();
     boolean PauseDownload();
-    boolean ResumeDownload();
-    boolean isPaused();
     boolean cancelDownload();
     void registerCallback(in IDownloadServiceCallback cb);
     void unregisterCallback(in IDownloadServiceCallback cb);

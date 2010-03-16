@@ -445,16 +445,26 @@ public class UpdateCheckService extends Service
 			mainJSONObject = new JSONObject(buf.toString());
 			JSONArray mirrorList = mainJSONObject.getJSONArray(Constants.JSON_MIRROR_LIST);
 			JSONArray updateList = mainJSONObject.getJSONArray(Constants.JSON_UPDATE_LIST);
+			JSONArray incrementalUpdateList = mainJSONObject.getJSONArray(Constants.JSON_INCREMENTAL_UPDATES);
 
 			Log.d(TAG, "Found "+mirrorList.length()+" mirrors in the JSON");
 			Log.d(TAG, "Found "+updateList.length()+" updates in the JSON");
+			Log.d(TAG, "Found "+incrementalUpdateList.length()+" incremental updates in the JSON");
 
 			for (int i = 0, max = updateList.length() ; i < max ; i++)
 			{
 				if(!updateList.isNull(i))
 					uis.add(parseUpdateJSONObject(updateList.getJSONObject(i),mirrorList));
 				else
-					Log.d(TAG, "Theres an error in your JSON File. Maybe a , after the last update");
+					Log.d(TAG, "Theres an error in your JSON File(update part). Maybe a , after the last update");
+			}
+			//Incremental Updates. Own JSON Section for backward compatibility
+			for (int i = 0, max = incrementalUpdateList.length() ; i < max ; i++)
+			{
+				if(!incrementalUpdateList.isNull(i))
+					uis.add(parseUpdateJSONObject(incrementalUpdateList.getJSONObject(i),mirrorList));
+				else
+					Log.d(TAG, "Theres an error in your JSON File(incremental part). Maybe a , after the last update");
 			}
 		}
 		catch (JSONException e)
@@ -476,14 +486,14 @@ public class UpdateCheckService extends Service
 			String[] Boards = obj.getString(Constants.JSON_BOARD).split("\\|");
 			for(String item:Boards)
 			{
-				if(item!=null)
+				if(item != null)
 					ui.board.add(item.trim());
 			}
 			ui.setType(obj.getString(Constants.JSON_TYPE).trim());
 			String[] mods= obj.getString(Constants.JSON_MOD).split("\\|");
 			for(String mod:mods)
 			{
-				if(mod!=null)
+				if(mod != null)
 					ui.mod.add(mod.trim());
 			}
 			ui.setName(obj.getString(Constants.JSON_NAME).trim());
@@ -491,6 +501,12 @@ public class UpdateCheckService extends Service
 			ui.setDescription(obj.getString(Constants.JSON_DESCRIPTION).trim());
 			ui.setBranchCode(obj.getString(Constants.JSON_BRANCH).trim());
 			ui.setFileName(obj.getString(Constants.JSON_FILENAME).trim());
+			
+			//For incremental Updates
+			if(obj.has(Constants.JSON_VERSION_FOR_APPLY))
+			{
+				ui.setVersionForApply(obj.getString(Constants.JSON_VERSION_FOR_APPLY));
+			}
 
 			for (int i = 0, max = mirrorList.length() ; i < max ; i++)
 			{

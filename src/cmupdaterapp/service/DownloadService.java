@@ -80,23 +80,9 @@ public class DownloadService extends Service
 	private ConnectivityManager mConnectivityManager;
 	private ConnectionChangeReceiver myConnectionChangeReceiver;
 	private boolean connected;
-	private boolean isPaused;
-	private DownloadStatus status;
 	private String fileName;
-	private boolean resumeSupported = true;
 	private long localFileSize = 0;
 	private Preferences prefs;
-
-	private enum DownloadStatus
-	{
-	    WAITING_CONNECTION,
-	    READY,
-	    DOWNLOADING,
-	    PAUSED,
-	    FINISHED,
-	    CANCELLED,
-	    ERROR
-	}
 
     @Override
     public IBinder onBind(Intent arg0)
@@ -119,17 +105,12 @@ public class DownloadService extends Service
 		}
 		public boolean PauseDownload() throws RemoteException
 		{
-			// TODO Auto-generated method stub
-			return false;
+			//TODO: Pause Download
+			return stopDownload();
 		}
-		public boolean ResumeDownload() throws RemoteException
-		{
-			// TODO Auto-generated method stub
-			return false;
-		}
+
 		public boolean cancelDownload() throws RemoteException
 		{
-			// TODO Auto-generated method stub
 			return cancelCurrentDownload();
 		}
 		public UpdateInfo getCurrentUpdate() throws RemoteException
@@ -139,10 +120,6 @@ public class DownloadService extends Service
 		public String getCurrentMirrorName() throws RemoteException
 		{
 			return mMirrorName;
-		}
-		public boolean isPaused() throws RemoteException
-		{
-			return isPaused;
 		}
 		public void registerCallback(IDownloadServiceCallback cb)
 				throws RemoteException {
@@ -176,7 +153,6 @@ public class DownloadService extends Service
 		registerReceiver(myConnectionChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 		android.net.NetworkInfo.State state = mConnectivityManager.getActiveNetworkInfo().getState();
 		connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
-		status = DownloadStatus.WAITING_CONNECTION;
     }
 
     @Override
@@ -283,7 +259,6 @@ public class DownloadService extends Service
 		//For every Mirror
 		for(int i = 0; i < size; i++)
 		{
-			resumeSupported = false;
 			if (!prepareForDownloadCancel)
 			{
 				updateURI = updateMirrors.get((start + i)% size);
@@ -334,11 +309,9 @@ public class DownloadService extends Service
 							ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.download_resume_not_supported, 0));
 							//To get the UdpateProgressBar working correctly, when server does not support resume
 							localFileSize = 0;
-							resumeSupported = false;
 						}
 						else if (localFileSize > 0 && serverResponse == HttpStatus.SC_PARTIAL_CONTENT)
 						{
-							resumeSupported = true;
 							Log.d(TAG, "Resume supported");
 							ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.download_resume_download, 0));
 						}
@@ -475,7 +448,6 @@ public class DownloadService extends Service
 				}
 			};
 			Timer progressUpdateTimer = new Timer();
-			status = DownloadStatus.DOWNLOADING;
 			try
 			{
 				//If File exists, set the Progress to it. Otherwise it will be initial 0
@@ -491,19 +463,16 @@ public class DownloadService extends Service
 				if (!prepareForDownloadCancel)
 				{
 					partialDestinationFile.renameTo(destinationFile);
-					status = DownloadStatus.FINISHED;
 					Log.d(TAG, "Download finished");
 				}
 				else
 				{
-					status = DownloadStatus.CANCELLED;
 					Log.d(TAG, "Download cancelled");
 				}
 			}
 			catch(IOException e)
 			{
 				out.close();
-				status = DownloadStatus.ERROR;
 				try
 				{
 					destinationFile.delete();
@@ -758,6 +727,15 @@ public class DownloadService extends Service
 		}
 		mDownloading = false;
 		Log.d(TAG, "Download Cancel StopSelf was called");
+		stopSelf();
+		return true;
+	}
+	
+	private Boolean stopDownload()
+	{
+		//TODO: Pause download
+		prepareForDownloadCancel = true;
+		mDownloading = false;
 		stopSelf();
 		return true;
 	}

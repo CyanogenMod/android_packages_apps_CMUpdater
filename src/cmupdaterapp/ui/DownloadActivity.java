@@ -38,6 +38,8 @@ public class DownloadActivity extends Activity
 	private TextView mRemainingTimeTextView;
 	private String mMirrorName;
 	private String mFileName;
+	private Button mStopButton;
+	private Button mResumeButton;
 	private UpdateInfo ui;
 	//Indicates if a Service is bound 
 	private boolean mbound = false;
@@ -113,7 +115,11 @@ public class DownloadActivity extends Activity
 			mDownloadMirrorTextView.setText(mMirrorName);
 		if(mFileName != null)
 			mDownloadFilenameTextView.setText(mFileName);
-		((Button)findViewById(R.id.cancel_download_buton)).setOnClickListener(mCancelDownloadListener);
+		((Button)findViewById(R.id.cancel_download_button)).setOnClickListener(mCancelDownloadListener);
+		mStopButton = (Button)findViewById(R.id.stop_download_button);
+		mResumeButton = (Button)findViewById(R.id.resume_download_button);
+		mStopButton.setOnClickListener(mStopDownloadListener);
+		mResumeButton.setOnClickListener(mResumeDownloadListener);
 	}
 
 	@Override
@@ -238,7 +244,26 @@ public class DownloadActivity extends Activity
 			})
 			.show();
 		}
-
+	};
+	
+	private final View.OnClickListener mStopDownloadListener = new View.OnClickListener()
+	{
+		public void onClick(View arg0)
+		{
+			//TODO: Pause Download Button Listener
+			mResumeButton.setVisibility(View.VISIBLE);
+			mStopButton.setVisibility(View.GONE);
+		}
+	};
+	
+	private final View.OnClickListener mResumeDownloadListener = new View.OnClickListener()
+	{
+		public void onClick(View arg0)
+		{
+			//TODO: Resume Download Button Listener
+			mStopButton.setVisibility(View.VISIBLE);
+			mResumeButton.setVisibility(View.GONE);
+		}
 	};
 
 	public static IDownloadService myService;
@@ -312,16 +337,6 @@ public class DownloadActivity extends Activity
 		public void DownloadError() throws RemoteException
 		{
 			mHandler.sendMessage(mHandler.obtainMessage(DOWNLOAD_ERROR));
-		}
-
-		public void ResumeSupported(boolean supported) throws RemoteException
-		{
-			// TODO Auto-generated method stub	
-		}
-
-		public void noMD5Found() throws RemoteException
-		{
-			// TODO Auto-generated method stub	
 		}
 	};
 
