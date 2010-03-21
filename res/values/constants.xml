@@ -23,6 +23,7 @@
 	<string name="PREF_UPDATE_FOLDER">prefUpdateFolderNew</string>
 	<string name="PREF_UPDATE_FOLDER_DEF">prefUpdateFolderDef</string>
 	<string name="PREF_THEMES_LIST">prefThemesList</string>
+	<string name="PREF_CONFIG_THEMES">prefConfigThemes</string>
 	
 	<!-- Default Values for Preference Keys -->
 	<string name="PREF_UPDATE_CHECK_FREQUENCY_DEF_VALUE">-1</string>

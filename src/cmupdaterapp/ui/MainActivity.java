@@ -34,6 +34,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -501,19 +502,29 @@ public class MainActivity extends Activity
 		//Sets the Title to Appname + Mod Version
 		setTitle(res.getString(R.string.app_name) + " " + res.getString(R.string.title_running) + " " + SysUtils.getModVersion());
 		setContentView(R.layout.main);
+		
+		//Inflate the Screenshot View if enabled
+		if (Customization.Screenshotsupport)
+		{
+			((ViewStub) findViewById(R.id.main_stub_themes)).setVisibility(View.VISIBLE);
+		}
+		
 		flipper = (ViewFlipper)findViewById(R.id.Flipper);
 		flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_in));
 		flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_out));
 		btnAvailableUpdates = (Button)findViewById(R.id.button_available_updates);
 		btnExistingUpdates = (Button)findViewById(R.id.button_existing_updates);
 		btnAvailableThemes = (Button)findViewById(R.id.button_available_themes);
+		//Make the ScreenshotButton invisible
+		if (!Customization.Screenshotsupport)
+		{
+			btnAvailableThemes.setVisibility(View.GONE);
+		}
 
 		experimentalBuildsRomtv = (TextView) findViewById(R.id.experimental_rom_updates_textview);
 		showDowngradesRomtv = (TextView) findViewById(R.id.show_rom_downgrades_textview);
 		experimentalBuildsThemetv = (TextView) findViewById(R.id.experimental_theme_updates_textview);
-		showDowngradesThemetv = (TextView) findViewById(R.id.show_theme_downgrades_textview);
 		lastRomUpdateChecktv = (TextView) findViewById(R.id.last_rom_update_check);
-		lastThemeUpdateChecktv = (TextView) findViewById(R.id.last_theme_update_check);
 
 		//Existing Updates Layout
 		mdownloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
@@ -530,13 +541,18 @@ public class MainActivity extends Activity
 		changelogButton = (Button) findViewById(R.id.show_changelog_button);
 		
 		//Theme Layout
-		btnDownloadTheme = (Button) findViewById(R.id.download_theme_button);
-		mThemesSpinner = (Spinner) findViewById(R.id.available_themes_list);
-		tvThemeDownloadText = (TextView) findViewById(R.id.available_themes_text);
-		stableExperimentalInfoThemes = (LinearLayout) findViewById(R.id.stable_experimental_description_container_themes);
-		btnThemechangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
-		btnThemeScreenshotButton = (Button) findViewById(R.id.theme_screenshots_button);
-		tvNoThemeUpdateServer = (TextView) findViewById(R.id.no_theme_update_server_configured);
+		if (Customization.Screenshotsupport)
+		{
+			showDowngradesThemetv = (TextView) findViewById(R.id.show_theme_downgrades_textview);
+			lastThemeUpdateChecktv = (TextView) findViewById(R.id.last_theme_update_check);
+			btnDownloadTheme = (Button) findViewById(R.id.download_theme_button);
+			mThemesSpinner = (Spinner) findViewById(R.id.available_themes_list);
+			tvThemeDownloadText = (TextView) findViewById(R.id.available_themes_text);
+			stableExperimentalInfoThemes = (LinearLayout) findViewById(R.id.stable_experimental_description_container_themes);
+			btnThemechangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
+			btnThemeScreenshotButton = (Button) findViewById(R.id.theme_screenshots_button);
+			tvNoThemeUpdateServer = (TextView) findViewById(R.id.no_theme_update_server_configured);
+		}
 		
 		//No ROM Updates Found Layout
 		CheckNowUpdateChooserUpdates = (Button) findViewById(R.id.check_now_button_update_chooser_updates);
@@ -545,10 +561,13 @@ public class MainActivity extends Activity
 		CheckNowUpdateChooserUpdates.setVisibility(View.GONE);
 
 		//No Theme Updates Found Layout
-		CheckNowUpdateChooserThemes = (Button) findViewById(R.id.check_now_button_update_chooser_themes);
-		CheckNowUpdateChooserTextThemes = (TextView) findViewById(R.id.check_now_update_chooser_text_themes);
-		CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
-		CheckNowUpdateChooserThemes.setVisibility(View.GONE);
+		if (Customization.Screenshotsupport)
+		{
+			CheckNowUpdateChooserThemes = (Button) findViewById(R.id.check_now_button_update_chooser_themes);
+			CheckNowUpdateChooserTextThemes = (TextView) findViewById(R.id.check_now_update_chooser_text_themes);
+			CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
+			CheckNowUpdateChooserThemes.setVisibility(View.GONE);
+		}
 		
 		//Flipper Buttons
 		btnAvailableUpdates.setOnClickListener(new View.OnClickListener()
@@ -567,14 +586,17 @@ public class MainActivity extends Activity
 					flipper.setDisplayedChild(Constants.FLIPPER_EXISTING_UPDATES);
 			}
 		});
-		btnAvailableThemes.setOnClickListener(new View.OnClickListener()
+		if (Customization.Screenshotsupport)
 		{
-			public void onClick(View view)
+			btnAvailableThemes.setOnClickListener(new View.OnClickListener()
 			{
-				if(flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_THEMES)
-					flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_THEMES);
-			}
-		});
+				public void onClick(View view)
+				{
+					if(flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_THEMES)
+						flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_THEMES);
+				}
+			});
+		}
 	}
 
 	@Override
@@ -738,8 +760,11 @@ public class MainActivity extends Activity
 		}
 
 		//Reset all Visibilities
-		CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
-		CheckNowUpdateChooserThemes.setVisibility(View.GONE);
+		if (Customization.Screenshotsupport)
+		{
+			CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
+			CheckNowUpdateChooserThemes.setVisibility(View.GONE);
+		}
 		CheckNowUpdateChooserTextUpdates.setVisibility(View.GONE);
 		CheckNowUpdateChooserUpdates.setVisibility(View.GONE);
 		selectUploadButton.setVisibility(View.VISIBLE);
@@ -747,12 +772,15 @@ public class MainActivity extends Activity
 		DownloadText.setVisibility(View.VISIBLE);
 		stableExperimentalInfoUpdates.setVisibility(View.VISIBLE);
 		changelogButton.setVisibility(View.VISIBLE);
-		btnDownloadTheme.setVisibility(View.VISIBLE);
-		mThemesSpinner.setVisibility(View.VISIBLE);
-		tvThemeDownloadText.setVisibility(View.VISIBLE);
-		stableExperimentalInfoThemes.setVisibility(View.VISIBLE);
-		btnThemechangelogButton.setVisibility(View.VISIBLE);
-		btnThemeScreenshotButton.setVisibility(View.VISIBLE);
+		if (Customization.Screenshotsupport)
+		{
+			btnDownloadTheme.setVisibility(View.VISIBLE);
+			mThemesSpinner.setVisibility(View.VISIBLE);
+			tvThemeDownloadText.setVisibility(View.VISIBLE);
+			stableExperimentalInfoThemes.setVisibility(View.VISIBLE);
+			btnThemechangelogButton.setVisibility(View.VISIBLE);
+			btnThemeScreenshotButton.setVisibility(View.VISIBLE);
+		}
 		
 		//Theme Update File URL Set?
 		boolean ThemeUpdateUrlSet = prefs.ThemeUpdateUrlSet();
@@ -762,8 +790,8 @@ public class MainActivity extends Activity
 		//Experimental and All
 		String showExperimentalRomUpdates;
 		String showAllRomUpdates;
-		String showExperimentalThemeUpdates;
-		String showAllThemeUpdates;
+		String showExperimentalThemeUpdates = "";
+		String showAllThemeUpdates = "";
 
 		String trueString = res.getString(R.string.true_string);
 		String falseString = res.getString(R.string.false_string);
@@ -778,22 +806,27 @@ public class MainActivity extends Activity
 		else
 			showAllRomUpdates = falseString;
 
-		if(prefs.showExperimentalThemeUpdates())
-			showExperimentalThemeUpdates = trueString;
-		else
-			showExperimentalThemeUpdates = falseString;
-
-		if(prefs.showAllThemeUpdates())
-			showAllThemeUpdates = trueString;
-		else
-			showAllThemeUpdates = falseString;
-
+		if (Customization.Screenshotsupport)
+		{
+			if(prefs.showExperimentalThemeUpdates())
+				showExperimentalThemeUpdates = trueString;
+			else
+				showExperimentalThemeUpdates = falseString;
+	
+			if(prefs.showAllThemeUpdates())
+				showAllThemeUpdates = trueString;
+			else
+				showAllThemeUpdates = falseString;
+		}
 		experimentalBuildsRomtv.setText(MessageFormat.format(res.getString(R.string.p_allow_experimental_rom_versions_title)+": {0}", showExperimentalRomUpdates));
 		showDowngradesRomtv.setText(MessageFormat.format(res.getString(R.string.p_display_older_rom_versions_title)+": {0}", showAllRomUpdates));
-		experimentalBuildsThemetv.setText(MessageFormat.format(res.getString(R.string.p_allow_experimental_theme_versions_title)+": {0}", showExperimentalThemeUpdates));
-		showDowngradesThemetv.setText(MessageFormat.format(res.getString(R.string.p_display_older_theme_versions_title)+": {0}", showAllThemeUpdates));
+		if (Customization.Screenshotsupport)
+		{
+			experimentalBuildsThemetv.setText(MessageFormat.format(res.getString(R.string.p_allow_experimental_theme_versions_title)+": {0}", showExperimentalThemeUpdates));
+			showDowngradesThemetv.setText(MessageFormat.format(res.getString(R.string.p_display_older_theme_versions_title)+": {0}", showAllThemeUpdates));
+			lastThemeUpdateChecktv.setText(res.getString(R.string.last_update_check_text) + ": " + prefs.getLastUpdateCheckString());
+		}
 		lastRomUpdateChecktv.setText(res.getString(R.string.last_update_check_text) + ": " + prefs.getLastUpdateCheckString());
-		lastThemeUpdateChecktv.setText(res.getString(R.string.last_update_check_text) + ": " + prefs.getLastUpdateCheckString());
 
 		//Sets the Theme and Rom Variables
 		List<UpdateInfo> availableRoms = null;
@@ -802,7 +835,7 @@ public class MainActivity extends Activity
 		{
 			if (mAvailableUpdates.roms != null)
 				availableRoms = mAvailableUpdates.roms;
-			if (mAvailableUpdates.themes != null)
+			if (Customization.Screenshotsupport && mAvailableUpdates.themes != null)
 				availableThemes = mAvailableUpdates.themes;
 			//Add the incrementalUpdates
 			if (mAvailableUpdates.incrementalRoms != null)
@@ -841,45 +874,48 @@ public class MainActivity extends Activity
 
 		//Theme Layout
 		//Update URL Set?
-		if (!ThemeUpdateUrlSet)
+		if (Customization.Screenshotsupport)
 		{
-			tvNoThemeUpdateServer.setVisibility(View.VISIBLE);
-			btnDownloadTheme.setVisibility(View.GONE);
-			mThemesSpinner.setVisibility(View.GONE);
-			tvThemeDownloadText.setVisibility(View.GONE);
-			stableExperimentalInfoThemes.setVisibility(View.GONE);
-			btnThemechangelogButton.setVisibility(View.GONE);
-			btnThemeScreenshotButton.setVisibility(View.GONE);
-			CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
-			CheckNowUpdateChooserThemes.setVisibility(View.GONE);
+			if (!ThemeUpdateUrlSet)
+			{
+				tvNoThemeUpdateServer.setVisibility(View.VISIBLE);
+				btnDownloadTheme.setVisibility(View.GONE);
+				mThemesSpinner.setVisibility(View.GONE);
+				tvThemeDownloadText.setVisibility(View.GONE);
+				stableExperimentalInfoThemes.setVisibility(View.GONE);
+				btnThemechangelogButton.setVisibility(View.GONE);
+				btnThemeScreenshotButton.setVisibility(View.GONE);
+				CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
+				CheckNowUpdateChooserThemes.setVisibility(View.GONE);
+			}
+			//Themes
+			else if(availableThemes != null && availableThemes.size() > 0)
+			{
+				btnDownloadTheme.setOnClickListener(ButtonOnClickListener);
+				btnThemechangelogButton.setOnClickListener(ButtonOnClickListener);
+				btnThemeScreenshotButton.setOnClickListener(ButtonOnClickListener);
+				mThemesSpinner.setOnItemSelectedListener(mThemeSpinnerChanged);
+	
+				UpdateListAdapter<UpdateInfo> spAdapterThemes = new UpdateListAdapter<UpdateInfo>(
+						this,
+						android.R.layout.simple_spinner_item,
+						availableThemes);
+				spAdapterThemes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				mThemesSpinner.setAdapter(spAdapterThemes);
+			}
+			//No Updates Found
+			else
+			{
+				btnDownloadTheme.setVisibility(View.GONE);
+				mThemesSpinner.setVisibility(View.GONE);
+				tvThemeDownloadText.setVisibility(View.GONE);
+				stableExperimentalInfoThemes.setVisibility(View.GONE);
+				btnThemechangelogButton.setVisibility(View.GONE);
+				btnThemeScreenshotButton.setVisibility(View.GONE);
+				CheckNowUpdateChooserTextThemes.setVisibility(View.VISIBLE);
+				CheckNowUpdateChooserThemes.setVisibility(View.VISIBLE);
+				CheckNowUpdateChooserThemes.setOnClickListener(ButtonOnClickListener);
 		}
-		//Themes
-		else if(availableThemes != null && availableThemes.size() > 0)
-		{
-			btnDownloadTheme.setOnClickListener(ButtonOnClickListener);
-			btnThemechangelogButton.setOnClickListener(ButtonOnClickListener);
-			btnThemeScreenshotButton.setOnClickListener(ButtonOnClickListener);
-			mThemesSpinner.setOnItemSelectedListener(mThemeSpinnerChanged);
-
-			UpdateListAdapter<UpdateInfo> spAdapterThemes = new UpdateListAdapter<UpdateInfo>(
-					this,
-					android.R.layout.simple_spinner_item,
-					availableThemes);
-			spAdapterThemes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			mThemesSpinner.setAdapter(spAdapterThemes);
-		}
-		//No Updates Found
-		else
-		{
-			btnDownloadTheme.setVisibility(View.GONE);
-			mThemesSpinner.setVisibility(View.GONE);
-			tvThemeDownloadText.setVisibility(View.GONE);
-			stableExperimentalInfoThemes.setVisibility(View.GONE);
-			btnThemechangelogButton.setVisibility(View.GONE);
-			btnThemeScreenshotButton.setVisibility(View.GONE);
-			CheckNowUpdateChooserTextThemes.setVisibility(View.VISIBLE);
-			CheckNowUpdateChooserThemes.setVisibility(View.VISIBLE);
-			CheckNowUpdateChooserThemes.setOnClickListener(ButtonOnClickListener);
 		}
 
 		//Existing Updates Layout

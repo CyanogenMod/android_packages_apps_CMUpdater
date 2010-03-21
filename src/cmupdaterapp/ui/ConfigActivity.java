@@ -14,6 +14,7 @@ import android.webkit.URLUtil;
 import android.widget.Toast;
 import cmupdaterapp.receiver.StartupReceiver;
 import cmupdaterapp.utils.Preferences;
+import cmupdaterapp.customization.Customization;
 import cmupdaterapp.misc.Log;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -49,6 +50,14 @@ public class ConfigActivity extends PreferenceActivity
 
 		prefs = new Preferences(this);
 		res = getResources();
+		
+		//Enable/Disable the Screenshot Settings
+		if (!Customization.Screenshotsupport)
+		{
+			Preference temp = findPreference(res.getString(R.string.PREF_CONFIG_THEMES)); 
+			temp.setEnabled(false);
+			temp.setSummary(R.string.config_themes_nosupport);
+		}
 
 		ListPreference updateCheckFreqPref = (ListPreference) findPreference(res.getString(R.string.PREF_UPDATE_CHECK_FREQUENCY));
 

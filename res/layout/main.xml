@@ -26,7 +26,7 @@
 				android:layout_height="wrap_content"
 				android:text="@string/button_available_themes"
 				android:layout_marginTop="10sp"
-				style="@style/TextAppearance.Button"/>	
+				style="@style/TextAppearance.Button"/>
 			<Button
 				android:id="@+id/button_existing_updates"
 				android:layout_width="fill_parent"
@@ -198,131 +198,11 @@
 			</LinearLayout>
 		</ScrollView>
 		<!-- Themes -->
-		<ScrollView
+		<ViewStub
+  			android:id="@+id/main_stub_themes"
+			android:layout="@layout/main_themesstub"
 			android:layout_width="fill_parent"
-			android:layout_height="fill_parent">
-		    <LinearLayout 
-		    	android:orientation="vertical"
-		    	android:layout_width="fill_parent"
-		    	android:layout_height="wrap_content"
-		    	android:gravity="center_horizontal">
-			    <TextView
-			    	android:id="@+id/no_theme_update_server_configured"
-			    	android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:text="@string/no_theme_update_server_configured"
-					android:gravity="center_horizontal"
-					android:layout_marginTop="10sp"
-			    	style="@style/TextAppearance.Text"
-			    	android:visibility="gone" />
-			    <TextView
-			    	android:id="@+id/available_themes_text"
-			    	android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:text="@string/available_themes_text"
-					android:gravity="center_horizontal"
-					android:layout_marginTop="10sp"
-			    	style="@style/TextAppearance.Text" />
-				<Spinner
-					android:id="@+id/available_themes_list"
-					android:layout_marginTop="20sp"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center_horizontal"
-					android:prompt="@string/available_themes_text" />
-				<LinearLayout
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="20sp"
-					android:id="@+id/stable_experimental_description_container_themes">
-					<ImageView
-						android:layout_height="wrap_content"
-						android:layout_width="wrap_content"
-						android:src="@drawable/stable" />
-					<TextView
-						android:layout_width="fill_parent"
-						android:layout_height="wrap_content"
-						android:gravity="center_horizontal"
-						android:text="@string/stable_description"
-						style="@style/TextAppearance.Text"
-						android:paddingTop="2px"
-						android:layout_marginLeft="5px"
-						android:layout_marginRight="20px"/>
-					<ImageView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:src="@drawable/experimental" />
-					<TextView
-						android:layout_width="fill_parent"
-						android:layout_height="wrap_content"
-						android:gravity="center_horizontal" 
-						android:text="@string/experimental_description"
-						style="@style/TextAppearance.Text"
-						android:paddingTop="2px"
-						android:layout_marginLeft="5px"/>
-				</LinearLayout>
-			    <Button
-			    	android:id="@+id/download_theme_button"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="@string/choose_available_theme_text"
-					android:layout_marginTop="20sp"
-				    style="@style/TextAppearance.Button"
-				    android:drawableLeft="@drawable/download" />
-				<Button
-			    	android:id="@+id/theme_screenshots_button"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="@string/screenshot_button_theme_text"
-					android:layout_marginTop="20sp"
-				    style="@style/TextAppearance.Button"
-				    android:drawableLeft="@drawable/button_gallery" />
-				<Button
-			    	android:id="@+id/show_theme_changelog_button"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="@string/changelog_button_theme_text"
-					android:layout_marginTop="20sp"
-				    style="@style/TextAppearance.Button"
-				    android:drawableLeft="@drawable/icon" />
-				<TextView
-			    	android:id="@+id/check_now_update_chooser_text_themes"
-			    	android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:text="@string/no_themes_found_instructions"
-					android:gravity="center_horizontal"
-					android:layout_marginTop="10sp"
-			    	style="@style/TextAppearance.Text" />
-				<Button
-				    android:id="@+id/check_now_button_update_chooser_themes"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="@string/check_now_button_text"
-					android:layout_marginTop="20sp"
-				    style="@style/TextAppearance.Button"
-				    android:drawableLeft="@drawable/check_now"/>
-				<TextView
-				    android:id="@+id/last_theme_update_check"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="10px"
-					android:layout_marginRight="10px"
-					android:layout_gravity="bottom|right" />
-				<TextView
-			    	android:id="@+id/experimental_theme_updates_textview"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="10px"
-					android:layout_marginRight="10px"
-					android:layout_gravity="bottom|right" />
-				<TextView
-			    	android:id="@+id/show_theme_downgrades_textview"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="10px"
-					android:layout_marginRight="10px"
-					android:layout_gravity="bottom|right" />
-			</LinearLayout>
-		</ScrollView>
+			android:layout_height="fill_parent"
+			android:layout_gravity="bottom" />
 	</ViewFlipper>
 </LinearLayout>

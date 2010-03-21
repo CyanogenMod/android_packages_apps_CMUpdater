@@ -303,21 +303,24 @@ public class UpdateCheckService extends Service
 		HttpEntity romResponseEntity = null;
 		HttpEntity themeResponseEntity = null;
 		systemRom = SysUtils.getModVersion();
-		themeInfos = mPreferences.getThemeInformations();
+		if (Customization.Screenshotsupport) themeInfos = mPreferences.getThemeInformations();
 		showExperimentalRomUpdates = mPreferences.showExperimentalRomUpdates();
 		showAllRomUpdates = mPreferences.showAllRomUpdates();
-		showExperimentalThemeUpdates = mPreferences.showExperimentalThemeUpdates();
-		showAllThemeUpdates = mPreferences.showAllThemeUpdates();
-		boolean ThemeUpdateUrlSet = mPreferences.ThemeUpdateUrlSet();
-
-		//If Wildcard is used or no themes.theme file present set the variable
-		if (themeInfos == null || themeInfos.name.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
+		boolean ThemeUpdateUrlSet = false;
+		if (Customization.Screenshotsupport)
 		{
-			Log.d(TAG, "Wildcard is used for Theme Updates");
-			themeInfos = new ThemeInfo();
-			WildcardUsed = true;
-		}
+			showExperimentalThemeUpdates = mPreferences.showExperimentalThemeUpdates();
+			showAllThemeUpdates = mPreferences.showAllThemeUpdates();
+			ThemeUpdateUrlSet = mPreferences.ThemeUpdateUrlSet();
 
+			//If Wildcard is used or no themes.theme file present set the variable
+			if (themeInfos == null || themeInfos.name.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
+			{
+				Log.d(TAG, "Wildcard is used for Theme Updates");
+				themeInfos = new ThemeInfo();
+				WildcardUsed = true;
+			}
+		}
 		//Get the actual Rom Updateserver URL
 		try
 		{
@@ -341,7 +344,7 @@ public class UpdateCheckService extends Service
 		}
 
 		//Get the actual Theme Updateserver URL
-		if(ThemeUpdateUrlSet)
+		if(Customization.Screenshotsupport && ThemeUpdateUrlSet)
 		{
 			try
 			{

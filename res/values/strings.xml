@@ -280,4 +280,5 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="download_not_enough_space">Not Enough Space on SDCard to download the Udpate</string>
 	<string name="download_stop_download_Button">Pause/Stop Download</string>
 	<string name="download_resume_download_Button">Resume Download</string>
+	<string name="config_themes_nosupport">This Updater was built without Screenshotsupport</string>
 </resources>

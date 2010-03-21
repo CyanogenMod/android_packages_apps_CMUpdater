@@ -73,6 +73,7 @@
 	</PreferenceScreen>
 	<!-- Theme -->
 	<PreferenceScreen
+		android:key="@string/PREF_CONFIG_THEMES"
 		android:title="@string/p_theme_screen_title"
 		android:summary="@string/p_theme_screen_summary" >
 		<CheckBoxPreference

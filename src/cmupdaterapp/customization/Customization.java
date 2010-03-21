@@ -18,4 +18,6 @@ public class Customization
 	public static final String BOARD = "ro.product.board";
 	//Name of the Current Rom
 	public static final String SYS_PROP_MOD_VERSION = "ro.modversion";
+	//Screenshotsupport?
+	public static final Boolean Screenshotsupport = true;
 }
