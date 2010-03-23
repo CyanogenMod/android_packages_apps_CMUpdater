@@ -10,6 +10,7 @@ import cmupdaterapp.customTypes.FullThemeList;
 import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
+import cmupdaterapp.ui.MainActivity;
 
 public class FeaturedThemesHandler extends DefaultHandler
 {
@@ -69,7 +70,7 @@ public class FeaturedThemesHandler extends DefaultHandler
 			if(!error)
 				fullThemeList.addThemeToList(currentTheme);
 			else
-				Log.d(TAG, "There was an error in the XML File. A value was NULL");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "There was an error in the XML File. A value was NULL");
 			currentTheme = null;
 		}
 	}

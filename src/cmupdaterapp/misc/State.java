@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.customization.Customization;
+import cmupdaterapp.ui.MainActivity;
 import android.content.Context;
 
 public class State
@@ -16,8 +17,8 @@ public class State
 
 	public static void saveState(Context ctx, Serializable mAvailableUpdates) throws IOException
 	{
-		Log.d(TAG, "Called SaveState");
-		Log.d(TAG, "Updatecount: " + ((FullUpdateInfo)mAvailableUpdates).getUpdateCount());
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Called SaveState");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Updatecount: " + ((FullUpdateInfo)mAvailableUpdates).getUpdateCount());
 		ObjectOutputStream oos = new ObjectOutputStream(ctx.openFileOutput(Customization.STORED_STATE_FILENAME, Context.MODE_PRIVATE));
 		try
 		{
@@ -39,7 +40,7 @@ public class State
 	@SuppressWarnings("unchecked")
 	public static FullUpdateInfo loadState(Context ctx) throws IOException
 	{
-		Log.d(TAG, "Called LoadState");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Called LoadState");
 		FullUpdateInfo mAvailableUpdates = new FullUpdateInfo();
 		ObjectInputStream ois = null;
 		try
@@ -63,7 +64,7 @@ public class State
 			if(ois != null)
 				ois.close();
 		}
-		Log.d(TAG, "LoadedUpdates: " + mAvailableUpdates.getUpdateCount());
+		if (MainActivity.showDebugOutput) Log.d(TAG, "LoadedUpdates: " + mAvailableUpdates.getUpdateCount());
 		return mAvailableUpdates;
 	}
 }

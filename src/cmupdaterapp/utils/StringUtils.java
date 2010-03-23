@@ -3,6 +3,7 @@ package cmupdaterapp.utils;
 import java.util.ArrayList;
 
 import cmupdaterapp.misc.Log;
+import cmupdaterapp.ui.MainActivity;
 
 public class StringUtils
 {
@@ -47,7 +48,7 @@ public class StringUtils
 	 */
 	public static boolean compareVersions(String newVersion, String oldVersion)
 	{
-		Log.d(TAG, "NewVersion: " + newVersion + ", oldVersion: " + oldVersion);
+		if (MainActivity.showDebugOutput) Log.d(TAG, "NewVersion: " + newVersion + ", oldVersion: " + oldVersion);
 		if (newVersion.equals(oldVersion))
 			return false;
 		

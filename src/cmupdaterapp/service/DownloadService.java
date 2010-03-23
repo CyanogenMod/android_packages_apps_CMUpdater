@@ -136,7 +136,7 @@ public class DownloadService extends Service
     @Override
 	public void onCreate()
     {
-    	Log.d(TAG, "Download Service Created");
+    	if (MainActivity.showDebugOutput) Log.d(TAG, "Download Service Created");
 
     	prefs = new Preferences(this);
     	
@@ -165,7 +165,7 @@ public class DownloadService extends Service
 
     private boolean checkForConnectionAndUpdate(UpdateInfo updateToDownload)
 	{
-		Log.d(TAG, "Called CheckForConnectionAndUpdate");
+    	if (MainActivity.showDebugOutput) Log.d(TAG, "Called CheckForConnectionAndUpdate");
 		mCurrentUpdate = updateToDownload;
 
 		boolean success;
@@ -174,7 +174,7 @@ public class DownloadService extends Service
 		//wait for a data connection
 		while(!connected)
 		{
-			Log.d(TAG, "No data connection, waiting for a data connection");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "No data connection, waiting for a data connection");
 			synchronized (mConnectivityManager)
 			{
 				try
@@ -190,7 +190,7 @@ public class DownloadService extends Service
 		}
 		try
 		{
-			Log.d(TAG, "Downloading update...");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Downloading update...");
 			success = downloadFile(updateToDownload);
 		}
 		catch (RuntimeException ex)
@@ -218,7 +218,7 @@ public class DownloadService extends Service
 
 	private boolean downloadFile(UpdateInfo updateInfo) throws IOException
 	{
-		Log.d(TAG, "Called downloadFile");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Called downloadFile");
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpClient MD5httpClient = new DefaultHttpClient();
 
@@ -228,7 +228,7 @@ public class DownloadService extends Service
 		List<URI> updateMirrors = updateInfo.updateFileUris();
 		int size = updateMirrors.size();
 		int start = new Random().nextInt(size);
-		Log.d(TAG, "Mirrorcount: " + size);
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Mirrorcount: " + size);
 		URI updateURI;
 		File destinationFile = null;
 		File partialDestinationFile = null;
@@ -240,7 +240,7 @@ public class DownloadService extends Service
 		if (!directory.exists())
 		{
 			directory.mkdirs();
-			Log.d(TAG, "UpdateFolder created");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "UpdateFolder created");
 		}
 
 		fileName = updateInfo.getFileName(); 
@@ -248,7 +248,7 @@ public class DownloadService extends Service
 		{
 			fileName = "update.zip";
 		}
-		Log.d(TAG, "fileName: " + fileName);
+		if (MainActivity.showDebugOutput) Log.d(TAG, "fileName: " + fileName);
 
 		//Set the Filename to update.zip.partial
 		partialDestinationFile = new File(fullUpdateFolderPath, fileName + ".partial");
@@ -263,7 +263,7 @@ public class DownloadService extends Service
 			{
 				updateURI = updateMirrors.get((start + i)% size);
 				mMirrorName = updateURI.getHost();
-				Log.d(TAG, "Mirrorname: " + mMirrorName);
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Mirrorname: " + mMirrorName);
 
 				boolean md5Available = true;
 
@@ -277,13 +277,13 @@ public class DownloadService extends Service
 					req.addHeader("Cache-Control", "no-cache");
 					md5req.addHeader("Cache-Control", "no-cache");
 
-					Log.d(TAG, "Trying to download md5sum file from " + md5req.getURI());
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Trying to download md5sum file from " + md5req.getURI());
 					md5response = MD5httpClient.execute(md5req);
-					Log.d(TAG, "Trying to download update zip from " + req.getURI());
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Trying to download update zip from " + req.getURI());
 
 					if (localFileSize > 0)
 					{
-						Log.d(TAG, "localFileSize for Resume: " + localFileSize);
+						if (MainActivity.showDebugOutput) Log.d(TAG, "localFileSize for Resume: " + localFileSize);
 	                    req.addHeader("Range", "bytes=" + localFileSize + "-");
 					}
 					response = httpClient.execute(req);
@@ -293,11 +293,11 @@ public class DownloadService extends Service
 
 					if (serverResponse == HttpStatus.SC_NOT_FOUND)
 					{
-						Log.d(TAG, "File not found on Server. Trying next one.");
+						if (MainActivity.showDebugOutput) Log.d(TAG, "File not found on Server. Trying next one.");
 					}
 					else if(serverResponse != HttpStatus.SC_OK && serverResponse != HttpStatus.SC_PARTIAL_CONTENT)
 					{
-						Log.d(TAG, "Server returned status code " + serverResponse + " for update zip trying next mirror");
+						if (MainActivity.showDebugOutput) Log.d(TAG, "Server returned status code " + serverResponse + " for update zip trying next mirror");
 					}
 					else
 					{
@@ -305,21 +305,21 @@ public class DownloadService extends Service
 						if (localFileSize > 0 && serverResponse != HttpStatus.SC_PARTIAL_CONTENT)
 						{
 							//TODO: continue to next mirror if resume not supported
-							Log.d(TAG, "Resume not supported");
+							if (MainActivity.showDebugOutput) Log.d(TAG, "Resume not supported");
 							ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.download_resume_not_supported, 0));
 							//To get the UdpateProgressBar working correctly, when server does not support resume
 							localFileSize = 0;
 						}
 						else if (localFileSize > 0 && serverResponse == HttpStatus.SC_PARTIAL_CONTENT)
 						{
-							Log.d(TAG, "Resume supported");
+							if (MainActivity.showDebugOutput) Log.d(TAG, "Resume supported");
 							ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.download_resume_download, 0));
 						}
 
 						if (md5serverResponse != HttpStatus.SC_OK)
 						{
 							md5Available = false;
-							Log.d(TAG, "Server returned status code " + md5serverResponse + " for update zip md5sum. Downloading without it");
+							if (MainActivity.showDebugOutput) Log.d(TAG, "Server returned status code " + md5serverResponse + " for update zip md5sum. Downloading without it");
 						}
 
 						if (md5Available)
@@ -329,12 +329,12 @@ public class DownloadService extends Service
 
 							try
 							{
-								Log.d(TAG, "Trying to Read MD5 hash from response");
+								if (MainActivity.showDebugOutput) Log.d(TAG, "Trying to Read MD5 hash from response");
 								HttpEntity temp = md5response.getEntity();
 								InputStreamReader isr = new InputStreamReader(temp.getContent());
 								BufferedReader br = new BufferedReader(isr);
 								downloadedMD5 = br.readLine().split("  ")[0];
-								Log.d(TAG, "MD5: " + downloadedMD5);
+								if (MainActivity.showDebugOutput) Log.d(TAG, "MD5: " + downloadedMD5);
 								br.close();
 								isr.close();
 
@@ -360,25 +360,25 @@ public class DownloadService extends Service
 						//Was the download canceled?
 						if(prepareForDownloadCancel)
 						{
-							Log.d(TAG, "Download was canceled. Break the for loop");
+							if (MainActivity.showDebugOutput) Log.d(TAG, "Download was canceled. Break the for loop");
 							break;
 						}
 						if (entity != null && !prepareForDownloadCancel)
 						{
-							Log.d(TAG, "Consuming entity....");
+							if (MainActivity.showDebugOutput) Log.d(TAG, "Consuming entity....");
 							entity.consumeContent();
-							Log.d(TAG, "Entity consumed");
+							if (MainActivity.showDebugOutput) Log.d(TAG, "Entity consumed");
 						}
 						else
 						{
-							Log.d(TAG, "Entity resetted to NULL");
+							if (MainActivity.showDebugOutput) Log.d(TAG, "Entity resetted to NULL");
 							entity = null;
 						}
-						Log.d(TAG, "Update download finished");
+						if (MainActivity.showDebugOutput) Log.d(TAG, "Update download finished");
 
 						if (md5Available)
 						{
-							Log.d(TAG, "Performing MD5 verification");
+							if (MainActivity.showDebugOutput) Log.d(TAG, "Performing MD5 verification");
 							if(!MD5.checkMD5(downloadedMD5, destinationFile))
 							{
 								throw new IOException(res.getString(R.string.md5_verification_failed));
@@ -405,28 +405,28 @@ public class DownloadService extends Service
 			}
 			else
 			{
-				Log.d(TAG, "Not trying any more mirrors, download canceled");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Not trying any more mirrors, download canceled");
 				break;
 			}
 		}
 		ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.unable_to_download_file, 0));
-		Log.d(TAG, "Unable to download the update file from any mirror");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Unable to download the update file from any mirror");
 		return false;
 	}
 
 	private void dumpFile(HttpEntity entity, File partialDestinationFile, File destinationFile) throws IOException, NotEnoughSpaceException
 	{
-		Log.d(TAG, "DumpFile Called");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "DumpFile Called");
 		if(!prepareForDownloadCancel)
 		{
 			mcontentLength = (int) entity.getContentLength();
 			if(mcontentLength <= 0)
 			{
-				Log.d(TAG, "unable to determine the update file size, Set ContentLength to 1024");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "unable to determine the update file size, Set ContentLength to 1024");
 				mcontentLength = 1024;
 			}
 			else
-				Log.d(TAG, "Update size: " + (mcontentLength/1024) + "KB" );
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Update size: " + (mcontentLength/1024) + "KB" );
 
 			//Check if there is enough Space on SDCard for Downloading the Update
 			if (!SysUtils.EnoughSpaceOnSdCard(mcontentLength))
@@ -463,11 +463,11 @@ public class DownloadService extends Service
 				if (!prepareForDownloadCancel)
 				{
 					partialDestinationFile.renameTo(destinationFile);
-					Log.d(TAG, "Download finished");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Download finished");
 				}
 				else
 				{
-					Log.d(TAG, "Download cancelled");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Download cancelled");
 				}
 			}
 			catch(IOException e)
@@ -489,12 +489,12 @@ public class DownloadService extends Service
 			}
 		}
 		else
-			Log.d(TAG, "Download Cancel in Progress. Don't start Downloading");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Download Cancel in Progress. Don't start Downloading");
 	}
 
 	private void writeMD5(File md5File, String md5) throws IOException
 	{
-		Log.d(TAG, "Writing the calculated MD5 to disk");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Writing the calculated MD5 to disk");
 		FileWriter fw = new FileWriter(md5File);
 		try
 		{
@@ -549,17 +549,17 @@ public class DownloadService extends Service
 			UpdateDownloadProgress(mtotalDownloaded, (int) contentLengthOfFullDownload, stringDownloaded, stringSpeed, stringRemainingTime);
 		}
 		else
-			Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
 	}
 
 	private void notifyUser(UpdateInfo ui, boolean success)
 	{
-		Log.d(TAG, "Called Notify User");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Called Notify User");
 		Intent i;
 
 		if(!success)
 		{
-			Log.d(TAG, "Downloaded Update was NULL");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Downloaded Update was NULL");
 			DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 			DownloadError();
 			return;
@@ -625,7 +625,7 @@ public class DownloadService extends Service
 			notification.sound = notificationRingtone;
 		}
 		((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).notify(R.string.not_update_download_error_title, notification);
-		Log.d(TAG, "Download Error");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Download Error");
 		ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.exception_while_downloading, 0));
 	}
 	
@@ -633,7 +633,7 @@ public class DownloadService extends Service
 	{
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		mNotificationManager.cancel(id);
-		Log.d(TAG, "Download Notification removed");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Download Notification removed");
 	}
 	
 	private void UpdateDownloadProgress(final long downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
@@ -711,22 +711,22 @@ public class DownloadService extends Service
 	private boolean cancelCurrentDownload()
 	{
 		prepareForDownloadCancel = true;
-		Log.d(TAG, "Download Service CancelDownload was called");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Download Service CancelDownload was called");
 		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 		File update = new File(fullUpdateFolderPath + "/" + mCurrentUpdate.getFileName());
 		File md5sum = new File(fullUpdateFolderPath + "/" + mCurrentUpdate.getFileName() + ".md5sum");
 		if(update.exists())
 		{
 			update.delete();
-			Log.d(TAG, update.getAbsolutePath() + " deleted");
+			if (MainActivity.showDebugOutput) Log.d(TAG, update.getAbsolutePath() + " deleted");
 		}
 		if(md5sum.exists())
 		{
 			md5sum.delete();
-			Log.d(TAG, md5sum.getAbsolutePath() + " deleted");
+			if (MainActivity.showDebugOutput) Log.d(TAG, md5sum.getAbsolutePath() + " deleted");
 		}
 		mDownloading = false;
-		Log.d(TAG, "Download Cancel StopSelf was called");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Download Cancel StopSelf was called");
 		stopSelf();
 		return true;
 	}

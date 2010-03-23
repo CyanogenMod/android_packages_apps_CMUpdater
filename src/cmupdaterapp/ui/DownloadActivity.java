@@ -48,30 +48,30 @@ public class DownloadActivity extends Activity
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		Log.d(TAG, "onCreate called");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "onCreate called");
 		super.onCreate(savedInstanceState);
 		Intent i = getIntent();
 		Bundle b = i.getExtras();
 		if (b!=null)
 		{
 			ui = (UpdateInfo) b.get(Constants.KEY_UPDATE_INFO);
-			Log.d(TAG, "Got UpdateInfo from Intent");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Got UpdateInfo from Intent");
 		}
 		//If no Intent, ui will be null so get the UpdateInfo from State
 		if (savedInstanceState != null)
 		{
 			ui = savedInstanceState.getParcelable(Constants.KEY_UPDATE_INFO);
-			Log.d(TAG, "Restored UpdateInfo from State");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Restored UpdateInfo from State");
 		}
 		else
-			Log.d(TAG, "savedInstanceState was null");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "savedInstanceState was null");
 		setContentView(R.layout.download);
 	}
 
 	@Override
 	protected void onResume()
 	{
-		Log.d(TAG, "onResume called");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "onResume called");
 		super.onResume();
 
 		try
@@ -80,13 +80,13 @@ public class DownloadActivity extends Activity
 			{
 				ui = myService.getCurrentUpdate();
 				myService.registerCallback(mCallback);
-				Log.d(TAG, "Retrieved update from DownloadService");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Retrieved update from DownloadService");
 				mMirrorName = myService.getCurrentMirrorName();
 				mbound = true;
 			}
 			else
 			{
-				Log.d(TAG, "Not downloading");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Not downloading");
 				serviceIntent = new Intent(IDownloadService.class.getName());
 				ComponentName comp = startService(serviceIntent);
 				if (comp == null)
@@ -125,7 +125,7 @@ public class DownloadActivity extends Activity
 	@Override
 	protected void onDestroy()
 	{
-		Log.d(TAG, "onDestroy called");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "onDestroy called");
 		try
 		{
 			if(myService != null && !myService.DownloadRunning())
@@ -133,21 +133,21 @@ public class DownloadActivity extends Activity
 				if(mbound)
 				{
 					unbindService(mConnection);
-					Log.d(TAG, "mUpdateDownloaderServiceConnection unbind finished");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "mUpdateDownloaderServiceConnection unbind finished");
 					mbound = false;
 				}
 				else
-					Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
 			}
 			else
-				Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
 		}
 		catch (RemoteException e)
 		{
 			Log.e(TAG, "Exception on calling DownloadService", e);
 		}
 		boolean stopped = stopService(serviceIntent);
-		Log.d(TAG, "DownloadService stopped: " + stopped);
+		if (MainActivity.showDebugOutput) Log.d(TAG, "DownloadService stopped: " + stopped);
 		super.onDestroy();
 	}
 
@@ -207,7 +207,7 @@ public class DownloadActivity extends Activity
 			{
 				public void onClick(DialogInterface dialog, int which)
 				{
-					Log.d(TAG, "Positive Download Cancel Button pressed");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Positive Download Cancel Button pressed");
 					if (myService!=null)
 					{
 						try
@@ -218,19 +218,19 @@ public class DownloadActivity extends Activity
 						{
 							Log.e(TAG, "Exception on calling DownloadService", e);
 						}
-						Log.d(TAG, "Cancel onClick Event: cancelDownload finished");
+						if (MainActivity.showDebugOutput) Log.d(TAG, "Cancel onClick Event: cancelDownload finished");
 					}
 					else
-						Log.d(TAG, "Cancel Download: mUpdateDownloaderService was NULL");
+						if (MainActivity.showDebugOutput) Log.d(TAG, "Cancel Download: mUpdateDownloaderService was NULL");
 					if(mbound)
 					{
 						unbindService(mConnection);
-						Log.d(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
+						if (MainActivity.showDebugOutput) Log.d(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
 						mbound = false;
 					}
 					else
-						Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
-					Log.d(TAG, "Download Cancel Procedure Finished. Switching Layout");
+						if (MainActivity.showDebugOutput) Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Download Cancel Procedure Finished. Switching Layout");
 					finish();
 				}
 			})
@@ -238,7 +238,7 @@ public class DownloadActivity extends Activity
 			{
 				public void onClick(DialogInterface dialog, int which)
 				{
-					Log.d(TAG, "Negative Download Cancel Button pressed");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Negative Download Cancel Button pressed");
 					dialog.dismiss();
 				}
 			})
@@ -406,7 +406,7 @@ public class DownloadActivity extends Activity
 	protected void onSaveInstanceState(Bundle outState)
 	{
 		super.onSaveInstanceState(outState);
-		Log.d(TAG, "Called onSaveInstanceState");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Called onSaveInstanceState");
 		outState.putParcelable(Constants.KEY_UPDATE_INFO, ui);
 	}
 }

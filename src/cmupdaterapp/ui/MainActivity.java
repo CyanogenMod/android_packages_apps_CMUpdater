@@ -65,7 +65,9 @@ import cmupdaterapp.changelog.Changelog.ChangelogType;
 public class MainActivity extends Activity
 {
 	private static final String TAG = "MainActivity";
-
+	
+	public static Boolean showDebugOutput = false;
+	
 	private Spinner mUpdatesSpinner;
 	private Spinner mThemesSpinner;
 	private FullUpdateInfo mAvailableUpdates;
@@ -149,7 +151,7 @@ public class MainActivity extends Activity
 	
 	private void ScreenshotThemesListener()
 	{
-		Log.d(TAG, "Theme Screenshot Button clicked");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Theme Screenshot Button clicked");
 		final UpdateInfo ui = (UpdateInfo) mThemesSpinner.getSelectedItem();
 		Intent i = new Intent(MainActivity.this, ScreenshotActivity.class);
 		i.putExtra(Constants.SCREENSHOTS_UPDATE, (Serializable)ui);
@@ -174,7 +176,7 @@ public class MainActivity extends Activity
 			.show();
 			return;
 		}
-		Log.d(TAG, "Download Rom Button clicked");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Download Rom Button clicked");
 		final UpdateInfo ui = (UpdateInfo) mUpdatesSpinner.getSelectedItem();
 		//Check if the File is present, so prompt the User to overwrite it
 		final File foo = new File(mUpdateFolder + "/" + ui.getFileName());
@@ -194,7 +196,7 @@ public class MainActivity extends Activity
 			{
 				public void onClick(DialogInterface dialog, int which)
 				{
-					Log.d(TAG, "Start downlading Rom update: " + ui.getFileName());
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Start downlading Rom update: " + ui.getFileName());
 					foo.delete();
 					downloadRequestedUpdate(ui);
 				}
@@ -227,7 +229,7 @@ public class MainActivity extends Activity
 			return;
 		}
 			
-		Log.d(TAG, "Download Theme Button clicked");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Download Theme Button clicked");
 		final UpdateInfo ui = (UpdateInfo) mThemesSpinner.getSelectedItem();
 		//Check if the File is present, so prompt the User to overwrite it
 		File foo = new File(mUpdateFolder + "/" + ui.getFileName());
@@ -247,7 +249,7 @@ public class MainActivity extends Activity
 			{
 				public void onClick(DialogInterface dialog, int which)
 				{
-					Log.d(TAG, "Start downlading Theme update: " + ui.getFileName());
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Start downlading Theme update: " + ui.getFileName());
 					downloadRequestedUpdate((UpdateInfo) mThemesSpinner.getSelectedItem());
 				}
 			})
@@ -263,13 +265,13 @@ public class MainActivity extends Activity
 
 	private void UpdateChangelogButtonListener()
 	{
-		Log.d(TAG, "Rom Changelog Button clicked");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Rom Changelog Button clicked");
 		getChangelog(ChangelogType.ROM);
 	}
 	
 	private void ThemeChangelogButtonListener()
 	{
-		Log.d(TAG, "Theme Changelog Button clicked");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Theme Changelog Button clicked");
 		getChangelog(ChangelogType.THEME);
 	}
 
@@ -302,7 +304,7 @@ public class MainActivity extends Activity
 				{
 					//Delete Updates here
 					String f = (String) mExistingUpdatesSpinner.getSelectedItem();
-					Log.d(TAG, "Delete single Update selected: " + f);
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Delete single Update selected: " + f);
 					if(deleteUpdate(f))
 						mfilenames.remove(f);
 					switchToUpdateChooserLayout();
@@ -313,7 +315,7 @@ public class MainActivity extends Activity
 			{
 				public void onClick(DialogInterface dialog, int which)
 				{
-					Log.d(TAG, "Delete all Updates selected");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Delete all Updates selected");
 					//Delete Updates here
 					//Set the Filenames to null, so the Spinner will be empty
 					if(deleteOldUpdates())
@@ -326,7 +328,7 @@ public class MainActivity extends Activity
 			{
 				public void onClick(DialogInterface dialog, int which)
 				{
-					Log.d(TAG, "Delete no updates selected");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Delete no updates selected");
 					dialog.dismiss();
 				}
 			})
@@ -383,7 +385,7 @@ public class MainActivity extends Activity
 		}
 
 		filename = (String) mExistingUpdatesSpinner.getSelectedItem();
-		Log.d(TAG, "Selected to Apply Existing update: " + filename);
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Selected to Apply Existing update: " + filename);
 		Update = new File(mUpdateFolder + "/" +filename);
 		File MD5 = new File(mUpdateFolder + "/" +filename + ".md5sum");
 		//IF no MD5 exists, ask the User what to do
@@ -493,11 +495,15 @@ public class MainActivity extends Activity
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		Log.d(TAG, "onCreate called");
-		super.onCreate(savedInstanceState);		
-		
+		super.onCreate(savedInstanceState);			
 		prefs = new Preferences(this);
+		
+		//Debug Output
+		showDebugOutput = prefs.displayDebugOutput();
+		
 		res = getResources();
+		
+		if (MainActivity.showDebugOutput) Log.d(TAG, "onCreate called");
 		
 		//Sets the Title to Appname + Mod Version
 		setTitle(res.getString(R.string.app_name) + " " + res.getString(R.string.title_running) + " " + SysUtils.getModVersion());
@@ -602,7 +608,7 @@ public class MainActivity extends Activity
 	@Override
 	protected void onStart()
 	{
-		Log.d(TAG, "onStart called");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "onStart called");
 		super.onStart();
 
 		//Show a Dialog that the User runs an old rom.
@@ -640,7 +646,7 @@ public class MainActivity extends Activity
 	@Override
 	protected void onResume()
 	{
-		Log.d(TAG, "onResume called");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "onResume called");
 		super.onResume();
 
 		mfilenames = null;
@@ -685,7 +691,7 @@ public class MainActivity extends Activity
 	@Override
 	protected void onStop()
 	{
-		Log.d(TAG, "onStop called");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "onStop called");
 		super.onStop();
 	}
 
@@ -742,7 +748,7 @@ public class MainActivity extends Activity
 				getChangelog(ChangelogType.APP);
 				return true;
 			default:
-				Log.d(TAG, "Unknown Menu ID:" + item.getItemId());
+				Log.e(TAG, "Unknown Menu ID:" + item.getItemId());
 				break;
 		}
 		return super.onMenuItemSelected(featureId, item);
@@ -1121,7 +1127,7 @@ public class MainActivity extends Activity
 		{
 			deleteDir(mUpdateFolder);
 			mUpdateFolder.mkdir();
-			Log.d(TAG, "Updates deleted and UpdateFolder created again");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Updates deleted and UpdateFolder created again");
 			success=true;
 			Toast.makeText(this, R.string.delete_updates_success_message, Toast.LENGTH_LONG).show();
 		}
@@ -1156,8 +1162,8 @@ public class MainActivity extends Activity
 			}
 			else
 			{
-				Log.d(TAG, "Update to delete not found");
-				Log.d(TAG, "Zip File: "+ZIPfiletodelete.getAbsolutePath());
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Update to delete not found");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Zip File: "+ZIPfiletodelete.getAbsolutePath());
 				return false;
 			}
 			if (MD5filetodelete.exists())
@@ -1166,8 +1172,8 @@ public class MainActivity extends Activity
 			}
 			else
 			{
-				Log.d(TAG, "MD5 to delete not found. No Problem here.");
-				Log.d(TAG, "MD5 File: "+MD5filetodelete.getAbsolutePath());
+				if (MainActivity.showDebugOutput) Log.d(TAG, "MD5 to delete not found. No Problem here.");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "MD5 File: "+MD5filetodelete.getAbsolutePath());
 			}
 			ZIPfiletodelete = null;
 			MD5filetodelete = null;

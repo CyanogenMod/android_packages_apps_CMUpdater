@@ -13,6 +13,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import cmupdaterapp.misc.Log;
+import cmupdaterapp.ui.MainActivity;
 
 public class MD5
 {
@@ -28,7 +29,7 @@ public class MD5
     {
     	if (md5 == null || md5 == "" || updateFile == null)
     	{
-    		Log.d(TAG, "md5 String NULL or UpdateFile NULL");
+    		if (MainActivity.showDebugOutput) Log.d(TAG, "md5 String NULL or UpdateFile NULL");
     		return false;
     	}
 
@@ -36,12 +37,12 @@ public class MD5
 
     	if(calculatedDigest == null)
     	{
-    		Log.d(TAG, "calculatedDigest NULL");
+    		if (MainActivity.showDebugOutput) Log.d(TAG, "calculatedDigest NULL");
     		return false;
     	}
 
-    	Log.d(TAG, "Calculated digest: " + calculatedDigest);
-		Log.d(TAG, "Provided digest: " + md5);
+    	if (MainActivity.showDebugOutput) Log.d(TAG, "Calculated digest: " + calculatedDigest);
+    	if (MainActivity.showDebugOutput) Log.d(TAG, "Provided digest: " + md5);
 		
 		return calculatedDigest.equalsIgnoreCase(md5);
 	}
@@ -124,7 +125,7 @@ public class MD5
 			Log.e(TAG, "Exception on getting Recovery MD5", e);
 			return null;
 		}
-		Log.d(TAG, "Recovery MD5: " + MD5string);
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Recovery MD5: " + MD5string);
 		return MD5string;
 	}
 }

@@ -65,13 +65,13 @@ public class ThemeListNewActivity extends Activity
 			{
 				if(etName.getText().toString().trim().equalsIgnoreCase(""))
 				{
-					Log.d(TAG, "Entered name was empty");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Entered name was empty");
 					Toast.makeText(ThemeListNewActivity.this, R.string.theme_list_new_wrong_name, Toast.LENGTH_LONG).show();
 					return;
 				}
 				if(!URLUtil.isValidUrl(etUri.getText().toString().trim()))
 				{
-					Log.d(TAG, "Entered URL was not valid: " + etUri.getText().toString());
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Entered URL was not valid: " + etUri.getText().toString());
 					Toast.makeText(ThemeListNewActivity.this, R.string.theme_list_new_wrong_uri, Toast.LENGTH_LONG).show();
 					return;
 				}
@@ -115,7 +115,7 @@ public class ThemeListNewActivity extends Activity
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent)
 	{
-		Log.d(TAG, "onActivityResult requestCode: "+requestCode+" resultCode: "+resultCode);
+		if (MainActivity.showDebugOutput) Log.d(TAG, "onActivityResult requestCode: "+requestCode+" resultCode: "+resultCode);
 		switch(requestCode)
 		{
 			case IntentIntegrator.REQUEST_CODE:
@@ -125,7 +125,7 @@ public class ThemeListNewActivity extends Activity
 					String result = scanResult.getContents();
 					if (null != result && !result.equals("") )
 					{
-						Log.d(TAG, "Scanned URL: " + result);
+						if (MainActivity.showDebugOutput) Log.d(TAG, "Scanned URL: " + result);
 						if(URLUtil.isValidUrl(result))
 						{
 							etUri.setText(result);
@@ -134,7 +134,7 @@ public class ThemeListNewActivity extends Activity
 						else
 						{
 							Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
-							Log.d(TAG, "Scanned URL not valid: " + result);
+							if (MainActivity.showDebugOutput) Log.d(TAG, "Scanned URL not valid: " + result);
 						}
 					}
 					else
@@ -144,7 +144,7 @@ public class ThemeListNewActivity extends Activity
 					Toast.makeText(getBaseContext(), R.string.barcode_scan_no_result, Toast.LENGTH_LONG).show();
 				break;
 			default:
-				Log.d(TAG, "Wrong Request Code");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Wrong Request Code");
 				break;
 		}
 	}

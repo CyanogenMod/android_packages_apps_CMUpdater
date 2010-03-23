@@ -15,6 +15,7 @@ import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.customization.Customization;
 import cmupdaterapp.misc.Log;
+import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.utils.StringUtils;
 
 public class DbAdapter
@@ -197,7 +198,7 @@ public class DbAdapter
 			Cursor result = db.query(true, DATABASE_TABLE_THEMELIST, new String[] { KEY_THEMELIST_ID, KEY_THEMELIST_NAME, KEY_THEMELIST_URI, KEY_THEMELIST_ENABLED, KEY_THEMELIST_FEATURED }, KEY_THEMELIST_NAME + "= ? and " + KEY_THEMELIST_FEATURED + "= ?" , new String[]{ tl.name, "1" }, null, null, null, null);
 			if ((result.getCount() == 0) || !result.moveToFirst())
 			{
-				Log.d(TAG, "Theme " + tl.name + " not found in your List");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Theme " + tl.name + " not found in your List");
 				retValue.addThemeToList(tl);
 				continue;
 			}
@@ -207,13 +208,13 @@ public class DbAdapter
 		}
 		//Delete all featured Themes
 		db.delete(DATABASE_TABLE_THEMELIST, KEY_THEMELIST_FEATURED + "= ?", new String[]{ "1" });
-		Log.d(TAG, "Deleted all old Featured Theme Servers");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Deleted all old Featured Theme Servers");
 		//Add all Featured Themes again
 		for (ThemeList tl2 : retValue.returnFullThemeList())
 		{
 			insertTheme(tl2);
 		}
-		Log.d(TAG, "Updated Featured Theme Servers");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Updated Featured Theme Servers");
 	}
 
 	//SCREENSHOTS
@@ -378,9 +379,9 @@ public class DbAdapter
 
 		private void update(SQLiteDatabase s, int _oldVersion, int _newVersion)
 		{
-			Log.d(TAG, "Upgrading from version " + _oldVersion + " to " + _newVersion + ", which will destroy all old data");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Upgrading from version " + _oldVersion + " to " + _newVersion + ", which will destroy all old data");
 			//Drop the old tables and triggers
-			Log.d(TAG, "Dropping old Database");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Dropping old Database");
 			s.execSQL("DROP TRIGGER IF EXISTS " + TRIGGER_THEMELIST_ID_INSERT);
 			s.execSQL("DROP TRIGGER IF EXISTS " + TRIGGER_THEMELIST_ID_UPDATE);
 			s.execSQL("DROP TRIGGER IF EXISTS " + TRIGGER_THEMELIST_ID_DELETE);
@@ -400,7 +401,7 @@ public class DbAdapter
 			s.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_THEMELIST);
 
 			// Create a new one.
-			Log.d(TAG, "Create Database");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Create Database");
 			s.execSQL(DATABASE_CREATE_THEMELIST);
 			s.execSQL(DATABASE_CREATE_SCREENSHOTS);
 

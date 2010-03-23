@@ -6,6 +6,7 @@ import java.util.Date;
 import cmupdaterapp.service.UpdateCheckService;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
+import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.utils.Preferences;
 
 import android.app.AlarmManager;
@@ -30,7 +31,7 @@ public class StartupReceiver extends BroadcastReceiver
 		{
 			Intent i = new Intent(ctx, UpdateCheckService.class);
 			
-			Log.d(TAG, "Asking UpdateService to check for updates...");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Asking UpdateService to check for updates...");
 			ctx.startService(i);
 		}
 		else if(!(updateFreq == Constants.UPDATE_FREQ_NONE) && notificationsEnabled)
@@ -40,7 +41,7 @@ public class StartupReceiver extends BroadcastReceiver
 		else
 		{
 			// User selected no updates
-			Log.d(TAG, "No Updatecheck");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "No Updatecheck");
 		}
 	}
 
@@ -50,7 +51,7 @@ public class StartupReceiver extends BroadcastReceiver
 		PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
 		
 		AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-		Log.d(TAG, "Canceling any previous alarms");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Canceling any previous alarms");
 		am.cancel(pi);
 	}
 
@@ -60,17 +61,17 @@ public class StartupReceiver extends BroadcastReceiver
 
 		Preferences prefs = new Preferences(ctx);
 		
-		Log.d(TAG, "Scheduling alarm to go off every "  + updateFrequency + " msegs");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Scheduling alarm to go off every "  + updateFrequency + " msegs");
 		Intent i = new Intent(ctx, UpdateCheckService.class);
 		PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
 
 		Date lastCheck = prefs.getLastUpdateCheck();
-		Log.d(TAG, "Last check on " + lastCheck.toString());
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Last check on " + lastCheck.toString());
 
 		cancelUpdateChecks(ctx);
 
 		AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-		Log.d(TAG, "Setting alarm for UpdateService");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Setting alarm for UpdateService");
 		am.setRepeating(AlarmManager.RTC_WAKEUP, lastCheck.getTime() + updateFrequency, updateFrequency, pi);
 	}
 }

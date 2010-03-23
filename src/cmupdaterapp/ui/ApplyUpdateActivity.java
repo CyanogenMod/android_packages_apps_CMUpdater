@@ -59,7 +59,7 @@ public class ApplyUpdateActivity extends Activity
 		String template = res.getString(R.string.apply_title_textview_text);
 		mTitle.setText(MessageFormat.format(template, mUpdateInfo.getName()));
 		mUpdateFolder = pref.getUpdateFolder();
-		Log.d(TAG, "Filename selected to flash: " + mUpdateInfo.getFileName());
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Filename selected to flash: " + mUpdateInfo.getFileName());
 	}
 	
 	private final View.OnClickListener mApplyButtonListener = new View.OnClickListener()

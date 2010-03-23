@@ -281,4 +281,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="download_stop_download_Button">Pause/Stop Download</string>
 	<string name="download_resume_download_Button">Resume Download</string>
 	<string name="config_themes_nosupport">This Updater was built without Screenshotsupport</string>
+	<string name="p_debug_output_title">Debug Output</string>
+	<string name="p_debug_output_summary">Show Debug Output in logcat</string>
+	<string name="p_debug_output_changed">Please restart the App for the changes to take effect</string>
 </resources>

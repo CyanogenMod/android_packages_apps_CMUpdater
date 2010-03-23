@@ -7,6 +7,7 @@ import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.database.DbAdapter;
 import cmupdaterapp.misc.Log;
+import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.ui.ScreenshotActivity;
 import cmupdaterapp.utils.ImageUtilities;
 
@@ -29,7 +30,7 @@ public class DownloadImageTask extends AsyncTask<UpdateInfo, Screenshot, Void>
 			int counter = 0;
 			for (URI uri : ui.screenshots)
 			{
-				Log.d(TAG, "Started Downloading Image number " + counter);
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Started Downloading Image number " + counter);
 				Screenshot screeni = new Screenshot();
 				if (isCancelled())
 					return null;

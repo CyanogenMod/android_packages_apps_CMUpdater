@@ -233,6 +233,17 @@ public class ConfigActivity extends PreferenceActivity
 				return true;
 			}
 		});
+		
+		//Display Debug Output
+		pref = (Preference) findPreference(res.getString(R.string.PREF_DEBUG_OUTPUT));
+		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
+		{
+			public boolean onPreferenceChange(Preference preference, Object newValue)
+			{
+				Toast.makeText(getBaseContext(), R.string.p_debug_output_changed, Toast.LENGTH_LONG).show();
+				return true;
+			}
+		});
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent)

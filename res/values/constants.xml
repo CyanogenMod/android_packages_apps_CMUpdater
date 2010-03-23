@@ -24,6 +24,7 @@
 	<string name="PREF_UPDATE_FOLDER_DEF">prefUpdateFolderDef</string>
 	<string name="PREF_THEMES_LIST">prefThemesList</string>
 	<string name="PREF_CONFIG_THEMES">prefConfigThemes</string>
+	<string name="PREF_DEBUG_OUTPUT">prefDebugOutput</string>
 	
 	<!-- Default Values for Preference Keys -->
 	<string name="PREF_UPDATE_CHECK_FREQUENCY_DEF_VALUE">-1</string>
@@ -35,6 +36,7 @@
 	<string name="PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS_DEF_VALUE">false</string>
 	<string name="PREF_DISPLAY_OLDER_THEME_VERSIONS_DEF_VALUE">false</string>
 	<string name="PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS_DEF_VALUE">false</string>
+	<string name="PREF_DEBUG_OUTPUT_DEF_VALUE">false</string>
 	
 	<!-- Frequency times, in seconds -->
 	<string-array name="update_frequency_values">

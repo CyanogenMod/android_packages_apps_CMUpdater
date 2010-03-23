@@ -104,15 +104,15 @@ public class UpdateCheckService extends Service
 		NetworkInfo nwi = mConnectivityManager.getActiveNetworkInfo();
 		android.net.NetworkInfo.State state = nwi.getState();
 		connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
-		Log.d(TAG, "OnCreate connected: " + connected);
+		if (MainActivity.showDebugOutput) Log.d(TAG, "OnCreate connected: " + connected);
 		
 		if(systemMod == null)
 		{
-			Log.d(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
 		}
 		else
 		{
-			Log.d(TAG, "System's Mod version:" + systemMod);
+			if (MainActivity.showDebugOutput) Log.d(TAG, "System's Mod version:" + systemMod);
 		}
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 	}
@@ -141,7 +141,7 @@ public class UpdateCheckService extends Service
 			{
 				if(mWaitingForDataConnection)
 				{
-					Log.d(TAG, "Another update check is waiting for data connection. Skipping");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Another update check is waiting for data connection. Skipping");
 					return;
 				}
             }
@@ -167,7 +167,7 @@ public class UpdateCheckService extends Service
 			//wait for a data connection
 			while(!isDataConnected())
 			{
-				Log.d(TAG, "No data connection, waiting for a data connection");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "No data connection, waiting for a data connection");
 				synchronized (mConnectivityManager)
 				{
 					try
@@ -183,7 +183,7 @@ public class UpdateCheckService extends Service
 			}
 			try
 			{
-				Log.d(TAG, "Checking for updates...");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Checking for updates...");
 				availableUpdates = getAvailableUpdates();
 				break;
 			}
@@ -211,13 +211,13 @@ public class UpdateCheckService extends Service
 		int updateCountIncrementalRoms = availableUpdates.getIncrementalRomCount();
 		int updateCountThemes = availableUpdates.getThemeCount();
 		int updateCount = availableUpdates.getUpdateCount();
-		Log.d(TAG, updateCountRoms + " ROM update(s) found; " +
+		if (MainActivity.showDebugOutput) Log.d(TAG, updateCountRoms + " ROM update(s) found; " +
 				updateCountIncrementalRoms + " incremental ROM udpate(s) found; "+
 				updateCountThemes + " Theme update(s) found");
 
 		if(updateCountRoms == 0 && updateCountThemes == 0 && updateCountIncrementalRoms == 0)
 		{
-			Log.d(TAG, "No updates found");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "No updates found");
 			ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.no_updates_found, 0));
 			FinishUpdateCheck();
 		}
@@ -290,7 +290,7 @@ public class UpdateCheckService extends Service
 		//Use a resourceId as an unique identifier
 		mNM.notify(R.string.not_update_downloaded_title, notification);
 		ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.not_update_check_error_ticker, 0));
-		Log.d(TAG, "Update check error");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Update check error");
 		FinishUpdateCheck();
 	}
 
@@ -316,7 +316,7 @@ public class UpdateCheckService extends Service
 			//If Wildcard is used or no themes.theme file present set the variable
 			if (themeInfos == null || themeInfos.name.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
 			{
-				Log.d(TAG, "Wildcard is used for Theme Updates");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Wildcard is used for Theme Updates");
 				themeInfos = new ThemeInfo();
 				WildcardUsed = true;
 			}
@@ -331,7 +331,7 @@ public class UpdateCheckService extends Service
 			int romServerResponse = romResponse.getStatusLine().getStatusCode();
 			if (romServerResponse != HttpStatus.SC_OK)
 			{
-				Log.d(TAG, "Server returned status code for ROM " + romServerResponse);
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Server returned status code for ROM " + romServerResponse);
 				romException = true;
 			}
 			if (!romException)
@@ -339,7 +339,7 @@ public class UpdateCheckService extends Service
 		}
 		catch (IllegalArgumentException e)
 		{
-			Log.d(TAG, "Rom Update URI wrong: " + mPreferences.getRomUpdateFileURL());
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Rom Update URI wrong: " + mPreferences.getRomUpdateFileURL());
 			romException = true;
 		}
 
@@ -353,11 +353,11 @@ public class UpdateCheckService extends Service
 				{
 					if(!t.enabled)
 					{
-						Log.d(TAG, "Theme " + t.name + " disabled. Continuing");
+						if (MainActivity.showDebugOutput) Log.d(TAG, "Theme " + t.name + " disabled. Continuing");
 						continue;
 					}
 					PrimaryKeyTheme = -1;
-					Log.d(TAG, "Trying to download ThemeInfos for " + t.url.toString());
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Trying to download ThemeInfos for " + t.url.toString());
 					URI ThemeUpdateServerUri = t.url;
 					HttpUriRequest themeReq = new HttpGet(ThemeUpdateServerUri);
 					themeReq.addHeader("Cache-Control", "no-cache");
@@ -367,7 +367,7 @@ public class UpdateCheckService extends Service
 						int themeServerResponse = themeResponse.getStatusLine().getStatusCode();
 						if (themeServerResponse != HttpStatus.SC_OK)
 						{
-							Log.d(TAG, "Server returned status code for Themes " + themeServerResponse);
+							if (MainActivity.showDebugOutput) Log.d(TAG, "Server returned status code for Themes " + themeServerResponse);
 							themeResponseEntity = themeResponse.getEntity();
 							continue;
 						}
@@ -400,7 +400,7 @@ public class UpdateCheckService extends Service
 			}
 			catch (IllegalArgumentException e)
 			{
-				Log.d(TAG, "Theme Update URI wrong");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Theme Update URI wrong");
 				//themeException = true;
 			}
 		}
@@ -426,7 +426,7 @@ public class UpdateCheckService extends Service
 				retValue.incrementalRoms = getIncrementalRomUpdates(incrementalRomUpdateInfos);
 			}
 			else
-				Log.d(TAG, "There was an Exception on Downloading the Rom JSON File");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "There was an Exception on Downloading the Rom JSON File");
 		}
 		finally
 		{
@@ -454,31 +454,31 @@ public class UpdateCheckService extends Service
 		{
 			mainJSONObject = new JSONObject(buf.toString());
 			JSONArray mirrorList = mainJSONObject.getJSONArray(Constants.JSON_MIRROR_LIST);
-			Log.d(TAG, "Found "+mirrorList.length()+" mirrors in the JSON");
+			if (MainActivity.showDebugOutput) Log.d(TAG, "Found "+mirrorList.length()+" mirrors in the JSON");
 
 			switch(type)
 			{
 				case Update:
 					JSONArray updateList = mainJSONObject.getJSONArray(Constants.JSON_UPDATE_LIST);
-					Log.d(TAG, "Found "+updateList.length()+" updates in the JSON");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Found "+updateList.length()+" updates in the JSON");
 					for (int i = 0, max = updateList.length() ; i < max ; i++)
 					{
 						if(!updateList.isNull(i))
 							uis.add(parseUpdateJSONObject(updateList.getJSONObject(i), mirrorList));
 						else
-							Log.d(TAG, "Theres an error in your JSON File(update part). Maybe a , after the last update");
+							Log.e(TAG, "Theres an error in your JSON File(update part). Maybe a , after the last update");
 					}
 					break;
 				case IncrementalUpdate:
 					JSONArray incrementalUpdateList = mainJSONObject.getJSONArray(Constants.JSON_INCREMENTAL_UPDATES);
-					Log.d(TAG, "Found "+incrementalUpdateList.length()+" incremental updates in the JSON");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Found "+incrementalUpdateList.length()+" incremental updates in the JSON");
 					//Incremental Updates. Own JSON Section for backward compatibility
 					for (int i = 0, max = incrementalUpdateList.length() ; i < max ; i++)
 					{
 						if(!incrementalUpdateList.isNull(i))
 							uis.add(parseUpdateJSONObject(incrementalUpdateList.getJSONObject(i), mirrorList));
 						else
-							Log.d(TAG, "Theres an error in your JSON File(incremental part). Maybe a , after the last update");
+							Log.e(TAG, "Theres an error in your JSON File(incremental part). Maybe a , after the last update");
 					}
 					break;
 				default:
@@ -534,7 +534,7 @@ public class UpdateCheckService extends Service
 					if (!mirrorList.isNull(i))
 						ui.updateMirrors.add(new URI(mirrorList.getString(i).trim()));
 					else
-						Log.d(TAG, "Theres an error in your JSON File. Maybe a , after the last mirror");
+						Log.e(TAG, "Theres an error in your JSON File. Maybe a , after the last mirror");
 				}
 				catch (URISyntaxException e)
 				{
@@ -556,7 +556,7 @@ public class UpdateCheckService extends Service
 							if (!screenshots.isNull(screenshotcounter))
 								ui.screenshots.add(new URI(screenshots.getString(screenshotcounter)));
 							else
-								Log.d(TAG, "Theres an error in your JSON File. Maybe a , after the last screenshot");
+								Log.e(TAG, "Theres an error in your JSON File. Maybe a , after the last screenshot");
 						}
 						catch (URISyntaxException e)
 						{
@@ -630,27 +630,27 @@ public class UpdateCheckService extends Service
 					{
 						if (branchMatches(ui, showExperimentalRomUpdates))
 						{
-							Log.d(TAG, "Adding Rom: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
+							if (MainActivity.showDebugOutput) Log.d(TAG, "Adding Rom: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
 							ret.add(ui);
 						}
 						else
 						{
-							Log.d(TAG, "Discarding Rom " + ui.getName() + " (Branch mismatch - stable/experimental)");
+							if (MainActivity.showDebugOutput) Log.d(TAG, "Discarding Rom " + ui.getName() + " (Branch mismatch - stable/experimental)");
 						}
 					}
 					else
 					{
-						Log.d(TAG, "Discarding Rom " + ui.getName() + " (older version)");
+						if (MainActivity.showDebugOutput) Log.d(TAG, "Discarding Rom " + ui.getName() + " (older version)");
 					}
 				}
 				else
 				{
-					Log.d(TAG, "Discarding Rom " + ui.getName() + " (mod mismatch)");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Discarding Rom " + ui.getName() + " (mod mismatch)");
 				}
 			}
 			else
 			{
-				Log.d(TAG, String.format("Discarding Rom %s Version %s (not a ROM)", ui.getName(), ui.getVersion()));
+				if (MainActivity.showDebugOutput) Log.d(TAG, String.format("Discarding Rom %s Version %s (not a ROM)", ui.getName(), ui.getVersion()));
 			}
 		}
 		return ret;
@@ -665,13 +665,13 @@ public class UpdateCheckService extends Service
 			//Only Incremental Updates here. If theres a standard Update in there, remove it
 			if (!ui.isIncremental())
 			{
-				Log.d(TAG, "Update " + ui.getName() + " is not an incremental update. Discarding it");
+				if (MainActivity.showDebugOutput) Log.d(TAG, "Update " + ui.getName() + " is not an incremental update. Discarding it");
 				continue;
 			}
 			//Only Use this Update, if the ForApply Version is the current running one
 			if (!(Customization.RO_MOD_START_STRING + ui.getVersionForApply()).equalsIgnoreCase(systemRom))
 			{
-				Log.d(TAG, String.format("Incremental Update %s discarded, because the VersionForAppy (%s)" +
+				if (MainActivity.showDebugOutput) Log.d(TAG, String.format("Incremental Update %s discarded, because the VersionForAppy (%s)" +
 						" doesn't match the current System Rom (%s).",
 						ui.getName(), Customization.RO_MOD_START_STRING + ui.getVersionForApply(), systemRom));
 				continue;
@@ -682,22 +682,22 @@ public class UpdateCheckService extends Service
 				{
 					if (branchMatches(ui, showExperimentalRomUpdates))
 					{
-						Log.d(TAG, "Adding Incremental Rom: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
+						if (MainActivity.showDebugOutput) Log.d(TAG, "Adding Incremental Rom: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
 						ret.add(ui);
 					}
 					else
 					{
-						Log.d(TAG, "Discarding Incremental Rom " + ui.getName() + " (Branch mismatch - stable/experimental)");
+						if (MainActivity.showDebugOutput) Log.d(TAG, "Discarding Incremental Rom " + ui.getName() + " (Branch mismatch - stable/experimental)");
 					}
 				}
 				else
 				{
-					Log.d(TAG, "Discarding Incremental Rom " + ui.getName() + " (mod mismatch)");
+					if (MainActivity.showDebugOutput) Log.d(TAG, "Discarding Incremental Rom " + ui.getName() + " (mod mismatch)");
 				}
 			}
 			else
 			{
-				Log.d(TAG, String.format("Discarding Incremental Rom %s Version %s(not a ROM)", ui.getName(), ui.getVersion()));
+				if (MainActivity.showDebugOutput) Log.d(TAG, String.format("Discarding Incremental Rom %s Version %s(not a ROM)", ui.getName(), ui.getVersion()));
 			}
 		}
 		return ret;
@@ -728,37 +728,37 @@ public class UpdateCheckService extends Service
 								//Branch matches
 								if (branchMatches(ui, showExperimentalThemeUpdates))
 								{
-									Log.d(TAG, "Adding Theme: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
+									if (MainActivity.showDebugOutput) Log.d(TAG, "Adding Theme: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
 									ret.add(ui);
 								}
 								else
 								{
-									Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
+									if (MainActivity.showDebugOutput) Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
 								}
 							}
 							else
 							{
-								Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
+								if (MainActivity.showDebugOutput) Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
 							}
 						}
 						else
 						{
-							Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
+							if (MainActivity.showDebugOutput) Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
 						}
 					}
 					else
 					{
-						Log.d(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
+						if (MainActivity.showDebugOutput) Log.d(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
 					}
 				}
 				else
 				{
-					Log.d(TAG, String.format("Discarding Update(not a Theme) %s Version %s", ui.getName(), ui.getVersion()));
+					if (MainActivity.showDebugOutput) Log.d(TAG, String.format("Discarding Update(not a Theme) %s Version %s", ui.getName(), ui.getVersion()));
 				}
 			}
 			else
 			{
-				Log.d(TAG, String.format("Discarding Theme %s Version %s. Invalid or no Themes installed", ui.getName(), ui.getVersion()));
+				if (MainActivity.showDebugOutput) Log.d(TAG, String.format("Discarding Theme %s Version %s. Invalid or no Themes installed", ui.getName(), ui.getVersion()));
 			}
 		}
 		return ret;
@@ -767,9 +767,9 @@ public class UpdateCheckService extends Service
 	@SuppressWarnings("unchecked")
 	private static FullUpdateInfo FilterUpdates(FullUpdateInfo newList, FullUpdateInfo oldList)
 	{
-		Log.d(TAG, "Called FilterUpdates");
-		Log.d(TAG, "newList Length: " + newList.getUpdateCount());
-		Log.d(TAG, "oldList Length: " + oldList.getUpdateCount());
+		if (MainActivity.showDebugOutput) Log.d(TAG, "Called FilterUpdates");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "newList Length: " + newList.getUpdateCount());
+		if (MainActivity.showDebugOutput) Log.d(TAG, "oldList Length: " + oldList.getUpdateCount());
 		FullUpdateInfo ful = new FullUpdateInfo();
 		ful.roms = (LinkedList<UpdateInfo>) newList.roms.clone();
 		ful.themes = (LinkedList<UpdateInfo>) newList.themes.clone();
@@ -777,7 +777,7 @@ public class UpdateCheckService extends Service
 		ful.roms.removeAll(oldList.roms);
 		ful.themes.removeAll(oldList.themes);
 		ful.incrementalRoms.removeAll(oldList.incrementalRoms);
-		Log.d(TAG, "fulList Length: " + ful.getUpdateCount());
+		if (MainActivity.showDebugOutput) Log.d(TAG, "fulList Length: " + ful.getUpdateCount());
 		return ful;
 	}
 
@@ -823,7 +823,7 @@ public class UpdateCheckService extends Service
 			NetworkInfo nwi = mConnectivityManager.getActiveNetworkInfo();
 			android.net.NetworkInfo.State state = nwi.getState();
 			connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
-			Log.d(TAG, "ConnectionChangeReciever connected: " + connected);
+			if (MainActivity.showDebugOutput) Log.d(TAG, "ConnectionChangeReciever connected: " + connected);
 		}
 	}
 }

@@ -107,7 +107,7 @@ public class MD5CheckerTask extends AsyncTask<File, Void, Boolean>
 	@Override
 	public void onCancelled()
 	{
-		Log.d(TAG, "MD5Checker Task cancelled");
+		if (MainActivity.showDebugOutput) Log.d(TAG, "MD5Checker Task cancelled");
 		Toast.makeText(mCtx, R.string.md5_check_cancelled, Toast.LENGTH_LONG).show();
 		Intent i = new Intent(mCtx, MainActivity.class);
 		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
