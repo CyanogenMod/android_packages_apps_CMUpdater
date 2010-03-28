@@ -304,7 +304,6 @@ public class DownloadService extends Service
 						// server must support partial content for resume
 						if (localFileSize > 0 && serverResponse != HttpStatus.SC_PARTIAL_CONTENT)
 						{
-							//TODO: continue to next mirror if resume not supported
 							if (MainActivity.showDebugOutput) Log.d(TAG, "Resume not supported");
 							ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.download_resume_not_supported, 0));
 							//To get the UdpateProgressBar working correctly, when server does not support resume
@@ -350,6 +349,7 @@ public class DownloadService extends Service
 							catch (IOException e)
 							{
 								Log.e(TAG, "Exception while reading MD5 response: ", e);
+								//TODO: Do not throw, continue with zipfile download
 								throw new IOException("MD5 Response cannot be read");
 							}
 						}
