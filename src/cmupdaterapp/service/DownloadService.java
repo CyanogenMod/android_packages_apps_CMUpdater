@@ -562,6 +562,7 @@ public class DownloadService extends Service
 			if (MainActivity.showDebugOutput) Log.d(TAG, "Downloaded Update was NULL");
 			DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 			DownloadError();
+			stopSelf();
 			return;
 		}
 

@@ -97,6 +97,10 @@ public class DownloadActivity extends Activity
 		catch (RemoteException ex)
 		{
 			Log.e(TAG, "Error on DownloadService call", ex);
+			//Set myService to null, otherwise Mainactivity.onResume will crash,
+			//cause the service is not null
+			myService = null;
+			finish();
 		}
 
 		mFileName = ui.getFileName();
@@ -231,6 +235,7 @@ public class DownloadActivity extends Activity
 					else
 						if (MainActivity.showDebugOutput) Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
 					if (MainActivity.showDebugOutput) Log.d(TAG, "Download Cancel Procedure Finished. Switching Layout");
+					myService = null;
 					finish();
 				}
 			})
