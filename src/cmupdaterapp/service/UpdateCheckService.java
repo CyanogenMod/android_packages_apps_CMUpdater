@@ -439,9 +439,9 @@ public class UpdateCheckService extends Service
 				themeResponseEntity.consumeContent();
 		}
 
-		FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(this));
+		FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(this, showDebugOutput));
 		if(!romException)
-			State.saveState(this, (Serializable)retValue);
+			State.saveState(this, (Serializable)retValue, showDebugOutput);
 		return ful;
 	}
 

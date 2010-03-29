@@ -18,7 +18,6 @@ import cmupdaterapp.ui.ApplyUpdateActivity;
 import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.ui.R;
 import cmupdaterapp.utils.MD5;
-import cmupdaterapp.utils.Preferences;
 
 public class MD5CheckerTask extends AsyncTask<File, Void, Boolean>
 {
@@ -31,12 +30,12 @@ public class MD5CheckerTask extends AsyncTask<File, Void, Boolean>
 	private boolean mreturnvalue;
 	private Context mCtx;
 
-	public MD5CheckerTask(Context ctx, ProgressDialog dialog, String filename)
+	public MD5CheckerTask(Context ctx, ProgressDialog dialog, String filename, Boolean _showDebugOutput)
 	{
 		mDialog = dialog;
 		mFilename = filename;
 		mCtx = ctx;
-		showDebugOutput = new Preferences(ctx).displayDebugOutput();
+		showDebugOutput = _showDebugOutput;
 	}
 
 	@Override

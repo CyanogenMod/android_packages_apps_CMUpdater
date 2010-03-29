@@ -140,14 +140,7 @@ public class DownloadActivity extends Activity
 		{
 			if(myService != null && !myService.DownloadRunning())
 			{
-				if(mbound)
-				{
-					unbindService(mConnection);
-					if (showDebugOutput) Log.d(TAG, "mUpdateDownloaderServiceConnection unbind finished");
-					mbound = false;
-				}
-				else
-					if (showDebugOutput) Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
+				MyUnbindService(mConnection);
 			}
 			else
 				if (showDebugOutput) Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
@@ -232,14 +225,9 @@ public class DownloadActivity extends Activity
 					}
 					else
 						if (showDebugOutput) Log.d(TAG, "Cancel Download: mUpdateDownloaderService was NULL");
-					if(mbound)
-					{
-						unbindService(mConnection);
-						if (showDebugOutput) Log.d(TAG, "unbindService(mUpdateDownloaderServiceConnection) finished");
-						mbound = false;
-					}
-					else
-						if (showDebugOutput) Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
+					
+					MyUnbindService(mConnection);
+					
 					if (showDebugOutput) Log.d(TAG, "Download Cancel Procedure Finished. Switching Layout");
 					myService = null;
 					finish();
@@ -376,6 +364,8 @@ public class DownloadActivity extends Activity
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(i);
 					finish();
+					MyUnbindService(mConnection); 
+					stopService(serviceIntent);
 					break;
 				case DOWNLOAD_ERROR:
 					Toast.makeText(DownloadActivity.this, R.string.exception_while_downloading, Toast.LENGTH_LONG).show();
@@ -383,6 +373,8 @@ public class DownloadActivity extends Activity
 					i2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(i2);
 					finish();
+					MyUnbindService(mConnection);
+					stopService(serviceIntent);
 					break;
 				default:
 					super.handleMessage(msg);
@@ -419,5 +411,17 @@ public class DownloadActivity extends Activity
 		super.onSaveInstanceState(outState);
 		if (showDebugOutput) Log.d(TAG, "Called onSaveInstanceState");
 		outState.putParcelable(Constants.KEY_UPDATE_INFO, ui);
+	}
+	
+	private void MyUnbindService(ServiceConnection con)
+	{
+		if (mbound)
+		{
+			unbindService(con);
+			mbound = false;
+			if (showDebugOutput) Log.d(TAG, "mUpdateDownloaderServiceConnection unbind finished");
+		}
+		else
+			if (showDebugOutput) Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
 	}
 }

@@ -399,7 +399,7 @@ public class MainActivity extends Activity
 				public void onClick(DialogInterface dialog, int which)
 				{
 					//Directly call on Postexecute, cause we need no md5check
-					new MD5CheckerTask(MainActivity.this, null, filename).onPostExecute(true);
+					new MD5CheckerTask(MainActivity.this, null, filename, showDebugOutput).onPostExecute(true);
 					dialog.dismiss();
 				}
 			})
@@ -431,7 +431,7 @@ public class MainActivity extends Activity
 					}
 			);
 	
-			md5CheckerTask = new MD5CheckerTask(MainActivity.this, mDialog, filename).execute(Update);
+			md5CheckerTask = new MD5CheckerTask(MainActivity.this, mDialog, filename, showDebugOutput).execute(Update);
 		}
 	}
 	
@@ -758,7 +758,7 @@ public class MainActivity extends Activity
 	{
 		try
 		{
-			mAvailableUpdates = State.loadState(this);
+			mAvailableUpdates = State.loadState(this, showDebugOutput);
 		}
 		catch (IOException e)
 		{
@@ -1087,7 +1087,7 @@ public class MainActivity extends Activity
 				switchToUpdateChooserLayout();
 			}
 		});
-		new UpdateCheckTask(this, pg).execute((Void) null);
+		new UpdateCheckTask(this, pg, showDebugOutput).execute((Void) null);
 	}
 
 	private void showAboutDialog()

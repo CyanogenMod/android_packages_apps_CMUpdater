@@ -67,7 +67,7 @@ public class DbAdapter
 	private SQLiteDatabase db;
 	private DbOpenHelper dbHelper;
 
-	public DbAdapter(Boolean  _showDebugOutput)
+	public DbAdapter(Boolean _showDebugOutput)
 	{
 		showDebugOutput = _showDebugOutput;
 		dbHelper = new DbOpenHelper();

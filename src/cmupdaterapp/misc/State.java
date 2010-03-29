@@ -8,18 +8,16 @@ import java.util.HashMap;
 import java.util.Map;
 import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.customization.Customization;
-import cmupdaterapp.utils.Preferences;
 import android.content.Context;
 
 public class State
 {
 	private static final String TAG = "State";
 
-	public static void saveState(Context ctx, Serializable mAvailableUpdates) throws IOException
+	public static void saveState(Context ctx, Serializable mAvailableUpdates, Boolean _showDebugOutput) throws IOException
 	{
-		Boolean showDebugOutput = new Preferences(ctx).displayDebugOutput();
-		if (showDebugOutput) Log.d(TAG, "Called SaveState");
-		if (showDebugOutput) Log.d(TAG, "Updatecount: " + ((FullUpdateInfo)mAvailableUpdates).getUpdateCount());
+		if (_showDebugOutput) Log.d(TAG, "Called SaveState");
+		if (_showDebugOutput) Log.d(TAG, "Updatecount: " + ((FullUpdateInfo)mAvailableUpdates).getUpdateCount());
 		ObjectOutputStream oos = new ObjectOutputStream(ctx.openFileOutput(Customization.STORED_STATE_FILENAME, Context.MODE_PRIVATE));
 		try
 		{
@@ -39,10 +37,9 @@ public class State
 	}
 
 	@SuppressWarnings("unchecked")
-	public static FullUpdateInfo loadState(Context ctx) throws IOException
+	public static FullUpdateInfo loadState(Context ctx, Boolean _showDebugOutput) throws IOException
 	{
-		Boolean showDebugOutput = new Preferences(ctx).displayDebugOutput();
-		if (showDebugOutput) Log.d(TAG, "Called LoadState");
+		if (_showDebugOutput) Log.d(TAG, "Called LoadState");
 		FullUpdateInfo mAvailableUpdates = new FullUpdateInfo();
 		ObjectInputStream ois = null;
 		try
@@ -66,7 +63,7 @@ public class State
 			if(ois != null)
 				ois.close();
 		}
-		if (showDebugOutput) Log.d(TAG, "LoadedUpdates: " + mAvailableUpdates.getUpdateCount());
+		if (_showDebugOutput) Log.d(TAG, "LoadedUpdates: " + mAvailableUpdates.getUpdateCount());
 		return mAvailableUpdates;
 	}
 }
