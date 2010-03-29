@@ -169,6 +169,10 @@ public class UpdateInfo implements Parcelable, Serializable
 			ui.screenshots = new LinkedList<URI>();
 		if (screenshots == null)
 			screenshots = new LinkedList<URI>();
+		if (ui.versionForApply == null)
+			ui.versionForApply = "";
+		if (versionForApply == null)
+			versionForApply = "";
 		if (ui.mod.equals(mod)
 				&& ui.board.equals(board)
 				&& ui.name.equals(name)
