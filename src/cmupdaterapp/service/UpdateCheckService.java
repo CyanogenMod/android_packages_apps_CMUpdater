@@ -473,16 +473,21 @@ public class UpdateCheckService extends Service
 					}
 					break;
 				case IncrementalUpdate:
-					JSONArray incrementalUpdateList = mainJSONObject.getJSONArray(Constants.JSON_INCREMENTAL_UPDATES);
-					if (showDebugOutput) Log.d(TAG, "Found "+incrementalUpdateList.length()+" incremental updates in the JSON");
-					//Incremental Updates. Own JSON Section for backward compatibility
-					for (int i = 0, max = incrementalUpdateList.length() ; i < max ; i++)
+					if (mainJSONObject.has(Constants.JSON_INCREMENTAL_UPDATES))
 					{
-						if(!incrementalUpdateList.isNull(i))
-							uis.add(parseUpdateJSONObject(incrementalUpdateList.getJSONObject(i), mirrorList));
-						else
-							Log.e(TAG, "Theres an error in your JSON File(incremental part). Maybe a , after the last update");
+						JSONArray incrementalUpdateList = mainJSONObject.getJSONArray(Constants.JSON_INCREMENTAL_UPDATES);
+						if (showDebugOutput) Log.d(TAG, "Found "+incrementalUpdateList.length()+" incremental updates in the JSON");
+						//Incremental Updates. Own JSON Section for backward compatibility
+						for (int i = 0, max = incrementalUpdateList.length() ; i < max ; i++)
+						{
+							if(!incrementalUpdateList.isNull(i))
+								uis.add(parseUpdateJSONObject(incrementalUpdateList.getJSONObject(i), mirrorList));
+							else
+								Log.e(TAG, "Theres an error in your JSON File(incremental part). Maybe a , after the last update");
+						}
 					}
+					else
+						if (showDebugOutput) Log.d(TAG, "No Incremental Update Info in the JSON");
 					break;
 				default:
 					Log.e(TAG, "Wrong RomType!");

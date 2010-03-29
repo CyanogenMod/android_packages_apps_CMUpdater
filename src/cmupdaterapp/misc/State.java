@@ -1,5 +1,6 @@
 package cmupdaterapp.misc;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -53,6 +54,10 @@ public class State
 		catch (ClassNotFoundException e)
 		{
 			Log.e(TAG, "Unable to load stored class", e);
+		}
+		catch (FileNotFoundException ex)
+		{
+			Log.i(TAG, "No State Info stored");
 		}
 		catch (IOException e)
 		{
