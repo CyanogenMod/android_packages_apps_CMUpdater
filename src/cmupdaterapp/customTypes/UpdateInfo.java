@@ -179,7 +179,7 @@ public class UpdateInfo implements Parcelable, Serializable
 				&& ui.fileName.equals(fileName)
 				&& ui.screenshots.equals(screenshots)
 				&& ui.PrimaryKey == PrimaryKey
-				&& ui.versionForApply == versionForApply)
+				&& ui.versionForApply.equals(versionForApply))
 			return true;
 		return false;
 	}
