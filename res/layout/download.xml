@@ -114,26 +114,9 @@
 			android:layout_gravity="right"
 			android:layout_weight="0"/>
     </LinearLayout>
-    <LinearLayout
-	    android:orientation="horizontal"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:gravity="center">
-	    <Button
-			android:id="@+id/stop_download_button"
-			android:text="@string/download_stop_download_Button"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-		<Button
-			android:id="@+id/resume_download_button"
-			android:visibility="gone"
-			android:text="@string/download_resume_download_Button"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"  />
-		<Button
-			android:id="@+id/cancel_download_button"
-			android:text="@string/cancel_download_buton_text"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-	</LinearLayout>
+	<Button
+		android:id="@+id/cancel_download_button"
+		android:text="@string/cancel_download_buton_text"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" />
 </LinearLayout>

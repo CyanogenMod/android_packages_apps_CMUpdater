@@ -52,7 +52,7 @@
 	<string name="menu_enable_all_featured_themes">Enable all Featured Theme Servers</string>
 	
 	<string name="cancel_download_buton_text">Cancel Download</string>
-	<string name="confirm_download_cancelation_dialog_message">Are you sure you want to cancel the current download?</string>
+	<string name="confirm_download_cancelation_dialog_message">Are you sure you want to cancel the current download? You can resume it later, by downloading the same update again.</string>
 	<string name="confirm_download_cancelation_dialog_yes">Yes</string>
 	<string name="confirm_download_cancelation_dialog_no">No</string>
 	<string name="download_canceled_toast_message">Download cancelled</string>
@@ -278,8 +278,6 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="download_resume_not_supported">Resume not supported by Server</string>
 	<string name="download_resume_download">Resuming Download</string>
 	<string name="download_not_enough_space">Not Enough Space on SDCard to download the Udpate</string>
-	<string name="download_stop_download_Button">Pause/Stop Download</string>
-	<string name="download_resume_download_Button">Resume Download</string>
 	<string name="config_themes_nosupport">This Updater was built without Screenshotsupport</string>
 	<string name="p_debug_output_title">Debug Output</string>
 	<string name="p_debug_output_summary">Show Debug Output in logcat</string>
