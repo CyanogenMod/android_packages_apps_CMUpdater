@@ -23,6 +23,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class ConfigActivity extends PreferenceActivity
 {
 	private static final String TAG = "ConfigActivity";
+
 	private Preferences prefs;
 	private boolean RomBarcodeRequested;
 	private Resources res;

@@ -29,4 +29,9 @@ public class Log
 	{
 		android.util.Log.e(LOGTAG, TAG + ": " + logMe, ex);
 	}
+
+	public static void i(String TAG, String logMe)
+	{
+		if(Config.LOGD) android.util.Log.i(LOGTAG, TAG + ": " + logMe);
+	}
 }

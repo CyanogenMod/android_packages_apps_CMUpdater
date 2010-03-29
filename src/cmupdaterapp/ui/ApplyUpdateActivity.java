@@ -23,6 +23,8 @@ public class ApplyUpdateActivity extends Activity
 {	
 	private static final String TAG = "ApplyUpdateActivity";
 
+	private Boolean showDebugOutput = false;
+	
 	private UpdateInfo mUpdateInfo;
 	private String mUpdateFolder;
 
@@ -40,6 +42,7 @@ public class ApplyUpdateActivity extends Activity
 		setContentView(R.layout.applyupdate);
 		
 		pref = new Preferences(this);
+		showDebugOutput = pref.displayDebugOutput();
 
 		mTitle = (TextView) findViewById(R.id.apply_title_textview);
 
@@ -59,7 +62,7 @@ public class ApplyUpdateActivity extends Activity
 		String template = res.getString(R.string.apply_title_textview_text);
 		mTitle.setText(MessageFormat.format(template, mUpdateInfo.getName()));
 		mUpdateFolder = pref.getUpdateFolder();
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Filename selected to flash: " + mUpdateInfo.getFileName());
+		if (showDebugOutput) Log.d(TAG, "Filename selected to flash: " + mUpdateInfo.getFileName());
 	}
 	
 	private final View.OnClickListener mApplyButtonListener = new View.OnClickListener()

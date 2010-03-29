@@ -5,6 +5,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
+import cmupdaterapp.utils.Preferences;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ public class ThemeListNewActivity extends Activity
 {
 	private static final String TAG = "ThemeListNewActivity";
 	public final static int REQUEST_CODE = 1;
+	
+	private Boolean showDebugOutput = false;
 	
 	private String intentName;
 	private String intentUri;
@@ -38,6 +41,7 @@ public class ThemeListNewActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		showDebugOutput = new Preferences(this).displayDebugOutput();
 		setContentView(R.layout.themelist_new);
 		Intent i = getIntent();
 		Bundle b = i.getExtras();
@@ -65,13 +69,13 @@ public class ThemeListNewActivity extends Activity
 			{
 				if(etName.getText().toString().trim().equalsIgnoreCase(""))
 				{
-					if (MainActivity.showDebugOutput) Log.d(TAG, "Entered name was empty");
+					if (showDebugOutput) Log.d(TAG, "Entered name was empty");
 					Toast.makeText(ThemeListNewActivity.this, R.string.theme_list_new_wrong_name, Toast.LENGTH_LONG).show();
 					return;
 				}
 				if(!URLUtil.isValidUrl(etUri.getText().toString().trim()))
 				{
-					if (MainActivity.showDebugOutput) Log.d(TAG, "Entered URL was not valid: " + etUri.getText().toString());
+					if (showDebugOutput) Log.d(TAG, "Entered URL was not valid: " + etUri.getText().toString());
 					Toast.makeText(ThemeListNewActivity.this, R.string.theme_list_new_wrong_uri, Toast.LENGTH_LONG).show();
 					return;
 				}
@@ -115,7 +119,7 @@ public class ThemeListNewActivity extends Activity
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent)
 	{
-		if (MainActivity.showDebugOutput) Log.d(TAG, "onActivityResult requestCode: "+requestCode+" resultCode: "+resultCode);
+		if (showDebugOutput) Log.d(TAG, "onActivityResult requestCode: "+requestCode+" resultCode: "+resultCode);
 		switch(requestCode)
 		{
 			case IntentIntegrator.REQUEST_CODE:
@@ -125,7 +129,7 @@ public class ThemeListNewActivity extends Activity
 					String result = scanResult.getContents();
 					if (null != result && !result.equals("") )
 					{
-						if (MainActivity.showDebugOutput) Log.d(TAG, "Scanned URL: " + result);
+						if (showDebugOutput) Log.d(TAG, "Scanned URL: " + result);
 						if(URLUtil.isValidUrl(result))
 						{
 							etUri.setText(result);
@@ -134,7 +138,7 @@ public class ThemeListNewActivity extends Activity
 						else
 						{
 							Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
-							if (MainActivity.showDebugOutput) Log.d(TAG, "Scanned URL not valid: " + result);
+							if (showDebugOutput) Log.d(TAG, "Scanned URL not valid: " + result);
 						}
 					}
 					else
@@ -144,7 +148,7 @@ public class ThemeListNewActivity extends Activity
 					Toast.makeText(getBaseContext(), R.string.barcode_scan_no_result, Toast.LENGTH_LONG).show();
 				break;
 			default:
-				if (MainActivity.showDebugOutput) Log.d(TAG, "Wrong Request Code");
+				if (showDebugOutput) Log.d(TAG, "Wrong Request Code");
 				break;
 		}
 	}

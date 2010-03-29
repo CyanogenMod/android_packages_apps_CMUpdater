@@ -11,12 +11,14 @@ import android.os.RemoteException;
 import cmupdaterapp.interfaces.IUpdateCheckService;
 import cmupdaterapp.interfaces.IUpdateCheckServiceCallback;
 import cmupdaterapp.misc.Log;
-import cmupdaterapp.ui.MainActivity;
+import cmupdaterapp.utils.Preferences;
 
 public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 {
 	private static final String TAG = "UpdateCheckTask";
 
+	private Boolean showDebugOutput = false;
+	
 	private IUpdateCheckService myService;	
 	private ProgressDialog p;
 	private Context context;
@@ -26,6 +28,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 	public UpdateCheckTask(Context ctx, ProgressDialog pg)
 	{
 		context = ctx;
+		showDebugOutput = new Preferences(ctx).displayDebugOutput();
 		p = pg;
 	}
 
@@ -67,7 +70,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 			mbound = false;
 		}
 		boolean stopped = context.stopService(serviceIntent);
-		if (MainActivity.showDebugOutput) Log.d(TAG, "UpdateCheckService stopped: " + stopped);
+		if (showDebugOutput) Log.d(TAG, "UpdateCheckService stopped: " + stopped);
 	}
 
 	/**

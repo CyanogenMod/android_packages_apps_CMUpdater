@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
 import cmupdaterapp.tasks.DownloadImageTask;
+import cmupdaterapp.utils.Preferences;
 
 public class ScreenshotActivity extends Activity
 {	
@@ -68,7 +69,7 @@ public class ScreenshotActivity extends Activity
         });
         
         //In onCreate, cause when pressing back from Detail, the old Screenshots remain in the List
-        downloadImageTask = new DownloadImageTask();
+        downloadImageTask = new DownloadImageTask(new Preferences(this).displayDebugOutput());
         downloadImageTask.execute(ui);
 	}
 	

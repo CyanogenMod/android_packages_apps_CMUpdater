@@ -18,11 +18,14 @@ import cmupdaterapp.ui.ApplyUpdateActivity;
 import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.ui.R;
 import cmupdaterapp.utils.MD5;
+import cmupdaterapp.utils.Preferences;
 
 public class MD5CheckerTask extends AsyncTask<File, Void, Boolean>
 {
 	private static final String TAG = "MD5CheckerTask";
 
+	private Boolean showDebugOutput = false;
+	
 	private ProgressDialog mDialog;
 	private String mFilename;
 	private boolean mreturnvalue;
@@ -33,6 +36,7 @@ public class MD5CheckerTask extends AsyncTask<File, Void, Boolean>
 		mDialog = dialog;
 		mFilename = filename;
 		mCtx = ctx;
+		showDebugOutput = new Preferences(ctx).displayDebugOutput();
 	}
 
 	@Override
@@ -107,7 +111,7 @@ public class MD5CheckerTask extends AsyncTask<File, Void, Boolean>
 	@Override
 	public void onCancelled()
 	{
-		if (MainActivity.showDebugOutput) Log.d(TAG, "MD5Checker Task cancelled");
+		if (showDebugOutput) Log.d(TAG, "MD5Checker Task cancelled");
 		Toast.makeText(mCtx, R.string.md5_check_cancelled, Toast.LENGTH_LONG).show();
 		Intent i = new Intent(mCtx, MainActivity.class);
 		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

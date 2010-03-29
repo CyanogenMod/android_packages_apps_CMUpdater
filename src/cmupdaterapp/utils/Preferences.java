@@ -17,7 +17,6 @@ import cmupdaterapp.customization.Customization;
 import cmupdaterapp.database.DbAdapter;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
-import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.ui.R;
 import android.app.Activity;
 import android.content.Context;
@@ -33,6 +32,8 @@ public class Preferences extends Activity
 {
 	private static final String TAG = "Preferences";
 
+	private Boolean showDebugOutput = false;
+	
 	private final SharedPreferences mPrefs;
 	private final Resources mRes;
 	private String temp;
@@ -42,7 +43,8 @@ public class Preferences extends Activity
 	{
 		mPrefs = PreferenceManager.getDefaultSharedPreferences(ctx);
 		mRes = ctx.getResources();
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Preference Instance set.");
+		showDebugOutput = displayDebugOutput();
+		if (showDebugOutput) Log.d(TAG, "Preference Instance set.");
 	}
 
 	public int getUpdateFrequency()
@@ -81,21 +83,21 @@ public class Preferences extends Activity
 	public String getBoardString()
 	{
 		temp = SysUtils.getSystemProperty(Customization.BOARD);
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Board: " + temp);
+		if (showDebugOutput) Log.d(TAG, "Board: " + temp);
 		return temp;
 	}
 
 	public String getChangelogURL()
 	{
 		temp = mRes.getString(R.string.conf_changelog_url);
-		if (MainActivity.showDebugOutput) Log.d(TAG, "ChangelogURL: " + temp);
+		if (showDebugOutput) Log.d(TAG, "ChangelogURL: " + temp);
 		return temp;
 	}
 
 	public String getFeaturedThemesURL()
 	{
 		temp = mRes.getString(R.string.conf_featured_themes_url);
-		if (MainActivity.showDebugOutput) Log.d(TAG, "FeaturedThemesURL: " + temp);
+		if (showDebugOutput) Log.d(TAG, "FeaturedThemesURL: " + temp);
 		return temp;
 	}
 
@@ -103,21 +105,21 @@ public class Preferences extends Activity
 	public boolean showAllRomUpdates()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_OLDER_ROM_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_OLDER_ROM_VERSIONS_DEF_VALUE))); 
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Display All Rom Updates: " + tempbool);
+		if (showDebugOutput) Log.d(TAG, "Display All Rom Updates: " + tempbool);
 		return tempbool;
 	}
 
 	public boolean showExperimentalRomUpdates()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS_DEF_VALUE)));
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Display Experimental Rom Updates: " + tempbool);
+		if (showDebugOutput) Log.d(TAG, "Display Experimental Rom Updates: " + tempbool);
 		return tempbool;
 	}
 
 	public String getRomUpdateFileURL()
 	{
 		temp = mPrefs.getString(mRes.getString(R.string.PREF_ROM_UPDATE_FILE_URL),  mRes.getString(R.string.conf_update_server_url_def));
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Rom MetadataFile-Url: " + temp);
+		if (showDebugOutput) Log.d(TAG, "Rom MetadataFile-Url: " + temp);
 		return temp;
 	}
 
@@ -132,21 +134,21 @@ public class Preferences extends Activity
 	public boolean showAllThemeUpdates()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_OLDER_THEME_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_OLDER_THEME_VERSIONS_DEF_VALUE)));
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Display All Theme Updates: " + tempbool);
+		if (showDebugOutput) Log.d(TAG, "Display All Theme Updates: " + tempbool);
 		return tempbool;
 	}
 
 	public boolean showExperimentalThemeUpdates()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS_DEF_VALUE)));
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Display Experimental Theme Updates: " + tempbool);
+		if (showDebugOutput) Log.d(TAG, "Display Experimental Theme Updates: " + tempbool);
 		return tempbool;
 	}
 
 	public LinkedList<ThemeList> getThemeUpdateUrls()
 	{
-		DbAdapter themeListDb = new DbAdapter();
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Opening Database");
+		DbAdapter themeListDb = new DbAdapter(showDebugOutput);
+		if (showDebugOutput) Log.d(TAG, "Opening Database");
 		themeListDb.open();
 		//Get the actual ThemeList from the Database
 		Cursor themeListCursor = themeListDb.getAllThemesCursor();
@@ -171,7 +173,7 @@ public class Preferences extends Activity
 			}
 			while(themeListCursor.moveToNext());
 		}
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Closing Database");
+		if (showDebugOutput) Log.d(TAG, "Closing Database");
 		themeListDb.close();
 		return fullThemeList.returnFullThemeList();	
 	}
@@ -179,7 +181,7 @@ public class Preferences extends Activity
 	public String getThemeFile()
 	{
 		temp = mPrefs.getString(mRes.getString(R.string.PREF_THEMES_THEME_FILE), mRes.getString(R.string.conf_theme_version_file_def));
-		if (MainActivity.showDebugOutput) Log.d(TAG, "ThemeFile: " + temp);
+		if (showDebugOutput) Log.d(TAG, "ThemeFile: " + temp);
 		return temp;
 	}
 
@@ -202,14 +204,14 @@ public class Preferences extends Activity
 	public boolean notificationsEnabled()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_NOTIFICATION_ENABLED), Boolean.valueOf(mRes.getString(R.string.PREF_NOTIFICATION_ENABLED_DEF_VALUE)));
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Notifications Enabled: " + tempbool);
+		if (showDebugOutput) Log.d(TAG, "Notifications Enabled: " + tempbool);
 		return tempbool;
 	}
 
 	public boolean getVibrate()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_NOTIFICATION_VIBRATE), Boolean.valueOf(mRes.getString(R.string.PREF_NOTIFICATION_VIBRATE_DEF_VALUE)));
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Notification Vibrate: " + tempbool);
+		if (showDebugOutput) Log.d(TAG, "Notification Vibrate: " + tempbool);
 		return tempbool;
 	}
 
@@ -223,7 +225,7 @@ public class Preferences extends Activity
 
 	public void setNotificationRingtone(String RingTone)
 	{
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Setting RingtoneURL to " + RingTone);
+		if (showDebugOutput) Log.d(TAG, "Setting RingtoneURL to " + RingTone);
 		Editor editor = mPrefs.edit();
 		editor.putString(mRes.getString(R.string.PREF_NOTIFICATION_RINGTONE), RingTone);
 		if(!editor.commit()) Log.e(TAG, "Unable to write Ringtone URI");
@@ -241,7 +243,7 @@ public class Preferences extends Activity
 	public String getUpdateFolder()
 	{
 		temp = mPrefs.getString(mRes.getString(R.string.PREF_UPDATE_FOLDER), mRes.getString(R.string.conf_update_folder)).trim();
-		if (MainActivity.showDebugOutput) Log.d(TAG, "UpdateFolder: " + temp);
+		if (showDebugOutput) Log.d(TAG, "UpdateFolder: " + temp);
 		return temp;
 	}
 
@@ -273,13 +275,13 @@ public class Preferences extends Activity
 	public int getProgressUpdateFreq()
 	{
 		temp = mPrefs.getString(mRes.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY), mRes.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY_DEF_VALUE));
-		if (MainActivity.showDebugOutput) Log.d(TAG, "ProgressUpdateFrequency: " + temp);
+		if (showDebugOutput) Log.d(TAG, "ProgressUpdateFrequency: " + temp);
 		return Integer.parseInt(temp);
 	}
 
 	public void setProgressUpdateFreq(String freq)
 	{
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Setting ProgressUpdate Frequency to " + freq);
+		if (showDebugOutput) Log.d(TAG, "Setting ProgressUpdate Frequency to " + freq);
 		Editor editor = mPrefs.edit();
 		editor.putString(mRes.getString(R.string.PREF_PROGRESS_UPDATE_FREQUENCY), freq);
 		if(!editor.commit()) Log.e(TAG, "Unable to write Update Frequency");
@@ -288,7 +290,7 @@ public class Preferences extends Activity
 	public boolean displayDebugOutput()
 	{
 		tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DEBUG_OUTPUT), Boolean.valueOf(mRes.getString(R.string.PREF_DEBUG_OUTPUT_DEF_VALUE))); 
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Display Debug Output: " + tempbool);
+		if (showDebugOutput) Log.d(TAG, "Display Debug Output: " + tempbool);
 		return tempbool;
 	}
 
@@ -311,7 +313,7 @@ public class Preferences extends Activity
 					if (firstLine.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
 					{
 						t.name = Constants.UPDATE_INFO_WILDCARD;
-						if (MainActivity.showDebugOutput) Log.d(TAG, "Wildcard in themes.theme");
+						if (showDebugOutput) Log.d(TAG, "Wildcard in themes.theme");
 						return t;
 					}
 					String[] Return = firstLine.split("\\|");
@@ -335,7 +337,7 @@ public class Preferences extends Activity
 		}
 		else
 		{
-			if (MainActivity.showDebugOutput) Log.d(TAG, "No Theme File found. Using Wildcard for Theme Updates instead");
+			if (showDebugOutput) Log.d(TAG, "No Theme File found. Using Wildcard for Theme Updates instead");
 		}
 		return null;
 	}

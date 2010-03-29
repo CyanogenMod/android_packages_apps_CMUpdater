@@ -11,6 +11,7 @@ import cmupdaterapp.listadapters.ThemeListAdapter;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.R;
+import cmupdaterapp.utils.Preferences;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -35,6 +36,8 @@ public class ThemeListActivity extends ListActivity
 {
 	private static final String TAG = "ThemeListActivity";
 	
+	private Boolean showDebugOutput = false;
+	
 	private DbAdapter themeListDb;
 	private Cursor themeListCursor;
 	private FullThemeList fullThemeList;
@@ -52,8 +55,9 @@ public class ThemeListActivity extends ListActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		themeListDb = new DbAdapter();
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Opening Database");
+		showDebugOutput = new Preferences(this).displayDebugOutput();
+		themeListDb = new DbAdapter(showDebugOutput);
+		if (showDebugOutput) Log.d(TAG, "Opening Database");
 		themeListDb.open();
 		setContentView(R.layout.themelist);
 		tv = (TextView) findViewById(R.id.theme_list_info);
@@ -111,7 +115,7 @@ public class ThemeListActivity extends ListActivity
 	public void onListItemClick(ListView parent, View v,int position, long id)
 	{
 		super.onListItemClick(parent, v, position, id);
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Item clicked. Postition: " + id);
+		if (showDebugOutput) Log.d(TAG, "Item clicked. Postition: " + id);
 	}
 
 	@Override
@@ -168,7 +172,7 @@ public class ThemeListActivity extends ListActivity
 				.show();
 				return true;
 			case Constants.MENU_THEME_LIST_CONTEXT_EDIT:
-				if (MainActivity.showDebugOutput) Log.d(TAG, "Edit clicked");
+				if (showDebugOutput) Log.d(TAG, "Edit clicked");
 				tl = ((ThemeList)lv.getAdapter().getItem(menuInfo.position));
 				createNewThemeList(true, tl.name, tl.url.toString(), tl.enabled, tl.PrimaryKey, tl.featured);
 				break;
@@ -232,7 +236,7 @@ public class ThemeListActivity extends ListActivity
 	public void onDestroy()
 	{
 		// Close the database
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Closing Database");
+		if (showDebugOutput) Log.d(TAG, "Closing Database");
 		themeListCursor.close();
 		themeListDb.close();
 		super.onDestroy();
@@ -265,9 +269,9 @@ public class ThemeListActivity extends ListActivity
 
 	private void DeleteTheme(int position)
 	{
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Remove Theme Postition: " + position);
+		if (showDebugOutput) Log.d(TAG, "Remove Theme Postition: " + position);
 		if (themeListDb.removeTheme(position))
-			if (MainActivity.showDebugOutput) Log.d(TAG, "Success");
+			if (showDebugOutput) Log.d(TAG, "Success");
 		else
 		{
 			Log.e(TAG, "Fail");
@@ -278,7 +282,7 @@ public class ThemeListActivity extends ListActivity
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent)
 	{
-		if (MainActivity.showDebugOutput) Log.d(TAG, "RequestCode: " + requestCode + " ResultCode: " + resultCode);
+		if (showDebugOutput) Log.d(TAG, "RequestCode: " + requestCode + " ResultCode: " + resultCode);
 		switch(requestCode)
 		{
 			case ThemeListNewActivity.REQUEST_CODE:
@@ -304,12 +308,12 @@ public class ThemeListActivity extends ListActivity
 
 	private void updateFeaturedThemes()
 	{
-		if (MainActivity.showDebugOutput) Log.d(TAG, "Called Update Featured Themes");
+		if (showDebugOutput) Log.d(TAG, "Called Update Featured Themes");
 		FeaturedThemesProgressHandler = new Handler()
 		{
 			public void handleMessage(Message msg)
 			{
-				if (MainActivity.showDebugOutput) Log.d(TAG, "recieved Message");
+				if (showDebugOutput) Log.d(TAG, "recieved Message");
 				if (FeaturedThemesProgressDialog != null)
 					FeaturedThemesProgressDialog.dismiss();
 				if (msg.obj instanceof String)
