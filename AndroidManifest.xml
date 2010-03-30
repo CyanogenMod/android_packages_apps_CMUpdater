@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	android:versionName="5.0.0" android:versionCode="500" package="cmupdaterapp.ui">
+	android:versionName="5.0.1" android:versionCode="501" package="cmupdaterapp.ui">
 
 	<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="4"/>
 
