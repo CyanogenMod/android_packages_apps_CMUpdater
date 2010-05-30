@@ -16,12 +16,12 @@ import android.widget.TextView;
 
 public class UpdateListAdapter<T> extends ArrayAdapter<T>
 {
-	private final Context _context;
+	private final LayoutInflater _inflater;
 
 	public UpdateListAdapter(Context context, int textViewResourceId, List<T> objects)
 	{
 		super(context, textViewResourceId, objects);
-		_context = context;
+		_inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	public View getDropDownView(int position, View convertView, ViewGroup parent)
@@ -35,8 +35,7 @@ public class UpdateListAdapter<T> extends ArrayAdapter<T>
 		ViewWrapper wrapper=null;
 		if (row == null)
 		{
-			LayoutInflater inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			row = inflater.inflate(R.layout.itemtemplate_updatelist, null);
+			row = _inflater.inflate(R.layout.itemtemplate_updatelist, null);
 			wrapper = new ViewWrapper(row);
 			row.setTag(wrapper);
 		}

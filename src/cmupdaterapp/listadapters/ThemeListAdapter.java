@@ -18,12 +18,12 @@ import android.widget.TextView;
 
 public class ThemeListAdapter<T> extends ArrayAdapter<T>
 {
-	private final Context _context;
+	private final LayoutInflater _inflater;
 
 	public ThemeListAdapter(Context context, int textViewResourceId, List<T> objects)
 	{
 		super(context, textViewResourceId, objects);
-		_context = context;
+		_inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	public View getDropDownView(int position, View convertView, ViewGroup parent)
@@ -37,8 +37,7 @@ public class ThemeListAdapter<T> extends ArrayAdapter<T>
 		ThemeListViewWrapper wrapper=null;
 		if (row == null)
 		{
-			LayoutInflater inflater = (LayoutInflater)_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			row = inflater.inflate(R.layout.itemtemplate_themelist, null);
+			row = _inflater.inflate(R.layout.itemtemplate_themelist, null);
 			wrapper = new ThemeListViewWrapper(row);
 			row.setTag(wrapper);
 		}
