@@ -39,13 +39,9 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.WifiLock;
@@ -79,9 +75,6 @@ public class DownloadService extends Service
 	private String secondsString;
 	private String fullUpdateFolderPath;
 	private Resources res;
-	private ConnectivityManager mConnectivityManager;
-	private ConnectionChangeReceiver myConnectionChangeReceiver;
-	private boolean connected;
 	private String fileName;
 	private long localFileSize = 0;
 	private Preferences prefs;
@@ -151,19 +144,12 @@ public class DownloadService extends Service
 		res = getResources();
 		minutesString = res.getString(R.string.minutes);
 		secondsString = res.getString(R.string.seconds);
-
-		mConnectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-		myConnectionChangeReceiver = new ConnectionChangeReceiver();
-		registerReceiver(myConnectionChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-		android.net.NetworkInfo.State state = mConnectivityManager.getActiveNetworkInfo().getState();
-		connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
     }
 
     @Override
     public void onDestroy()
     {
     	mCallbacks.kill();
-    	unregisterReceiver(myConnectionChangeReceiver);
     	super.onDestroy();
     }
 
@@ -175,23 +161,6 @@ public class DownloadService extends Service
 		boolean success;
 		mWifiLock.acquire();
 
-		//wait for a data connection
-		while(!connected)
-		{
-			if (showDebugOutput) Log.d(TAG, "No data connection, waiting for a data connection");
-			synchronized (mConnectivityManager)
-			{
-				try
-				{
-					mConnectivityManager.wait();
-					break;
-				}
-				catch (InterruptedException e)
-				{
-					Log.e(TAG, "Error in TelephonyManager.wait", e);
-				}
-			}
-		}
 		try
 		{
 			if (showDebugOutput) Log.d(TAG, "Downloading update...");
@@ -755,15 +724,4 @@ public class DownloadService extends Service
 				Toast.makeText(DownloadService.this, (String)msg.obj, Toast.LENGTH_LONG).show();
 		}
 	};
-
-	//Is called when Network Connection Changes
-	private class ConnectionChangeReceiver extends BroadcastReceiver
-	{
-		@Override
-		public void onReceive(Context context, Intent intent)
-		{
-			android.net.NetworkInfo.State state = mConnectivityManager.getActiveNetworkInfo().getState();
-			connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
-		}
-	}
 }

@@ -40,13 +40,8 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
@@ -63,7 +58,6 @@ public class UpdateCheckService extends Service
 	
 	private final RemoteCallbackList<IUpdateCheckServiceCallback> mCallbacks = new RemoteCallbackList<IUpdateCheckServiceCallback>();
 	private NotificationManager mNM;
-	private ConnectivityManager mConnectivityManager;
 	private Resources res;
 	private Preferences mPreferences;
 	private String systemMod;
@@ -75,9 +69,6 @@ public class UpdateCheckService extends Service
 	private boolean showAllThemeUpdates;
 	private boolean WildcardUsed = false;
 	private int PrimaryKeyTheme = -1;
-	private boolean mWaitingForDataConnection = false;
-	private ConnectionChangeReceiver myConnectionChangeReceiver;
-	private boolean connected;
 
 	@Override
 	public IBinder onBind(Intent intent)
@@ -92,23 +83,6 @@ public class UpdateCheckService extends Service
 		showDebugOutput = mPreferences.displayDebugOutput();
 		systemMod = mPreferences.getBoardString();
 		res = this.getResources();
-		myConnectionChangeReceiver = new ConnectionChangeReceiver();
-		registerReceiver(myConnectionChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-
-		//Can be null on Startup, when System not available. So try it, till we get it. Before there is no DataConnection available
-		while(mConnectivityManager == null)
-		{
-			mConnectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-		}
-		while (mConnectivityManager.getActiveNetworkInfo() == null)
-		{
-			continue;
-		}
-		NetworkInfo nwi = mConnectivityManager.getActiveNetworkInfo();
-		android.net.NetworkInfo.State state = nwi.getState();
-		connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
-		if (showDebugOutput) Log.d(TAG, "OnCreate connected: " + connected);
-		
 		if(systemMod == null)
 		{
 			if (showDebugOutput) Log.d(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
@@ -124,7 +98,6 @@ public class UpdateCheckService extends Service
 	public void onDestroy()
 	{
 		mCallbacks.kill();
-		unregisterReceiver(myConnectionChangeReceiver);
     	super.onDestroy();
 	}
 
@@ -140,14 +113,6 @@ public class UpdateCheckService extends Service
 		}
 		public void checkForUpdates() throws RemoteException
 		{
-			synchronized (mConnectivityManager)
-			{
-				if(mWaitingForDataConnection)
-				{
-					if (showDebugOutput) Log.d(TAG, "Another update check is waiting for data connection. Skipping");
-					return;
-				}
-            }
 			checkForNewUpdates();
 		}
     };
@@ -157,33 +122,11 @@ public class UpdateCheckService extends Service
     	ToastHandler.sendMessage(ToastHandler.obtainMessage(0, ex));
 	}
 
-	private boolean isDataConnected()
-	{
-		return connected;
-	}
-
 	private void checkForNewUpdates()
 	{
 		FullUpdateInfo availableUpdates;
 		while (true)
-		{	
-			//wait for a data connection
-			while(!isDataConnected())
-			{
-				if (showDebugOutput) Log.d(TAG, "No data connection, waiting for a data connection");
-				synchronized (mConnectivityManager)
-				{
-					try
-					{
-						mConnectivityManager.wait();
-						break;
-					}
-					catch (InterruptedException e)
-					{
-						Log.e(TAG, "Error in TelephonyManager.wait", e);
-					}
-				}
-			}
+		{
 			try
 			{
 				if (showDebugOutput) Log.d(TAG, "Checking for updates...");
@@ -193,12 +136,8 @@ public class UpdateCheckService extends Service
 			catch (IOException ex)
 			{
 				Log.e(TAG, "IOEx while checking for updates", ex);
-				if(isDataConnected())
-				{
-					notificateCheckError(ex.getMessage());
-					DisplayExceptionToast(ex.getMessage());
-					return;
-				}
+				notificateCheckError(ex.getMessage());
+				return;
 			}
 			catch (RuntimeException ex)
 			{
@@ -788,22 +727,5 @@ public class UpdateCheckService extends Service
 			}
 		}
 		mCallbacks.finishBroadcast();
-	}
-
-	//Is called when Network Connection Changes
-	class ConnectionChangeReceiver extends BroadcastReceiver
-	{
-		@Override
-		public void onReceive(Context context, Intent intent)
-		{
-			while (mConnectivityManager.getActiveNetworkInfo() == null)
-			{
-				continue;
-			}
-			NetworkInfo nwi = mConnectivityManager.getActiveNetworkInfo();
-			android.net.NetworkInfo.State state = nwi.getState();
-			connected = (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.SUSPENDED);
-			if (showDebugOutput) Log.d(TAG, "ConnectionChangeReciever connected: " + connected);
-		}
 	}
 }
