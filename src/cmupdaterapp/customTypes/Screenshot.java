@@ -1,5 +1,11 @@
 package cmupdaterapp.customTypes;
 
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
+import cmupdaterapp.customExceptions.InvalidPictureException;
+import cmupdaterapp.misc.Constants;
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -9,12 +15,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Bitmap.CompressFormat;
-import cmupdaterapp.customExceptions.InvalidPictureException;
-import cmupdaterapp.misc.Constants;
 
 public class Screenshot implements Serializable
 {	

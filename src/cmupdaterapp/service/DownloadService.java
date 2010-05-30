@@ -1,27 +1,18 @@
 package cmupdaterapp.service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
-import java.io.Serializable;
-import java.net.URI;
-import java.util.List;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.DefaultHttpClient;
-
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.net.Uri;
+import android.net.wifi.WifiManager;
+import android.net.wifi.WifiManager.WifiLock;
+import android.os.*;
+import android.widget.RemoteViews;
+import android.widget.Toast;
 import cmupdaterapp.customExceptions.NotEnoughSpaceException;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IDownloadService;
@@ -35,24 +26,20 @@ import cmupdaterapp.ui.R;
 import cmupdaterapp.utils.MD5;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.SysUtils;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.Service;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.net.Uri;
-import android.net.wifi.WifiManager;
-import android.net.wifi.WifiManager.WifiLock;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.RemoteCallbackList;
-import android.os.RemoteException;
-import android.widget.RemoteViews;
-import android.widget.Toast;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.*;
+import java.net.URI;
+import java.util.List;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DownloadService extends Service
 {
@@ -75,8 +62,7 @@ public class DownloadService extends Service
 	private String secondsString;
 	private String fullUpdateFolderPath;
 	private Resources res;
-	private String fileName;
-	private long localFileSize = 0;
+    private long localFileSize = 0;
 	private Preferences prefs;
 
     @Override
@@ -183,10 +169,7 @@ public class DownloadService extends Service
 			mWifiLock.release();
 		}
 		//Be sure to return false if the User canceled the Download
-		if(prepareForDownloadCancel)
-			return false;
-		else
-			return success;
+        return !prepareForDownloadCancel && success;
 	}
 
 	private boolean downloadFile(UpdateInfo updateInfo) throws IOException
@@ -203,9 +186,9 @@ public class DownloadService extends Service
 		int start = new Random().nextInt(size);
 		if (showDebugOutput) Log.d(TAG, "Mirrorcount: " + size);
 		URI updateURI;
-		File destinationFile = null;
-		File partialDestinationFile = null;
-		File destinationMD5File = null;
+		File destinationFile;
+		File partialDestinationFile;
+		File destinationMD5File;
 		String downloadedMD5 = null;
 
 		//If directory not exists, create it
@@ -216,7 +199,7 @@ public class DownloadService extends Service
 			if (showDebugOutput) Log.d(TAG, "UpdateFolder created");
 		}
 
-		fileName = updateInfo.getFileName(); 
+        String fileName = updateInfo.getFileName();
 		if (null == fileName || fileName.length() < 1)
 		{
 			fileName = "update.zip";
@@ -408,7 +391,7 @@ public class DownloadService extends Service
 			mStartTime = System.currentTimeMillis(); 
 
 			byte[] buff = new byte[64 * 1024];
-			int read = 0;
+			int read;
 			RandomAccessFile out = new RandomAccessFile(partialDestinationFile, "rw");
 			out.seek(localFileSize);
 			InputStream is = entity.getContent();
@@ -545,12 +528,9 @@ public class DownloadService extends Service
 		//Set the Notification to finished
 		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		Notification mNotification = new Notification(R.drawable.icon_notification, res.getString(R.string.notification_tickertext), System.currentTimeMillis());
-		Intent mNotificationIntent = new Intent(this, MainActivity.class);
-		PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
-		mNotification = new Notification(R.drawable.icon, res.getString(R.string.notification_finished), System.currentTimeMillis());
+		Notification mNotification = new Notification(R.drawable.icon, res.getString(R.string.notification_finished), System.currentTimeMillis());
 		mNotification.flags = Notification.FLAG_AUTO_CANCEL;
-		mNotificationContentIntent = PendingIntent.getActivity(this, 0, i, 0);
+		PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, i, 0);
 		mNotification.setLatestEventInfo(this, res.getString(R.string.app_name), res.getString(R.string.notification_finished), mNotificationContentIntent);
 		Uri notificationRingtone = prefs.getConfiguredRingtone();
 		if(prefs.getVibrate())

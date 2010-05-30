@@ -1,23 +1,5 @@
 package cmupdaterapp.utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URI;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.LinkedList;
-
-import cmupdaterapp.customTypes.FullThemeList;
-import cmupdaterapp.customTypes.ThemeInfo;
-import cmupdaterapp.customTypes.ThemeList;
-import cmupdaterapp.customization.Customization;
-import cmupdaterapp.database.DbAdapter;
-import cmupdaterapp.misc.Constants;
-import cmupdaterapp.misc.Log;
-import cmupdaterapp.ui.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -27,6 +9,20 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import cmupdaterapp.customTypes.FullThemeList;
+import cmupdaterapp.customTypes.ThemeInfo;
+import cmupdaterapp.customTypes.ThemeList;
+import cmupdaterapp.customization.Customization;
+import cmupdaterapp.database.DbAdapter;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.misc.Log;
+import cmupdaterapp.ui.R;
+
+import java.io.*;
+import java.net.URI;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.LinkedList;
 
 public class Preferences extends Activity
 {
@@ -166,8 +162,7 @@ public class Preferences extends Activity
 				ThemeList newItem = new ThemeList();
 				newItem.name = name;
 				newItem.url = URI.create(uri);
-				if(enabled == 1) newItem.enabled = true;
-				else newItem.enabled = false;
+                newItem.enabled = enabled == 1;
 				newItem.PrimaryKey = pk;
 				fullThemeList.addThemeToList(newItem);
 			}
@@ -194,10 +189,7 @@ public class Preferences extends Activity
 
 	public boolean ThemeUpdateUrlSet()
 	{
-		if(getThemeUpdateUrls().size()==0)
-			return false;
-		else
-			return true;
+        return getThemeUpdateUrls().size() != 0;
 	}
 
 	//Notifications
@@ -297,7 +289,7 @@ public class Preferences extends Activity
 	public ThemeInfo getThemeInformations()
 	{
 		File f = new File(getThemeFile());
-		if (f != null && f.exists() && f.canRead())
+		if (f.exists() && f.canRead())
 		{
 			try
 			{

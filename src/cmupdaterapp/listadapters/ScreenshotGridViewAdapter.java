@@ -1,12 +1,5 @@
 package cmupdaterapp.listadapters;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import cmupdaterapp.customExceptions.InvalidPictureException;
-import cmupdaterapp.customTypes.Screenshot;
-import cmupdaterapp.misc.Constants;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.View;
@@ -14,6 +7,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import cmupdaterapp.customExceptions.InvalidPictureException;
+import cmupdaterapp.customTypes.Screenshot;
+import cmupdaterapp.misc.Constants;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class ScreenshotGridViewAdapter extends BaseAdapter
 {
@@ -48,7 +47,7 @@ public class ScreenshotGridViewAdapter extends BaseAdapter
     {
     	boolean ImageLoaded = items.size() > position;
 
-        ImageView imageView = null;
+        ImageView imageView;
         if (convertView == null) // if it's not recycled, initialize some attributes
         {
 	            imageView = new ImageView(mContext);

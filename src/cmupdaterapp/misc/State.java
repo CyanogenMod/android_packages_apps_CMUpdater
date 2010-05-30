@@ -1,15 +1,12 @@
 package cmupdaterapp.misc;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import android.content.Context;
 import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.customization.Customization;
-import android.content.Context;
+
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class State
 {
@@ -23,7 +20,7 @@ public class State
 		try
 		{
 			Map<String,Serializable> data = new HashMap<String, Serializable>();
-			data.put(Constants.KEY_AVAILABLE_UPDATES, (Serializable)mAvailableUpdates);
+			data.put(Constants.KEY_AVAILABLE_UPDATES, mAvailableUpdates);
 			oos.writeObject(data);
 			oos.flush();
 		}

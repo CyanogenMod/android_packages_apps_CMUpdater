@@ -1,18 +1,11 @@
 package cmupdaterapp.utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import cmupdaterapp.misc.Log;
+
+import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import cmupdaterapp.misc.Log;
 
 public class MD5
 {
@@ -20,7 +13,7 @@ public class MD5
 
     public static boolean checkMD5(String md5, File updateFile) throws IOException
     {
-    	if (md5 == null || md5 == "" || updateFile == null)
+    	if (md5 == null || md5.equals("") || updateFile == null)
     	{
     		Log.e(TAG, "md5 String NULL or UpdateFile NULL");
     		return false;
@@ -42,7 +35,7 @@ public class MD5
 
     public static String calculateMD5(File updateFile)
     {
-    	MessageDigest digest = null;
+    	MessageDigest digest;
 		try
 		{
 			digest = MessageDigest.getInstance("MD5");
@@ -52,7 +45,7 @@ public class MD5
 			Log.e(TAG, "Exception while getting Digest", e);
 			return null;
 		}
-    	InputStream is = null;
+    	InputStream is;
 		try
 		{
 			is = new FileInputStream(updateFile);
@@ -63,7 +56,7 @@ public class MD5
 			return null;
 		}				
     	byte[] buffer = new byte[8192];
-    	int read = 0;
+    	int read;
     	try
     	{
     		while( (read = is.read(buffer)) > 0)

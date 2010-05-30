@@ -1,26 +1,14 @@
 package cmupdaterapp.service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.text.MessageFormat;
-import java.util.Date;
-import java.util.LinkedList;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.net.Uri;
+import android.os.*;
+import android.widget.Toast;
 import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.customTypes.ThemeInfo;
 import cmupdaterapp.customTypes.ThemeList;
@@ -36,19 +24,25 @@ import cmupdaterapp.ui.R;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.StringUtils;
 import cmupdaterapp.utils.SysUtils;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.Service;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.RemoteCallbackList;
-import android.os.RemoteException;
-import android.widget.Toast;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.text.MessageFormat;
+import java.util.Date;
+import java.util.LinkedList;
 
 public class UpdateCheckService extends Service
 {
@@ -352,7 +346,7 @@ public class UpdateCheckService extends Service
 
 		FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(this, showDebugOutput));
 		if(!romException)
-			State.saveState(this, (Serializable)retValue, showDebugOutput);
+			State.saveState(this, retValue, showDebugOutput);
 		return ful;
 	}
 
@@ -500,7 +494,7 @@ public class UpdateCheckService extends Service
 
 		if (ui.getBranchCode().equalsIgnoreCase(Constants.UPDATE_INFO_BRANCH_EXPERIMENTAL))
 		{
-			if (experimentalAllowed == true)
+			if (experimentalAllowed)
 				allow = true;
 		}
 		else
@@ -639,7 +633,7 @@ public class UpdateCheckService extends Service
 					if (romMatches(ui, systemRom))
 					{
 						//Name matches or is *
-						if (WildcardUsed || showAllThemeUpdates || (themeInfos.name != null && themeInfos.name != "" && ui.getName().equalsIgnoreCase(themeInfos.name)))
+						if (WildcardUsed || showAllThemeUpdates || (themeInfos.name != null && !themeInfos.name.equals("") && ui.getName().equalsIgnoreCase(themeInfos.name)))
 						{
 							//Version matches or name is *. If *, display all Versions
 							if(WildcardUsed || showAllThemeUpdates || StringUtils.compareVersions(ui.getVersion(), themeInfos.version))

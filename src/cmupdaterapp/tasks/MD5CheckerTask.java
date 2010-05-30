@@ -1,11 +1,5 @@
 package cmupdaterapp.tasks;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Serializable;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +12,8 @@ import cmupdaterapp.ui.ApplyUpdateActivity;
 import cmupdaterapp.ui.MainActivity;
 import cmupdaterapp.ui.R;
 import cmupdaterapp.utils.MD5;
+
+import java.io.*;
 
 public class MD5CheckerTask extends AsyncTask<File, Void, Boolean>
 {
@@ -91,7 +87,7 @@ public class MD5CheckerTask extends AsyncTask<File, Void, Boolean>
 		String[] temp = mFilename.split("\\\\");
 		ui.setName(temp[temp.length-1]);
 		ui.setFileName(mFilename);
-		if(result == true)
+		if(result)
 		{
 			Intent i = new Intent(mCtx, ApplyUpdateActivity.class)
 			.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)ui);

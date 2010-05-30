@@ -13,7 +13,7 @@ import java.io.FilenameFilter;
  */
 public class UpdateFilter implements FilenameFilter
 {
-	private String[] mExtension;
+	private final String[] mExtension;
 	
 	public UpdateFilter(String Extensions)
 	{

@@ -19,8 +19,8 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 	private Boolean showDebugOutput = false;
 	
 	private IUpdateCheckService myService;	
-	private ProgressDialog p;
-	private Context context;
+	private final ProgressDialog p;
+	private final Context context;
 	private boolean mbound;
 	private Intent serviceIntent;
 
@@ -49,8 +49,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 			//Wait till the Service is bound
 			while(myService == null)
 			{
-				continue;
-			}
+            }
 			myService.checkForUpdates();
 		}
 		catch (RemoteException e)
@@ -75,7 +74,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
 	/**
 	 * Class for interacting with the main interface of the service.
 	 */
-    private ServiceConnection mConnection = new ServiceConnection()
+    private final ServiceConnection mConnection = new ServiceConnection()
     {
     	public void onServiceConnected(ComponentName name, IBinder service)
     	{
@@ -99,7 +98,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
     	}
     };
 
-    private IUpdateCheckServiceCallback mCallback = new IUpdateCheckServiceCallback.Stub()
+    private final IUpdateCheckServiceCallback mCallback = new IUpdateCheckServiceCallback.Stub()
 	{
 		public void UpdateCheckFinished() throws RemoteException
 		{

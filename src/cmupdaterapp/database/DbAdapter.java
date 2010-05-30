@@ -1,10 +1,5 @@
 package cmupdaterapp.database;
 
-import java.io.File;
-import java.net.URI;
-import java.util.LinkedList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -16,6 +11,11 @@ import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.customization.Customization;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.utils.StringUtils;
+
+import java.io.File;
+import java.net.URI;
+import java.util.LinkedList;
+import java.util.List;
 
 public class DbAdapter
 {
@@ -183,10 +183,8 @@ public class DbAdapter
 		result.name = name;
 		result.url = URI.create(uri);
 		result.PrimaryKey = Key;
-		if(enabled == 1) result.enabled = true;
-		else result.enabled = false;
-		if(featured == 1) result.featured = true;
-		else result.featured = false;
+        result.enabled = enabled == 1;
+        result.featured = featured == 1;
 		cursor.close();
 		return result;
 	}

@@ -1,15 +1,14 @@
 package cmupdaterapp.utils;
 
+import android.os.Environment;
+import android.os.StatFs;
+import cmupdaterapp.customization.Customization;
+import cmupdaterapp.misc.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-import android.os.Environment;
-import android.os.StatFs;
-
-import cmupdaterapp.customization.Customization;
-import cmupdaterapp.misc.Log;
 
 public class SysUtils
 {

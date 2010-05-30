@@ -1,7 +1,5 @@
 package cmupdaterapp.ui;
 
-import cmupdaterapp.customExceptions.InvalidPictureException;
-import cmupdaterapp.misc.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cmupdaterapp.customExceptions.InvalidPictureException;
+import cmupdaterapp.misc.Constants;
 
 public class ScreenshotDetailActivity extends Activity
 {

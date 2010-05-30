@@ -1,8 +1,9 @@
 package cmupdaterapp.utils;
 
-import java.util.ArrayList;
-
 import cmupdaterapp.misc.Log;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class StringUtils
 {
@@ -60,15 +61,9 @@ public class StringUtils
 	
 		ArrayList<String> newVersionArray = new ArrayList<String>();
 		ArrayList<String> oldVersionArray = new ArrayList<String>();
-		
-		for (String s : sNewVersion)
-		{
-			newVersionArray.add(s);
-		}
-		for (String s : sOldVersion)
-		{
-			oldVersionArray.add(s);
-		}
+
+        newVersionArray.addAll(Arrays.asList(sNewVersion));
+        oldVersionArray.addAll(Arrays.asList(sOldVersion));
 		
 		//Make the 2 Arrays the Same size filling it with 0. So Version 2 compared to 2.1 will be 2.0 to 2.1
 		if (newVersionArray.size() > oldVersionArray.size())

@@ -1,26 +1,23 @@
 package cmupdaterapp.changelog;
 
+import android.app.Activity;
+import android.os.Message;
+import cmupdaterapp.customTypes.UpdateInfo;
+import cmupdaterapp.misc.Log;
+import cmupdaterapp.ui.MainActivity;
+import cmupdaterapp.utils.Preferences;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-
-import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.utils.Preferences;
-import cmupdaterapp.misc.Log;
-import cmupdaterapp.ui.MainActivity;
-
-import android.app.Activity;
-import android.os.Message;
 
 public class Changelog implements Runnable
 {
@@ -48,7 +45,7 @@ public class Changelog implements Runnable
 		v.Version = ui.getVersion();
 		for (String str : ui.getDescription().split("\\|"))
 		{
-			if(str != "")
+			if(!str.equals(""))
 				v.ChangeLogText.add(str);
 		}
 		returnValue.add(v);

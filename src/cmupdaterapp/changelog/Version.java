@@ -6,7 +6,7 @@ import java.util.List;
 public class Version
 {
 	public String Version;
-	public List<String> ChangeLogText;
+	public final List<String> ChangeLogText;
 	Version()
 	{
 		Version = "";

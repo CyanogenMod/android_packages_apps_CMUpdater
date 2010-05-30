@@ -1,12 +1,12 @@
 package cmupdaterapp.customTypes;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
-
-import android.os.Parcel;
-import android.os.Parcelable;
 
 public class UpdateInfo implements Parcelable, Serializable
 {
@@ -147,7 +147,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	 */
 	public Boolean isIncremental()
 	{
-		return (this.versionForApply != null && this.versionForApply != "");
+		return (this.versionForApply != null && !this.versionForApply.equals(""));
 	}
 	
 	@Override
@@ -173,20 +173,18 @@ public class UpdateInfo implements Parcelable, Serializable
 			ui.versionForApply = "";
 		if (versionForApply == null)
 			versionForApply = "";
-		if (ui.mod.equals(mod)
-				&& ui.board.equals(board)
-				&& ui.name.equals(name)
-				&& ui.version.equals(version)
-				&& ui.type.equals(type)
-				&& ui.branchCode.equals(branchCode)
-				&& ui.description.equals(description)
-				&& ui.fileName.equals(fileName)
-				&& ui.screenshots.equals(screenshots)
-				&& ui.PrimaryKey == PrimaryKey
-				&& ui.versionForApply.equals(versionForApply))
-			return true;
-		return false;
-	}
+        return ui.mod.equals(mod)
+                && ui.board.equals(board)
+                && ui.name.equals(name)
+                && ui.version.equals(version)
+                && ui.type.equals(type)
+                && ui.branchCode.equals(branchCode)
+                && ui.description.equals(description)
+                && ui.fileName.equals(fileName)
+                && ui.screenshots.equals(screenshots)
+                && ui.PrimaryKey == PrimaryKey
+                && ui.versionForApply.equals(versionForApply);
+    }
 
 	public UpdateInfo()
 	{

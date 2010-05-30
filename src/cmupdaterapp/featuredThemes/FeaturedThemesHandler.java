@@ -1,15 +1,14 @@
 package cmupdaterapp.featuredThemes;
 
-import java.net.URI;
-
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
 import cmupdaterapp.customTypes.FullThemeList;
 import cmupdaterapp.customTypes.ThemeList;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import java.net.URI;
 
 public class FeaturedThemesHandler extends DefaultHandler
 {

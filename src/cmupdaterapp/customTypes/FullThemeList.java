@@ -1,10 +1,10 @@
 package cmupdaterapp.customTypes;
 
+import cmupdaterapp.misc.Log;
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
-
-import cmupdaterapp.misc.Log;
 
 public class FullThemeList implements Serializable
 {

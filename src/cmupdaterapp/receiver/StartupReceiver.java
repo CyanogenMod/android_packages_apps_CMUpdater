@@ -1,18 +1,17 @@
 package cmupdaterapp.receiver;
 
-import java.security.InvalidParameterException;
-import java.util.Date;
-
-import cmupdaterapp.service.UpdateCheckService;
-import cmupdaterapp.misc.Constants;
-import cmupdaterapp.misc.Log;
-import cmupdaterapp.utils.Preferences;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.misc.Log;
+import cmupdaterapp.service.UpdateCheckService;
+import cmupdaterapp.utils.Preferences;
+
+import java.security.InvalidParameterException;
+import java.util.Date;
 
 public class StartupReceiver extends BroadcastReceiver
 {

@@ -1,13 +1,12 @@
 package cmupdaterapp.changelog;
 
-import java.util.LinkedList;
-import java.util.List;
-
+import cmupdaterapp.misc.Constants;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import cmupdaterapp.misc.Constants;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ChangelogHandler extends DefaultHandler
 {
@@ -68,7 +67,7 @@ public class ChangelogHandler extends DefaultHandler
     	a = a.replaceAll("\\r", "");
     	a = a.replaceAll("\\t", "");
     	// If the object is not initialized because of junk data in the xml like the xml starting tag and so
-    	if (currentVersion != null && currentVersion.ChangeLogText != null && a != "")
+    	if (currentVersion != null && currentVersion.ChangeLogText != null && !a.equals(""))
     		currentVersion.ChangeLogText.add(a);
     }
 }

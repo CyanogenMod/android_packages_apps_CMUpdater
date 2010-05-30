@@ -1,5 +1,36 @@
 package cmupdaterapp.ui;
 
+import android.app.*;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.net.Uri;
+import android.os.*;
+import android.view.*;
+import android.view.ViewGroup.LayoutParams;
+import android.view.animation.AnimationUtils;
+import android.widget.*;
+import cmupdaterapp.changelog.Changelog;
+import cmupdaterapp.changelog.Changelog.ChangelogType;
+import cmupdaterapp.changelog.Version;
+import cmupdaterapp.customTypes.FullUpdateInfo;
+import cmupdaterapp.customTypes.UpdateInfo;
+import cmupdaterapp.customization.Customization;
+import cmupdaterapp.listadapters.UpdateListAdapter;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.misc.Log;
+import cmupdaterapp.misc.State;
+import cmupdaterapp.tasks.MD5CheckerTask;
+import cmupdaterapp.tasks.UpdateCheckTask;
+import cmupdaterapp.utils.Preferences;
+import cmupdaterapp.utils.StringUtils;
+import cmupdaterapp.utils.SysUtils;
+import cmupdaterapp.utils.UpdateFilter;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -9,59 +40,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.NotificationManager;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.os.RemoteException;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewStub;
-import android.view.ViewGroup.LayoutParams;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewFlipper;
-import cmupdaterapp.customTypes.FullUpdateInfo;
-import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.customization.Customization;
-import cmupdaterapp.listadapters.UpdateListAdapter;
-import cmupdaterapp.tasks.MD5CheckerTask;
-import cmupdaterapp.tasks.UpdateCheckTask;
-import cmupdaterapp.utils.Preferences;
-import cmupdaterapp.utils.StringUtils;
-import cmupdaterapp.utils.SysUtils;
-import cmupdaterapp.utils.UpdateFilter;
-import cmupdaterapp.misc.Constants;
-import cmupdaterapp.misc.Log;
-import cmupdaterapp.misc.State;
-import cmupdaterapp.changelog.*;
-import cmupdaterapp.changelog.Changelog.ChangelogType;
 
 public class MainActivity extends Activity
 {
@@ -88,10 +66,7 @@ public class MainActivity extends Activity
 	private Preferences prefs;
 	private Resources res;
 	private Boolean runningOldVersion = false;
-	private Button btnAvailableUpdates;
-	private Button btnExistingUpdates;
-	private Button btnAvailableThemes;
-	private TextView experimentalBuildsRomtv;
+    private TextView experimentalBuildsRomtv;
 	private TextView showDowngradesRomtv;
 	private TextView experimentalBuildsThemetv;
 	private TextView showDowngradesThemetv;
@@ -442,7 +417,7 @@ public class MainActivity extends Activity
 		{
 			Button updateChangelogButton = (Button) findViewById(R.id.show_changelog_button);
 			String changelog = ((UpdateInfo) mUpdatesSpinner.getSelectedItem()).getDescription();
-			if (changelog == null || changelog == "")
+			if (changelog == null || changelog.equals(""))
 			{
 				updateChangelogButton.setVisibility(View.GONE);
 			}
@@ -469,7 +444,7 @@ public class MainActivity extends Activity
 			List<URI> screenshots = item.screenshots;
 			int ScreenshotCount = item.screenshots.size();
 			
-			if (changelog == null || changelog == "")
+			if (changelog == null || changelog.equals(""))
 			{
 				themeChangelogButton.setVisibility(View.GONE);
 			}
@@ -532,15 +507,15 @@ public class MainActivity extends Activity
 		//Inflate the Screenshot View if enabled
 		if (Customization.Screenshotsupport)
 		{
-			((ViewStub) findViewById(R.id.main_stub_themes)).setVisibility(View.VISIBLE);
+			findViewById(R.id.main_stub_themes).setVisibility(View.VISIBLE);
 		}
 		
 		flipper = (ViewFlipper)findViewById(R.id.Flipper);
 		flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_in));
 		flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_out));
-		btnAvailableUpdates = (Button)findViewById(R.id.button_available_updates);
-		btnExistingUpdates = (Button)findViewById(R.id.button_existing_updates);
-		btnAvailableThemes = (Button)findViewById(R.id.button_available_themes);
+        Button btnAvailableUpdates = (Button) findViewById(R.id.button_available_updates);
+        Button btnExistingUpdates = (Button) findViewById(R.id.button_existing_updates);
+        Button btnAvailableThemes = (Button) findViewById(R.id.button_available_themes);
 		//Make the ScreenshotButton invisible
 		if (!Customization.Screenshotsupport)
 		{
@@ -678,10 +653,9 @@ public class MainActivity extends Activity
 		{
 			//To show only the Filename. Otherwise the whole Path with /sdcard/cm-updates will be shown
 			mfilenames = new ArrayList<String>();
-			for (int i=0;i<files.length;i++)
-			{
-				mfilenames.add(files[i].getName());
-			}
+            for (File file : files) {
+                mfilenames.add(file.getName());
+            }
 			//For sorting the Filenames, have to find a way to do natural sorting
 			mfilenames = Collections.synchronizedList(mfilenames); 
             Collections.sort(mfilenames, Collections.reverseOrder()); 
@@ -1139,11 +1113,11 @@ public class MainActivity extends Activity
 
 	private boolean deleteOldUpdates()
 	{
-		boolean success = false;
+		boolean success;
 		//updateFolder: Foldername
 		//mUpdateFolder: Foldername with fullpath of SDCARD
 		String updateFolder = prefs.getUpdateFolder();
-		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory() && updateFolder.trim() != "" && updateFolder.trim() != "/")
+		if (mUpdateFolder.exists() && mUpdateFolder.isDirectory() && !updateFolder.trim().equals("") && !updateFolder.trim().equals("/"))
 		{
 			deleteDir(mUpdateFolder);
 			mUpdateFolder.mkdir();
@@ -1156,7 +1130,7 @@ public class MainActivity extends Activity
 			success = false;
 			Toast.makeText(this, R.string.delete_updates_noFolder_message, Toast.LENGTH_LONG).show();
 		}
-		else if(updateFolder.trim() == "" || updateFolder.trim() == "/")
+		else if(updateFolder.trim().equals("") || updateFolder.trim().equals("/"))
 		{
 			success = false;
 			Toast.makeText(this, R.string.delete_updates_root_folder_message, Toast.LENGTH_LONG).show();
@@ -1217,14 +1191,12 @@ public class MainActivity extends Activity
 		if (dir.isDirectory())
 		{ 	
 			String[] children = dir.list();
-			for (int i=0; i<children.length; i++)
-			{
-				boolean success = deleteDir(new File(dir, children[i]));
-				if (!success)
-				{
-					return false;
-				}
-			}
+            for (String aChildren : children) {
+                boolean success = deleteDir(new File(dir, aChildren));
+                if (!success) {
+                    return false;
+                }
+            }
 		}
 		// The directory is now empty so delete it
 		return dir.delete();

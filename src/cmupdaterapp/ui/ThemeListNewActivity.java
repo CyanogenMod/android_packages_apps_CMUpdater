@@ -1,11 +1,5 @@
 package cmupdaterapp.ui;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-
-import cmupdaterapp.misc.Constants;
-import cmupdaterapp.misc.Log;
-import cmupdaterapp.utils.Preferences;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +10,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.misc.Log;
+import cmupdaterapp.utils.Preferences;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class ThemeListNewActivity extends Activity
 {
@@ -26,14 +25,10 @@ public class ThemeListNewActivity extends Activity
 	
 	private String intentName;
 	private String intentUri;
-	private boolean intentEnabled;
-	private boolean intentFeatured;
+    private boolean intentFeatured;
 	private boolean intentUpdate;
 	private int intentPrimaryKey;
-	private Button btnSave;
-	private Button btnCancel;
-	private Button btnBarcode;
-	private EditText etName;
+    private EditText etName;
 	private EditText etUri;
 	private CheckBox cbEnabled;
 
@@ -47,14 +42,14 @@ public class ThemeListNewActivity extends Activity
 		Bundle b = i.getExtras();
 		intentName = b.getString(Constants.THEME_LIST_NEW_NAME).trim();
 		intentUri = b.getString(Constants.THEME_LIST_NEW_URI).trim();
-		intentEnabled = b.getBoolean(Constants.THEME_LIST_NEW_ENABLED);
+        boolean intentEnabled = b.getBoolean(Constants.THEME_LIST_NEW_ENABLED);
 		intentFeatured = b.getBoolean(Constants.THEME_LIST_NEW_FEATURED);
 		intentUpdate = b.getBoolean(Constants.THEME_LIST_NEW_UPDATE);
 		intentPrimaryKey = b.getInt(Constants.THEME_LIST_NEW_PRIMARYKEY);
-	
-		btnSave = (Button) findViewById(R.id.new_theme_list_button_save);
-		btnCancel = (Button) findViewById(R.id.new_theme_list_button_cancel);
-		btnBarcode = (Button) findViewById(R.id.new_theme_list_button_barcode);
+
+        Button btnSave = (Button) findViewById(R.id.new_theme_list_button_save);
+        Button btnCancel = (Button) findViewById(R.id.new_theme_list_button_cancel);
+        Button btnBarcode = (Button) findViewById(R.id.new_theme_list_button_barcode);
 		etName = (EditText) findViewById(R.id.new_theme_list_name);
 		etUri = (EditText) findViewById(R.id.new_theme_list_uri);
 		cbEnabled = (CheckBox) findViewById(R.id.new_theme_list_enabled);

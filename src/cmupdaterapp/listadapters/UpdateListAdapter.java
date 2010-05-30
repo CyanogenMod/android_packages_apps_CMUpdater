@@ -1,11 +1,5 @@
 package cmupdaterapp.listadapters;
 
-import java.util.List;
-
-import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.misc.Constants;
-import cmupdaterapp.ui.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cmupdaterapp.customTypes.UpdateInfo;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.ui.R;
+
+import java.util.List;
 
 public class UpdateListAdapter<T> extends ArrayAdapter<T>
 {
@@ -32,7 +31,7 @@ public class UpdateListAdapter<T> extends ArrayAdapter<T>
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
 		View row = convertView;
-		ViewWrapper wrapper=null;
+		ViewWrapper wrapper;
 		if (row == null)
 		{
 			row = _inflater.inflate(R.layout.itemtemplate_updatelist, null);

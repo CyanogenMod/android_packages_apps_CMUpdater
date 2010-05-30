@@ -1,7 +1,17 @@
 package cmupdaterapp.ui;
 
-import java.io.Serializable;
-
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.*;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 import cmupdaterapp.customTypes.DownloadProgress;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.interfaces.IDownloadService;
@@ -9,23 +19,8 @@ import cmupdaterapp.interfaces.IDownloadServiceCallback;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.utils.Preferences;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.ComponentName;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.RemoteException;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.io.Serializable;
 
 public class DownloadActivity extends Activity
 {
@@ -36,12 +31,10 @@ public class DownloadActivity extends Activity
 	private ProgressBar mProgressBar;
 	private TextView mDownloadedBytesTextView;
 	private TextView mDownloadMirrorTextView;
-	private TextView mDownloadFilenameTextView;
-	private TextView mDownloadSpeedTextView;
+    private TextView mDownloadSpeedTextView;
 	private TextView mRemainingTimeTextView;
 	private String mMirrorName;
-	private String mFileName;
-	private UpdateInfo ui;
+    private UpdateInfo ui;
 	//Indicates if a Service is bound 
 	private boolean mbound = false;
 	private Intent serviceIntent;
@@ -107,14 +100,14 @@ public class DownloadActivity extends Activity
 			finish();
 		}
 
-		mFileName = ui.getFileName();
+        String mFileName = ui.getFileName();
 
 		mProgressBar = (ProgressBar) findViewById(R.id.download_progress_bar);
 		mDownloadedBytesTextView = (TextView) findViewById(R.id.bytes_downloaded_text_view);
 
 		mDownloadMirrorTextView = (TextView) findViewById(R.id.mirror_text_view);
 
-		mDownloadFilenameTextView = (TextView) findViewById(R.id.filename_text_view);
+        TextView mDownloadFilenameTextView = (TextView) findViewById(R.id.filename_text_view);
 
 		mDownloadSpeedTextView = (TextView) findViewById(R.id.speed_text_view);
 		mRemainingTimeTextView = (TextView) findViewById(R.id.remaining_time_text_view);
@@ -123,7 +116,7 @@ public class DownloadActivity extends Activity
 			mDownloadMirrorTextView.setText(mMirrorName);
 		if(mFileName != null)
 			mDownloadFilenameTextView.setText(mFileName);
-		((Button)findViewById(R.id.cancel_download_button)).setOnClickListener(mCancelDownloadListener);
+		findViewById(R.id.cancel_download_button).setOnClickListener(mCancelDownloadListener);
 	}
 
 	@Override
@@ -365,10 +358,7 @@ public class DownloadActivity extends Activity
 	    	try
 	    	{
 	    		//Disable the Back Key when Download is running
-				if (myService != null && myService.DownloadRunning())
-					return false;
-				else
-					return true;
+                return !(myService != null && myService.DownloadRunning());
 			}
 	    	catch (RemoteException e)
 	    	{

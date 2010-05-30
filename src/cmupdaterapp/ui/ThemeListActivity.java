@@ -1,17 +1,5 @@
 package cmupdaterapp.ui;
 
-import java.net.URI;
-import java.util.LinkedList;
-
-import cmupdaterapp.customTypes.FullThemeList;
-import cmupdaterapp.customTypes.ThemeList;
-import cmupdaterapp.database.DbAdapter;
-import cmupdaterapp.featuredThemes.FeaturedThemes;
-import cmupdaterapp.listadapters.ThemeListAdapter;
-import cmupdaterapp.misc.Constants;
-import cmupdaterapp.misc.Log;
-import cmupdaterapp.ui.R;
-import cmupdaterapp.utils.Preferences;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -22,15 +10,22 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
-import android.view.View;
+import android.view.*;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cmupdaterapp.customTypes.FullThemeList;
+import cmupdaterapp.customTypes.ThemeList;
+import cmupdaterapp.database.DbAdapter;
+import cmupdaterapp.featuredThemes.FeaturedThemes;
+import cmupdaterapp.listadapters.ThemeListAdapter;
+import cmupdaterapp.misc.Constants;
+import cmupdaterapp.misc.Log;
+import cmupdaterapp.utils.Preferences;
+
+import java.net.URI;
+import java.util.LinkedList;
 
 public class ThemeListActivity extends ListActivity
 {
@@ -40,12 +35,9 @@ public class ThemeListActivity extends ListActivity
 	
 	private DbAdapter themeListDb;
 	private Cursor themeListCursor;
-	private FullThemeList fullThemeList;
-	private LinkedList<ThemeList> fullThemeListList;
-	private ListView lv;
+    private ListView lv;
 	private Resources res;
-	private AdapterContextMenuInfo menuInfo;
-	private TextView tv;
+    private TextView tv;
 	private FullThemeList FeaturedThemes = null;
 	private Thread FeaturedThemesThread;
 	private ProgressDialog FeaturedThemesProgressDialog;
@@ -77,7 +69,7 @@ public class ThemeListActivity extends ListActivity
 	private void updateThemeList()
 	{
 		themeListCursor.requery();
-		fullThemeList = new FullThemeList();
+        FullThemeList fullThemeList = new FullThemeList();
 		if (themeListCursor.moveToFirst())
 		{
 			do
@@ -90,20 +82,18 @@ public class ThemeListActivity extends ListActivity
 				ThemeList newItem = new ThemeList();
 				newItem.name = name;
 				newItem.url = URI.create(uri);
-				if(enabled == 1) newItem.enabled = true;
-				else newItem.enabled = false;
-				if(featured == 1) newItem.featured = true;
-				else newItem.featured = false;
+                newItem.enabled = enabled == 1;
+                newItem.featured = featured == 1;
 				newItem.PrimaryKey = pk;
 				fullThemeList.addThemeToList(newItem);
 			}
 			while(themeListCursor.moveToNext());
 		}
-		fullThemeListList = fullThemeList.returnFullThemeList();
+        LinkedList<ThemeList> fullThemeListList = fullThemeList.returnFullThemeList();
 		ThemeListAdapter<ThemeList> AdapterThemeList = new ThemeListAdapter<ThemeList>(
 				this,
 				android.R.layout.simple_list_item_1,
-				fullThemeListList);
+                fullThemeListList);
 		setListAdapter(AdapterThemeList);
 		if (fullThemeList.getThemeCount() > 0)
 			tv.setText(R.string.theme_list_long_press);
@@ -142,7 +132,7 @@ public class ThemeListActivity extends ListActivity
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item)
 	{
-		menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
+        AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
 		ThemeList tl;
 
 		switch(item.getItemId())

@@ -30,7 +30,6 @@ public class Constants
 	public static final String JSON_FILENAME = "filename";
 
 	//Keys
-	public static final String KEY_REQUEST = Customization.PACKAGE_FIRST_NAME + ".keyRequest";
 	public static final String KEY_UPDATE_INFO = Customization.PACKAGE_FIRST_NAME + ".fullUpdateList";
 	public static final String KEY_AVAILABLE_UPDATES = Customization.PACKAGE_FIRST_NAME + ".availableUpdates";
 

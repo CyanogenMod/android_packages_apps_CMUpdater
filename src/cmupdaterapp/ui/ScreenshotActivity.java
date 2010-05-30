@@ -1,24 +1,23 @@
 package cmupdaterapp.ui;
 
-import cmupdaterapp.customTypes.Screenshot;
-import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.listadapters.ScreenshotGridViewAdapter;
-import cmupdaterapp.misc.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
+import cmupdaterapp.customTypes.Screenshot;
+import cmupdaterapp.customTypes.UpdateInfo;
+import cmupdaterapp.listadapters.ScreenshotGridViewAdapter;
+import cmupdaterapp.misc.Constants;
 import cmupdaterapp.tasks.DownloadImageTask;
 import cmupdaterapp.utils.Preferences;
 
 public class ScreenshotActivity extends Activity
-{	
-	private UpdateInfo ui;
-	private static ScreenshotGridViewAdapter imageAdapter;
+{
+    private static ScreenshotGridViewAdapter imageAdapter;
 	private DownloadImageTask downloadImageTask;
 	
 	public static void NotifyChange()
@@ -48,7 +47,7 @@ public class ScreenshotActivity extends Activity
 		setContentView(R.layout.screenshots);
 		Intent i = getIntent();
 		Bundle b = i.getExtras();
-		ui = (UpdateInfo) b.get(Constants.SCREENSHOTS_UPDATE);
+        UpdateInfo ui = (UpdateInfo) b.get(Constants.SCREENSHOTS_UPDATE);
 		
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 		imageAdapter = new ScreenshotGridViewAdapter(this, ui.screenshots.size());

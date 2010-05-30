@@ -1,21 +1,20 @@
 package cmupdaterapp.featuredThemes;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-
 import android.content.Context;
 import android.os.Message;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.ThemeListActivity;
 import cmupdaterapp.utils.Preferences;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class FeaturedThemes implements Runnable
 {

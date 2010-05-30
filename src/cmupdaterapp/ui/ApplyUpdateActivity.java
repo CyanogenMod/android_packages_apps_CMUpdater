@@ -1,9 +1,5 @@
 package cmupdaterapp.ui;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.text.MessageFormat;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,9 +11,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import cmupdaterapp.customTypes.UpdateInfo;
-import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
+import cmupdaterapp.utils.Preferences;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.text.MessageFormat;
 
 public class ApplyUpdateActivity extends Activity
 {	
@@ -29,10 +29,8 @@ public class ApplyUpdateActivity extends Activity
 	private String mUpdateFolder;
 
 	private TextView mTitle;
-	private Button mApplyButton;
-	private Button mPostponeButton;
-	
-	private Preferences pref;
+
+    private Preferences pref;
 
 
 	@Override
@@ -46,10 +44,10 @@ public class ApplyUpdateActivity extends Activity
 
 		mTitle = (TextView) findViewById(R.id.apply_title_textview);
 
-		mApplyButton = (Button) findViewById(R.id.apply_now_button);
+        Button mApplyButton = (Button) findViewById(R.id.apply_now_button);
 		mApplyButton.setOnClickListener(mApplyButtonListener);
 
-		mPostponeButton = (Button) findViewById(R.id.apply_later_button);
+        Button mPostponeButton = (Button) findViewById(R.id.apply_later_button);
 		mPostponeButton.setOnClickListener(mPostponeButtonListener);
 	}
 

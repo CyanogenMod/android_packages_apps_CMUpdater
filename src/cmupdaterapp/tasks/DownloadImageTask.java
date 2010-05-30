@@ -1,7 +1,5 @@
 package cmupdaterapp.tasks;
 
-import java.net.URI;
-
 import android.os.AsyncTask;
 import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.customTypes.UpdateInfo;
@@ -9,6 +7,8 @@ import cmupdaterapp.database.DbAdapter;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.ScreenshotActivity;
 import cmupdaterapp.utils.ImageUtilities;
+
+import java.net.URI;
 
 public class DownloadImageTask extends AsyncTask<UpdateInfo, Screenshot, Void>
 {
@@ -37,11 +37,10 @@ public class DownloadImageTask extends AsyncTask<UpdateInfo, Screenshot, Void>
 			for (URI uri : ui.screenshots)
 			{
 				if (showDebugOutput) Log.d(TAG, "Started Downloading Image number " + counter);
-				Screenshot screeni = new Screenshot();
 				if (isCancelled())
 					return null;
 				//Add to DB if not there, otherwise get the DatabaseObject
-				screeni = db.ScreenshotExists(ui.PrimaryKey, uri.toString());
+				Screenshot screeni = db.ScreenshotExists(ui.PrimaryKey, uri.toString());
 				if (screeni.PrimaryKey != -1)
 				{
 					ScreenFound = true;

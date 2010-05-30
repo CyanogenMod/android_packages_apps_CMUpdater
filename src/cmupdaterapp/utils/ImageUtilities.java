@@ -1,9 +1,7 @@
 package cmupdaterapp.utils;
 
-import java.io.InputStream;
-import java.io.IOException;
-import java.net.URI;
-
+import cmupdaterapp.customTypes.Screenshot;
+import cmupdaterapp.misc.Log;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -12,8 +10,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import cmupdaterapp.customTypes.Screenshot;
-import cmupdaterapp.misc.Log;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 
 public class ImageUtilities
 {

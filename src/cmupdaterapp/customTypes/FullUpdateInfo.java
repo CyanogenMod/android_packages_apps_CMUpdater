@@ -1,12 +1,10 @@
 package cmupdaterapp.customTypes;
 
-import java.io.Serializable;
-import java.util.LinkedList;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import cmupdaterapp.customTypes.UpdateInfo;
+import java.io.Serializable;
+import java.util.LinkedList;
 
 public class FullUpdateInfo implements Parcelable, Serializable
 {
