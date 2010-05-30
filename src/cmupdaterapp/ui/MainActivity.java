@@ -30,6 +30,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -495,7 +496,26 @@ public class MainActivity extends Activity
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		super.onCreate(savedInstanceState);			
+		super.onCreate(savedInstanceState);
+
+		if(Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
+		{
+			Log.d(TAG,"SDcard Available");
+		}
+		else
+		{
+			Log.d(TAG,"SDcard Not Available");
+			LayoutInflater inflater = getLayoutInflater();
+			View layout = inflater.inflate(R.layout.nosdcardtoast,
+					(ViewGroup) findViewById(R.id.toast_layout_root));
+			Toast toast = new Toast(getApplicationContext());
+			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+			toast.setDuration(Toast.LENGTH_LONG);
+			toast.setView(layout);
+			toast.show();
+			finish();
+		}
+
 		prefs = new Preferences(this);
 		
 		//Debug Output

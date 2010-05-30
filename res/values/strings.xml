@@ -282,4 +282,5 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_debug_output_title">Debug Output</string>
 	<string name="p_debug_output_summary">Show Debug Output in logcat</string>
 	<string name="p_debug_output_changed">Please restart the App for the changes to take effect</string>
+	<string name="sdcard_not_avail">No SDCard present or Phone Mounted to PC. You need a writeable SDCard to procedd. The App will now exit</string>
 </resources>

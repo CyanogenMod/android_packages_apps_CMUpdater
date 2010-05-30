@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/toast_layout_root"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:padding="8dp"
+              android:background="@android:color/darker_gray"
+              >
+    <ImageView android:id="@+id/image"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@android:drawable/ic_dialog_alert"
+               />
+    <TextView android:id="@+id/text"
+              android:layout_width="wrap_content"
+              android:layout_height="fill_parent"
+              android:textSize="18.0sp"
+              android:textColor="@android:color/white"
+              android:text="@string/sdcard_not_avail"
+			  />
+</LinearLayout>
