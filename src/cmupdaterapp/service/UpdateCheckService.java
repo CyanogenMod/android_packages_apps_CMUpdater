@@ -264,34 +264,6 @@ public class UpdateCheckService extends Service
 
 	private void notificateCheckError(String ExceptionText)
 	{
-		Intent i = new Intent(this, MainActivity.class);
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
-															PendingIntent.FLAG_ONE_SHOT);
-		Notification notification = new Notification(android.R.drawable.stat_notify_error,
-												res.getString(R.string.not_update_check_error_ticker),
-												System.currentTimeMillis());
-		notification.flags = Notification.FLAG_AUTO_CANCEL;
-		notification.setLatestEventInfo(
-							this,
-							res.getString(R.string.not_update_check_error_title),
-							ExceptionText,
-							contentIntent);
-		Uri notificationRingtone = mPreferences.getConfiguredRingtone();
-		if(mPreferences.getVibrate())
-			notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
-		else
-			notification.defaults = Notification.DEFAULT_LIGHTS;
-		if(notificationRingtone == null)
-		{
-			notification.sound = null;
-		}
-		else
-		{
-			notification.sound = notificationRingtone;
-		}
-
-		//Use a resourceId as an unique identifier
-		mNM.notify(R.string.not_update_downloaded_title, notification);
 		ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.not_update_check_error_ticker, 0));
 		if (showDebugOutput) Log.d(TAG, "Update check error");
 		FinishUpdateCheck();
