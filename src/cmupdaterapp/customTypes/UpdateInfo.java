@@ -31,7 +31,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	public void setName(String _name)
 	{
 		if (_name != null)
-			name = _name;
+			name = _name.trim();
 		else
 			name = "";
 	}
@@ -52,7 +52,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	public void setVersion(String _version)
 	{
 		if (_version != null)
-			version = _version;
+			version = _version.trim();
 		else
 			version = "";
 	}
@@ -68,7 +68,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	public void setVersionForApply(String _version)
 	{
 		if (_version != null)
-			versionForApply = _version;
+			versionForApply = _version.trim();
 		else
 			versionForApply = "";
 	}
@@ -84,7 +84,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	public void setType(String _type)
 	{
 		if (_type != null)
-			type = _type;
+			type = _type.trim();
 		else
 			type = "";
 	}
@@ -100,7 +100,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	public void setBranchCode(String _branchCode)
 	{
 		if (_branchCode != null)
-			branchCode = _branchCode;
+			branchCode = _branchCode.trim();
 		else
 			branchCode = "";
 	}
@@ -116,7 +116,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	public void setDescription(String _description)
 	{
 		if (_description != null)
-			description = _description;
+			description = _description.trim();
 		else
 			description = "";
 	}
@@ -132,7 +132,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	public void setFileName(String _fileName)
 	{
 		if (_fileName != null)
-			fileName = _fileName;
+			fileName = _fileName.trim();
 		else
 			fileName = "";
 	}
@@ -147,7 +147,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	 */
 	public Boolean isIncremental()
 	{
-		return (this.versionForApply != null && !this.versionForApply.equals(""));
+		return (this.versionForApply != null && !this.versionForApply.trim().equals(""));
 	}
 	
 	@Override
