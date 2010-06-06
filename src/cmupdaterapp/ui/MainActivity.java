@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.*;
 import android.view.*;
 import android.view.ViewGroup.LayoutParams;
-import android.view.animation.AnimationUtils;
 import android.widget.*;
 import cmupdaterapp.changelog.Changelog;
 import cmupdaterapp.changelog.Changelog.ChangelogType;
@@ -58,7 +57,6 @@ public class MainActivity extends Activity
 	private List<Version> ChangelogList = null;
 	private List<String> mfilenames;
 	private TextView mdownloadedUpdateText;
-	private Spinner mspFoundUpdates;
 	private Button mdeleteOldUpdatesButton;
 	private Button mapplyUpdateButton;
 	private TextView mNoExistingUpdatesFound;
@@ -511,8 +509,6 @@ public class MainActivity extends Activity
 		}
 		
 		flipper = (ViewFlipper)findViewById(R.id.Flipper);
-		flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_in));
-		flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_out));
         Button btnAvailableUpdates = (Button) findViewById(R.id.button_available_updates);
         Button btnExistingUpdates = (Button) findViewById(R.id.button_existing_updates);
         Button btnAvailableThemes = (Button) findViewById(R.id.button_available_themes);
@@ -522,54 +518,47 @@ public class MainActivity extends Activity
 			btnAvailableThemes.setVisibility(View.GONE);
 		}
 
-		experimentalBuildsRomtv = (TextView) findViewById(R.id.experimental_rom_updates_textview);
-		showDowngradesRomtv = (TextView) findViewById(R.id.show_rom_downgrades_textview);
-		experimentalBuildsThemetv = (TextView) findViewById(R.id.experimental_theme_updates_textview);
-		lastRomUpdateChecktv = (TextView) findViewById(R.id.last_rom_update_check);
+		//Rom Layout
+		View roms = findViewById(R.id.rom_layout);
+		experimentalBuildsRomtv = (TextView) roms.findViewById(R.id.experimental_rom_updates_textview);
+		showDowngradesRomtv = (TextView) roms.findViewById(R.id.show_rom_downgrades_textview);
+		lastRomUpdateChecktv = (TextView) roms.findViewById(R.id.last_rom_update_check);
+		selectUploadButton = (Button) roms.findViewById(R.id.download_update_button);
+		mUpdatesSpinner = (Spinner) roms.findViewById(R.id.available_updates_list);
+		DownloadText = (TextView) roms.findViewById(R.id.available_updates_text);
+		stableExperimentalInfoUpdates = (LinearLayout) roms.findViewById(R.id.stable_experimental_description_container_updates);
+		changelogButton = (Button) roms.findViewById(R.id.show_changelog_button);
+		//No ROM Updates Found Layout
+		CheckNowUpdateChooserUpdates = (Button) roms.findViewById(R.id.check_now_button_update_chooser_updates);
+		CheckNowUpdateChooserTextUpdates = (TextView) roms.findViewById(R.id.check_now_update_chooser_text_updates);
 
 		//Existing Updates Layout
-		mdownloadedUpdateText = (TextView) findViewById(R.id.downloaded_update_found);
-		mspFoundUpdates = mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
-		mdeleteOldUpdatesButton = (Button) findViewById(R.id.delete_updates_button);
-		mapplyUpdateButton = (Button) findViewById(R.id.apply_update_button);
-		mNoExistingUpdatesFound = (TextView) findViewById(R.id.no_existing_updates_found_textview);
-		
-		//Rom Layout
-		selectUploadButton = (Button) findViewById(R.id.download_update_button);
-		mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
-		DownloadText = (TextView) findViewById(R.id.available_updates_text);
-		stableExperimentalInfoUpdates = (LinearLayout) findViewById(R.id.stable_experimental_description_container_updates);
-		changelogButton = (Button) findViewById(R.id.show_changelog_button);
-		
+		View existing = findViewById(R.id.existing_layout);
+		mdownloadedUpdateText = (TextView) existing.findViewById(R.id.downloaded_update_found);
+		mExistingUpdatesSpinner = (Spinner) existing.findViewById(R.id.found_updates_list);
+		mdeleteOldUpdatesButton = (Button) existing.findViewById(R.id.delete_updates_button);
+		mapplyUpdateButton = (Button) existing.findViewById(R.id.apply_update_button);
+		mNoExistingUpdatesFound = (TextView) existing.findViewById(R.id.no_existing_updates_found_textview);
+
 		//Theme Layout
 		if (Customization.Screenshotsupport)
 		{
-			showDowngradesThemetv = (TextView) findViewById(R.id.show_theme_downgrades_textview);
-			lastThemeUpdateChecktv = (TextView) findViewById(R.id.last_theme_update_check);
-			btnDownloadTheme = (Button) findViewById(R.id.download_theme_button);
-			mThemesSpinner = (Spinner) findViewById(R.id.available_themes_list);
-			tvThemeDownloadText = (TextView) findViewById(R.id.available_themes_text);
-			stableExperimentalInfoThemes = (LinearLayout) findViewById(R.id.stable_experimental_description_container_themes);
-			btnThemechangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
-			btnThemeScreenshotButton = (Button) findViewById(R.id.theme_screenshots_button);
-			tvNoThemeUpdateServer = (TextView) findViewById(R.id.no_theme_update_server_configured);
+			View themes = findViewById(R.id.themes_layout);
+			showDowngradesThemetv = (TextView) themes.findViewById(R.id.show_theme_downgrades_textview);
+			experimentalBuildsThemetv = (TextView) themes.findViewById(R.id.experimental_theme_updates_textview);
+			lastThemeUpdateChecktv = (TextView) themes.findViewById(R.id.last_theme_update_check);
+			btnDownloadTheme = (Button) themes.findViewById(R.id.download_theme_button);
+			mThemesSpinner = (Spinner) themes.findViewById(R.id.available_themes_list);
+			tvThemeDownloadText = (TextView) themes.findViewById(R.id.available_themes_text);
+			stableExperimentalInfoThemes = (LinearLayout) themes.findViewById(R.id.stable_experimental_description_container_themes);
+			btnThemechangelogButton = (Button) themes.findViewById(R.id.show_theme_changelog_button);
+			btnThemeScreenshotButton = (Button) themes.findViewById(R.id.theme_screenshots_button);
+			tvNoThemeUpdateServer = (TextView) themes.findViewById(R.id.no_theme_update_server_configured);
+			//No Theme Updates Found Layout
+			CheckNowUpdateChooserThemes = (Button) themes.findViewById(R.id.check_now_button_update_chooser_themes);
+			CheckNowUpdateChooserTextThemes = (TextView) themes.findViewById(R.id.check_now_update_chooser_text_themes);
 		}
-		
-		//No ROM Updates Found Layout
-		CheckNowUpdateChooserUpdates = (Button) findViewById(R.id.check_now_button_update_chooser_updates);
-		CheckNowUpdateChooserTextUpdates = (TextView) findViewById(R.id.check_now_update_chooser_text_updates);
-		CheckNowUpdateChooserTextUpdates.setVisibility(View.GONE);
-		CheckNowUpdateChooserUpdates.setVisibility(View.GONE);
 
-		//No Theme Updates Found Layout
-		if (Customization.Screenshotsupport)
-		{
-			CheckNowUpdateChooserThemes = (Button) findViewById(R.id.check_now_button_update_chooser_themes);
-			CheckNowUpdateChooserTextThemes = (TextView) findViewById(R.id.check_now_update_chooser_text_themes);
-			CheckNowUpdateChooserTextThemes.setVisibility(View.GONE);
-			CheckNowUpdateChooserThemes.setVisibility(View.GONE);
-		}
-		
 		//Flipper Buttons
 		btnAvailableUpdates.setOnClickListener(new View.OnClickListener()
 		{
@@ -915,7 +904,7 @@ public class MainActivity extends Activity
 				CheckNowUpdateChooserTextThemes.setVisibility(View.VISIBLE);
 				CheckNowUpdateChooserThemes.setVisibility(View.VISIBLE);
 				CheckNowUpdateChooserThemes.setOnClickListener(ButtonOnClickListener);
-		}
+			}
 		}
 
 		//Existing Updates Layout
@@ -926,14 +915,14 @@ public class MainActivity extends Activity
 					android.R.layout.simple_spinner_item,
 					mfilenames);
 			localUpdates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			mspFoundUpdates.setAdapter(localUpdates);
+			mExistingUpdatesSpinner.setAdapter(localUpdates);
 		  	mapplyUpdateButton.setOnClickListener(ButtonOnClickListener);
 			mdeleteOldUpdatesButton.setOnClickListener(ButtonOnClickListener);
 		}
 		else
 		{
 			mNoExistingUpdatesFound.setVisibility(View.VISIBLE);
-			mspFoundUpdates.setVisibility(View.GONE);
+			mExistingUpdatesSpinner.setVisibility(View.GONE);
 			mapplyUpdateButton.setVisibility(View.GONE);
 			mdownloadedUpdateText.setVisibility(View.GONE);
 			mdeleteOldUpdatesButton.setVisibility(View.GONE);

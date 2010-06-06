@@ -38,13 +38,16 @@
 	</TableLayout>
 	<ViewFlipper
 		android:id="@+id/Flipper"
+		android:inAnimation="@anim/push_left_in"
+		android:outAnimation="@anim/push_left_out"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
 		<!-- Roms -->
 		<ScrollView
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
-		    <LinearLayout 
+		    <LinearLayout
+		    	android:id="@+id/rom_layout"
 		    	android:orientation="vertical"
 		    	android:layout_width="fill_parent"
 		    	android:layout_height="wrap_content"
@@ -118,6 +121,7 @@
 					android:text="@string/no_updates_found_instructions"
 					android:gravity="center_horizontal"
 					android:layout_marginTop="10sp"
+					android:visibility="gone"
 			    	style="@style/TextAppearance.Text" />
 				<Button
 				    android:id="@+id/check_now_button_update_chooser_updates"
@@ -126,6 +130,7 @@
 					android:text="@string/check_now_button_text"
 					android:layout_marginTop="20sp"
 				    style="@style/TextAppearance.Button"
+				    android:visibility="gone"
 				    android:drawableLeft="@drawable/check_now"/>
 				<TextView
 				    android:id="@+id/last_rom_update_check"
@@ -154,7 +159,8 @@
 		<ScrollView
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
-			<LinearLayout 
+			<LinearLayout
+				android:id="@+id/existing_layout"
 		    	android:orientation="vertical"
 		    	android:layout_width="fill_parent"
 		    	android:layout_height="wrap_content"

@@ -103,6 +103,14 @@ public class DbAdapter
 	{
 		return db.delete(DATABASE_TABLE_THEMELIST, KEY_THEMELIST_ID + "= ?", new String[]{ Long.toString(_rowIndex) }) > 0;
 	}
+	
+	public int getThemeCount()
+	{
+		Cursor c = db.query(DATABASE_TABLE_THEMELIST, new String[] {KEY_THEMELIST_ID}, null, null, null, null, null);
+		int ret = c.getCount();
+		c.close();
+		return ret;
+	}
 
 	// Removes all themes
 	public boolean removeAllThemes()
