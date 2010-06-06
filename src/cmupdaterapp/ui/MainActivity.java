@@ -473,11 +473,11 @@ public class MainActivity extends Activity
 
 		if(Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
 		{
-			Log.d(TAG,"SDcard Available");
+			Log.i(TAG,"SDcard Available");
 		}
 		else
 		{
-			Log.d(TAG,"SDcard Not Available");
+			Log.i(TAG,"SDcard Not Available");
 			LayoutInflater inflater = getLayoutInflater();
 			View layout = inflater.inflate(R.layout.nosdcardtoast,
 					(ViewGroup) findViewById(R.id.toast_layout_root));
