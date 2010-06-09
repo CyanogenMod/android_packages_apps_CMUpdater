@@ -51,7 +51,7 @@ public class MainActivity extends Activity
 	private static final int DIALOG_RUNNING_OLD_VERSION = 4;
 	private static final int DIALOG_NO_MD5 = 5;
 
-	private Boolean showDebugOutput = true;
+	private Boolean showDebugOutput = false;
 
 	private Spinner mUpdatesSpinner;
 	private Spinner mThemesSpinner;
