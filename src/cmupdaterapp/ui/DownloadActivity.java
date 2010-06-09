@@ -141,12 +141,6 @@ public class DownloadActivity extends Activity
 		super.onDestroy();
 	}
 
-	@Override
-	protected void onPause()
-	{
-		super.onPause();
-	}
-
 	private void updateDownloadProgress(final long downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
 	{
 		if(mProgressBar == null) return;
@@ -237,7 +231,7 @@ public class DownloadActivity extends Activity
 	/**
 	 * Class for interacting with the main interface of the service.
 	 */
-    private ServiceConnection mConnection = new ServiceConnection()
+    private final ServiceConnection mConnection = new ServiceConnection()
     {
     	public void onServiceConnected(ComponentName name, IBinder service)
     	{
@@ -247,7 +241,9 @@ public class DownloadActivity extends Activity
     			myService.registerCallback(mCallback);
     		}
     		catch (RemoteException e)
-    		{ }
+    		{
+                Log.e(TAG, "RemoteException", e);
+            }
     		//Start Downloading
     		Thread t = new Thread()
             {
@@ -275,12 +271,14 @@ public class DownloadActivity extends Activity
     			myService.unregisterCallback(mCallback);
     		}
     		catch (RemoteException e)
-    		{ }
+    		{
+                Log.e(TAG, "RemoteException", e);
+            }
     		myService = null;
     	}
     };
 
-	private IDownloadServiceCallback mCallback = new IDownloadServiceCallback.Stub()
+	private final IDownloadServiceCallback mCallback = new IDownloadServiceCallback.Stub()
 	{
 		public void updateDownloadProgress(final long downloaded, final int total,
 				final String downloadedText, final String speedText,
@@ -311,7 +309,7 @@ public class DownloadActivity extends Activity
 	private static final int DOWNLOAD_FINISHED = 3;
 	private static final int DOWNLOAD_ERROR = 4;
 
-	private Handler mHandler = new Handler()
+	private final Handler mHandler = new Handler()
 	{
 		public void handleMessage(Message msg)
 		{

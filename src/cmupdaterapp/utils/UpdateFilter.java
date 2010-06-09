@@ -7,9 +7,6 @@ import java.io.FilenameFilter;
  * Filename Filter for getting only Files that matches the Given Extensions 
  * Extensions can be split with |
  * Example: .zip|.md5sum  
- *
- * @param  Extensions  String with supported Extensions. Split multiple Extensions with |
- * @return      true when file Matches Extension, otherwise false
  */
 public class UpdateFilter implements FilenameFilter
 {

@@ -12,7 +12,7 @@ public class FullThemeList implements Serializable
 
 	private static final String TAG = "FullThemeList";
 
-	private LinkedList<ThemeList> Themes;
+	private final LinkedList<ThemeList> Themes;
 
 	public FullThemeList()
 	{

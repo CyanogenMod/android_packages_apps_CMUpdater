@@ -46,7 +46,7 @@ public class DownloadService extends Service
 	private static final String TAG = "DownloadService";
 
 	private Boolean showDebugOutput = false;
-	
+
 	private final RemoteCallbackList<IDownloadServiceCallback> mCallbacks = new RemoteCallbackList<IDownloadServiceCallback>();
 
 	private boolean prepareForDownloadCancel;
@@ -84,15 +84,15 @@ public class DownloadService extends Service
 		{
 			return mDownloading;
 		}
-		public boolean PauseDownload() throws RemoteException
+		public void PauseDownload() throws RemoteException
 		{
 			//TODO: Pause Download
-			return stopDownload();
+			stopDownload();
 		}
 
-		public boolean cancelDownload() throws RemoteException
+		public void cancelDownload() throws RemoteException
 		{
-			return cancelCurrentDownload();
+			cancelCurrentDownload();
 		}
 		public UpdateInfo getCurrentUpdate() throws RemoteException
 		{
@@ -105,12 +105,12 @@ public class DownloadService extends Service
 		public void registerCallback(IDownloadServiceCallback cb)
 				throws RemoteException {
 			if (cb != null) mCallbacks.register(cb);
-			
+
 		}
 		public void unregisterCallback(IDownloadServiceCallback cb)
 				throws RemoteException {
 			if (cb != null) mCallbacks.unregister(cb);
-			
+
 		}
     };
 
@@ -120,13 +120,13 @@ public class DownloadService extends Service
     	if (showDebugOutput) Log.d(TAG, "Download Service Created");
 
     	prefs = new Preferences(this);
-    	
+
     	showDebugOutput = prefs.displayDebugOutput();
-    	
+
 		mWifiLock = ((WifiManager) getSystemService(WIFI_SERVICE)).createWifiLock("CM Updater");
 
 		fullUpdateFolderPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + prefs.getUpdateFolder();
-	
+
 		res = getResources();
 		minutesString = res.getString(R.string.minutes);
 		secondsString = res.getString(R.string.seconds);
@@ -158,12 +158,6 @@ public class DownloadService extends Service
 			notificateDownloadError(ex.getMessage());
 			return false;
 		}
-		catch (IOException ex)
-		{
-			Log.e(TAG, "Exception while downloading update", ex);
-			notificateDownloadError(ex.getMessage());
-			return false;
-		}
 		finally
 		{
 			mWifiLock.release();
@@ -172,7 +166,7 @@ public class DownloadService extends Service
         return !prepareForDownloadCancel && success;
 	}
 
-	private boolean downloadFile(UpdateInfo updateInfo) throws IOException
+	private boolean downloadFile(UpdateInfo updateInfo)
 	{
 		if (showDebugOutput) Log.d(TAG, "Called downloadFile");
 		HttpClient httpClient = new DefaultHttpClient();
@@ -209,8 +203,8 @@ public class DownloadService extends Service
 		//Set the Filename to update.zip.partial
 		partialDestinationFile = new File(fullUpdateFolderPath, fileName + ".partial");
 		destinationFile = new File(fullUpdateFolderPath, fileName);
-		if(partialDestinationFile.exists()) 
-             localFileSize = partialDestinationFile.length(); 
+		if(partialDestinationFile.exists())
+             localFileSize = partialDestinationFile.length();
 
 		//For every Mirror
 		for(int i = 0; i < size; i++)
@@ -388,7 +382,7 @@ public class DownloadService extends Service
 			if (!SysUtils.EnoughSpaceOnSdCard(mcontentLength))
 				throw new NotEnoughSpaceException(res.getString(R.string.download_not_enough_space));
 
-			mStartTime = System.currentTimeMillis(); 
+			mStartTime = System.currentTimeMillis();
 
 			byte[] buff = new byte[64 * 1024];
 			int read;
@@ -482,7 +476,7 @@ public class DownloadService extends Service
 			PendingIntent mNotificationContentIntent = PendingIntent.getActivity(this, 0, mNotificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 			mNotification.contentView = mNotificationRemoteView;
 			mNotification.contentIntent = mNotificationContentIntent;
-			
+
 			//lcoalFileSize because the contentLength will only be the missing bytes and not the whole file
 			long contentLengthOfFullDownload = mcontentLength + localFileSize;
 			long speed = ((mtotalDownloaded - localFileSize)/(System.currentTimeMillis() - mStartTime));
@@ -516,7 +510,7 @@ public class DownloadService extends Service
 		if(!success)
 		{
 			if (showDebugOutput) Log.d(TAG, "Downloaded Update was NULL");
-			DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
+			DeleteDownloadStatusNotification();
 			DownloadError();
 			stopSelf();
 			return;
@@ -526,7 +520,7 @@ public class DownloadService extends Service
 		i.putExtra(Constants.KEY_UPDATE_INFO, (Serializable)ui);
 
 		//Set the Notification to finished
-		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
+		DeleteDownloadStatusNotification();
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification mNotification = new Notification(R.drawable.icon, res.getString(R.string.notification_finished), System.currentTimeMillis());
 		mNotification.flags = Notification.FLAG_AUTO_CANCEL;
@@ -582,14 +576,14 @@ public class DownloadService extends Service
 		if (showDebugOutput) Log.d(TAG, "Download Error");
 		ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.exception_while_downloading, 0));
 	}
-	
-	private void DeleteDownloadStatusNotification(int id)
+
+	private void DeleteDownloadStatusNotification()
 	{
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		mNotificationManager.cancel(id);
+		mNotificationManager.cancel(Constants.NOTIFICATION_DOWNLOAD_STATUS);
 		if (showDebugOutput) Log.d(TAG, "Download Notification removed");
 	}
-	
+
 	private void UpdateDownloadProgress(final long downloaded, final int total, final String downloadedText, final String speedText, final String remainingTimeText)
 	{
 		final int N = mCallbacks.beginBroadcast();
@@ -607,7 +601,7 @@ public class DownloadService extends Service
 		}
 		mCallbacks.finishBroadcast();
 	}
-	
+
 	private void UpdateDownloadMirror(String mirrorName)
 	{
 		final int M = mCallbacks.beginBroadcast();
@@ -662,11 +656,11 @@ public class DownloadService extends Service
 		mCallbacks.finishBroadcast();
 	}
 
-	private boolean cancelCurrentDownload()
+	private void cancelCurrentDownload()
 	{
 		prepareForDownloadCancel = true;
 		if (showDebugOutput) Log.d(TAG, "Download Service CancelDownload was called");
-		DeleteDownloadStatusNotification(Constants.NOTIFICATION_DOWNLOAD_STATUS);
+		DeleteDownloadStatusNotification();
 		File update = new File(fullUpdateFolderPath + "/" + mCurrentUpdate.getFileName());
 		File md5sum = new File(fullUpdateFolderPath + "/" + mCurrentUpdate.getFileName() + ".md5sum");
 		if(update.exists())
@@ -682,19 +676,17 @@ public class DownloadService extends Service
 		mDownloading = false;
 		if (showDebugOutput) Log.d(TAG, "Download Cancel StopSelf was called");
 		stopSelf();
-		return true;
 	}
-	
-	private Boolean stopDownload()
+
+	private void stopDownload()
 	{
 		//TODO: Pause download
 		prepareForDownloadCancel = true;
 		mDownloading = false;
 		stopSelf();
-		return true;
 	}
 
-	private Handler ToastHandler = new Handler()
+	private final Handler ToastHandler = new Handler()
 	{
 		public void handleMessage(Message msg)
 		{

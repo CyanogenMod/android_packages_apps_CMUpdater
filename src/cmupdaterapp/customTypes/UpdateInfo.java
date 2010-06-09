@@ -13,8 +13,8 @@ public class UpdateInfo implements Parcelable, Serializable
 	private static final long serialVersionUID = 5499890003569313403L;
 
 	public int PrimaryKey = -1;
-	public List<String> mod;
-	public List<String> board;
+	public final List<String> mod;
+	public final List<String> board;
 	private String name;
 	private String version;
 	private String type;
@@ -23,7 +23,7 @@ public class UpdateInfo implements Parcelable, Serializable
 	private String fileName;
 	private String versionForApply;
 	public List<URI> screenshots;
-	public List<URI> updateMirrors;
+	public final List<URI> updateMirrors;
 
 	/**
 	 * Set Name
@@ -236,7 +236,7 @@ public class UpdateInfo implements Parcelable, Serializable
 		arg0.writeList(updateMirrors);
 	}
 
-	public void readFromParcel(Parcel in)
+	void readFromParcel(Parcel in)
 	{
 		PrimaryKey = in.readInt();
 		in.readList(mod, null);

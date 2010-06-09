@@ -92,7 +92,6 @@ public class ThemeListActivity extends ListActivity
         LinkedList<ThemeList> fullThemeListList = fullThemeList.returnFullThemeList();
 		ThemeListAdapter<ThemeList> AdapterThemeList = new ThemeListAdapter<ThemeList>(
 				this,
-				android.R.layout.simple_list_item_1,
                 fullThemeListList);
 		setListAdapter(AdapterThemeList);
 		if (fullThemeList.getThemeCount() > 0)

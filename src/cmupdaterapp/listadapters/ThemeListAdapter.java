@@ -19,9 +19,9 @@ public class ThemeListAdapter<T> extends ArrayAdapter<T>
 {
 	private final LayoutInflater _inflater;
 
-	public ThemeListAdapter(Context context, int textViewResourceId, List<T> objects)
+	public ThemeListAdapter(Context context, List<T> objects)
 	{
-		super(context, textViewResourceId, objects);
+		super(context, android.R.layout.simple_list_item_1, objects);
 		_inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
@@ -73,7 +73,7 @@ public class ThemeListAdapter<T> extends ArrayAdapter<T>
 //Class that Holds the Ids, so we have not to call findViewById each time which costs a lot of ressources
 class ThemeListViewWrapper
 {
-	private View base;
+	private final View base;
 	private TextView ThemeListName = null;
 	private TextView ThemeListUri = null;
 	private ImageView image = null;
@@ -102,13 +102,12 @@ class ThemeListViewWrapper
 		return ThemeListUri;
 	}
 
-	public ImageView getImage()
+	void getImage()
 	{
 		if (image == null)
 		{
 			image = (ImageView)base.findViewById(R.id.ThemeListImage);
 		}
-		return image;
 	}
 
 	public Drawable getImageDrawable()

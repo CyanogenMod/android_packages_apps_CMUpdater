@@ -53,7 +53,7 @@ public class FullUpdateInfo implements Parcelable, Serializable
 		arg0.writeList(themes);
 	}
 
-	public void readFromParcel(Parcel in)
+	void readFromParcel(Parcel in)
 	{
 		in.readList(roms, null);
 		in.readList(incrementalRoms, null);

@@ -49,7 +49,7 @@ public class UpdateCheckService extends Service
 	private static final String TAG = "UpdateCheckService";
 
 	private static Boolean showDebugOutput = false;
-	
+
 	private final RemoteCallbackList<IUpdateCheckServiceCallback> mCallbacks = new RemoteCallbackList<IUpdateCheckServiceCallback>();
 	private NotificationManager mNM;
 	private Resources res;
@@ -160,7 +160,7 @@ public class UpdateCheckService extends Service
 		else
 		{
 			if(mPreferences.notificationsEnabled())
-			{	
+			{
 				Intent i = new Intent(this, MainActivity.class);
 				PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_ONE_SHOT);
 
@@ -197,7 +197,7 @@ public class UpdateCheckService extends Service
 
 	private void notificateCheckError(String ExceptionText)
 	{
-		ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.not_update_check_error_ticker, 0));
+		DisplayExceptionToast(ExceptionText);
 		if (showDebugOutput) Log.d(TAG, "Update check error");
 		FinishUpdateCheck();
 	}
@@ -301,7 +301,7 @@ public class UpdateCheckService extends Service
 					//Set the PrimaryKey for the Database
 					if (t.PrimaryKey > 0)
 						PrimaryKeyTheme = t.PrimaryKey;
-					
+
 					LinkedList<UpdateInfo> themeUpdateInfos = parseJSON(themeBuf, RomType.Update);
 					retValue.themes.addAll(getThemeUpdates(themeUpdateInfos));
 				}
@@ -351,7 +351,7 @@ public class UpdateCheckService extends Service
 	}
 
 	private enum RomType { Update, IncrementalUpdate }
-	
+
 	private LinkedList<UpdateInfo> parseJSON(StringBuffer buf, RomType type)
 	{
 		LinkedList<UpdateInfo> uis = new LinkedList<UpdateInfo>();
@@ -433,7 +433,7 @@ public class UpdateCheckService extends Service
 			ui.setDescription(obj.getString(Constants.JSON_DESCRIPTION).trim());
 			ui.setBranchCode(obj.getString(Constants.JSON_BRANCH).trim());
 			ui.setFileName(obj.getString(Constants.JSON_FILENAME).trim());
-			
+
 			//For incremental Updates
 			if(obj.has(Constants.JSON_VERSION_FOR_APPLY))
 			{
@@ -508,7 +508,7 @@ public class UpdateCheckService extends Service
 	{
 		if(ui == null) return false;
 		//If * is provided, all Boards are supported
-		if(ui.board.equals(Constants.UPDATE_INFO_WILDCARD) || systemMod.equals(Constants.UPDATE_INFO_WILDCARD)) return true;
+		if(systemMod.equals(Constants.UPDATE_INFO_WILDCARD)) return true;
 		for(String board:ui.board)
 		{
 			if(board.equalsIgnoreCase(systemMod) || board.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
@@ -520,7 +520,7 @@ public class UpdateCheckService extends Service
 	private boolean romMatches(UpdateInfo ui, String systemRom)
 	{
 		if(ui == null) return false;
-		if(ui.mod.equals(Constants.UPDATE_INFO_WILDCARD) || systemRom.equals(Constants.UPDATE_INFO_WILDCARD)) return true;
+		if(systemRom.equals(Constants.UPDATE_INFO_WILDCARD)) return true;
 		for(String mod:ui.mod)
 		{
 			if(mod.equalsIgnoreCase(systemRom) || mod.equalsIgnoreCase(Constants.UPDATE_INFO_WILDCARD))
@@ -694,7 +694,7 @@ public class UpdateCheckService extends Service
 		return ful;
 	}
 
-	private Handler ToastHandler = new Handler()
+	private final Handler ToastHandler = new Handler()
 	{
 		public void handleMessage(Message msg)
 		{

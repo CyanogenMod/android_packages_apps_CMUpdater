@@ -43,50 +43,32 @@ import java.util.List;
 public class MainActivity extends Activity
 {
 	private static final String TAG = "MainActivity";
-	
-	private Boolean showDebugOutput = false;
-	
+
+	//Dialogs
+	private static final int DIALOG_NO_SDCARD = 1;
+	private static final int DIALOG_OVERWRITE_UPDATE = 2;
+	private static final int DIALOG_DELETE_EXISTING = 3;
+	private static final int DIALOG_RUNNING_OLD_VERSION = 4;
+	private static final int DIALOG_NO_MD5 = 5;
+
+	private Boolean showDebugOutput = true;
+
 	private Spinner mUpdatesSpinner;
 	private Spinner mThemesSpinner;
-	private FullUpdateInfo mAvailableUpdates;
-	private File mUpdateFolder;
 	private Spinner mExistingUpdatesSpinner;
+	private File mUpdateFolder;
 	private ProgressDialog ChangelogProgressDialog;
 	public static Handler ChangelogProgressHandler;
 	private Thread ChangelogThread;
-	private List<Version> ChangelogList = null;
-	private List<String> mfilenames;
-	private TextView mdownloadedUpdateText;
-	private Button mdeleteOldUpdatesButton;
-	private Button mapplyUpdateButton;
-	private TextView mNoExistingUpdatesFound;
 	private ViewFlipper flipper;
 	private Preferences prefs;
-	private Resources res;
 	private Boolean runningOldVersion = false;
-    private TextView experimentalBuildsRomtv;
-	private TextView showDowngradesRomtv;
-	private TextView experimentalBuildsThemetv;
-	private TextView showDowngradesThemetv;
-	private TextView lastRomUpdateChecktv;
-	private TextView lastThemeUpdateChecktv;
-	private Button selectUploadButton;
-	private TextView DownloadText;
-	private LinearLayout stableExperimentalInfoUpdates;
-	private Button changelogButton;
-	private Button btnDownloadTheme;
-	private TextView tvThemeDownloadText;
-	private LinearLayout stableExperimentalInfoThemes;
-	private Button btnThemechangelogButton;
-	private Button btnThemeScreenshotButton;
-	private TextView tvNoThemeUpdateServer;
-	private Button CheckNowUpdateChooserUpdates;
-	private TextView CheckNowUpdateChooserTextUpdates;
-	private Button CheckNowUpdateChooserThemes;
-	private TextView CheckNowUpdateChooserTextThemes;
 	private AsyncTask<File, Void, Boolean> md5CheckerTask;
+	private File foo;
+	private UpdateInfo updateForDownload;
+	private String existingUpdateFilename;
 
-	private View.OnClickListener ButtonOnClickListener = new View.OnClickListener()
+	private final View.OnClickListener ButtonOnClickListener = new View.OnClickListener()
 	{
 		public void onClick(View v)
 		{
@@ -119,10 +101,22 @@ public class MainActivity extends Activity
 				case R.id.apply_update_button:
 					ApplyExistingButtonListener();
 					break;
+				case R.id.button_available_updates:
+					if(flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_UPDATES)
+						flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_UPDATES);
+					break;
+				case R.id.button_available_themes:
+					if(flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_THEMES)
+						flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_THEMES);
+					break;
+				case R.id.button_existing_updates:
+					if(flipper.getDisplayedChild() != Constants.FLIPPER_EXISTING_UPDATES)
+						flipper.setDisplayedChild(Constants.FLIPPER_EXISTING_UPDATES);
+					break;
 			}
 		}
 	};
-	
+
 	private void ScreenshotThemesListener()
 	{
 		if (showDebugOutput) Log.d(TAG, "Theme Screenshot Button clicked");
@@ -137,51 +131,23 @@ public class MainActivity extends Activity
 	{
 		if(!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState()))
 		{
-			new AlertDialog.Builder(MainActivity.this)
-			.setTitle(R.string.sdcard_is_not_present_dialog_title)
-			.setMessage(R.string.sdcard_is_not_present_dialog_body)
-			.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					dialog.dismiss();
-				}
-			})
-			.show();
+			showDialog(DIALOG_NO_SDCARD);
 			return;
 		}
 		if (showDebugOutput) Log.d(TAG, "Download Rom Button clicked");
-		final UpdateInfo ui = (UpdateInfo) mUpdatesSpinner.getSelectedItem();
+		updateForDownload = (UpdateInfo) mUpdatesSpinner.getSelectedItem();
 		//Check if the File is present, so prompt the User to overwrite it
-		final File foo = new File(mUpdateFolder + "/" + ui.getFileName());
+		foo = new File(mUpdateFolder + "/" + updateForDownload.getFileName());
 		if (foo.isFile() && foo.exists())
 		{
-			new AlertDialog.Builder(MainActivity.this)
-			.setTitle(R.string.overwrite_update_title)
-			.setMessage(R.string.overwrite_update_summary)
-			.setNegativeButton(R.string.overwrite_update_negative, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					dialog.dismiss();
-				}
-			})
-			.setPositiveButton(R.string.overwrite_update_positive, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					if (showDebugOutput) Log.d(TAG, "Start downlading Rom update: " + ui.getFileName());
-					foo.delete();
-					downloadRequestedUpdate(ui);
-				}
-			})
-			.show();
+
+			showDialog(DIALOG_OVERWRITE_UPDATE);
 			return;
 		}
 		//Otherwise download it
 		else
 		{
-			downloadRequestedUpdate((UpdateInfo) mUpdatesSpinner.getSelectedItem());
+			downloadRequestedUpdate(updateForDownload);
 		}
 	}
 
@@ -189,51 +155,23 @@ public class MainActivity extends Activity
 	{
 		if(!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState()))
 		{
-			new AlertDialog.Builder(MainActivity.this)
-			.setTitle(R.string.sdcard_is_not_present_dialog_title)
-			.setMessage(R.string.sdcard_is_not_present_dialog_body)
-			.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					dialog.dismiss();
-				}
-			})
-			.show();
+			showDialog(DIALOG_NO_SDCARD);
 			return;
 		}
-			
+
 		if (showDebugOutput) Log.d(TAG, "Download Theme Button clicked");
-		final UpdateInfo ui = (UpdateInfo) mThemesSpinner.getSelectedItem();
+		updateForDownload = (UpdateInfo) mThemesSpinner.getSelectedItem();
 		//Check if the File is present, so prompt the User to overwrite it
-		File foo = new File(mUpdateFolder + "/" + ui.getFileName());
+		foo = new File(mUpdateFolder + "/" + updateForDownload.getFileName());
 		if (foo.isFile() && foo.exists())
 		{
-			new AlertDialog.Builder(MainActivity.this)
-			.setTitle(R.string.overwrite_update_title)
-			.setMessage(R.string.overwrite_update_summary)
-			.setNegativeButton(R.string.overwrite_update_negative, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					dialog.dismiss();
-				}
-			})
-			.setPositiveButton(R.string.overwrite_update_positive, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					if (showDebugOutput) Log.d(TAG, "Start downlading Theme update: " + ui.getFileName());
-					downloadRequestedUpdate((UpdateInfo) mThemesSpinner.getSelectedItem());
-				}
-			})
-			.show();
+			showDialog(DIALOG_OVERWRITE_UPDATE);
 			return;
 		}
 		//Otherwise download it
 		else
 		{
-			downloadRequestedUpdate((UpdateInfo) mThemesSpinner.getSelectedItem());
+			downloadRequestedUpdate(updateForDownload);
 		}
 	}
 
@@ -242,7 +180,7 @@ public class MainActivity extends Activity
 		if (showDebugOutput) Log.d(TAG, "Rom Changelog Button clicked");
 		getChangelog(ChangelogType.ROM);
 	}
-	
+
 	private void ThemeChangelogButtonListener()
 	{
 		if (showDebugOutput) Log.d(TAG, "Theme Changelog Button clicked");
@@ -253,143 +191,42 @@ public class MainActivity extends Activity
 	{
 		if(!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState()))
 		{
-			new AlertDialog.Builder(MainActivity.this)
-			.setTitle(R.string.sdcard_is_not_present_dialog_title)
-			.setMessage(R.string.sdcard_is_not_present_dialog_body)
-			.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					dialog.dismiss();
-				}
-			})
-			.show();
+			showDialog(DIALOG_NO_SDCARD);
 			return;
 		}
 		else
 		{
-			new AlertDialog.Builder(MainActivity.this)
-			.setTitle(R.string.delete_updates_text)
-			.setMessage(R.string.confirm_delete_update_folder_dialog_message)
-			//Delete Only Selected Update
-			.setNeutralButton(R.string.confirm_delete_update_folder_dialog_neutral, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					//Delete Updates here
-					String f = (String) mExistingUpdatesSpinner.getSelectedItem();
-					if (showDebugOutput) Log.d(TAG, "Delete single Update selected: " + f);
-					if(deleteUpdate(f))
-						mfilenames.remove(f);
-					switchToUpdateChooserLayout();
-				}
-			})
-			//Delete All Updates
-			.setPositiveButton(R.string.confirm_delete_update_folder_dialog_yes, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					if (showDebugOutput) Log.d(TAG, "Delete all Updates selected");
-					//Delete Updates here
-					//Set the Filenames to null, so the Spinner will be empty
-					if(deleteOldUpdates())
-						mfilenames = null;
-					switchToUpdateChooserLayout();
-				}
-			})
-			//Delete no Update
-			.setNegativeButton(R.string.confirm_delete_update_folder_dialog_no, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					if (showDebugOutput) Log.d(TAG, "Delete no updates selected");
-					dialog.dismiss();
-				}
-			})
-			.show();
+			showDialog(DIALOG_DELETE_EXISTING);
 		}
 	}
 
 	private void ApplyExistingButtonListener()
 	{
-		ProgressDialog mDialog;
-		final String filename;
-		File Update;
-
 		if(!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState()))
 		{
-			new AlertDialog.Builder(MainActivity.this)
-			.setTitle(R.string.sdcard_is_not_present_dialog_title)
-			.setMessage(R.string.sdcard_is_not_present_dialog_body)
-			.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					dialog.dismiss();
-				}
-			})
-			.show();
+			showDialog(DIALOG_NO_SDCARD);
 			return;
 		}
-		
+
 		if (runningOldVersion)
 		{
-			new AlertDialog.Builder(MainActivity.this)
-			.setTitle(R.string.alert_old_version_title)
-			.setMessage(R.string.alert_old_version_summary)
-			.setPositiveButton(R.string.alert_old_version_ok, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					dialog.dismiss();
-				}
-			})
-			.setNegativeButton(R.string.alert_old_version_browser, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					//Open the Browser for Instructions
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(Customization.UPDATE_INSTRUCTIONS_URL));
-                    startActivity(i);
-                    dialog.dismiss();
-				}
-			})
-			.show();
+			showDialog(DIALOG_RUNNING_OLD_VERSION);
 		}
 
-		filename = (String) mExistingUpdatesSpinner.getSelectedItem();
-		if (showDebugOutput) Log.d(TAG, "Selected to Apply Existing update: " + filename);
-		Update = new File(mUpdateFolder + "/" +filename);
-		File MD5 = new File(mUpdateFolder + "/" +filename + ".md5sum");
+		existingUpdateFilename = (String) mExistingUpdatesSpinner.getSelectedItem();
+		if (showDebugOutput) Log.d(TAG, "Selected to Apply Existing update: " + existingUpdateFilename);
+		File Update = new File(mUpdateFolder + "/" +existingUpdateFilename);
+		File MD5 = new File(mUpdateFolder + "/" +existingUpdateFilename + ".md5sum");
 		//IF no MD5 exists, ask the User what to do
 		if(!MD5.exists() || !MD5.canRead())
 		{
-			new AlertDialog.Builder(MainActivity.this)
-			.setTitle(R.string.no_md5_found_title)
-			.setMessage(R.string.no_md5_found_summary)
-			.setPositiveButton(R.string.no_md5_found_positive, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					//Directly call on Postexecute, cause we need no md5check
-					new MD5CheckerTask(MainActivity.this, null, filename, showDebugOutput).onPostExecute(true);
-					dialog.dismiss();
-				}
-			})
-			.setNegativeButton(R.string.no_md5_found_negative, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					dialog.dismiss();
-				}
-			})
-			.show();
+			showDialog(DIALOG_NO_MD5);
 		}
 		//If MD5 exists, apply the update normally
 		else
 		{
-			mDialog = ProgressDialog.show(
+			Resources res = getResources();
+			ProgressDialog progressDialog = ProgressDialog.show(
 					MainActivity.this,
 					res.getString(R.string.verify_and_apply_dialog_title),
 					res.getString(R.string.verify_and_apply_dialog_message),
@@ -404,11 +241,11 @@ public class MainActivity extends Activity
 						}
 					}
 			);
-	
-			md5CheckerTask = new MD5CheckerTask(MainActivity.this, mDialog, filename, showDebugOutput).execute(Update);
+
+			md5CheckerTask = new MD5CheckerTask(this, progressDialog, existingUpdateFilename, showDebugOutput).execute(Update);
 		}
 	}
-	
+
 	private final Spinner.OnItemSelectedListener mUpdateSpinnerChanged = new Spinner.OnItemSelectedListener()
 	{
 		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3)
@@ -430,7 +267,7 @@ public class MainActivity extends Activity
 
 		}
 	};
-	
+
 	private final Spinner.OnItemSelectedListener mThemeSpinnerChanged = new Spinner.OnItemSelectedListener()
 	{
 		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3)
@@ -441,7 +278,7 @@ public class MainActivity extends Activity
 			String changelog = item.getDescription();
 			List<URI> screenshots = item.screenshots;
 			int ScreenshotCount = item.screenshots.size();
-			
+
 			if (changelog == null || changelog.equals(""))
 			{
 				themeChangelogButton.setVisibility(View.GONE);
@@ -490,24 +327,24 @@ public class MainActivity extends Activity
 		}
 
 		prefs = new Preferences(this);
-		
+
 		//Debug Output
 		showDebugOutput = prefs.displayDebugOutput();
-		
-		res = getResources();
-		
+
 		if (showDebugOutput) Log.d(TAG, "onCreate called");
-		
+
 		//Sets the Title to Appname + Mod Version
+		Resources res = getResources();
 		setTitle(res.getString(R.string.app_name) + " " + res.getString(R.string.title_running) + " " + SysUtils.getModVersion());
 		setContentView(R.layout.main);
-		
+
 		//Inflate the Screenshot View if enabled
 		if (Customization.Screenshotsupport)
 		{
 			findViewById(R.id.main_stub_themes).setVisibility(View.VISIBLE);
 		}
-		
+
+		//Layout
 		flipper = (ViewFlipper)findViewById(R.id.Flipper);
         Button btnAvailableUpdates = (Button) findViewById(R.id.button_available_updates);
         Button btnExistingUpdates = (Button) findViewById(R.id.button_existing_updates);
@@ -518,74 +355,12 @@ public class MainActivity extends Activity
 			btnAvailableThemes.setVisibility(View.GONE);
 		}
 
-		//Rom Layout
-		View roms = findViewById(R.id.rom_layout);
-		experimentalBuildsRomtv = (TextView) roms.findViewById(R.id.experimental_rom_updates_textview);
-		showDowngradesRomtv = (TextView) roms.findViewById(R.id.show_rom_downgrades_textview);
-		lastRomUpdateChecktv = (TextView) roms.findViewById(R.id.last_rom_update_check);
-		selectUploadButton = (Button) roms.findViewById(R.id.download_update_button);
-		mUpdatesSpinner = (Spinner) roms.findViewById(R.id.available_updates_list);
-		DownloadText = (TextView) roms.findViewById(R.id.available_updates_text);
-		stableExperimentalInfoUpdates = (LinearLayout) roms.findViewById(R.id.stable_experimental_description_container_updates);
-		changelogButton = (Button) roms.findViewById(R.id.show_changelog_button);
-		//No ROM Updates Found Layout
-		CheckNowUpdateChooserUpdates = (Button) roms.findViewById(R.id.check_now_button_update_chooser_updates);
-		CheckNowUpdateChooserTextUpdates = (TextView) roms.findViewById(R.id.check_now_update_chooser_text_updates);
-
-		//Existing Updates Layout
-		View existing = findViewById(R.id.existing_layout);
-		mdownloadedUpdateText = (TextView) existing.findViewById(R.id.downloaded_update_found);
-		mExistingUpdatesSpinner = (Spinner) existing.findViewById(R.id.found_updates_list);
-		mdeleteOldUpdatesButton = (Button) existing.findViewById(R.id.delete_updates_button);
-		mapplyUpdateButton = (Button) existing.findViewById(R.id.apply_update_button);
-		mNoExistingUpdatesFound = (TextView) existing.findViewById(R.id.no_existing_updates_found_textview);
-
-		//Theme Layout
-		if (Customization.Screenshotsupport)
-		{
-			View themes = findViewById(R.id.themes_layout);
-			showDowngradesThemetv = (TextView) themes.findViewById(R.id.show_theme_downgrades_textview);
-			experimentalBuildsThemetv = (TextView) themes.findViewById(R.id.experimental_theme_updates_textview);
-			lastThemeUpdateChecktv = (TextView) themes.findViewById(R.id.last_theme_update_check);
-			btnDownloadTheme = (Button) themes.findViewById(R.id.download_theme_button);
-			mThemesSpinner = (Spinner) themes.findViewById(R.id.available_themes_list);
-			tvThemeDownloadText = (TextView) themes.findViewById(R.id.available_themes_text);
-			stableExperimentalInfoThemes = (LinearLayout) themes.findViewById(R.id.stable_experimental_description_container_themes);
-			btnThemechangelogButton = (Button) themes.findViewById(R.id.show_theme_changelog_button);
-			btnThemeScreenshotButton = (Button) themes.findViewById(R.id.theme_screenshots_button);
-			tvNoThemeUpdateServer = (TextView) themes.findViewById(R.id.no_theme_update_server_configured);
-			//No Theme Updates Found Layout
-			CheckNowUpdateChooserThemes = (Button) themes.findViewById(R.id.check_now_button_update_chooser_themes);
-			CheckNowUpdateChooserTextThemes = (TextView) themes.findViewById(R.id.check_now_update_chooser_text_themes);
-		}
-
 		//Flipper Buttons
-		btnAvailableUpdates.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View view)
-			{
-				if(flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_UPDATES)
-					flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_UPDATES);
-			}
-		});
-		btnExistingUpdates.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View view)
-			{
-				if(flipper.getDisplayedChild() != Constants.FLIPPER_EXISTING_UPDATES)
-					flipper.setDisplayedChild(Constants.FLIPPER_EXISTING_UPDATES);
-			}
-		});
+		btnAvailableUpdates.setOnClickListener(ButtonOnClickListener);
+		btnExistingUpdates.setOnClickListener(ButtonOnClickListener);
 		if (Customization.Screenshotsupport)
 		{
-			btnAvailableThemes.setOnClickListener(new View.OnClickListener()
-			{
-				public void onClick(View view)
-				{
-					if(flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_THEMES)
-						flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_THEMES);
-				}
-			});
+			btnAvailableThemes.setOnClickListener(ButtonOnClickListener);
 		}
 	}
 
@@ -600,29 +375,7 @@ public class MainActivity extends Activity
 		if (StringUtils.compareVersions(Customization.MIN_SUPPORTED_VERSION_STRING, mod))
 		{
 			runningOldVersion = true;
-
-			new AlertDialog.Builder(MainActivity.this)
-			.setTitle(R.string.alert_old_version_title)
-			.setMessage(R.string.alert_old_version_summary)
-			.setPositiveButton(R.string.alert_old_version_ok, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					dialog.dismiss();
-				}
-			})
-			.setNegativeButton(R.string.alert_old_version_browser, new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					//Open the Browser for Instructions
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(Customization.UPDATE_INSTRUCTIONS_URL));
-                    startActivity(i);
-                    dialog.dismiss();
-				}
-			})
-			.show();
+			showDialog(DIALOG_RUNNING_OLD_VERSION);
 			return;
 		}
 	}
@@ -632,24 +385,6 @@ public class MainActivity extends Activity
 	{
 		if (showDebugOutput) Log.d(TAG, "onResume called");
 		super.onResume();
-
-		mfilenames = null;
-		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + prefs.getUpdateFolder());
-		FilenameFilter f = new UpdateFilter(".zip");
-		File[] files = mUpdateFolder.listFiles(f);
-		//If Folder Exists and Updates are present(with md5files)
-		if(mUpdateFolder.exists() && mUpdateFolder.isDirectory() && files != null && files.length>0)
-		{
-			//To show only the Filename. Otherwise the whole Path with /sdcard/cm-updates will be shown
-			mfilenames = new ArrayList<String>();
-            for (File file : files) {
-                mfilenames.add(file.getName());
-            }
-			//For sorting the Filenames, have to find a way to do natural sorting
-			mfilenames = Collections.synchronizedList(mfilenames); 
-            Collections.sort(mfilenames, Collections.reverseOrder()); 
-		}
-		files = null;
 
 		try
 		{
@@ -694,7 +429,7 @@ public class MainActivity extends Activity
 	}
 
 	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) 
+	public boolean onPrepareOptionsMenu(Menu menu)
 	{
 		boolean superReturn = super.onPrepareOptionsMenu(menu);
 
@@ -739,6 +474,7 @@ public class MainActivity extends Activity
 
 	private void switchToUpdateChooserLayout()
 	{
+		FullUpdateInfo mAvailableUpdates = null;
 		try
 		{
 			mAvailableUpdates = State.loadState(this, showDebugOutput);
@@ -747,6 +483,79 @@ public class MainActivity extends Activity
 		{
 			Log.e(TAG, "Unable to restore activity status", e);
 		}
+
+		//Rom Layout
+		View roms = findViewById(R.id.rom_layout);
+		TextView experimentalBuildsRomtv = (TextView) roms.findViewById(R.id.experimental_rom_updates_textview);
+		TextView showDowngradesRomtv = (TextView) roms.findViewById(R.id.show_rom_downgrades_textview);
+		TextView lastRomUpdateChecktv = (TextView) roms.findViewById(R.id.last_rom_update_check);
+		Button selectUploadButton = (Button) roms.findViewById(R.id.download_update_button);
+		Spinner mUpdatesSpinner = (Spinner) roms.findViewById(R.id.available_updates_list);
+		TextView DownloadText = (TextView) roms.findViewById(R.id.available_updates_text);
+		LinearLayout stableExperimentalInfoUpdates = (LinearLayout) roms.findViewById(R.id.stable_experimental_description_container_updates);
+		Button changelogButton = (Button) roms.findViewById(R.id.show_changelog_button);
+		//No ROM Updates Found Layout
+		Button CheckNowUpdateChooserUpdates = (Button) roms.findViewById(R.id.check_now_button_update_chooser_updates);
+		TextView CheckNowUpdateChooserTextUpdates = (TextView) roms.findViewById(R.id.check_now_update_chooser_text_updates);
+
+		//Existing Updates Layout
+		View existing = findViewById(R.id.existing_layout);
+		TextView mdownloadedUpdateText = (TextView) existing.findViewById(R.id.downloaded_update_found);
+		Spinner mExistingUpdatesSpinner = (Spinner) existing.findViewById(R.id.found_updates_list);
+		Button mdeleteOldUpdatesButton = (Button) existing.findViewById(R.id.delete_updates_button);
+		Button mapplyUpdateButton = (Button) existing.findViewById(R.id.apply_update_button);
+		TextView mNoExistingUpdatesFound = (TextView) existing.findViewById(R.id.no_existing_updates_found_textview);
+
+		//Theme Layout
+		View themes = null;
+		TextView showDowngradesThemetv = null;
+		TextView experimentalBuildsThemetv = null;
+		TextView lastThemeUpdateChecktv = null;
+		Button btnDownloadTheme = null;
+		Spinner mThemesSpinner = null;
+		TextView tvThemeDownloadText = null;
+		LinearLayout stableExperimentalInfoThemes = null;
+		Button btnThemechangelogButton = null;
+		Button btnThemeScreenshotButton = null;
+		TextView tvNoThemeUpdateServer = null;
+		Button CheckNowUpdateChooserThemes = null;
+		TextView CheckNowUpdateChooserTextThemes = null;
+		if (Customization.Screenshotsupport)
+		{
+			themes = findViewById(R.id.themes_layout);
+			showDowngradesThemetv = (TextView) themes.findViewById(R.id.show_theme_downgrades_textview);
+			experimentalBuildsThemetv = (TextView) themes.findViewById(R.id.experimental_theme_updates_textview);
+			lastThemeUpdateChecktv = (TextView) themes.findViewById(R.id.last_theme_update_check);
+			btnDownloadTheme = (Button) themes.findViewById(R.id.download_theme_button);
+			mThemesSpinner = (Spinner) themes.findViewById(R.id.available_themes_list);
+			tvThemeDownloadText = (TextView) themes.findViewById(R.id.available_themes_text);
+			stableExperimentalInfoThemes = (LinearLayout) themes.findViewById(R.id.stable_experimental_description_container_themes);
+			btnThemechangelogButton = (Button) themes.findViewById(R.id.show_theme_changelog_button);
+			btnThemeScreenshotButton = (Button) themes.findViewById(R.id.theme_screenshots_button);
+			tvNoThemeUpdateServer = (TextView) themes.findViewById(R.id.no_theme_update_server_configured);
+			//No Theme Updates Found Layout
+			CheckNowUpdateChooserThemes = (Button) themes.findViewById(R.id.check_now_button_update_chooser_themes);
+			CheckNowUpdateChooserTextThemes = (TextView) themes.findViewById(R.id.check_now_update_chooser_text_themes);
+		}
+
+		//Read existing Updates
+		List<String> existingFilenames = null;
+		mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + prefs.getUpdateFolder());
+		FilenameFilter f = new UpdateFilter(".zip");
+		File[] files = mUpdateFolder.listFiles(f);
+		//If Folder Exists and Updates are present(with md5files)
+		if(mUpdateFolder.exists() && mUpdateFolder.isDirectory() && files != null && files.length>0)
+		{
+			//To show only the Filename. Otherwise the whole Path with /sdcard/cm-updates will be shown
+			existingFilenames = new ArrayList<String>();
+            for (File file : files) {
+            	existingFilenames.add(file.getName());
+            }
+			//For sorting the Filenames, have to find a way to do natural sorting
+            existingFilenames = Collections.synchronizedList(existingFilenames);
+            Collections.sort(existingFilenames, Collections.reverseOrder());
+		}
+		files = null;
 
 		//Reset all Visibilities
 		if (Customization.Screenshotsupport)
@@ -770,7 +579,7 @@ public class MainActivity extends Activity
 			btnThemechangelogButton.setVisibility(View.VISIBLE);
 			btnThemeScreenshotButton.setVisibility(View.VISIBLE);
 		}
-		
+
 		//Theme Update File URL Set?
 		boolean ThemeUpdateUrlSet = prefs.ThemeUpdateUrlSet();
 
@@ -782,6 +591,7 @@ public class MainActivity extends Activity
 		String showExperimentalThemeUpdates = "";
 		String showAllThemeUpdates = "";
 
+		Resources res = getResources();
 		String trueString = res.getString(R.string.true_string);
 		String falseString = res.getString(R.string.false_string);
 
@@ -801,7 +611,7 @@ public class MainActivity extends Activity
 				showExperimentalThemeUpdates = trueString;
 			else
 				showExperimentalThemeUpdates = falseString;
-	
+
 			if(prefs.showAllThemeUpdates())
 				showAllThemeUpdates = trueString;
 			else
@@ -840,8 +650,7 @@ public class MainActivity extends Activity
 
 			UpdateListAdapter<UpdateInfo> spAdapterRoms = new UpdateListAdapter<UpdateInfo>(
 					this,
-					android.R.layout.simple_spinner_item,
-					availableRoms);
+                    availableRoms);
 			spAdapterRoms.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			mUpdatesSpinner.setAdapter(spAdapterRoms);
 		}
@@ -884,11 +693,10 @@ public class MainActivity extends Activity
 				btnThemechangelogButton.setOnClickListener(ButtonOnClickListener);
 				btnThemeScreenshotButton.setOnClickListener(ButtonOnClickListener);
 				mThemesSpinner.setOnItemSelectedListener(mThemeSpinnerChanged);
-	
+
 				UpdateListAdapter<UpdateInfo> spAdapterThemes = new UpdateListAdapter<UpdateInfo>(
 						this,
-						android.R.layout.simple_spinner_item,
-						availableThemes);
+                        availableThemes);
 				spAdapterThemes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				mThemesSpinner.setAdapter(spAdapterThemes);
 			}
@@ -908,12 +716,12 @@ public class MainActivity extends Activity
 		}
 
 		//Existing Updates Layout
-		if (mfilenames != null && mfilenames.size() > 0)
+		if (existingFilenames != null && existingFilenames.size() > 0)
 		{
 			ArrayAdapter<String> localUpdates = new ArrayAdapter<String>(
 					this,
 					android.R.layout.simple_spinner_item,
-					mfilenames);
+					existingFilenames);
 			localUpdates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			mExistingUpdatesSpinner.setAdapter(localUpdates);
 		  	mapplyUpdateButton.setOnClickListener(ButtonOnClickListener);
@@ -930,13 +738,14 @@ public class MainActivity extends Activity
 	}
 
 	private void getChangelog(ChangelogType changelogType)
-	{	
+	{
 		//Handler for the ThreadClass, that downloads the AppChangelog
 		ChangelogProgressHandler = new Handler()
 		{
 			@SuppressWarnings("unchecked")
 			public void handleMessage(Message msg)
 			{
+				List<Version> ChangelogList;
 				if (ChangelogProgressDialog != null)
 					ChangelogProgressDialog.dismiss();
 				if (msg.obj instanceof String)
@@ -945,32 +754,34 @@ public class MainActivity extends Activity
 					ChangelogList = null;
 					MainActivity.this.ChangelogThread.interrupt();
 					ChangelogProgressDialog.dismiss();
-					displayChangelog(ChangelogType.APP);
+					displayChangelog(ChangelogType.APP, ChangelogList);
 				}
 				else if (msg.obj instanceof List<?>)
 				{
 					ChangelogList = (List<Version>) msg.obj;
 					MainActivity.this.ChangelogThread.interrupt();
 					ChangelogProgressDialog.dismiss();
-					displayChangelog(ChangelogType.APP);
+					displayChangelog(ChangelogType.APP, ChangelogList);
 				}
 	        }
 	    };
 
+	    List<Version> ChangelogList;
 		switch (changelogType)
 		{
 			case ROM:
 				//Get the ROM Changelog and Display the Changelog
 				ChangelogList = Changelog.getRomChangelog((UpdateInfo) mUpdatesSpinner.getSelectedItem());
-				displayChangelog(ChangelogType.ROM);
+				displayChangelog(ChangelogType.ROM, ChangelogList);
 				break;
 			case THEME:
 				//Get the THEME Changelog and Display the Changelog
 				ChangelogList = Changelog.getRomChangelog((UpdateInfo) mThemesSpinner.getSelectedItem());
-				displayChangelog(ChangelogType.THEME);
+				displayChangelog(ChangelogType.THEME, ChangelogList);
 				break;
 			case APP:
 				//Show a ProgressDialog and start the Thread. The Dialog is shown in the Handler Function
+				Resources res = getResources();
 				ChangelogProgressDialog = ProgressDialog.show(this, res.getString(R.string.changelog_progress_title), res.getString(R.string.changelog_progress_body), true);
 				ChangelogThread = new Thread(new Changelog(this));
 				ChangelogThread.start();
@@ -980,23 +791,23 @@ public class MainActivity extends Activity
 		}
 	}
 
-	private void displayChangelog(ChangelogType changelogtype)
+	private void displayChangelog(ChangelogType changelogtype, List<Version> ChangelogList)
 	{
 		if (ChangelogList == null)
-			return; 
+			return;
 		boolean ChangelogEmpty = true;
 		Dialog dialog = new Dialog(this);
-		String dialogTitle;
+		int dialogTitle;
 		switch (changelogtype)
 		{
 			case ROM:
-				dialogTitle = res.getString(R.string.changelog_title_rom);
+				dialogTitle = R.string.changelog_title_rom;
 				break;
 			case THEME:
-				dialogTitle = res.getString(R.string.changelog_title_theme);
+				dialogTitle = R.string.changelog_title_theme;
 				break;
 			case APP:
-				dialogTitle = res.getString(R.string.changelog_title_app);
+				dialogTitle = R.string.changelog_title_app;
 				break;
 			default:
 				return;
@@ -1049,7 +860,7 @@ public class MainActivity extends Activity
 		if(!ChangelogEmpty)
 			dialog.show();
 		else
-			Toast.makeText(this, res.getString(R.string.no_changelog_found), Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.no_changelog_found, Toast.LENGTH_LONG).show();
 		System.gc();
 	}
 
@@ -1061,6 +872,7 @@ public class MainActivity extends Activity
 
 	private void checkForUpdates()
 	{
+		Resources res = getResources();
 		ProgressDialog pg = ProgressDialog.show(this, res.getString(R.string.checking_for_updates), res.getString(R.string.checking_for_updates), true, true);
 		//Refresh the Layout when UpdateCheck finished
 		pg.setOnDismissListener(new DialogInterface.OnDismissListener()
@@ -1076,12 +888,12 @@ public class MainActivity extends Activity
 	private void showAboutDialog()
 	{
 		Dialog dialog = new Dialog(this);
-		dialog.setTitle(res.getString(R.string.about_dialog_title));
+		dialog.setTitle(R.string.about_dialog_title);
 		dialog.setContentView(R.layout.about);
-		TextView mVersionName = (TextView) dialog.findViewById(R.id.version_name_about_text_view);            
+		TextView mVersionName = (TextView) dialog.findViewById(R.id.version_name_about_text_view);
 		try
 		{
-			PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);                
+			PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);
 			mVersionName.setText("v " + pi.versionName);
 		}
 		catch (NameNotFoundException e)
@@ -1089,7 +901,7 @@ public class MainActivity extends Activity
 			Log.e(TAG, "Can't find version name", e);
 			mVersionName.setText("v unknown");
 		}
-		dialog.show();			
+		dialog.show();
 	}
 
 	private void downloadRequestedUpdate(UpdateInfo ui)
@@ -1162,7 +974,7 @@ public class MainActivity extends Activity
 			MD5filetodelete = null;
 
 			success=true;
-			Toast.makeText(this, MessageFormat.format(res.getString(R.string.delete_single_update_success_message), filename), Toast.LENGTH_LONG).show();
+			Toast.makeText(this, MessageFormat.format(getResources().getString(R.string.delete_single_update_success_message), filename), Toast.LENGTH_LONG).show();
 		}
 		else if (!mUpdateFolder.exists())
 		{
@@ -1178,7 +990,7 @@ public class MainActivity extends Activity
 	private static boolean deleteDir(File dir)
 	{
 		if (dir.isDirectory())
-		{ 	
+		{
 			String[] children = dir.list();
             for (String aChildren : children) {
                 boolean success = deleteDir(new File(dir, aChildren));
@@ -1189,5 +1001,123 @@ public class MainActivity extends Activity
 		}
 		// The directory is now empty so delete it
 		return dir.delete();
+	}
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+	    switch(id) {
+		    case DIALOG_NO_SDCARD:
+		    	return new AlertDialog.Builder(this)
+				.setTitle(R.string.sdcard_is_not_present_dialog_title)
+				.setMessage(R.string.sdcard_is_not_present_dialog_body)
+				.setPositiveButton(R.string.sdcard_is_not_present_dialog_ok_button, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						dialog.dismiss();
+					}
+				}).create();
+		    case DIALOG_OVERWRITE_UPDATE:
+		    	return new AlertDialog.Builder(this)
+				.setTitle(R.string.overwrite_update_title)
+				.setMessage(R.string.overwrite_update_summary)
+				.setNegativeButton(R.string.overwrite_update_negative, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						dialog.dismiss();
+					}
+				})
+				.setPositiveButton(R.string.overwrite_update_positive, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						foo.delete();
+						if (showDebugOutput) Log.d(TAG, "Start downlading update: " + updateForDownload.getFileName());
+						downloadRequestedUpdate(updateForDownload);
+					}
+				}).create();
+		    case DIALOG_DELETE_EXISTING:
+		    	return new AlertDialog.Builder(this)
+				.setTitle(R.string.delete_updates_text)
+				.setMessage(R.string.confirm_delete_update_folder_dialog_message)
+				//Delete Only Selected Update
+				.setNeutralButton(R.string.confirm_delete_update_folder_dialog_neutral, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						//Delete Updates here
+						String f = (String) mExistingUpdatesSpinner.getSelectedItem();
+						if (showDebugOutput) Log.d(TAG, "Delete single Update selected: " + f);
+						deleteUpdate(f);
+						switchToUpdateChooserLayout();
+					}
+				})
+				//Delete All Updates
+				.setPositiveButton(R.string.confirm_delete_update_folder_dialog_yes, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						if (showDebugOutput) Log.d(TAG, "Delete all Updates selected");
+						//Delete Updates here
+						//Set the Filenames to null, so the Spinner will be empty
+						deleteOldUpdates();
+						switchToUpdateChooserLayout();
+					}
+				})
+				//Delete no Update
+				.setNegativeButton(R.string.confirm_delete_update_folder_dialog_no, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						if (showDebugOutput) Log.d(TAG, "Delete no updates selected");
+						dialog.dismiss();
+					}
+				}).create();
+		    case DIALOG_RUNNING_OLD_VERSION:
+		    	return new AlertDialog.Builder(MainActivity.this)
+				.setTitle(R.string.alert_old_version_title)
+				.setMessage(R.string.alert_old_version_summary)
+				.setPositiveButton(R.string.alert_old_version_ok, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						dialog.dismiss();
+					}
+				})
+				.setNegativeButton(R.string.alert_old_version_browser, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						//Open the Browser for Instructions
+	                    Intent i = new Intent(Intent.ACTION_VIEW);
+	                    i.setData(Uri.parse(Customization.UPDATE_INSTRUCTIONS_URL));
+	                    startActivity(i);
+	                    dialog.dismiss();
+					}
+				}).create();
+		    case DIALOG_NO_MD5:
+		    	return new AlertDialog.Builder(MainActivity.this)
+				.setTitle(R.string.no_md5_found_title)
+				.setMessage(R.string.no_md5_found_summary)
+				.setPositiveButton(R.string.no_md5_found_positive, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						//Directly call on Postexecute, cause we need no md5check
+						new MD5CheckerTask(MainActivity.this, null, existingUpdateFilename, showDebugOutput).onPostExecute(true);
+						dialog.dismiss();
+					}
+				})
+				.setNegativeButton(R.string.no_md5_found_negative, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						dialog.dismiss();
+					}
+				}).create();
+		    default:
+		        return null;
+	    }
 	}
 }

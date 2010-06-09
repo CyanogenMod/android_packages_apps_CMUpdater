@@ -10,7 +10,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import java.net.URI;
 
-public class FeaturedThemesHandler extends DefaultHandler
+class FeaturedThemesHandler extends DefaultHandler
 {
 	private static final String TAG = "FeaturedThemesHandler";
 

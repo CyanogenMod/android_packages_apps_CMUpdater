@@ -21,10 +21,10 @@ public class MD5CheckerTask extends AsyncTask<File, Void, Boolean>
 
 	private Boolean showDebugOutput = false;
 	
-	private ProgressDialog mDialog;
-	private String mFilename;
+	private final ProgressDialog mDialog;
+	private final String mFilename;
 	private boolean mreturnvalue;
-	private Context mCtx;
+	private final Context mCtx;
 
 	public MD5CheckerTask(Context ctx, ProgressDialog dialog, String filename, Boolean _showDebugOutput)
 	{

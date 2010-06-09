@@ -17,7 +17,6 @@
 		<activity
 			android:name="cmupdaterapp.ui.MainActivity"
 			android:launchMode="singleTask"
-			android:configChanges="orientation|keyboardHidden"
 			android:theme="@style/Theme.loading">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -37,7 +36,7 @@
 			android:configChanges="orientation|keyboardHidden" />
 		<activity
 			android:name="cmupdaterapp.ui.ApplyUpdateActivity"
-			android:configChanges="orientation|keyboardHidden" />			
+			android:configChanges="orientation|keyboardHidden" />
 		<activity
 			android:name="cmupdaterapp.ui.ThemeListActivity" />
 		<activity
@@ -48,7 +47,7 @@
 			android:configChanges="orientation|keyboardHidden" />
 		<activity
 			android:name="cmupdaterapp.ui.ScreenshotDetailActivity"
-			android:configChanges="orientation|keyboardHidden" />	
+			android:configChanges="orientation|keyboardHidden" />
 
 		<receiver android:name="cmupdaterapp.receiver.StartupReceiver">
 			<intent-filter>

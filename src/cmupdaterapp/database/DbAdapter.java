@@ -27,20 +27,20 @@ public class DbAdapter
 	private static final int DATABASE_VERSION = 5;
 	//Themelist
 	private static final String DATABASE_TABLE_THEMELIST = "ThemeList";
-	public static final String KEY_THEMELIST_ID = "id";
-	public static final String INDEX_THEMELIST_ID = "uidx_themelist_id";
+	private static final String KEY_THEMELIST_ID = "id";
+	private static final String INDEX_THEMELIST_ID = "uidx_themelist_id";
 	public static final int COLUMN_THEMELIST_ID = 0;
-	public static final String KEY_THEMELIST_NAME = "name";
-	public static final String INDEX_THEMELIST_NAME = "idx_themelist_name";
+	private static final String KEY_THEMELIST_NAME = "name";
+	private static final String INDEX_THEMELIST_NAME = "idx_themelist_name";
 	public static final int COLUMN_THEMELIST_NAME = 1;
-	public static final String KEY_THEMELIST_URI = "uri";
-	public static final String INDEX_THEMELIST_URI = "idx_themelist_uri";
+	private static final String KEY_THEMELIST_URI = "uri";
+	private static final String INDEX_THEMELIST_URI = "idx_themelist_uri";
 	public static final int COLUMN_THEMELIST_URI = 2;
-	public static final String KEY_THEMELIST_ENABLED = "enabled";
-	public static final String INDEX_THEMELIST_ENABLED = "idx_themelist_enabled";
+	private static final String KEY_THEMELIST_ENABLED = "enabled";
+	private static final String INDEX_THEMELIST_ENABLED = "idx_themelist_enabled";
 	public static final int COLUMN_THEMELIST_ENABLED = 3;
-	public static final String KEY_THEMELIST_FEATURED = "featured";
-	public static final String INDEX_THEMELIST_FEATURED = "idx_themelist_featured";
+	private static final String KEY_THEMELIST_FEATURED = "featured";
+	private static final String INDEX_THEMELIST_FEATURED = "idx_themelist_featured";
 	public static final int COLUMN_THEMELIST_FEATURED = 4;
 	//Screenshots
 	private static final String DATABASE_TABLE_SCREENSHOT = "Screenshot";
@@ -48,24 +48,24 @@ public class DbAdapter
 	private static final String TRIGGER_THEMELIST_ID_INSERT = "fki_themelist_id";
 	private static final String TRIGGER_THEMELIST_ID_UPDATE = "fku_themelist_id";
 	private static final String TRIGGER_THEMELIST_ID_DELETE = "fkd_themelist_id";
-	public static final String KEY_SCREENSHOT_ID = "id";
-	public static final String INDEX_SCREENSHOT_ID = "uidx_screenshot_id";
-	public static final int COLUMN_SCREENSHOT_ID = 0;
-	public static final String KEY_SCREENSHOT_THEMELIST_ID = "themelist_id";
-	public static final String INDEX_SCREENSHOT_THEMELIST_ID = "idx_screenshot_themelist_id";
-	public static final int COLUMN_SCREENSHOT_THEMELIST_ID = 1;
-	public static final String KEY_SCREENSHOT_URI = "uri";
-	public static final String INDEX_SCREENSHOT_URI = "idx_screenshot_uri";
-	public static final int COLUMN_SCREENSHOT_URI = 2;
-	public static final String KEY_SCREENSHOT_MODIFYDATE = "modifydate";
-	public static final String INDEX_SCREENSHOT_MODIFYDATE = "idx_screenshot_modifydate";
-	public static final int COLUMN_SCREENSHOT_MODIFYDATE = 3;
-	public static final String KEY_SCREENSHOT_SCREENSHOT = "screenshot";
-	public static final String INDEX_SCREENSHOT_SCREENSHOT = "idx_screenshot_screenshot";
-	public static final int COLUMN_SCREENSHOT_SCREENSHOT = 4;
+	private static final String KEY_SCREENSHOT_ID = "id";
+	private static final String INDEX_SCREENSHOT_ID = "uidx_screenshot_id";
+	private static final int COLUMN_SCREENSHOT_ID = 0;
+	private static final String KEY_SCREENSHOT_THEMELIST_ID = "themelist_id";
+	private static final String INDEX_SCREENSHOT_THEMELIST_ID = "idx_screenshot_themelist_id";
+	private static final int COLUMN_SCREENSHOT_THEMELIST_ID = 1;
+	private static final String KEY_SCREENSHOT_URI = "uri";
+	private static final String INDEX_SCREENSHOT_URI = "idx_screenshot_uri";
+	private static final int COLUMN_SCREENSHOT_URI = 2;
+	private static final String KEY_SCREENSHOT_MODIFYDATE = "modifydate";
+	private static final String INDEX_SCREENSHOT_MODIFYDATE = "idx_screenshot_modifydate";
+	private static final int COLUMN_SCREENSHOT_MODIFYDATE = 3;
+	private static final String KEY_SCREENSHOT_SCREENSHOT = "screenshot";
+	private static final String INDEX_SCREENSHOT_SCREENSHOT = "idx_screenshot_screenshot";
+	private static final int COLUMN_SCREENSHOT_SCREENSHOT = 4;
 
 	private SQLiteDatabase db;
-	private DbOpenHelper dbHelper;
+	private final DbOpenHelper dbHelper;
 
 	public DbAdapter(Boolean _showDebugOutput)
 	{
@@ -82,7 +82,7 @@ public class DbAdapter
 	{
 		File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Customization.EXTERNAL_DATA_DIRECTORY + "/");
 		f.mkdirs();
-		db = dbHelper.open(f.toString(), DATABASE_NAME, DATABASE_VERSION);
+		db = dbHelper.open(f.toString());
 	}
 
 	// Insert a new Theme
@@ -373,21 +373,21 @@ public class DbAdapter
 	//Helper Class for opening/creating a Database
 	private static class DbOpenHelper
 	{
-		public SQLiteDatabase open(String path, String name, int version)
+		public SQLiteDatabase open(String path)
 		{
 			if (!path.endsWith("/"))
 				path += "/";
-			String databasePath = path + name;
+			String databasePath = path + DbAdapter.DATABASE_NAME;
 			SQLiteDatabase s = SQLiteDatabase.openDatabase(databasePath, null, SQLiteDatabase.CREATE_IF_NECESSARY);
-			if (s.needUpgrade(version))
-				update(s, s.getVersion(), version);
-			s.setVersion(version);
+			if (s.needUpgrade(DbAdapter.DATABASE_VERSION))
+				update(s, s.getVersion());
+			s.setVersion(DbAdapter.DATABASE_VERSION);
 			return s;
 		}
 
-		private void update(SQLiteDatabase s, int _oldVersion, int _newVersion)
+		private void update(SQLiteDatabase s, int _oldVersion)
 		{
-			if (showDebugOutput) Log.d(TAG, "Upgrading from version " + _oldVersion + " to " + _newVersion + ", which will destroy all old data");
+			if (showDebugOutput) Log.d(TAG, "Upgrading from version " + _oldVersion + " to " + DbAdapter.DATABASE_VERSION + ", which will destroy all old data");
 			//Drop the old tables and triggers
 			if (showDebugOutput) Log.d(TAG, "Dropping old Database");
 			s.execSQL("DROP TRIGGER IF EXISTS " + TRIGGER_THEMELIST_ID_INSERT);

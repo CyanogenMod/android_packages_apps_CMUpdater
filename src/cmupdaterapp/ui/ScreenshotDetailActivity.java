@@ -14,7 +14,6 @@ public class ScreenshotDetailActivity extends Activity
 {
 	private int mCurrentScreenshotIndex = 0;
 	private ImageView imageView;
-	private TextView statusText;
 	private ImageButton nextButton;
 	private ImageButton prevButton;
 	private int maxIndexSize;
@@ -25,7 +24,6 @@ public class ScreenshotDetailActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.screenshots_detail);
 		imageView = (ImageView) findViewById(R.id.image_view);
-		statusText = (TextView) findViewById(R.id.status_text);
 
 		Intent i = getIntent();
 		Bundle b = i.getExtras();
@@ -37,22 +35,8 @@ public class ScreenshotDetailActivity extends Activity
         nextButton = (ImageButton) findViewById(R.id.next_button);
         prevButton = (ImageButton) findViewById(R.id.previous_button);
 
-        nextButton.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-            	mCurrentScreenshotIndex++;
-            	showScreenshot();
-            }
-        });
-        prevButton.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-            	mCurrentScreenshotIndex--;
-            	showScreenshot();
-            }
-        });
+        nextButton.setOnClickListener(ButtonOnClickListener);
+        prevButton.setOnClickListener(ButtonOnClickListener);
 	}
 
 	@Override
@@ -91,7 +75,7 @@ public class ScreenshotDetailActivity extends Activity
         {
         	imageView.setImageResource(Constants.SCREENSHOTS_LOADING_IMAGE);
 		}
-        statusText.setText(String.format("%d/%d", mCurrentScreenshotIndex + 1, maxIndexSize + 1));
+        ((TextView)findViewById(R.id.status_text)).setText(String.format("%d/%d", mCurrentScreenshotIndex + 1, maxIndexSize + 1));
     }
 
 	@Override
@@ -101,4 +85,21 @@ public class ScreenshotDetailActivity extends Activity
 		imageView.getDrawable().setCallback(null);
 		System.gc();
 	}
+
+	private final View.OnClickListener ButtonOnClickListener = new View.OnClickListener()
+	{
+		public void onClick(View v)
+		{
+			switch (v.getId())
+			{
+				case R.id.next_button:
+					mCurrentScreenshotIndex++;
+					break;
+				case R.id.previous_button:
+					mCurrentScreenshotIndex--;
+					break;
+			}
+			showScreenshot();
+		}
+	};
 }

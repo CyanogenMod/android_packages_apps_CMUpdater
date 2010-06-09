@@ -23,7 +23,7 @@ public class Changelog implements Runnable
 {
 	private static final String TAG = "Changelog";
 
-	private Preferences p;
+	private final Preferences p;
 
 	public enum ChangelogType
 	{

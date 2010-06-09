@@ -19,7 +19,7 @@ import java.net.URL;
 public class FeaturedThemes implements Runnable
 {
 	private static final String TAG = "FeaturedThemes";
-	private Preferences p;
+	private final Preferences p;
 
 	public FeaturedThemes(Context ctx)
 	{

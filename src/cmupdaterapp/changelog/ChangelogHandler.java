@@ -8,7 +8,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ChangelogHandler extends DefaultHandler
+class ChangelogHandler extends DefaultHandler
 {
 	private List<Version> co;
 	private Version currentVersion;

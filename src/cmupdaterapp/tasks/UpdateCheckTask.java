@@ -84,7 +84,9 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
     			myService.registerCallback(mCallback);
     		}
     		catch (RemoteException e)
-    		{ }
+    		{
+                Log.e(TAG, "RemoteException", e);
+            }
     	}
     	public void onServiceDisconnected(ComponentName name)
     	{
@@ -93,7 +95,9 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void>
     			myService.unregisterCallback(mCallback);
     		}
     		catch (RemoteException e)
-    		{ }
+    		{
+                Log.e(TAG, "RemoteException", e);
+            }
     		myService = null;
     	}
     };

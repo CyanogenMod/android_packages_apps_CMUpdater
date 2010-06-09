@@ -16,10 +16,10 @@ import java.util.List;
 
 public class ScreenshotGridViewAdapter extends BaseAdapter
 {
-    private Context mContext;
-    private int length;
+    private final Context mContext;
+    private final int length;
 
-    private static List<Screenshot> items = new LinkedList<Screenshot>();
+    private static final List<Screenshot> items = new LinkedList<Screenshot>();
 
     public ScreenshotGridViewAdapter(Context c, int numberOfItems)
     {

@@ -11,7 +11,7 @@ public class MD5
 {
     private static final String TAG = "MD5";
 
-    public static boolean checkMD5(String md5, File updateFile) throws IOException
+    public static boolean checkMD5(String md5, File updateFile)
     {
     	if (md5 == null || md5.equals("") || updateFile == null)
     	{
@@ -82,7 +82,7 @@ public class MD5
     		}
     		catch(IOException e)
     		{
-    			throw new RuntimeException("Unable to close input stream for MD5 calculation", e);
+    			Log.e(TAG, "Exception on closing MD5 input stream", e);
     		}
     	}
     }

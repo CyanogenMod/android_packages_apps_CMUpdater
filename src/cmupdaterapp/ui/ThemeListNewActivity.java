@@ -20,17 +20,11 @@ public class ThemeListNewActivity extends Activity
 {
 	private static final String TAG = "ThemeListNewActivity";
 	public final static int REQUEST_CODE = 1;
-	
+
 	private Boolean showDebugOutput = false;
-	
-	private String intentName;
-	private String intentUri;
+
     private boolean intentFeatured;
-	private boolean intentUpdate;
-	private int intentPrimaryKey;
-    private EditText etName;
 	private EditText etUri;
-	private CheckBox cbEnabled;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -40,19 +34,19 @@ public class ThemeListNewActivity extends Activity
 		setContentView(R.layout.themelist_new);
 		Intent i = getIntent();
 		Bundle b = i.getExtras();
-		intentName = b.getString(Constants.THEME_LIST_NEW_NAME).trim();
-		intentUri = b.getString(Constants.THEME_LIST_NEW_URI).trim();
+		final String intentName = b.getString(Constants.THEME_LIST_NEW_NAME).trim();
+		final String intentUri = b.getString(Constants.THEME_LIST_NEW_URI).trim();
         boolean intentEnabled = b.getBoolean(Constants.THEME_LIST_NEW_ENABLED);
 		intentFeatured = b.getBoolean(Constants.THEME_LIST_NEW_FEATURED);
-		intentUpdate = b.getBoolean(Constants.THEME_LIST_NEW_UPDATE);
-		intentPrimaryKey = b.getInt(Constants.THEME_LIST_NEW_PRIMARYKEY);
+		final boolean intentUpdate = b.getBoolean(Constants.THEME_LIST_NEW_UPDATE);
+		final int intentPrimaryKey = b.getInt(Constants.THEME_LIST_NEW_PRIMARYKEY);
 
         Button btnSave = (Button) findViewById(R.id.new_theme_list_button_save);
         Button btnCancel = (Button) findViewById(R.id.new_theme_list_button_cancel);
         Button btnBarcode = (Button) findViewById(R.id.new_theme_list_button_barcode);
-		etName = (EditText) findViewById(R.id.new_theme_list_name);
+		final EditText etName = (EditText) findViewById(R.id.new_theme_list_name);
 		etUri = (EditText) findViewById(R.id.new_theme_list_uri);
-		cbEnabled = (CheckBox) findViewById(R.id.new_theme_list_enabled);
+		final CheckBox cbEnabled = (CheckBox) findViewById(R.id.new_theme_list_enabled);
 		if(intentName != null)
 			etName.setText(intentName);
 		if(intentUri != null)

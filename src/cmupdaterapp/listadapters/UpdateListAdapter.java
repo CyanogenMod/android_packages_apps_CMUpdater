@@ -17,9 +17,9 @@ public class UpdateListAdapter<T> extends ArrayAdapter<T>
 {
 	private final LayoutInflater _inflater;
 
-	public UpdateListAdapter(Context context, int textViewResourceId, List<T> objects)
+	public UpdateListAdapter(Context context, List<T> objects)
 	{
-		super(context, textViewResourceId, objects);
+		super(context, android.R.layout.simple_spinner_item, objects);
 		_inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
@@ -60,7 +60,7 @@ public class UpdateListAdapter<T> extends ArrayAdapter<T>
 //Class that Holds the Ids, so we have not to call findViewById each time which costs a lot of ressources
 class ViewWrapper
 {
-	private View base;
+	private final View base;
 	private TextView label = null;
 	private ImageView image = null;
 
