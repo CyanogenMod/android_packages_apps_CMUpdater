@@ -15,109 +15,88 @@ import cmupdaterapp.ui.R;
 
 import java.util.List;
 
-public class ThemeListAdapter<T> extends ArrayAdapter<T>
-{
-	private final LayoutInflater _inflater;
+public class ThemeListAdapter<T> extends ArrayAdapter<T> {
+    private final LayoutInflater _inflater;
 
-	public ThemeListAdapter(Context context, List<T> objects)
-	{
-		super(context, android.R.layout.simple_list_item_1, objects);
-		_inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	}
+    public ThemeListAdapter(Context context, List<T> objects) {
+        super(context, android.R.layout.simple_list_item_1, objects);
+        _inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
 
-	public View getDropDownView(int position, View convertView, ViewGroup parent)
-	{
-		return getView(position, convertView, parent);
-	}
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        return getView(position, convertView, parent);
+    }
 
-	public View getView(int position, View convertView, ViewGroup parent)
-	{
-		View row = convertView;
-		ThemeListViewWrapper wrapper;
-		if (row == null)
-		{
-			row = _inflater.inflate(R.layout.itemtemplate_themelist, null);
-			wrapper = new ThemeListViewWrapper(row);
-			row.setTag(wrapper);
-		}
-		else
-		{
-			wrapper = (ThemeListViewWrapper)row.getTag();
-		}
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View row = convertView;
+        ThemeListViewWrapper wrapper;
+        if (row == null) {
+            row = _inflater.inflate(R.layout.itemtemplate_themelist, null);
+            wrapper = new ThemeListViewWrapper(row);
+            row.setTag(wrapper);
+        } else {
+            wrapper = (ThemeListViewWrapper) row.getTag();
+        }
 
-    	ThemeList info = (ThemeList) this.getItem(position);
-    	wrapper.getThemeNameView().setText(info.name);
-    	wrapper.getThemeUriView().setText(info.url.toString());
-    	if (!info.enabled)
-    	{
-    		wrapper.getImageDrawable().mutate().setAlpha(Constants.THEME_LIST_ITEM_DISABLED_ALPHA);
-    		wrapper.getThemeNameView().setTextColor(Color.GRAY);
-    		wrapper.getThemeUriView().setTextColor(Color.GRAY);
-    	}
-    	//We need an else if otherwise the disabled themes will also be yellow
-    	else if (info.featured)
-    	{
-    		//Mark featured Themes
-    		wrapper.getThemeNameView().setTextColor(Color.YELLOW);
-    		wrapper.getThemeUriView().setTextColor(Color.YELLOW);
-    	}
-    	else
-    	{
-    		wrapper.getThemeNameView().setTextColor(Color.WHITE);
-    		wrapper.getThemeUriView().setTextColor(Color.WHITE);
-    	}
+        ThemeList info = (ThemeList) this.getItem(position);
+        wrapper.getThemeNameView().setText(info.name);
+        wrapper.getThemeUriView().setText(info.url.toString());
+        if (!info.enabled) {
+            wrapper.getImageDrawable().mutate().setAlpha(Constants.THEME_LIST_ITEM_DISABLED_ALPHA);
+            wrapper.getThemeNameView().setTextColor(Color.GRAY);
+            wrapper.getThemeUriView().setTextColor(Color.GRAY);
+        }
+        //We need an else if otherwise the disabled themes will also be yellow
+        else if (info.featured) {
+            //Mark featured Themes
+            wrapper.getThemeNameView().setTextColor(Color.YELLOW);
+            wrapper.getThemeUriView().setTextColor(Color.YELLOW);
+        } else {
+            wrapper.getThemeNameView().setTextColor(Color.WHITE);
+            wrapper.getThemeUriView().setTextColor(Color.WHITE);
+        }
         return row;
-   }
+    }
 }
 
 //Class that Holds the Ids, so we have not to call findViewById each time which costs a lot of ressources
-class ThemeListViewWrapper
-{
-	private final View base;
-	private TextView ThemeListName = null;
-	private TextView ThemeListUri = null;
-	private ImageView image = null;
-	private Drawable imageDrawable = null;
+class ThemeListViewWrapper {
+    private final View base;
+    private TextView ThemeListName = null;
+    private TextView ThemeListUri = null;
+    private ImageView image = null;
+    private Drawable imageDrawable = null;
 
-	public ThemeListViewWrapper(View base)
-	{
-		this.base = base;
-	}
+    public ThemeListViewWrapper(View base) {
+        this.base = base;
+    }
 
-	public TextView getThemeNameView()
-	{
-		if (ThemeListName == null)
-		{
-			ThemeListName = (TextView)base.findViewById(R.id.txtThemeName);
-		}
-		return ThemeListName;
-	}
+    public TextView getThemeNameView() {
+        if (ThemeListName == null) {
+            ThemeListName = (TextView) base.findViewById(R.id.txtThemeName);
+        }
+        return ThemeListName;
+    }
 
-	public TextView getThemeUriView()
-	{
-		if (ThemeListUri == null)
-		{
-			ThemeListUri = (TextView)base.findViewById(R.id.txtThemeUri);
-		}
-		return ThemeListUri;
-	}
+    public TextView getThemeUriView() {
+        if (ThemeListUri == null) {
+            ThemeListUri = (TextView) base.findViewById(R.id.txtThemeUri);
+        }
+        return ThemeListUri;
+    }
 
-	void getImage()
-	{
-		if (image == null)
-		{
-			image = (ImageView)base.findViewById(R.id.ThemeListImage);
-		}
-	}
+    void getImage() {
+        if (image == null) {
+            image = (ImageView) base.findViewById(R.id.ThemeListImage);
+        }
+    }
 
-	public Drawable getImageDrawable()
-	{
-		if (image == null)
-			getImage();
-		if (imageDrawable == null)
-		{
-			imageDrawable = image.getDrawable();
-		}
-		return imageDrawable;
-	}
+    public Drawable getImageDrawable() {
+        if (image == null)
+            getImage();
+        if (imageDrawable == null) {
+            imageDrawable = image.getDrawable();
+        }
+        return imageDrawable;
+    }
 }
