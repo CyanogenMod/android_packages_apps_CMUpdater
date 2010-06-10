@@ -100,11 +100,10 @@ public class ChangelogTask extends AsyncTask<Object, Void, List<Version>> {
             return returnValue;
         }
 
-    	InputSource i;
         List<Version> ret = null;
 
         try {
-            i = new InputSource(changelogUrl.openStream());
+        	InputSource i = new InputSource(changelogUrl.openStream());
             SAXParserFactory spf = SAXParserFactory.newInstance();
             SAXParser sp = spf.newSAXParser();
             XMLReader xr = sp.getXMLReader();
@@ -143,15 +142,11 @@ public class ChangelogTask extends AsyncTask<Object, Void, List<Version>> {
     		Toast.makeText(mCtx, mException, Toast.LENGTH_LONG);
     		return;
     	}
-    	if (result == null) {
+    	if (result == null || result.isEmpty()) {
         	d.dismiss();
+        	Toast.makeText(mCtx, R.string.no_changelog_found, Toast.LENGTH_LONG).show();
             return;
     	}
-
-        if (result.isEmpty()) {
-        	d.dismiss();
-            Toast.makeText(mCtx, R.string.no_changelog_found, Toast.LENGTH_LONG).show();
-        }
 
         Dialog dialog = new Dialog(mCtx);
         int dialogTitle;
