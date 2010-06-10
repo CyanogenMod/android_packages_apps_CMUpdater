@@ -61,53 +61,7 @@ public class MainActivity extends Activity {
     private UpdateInfo updateForDownload;
     private String existingUpdateFilename;
 
-    private final View.OnClickListener ButtonOnClickListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.theme_screenshots_button:
-                    ScreenshotThemesListener();
-                    break;
-                case R.id.download_update_button:
-                    DownloadUpdateButtonListener();
-                    break;
-                case R.id.download_theme_button:
-                    DownloadThemeButtonListener();
-                    break;
-                case R.id.show_changelog_button:
-                    UpdateChangelogButtonListener();
-                    break;
-                case R.id.show_theme_changelog_button:
-                    ThemeChangelogButtonListener();
-                    break;
-                case R.id.check_now_button_update_chooser_updates:
-                    checkForUpdates();
-                    break;
-                case R.id.check_now_button_update_chooser_themes:
-                    checkForUpdates();
-                    break;
-                case R.id.delete_updates_button:
-                    DeleteUpdatesButtonListener();
-                    break;
-                case R.id.apply_update_button:
-                    ApplyExistingButtonListener();
-                    break;
-                case R.id.button_available_updates:
-                    if (flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_UPDATES)
-                        flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_UPDATES);
-                    break;
-                case R.id.button_available_themes:
-                    if (flipper.getDisplayedChild() != Constants.FLIPPER_AVAILABLE_THEMES)
-                        flipper.setDisplayedChild(Constants.FLIPPER_AVAILABLE_THEMES);
-                    break;
-                case R.id.button_existing_updates:
-                    if (flipper.getDisplayedChild() != Constants.FLIPPER_EXISTING_UPDATES)
-                        flipper.setDisplayedChild(Constants.FLIPPER_EXISTING_UPDATES);
-                    break;
-            }
-        }
-    };
-
-    private void ScreenshotThemesListener() {
+    public void ScreenshotThemesListener(View target) {
         if (showDebugOutput) Log.d(TAG, "Theme Screenshot Button clicked");
         final UpdateInfo ui = (UpdateInfo) mThemesSpinner.getSelectedItem();
         Intent i = new Intent(MainActivity.this, ScreenshotActivity.class);
@@ -116,7 +70,7 @@ public class MainActivity extends Activity {
         return;
     }
 
-    private void DownloadUpdateButtonListener() {
+    public void DownloadUpdateButtonListener(View target) {
         if (!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState())) {
             showDialog(DIALOG_NO_SDCARD);
             return;
@@ -136,7 +90,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void DownloadThemeButtonListener() {
+    public void DownloadThemeButtonListener(View target) {
         if (!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState())) {
             showDialog(DIALOG_NO_SDCARD);
             return;
@@ -156,17 +110,17 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void UpdateChangelogButtonListener() {
+    public void UpdateChangelogButtonListener(View target) {
         if (showDebugOutput) Log.d(TAG, "Rom Changelog Button clicked");
         getChangelog(ChangelogType.ROM);
     }
 
-    private void ThemeChangelogButtonListener() {
+    public void ThemeChangelogButtonListener(View target) {
         if (showDebugOutput) Log.d(TAG, "Theme Changelog Button clicked");
         getChangelog(ChangelogType.THEME);
     }
 
-    private void DeleteUpdatesButtonListener() {
+    public void DeleteUpdatesButtonListener(View target) {
         if (!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState())) {
             showDialog(DIALOG_NO_SDCARD);
             return;
@@ -175,7 +129,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void ApplyExistingButtonListener() {
+    public void ApplyExistingButtonListener(View target) {
         if (!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState())) {
             showDialog(DIALOG_NO_SDCARD);
             return;
@@ -212,6 +166,26 @@ public class MainActivity extends Activity {
 
             md5CheckerTask = new MD5CheckerTask(getApplicationContext(), progressDialog, existingUpdateFilename, showDebugOutput).execute(Update);
         }
+    }
+
+    public void FlipperButtonListener(View target) {
+    	int id = target.getId();
+    	int child = -1;
+    	switch (id) {
+	    	case R.id.button_available_updates:
+	    		child = Constants.FLIPPER_AVAILABLE_UPDATES;
+	    		break;
+	    	case R.id.button_available_themes:
+	    		child = Constants.FLIPPER_AVAILABLE_THEMES;
+	    		break;
+	    	case R.id.button_existing_updates:
+	    		child = Constants.FLIPPER_EXISTING_UPDATES;
+	    		break;
+	    	default:
+	    		return;
+    	}
+    	if (flipper.getDisplayedChild() != child)
+            flipper.setDisplayedChild(child);
     }
 
     private final Spinner.OnItemSelectedListener mUpdateSpinnerChanged = new Spinner.OnItemSelectedListener() {
@@ -294,19 +268,10 @@ public class MainActivity extends Activity {
 
         //Layout
         flipper = (ViewFlipper) findViewById(R.id.Flipper);
-        Button btnAvailableUpdates = (Button) findViewById(R.id.button_available_updates);
-        Button btnExistingUpdates = (Button) findViewById(R.id.button_existing_updates);
-        Button btnAvailableThemes = (Button) findViewById(R.id.button_available_themes);
         //Make the ScreenshotButton invisible
         if (!Customization.Screenshotsupport) {
+        	Button btnAvailableThemes = (Button) findViewById(R.id.button_available_themes);
             btnAvailableThemes.setVisibility(View.GONE);
-        }
-
-        //Flipper Buttons
-        btnAvailableUpdates.setOnClickListener(ButtonOnClickListener);
-        btnExistingUpdates.setOnClickListener(ButtonOnClickListener);
-        if (Customization.Screenshotsupport) {
-            btnAvailableThemes.setOnClickListener(ButtonOnClickListener);
         }
     }
 
@@ -384,7 +349,7 @@ public class MainActivity extends Activity {
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
             case Constants.MENU_ID_UPDATE_NOW:
-                checkForUpdates();
+                checkForUpdates(null);
                 return true;
             case Constants.MENU_ID_CONFIG:
                 showConfigActivity();
@@ -563,8 +528,6 @@ public class MainActivity extends Activity {
 
         //Rom Layout
         if (availableRoms != null && availableRoms.size() > 0) {
-            selectUploadButton.setOnClickListener(ButtonOnClickListener);
-            changelogButton.setOnClickListener(ButtonOnClickListener);
             mUpdatesSpinner.setOnItemSelectedListener(mUpdateSpinnerChanged);
 
             UpdateListAdapter<UpdateInfo> spAdapterRoms = new UpdateListAdapter<UpdateInfo>(
@@ -580,7 +543,6 @@ public class MainActivity extends Activity {
             changelogButton.setVisibility(View.GONE);
             CheckNowUpdateChooserTextUpdates.setVisibility(View.VISIBLE);
             CheckNowUpdateChooserUpdates.setVisibility(View.VISIBLE);
-            CheckNowUpdateChooserUpdates.setOnClickListener(ButtonOnClickListener);
         }
 
         //Disable the download Button when running an old ROM
@@ -603,9 +565,6 @@ public class MainActivity extends Activity {
             }
             //Themes
             else if (availableThemes != null && availableThemes.size() > 0) {
-                btnDownloadTheme.setOnClickListener(ButtonOnClickListener);
-                btnThemechangelogButton.setOnClickListener(ButtonOnClickListener);
-                btnThemeScreenshotButton.setOnClickListener(ButtonOnClickListener);
                 mThemesSpinner.setOnItemSelectedListener(mThemeSpinnerChanged);
 
                 UpdateListAdapter<UpdateInfo> spAdapterThemes = new UpdateListAdapter<UpdateInfo>(
@@ -624,7 +583,6 @@ public class MainActivity extends Activity {
                 btnThemeScreenshotButton.setVisibility(View.GONE);
                 CheckNowUpdateChooserTextThemes.setVisibility(View.VISIBLE);
                 CheckNowUpdateChooserThemes.setVisibility(View.VISIBLE);
-                CheckNowUpdateChooserThemes.setOnClickListener(ButtonOnClickListener);
             }
         }
 
@@ -636,8 +594,6 @@ public class MainActivity extends Activity {
                     existingFilenames);
             localUpdates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             mExistingUpdatesSpinner.setAdapter(localUpdates);
-            mapplyUpdateButton.setOnClickListener(ButtonOnClickListener);
-            mdeleteOldUpdatesButton.setOnClickListener(ButtonOnClickListener);
         } else {
             mNoExistingUpdatesFound.setVisibility(View.VISIBLE);
             mExistingUpdatesSpinner.setVisibility(View.GONE);
@@ -672,7 +628,7 @@ public class MainActivity extends Activity {
         startActivity(i);
     }
 
-    private void checkForUpdates() {
+    public void checkForUpdates(View target) {
         Resources res = getResources();
         ProgressDialog pg = ProgressDialog.show(this, res.getString(R.string.checking_for_updates), res.getString(R.string.checking_for_updates), true, true);
         //Refresh the Layout when UpdateCheck finished
