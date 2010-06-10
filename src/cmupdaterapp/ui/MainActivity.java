@@ -6,16 +6,10 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.*;
 import android.view.*;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.*;
-import cmupdaterapp.changelog.Changelog;
-import cmupdaterapp.changelog.Changelog.ChangelogType;
-import cmupdaterapp.changelog.Version;
 import cmupdaterapp.customTypes.FullUpdateInfo;
 import cmupdaterapp.customTypes.UpdateInfo;
 import cmupdaterapp.customization.Customization;
@@ -23,8 +17,10 @@ import cmupdaterapp.listadapters.UpdateListAdapter;
 import cmupdaterapp.misc.Constants;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.misc.State;
+import cmupdaterapp.tasks.ChangelogTask;
 import cmupdaterapp.tasks.MD5CheckerTask;
 import cmupdaterapp.tasks.UpdateCheckTask;
+import cmupdaterapp.tasks.ChangelogTask.ChangelogType;
 import cmupdaterapp.utils.Preferences;
 import cmupdaterapp.utils.StringUtils;
 import cmupdaterapp.utils.SysUtils;
@@ -49,6 +45,7 @@ public class MainActivity extends Activity {
     private static final int DIALOG_DELETE_EXISTING = 3;
     private static final int DIALOG_RUNNING_OLD_VERSION = 4;
     private static final int DIALOG_NO_MD5 = 5;
+    private static final int DIALOG_ABOUT = 6;
 
     private Boolean showDebugOutput = false;
 
@@ -56,9 +53,6 @@ public class MainActivity extends Activity {
     private Spinner mThemesSpinner;
     private Spinner mExistingUpdatesSpinner;
     private File mUpdateFolder;
-    private ProgressDialog ChangelogProgressDialog;
-    public static Handler ChangelogProgressHandler;
-    private Thread ChangelogThread;
     private ViewFlipper flipper;
     private Preferences prefs;
     private Boolean runningOldVersion = false;
@@ -216,7 +210,7 @@ public class MainActivity extends Activity {
                     }
             );
 
-            md5CheckerTask = new MD5CheckerTask(this, progressDialog, existingUpdateFilename, showDebugOutput).execute(Update);
+            md5CheckerTask = new MD5CheckerTask(getApplicationContext(), progressDialog, existingUpdateFilename, showDebugOutput).execute(Update);
         }
     }
 
@@ -423,7 +417,7 @@ public class MainActivity extends Activity {
         TextView showDowngradesRomtv = (TextView) roms.findViewById(R.id.show_rom_downgrades_textview);
         TextView lastRomUpdateChecktv = (TextView) roms.findViewById(R.id.last_rom_update_check);
         Button selectUploadButton = (Button) roms.findViewById(R.id.download_update_button);
-        Spinner mUpdatesSpinner = (Spinner) roms.findViewById(R.id.available_updates_list);
+        mUpdatesSpinner = (Spinner) roms.findViewById(R.id.available_updates_list);
         TextView DownloadText = (TextView) roms.findViewById(R.id.available_updates_text);
         LinearLayout stableExperimentalInfoUpdates = (LinearLayout) roms.findViewById(R.id.stable_experimental_description_container_updates);
         Button changelogButton = (Button) roms.findViewById(R.id.show_changelog_button);
@@ -445,7 +439,7 @@ public class MainActivity extends Activity {
         TextView experimentalBuildsThemetv = null;
         TextView lastThemeUpdateChecktv = null;
         Button btnDownloadTheme = null;
-        Spinner mThemesSpinner = null;
+        mThemesSpinner = null;
         TextView tvThemeDownloadText = null;
         LinearLayout stableExperimentalInfoThemes = null;
         Button btnThemechangelogButton = null;
@@ -654,118 +648,23 @@ public class MainActivity extends Activity {
     }
 
     private void getChangelog(ChangelogType changelogType) {
-        //Handler for the ThreadClass, that downloads the AppChangelog
-        ChangelogProgressHandler = new Handler() {
-            @SuppressWarnings("unchecked")
-            public void handleMessage(Message msg) {
-                List<Version> ChangelogList;
-                if (ChangelogProgressDialog != null)
-                    ChangelogProgressDialog.dismiss();
-                if (msg.obj instanceof String) {
-                    Toast.makeText(MainActivity.this, (CharSequence) msg.obj, Toast.LENGTH_LONG).show();
-                    ChangelogList = null;
-                    MainActivity.this.ChangelogThread.interrupt();
-                    ChangelogProgressDialog.dismiss();
-                    displayChangelog(ChangelogType.APP, ChangelogList);
-                } else if (msg.obj instanceof List<?>) {
-                    ChangelogList = (List<Version>) msg.obj;
-                    MainActivity.this.ChangelogThread.interrupt();
-                    ChangelogProgressDialog.dismiss();
-                    displayChangelog(ChangelogType.APP, ChangelogList);
-                }
-            }
-        };
-
-        List<Version> ChangelogList;
         switch (changelogType) {
             case ROM:
                 //Get the ROM Changelog and Display the Changelog
-                ChangelogList = Changelog.getRomChangelog((UpdateInfo) mUpdatesSpinner.getSelectedItem());
-                displayChangelog(ChangelogType.ROM, ChangelogList);
+            	UpdateInfo uiRom = (UpdateInfo) mUpdatesSpinner.getSelectedItem();
+            	new ChangelogTask(this).execute(changelogType, uiRom);
                 break;
             case THEME:
                 //Get the THEME Changelog and Display the Changelog
-                ChangelogList = Changelog.getRomChangelog((UpdateInfo) mThemesSpinner.getSelectedItem());
-                displayChangelog(ChangelogType.THEME, ChangelogList);
+            	UpdateInfo uiTheme = (UpdateInfo) mThemesSpinner.getSelectedItem();
+            	new ChangelogTask(this).execute(changelogType, uiTheme);
                 break;
             case APP:
-                //Show a ProgressDialog and start the Thread. The Dialog is shown in the Handler Function
-                Resources res = getResources();
-                ChangelogProgressDialog = ProgressDialog.show(this, res.getString(R.string.changelog_progress_title), res.getString(R.string.changelog_progress_body), true);
-                ChangelogThread = new Thread(new Changelog(this));
-                ChangelogThread.start();
+            	new ChangelogTask(this).execute(changelogType);
                 break;
             default:
                 return;
         }
-    }
-
-    private void displayChangelog(ChangelogType changelogtype, List<Version> ChangelogList) {
-        if (ChangelogList == null)
-            return;
-        boolean ChangelogEmpty = true;
-        Dialog dialog = new Dialog(this);
-        int dialogTitle;
-        switch (changelogtype) {
-            case ROM:
-                dialogTitle = R.string.changelog_title_rom;
-                break;
-            case THEME:
-                dialogTitle = R.string.changelog_title_theme;
-                break;
-            case APP:
-                dialogTitle = R.string.changelog_title_app;
-                break;
-            default:
-                return;
-        }
-        dialog.setTitle(dialogTitle);
-        dialog.setContentView(R.layout.changelog);
-        LinearLayout main = (LinearLayout) dialog.findViewById(R.id.ChangelogLinearMain);
-
-        LayoutParams lp1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-        LayoutParams lp2 = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT);
-        LayoutParams lp3 = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-
-        //Foreach Version
-        for (Version v : ChangelogList) {
-            if (v.ChangeLogText.isEmpty()) {
-                continue;
-            }
-            ChangelogEmpty = false;
-            TextView versiontext = new TextView(this);
-            versiontext.setLayoutParams(lp1);
-            versiontext.setGravity(Gravity.CENTER);
-            versiontext.setTextColor(Color.RED);
-            versiontext.setText("Version " + v.Version);
-            versiontext.setTypeface(null, Typeface.BOLD);
-            versiontext.setTextSize((versiontext.getTextSize() * (float) 1.5));
-            main.addView(versiontext);
-            //Foreach Changelogtext
-            for (String Change : v.ChangeLogText) {
-                LinearLayout l = new LinearLayout(this);
-                l.setLayoutParams(lp2);
-                l.setGravity(Gravity.CENTER_VERTICAL);
-                ImageView i = new ImageView(this);
-                i.setLayoutParams(lp3);
-                i.setImageResource(R.drawable.icon);
-                l.addView(i);
-                TextView ChangeText = new TextView(this);
-                ChangeText.setLayoutParams(lp3);
-                ChangeText.setText(Change);
-                l.addView(ChangeText);
-                main.addView(l);
-                //Horizontal Line
-                View ruler = new View(this);
-                ruler.setBackgroundColor(Color.WHITE);
-                main.addView(ruler, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
-            }
-        }
-        if (!ChangelogEmpty)
-            dialog.show();
-        else
-            Toast.makeText(this, R.string.no_changelog_found, Toast.LENGTH_LONG).show();
-        System.gc();
     }
 
     private void showConfigActivity() {
@@ -786,19 +685,7 @@ public class MainActivity extends Activity {
     }
 
     private void showAboutDialog() {
-        Dialog dialog = new Dialog(this);
-        dialog.setTitle(R.string.about_dialog_title);
-        dialog.setContentView(R.layout.about);
-        TextView mVersionName = (TextView) dialog.findViewById(R.id.version_name_about_text_view);
-        try {
-            PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);
-            mVersionName.setText("v " + pi.versionName);
-        }
-        catch (NameNotFoundException e) {
-            Log.e(TAG, "Can't find version name", e);
-            mVersionName.setText("v unknown");
-        }
-        dialog.show();
+    	showDialog(DIALOG_ABOUT);
     }
 
     private void downloadRequestedUpdate(UpdateInfo ui) {
@@ -962,7 +849,7 @@ public class MainActivity extends Activity {
                         .setPositiveButton(R.string.no_md5_found_positive, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 //Directly call on Postexecute, cause we need no md5check
-                                new MD5CheckerTask(MainActivity.this, null, existingUpdateFilename, showDebugOutput).onPostExecute(true);
+                                new MD5CheckerTask(getApplicationContext(), null, existingUpdateFilename, showDebugOutput).onPostExecute(true);
                                 dialog.dismiss();
                             }
                         })
@@ -971,6 +858,20 @@ public class MainActivity extends Activity {
                                 dialog.dismiss();
                             }
                         }).create();
+            case DIALOG_ABOUT:
+            	Dialog dialog = new Dialog(this);
+                dialog.setTitle(R.string.about_dialog_title);
+                dialog.setContentView(R.layout.about);
+                TextView mVersionName = (TextView) dialog.findViewById(R.id.version_name_about_text_view);
+                try {
+                    PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);
+                    mVersionName.setText("v " + pi.versionName);
+                }
+                catch (NameNotFoundException e) {
+                    Log.e(TAG, "Can't find version name", e);
+                    mVersionName.setText("v unknown");
+                }
+                return dialog;
             default:
                 return null;
         }

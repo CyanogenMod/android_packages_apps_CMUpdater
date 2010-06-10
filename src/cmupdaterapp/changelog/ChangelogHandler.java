@@ -1,5 +1,6 @@
 package cmupdaterapp.changelog;
 
+import cmupdaterapp.customTypes.Version;
 import cmupdaterapp.misc.Constants;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -8,7 +9,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.LinkedList;
 import java.util.List;
 
-class ChangelogHandler extends DefaultHandler {
+public class ChangelogHandler extends DefaultHandler {
     private List<Version> co;
     private Version currentVersion;
 

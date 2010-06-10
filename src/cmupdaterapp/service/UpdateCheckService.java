@@ -50,8 +50,6 @@ public class UpdateCheckService extends Service {
     private static Boolean showDebugOutput = false;
 
     private final RemoteCallbackList<IUpdateCheckServiceCallback> mCallbacks = new RemoteCallbackList<IUpdateCheckServiceCallback>();
-    private NotificationManager mNM;
-    private Resources res;
     private Preferences mPreferences;
     private String systemMod;
     private String systemRom;
@@ -73,14 +71,12 @@ public class UpdateCheckService extends Service {
         mPreferences = new Preferences(this);
         showDebugOutput = mPreferences.displayDebugOutput();
         systemMod = mPreferences.getBoardString();
-        res = this.getResources();
         if (systemMod == null) {
             if (showDebugOutput)
                 Log.d(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
         } else {
             if (showDebugOutput) Log.d(TAG, "System's Mod version:" + systemMod);
         }
-        mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     }
 
     @Override
@@ -146,6 +142,7 @@ public class UpdateCheckService extends Service {
                 Intent i = new Intent(this, MainActivity.class);
                 PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_ONE_SHOT);
 
+                Resources res = getResources();
                 Notification notification = new Notification(R.drawable.icon_notification,
                         res.getString(R.string.not_new_updates_found_ticker),
                         System.currentTimeMillis());
@@ -161,14 +158,10 @@ public class UpdateCheckService extends Service {
                     notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
                 else
                     notification.defaults = Notification.DEFAULT_LIGHTS;
-                if (notificationRingtone == null) {
-                    notification.sound = null;
-                } else {
-                    notification.sound = notificationRingtone;
-                }
+                notification.sound = notificationRingtone;
 
                 //Use a resourceId as an unique identifier
-                mNM.notify(R.string.not_new_updates_found_title, notification);
+                ((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).notify(R.string.not_new_updates_found_title, notification);
             }
             FinishUpdateCheck();
         }
@@ -250,7 +243,7 @@ public class UpdateCheckService extends Service {
                     }
                     catch (IOException ex) {
                         //when theres an Exception Downloading the Theme, continue
-                        DisplayExceptionToast(res.getString(R.string.theme_download_exception) + t.name + ": " + ex.getMessage());
+                        DisplayExceptionToast(getResources().getString(R.string.theme_download_exception) + t.name + ": " + ex.getMessage());
                         Log.e(TAG, "There was an error downloading Theme " + t.name + ": ", ex);
                         continue;
                     }
