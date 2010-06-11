@@ -80,7 +80,6 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onCancelled() {
-		Log.d(TAG, "CANCEL");
     	if (mbound) {
             act.unbindService(mConnection);
             mbound = false;
@@ -90,10 +89,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
     		pg.dismiss();
     	}
     	act.updateLayout();
-		Log.d(TAG, "CANCEL");
     	super.onCancelled();
-
-		Log.d(TAG, "CANCEL");
     }
 
     /**
