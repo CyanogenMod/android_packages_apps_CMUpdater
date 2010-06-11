@@ -61,7 +61,7 @@ public class MainActivity extends Activity {
     private UpdateInfo updateForDownload;
     private String existingUpdateFilename;
 
-    public void ScreenshotThemesListener(View target) {
+    public void ListenerScreenshotThemes(View target) {
         if (showDebugOutput) Log.d(TAG, "Theme Screenshot Button clicked");
         final UpdateInfo ui = (UpdateInfo) mThemesSpinner.getSelectedItem();
         Intent i = new Intent(MainActivity.this, ScreenshotActivity.class);
@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
         return;
     }
 
-    public void DownloadUpdateButtonListener(View target) {
+    public void ListenerDownloadUpdateButton(View target) {
         if (!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState())) {
             showDialog(DIALOG_NO_SDCARD);
             return;
@@ -90,7 +90,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    public void DownloadThemeButtonListener(View target) {
+    public void ListenerDownloadThemeButton(View target) {
         if (!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState())) {
             showDialog(DIALOG_NO_SDCARD);
             return;
@@ -110,17 +110,17 @@ public class MainActivity extends Activity {
         }
     }
 
-    public void UpdateChangelogButtonListener(View target) {
+    public void ListenerUpdateChangelogButton(View target) {
         if (showDebugOutput) Log.d(TAG, "Rom Changelog Button clicked");
         getChangelog(ChangelogType.ROM);
     }
 
-    public void ThemeChangelogButtonListener(View target) {
+    public void ListenerThemeChangelogButton(View target) {
         if (showDebugOutput) Log.d(TAG, "Theme Changelog Button clicked");
         getChangelog(ChangelogType.THEME);
     }
 
-    public void DeleteUpdatesButtonListener(View target) {
+    public void ListenerDeleteUpdatesButton(View target) {
         if (!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState())) {
             showDialog(DIALOG_NO_SDCARD);
             return;
@@ -129,7 +129,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    public void ApplyExistingButtonListener(View target) {
+    public void ListenerApplyExistingButton(View target) {
         if (!Environment.MEDIA_MOUNTED.equalsIgnoreCase(Environment.getExternalStorageState())) {
             showDialog(DIALOG_NO_SDCARD);
             return;
@@ -168,7 +168,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    public void FlipperButtonListener(View target) {
+    public void ListenerFlipperButton(View target) {
     	int id = target.getId();
     	int child = -1;
     	switch (id) {
@@ -301,18 +301,12 @@ public class MainActivity extends Activity {
                 i.putExtra(Constants.KEY_UPDATE_INFO, (Serializable) ui);
                 startActivity(i);
             } else {
-                switchToUpdateChooserLayout();
+            	updateLayout();
             }
         }
         catch (RemoteException e) {
             Log.e(TAG, "Exception on calling DownloadService", e);
         }
-    }
-
-    @Override
-    protected void onStop() {
-        if (showDebugOutput) Log.d(TAG, "onStop called");
-        super.onStop();
     }
 
     @Override
@@ -367,7 +361,7 @@ public class MainActivity extends Activity {
         return super.onMenuItemSelected(featureId, item);
     }
 
-    private void switchToUpdateChooserLayout() {
+    public void updateLayout() {
         FullUpdateInfo mAvailableUpdates = null;
         try {
             mAvailableUpdates = State.loadState(this, showDebugOutput);
@@ -629,15 +623,10 @@ public class MainActivity extends Activity {
     }
 
     public void checkForUpdates(View target) {
-        Resources res = getResources();
-        ProgressDialog pg = ProgressDialog.show(this, res.getString(R.string.checking_for_updates), res.getString(R.string.checking_for_updates), true, true);
         //Refresh the Layout when UpdateCheck finished
-        pg.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            public void onDismiss(DialogInterface dialog) {
-                switchToUpdateChooserLayout();
-            }
-        });
-        new UpdateCheckTask(this, pg, showDebugOutput).execute((Void) null);
+        UpdateCheckTask task = new UpdateCheckTask(this, showDebugOutput);
+        task.execute((Void) null);
+        updateLayout();
     }
 
     private void showAboutDialog() {
@@ -760,7 +749,7 @@ public class MainActivity extends Activity {
                                 String f = (String) mExistingUpdatesSpinner.getSelectedItem();
                                 if (showDebugOutput) Log.d(TAG, "Delete single Update selected: " + f);
                                 deleteUpdate(f);
-                                switchToUpdateChooserLayout();
+                                updateLayout();
                             }
                         })
                                 //Delete All Updates
@@ -770,7 +759,7 @@ public class MainActivity extends Activity {
                                 //Delete Updates here
                                 //Set the Filenames to null, so the Spinner will be empty
                                 deleteOldUpdates();
-                                switchToUpdateChooserLayout();
+                                updateLayout();
                             }
                         })
                                 //Delete no Update

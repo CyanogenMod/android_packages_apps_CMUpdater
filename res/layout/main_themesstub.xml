@@ -72,7 +72,7 @@
                 android:layout_marginTop="20sp"
                 style="@style/TextAppearance.Button"
                 android:drawableLeft="@drawable/download"
-                android:onClick="DownloadThemeButtonListener"/>
+                android:onClick="ListenerDownloadThemeButton"/>
         <Button
                 android:id="@+id/theme_screenshots_button"
                 android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
                 android:layout_marginTop="20sp"
                 style="@style/TextAppearance.Button"
                 android:drawableLeft="@drawable/button_gallery"
-                android:onClick="ScreenshotThemesListener"/>
+                android:onClick="ListenerScreenshotThemes"/>
         <Button
                 android:id="@+id/show_theme_changelog_button"
                 android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
                 android:layout_marginTop="20sp"
                 style="@style/TextAppearance.Button"
                 android:drawableLeft="@drawable/icon"
-                android:onClick="ThemeChangelogButtonListener"/>
+                android:onClick="ListenerThemeChangelogButton"/>
         <TextView
                 android:id="@+id/check_now_update_chooser_text_themes"
                 android:layout_width="fill_parent"
