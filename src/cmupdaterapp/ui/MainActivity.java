@@ -167,7 +167,7 @@ public class MainActivity extends Activity {
                     }
             );
 
-            md5CheckerTask = new MD5CheckerTask(getApplicationContext(), progressDialog, existingUpdateFilename, showDebugOutput).execute(Update);
+            md5CheckerTask = new MD5CheckerTask(this, progressDialog, existingUpdateFilename, showDebugOutput).execute(Update);
         }
     }
 
