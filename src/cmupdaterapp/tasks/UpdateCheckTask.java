@@ -2,6 +2,7 @@ package cmupdaterapp.tasks;
 
 import android.app.ProgressDialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -25,10 +26,12 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
     private Intent serviceIntent;
     private final ProgressDialog pg;
     private final MainActivity act;
+    private final Context context;
 
     public UpdateCheckTask(MainActivity a, Boolean _showDebugOutput) {
         showDebugOutput = _showDebugOutput;
         act = a;
+        context = a.getApplicationContext();
 	    pg = new ProgressDialog(a);
 	    pg.setTitle(R.string.checking_for_updates);
 	    pg.setMessage(a.getResources().getString(R.string.checking_for_updates));
@@ -47,10 +50,10 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
     protected void onPreExecute() {
     	pg.show();
         serviceIntent = new Intent(IUpdateCheckService.class.getName());
-        ComponentName comp = act.startService(serviceIntent);
+        ComponentName comp = context.startService(serviceIntent);
         if (comp == null)
             Log.e(TAG, "startService failed");
-        mbound = act.bindService(serviceIntent, mConnection, 0);
+        mbound = context.bindService(serviceIntent, mConnection, 0);
     }
 
     @Override
@@ -70,7 +73,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         if (mbound) {
-            act.unbindService(mConnection);
+        	context.unbindService(mConnection);
             mbound = false;
         }
         boolean stopped = act.stopService(serviceIntent);
@@ -81,10 +84,10 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onCancelled() {
     	if (mbound) {
-            act.unbindService(mConnection);
+    		context.unbindService(mConnection);
             mbound = false;
         }
-        act.stopService(serviceIntent);
+    	context.stopService(serviceIntent);
     	if (pg != null) {
     		pg.dismiss();
     	}
