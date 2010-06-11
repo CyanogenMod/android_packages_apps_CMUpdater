@@ -60,6 +60,9 @@ public class MainActivity extends Activity {
     private File foo;
     private UpdateInfo updateForDownload;
     private String existingUpdateFilename;
+    private UpdateListAdapter<UpdateInfo> spAdapterRoms;
+    private UpdateListAdapter<UpdateInfo> spAdapterThemes;
+    private ArrayAdapter<String> localUpdates;
 
     public void ListenerScreenshotThemes(View target) {
         if (showDebugOutput) Log.d(TAG, "Theme Screenshot Button clicked");
@@ -273,6 +276,34 @@ public class MainActivity extends Activity {
         	Button btnAvailableThemes = (Button) findViewById(R.id.button_available_themes);
             btnAvailableThemes.setVisibility(View.GONE);
         }
+        mUpdatesSpinner = (Spinner) findViewById(R.id.available_updates_list);
+        mUpdatesSpinner.setOnItemSelectedListener(mUpdateSpinnerChanged);
+        spAdapterRoms = new UpdateListAdapter<UpdateInfo>(
+                this,
+                new ArrayList<UpdateInfo>());
+        spAdapterRoms.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spAdapterRoms.setNotifyOnChange(false);
+        mUpdatesSpinner.setAdapter(spAdapterRoms);
+
+        if (Customization.Screenshotsupport) {
+        	mThemesSpinner = (Spinner) findViewById(R.id.available_themes_list);
+        	mThemesSpinner.setOnItemSelectedListener(mThemeSpinnerChanged);
+            spAdapterThemes = new UpdateListAdapter<UpdateInfo>(
+                    this,
+                    new ArrayList<UpdateInfo>());
+            spAdapterThemes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spAdapterThemes.setNotifyOnChange(false);
+            mThemesSpinner.setAdapter(spAdapterThemes);
+        }
+
+        mExistingUpdatesSpinner = (Spinner) findViewById(R.id.found_updates_list);
+        localUpdates = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_spinner_item,
+                new ArrayList<String>());
+        localUpdates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        localUpdates.setNotifyOnChange(false);
+        mExistingUpdatesSpinner.setAdapter(localUpdates);
     }
 
     @Override
@@ -376,7 +407,6 @@ public class MainActivity extends Activity {
         TextView showDowngradesRomtv = (TextView) roms.findViewById(R.id.show_rom_downgrades_textview);
         TextView lastRomUpdateChecktv = (TextView) roms.findViewById(R.id.last_rom_update_check);
         Button selectUploadButton = (Button) roms.findViewById(R.id.download_update_button);
-        mUpdatesSpinner = (Spinner) roms.findViewById(R.id.available_updates_list);
         TextView DownloadText = (TextView) roms.findViewById(R.id.available_updates_text);
         LinearLayout stableExperimentalInfoUpdates = (LinearLayout) roms.findViewById(R.id.stable_experimental_description_container_updates);
         Button changelogButton = (Button) roms.findViewById(R.id.show_changelog_button);
@@ -387,7 +417,6 @@ public class MainActivity extends Activity {
         //Existing Updates Layout
         View existing = findViewById(R.id.existing_layout);
         TextView mdownloadedUpdateText = (TextView) existing.findViewById(R.id.downloaded_update_found);
-        Spinner mExistingUpdatesSpinner = (Spinner) existing.findViewById(R.id.found_updates_list);
         Button mdeleteOldUpdatesButton = (Button) existing.findViewById(R.id.delete_updates_button);
         Button mapplyUpdateButton = (Button) existing.findViewById(R.id.apply_update_button);
         TextView mNoExistingUpdatesFound = (TextView) existing.findViewById(R.id.no_existing_updates_found_textview);
@@ -398,7 +427,6 @@ public class MainActivity extends Activity {
         TextView experimentalBuildsThemetv = null;
         TextView lastThemeUpdateChecktv = null;
         Button btnDownloadTheme = null;
-        mThemesSpinner = null;
         TextView tvThemeDownloadText = null;
         LinearLayout stableExperimentalInfoThemes = null;
         Button btnThemechangelogButton = null;
@@ -412,7 +440,6 @@ public class MainActivity extends Activity {
             experimentalBuildsThemetv = (TextView) themes.findViewById(R.id.experimental_theme_updates_textview);
             lastThemeUpdateChecktv = (TextView) themes.findViewById(R.id.last_theme_update_check);
             btnDownloadTheme = (Button) themes.findViewById(R.id.download_theme_button);
-            mThemesSpinner = (Spinner) themes.findViewById(R.id.available_themes_list);
             tvThemeDownloadText = (TextView) themes.findViewById(R.id.available_themes_text);
             stableExperimentalInfoThemes = (LinearLayout) themes.findViewById(R.id.stable_experimental_description_container_themes);
             btnThemechangelogButton = (Button) themes.findViewById(R.id.show_theme_changelog_button);
@@ -522,13 +549,11 @@ public class MainActivity extends Activity {
 
         //Rom Layout
         if (availableRoms != null && availableRoms.size() > 0) {
-            mUpdatesSpinner.setOnItemSelectedListener(mUpdateSpinnerChanged);
-
-            UpdateListAdapter<UpdateInfo> spAdapterRoms = new UpdateListAdapter<UpdateInfo>(
-                    this,
-                    availableRoms);
-            spAdapterRoms.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            mUpdatesSpinner.setAdapter(spAdapterRoms);
+        	spAdapterRoms.clear();
+        	for (UpdateInfo rom:availableRoms) {
+        		spAdapterRoms.add(rom);
+        	}
+        	spAdapterRoms.notifyDataSetChanged();
         } else {
             selectUploadButton.setVisibility(View.GONE);
             mUpdatesSpinner.setVisibility(View.GONE);
@@ -559,13 +584,11 @@ public class MainActivity extends Activity {
             }
             //Themes
             else if (availableThemes != null && availableThemes.size() > 0) {
-                mThemesSpinner.setOnItemSelectedListener(mThemeSpinnerChanged);
-
-                UpdateListAdapter<UpdateInfo> spAdapterThemes = new UpdateListAdapter<UpdateInfo>(
-                        this,
-                        availableThemes);
-                spAdapterThemes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                mThemesSpinner.setAdapter(spAdapterThemes);
+            	spAdapterThemes.clear();
+            	for (UpdateInfo theme:availableThemes) {
+            		spAdapterThemes.add(theme);
+            	}
+            	spAdapterThemes.notifyDataSetChanged();
             }
             //No Updates Found
             else {
@@ -582,12 +605,11 @@ public class MainActivity extends Activity {
 
         //Existing Updates Layout
         if (existingFilenames != null && existingFilenames.size() > 0) {
-            ArrayAdapter<String> localUpdates = new ArrayAdapter<String>(
-                    this,
-                    android.R.layout.simple_spinner_item,
-                    existingFilenames);
-            localUpdates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            mExistingUpdatesSpinner.setAdapter(localUpdates);
+        	localUpdates.clear();
+        	for (String file:existingFilenames) {
+        		localUpdates.add(file);
+        	}
+        	localUpdates.notifyDataSetChanged();
         } else {
             mNoExistingUpdatesFound.setVisibility(View.VISIBLE);
             mExistingUpdatesSpinner.setVisibility(View.GONE);
