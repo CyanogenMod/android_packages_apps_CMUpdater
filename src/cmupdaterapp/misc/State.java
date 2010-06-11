@@ -14,8 +14,13 @@ public class State {
     public static void saveState(Context ctx, Serializable mAvailableUpdates, Boolean _showDebugOutput) throws IOException {
         if (_showDebugOutput) Log.d(TAG, "Called SaveState");
         if (_showDebugOutput) Log.d(TAG, "Updatecount: " + ((FullUpdateInfo) mAvailableUpdates).getUpdateCount());
-        ObjectOutputStream oos = new ObjectOutputStream(ctx.openFileOutput(Customization.STORED_STATE_FILENAME, Context.MODE_PRIVATE));
+
+        ObjectOutputStream oos = null;
+        FileOutputStream fos = null;
         try {
+        	File f = new File(ctx.getCacheDir(), Customization.STORED_STATE_FILENAME);
+        	fos = new FileOutputStream(f);
+        	oos = new ObjectOutputStream(fos);
             Map<String, Serializable> data = new HashMap<String, Serializable>();
             data.put(Constants.KEY_AVAILABLE_UPDATES, mAvailableUpdates);
             oos.writeObject(data);
@@ -25,7 +30,12 @@ public class State {
             Log.e(TAG, "Exception on saving Instance State", ex);
         }
         finally {
-            oos.close();
+        	if (oos != null) {
+        		oos.close();
+        	}
+            if (fos != null) {
+            	fos.close();
+            }
         }
     }
 
@@ -34,10 +44,12 @@ public class State {
         if (_showDebugOutput) Log.d(TAG, "Called LoadState");
         FullUpdateInfo mAvailableUpdates = new FullUpdateInfo();
         ObjectInputStream ois = null;
+        FileInputStream fis = null;
         try {
-            ois = new ObjectInputStream(ctx.openFileInput(Customization.STORED_STATE_FILENAME));
+        	File f = new File(ctx.getCacheDir(), Customization.STORED_STATE_FILENAME);
+        	fis = new FileInputStream(f);
+            ois = new ObjectInputStream(fis);
             Map<String, Serializable> data = (HashMap<String, Serializable>) ois.readObject();
-
             Object o = data.get(Constants.KEY_AVAILABLE_UPDATES);
             if (o != null) mAvailableUpdates = (FullUpdateInfo) o;
         }
@@ -51,8 +63,12 @@ public class State {
             Log.e(TAG, "Exception on Loading State", e);
         }
         finally {
-            if (ois != null)
+            if (ois != null) {
                 ois.close();
+            }
+            if (fis != null) {
+            	fis.close();
+            }
         }
         if (_showDebugOutput) Log.d(TAG, "LoadedUpdates: " + mAvailableUpdates.getUpdateCount());
         return mAvailableUpdates;
