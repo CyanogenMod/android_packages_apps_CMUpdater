@@ -45,7 +45,7 @@ public class ConfigActivity extends PreferenceActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.layout.config);
+        addPreferencesFromResource(R.xml.preferences);
 
         prefs = new Preferences(this);
         res = getResources();

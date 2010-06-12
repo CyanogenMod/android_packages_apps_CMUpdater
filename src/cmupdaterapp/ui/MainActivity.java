@@ -304,6 +304,9 @@ public class MainActivity extends Activity {
         localUpdates.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         localUpdates.setNotifyOnChange(false);
         mExistingUpdatesSpinner.setAdapter(localUpdates);
+
+        String mod = SysUtils.getModVersion();
+        runningOldVersion = StringUtils.compareVersions(Customization.MIN_SUPPORTED_VERSION_STRING, mod);
     }
 
     @Override
@@ -312,9 +315,7 @@ public class MainActivity extends Activity {
         super.onStart();
 
         //Show a Dialog that the User runs an old rom.
-        String mod = SysUtils.getModVersion();
-        if (StringUtils.compareVersions(Customization.MIN_SUPPORTED_VERSION_STRING, mod)) {
-            runningOldVersion = true;
+        if (runningOldVersion) {
             showDialog(DIALOG_RUNNING_OLD_VERSION);
             return;
         }
