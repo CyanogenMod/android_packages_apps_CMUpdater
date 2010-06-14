@@ -531,27 +531,32 @@ public class UpdateCheckService extends Service {
                 if (ui.getType().equalsIgnoreCase(Constants.UPDATE_INFO_TYPE_THEME)) {
                     //Rom matches (must also match, if there is a * in the themes.theme file, or the file does not exist)
                     if (romMatches(ui, systemRom)) {
-                        //Name matches or is *
-                        if (WildcardUsed || showAllThemeUpdates || (themeInfos.name != null && !themeInfos.name.equals("") && ui.getName().equalsIgnoreCase(themeInfos.name))) {
-                            //Version matches or name is *. If *, display all Versions
-                            if (WildcardUsed || showAllThemeUpdates || StringUtils.compareVersions(ui.getVersion(), themeInfos.version)) {
-                                //Branch matches
-                                if (branchMatches(ui, showExperimentalThemeUpdates)) {
-                                    if (showDebugOutput)
-                                        Log.d(TAG, "Adding Theme: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
-                                    ret.add(ui);
-                                } else {
-                                    if (showDebugOutput)
-                                        Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
-                                }
-                            } else {
-                                if (showDebugOutput)
-                                    Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
-                            }
-                        } else {
-                            if (showDebugOutput)
-                                Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
-                        }
+                    	if (boardMatches(ui, systemMod)) {
+	                        //Name matches or is *
+	                        if (WildcardUsed || showAllThemeUpdates || (themeInfos.name != null && !themeInfos.name.equals("") && ui.getName().equalsIgnoreCase(themeInfos.name))) {
+	                            //Version matches or name is *. If *, display all Versions
+	                            if (WildcardUsed || showAllThemeUpdates || StringUtils.compareVersions(ui.getVersion(), themeInfos.version)) {
+	                                //Branch matches
+	                                if (branchMatches(ui, showExperimentalThemeUpdates)) {
+	                                    if (showDebugOutput)
+	                                        Log.d(TAG, "Adding Theme: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
+	                                    ret.add(ui);
+	                                } else {
+	                                    if (showDebugOutput)
+	                                        Log.d(TAG, String.format("Discarding Theme (branch mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
+	                                }
+	                            } else {
+	                                if (showDebugOutput)
+	                                    Log.d(TAG, String.format("Discarding Theme (Version mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
+	                            }
+	                        } else {
+	                            if (showDebugOutput)
+	                                Log.d(TAG, String.format("Discarding Theme (name mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
+	                        }
+                    	} else {
+                    		if (showDebugOutput)
+                                Log.d(TAG, String.format("Discarding Theme (board mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
+                    	}
                     } else {
                         if (showDebugOutput)
                             Log.d(TAG, String.format("Discarding Theme (rom mismatch) %s: Your Theme: %s %s; From JSON: %s %s", ui.getName(), themeInfos.name, themeInfos.version, ui.getName(), ui.getVersion()));
