@@ -169,7 +169,7 @@ public class Preferences extends Activity {
         DbAdapter themeListDb = new DbAdapter(showDebugOutput);
         if (showDebugOutput) Log.d(TAG, "Opening Database");
         themeListDb.open();
-        int count = themeListDb.getThemeCount();
+        long count = themeListDb.getThemeCount();
         themeListDb.close();
         return count > 0;
     }

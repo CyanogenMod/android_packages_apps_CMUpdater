@@ -98,10 +98,14 @@ public class DbAdapter {
         return db.delete(DATABASE_TABLE_THEMELIST, KEY_THEMELIST_ID + "= ?", new String[]{Long.toString(_rowIndex)}) > 0;
     }
 
-    public int getThemeCount() {
-        Cursor c = db.query(DATABASE_TABLE_THEMELIST, new String[]{KEY_THEMELIST_ID}, null, null, null, null, null);
-        int ret = c.getCount();
-        c.close();
+    public long getThemeCount() {
+    	long ret = 0;
+    	Cursor cursor = db.rawQuery(
+                "SELECT COUNT(1) as count FROM " + DATABASE_TABLE_THEMELIST, null);
+        if (cursor.moveToFirst()) {
+            ret = cursor.getLong(0);
+        }
+        cursor.close();
         return ret;
     }
 
