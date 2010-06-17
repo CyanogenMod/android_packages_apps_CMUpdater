@@ -2,6 +2,7 @@ package cmupdaterapp.database;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
@@ -99,14 +100,7 @@ public class DbAdapter {
     }
 
     public long getThemeCount() {
-    	long ret = 0;
-    	Cursor cursor = db.rawQuery(
-                "SELECT COUNT(1) as count FROM " + DATABASE_TABLE_THEMELIST, null);
-        if (cursor.moveToFirst()) {
-            ret = cursor.getLong(0);
-        }
-        cursor.close();
-        return ret;
+    	return DatabaseUtils.queryNumEntries(db, DATABASE_TABLE_THEMELIST);
     }
 
     // Removes all themes
