@@ -298,7 +298,7 @@ public class ThemeListActivity extends ListActivity {
             }
         };
         FeaturedThemesProgressDialog = ProgressDialog.show(this, res.getString(R.string.featured_themes_progress_title), res.getString(R.string.featured_themes_progress_body), true);
-        FeaturedThemesThread = new Thread(new FeaturedThemes(this));
+        FeaturedThemesThread = new Thread(new FeaturedThemes(new Preferences(this).getFeaturedThemesURL()));
         FeaturedThemesThread.start();
     }
 }

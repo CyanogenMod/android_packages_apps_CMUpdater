@@ -1,10 +1,8 @@
 package cmupdaterapp.featuredThemes;
 
-import android.content.Context;
 import android.os.Message;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.ui.ThemeListActivity;
-import cmupdaterapp.utils.Preferences;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -18,10 +16,10 @@ import java.net.URL;
 
 public class FeaturedThemes implements Runnable {
     private static final String TAG = "FeaturedThemes";
-    private final Preferences p;
+    private final String mUrl;
 
-    public FeaturedThemes(Context ctx) {
-        p = new Preferences(ctx);
+    public FeaturedThemes(String featuredThemesUrl) {
+        mUrl = featuredThemesUrl;
     }
 
     public void run() {
@@ -30,7 +28,7 @@ public class FeaturedThemes implements Runnable {
 
         Message m = ThemeListActivity.FeaturedThemesProgressHandler.obtainMessage();
         try {
-            url = new URL(p.getFeaturedThemesURL());
+            url = new URL(mUrl);
             i = new InputSource(url.openStream());
             SAXParserFactory spf = SAXParserFactory.newInstance();
             SAXParser sp = spf.newSAXParser();

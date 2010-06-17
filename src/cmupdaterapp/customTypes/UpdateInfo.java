@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class UpdateInfo implements Parcelable, Serializable {
     private String version;
     private String type;
     private String branchCode;
-    private String description;
+    private String[] description;
     private String fileName;
     private String versionForApply;
     public List<URI> screenshots;
@@ -116,15 +117,22 @@ public class UpdateInfo implements Parcelable, Serializable {
      */
     public void setDescription(String _description) {
         if (_description != null)
-            description = _description.trim();
+            description = _description.trim().split("\\|");
         else
-            description = "";
+            description = null;
+    }
+
+    /**
+     * Set Descrition
+     */
+    public void setDescription(String[] _description) {
+    	description = _description;
     }
 
     /**
      * Get Description
      */
-    public String getDescription() {
+    public String[] getDescription() {
         return description;
     }
 
@@ -179,7 +187,7 @@ public class UpdateInfo implements Parcelable, Serializable {
                 && ui.version.equals(version)
                 && ui.type.equals(type)
                 && ui.branchCode.equals(branchCode)
-                && ui.description.equals(description)
+                && Arrays.equals(ui.description, description)
                 && ui.fileName.equals(fileName)
                 && ui.screenshots.equals(screenshots)
                 && ui.PrimaryKey == PrimaryKey
@@ -224,7 +232,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         arg0.writeString(versionForApply);
         arg0.writeString(type);
         arg0.writeString(branchCode);
-        arg0.writeString(description);
+        arg0.writeArray(description);
         arg0.writeString(fileName);
         arg0.writeList(screenshots);
         arg0.writeList(updateMirrors);
@@ -239,7 +247,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         versionForApply = in.readString();
         type = in.readString();
         branchCode = in.readString();
-        description = in.readString();
+        setDescription((String[])in.readArray(null));
         fileName = in.readString();
         in.readList(screenshots, null);
         in.readList(updateMirrors, null);

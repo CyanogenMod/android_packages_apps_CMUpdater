@@ -92,11 +92,14 @@ public class ChangelogTask extends AsyncTask<Object, Void, List<Version>> {
         	Version v = new Version();
             List<Version> returnValue = new LinkedList<Version>();
             v.Version = ui.getVersion();
-            for (String str : ui.getDescription().split("\\|")) {
-                if (!str.equals(""))
-                    v.ChangeLogText.add(str);
+            String[] changelog = ui.getDescription();
+            if (changelog != null) {
+	            for (String str : changelog) {
+	                if (!str.equals(""))
+	                    v.ChangeLogText.add(str);
+	            }
+	            returnValue.add(v);
             }
-            returnValue.add(v);
             return returnValue;
         }
 

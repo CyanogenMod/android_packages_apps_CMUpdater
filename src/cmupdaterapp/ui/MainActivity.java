@@ -194,8 +194,8 @@ public class MainActivity extends Activity {
     private final Spinner.OnItemSelectedListener mUpdateSpinnerChanged = new Spinner.OnItemSelectedListener() {
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
             Button updateChangelogButton = (Button) findViewById(R.id.show_changelog_button);
-            String changelog = ((UpdateInfo) mUpdatesSpinner.getSelectedItem()).getDescription();
-            if (changelog == null || changelog.equals("")) {
+            String[] changelog = ((UpdateInfo) mUpdatesSpinner.getSelectedItem()).getDescription();
+            if (changelog == null) {
                 updateChangelogButton.setVisibility(View.GONE);
             } else {
                 updateChangelogButton.setVisibility(View.VISIBLE);
@@ -212,11 +212,11 @@ public class MainActivity extends Activity {
             Button themeChangelogButton = (Button) findViewById(R.id.show_theme_changelog_button);
             Button ScreenshotThemeButton = (Button) findViewById(R.id.theme_screenshots_button);
             UpdateInfo item = (UpdateInfo) mThemesSpinner.getSelectedItem();
-            String changelog = item.getDescription();
+            String[] changelog = item.getDescription();
             List<URI> screenshots = item.screenshots;
             int ScreenshotCount = item.screenshots.size();
 
-            if (changelog == null || changelog.equals("")) {
+            if (changelog == null) {
                 themeChangelogButton.setVisibility(View.GONE);
             } else {
                 themeChangelogButton.setVisibility(View.VISIBLE);
