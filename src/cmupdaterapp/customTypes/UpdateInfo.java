@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.net.URI;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class UpdateInfo implements Parcelable, Serializable {
     private String version;
     private String type;
     private String branchCode;
-    private String[] description;
+    private List<String> description;
     private String fileName;
     private String versionForApply;
     public List<URI> screenshots;
@@ -117,7 +117,7 @@ public class UpdateInfo implements Parcelable, Serializable {
      */
     public void setDescription(String _description) {
         if (_description != null)
-            description = _description.trim().split("\\|");
+            Collections.addAll(description, _description.trim().split("\\|"));
         else
             description = null;
     }
@@ -125,14 +125,14 @@ public class UpdateInfo implements Parcelable, Serializable {
     /**
      * Set Descrition
      */
-    public void setDescription(String[] _description) {
+    public void setDescription(List<String> _description) {
     	description = _description;
     }
 
     /**
      * Get Description
      */
-    public String[] getDescription() {
+    public List<String> getDescription() {
         return description;
     }
 
@@ -187,7 +187,7 @@ public class UpdateInfo implements Parcelable, Serializable {
                 && ui.version.equals(version)
                 && ui.type.equals(type)
                 && ui.branchCode.equals(branchCode)
-                && Arrays.equals(ui.description, description)
+                && ui.description.equals(description)
                 && ui.fileName.equals(fileName)
                 && ui.screenshots.equals(screenshots)
                 && ui.PrimaryKey == PrimaryKey
@@ -197,6 +197,7 @@ public class UpdateInfo implements Parcelable, Serializable {
     public UpdateInfo() {
         screenshots = new LinkedList<URI>();
         updateMirrors = new LinkedList<URI>();
+        description = new LinkedList<String>();
         mod = new LinkedList<String>();
         board = new LinkedList<String>();
     }
@@ -204,6 +205,7 @@ public class UpdateInfo implements Parcelable, Serializable {
     private UpdateInfo(Parcel in) {
         screenshots = new LinkedList<URI>();
         updateMirrors = new LinkedList<URI>();
+        description = new LinkedList<String>();
         mod = new LinkedList<String>();
         board = new LinkedList<String>();
         readFromParcel(in);
@@ -225,14 +227,14 @@ public class UpdateInfo implements Parcelable, Serializable {
 
     public void writeToParcel(Parcel arg0, int arg1) {
         arg0.writeInt(PrimaryKey);
-        arg0.writeList(mod);
-        arg0.writeList(board);
+        arg0.writeStringList(mod);
+        arg0.writeStringList(board);
         arg0.writeString(name);
         arg0.writeString(version);
         arg0.writeString(versionForApply);
         arg0.writeString(type);
         arg0.writeString(branchCode);
-        arg0.writeArray(description);
+        arg0.writeStringList(description);
         arg0.writeString(fileName);
         arg0.writeList(screenshots);
         arg0.writeList(updateMirrors);
@@ -240,17 +242,17 @@ public class UpdateInfo implements Parcelable, Serializable {
 
     void readFromParcel(Parcel in) {
         PrimaryKey = in.readInt();
-        in.readList(mod, null);
-        in.readList(board, null);
+        in.readStringList(mod);
+        in.readStringList(board);
         name = in.readString();
         version = in.readString();
         versionForApply = in.readString();
         type = in.readString();
         branchCode = in.readString();
-        setDescription((String[])in.readArray(null));
+        in.readStringList(description);
         fileName = in.readString();
-        in.readList(screenshots, null);
-        in.readList(updateMirrors, null);
+        in.readList(screenshots, URI.class.getClassLoader());
+        in.readList(updateMirrors, URI.class.getClassLoader());
     }
 
     public List<URI> updateFileUris() {

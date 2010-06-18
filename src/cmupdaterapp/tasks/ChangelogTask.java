@@ -92,8 +92,8 @@ public class ChangelogTask extends AsyncTask<Object, Void, List<Version>> {
         	Version v = new Version();
             List<Version> returnValue = new LinkedList<Version>();
             v.Version = ui.getVersion();
-            String[] changelog = ui.getDescription();
-            if (changelog != null) {
+            List<String> changelog = ui.getDescription();
+            if (changelog != null && changelog.size() > 0) {
 	            for (String str : changelog) {
 	                if (!str.equals(""))
 	                    v.ChangeLogText.add(str);
