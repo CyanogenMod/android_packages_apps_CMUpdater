@@ -59,7 +59,7 @@ public class ScreenshotActivity extends Activity {
         });
 
         //In onCreate, cause when pressing back from Detail, the old Screenshots remain in the List
-        downloadImageTask = new DownloadImageTask(new Preferences(this).displayDebugOutput());
+        downloadImageTask = new DownloadImageTask(this, new Preferences(this).displayDebugOutput());
         downloadImageTask.execute(ui);
     }
 

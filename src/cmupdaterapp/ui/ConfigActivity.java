@@ -100,7 +100,7 @@ public class ConfigActivity extends PreferenceActivity {
         pref = findPreference(res.getString(R.string.PREF_UPDATE_FOLDER_DEF));
         pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
-                if (prefs.setUpdateFolder(res.getString(R.string.conf_update_folder))) {
+                if (prefs.setUpdateFolder(Customization.DOWNLOAD_DIR)) {
                     Toast.makeText(getBaseContext(), R.string.p_update_folder_def_toast, Toast.LENGTH_LONG).show();
                     Log.d(TAG, "UpdateFolder set back to default: " + prefs.getUpdateFolder());
                 } else {

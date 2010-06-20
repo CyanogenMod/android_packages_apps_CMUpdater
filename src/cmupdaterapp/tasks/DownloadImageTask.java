@@ -1,5 +1,6 @@
 package cmupdaterapp.tasks;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.customTypes.UpdateInfo;
@@ -13,15 +14,17 @@ import java.net.URI;
 public class DownloadImageTask extends AsyncTask<UpdateInfo, Screenshot, Void> {
     private static final String TAG = "DownloadImageTask";
 
-    private Boolean showDebugOutput = false;
+    private final Boolean showDebugOutput;
+    private final Context context;
 
-    public DownloadImageTask(Boolean _showDebugOutput) {
+    public DownloadImageTask(Context ctx, Boolean _showDebugOutput) {
         showDebugOutput = _showDebugOutput;
+        context = ctx;
     }
 
     @Override
     protected Void doInBackground(UpdateInfo... params) {
-        DbAdapter db = new DbAdapter(showDebugOutput);
+        DbAdapter db = new DbAdapter(context, showDebugOutput);
         UpdateInfo ui = params[0];
 
         try {

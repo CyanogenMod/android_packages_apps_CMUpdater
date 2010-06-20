@@ -46,7 +46,7 @@ public class ThemeListActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         showDebugOutput = new Preferences(this).displayDebugOutput();
-        themeListDb = new DbAdapter(showDebugOutput);
+        themeListDb = new DbAdapter(this, showDebugOutput);
         if (showDebugOutput) Log.d(TAG, "Opening Database");
         themeListDb.open();
         setContentView(R.layout.themelist);

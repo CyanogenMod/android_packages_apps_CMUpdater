@@ -1,11 +1,12 @@
 package cmupdaterapp.database;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
+import android.database.sqlite.SQLiteOpenHelper;
 import cmupdaterapp.customTypes.FullThemeList;
 import cmupdaterapp.customTypes.Screenshot;
 import cmupdaterapp.customTypes.ThemeList;
@@ -13,7 +14,6 @@ import cmupdaterapp.customization.Customization;
 import cmupdaterapp.misc.Log;
 import cmupdaterapp.utils.StringUtils;
 
-import java.io.File;
 import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,10 +21,9 @@ import java.util.List;
 public class DbAdapter {
     private static final String TAG = "DbAdapter";
 
-    private static Boolean showDebugOutput = false;
+    private static Boolean showDebugOutput;
 
-    private static final String DATABASE_NAME = "cmupdater.db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 1;
     //Themelist
     private static final String DATABASE_TABLE_THEMELIST = "ThemeList";
     private static final String KEY_THEMELIST_ID = "id";
@@ -80,23 +79,122 @@ public class DbAdapter {
     	KEY_THEMELIST_FEATURED
     };
 
-    private SQLiteDatabase db;
-    private final DbOpenHelper dbHelper;
+    // SQL Statements to create a new database.
+    private static final String DATABASE_CREATE_THEMELIST =
+            "create table " +
+                    DATABASE_TABLE_THEMELIST +
+                    " (" +
+                    KEY_THEMELIST_ID + " integer primary key autoincrement, " +
+                    KEY_THEMELIST_NAME + " text not null, " +
+                    KEY_THEMELIST_URI + " text not null, " +
+                    KEY_THEMELIST_ENABLED + " integer default 0, " +
+                    KEY_THEMELIST_FEATURED + " integer default 0);";
 
-    public DbAdapter(Boolean _showDebugOutput) {
-        showDebugOutput = _showDebugOutput;
-        dbHelper = new DbOpenHelper();
+    private static final String DATABASE_CREATE_SCREENSHOTS =
+            "create table " +
+                    DATABASE_TABLE_SCREENSHOT +
+                    " (" +
+                    KEY_SCREENSHOT_ID + " integer primary key autoincrement, " +
+                    KEY_SCREENSHOT_THEMELIST_ID + " integer not null" +
+                    " CONSTRAINT " + THEMELIST_ID_FOREIGNKEYCONSTRAINT + " REFERENCES " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_ID + ") ON DELETE CASCADE, " +
+                    KEY_SCREENSHOT_URI + " text not null, " +
+                    KEY_SCREENSHOT_MODIFYDATE + " date not null, " +
+                    KEY_SCREENSHOT_SCREENSHOT + " blob);";
+
+    //Trigger for foreign Key Constraints (i hate sqlite, hail to ORACLE!)
+    private static final String TRIGGER_THEMELISTID_INSERT =
+            "CREATE TRIGGER " + TRIGGER_THEMELIST_ID_INSERT +
+                    " BEFORE INSERT ON " + DATABASE_TABLE_SCREENSHOT +
+                    " FOR EACH ROW BEGIN" +
+                    " SELECT CASE" +
+                    " WHEN ((new." + KEY_SCREENSHOT_THEMELIST_ID + " IS NOT NULL)" +
+                    " AND ((SELECT " + KEY_THEMELIST_ID + " FROM " + DATABASE_TABLE_THEMELIST +
+                    " WHERE " + KEY_THEMELIST_ID + " = new." + KEY_SCREENSHOT_THEMELIST_ID + ") IS NULL))" +
+                    " THEN RAISE(ABORT, 'insert on table " + DATABASE_TABLE_SCREENSHOT +
+                    " violates foreign key constraint " + THEMELIST_ID_FOREIGNKEYCONSTRAINT + "')" +
+                    " END;" +
+                    " END;";
+
+    private static final String TRIGGER_THEMELISTID_UPDATE =
+            "CREATE TRIGGER " + TRIGGER_THEMELIST_ID_UPDATE +
+                    " BEFORE UPDATE ON " + DATABASE_TABLE_SCREENSHOT +
+                    " FOR EACH ROW BEGIN" +
+                    " SELECT CASE" +
+                    " WHEN ((SELECT " + KEY_THEMELIST_ID + " FROM " + DATABASE_TABLE_THEMELIST +
+                    " WHERE " + KEY_THEMELIST_ID + " = new." + KEY_SCREENSHOT_THEMELIST_ID + ") IS NULL)" +
+                    " THEN RAISE(ABORT, 'update on table " + DATABASE_TABLE_SCREENSHOT +
+                    " violates foreign key constraint " + THEMELIST_ID_FOREIGNKEYCONSTRAINT + "')" +
+                    " END;" +
+                    " END;";
+
+    //Delete cached Screenshots, when ThemeList is removed
+    private static final String TRIGGER_THEMELISTID_DELETE =
+            "CREATE TRIGGER " + TRIGGER_THEMELIST_ID_DELETE +
+                    " BEFORE DELETE ON " + DATABASE_TABLE_THEMELIST +
+                    " FOR EACH ROW BEGIN" +
+                    " DELETE FROM " + DATABASE_TABLE_SCREENSHOT +
+                    " WHERE " + KEY_SCREENSHOT_THEMELIST_ID + " = old." + KEY_THEMELIST_ID + ";" +
+                    " END;";
+
+    //Indeces ThemeList
+    private static final String INDEX_THEMELIST_THEMELIST_ID =
+            "CREATE UNIQUE INDEX IF NOT EXISTS " + INDEX_THEMELIST_ID +
+                    " ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_ID + ");";
+
+    private static final String INDEX_THEMELIST_THEMELIST_NAME =
+            "CREATE INDEX IF NOT EXISTS " + INDEX_THEMELIST_NAME +
+                    " ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_NAME + ");";
+
+    private static final String INDEX_THEMELIST_THEMELIST_URI =
+            "CREATE INDEX IF NOT EXISTS " + INDEX_THEMELIST_URI +
+                    " ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_URI + ");";
+
+    private static final String INDEX_THEMELIST_THEMELIST_ENABLED =
+            "CREATE INDEX IF NOT EXISTS " + INDEX_THEMELIST_ENABLED +
+                    " ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_ENABLED + ");";
+
+    private static final String INDEX_THEMELIST_THEMELIST_FEATURED =
+            "CREATE INDEX IF NOT EXISTS " + INDEX_THEMELIST_FEATURED +
+                    " ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_FEATURED + ");";
+
+    //Indeces Screenshots
+    private static final String INDEX_SCREENSHOT_SCREENSHOT_ID =
+            "CREATE UNIQUE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_ID +
+                    " ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_ID + ");";
+
+    private static final String INDEX_SCREENSHOT_SCREENSHOT_THEMELIST_ID =
+            "CREATE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_THEMELIST_ID +
+                    " ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_THEMELIST_ID + ");";
+
+    private static final String INDEX_SCREENSHOT_SCREENSHOT_URI =
+            "CREATE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_URI +
+                    " ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_URI + ");";
+
+    private static final String INDEX_SCREENSHOT_SCREENSHOT_MODIFYDATE =
+            "CREATE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_MODIFYDATE +
+                    " ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_MODIFYDATE + ");";
+
+    private static final String INDEX_SCREENSHOT_SCREENSHOT_SCREENSHOT =
+            "CREATE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_SCREENSHOT +
+                    " ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_SCREENSHOT + ");";
+
+    private final Context context;
+    private final DatabaseHelper helper;
+    private SQLiteDatabase db;
+
+    public DbAdapter(Context _context, Boolean _showDebugOutput) {
+        context = _context;
+        helper = new DatabaseHelper(context);
+    	showDebugOutput = _showDebugOutput;
+    }
+
+    public DbAdapter open() throws SQLException{
+    	db = helper.getWritableDatabase();
+        return this;
     }
 
     public void close() {
-        db.close();
-    }
-
-    public void open() {
-        File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-        		+ "/" + Customization.EXTERNAL_DATA_DIRECTORY + "/");
-        f.mkdirs();
-        db = dbHelper.open(f.toString());
+        helper.close();
     }
 
     // Insert a new Theme
@@ -345,161 +443,62 @@ public class DbAdapter {
         db.execSQL("DELETE FROM " + DATABASE_TABLE_SCREENSHOT + ";");
     }
 
-    //Helper Class for opening/creating a Database
-    private static class DbOpenHelper {
-        public SQLiteDatabase open(String path) {
-            if (!path.endsWith("/"))
-                path += "/";
-            String databasePath = path + DbAdapter.DATABASE_NAME;
-            SQLiteDatabase s = SQLiteDatabase.openDatabase(databasePath, null,
-            		SQLiteDatabase.CREATE_IF_NECESSARY);
-            if (s.needUpgrade(DbAdapter.DATABASE_VERSION))
-                update(s, s.getVersion());
-            s.setVersion(DbAdapter.DATABASE_VERSION);
-            return s;
+    private static class DatabaseHelper extends SQLiteOpenHelper
+    {
+        DatabaseHelper(Context context)
+        {
+            super(context, Customization.DATABASE_FILE, null, DATABASE_VERSION);
         }
 
-        private void update(SQLiteDatabase s, int _oldVersion) {
-            if (showDebugOutput)
-                Log.d(TAG, "Upgrading from version " + _oldVersion + " to " + DbAdapter.DATABASE_VERSION + ", which will destroy all old data");
+        @Override
+        public void onCreate(SQLiteDatabase db)
+        {
+            if (showDebugOutput) Log.d(TAG, "Create Database");
+            db.execSQL(DATABASE_CREATE_THEMELIST);
+            db.execSQL(DATABASE_CREATE_SCREENSHOTS);
+
+            db.execSQL(INDEX_THEMELIST_THEMELIST_ID);
+            db.execSQL(INDEX_THEMELIST_THEMELIST_NAME);
+            db.execSQL(INDEX_THEMELIST_THEMELIST_URI);
+            db.execSQL(INDEX_THEMELIST_THEMELIST_ENABLED);
+            db.execSQL(INDEX_THEMELIST_THEMELIST_FEATURED);
+            db.execSQL(INDEX_SCREENSHOT_SCREENSHOT_ID);
+            db.execSQL(INDEX_SCREENSHOT_SCREENSHOT_THEMELIST_ID);
+            db.execSQL(INDEX_SCREENSHOT_SCREENSHOT_URI);
+            db.execSQL(INDEX_SCREENSHOT_SCREENSHOT_MODIFYDATE);
+            db.execSQL(INDEX_SCREENSHOT_SCREENSHOT_SCREENSHOT);
+
+            db.execSQL(TRIGGER_THEMELISTID_INSERT);
+            db.execSQL(TRIGGER_THEMELISTID_UPDATE);
+            db.execSQL(TRIGGER_THEMELISTID_DELETE);
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion,
+                              int newVersion)
+        {
+        	if (showDebugOutput)
+                Log.d(TAG, "Upgrading from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
             //Drop the old tables and triggers
             if (showDebugOutput) Log.d(TAG, "Dropping old Database");
-            s.execSQL("DROP TRIGGER IF EXISTS " + TRIGGER_THEMELIST_ID_INSERT);
-            s.execSQL("DROP TRIGGER IF EXISTS " + TRIGGER_THEMELIST_ID_UPDATE);
-            s.execSQL("DROP TRIGGER IF EXISTS " + TRIGGER_THEMELIST_ID_DELETE);
+            db.execSQL("DROP TRIGGER IF EXISTS " + TRIGGER_THEMELIST_ID_INSERT);
+            db.execSQL("DROP TRIGGER IF EXISTS " + TRIGGER_THEMELIST_ID_UPDATE);
+            db.execSQL("DROP TRIGGER IF EXISTS " + TRIGGER_THEMELIST_ID_DELETE);
 
-            s.execSQL("DROP INDEX IF EXISTS " + INDEX_THEMELIST_ID);
-            s.execSQL("DROP INDEX IF EXISTS " + INDEX_THEMELIST_NAME);
-            s.execSQL("DROP INDEX IF EXISTS " + INDEX_THEMELIST_URI);
-            s.execSQL("DROP INDEX IF EXISTS " + INDEX_THEMELIST_ENABLED);
-            s.execSQL("DROP INDEX IF EXISTS " + INDEX_THEMELIST_FEATURED);
-            s.execSQL("DROP INDEX IF EXISTS " + INDEX_SCREENSHOT_ID);
-            s.execSQL("DROP INDEX IF EXISTS " + INDEX_SCREENSHOT_THEMELIST_ID);
-            s.execSQL("DROP INDEX IF EXISTS " + INDEX_SCREENSHOT_URI);
-            s.execSQL("DROP INDEX IF EXISTS " + INDEX_SCREENSHOT_MODIFYDATE);
-            s.execSQL("DROP INDEX IF EXISTS " + INDEX_SCREENSHOT_SCREENSHOT);
+            db.execSQL("DROP INDEX IF EXISTS " + INDEX_THEMELIST_ID);
+            db.execSQL("DROP INDEX IF EXISTS " + INDEX_THEMELIST_NAME);
+            db.execSQL("DROP INDEX IF EXISTS " + INDEX_THEMELIST_URI);
+            db.execSQL("DROP INDEX IF EXISTS " + INDEX_THEMELIST_ENABLED);
+            db.execSQL("DROP INDEX IF EXISTS " + INDEX_THEMELIST_FEATURED);
+            db.execSQL("DROP INDEX IF EXISTS " + INDEX_SCREENSHOT_ID);
+            db.execSQL("DROP INDEX IF EXISTS " + INDEX_SCREENSHOT_THEMELIST_ID);
+            db.execSQL("DROP INDEX IF EXISTS " + INDEX_SCREENSHOT_URI);
+            db.execSQL("DROP INDEX IF EXISTS " + INDEX_SCREENSHOT_MODIFYDATE);
+            db.execSQL("DROP INDEX IF EXISTS " + INDEX_SCREENSHOT_SCREENSHOT);
 
-            s.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_SCREENSHOT);
-            s.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_THEMELIST);
-
-            // Create a new one.
-            if (showDebugOutput) Log.d(TAG, "Create Database");
-            s.execSQL(DATABASE_CREATE_THEMELIST);
-            s.execSQL(DATABASE_CREATE_SCREENSHOTS);
-
-            s.execSQL(INDEX_THEMELIST_THEMELIST_ID);
-            s.execSQL(INDEX_THEMELIST_THEMELIST_NAME);
-            s.execSQL(INDEX_THEMELIST_THEMELIST_URI);
-            s.execSQL(INDEX_THEMELIST_THEMELIST_ENABLED);
-            s.execSQL(INDEX_THEMELIST_THEMELIST_FEATURED);
-            s.execSQL(INDEX_SCREENSHOT_SCREENSHOT_ID);
-            s.execSQL(INDEX_SCREENSHOT_SCREENSHOT_THEMELIST_ID);
-            s.execSQL(INDEX_SCREENSHOT_SCREENSHOT_URI);
-            s.execSQL(INDEX_SCREENSHOT_SCREENSHOT_MODIFYDATE);
-            s.execSQL(INDEX_SCREENSHOT_SCREENSHOT_SCREENSHOT);
-
-            s.execSQL(TRIGGER_THEMELISTID_INSERT);
-            s.execSQL(TRIGGER_THEMELISTID_UPDATE);
-            s.execSQL(TRIGGER_THEMELISTID_DELETE);
+            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_SCREENSHOT);
+            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_THEMELIST);
+            onCreate(db);
         }
-
-        // SQL Statements to create a new database.
-        private static final String DATABASE_CREATE_THEMELIST =
-                "create table " +
-                        DATABASE_TABLE_THEMELIST +
-                        " (" +
-                        KEY_THEMELIST_ID + " integer primary key autoincrement, " +
-                        KEY_THEMELIST_NAME + " text not null, " +
-                        KEY_THEMELIST_URI + " text not null, " +
-                        KEY_THEMELIST_ENABLED + " integer default 0, " +
-                        KEY_THEMELIST_FEATURED + " integer default 0);";
-
-        private static final String DATABASE_CREATE_SCREENSHOTS =
-                "create table " +
-                        DATABASE_TABLE_SCREENSHOT +
-                        " (" +
-                        KEY_SCREENSHOT_ID + " integer primary key autoincrement, " +
-                        KEY_SCREENSHOT_THEMELIST_ID + " integer not null" +
-                        " CONSTRAINT " + THEMELIST_ID_FOREIGNKEYCONSTRAINT + " REFERENCES " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_ID + ") ON DELETE CASCADE, " +
-                        KEY_SCREENSHOT_URI + " text not null, " +
-                        KEY_SCREENSHOT_MODIFYDATE + " date not null, " +
-                        KEY_SCREENSHOT_SCREENSHOT + " blob);";
-
-        //Trigger for foreign Key Constraints (i hate sqlite, hail to ORACLE!)
-        private static final String TRIGGER_THEMELISTID_INSERT =
-                "CREATE TRIGGER " + TRIGGER_THEMELIST_ID_INSERT +
-                        " BEFORE INSERT ON " + DATABASE_TABLE_SCREENSHOT +
-                        " FOR EACH ROW BEGIN" +
-                        " SELECT CASE" +
-                        " WHEN ((new." + KEY_SCREENSHOT_THEMELIST_ID + " IS NOT NULL)" +
-                        " AND ((SELECT " + KEY_THEMELIST_ID + " FROM " + DATABASE_TABLE_THEMELIST +
-                        " WHERE " + KEY_THEMELIST_ID + " = new." + KEY_SCREENSHOT_THEMELIST_ID + ") IS NULL))" +
-                        " THEN RAISE(ABORT, 'insert on table " + DATABASE_TABLE_SCREENSHOT +
-                        " violates foreign key constraint " + THEMELIST_ID_FOREIGNKEYCONSTRAINT + "')" +
-                        " END;" +
-                        " END;";
-
-        private static final String TRIGGER_THEMELISTID_UPDATE =
-                "CREATE TRIGGER " + TRIGGER_THEMELIST_ID_UPDATE +
-                        " BEFORE UPDATE ON " + DATABASE_TABLE_SCREENSHOT +
-                        " FOR EACH ROW BEGIN" +
-                        " SELECT CASE" +
-                        " WHEN ((SELECT " + KEY_THEMELIST_ID + " FROM " + DATABASE_TABLE_THEMELIST +
-                        " WHERE " + KEY_THEMELIST_ID + " = new." + KEY_SCREENSHOT_THEMELIST_ID + ") IS NULL)" +
-                        " THEN RAISE(ABORT, 'update on table " + DATABASE_TABLE_SCREENSHOT +
-                        " violates foreign key constraint " + THEMELIST_ID_FOREIGNKEYCONSTRAINT + "')" +
-                        " END;" +
-                        " END;";
-
-        //Delete cached Screenshots, when ThemeList is removed
-        private static final String TRIGGER_THEMELISTID_DELETE =
-                "CREATE TRIGGER " + TRIGGER_THEMELIST_ID_DELETE +
-                        " BEFORE DELETE ON " + DATABASE_TABLE_THEMELIST +
-                        " FOR EACH ROW BEGIN" +
-                        " DELETE FROM " + DATABASE_TABLE_SCREENSHOT +
-                        " WHERE " + KEY_SCREENSHOT_THEMELIST_ID + " = old." + KEY_THEMELIST_ID + ";" +
-                        " END;";
-
-        //Indeces ThemeList
-        private static final String INDEX_THEMELIST_THEMELIST_ID =
-                "CREATE UNIQUE INDEX IF NOT EXISTS " + INDEX_THEMELIST_ID +
-                        " ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_ID + ");";
-
-        private static final String INDEX_THEMELIST_THEMELIST_NAME =
-                "CREATE INDEX IF NOT EXISTS " + INDEX_THEMELIST_NAME +
-                        " ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_NAME + ");";
-
-        private static final String INDEX_THEMELIST_THEMELIST_URI =
-                "CREATE INDEX IF NOT EXISTS " + INDEX_THEMELIST_URI +
-                        " ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_URI + ");";
-
-        private static final String INDEX_THEMELIST_THEMELIST_ENABLED =
-                "CREATE INDEX IF NOT EXISTS " + INDEX_THEMELIST_ENABLED +
-                        " ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_ENABLED + ");";
-
-        private static final String INDEX_THEMELIST_THEMELIST_FEATURED =
-                "CREATE INDEX IF NOT EXISTS " + INDEX_THEMELIST_FEATURED +
-                        " ON " + DATABASE_TABLE_THEMELIST + "(" + KEY_THEMELIST_FEATURED + ");";
-
-        //Indeces Screenshots
-        private static final String INDEX_SCREENSHOT_SCREENSHOT_ID =
-                "CREATE UNIQUE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_ID +
-                        " ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_ID + ");";
-
-        private static final String INDEX_SCREENSHOT_SCREENSHOT_THEMELIST_ID =
-                "CREATE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_THEMELIST_ID +
-                        " ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_THEMELIST_ID + ");";
-
-        private static final String INDEX_SCREENSHOT_SCREENSHOT_URI =
-                "CREATE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_URI +
-                        " ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_URI + ");";
-
-        private static final String INDEX_SCREENSHOT_SCREENSHOT_MODIFYDATE =
-                "CREATE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_MODIFYDATE +
-                        " ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_MODIFYDATE + ");";
-
-        private static final String INDEX_SCREENSHOT_SCREENSHOT_SCREENSHOT =
-                "CREATE INDEX IF NOT EXISTS " + INDEX_SCREENSHOT_SCREENSHOT +
-                        " ON " + DATABASE_TABLE_SCREENSHOT + "(" + KEY_SCREENSHOT_SCREENSHOT + ");";
     }
 }

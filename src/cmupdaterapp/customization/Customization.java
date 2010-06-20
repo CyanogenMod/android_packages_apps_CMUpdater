@@ -7,8 +7,10 @@ public class Customization {
     public static final String MIN_SUPPORTED_VERSION_STRING = RO_MOD_START_STRING + "4.1.99";
     //Updateinstructions for the min supported Version
     public static final String UPDATE_INSTRUCTIONS_URL = "http://wiki.cyanogenmod.com/index.php/Upgrading_From_Older_CyanogenMod_or_other_rooted_ROMs";
-    //Data Firectory on SDCard
-    public static final String EXTERNAL_DATA_DIRECTORY = "cmupdater/data";
+    //DB filename
+    public static final String DATABASE_FILE = "cmupdater.db";
+    //DownloadDirectory
+    public static final String DOWNLOAD_DIR = "download";
     //MUST be the first package name.
     public static final String PACKAGE_FIRST_NAME = "cmupdaterapp";
     //Filename for Instance save

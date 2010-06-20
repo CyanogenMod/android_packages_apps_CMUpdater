@@ -1,6 +1,5 @@
 package cmupdaterapp.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -24,7 +23,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class Preferences extends Activity {
+public class Preferences {
     private static final String TAG = "Preferences";
 
     private Boolean showDebugOutput = false;
@@ -33,10 +32,12 @@ public class Preferences extends Activity {
     private final Resources mRes;
     private String temp;
     private boolean tempbool;
+    private final Context context;
 
     public Preferences(Context ctx) {
         mPrefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         mRes = ctx.getResources();
+        context = ctx;
         showDebugOutput = displayDebugOutput();
         if (showDebugOutput) Log.d(TAG, "Preference Instance set.");
     }
@@ -125,32 +126,37 @@ public class Preferences extends Activity {
     }
 
     public LinkedList<ThemeList> getThemeUpdateUrls() {
-        DbAdapter themeListDb = new DbAdapter(showDebugOutput);
+        DbAdapter themeListDb = new DbAdapter(context, showDebugOutput);
         if (showDebugOutput) Log.d(TAG, "Opening Database");
-        themeListDb.open();
-        //Get the actual ThemeList from the Database
-        Cursor themeListCursor = themeListDb.getAllThemesCursor();
-        startManagingCursor(themeListCursor);
-        themeListCursor.requery();
         FullThemeList fullThemeList = new FullThemeList();
-        if (themeListCursor.moveToFirst()) {
-            do {
-                String name = themeListCursor.getString(DbAdapter.COLUMN_THEMELIST_NAME);
-                String uri = themeListCursor.getString(DbAdapter.COLUMN_THEMELIST_URI);
-                int pk = themeListCursor.getInt(DbAdapter.COLUMN_THEMELIST_ID);
-                int enabled = themeListCursor.getInt(DbAdapter.COLUMN_THEMELIST_ENABLED);
-                ThemeList newItem = new ThemeList();
-                newItem.name = name;
-                newItem.url = URI.create(uri);
-                newItem.enabled = enabled == 1;
-                newItem.PrimaryKey = pk;
-                fullThemeList.addThemeToList(newItem);
-            }
-            while (themeListCursor.moveToNext());
+        //Get the actual ThemeList from the Database
+        Cursor themeListCursor = null;
+        try {
+            themeListDb.open();
+            themeListCursor = themeListDb.getAllThemesCursor();
+	        themeListCursor.requery();
+	        if (themeListCursor.moveToFirst()) {
+	            do {
+	                String name = themeListCursor.getString(DbAdapter.COLUMN_THEMELIST_NAME);
+	                String uri = themeListCursor.getString(DbAdapter.COLUMN_THEMELIST_URI);
+	                int pk = themeListCursor.getInt(DbAdapter.COLUMN_THEMELIST_ID);
+	                int enabled = themeListCursor.getInt(DbAdapter.COLUMN_THEMELIST_ENABLED);
+	                ThemeList newItem = new ThemeList();
+	                newItem.name = name;
+	                newItem.url = URI.create(uri);
+	                newItem.enabled = enabled == 1;
+	                newItem.PrimaryKey = pk;
+	                fullThemeList.addThemeToList(newItem);
+	            }
+	            while (themeListCursor.moveToNext());
+	        }
+	        if (showDebugOutput) Log.d(TAG, "Closing Database");
+	        themeListDb.close();
+	        return fullThemeList.returnFullThemeList();
+        } finally {
+        	if (themeListCursor != null && !themeListCursor.isClosed())
+        		themeListCursor.close();
         }
-        if (showDebugOutput) Log.d(TAG, "Closing Database");
-        themeListDb.close();
-        return fullThemeList.returnFullThemeList();
     }
 
     public String getThemeFile() {
@@ -166,7 +172,7 @@ public class Preferences extends Activity {
     }
 
     public boolean ThemeUpdateUrlSet() {
-        DbAdapter themeListDb = new DbAdapter(showDebugOutput);
+        DbAdapter themeListDb = new DbAdapter(context, showDebugOutput);
         if (showDebugOutput) Log.d(TAG, "Opening Database");
         themeListDb.open();
         long count = themeListDb.getThemeCount();
@@ -210,13 +216,13 @@ public class Preferences extends Activity {
 
     //Advanced Properties
     public String getUpdateFolder() {
-        temp = mPrefs.getString(mRes.getString(R.string.PREF_UPDATE_FOLDER), mRes.getString(R.string.conf_update_folder)).trim();
+        temp = mPrefs.getString(mRes.getString(R.string.PREF_UPDATE_FOLDER), Customization.DOWNLOAD_DIR);
         if (showDebugOutput) Log.d(TAG, "UpdateFolder: " + temp);
         return temp;
     }
 
     public boolean setUpdateFolder(String folder) {
-        String folderTrimmed = folder.trim();
+    	String folderTrimmed = folder.trim();
         File f = new File(Environment.getExternalStorageDirectory() + "/" + folderTrimmed);
         if (f.isFile())
             return false;

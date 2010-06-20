@@ -116,7 +116,6 @@
                 android:title="@string/p_update_folder_title"
                 android:summary="@string/p_update_folder_summary"
                 android:dialogTitle="@string/p_update_folder_title"
-                android:defaultValue="@string/conf_update_folder"
                 android:singleLine="false"/>
         <Preference
                 android:key="prefUpdateFolderDef"
