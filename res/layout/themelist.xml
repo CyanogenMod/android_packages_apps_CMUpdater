@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
-    <TextView
-            android:id="@+id/theme_list_info"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            style="@style/TextAppearance.Text"/>
-    <ListView
-            android:id="@android:id/android:list"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<TextView
+		android:id="@+id/theme_list_info"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		style="@style/TextAppearance.Text"/>
+	<ListView
+		android:id="@android:id/android:list"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"/>
 </LinearLayout>

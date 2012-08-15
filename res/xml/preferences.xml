@@ -35,12 +35,11 @@
                 android:dependency="prefNotifications"/>
     </PreferenceScreen>
     <!-- Nandroid Backup -->
-    <!--
-         <CheckBoxPreference android:key="doNandroidBackup"
-         android:title="@string/p_do_nandroid_backup_title"
-         android:summary="@string/p_do_nandroid_backup_summary"
-         android:defaultValue="@string/p_do_nandroid_backup_def_value" />
-     -->
+    <CheckBoxPreference
+            android:key="doNandroidBackup"
+            android:title="@string/p_do_nandroid_backup_title"
+            android:summary="@string/p_do_nandroid_backup_summary"
+            android:defaultValue="@string/PREF_DO_NANDROID_BACKUP_DEF_VALUE" />
     <!-- Rom -->
     <PreferenceScreen
             android:title="@string/p_rom_screen_title"
@@ -70,37 +69,6 @@
                 android:key="prefUpdateFileURLDef"
                 android:title="@string/p_update_file_url_def_title"
                 android:summary="@string/p_update_file_url_def_summary"/>
-    </PreferenceScreen>
-    <!-- Theme -->
-    <PreferenceScreen
-            android:key="prefConfigThemes"
-            android:title="@string/p_theme_screen_title"
-            android:summary="@string/p_theme_screen_summary">
-        <CheckBoxPreference
-                android:key="displayOlderThemeVersions"
-                android:title="@string/p_display_older_theme_versions_title"
-                android:summary="@string/p_display_older_theme_versions_summary"
-                android:defaultValue="@string/PREF_DISPLAY_OLDER_THEME_VERSIONS_DEF_VALUE"/>
-        <CheckBoxPreference
-                android:key="displayExperimentalThemeVersions"
-                android:title="@string/p_allow_experimental_theme_versions_title"
-                android:summary="@string/p_allow_experimental_theme_versions_summary"
-                android:defaultValue="@string/PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS_DEF_VALUE"/>
-        <Preference
-                android:key="prefThemesList"
-                android:title="@string/p_theme_list_title"
-                android:summary="@string/p_theme_list_summary"/>
-        <EditTextPreference
-                android:key="prefThemeFile"
-                android:title="@string/p_theme_file_title"
-                android:summary="@string/p_theme_file_summary"
-                android:dialogTitle="@string/p_theme_file_title"
-                android:defaultValue="@string/conf_theme_version_file_def"
-                android:singleLine="false"/>
-        <Preference
-                android:key="prefThemeFileDef"
-                android:title="@string/p_theme_file_def_title"
-                android:summary="@string/p_theme_file_def_summary"/>
     </PreferenceScreen>
     <!-- Advanced Properties -->
     <PreferenceScreen

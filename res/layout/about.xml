@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/app_name"/>
-    <TextView
-            android:id="@+id/version_name_about_text_view"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            />
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="4dip"
-            android:text="@string/about_comments"/>
-
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="4dip"
-            android:text="@string/about_credits"/>
-
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="4dip"
-            android:text="@string/about_website_url"/>
+    	android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:text="@string/app_name"/>
+	<TextView
+		android:id="@+id/version_name_about_text_view"
+    	android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		/>
+	<TextView
+    	android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:padding="4dip"
+		android:text="@string/about_comments"/>
+		
+	<TextView
+    	android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:padding="4dip"
+		android:text="@string/about_credits"/>
+		
+	<TextView
+    	android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:padding="4dip"
+		android:text="@string/about_website_url"/>
 </LinearLayout>

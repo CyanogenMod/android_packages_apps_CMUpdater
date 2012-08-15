@@ -108,15 +108,15 @@ public final class IntentIntegrator {
    * to the {@link Activity}'s resource bundle entries.
    */
   public static AlertDialog initiateScan(Activity activity,
-                                         int stringTitle,
-                                         int stringMessage,
-                                         int stringButtonYes,
-                                         int stringButtonNo) {
+                                  int stringTitle,
+                                  int stringMessage,
+                                  int stringButtonYes,
+                                  int stringButtonNo) {
     return initiateScan(activity,
-                        activity.getString(stringTitle),
-                        activity.getString(stringMessage),
-                        activity.getString(stringButtonYes),
-                        activity.getString(stringButtonNo));
+                 activity.getString(stringTitle),
+                 activity.getString(stringMessage),
+                 activity.getString(stringButtonYes),
+                 activity.getString(stringButtonNo));
   }
 
   /**

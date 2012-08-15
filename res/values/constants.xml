@@ -27,8 +27,8 @@
 	<string name="PREF_DEBUG_OUTPUT">prefDebugOutput</string>
 	
 	<!-- Default Values for Preference Keys -->
-	<string name="PREF_UPDATE_CHECK_FREQUENCY_DEF_VALUE">-1</string>
-	<string name="PREF_DO_NANDROID_BACKUP_DEF_VALUE">true</string>
+	<string name="PREF_UPDATE_CHECK_FREQUENCY_DEF_VALUE">86400</string>
+	<string name="PREF_DO_NANDROID_BACKUP_DEF_VALUE">false</string>
 	<string name="PREF_NOTIFICATION_VIBRATE_DEF_VALUE">true</string>
 	<string name="PREF_NOTIFICATION_ENABLED_DEF_VALUE">true</string>
 	<string name="PREF_PROGRESS_UPDATE_FREQUENCY_DEF_VALUE">500</string>

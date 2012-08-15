@@ -1,222 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/background"
-        android:gravity="center_horizontal">
-    <TableLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:stretchColumns="*">
-        <TableRow>
-            <Button
-                    android:id="@+id/button_available_updates"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_available_updates"
-                    android:layout_marginTop="10sp"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@drawable/background"
+	android:gravity="center_horizontal">
+	<TableLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:stretchColumns="*">
+		<TableRow>
+			<Button
+				android:id="@+id/button_available_updates"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/button_available_updates"
+				android:layout_marginTop="10sp"
                     style="@style/TextAppearance.Button"
                     android:onClick="ListenerFlipperButton"/>
-            <Button
-                    android:id="@+id/button_available_themes"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_available_themes"
-                    android:layout_marginTop="10sp"
+			<Button
+				android:id="@+id/button_available_themes"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/button_available_themes"
+				android:layout_marginTop="10sp"
                     style="@style/TextAppearance.Button"
                     android:onClick="ListenerFlipperButton"/>
-            <Button
-                    android:id="@+id/button_existing_updates"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_existing_updates"
-                    android:layout_marginTop="10sp"
+			<Button
+				android:id="@+id/button_existing_updates"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/button_existing_updates"
+				android:layout_marginTop="10sp"
                     style="@style/TextAppearance.Button"
                     android:onClick="ListenerFlipperButton"/>
-        </TableRow>
-    </TableLayout>
-    <ViewFlipper
-            android:id="@+id/Flipper"
+		</TableRow>
+	</TableLayout>
+	<ViewFlipper
+		android:id="@+id/Flipper"
             android:inAnimation="@anim/push_left_in"
             android:outAnimation="@anim/push_left_out"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-        <!-- Roms -->
-        <ScrollView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-            <LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<!-- Roms -->
+		<ScrollView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+		    <LinearLayout 
                     android:id="@+id/rom_layout"
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal">
-                <TextView
-                        android:id="@+id/available_updates_text"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/available_updates_text"
-                        android:gravity="center_horizontal"
-                        android:layout_marginTop="10sp"
+		    	android:orientation="vertical"
+		    	android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content"
+		    	android:gravity="center_horizontal">
+			    <TextView
+			    	android:id="@+id/available_updates_text"
+			    	android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/available_updates_text"
+					android:gravity="center_horizontal"
+					android:layout_marginTop="10sp"
                         style="@style/TextAppearance.Text"/>
-                <Spinner
-                        android:id="@+id/available_updates_list"
-                        android:layout_marginTop="20sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
+				<Spinner
+					android:id="@+id/available_updates_list"
+					android:layout_marginTop="20sp"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_horizontal"
                         android:prompt="@string/available_updates_text"/>
-                <LinearLayout
+				<LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20sp"
                         android:id="@+id/stable_experimental_description_container_updates">
-                    <ImageView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:src="@drawable/stable"/>
-                    <TextView
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="@string/stable_description"
-                            style="@style/TextAppearance.Text"
-                            android:paddingTop="2px"
-                            android:layout_marginLeft="5px"
-                            android:layout_marginRight="20px"/>
-                    <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/experimental"/>
-                    <TextView
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="@string/experimental_description"
-                            style="@style/TextAppearance.Text"
-                            android:paddingTop="2px"
-                            android:layout_marginLeft="5px"/>
+                    	<ImageView
+                    			android:layout_height="25px"
+                    			android:layout_width="25px"
+                    			android:src="@android:drawable/ic_menu_myplaces" />
+                    	<TextView
+                    			android:layout_height="wrap_content"
+                    			android:gravity="center_horizontal"
+                    			android:text="@string/stable_description"
+                    			style="@style/TextAppearance.Text"
+                    			android:paddingTop="2px"
+                    			android:layout_width="fill_parent"/>
+                		<ImageView
+                				android:layout_width="25px" 
+                				android:layout_height="25px" 
+                				android:src="@android:drawable/ic_menu_manage" />
+                		<TextView
+                				android:layout_height="wrap_content"
+                				android:gravity="center_horizontal"
+                				android:text="@string/experimental_description"
+                				style="@style/TextAppearance.Text"
+                				android:paddingTop="2px"
+                				android:layout_marginLeft="5px"
+                				android:layout_width="fill_parent"/>
                 </LinearLayout>
-                <Button
-                        android:id="@+id/download_update_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/choose_available_update_text"
-                        android:layout_marginTop="20sp"
-                        style="@style/TextAppearance.Button"
-                        android:drawableLeft="@drawable/download"
+			    <Button
+			    	android:id="@+id/download_update_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/choose_available_update_text"
+					android:layout_marginTop="20sp"
+				    style="@style/TextAppearance.Button"
+                        android:drawableLeft="@*android:drawable/ic_menu_upload"
                         android:onClick="ListenerDownloadUpdateButton"/>
-                <Button
-                        android:id="@+id/show_changelog_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/changelog_button_text"
-                        android:layout_marginTop="20sp"
-                        style="@style/TextAppearance.Button"
-                        android:drawableLeft="@drawable/icon"
+				<Button
+			    	android:id="@+id/show_changelog_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/changelog_button_text"
+					android:layout_marginTop="20sp"
+				    style="@style/TextAppearance.Button"
+                        android:drawableLeft="@android:drawable/ic_menu_recent_history"
                         android:onClick="ListenerUpdateChangelogButton"/>
-                <TextView
-                        android:id="@+id/check_now_update_chooser_text_updates"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/no_updates_found_instructions"
-                        android:gravity="center_horizontal"
-                        android:layout_marginTop="10sp"
+				<TextView
+			    	android:id="@+id/check_now_update_chooser_text_updates"
+			    	android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/no_updates_found_instructions"
+					android:gravity="center_horizontal"
+					android:layout_marginTop="10sp"
                         android:visibility="gone"
                         style="@style/TextAppearance.Text"/>
-                <Button
-                        android:id="@+id/check_now_button_update_chooser_updates"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/check_now_button_text"
-                        android:layout_marginTop="20sp"
-                        style="@style/TextAppearance.Button"
+				<Button
+				    android:id="@+id/check_now_button_update_chooser_updates"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/check_now_button_text"
+					android:layout_marginTop="20sp"
+				    style="@style/TextAppearance.Button"
                         android:visibility="gone"
-                        android:drawableLeft="@drawable/check_now"
+                        android:drawableLeft="@*android:drawable/ic_menu_refresh"
                         android:onClick="checkForUpdates"/>
-                <TextView
-                        android:id="@+id/last_rom_update_check"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10px"
-                        android:layout_marginRight="10px"
+				<TextView
+				    android:id="@+id/last_rom_update_check"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10px"
+					android:layout_marginRight="10px"
                         android:layout_gravity="bottom|right"/>
-                <TextView
-                        android:id="@+id/experimental_rom_updates_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10px"
-                        android:layout_marginRight="10px"
+				<TextView
+			    	android:id="@+id/experimental_rom_updates_textview"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10px"
+					android:layout_marginRight="10px"
                         android:layout_gravity="bottom|right"/>
-                <TextView
-                        android:id="@+id/show_rom_downgrades_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10px"
-                        android:layout_marginRight="10px"
+				<TextView
+			    	android:id="@+id/show_rom_downgrades_textview"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10px"
+					android:layout_marginRight="10px"
                         android:layout_gravity="bottom|right"/>
-            </LinearLayout>
-        </ScrollView>
-        <!-- Existing Updates -->
-        <ScrollView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-            <LinearLayout
+			</LinearLayout>
+		</ScrollView>
+		<!-- Existing Updates -->
+		<ScrollView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+			<LinearLayout 
                     android:id="@+id/existing_layout"
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal">
-                <TextView
-                        android:id="@+id/no_existing_updates_found_textview"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/no_existing_updates_found"
-                        android:layout_marginBottom="10px"
-                        style="@style/TextAppearance.Text"
-                        android:gravity="center_horizontal"
-                        android:visibility="gone"/>
-                <TextView
-                        android:id="@+id/downloaded_update_found"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/downloaded_update_found_text"
-                        android:layout_marginBottom="10px"
-                        style="@style/TextAppearance.Text"
-                        android:gravity="center_horizontal"/>
-                <Spinner
-                        android:id="@+id/found_updates_list"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+		    	android:orientation="vertical"
+		    	android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content"
+		    	android:gravity="center_horizontal">
+				<TextView
+					android:id="@+id/no_existing_updates_found_textview"
+			    	android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/no_existing_updates_found"
+					android:layout_marginBottom="10px"
+			    	style="@style/TextAppearance.Text"
+			    	android:gravity="center_horizontal"
+			    	android:visibility="gone"/>
+				<TextView
+					android:id="@+id/downloaded_update_found"
+			    	android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/downloaded_update_found_text"
+					android:layout_marginBottom="10px"
+			    	style="@style/TextAppearance.Text"
+			    	android:gravity="center_horizontal"/>
+				<Spinner
+					android:id="@+id/found_updates_list"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"/>
-                <Button
-                        android:id="@+id/apply_update_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/apply_update_button_text"
-                        android:drawableLeft="@drawable/verify_and_apply"
+				<Button
+			    	android:id="@+id/apply_update_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/apply_update_button_text"
+				    android:drawableLeft="@android:drawable/ic_menu_agenda"
                         style="@style/TextAppearance.Button"
                         android:onClick="ListenerApplyExistingButton"/>
-                <Button
-                        android:id="@+id/delete_updates_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/delete_updates_text"
-                        style="@style/TextAppearance.Button"
-                        android:drawableLeft="@drawable/check_now"
+				<Button
+			    	android:id="@+id/delete_updates_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/delete_updates_text"
+				    style="@style/TextAppearance.Button"
+                        android:drawableLeft="@android:drawable/ic_menu_delete"
                         android:onClick="ListenerDeleteUpdatesButton"/>
-            </LinearLayout>
-        </ScrollView>
-        <!-- Themes -->
-        <ViewStub
-                android:id="@+id/main_stub_themes"
-                android:layout="@layout/main_themesstub"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+			</LinearLayout>
+		</ScrollView>
+		<!-- Themes -->
+		<ViewStub
+  			android:id="@+id/main_stub_themes"
+			android:layout="@layout/main_themesstub"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
                 android:layout_gravity="bottom"/>
-    </ViewFlipper>
+	</ViewFlipper>
 </LinearLayout>
