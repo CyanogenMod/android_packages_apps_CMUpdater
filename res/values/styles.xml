@@ -4,25 +4,20 @@
     </style>
     <style name="TextAppearance.Text">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@android:color/white</item>
     </style>
     <style name="TextAppearance.TextSpinner">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@android:color/black</item>
     </style>
     <style name="TextAppearance.TextSmall">
         <item name="android:textSize">10sp</item>
-        <item name="android:textColor">@android:color/white</item>
     </style>
     <style name="TextAppearance.Subtitle">
         <item name="android:textSize">17sp</item>
-        <item name="android:textColor">@android:color/white</item>
     </style>
     <style name="TextAppearance.Button" >
         <item name="android:textSize">17sp</item>
-        <item name="android:textColor">@android:color/black</item>
     </style>
-    <style name="Theme.loading" parent="android:Theme">
+    <style name="Theme.loading" parent="android:style/Theme.Holo.NoActionBar">
         <item name="android:windowBackground">@drawable/loading</item>
         <item name="android:windowNoTitle">false</item>
     </style>

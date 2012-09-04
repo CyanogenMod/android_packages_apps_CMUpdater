@@ -5,31 +5,31 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:verticalSpacing="0px">
-		<ImageView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:verticalSpacing="0px"
-			android:src="@drawable/icon"
-            android:layout_gravity="center"/>
+                <ImageView android:id="@+id/icon"
+                    android:layout_width="@android:dimen/notification_large_icon_width"
+                    android:layout_height="@android:dimen/notification_large_icon_height"
+                    android:src="@drawable/icon"
+                    android:scaleType="center"
+        />
 		<LinearLayout
 			xmlns:android="http://schemas.android.com/apk/res/android"
 			android:orientation="vertical"
-			android:layout_width="fill_parent"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:paddingTop="6dp"
+			android:layout_marginLeft="8dp"
 			android:verticalSpacing="0px">
 				<TextView
 					android:text="@string/notification_tickertext"
 					android:textStyle="bold"
 					android:layout_width="wrap_content"
 					android:layout_height="fill_parent"
-					android:verticalSpacing="0px"
-                android:textColor="#000"/>
+					android:verticalSpacing="0px"/>
 				<TextView
 					android:id="@+id/notificationTextDownloadInfos"
 					android:layout_width="wrap_content"
 					android:layout_height="fill_parent"
-					android:verticalSpacing="0px"
-                android:textColor="#000"/>
+					android:verticalSpacing="0px"/>
 				<ProgressBar 
 					android:id="@+id/notificationProgressBar"
 		    		style="?android:attr/progressBarStyleHorizontal" 

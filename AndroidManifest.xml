@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           android:versionName="5.0.1.2" android:versionCode="5012" package="com.cyanogenmod.updater.ui">
 
-    <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="4"/>
+    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="15"/>
 
 	<application
 		android:label="@string/app_name"
+		android:theme="@android:style/Theme.Holo"
 		android:icon="@drawable/icon">
 
 		<activity

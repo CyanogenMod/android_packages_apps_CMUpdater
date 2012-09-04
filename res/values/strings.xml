@@ -90,7 +90,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	
 	<string name="no_existing_updates_found">No Existing Updates found</string>
 
-	<string name="title_running">running</string>
+	<string name="title_running">running on CyanogenMod</string>
 	
 	<string name="no_updatecheck_executed">No Updatecheck executed</string>
 	
