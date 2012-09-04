@@ -25,6 +25,7 @@
 
 		<activity
                 android:name="com.cyanogenmod.updater.ui.DownloadActivity"
+                android:launchMode="singleInstance"
                 android:configChanges="orientation|keyboardHidden"/>
 		<activity
                 android:name="com.cyanogenmod.updater.ui.ConfigActivity"
