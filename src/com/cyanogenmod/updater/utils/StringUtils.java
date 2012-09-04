@@ -84,7 +84,9 @@ public class StringUtils {
         } else if (iNewVersion > iOldVersion) {
             return true;
         } else {
-            return newDate > oldDate;
+            return newDate > oldDate + 3600; /* The jenkins timestamp is for 
+                                                build completion, not the 
+                                                actual build.date prop */
         }
     }
 }
