@@ -8,7 +8,7 @@ public class Constants {
 
 	//UpdateInfo
 	public static final String UPDATE_INFO_BRANCH_STABLE = "stable";
-	public static final String UPDATE_INFO_BRANCH_EXPERIMENTAL = "nightly";
+	public static final String UPDATE_INFO_BRANCH_NIGHTLY = "nightly";
 	public static final String UPDATE_INFO_WILDCARD = "*";
 
 	//JSON Objects

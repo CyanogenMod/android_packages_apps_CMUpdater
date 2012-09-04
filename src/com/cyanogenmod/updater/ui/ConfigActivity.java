@@ -128,11 +128,11 @@ public class ConfigActivity extends PreferenceActivity {
                     }
                     });
 
-            //Show Experimental Roms
-            pref = findPreference(res.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS));
+            //Show Nightly Roms
+            pref = findPreference(res.getString(R.string.PREF_DISPLAY_NIGHTLY_ROM_VERSIONS));
             pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                     public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    Toast.makeText(getBaseContext(), R.string.p_allow_experimental_rom_versions_changed, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), R.string.p_allow_nightly_rom_versions_changed, Toast.LENGTH_LONG).show();
                     return true;
                     }
                     });

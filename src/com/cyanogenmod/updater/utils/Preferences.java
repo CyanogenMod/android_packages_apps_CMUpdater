@@ -84,9 +84,9 @@ public class Preferences {
         return tempbool;
     }
 
-    public boolean showExperimentalRomUpdates() {
-        tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS_DEF_VALUE)));
-        if (showDebugOutput) Log.d(TAG, "Display Experimental Rom Updates: " + tempbool);
+    public boolean showNightlyRomUpdates() {
+        tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_DISPLAY_NIGHTLY_ROM_VERSIONS), Boolean.valueOf(mRes.getString(R.string.PREF_DISPLAY_NIGHTLY_ROM_VERSIONS_DEF_VALUE)));
+        if (showDebugOutput) Log.d(TAG, "Display Nightly Rom Updates: " + tempbool);
         return tempbool;
     }
 

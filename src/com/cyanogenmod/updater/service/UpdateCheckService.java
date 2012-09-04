@@ -53,7 +53,7 @@ public class UpdateCheckService extends Service {
     private String systemMod;
     private String systemRom;
     private Integer currentBuildDate;
-    private boolean showExperimentalRomUpdates;
+    private boolean showNightlyRomUpdates;
     private boolean showAllRomUpdates;
     private boolean WildcardUsed = false;
 
@@ -172,7 +172,7 @@ public class UpdateCheckService extends Service {
         HttpEntity romResponseEntity = null;
         systemRom = SysUtils.getModVersion();
         currentBuildDate = new Integer(SysUtils.getSystemProperty(Customization.BUILD_DATE));
-        showExperimentalRomUpdates = mPreferences.showExperimentalRomUpdates();
+        showNightlyRomUpdates = mPreferences.showNightlyRomUpdates();
         showAllRomUpdates = mPreferences.showAllRomUpdates();
         //Get the actual Rom Updateserver URL
         try {
@@ -263,13 +263,13 @@ public class UpdateCheckService extends Service {
         return ui;
     }
 
-    private boolean branchMatches(UpdateInfo ui, boolean experimentalAllowed) {
+    private boolean branchMatches(UpdateInfo ui, boolean nightlyAllowed) {
         if (ui == null) return false;
 
         boolean allow = false;
 
-        if (ui.getBranchCode().equalsIgnoreCase(Constants.UPDATE_INFO_BRANCH_EXPERIMENTAL)) {
-            if (experimentalAllowed)
+        if (ui.getBranchCode().equalsIgnoreCase(Constants.UPDATE_INFO_BRANCH_NIGHTLY)) {
+            if (nightlyAllowed)
                 allow = true;
         } else {
             allow = true;
@@ -282,13 +282,13 @@ public class UpdateCheckService extends Service {
         for (int i = 0, max = updateInfos.size(); i < max; i++) {
             UpdateInfo ui = updateInfos.poll();
             if (showAllRomUpdates || StringUtils.compareVersions(ui.getVersion(), systemRom, ui.getDate(), currentBuildDate)) {
-                if (branchMatches(ui, showExperimentalRomUpdates)) {
+                if (branchMatches(ui, showNightlyRomUpdates)) {
                     if (showDebugOutput)
                         Log.d(TAG, "Adding Rom: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
                     ret.add(ui);
                 } else {
                     if (showDebugOutput)
-                        Log.d(TAG, "Discarding Rom " + ui.getName() + " (Branch mismatch - stable/experimental)");
+                        Log.d(TAG, "Discarding Rom " + ui.getName() + " (Branch mismatch - stable/nightly)");
                 }
             } else {
                 if (showDebugOutput) Log.d(TAG, "Discarding Rom " + ui.getName() + " (older version)");

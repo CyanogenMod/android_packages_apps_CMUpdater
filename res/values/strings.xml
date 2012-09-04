@@ -11,7 +11,7 @@
 
 	<string name="available_updates_text">Please select the ROM to download:</string>
 	<string name="choose_available_update_text">Download</string>
-	<string name="no_updates_found_instructions">No Roms found.\nPress \'Check now\' to manually check for new updates</string>
+	<string name="no_updates_found_instructions">No updates found.\nPress \'Check now\' to manually check for new updates</string>
 	<string name="downloaded_update_found_text">Updates found in Update Folder:</string>
 	<string name="checking_for_updates">Checking for updates</string>
 	<string name="downloading_update">Downloading update</string>
@@ -49,8 +49,7 @@
 
 	<string name="apply_existing_update_md5error_message">Error. MD5 checksum missmatch</string>
 
-	<string name="apply_upload_info_message">THIS VERSION OF THE UPDATER HAS THE REBOOT OPTION ENABLED, SO CLICKING ON APPLY NOW WILL ACTUALLY DO SO.
-PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT TO PERFORM A BACKUP</string>
+	<string name="apply_upload_info_message">Please note: pushing the "Apply" button will immediately reboot your device into recovery and attempt to install this update. Please do not interrupt the process after it starts.</string>
 
 	<string name="last_update_check_text">Last update check</string>
 	<string name="overwrite_update_title">Update exists</string>
@@ -69,7 +68,7 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="toast_uninstall_old_Version">You have to uninstall any old Version of the App to proceed!</string>
 
 	<string name="stable_description"> = Stable</string>
-	<string name="experimental_description"> = Experimental</string>
+	<string name="nightly_description"> = Nightly</string>
 
 	<string name="changelog_progress_title">Please wait ...</string>
 	<string name="changelog_progress_body">Trying to download the changelog.xml</string>
@@ -85,10 +84,10 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	
 	<string name="md5_check_cancelled">MD5 Check was Cancelled</string>
 	
-	<string name="button_available_updates">Roms</string>
-	<string name="button_existing_updates">Existing</string>
+	<string name="button_available_updates">Updates</string>
+	<string name="button_existing_updates">Downloaded</string>
 	
-	<string name="no_existing_updates_found">No Existing Updates found</string>
+	<string name="no_existing_updates_found">No Updates downloaded to this device</string>
 
 	<string name="title_running">running on CyanogenMod</string>
 	
@@ -141,12 +140,12 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_display_older_rom_versions_summary">Display all Rom updates, including old versions</string>
 	<string name="p_display_older_rom_versions_changed">Please check for updates again, to update the List of available updates</string>
 
-	<string name="p_allow_experimental_rom_versions_title">Display Experimental Roms</string>
-	<string name="p_allow_experimental_rom_versions_summary">Display Rom updates that are Experimental (non-stable)</string>
-	<string name="p_allow_experimental_rom_versions_changed">Please check for updates again, to update the List of available updates</string>
+	<string name="p_allow_nightly_rom_versions_title">Display Nightly Roms</string>
+	<string name="p_allow_nightly_rom_versions_summary">Display Rom updates that are Nightly (non-stable)</string>
+	<string name="p_allow_nightly_rom_versions_changed">Please check for updates again, to update the List of available updates</string>
 
-	<string name="p_do_nandroid_backup_title">Nandroid Backup</string>
-	<string name="p_do_nandroid_backup_summary">Create Nandroid backup before applying update?</string>
+	<string name="p_do_nandroid_backup_title">Backups</string>
+	<string name="p_do_nandroid_backup_summary">Create backups before applying any update?</string>
 
 	<string name="p_notification_ringtone_title">Notification Ringtone</string>
 	<string name="p_notification_ringtone_summary">Choose a ringtone for Updater alerts</string>

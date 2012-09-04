@@ -50,10 +50,10 @@
                 android:summary="@string/p_display_older_rom_versions_summary"
                 android:defaultValue="@string/PREF_DISPLAY_OLDER_ROM_VERSIONS_DEF_VALUE"/>
         <CheckBoxPreference
-                android:key="displayExperimentalRomVersions"
-                android:title="@string/p_allow_experimental_rom_versions_title"
-                android:summary="@string/p_allow_experimental_rom_versions_summary"
-                android:defaultValue="@string/PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS_DEF_VALUE"/>
+                android:key="displayNightlyRomVersions"
+                android:title="@string/p_allow_nightly_rom_versions_title"
+                android:summary="@string/p_allow_nightly_rom_versions_summary"
+                android:defaultValue="@string/PREF_DISPLAY_NIGHTLY_ROM_VERSIONS_DEF_VALUE"/>
         <EditTextPreference
                 android:key="prefRomJsonURLGithub"
                 android:title="@string/p_update_file_url_title"

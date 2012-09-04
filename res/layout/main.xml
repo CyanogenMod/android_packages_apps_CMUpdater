@@ -66,7 +66,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20sp"
-                        android:id="@+id/stable_experimental_description_container_updates">
+                        android:id="@+id/stable_nightly_description_container_updates">
                     	<ImageView
                     			android:layout_height="25px"
                     			android:layout_width="25px"
@@ -85,7 +85,7 @@
                 		<TextView
                 				android:layout_height="wrap_content"
                 				android:gravity="center_horizontal"
-                				android:text="@string/experimental_description"
+                				android:text="@string/nightly_description"
                 				style="@style/TextAppearance.Text"
                 				android:paddingTop="2px"
                 				android:layout_marginLeft="5px"
@@ -136,7 +136,7 @@
 					android:layout_marginRight="10px"
                         android:layout_gravity="bottom|right"/>
 				<TextView
-			    	android:id="@+id/experimental_rom_updates_textview"
+			    	android:id="@+id/nightly_rom_updates_textview"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10px"

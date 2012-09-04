@@ -15,7 +15,7 @@
 	<string name="PREF_PROGRESS_UPDATE_FREQUENCY">progressUpdateFrequ</string>
 	<string name="PREF_PROGRESS_UPDATE_FREQUENCY_DEF">progressUpdateFreqDef</string>
 	<string name="PREF_DISPLAY_OLDER_ROM_VERSIONS">displayOlderRomVersions</string>
-	<string name="PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS">displayExperimentalRomVersions</string>
+	<string name="PREF_DISPLAY_NIGHTLY_ROM_VERSIONS">displayNightlyRomVersions</string>
 	<string name="PREF_UPDATE_FOLDER">prefUpdateFolderNew</string>
 	<string name="PREF_UPDATE_FOLDER_DEF">prefUpdateFolderDef</string>
 	<string name="PREF_DEBUG_OUTPUT">prefDebugOutput</string>
@@ -27,7 +27,7 @@
 	<string name="PREF_NOTIFICATION_ENABLED_DEF_VALUE">true</string>
 	<string name="PREF_PROGRESS_UPDATE_FREQUENCY_DEF_VALUE">500</string>
 	<string name="PREF_DISPLAY_OLDER_ROM_VERSIONS_DEF_VALUE">false</string>
-	<string name="PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS_DEF_VALUE">false</string>
+	<string name="PREF_DISPLAY_NIGHTLY_ROM_VERSIONS_DEF_VALUE">true</string>
 	<string name="PREF_DEBUG_OUTPUT_DEF_VALUE">false</string>
 	
 	<!-- Frequency times, in seconds -->

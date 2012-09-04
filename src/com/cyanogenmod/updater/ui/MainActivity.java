@@ -305,12 +305,12 @@ public class MainActivity extends Activity {
 
         //Rom Layout
         View roms = findViewById(R.id.rom_layout);
-        TextView experimentalBuildsRomtv = (TextView) roms.findViewById(R.id.experimental_rom_updates_textview);
+        TextView nightlyBuildsRomtv = (TextView) roms.findViewById(R.id.nightly_rom_updates_textview);
         TextView showDowngradesRomtv = (TextView) roms.findViewById(R.id.show_rom_downgrades_textview);
         TextView lastRomUpdateChecktv = (TextView) roms.findViewById(R.id.last_rom_update_check);
         Button selectUploadButton = (Button) roms.findViewById(R.id.download_update_button);
         TextView DownloadText = (TextView) roms.findViewById(R.id.available_updates_text);
-        LinearLayout stableExperimentalInfoUpdates = (LinearLayout) roms.findViewById(R.id.stable_experimental_description_container_updates);
+        LinearLayout stableNightlyInfoUpdates = (LinearLayout) roms.findViewById(R.id.stable_nightly_description_container_updates);
         Button changelogButton = (Button) roms.findViewById(R.id.show_changelog_button);
         //No ROM Updates Found Layout
         Button CheckNowUpdateChooserUpdates = (Button) roms.findViewById(R.id.check_now_button_update_chooser_updates);
@@ -347,29 +347,29 @@ public class MainActivity extends Activity {
         selectUploadButton.setVisibility(View.VISIBLE);
         mUpdatesSpinner.setVisibility(View.VISIBLE);
         DownloadText.setVisibility(View.VISIBLE);
-        stableExperimentalInfoUpdates.setVisibility(View.VISIBLE);
+        stableNightlyInfoUpdates.setVisibility(View.VISIBLE);
         changelogButton.setVisibility(View.VISIBLE);
         ((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).cancel(R.string.not_new_updates_found_title);
 
-        //Experimental and All
-        String showExperimentalRomUpdates;
+        //Nightly and All
+        String showNightlyRomUpdates;
         String showAllRomUpdates;
 
         Resources res = getResources();
         String trueString = res.getString(R.string.true_string);
         String falseString = res.getString(R.string.false_string);
 
-        if (prefs.showExperimentalRomUpdates())
-            showExperimentalRomUpdates = trueString;
+        if (prefs.showNightlyRomUpdates())
+            showNightlyRomUpdates = trueString;
         else
-            showExperimentalRomUpdates = falseString;
+            showNightlyRomUpdates = falseString;
 
         if (prefs.showAllRomUpdates())
             showAllRomUpdates = trueString;
         else
             showAllRomUpdates = falseString;
 
-        experimentalBuildsRomtv.setText(MessageFormat.format(res.getString(R.string.p_allow_experimental_rom_versions_title) + ": {0}", showExperimentalRomUpdates));
+        nightlyBuildsRomtv.setText(MessageFormat.format(res.getString(R.string.p_allow_nightly_rom_versions_title) + ": {0}", showNightlyRomUpdates));
         showDowngradesRomtv.setText(MessageFormat.format(res.getString(R.string.p_display_older_rom_versions_title) + ": {0}", showAllRomUpdates));
         lastRomUpdateChecktv.setText(res.getString(R.string.last_update_check_text) + ": " + prefs.getLastUpdateCheckString());
 
@@ -394,7 +394,7 @@ public class MainActivity extends Activity {
             selectUploadButton.setVisibility(View.GONE);
             mUpdatesSpinner.setVisibility(View.GONE);
             DownloadText.setVisibility(View.GONE);
-            stableExperimentalInfoUpdates.setVisibility(View.GONE);
+            stableNightlyInfoUpdates.setVisibility(View.GONE);
             changelogButton.setVisibility(View.GONE);
             CheckNowUpdateChooserTextUpdates.setVisibility(View.VISIBLE);
             CheckNowUpdateChooserUpdates.setVisibility(View.VISIBLE);

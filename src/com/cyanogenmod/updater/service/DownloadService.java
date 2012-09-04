@@ -324,6 +324,7 @@ public class DownloadService extends Service {
             }
             finally {
                 progressUpdateTimer.cancel();
+                progressUpdateTimerTask.cancel();
                 buff = null;
             }
         } else if (showDebugOutput) Log.d(TAG, "Download Cancel in Progress. Don't start Downloading");
