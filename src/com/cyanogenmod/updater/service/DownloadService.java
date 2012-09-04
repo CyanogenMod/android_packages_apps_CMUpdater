@@ -51,8 +51,6 @@ public class DownloadService extends Service {
     private final RemoteCallbackList<IDownloadServiceCallback> mCallbacks = new RemoteCallbackList<IDownloadServiceCallback>();
 
     private boolean prepareForDownloadCancel;
-    private boolean mMirrorNameUpdated;
-    private String mMirrorName;
     private boolean mDownloading = false;
     private UpdateInfo mCurrentUpdate;
     private WifiLock mWifiLock;
@@ -94,10 +92,6 @@ public class DownloadService extends Service {
 
         public UpdateInfo getCurrentUpdate() throws RemoteException {
             return mCurrentUpdate;
-        }
-
-        public String getCurrentMirrorName() throws RemoteException {
-            return mMirrorName;
         }
 
         public void registerCallback(IDownloadServiceCallback cb)
@@ -357,10 +351,6 @@ public class DownloadService extends Service {
             mNotificationRemoteView.setProgressBar(R.id.notificationProgressBar, (int) contentLengthOfFullDownload, (int) mtotalDownloaded, false);
             mNotificationManager.notify(Constants.NOTIFICATION_DOWNLOAD_STATUS, mNotification);
 
-            if (!mMirrorNameUpdated) {
-                UpdateDownloadMirror(mMirrorName);
-                mMirrorNameUpdated = true;
-            }
             //Update the DownloadProgress
             UpdateDownloadProgress(mtotalDownloaded, (int) contentLengthOfFullDownload, stringDownloaded, stringSpeed, stringRemainingTime);
         } else if (showDebugOutput)
@@ -444,20 +434,6 @@ public class DownloadService extends Service {
         for (int i = 0; i < N; i++) {
             try {
                 mCallbacks.getBroadcastItem(i).updateDownloadProgress(downloaded, total, downloadedText, speedText, remainingTimeText);
-            }
-            catch (RemoteException e) {
-                // The RemoteCallbackList will take care of removing
-                // the dead object for us.
-            }
-        }
-        mCallbacks.finishBroadcast();
-    }
-
-    private void UpdateDownloadMirror(String mirrorName) {
-        final int M = mCallbacks.beginBroadcast();
-        for (int i = 0; i < M; i++) {
-            try {
-                mCallbacks.getBroadcastItem(i).UpdateDownloadMirror(mirrorName);
             }
             catch (RemoteException e) {
                 // The RemoteCallbackList will take care of removing

@@ -29,10 +29,8 @@ public class DownloadActivity extends Activity {
 
     private ProgressBar mProgressBar;
     private TextView mDownloadedBytesTextView;
-    private TextView mDownloadMirrorTextView;
     private TextView mDownloadSpeedTextView;
     private TextView mRemainingTimeTextView;
-    private String mMirrorName;
     private UpdateInfo ui;
     //Indicates if a Service is bound 
     private boolean mbound = false;
@@ -69,7 +67,6 @@ public class DownloadActivity extends Activity {
                     ui = myService.getCurrentUpdate();
                     myService.registerCallback(mCallback);
                     if (showDebugOutput) Log.d(TAG, "Retrieved update from DownloadService");
-                    mMirrorName = myService.getCurrentMirrorName();
                     mbound = true;
                 } else {
                     if (showDebugOutput) Log.d(TAG, "Not downloading");
@@ -93,15 +90,11 @@ public class DownloadActivity extends Activity {
             mProgressBar = (ProgressBar) findViewById(R.id.download_progress_bar);
             mDownloadedBytesTextView = (TextView) findViewById(R.id.bytes_downloaded_text_view);
 
-            mDownloadMirrorTextView = (TextView) findViewById(R.id.mirror_text_view);
-
             TextView mDownloadFilenameTextView = (TextView) findViewById(R.id.filename_text_view);
 
             mDownloadSpeedTextView = (TextView) findViewById(R.id.speed_text_view);
             mRemainingTimeTextView = (TextView) findViewById(R.id.remaining_time_text_view);
 
-            if (mMirrorName != null)
-                mDownloadMirrorTextView.setText(mMirrorName);
             if (mFileName != null)
                 mDownloadFilenameTextView.setText(mFileName);
             findViewById(R.id.cancel_download_button).setOnClickListener(mCancelDownloadListener);
@@ -139,17 +132,6 @@ public class DownloadActivity extends Activity {
                 mDownloadedBytesTextView.setText(downloadedText);
                 mDownloadSpeedTextView.setText(speedText);
                 mRemainingTimeTextView.setText(remainingTimeText);
-                }
-                });
-    }
-
-    private void updateDownloadMirror(final String mirror) {
-        if (mDownloadMirrorTextView == null) return;
-
-        mDownloadMirrorTextView.post(new Runnable() {
-                public void run() {
-                mDownloadMirrorTextView.setText(mirror);
-                mMirrorName = mirror;
                 }
                 });
     }
@@ -239,10 +221,6 @@ public class DownloadActivity extends Activity {
                             downloaded, total, downloadedText, speedText, remainingTimeText)));
         }
 
-        public void UpdateDownloadMirror(String mirror) throws RemoteException {
-            mHandler.sendMessage(mHandler.obtainMessage(UPDATE_DOWNLOAD_MIRROR, mirror));
-        }
-
         public void DownloadFinished(UpdateInfo u) throws RemoteException {
             mHandler.sendMessage(mHandler.obtainMessage(DOWNLOAD_FINISHED, u));
         }
@@ -253,9 +231,8 @@ public class DownloadActivity extends Activity {
     };
 
     private static final int UPDATE_DOWNLOAD_PROGRESS = 1;
-    private static final int UPDATE_DOWNLOAD_MIRROR = 2;
-    private static final int DOWNLOAD_FINISHED = 3;
-    private static final int DOWNLOAD_ERROR = 4;
+    private static final int DOWNLOAD_FINISHED = 2;
+    private static final int DOWNLOAD_ERROR = 3;
 
     private final Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -263,9 +240,6 @@ public class DownloadActivity extends Activity {
                 case UPDATE_DOWNLOAD_PROGRESS:
                     DownloadProgress dp = (DownloadProgress) msg.obj;
                     updateDownloadProgress(dp.getDownloaded(), dp.getTotal(), dp.getDownloadedText(), dp.getSpeedText(), dp.getRemainingTimeText());
-                    break;
-                case UPDATE_DOWNLOAD_MIRROR:
-                    updateDownloadMirror((String) msg.obj);
                     break;
                 case DOWNLOAD_FINISHED:
                     UpdateInfo u = (UpdateInfo) msg.obj;

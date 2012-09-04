@@ -116,7 +116,6 @@
 	<string name="not_update_downloaded_body">{0} is ready to install</string>
 
 	<string name="download_info_filename">Filename: </string>
-	<string name="download_info_mirror">Mirror: </string>
 	<string name="download_info_downloading">Downloading...</string>
 	<string name="download_info_speed">Speed: </string>
 	<string name="download_info_remaining_time">Remaining Time: </string>
