@@ -90,18 +90,6 @@ public class Preferences {
         return tempbool;
     }
 
-    public String getRomUpdateFileURL() {
-        temp = mPrefs.getString(mRes.getString(R.string.PREF_ROM_UPDATE_FILE_URL),  mRes.getString(R.string.conf_update_server_url_def));
-        if (showDebugOutput) Log.d(TAG, "Rom MetadataFile-Url: " + temp);
-        return temp;
-    }
-
-    public void setRomUpdateFileURL(String updateFileURL) {
-        Editor editor = mPrefs.edit();
-        editor.putString(mRes.getString(R.string.PREF_ROM_UPDATE_FILE_URL), updateFileURL);
-        if (!editor.commit()) Log.e(TAG, "Unable to write Rom Update File URL");
-    }
-
     //Notifications
     public boolean notificationsEnabled() {
         tempbool = mPrefs.getBoolean(mRes.getString(R.string.PREF_NOTIFICATION_ENABLED), Boolean.valueOf(mRes.getString(R.string.PREF_NOTIFICATION_ENABLED_DEF_VALUE)));

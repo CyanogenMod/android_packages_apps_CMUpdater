@@ -149,17 +149,6 @@
 	<string name="p_notification_ringtone_title">Notification Ringtone</string>
 	<string name="p_notification_ringtone_summary">Choose a ringtone for Updater alerts</string>
 
-	<string name="p_update_file_url_title">Rom Update Server</string>
-	<string name="p_update_file_url_summary">Change the Rom Update Server</string>
-	<string name="p_update_file_url_changed">Rom Update URL set back to default</string>
-
-	<string name="p_update_file_url_def_title">Reset Rom Update Server</string>
-	<string name="p_update_file_url_def_summary">Reset the location of the Rom Update Server back to default</string>
-
-	<string name="p_update_file_url_qr_title">Scan Barcode</string>
-	<string name="p_update_file_url_qr_summary">Scan QR Code for Rom Update File URL</string>
-	<string name="p_update_file_changed_toast">Rom Update File URL: </string>
-
 	<string name="p_vibrate_title">Vibrate</string>
 	<string name="p_vibrate_summary">Vibrate on Notifications</string>
 

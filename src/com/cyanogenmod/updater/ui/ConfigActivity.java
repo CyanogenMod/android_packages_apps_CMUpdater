@@ -16,8 +16,6 @@ import com.cyanogenmod.updater.customization.Customization;
 import com.cyanogenmod.updater.misc.Log;
 import com.cyanogenmod.updater.receiver.StartupReceiver;
 import com.cyanogenmod.updater.utils.Preferences;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 public class ConfigActivity extends PreferenceActivity {
     private static final String TAG = "ConfigActivity";
@@ -54,31 +52,8 @@ public class ConfigActivity extends PreferenceActivity {
 
             updateCheckFreqPref.setOnPreferenceChangeListener(mUpdateCheckingFrequencyListener);
 
-            //Barcodescanning Stuff
-            Preference pref = findPreference(res.getString(R.string.PREF_ROM_UPDATE_FILE_QR));
-            pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                    public boolean onPreferenceClick(Preference preference) {
-                    RomBarcodeRequested = true;
-                    IntentIntegrator.initiateScan(ConfigActivity.this);
-                    Log.d(TAG, "Starting Barcodescanner for Rom Update File");
-                    return true;
-                    }
-                    });
-
-            //Reset Update URLs
-            pref = findPreference(res.getString(R.string.PREF_ROM_UPDATE_FILE_URL_DEF));
-            pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                    public boolean onPreferenceClick(Preference preference) {
-                    prefs.setRomUpdateFileURL(res.getString(R.string.conf_update_server_url_def));
-                    Toast.makeText(getBaseContext(), R.string.p_update_file_url_changed, Toast.LENGTH_LONG).show();
-                    Log.d(TAG, "Rom Update File URL set back to default: " + prefs.getRomUpdateFileURL());
-                    ConfigActivity.this.finish();
-                    return true;
-                    }
-                    });
-
             //Reset UpdateFolder
-            pref = findPreference(res.getString(R.string.PREF_UPDATE_FOLDER_DEF));
+            Preference pref = findPreference(res.getString(R.string.PREF_UPDATE_FOLDER_DEF));
             pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                     public boolean onPreferenceClick(Preference preference) {
                     if (prefs.setUpdateFolder(Customization.DOWNLOAD_DIR)) {
@@ -89,21 +64,6 @@ public class ConfigActivity extends PreferenceActivity {
                     Log.d(TAG, "Error on Setting UpdateFolder: " + prefs.getUpdateFolder());
                     }
                     ConfigActivity.this.finish();
-                    return true;
-                    }
-                    });
-
-            //URL Validation checkers
-            pref = findPreference(res.getString(R.string.PREF_ROM_UPDATE_FILE_URL));
-            pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-                    public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (URLUtil.isValidUrl(String.valueOf(newValue))) {
-                    prefs.setRomUpdateFileURL(String.valueOf(newValue));
-                    Log.d(TAG, "Rom Update URL Set to: " + String.valueOf(newValue));
-                    } else {
-                    Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
-                    Log.d(TAG, "Entered Rom Update URL not valid: " + String.valueOf(newValue));
-                    }
                     return true;
                     }
                     });
@@ -164,55 +124,15 @@ public class ConfigActivity extends PreferenceActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         Log.d(TAG, "onActivityResult requestCode: " + requestCode);
-        //Switch is necessary, because RingtonePreference and QRBarcodeScanner call the same Event
-        switch (requestCode) {
-            //QR Barcode scanner
-            case IntentIntegrator.REQUEST_CODE:
-                IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-                if (null != scanResult) {
-                    String result = scanResult.getContents();
-                    if (null != result && !result.equals("")) {
-                        Log.d(TAG, "Requested Rom Barcodescan? " + String.valueOf(RomBarcodeRequested));
-                        if (RomBarcodeRequested) {
-                            Log.d(TAG, "Setting Rom Update File to " + result);
-                            if (URLUtil.isValidUrl(result)) {
-                                prefs.setRomUpdateFileURL(result);
-                                Toast.makeText(getBaseContext(), res.getString(R.string.p_update_file_changed_toast) + result, Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(getBaseContext(), R.string.p_invalid_url, Toast.LENGTH_LONG).show();
-                                Log.d(TAG, "Entered Rom Update URL not valid: " + result);
-                            }
-                        } else {
-                            //Something wrong here. Barcodescan requested but no Variables set
-                            Toast.makeText(getBaseContext(), R.string.p_barcode_scan_failure, Toast.LENGTH_LONG).show();
-                            Log.d(TAG, "Something wrong here. Barcodescan requested but no Variables set");
-                        }
-                        RomBarcodeRequested = false;
-                        ConfigActivity.this.finish();
-                    } else {
-                        Toast.makeText(getBaseContext(), R.string.barcode_scan_no_result, Toast.LENGTH_LONG).show();
-                        RomBarcodeRequested = false;
-                    }
-                } else {
-                    Toast.makeText(getBaseContext(), R.string.barcode_scan_no_result, Toast.LENGTH_LONG).show();
-                    RomBarcodeRequested = false;
-                }
-                break;
-                //RingtonePicker
-            case 100:
-                //Needs to be an Object, because when giving the toString() here, it crashes when NULL is returned
-                //Object ringtone = intent.getExtras().get(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-                //intent = null when pressing back on the ringtonpickerdialog
-                if (intent == null)
-                    break;
-                Uri ringtone = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI); 
-                if (ringtone != null)
-                    prefs.setNotificationRingtone(ringtone.toString());
-                else
-                    prefs.setNotificationRingtone(null);
-                break;
-            default:
-                break;
-        }
+        //Needs to be an Object, because when giving the toString() here, it crashes when NULL is returned
+        //Object ringtone = intent.getExtras().get(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+        //intent = null when pressing back on the ringtonpickerdialog
+        if (intent == null)
+            return;
+        Uri ringtone = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI); 
+        if (ringtone != null)
+            prefs.setNotificationRingtone(ringtone.toString());
+        else
+            prefs.setNotificationRingtone(null);
     }
 }

@@ -54,21 +54,6 @@
                 android:title="@string/p_allow_nightly_rom_versions_title"
                 android:summary="@string/p_allow_nightly_rom_versions_summary"
                 android:defaultValue="@string/PREF_DISPLAY_NIGHTLY_ROM_VERSIONS_DEF_VALUE"/>
-        <EditTextPreference
-                android:key="prefRomJsonURLGithub"
-                android:title="@string/p_update_file_url_title"
-                android:summary="@string/p_update_file_url_summary"
-                android:dialogTitle="@string/p_update_file_url_title"
-                android:defaultValue="@string/conf_update_server_url_def"
-                android:singleLine="false"/>
-        <Preference
-                android:key="prefUpdateFileURLQr"
-                android:title="@string/p_update_file_url_qr_title"
-                android:summary="@string/p_update_file_url_qr_summary"/>
-        <Preference
-                android:key="prefUpdateFileURLDef"
-                android:title="@string/p_update_file_url_def_title"
-                android:summary="@string/p_update_file_url_def_summary"/>
     </PreferenceScreen>
     <!-- Advanced Properties -->
     <PreferenceScreen

@@ -176,7 +176,7 @@ public class UpdateCheckService extends Service {
         showAllRomUpdates = mPreferences.showAllRomUpdates();
         //Get the actual Rom Updateserver URL
         try {
-            URI RomUpdateServerUri = URI.create(mPreferences.getRomUpdateFileURL());
+            URI RomUpdateServerUri = URI.create(getResources().getString(R.string.conf_update_server_url_def));
             HttpPost romReq = new HttpPost(RomUpdateServerUri);
             String getcmRequest = "{\"method\": \"get_builds\", \"params\":{\"device\":\""+systemMod+"\", \"channels\": [\"nightly\",\"stable\"]}}";
             romReq.setEntity(new ByteArrayEntity(getcmRequest.getBytes()));
@@ -191,7 +191,7 @@ public class UpdateCheckService extends Service {
                 romResponseEntity = romResponse.getEntity();
         }
         catch (IllegalArgumentException e) {
-            if (showDebugOutput) Log.d(TAG, "Rom Update URI wrong: " + mPreferences.getRomUpdateFileURL());
+            if (showDebugOutput) Log.d(TAG, "Rom Update request failed: " + e);
             romException = true;
         }
 
