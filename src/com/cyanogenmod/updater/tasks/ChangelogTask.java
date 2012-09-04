@@ -47,8 +47,7 @@ public class ChangelogTask extends AsyncTask<Object, Void, List<Version>> {
 
     public enum ChangelogType {
         ROM,
-        APP,
-        THEME
+        APP
     }
 
     public ChangelogTask(Context ctx) {
@@ -83,7 +82,7 @@ public class ChangelogTask extends AsyncTask<Object, Void, List<Version>> {
         mChangelogType = (ChangelogType) params[0];
 
         if (!mChangelogType.equals(ChangelogType.APP)) {
-        	//ROM or THEME Changelog
+        	//ROM Changelog
         	if (params.length != 2 || !(params[1] instanceof UpdateInfo)) {
             	mException = "Second Parameter not UpdateInfo";
             	return null;
@@ -156,9 +155,6 @@ public class ChangelogTask extends AsyncTask<Object, Void, List<Version>> {
         switch (mChangelogType) {
             case ROM:
                 dialogTitle = R.string.changelog_title_rom;
-                break;
-            case THEME:
-                dialogTitle = R.string.changelog_title_theme;
                 break;
             case APP:
                 dialogTitle = R.string.changelog_title_app;

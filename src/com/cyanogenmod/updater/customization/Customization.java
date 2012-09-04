@@ -21,6 +21,4 @@ public class Customization {
     public static final String BUILD_DATE = "ro.build.date.utc";
     //Name of the Current Rom
     public static final String SYS_PROP_MOD_VERSION = "ro.cm.version";
-    //Screenshotsupport?
-    public static final Boolean Screenshotsupport = false;
 }

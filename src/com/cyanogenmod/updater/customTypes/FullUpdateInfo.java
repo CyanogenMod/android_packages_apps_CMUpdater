@@ -11,18 +11,15 @@ public class FullUpdateInfo implements Parcelable, Serializable {
 
 	public LinkedList<UpdateInfo> roms;
 	public LinkedList<UpdateInfo> incrementalRoms;
-	public LinkedList<UpdateInfo> themes;
 
     public FullUpdateInfo() {
 		roms = new LinkedList<UpdateInfo>();
 		incrementalRoms = new LinkedList<UpdateInfo>();
-		themes = new LinkedList<UpdateInfo>();
 	}
 
     private FullUpdateInfo(Parcel in) {
 		roms = new LinkedList<UpdateInfo>();
 		incrementalRoms = new LinkedList<UpdateInfo>();
-		themes = new LinkedList<UpdateInfo>();
 		readFromParcel(in);
 	}
 
@@ -43,13 +40,11 @@ public class FullUpdateInfo implements Parcelable, Serializable {
     public void writeToParcel(Parcel arg0, int arg1) {
 		arg0.writeList(roms);
 		arg0.writeList(incrementalRoms);
-		arg0.writeList(themes);
 	}
 
     void readFromParcel(Parcel in) {
 		in.readList(roms, null);
 		in.readList(incrementalRoms, null);
-		in.readList(themes, null);
 	}
 
 	@Override
@@ -67,15 +62,9 @@ public class FullUpdateInfo implements Parcelable, Serializable {
 		return incrementalRoms.size();
 	}
 
-    public int getThemeCount() {
-		if (themes == null) return 0;
-		return themes.size();
-	}
-
     public int getUpdateCount() {
-		int themessize = themes == null ? 0 : themes.size();
 		int romssize = roms == null ? 0 : roms.size();
 		int incrementalromssize = incrementalRoms == null ? 0 : incrementalRoms.size();
-		return themessize + romssize + incrementalromssize;
+		return romssize + incrementalromssize;
 	}
 }

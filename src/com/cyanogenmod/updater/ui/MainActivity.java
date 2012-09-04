@@ -373,7 +373,7 @@ public class MainActivity extends Activity {
         showDowngradesRomtv.setText(MessageFormat.format(res.getString(R.string.p_display_older_rom_versions_title) + ": {0}", showAllRomUpdates));
         lastRomUpdateChecktv.setText(res.getString(R.string.last_update_check_text) + ": " + prefs.getLastUpdateCheckString());
 
-        //Sets the Theme and Rom Variables
+        //Sets the Rom Variables
         List<UpdateInfo> availableRoms = null;
         if (mAvailableUpdates != null) {
             if (mAvailableUpdates.roms != null)

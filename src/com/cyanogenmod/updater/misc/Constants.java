@@ -27,29 +27,12 @@ public class Constants {
 	//Flipper
 	public static final int FLIPPER_AVAILABLE_UPDATES = 0;
 	public static final int FLIPPER_EXISTING_UPDATES = 1;
-	public static final int FLIPPER_AVAILABLE_THEMES = 2;
 
 	//Menu main Layout
 	public static final int MENU_ID_UPDATE_NOW = 1;
 	public static final int MENU_ID_CONFIG = 2;
 	public static final int MENU_ID_ABOUT = 3;
 	public static final int MENU_ID_CHANGELOG = 4;
-
-	//Menu ThemeList Layout
-	public static final int MENU_THEME_LIST_ADD = 1;
-	public static final int MENU_THEME_LIST_UPDATE_FEATURED = 2;
-	public static final int MENU_THEME_DELETE_ALL = 3;
-	public static final int MENU_THEME_DELETE_ALL_FEATURED = 4;
-	public static final int MENU_THEME_DISABLE_ALL = 5;
-	public static final int MENU_THEME_DISABLE_ALL_FEATURED = 6;
-	public static final int MENU_THEME_ENABLE_ALL = 7;
-	public static final int MENU_THEME_ENABLE_ALL_FEATURED = 8;
-
-	//Menu ThemeListContextMenu
-	public static final int MENU_THEME_LIST_CONTEXT_EDIT = 10;
-	public static final int MENU_THEME_LIST_CONTEXT_DELETE = 11;
-	public static final int MENU_THEME_LIST_CONTEXT_ENABLE = 12;
-	public static final int MENU_THEME_LIST_CONTEXT_DISABLE = 13;
 
 	//Notifications
 	public static final int NOTIFICATION_DOWNLOAD_STATUS = 100;
@@ -63,25 +46,4 @@ public class Constants {
 	public static final String VERSION_TAG = "Version";
 	public static final String VERSION_NAME_TAG = "name";
 
-	//Featured Themes Handler
-	public static final String FEATURED_THEMES_TAG = "Theme";
-	public static final String FEATURES_THEMES_TAG_NAME = "name";
-	public static final String FEATURES_THEMES_TAG_URI = "url";
-
-	//ThemeListNew
-	public static final String THEME_LIST_NEW_NAME = "name";
-	public static final String THEME_LIST_NEW_URI = "uri";
-	public static final String THEME_LIST_NEW_ENABLED = "enabled";
-	public static final String THEME_LIST_NEW_PRIMARYKEY = "pk";
-	public static final String THEME_LIST_NEW_UPDATE = "update";
-	public static final String THEME_LIST_NEW_FEATURED = "featured";
-
-	//ThemeListItem
-	public static final int THEME_LIST_ITEM_DISABLED_ALPHA = 70;
-
-	//Screenshots
-	public static final String SCREENSHOTS_UPDATE = "Screenshots";
-	public static final int SCREENSHOTS_FALLBACK_IMAGE = android.R.drawable.ic_delete;
-    public static final int SCREENSHOTS_LOADING_IMAGE = com.cyanogenmod.updater.ui.R.drawable.cmu_loading;
-	public static final String SCREENSHOTS_POSITION = "ScreenshotPosition";
 }

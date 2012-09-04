@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import com.cyanogenmod.updater.customization.Customization;
-import com.cyanogenmod.updater.database.DbAdapter;
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.Log;
 import com.cyanogenmod.updater.ui.R;

@@ -12,7 +12,6 @@
 	<string name="available_updates_text">Please select the ROM to download:</string>
 	<string name="choose_available_update_text">Download</string>
 	<string name="no_updates_found_instructions">No Roms found.\nPress \'Check now\' to manually check for new updates</string>
-	<string name="no_themes_found_instructions">No Themes found.\nPress \'Check now\' to manually check for new updates</string>
 	<string name="downloaded_update_found_text">Updates found in Update Folder:</string>
 	<string name="checking_for_updates">Checking for updates</string>
 	<string name="downloading_update">Downloading update</string>
@@ -38,18 +37,6 @@
 	<string name="menu_config">Configuration</string>
 	<string name="menu_about">About</string>
 	<string name="menu_changelog">Changelog</string>
-	<string name="menu_add_theme">Add Theme Server</string>
-	<string name="menu_update_featured">Update Featured Theme Servers</string>
-	<string name="menu_edit_theme">Edit Theme Server</string>
-	<string name="menu_delete_theme">Delete Theme Server</string>
-	<string name="menu_enable_theme">Enable Theme Server</string>
-	<string name="menu_disable_theme">Disable Theme Server</string>
-	<string name="menu_delete_all_themes">Delete all Theme Servers</string>
-	<string name="menu_delete_all_featured_themes">Delete all Featured Theme Servers</string>
-	<string name="menu_disable_all_themes">Disable all Theme Servers</string>
-	<string name="menu_disable_all_featured_themes">Disable all Featured Theme Servers</string>
-	<string name="menu_enable_all_themes">Enable all Theme Servers</string>
-	<string name="menu_enable_all_featured_themes">Enable all Featured Theme Servers</string>
 	
 	<string name="cancel_download_buton_text">Cancel Download</string>
 	<string name="confirm_download_cancelation_dialog_message">Are you sure you want to cancel the current download? You can resume it later, by downloading the same update again.</string>
@@ -92,11 +79,6 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 
 	<string name="changelog_title_rom">Update Changelog</string>
 	<string name="changelog_title_app">Application Changelog</string>
-	<string name="changelog_title_theme">Theme Changelog</string>
-
-	<string name="featured_themes_progress_title">Please wait ...</string>
-	<string name="featured_themes_progress_body">Trying to download the Featured Theme Servers XML</string>
-	<string name="featured_themes_finished_toast">Featured Theme Servers updated</string>
 
 	<string name="true_string">true</string>
 	<string name="false_string">false</string>
@@ -104,39 +86,20 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="md5_check_cancelled">MD5 Check was Cancelled</string>
 	
 	<string name="button_available_updates">Roms</string>
-	<string name="button_available_themes">Themes</string>
 	<string name="button_existing_updates">Existing</string>
 	
 	<string name="no_existing_updates_found">No Existing Updates found</string>
-
-	<string name="available_themes_text">Please select the Theme to download:</string>
-	<string name="choose_available_theme_text">Download</string>
-	<string name="changelog_button_theme_text">Changelog of selected Theme</string>
 
 	<string name="title_running">running</string>
 	
 	<string name="no_updatecheck_executed">No Updatecheck executed</string>
 	
-	<string name="no_theme_update_server_configured">No Theme Update Server configured.\nIf you want to use Theme Updates, go to Settings and configure a Update-Server</string>
-
 	<string name="delete_updates_root_folder_message">You can not delete the Root Folder\nPlease delete the Updates one by one</string>
 
 	<string name="about_dialog_title">About</string>
 	
 	<string name="barcode_scan_no_result">No result was received. Please try again.</string>
 	
-	<string name="theme_list_long_press">Long Press an Item to show options</string>
-	<string name="theme_list_no_themes">No Theme Servers. Press Menu to add one or update the List of Featured Theme Servers</string>
-	<string name="theme_list_delete_error">There was an Error deleting the Theme Server</string>
-	
-	<string name="theme_list_new_wrong_uri">Entered URL is invalid. Please Try again</string>
-	<string name="theme_list_new_wrong_name">Please enter a Name.</string>
-	
-	<string name="featured_themes_dialog_title">Featured Themes</string>
-	<string name="featured_themes_dialog_summary">Do you really want to update your List of Featured Theme Servers?\nYour custom servers will not be deleted</string>
-	<string name="featured_themes_dialog_pos">Yes</string>
-	<string name="featured_themes_dialog_neg">No</string>
-
 	<!-- .service.* Strings -->
 	<string name="no_updates_found">No updates found</string>
 	<string name="not_new_updates_found_ticker">New updates found!</string>
@@ -182,14 +145,6 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_allow_experimental_rom_versions_summary">Display Rom updates that are Experimental (non-stable)</string>
 	<string name="p_allow_experimental_rom_versions_changed">Please check for updates again, to update the List of available updates</string>
 
-	<string name="p_display_older_theme_versions_title">Display All Theme Updates</string>
-	<string name="p_display_older_theme_versions_summary">Display all Theme updates, including old versions</string>
-	<string name="p_display_older_theme_versions_changed">Please check for updates again, to update the List of available updates</string>
-
-	<string name="p_allow_experimental_theme_versions_title">Display Experimental Themes</string>
-	<string name="p_allow_experimental_theme_versions_summary">Display Theme updates that are Experimental (non-stable)</string>
-	<string name="p_allow_experimental_theme_versions_changed">Please check for updates again, to update the List of available updates</string>
-
 	<string name="p_do_nandroid_backup_title">Nandroid Backup</string>
 	<string name="p_do_nandroid_backup_summary">Create Nandroid backup before applying update?</string>
 
@@ -222,21 +177,11 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	
 	<string name="p_invalid_url">Entered URL is not valid! Please try again.</string>
 	
-	<string name="p_theme_file_title">themes.theme Path</string>
-	<string name="p_theme_file_summary">Change the Path of the themes.theme File</string>
-	
-	<string name="p_theme_file_def_title">Reset themes.theme File</string>
-	<string name="p_theme_file_def_summary">Set the Path of themes.theme back to default</string>
-	<string name="p_theme_file_def_toast">themes.theme set back to default</string>
-	
 	<string name="p_notifications_screen_title">Notifications</string>
 	<string name="p_notifications_screen_summary">Set Notification Settings</string>
 	
 	<string name="p_rom_screen_title">Rom Update Settings</string>
 	<string name="p_rom_screen_summary">Set Settings for Rom Updates</string>
-	
-	<string name="p_theme_screen_title">Theme Update Settings</string>
-	<string name="p_theme_screen_summary">Set Settings for Theme Updates</string>
 	
 	<string name="p_barcode_scan_failure">There was an error while scanning the Barcode</string>
 	
@@ -251,18 +196,6 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	<string name="p_update_folder_def_toast">Update Folder set back to default</string>
 	<string name="p_update_folder_error">Error on Setting the UpdateFolder</string>
 	
-	<string name="p_theme_list_title">Manage Theme Servers</string>
-	<string name="p_theme_list_summary">Add, Edit, Delete Theme Servers</string>
-	
-	<string name="p_theme_list_context_menu_header">Choose Action</string>
-	
-	<string name="p_theme_list_new_name">Theme Name:</string>
-	<string name="p_theme_list_new_uri">URL:</string>
-	<string name="p_theme_list_new_enabled">Enabled:</string>
-	<string name="p_theme_list_new_barcode">Scan barcode</string>
-	<string name="p_theme_list_new_save">Save</string>
-	<string name="p_theme_list_new_cancel">Cancel</string>
-	
 	<!--  new Strings -->
 	<string name="alert_old_version_title">Old Version</string>
 	<string name="alert_old_version_summary">You are running an old Rom-Version.
@@ -270,15 +203,9 @@ PLEASE REBOOT INTO RECOVERY MANUALLY *BEFORE* APPLYING THIS UPDATE IF YOU WANT T
 	Click the open Browser Button below, to open up the Instructions</string>
 	<string name="alert_old_version_ok">Ok</string>
 	<string name="alert_old_version_browser">Open Browser</string>
-	<string name="screenshot_button_theme_text">Screenshots</string>
-	<string name="theme_download_exception">There was an error downloading Theme: </string>
-	<string name="theme_submenu_delete">Delete</string>
-	<string name="theme_submenu_enable">Enable</string>
-	<string name="theme_submenu_disable">Disable</string>
 	<string name="download_resume_not_supported">Resume not supported by Server</string>
 	<string name="download_resume_download">Resuming Download</string>
 	<string name="download_not_enough_space">Not Enough Space on SDCard to download the Udpate</string>
-	<string name="config_themes_nosupport">This Updater was built without Screenshotsupport</string>
 	<string name="p_debug_output_title">Debug Output</string>
 	<string name="p_debug_output_summary">Show Debug Output in logcat</string>
 	<string name="p_debug_output_changed">Please restart the App for the changes to take effect</string>

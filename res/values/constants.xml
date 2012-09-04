@@ -14,16 +14,10 @@
 	<string name="PREF_LAST_UPDATE_CHECK">lastUpdateCheck</string>
 	<string name="PREF_PROGRESS_UPDATE_FREQUENCY">progressUpdateFrequ</string>
 	<string name="PREF_PROGRESS_UPDATE_FREQUENCY_DEF">progressUpdateFreqDef</string>
-	<string name="PREF_THEMES_THEME_FILE">prefThemeFile</string>
-	<string name="PREF_THEMES_THEME_FILE_DEF">prefThemeFileDef</string>
 	<string name="PREF_DISPLAY_OLDER_ROM_VERSIONS">displayOlderRomVersions</string>
 	<string name="PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS">displayExperimentalRomVersions</string>
-	<string name="PREF_DISPLAY_OLDER_THEME_VERSIONS">displayOlderThemeVersions</string>
-	<string name="PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS">displayExperimentalThemeVersions</string>
 	<string name="PREF_UPDATE_FOLDER">prefUpdateFolderNew</string>
 	<string name="PREF_UPDATE_FOLDER_DEF">prefUpdateFolderDef</string>
-	<string name="PREF_THEMES_LIST">prefThemesList</string>
-	<string name="PREF_CONFIG_THEMES">prefConfigThemes</string>
 	<string name="PREF_DEBUG_OUTPUT">prefDebugOutput</string>
 	
 	<!-- Default Values for Preference Keys -->
@@ -34,8 +28,6 @@
 	<string name="PREF_PROGRESS_UPDATE_FREQUENCY_DEF_VALUE">500</string>
 	<string name="PREF_DISPLAY_OLDER_ROM_VERSIONS_DEF_VALUE">false</string>
 	<string name="PREF_DISPLAY_EXPERIMENTAL_ROM_VERSIONS_DEF_VALUE">false</string>
-	<string name="PREF_DISPLAY_OLDER_THEME_VERSIONS_DEF_VALUE">false</string>
-	<string name="PREF_DISPLAY_EXPERIMENTAL_THEME_VERSIONS_DEF_VALUE">false</string>
 	<string name="PREF_DEBUG_OUTPUT_DEF_VALUE">false</string>
 	
 	<!-- Frequency times, in seconds -->
