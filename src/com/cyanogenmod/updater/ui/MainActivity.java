@@ -251,8 +251,6 @@ public class MainActivity extends Activity {
                 .setIcon(android.R.drawable.ic_menu_preferences);
             menu.add(Menu.NONE, Constants.MENU_ID_ABOUT, Menu.NONE, R.string.menu_about)
                 .setIcon(android.R.drawable.ic_menu_info_details);
-            menu.add(Menu.NONE, Constants.MENU_ID_CHANGELOG, Menu.NONE, R.string.menu_changelog)
-                .setIcon(android.R.drawable.ic_menu_recent_history);
             return true;
         }
 
@@ -283,9 +281,6 @@ public class MainActivity extends Activity {
                     return true;
                 case Constants.MENU_ID_ABOUT:
                     showAboutDialog();
-                    return true;
-                case Constants.MENU_ID_CHANGELOG:
-                    getChangelog(ChangelogType.APP);
                     return true;
                 default:
                     Log.e(TAG, "Unknown Menu ID:" + item.getItemId());

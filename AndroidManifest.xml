@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          android:versionName="5.0.1.2" android:versionCode="5012" package="com.cyanogenmod.updater.ui">
+          android:versionName="10.0.0" android:versionCode="1" package="com.cyanogenmod.updater.ui">
 
     <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="15"/>
 

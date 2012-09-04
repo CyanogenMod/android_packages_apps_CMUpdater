@@ -32,7 +32,6 @@ public class Constants {
 	public static final int MENU_ID_UPDATE_NOW = 1;
 	public static final int MENU_ID_CONFIG = 2;
 	public static final int MENU_ID_ABOUT = 3;
-	public static final int MENU_ID_CHANGELOG = 4;
 
 	//Notifications
 	public static final int NOTIFICATION_DOWNLOAD_STATUS = 100;
