@@ -10,7 +10,7 @@ public class Customization {
     //DB filename
     public static final String DATABASE_FILE = "cmupdater.db";
     //DownloadDirectory
-    public static final String DOWNLOAD_DIR = "download";
+    public static final String DOWNLOAD_DIR = "cmupdater";
     //MUST be the first package name.
     public static final String PACKAGE_FIRST_NAME = "com.cyanogenmod.updater";
     //Filename for Instance save

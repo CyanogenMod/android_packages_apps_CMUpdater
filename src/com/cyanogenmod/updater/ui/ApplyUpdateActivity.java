@@ -62,7 +62,7 @@ public class ApplyUpdateActivity extends Activity {
         StorageVolume[] volumes = sm.getVolumeList();
         String primaryStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath();
 
-        if (volumes.length <= 1) { return true; } // single storage, assume /sdcard
+        if (volumes.length <= 1) { return false; } // single storage, assume /sdcard
         for (int i = 0; i < volumes.length; i++) {
             StorageVolume v = volumes[i];
 
@@ -108,7 +108,7 @@ public class ApplyUpdateActivity extends Activity {
                                 os.write("echo 'boot-recovery' >/cache/recovery/command\n".getBytes());
                                 if (mBackup)
                                 os.write("echo '--nandroid'  >> /cache/recovery/command\n".getBytes());
-                                String cmd = "echo '--update_package="+(isStorageRemovable() ? "/sdcard" : "/emmc") +"/" + mUpdateFolder + "/" + mUpdateInfo.getFileName() + "' >> /cache/recovery/command\n";
+                                String cmd = "echo '--update_package="+(isStorageRemovable() ? "/external_sd" : "/sdcard") +"/" + mUpdateFolder + "/" + mUpdateInfo.getFileName() + "' >> /cache/recovery/command\n";
                                 os.write(cmd.getBytes());
                                 os.write("reboot recovery\n".getBytes());
                                 os.flush();
