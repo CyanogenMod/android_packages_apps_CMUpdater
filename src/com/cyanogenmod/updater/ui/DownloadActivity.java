@@ -284,9 +284,22 @@ public class DownloadActivity extends Activity {
     //When the Activity is killed, save the UpdateInfo to state so we can restore it
 
     @Override
+        protected void onRestoreInstanceState(Bundle outState) {
+            if (myService != null) {
+                serviceIntent = new Intent(IDownloadService.class.getName());
+                ComponentName comp = startService(serviceIntent);
+                if (comp == null)
+                    Log.e(TAG, "startService failed");
+                mbound = bindService(serviceIntent, mConnection, 0);
+            }
+        }
+    @Override
         protected void onSaveInstanceState(Bundle outState) {
             super.onSaveInstanceState(outState);
-            if (showDebugOutput) Log.d(TAG, "Called onSaveInstanceState");
+            Log.d(TAG, "Called onSaveInstanceState");
+            if (myService != null) {
+                MyUnbindService(mConnection);
+            } else if (showDebugOutput) Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
             outState.putParcelable(Constants.KEY_UPDATE_INFO, ui);
         }
 
