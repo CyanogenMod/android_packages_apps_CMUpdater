@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.PowerManager;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.view.View;
@@ -101,8 +102,9 @@ public class ApplyUpdateActivity extends Activity {
                                  * 6.- reboot recovery 
                                  */
                                 try {
+                                PowerManager mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
                                 Boolean mBackup = pref.doNandroidBackup(); 
-                                Process p = Runtime.getRuntime().exec("su");
+                                Process p = Runtime.getRuntime().exec("sh");
                                 OutputStream os = p.getOutputStream();
                                 os.write("mkdir -p /cache/recovery/\n".getBytes());
                                 os.write("echo 'boot-recovery' >/cache/recovery/command\n".getBytes());
@@ -110,9 +112,9 @@ public class ApplyUpdateActivity extends Activity {
                                 os.write("echo '--nandroid'  >> /cache/recovery/command\n".getBytes());
                                 String cmd = "echo '--update_package="+(isStorageRemovable() ? "/external_sd" : "/sdcard") +"/" + mUpdateFolder + "/" + mUpdateInfo.getFileName() + "' >> /cache/recovery/command\n";
                                 os.write(cmd.getBytes());
-                                os.write("reboot recovery\n".getBytes());
                                 os.flush();
                                 Toast.makeText(ApplyUpdateActivity.this, R.string.apply_trying_to_get_root_access, Toast.LENGTH_LONG).show();
+                                mPowerManager.reboot("recovery");
                                 }
                                 catch (IOException e) {
                                     Log.e(TAG, "Unable to reboot into recovery mode:", e);
