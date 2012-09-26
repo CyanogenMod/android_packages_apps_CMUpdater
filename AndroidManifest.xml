@@ -1,59 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          android:versionName="10.0.0" android:versionCode="1" package="com.cyanogenmod.updater.ui">
+    package="com.cyanogenmod.updater"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="15"/>
-
-	<application
-		android:label="@string/app_name"
-		android:theme="@android:style/Theme.Holo"
-		android:icon="@drawable/icon">
-
-		<activity
-                android:name="com.cyanogenmod.updater.ui.MainActivity"
-			android:launchMode="singleTask"
-			android:theme="@style/Theme.loading">
-			<intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-			</intent-filter>
-			<intent-filter>
-                <action android:name="android.settings.SYSTEM_UPDATE_SETTINGS"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-			</intent-filter>
-		</activity>
-
-		<activity
-                android:name="com.cyanogenmod.updater.ui.DownloadActivity"
-                android:launchMode="singleInstance"
-                android:configChanges="orientation|keyboardHidden"/>
-		<activity
-                android:name="com.cyanogenmod.updater.ui.ConfigActivity"
-                android:configChanges="orientation|keyboardHidden"/>
-		<activity
-                android:name="com.cyanogenmod.updater.ui.ApplyUpdateActivity"
-                android:configChanges="orientation|keyboardHidden"/>
-
-        <receiver android:name="com.cyanogenmod.updater.receiver.StartupReceiver">
-			<intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <category android:name="android.intent.category.HOME"/>
-			</intent-filter>
-		</receiver>
-
-        <service android:name="com.cyanogenmod.updater.service.UpdateCheckService"
-                 android:process="com.cyanogenmod.updater.service.UpdateCheckService">
-			<intent-filter>
-                <action android:name="com.cyanogenmod.updater.interfaces.IUpdateCheckService"/>
-			</intent-filter>
-		</service>
-        <service android:name="com.cyanogenmod.updater.service.DownloadService"
-                 android:process="com.cyanogenmod.updater.service.DownloadService">
-			<intent-filter>
-                <action android:name="com.cyanogenmod.updater.interfaces.IDownloadService"/>
-			</intent-filter>
-		</service>
-	</application>
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
@@ -64,4 +16,50 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.REBOOT"/>
     <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM"/>
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:theme="@android:style/Theme.Holo"
+        android:label="@string/app_name">
+
+        <activity
+            android:name=".UpdatesSettings"
+            android:launchMode="singleTop"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ApplyUpdate"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:excludeFromRecents="true" >
+        </activity>
+
+        <service android:name="com.cyanogenmod.updater.service.UpdateCheckService"
+                 android:process="com.cyanogenmod.updater.updater.service.UpdateCheckService">
+            <intent-filter>
+                <action android:name="com.cyanogenmod.updater.interfaces.IUpdateCheckService"/>
+            </intent-filter>
+        </service>
+
+        <service android:name="com.cyanogenmod.updater.service.DownloadService"
+                 android:process="com.cyanogenmod.updater.service.DownloadService">
+            <intent-filter>
+                <action android:name="com.cyanogenmod.updater.interfaces.IDownloadService"/>
+            </intent-filter>
+        </service>
+
+        <receiver android:name="com.cyanogenmod.updater.receiver.StartupReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.HOME"/>
+            </intent-filter>
+        </receiver>
+
+    </application>
+
 </manifest>

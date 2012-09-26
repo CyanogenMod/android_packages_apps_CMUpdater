@@ -1,199 +1,94 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<!-- .ui.* Strings -->
-	<string name="apply_now_button_text">Apply Now</string>
-	<string name="apply_later_button_text">Apply Later</string>
-	<string name="apply_update_button_text">Apply Update</string>
-	<string name="apply_title_textview_text">{0} is ready to be applied</string>
-	<string name="apply_subtitle_textview_text">Release notes:</string>
-	<string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
-	<string name="apply_trying_to_get_root_access">Trying to get root access to reboot in recovery mode</string>
 
-	<string name="available_updates_text">Please select the ROM to download:</string>
-	<string name="choose_available_update_text">Download</string>
-	<string name="no_updates_found_instructions">No updates found.\nPress \'Check now\' to manually check for new updates</string>
-	<string name="downloaded_update_found_text">Updates found in Update Folder:</string>
-	<string name="checking_for_updates">Checking for updates</string>
-	<string name="downloading_update">Downloading update</string>
-	<string name="sdcard_is_not_present_dialog_body">You will need a writable SD card to download this update</string>
-	<string name="sdcard_is_not_present_dialog_title">No SDCard found</string>
-	<string name="sdcard_is_not_present_dialog_ok_button">Ok</string>
-	<string name="current_version_text">Running Version: {0}</string>
-	<string name="delete_updates_text">Delete updates</string>
-	<string name="delete_updates_success_message">Update Folder deleted</string>
-	<string name="delete_updates_failure_message">There was an error deleting the Update Folder</string>
-	<string name="delete_updates_noFolder_message">Update Folder not found</string>
+    <!-- General strings -->
+    <string name="app_name">CM Updater</string>
+    <string name="unknown">Unknown</string>
 
-	<string name="apply_update_dialog_title">Confirmation</string>
-	<string name="apply_update_dialog_text">You are about to upgrade to {0}.\nIf you press update, the phone will restart itself in recovery mode to apply the update.</string>
-	<string name="apply_update_dialog_update_button">Update</string>
-	<string name="apply_update_dialog_backup_and_update_button">Backup &amp; Apply</string>
-	<string name="apply_update_dialog_cancel_button">Cancel</string>
-	
-	<string name="no_updates_no_mod_text">Your system is running an unsupported OS mod (Version {0}).</string>
-	<string name="check_now_button_text">Check now</string>
-	
-	<string name="menu_check_now">Check now</string>
-	<string name="menu_config">Configuration</string>
-	<string name="menu_about">About</string>
-	
-	<string name="cancel_download_buton_text">Cancel Download</string>
-	<string name="confirm_download_cancelation_dialog_message">Are you sure you want to cancel the current download? You can resume it later, by downloading the same update again.</string>
-	<string name="confirm_download_cancelation_dialog_yes">Yes</string>
-	<string name="confirm_download_cancelation_dialog_no">No</string>
-	<string name="download_canceled_toast_message">Download cancelled</string>
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_delete_all">Delete downloads</string>
+    <string name="menu_system_info">System info</string>
 
-	<string name="verify_and_apply_dialog_title">Verifying</string>
-	<string name="verify_and_apply_dialog_message">Verifying update MD5 sum</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+    <string name="dialog_update">Update</string>
+    <string name="dialog_backup_and_update">Backup &amp; Apply</string>
 
-	<string name="apply_existing_update_md5error_message">Error. MD5 checksum missmatch</string>
+    <!-- Settings strings -->
+    <string name="cmupdate_settings_title">CyanogenMod updates</string>
+    <string name="cmupdate_settings_summary">View or install available updates</string>
+    <string name="enable_updates_title">Enable updates</string>
+    <string name="available_updates_title">Available updates</string>
+    <string name="no_available_updates_intro">The last check did not find any available updates. To manually check for new updates, use the Refresh button</string>
+    <string name="new_update_summary">New</string>
+    <string name="downloaded_update_summary">Downloaded</string>
+    <string name="backup_rom_title">Create backup</string>
+    <string name="backup_rom_summary">Backup existing ROM before applying an update</string>
 
-	<string name="apply_upload_info_message">Please note: pushing the "Apply" button will immediately reboot your device into recovery and attempt to install this update. Please do not interrupt the process after it starts.</string>
+    <string name="update_check_title">Check for updates</string>
+    <string name="check_manual">Manual</string>
+    <string name="check_on_boot">On every boot</string>
+    <string name="check_hourly">Hourly</string>
+    <string name="check_daily">Daily</string>
+    <string name="check_weekly">Weekly</string>
+    <string name="check_bi_weekly">Bi-weekly</string>
+    <string name="check_monthly">Monthly</string>
 
-	<string name="last_update_check_text">Last update check</string>
-	<string name="overwrite_update_title">Update exists</string>
-	<string name="overwrite_update_summary">The selected Update already exists in your Update Folder.\nWould you like to overwrite it?</string>
-	<string name="overwrite_update_positive">Yes</string>
-	<string name="overwrite_update_negative">No</string>
+    <string name="update_type_title">Update types</string>
+    <string name="type_all">All versions (Stable only)</string>
+    <string name="type_all_incl_nightly">All versions (incl. Nightlies)</string>
+    <string name="type_new">New versions (Stable only)</string>
+    <string name="type_new_incl_nightly">New versions (incl. Nightlies)</string>
 
-	<string name="no_md5_found_title">No MD5 found</string>
-	<string name="no_md5_found_summary">No MD5 File according to the Update was found.\nDo you want to apply it without checking?</string>
-	<string name="no_md5_found_positive">Apply</string>
-	<string name="no_md5_found_negative">Cancel</string>
+    <!-- Update checking -->
+    <string name="checking_for_updates">Checking for updates</string>
+    <string name="no_updates_found">No new updates found</string>
+    <string name="not_new_updates_found_ticker">New updates are available</string>
+    <string name="not_new_updates_found_title">New updates</string>
+    <string name="not_new_updates_found_body">{0} update(s) available for download</string>
 
-	<string name="notification_tickertext">Downloading Update</string>
-	<string name="notification_finished">Download finished</string>
+    <!-- Downloads -->
+    <string name="minutes">min</string>
+    <string name="seconds">sec</string>
+    <string name="download_resume_not_supported">Resume not supported by server</string>
+    <string name="download_resume_download">Resuming download</string>
+    <string name="unable_to_download_file">Unable to download the update file</string>
+    <string name="download_not_enough_space">Not enough space on SDCard to download the update</string>
+    <string name="not_update_download_error_ticker">An error occurred while downloading the update</string>
+    <string name="not_update_download_error_title">An error occurred while downloading the update</string>
+    <string name="notification_tickertext">Downloading update</string>
+    <string name="notification_finished">Download finished</string>
+    <string name="exception_while_downloading">An error occurred while trying to download the update</string>
+    <string name="confirm_download_cancelation_dialog_title">Cancel download?</string>
+    <string name="confirm_download_cancelation_dialog_message">You can resume it later by downloading the same update again</string>
+    <string name="download_canceled_toast_message">Download cancelled</string>
+    <string name="downloading_update">Downloading update</string>
 
-	<string name="toast_uninstall_old_Version">You have to uninstall any old Version of the App to proceed!</string>
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Error. MD5 checksum missmatch</string>
+    <string name="md5_check_cancelled">MD5 check was cancelled</string>
+    <string name="md5_verification_failed">MD5 verification failed</string>
 
-	<string name="stable_description"> = Stable</string>
-	<string name="nightly_description"> = Nightly</string>
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Apply update</string>
+    <string name="apply_update_dialog_text">You are about to upgrade to {0}.\n\nIf you press Update, the phone will restart itself in recovery mode to install the update</string>
+    <string name="apply_trying_to_get_root_access">Trying to get root access to reboot in recovery mode</string>
+    <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
 
-	<string name="changelog_progress_title">Please wait ...</string>
-	<string name="changelog_progress_body">Trying to download the changelog.xml</string>
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Delete file</string>
+    <string name="confirm_delete_dialog_message">You are about to delete the downloaded update file, OK to proceed?</string>
+    <string name="confirm_delete_all_dialog_message">You are about to delete all downloaded update files, OK to proceed?</string>
+    <string name="delete_single_update_success_message">Update {0} deleted</string>
+    <string name="delete_updates_failure_message">There was an error deleting the update file</string>
+    <string name="delete_updates_noFolder_message">Update Folder not found</string>
+    <string name="delete_updates_success_message">All downloaded updates deleted</string>
 
-	<string name="changelog_button_text">Changelog of selected Rom</string>
-	<string name="no_changelog_found">No Changelog found</string>
-
-	<string name="changelog_title_rom">Update Changelog</string>
-	<string name="changelog_title_app">Application Changelog</string>
-
-	<string name="true_string">true</string>
-	<string name="false_string">false</string>
-	
-	<string name="md5_check_cancelled">MD5 Check was Cancelled</string>
-	
-	<string name="button_available_updates">Updates</string>
-	<string name="button_existing_updates">Downloaded</string>
-	
-	<string name="no_existing_updates_found">No Updates downloaded to this device</string>
-
-	<string name="title_running">running on CyanogenMod</string>
-	
-	<string name="no_updatecheck_executed">No Updatecheck executed</string>
-	
-	<string name="delete_updates_root_folder_message">You can not delete the Root Folder\nPlease delete the Updates one by one</string>
-
-	<string name="about_dialog_title">About</string>
-	
-	<string name="barcode_scan_no_result">No result was received. Please try again.</string>
-	
-	<!-- .service.* Strings -->
-	<string name="no_updates_found">No updates found</string>
-	<string name="not_new_updates_found_ticker">New updates found!</string>
-	<string name="not_new_updates_found_title">New updates found</string>
-	<string name="exception_while_downloading">An error occurred while trying to download an update</string>
-
-	<string name="not_update_check_error_ticker">Check for updates failed</string>
-	<string name="not_update_check_error_title">Unable to check for new updates</string>
-
-	<string name="not_update_download_error_ticker">An error occurred while downloading the update</string>
-	<string name="not_update_download_error_title">An error occurred while downloading the update</string>
-
-	<string name="not_update_downloaded_ticker">Update downloaded</string>
-	<string name="not_update_downloaded_title">Ipdate downloaded</string>
-	<string name="not_update_downloaded_body">{0} is ready to install</string>
-
-	<string name="download_info_filename">Filename: </string>
-	<string name="download_info_downloading">Downloading...</string>
-	<string name="download_info_speed">Speed: </string>
-	<string name="download_info_remaining_time">Remaining Time: </string>
-
-	<string name="confirm_delete_update_folder_dialog_message">Delete Update Folder?</string>
-	<string name="confirm_delete_update_folder_dialog_yes">Delete All Updates</string>
-	<string name="confirm_delete_update_folder_dialog_neutral">Delete selected Update</string>
-	<string name="confirm_delete_update_folder_dialog_no">Cancel</string>
-	<string name="delete_single_update_success_message">Update {0} deleted</string>    
-	<string name="minutes">min</string>
-	<string name="seconds">sec</string>
-	
-	<string name="unable_to_download_file">Unable to download the update file from any mirror</string>
-	<string name="md5_verification_failed">MD5 verification failed</string>
-
-	<!-- Preferences Strings -->
-	<string name="p_update_check_freq_title">Update Checking frequency</string>
-	<string name="p_update_check_freq_summary">Set update checking frequency</string>
-
-	<string name="p_display_older_rom_versions_title">Display All Rom Updates</string>
-	<string name="p_display_older_rom_versions_summary">Display all Rom updates, including old versions</string>
-	<string name="p_display_older_rom_versions_changed">Please check for updates again, to update the List of available updates</string>
-
-	<string name="p_allow_nightly_rom_versions_title">Display Nightly Roms</string>
-	<string name="p_allow_nightly_rom_versions_summary">Display Rom updates that are Nightly (non-stable)</string>
-	<string name="p_allow_nightly_rom_versions_changed">Please check for updates again, to update the List of available updates</string>
-
-	<string name="p_do_nandroid_backup_title">Backups</string>
-	<string name="p_do_nandroid_backup_summary">Create backups before applying any update?</string>
-
-	<string name="p_notification_ringtone_title">Notification Ringtone</string>
-	<string name="p_notification_ringtone_summary">Choose a ringtone for Updater alerts</string>
-
-	<string name="p_vibrate_title">Vibrate</string>
-	<string name="p_vibrate_summary">Vibrate on Notifications</string>
-
-	<string name="p_notifications_title">Notifications</string>
-	<string name="p_notifications_summary">Enable/Disable Notifications</string>
-
-	<string name="p_progress_update_frequency_title">Progress Update Frequency</string>
-	<string name="p_progress_update_frequency_summary">Higher Values --> Less updating\nLower Values --> More updating</string>
-
-	<string name="p_progress_update_freq_def_title">Reset Update Frequency</string>
-	<string name="p_progress_update_freq_def_summary">Reset the Update Frequency of the Downloaddialog/Notificationbar</string>
-	<string name="p_progress_update_freq_def_toast">Progress Update Frequency set back to default</string>
-	
-	<string name="p_invalid_url">Entered URL is not valid! Please try again.</string>
-	
-	<string name="p_notifications_screen_title">Notifications</string>
-	<string name="p_notifications_screen_summary">Set Notification Settings</string>
-	
-	<string name="p_rom_screen_title">Rom Update Settings</string>
-	<string name="p_rom_screen_summary">Set Settings for Rom Updates</string>
-	
-	<string name="p_barcode_scan_failure">There was an error while scanning the Barcode</string>
-	
-	<string name="p_advanced_screen_title">Advanced Settings</string>
-	<string name="p_advanced_screen_summary">Set Advanced Settings</string>
-	
-	<string name="p_update_folder_title">Update Folder</string>
-	<string name="p_update_folder_summary">Set the update Folder\nSet blank for root-Directory</string>
-	
-	<string name="p_update_folder_def_title">Reset Update Folder</string>
-	<string name="p_update_folder_def_summary">Set the update Folder back to default</string>
-	<string name="p_update_folder_def_toast">Update Folder set back to default</string>
-	<string name="p_update_folder_error">Error on Setting the UpdateFolder</string>
-	
-	<!--  new Strings -->
-	<string name="alert_old_version_title">Old Version</string>
-	<string name="alert_old_version_summary">You are running an old Rom-Version.
-	To use the Updater, you have to upgrade manually.
-	Click the open Browser Button below, to open up the Instructions</string>
-	<string name="alert_old_version_ok">Ok</string>
-	<string name="alert_old_version_browser">Open Browser</string>
-	<string name="download_resume_not_supported">Resume not supported by Server</string>
-	<string name="download_resume_download">Resuming Download</string>
-	<string name="download_not_enough_space">Not Enough Space on SDCard to download the Udpate</string>
-	<string name="p_debug_output_title">Debug Output</string>
-	<string name="p_debug_output_summary">Show Debug Output in logcat</string>
-	<string name="p_debug_output_changed">Please restart the App for the changes to take effect</string>
-	<string name="sdcard_not_avail">No SDCard present or Phone Mounted to PC. You need a writeable SDCard to procedd. The App will now exit</string>
+    <!-- System info strings -->
+    <string name="sysinfo_device">Device:</string>
+    <string name="sysinfo_running">Running:</string>
+    <string name="sysinfo_last_check">Last check:</string>
 </resources>

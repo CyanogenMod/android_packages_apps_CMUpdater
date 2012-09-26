@@ -1,24 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="TextAppearance" parent="android:TextAppearance">
+
+    <style name="AppTheme" parent="android:Theme.Light" />
+
+    <style name="UpdatesPreferenceStyle">
+        <item name="android:layout">@layout/preference_updates</item>
     </style>
-    <style name="TextAppearance.Text">
-        <item name="android:textSize">20sp</item>
-    </style>
-    <style name="TextAppearance.TextSpinner">
-        <item name="android:textSize">20sp</item>
-    </style>
-    <style name="TextAppearance.TextSmall">
-        <item name="android:textSize">10sp</item>
-    </style>
-    <style name="TextAppearance.Subtitle">
-        <item name="android:textSize">17sp</item>
-    </style>
-    <style name="TextAppearance.Button" >
-        <item name="android:textSize">17sp</item>
-    </style>
-    <style name="Theme.loading" parent="android:style/Theme.Holo.NoActionBar">
-        <item name="android:windowBackground">@drawable/loading</item>
-        <item name="android:windowNoTitle">false</item>
-    </style>
+
 </resources>

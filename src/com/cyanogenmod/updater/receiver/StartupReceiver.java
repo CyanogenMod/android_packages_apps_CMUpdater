@@ -5,65 +5,64 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import com.cyanogenmod.updater.misc.Constants;
-import com.cyanogenmod.updater.misc.Log;
-import com.cyanogenmod.updater.service.UpdateCheckService;
-import com.cyanogenmod.updater.utils.Preferences;
+import android.content.SharedPreferences;
+import android.util.Log;
 
-import java.security.InvalidParameterException;
+import com.cyanogenmod.updater.misc.Constants;
+import com.cyanogenmod.updater.service.UpdateCheckService;
+
 import java.util.Date;
 
 public class StartupReceiver extends BroadcastReceiver {
-	private static final String TAG = "StartupReceiver";
-	
-	private static Boolean showDebugOutput = false;
+    private static final String TAG = "StartupReceiver";
 
-	@Override
+    @Override
     public void onReceive(Context ctx, Intent intent) {
-		Preferences prefs = new Preferences(ctx);
-		showDebugOutput = prefs.displayDebugOutput();
-		boolean notificationsEnabled = prefs.notificationsEnabled();
-		int updateFreq = prefs.getUpdateFrequency();
-		 
-		//Only check for updates if notifications are enabled
-        if (updateFreq == Constants.UPDATE_FREQ_AT_BOOT && notificationsEnabled) {
-			Intent i = new Intent(ctx, UpdateCheckService.class);
-			
-			if (showDebugOutput) Log.d(TAG, "Asking UpdateService to check for updates...");
-			ctx.startService(i);
-        } else if (!(updateFreq == Constants.UPDATE_FREQ_NONE) && notificationsEnabled) {
-			scheduleUpdateService(ctx, updateFreq * 1000);
+
+        // Load the following from preferences
+        SharedPreferences prefs = ctx.getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+        int updateFreq = prefs.getInt(Constants.UPDATE_CHECK_PREF, -2);
+
+        if (updateFreq == Constants.UPDATE_FREQ_NONE) {
+            // We are set to manual updates, don't do anything
+            return;
+        }
+
+        // We should check for updates
+        if (updateFreq == Constants.UPDATE_FREQ_AT_BOOT) {
+            // Asking UpdateService to check for updates on boot
+            Intent i = new Intent(ctx, UpdateCheckService.class);
+            i.putExtra(Constants.CHECK_FOR_UPDATE, true);
+            ctx.startService(i);
+
         } else {
-			// User selected no updates
-			if (showDebugOutput) Log.d(TAG, "No Updatecheck");
-		}
-	}
+            // Scheduling future UpdateService checks for updates
+            scheduleUpdateService(ctx, updateFreq * 1000);
+        }
+    }
 
-    public static void cancelUpdateChecks(Context ctx) {
-		Intent i = new Intent(ctx, UpdateCheckService.class);
-		PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
-		
-		AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-		if (showDebugOutput) Log.d(TAG, "Canceling any previous alarms");
-		am.cancel(pi);
-	}
+    private void scheduleUpdateService(Context ctx, int updateFrequency) {
 
-    public static void scheduleUpdateService(Context ctx, int updateFrequency) {
-        if (updateFrequency < 0) throw new InvalidParameterException("updateFrequency can't be negative");
+        // Get the intent ready
+        Intent i = new Intent(ctx, UpdateCheckService.class);
+        i.putExtra(Constants.CHECK_FOR_UPDATE, true);
+        PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
 
-		Preferences prefs = new Preferences(ctx);
-		
-		if (showDebugOutput) Log.d(TAG, "Scheduling alarm to go off every "  + updateFrequency + " msegs");
-		Intent i = new Intent(ctx, UpdateCheckService.class);
-		PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
+        // Clear any old alarms before we start
+        AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
+        am.cancel(pi);
 
-		Date lastCheck = prefs.getLastUpdateCheck();
-		if (showDebugOutput) Log.d(TAG, "Last check on " + lastCheck.toString());
+        // Check if we need to schedule a new alarm
+        if (updateFrequency > 0) {
+            Log.d(TAG, "Update frequency is " + updateFrequency);
 
-		cancelUpdateChecks(ctx);
+            // Get the last time we checked for an update
+            SharedPreferences prefs = ctx.getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+            Date lastCheck = new Date(prefs.getLong(Constants.LAST_UPDATE_CHECK_PREF, 0));
+            Log.d(TAG, "Last check was " + lastCheck.toString());
 
-		AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-		if (showDebugOutput) Log.d(TAG, "Setting alarm for UpdateService");
-		am.setRepeating(AlarmManager.RTC_WAKEUP, lastCheck.getTime() + updateFrequency, updateFrequency, pi);
-	}
+            // Set the new alarm
+            am.setRepeating(AlarmManager.RTC_WAKEUP, lastCheck.getTime() + updateFrequency, updateFrequency, pi);
+        }
+    }
 }
