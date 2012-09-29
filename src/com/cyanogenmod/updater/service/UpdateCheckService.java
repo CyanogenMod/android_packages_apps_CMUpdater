@@ -1,35 +1,57 @@
+/*
+ * Copyright (C) 2012 The CyanogenMod Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.cyanogenmod.updater.service;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.net.Uri;
-import android.os.*;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.RemoteCallbackList;
+import android.os.RemoteException;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.cyanogenmod.updater.R;
+import com.cyanogenmod.updater.UpdatesSettings;
+import com.cyanogenmod.updater.interfaces.IUpdateCheckService;
+import com.cyanogenmod.updater.interfaces.IUpdateCheckServiceCallback;
 import com.cyanogenmod.updater.customTypes.FullUpdateInfo;
 import com.cyanogenmod.updater.customTypes.UpdateInfo;
 import com.cyanogenmod.updater.customization.Customization;
-import com.cyanogenmod.updater.interfaces.IUpdateCheckService;
-import com.cyanogenmod.updater.interfaces.IUpdateCheckServiceCallback;
 import com.cyanogenmod.updater.misc.Constants;
-import com.cyanogenmod.updater.misc.Log;
 import com.cyanogenmod.updater.misc.State;
-import com.cyanogenmod.updater.ui.MainActivity;
-import com.cyanogenmod.updater.ui.R;
-import com.cyanogenmod.updater.utils.Preferences;
 import com.cyanogenmod.updater.utils.StringUtils;
 import com.cyanogenmod.updater.utils.SysUtils;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +60,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -46,40 +67,63 @@ import java.util.LinkedList;
 public class UpdateCheckService extends Service {
     private static final String TAG = "UpdateCheckService";
 
-    private static Boolean showDebugOutput = false;
+    private static Boolean DEBUG = false;
 
     private final RemoteCallbackList<IUpdateCheckServiceCallback> mCallbacks = new RemoteCallbackList<IUpdateCheckServiceCallback>();
-    private Preferences mPreferences;
-    private String systemMod;
-    private String systemRom;
-    private Integer currentBuildDate;
-    private boolean showNightlyRomUpdates;
-    private boolean showAllRomUpdates;
-    private boolean WildcardUsed = false;
+    private String mSystemMod;
+    private String mSystemRom;
+    private Integer mCurrentBuildDate;
+    private boolean mShowNightlyRomUpdates;
+    private boolean mShowAllRomUpdates;
+    private boolean mWildcardUsed = false;
 
     @Override
-        public IBinder onBind(Intent intent) {
-            return mBinder;
-        }
+    public IBinder onBind(Intent intent) {
+        return mBinder;
+    }
 
     @Override
-        public void onCreate() {
-            mPreferences = new Preferences(this);
-            showDebugOutput = mPreferences.displayDebugOutput();
-            systemMod = mPreferences.getBoardString();
-            if (systemMod == null) {
-                if (showDebugOutput)
-                    Log.d(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
-            } else {
-                if (showDebugOutput) Log.d(TAG, "System's Mod version:" + systemMod);
-            }
+    public void onCreate() {
+        // Get the system MOD string
+        mSystemMod = SysUtils.getSystemProperty(Customization.BOARD);
+        if (mSystemMod == null) {
+            if (DEBUG)
+                Log.d(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
+        } else {
+            if (DEBUG)
+                Log.d(TAG, "System's Mod version:" + mSystemMod);
         }
 
+    }
+
     @Override
-        public void onDestroy() {
-            mCallbacks.kill();
-            super.onDestroy();
+    public void onStart(Intent intent, int startId) {
+        // Parse the intent
+        boolean doCheck = intent.getBooleanExtra(Constants.CHECK_FOR_UPDATE, false);
+        if (doCheck) {
+            // If we should check for updates on start, do so in a seperate thread
+            if (DEBUG)
+                Log.d(TAG, "The intent says we should check for new updates, lets do it");
+            new AutoCheckForUpdatesTask().execute();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        mCallbacks.kill();
+        super.onDestroy();
+    }
+
+    //*********************************************************
+    // Supporting methods and classes
+    //*********************************************************
+    private class AutoCheckForUpdatesTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            checkForNewUpdates();
+            return null;
+        }
+    }
 
     private final IUpdateCheckService.Stub mBinder = new IUpdateCheckService.Stub() {
         public void registerCallback(IUpdateCheckServiceCallback cb) throws RemoteException {
@@ -103,7 +147,9 @@ public class UpdateCheckService extends Service {
         FullUpdateInfo availableUpdates;
         while (true) {
             try {
-                if (showDebugOutput) Log.d(TAG, "Checking for updates...");
+                if (DEBUG)
+                    Log.d(TAG, "Checking for updates...");
+
                 availableUpdates = getAvailableUpdates();
                 break;
             }
@@ -119,49 +165,60 @@ public class UpdateCheckService extends Service {
             }
         }
 
-        mPreferences.setLastUpdateCheck(new Date());
+        // Store the last update check time
+        Date d = new Date();
+        SharedPreferences prefs = getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+        prefs.edit().putLong(Constants.LAST_UPDATE_CHECK_PREF, d.getTime()).apply();
+        if (DEBUG)
+            Log.d(TAG, "Update time being set to " + d.toString());
 
         int updateCountRoms = availableUpdates.getRomCount();
         int updateCount = availableUpdates.getUpdateCount();
-        if (showDebugOutput) Log.d(TAG, updateCountRoms + " ROM update(s) found; ");
+        if (DEBUG)
+            Log.d(TAG, updateCountRoms + " ROM update(s) found; ");
 
         if (updateCountRoms == 0) {
-            if (showDebugOutput) Log.d(TAG, "No updates found");
+            if (DEBUG)
+                Log.d(TAG, "No updates found");
             ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.no_updates_found, 0));
             FinishUpdateCheck();
+
         } else {
-            if (mPreferences.notificationsEnabled()) {
-                Intent i = new Intent(this, MainActivity.class);
-                PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_ONE_SHOT);
+            // There are updates available
+            // The notification should launch the main app
+            Intent i = new Intent(this, UpdatesSettings.class);
+            i.putExtra(Constants.CHECK_FOR_UPDATE, true);
+            PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_ONE_SHOT);
 
-                Resources res = getResources();
-                Notification notification = new Notification(android.R.drawable.ic_popup_sync,
-                        res.getString(R.string.not_new_updates_found_ticker),
-                        System.currentTimeMillis());
+            Resources res = getResources();
+            String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
 
-                //To remove the Notification, when the User clicks on it
-                notification.flags = Notification.FLAG_AUTO_CANCEL;
+            // Get the notification ready
+            Notification.Builder builder = new Notification.Builder(this);
+            builder.setSmallIcon(R.drawable.ic_tab_unselected_download);
+            builder.setWhen(System.currentTimeMillis());
+            builder.setTicker(res.getString(R.string.not_new_updates_found_ticker));
 
-                String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
-                notification.setLatestEventInfo(this, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
+            // Set the rest of the content
+            builder.setContentTitle(res.getString(R.string.not_new_updates_found_title));
+            builder.setContentText(text);
+            builder.setContentIntent(contentIntent);
+            builder.setAutoCancel(true);
+            Notification noti = builder.build();
 
-                Uri notificationRingtone = mPreferences.getConfiguredRingtone();
-                if (mPreferences.getVibrate())
-                    notification.defaults = Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS;
-                else
-                    notification.defaults = Notification.DEFAULT_LIGHTS;
-                notification.sound = notificationRingtone;
+            // Trigger the notification
+            NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            nm.notify(R.string.not_new_updates_found_title, noti);
 
-                //Use a resourceId as an unique identifier
-                ((NotificationManager)getSystemService(NOTIFICATION_SERVICE)).notify(R.string.not_new_updates_found_title, notification);
-            }
+            // We are done
             FinishUpdateCheck();
         }
     }
 
     private void notificateCheckError(String ExceptionText) {
         DisplayExceptionToast(ExceptionText);
-        if (showDebugOutput) Log.d(TAG, "Update check error");
+        if (DEBUG)
+            Log.d(TAG, "Update check error");
         FinishUpdateCheck();
     }
 
@@ -170,31 +227,52 @@ public class UpdateCheckService extends Service {
         boolean romException = false;
         HttpClient romHttpClient = new DefaultHttpClient();
         HttpEntity romResponseEntity = null;
-        systemRom = SysUtils.getModVersion();
-        currentBuildDate = new Integer(SysUtils.getSystemProperty(Customization.BUILD_DATE));
-        showNightlyRomUpdates = mPreferences.showNightlyRomUpdates();
-        showAllRomUpdates = mPreferences.showAllRomUpdates();
+        mSystemRom = SysUtils.getModVersion();
+        mCurrentBuildDate = Integer.valueOf(SysUtils.getSystemProperty(Customization.BUILD_DATE));
+
+        // Get the type of update we should check for
+        SharedPreferences prefs = getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+        int updateType = prefs.getInt(Constants.UPDATE_TYPE_PREF, 0);
+        if (DEBUG)
+            Log.d(TAG, "Checking for updates of type " + updateType);
+        if (updateType == 0) {
+            mShowAllRomUpdates = false;
+            mShowNightlyRomUpdates = false;
+        } else if (updateType == 1) {
+            mShowAllRomUpdates = false;
+            mShowNightlyRomUpdates = true;
+        } else if (updateType == 2) {
+            mShowAllRomUpdates = true;
+            mShowNightlyRomUpdates = false;
+        } else if (updateType == 3) {
+            mShowAllRomUpdates = true;
+            mShowNightlyRomUpdates = true;
+        }
+
         //Get the actual Rom Updateserver URL
         try {
             URI RomUpdateServerUri = URI.create(getResources().getString(R.string.conf_update_server_url_def));
             HttpPost romReq = new HttpPost(RomUpdateServerUri);
-            String getcmRequest = "{\"method\": \"get_builds\", \"params\":{\"device\":\""+systemMod+"\", \"channels\": [\"nightly\",\"stable\"]}}";
+            String getcmRequest = "{\"method\": \"get_builds\", \"params\":{\"device\":\""+mSystemMod+"\", \"channels\": [\"nightly\",\"stable\"]}}";
             romReq.setEntity(new ByteArrayEntity(getcmRequest.getBytes()));
             romReq.addHeader("Cache-Control", "no-cache");
             HttpResponse romResponse = romHttpClient.execute(romReq);
             int romServerResponse = romResponse.getStatusLine().getStatusCode();
             if (romServerResponse != HttpStatus.SC_OK) {
-                if (showDebugOutput) Log.d(TAG, "Server returned status code for ROM " + romServerResponse);
+                if (DEBUG)
+                    Log.d(TAG, "Server returned status code for ROM " + romServerResponse);
                 romException = true;
             }
-            if (!romException)
+
+            if (!romException) {
                 romResponseEntity = romResponse.getEntity();
-        }
-        catch (IllegalArgumentException e) {
-            if (showDebugOutput) Log.d(TAG, "Rom Update request failed: " + e);
+            }
+
+        } catch (IllegalArgumentException e) {
+            if (DEBUG)
+                Log.d(TAG, "Rom Update request failed: " + e);
             romException = true;
         }
-
 
         try {
             if (!romException) {
@@ -209,16 +287,20 @@ public class UpdateCheckService extends Service {
 
                 LinkedList<UpdateInfo> romUpdateInfos = parseJSON(romBuf);
                 retValue.roms = getRomUpdates(romUpdateInfos);
-            } else if (showDebugOutput) Log.d(TAG, "There was an Exception on Downloading the Rom JSON File");
-        }
-        finally {
+
+            } else {
+                if (DEBUG)
+                    Log.d(TAG, "There was an Exception on Downloading the Rom JSON File");
+            }
+
+        } finally {
             if (romResponseEntity != null)
                 romResponseEntity.consumeContent();
         }
 
-        FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(this, showDebugOutput));
+        FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(this));
         if (!romException)
-            State.saveState(this, retValue, showDebugOutput);
+            State.saveState(this, retValue);
         return ful;
     }
 
@@ -230,17 +312,21 @@ public class UpdateCheckService extends Service {
         try {
             mainJSONObject = new JSONObject(buf.toString());
             JSONArray updateList = mainJSONObject.getJSONArray(Constants.JSON_UPDATE_LIST);
-            if (showDebugOutput) Log.d(TAG, "Found " + updateList.length() + " updates in the JSON");
+            if (DEBUG)
+                Log.d(TAG, "Found " + updateList.length() + " updates in the JSON");
+
             for (int i = 0, max = updateList.length(); i < max; i++) {
-                if (!updateList.isNull(i))
+                if (!updateList.isNull(i)) {
                     uis.add(parseUpdateJSONObject(updateList.getJSONObject(i)));
-                else
+                } else {
                     Log.e(TAG, "Theres an error in your JSON File(update part). Maybe a , after the last update");
+                }
             }
-        }
-        catch (JSONException e) {
+
+        } catch (JSONException e) {
             Log.e(TAG, "Error in JSON File: ", e);
         }
+
         return uis;
     }
 
@@ -256,10 +342,10 @@ public class UpdateCheckService extends Service {
             ui.setBranchCode(obj.getString(Constants.JSON_BRANCH).trim());
             ui.setFileName(obj.getString(Constants.JSON_FILENAME).trim());
 
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             Log.e(TAG, "Error in JSON File: ", e);
         }
+
         return ui;
     }
 
@@ -281,40 +367,44 @@ public class UpdateCheckService extends Service {
         LinkedList<UpdateInfo> ret = new LinkedList<UpdateInfo>();
         for (int i = 0, max = updateInfos.size(); i < max; i++) {
             UpdateInfo ui = updateInfos.poll();
-            if (showAllRomUpdates || StringUtils.compareVersions(ui.getVersion(), systemRom, ui.getDate(), currentBuildDate)) {
-                if (branchMatches(ui, showNightlyRomUpdates)) {
-                    if (showDebugOutput)
+            if (mShowAllRomUpdates || StringUtils.compareVersions(ui.getVersion(), mSystemRom, ui.getDate(), mCurrentBuildDate)) {
+                if (branchMatches(ui, mShowNightlyRomUpdates)) {
+                    if (DEBUG)
                         Log.d(TAG, "Adding Rom: " + ui.getName() + " Version: " + ui.getVersion() + " Filename: " + ui.getFileName());
                     ret.add(ui);
                 } else {
-                    if (showDebugOutput)
+                    if (DEBUG)
                         Log.d(TAG, "Discarding Rom " + ui.getName() + " (Branch mismatch - stable/nightly)");
                 }
             } else {
-                if (showDebugOutput) Log.d(TAG, "Discarding Rom " + ui.getName() + " (older version)");
+                if (DEBUG)
+                    Log.d(TAG, "Discarding Rom " + ui.getName() + " (older version)");
             }
         }
         return ret;
     }
 
     @SuppressWarnings("unchecked")
-        private static FullUpdateInfo FilterUpdates(FullUpdateInfo newList, FullUpdateInfo oldList) {
-            if (showDebugOutput) Log.d(TAG, "Called FilterUpdates");
-            if (showDebugOutput) Log.d(TAG, "newList Length: " + newList.getUpdateCount());
-            if (showDebugOutput) Log.d(TAG, "oldList Length: " + oldList.getUpdateCount());
-            FullUpdateInfo ful = new FullUpdateInfo();
-            ful.roms = (LinkedList<UpdateInfo>) newList.roms.clone();
-            ful.roms.removeAll(oldList.roms);
-            if (showDebugOutput) Log.d(TAG, "fulList Length: " + ful.getUpdateCount());
-            return ful;
-        }
+    private static FullUpdateInfo FilterUpdates(FullUpdateInfo newList, FullUpdateInfo oldList) {
+        if (DEBUG) Log.d(TAG, "Called FilterUpdates");
+        if (DEBUG) Log.d(TAG, "newList Length: " + newList.getUpdateCount());
+        if (DEBUG) Log.d(TAG, "oldList Length: " + oldList.getUpdateCount());
+
+        FullUpdateInfo ful = new FullUpdateInfo();
+        ful.roms = (LinkedList<UpdateInfo>) newList.roms.clone();
+        ful.roms.removeAll(oldList.roms);
+
+        if (DEBUG) Log.d(TAG, "fulList Length: " + ful.getUpdateCount());
+
+        return ful;
+    }
 
     private final Handler ToastHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.arg1 != 0)
-                Toast.makeText(UpdateCheckService.this, msg.arg1, Toast.LENGTH_LONG).show();
+                Toast.makeText(UpdateCheckService.this, msg.arg1, Toast.LENGTH_SHORT).show();
             else
-                Toast.makeText(UpdateCheckService.this, (String) msg.obj, Toast.LENGTH_LONG).show();
+                Toast.makeText(UpdateCheckService.this, (String) msg.obj, Toast.LENGTH_SHORT).show();
         }
     };
 
