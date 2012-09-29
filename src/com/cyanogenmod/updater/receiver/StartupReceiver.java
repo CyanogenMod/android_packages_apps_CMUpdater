@@ -21,7 +21,7 @@ public class StartupReceiver extends BroadcastReceiver {
 
         // Load the following from preferences
         SharedPreferences prefs = ctx.getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
-        int updateFreq = prefs.getInt(Constants.UPDATE_CHECK_PREF, -2);
+        int updateFreq = prefs.getInt(Constants.UPDATE_CHECK_PREF, Constants.UPDATE_FREQ_WEEKLY);
 
         if (updateFreq == Constants.UPDATE_FREQ_NONE) {
             // We are set to manual updates, don't do anything

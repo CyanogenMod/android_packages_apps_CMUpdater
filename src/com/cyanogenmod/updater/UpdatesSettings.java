@@ -36,7 +36,6 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -98,7 +97,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         mBackupRom.setChecked(mPrefs.getBoolean(Constants.BACKUP_PREF, true));
         mUpdateCheck = (ListPreference) findPreference(Constants.UPDATE_CHECK_PREF);
         if (mUpdateCheck != null) {
-            int check = mPrefs.getInt(Constants.UPDATE_CHECK_PREF, -2);
+            int check = mPrefs.getInt(Constants.UPDATE_CHECK_PREF, Constants.UPDATE_FREQ_WEEKLY);
             mUpdateCheck.setValue(String.valueOf(check));
             mUpdateCheck.setSummary(mapCheckValue(check));
             mUpdateCheck.setOnPreferenceChangeListener(this);
@@ -124,7 +123,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_REFRESH, 0, R.string.menu_refresh)
-                .setIcon(R.drawable.ic_menu_refresh_holo_dark)
+                .setIcon(R.drawable.ic_menu_refresh)
                 .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS
                         | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
@@ -484,7 +483,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         Date lastCheck = new Date(mPrefs.getLong(Constants.LAST_UPDATE_CHECK_PREF, 0));
         String message = getString(R.string.sysinfo_device) + " " + systemMod + "\n\n"
                 + getString(R.string.sysinfo_running)+ " "+ systemRom + "\n\n"
-                + getString(R.string.sysinfo_last_check) + " " + lastCheck.toString() + "\n";
+                + getString(R.string.sysinfo_last_check) + " " + lastCheck.toString();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.menu_system_info);

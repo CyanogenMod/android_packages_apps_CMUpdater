@@ -239,6 +239,8 @@ public class DownloadUpdate extends Activity {
 
                     // Trigger the apply update activity
                     Intent i = new Intent(mParent, ApplyUpdate.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                            Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                     i.putExtra(Constants.KEY_UPDATE_INFO, (Serializable) mUpdateInfo);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mParent.startActivity(i);

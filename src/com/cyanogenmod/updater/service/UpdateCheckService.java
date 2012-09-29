@@ -195,7 +195,7 @@ public class UpdateCheckService extends Service {
 
             // Get the notification ready
             Notification.Builder builder = new Notification.Builder(this);
-            builder.setSmallIcon(R.drawable.ic_tab_unselected_download);
+            builder.setSmallIcon(R.drawable.cm_updater);
             builder.setWhen(System.currentTimeMillis());
             builder.setTicker(res.getString(R.string.not_new_updates_found_ticker));
 

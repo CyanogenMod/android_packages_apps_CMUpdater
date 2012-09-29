@@ -18,20 +18,17 @@
     <string name="dialog_backup_and_update">Backup &amp; Apply</string>
 
     <!-- Settings strings -->
-    <string name="cmupdate_settings_title">CyanogenMod updates</string>
-    <string name="cmupdate_settings_summary">View or install available updates</string>
-    <string name="enable_updates_title">Enable updates</string>
     <string name="available_updates_title">Available updates</string>
     <string name="no_available_updates_intro">The last check did not find any available updates. To manually check for new updates, use the Refresh button</string>
     <string name="new_update_summary">New</string>
     <string name="downloaded_update_summary">Downloaded</string>
     <string name="backup_rom_title">Create backup</string>
-    <string name="backup_rom_summary">Backup existing ROM before applying an update</string>
+    <string name="backup_rom_summary">Backup existing ROM before updating</string>
 
     <string name="update_check_title">Check for updates</string>
     <string name="check_manual">Manual</string>
     <string name="check_on_boot">On every boot</string>
-    <string name="check_hourly">Hourly</string>
+    <string name="check_twice_daily">Twice daily</string>
     <string name="check_daily">Daily</string>
     <string name="check_weekly">Weekly</string>
     <string name="check_bi_weekly">Bi-weekly</string>
