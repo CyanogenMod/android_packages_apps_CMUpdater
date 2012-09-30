@@ -1,0 +1,91 @@
+<resources>
+
+    <!-- General strings -->
+    <string name="app_name">CM Updater</string>
+    <string name="unknown">Неизвестный</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Обновить</string>
+    <string name="menu_delete">Удалить</string>
+    <string name="menu_delete_all">Удалить загрузки</string>
+    <string name="menu_system_info">Информация о системе</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Отмена</string>
+    <string name="dialog_yes">Да</string>
+    <string name="dialog_no">Нет</string>
+    <string name="dialog_update">Обновить</string>
+    <string name="dialog_backup_and_update">Создать РК и применить</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Доступные обновления</string>
+    <string name="no_available_updates_intro">Последняя проверка не обнаружила доступных обновлений. Чтобы проверить наличие обновлений вручную, нажмите кнопку \"Обновить\"</string>
+    <string name="new_update_summary">Новые</string>
+    <string name="downloaded_update_summary">Загруженные</string>
+    <string name="backup_rom_title">Создать РК</string>
+    <string name="backup_rom_summary">Создать резервную копию перед обновлением</string>
+
+    <string name="update_check_title">Проверка обновлений</string>
+    <string name="check_manual">Вручную</string>
+    <string name="check_on_boot">При включении устройства</string>
+    <string name="check_twice_daily">Дважды в день</string>
+    <string name="check_daily">Ежедневно</string>
+    <string name="check_weekly">Еженедельно</string>
+    <string name="check_bi_weekly">Раз в две недели</string>
+    <string name="check_monthly">Ежемесячно</string>
+
+    <string name="update_type_title">Тип обновления</string>
+    <string name="type_all">Все версии (Только стабильные)</string>
+    <string name="type_all_incl_nightly">Все версии (Включая ночные сборки)</string>
+    <string name="type_new">Новые версии (Только стабильные)</string>
+    <string name="type_new_incl_nightly">Новые версии (Включая ночные сборки)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Проверка обновлений...</string>
+    <string name="no_updates_found">Обновлений не найдено</string>
+    <string name="not_new_updates_found_ticker">Доступны новые обновления</string>
+    <string name="not_new_updates_found_title">Новые обновления</string>
+    <string name="not_new_updates_found_body">{0} обновления(ий) доступно для загрузки</string>
+
+    <!-- Downloads -->
+    <string name="minutes">мин.</string>
+    <string name="seconds">сек.</string>
+    <string name="download_resume_not_supported">Возобновление не поддерживается сервером</string>
+    <string name="download_resume_download">Возобновление загрузки</string>
+    <string name="unable_to_download_file">Не удалось загрузить файл обновления</string>
+    <string name="download_not_enough_space">Нет свободного места на карте-памяти для загрузки обновлений</string>
+    <string name="not_update_download_error_ticker">При загрузке обновления произошла ошибка</string>
+    <string name="not_update_download_error_title">При загрузке обновления произошла ошибка</string>
+    <string name="notification_tickertext">Загрузка обновления</string>
+    <string name="notification_finished">Загрузка завершена</string>
+    <string name="exception_while_downloading">При загрузке обновления произошла ошибка</string>
+    <string name="confirm_download_cancelation_dialog_title">Отменить загрузку?</string>
+    <string name="confirm_download_cancelation_dialog_message">Вы можете возобновить загрузку позже, запустив обновление ещё раз</string>
+    <string name="download_canceled_toast_message">Загрузка отменена</string>
+    <string name="downloading_update">Загрузка обновления</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Ошибка! Несоответствие контрольной суммы MD5</string>
+    <string name="md5_check_cancelled">Проверка MD5 была отменена</string>
+    <string name="md5_verification_failed">Не удалось выполнить проверку MD5</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Применить обновление</string>
+    <string name="apply_update_dialog_text">Вы собираетесь обновиться на {0}.\n\nПри нажатии кнопки \"Обновить\", телефон перезагрузится в режим recovery для установки обновления</string>
+    <string name="apply_trying_to_get_root_access">Попытка получить root-доступ для перезагрузки в режим recovery</string>
+    <string name="apply_unable_to_reboot_toast">Невозможно перезагрузиться в режим recovery</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Удалить файл</string>
+    <string name="confirm_delete_dialog_message">Вы собираетесь удалить загруженный файл обновления. Нажмите \"Да\" для продолжения.</string>
+    <string name="confirm_delete_all_dialog_message">Вы собираетесь удалить все загруженные файлы обновлений. Нажмите \"Да\" для продолжения.</string>
+    <string name="delete_single_update_success_message">Обновление {0} удалено</string>
+    <string name="delete_updates_failure_message">Произошла ошибка при удалении файла обновления</string>
+    <string name="delete_updates_noFolder_message">Каталог с обновлениями не найден</string>
+    <string name="delete_updates_success_message">Все загруженные обновления удалены</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Устройство:</string>
+    <string name="sysinfo_running">Версия:</string>
+    <string name="sysinfo_last_check">Последняя проверка:</string>
+</resources>
