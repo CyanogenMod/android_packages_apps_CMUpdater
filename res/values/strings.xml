@@ -15,7 +15,6 @@
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
     <string name="dialog_update">Update</string>
-    <string name="dialog_backup_and_update">Backup &amp; Apply</string>
 
     <!-- Settings strings -->
     <string name="available_updates_title">Available updates</string>
@@ -48,21 +47,12 @@
     <string name="not_new_updates_found_body">{0} update(s) available for download</string>
 
     <!-- Downloads -->
-    <string name="minutes">min</string>
-    <string name="seconds">sec</string>
-    <string name="download_resume_not_supported">Resume not supported by server</string>
-    <string name="download_resume_download">Resuming download</string>
+    <string name="confirm_download_cancelation_dialog_title">Cancel download</string>
+    <string name="confirm_download_cancelation_dialog_message">You are about to cancel the current download, OK to proceed?</string>
+    <string name="download_stopped">Download stopped</string>
+    <string name="download_already_running">A download is already running</string>
     <string name="unable_to_download_file">Unable to download the update file</string>
-    <string name="download_not_enough_space">Not enough space on SDCard to download the update</string>
-    <string name="not_update_download_error_ticker">An error occurred while downloading the update</string>
-    <string name="not_update_download_error_title">An error occurred while downloading the update</string>
-    <string name="notification_tickertext">Downloading update</string>
-    <string name="notification_finished">Download finished</string>
-    <string name="exception_while_downloading">An error occurred while trying to download the update</string>
-    <string name="confirm_download_cancelation_dialog_title">Cancel download?</string>
-    <string name="confirm_download_cancelation_dialog_message">You can resume it later by downloading the same update again</string>
-    <string name="download_canceled_toast_message">Download cancelled</string>
-    <string name="downloading_update">Downloading update</string>
+    <string name="download_not_found">Download not found</string>
 
     <!-- MD5 related strings -->
     <string name="apply_existing_update_md5error_message">Error. MD5 checksum missmatch</string>
@@ -81,7 +71,7 @@
     <string name="confirm_delete_all_dialog_message">You are about to delete all downloaded update files, OK to proceed?</string>
     <string name="delete_single_update_success_message">Update {0} deleted</string>
     <string name="delete_updates_failure_message">There was an error deleting the update file</string>
-    <string name="delete_updates_noFolder_message">Update Folder not found</string>
+    <string name="delete_updates_noFolder_message">Update folder not found</string>
     <string name="delete_updates_success_message">All downloaded updates deleted</string>
 
     <!-- System info strings -->

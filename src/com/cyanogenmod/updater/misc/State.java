@@ -40,14 +40,12 @@ public class State {
             data.put(Constants.KEY_AVAILABLE_UPDATES, mAvailableUpdates);
             oos.writeObject(data);
             oos.flush();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             Log.e(TAG, "Exception on saving Instance State", ex);
-        }
-        finally {
+        } finally {
             if (oos != null) {
-            oos.close();
-        }
+                oos.close();
+            }
             if (fos != null) {
                 fos.close();
             }
@@ -56,7 +54,7 @@ public class State {
 
     @SuppressWarnings("unchecked")
     public static FullUpdateInfo loadState(Context ctx) throws IOException {
-        FullUpdateInfo mAvailableUpdates = new FullUpdateInfo();
+        FullUpdateInfo availableUpdates = new FullUpdateInfo();
         ObjectInputStream ois = null;
         FileInputStream fis = null;
         try {
@@ -64,26 +62,22 @@ public class State {
             fis = new FileInputStream(f);
             ois = new ObjectInputStream(fis);
             Map<String, Serializable> data = (HashMap<String, Serializable>) ois.readObject();
-            Object o = data.get(Constants.KEY_AVAILABLE_UPDATES); 
-            if (o != null) mAvailableUpdates = (FullUpdateInfo) o;
-        }
-        catch (ClassNotFoundException e) {
+            Object o = data.get(Constants.KEY_AVAILABLE_UPDATES);
+            if (o != null) availableUpdates = (FullUpdateInfo) o;
+        } catch (ClassNotFoundException e) {
             Log.e(TAG, "Unable to load stored class", e);
-        }
-        catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {
             Log.i(TAG, "No State Info stored");
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Log.e(TAG, "Exception on Loading State", e);
-        }
-        finally {
+        } finally {
             if (ois != null) {
                 ois.close();
-        }
+            }
             if (fis != null) {
                 fis.close();
             }
         }
-        return mAvailableUpdates;
+        return availableUpdates;
     }
 }
