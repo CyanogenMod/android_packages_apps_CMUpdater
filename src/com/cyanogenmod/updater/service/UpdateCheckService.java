@@ -67,7 +67,8 @@ import java.util.LinkedList;
 public class UpdateCheckService extends Service {
     private static final String TAG = "UpdateCheckService";
 
-    private static Boolean DEBUG = false;
+    private static final boolean DEBUG = false;
+    private static final boolean TESTING_DOWNLOAD = false;
 
     private final RemoteCallbackList<IUpdateCheckServiceCallback> mCallbacks = new RemoteCallbackList<IUpdateCheckServiceCallback>();
     private String mSystemMod;
@@ -84,8 +85,14 @@ public class UpdateCheckService extends Service {
 
     @Override
     public void onCreate() {
+
         // Get the system MOD string
-        mSystemMod = SysUtils.getSystemProperty(Customization.BOARD);
+        if (!TESTING_DOWNLOAD) {
+            mSystemMod = SysUtils.getSystemProperty(Customization.BOARD);
+        } else {
+            mSystemMod = "cmtestdevice";
+        }
+
         if (mSystemMod == null) {
             if (DEBUG)
                 Log.d(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
@@ -102,8 +109,6 @@ public class UpdateCheckService extends Service {
         boolean doCheck = intent.getBooleanExtra(Constants.CHECK_FOR_UPDATE, false);
         if (doCheck) {
             // If we should check for updates on start, do so in a seperate thread
-            if (DEBUG)
-                Log.d(TAG, "The intent says we should check for new updates, lets do it");
             new AutoCheckForUpdatesTask().execute();
         }
     }
@@ -139,8 +144,8 @@ public class UpdateCheckService extends Service {
         }
     };
 
-    private void DisplayExceptionToast(String ex) {
-        ToastHandler.sendMessage(ToastHandler.obtainMessage(0, ex));
+    private void displayExceptionToast(String ex) {
+        mToastHandler.sendMessage(mToastHandler.obtainMessage(0, ex));
     }
 
     private void checkForNewUpdates() {
@@ -180,8 +185,8 @@ public class UpdateCheckService extends Service {
         if (updateCountRoms == 0) {
             if (DEBUG)
                 Log.d(TAG, "No updates found");
-            ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.no_updates_found, 0));
-            FinishUpdateCheck();
+            mToastHandler.sendMessage(mToastHandler.obtainMessage(0, R.string.no_updates_found, 0));
+            finishUpdateCheck();
 
         } else {
             // There are updates available
@@ -211,15 +216,15 @@ public class UpdateCheckService extends Service {
             nm.notify(R.string.not_new_updates_found_title, noti);
 
             // We are done
-            FinishUpdateCheck();
+            finishUpdateCheck();
         }
     }
 
     private void notificateCheckError(String ExceptionText) {
-        DisplayExceptionToast(ExceptionText);
+        displayExceptionToast(ExceptionText);
         if (DEBUG)
             Log.d(TAG, "Update check error");
-        FinishUpdateCheck();
+        finishUpdateCheck();
     }
 
     private FullUpdateInfo getAvailableUpdates() throws IOException {
@@ -298,7 +303,7 @@ public class UpdateCheckService extends Service {
                 romResponseEntity.consumeContent();
         }
 
-        FullUpdateInfo ful = FilterUpdates(retValue, State.loadState(this));
+        FullUpdateInfo ful = filterUpdates(retValue, State.loadState(this));
         if (!romException)
             State.saveState(this, retValue);
         return ful;
@@ -385,7 +390,7 @@ public class UpdateCheckService extends Service {
     }
 
     @SuppressWarnings("unchecked")
-    private static FullUpdateInfo FilterUpdates(FullUpdateInfo newList, FullUpdateInfo oldList) {
+    private static FullUpdateInfo filterUpdates(FullUpdateInfo newList, FullUpdateInfo oldList) {
         if (DEBUG) Log.d(TAG, "Called FilterUpdates");
         if (DEBUG) Log.d(TAG, "newList Length: " + newList.getUpdateCount());
         if (DEBUG) Log.d(TAG, "oldList Length: " + oldList.getUpdateCount());
@@ -399,7 +404,7 @@ public class UpdateCheckService extends Service {
         return ful;
     }
 
-    private final Handler ToastHandler = new Handler() {
+    private final Handler mToastHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.arg1 != 0)
                 Toast.makeText(UpdateCheckService.this, msg.arg1, Toast.LENGTH_SHORT).show();
@@ -408,11 +413,11 @@ public class UpdateCheckService extends Service {
         }
     };
 
-    private void FinishUpdateCheck() {
+    private void finishUpdateCheck() {
         final int M = mCallbacks.beginBroadcast();
         for (int i = 0; i < M; i++) {
             try {
-                mCallbacks.getBroadcastItem(i).UpdateCheckFinished();
+                mCallbacks.getBroadcastItem(i).updateCheckFinished();
             }
             catch (RemoteException e) {
                 // The RemoteCallbackList will take care of removing
