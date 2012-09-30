@@ -31,13 +31,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ApplyUpdate"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:excludeFromRecents="true" >
-        </activity>
-
         <service android:name="com.cyanogenmod.updater.service.UpdateCheckService"
                  android:process="com.cyanogenmod.updater.updater.service.UpdateCheckService">
             <intent-filter>
@@ -45,16 +38,22 @@
             </intent-filter>
         </service>
 
-        <service android:name="com.cyanogenmod.updater.service.DownloadService"
-                 android:process="com.cyanogenmod.updater.service.DownloadService">
-            <intent-filter>
-                <action android:name="com.cyanogenmod.updater.interfaces.IDownloadService"/>
-            </intent-filter>
-        </service>
-
         <receiver android:name="com.cyanogenmod.updater.receiver.StartupReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.HOME"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.cyanogenmod.updater.receiver.DownloadCompletedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+                <category android:name="android.intent.category.HOME"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.cyanogenmod.updater.receiver.NotificationClickReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"/>
                 <category android:name="android.intent.category.HOME"/>
             </intent-filter>
         </receiver>

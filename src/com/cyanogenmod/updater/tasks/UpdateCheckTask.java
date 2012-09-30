@@ -39,17 +39,17 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
     private IUpdateCheckService mService;
     private boolean mBound;
     private Intent mServiceIntent;
-    private final ProgressDialog mPgDialog;
+    private final ProgressDialog mProgressDialog;
     private final UpdatesSettings mParent;
 
-    public UpdateCheckTask(UpdatesSettings parent) { 
+    public UpdateCheckTask(UpdatesSettings parent) {
         mParent = parent;
-        mPgDialog = new ProgressDialog(mParent);
-        mPgDialog.setTitle(R.string.checking_for_updates);
-        mPgDialog.setMessage(mParent.getResources().getString(R.string.checking_for_updates));
-        mPgDialog.setIndeterminate(true);
-        mPgDialog.setCancelable(true);
-        mPgDialog.setOnCancelListener(new OnCancelListener() {
+        mProgressDialog = new ProgressDialog(mParent);
+        mProgressDialog.setTitle(R.string.checking_for_updates);
+        mProgressDialog.setMessage(mParent.getResources().getString(R.string.checking_for_updates));
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setCancelable(true);
+        mProgressDialog.setOnCancelListener(new OnCancelListener() {
             public void onCancel(DialogInterface dialog) {
                 if (!isCancelled()) {
                     cancel(true);
@@ -60,7 +60,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPreExecute() {
-        mPgDialog.show();
+        mProgressDialog.show();
         mServiceIntent = new Intent(IUpdateCheckService.class.getName());
         ComponentName comp = mParent.startService(mServiceIntent);
         if (comp == null)
@@ -100,8 +100,8 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
             mBound = false;
         }
         mParent.stopService(mServiceIntent);
-        if (mPgDialog != null) {
-            mPgDialog.dismiss();
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
         }
 
         mParent.updateLayout();
@@ -135,9 +135,9 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
     };
 
     private final IUpdateCheckServiceCallback mCallback = new IUpdateCheckServiceCallback.Stub() {
-        public void UpdateCheckFinished() throws RemoteException {
-            if (mPgDialog != null) {
-                mPgDialog.dismiss();
+        public void updateCheckFinished() throws RemoteException {
+            if (mProgressDialog != null) {
+                mProgressDialog.dismiss();
             }
         }
     };
