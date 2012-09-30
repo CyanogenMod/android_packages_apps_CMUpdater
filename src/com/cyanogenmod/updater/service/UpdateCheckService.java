@@ -253,7 +253,7 @@ public class UpdateCheckService extends Service {
         try {
             URI RomUpdateServerUri = URI.create(getResources().getString(R.string.conf_update_server_url_def));
             HttpPost romReq = new HttpPost(RomUpdateServerUri);
-            String getcmRequest = "{\"method\": \"get_builds\", \"params\":{\"device\":\""+mSystemMod+"\", \"channels\": [\"nightly\",\"stable\"]}}";
+            String getcmRequest = "{\"method\": \"get_all_builds\", \"params\":{\"device\":\""+mSystemMod+"\", \"channels\": [\"nightly\",\"stable\",\"snapshot\"]}}";
             romReq.setEntity(new ByteArrayEntity(getcmRequest.getBytes()));
             romReq.addHeader("Cache-Control", "no-cache");
             HttpResponse romResponse = romHttpClient.execute(romReq);
