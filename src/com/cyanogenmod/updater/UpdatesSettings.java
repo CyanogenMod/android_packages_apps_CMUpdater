@@ -146,7 +146,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
             case MENU_DELETE_ALL:
                 confirmDeleteAll();
-                updateLayout();
                 return true;
 
             case MENU_SYSTEM_INFO:
@@ -253,7 +252,9 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             //To show only the Filename. Otherwise the whole Path with /sdcard/cm-updates will be shown
             existingFilenames = new ArrayList<String>();
             for (File file : files) {
-                existingFilenames.add(file.getName());
+                if (file.isFile()) {
+                    existingFilenames.add(file.getName());
+                }
             }
             //For sorting the Filenames, have to find a way to do natural sorting
             existingFilenames = Collections.synchronizedList(existingFilenames);
@@ -430,6 +431,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             public void onClick(DialogInterface dialog, int which) {
                 // We are OK to delete, trigger it
                 deleteOldUpdates();
+                updateLayout();
             }
         });
         builder.setNegativeButton(R.string.dialog_no, new DialogInterface.OnClickListener() {
