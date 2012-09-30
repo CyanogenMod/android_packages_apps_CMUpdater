@@ -90,7 +90,7 @@
         android:layout_height="fill_parent"
         android:paddingLeft="15dip"
         android:paddingRight="?android:attr/scrollbarSize"
-        android:src="@drawable/ic_tab_unselected_download"
+        android:src="@drawable/ic_tab_download"
         android:layout_gravity="center"
         android:clickable="true"
         android:focusable="true"
