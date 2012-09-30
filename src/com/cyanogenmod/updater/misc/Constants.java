@@ -49,8 +49,9 @@ public class Constants {
     public static final String UPDATE_TYPE_PREF = "pref_update_type";
     public static final String LAST_UPDATE_CHECK_PREF = "pref_last_update_check";
 
-    // Service start parameter
+    // Updates activity start parameter
     public static final String CHECK_FOR_UPDATE = "check_for_update";
+    public static final String START_UPDATE = "start_update";
 
     // Notifications
     public static final int NOTIFICATION_DOWNLOAD_STATUS = 100;
