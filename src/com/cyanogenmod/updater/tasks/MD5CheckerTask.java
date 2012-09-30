@@ -23,7 +23,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.cyanogenmod.updater.ApplyUpdate;
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.UpdatesSettings;
 import com.cyanogenmod.updater.customTypes.UpdateInfo;
@@ -94,9 +93,11 @@ public class MD5CheckerTask extends AsyncTask<File, Void, Boolean> {
         ui.setName(temp[temp.length - 1]);
         ui.setFileName(mFilename);
         if (result) {
-            Intent i = new Intent(mContext, ApplyUpdate.class);
+            Intent i = new Intent(mContext, UpdatesSettings.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.putExtra(Constants.START_UPDATE, true);
             i.putExtra(Constants.KEY_UPDATE_INFO, (Serializable) ui);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivity(i);
         } else {
             Toast.makeText(mContext, R.string.apply_existing_update_md5error_message, Toast.LENGTH_SHORT).show();

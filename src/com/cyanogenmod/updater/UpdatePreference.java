@@ -18,7 +18,6 @@ package com.cyanogenmod.updater;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.view.View;
@@ -29,10 +28,7 @@ import android.widget.TextView;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.customTypes.UpdateInfo;
-import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.UpdatesSettings;
-
-import java.io.Serializable;
 
 public class UpdatePreference extends Preference implements OnClickListener {
     private static final String TAG = "UpdatePreference";
@@ -198,17 +194,14 @@ public class UpdatePreference extends Preference implements OnClickListener {
                             public void onClick(View arg0) {
                                 // Check if an UpdateInfo object is available
                                 if (mUpdateInfo == null) {
-                                    // If not, create a skeleton with the name
+                                    // If not, create a skeleton with the filename
                                     mUpdateInfo = new UpdateInfo();
+                                    mUpdateInfo.setName(mTitle);
                                     mUpdateInfo.setFileName(mTitle);
                                 }
 
                                 // Attempt to install the supplied update
-                                Intent i = new Intent(mParent, ApplyUpdate.class);
-                                i.putExtra(Constants.KEY_UPDATE_INFO, (Serializable) mUpdateInfo);
-                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                                        Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                                mParent.startActivity(i);
+                                mParent.startUpdate(mUpdateInfo);
                             }
                         });
 

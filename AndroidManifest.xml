@@ -31,13 +31,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ApplyUpdate"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
-            android:excludeFromRecents="true" >
-        </activity>
-
         <service android:name="com.cyanogenmod.updater.service.UpdateCheckService"
                  android:process="com.cyanogenmod.updater.updater.service.UpdateCheckService">
             <intent-filter>

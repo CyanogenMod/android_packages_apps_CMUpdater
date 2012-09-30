@@ -20,10 +20,10 @@ import com.cyanogenmod.updater.customTypes.UpdateInfo;
 import com.cyanogenmod.updater.interfaces.IDownloadServiceCallback;
 
 interface IDownloadService {
-    void Download(in UpdateInfo ui);
+    void download(in UpdateInfo ui);
     UpdateInfo getCurrentUpdate();
-    boolean DownloadRunning();
-    void PauseDownload();
+    boolean isDownloadRunning();
+    void pauseDownload();
     void cancelDownload();
     void registerCallback(in IDownloadServiceCallback cb);
     void unregisterCallback(in IDownloadServiceCallback cb);
