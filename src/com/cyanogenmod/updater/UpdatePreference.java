@@ -192,7 +192,7 @@ public class UpdatePreference extends Preference implements OnClickListener {
         switch (mStyle) {
             case STYLE_DOWNLOADED:
                 // Show the install image
-                mUpdatesButton.setImageResource(R.drawable.ic_tab_unselected_install);
+                mUpdatesButton.setImageResource(R.drawable.ic_tab_install);
                 mUpdatesButton.setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View arg0) {
@@ -206,7 +206,8 @@ public class UpdatePreference extends Preference implements OnClickListener {
                                 // Attempt to install the supplied update
                                 Intent i = new Intent(mParent, ApplyUpdate.class);
                                 i.putExtra(Constants.KEY_UPDATE_INFO, (Serializable) mUpdateInfo);
-                                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                                        Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                                 mParent.startActivity(i);
                             }
                         });
@@ -220,7 +221,7 @@ public class UpdatePreference extends Preference implements OnClickListener {
             case STYLE_DOWNLOADING:
                 // Show the cancel button image
                 // The download service takes care of the button assignment
-                mUpdatesButton.setImageResource(R.drawable.ic_tab_unselected_cancel);
+                mUpdatesButton.setImageResource(R.drawable.ic_tab_cancel);
                 mProgressBar.setVisibility(View.VISIBLE);
                 mSummaryText.setVisibility(View.GONE);
                 break;
@@ -228,7 +229,7 @@ public class UpdatePreference extends Preference implements OnClickListener {
             case STYLE_NEW:
             default:
                 // Show the download button image
-                mUpdatesButton.setImageResource(R.drawable.ic_tab_unselected_download);
+                mUpdatesButton.setImageResource(R.drawable.ic_tab_download);
                 mUpdatesButton.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View arg0) {

@@ -447,13 +447,15 @@ public class DownloadService extends Service {
 
         // Get the apply update intent ready
         i = new Intent(this, ApplyUpdate.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         i.putExtra(Constants.KEY_UPDATE_INFO, (Serializable) ui);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, 0);
 
         // Set the Notification to finished
         Resources res = getResources();
         Notification.Builder builder = new Notification.Builder(this);
-        builder.setSmallIcon(R.drawable.ic_tab_unselected_install);
+        builder.setSmallIcon(R.drawable.ic_tab_install);
         builder.setWhen(System.currentTimeMillis());
         builder.setTicker(res.getString(R.string.notification_finished));
 

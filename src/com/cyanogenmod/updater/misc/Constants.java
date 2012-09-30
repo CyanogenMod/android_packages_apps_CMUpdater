@@ -59,6 +59,11 @@ public class Constants {
     // Update Check Frequencies
     public static final int UPDATE_FREQ_AT_BOOT = -1;
     public static final int UPDATE_FREQ_NONE = -2;
+    public static final int UPDATE_FREQ_TWICE_DAILY = 43200;
+    public static final int UPDATE_FREQ_DAILY = 86400;
+    public static final int UPDATE_FREQ_WEEKLY = 604800;
+    public static final int UPDATE_FREQ_BI_WEEKLY = 1209600;
+    public static final int UPDATE_FREQ_MONTHLY = 2419200;
 
     // ChangelogHandler
     public static final String VERSION_TAG = "Version";
