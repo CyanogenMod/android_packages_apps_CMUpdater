@@ -34,7 +34,6 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.cyanogenmod.updater.ApplyUpdate;
 import com.cyanogenmod.updater.DownloadUpdate;
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.UpdatesSettings;
@@ -66,7 +65,7 @@ import java.util.TimerTask;
 public class DownloadService extends Service {
     private static final String TAG = "DownloadService";
 
-    boolean DEBUG = false;
+    private static final boolean DEBUG = false;
 
     private final RemoteCallbackList<IDownloadServiceCallback> mCallbacks = new RemoteCallbackList<IDownloadServiceCallback>();
 
@@ -83,23 +82,23 @@ public class DownloadService extends Service {
     private long mLocalFileSize = 0;
 
     @Override
-    public IBinder onBind(Intent arg0) {
+    public IBinder onBind(Intent intent) {
         return mBinder;
     }
 
     private final IDownloadService.Stub mBinder = new IDownloadService.Stub() {
-        public void Download(UpdateInfo ui) throws RemoteException {
+        public void download(UpdateInfo ui) throws RemoteException {
             mDownloading = true;
             boolean success = checkForConnectionAndUpdate(ui);
             notifyUser(ui, success);
             mDownloading = false;
         }
 
-        public boolean DownloadRunning() throws RemoteException {
+        public boolean isDownloadRunning() throws RemoteException {
             return mDownloading;
         }
 
-        public void PauseDownload() throws RemoteException {
+        public void pauseDownload() throws RemoteException {
             //TODO: Pause Download
             stopDownload();
         }
@@ -148,17 +147,15 @@ public class DownloadService extends Service {
 
         try {
             success = downloadFile(updateToDownload);
-        }
-        catch (RuntimeException ex) {
-            Log.e(TAG, "RuntimeEx while checking for updates", ex);
-            notificateDownloadError(ex.getMessage());
+        } catch (RuntimeException ex) {
+            Log.e(TAG, "RuntimeExeption while checking for updates", ex);
+            notifyDownloadError(ex.getMessage());
             return false;
-        }
-        finally {
+        } finally {
             mWifiLock.release();
         }
 
-        //Be sure to return false if the User cancelled the Download
+        // Be sure to return false if the user cancelled the Download
         return !mPrepForDownloadCancel && success;
     }
 
@@ -238,14 +235,14 @@ public class DownloadService extends Service {
                         if (DEBUG)
                             Log.d(TAG, "Resume not supported");
 
-                        ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.download_resume_not_supported, 0));
+                        mToastHandler.sendMessage(mToastHandler.obtainMessage(0, R.string.download_resume_not_supported, 0));
                         //To get the UdpateProgressBar working correctly, when server does not support resume
                         mLocalFileSize = 0;
                     } else if (mLocalFileSize > 0 && serverResponse == HttpStatus.SC_PARTIAL_CONTENT) {
                         if (DEBUG)
                             Log.d(TAG, "Resume supported");
 
-                        ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.download_resume_download, 0));
+                        mToastHandler.sendMessage(mToastHandler.obtainMessage(0, R.string.download_resume_download, 0));
                     }
 
                     downloadedMD5 = updateInfo.getMD5();
@@ -261,7 +258,7 @@ public class DownloadService extends Service {
                         if (DEBUG)
                             Log.d(TAG, "Download was canceled. Break the for loop");
                         entity = null;
-                        ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.download_canceled_toast_message, 0));
+                        mToastHandler.sendMessage(mToastHandler.obtainMessage(0, R.string.download_canceled_toast_message, 0));
                         return true;
                     }
 
@@ -290,18 +287,18 @@ public class DownloadService extends Service {
                 }
 
             } catch (IOException ex) {
-                ToastHandler.sendMessage(ToastHandler.obtainMessage(0, ex.getMessage()));
+                mToastHandler.sendMessage(mToastHandler.obtainMessage(0, ex.getMessage()));
                 Log.e(TAG, "An error occured while downloading the update file.", ex);
 
             } catch (NotEnoughSpaceException ex) {
-                ToastHandler.sendMessage(ToastHandler.obtainMessage(0, ex.getMessage()));
+                mToastHandler.sendMessage(mToastHandler.obtainMessage(0, ex.getMessage()));
                 Log.e(TAG, "Not enough Space on SDCard to download the Update");
                 return false;
             }
         }
 
         // Houston, we have a problem!
-        ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.unable_to_download_file, 0));
+        mToastHandler.sendMessage(mToastHandler.obtainMessage(0, R.string.unable_to_download_file, 0));
         if (DEBUG)
             Log.d(TAG, "Unable to download the update file from any mirror");
 
@@ -419,7 +416,7 @@ public class DownloadService extends Service {
             nm.notify(Constants.NOTIFICATION_DOWNLOAD_STATUS, noti);
 
             // Update the DownloadProgress
-            UpdateDownloadProgress(mTotalDownloaded, (int) contentLengthOfFullDownload, stringDownloaded, stringSpeed, stringRemainingTime);
+            updateDownloadProgress(mTotalDownloaded, (int) contentLengthOfFullDownload, stringDownloaded, stringSpeed, stringRemainingTime);
 
         } else if (DEBUG)
             Log.d(TAG, "Downloadcancel in Progress. Not updating the Notification and DownloadLayout");
@@ -436,21 +433,22 @@ public class DownloadService extends Service {
             if (DEBUG)
                 Log.d(TAG, "Downloaded Update was NULL");
 
-            DeleteDownloadStatusNotification();
-            DownloadError();
+            deleteDownloadStatusNotification();
+            downloadError();
             stopSelf();
             return;
         }
 
         // Clear any existing notifications
-        DeleteDownloadStatusNotification();
+        deleteDownloadStatusNotification();
 
         // Get the apply update intent ready
-        i = new Intent(this, ApplyUpdate.class);
+        i = new Intent(this, UpdatesSettings.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.putExtra(Constants.START_UPDATE, true);
         i.putExtra(Constants.KEY_UPDATE_INFO, (Serializable) ui);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Set the Notification to finished
         Resources res = getResources();
@@ -470,10 +468,10 @@ public class DownloadService extends Service {
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(Constants.NOTIFICATION_DOWNLOAD_FINISHED, noti);
 
-        DownloadFinished();
+        downloadFinished();
     }
 
-    private void notificateDownloadError(String ExceptionText) {
+    private void notifyDownloadError(String ExceptionText) {
         mDownloading = false;
 
         Intent i = new Intent(this, UpdatesSettings.class);
@@ -497,15 +495,15 @@ public class DownloadService extends Service {
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(R.string.not_update_download_error_title, noti);
 
-        ToastHandler.sendMessage(ToastHandler.obtainMessage(0, R.string.exception_while_downloading, 0));
+        mToastHandler.sendMessage(mToastHandler.obtainMessage(0, R.string.exception_while_downloading, 0));
     }
 
-    private void DeleteDownloadStatusNotification() {
+    private void deleteDownloadStatusNotification() {
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.cancel(Constants.NOTIFICATION_DOWNLOAD_STATUS);
     }
 
-    private void UpdateDownloadProgress(final long downloaded, final int total, final String downloadedText,
+    private void updateDownloadProgress(final long downloaded, final int total, final String downloadedText,
             final String speedText, final String remainingTimeText) {
         final int N = mCallbacks.beginBroadcast();
         for (int i = 0; i < N; i++) {
@@ -521,11 +519,11 @@ public class DownloadService extends Service {
         mCallbacks.finishBroadcast();
     }
 
-    private void DownloadFinished() {
+    private void downloadFinished() {
         final int M = mCallbacks.beginBroadcast();
         for (int i = 0; i < M; i++) {
             try {
-                mCallbacks.getBroadcastItem(i).DownloadFinished(mCurrentUpdate);
+                mCallbacks.getBroadcastItem(i).downloadFinished(mCurrentUpdate);
 
             } catch (RemoteException e) {
                 // The RemoteCallbackList will take care of removing
@@ -535,11 +533,11 @@ public class DownloadService extends Service {
         mCallbacks.finishBroadcast();
     }
 
-    private void DownloadError() {
+    private void downloadError() {
         final int M = mCallbacks.beginBroadcast();
         for (int i = 0; i < M; i++) {
             try {
-                mCallbacks.getBroadcastItem(i).DownloadError();
+                mCallbacks.getBroadcastItem(i).downloadError();
 
             } catch (RemoteException e) {
                 // The RemoteCallbackList will take care of removing
@@ -554,7 +552,7 @@ public class DownloadService extends Service {
         if (DEBUG)
             Log.d(TAG, "Download Service CancelDownload was called");
 
-        DeleteDownloadStatusNotification();
+        deleteDownloadStatusNotification();
         File update = new File(mFullUpdateFolderPath + "/" + mCurrentUpdate.getFileName());
         if (update.exists()) {
             update.delete();
@@ -574,7 +572,7 @@ public class DownloadService extends Service {
         stopSelf();
     }
 
-    private final Handler ToastHandler = new Handler() {
+    private final Handler mToastHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.arg1 != 0)
                 Toast.makeText(DownloadService.this, msg.arg1, Toast.LENGTH_SHORT).show();

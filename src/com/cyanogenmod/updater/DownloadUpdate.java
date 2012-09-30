@@ -21,14 +21,11 @@ import com.cyanogenmod.updater.customTypes.DownloadProgress;
 import com.cyanogenmod.updater.customTypes.UpdateInfo;
 import com.cyanogenmod.updater.interfaces.IDownloadService;
 import com.cyanogenmod.updater.interfaces.IDownloadServiceCallback;
-import com.cyanogenmod.updater.misc.Constants;
-
-import java.io.Serializable;
 
 public class DownloadUpdate extends Activity {
     private static final String TAG = "DownloadUpdate";
 
-    private Boolean DEBUG = false;
+    private static final boolean DEBUG = false;
 
     private UpdatePreference mCallingPreference = null;
     private ProgressBar mProgressBar;
@@ -36,9 +33,9 @@ public class DownloadUpdate extends Activity {
     private UpdateInfo mUpdateInfo;
     private PreferenceActivity mParent;
 
-    //Indicates if a Service is bound 
-    private boolean mbound = false;
-    private Intent serviceIntent;
+    // Indicates if a Service is bound
+    private boolean mBound = false;
+    private Intent mServiceIntent;
 
     public DownloadUpdate(UpdatePreference pref) {
         mCallingPreference = pref;
@@ -54,30 +51,30 @@ public class DownloadUpdate extends Activity {
 
     protected void startService() {
         try {
-            if (myService != null && myService.DownloadRunning()) {
-                mUpdateInfo = myService.getCurrentUpdate();
-                myService.registerCallback(mCallback);
+            if (mDownloadService != null && mDownloadService.isDownloadRunning()) {
+                mUpdateInfo = mDownloadService.getCurrentUpdate();
+                mDownloadService.registerCallback(mCallback);
 
                 if (DEBUG)
                     Log.d(TAG, "Retrieved update from DownloadService");
 
-                mbound = true;
+                mBound = true;
             } else {
                 if (DEBUG)
                     Log.d(TAG, "Not downloading");
 
-                serviceIntent = new Intent(IDownloadService.class.getName());
-                ComponentName comp = mParent.startService(serviceIntent);
+                mServiceIntent = new Intent(IDownloadService.class.getName());
+                ComponentName comp = mParent.startService(mServiceIntent);
                 if (comp == null) {
                     Log.e(TAG, "startService failed");
                 }
-                mbound = mParent.bindService(serviceIntent, mConnection, 0);
+                mBound = mParent.bindService(mServiceIntent, mConnection, 0);
             }
         } catch (RemoteException ex) {
             Log.e(TAG, "Error on DownloadService call", ex);
-            //Set myService to null, otherwise Mainactivity.onResume will crash,
+            //Set mDownloadService to null, otherwise Mainactivity.onResume will crash,
             //cause the service is not null
-            myService = null;
+            mDownloadService = null;
             stopService();
         }
 
@@ -89,15 +86,15 @@ public class DownloadUpdate extends Activity {
             Log.d(TAG, "onDestroy called");
 
         try {
-            if (myService != null && !myService.DownloadRunning()) {
-                MyUnbindService(mConnection);
+            if (mDownloadService != null && !mDownloadService.isDownloadRunning()) {
+                myUnbindService(mConnection);
             } else if (DEBUG)
                 Log.d(TAG, "DownloadService not Stopped. Not Started or Currently Downloading");
         } catch (RemoteException e) {
             Log.e(TAG, "Exception on calling DownloadService", e);
         }
 
-        boolean stopped = mParent.stopService(serviceIntent);
+        boolean stopped = mParent.stopService(mServiceIntent);
         if (DEBUG)
             Log.d(TAG, "DownloadService stopped: " + stopped);
     }
@@ -128,16 +125,16 @@ public class DownloadUpdate extends Activity {
             builder.setMessage(R.string.confirm_download_cancelation_dialog_message);
             builder.setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    if (myService != null) {
+                    if (mDownloadService != null) {
                         try {
-                            myService.cancelDownload();
+                            mDownloadService.cancelDownload();
                         } catch (RemoteException e) {
                             Log.e(TAG, "Exception on calling DownloadService", e);
                         }
                     }
 
-                    MyUnbindService(mConnection);
-                    myService = null;
+                    myUnbindService(mConnection);
+                    mDownloadService = null;
                     stopService();
                     // Set the preference to the proper style if supplied
                     if (mCallingPreference != null) {
@@ -155,16 +152,16 @@ public class DownloadUpdate extends Activity {
         }
     };
 
-    public static IDownloadService myService;
+    public static IDownloadService mDownloadService;
 
     /**
      * Class for interacting with the main interface of the service.
      */
     private final ServiceConnection mConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName name, IBinder service) {
-            myService = IDownloadService.Stub.asInterface(service);
+            mDownloadService = IDownloadService.Stub.asInterface(service);
             try {
-                myService.registerCallback(mCallback);
+                mDownloadService.registerCallback(mCallback);
             }
             catch (RemoteException e) {
                 Log.e(TAG, "RemoteException", e);
@@ -173,10 +170,10 @@ public class DownloadUpdate extends Activity {
             Thread t = new Thread() {
                 public void run() {
                     try {
-                        if (myService.DownloadRunning()) {
-                            mUpdateInfo = myService.getCurrentUpdate();
+                        if (mDownloadService.isDownloadRunning()) {
+                            mUpdateInfo = mDownloadService.getCurrentUpdate();
                         } else {
-                            myService.Download(mUpdateInfo);
+                            mDownloadService.download(mUpdateInfo);
                         }
 
                     } catch (RemoteException e) {
@@ -189,12 +186,12 @@ public class DownloadUpdate extends Activity {
 
         public void onServiceDisconnected(ComponentName name) {
             try {
-                myService.unregisterCallback(mCallback);
+                mDownloadService.unregisterCallback(mCallback);
             }
             catch (RemoteException e) {
                 Log.e(TAG, "RemoteException", e);
             }
-            myService = null;
+            mDownloadService = null;
         }
     };
 
@@ -206,11 +203,11 @@ public class DownloadUpdate extends Activity {
                             downloaded, total, downloadedText, speedText, remainingTimeText)));
         }
 
-        public void DownloadFinished(UpdateInfo u) throws RemoteException {
+        public void downloadFinished(UpdateInfo u) throws RemoteException {
             mHandler.sendMessage(mHandler.obtainMessage(DOWNLOAD_FINISHED, u));
         }
 
-        public void DownloadError() throws RemoteException {
+        public void downloadError() throws RemoteException {
             mHandler.sendMessage(mHandler.obtainMessage(DOWNLOAD_ERROR));
         }
     };
@@ -231,26 +228,22 @@ public class DownloadUpdate extends Activity {
                 case DOWNLOAD_FINISHED:
                     // Clean up the download service
                     stopService();
-                    MyUnbindService(mConnection); 
-                    mParent.stopService(serviceIntent);
+                    myUnbindService(mConnection);
+                    mParent.stopService(mServiceIntent);
 
                     // Set the calling preference to the proper style
                     mCallingPreference.setStyle(UpdatePreference.STYLE_DOWNLOADED);
 
                     // Trigger the apply update activity
-                    Intent i = new Intent(mParent, ApplyUpdate.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                            Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                    i.putExtra(Constants.KEY_UPDATE_INFO, (Serializable) mUpdateInfo);
-                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    mParent.startActivity(i);
+                    UpdatesSettings parent = (UpdatesSettings) mParent;
+                    parent.startUpdate(mUpdateInfo);
                     break;
 
                 case DOWNLOAD_ERROR:
                     // Clean up the download service
                     stopService();
-                    MyUnbindService(mConnection);
-                    mParent.stopService(serviceIntent);
+                    myUnbindService(mConnection);
+                    mParent.stopService(mServiceIntent);
 
                     // Display the error message to the user
                     Toast.makeText(mParent, R.string.exception_while_downloading,
@@ -266,10 +259,10 @@ public class DownloadUpdate extends Activity {
         }
     };
 
-    private void MyUnbindService(ServiceConnection con) {
-        if (mbound) {
+    private void myUnbindService(ServiceConnection con) {
+        if (mBound) {
             mParent.unbindService(con);
-            mbound = false;
+            mBound = false;
             if (DEBUG) Log.d(TAG, "mUpdateDownloaderServiceConnection unbind finished");
         } else if (DEBUG) Log.d(TAG, "mUpdateDownloaderServiceConnection not bound");
     }
