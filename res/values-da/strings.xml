@@ -1,0 +1,81 @@
+<resources>
+
+    <!-- General strings -->
+    <string name="app_name">CM-opdatering</string>
+    <string name="unknown">Ukendt</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Genopfrisk</string>
+    <string name="menu_delete">Slet</string>
+    <string name="menu_delete_all">Slet downloads</string>
+    <string name="menu_system_info">System-info</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Annuller</string>
+    <string name="dialog_yes">Ja</string>
+    <string name="dialog_no">Nej</string>
+    <string name="dialog_update">Opdatér</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Tilgængelige opdateringer</string>
+    <string name="no_available_updates_intro">Den sidste søgning fandt ingen tilgængelige opdateringer. Brug knappen Genopfrisk for at søge efter opdateringer manuelt</string>
+    <string name="new_update_summary">Ny</string>
+    <string name="downloaded_update_summary">Downloadet</string>
+    <string name="backup_rom_title">Lav backup</string>
+    <string name="backup_rom_summary">Backup eksisterende ROM før opdatering</string>
+
+    <string name="update_check_title">Søg efter opdateringer</string>
+    <string name="check_manual">Manuelt</string>
+    <string name="check_on_boot">Ved hver opstart</string>
+    <string name="check_twice_daily">To gange dagligt</string>
+    <string name="check_daily">Dagligt</string>
+    <string name="check_weekly">Ugentligt</string>
+    <string name="check_bi_weekly">To gange ugentligt</string>
+    <string name="check_monthly">Månedligt</string>
+
+    <string name="update_type_title">Opdateringstyper</string>
+    <string name="type_all">Alle udgaver (kun stabile)</string>
+    <string name="type_all_incl_nightly">Alle udgaver (inkl. natlige)</string>
+    <string name="type_new">Nye udgaver (kun stabile)</string>
+    <string name="type_new_incl_nightly">Nye udgaver (inkl. natlige)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Søg efter opdateringer</string>
+    <string name="no_updates_found">Ingen nye opdateringer fundet</string>
+    <string name="not_new_updates_found_ticker">Nye opdateringer er tilgængelige</string>
+    <string name="not_new_updates_found_title">Nye opdateringer</string>
+    <string name="not_new_updates_found_body">{0} opdatering(er) tilgængelige til download</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Annuller download</string>
+    <string name="confirm_download_cancelation_dialog_message">Du skal til at annullere den nuværende download, OK at fortsætte?</string>
+    <string name="download_cancelled">Download annulleret</string>
+    <string name="download_already_running">En download kører allerede</string>
+    <string name="unable_to_download_file">Kan ikke downloade opdateringsfilen</string>
+    <string name="download_not_found">Download ikke fundet</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Fejl. MD5-kontrolsum passer ikke</string>
+    <string name="md5_check_cancelled">MD5-tjek blev annulleret</string>
+    <string name="md5_verification_failed">MD5-bekræftelse mislykkedes</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Anvend opdatering</string>
+    <string name="apply_update_dialog_text">Du skal til at opgradere til {0}.\n\nHvis du trykker Opdatér, vil telefonen genstarte til tilstanden recovery for at installere opdateringen</string>
+    <string name="apply_trying_to_get_root_access">Prøver at få root-adgang for at genstarte i tilstanden recovery</string>
+    <string name="apply_unable_to_reboot_toast">Kan ikke genstarte til recovery</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Slet fil</string>
+    <string name="confirm_delete_dialog_message">Du skal til at slette den downloadede opdateringsfil, OK at fortsætte?</string>
+    <string name="confirm_delete_all_dialog_message">Du skal til at slette alle downloadede opdateringsfiler, OK at fortsætte?</string>
+    <string name="delete_single_update_success_message">Opdatering {0} slettet</string>
+    <string name="delete_updates_failure_message">Der opstod en fejl ved sletning af opdateringsfilen</string>
+    <string name="delete_updates_noFolder_message">Opdateringsmappen findes ikke</string>
+    <string name="delete_updates_success_message">Alle downloadede opdateringer slettet</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Enhed:</string>
+    <string name="sysinfo_running">Kører:</string>
+    <string name="sysinfo_last_check">Sidste søgning:</string>
+</resources>
