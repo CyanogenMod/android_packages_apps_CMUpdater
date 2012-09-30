@@ -33,11 +33,13 @@
         android:entries="@array/update_type_entries"
         android:entryValues="@array/update_type_values"/>
 
+     <!-- TODO: add this back once we have a way of doing backups that is not recovery specific
      <CheckBoxPreference
         android:key="pref_backup_rom"
         android:defaultValue="true"
         android:title="@string/backup_rom_title" 
         android:summary="@string/backup_rom_summary" />
+    -->
 
     <PreferenceCategory
         android:key="updates_category"
