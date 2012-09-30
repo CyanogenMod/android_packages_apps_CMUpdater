@@ -18,15 +18,26 @@ package com.cyanogenmod.updater;
 
 import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.DownloadManager;
+import android.app.DownloadManager.Query;
+import android.app.DownloadManager.Request;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.os.PowerManager;
 import android.os.RemoteException;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -38,6 +49,7 @@ import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +66,7 @@ import com.cyanogenmod.updater.utils.UpdateFilter;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,7 +76,7 @@ import java.util.List;
 public class UpdatesSettings extends PreferenceActivity implements OnPreferenceChangeListener {
 
     private static String TAG = "UpdatesSettings";
-    private static boolean DEBUG = true;
+    private static final boolean DEBUG = true;
 
     private static String UPDATES_CATEGORY = "updates_category";
 
@@ -77,11 +90,23 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
     private ListPreference mUpdateType;
 
     private PreferenceCategory mUpdatesList;
+    private UpdatePreference mDownloadingPreference;
 
     private File mUpdateFolder;
-    private ArrayList<UpdateInfo> serverUpdates;
-    private ArrayList<String> localUpdates;
+    private ArrayList<UpdateInfo> mServerUpdates;
+    private ArrayList<String> mLocalUpdates;
 
+    private boolean mStartUpdateVisible = false;
+
+    // Use DownloadManager
+    private DownloadManager mDownloadManager;
+    private boolean mDownloading = false;
+    private long mEnqueue;
+    private String mFileName;
+
+    private Handler mUpdateHandler = new Handler();
+
+    @SuppressWarnings("deprecation")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,8 +137,26 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         }
 
         // Initialize the arrays
-        serverUpdates = new ArrayList<UpdateInfo>();
-        localUpdates = new ArrayList<String>();
+        mServerUpdates = new ArrayList<UpdateInfo>();
+        mLocalUpdates = new ArrayList<String>();
+
+        mDownloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+        mEnqueue = mPrefs.getLong(Constants.DOWNLOAD_ID, -1);
+        if (mEnqueue != -1) {
+            Cursor c = mDownloadManager.query(new DownloadManager.Query().setFilterById(mEnqueue));
+            if (c == null) {
+              Toast.makeText(this, "Download not found!", Toast.LENGTH_LONG).show();
+            } else {
+                if (c.moveToFirst()) {
+                    String lFile = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+                    if (lFile != null) {
+                        String[] temp = lFile.split("/");
+                        mFileName = temp[temp.length - 1];
+                    }
+                }
+            }
+            c.close();
+        }
 
         // Turn on the Options Menu and update the layout
         invalidateOptionsMenu();
@@ -146,7 +189,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
             case MENU_DELETE_ALL:
                 confirmDeleteAll();
-                updateLayout();
                 return true;
 
             case MENU_SYSTEM_INFO:
@@ -156,6 +198,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mBackupRom) {
@@ -175,42 +218,272 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             // We have been asked to refresh the screen to show new updates
             updateLayout();
         }
+
+        boolean startUpdate = intent.getBooleanExtra(Constants.START_UPDATE, false);
+        if (startUpdate) {
+            // We have been asked to refresh the screen to show new updates
+            UpdateInfo ui = (UpdateInfo) intent.getSerializableExtra(Constants.KEY_UPDATE_INFO);
+            if (ui != null) {
+                // Set the proper preference style
+                UpdatePreference pref = findMatchingPreference(ui.getFileName());
+                if (pref != null) {
+                    pref.setStyle(UpdatePreference.STYLE_DOWNLOADED);
+                }
+
+                startUpdate(ui);
+            }
+        }
     }
 
-    // TODO: figure out how to decouple the download from the app on pause when a download
-    // is running to prevent the FC on download finished, allowing for the download to continue
-    // even after the user has backed out
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        // Stop any running downloads in a nice way
-        try {
-            if (DownloadUpdate.myService != null && DownloadUpdate.myService.DownloadRunning()) {
-                DownloadUpdate.myService.PauseDownload();
-            }
-        } catch (RemoteException e) {
-            Log.e(TAG, "Exception on calling DownloadService", e);
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mUpdateCheck) {
+            int value = Integer.valueOf((String) newValue);
+            mPrefs.edit().putInt(Constants.UPDATE_CHECK_PREF, value).apply();
+            mUpdateCheck.setSummary(mapCheckValue(value));
+            scheduleUpdateService(value * 1000);
+            return true;
+
+        } else if (preference == mUpdateType) {
+            int value = Integer.valueOf((String) newValue);
+            mPrefs.edit().putInt(Constants.UPDATE_TYPE_PREF, value).apply();
+            mUpdateType.setSummary(mUpdateType.getEntries()[value]);
+            // Trigger a new update check
+            checkForUpdates();
+            return true;
         }
+
+        return false;
+    }
+
+    @Override
+    protected void onResume() {
+            super.onPause();
+            // Make sure we have the download broadcast
+            registerReceiver(onComplete,
+                    new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+            registerReceiver(onNotificationClick,
+                    new IntentFilter(DownloadManager.ACTION_NOTIFICATION_CLICKED));
+            mUpdateHandler.post(updateProgress);
+    }
+
+    @Override
+    protected void onPause() {
+            super.onPause();
+            // Unregister the receiver
+            unregisterReceiver(onComplete);
+            unregisterReceiver(onNotificationClick);
+            mUpdateHandler.removeCallbacks(updateProgress);
     }
 
     //*********************************************************
     // Supporting methods
     //*********************************************************
-    protected void startDownload (String key) {
-        UpdatePreference pref = null;
 
-        if (mUpdatesList != null) {
-            // Find the matching preference
-            for (int i = 0; i < mUpdatesList.getPreferenceCount(); i++) {
-                pref = (UpdatePreference) mUpdatesList.getPreference(i);
-                if (pref.getKey().equals(key)) {
-                    // We have a match, trigger the download
-                    DownloadUpdate du = new DownloadUpdate(pref);
-                    du.startDownload();
-                    pref.setStyle(UpdatePreference.STYLE_DOWNLOADING);
+    protected void startDownload(String key) {
+        if (mDownloading) {
+            // TODO: put this in strings.xml
+            Toast.makeText(this, "A download is already running", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mDownloadingPreference = findMatchingPreference(key);
+        if (mDownloadingPreference != null) {
+            // We have a match, get ready to trigger the download
+            UpdateInfo ui = mDownloadingPreference.getUpdateInfo();
+            mDownloadingPreference.setStyle(UpdatePreference.STYLE_DOWNLOADING);
+
+            // Create the download request and set some basic parameters
+            // TODO: this could be made configurable
+            String fullFolderPath = "file://" + Environment.getExternalStorageDirectory().getAbsolutePath()
+                    + Constants.UPDATES_FOLDER + "/" + ui.getFileName();
+            Request request = new Request(Uri.parse(ui.getDownloadUrl()));
+            request.addRequestHeader("Cache-Control", "no-cache");
+            request.setTitle(getString(R.string.app_name));
+            request.setDescription(ui.getFileName());
+            request.setDestinationUri(Uri.parse(fullFolderPath));
+            request.setAllowedOverRoaming(false);
+            request.setVisibleInDownloadsUi(false);
+
+            // Start the download
+            mEnqueue = mDownloadManager.enqueue(request);
+            mPrefs.edit().putLong(Constants.DOWNLOAD_ID, mEnqueue).apply();
+            mFileName = ui.getFileName();
+            mDownloading = true;
+            mUpdateHandler.post(updateProgress);
+        }
+    }
+
+    Runnable updateProgress = new Runnable() {
+        public void run() {
+            if (mDownloadingPreference.getProgressBar() != null && mDownloading) {
+                DownloadManager mgr = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                DownloadManager.Query q = new DownloadManager.Query();
+                q.setFilterById(mEnqueue);
+                Cursor cursor = mgr.query(q);
+                if (!cursor.moveToFirst()) {
+                    return;
+                }
+                int bytes_downloaded = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
+                int bytes_total = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
+                cursor.close();
+                ProgressBar prog = mDownloadingPreference.getProgressBar();
+                if (bytes_total < 0) {
+                    prog.setIndeterminate(true);
+                } else {
+                    prog.setIndeterminate(false);
+                    prog.setMax(bytes_total);
+                }
+                prog.setProgress(bytes_downloaded);
+            }
+            if (mDownloading) {
+                mUpdateHandler.postDelayed(this, 1000);
+            }
+        }
+    };
+
+    protected void stopDownload() {
+        if (!mDownloading || mFileName == null) {
+            return;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.confirm_download_cancelation_dialog_title);
+        builder.setMessage(R.string.confirm_download_cancelation_dialog_message);
+        builder.setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Set the preference back to new style
+                UpdatePreference pref = findMatchingPreference(mFileName);
+                if (pref != null) {
+                    pref.setStyle(UpdatePreference.STYLE_NEW);
+                }
+                // We are OK to stop download, trigger it
+                mDownloadManager.remove(mEnqueue);
+                mUpdateHandler.removeCallbacks(updateProgress);
+                // Clear globals
+                mFileName = null;
+                mDownloading = false;
+            }
+        });
+        builder.setNegativeButton(R.string.dialog_no, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+   BroadcastReceiver onComplete = new BroadcastReceiver() {
+        public void onReceive(Context ctxt, Intent intent) {
+            Query query = new Query();
+            query.setFilterById(mEnqueue);
+            Cursor c = mDownloadManager.query(query);
+            if (c.moveToFirst()) {
+                int columnIndex = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
+                if (DownloadManager.STATUS_SUCCESSFUL == c.getInt(columnIndex)) {
+                    mDownloading = false;
+
+                    int filenameIndex = c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME);
+                    String[] temp = c.getString(filenameIndex).split("/");
+                    String fileName = temp[temp.length - 1];
+
+                    if (DEBUG)
+                        Log.d(TAG, "The download of " + fileName + " is complete");
+
+                    // Set the proper preference style
+                    UpdatePreference pref = findMatchingPreference(fileName);
+                    if (pref != null) {
+                        pref.setStyle(UpdatePreference.STYLE_DOWNLOADED);
+                    }
+
+                    // Attempt to install the supplied update
+                    UpdateInfo ui = new UpdateInfo();
+                    ui.setFileName(fileName);
+                    startUpdate(ui);
                 }
             }
         }
+    };
+
+    BroadcastReceiver onNotificationClick = new BroadcastReceiver() {
+      public void onReceive(Context ctxt, Intent intent) {
+        Toast.makeText(ctxt, "Ummmm...hi!", Toast.LENGTH_LONG).show();
+        if (DEBUG)
+            Log.d(TAG, "User clicked the download notification");
+        // TODO: Dismiss the progressbar of mDownloadingPreference
+        queryStatus();
+      }
+    };
+
+    public void queryStatus() {
+        Cursor c = mDownloadManager.query(new DownloadManager.Query().setFilterById(mEnqueue));
+
+        if (c==null) {
+          Toast.makeText(this, "Download not found!", Toast.LENGTH_LONG).show();
+
+        } else {
+          c.moveToFirst();
+          Log.d(getClass().getName(), "COLUMN_ID: "+
+                c.getLong(c.getColumnIndex(DownloadManager.COLUMN_ID)));
+          Log.d(getClass().getName(), "COLUMN_BYTES_DOWNLOADED_SO_FAR: "+
+                c.getLong(c.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR)));
+          Log.d(getClass().getName(), "COLUMN_LAST_MODIFIED_TIMESTAMP: "+
+                c.getLong(c.getColumnIndex(DownloadManager.COLUMN_LAST_MODIFIED_TIMESTAMP)));
+          Log.d(getClass().getName(), "COLUMN_LOCAL_URI: "+
+                c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)));
+          Log.d(getClass().getName(), "COLUMN_STATUS: "+
+                c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS)));
+          Log.d(getClass().getName(), "COLUMN_REASON: "+
+                c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON)));
+
+          Toast.makeText(this, statusMessage(c), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private String statusMessage(Cursor c) {
+        String msg="???";
+        switch(c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS))) {
+          case DownloadManager.STATUS_FAILED:
+            msg="Download failed!";
+            break;
+
+          case DownloadManager.STATUS_PAUSED:
+            msg="Download paused!";
+            break;
+
+          case DownloadManager.STATUS_PENDING:
+            msg="Download pending!";
+            break;
+
+          case DownloadManager.STATUS_RUNNING:
+            msg="Download in progress!";
+            break;
+
+          case DownloadManager.STATUS_SUCCESSFUL:
+            msg="Download complete!";
+            break;
+
+          default:
+            msg="Download is nowhere in sight";
+            break;
+        }
+
+        return(msg);
+    }
+
+    private UpdatePreference findMatchingPreference(String key) {
+        if (mUpdatesList != null) {
+            // Find the matching preference
+            for (int i = 0; i < mUpdatesList.getPreferenceCount(); i++) {
+                UpdatePreference pref = (UpdatePreference) mUpdatesList.getPreference(i);
+                if (pref.getKey().equals(key)) {
+                    // We have a match
+                    return pref;
+                }
+            }
+        }
+        return null;
     }
 
     private String mapCheckValue(Integer value) {
@@ -253,7 +526,9 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             //To show only the Filename. Otherwise the whole Path with /sdcard/cm-updates will be shown
             existingFilenames = new ArrayList<String>();
             for (File file : files) {
-                existingFilenames.add(file.getName());
+                if (file.isFile()) {
+                    existingFilenames.add(file.getName());
+                }
             }
             //For sorting the Filenames, have to find a way to do natural sorting
             existingFilenames = Collections.synchronizedList(existingFilenames);
@@ -275,21 +550,21 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         }
 
         // Existing Updates Layout
-        localUpdates.clear();
+        mLocalUpdates.clear();
         if (existingFilenames != null && existingFilenames.size() > 0) {
             for (String file:existingFilenames) {
-                localUpdates.add(file);
+                mLocalUpdates.add(file);
             }
         }
 
         // Available Roms Layout
-        serverUpdates.clear();
+        mServerUpdates.clear();
         if (availableRoms != null && availableRoms.size() > 0) {
             for (UpdateInfo rom:availableRoms) {
 
                 // See if we have matching updates already downloaded
                 boolean matched = false;
-                for (String name : localUpdates) {
+                for (String name : mLocalUpdates) {
                     if (name.equals(rom.getFileName())) {
                         matched = true;
                     }
@@ -297,7 +572,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
                 // Only add updates to the server list that are not already downloaded
                 if (!matched) {
-                    serverUpdates.add(rom);
+                    mServerUpdates.add(rom);
                 }
             }
         }
@@ -310,23 +585,31 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         if (mUpdatesList != null) {
             // Clear the list
             mUpdatesList.removeAll();
+            boolean foundMatch;
 
-            // Add the server based updates
-            if (!serverUpdates.isEmpty()) {
-                // We have updates to display
-                for (UpdateInfo ui : serverUpdates) {
-                    UpdatePreference up = new UpdatePreference(this, ui, ui.getName(), UpdatePreference.STYLE_NEW);
-                    up.setKey(ui.getName());
+            // Add the locally saved update files first
+            if (!mLocalUpdates.isEmpty()) {
+                // We have local updates to display
+                for (String name : mLocalUpdates) {
+                    foundMatch = name.equals(mFileName);
+                    UpdatePreference up = new UpdatePreference(this, null, name, foundMatch ? UpdatePreference.STYLE_DOWNLOADING : UpdatePreference.STYLE_DOWNLOADED);
+                    if (foundMatch) {
+                        mDownloadingPreference = up;
+                        mUpdateHandler.post(updateProgress);
+                        foundMatch = false;
+                        mDownloading = true;
+                    }
+                    up.setKey(name);
                     mUpdatesList.addPreference(up);
                 }
             }
 
-            // Add the locally saved update files
-            if (!localUpdates.isEmpty()) {
-                // We have local updates to display
-                for (String name : localUpdates) {
-                    UpdatePreference up = new UpdatePreference(this, null, name, UpdatePreference.STYLE_DOWNLOADED);
-                    up.setKey(name);
+            // Add the server based updates
+            if (!mServerUpdates.isEmpty()) {
+                // We have updates to display
+                for (UpdateInfo ui : mServerUpdates) {
+                    UpdatePreference up = new UpdatePreference(this, ui, ui.getName(), UpdatePreference.STYLE_NEW);
+                    up.setKey(ui.getName());
                     mUpdatesList.addPreference(up);
                 }
             }
@@ -379,25 +662,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         return success;
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mUpdateCheck) {
-            int value = Integer.valueOf((String) newValue);
-            mPrefs.edit().putInt(Constants.UPDATE_CHECK_PREF, value).apply();
-            mUpdateCheck.setSummary(mapCheckValue(value));
-            scheduleUpdateService(value * 1000);
-            return true;
-
-        } else if (preference == mUpdateType) {
-            int value = Integer.valueOf((String) newValue);
-            mPrefs.edit().putInt(Constants.UPDATE_TYPE_PREF, value).apply();
-            mUpdateType.setSummary(mUpdateType.getEntries()[value]);
-            return true;
-        }
-
-        return false;
-    }
-
     private void scheduleUpdateService(int updateFrequency) {
 
         // Get the intent ready
@@ -430,6 +694,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             public void onClick(DialogInterface dialog, int which) {
                 // We are OK to delete, trigger it
                 deleteOldUpdates();
+                updateLayout();
             }
         });
         builder.setNegativeButton(R.string.dialog_no, new DialogInterface.OnClickListener() {
@@ -476,7 +741,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
     }
 
     private void showSysInfo() {
-
         // Build the message
         String systemMod = SysUtils.getSystemProperty(Customization.BOARD);
         String systemRom = SysUtils.getSystemProperty(Customization.SYS_PROP_MOD_VERSION);
@@ -497,6 +761,77 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         dialog.show();
         ((TextView)dialog.findViewById(android.R.id.message)).setTextAppearance(this,
                 android.R.style.TextAppearance_DeviceDefault_Small);
+    }
+
+    protected void startUpdate(final UpdateInfo updateInfo) {
+        if (DEBUG)
+            Log.d(TAG, "Filename selected to flash: " + updateInfo.getFileName());
+
+        // Prevent the dialog from being triggered more than once
+        if (mStartUpdateVisible) {
+            return;
+        } else {
+            mStartUpdateVisible = true;
+        }
+
+        // Get the message body right
+        String dialogBody = MessageFormat.format(
+                getResources().getString(R.string.apply_update_dialog_text),
+                updateInfo.getFileName());
+
+        // Display the dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.apply_update_dialog_title);
+            builder.setMessage(dialogBody);
+            builder.setPositiveButton(R.string.dialog_update, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    /*
+                     * Should perform the following steps.
+                     * 0.- Ask the user for a confirmation (already done when we reach here)
+                     * 1.- su
+                     * 2.- mkdir -p /cache/recovery
+                     * 3.- echo 'boot-recovery' > /cache/recovery/command
+                     * 4.- if(mBackup) echo '--nandroid'  >> /cache/recovery/command
+                     * 5.- echo '--update_package=SDCARD:update.zip' >> /cache/recovery/command
+                     * 6.- reboot recovery 
+                     */
+                    try {
+                        // Set the 'boot recovery' command
+                        Process p = Runtime.getRuntime().exec("sh");
+                        OutputStream os = p.getOutputStream();
+                        os.write("mkdir -p /cache/recovery/\n".getBytes());
+                        os.write("echo 'boot-recovery' >/cache/recovery/command\n".getBytes());
+
+                        // See if backups are enabled and add the nandroid flag
+                        SharedPreferences prefs = getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+                        if (prefs.getBoolean(Constants.BACKUP_PREF, true)) {
+                            os.write("echo '--nandroid'  >> /cache/recovery/command\n".getBytes());
+                        }
+
+                        // Add the update folder/file name
+                        // TODO: this is where it handled the external storage command, now assume /sdcard/cmupdater
+                        String cmd = "echo '--update_package=/sdcard" + Constants.UPDATES_FOLDER + "/" + updateInfo.getFileName()
+                                + "' >> /cache/recovery/command\n";
+                        os.write(cmd.getBytes());
+                        os.flush();
+                        Toast.makeText(UpdatesSettings.this, R.string.apply_trying_to_get_root_access, Toast.LENGTH_SHORT).show();
+                        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+                        powerManager.reboot("recovery");
+
+                    } catch (IOException e) {
+                        Log.e(TAG, "Unable to reboot into recovery mode:", e);
+                        Toast.makeText(UpdatesSettings.this, R.string.apply_unable_to_reboot_toast, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            builder.setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    mStartUpdateVisible = false;
+                }
+            });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }

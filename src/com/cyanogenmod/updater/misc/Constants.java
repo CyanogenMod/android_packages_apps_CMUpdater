@@ -23,6 +23,10 @@ public class Constants {
     // System Info
     public static final String DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z"; 
 
+    // Download location
+    public static final String UPDATES_FOLDER = "/cmupdater";
+    public static final String DOWNLOAD_ID = "download_id";
+
     //UpdateInfo
     public static final String UPDATE_INFO_BRANCH_STABLE = "stable";
     public static final String UPDATE_INFO_BRANCH_NIGHTLY = "nightly";
@@ -49,8 +53,10 @@ public class Constants {
     public static final String UPDATE_TYPE_PREF = "pref_update_type";
     public static final String LAST_UPDATE_CHECK_PREF = "pref_last_update_check";
 
-    // Service start parameter
+    // Activity start parameters
     public static final String CHECK_FOR_UPDATE = "check_for_update";
+    public static final String START_UPDATE = "start_update";
+    public static final String STOP_DOWNLOAD = "stop_download";
 
     // Notifications
     public static final int NOTIFICATION_DOWNLOAD_STATUS = 100;
