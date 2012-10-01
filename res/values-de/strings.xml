@@ -1,0 +1,88 @@
+<resources>
+
+    <!-- General strings -->
+    <string name="app_name">CM-Updater</string>
+    <string name="unknown">Unbekannt</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Aktualisieren</string>
+    <string name="menu_delete">Löschen</string>
+    <string name="menu_delete_all">Downloads löschen</string>
+    <string name="menu_system_info">Systeminformation</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Abbrechen</string>
+    <string name="dialog_yes">Ja</string>
+    <string name="dialog_no">Nein</string>
+    <string name="dialog_update">Update</string>
+    <string name="dialog_close">Schließen</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Verfügbare Updates</string>
+    <string name="no_available_updates_intro">Es wurden keine Updates gefunden. Um manuell auf eine neue Version zu prüfen, drücke \"Aktualisieren\".</string>
+    <string name="new_update_summary">Neu</string>
+    <string name="downloaded_update_summary">Heruntergeladen</string>
+    <string name="installed_update_summary">Installiert</string>
+    <string name="backup_rom_title">Backup erstellen</string>
+    <string name="backup_rom_summary">Aktuelles ROM vor dem Update sichern</string>
+
+    <string name="update_check_title">Prüfe auf Updates</string>
+    <string name="check_manual">Manuell</string>
+    <string name="check_on_boot">Bei jedem Start</string>
+    <string name="check_twice_daily">Zweimal täglich</string>
+    <string name="check_daily">Täglich</string>
+    <string name="check_weekly">Wöchentlich</string>
+    <string name="check_bi_weekly">Zweimal wöchentlich</string>
+    <string name="check_monthly">Monatlich</string>
+
+    <string name="update_type_title">Update-Typen</string>
+    <string name="type_all">Alle Versionen\n(nur Stable)</string>
+    <string name="type_all_incl_nightly">Alle Versionen\n(inkl. Nightlies)</string>
+    <string name="type_new">Neue Versionen\n(nur Stable)</string>
+    <string name="type_new_incl_nightly">Neue Versionen\n(inkl. Nightlies)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Prüfe auf Updates</string>
+    <string name="no_updates_found">Keine Updates gefunden</string>
+    <string name="not_new_updates_found_ticker">Neue Updates sind verfügbar</string>
+    <string name="not_new_updates_found_title">Neue Updates</string>
+    <string name="not_new_updates_found_body">{0} Update(s) zum Download verfügbar</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Download abbrechen</string>
+    <string name="confirm_download_cancelation_dialog_message">Soll der Download abgebrochen werden?</string>
+    <string name="download_cancelled">Download abgebrochen</string>
+    <string name="download_already_running">Es ist bereits ein Download aktiv</string>
+    <string name="unable_to_download_file">Update konnte nicht heruntergeladen werden</string>
+    <string name="download_not_found">Download nicht gefunden</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Fehler: MD5-Prüfsumme stimmt nicht überein</string>
+    <string name="md5_check_cancelled">MD5-Prüfung wurde abgebrochen</string>
+    <string name="md5_verification_failed">MD5-Prüfung fehlgeschlagen</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Update installieren</string>
+    <string name="apply_update_dialog_text">Bereit zum Update auf {0}.\n\nNach dem Drücken auf Update, wird das Gerät im Recovery-Modus gestartet, um das Update durchzuführen.\n\nDiese Funktion erfordert ein kompatibles Recovery-System.</string>
+    <string name="apply_trying_to_get_root_access">Root-Zugriff anfordern, um in den Recovery-Modus zu starten.</string>
+    <string name="apply_unable_to_reboot_toast">Neustart in den Recovery-Modus nicht möglich</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Lösche Datei</string>
+    <string name="confirm_delete_dialog_message">Soll die heruntergeladene Update-Datei gelöscht werden?</string>
+    <string name="confirm_delete_all_dialog_message">Sollen alle heruntergeladenen Update-Dateien gelöscht werden?</string>
+    <string name="delete_single_update_success_message">Update {0} gelöscht</string>
+    <string name="delete_updates_failure_message">Beim Löschen der Datei ist ein Fehler aufgetreten</string>
+    <string name="delete_updates_noFolder_message">Update-Verzeichnis nicht gefunden</string>
+    <string name="delete_updates_success_message">Alle heruntergeladenen Update-Dateien wurden gelöscht</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Gerät:</string>
+    <string name="sysinfo_running">Version:</string>
+    <string name="sysinfo_last_check">Letzte Prüfung:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">Kein Changelog verfügbar</string>
+    <string name="failed_to_load_changelog">Changelog konnte nicht geladen werden</string>
+    <string name="changelog_dialog_title">Changelog</string>
+</resources>
