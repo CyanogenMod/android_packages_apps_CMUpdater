@@ -1,0 +1,91 @@
+<resources>
+
+    <!-- General strings -->
+    <string name="app_name">CM frissítő</string>
+    <string name="unknown">Ismeretlen</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Frissítés</string>
+    <string name="menu_delete">Törlés</string>
+    <string name="menu_delete_all">Letöltések törlése</string>
+    <string name="menu_system_info">Rendszer információ</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Mégsem</string>
+    <string name="dialog_yes">Igen</string>
+    <string name="dialog_no">Nem</string>
+    <string name="dialog_update">Frissítés</string>
+    <string name="dialog_backup_and_update">Biztonsági mentés &amp; alkalmazása</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Elérhető frissítések</string>
+    <string name="no_available_updates_intro">Az utolsó ellenőrzés nem talált elérhető frissítést. A manuális ellenőrizéshez használja a Frissítés gombot</string>
+    <string name="new_update_summary">Új</string>
+    <string name="downloaded_update_summary">Letöltés</string>
+    <string name="backup_rom_title">Biztonsági mentés készítése</string>
+    <string name="backup_rom_summary">Biztonsági mentés készítése a ROM-ról a frissítés előtt</string>
+
+    <string name="update_check_title">Frissítések keresése</string>
+    <string name="check_manual">Manuális</string>
+    <string name="check_on_boot">Minden indításkor</string>
+    <string name="check_twice_daily">Naponta kétszer</string>
+    <string name="check_daily">Naponta</string>
+    <string name="check_weekly">Hetente</string>
+    <string name="check_bi_weekly">Kéthetente</string>
+    <string name="check_monthly">Havonta</string>
+
+    <string name="update_type_title">Frissítés típusa</string>
+    <string name="type_all">Minden verzió (csak stable)</string>
+    <string name="type_all_incl_nightly">Minden verzió (beleértve a Nightly-kat)</string>
+    <string name="type_new">Új verzió (csak Stable)</string>
+    <string name="type_new_incl_nightly">Új verzió (beleértve Nightly-kat)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Frissítések keresése</string>
+    <string name="no_updates_found">Nem található új frissítés</string>
+    <string name="not_new_updates_found_ticker">Új frissítések elérhetőek</string>
+    <string name="not_new_updates_found_title">Új frissítések</string>
+    <string name="not_new_updates_found_body">{0} frissítés letölthető</string>
+
+    <!-- Downloads -->
+    <string name="minutes">perc</string>
+    <string name="seconds">másodperc</string>
+    <string name="download_resume_not_supported">A folytatást nem támogatja a szerver</string>
+    <string name="download_resume_download">Letöltés folytatása</string>
+    <string name="unable_to_download_file">Nem sikerült letölteni a frissítő fájlt</string>
+    <string name="download_not_enough_space">Nincs elég hely az SD kártyán a frissítés letöltéséhez</string>
+    <string name="not_update_download_error_ticker">Hiba történt a frissítés letöltése közben</string>
+    <string name="not_update_download_error_title">Hiba történt a frissítés letöltése közben</string>
+    <string name="notification_tickertext">Frissítés letöltése</string>
+    <string name="notification_finished">Letöltés befejezve</string>
+    <string name="exception_while_downloading">Hiba történt a frissítés letöltése közben</string>
+    <string name="confirm_download_cancelation_dialog_title">Megszakítja a letöltést?</string>
+    <string name="confirm_download_cancelation_dialog_message">Később folytatni tudja, amennyiben ugyan ezt a frissítést választja újra</string>
+    <string name="download_canceled_toast_message">Letöltés megszakítva</string>
+    <string name="downloading_update">Frissítés letöltése</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Hiba. MD5 checksum keveredés</string>
+    <string name="md5_check_cancelled">MD5 ellenőrzése törölve</string>
+    <string name="md5_verification_failed">MD5 ellenőrzése sikertelen</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Frissítés alkalmazása</string>
+    <string name="apply_update_dialog_text">A következőre frissít: {0}.\n\nAmennyiben a Frissítésre koppint, az eszköz újra fog indulni Recovery módban a frissítés telepítéshez</string>
+    <string name="apply_trying_to_get_root_access">Root jogosultság megszerzésére tett kisérlet a Recovery módhoz</string>
+    <string name="apply_unable_to_reboot_toast">Nem lehetséges az újraindítás Recovery módban</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Fájl törlése</string>
+    <string name="confirm_delete_dialog_message">Biztosan törölni kívánja a letöltött frissítő fájlt?</string>
+    <string name="confirm_delete_all_dialog_message">Biztosan törölni kívánja az összes letöltött frissítő fájlt?</string>
+    <string name="delete_single_update_success_message">{0} frissítés törölve</string>
+    <string name="delete_updates_failure_message">Hiba történt a frissítő fájlok törlésekor</string>
+    <string name="delete_updates_noFolder_message">Frissítéseket tratalmazó mappa nem található</string>
+    <string name="delete_updates_success_message">Az összes letöltöttt frissítés törölve</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Eszköz:</string>
+    <string name="sysinfo_running">Futó verzió:</string>
+    <string name="sysinfo_last_check">Utóljára ellenőrizve:</string>
+</resources>
