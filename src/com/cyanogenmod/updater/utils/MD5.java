@@ -33,7 +33,6 @@ public class MD5 {
         }
 
         String calculatedDigest = calculateMD5(updateFile);
-
         if (calculatedDigest == null) {
             Log.e(TAG, "calculatedDigest NULL");
             return false;
@@ -41,7 +40,7 @@ public class MD5 {
 
         Log.i(TAG, "Calculated digest: " + calculatedDigest);
         Log.i(TAG, "Provided digest: " + md5);
-        
+
         return calculatedDigest.equalsIgnoreCase(md5);
     }
 
@@ -49,40 +48,37 @@ public class MD5 {
         MessageDigest digest;
         try {
             digest = MessageDigest.getInstance("MD5");
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             Log.e(TAG, "Exception while getting Digest", e);
             return null;
         }
+
         InputStream is;
         try {
             is = new FileInputStream(updateFile);
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             Log.e(TAG, "Exception while getting FileInputStream", e);
             return null;
-        }                
+        }
+
         byte[] buffer = new byte[8192];
         int read;
         try {
             while ((read = is.read(buffer)) > 0) {
                 digest.update(buffer, 0, read);
-            }        
+            }
             byte[] md5sum = digest.digest();
             BigInteger bigInt = new BigInteger(1, md5sum);
             String output = bigInt.toString(16);
             //Fill to 32 chars
             output = String.format("%32s", output).replace(' ', '0');
             return output;
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Unable to process file for MD5", e);
-        }
-        finally {
+        } finally {
             try {
                 is.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 Log.e(TAG, "Exception on closing MD5 input stream", e);
             }
         }
@@ -104,8 +100,7 @@ public class MD5 {
             is.close();
             br.close();
             p.destroy();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Log.e(TAG, "Exception on getting Recovery MD5", e);
             return null;
         }
