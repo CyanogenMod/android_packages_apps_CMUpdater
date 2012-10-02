@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.service.UpdateCheckService;
@@ -54,12 +53,9 @@ public class StartupReceiver extends BroadcastReceiver {
 
         // Check if we need to schedule a new alarm
         if (updateFrequency > 0) {
-            Log.d(TAG, "Update frequency is " + updateFrequency);
-
             // Get the last time we checked for an update
             SharedPreferences prefs = ctx.getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
             Date lastCheck = new Date(prefs.getLong(Constants.LAST_UPDATE_CHECK_PREF, 0));
-            Log.d(TAG, "Last check was " + lastCheck.toString());
 
             // Set the new alarm
             am.setRepeating(AlarmManager.RTC_WAKEUP, lastCheck.getTime() + updateFrequency, updateFrequency, pi);

@@ -29,7 +29,6 @@ import java.io.*;
 
 public class MD5CheckerTask extends AsyncTask<File, Void, Boolean> {
     private static final String TAG = "MD5CheckerTask";
-    private boolean DEBUG = false;
 
     private final ProgressDialog mDialog;
     private final String mFilename;
@@ -47,8 +46,10 @@ public class MD5CheckerTask extends AsyncTask<File, Void, Boolean> {
         boolean MD5exists = false;
         try {
             File MD5file = new File(params[0] + ".md5sum");
-            if (MD5file.exists() && MD5file.canRead())
+            if (MD5file.exists() && MD5file.canRead()) {
                 MD5exists = true;
+            }
+
             if (params[0].exists() && params[0].canRead()) {
                 //If MD5 File exists, check it
                 if (MD5exists) {
@@ -71,8 +72,7 @@ public class MD5CheckerTask extends AsyncTask<File, Void, Boolean> {
                     return true;
                 }
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Log.e(TAG, "IOEx while checking MD5 sum", e);
             mReturnvalue = false;
         }
@@ -85,6 +85,7 @@ public class MD5CheckerTask extends AsyncTask<File, Void, Boolean> {
         String[] temp = mFilename.split("\\\\");
         ui.setName(temp[temp.length - 1]);
         ui.setFileName(mFilename);
+
         if (result) {
             Intent i = new Intent(mContext, UpdatesSettings.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
@@ -97,8 +98,9 @@ public class MD5CheckerTask extends AsyncTask<File, Void, Boolean> {
         }
 
         //Is null when no MD5SUM is present
-        if (mDialog != null)
+        if (mDialog != null) {
             mDialog.dismiss();
+        }
     }
 
     @Override

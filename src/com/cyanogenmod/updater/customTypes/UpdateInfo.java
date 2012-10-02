@@ -13,7 +13,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
-import java.net.URI;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,11 +34,11 @@ public class UpdateInfo implements Parcelable, Serializable {
      * Set Name
      */
     public void setName(String _name) {
-        if (_name != null)
+        if (_name != null) {
             name = _name.trim();
-        else
+        } else {
             name = "";
-
+        }
         name.replaceAll(".zip$","");
     }
 
@@ -55,11 +54,11 @@ public class UpdateInfo implements Parcelable, Serializable {
      * Set Version
      */
     public void setVersion(String _filename) {
-        if (_filename != null)
+        if (_filename != null) {
             version = _filename.trim();
-        else
+        } else {
             version = "";
-
+        }
         version = version.replaceAll(".*?([0-9.]+?)-.+","$1");
     }
 
@@ -74,10 +73,11 @@ public class UpdateInfo implements Parcelable, Serializable {
      * Set BranchCode
      */
     public void setBranchCode(String _branchCode) {
-        if (_branchCode != null)
+        if (_branchCode != null) {
             branchCode = _branchCode.trim();
-        else
+        } else {
             branchCode = "";
+        }
     }
 
     /**
@@ -91,10 +91,11 @@ public class UpdateInfo implements Parcelable, Serializable {
      * Set Descrition
      */
     public void setDescription(String _description) {
-        if (_description != null)
+        if (_description != null) {
             Collections.addAll(description, _description.trim().split("\\|"));
-        else
+        } else {
             description = null;
+        }
     }
 
     /**
@@ -115,10 +116,11 @@ public class UpdateInfo implements Parcelable, Serializable {
      * Set Filename
      */
     public void setFileName(String _fileName) {
-        if (_fileName != null)
+        if (_fileName != null) {
             fileName = _fileName.trim();
-        else
+        } else {
             fileName = "";
+        }
     }
 
     /**
@@ -132,10 +134,11 @@ public class UpdateInfo implements Parcelable, Serializable {
      * Set MD5
      */
     public void setMD5(String _md5) {
-        if (_md5 != null)
+        if (_md5 != null) {
             md5sum = _md5.trim();
-        else
+        } else {
             md5sum = "";
+        }
     }
 
     /**
@@ -149,10 +152,11 @@ public class UpdateInfo implements Parcelable, Serializable {
      * Set build date
      */
     public void setDate(String _timeStamp) {
-        if (_timeStamp != null)
+        if (_timeStamp != null) {
             buildDate = new Integer(_timeStamp.trim());
-        else
+        } else {
             buildDate = 0;
+        }
     }
 
     /**
@@ -166,10 +170,11 @@ public class UpdateInfo implements Parcelable, Serializable {
      * Set download location
      */
     public void setDownloadUrl(String _url) {
-        if (_url != null)
+        if (_url != null) {
             downloadUrl = _url.trim();
-        else
+        } else {
             downloadUrl = "";
+        }
     }
 
     /**
@@ -186,10 +191,14 @@ public class UpdateInfo implements Parcelable, Serializable {
 
     @Override
         public boolean equals(Object o) {
-            if (o == this)
+            if (o == this) {
                 return true;
-            if (!(o instanceof UpdateInfo))
+            }
+
+            if (!(o instanceof UpdateInfo)) {
                 return false;
+            }
+
             UpdateInfo ui = (UpdateInfo) o;
             //For the old stored updates
             return ui.name.equals(name)
@@ -246,5 +255,4 @@ public class UpdateInfo implements Parcelable, Serializable {
         md5sum = in.readString();
         downloadUrl = in.readString();
     }
-
 }

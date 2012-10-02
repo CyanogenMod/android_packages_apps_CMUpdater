@@ -14,12 +14,6 @@ public class Customization {
     public static final String RO_MOD_START_STRING = "CyanogenMod";
     //Minimum Supported Version (So the User has to install google apps and so before)
     public static final String MIN_SUPPORTED_VERSION_STRING = RO_MOD_START_STRING + "";
-    //Updateinstructions for the min supported Version
-    public static final String UPDATE_INSTRUCTIONS_URL = "http://wiki.cyanogenmod.com/index.php/Upgrading_From_Older_CyanogenMod_or_other_rooted_ROMs";
-    //DB filename
-    public static final String DATABASE_FILE = "cmupdater.db";
-    //DownloadDirectory
-    public static final String DOWNLOAD_DIR = "cmupdater";
     //MUST be the first package name.
     public static final String PACKAGE_FIRST_NAME = "com.cyanogenmod.updater";
     //Filename for Instance save
