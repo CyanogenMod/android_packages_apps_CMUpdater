@@ -745,7 +745,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                         */
 
                         // Add the update folder/file name
-                        String cmd = "echo '--update_package="+(isAlternateStorage() ? "/emmc" : "/sdcard")
+                        String cmd = "echo '--update_package="+getStorageMountpoint()
                                 + "/" + Constants.UPDATES_FOLDER + "/" + updateInfo.getFileName()
                                 + "' >> /cache/recovery/command\n";
                         os.write(cmd.getBytes());
@@ -770,34 +770,39 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         dialog.show();
     }
 
-    private boolean isAlternateStorage() {
+    private String getStorageMountpoint() {
         StorageManager sm = (StorageManager) getSystemService(Context.STORAGE_SERVICE);
         StorageVolume[] volumes = sm.getVolumeList();
         String primaryStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        boolean alternateIsInternal = getResources().getBoolean(R.bool.alternateIsInternal);
 
         if (volumes.length <= 1) {
             // single storage, assume only /sdcard exists
-            return false;
+            return "/sdcard";
         }
 
         for (int i = 0; i < volumes.length; i++) {
             StorageVolume v = volumes[i];
             if (v.getPath().equals(primaryStoragePath)) {
-                // This is the primary storage, where we stored the update file
-                /* Attempts to "standardize" as the /external_sd crap haven't been
-                 * successful, so let's go with our previous standard, which is still
-                 * the most common case (by far).
-                 * That's removable (microSD) as /sdcard, and internal (EMMC partition
-                 * or FUSE) as the alternate (at /emmc)
+                /* This is the primary storage, where we stored the update file
+                 *
+                 * For CM10, a non-removable storage (partition or FUSE)
+                 * will always be primary. But we have older recoveries out there 
+                 * in which /sdcard is the microSD, and the internal partition is 
+                 * mounted at /emmc.
+                 *
+                 * At buildtime, we try to automagically guess from recovery.fstab
+                 * what's the recovery configuration for this device. If "/emmc"
+                 * exists, and the primary isn't removable, we assume it will be 
+                 * mounted there.
                  */ 
-                if (v.isRemovable()) {
-                    return false;
+                if (!v.isRemovable() && alternateIsInternal) {
+                    return "/emmc";
                 }
-                return true;
             };
         }
         // Not found, assume non-alternate
-        return false;
+        return "/sdcard";
     }
 
 }

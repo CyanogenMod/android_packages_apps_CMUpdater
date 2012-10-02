@@ -19,5 +19,5 @@
     <!-- CMUpdate Config Strings -->
     <string name="conf_update_server_url_def">http://get.cm/api</string>
     <string name="conf_changelog_url">http://localhost/changelog.xml</string>
-
+    <bool name="alternateIsInternal">false</bool>
 </resources>
