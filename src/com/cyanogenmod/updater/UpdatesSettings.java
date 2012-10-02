@@ -100,9 +100,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (DEBUG)
-            Log.d(TAG, "onCreate called");
-
         // Load the layouts
         addPreferencesFromResource(R.xml.main);
         PreferenceScreen prefSet = getPreferenceScreen();
@@ -200,7 +197,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             mPrefs.edit().putBoolean(Constants.BACKUP_PREF, mBackupRom.isChecked()).apply();
             return true;
         }
-
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
@@ -297,7 +293,9 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                 try {
                     PackageInfo pinfo = manager.getPackageInfo(this.getPackageName(), 0);
                     request.addRequestHeader("User-Agent", pinfo.packageName+"/"+pinfo.versionName);
-                } catch (android.content.pm.PackageManager.NameNotFoundException nnfe) {}
+                } catch (android.content.pm.PackageManager.NameNotFoundException nnfe) {
+                    // Do nothing
+                }
                 request.setTitle(getString(R.string.app_name));
                 request.setDescription(ui.getFileName());
                 request.setDestinationUri(Uri.parse(fullFolderPath));
@@ -564,7 +562,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         boolean success = false;
         if (mUpdateFolder.exists() && mUpdateFolder.isDirectory()) {
             File ZIPfiletodelete = new File(mUpdateFolder + "/" + filename);
-            File MD5filetodelete = new File(mUpdateFolder + "/" + filename + ".md5sum");
             if (ZIPfiletodelete.exists()) {
                 ZIPfiletodelete.delete();
             } else {
@@ -572,14 +569,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                 if (DEBUG) Log.d(TAG, "Zip File: " + ZIPfiletodelete.getAbsolutePath());
                 return false;
             }
-            if (MD5filetodelete.exists()) {
-                MD5filetodelete.delete();
-            } else {
-                if (DEBUG) Log.d(TAG, "MD5 to delete not found. No Problem here.");
-                if (DEBUG) Log.d(TAG, "MD5 File: " + MD5filetodelete.getAbsolutePath());
-            }
             ZIPfiletodelete = null;
-            MD5filetodelete = null;
 
             success = true;
             Toast.makeText(this, MessageFormat.format(getResources().getString(R.string.delete_single_update_success_message),
@@ -598,7 +588,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
     }
 
     private void scheduleUpdateService(int updateFrequency) {
-
         // Get the intent ready
         Intent i = new Intent(this, UpdateCheckService.class);
         i.putExtra(Constants.CHECK_FOR_UPDATE, true);
@@ -610,13 +599,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
         // Check if we need to schedule a new alarm
         if (updateFrequency > 0) {
-            Log.d(TAG, "Update frequency is " + updateFrequency);
-
-            // Get the last time we checked for an update
             Date lastCheck = new Date(mPrefs.getLong(Constants.LAST_UPDATE_CHECK_PREF, 0));
-            Log.d(TAG, "Last check was " + lastCheck.toString());
-
-            // Set the new alarm
             am.setRepeating(AlarmManager.RTC_WAKEUP, lastCheck.getTime() + updateFrequency, updateFrequency, pi);
         }
     }
@@ -647,8 +630,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         if (mUpdateFolder.exists() && mUpdateFolder.isDirectory()) {
             deleteDir(mUpdateFolder);
             mUpdateFolder.mkdir();
-            if (DEBUG)
-                Log.d(TAG, "Updates deleted and UpdateFolder created again");
             success = true;
             Toast.makeText(this, R.string.delete_updates_success_message, Toast.LENGTH_SHORT).show();
         } else if (!mUpdateFolder.exists()) {
@@ -699,9 +680,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
     }
 
     protected void startUpdate(final UpdateInfo updateInfo) {
-        if (DEBUG)
-            Log.d(TAG, "Filename selected to flash: " + updateInfo.getFileName());
-
         // Prevent the dialog from being triggered more than once
         if (mStartUpdateVisible) {
             return;
@@ -750,7 +728,8 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                                 + "' >> /cache/recovery/command\n";
                         os.write(cmd.getBytes());
                         os.flush();
-                        //Toast.makeText(UpdatesSettings.this, R.string.apply_trying_to_get_root_access, Toast.LENGTH_SHORT).show();
+
+                        // Trigger the reboot
                         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
                         powerManager.reboot("recovery");
 

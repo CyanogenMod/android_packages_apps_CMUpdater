@@ -19,7 +19,7 @@ import java.io.FilenameFilter;
  */
 public class UpdateFilter implements FilenameFilter {
     private final String[] mExtension;
-    
+
     public UpdateFilter(String Extensions) {
         mExtension = Extensions.split("\\|");
     }
