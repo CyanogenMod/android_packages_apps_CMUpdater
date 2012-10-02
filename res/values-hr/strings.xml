@@ -1,0 +1,81 @@
+<resources>
+
+    <!-- General strings -->
+    <string name="app_name">CM Updater</string>
+    <string name="unknown">Nepoznato</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Osvježi</string>
+    <string name="menu_delete">Izbriši</string>
+    <string name="menu_delete_all">Izbriši preuzimanja</string>
+    <string name="menu_system_info">Sistem info</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Prekini</string>
+    <string name="dialog_yes">Da</string>
+    <string name="dialog_no">Ne</string>
+    <string name="dialog_update">Ažuriraj</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Dostupna ažuriranja</string>
+    <string name="no_available_updates_intro">Posljednja provjera nije pronašla nikakva ažuriranja. Za ručnu provjeru novih ažuriranja koristite Osvježi tipku</string>
+    <string name="new_update_summary">Novo</string>
+    <string name="downloaded_update_summary">Preuzeto</string>
+    <string name="backup_rom_title">Napravi sigurnosnu kopiju</string>
+    <string name="backup_rom_summary">Sačuvajte trenutni ROM prije ažuriranja</string>
+
+    <string name="update_check_title">Potraži ažuriranja</string>
+    <string name="check_manual">Ručno</string>
+    <string name="check_on_boot">Na svakom paljenju</string>
+    <string name="check_twice_daily">Dvaput na dan</string>
+    <string name="check_daily">Dnevno</string>
+    <string name="check_weekly">Tjedno</string>
+    <string name="check_bi_weekly">Više tjedno</string>
+    <string name="check_monthly">Mjesečno</string>
+
+    <string name="update_type_title">Tip ažuriranja</string>
+    <string name="type_all">Sve verzije (Samo stabilne)</string>
+    <string name="type_all_incl_nightly">Sve verzije (uklj. Nightlije)</string>
+    <string name="type_new">Nove verzije (Samo stabilne)</string>
+    <string name="type_new_incl_nightly">Nove verzije (uklj. Nightlije)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Provjeravanje ažuriranja</string>
+    <string name="no_updates_found">Nema novi ažuriranja</string>
+    <string name="not_new_updates_found_ticker">Dostupna su nova ažuriranja</string>
+    <string name="not_new_updates_found_title">Nova ažuriranja</string>
+    <string name="not_new_updates_found_body">{0} ažuriranje(a) dostupna su za preuzimanje</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Prekini preuzimanje?</string>
+    <string name="confirm_download_cancelation_dialog_message">Prekinuti ćete preuzimanje ažuriranja. Nastaviti?</string>
+    <string name="download_cancelled">Preuzimanje prekinuto</string>
+    <string name="download_already_running">Preuzimanje je već u tijeku</string>
+    <string name="unable_to_download_file">Neuspjelo preuzimanje ažuriranja</string>
+    <string name="download_not_found">Preuzimanje nije pronađeno</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Greška. MD5 checksum se ne podudara</string>
+    <string name="md5_check_cancelled">MD5 provjera je prekinuta</string>
+    <string name="md5_verification_failed">Neuspjela MD5 provjera</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Primjeni ažuriranje</string>
+    <string name="apply_update_dialog_text">Ažurirati ćete na {0}.\n\nAko pritisnete Ažuriraj telefon će se sam restartirati u recovery kako bi instalirao ažuriranje</string>
+    <string name="apply_trying_to_get_root_access">Dobijanje root pristupa kako bi se telefon restartirao u recovery</string>
+    <string name="apply_unable_to_reboot_toast">Neuspjelo restartiranje u recovery</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Obriši datoteku</string>
+    <string name="confirm_delete_dialog_message">Obrisati će se preuzeta datoteka ažuriranja. Nastaviti?</string>
+    <string name="confirm_delete_all_dialog_message">Obrisati ćete sve preuzete datoteke ažuriranja. Nastaviti?</string>
+    <string name="delete_single_update_success_message">Ažuriranje {0} obrisano</string>
+    <string name="delete_updates_failure_message">Dogodila se greška prilikom brisanja datoteke ažuriranja</string>
+    <string name="delete_updates_noFolder_message">Nije pronađen Folder ažuriranja</string>
+    <string name="delete_updates_success_message">Sve preuzete datoteke ažuriranja su obrisane</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Uređaj:</string>
+    <string name="sysinfo_running">Softver:</string>
+    <string name="sysinfo_last_check">Posljednja provjera:</string>
+</resources>
