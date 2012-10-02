@@ -15,7 +15,6 @@
     <string name="dialog_yes">Da</string>
     <string name="dialog_no">Ne</string>
     <string name="dialog_update">Ažuriraj</string>
-    <string name="dialog_backup_and_update">Sačuvaj &amp; Primjeni</string>
 
     <!-- Settings strings -->
     <string name="available_updates_title">Dostupna ažuriranja</string>
@@ -48,21 +47,12 @@
     <string name="not_new_updates_found_body">{0} ažuriranje(a) dostupna su za preuzimanje</string>
 
     <!-- Downloads -->
-    <string name="minutes">min</string>
-    <string name="seconds">sec</string>
-    <string name="download_resume_not_supported">Server ne podržava nastavljanje preuzimanja</string>
-    <string name="download_resume_download">Nastavlja se preuzimanje</string>
-    <string name="unable_to_download_file">Neuspjelo preuzimanje ažuriranja</string>
-    <string name="download_not_enough_space">Nema dovoljno prostora na SD Kartici za preuzimanje ažuriranja</string>
-    <string name="not_update_download_error_ticker">Dogodila se greška prilokom preuzimanja</string>
-    <string name="not_update_download_error_title">Dogodila se greška prilokom preuzimanja</string>
-    <string name="notification_tickertext">Preuzimanje ažuriranja</string>
-    <string name="notification_finished">Preuzimanje završeno</string>
-    <string name="exception_while_downloading">Dogodila se greška prilokom preuzimanja ažuriranja</string>
     <string name="confirm_download_cancelation_dialog_title">Prekini preuzimanje?</string>
-    <string name="confirm_download_cancelation_dialog_message">Možete nastaviti kasnije tako što ćete preuzeti opet isto ažuriranje</string>
-    <string name="download_canceled_toast_message">Preuzimanje prekinuto</string>
-    <string name="downloading_update">Preuzimanje ažuriranja</string>
+    <string name="confirm_download_cancelation_dialog_message">Prekinuti ćete preuzimanje ažuriranja. Nastaviti?</string>
+    <string name="download_cancelled">Preuzimanje prekinuto</string>
+    <string name="download_already_running">Preuzimanje je već u tijeku</string>
+    <string name="unable_to_download_file">Neuspjelo preuzimanje ažuriranja</string>
+    <string name="download_not_found">Preuzimanje nije pronađeno</string>
 
     <!-- MD5 related strings -->
     <string name="apply_existing_update_md5error_message">Greška. MD5 checksum se ne podudara</string>
