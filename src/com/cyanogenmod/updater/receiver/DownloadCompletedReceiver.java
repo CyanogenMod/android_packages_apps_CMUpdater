@@ -16,11 +16,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.cyanogenmod.updater.R;
-import com.cyanogenmod.updater.UpdatePreference;
 import com.cyanogenmod.updater.UpdatesSettings;
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.utils.MD5;

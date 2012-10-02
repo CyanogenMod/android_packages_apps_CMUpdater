@@ -19,7 +19,6 @@ public class StringUtils {
 
     /**
      * Converts a String array to an String, joined by the Seperator
-     * 
      * @param items     The String Array to Join
      * @param seperator The Seperator used to join the String
      * @return The Joined String
@@ -39,7 +38,6 @@ public class StringUtils {
 
     /**
      * Compare two versions.
-     * 
      * @param newVersion new version to be compared
      * @param oldVersion old version to be compared
      * @return true if newVersion is greater then oldVersion,
@@ -73,11 +71,11 @@ public class StringUtils {
         }
 
         // Collapse them again
-        //
         newVersion = "";
         for (String s : newVersionArray) {
             newVersion += s;
         }
+
         oldVersion = "";
         for (String s : oldVersionArray) {
             oldVersion += s;
@@ -86,16 +84,16 @@ public class StringUtils {
         Integer iNewVersion = new Integer(newVersion);
         Integer iOldVersion = new Integer(oldVersion);
 
+        Log.i(TAG, "NewVersion: " + newVersion + ", oldVersion: " + oldVersion + " dates (old/new) "
+                + oldDate + "/" + newDate);
 
-        Log.i(TAG, "NewVersion: " + newVersion + ", oldVersion: " + oldVersion + " dates (old/new) " + oldDate + "/" + newDate);
         if (iNewVersion < iOldVersion) {
             return false;
         } else if (iNewVersion > iOldVersion) {
             return true;
         } else {
-            return newDate > oldDate + 3600; /* The jenkins timestamp is for 
-                                                build completion, not the 
-                                                actual build.date prop */
+            // The jenkins timestamp is for build completion, not the actual build.date prop
+            return newDate > oldDate + 3600; 
         }
     }
 }
