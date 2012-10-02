@@ -56,20 +56,20 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
         mProgressDialog.show();
         mServiceIntent = new Intent(IUpdateCheckService.class.getName());
         ComponentName comp = mParent.startService(mServiceIntent);
-        if (comp == null)
+        if (comp == null) {
             Log.e(TAG, "startService failed");
+        }
         mBound = mParent.bindService(mServiceIntent, mConnection, 0);
     }
 
     @Override
     protected Void doInBackground(Void... arg0) {
         try {
-            //Wait till the Service is bound
             while (mService == null) {
+                // Wait till the Service is bound
             }
             mService.checkForUpdates();
-        }
-        catch (RemoteException e) {
+        } catch (RemoteException e) {
             Log.e(TAG, "Exception on calling UpdateCheckService", e);
         }
         return null;
@@ -81,8 +81,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
             mParent.unbindService(mConnection);
             mBound = false;
         }
-
-        boolean stopped = mParent.stopService(mServiceIntent);
+        mParent.stopService(mServiceIntent);
         mParent.updateLayout();
     }
 
@@ -96,10 +95,8 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
         }
-
         mParent.updateLayout();
         super.onCancelled();
-
     }
 
     /**
@@ -110,17 +107,15 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
             mService = IUpdateCheckService.Stub.asInterface(service);
             try {
                 mService.registerCallback(mCallback);
-            }
-            catch (RemoteException e) {
+            } catch (RemoteException e) {
                 Log.e(TAG, "RemoteException", e);
-        }
+            }
         }
 
         public void onServiceDisconnected(ComponentName name) {
             try {
                 mService.unregisterCallback(mCallback);
-            }
-            catch (RemoteException e) {
+            } catch (RemoteException e) {
                 Log.e(TAG, "RemoteException", e);
             }
             mService = null;
