@@ -14,6 +14,7 @@ ifneq ($(recovery_fstab),)
   endif
 endif
 
+$(error $(ALTERNATE_IS_INTERNAL))
 include $(CLEAR_VARS)
 
 LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res
