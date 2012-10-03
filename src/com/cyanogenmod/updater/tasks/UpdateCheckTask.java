@@ -58,19 +58,23 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
         ComponentName comp = mParent.startService(mServiceIntent);
         if (comp == null) {
             Log.e(TAG, "startService failed");
+            mBound = false;
+        } else {
+            mBound = mParent.bindService(mServiceIntent, mConnection, 0);
         }
-        mBound = mParent.bindService(mServiceIntent, mConnection, 0);
     }
 
     @Override
     protected Void doInBackground(Void... arg0) {
-        try {
-            while (mService == null) {
-                // Wait till the Service is bound
+        if (mBound) {
+            try {
+                while (mService == null) {
+                    // Wait till the Service is bound
+                }
+                mService.checkForUpdates();
+            } catch (RemoteException e) {
+                Log.e(TAG, "Exception on calling UpdateCheckService", e);
             }
-            mService.checkForUpdates();
-        } catch (RemoteException e) {
-            Log.e(TAG, "Exception on calling UpdateCheckService", e);
         }
         return null;
     }
