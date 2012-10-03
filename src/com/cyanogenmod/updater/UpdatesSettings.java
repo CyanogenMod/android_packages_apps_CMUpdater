@@ -286,8 +286,15 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                 mDownloadingPreference.setStyle(UpdatePreference.STYLE_DOWNLOADING);
 
                 // Create the download request and set some basic parameters
-                String fullFolderPath = "file://" + Environment.getExternalStorageDirectory().getAbsolutePath()
-                        + Constants.UPDATES_FOLDER + "/" + ui.getFileName();
+                String fullFolderPath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                        + Constants.UPDATES_FOLDER;
+                //If directory doesn't exist, create it
+                File directory = new File(fullFolderPath);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                    Log.d(TAG, "UpdateFolder created");
+                }
+                String fullFilePath = "file://" + fullFolderPath + "/" + ui.getFileName();
                 Request request = new Request(Uri.parse(ui.getDownloadUrl()));
                 request.addRequestHeader("Cache-Control", "no-cache");
                 try {
@@ -298,7 +305,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                 }
                 request.setTitle(getString(R.string.app_name));
                 request.setDescription(ui.getFileName());
-                request.setDestinationUri(Uri.parse(fullFolderPath));
+                request.setDestinationUri(Uri.parse(fullFilePath));
                 request.setAllowedOverRoaming(false);
                 request.setVisibleInDownloadsUi(false);
 
