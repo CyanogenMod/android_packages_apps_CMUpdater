@@ -9,6 +9,7 @@
 
 package com.cyanogenmod.updater;
 
+import android.app.ActionBar;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
@@ -151,6 +152,10 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             c.close();
         }
 
+        // Set 'HomeAsUp' feature of the actionbar to fit better into Settings
+        final ActionBar bar = getActionBar();
+        bar.setDisplayHomeAsUpEnabled(true);
+
         // Turn on the Options Menu and update the layout
         invalidateOptionsMenu();
         updateLayout();
@@ -185,6 +190,10 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
             case MENU_SYSTEM_INFO:
                 showSysInfo();
+                return true;
+
+            case android.R.id.home:
+                UpdatesSettings.this.onBackPressed();
                 return true;
         }
         return false;
