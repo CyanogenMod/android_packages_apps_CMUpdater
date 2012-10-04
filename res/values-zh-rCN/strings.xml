@@ -1,0 +1,88 @@
+<resources>
+
+    <!-- General strings -->
+    <string name="app_name">CM 更新器</string>
+    <string name="unknown">未知</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">刷新</string>
+    <string name="menu_delete">删除</string>
+    <string name="menu_delete_all">删除下载</string>
+    <string name="menu_system_info">系统信息</string>
+
+    <string name="dialog_ok">确认</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_yes">是</string>
+    <string name="dialog_no">否</string>
+    <string name="dialog_update">更新</string>
+    <string name="dialog_close">关闭</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">可用更新</string>
+    <string name="no_available_updates_intro">最后一次刷新没有找到可用的更新. 使用刷新按钮来手动检查更新.</string>
+    <string name="new_update_summary">新的更新</string>
+    <string name="downloaded_update_summary">已下载</string>
+    <string name="installed_update_summary">已安装</string>
+    <string name="backup_rom_title">创建备份</string>
+    <string name="backup_rom_summary">在更新之前创建目前使用的 ROM 备份</string>
+
+    <string name="update_check_title">检查更新频率</string>
+    <string name="check_manual">手动</string>
+    <string name="check_on_boot">每次启动</string>
+    <string name="check_twice_daily">每天两次</string>
+    <string name="check_daily">每天一次</string>
+    <string name="check_weekly">每周一次</string>
+    <string name="check_bi_weekly">两周一次</string>
+    <string name="check_monthly">每月一次</string>
+
+    <string name="update_type_title">更新类型</string>
+    <string name="type_all">所有版本 (仅稳定版)</string>
+    <string name="type_all_incl_nightly">所有版本 (包括 Nightly 版)</string>
+    <string name="type_new">新版本 (仅稳定版)</string>
+    <string name="type_new_incl_nightly">新版本 (包括 Nightly 版)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">正在检查更新</string>
+    <string name="no_updates_found">没有找到新的更新</string>
+    <string name="not_new_updates_found_ticker">找到了可用的更新</string>
+    <string name="not_new_updates_found_title">新更新</string>
+    <string name="not_new_updates_found_body">{0} 个可下载的更新</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">取消下载</string>
+    <string name="confirm_download_cancelation_dialog_message">您将取消当前的下载, 您确定继续?</string>
+    <string name="download_cancelled">下载已取消</string>
+    <string name="download_already_running">已有一个正在运行的下载</string>
+    <string name="unable_to_download_file">无法下载更新</string>
+    <string name="download_not_found">未找到下载</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">错误. MD5 值不匹配</string>
+    <string name="md5_check_cancelled">MD5 检测已被取消</string>
+    <string name="md5_verification_failed">MD5 检测失败</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">应用更新</string>
+    <string name="apply_update_dialog_text">您将要更新到 {0}.\n\n如果您选择更新, 您的设备将会重启到恢复模式并安装更新.\n\n注意: 此功能需要一个兼容的恢复程序. 如果您没有的话, 您将需要手动安装更新.</string>
+    <string name="apply_trying_to_get_root_access">正在尝试获得超级用户权限以便进入恢复模式</string>
+    <string name="apply_unable_to_reboot_toast">无法重启到恢复模式</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">删除文件</string>
+    <string name="confirm_delete_dialog_message">您将要删除已下载的更新文件. 您确定继续?</string>
+    <string name="confirm_delete_all_dialog_message">您将要删除所有已下载的更新文件. 您确定继续?</string>
+    <string name="delete_single_update_success_message">更新 {0} 已被删除</string>
+    <string name="delete_updates_failure_message">删除更新时发生了错误</string>
+    <string name="delete_updates_noFolder_message">未找到更新所在的文件夹</string>
+    <string name="delete_updates_success_message">所有已下载的更新文件已被删除</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">设备:</string>
+    <string name="sysinfo_running">目前运行:</string>
+    <string name="sysinfo_last_check">最后一次检查时间:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">无可用的更改记录</string>
+    <string name="failed_to_load_changelog">无法读取更改记录</string>
+    <string name="changelog_dialog_title">更改记录</string>
+</resources>
