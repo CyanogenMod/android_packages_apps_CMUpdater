@@ -38,9 +38,10 @@
             </intent-filter>
         </service>
 
-        <receiver android:name="com.cyanogenmod.updater.receiver.StartupReceiver">
+        <receiver android:name="com.cyanogenmod.updater.receiver.UpdateCheckReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <category android:name="android.intent.category.HOME"/>
             </intent-filter>
         </receiver>
