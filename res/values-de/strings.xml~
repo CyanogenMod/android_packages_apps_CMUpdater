@@ -1,0 +1,81 @@
+<resources>
+
+    <!-- General strings -->
+    <string name="app_name">CM Updater</string>
+    <string name="unknown">Unknown</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_delete_all">Delete downloads</string>
+    <string name="menu_system_info">System info</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+    <string name="dialog_update">Update</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Available updates</string>
+    <string name="no_available_updates_intro">The last check did not find any available updates. To manually check for new updates, use the Refresh button</string>
+    <string name="new_update_summary">New</string>
+    <string name="downloaded_update_summary">Downloaded</string>
+    <string name="backup_rom_title">Create backup</string>
+    <string name="backup_rom_summary">Backup existing ROM before updating</string>
+
+    <string name="update_check_title">Check for updates</string>
+    <string name="check_manual">Manual</string>
+    <string name="check_on_boot">On every boot</string>
+    <string name="check_twice_daily">Twice daily</string>
+    <string name="check_daily">Daily</string>
+    <string name="check_weekly">Weekly</string>
+    <string name="check_bi_weekly">Bi-weekly</string>
+    <string name="check_monthly">Monthly</string>
+
+    <string name="update_type_title">Update types</string>
+    <string name="type_all">All versions (Stable only)</string>
+    <string name="type_all_incl_nightly">All versions (incl. Nightlies)</string>
+    <string name="type_new">New versions (Stable only)</string>
+    <string name="type_new_incl_nightly">New versions (incl. Nightlies)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Checking for updates</string>
+    <string name="no_updates_found">No new updates found</string>
+    <string name="not_new_updates_found_ticker">New updates are available</string>
+    <string name="not_new_updates_found_title">New updates</string>
+    <string name="not_new_updates_found_body">{0} update(s) available for download</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Cancel download</string>
+    <string name="confirm_download_cancelation_dialog_message">You are about to cancel the current download, OK to proceed?</string>
+    <string name="download_cancelled">Download cancelled</string>
+    <string name="download_already_running">A download is already running</string>
+    <string name="unable_to_download_file">Unable to download the update file</string>
+    <string name="download_not_found">Download not found</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Error. MD5 checksum mismatch</string>
+    <string name="md5_check_cancelled">MD5 check was cancelled</string>
+    <string name="md5_verification_failed">MD5 verification failed</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Apply update</string>
+    <string name="apply_update_dialog_text">You are about to upgrade to {0}.\n\nIf you press Update, the phone will restart itself in recovery mode to install the update</string>
+    <string name="apply_trying_to_get_root_access">Trying to get root access to reboot in recovery mode</string>
+    <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Delete file</string>
+    <string name="confirm_delete_dialog_message">You are about to delete the downloaded update file, OK to proceed?</string>
+    <string name="confirm_delete_all_dialog_message">You are about to delete all downloaded update files, OK to proceed?</string>
+    <string name="delete_single_update_success_message">Update {0} deleted</string>
+    <string name="delete_updates_failure_message">There was an error deleting the update file</string>
+    <string name="delete_updates_noFolder_message">Update folder not found</string>
+    <string name="delete_updates_success_message">All downloaded updates deleted</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Device:</string>
+    <string name="sysinfo_running">Running:</string>
+    <string name="sysinfo_last_check">Last check:</string>
+</resources>
