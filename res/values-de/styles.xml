@@ -1,9 +1,0 @@
-<resources>
-
-    <style name="AppTheme" parent="android:Theme.Light" />
-
-    <style name="UpdatesPreferenceStyle">
-        <item name="android:layout">@layout/preference_updates</item>
-    </style>
-
-</resources>
