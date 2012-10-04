@@ -55,7 +55,8 @@ public class Constants {
     public static final String STOP_DOWNLOAD = "stop_download";
     public static final String DOWNLOAD_COMPLETED = "download_completed";
 
-    // Update Check Frequencies
+    // Update Check items
+    public static final String BOOT_CHECK_COMPLETED = "boot_check_completed";
     public static final int UPDATE_FREQ_AT_BOOT = -1;
     public static final int UPDATE_FREQ_NONE = -2;
     public static final int UPDATE_FREQ_TWICE_DAILY = 43200;
