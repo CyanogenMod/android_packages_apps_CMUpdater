@@ -61,7 +61,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Apply update</string>
-    <string name="apply_update_dialog_text">You are about to upgrade to {0}.\n\nIf you press Update, the phone will restart itself in recovery mode to install the update</string>
+    <string name="apply_update_dialog_text">You are about to upgrade to {0}.\n\nIf you press Update, the phone will restart itself in recovery mode to install the update.</string>
     <string name="apply_trying_to_get_root_access">Trying to get root access to reboot in recovery mode</string>
     <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
 
