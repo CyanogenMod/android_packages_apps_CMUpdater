@@ -19,6 +19,8 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
@@ -89,11 +91,14 @@ public class UpdateCheckService extends Service {
 
     @Override
     public void onStart(Intent intent, int startId) {
-        // Parse the intent
-        boolean doCheck = intent.getBooleanExtra(Constants.CHECK_FOR_UPDATE, false);
-        if (doCheck) {
-            // If we should check for updates on start, do so in a seperate thread
-            new AutoCheckForUpdatesTask().execute();
+        // See if we have an intent to parse
+        if (intent != null) {
+            boolean doCheck = intent.getBooleanExtra(Constants.CHECK_FOR_UPDATE, false);
+            if (doCheck) {
+                // If we should check for updates on start, do so in a seperate thread
+                Log.i(TAG, "Checking for updates...");
+                new AutoCheckForUpdatesTask().execute();
+            }
         }
     }
 
@@ -133,7 +138,23 @@ public class UpdateCheckService extends Service {
         mToastHandler.sendMessage(mToastHandler.obtainMessage(0, ex));
     }
 
+    private boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
+    }
+
     private void checkForNewUpdates() {
+        if (!isOnline()) {
+            // Only check for updates if the phone is actually connected to a network
+            Log.i(TAG, "Could not check for updates. Not connected to the network.");
+            return;
+        }
+
+        // Start the update check
         FullUpdateInfo availableUpdates;
         while (true) {
             try {
@@ -150,13 +171,18 @@ public class UpdateCheckService extends Service {
             }
         }
 
-        // Store the last update check time
+        // Store the last update check time and ensure boot check completed is true
         Date d = new Date();
         SharedPreferences prefs = getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
         prefs.edit().putLong(Constants.LAST_UPDATE_CHECK_PREF, d.getTime()).apply();
+        prefs.edit().putBoolean(Constants.BOOT_CHECK_COMPLETED, true).apply();
 
         int updateCountRoms = availableUpdates.getRomCount();
         int updateCount = availableUpdates.getUpdateCount();
+
+        // Write to log
+        Log.i(TAG, "The update check successfully completed at " + d.toString() + " and found "
+                + updateCountRoms + " updates.");
 
         if (updateCountRoms == 0) {
             mToastHandler.sendMessage(mToastHandler.obtainMessage(0, R.string.no_updates_found, 0));
