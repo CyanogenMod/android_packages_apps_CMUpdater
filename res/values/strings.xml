@@ -55,7 +55,7 @@
     <string name="download_not_found">Download not found</string>
 
     <!-- MD5 related strings -->
-    <string name="apply_existing_update_md5error_message">Error. MD5 checksum missmatch</string>
+    <string name="apply_existing_update_md5error_message">Error. MD5 checksum mismatch</string>
     <string name="md5_check_cancelled">MD5 check was cancelled</string>
     <string name="md5_verification_failed">MD5 verification failed</string>
 
