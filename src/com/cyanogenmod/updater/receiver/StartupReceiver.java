@@ -27,12 +27,16 @@ public class StartupReceiver extends BroadcastReceiver {
             return;
         }
 
-        // We should check for updates
         if (updateFreq == Constants.UPDATE_FREQ_AT_BOOT) {
             // Asking UpdateService to check for updates on boot
             Intent i = new Intent(ctx, UpdateCheckService.class);
             i.putExtra(Constants.CHECK_FOR_UPDATE, true);
-            ctx.startService(i);
+            PendingIntent pi = PendingIntent.getService(ctx, 0, i, 0);
+
+            // Schedule a check in 60 seconds to give the network a chance to start
+            Date dt = new Date();
+            AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
+            am.set(AlarmManager.RTC_WAKEUP, dt.getTime()+60000, pi);
 
         } else {
             // Scheduling future UpdateService checks for updates
