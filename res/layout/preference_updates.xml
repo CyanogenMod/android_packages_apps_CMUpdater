@@ -23,17 +23,18 @@
 
     <LinearLayout
         android:id="@+id/updates_pref"
-        android:layout_width="wrap_content"
+        android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:paddingLeft="@*android:dimen/preference_item_padding_side"
+        android:paddingLeft="8dip"
         android:gravity="center_vertical"
         android:clickable="true"
         android:focusable="true"
+        android:baselineAligned="false"
         android:background="?android:attr/selectableItemBackground">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_marginRight="6dip"
             android:layout_marginTop="6dip"
@@ -70,7 +71,7 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:paddingBottom="3dip"
                 android:visibility="gone"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
     </RelativeLayout>
@@ -87,7 +88,7 @@
     <ImageView
         android:id="@+id/updates_button"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:paddingLeft="15dip"
         android:paddingRight="?android:attr/scrollbarSize"
         android:src="@drawable/ic_tab_download"
