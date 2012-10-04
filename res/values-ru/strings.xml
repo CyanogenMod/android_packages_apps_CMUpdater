@@ -52,7 +52,6 @@
     <string name="download_cancelled">Загрузка отменена</string>
     <string name="download_already_running">Загрузка уже выполняется</string>
     <string name="unable_to_download_file">Не удалось загрузить файл обновления</string>
-    <string name="downloading_update">Загрузка обновления</string>
 
     <!-- MD5 related strings -->
     <string name="apply_existing_update_md5error_message">Ошибка! Несоответствие контрольной суммы MD5</string>
