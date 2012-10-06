@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-/*
-** Copyright 2012, The CyanogenMod Project
-*/
--->
+<!-- Copyright (C) 2012 The CyanogenMod Project
 
-<resources>
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- This resource is overlayed automatically if "/emmc" is detected
          in the recovery.fstab file -->
     <bool name="alternateIsInternal">true</bool>

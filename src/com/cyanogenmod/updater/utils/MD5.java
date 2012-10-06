@@ -4,7 +4,7 @@
  * * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
- * or at http://www.gnu.org/licenses/gpl-2.0.txt
+ * or at https://www.gnu.org/licenses/gpl-2.0.txt
  */
 
 package com.cyanogenmod.updater.utils;
@@ -28,7 +28,7 @@ public class MD5 {
 
     public static boolean checkMD5(String md5, File updateFile) {
         if (md5 == null || md5.equals("") || updateFile == null) {
-            Log.e(TAG, "md5 String NULL or UpdateFile NULL");
+            Log.e(TAG, "MD5 String NULL or UpdateFile NULL");
             return false;
         }
 
@@ -70,7 +70,7 @@ public class MD5 {
             byte[] md5sum = digest.digest();
             BigInteger bigInt = new BigInteger(1, md5sum);
             String output = bigInt.toString(16);
-            //Fill to 32 chars
+            // Fill to 32 chars
             output = String.format("%32s", output).replace(' ', '0');
             return output;
         } catch (IOException e) {

@@ -4,7 +4,7 @@
  * * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
- * or at http://www.gnu.org/licenses/gpl-2.0.txt
+ * or at https://www.gnu.org/licenses/gpl-2.0.txt
  */
 
 package com.cyanogenmod.updater.service;
@@ -84,7 +84,7 @@ public class UpdateCheckService extends Service {
 
     @Override
     public void onCreate() {
-        // Get the system MOD string
+        // Get the System Mod string
         mSystemMod = TESTING_DOWNLOAD ? "cmtestdevice" : SysUtils.getSystemProperty(Customization.BOARD);
         if (mSystemMod == null) {
                 Log.i(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
@@ -157,7 +157,7 @@ public class UpdateCheckService extends Service {
 
     private void checkForNewUpdates() {
         if (!isOnline()) {
-            // Only check for updates if the phone is actually connected to a network
+            // Only check for updates if the device is actually connected to a network
             Log.i(TAG, "Could not check for updates. Not connected to the network.");
             return;
         }
@@ -258,7 +258,7 @@ public class UpdateCheckService extends Service {
             mShowNightlyRomUpdates = true;
         }
 
-        //Get the actual Rom Updateserver URL
+        // Get the actual ROM Update Server URL
         try {
             PackageManager manager = this.getPackageManager();
             URI RomUpdateServerUri = URI.create(getResources().getString(R.string.conf_update_server_url_def));
@@ -292,7 +292,7 @@ public class UpdateCheckService extends Service {
 
         try {
             if (!romException) {
-                //Read the Rom Infos
+                // Read the ROM Infos
                 BufferedReader romLineReader = new BufferedReader(new InputStreamReader(romResponseEntity.getContent()), 2 * 1024);
                 StringBuffer romBuf = new StringBuffer();
                 String romLine;
@@ -304,7 +304,7 @@ public class UpdateCheckService extends Service {
                 LinkedList<UpdateInfo> romUpdateInfos = parseJSON(romBuf);
                 retValue.roms = getRomUpdates(romUpdateInfos);
             } else {
-                Log.e(TAG, "There was an Exception on Downloading the Rom JSON File");
+                Log.e(TAG, "There was an exception on downloading the ROM JSON File");
             }
         } finally {
             if (romResponseEntity != null)
@@ -328,7 +328,7 @@ public class UpdateCheckService extends Service {
                 if (!updateList.isNull(i)) {
                     uis.add(parseUpdateJSONObject(updateList.getJSONObject(i)));
                 } else {
-                    Log.e(TAG, "There is an error in your JSON File(update part). Maybe a , after the last update");
+                    Log.e(TAG, "There is an error in your JSON File (update part). Maybe a , after the last update");
                 }
             }
         } catch (JSONException e) {
@@ -471,7 +471,7 @@ public class UpdateCheckService extends Service {
             try {
                 mCallbacks.getBroadcastItem(i).updateCheckFinished();
             } catch (RemoteException e) {
-                // The RemoteCallbackList will take care of removing the dead object for us.
+                // The RemoteCallbackList will take care of removing the dead object for us
             }
         }
         mCallbacks.finishBroadcast();
