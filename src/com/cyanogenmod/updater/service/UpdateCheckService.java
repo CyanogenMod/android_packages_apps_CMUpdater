@@ -74,7 +74,6 @@ public class UpdateCheckService extends Service {
     private Integer mCurrentBuildDate;
     private boolean mShowNightlyRomUpdates;
     private boolean mShowAllRomUpdates;
-    private boolean mUpdateTaskRunning = false;
     private AutoCheckForUpdatesTask mTask;
 
     @Override
@@ -98,8 +97,8 @@ public class UpdateCheckService extends Service {
             boolean doCheck = intent.getBooleanExtra(Constants.CHECK_FOR_UPDATE, false);
             if (doCheck) {
                 // If we should check for updates on start, do so in a seperate thread
-                Log.i(TAG, "Checking for updates...");
-                if (!mUpdateTaskRunning) {
+                if (mTask == null || mTask.getStatus() == AsyncTask.Status.FINISHED) {
+                    Log.i(TAG, "Checking for updates...");
                     mTask = new AutoCheckForUpdatesTask();
                     mTask.execute();
                 }
@@ -110,9 +109,8 @@ public class UpdateCheckService extends Service {
     @Override
     public void onDestroy() {
         mCallbacks.kill();
-        if (mTask != null && mUpdateTaskRunning) {
+        if (mTask != null || mTask.getStatus() != AsyncTask.Status.FINISHED) {
             mTask.cancel(true);
-            mTask = null;
         }
         super.onDestroy();
     }
@@ -121,23 +119,11 @@ public class UpdateCheckService extends Service {
     // Supporting methods and classes
     //*********************************************************
     private class AutoCheckForUpdatesTask extends AsyncTask<Void, Void, Integer> {
-
         @Override
         protected Integer doInBackground(Void... params) {
-            if (mUpdateTaskRunning) {
-                return null;
-            } else {
-                mUpdateTaskRunning = true;
-                checkForNewUpdates();
-            }
+            checkForNewUpdates();
             return null;
         }
-
-        @Override
-        protected void onPostExecute(Integer result) {
-            mUpdateTaskRunning = false;
-        }
-
     }
 
     private final IUpdateCheckService.Stub mBinder = new IUpdateCheckService.Stub() {
