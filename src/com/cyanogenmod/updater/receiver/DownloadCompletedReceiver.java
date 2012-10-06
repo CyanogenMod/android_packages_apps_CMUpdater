@@ -4,7 +4,7 @@
  * * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
- * or at http://www.gnu.org/licenses/gpl-2.0.txt
+ * or at https://www.gnu.org/licenses/gpl-2.0.txt
  */
 
 package com.cyanogenmod.updater.receiver;
@@ -37,7 +37,7 @@ public class DownloadCompletedReceiver extends BroadcastReceiver{
         long enqueue = prefs.getLong(Constants.DOWNLOAD_ID, -1);
         long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -2);
 
-        // If we had an active download and the id's match
+        // If we had an active download and the IDs match
         if (enqueue != -1 && id != -2 && id == enqueue) {
             Query query = new Query();
             query.setFilterById(id);

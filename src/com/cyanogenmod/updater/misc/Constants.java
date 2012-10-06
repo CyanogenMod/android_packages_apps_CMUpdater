@@ -4,7 +4,7 @@
  * * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
- * or at http://www.gnu.org/licenses/gpl-2.0.txt
+ * or at https://www.gnu.org/licenses/gpl-2.0.txt
  */
 
 package com.cyanogenmod.updater.misc;
@@ -23,7 +23,7 @@ public class Constants {
     public static final String DOWNLOAD_MD5 = "download_md5";
     public static final String CHANGELOG_ID = "changelog_id";
 
-    //UpdateInfo
+    // Update Info
     public static final String UPDATE_INFO_BRANCH_STABLE = "stable";
     public static final String UPDATE_INFO_BRANCH_NIGHTLY = "nightly";
     public static final String UPDATE_INFO_WILDCARD = "*";

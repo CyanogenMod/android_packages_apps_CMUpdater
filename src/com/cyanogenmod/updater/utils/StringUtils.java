@@ -4,7 +4,7 @@
  * * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
- * or at http://www.gnu.org/licenses/gpl-2.0.txt
+ * or at https://www.gnu.org/licenses/gpl-2.0.txt
  */
 
 package com.cyanogenmod.updater.utils;
@@ -16,7 +16,7 @@ public class StringUtils {
     private static final String TAG = "StringUtils";
 
     /**
-     * Converts a String array to an String, joined by the Seperator
+     * Converts a String array to a String, joined by the Seperator
      * @param items     The String Array to Join
      * @param seperator The Seperator used to join the String
      * @return The Joined String
@@ -35,7 +35,7 @@ public class StringUtils {
     }
 
     /**
-     * Compare two versions.
+     * Compare two versions
      * @param newVersion new version to be compared
      * @param oldVersion old version to be compared
      * @return true if newVersion is greater then oldVersion,
@@ -55,7 +55,7 @@ public class StringUtils {
         newVersionArray.addAll(Arrays.asList(sNewVersion));
         oldVersionArray.addAll(Arrays.asList(sOldVersion));
 
-        //Make the 2 Arrays the Same size filling it with 0. So Version 2 compared to 2.1 will be 2.0 to 2.1
+        //Make the 2 Arrays the same size filling it with 0. So Version 2 compared to 2.1 will be 2.0 to 2.1
         if (newVersionArray.size() > oldVersionArray.size()) {
             int difference = newVersionArray.size() - oldVersionArray.size();
             for (int i = 0; i < difference; i++) {
