@@ -1,0 +1,81 @@
+﻿<resources>
+
+    <!-- General strings -->
+    <string name="app_name">Actualizare CM</string>
+    <string name="unknown">Necunoscut</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Reîmprospatare</string>
+    <string name="menu_delete">Șterge</string>
+    <string name="menu_delete_all">Șterge Descărcările</string>
+    <string name="menu_system_info">Informații Sistem</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Anulare</string>
+    <string name="dialog_yes">Da</string>
+    <string name="dialog_no">Nu</string>
+    <string name="dialog_update">Actualizare</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Actualizări Disponibile</string>
+    <string name="no_available_updates_intro">Ultima verificare nu a găsit nici o actualizare. Pentru a verifica manual apasă butonul de reîmprospatare.</string>
+    <string name="new_update_summary">Nou</string>
+    <string name="downloaded_update_summary">Descărcate</string>
+    <string name="backup_rom_title">Creați o copie de siguranță</string>
+    <string name="backup_rom_summary">Creați o copie de siguranță a ROM-ului înainte de actualizare</string>
+
+    <string name="update_check_title">Verifică pentru actualizări</string>
+    <string name="check_manual">Manual</string>
+    <string name="check_on_boot">La fiecare pornire</string>
+    <string name="check_twice_daily">La fiecare a doua zi</string>
+    <string name="check_daily">În fiecare zi</string>
+    <string name="check_weekly">Săptămânal</string>
+    <string name="check_bi_weekly">La fiecare două săptamâni</string>
+    <string name="check_monthly">Lunar</string>
+
+    <string name="update_type_title">Tipuri de actualizari</string>
+    <string name="type_all">Toate versiunile (Numai cele stabile)</string>
+    <string name="type_all_incl_nightly">Toate versiunile (incl. Nightlies)</string>
+    <string name="type_new">Versiuni noi (Numai cele stabile)</string>
+    <string name="type_new_incl_nightly">Versiuni noi (incl. Nightlies)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Se verifică pentru actualizări</string>
+    <string name="no_updates_found">Nici o actualizare nouă nu a fost găsită</string>
+    <string name="not_new_updates_found_ticker">Actualizari noi sunt disponibile</string>
+    <string name="not_new_updates_found_title">Actualizari noi</string>
+    <string name="not_new_updates_found_body">{0} actualizari disponibile pentru decărcare</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Anulare descărcare</string>
+    <string name="confirm_download_cancelation_dialog_message">Ești pe cale da a anula descărcarea. Dorești să continui?</string>
+    <string name="download_cancelled">Descărcare anulata</string>
+    <string name="download_already_running">O descărcare este deja in proces</string>
+    <string name="unable_to_download_file">Nu s-a putut descărca fișierul de actualizare</string>
+    <string name="download_not_found">Descărcarea nu a fost gasită</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Eroare. Criptarea MD5 nu corespunde</string>
+    <string name="md5_check_cancelled">Verificarea MD5 a fost anulată</string>
+    <string name="md5_verification_failed">Verificarea MD5 a eșuat</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Aplică actualizarea</string>
+    <string name="apply_update_dialog_text">Ești pe cale de a actualiza la {0}.\n\nDaca apeși pe actualizare, telefonul v-a reporni în recuperare pentru a aplica actualizarea</string>
+    <string name="apply_trying_to_get_root_access">Se încearcă obținerea permisiei de la sursă</string>
+    <string name="apply_unable_to_reboot_toast">A eșuat intrarea în modul de recuperare</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Șterge fișier</string>
+    <string name="confirm_delete_dialog_message">Ești pe cale de a șterge fișierul de actualizare, Dorești să continui?</string>
+    <string name="confirm_delete_all_dialog_message">Ești pe cale de a șterge toate fișierele de actualizare, Apasă OK pentru a continua?</string>
+    <string name="delete_single_update_success_message">Actualizări șterse {0} </string>
+    <string name="delete_updates_failure_message">A fost întâmpinată o eroare în încercarea de a sterge fișierul de actualizare</string>
+    <string name="delete_updates_noFolder_message">Dosarul de actualizare nu a fost găsit</string>
+    <string name="delete_updates_success_message">Toate fișierele de actualizare au fost șterse</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Dispozitiv:</string>
+    <string name="sysinfo_running">Rulează:</string>
+    <string name="sysinfo_last_check">Ultima verificare:</string>
+</resources>
