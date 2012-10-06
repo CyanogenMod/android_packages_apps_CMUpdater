@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">CyanogenMod-updates</string>
+    <string name="unknown">Onbekend</string>
+
+    <string name="menu_refresh">Vernieuwen</string>
+    <string name="menu_delete">Verwijderen</string>
+    <string name="menu_delete_all">Downloads verwijderen</string>
+    <string name="menu_system_info">Systeeminformatie</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Annuleren</string>
+    <string name="dialog_yes">Ja</string>
+    <string name="dialog_no">Nee</string>
+    <string name="dialog_update">Bijwerken</string>
+    <string name="dialog_close">Sluiten</string>
+
+    <string name="available_updates_title">Beschikbare updates</string>
+    <string name="no_available_updates_intro">De laatste keer zijn geen updates gevonden. Om handmatig te controleren, tikt u op \'Vernieuwen\'</string>
+    <string name="new_update_summary">Nieuw</string>
+    <string name="downloaded_update_summary">Gedownload</string>
+    <string name="backup_rom_title">Back-up maken</string>
+    <string name="backup_rom_summary">Back-up maken van systeem alvorens bij te werken</string>
+
+    <string name="update_check_title">Controleren op updates</string>
+    <string name="check_manual">Handmatig</string>
+    <string name="check_on_boot">Bij opstarten</string>
+    <string name="check_twice_daily">Twee keer per dag</string>
+    <string name="check_daily">Dagelijks</string>
+    <string name="check_weekly">Wekelijks</string>
+    <string name="check_bi_weekly">Tweewekelijks</string>
+    <string name="check_monthly">Maandelijks</string>
+
+    <string name="update_type_title">Soort updates</string>
+    <string name="type_all">Alle versies (alleen Stable)</string>
+    <string name="type_all_incl_nightly">Alle versies (incl. Nightlies)</string>
+    <string name="type_new">Nieuwe versies (alleen Stable)</string>
+    <string name="type_new_incl_nightly">Nieuwe versies (incl. Nightlies)</string>
+
+    <string name="checking_for_updates">Controleren op updates\u2026</string>
+    <string name="no_updates_found">Geen nieuwe updates gevonden</string>
+    <string name="not_new_updates_found_ticker">Er zijn nieuwe updates beschikbaar</string>
+    <string name="not_new_updates_found_title">Nieuwe updates</string>
+    <string name="not_new_updates_found_body">{0} update(s) beschikbaar om te downloaden</string>
+
+    <string name="confirm_download_cancelation_dialog_title">Download annuleren</string>
+    <string name="confirm_download_cancelation_dialog_message">Weet u zeker dat u de download wilt annuleren?</string>
+    <string name="download_cancelled">Download geannuleeerd</string>
+    <string name="download_already_running">Er is al een andere download bezig</string>
+    <string name="unable_to_download_file">Kan updatebestand niet downloaden</string>
+    <string name="download_not_found">Download niet gevonden</string>
+
+    <string name="apply_existing_update_md5error_message">Fout: MD5-hashes niet gelijk</string>
+    <string name="md5_check_cancelled">MD5-verificatie geannuleerd</string>
+    <string name="md5_verification_failed">MD5-verificatie mislukt</string>
+
+    <string name="apply_update_dialog_title">Update toepassen</string>
+    <string name="apply_update_dialog_text">Uw systeem wordt bijgewerkt naar {0}.\n\nWanneer u op \'Bijwerken\' tikt, herstart de telefoon zichzelf naar recovery om de update te installeren.\n\nLet op: hiervoor is een compatibele recovery vereist, anders moeten updates handmatig worden geïnstalleerd.</string>
+    <string name="apply_trying_to_get_root_access">Root-toegang verkrijgen om te herstarten naar recovery\u2026</string>
+    <string name="apply_unable_to_reboot_toast">Kan niet herstarten naar recovery</string>
+
+    <string name="confirm_delete_dialog_title">Bestand verwijderen</string>
+    <string name="confirm_delete_dialog_message">Weet u zeker dat u het gedownloade updatebestand wilt verwijderen?</string>
+    <string name="confirm_delete_all_dialog_message">Weet u zeker dat u alle gedownloade updatebestanden wilt verwijderen?</string>
+    <string name="delete_single_update_success_message">Update {0} verwijderd</string>
+    <string name="delete_updates_failure_message">Kan updatebestand niet verwijderen</string>
+    <string name="delete_updates_noFolder_message">Kan updatemap niet vinden</string>
+    <string name="delete_updates_success_message">Alle gedownloade updates zijn verwijderd</string>
+
+    <string name="sysinfo_device">Apparaat:</string>
+    <string name="sysinfo_running">Huidige:</string>
+    <string name="sysinfo_last_check">Laatst gecontroleerd:</string>
+
+    <string name="no_changelog_alert">Geen changelog beschikbaar</string>
+    <string name="failed_to_load_changelog">Kan changelog niet laden</string>
+    <string name="changelog_dialog_title">Changelog</string>
+</resources>
