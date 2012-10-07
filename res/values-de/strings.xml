@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string name="app_name">CM Aktualisierer</string>
+    <string name="unknown">Unbekannt</string>
+
+    <string name="menu_refresh">Erneuern</string>
+    <string name="menu_delete">Löschen</string>
+    <string name="menu_delete_all">Lösche Downloads</string>
+    <string name="menu_system_info">Systeminformationen</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Abbruch</string>
+    <string name="dialog_yes">Ja</string>
+    <string name="dialog_no">Nein</string>
+    <string name="dialog_update">Aktualisieren</string>
+
+    <string name="available_updates_title">Verfügbare Aktualisierungen</string>
+    <string name="no_available_updates_intro">Die letzte Suche ergab keine neuen verfügbaren Aktualisierungen. Um manuell nach Aktualisierungen zu Suchen, nutze den Erneuern-Button.</string>
+    <string name="new_update_summary">Neu</string>
+    <string name="downloaded_update_summary">Heruntergeladen</string>
+    <string name="backup_rom_title">Erstelle Sicherung</string>
+    <string name="backup_rom_summary">Sichere das existierende ROM vor der Aktualisierung.</string>
+
+    <string name="update_check_title">Suche nach Aktualisierungen</string>
+    <string name="check_manual">Manuell</string>
+    <string name="check_on_boot">Bei jedem Neustart</string>
+    <string name="check_twice_daily">Zweimal täglich</string>
+    <string name="check_daily">Täglich</string>
+    <string name="check_weekly">Wöchentlich</string>
+    <string name="check_bi_weekly">Zweimal wöchentlich</string>
+    <string name="check_monthly">Monatlich</string>
+
+    <string name="update_type_title">Aktualisierungstyp</string>
+    <string name="type_all">Alle Versionen (nur stabile)</string>
+    <string name="type_all_incl_nightly">Alle Versionen (incl. Nightlies)</string>
+    <string name="type_new">Neue Versionen (nur stabile)</string>
+    <string name="type_new_incl_nightly">Neue Versionen (incl. Nightlies)</string>
+
+    <string name="checking_for_updates">Suche nach Aktualisierungen</string>
+    <string name="no_updates_found">Keine Aktualisierungen gefunden</string>
+    <string name="not_new_updates_found_ticker">Neue Aktualisierungen verfügbar</string>
+    <string name="not_new_updates_found_title">Neue Aktualisierungen</string>
+    <string name="not_new_updates_found_body">{0} Aktualisierung(en) zum Herunterladen verfügbar</string>
+
+    <string name="confirm_download_cancelation_dialog_title">Download abbrechen</string>
+    <string name="confirm_download_cancelation_dialog_message">Aktueller Download abbrechen?\nOK zum Forfahren</string>
+    <string name="download_cancelled">Download abgebrochen</string>
+    <string name="download_already_running">Ein Download läuft gerade.</string>
+    <string name="unable_to_download_file">Die Aktualisierungsdatei konnte nicht heruntergeladen werden.</string>
+    <string name="download_not_found">Download wurde nicht gefunden</string>
+
+    <string name="apply_existing_update_md5error_message">Error: MD5 Prüfungssumme ungleich</string>
+    <string name="md5_check_cancelled">MD5 Überprüfung wurde abgebrochen</string>
+    <string name="md5_verification_failed">MD5 Verifizierung fehlgeschlagen</string>
+
+    <string name="apply_update_dialog_title">Aktualisierung anwenden</string>
+    <string name="apply_update_dialog_text">Aktualisiere: {0}.\n\nWird Update gedrückt, startet das Telefon selbstständig in den Recovery-Modus um die Aktualisierung zu installieren</string>
+    <string name="apply_trying_to_get_root_access">Versuche root-Rechte zu bekommen, um in den Recovery-Modus zu starten.</string>
+    <string name="apply_unable_to_reboot_toast">Es konnte nicht in den Recovery-Modus gestartet werden.</string>
+
+    <string name="confirm_delete_dialog_title">Lösche Datei</string>
+    <string name="confirm_delete_dialog_message">Die heruntergeladene Aktualisierungsdatei löschen?\nOK zum Fortfahren.</string>
+    <string name="confirm_delete_all_dialog_message">Alle herungeladenen Aktualisierungsdateien löschen?\nOK zum Fortfahren.</string>
+    <string name="delete_single_update_success_message">Aktualisierung {0} gelöscht</string>
+    <string name="delete_updates_failure_message">There was an error deleting the update file</string>
+    <string name="delete_updates_noFolder_message">Aktualisierungsordner nicht gefunden.</string>
+    <string name="delete_updates_success_message">Alle heruntergeladene Aktualisierungen gelöscht</string>
+
+    <string name="sysinfo_device">Gerät:</string>
+    <string name="sysinfo_running">Läuft:</string>
+    <string name="sysinfo_last_check">Letzte Suche:</string>
+</resources>
