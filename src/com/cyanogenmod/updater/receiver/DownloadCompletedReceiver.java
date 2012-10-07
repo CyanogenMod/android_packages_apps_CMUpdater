@@ -34,7 +34,25 @@ public class DownloadCompletedReceiver extends BroadcastReceiver{
         // Get the ID of the currently running CMUpdater download and the one just finished
         SharedPreferences prefs = context.getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
         long enqueue = prefs.getLong(Constants.DOWNLOAD_ID, -1);
+        long logEnqueue = prefs.getLong(Constants.CHANGELOG_ID, -1);
         long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -2);
+
+        // Hangle the changelog download completed
+        if (logEnqueue != -1 && id != -2 && id == logEnqueue) {
+            Query query = new Query();
+            query.setFilterById(id);
+            DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+            Cursor c = dm.query(query);
+            if (c.moveToFirst()) {
+                int columnIndex = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
+                int status = c.getInt(columnIndex);
+                if (status == DownloadManager.STATUS_FAILED) {
+                    // The download failed, reset
+                    dm.remove(logEnqueue);
+                    prefs.edit().putLong(Constants.CHANGELOG_ID, -1).apply();
+                }
+            }
+        }
 
         // If we had an active download and the id's match
         if (enqueue != -1 && id != -2 && id == enqueue) {
@@ -49,38 +67,53 @@ public class DownloadCompletedReceiver extends BroadcastReceiver{
 
                     // Get the full path name of the downloaded file and the MD5
                     int filenameIndex = c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME);
-                    String fullPathName = c.getString(filenameIndex);
-                    File destinationFile = new File(fullPathName);
+
+                    // Strip off the .partial at the end to get the completed file
+                    String partialFileFullPath = c.getString(filenameIndex);
+                    String completedFileFullPath = partialFileFullPath.replace(".partial", "");
+                    File partialFile = new File(partialFileFullPath);
+                    File completedFile = new File(completedFileFullPath);
+                    partialFile.renameTo(completedFile);
+
                     String downloadedMD5 = prefs.getString(Constants.DOWNLOAD_MD5, "");
 
                     // Clear the shared prefs
                     prefs.edit().putString(Constants.DOWNLOAD_MD5, "").apply();
                     prefs.edit().putLong(Constants.DOWNLOAD_ID, -1).apply();
-                    prefs.edit().putString(Constants.DOWNLOAD_URL, "").apply();
+
+                    // TODO: Does this make sense here?
+                    prefs.edit().putLong(Constants.CHANGELOG_ID, -1).apply();
 
                     // Start the MD5 check of the downloaded file
-                    if (MD5.checkMD5(downloadedMD5, destinationFile)) {
+                    if (MD5.checkMD5(downloadedMD5, completedFile)) {
                         // We passed. Bring the main app to the foreground and trigger download completed
                         Intent i = new Intent(context, UpdatesSettings.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
                                 Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         i.putExtra(Constants.DOWNLOAD_COMPLETED, true);
                         i.putExtra(Constants.DOWNLOAD_ID, id);
-                        i.putExtra(Constants.DOWNLOAD_FULLPATH, fullPathName);
+                        i.putExtra(Constants.DOWNLOAD_FULLPATH, completedFileFullPath);
                         context.startActivity(i);
 
                     } else {
-                        // We failed. Clear the file and reset everything
+                        // We failed. Clear the files and reset everything
                         dm.remove(id);
+                        if (logEnqueue != -1) {
+                            dm.remove(logEnqueue);
+                            prefs.edit().putLong(Constants.CHANGELOG_ID, -1).apply();
+                        }
                         Toast.makeText(context, R.string.md5_verification_failed, Toast.LENGTH_LONG).show();
                     }
 
                 } else if (status == DownloadManager.STATUS_FAILED) {
                     // The download failed, reset
                     dm.remove(id);
+                    if (logEnqueue != -1) {
+                        dm.remove(logEnqueue);
+                    }
                     prefs.edit().putLong(Constants.DOWNLOAD_ID, -1).apply();
+                    prefs.edit().putLong(Constants.CHANGELOG_ID, -1).apply();
                     prefs.edit().putString(Constants.DOWNLOAD_MD5, "").apply();
-                    prefs.edit().putString(Constants.DOWNLOAD_URL, "").apply();
                     Toast.makeText(context, R.string.unable_to_download_file, Toast.LENGTH_LONG).show();
                 }
             }
