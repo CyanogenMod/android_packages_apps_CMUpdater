@@ -36,6 +36,7 @@ public class Constants {
     public static final String JSON_BRANCH = "channel";
     public static final String JSON_FILENAME = "filename";
     public static final String JSON_MD5SUM = "md5sum";
+    public static final String JSON_CHANGES = "changes";
 
     // Keys
     public static final String KEY_UPDATE_INFO = Customization.PACKAGE_FIRST_NAME + ".fullUpdateList";
