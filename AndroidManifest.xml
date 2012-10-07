@@ -25,7 +25,9 @@
         <activity
             android:name=".UpdatesSettings"
             android:launchMode="singleTop"
-            android:label="@string/app_name" >
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            android:excludeFromRecents="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

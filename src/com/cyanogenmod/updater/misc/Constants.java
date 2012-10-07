@@ -20,8 +20,8 @@ public class Constants {
     public static final String UPDATES_FOLDER = "/cmupdater";
     public static final String DOWNLOAD_ID = "download_id";
     public static final String DOWNLOAD_FULLPATH = "download_fullpath";
-    public static final String DOWNLOAD_URL = "download_url";
     public static final String DOWNLOAD_MD5 = "download_md5";
+    public static final String CHANGELOG_ID = "changelog_id";
 
     //UpdateInfo
     public static final String UPDATE_INFO_BRANCH_STABLE = "stable";
@@ -36,6 +36,7 @@ public class Constants {
     public static final String JSON_BRANCH = "channel";
     public static final String JSON_FILENAME = "filename";
     public static final String JSON_MD5SUM = "md5sum";
+    public static final String JSON_CHANGES = "changes";
 
     // Keys
     public static final String KEY_UPDATE_INFO = Customization.PACKAGE_FIRST_NAME + ".fullUpdateList";
