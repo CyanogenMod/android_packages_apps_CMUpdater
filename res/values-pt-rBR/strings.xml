@@ -45,7 +45,8 @@
     <string name="md5_check_cancelled">Verificação MD5 foi cancelada</string>
     <string name="md5_verification_failed">Verificação MD5 falhou</string>
     <string name="apply_update_dialog_title">Aplicar atualização</string>
-    <string name="apply_update_dialog_text">Vocês está prestes a atualizar para {0}.\n\nSe você pressionar Atualizar, o telefone irá reiniciar no modo de recuperação e instalar a atualização</string>
+    <string name="apply_update_dialog_text">Vocês está prestes a atualizar para {0}.\n\nSe você pressionar Atualizar, o dispositivo irá reiniciar no modo de recuperação e instalar a atualização.\n
+        \nNote: Esta função requer uma Recuperação compatível ou as atualizações irão precisar de serem instaladas manualmente</string>
     <string name="apply_trying_to_get_root_access">Tentando obter acesso root para reiniciar no modo de recuperação</string>
     <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar para a recuperação</string>
     <string name="confirm_delete_dialog_title">Excluir arquivo</string>
@@ -58,4 +59,9 @@
     <string name="sysinfo_device">Dispositivo:</string>
     <string name="sysinfo_running">Rodando:</string>
     <string name="sysinfo_last_check">Última verificação:</string>
+    <string name="dialog_close">Fechar</string>
+    <string name="installed_update_summary">Instalado</string>
+    <string name="no_changelog_alert">Nenhum registro de mudanças disponível</string>
+    <string name="failed_to_load_changelog">Não foi possível carregar o registro de mudanças</string>
+    <string name="changelog_dialog_title">Registro de mudanças</string>
 </resources>
