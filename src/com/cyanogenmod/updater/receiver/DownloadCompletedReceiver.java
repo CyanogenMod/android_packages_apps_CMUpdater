@@ -49,24 +49,29 @@ public class DownloadCompletedReceiver extends BroadcastReceiver{
 
                     // Get the full path name of the downloaded file and the MD5
                     int filenameIndex = c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME);
-                    String fullPathName = c.getString(filenameIndex);
-                    File destinationFile = new File(fullPathName);
+
+                    // Strip off the .partial at the end to get the completed file
+                    String partialFileFullPath = c.getString(filenameIndex);
+                    String completedFileFullPath = partialFileFullPath.replace(".partial", "");
+                    File partialFile = new File(partialFileFullPath);
+                    File completedFile = new File(completedFileFullPath);
+                    partialFile.renameTo(completedFile);
+
                     String downloadedMD5 = prefs.getString(Constants.DOWNLOAD_MD5, "");
 
                     // Clear the shared prefs
                     prefs.edit().putString(Constants.DOWNLOAD_MD5, "").apply();
                     prefs.edit().putLong(Constants.DOWNLOAD_ID, -1).apply();
-                    prefs.edit().putString(Constants.DOWNLOAD_URL, "").apply();
 
                     // Start the MD5 check of the downloaded file
-                    if (MD5.checkMD5(downloadedMD5, destinationFile)) {
+                    if (MD5.checkMD5(downloadedMD5, completedFile)) {
                         // We passed. Bring the main app to the foreground and trigger download completed
                         Intent i = new Intent(context, UpdatesSettings.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
                                 Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         i.putExtra(Constants.DOWNLOAD_COMPLETED, true);
                         i.putExtra(Constants.DOWNLOAD_ID, id);
-                        i.putExtra(Constants.DOWNLOAD_FULLPATH, fullPathName);
+                        i.putExtra(Constants.DOWNLOAD_FULLPATH, completedFileFullPath);
                         context.startActivity(i);
 
                     } else {
@@ -80,7 +85,6 @@ public class DownloadCompletedReceiver extends BroadcastReceiver{
                     dm.remove(id);
                     prefs.edit().putLong(Constants.DOWNLOAD_ID, -1).apply();
                     prefs.edit().putString(Constants.DOWNLOAD_MD5, "").apply();
-                    prefs.edit().putString(Constants.DOWNLOAD_URL, "").apply();
                     Toast.makeText(context, R.string.unable_to_download_file, Toast.LENGTH_LONG).show();
                 }
             }
