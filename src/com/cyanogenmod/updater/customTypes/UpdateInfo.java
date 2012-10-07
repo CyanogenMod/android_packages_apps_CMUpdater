@@ -29,6 +29,25 @@ public class UpdateInfo implements Parcelable, Serializable {
     private Integer buildDate;
     private String downloadUrl;
     private String md5sum;
+    private String changes;
+
+    /**
+      * Set changelog url
+      */
+    public void setChanges(String _changes) {
+        if(_changes != null)
+            changes = _changes.trim();
+        else
+            changes = "";
+    }
+
+    /**
+      * Return changelog url
+      */
+
+    public String getChanges() {
+        return changes;
+    }
 
     /**
      * Set Name

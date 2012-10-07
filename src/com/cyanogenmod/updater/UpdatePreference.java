@@ -15,15 +15,19 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Button;
+import android.widget.Toast;
+import android.app.Dialog;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.customTypes.UpdateInfo;
 import com.cyanogenmod.updater.UpdatesSettings;
 
-public class UpdatePreference extends Preference implements OnClickListener {
+public class UpdatePreference extends Preference implements OnClickListener, OnLongClickListener {
     private static final String TAG = "UpdatePreference";
 
     private static final float DISABLED_ALPHA = 0.4f;
@@ -38,14 +42,16 @@ public class UpdatePreference extends Preference implements OnClickListener {
     private View mUpdatesPref;
     private int mStyle;
     private String mTitle;
+    private String mChangeLog;
     private ProgressBar mProgressBar;
     private UpdateInfo mUpdateInfo = null;
 
-    public UpdatePreference(UpdatesSettings parent, UpdateInfo ui, String title, int style) {
+    public UpdatePreference(UpdatesSettings parent, UpdateInfo ui, String title, String changelog, int style) {
         super(parent, null, R.style.UpdatesPreferenceStyle);
         setLayoutResource(R.layout.preference_updates);
 
         mParent = parent;
+        mChangeLog = changelog;
         mTitle = title;
         mStyle = style;
         mUpdateInfo = ui;
@@ -58,6 +64,7 @@ public class UpdatePreference extends Preference implements OnClickListener {
         // Store the views from the layout
         mUpdatesPref = view.findViewById(R.id.updates_pref);
         mUpdatesPref.setOnClickListener(this);
+        mUpdatesPref.setOnLongClickListener(this);
 
         mUpdatesButton = (ImageView)view.findViewById(R.id.updates_button);
         mTitleText = (TextView)view.findViewById(android.R.id.title);
@@ -69,18 +76,43 @@ public class UpdatePreference extends Preference implements OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
+    public boolean onLongClick(View v) {
         switch (mStyle) {
             case STYLE_DOWNLOADED:
-                // Show the delete confirmation dialog
                 confirmDelete();
                 break;
-
             case STYLE_DOWNLOADING:
             case STYLE_NEW:
             default:
                 // Do nothing for now
                 break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if( mChangeLog.compareTo(mParent.getResources().getString(R.string.no_changelog_alert)) == 0
+            || mChangeLog.compareTo(mParent.getResources().getString(R.string.failed_to_load_changelog)) == 0 ) {
+            Toast.makeText(mParent.getBaseContext(), mChangeLog, Toast.LENGTH_SHORT).show();
+        } else {
+            // custom dialog
+            final Dialog dialog = new Dialog(mParent);
+            dialog.setContentView(R.layout.changelog_dialog);
+            dialog.setTitle(mParent.getResources().getString(R.string.changelog_dialog_title));
+
+            // set the custom dialog components - text, image and button
+            TextView text = (TextView) dialog.findViewById(R.id.changelog_text);
+            text.setText(mChangeLog);
+            Button dialogButton = (Button) dialog.findViewById(R.id.btn_close_changelog);
+            // if button is clicked, close the custom dialog
+            dialogButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
         }
     }
 
