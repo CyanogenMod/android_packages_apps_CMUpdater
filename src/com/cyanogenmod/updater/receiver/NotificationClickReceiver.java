@@ -24,7 +24,7 @@ public class NotificationClickReceiver extends BroadcastReceiver{
         // Bring the main app to the foreground
         Intent i = new Intent(context, UpdatesSettings.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | 
-                Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         context.startActivity(i);
     }
 }

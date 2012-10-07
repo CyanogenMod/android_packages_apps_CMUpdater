@@ -15,21 +15,23 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.customTypes.UpdateInfo;
-import com.cyanogenmod.updater.UpdatesSettings;
 
-public class UpdatePreference extends Preference implements OnClickListener {
+public class UpdatePreference extends Preference implements OnClickListener, OnLongClickListener {
     private static final String TAG = "UpdatePreference";
 
     private static final float DISABLED_ALPHA = 0.4f;
     public static final int STYLE_NEW = 1;
     public static final int STYLE_DOWNLOADING = 2;
     public static final int STYLE_DOWNLOADED = 3;
+    public static final int STYLE_INSTALLED = 4;
 
     private final UpdatesSettings mParent;
     private ImageView mUpdatesButton;
@@ -44,7 +46,6 @@ public class UpdatePreference extends Preference implements OnClickListener {
     public UpdatePreference(UpdatesSettings parent, UpdateInfo ui, String title, int style) {
         super(parent, null, R.style.UpdatesPreferenceStyle);
         setLayoutResource(R.layout.preference_updates);
-
         mParent = parent;
         mTitle = title;
         mStyle = style;
@@ -58,6 +59,7 @@ public class UpdatePreference extends Preference implements OnClickListener {
         // Store the views from the layout
         mUpdatesPref = view.findViewById(R.id.updates_pref);
         mUpdatesPref.setOnClickListener(this);
+        mUpdatesPref.setOnLongClickListener(this);
 
         mUpdatesButton = (ImageView)view.findViewById(R.id.updates_button);
         mTitleText = (TextView)view.findViewById(android.R.id.title);
@@ -69,10 +71,10 @@ public class UpdatePreference extends Preference implements OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
+    public boolean onLongClick(View v) {
         switch (mStyle) {
             case STYLE_DOWNLOADED:
-                // Show the delete confirmation dialog
+            case STYLE_INSTALLED:
                 confirmDelete();
                 break;
 
@@ -81,6 +83,31 @@ public class UpdatePreference extends Preference implements OnClickListener {
             default:
                 // Do nothing for now
                 break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        String changeLog = mUpdateInfo.getChanges();
+        if (changeLog.equals(mParent.getResources().getString(R.string.no_changelog_alert))
+                || changeLog.equals(mParent.getResources().getString(R.string.failed_to_load_changelog))) {
+            // No changelog to show, display a toast
+            Toast.makeText(mParent.getBaseContext(), changeLog, Toast.LENGTH_SHORT).show();
+        } else {
+            // Prepare the dialog box content
+            WebView chngLog = new WebView(mParent);
+            chngLog.getSettings().setTextZoom(80);
+            chngLog.setBackgroundColor(mParent.getResources().getColor(android.R.color.darker_gray));
+            chngLog.loadDataWithBaseURL(null, changeLog, "text/html", "utf-8", null);
+
+            // Prepare the dialog box
+            AlertDialog.Builder builder = new AlertDialog.Builder(mParent);
+            builder.setTitle(mParent.getResources().getString(R.string.changelog_dialog_title));
+            builder.setView(chngLog);
+            builder.setPositiveButton(R.string.dialog_close, null);
+            final AlertDialog dialog = builder.create();
+            dialog.show();
         }
     }
 
@@ -94,11 +121,7 @@ public class UpdatePreference extends Preference implements OnClickListener {
                 mParent.deleteUpdate(getKey());
             }
         });
-        builder.setNegativeButton(R.string.dialog_no, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        builder.setNegativeButton(R.string.dialog_no, null);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -180,33 +203,21 @@ public class UpdatePreference extends Preference implements OnClickListener {
         // Display the appropriate preference style
         switch (mStyle) {
             case STYLE_DOWNLOADED:
-                // Show the install image
+                // Show the install image and summary of 'Downloaded'
                 mUpdatesButton.setImageResource(R.drawable.ic_tab_install);
                 mUpdatesButton.setOnClickListener(new OnClickListener() {
-                            @Override
-                            public void onClick(View arg0) {
-                                // Check if an UpdateInfo object is available
-                                if (mUpdateInfo == null) {
-                                    // If not, create a skeleton with the filename
-                                    mUpdateInfo = new UpdateInfo();
-                                    mUpdateInfo.setName(mTitle);
-                                    mUpdateInfo.setFileName(mTitle);
-                                }
-
-                                // Attempt to install the supplied update
-                                mParent.startUpdate(mUpdateInfo);
-                            }
-                        });
-
-                // Display a summary of "Downloaded"
+                    @Override
+                    public void onClick(View arg0) {
+                        mParent.startUpdate(mUpdateInfo);
+                    }
+                });
                 mSummaryText.setText(R.string.downloaded_update_summary);
                 mSummaryText.setVisibility(View.VISIBLE);
                 mProgressBar.setVisibility(View.GONE);
                 break;
 
             case STYLE_DOWNLOADING:
-                // Show the cancel button image
-                // The download service takes care of the button assignment
+                // Show the cancel button image and progress bar
                 mUpdatesButton.setImageResource(R.drawable.ic_tab_cancel);
                 mUpdatesButton.setOnClickListener(new OnClickListener() {
                     @Override
@@ -218,9 +229,18 @@ public class UpdatePreference extends Preference implements OnClickListener {
                 mSummaryText.setVisibility(View.GONE);
                 break;
 
+            case STYLE_INSTALLED:
+                // Show the installed button image and summary of 'Installed'
+                mUpdatesButton.setImageResource(R.drawable.ic_tab_installed);
+                mUpdatesButton.setEnabled(false);
+                mSummaryText.setText(R.string.installed_update_summary);
+                mSummaryText.setVisibility(View.VISIBLE);
+                mProgressBar.setVisibility(View.GONE);
+                break;
+
             case STYLE_NEW:
             default:
-                // Show the download button image
+                // Show the download button image and summary of 'New'
                 mUpdatesButton.setImageResource(R.drawable.ic_tab_download);
                 mUpdatesButton.setOnClickListener(new OnClickListener() {
                     @Override
@@ -228,8 +248,6 @@ public class UpdatePreference extends Preference implements OnClickListener {
                         mParent.startDownload(getKey());
                     }
                 });
-
-                // Display a summary of "New"
                 mSummaryText.setText(R.string.new_update_summary);
                 mSummaryText.setVisibility(View.VISIBLE);
                 mProgressBar.setVisibility(View.GONE);
