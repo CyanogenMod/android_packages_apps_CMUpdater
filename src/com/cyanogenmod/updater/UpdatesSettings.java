@@ -55,7 +55,9 @@ import com.cyanogenmod.updater.tasks.UpdateCheckTask;
 import com.cyanogenmod.updater.utils.SysUtils;
 import com.cyanogenmod.updater.utils.UpdateFilter;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -92,7 +94,11 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
     private DownloadManager mDownloadManager;
     private boolean mDownloading = false;
     private long mEnqueue;
+    private long mLogEnqueue;
     private String mFileName;
+
+    private String mSystemMod;
+    private String mSystemRom;
 
     private Handler mUpdateHandler = new Handler();
 
@@ -129,10 +135,15 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         mBackupRom.setChecked(mPrefs.getBoolean(Constants.BACKUP_PREF, true));
         */
 
+        // Get the currently installed system Mod and Rom for later matching
+        mSystemMod = SysUtils.getSystemProperty(Customization.BOARD);
+        mSystemRom = SysUtils.getSystemProperty(Customization.SYS_PROP_MOD_VERSION);
+
         // Initialize the arrays
         mServerUpdates = new ArrayList<UpdateInfo>();
         mLocalUpdates = new ArrayList<UpdateInfo>();
 
+        // Determine if there are any in-progress downloads
         mDownloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
         mEnqueue = mPrefs.getLong(Constants.DOWNLOAD_ID, -1);
         if (mEnqueue != -1) {
@@ -145,7 +156,8 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                     int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
                     if (lFile != null && status != DownloadManager.STATUS_FAILED) {
                         String[] temp = lFile.split("/");
-                        mFileName = temp[temp.length - 1];
+                        // Strip the .partial at the end of the name
+                        mFileName = (temp[temp.length - 1]).replace(".partial", "");
                     }
                 }
             }
@@ -303,12 +315,33 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                     directory.mkdirs();
                     Log.d(TAG, "UpdateFolder created");
                 }
-                String fullFilePath = "file://" + fullFolderPath + "/" + ui.getFileName();
-                Request request = new Request(Uri.parse(ui.getDownloadUrl()));
+
+                // CHANGELOG
+                // Build the name of the file to download, adding .changelog at the end.
+                String fullFilePath = "file://" + fullFolderPath + "/" + ui.getFileName() + ".changelog";
+                Request request = new Request(Uri.parse(ui.getChangelogUrl()));
+                request.addRequestHeader("Cache-Control", "no-cache");
+                request.setTitle(getString(R.string.app_name));
+                request.setDescription(ui.getFileName() + " - " + getString(R.string.changelog_dialog_title));
+                request.setDestinationUri(Uri.parse(fullFilePath));
+                request.setAllowedOverRoaming(false);
+                request.setNotificationVisibility(Request.VISIBILITY_HIDDEN); // Hide it from the UI
+
+                // TODO: this could/should be made configurable
+                request.setAllowedOverMetered(true);
+
+                // Start the download
+                mLogEnqueue = mDownloadManager.enqueue(request);
+
+                // MAIN UPDATE FILE
+                // Build the name of the file to download, adding .partial at the end.  It will get
+                // stripped off when the download completes
+                fullFilePath = "file://" + fullFolderPath + "/" + ui.getFileName() + ".partial";
+                request = new Request(Uri.parse(ui.getDownloadUrl()));
                 request.addRequestHeader("Cache-Control", "no-cache");
                 try {
                     PackageInfo pinfo = manager.getPackageInfo(this.getPackageName(), 0);
-                    request.addRequestHeader("User-Agent", pinfo.packageName+"/"+pinfo.versionName);
+                    request.addRequestHeader("User-Agent", pinfo.packageName + "/" + pinfo.versionName);
                 } catch (android.content.pm.PackageManager.NameNotFoundException nnfe) {
                     // Do nothing
                 }
@@ -328,7 +361,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
                 // Store in shared preferences
                 mPrefs.edit().putLong(Constants.DOWNLOAD_ID, mEnqueue).apply();
-                mPrefs.edit().putString(Constants.DOWNLOAD_URL, ui.getDownloadUrl()).apply();
+                mPrefs.edit().putLong(Constants.CHANGELOG_ID, mLogEnqueue).apply();
                 mPrefs.edit().putString(Constants.DOWNLOAD_MD5, ui.getMD5()).apply();
                 mUpdateHandler.post(updateProgress);
             }
@@ -381,14 +414,16 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                 }
                 // We are OK to stop download, trigger it
                 mDownloadManager.remove(mEnqueue);
+                mDownloadManager.remove(mLogEnqueue);
                 mUpdateHandler.removeCallbacks(updateProgress);
                 mEnqueue = -1;
+                mLogEnqueue = -1;
                 mFileName = null;
                 mDownloading = false;
 
                 // Clear the stored data from sharedpreferences
                 mPrefs.edit().putLong(Constants.DOWNLOAD_ID, mEnqueue).apply();
-                mPrefs.edit().putString(Constants.DOWNLOAD_URL, "").apply();
+                mPrefs.edit().putLong(Constants.CHANGELOG_ID, mLogEnqueue).apply();
                 mPrefs.edit().putString(Constants.DOWNLOAD_MD5, "").apply();
                 Toast.makeText(UpdatesSettings.this, R.string.download_cancelled, Toast.LENGTH_SHORT).show();
             }
@@ -526,28 +561,51 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         refreshPreferences();
     }
 
+    // TODO: this is not complete!! It can probably be done differently and the
+    // formatting is not implemented
+    private String readLogFile(String filename) {
+        StringBuilder text = new StringBuilder();
+
+        File logFile = new File(mUpdateFolder + "/" + filename + ".changelog");
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(logFile));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+                text.append('\n');
+            }
+            br.close();
+        }
+        catch (IOException e) {
+            return null;
+        }
+
+        return text.toString();
+    }
 
     private void refreshPreferences() {
         if (mUpdatesList != null) {
             // Clear the list
             mUpdatesList.removeAll();
             boolean foundMatch;
+            int style;
+
+            // Convert the systemRom name to the associated filename
+            String installedZip = "cm-" + mSystemRom.toString() + ".zip";
 
             // Add the locally saved update files first
             if (!mLocalUpdates.isEmpty()) {
                 // We have local updates to display
                 for (UpdateInfo ui : mLocalUpdates) {
-                    foundMatch = ui.getFileName().equals(mFileName);
-                    UpdatePreference up = new UpdatePreference(this, ui, ui.getFileName(),
-                            foundMatch ? UpdatePreference.STYLE_DOWNLOADING : UpdatePreference.STYLE_DOWNLOADED);
-                    if (foundMatch) {
-                        up.getUpdateInfo().setMD5(mPrefs.getString(Constants.DOWNLOAD_MD5,""));
-                        up.getUpdateInfo().setDownloadUrl(mPrefs.getString(Constants.DOWNLOAD_URL,""));
-                        mDownloadingPreference = up;
-                        mUpdateHandler.post(updateProgress);
-                        foundMatch = false;
-                        mDownloading = true;
+                    // See if the local file has a downloaded changelog and load its content
+                    String changeLog = readLogFile(ui.getFileName());
+                    if (changeLog != null) {
+                        ui.setChanges(changeLog);
                     }
+                    UpdatePreference up = new UpdatePreference(this, ui, ui.getFileName(), ui.getChanges(),
+                            ui.getFileName().equals(installedZip) ? UpdatePreference.STYLE_INSTALLED
+                                    : UpdatePreference.STYLE_DOWNLOADED);
                     up.setKey(ui.getFileName());
                     mUpdatesList.addPreference(up);
                 }
@@ -557,7 +615,30 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             if (!mServerUpdates.isEmpty()) {
                 // We have updates to display
                 for (UpdateInfo ui : mServerUpdates) {
-                    UpdatePreference up = new UpdatePreference(this, ui, ui.getFileName(), UpdatePreference.STYLE_NEW);
+                    // See if we have an in progress download
+                    foundMatch = ui.getFileName().equals(mFileName);
+
+                    Log.d(TAG, "Url for changelog = " + ui.getChangelogUrl());
+
+                    // Determine the preference style
+                    if (foundMatch) {
+                        // In progress download
+                        style = UpdatePreference.STYLE_DOWNLOADING;
+                    } else if (ui.getFileName().equals(installedZip)) {
+                        // This is the currently installed mod
+                        style = UpdatePreference.STYLE_INSTALLED;
+                    } else {
+                        style = UpdatePreference.STYLE_NEW;
+                    }
+                    UpdatePreference up = new UpdatePreference(this, ui, ui.getFileName(), ui.getChanges(), style);
+
+                    // If we have an in progress download, link the preference
+                    if (foundMatch) {
+                        mDownloadingPreference = up;
+                        mUpdateHandler.post(updateProgress);
+                        foundMatch = false;
+                        mDownloading = true;
+                    }
                     up.setKey(ui.getFileName());
                     mUpdatesList.addPreference(up);
                 }
@@ -577,15 +658,19 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
     public boolean deleteUpdate(String filename) {
         boolean success = false;
         if (mUpdateFolder.exists() && mUpdateFolder.isDirectory()) {
-            File ZIPfiletodelete = new File(mUpdateFolder + "/" + filename);
-            if (ZIPfiletodelete.exists()) {
-                ZIPfiletodelete.delete();
+            File zipFileToDelete = new File(mUpdateFolder + "/" + filename);
+            File logFileToDelete = new File(mUpdateFolder + "/" + filename + ".changelog");
+            if (zipFileToDelete.exists()) {
+                zipFileToDelete.delete();
             } else {
-                if (DEBUG) Log.d(TAG, "Update to delete not found");
-                if (DEBUG) Log.d(TAG, "Zip File: " + ZIPfiletodelete.getAbsolutePath());
+                // File not found, we are done
                 return false;
             }
-            ZIPfiletodelete = null;
+            if (logFileToDelete.exists()) {
+                logFileToDelete.delete();
+            }
+            zipFileToDelete = null;
+            logFileToDelete = null;
 
             success = true;
             Toast.makeText(this, MessageFormat.format(getResources().getString(R.string.delete_single_update_success_message),
@@ -674,11 +759,9 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
     private void showSysInfo() {
         // Build the message
-        String systemMod = SysUtils.getSystemProperty(Customization.BOARD);
-        String systemRom = SysUtils.getSystemProperty(Customization.SYS_PROP_MOD_VERSION);
         Date lastCheck = new Date(mPrefs.getLong(Constants.LAST_UPDATE_CHECK_PREF, 0));
-        String message = getString(R.string.sysinfo_device) + " " + systemMod + "\n\n"
-                + getString(R.string.sysinfo_running)+ " "+ systemRom + "\n\n"
+        String message = getString(R.string.sysinfo_device) + " " + mSystemMod + "\n\n"
+                + getString(R.string.sysinfo_running)+ " "+ mSystemRom + "\n\n"
                 + getString(R.string.sysinfo_last_check) + " " + lastCheck.toString();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
