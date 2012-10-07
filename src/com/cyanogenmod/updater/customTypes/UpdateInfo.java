@@ -29,6 +29,42 @@ public class UpdateInfo implements Parcelable, Serializable {
     private Integer buildDate;
     private String downloadUrl;
     private String md5sum;
+    private String changes;
+    private String changelogUrl;
+
+    /**
+      * Set changelog url
+      */
+    public void setChangelogUrl(String _url) {
+        if(_url != null)
+            changelogUrl = _url.trim();
+        else
+            changelogUrl = "";
+    }
+
+    /**
+      * Return changelog url
+      */
+    public String getChangelogUrl() {
+        return changelogUrl;
+    }
+
+    /**
+      * Set changelog
+      */
+    public void setChanges(String _changes) {
+        if(_changes != null)
+            changes = _changes.trim();
+        else
+            changes = "";
+    }
+
+    /**
+      * Return changelog
+      */
+    public String getChanges() {
+        return changes;
+    }
 
     /**
      * Set Name
@@ -243,6 +279,8 @@ public class UpdateInfo implements Parcelable, Serializable {
         arg0.writeString(fileName);
         arg0.writeString(md5sum);
         arg0.writeString(downloadUrl);
+        arg0.writeString(changes);
+        arg0.writeString(changelogUrl);
     }
 
     void readFromParcel(Parcel in) {
@@ -254,5 +292,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         fileName = in.readString();
         md5sum = in.readString();
         downloadUrl = in.readString();
+        changes = in.readString();
+        changelogUrl = in.readString();
     }
 }

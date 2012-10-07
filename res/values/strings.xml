@@ -15,12 +15,14 @@
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
     <string name="dialog_update">Update</string>
+    <string name="dialog_close">Close</string>
 
     <!-- Settings strings -->
     <string name="available_updates_title">Available updates</string>
-    <string name="no_available_updates_intro">The last check did not find any available updates. To manually check for new updates, use the Refresh button</string>
+    <string name="no_available_updates_intro">The last check did not find any available updates. To manually check for new updates, use the Refresh button.</string>
     <string name="new_update_summary">New</string>
     <string name="downloaded_update_summary">Downloaded</string>
+    <string name="installed_update_summary">Installed</string>
     <string name="backup_rom_title">Create backup</string>
     <string name="backup_rom_summary">Backup existing ROM before updating</string>
 
@@ -61,7 +63,8 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Apply update</string>
-    <string name="apply_update_dialog_text">You are about to upgrade to {0}.\n\nIf you press Update, the phone will restart itself in recovery mode to install the update</string>
+    <string name="apply_update_dialog_text">You are about to upgrade to {0}.\n\nIf you press Update, the device will restart itself in recovery mode to install the update.\n
+        \nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
     <string name="apply_trying_to_get_root_access">Trying to get root access to reboot in recovery mode</string>
     <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
 
@@ -78,4 +81,9 @@
     <string name="sysinfo_device">Device:</string>
     <string name="sysinfo_running">Running:</string>
     <string name="sysinfo_last_check">Last check:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">No changelog available</string>
+    <string name="failed_to_load_changelog">Unable to load changelog</string>
+    <string name="changelog_dialog_title">Changelog</string>
 </resources>
