@@ -47,6 +47,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
@@ -346,10 +347,61 @@ public class UpdateCheckService extends Service {
             ui.setMD5(obj.getString(Constants.JSON_MD5SUM).trim());
             ui.setBranchCode(obj.getString(Constants.JSON_BRANCH).trim());
             ui.setFileName(obj.getString(Constants.JSON_FILENAME).trim());
+            try {
+                ui.setChanges(returnFullChangeLog(obj.getString(Constants.JSON_CHANGES)));
+            } catch (IOException e) {
+                Log.e(TAG, "failed to load changelog");
+                ui.setChanges("No changelog loaded");
+            }
         } catch (JSONException e) {
             Log.e(TAG, "Error in JSON File: ", e);
         }
         return ui;
+    }
+
+    private String returnFullChangeLog(String changeLogPath) throws IOException {
+        String fullChangeLog = getResources().getString(R.string.failed_to_load_changelog);
+        
+        boolean changeLogException = false;
+        HttpEntity changeLogResponseEntity = null;
+        HttpClient changeLogHttpClient = new DefaultHttpClient();
+        
+        try {
+            URI ChangeLogUpdateServerUri = URI.create(changeLogPath);
+            HttpGet changeLogReq = new HttpGet(ChangeLogUpdateServerUri);
+            changeLogReq.addHeader("Cache-Control", "no-cache");
+            HttpResponse changeLogResponse = changeLogHttpClient.execute(changeLogReq);
+            int changeLogServerResponse = changeLogResponse.getStatusLine().getStatusCode();
+            if (changeLogServerResponse != HttpStatus.SC_OK) {
+                changeLogException = true;
+            }
+
+            if (!changeLogException) {
+                changeLogResponseEntity = changeLogResponse.getEntity();
+            }
+        } catch (IllegalArgumentException e) {
+            changeLogException = true;
+        }
+         
+        try {
+            if (!changeLogException) {
+                BufferedReader changeLogLineReader = new BufferedReader(new InputStreamReader(changeLogResponseEntity.getContent()), 2 * 1024);
+                StringBuffer changeLogBuf = new StringBuffer();
+                String changeLogLine;
+                while ((changeLogLine = changeLogLineReader.readLine()) != null) {
+                    changeLogBuf.append(changeLogLine + "\r\n");
+                }
+                changeLogLineReader.close();
+
+                fullChangeLog = changeLogBuf.toString();
+            } else {
+            }
+        } finally {
+            if (changeLogResponseEntity != null)
+                changeLogResponseEntity.consumeContent();
+        }
+         
+        return fullChangeLog;
     }
 
     private boolean branchMatches(UpdateInfo ui, boolean nightlyAllowed) {

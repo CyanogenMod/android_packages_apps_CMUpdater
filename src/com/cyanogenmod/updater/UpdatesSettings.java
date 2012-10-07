@@ -538,7 +538,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                 // We have local updates to display
                 for (UpdateInfo ui : mLocalUpdates) {
                     foundMatch = ui.getFileName().equals(mFileName);
-                    UpdatePreference up = new UpdatePreference(this, ui, ui.getFileName(),
+                    UpdatePreference up = new UpdatePreference(this, ui, ui.getFileName(), ui.getChanges(),
                             foundMatch ? UpdatePreference.STYLE_DOWNLOADING : UpdatePreference.STYLE_DOWNLOADED);
                     if (foundMatch) {
                         up.getUpdateInfo().setMD5(mPrefs.getString(Constants.DOWNLOAD_MD5,""));
@@ -557,7 +557,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             if (!mServerUpdates.isEmpty()) {
                 // We have updates to display
                 for (UpdateInfo ui : mServerUpdates) {
-                    UpdatePreference up = new UpdatePreference(this, ui, ui.getFileName(), UpdatePreference.STYLE_NEW);
+                    UpdatePreference up = new UpdatePreference(this, ui, ui.getFileName(), ui.getChanges(), UpdatePreference.STYLE_NEW);
                     up.setKey(ui.getFileName());
                     mUpdatesList.addPreference(up);
                 }
