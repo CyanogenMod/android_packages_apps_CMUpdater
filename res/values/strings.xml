@@ -78,4 +78,10 @@
     <string name="sysinfo_device">Device:</string>
     <string name="sysinfo_running">Running:</string>
     <string name="sysinfo_last_check">Last check:</string>
+
+    <!-- changelog strings -->
+    <string name="close_changelog_button">Close Changelog</string>
+    <string name="no_changelog_alert">No Changelog Available</string>
+    <string name="failed_to_load_changelog">Failed to load Changelog</string>
+    <string name="changelog_dialog_title">Changelog</string>
 </resources>
