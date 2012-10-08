@@ -19,8 +19,8 @@
     <!-- Settings strings -->
     <string name="available_updates_title">Доступные обновления</string>
     <string name="no_available_updates_intro">Последняя проверка не обнаружила доступных обновлений. Чтобы проверить наличие обновлений вручную, нажмите кнопку \"Обновить\"</string>
-    <string name="new_update_summary">Новые</string>
-    <string name="downloaded_update_summary">Загруженные</string>
+    <string name="new_update_summary">Новое</string>
+    <string name="downloaded_update_summary">Загруженное</string>
     <string name="backup_rom_title">Создать РК</string>
     <string name="backup_rom_summary">Создать резервную копию перед обновлением</string>
 
