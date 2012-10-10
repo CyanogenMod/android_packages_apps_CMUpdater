@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- General strings -->
+    <string name="app_name">CM Güncellemeleri</string>
+    <string name="unknown">Bilinmiyor</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Yenile</string>
+    <string name="menu_delete">Sil</string>
+    <string name="menu_delete_all">İndirilenleri sil</string>
+    <string name="menu_system_info">Sistem bilgisi</string>
+
+    <string name="dialog_ok">Tamam</string>
+    <string name="dialog_cancel">İptal</string>
+    <string name="dialog_yes">Evet</string>
+    <string name="dialog_no">Hayır</string>
+    <string name="dialog_update">Güncelle</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">İndirilebilir güncellemeler</string>
+    <string name="no_available_updates_intro">Son kontrolde güncelleme bulunamadı. Yeni güncellemeleri elle kontrol etmek için Yenile düğmesini kullanın</string>
+    <string name="new_update_summary">Yeni</string>
+    <string name="downloaded_update_summary">İndirilen</string>
+    <string name="backup_rom_title">Yedek oluştur</string>
+    <string name="backup_rom_summary">Sistemi güncellemeden önce yedek oluştur</string>
+
+    <string name="update_check_title">Güncellemeleri kontrol et</string>
+    <string name="check_manual">Elle</string>
+    <string name="check_on_boot">Sistem her açıldığında</string>
+    <string name="check_twice_daily">Günde iki kez</string>
+    <string name="check_daily">Günlük</string>
+    <string name="check_weekly">Haftalık</string>
+    <string name="check_bi_weekly">İki haftada bir</string>
+    <string name="check_monthly">Aylık</string>
+
+    <string name="update_type_title">Güncelleme türleri</string>
+    <string name="type_all">Tüm sürümler (Sadece kararlı)</string>
+    <string name="type_all_incl_nightly">Tüm sürümler (Günlük dahil)</string>
+    <string name="type_new">Yeni sürümler (Sadece kararlı)</string>
+    <string name="type_new_incl_nightly">Yeni sürümler (Günlük dahil)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Güncellemeler kontrol ediliyor</string>
+    <string name="no_updates_found">Yeni güncelleme yok</string>
+    <string name="not_new_updates_found_ticker">Yeni güncelleme var</string>
+    <string name="not_new_updates_found_title">Yeni güncellemeler</string>
+    <string name="not_new_updates_found_body">İndirilebilir {0} güncelleme var</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">İndirmeyi iptal et</string>
+    <string name="confirm_download_cancelation_dialog_message">Devam eden indirmeyi iptal etmek istediğinizden emin misiniz?</string>
+    <string name="download_cancelled">İndirme iptal edildi</string>
+    <string name="download_already_running">İndirme zaten devam ediyor</string>
+    <string name="unable_to_download_file">Güncelleme dosyası indirilemiyor</string>
+    <string name="download_not_found">İndirme bulunamadı</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Hata. MD5 eşleşmedi</string>
+    <string name="md5_check_cancelled">MD5 kontrolü iptal edildi</string>
+    <string name="md5_verification_failed">MD5 doğrulama hatası</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Güncellemeyi uygula</string>
+    <string name="apply_update_dialog_text">{0} güncellemesi yapılacak.\n\nGüncelleye bastığınızda, güncellemeyi kurmak için cihaz kurtarma modunda yeniden başlatılacak</string>
+    <string name="apply_trying_to_get_root_access">Kurtarma modunda yönetici erişimi sağlanıyor</string>
+    <string name="apply_unable_to_reboot_toast">Kurtarma modu için sistem yeniden başlatılamadı</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Dosya sil</string>
+    <string name="confirm_delete_dialog_message">İndirilen güncelleme dosyalarını silmek istiyor musunuz?</string>
+    <string name="confirm_delete_all_dialog_message">İndirilen tüm güncelleme dosyalarını silmek istiyor musunuz?</string>
+    <string name="delete_single_update_success_message">{0} güncellemesi silindi</string>
+    <string name="delete_updates_failure_message">Güncelleme dosyasını silerken hata oluştu</string>
+    <string name="delete_updates_noFolder_message">Güncelleme klasörü bulunamadı</string>
+    <string name="delete_updates_success_message">İndirilen tüm güncellemeler silindi</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Cihaz:</string>
+    <string name="sysinfo_running">Çalışan:</string>
+    <string name="sysinfo_last_check">Son kontrol:</string>
+</resources>
