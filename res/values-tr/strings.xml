@@ -16,12 +16,14 @@
     <string name="dialog_yes">Evet</string>
     <string name="dialog_no">Hayır</string>
     <string name="dialog_update">Güncelle</string>
+    <string name="dialog_close">Kapat</string>
 
     <!-- Settings strings -->
     <string name="available_updates_title">İndirilebilir güncellemeler</string>
-    <string name="no_available_updates_intro">Son kontrolde güncelleme bulunamadı. Yeni güncellemeleri elle kontrol etmek için Yenile düğmesini kullanın</string>
+    <string name="no_available_updates_intro">Son kontrolde güncelleme bulunamadı. Yeni güncellemeleri elle kontrol etmek için Yenile düğmesini kullanın.</string>
     <string name="new_update_summary">Yeni</string>
-    <string name="downloaded_update_summary">İndirilen</string>
+    <string name="downloaded_update_summary">İndirildi</string>
+    <string name="installed_update_summary">Kuruldu</string>
     <string name="backup_rom_title">Yedek oluştur</string>
     <string name="backup_rom_summary">Sistemi güncellemeden önce yedek oluştur</string>
 
@@ -62,7 +64,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Güncellemeyi uygula</string>
-    <string name="apply_update_dialog_text">{0} güncellemesi yapılacak.\n\nGüncelleye bastığınızda, güncellemeyi kurmak için cihaz kurtarma modunda yeniden başlatılacak</string>
+    <string name="apply_update_dialog_text">{0} güncellemesi yapılacak.\n\nGüncelleye bastığınızda, güncellemeyi kurmak için cihaz kurtarma modunda yeniden başlatılacak.\n\nBu özellik, uyumlu bir Kurtarma bölümü gerektirir, aksi takdirde güncellemelerin elle kurulması gerekir.</string>
     <string name="apply_trying_to_get_root_access">Kurtarma modunda yönetici erişimi sağlanıyor</string>
     <string name="apply_unable_to_reboot_toast">Kurtarma modu için sistem yeniden başlatılamadı</string>
 
@@ -79,4 +81,9 @@
     <string name="sysinfo_device">Cihaz:</string>
     <string name="sysinfo_running">Çalışan:</string>
     <string name="sysinfo_last_check">Son kontrol:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">Değişiklik kaydı yok</string>
+    <string name="failed_to_load_changelog">Değişiklik kaydı yüklenemedi</string>
+    <string name="changelog_dialog_title">Değişiklik kaydı</string>
 </resources>
