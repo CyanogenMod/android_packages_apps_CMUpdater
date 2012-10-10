@@ -1,0 +1,10 @@
+Change-Id: I5ccef476a79324d6e8beb5275a7d46d1415d1d7a
+Code-Review+2: Daniel Hillenbrand <codeworkx@cyanogenmod.com>
+Verified+1: Daniel Hillenbrand <codeworkx@cyanogenmod.com>
+Code-Review+1: Alexey Alexeevich <madzerling@gmail.com>
+Code-Review+1: Anatoly Nechaev <mr.prayer@gmail.com>
+Submitted-by: Daniel Hillenbrand <codeworkx@cyanogenmod.com>
+Submitted-at: Wed, 10 Oct 2012 07:31:04 -0700
+Reviewed-on: http://review.cyanogenmod.com/24625
+Project: CyanogenMod/android_packages_apps_CMUpdater
+Branch: refs/heads/jellybean
