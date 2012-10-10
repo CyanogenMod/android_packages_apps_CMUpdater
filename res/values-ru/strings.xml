@@ -15,12 +15,14 @@
     <string name="dialog_yes">Да</string>
     <string name="dialog_no">Нет</string>
     <string name="dialog_update">Обновить</string>
+    <string name="dialog_close">Закрыть</string>
 
     <!-- Settings strings -->
     <string name="available_updates_title">Доступные обновления</string>
     <string name="no_available_updates_intro">Последняя проверка не обнаружила доступных обновлений. Чтобы проверить наличие обновлений вручную, нажмите кнопку \"Обновить\"</string>
     <string name="new_update_summary">Новое</string>
     <string name="downloaded_update_summary">Загруженное</string>
+    <string name="installed_update_summary">Установленное</string>
     <string name="backup_rom_title">Создать РК</string>
     <string name="backup_rom_summary">Создать резервную копию перед обновлением</string>
 
@@ -60,7 +62,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Применить обновление</string>
-    <string name="apply_update_dialog_text">Вы собираетесь обновиться на {0}.\n\nПри нажатии кнопки \"Обновить\", телефон перезагрузится в режим recovery для установки обновления</string>
+    <string name="apply_update_dialog_text">Вы собираетесь обновиться на {0}.\n\nПри нажатии кнопки \"Обновить\", устройство перезагрузится в режим recovery для установки обновления. \n\nПримечание: эта функция требует совместимого recovery, в противном случае обновление необходимо установить вручную.</string>
     <string name="apply_trying_to_get_root_access">Попытка получить root-доступ для перезагрузки в режим recovery</string>
     <string name="apply_unable_to_reboot_toast">Невозможно перезагрузиться в режим recovery</string>
 
@@ -77,4 +79,9 @@
     <string name="sysinfo_device">Устройство:</string>
     <string name="sysinfo_running">Версия:</string>
     <string name="sysinfo_last_check">Последняя проверка:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">Список изменений не доступен</string>
+    <string name="failed_to_load_changelog">Не удаётся загрузить список изменений</string>
+    <string name="changelog_dialog_title">Список изменений</string>
 </resources>
