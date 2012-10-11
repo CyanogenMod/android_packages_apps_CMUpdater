@@ -11,10 +11,12 @@
     <string name="dialog_yes">Si</string>
     <string name="dialog_no">No</string>
     <string name="dialog_update">Aggiorna</string>
+    <string name="dialog_close">Chiudi</string>
     <string name="available_updates_title">Aggiornamenti disponibili</string>
     <string name="no_available_updates_intro">Nessun aggiornamento trovato con l\'ultima verifica. Per controllare manualmente la presenza di nuovi aggiornamenti, premere il pulsante Aggiorna</string>
     <string name="new_update_summary">Nuovo</string>
     <string name="downloaded_update_summary">Scaricato</string>
+    <string name="installed_update_summary">Installato</string>
     <string name="backup_rom_title">Crea backup</string>
     <string name="backup_rom_summary">Fai un backup della ROM attuale prima di aggiornare</string>
     <string name="update_check_title">Controlla aggiornamenti</string>
@@ -36,7 +38,7 @@
     <string name="not_new_updates_found_title">Nuovi aggiornamenti</string>
     <string name="not_new_updates_found_body">{0} aggiornamento/i disponibile/i per il download</string>
     <string name="confirm_download_cancelation_dialog_title">Annullare il download?</string>
-    <string name="confirm_download_cancelation_dialog_message">Si sta per annullare il download corrente. Premere Ok per confermare</string>
+    <string name="confirm_download_cancelation_dialog_message">Si sta per annullare il download corrente. Confermare?</string>
     <string name="download_cancelled">Download annullato</string>
     <string name="download_already_running">Un download è già in corso</string>
     <string name="unable_to_download_file">Impossibile effettuare il download dell\'aggiornamento</string>
@@ -45,12 +47,12 @@
     <string name="md5_check_cancelled">Verifica MD5 annullata</string>
     <string name="md5_verification_failed">Verifica MD5 fallita</string>
     <string name="apply_update_dialog_title">Applica aggiornamento</string>
-    <string name="apply_update_dialog_text">Si sta per aggiornare a {0}.\n\nPremendo Aggiorna, il dispositivo verrà riavviato in modalità recovery per l\'installazione dell\'aggiornamento</string>
+    <string name="apply_update_dialog_text">Si sta per aggiornare a {0}.\n\nPremendo Aggiorna, il dispositivo verrà riavviato in modalità recovery per l\'installazione dell\'aggiornamento\n\nNota: questa caratteristica richiede una recovery compatibile; in caso contrario sarà necessario installare gli aggiornamenti manualmente</string>
     <string name="apply_trying_to_get_root_access">Richiesta dei permessi root per il riavvio in recovery</string>
     <string name="apply_unable_to_reboot_toast">Impossibile riavviare in recovery</string>
     <string name="confirm_delete_dialog_title">Cancella file</string>
     <string name="confirm_delete_dialog_message">Premere Ok per cancellare il file di aggiornamento scaricato</string>
-    <string name="confirm_delete_all_dialog_message">Premere Ok per cancellare tutti gli aggiornamenti scaricati</string>
+    <string name="confirm_delete_all_dialog_message">Si stanno per cancellare tutti gli aggiornamenti scaricati. Confermare?</string>
     <string name="delete_single_update_success_message">Aggiornamento {0} cancellato</string>
     <string name="delete_updates_failure_message">Errore durante la cancellazione dell\'aggiornamento</string>
     <string name="delete_updates_noFolder_message">Cartella degli aggiornamenti non trovata</string>
@@ -58,4 +60,7 @@
     <string name="sysinfo_device">Dispositivo:</string>
     <string name="sysinfo_running">ROM installata:</string>
     <string name="sysinfo_last_check">Ultima verifica:</string>
+    <string name="no_changelog_alert">Nessun changelog disponibile</string>
+    <string name="failed_to_load_changelog">Impossibile caricare il changelog</string>
+    <string name="changelog_dialog_title">Changelog</string>
 </resources>
