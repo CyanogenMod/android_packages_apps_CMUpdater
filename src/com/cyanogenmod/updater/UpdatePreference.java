@@ -89,7 +89,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
 
     @Override
     public void onClick(View v) {
-        String changeLog = mUpdateInfo.getChanges();
+        String changeLog = (mUpdateInfo.getChanges() == null ? mParent.getResources().getString(R.string.no_changelog_alert) : mUpdateInfo.getChanges());
         if (changeLog.equals(mParent.getResources().getString(R.string.no_changelog_alert))
                 || changeLog.equals(mParent.getResources().getString(R.string.failed_to_load_changelog))) {
             // No changelog to show, display a toast
