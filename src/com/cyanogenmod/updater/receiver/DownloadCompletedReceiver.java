@@ -17,6 +17,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.widget.Toast;
+import android.app.NotificationManager;
+import android.app.Notification;
+import android.content.Intent;
+import android.app.PendingIntent;
+import android.content.res.Resources;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.UpdatesSettings;
@@ -66,14 +71,34 @@ public class DownloadCompletedReceiver extends BroadcastReceiver{
 
                     // Start the MD5 check of the downloaded file
                     if (MD5.checkMD5(downloadedMD5, completedFile)) {
-                        // We passed. Bring the main app to the foreground and trigger download completed
+                        // Fire Download Complete Notification
                         Intent i = new Intent(context, UpdatesSettings.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
                                 Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                         i.putExtra(Constants.DOWNLOAD_COMPLETED, true);
                         i.putExtra(Constants.DOWNLOAD_ID, id);
                         i.putExtra(Constants.DOWNLOAD_FULLPATH, mCompletedFileFullPath);
-                        context.startActivity(i);
+                        PendingIntent p = PendingIntent.getActivity(context, 0, i, 0);
+
+                        Resources res = context.getResources();
+                        String text = res.getString(R.string.download_complete_notification);;
+
+                        // Get the notification ready
+                        Notification.Builder builder = new Notification.Builder(context);
+                        builder.setSmallIcon(R.drawable.cm_updater);
+                        builder.setWhen(System.currentTimeMillis());
+                        builder.setTicker(res.getString(R.string.download_complete_notification_ticker));
+                        builder.setContentIntent(p);
+
+                        // Set the rest of the notification content
+                        builder.setContentTitle(res.getString(R.string.download_complete_notification_ticker));
+                        builder.setContentText(text);
+                        builder.setAutoCancel(true);
+                        Notification noti = builder.build();
+
+                        // Trigger the notification
+                        NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                        nm.notify(R.string.not_new_updates_found_title, noti);
 
                     } else {
                         // We failed. Clear the file and reset everything
