@@ -55,6 +55,8 @@
     <string name="download_already_running">A download is already running</string>
     <string name="unable_to_download_file">Unable to download the update file</string>
     <string name="download_not_found">Download not found</string>
+    <string name="download_complete_notification">Touch to install.</string>
+    <string name="download_complete_notification_ticker">Download complete</string>
 
     <!-- MD5 related strings -->
     <string name="apply_existing_update_md5error_message">Error. MD5 checksum mismatch</string>
