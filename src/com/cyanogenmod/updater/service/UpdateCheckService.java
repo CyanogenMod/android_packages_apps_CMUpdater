@@ -9,6 +9,8 @@
 
 package com.cyanogenmod.updater.service;
 
+
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -21,6 +23,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
@@ -194,37 +197,48 @@ public class UpdateCheckService extends Service {
 
         if (updateCountRoms == 0) {
             mToastHandler.sendMessage(mToastHandler.obtainMessage(0, R.string.no_updates_found, 0));
-            finishUpdateCheck();
         } else {
             // There are updates available
-            // The notification should launch the main app
-            Intent i = new Intent(this, UpdatesSettings.class);
-            i.putExtra(Constants.CHECK_FOR_UPDATE, true);
-            PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_ONE_SHOT);
 
-            Resources res = getResources();
-            String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
+			// Check to see if notifications are turned on, default to on
+			if (prefs.getBoolean(Constants.ALLOW_NOTIFICATIONS_CHECK_PREF, true) == true) {
 
-            // Get the notification ready
-            Notification.Builder builder = new Notification.Builder(this);
-            builder.setSmallIcon(R.drawable.cm_updater);
-            builder.setWhen(System.currentTimeMillis());
-            builder.setTicker(res.getString(R.string.not_new_updates_found_ticker));
+            	// The notification should launch the main app
+            	Intent i = new Intent(this, UpdatesSettings.class);
+            	i.putExtra(Constants.CHECK_FOR_UPDATE, true);
+            	PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_ONE_SHOT);
+	
+            	Resources res = getResources();
+            	String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
+	
+            	// Get the notification ready
+            	Notification.Builder builder = new Notification.Builder(this);
+            	builder.setSmallIcon(R.drawable.cm_updater);
+            	builder.setWhen(System.currentTimeMillis());
+            	builder.setTicker(res.getString(R.string.not_new_updates_found_ticker));
+	
+            	// Set the rest of the notification content
+            	builder.setContentTitle(res.getString(R.string.not_new_updates_found_title));
+            	builder.setContentText(text);
+            	builder.setContentIntent(contentIntent);
+            	builder.setAutoCancel(true);
+	
+				// Set the notification sound
+				builder.setSound( Uri.parse( prefs.getString(Constants.RINGTONE_PREF, "Silent") ) );
+	
+            	Notification noti = builder.build();
 
-            // Set the rest of the notification content
-            builder.setContentTitle(res.getString(R.string.not_new_updates_found_title));
-            builder.setContentText(text);
-            builder.setContentIntent(contentIntent);
-            builder.setAutoCancel(true);
-            Notification noti = builder.build();
+            	// Trigger the notification
+            	NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            	nm.notify(R.string.not_new_updates_found_title, noti);
 
-            // Trigger the notification
-            NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            nm.notify(R.string.not_new_updates_found_title, noti);
+			}
 
-            // We are done
-            finishUpdateCheck();
         }
+
+        // We are done
+
+        finishUpdateCheck();
     }
 
     private void notifyCheckError(String ExceptionText) {

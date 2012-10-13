@@ -41,9 +41,28 @@
         android:summary="@string/backup_rom_summary" />
     -->
 
+	<!-- Notification Preferences -->
+
+	<CheckBoxPreference
+		android:key="pref_allow_notifications_check"
+		android:title="@string/ns_allow_notifications_title"
+		android:summary="@string/ns_check_to_allow_notifications"
+		android:defaultValue="true" />
+
+	<RingtonePreference 
+		android:showDefault="true"
+   		android:key="pref_ringtone" 
+		android:title="@string/ns_choose_ringtone_title"
+   		android:ringtoneType="all"
+		android:showSilent="true"
+		android:shouldDisableView="true">
+	</RingtonePreference>
+
+	<!-- /Notification Preferences -->
+
     <PreferenceCategory
         android:key="updates_category"
         android:title="@string/available_updates_title">
     </PreferenceCategory>
-
+		
 </PreferenceScreen>

@@ -50,6 +50,7 @@ public class State {
         FullUpdateInfo availableUpdates = new FullUpdateInfo();
         ObjectInputStream ois = null;
         FileInputStream fis = null;
+
         try {
             File f = new File(ctx.getCacheDir(), Customization.STORED_STATE_FILENAME);
             fis = new FileInputStream(f);

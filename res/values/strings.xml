@@ -86,4 +86,12 @@
     <string name="no_changelog_alert">No changelog available</string>
     <string name="failed_to_load_changelog">Unable to load changelog</string>
     <string name="changelog_dialog_title">Changelog</string>
+
+	<!-- Notification Settings strings -->
+    <string name="ns_notification_settings_title">Notification Settings</string>
+    <string name="ns_notification_settings_summary">Configure Notification Settings</string>
+	<string name="ns_allow_notifications_title">Allow Notifications</string>
+	<string name="ns_check_to_allow_notifications">Check to allow notifications</string>
+	<string name="ns_choose_ringtone_title">Choose Notification Sound</string>
+
 </resources>

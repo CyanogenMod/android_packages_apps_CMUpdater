@@ -49,6 +49,8 @@ public class Constants {
     public static final String UPDATE_CHECK_PREF = "pref_update_check";
     public static final String UPDATE_TYPE_PREF = "pref_update_type";
     public static final String LAST_UPDATE_CHECK_PREF = "pref_last_update_check";
+    public static final String ALLOW_NOTIFICATIONS_CHECK_PREF = "pref_allow_notifications_check";
+    public static final String RINGTONE_PREF = "pref_ringtone";
 
     // Activity start parameters
     public static final String CHECK_FOR_UPDATE = "check_for_update";

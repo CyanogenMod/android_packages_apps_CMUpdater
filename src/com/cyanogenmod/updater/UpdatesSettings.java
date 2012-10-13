@@ -9,6 +9,7 @@
 
 package com.cyanogenmod.updater;
 
+
 import android.app.ActionBar;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -24,6 +25,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -38,6 +41,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.preference.RingtonePreference;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -81,8 +85,10 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
     private SharedPreferences mPrefs;
     private CheckBoxPreference mBackupRom;
+    private CheckBoxPreference mAllowNotifications;
     private ListPreference mUpdateCheck;
     private ListPreference mUpdateType;
+    private RingtonePreference mRingtone;
 
     private PreferenceCategory mUpdatesList;
     private UpdatePreference mDownloadingPreference;
@@ -130,6 +136,33 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             mUpdateType.setSummary(mUpdateType.getEntries()[type]);
             mUpdateType.setOnPreferenceChangeListener(this);
         }
+
+        mRingtone = (RingtonePreference) findPreference(Constants.RINGTONE_PREF);
+		if (mRingtone != null) {
+			Uri ringtoneUri = Uri.parse( (String) mPrefs.getString(Constants.RINGTONE_PREF, "") );
+			Ringtone ringtone = RingtoneManager.getRingtone(this, ringtoneUri);
+			if (ringtone != null) {
+				if (ringtone.getTitle(this).equals("Unknown ringtone")) {
+					mRingtone.setSummary( "Silent" );
+				} else {
+					mRingtone.setSummary( ringtone.getTitle(this) );
+				}
+			}
+			mRingtone.setOnPreferenceChangeListener(this);
+
+			// The Sound picker defaults to on because the Allow Notifications box is checked by default.
+			if (mPrefs.getBoolean(Constants.ALLOW_NOTIFICATIONS_CHECK_PREF, true) == false) {
+				mRingtone.setEnabled(false);
+			} else {
+				mRingtone.setEnabled(true);
+			}
+				
+		}
+
+        mAllowNotifications = (CheckBoxPreference) findPreference(Constants.ALLOW_NOTIFICATIONS_CHECK_PREF);
+        if (mAllowNotifications != null) {
+			mAllowNotifications.setOnPreferenceChangeListener(this);
+		}
 
         /* TODO: add this back once we have a way of doing backups that is not recovery specific
         mBackupRom = (CheckBoxPreference) prefSet.findPreference(Constants.BACKUP_PREF);
@@ -264,14 +297,49 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             mUpdateCheck.setSummary(mapCheckValue(value));
             scheduleUpdateService(value * 1000);
             return true;
-
         } else if (preference == mUpdateType) {
             int value = Integer.valueOf((String) newValue);
             mPrefs.edit().putInt(Constants.UPDATE_TYPE_PREF, value).apply();
             mUpdateType.setSummary(mUpdateType.getEntries()[value]);
             checkForUpdates();
             return true;
-        }
+        } else if (preference == mRingtone) {
+			RingtonePreference ringtonePreference = (RingtonePreference) preference;
+			Uri ringtoneUri = Uri.parse( (String) newValue );
+			Ringtone ringtone = RingtoneManager.getRingtone(this, ringtoneUri);
+			if (ringtone != null) {
+				if (ringtone.getTitle(this).equals("Unknown ringtone")) {
+					ringtonePreference.setSummary("Silent");
+					mPrefs.edit().putString(Constants.RINGTONE_PREF, "Silent").apply();
+				} else {
+					ringtonePreference.setSummary(ringtone.getTitle(this));
+					mPrefs.edit().putString(Constants.RINGTONE_PREF, (String) newValue).apply();
+				}
+				return true;
+			} else {
+				return false;
+			}
+		} else if (preference == mAllowNotifications) {
+
+			// May need to activate or inactivate later
+        	mRingtone = (RingtonePreference) findPreference(Constants.RINGTONE_PREF);
+			if (newValue.toString().equals("true")) {
+				mPrefs.edit().putBoolean(Constants.ALLOW_NOTIFICATIONS_CHECK_PREF, true).apply();
+
+				// activate the Choose Notification Sound field
+				if (mRingtone.isEnabled() == false) {
+					mRingtone.setEnabled(true);
+				}
+			} else {
+				mPrefs.edit().putBoolean(Constants.ALLOW_NOTIFICATIONS_CHECK_PREF, false).apply();
+
+				// grey out the Choose Notification Sound field
+				if (mRingtone.isEnabled() == true) {
+					mRingtone.setEnabled(false);
+				}
+			}
+			return true;
+		}	
 
         return false;
     }
