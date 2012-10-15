@@ -15,12 +15,14 @@
     <string name="dialog_yes">Igen</string>
     <string name="dialog_no">Nem</string>
     <string name="dialog_update">Frissítés</string>
+    <string name="dialog_close">Bezárás</string>
 
     <!-- Settings strings -->
     <string name="available_updates_title">Elérhető frissítések</string>
     <string name="no_available_updates_intro">Az utolsó ellenőrzés nem talált elérhető frissítést. A manuális ellenőrizéshez használja a Frissítés gombot</string>
     <string name="new_update_summary">Új</string>
-    <string name="downloaded_update_summary">Letöltés</string>
+    <string name="downloaded_update_summary">Letöltött</string>
+    <string name="installed_update_summary">Telepített</string>
     <string name="backup_rom_title">Biztonsági mentés készítése</string>
     <string name="backup_rom_summary">Biztonsági mentés készítése a ROM-ról a frissítés előtt</string>
 
@@ -78,4 +80,9 @@
     <string name="sysinfo_device">Eszköz:</string>
     <string name="sysinfo_running">Futó verzió:</string>
     <string name="sysinfo_last_check">Utóljára ellenőrizve:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">A változások listája nem elérhető</string>
+    <string name="failed_to_load_changelog">Nem lehet betölteni a változások listáját</string>
+    <string name="changelog_dialog_title">Változások listája</string>
 </resources>
