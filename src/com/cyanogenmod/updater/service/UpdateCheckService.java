@@ -206,21 +206,14 @@ public class UpdateCheckService extends Service {
             String text = MessageFormat.format(res.getString(R.string.not_new_updates_found_body), updateCount);
 
             // Get the notification ready
-            Notification.Builder builder = new Notification.Builder(this);
-            builder.setSmallIcon(R.drawable.cm_updater);
-            builder.setWhen(System.currentTimeMillis());
-            builder.setTicker(res.getString(R.string.not_new_updates_found_ticker));
-
-            // Set the rest of the notification content
-            builder.setContentTitle(res.getString(R.string.not_new_updates_found_title));
-            builder.setContentText(text);
-            builder.setContentIntent(contentIntent);
-            builder.setAutoCancel(true);
-            Notification noti = builder.build();
+            NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            Notification mNotification = new Notification(R.drawable.cm_updater, res.getString(R.string.not_new_updates_found_ticker), System.currentTimeMillis());
+            mNotification.flags = Notification.FLAG_AUTO_CANCEL;
+            mNotification.setLatestEventInfo(this, res.getString(R.string.not_new_updates_found_title), text, contentIntent);
 
             // Trigger the notification
             NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            nm.notify(R.string.not_new_updates_found_title, noti);
+            nm.notify(R.string.not_new_updates_found_title, mNotification);
 
             // We are done
             finishUpdateCheck();

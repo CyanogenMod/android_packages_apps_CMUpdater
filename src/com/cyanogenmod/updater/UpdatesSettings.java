@@ -337,9 +337,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                 request.setAllowedOverRoaming(false);
                 request.setVisibleInDownloadsUi(false);
 
-                // TODO: this could/should be made configurable
-                request.setAllowedOverMetered(true);
-
                 // Start the download
                 mEnqueue = mDownloadManager.enqueue(request);
                 mFileName = ui.getFileName();
