@@ -125,7 +125,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
         mUpdateType = (ListPreference) findPreference(Constants.UPDATE_TYPE_PREF);
         if (mUpdateType != null) {
-            int type = mPrefs.getInt(Constants.UPDATE_TYPE_PREF, 0);
+            int type = mPrefs.getInt(Constants.UPDATE_TYPE_PREF, 1);
             mUpdateType.setValue(String.valueOf(type));
             mUpdateType.setSummary(mUpdateType.getEntries()[type]);
             mUpdateType.setOnPreferenceChangeListener(this);
