@@ -26,7 +26,7 @@
 
     <!-- Settings strings -->
     <string name="available_updates_title">Dostupna ažuriranja</string>
-    <string name="no_available_updates_intro">Posljednja provera nije pronašla nikakva ažuriranja. Za ručnu provjeru novih ažuriranja koristite Osvježi tipku</string>
+    <string name="no_available_updates_intro">Poslednja provera nije pronašla nikakva ažuriranja. Za ručnu provjeru novih ažuriranja koristite Osvježi tipku</string>
     <string name="new_update_summary">Novo</string>
     <string name="downloaded_update_summary">Preuzeto</string>
     <string name="backup_rom_title">Napravi sigurnosnu kopiju</string>
