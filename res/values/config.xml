@@ -8,7 +8,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- CMUpdate Config Strings -->
-    <string name="conf_update_server_url_def">http://get.cm/api</string>
-    <string name="conf_changelog_url">http://localhost/changelog.xml</string>
+    <string name="conf_update_server_url_def" translatable="false">http://get.cm/api</string>
+    <string name="conf_changelog_url" translatable="false">http://localhost/changelog.xml</string>
     <bool name="alternateIsInternal">false</bool>
 </resources>
