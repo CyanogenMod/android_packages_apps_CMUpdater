@@ -28,6 +28,7 @@
     <string name="no_available_updates_intro">De laatste keer zijn geen updates gevonden. Om handmatig te controleren, tikt u op \'Vernieuwen\'</string>
     <string name="new_update_summary">Nieuw</string>
     <string name="downloaded_update_summary">Gedownload</string>
+    <string name="installed_update_summary">Geïnstalleerd</string>
     <string name="backup_rom_title">Back-up maken</string>
     <string name="backup_rom_summary">Back-up maken van systeem alvorens bij te werken</string>
 
