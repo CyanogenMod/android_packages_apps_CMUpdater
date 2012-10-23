@@ -73,8 +73,8 @@
     <string name="apply_update_dialog_title">Примени ажурирање</string>
     <string name="apply_update_dialog_text">Ажурираћете на {0}.\n\nАко притиснете Ажурирај уређај ће се сам поново покренути у recovery како би инсталирао ажурирање\n
         \nНапомена: За ово својство је неопходан одговарајући Recovery, иначе се ажурирања морају инсталирати ручно.</string>
-    <string name="apply_trying_to_get_root_access">Покушавање добијања root приступа како би се уређај поново покренуо у Recovery</string>
-    <string name="apply_unable_to_reboot_toast">Неуспешно поновно покретање у Recovery</string>
+    <string name="apply_trying_to_get_root_access">Покушавање добијања root приступа како би се уређај поново покренуо у Recovery моду</string>
+    <string name="apply_unable_to_reboot_toast">Неуспешно поновно покретање у Recovery моду</string>
 
     <!-- deleting -->
     <string name="confirm_delete_dialog_title">Обриши датотеку</string>
