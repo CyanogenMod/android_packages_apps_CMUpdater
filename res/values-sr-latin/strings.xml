@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2012 The CyanogenMod Project
 
      Licensed under the GNU GPLv2 license
@@ -14,76 +14,84 @@
 
     <!-- Menu and dialog box strings -->
     <string name="menu_refresh">Osveži</string>
-    <string name="menu_delete">Izbriši</string>
-    <string name="menu_delete_all">Izbriši preuzimanja</string>
-    <string name="menu_system_info">Sistem info</string>
+    <string name="menu_delete">Obriši</string>
+    <string name="menu_delete_all">Obriši preuzimanja</string>
+    <string name="menu_system_info">Informacije o sistemu</string>
 
     <string name="dialog_ok">OK</string>
-    <string name="dialog_cancel">Prekini</string>
+    <string name="dialog_cancel">Poništi</string>
     <string name="dialog_yes">Da</string>
     <string name="dialog_no">Ne</string>
     <string name="dialog_update">Ažuriraj</string>
+    <string name="dialog_close">Zatvori</string>
 
     <!-- Settings strings -->
     <string name="available_updates_title">Dostupna ažuriranja</string>
-    <string name="no_available_updates_intro">Poslednja provera nije pronašla nikakva ažuriranja. Za ručnu provjeru novih ažuriranja koristite Osvježi tipku</string>
+    <string name="no_available_updates_intro">Poslednje potraživanje nije pronašlo nijedno ažuriranje. Da bi ste ručno potražili nova ažuriranja pritisnite taster Osveži</string>
     <string name="new_update_summary">Novo</string>
     <string name="downloaded_update_summary">Preuzeto</string>
-    <string name="backup_rom_title">Napravi sigurnosnu kopiju</string>
-    <string name="backup_rom_summary">Sačuvajte trenutni ROM pre ažuriranja</string>
+    <string name="installed_update_summary">Instalirano</string>
+    <string name="backup_rom_title">Napravi rezervnu kopiju</string>
+    <string name="backup_rom_summary">Napravi rezervnu kopiju postojećeg ROM-a pre ažuriranja</string>
 
     <string name="update_check_title">Potraži ažuriranja</string>
     <string name="check_manual">Ručno</string>
-    <string name="check_on_boot">Na svakom paljenju</string>
-    <string name="check_twice_daily">Dvaput na dan</string>
+    <string name="check_on_boot">Prilikom svakog uključivanja</string>
+    <string name="check_twice_daily">Dvaput dnevno</string>
     <string name="check_daily">Dnevno</string>
     <string name="check_weekly">Nedeljno</string>
     <string name="check_bi_weekly">Dvonedeljno</string>
     <string name="check_monthly">Mesečno</string>
 
     <string name="update_type_title">Tip ažuriranja</string>
-    <string name="type_all">Sve verzije (Samo stabilne)</string>
-    <string name="type_all_incl_nightly">Sve verzije (uklj. Nightlije)</string>
-    <string name="type_new">Nove verzije (Samo stabilne)</string>
-    <string name="type_new_incl_nightly">Nove verzije (uklj. Nightlije)</string>
+    <string name="type_all">Sve (stabilne) verzije</string>
+    <string name="type_all_incl_nightly">Sve verzije (uklj. Noćne)</string>
+    <string name="type_new">Nove (stabilne) verzije</string>
+    <string name="type_new_incl_nightly">Nove verzije (uklj. Noćne)</string>
 
     <!-- Update checking -->
-    <string name="checking_for_updates">Proveravanje ažuriranja</string>
+    <string name="checking_for_updates">Potraživanje ažuriranja</string>
     <string name="no_updates_found">Nema novih ažuriranja</string>
     <string name="not_new_updates_found_ticker">Dostupna su nova ažuriranja</string>
     <string name="not_new_updates_found_title">Nova ažuriranja</string>
-    <string name="not_new_updates_found_body">{0} ažuriranje(a) dostupna su za preuzimanje</string>
+    <string name="not_new_updates_found_body">Dostupno je {0} ažuriranje(a) za preuzimanje</string>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">Prekini preuzimanje?</string>
-    <string name="confirm_download_cancelation_dialog_message">Prekinućete preuzimanje ažuriranja. Nastaviti?</string>
+    <string name="confirm_download_cancelation_dialog_message">Prekinućete preuzimanje ažuriranja. Da li želite da nastavite?</string>
     <string name="download_cancelled">Preuzimanje prekinuto</string>
     <string name="download_already_running">Preuzimanje je već u toku</string>
-    <string name="unable_to_download_file">Neuspelo preuzimanje ažuriranja</string>
-    <string name="download_not_found">Preuzimanje nije pronađeno</string>
+    <string name="unable_to_download_file">Preuzimanje ažuriranja neuspešno</string>
+    <string name="download_not_found">Nije pronađeno preuzimanje</string>
 
     <!-- MD5 related strings -->
-    <string name="apply_existing_update_md5error_message">Greška. MD5 checksum se ne podudara</string>
+    <string name="apply_existing_update_md5error_message">Greška. Neodgovarajući MD5 checksum</string>
     <string name="md5_check_cancelled">MD5 provera je prekinuta</string>
-    <string name="md5_verification_failed">Neuspela MD5 provera</string>
+    <string name="md5_verification_failed">Neuspešna provera MD5</string>
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Primeni ažuriranje</string>
-    <string name="apply_update_dialog_text">Ažuriraćete na {0}.\n\nAko pritisnete Ažuriraj telefon će se sam restartovati u recovery kako bi instalirao ažuriranje</string>
-    <string name="apply_trying_to_get_root_access">Dobijanje root pristupa kako bi se telefon restartovao u recovery</string>
-    <string name="apply_unable_to_reboot_toast">Neuspelo restartovanje u recovery</string>
+    <string name="apply_update_dialog_text">Ažuriraćete na {0}.\n\nAko pritisnete Ažuriraj uređaj će se sam ponovo pokrenuti u recovery kako bi instalirao ažuriranje\n
+        \nNapomena: Za ovo svojstvo je neophodan odgovarajući Recovery, inače se ažuriranja moraju instalirati ručno.</string>
+    <string name="apply_trying_to_get_root_access">Pokušavanje dobijanja root pristupa kako bi se uređaj ponovo pokrenuo u recovery modu</string>
+    <string name="apply_unable_to_reboot_toast">Neuspešno ponovno pokretanje u Recovery modu</string>
 
     <!-- deleting -->
     <string name="confirm_delete_dialog_title">Obriši datoteku</string>
-    <string name="confirm_delete_dialog_message">Obrisaće se preuzeta datoteka ažuriranja. Nastaviti?</string>
-    <string name="confirm_delete_all_dialog_message">Obrisaćete sve preuzete datoteke ažuriranja. Nastaviti?</string>
-    <string name="delete_single_update_success_message">Ažuriranje {0} obrisano</string>
-    <string name="delete_updates_failure_message">Dogodila se greška prilikom brisanja datoteke ažuriranja</string>
-    <string name="delete_updates_noFolder_message">Nije pronađen Folder ažuriranja</string>
+    <string name="confirm_delete_dialog_message">Obrisaćete preuzetu datoteku ažuriranja. Da li želite da nastavite?</string>
+    <string name="confirm_delete_all_dialog_message">Obrisaćete sve preuzete datoteke ažuriranja. Da li želite da nastavite?</string>
+    <string name="delete_single_update_success_message">Obrisano {0} ažuriranje</string>
+    <string name="delete_updates_failure_message">Desila se greška prilikom brisanja datoteke ažuriranja</string>
+    <string name="delete_updates_noFolder_message">Nije pronađena fascikla za ažuriranja</string>
     <string name="delete_updates_success_message">Sve preuzete datoteke ažuriranja su obrisane</string>
 
     <!-- System info strings -->
     <string name="sysinfo_device">Uređaj:</string>
     <string name="sysinfo_running">Softver:</string>
     <string name="sysinfo_last_check">Poslednja provera:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">Nema dostupnih dnevnika izmena</string>
+    <string name="failed_to_load_changelog">Neuspešno učitavanje dnevnika izmena</string>
+    <string name="changelog_dialog_title">Dnevnik izmena</string>
 </resources>
