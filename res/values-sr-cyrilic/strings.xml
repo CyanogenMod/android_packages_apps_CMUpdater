@@ -10,7 +10,7 @@
 
     <!-- General strings -->
     <string name="app_name">CM Updater</string>
-    <string name="unknown">Непоѕнато</string>
+    <string name="unknown">Непознато</string>
 
     <!-- Menu and dialog box strings -->
     <string name="menu_refresh">Освежи</string>
