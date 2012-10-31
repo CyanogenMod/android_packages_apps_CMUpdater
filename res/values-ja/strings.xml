@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- General strings -->
+    <string name="app_name">CMアップデータ</string>
+    <string name="unknown">不明</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">更新</string>
+    <string name="menu_delete">削除</string>
+    <string name="menu_delete_all">すべてのダウンロードを削除</string>
+    <string name="menu_system_info">システム情報</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">キャンセル</string>
+    <string name="dialog_yes">はい</string>
+    <string name="dialog_no">いいえ</string>
+    <string name="dialog_update">更新</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">利用できるアップデート</string>
+    <string name="no_available_updates_intro">前回のチェックでは$利用可能なアップデートは見つかりませんでした。更新ボタンを使って手動で新しいアップデートを確認できます。</string>
+    <string name="new_update_summary">新しいアップデート</string>
+    <string name="downloaded_update_summary">ダウンロード済</string>
+    <string name="backup_rom_title">バックアップの作成</string>
+    <string name="backup_rom_summary">アップデートの前に現在のROMをバックアップする</string>
+
+    <string name="update_check_title">アップデートの確認</string>
+    <string name="check_manual">手動</string>
+    <string name="check_on_boot">起動時</string>
+    <string name="check_twice_daily">一日2回</string>
+    <string name="check_daily">毎日</string>
+    <string name="check_weekly">毎週</string>
+    <string name="check_bi_weekly">隔週</string>
+    <string name="check_monthly">毎月</string>
+
+    <string name="update_type_title">アップデートタイプ</string>
+    <string name="type_all">すべてのバージョン (安定版のみ)</string>
+    <string name="type_all_incl_nightly">すべてのバージョン (ナイトリーを含む)</string>
+    <string name="type_new">新しいバージョン (安定版のみ)</string>
+    <string name="type_new_incl_nightly">新しいバージョン (ナイトリーを含む)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">アップデートを確認中</string>
+    <string name="no_updates_found">新しいアップデートはありません</string>
+    <string name="not_new_updates_found_ticker">新しいアップデートが利用できます</string>
+    <string name="not_new_updates_found_title">新しいアップデート</string>
+    <string name="not_new_updates_found_body">{0}つのアップデートがダウンロードできます</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">ダウンロードをキャンセル</string>
+    <string name="confirm_download_cancelation_dialog_message">現在のダウンロードをキャンセルしようとしています。 よろしいですか?</string>
+    <string name="download_cancelled">ダウンロードはキャンセルされました</string>
+    <string name="download_already_running">ダウンロードはすでに実行中です</string>
+    <string name="unable_to_download_file">アップデートファイルをダウンロードできません</string>
+    <string name="download_not_found">ダウンロードは見つかりませんでした</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">エラー MD5チェックサムが一致しません</string>
+    <string name="md5_check_cancelled">MD5チェックはキャンセルされました</string>
+    <string name="md5_verification_failed">MD5確認に失敗しました</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">アップデートを適用</string>
+    <string name="apply_update_dialog_text">{0} にアップグレードしようとしています.\n\n更新を押すと端末は再起動後、自動でリカバリーモードに移行しアップデートをインストールします。</string>
+    <string name="apply_trying_to_get_root_access">リカバリーモードへ再起動するためにroot権限を取得します</string>
+    <string name="apply_unable_to_reboot_toast">リカバリーモードへ再起動できません</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">ファイルの削除</string>
+    <string name="confirm_delete_dialog_message">ダウンロードしたアップデートファイルを削除しようとしています。よろしいですか?</string>
+    <string name="confirm_delete_all_dialog_message">すべてのダウンロードしたアップデートファイルを削除しようとしています。よろしいですか?</string>
+    <string name="delete_single_update_success_message">{0}つのアップデートは削除されました</string>
+    <string name="delete_updates_failure_message">アップデートファイルの削除中にエラーがありました</string>
+    <string name="delete_updates_noFolder_message">アップデートフォルダが見つかりませんでした</string>
+    <string name="delete_updates_success_message">すべてのダウンロードしたアップデートファイルは削除されました</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">デバイス:</string>
+    <string name="sysinfo_running">稼働中:</string>
+    <string name="sysinfo_last_check">最終チェック:</string>
+</resources>

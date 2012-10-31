@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">CM Updater</string>
+    <string name="unknown">Desconocida</string>
+    <string name="menu_refresh">Refrescar</string>
+    <string name="menu_delete">Borrar</string>
+    <string name="menu_delete_all">Borrar descargas</string>
+    <string name="menu_system_info">Información del sistema</string>
+    <string name="dialog_ok">Aceptar</string>
+    <string name="dialog_cancel">Cancelar</string>
+    <string name="dialog_yes">Sí</string>
+    <string name="dialog_no">No</string>
+    <string name="dialog_update">Actualizar</string>
+    <string name="dialog_close">Cerrar</string>
+    <string name="available_updates_title">Actualizaciones disponibles</string>
+    <string name="no_available_updates_intro">No se encontraron actualizaciones en la última comprobación. Pulse el botón Refrescar para comprobar si existen nuevas actualizaciones.</string>
+    <string name="new_update_summary">Nueva</string>
+    <string name="downloaded_update_summary">Descargada</string>
+    <string name="installed_update_summary">Instalada</string>
+    <string name="backup_rom_title">Copia de respaldo</string>
+    <string name="backup_rom_summary">Crear copia de respaldo de la ROM actual antes de realizar la actualización</string>
+    <string name="update_check_title">Comprobar actualizaciones</string>
+    <string name="check_manual">Manualmente</string>
+    <string name="check_on_boot">En cada arranque</string>
+    <string name="check_twice_daily">Dos veces al día</string>
+    <string name="check_daily">Diariamente</string>
+    <string name="check_weekly">Semanalmente</string>
+    <string name="check_bi_weekly">Cada dos semanas</string>
+    <string name="check_monthly">Mensualmente</string>
+    <string name="update_type_title">Tipo de actualización</string>
+    <string name="type_all">Todas (sólo estables)</string>
+    <string name="type_all_incl_nightly">Todas (incl. no estables)</string>
+    <string name="type_new">Nuevas (sólo estables)</string>
+    <string name="type_new_incl_nightly">Nuevas (incl. no estables)</string>
+    <string name="checking_for_updates">Comprobando actualizaciones\u2026</string>
+    <string name="no_updates_found">No se han encontrado nuevas actualizaciones</string>
+    <string name="not_new_updates_found_ticker">Hay actualizaciones disponibles</string>
+    <string name="not_new_updates_found_title">Nuevas actualizaciones</string>
+    <string name="not_new_updates_found_body">{0} actualización(es) disponible(s) para descargar</string>
+    <string name="confirm_download_cancelation_dialog_title">Cancelar descarga</string>
+    <string name="confirm_download_cancelation_dialog_message">¿Cancelar la descarga actual?</string>
+    <string name="download_cancelled">Descarga cancelada</string>
+    <string name="download_already_running">Hay una descarga en curso</string>
+    <string name="unable_to_download_file">Imposible descargar el fichero de actualización</string>
+    <string name="download_not_found">Descarga no encontrada</string>
+    <string name="apply_existing_update_md5error_message">Error. La verificación MD5 no coincide</string>
+    <string name="md5_check_cancelled">La verificación MD5 fue cancelada</string>
+    <string name="md5_verification_failed">Falló la verificación MD5</string>
+    <string name="apply_update_dialog_title">Aplicar actualización</string>
+    <string name="apply_update_dialog_text">Se va a proceder a actualizar a la versión {0}.\n\nSi pulsa sobre el botón Actualizar, el terminal se reiniciará en modo recovery para proceder con la actualización.\n\nAviso: Si no se dispone de un recovery compatible, la actualización se deberá instalar de forma manual.</string>
+    <string name="apply_trying_to_get_root_access">Intentando acceso administrativo para reiniciar en modo recovery</string>
+    <string name="apply_unable_to_reboot_toast">Imposible reiniciar en modo recovery</string>
+    <string name="confirm_delete_dialog_title">Borrar archivo</string>
+    <string name="confirm_delete_dialog_message">¿Borrar el archivo descargado?</string>
+    <string name="confirm_delete_all_dialog_message">¿Borrar todos los archivos de actualización descargados?</string>
+    <string name="delete_single_update_success_message">Actualización {0} borrada</string>
+    <string name="delete_updates_failure_message">Ocurrió un error al borrar el archivo de actualización</string>
+    <string name="delete_updates_noFolder_message">Carpeta de actualizaciones no encontrada</string>
+    <string name="delete_updates_success_message">Todas las actualizaciones fueron borradas</string>
+    <string name="sysinfo_device">Dispositivo:</string>
+    <string name="sysinfo_running">Ejecutando:</string>
+    <string name="sysinfo_last_check">Última comprobación:</string>
+    <string name="no_changelog_alert">No hay registro de cambios</string>
+    <string name="failed_to_load_changelog">Imposible cargar el registro de cambios</string>
+    <string name="changelog_dialog_title">Registro de cambios</string>
+</resources>

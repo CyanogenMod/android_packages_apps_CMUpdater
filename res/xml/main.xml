@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/app_name"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+     <ListPreference
+        android:key="pref_update_check"
+        android:dialogTitle="@string/update_check_title"
+        android:title="@string/update_check_title"
+        android:entries="@array/update_check_entries"
+        android:entryValues="@array/update_check_values"/>
+
+     <ListPreference
+        android:key="pref_update_type"
+        android:dialogTitle="@string/update_type_title"
+        android:title="@string/update_type_title"
+        android:entries="@array/update_type_entries"
+        android:entryValues="@array/update_type_values"/>
+
+     <!-- TODO: add this back once we have a way of doing backups that is not recovery specific
+     <CheckBoxPreference
+        android:key="pref_backup_rom"
+        android:defaultValue="true"
+        android:title="@string/backup_rom_title" 
+        android:summary="@string/backup_rom_summary" />
+    -->
+
+    <PreferenceCategory
+        android:key="updates_category"
+        android:title="@string/available_updates_title">
+    </PreferenceCategory>
+
+</PreferenceScreen>
