@@ -27,11 +27,8 @@
 
     <!-- Settings strings -->
     <string name="available_updates_title">Mise à jour disponible</string>
-<<<<<<< HEAD
     <string name="no_available_updates_intro">La dernière vérification n'a pas trouvé de mises à jour disponibles. Pour vérifier manuellement les nouvelles mises à jour, utilisez le bouton Actualiser.</string>
-=======
     <string name="no_available_updates_intro">La dernière vérification n\'a pas trouvé de mises à jour disponibles. Pour vérifier manuellement les nouvelles mises à jour, utilisez le bouton Actualiser.</string>
->>>>>>> Initial CMUpdater French translarion
     <string name="new_update_summary">Nouveau</string>
     <string name="downloaded_update_summary">Téléchargée</string>
     <string name="installed_update_summary">Installée</string>
@@ -75,11 +72,8 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Effectuer la mise à jour</string>
-<<<<<<< HEAD
     <string name="apply_update_dialog_text">Vous êtes sur le point de mettre à niveau vers {0}.\n\nIf appuyez sur Mise à jour, l'appareil va redémarrer automatiquement en mode Recovery pour installer la mise à jour.\n
-=======
     <string name="apply_update_dialog_text">Vous êtes sur le point de mettre à niveau vers {0}.\n\nIf appuyez sur Mise à jour, l\'appareil va redémarrer automatiquement en mode Recovery pour installer la mise à jour.\n
->>>>>>> Initial CMUpdater French translarion
         \nNote: Cette fonction nécessite un Recovery compatible ou les mises à jour devront être installés manuellement.</string>
     <string name="apply_trying_to_get_root_access">Essaye d'obtenir un accès root pour redémarrer en mode Recovery</string>
     <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode Recovery</string>
