@@ -10,6 +10,7 @@
 
     <!-- General strings -->
     <string name="app_name">CM-opdatering</string>
+    <string name="display_name">Opdateringer</string>
     <string name="unknown">Ukendt</string>
 
     <!-- Menu and dialog box strings -->
