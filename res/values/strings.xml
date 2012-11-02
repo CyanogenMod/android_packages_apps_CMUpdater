@@ -10,6 +10,7 @@
 
     <!-- General strings -->
     <string name="app_name">CM Updater</string>
+    <string name="display_name">Updates</string>
     <string name="unknown">Unknown</string>
 
     <!-- Menu and dialog box strings -->
