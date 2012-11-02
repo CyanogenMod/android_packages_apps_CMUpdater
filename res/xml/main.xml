@@ -9,7 +9,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/app_name"
+    android:title="@string/display_name"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
      <ListPreference
