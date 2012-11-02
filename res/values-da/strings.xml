@@ -10,6 +10,7 @@
 
     <!-- General strings -->
     <string name="app_name">CM-opdatering</string>
+    <string name="display_name">Opdateringer</string>
     <string name="unknown">Ukendt</string>
 
     <!-- Menu and dialog box strings -->
@@ -23,12 +24,14 @@
     <string name="dialog_yes">Ja</string>
     <string name="dialog_no">Nej</string>
     <string name="dialog_update">Opdatér</string>
+    <string name="dialog_close">Luk</string>
 
     <!-- Settings strings -->
     <string name="available_updates_title">Tilgængelige opdateringer</string>
     <string name="no_available_updates_intro">Den sidste søgning fandt ingen tilgængelige opdateringer. Brug knappen Genopfrisk for at søge efter opdateringer manuelt</string>
     <string name="new_update_summary">Ny</string>
     <string name="downloaded_update_summary">Downloadet</string>
+    <string name="installed_update_summary">Installeret</string>
     <string name="backup_rom_title">Lav backup</string>
     <string name="backup_rom_summary">Backup eksisterende ROM før opdatering</string>
 
@@ -86,4 +89,9 @@
     <string name="sysinfo_device">Enhed:</string>
     <string name="sysinfo_running">Kører:</string>
     <string name="sysinfo_last_check">Sidste søgning:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">Ingen ændringslog tilgængelig</string>
+    <string name="failed_to_load_changelog">Kan ikke indlæse ændringslog</string>
+    <string name="changelog_dialog_title">Ændringslog</string>
 </resources>
