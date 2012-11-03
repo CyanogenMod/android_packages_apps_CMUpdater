@@ -8,9 +8,6 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-
-
-
     <!-- General strings -->
     <string name="app_name">CM Updater</string>
     <string name="unknown">Inconnu</string>
