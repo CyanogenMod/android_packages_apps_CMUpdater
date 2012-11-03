@@ -10,6 +10,7 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name">CyanogenMod-updates</string>
+    <string name="display_name">Updates</string>
     <string name="unknown">Onbekend</string>
 
     <string name="menu_refresh">Vernieuwen</string>
