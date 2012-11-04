@@ -1,0 +1,77 @@
+<resources>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Oppdater</string>
+    <string name="menu_delete">Slett</string>
+    <string name="menu_delete_all">Fjern nedlastinger</string>
+    <string name="menu_system_info">Systeminfo</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Avbryt</string>
+    <string name="dialog_yes">Ja</string>
+    <string name="dialog_no">Nei</string>
+    <string name="dialog_update">Oppdater</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Tilgjengelige oppdateringer</string>
+    <string name="no_available_updates_intro">Siste oppdateringsjekk fant ingen tilgjengelige oppdateringer. Bruk oppdateringsknappen for å manuelt sjekke for nye oppdateringer</string>
+    <string name="new_update_summary">Ny</string>
+    <string name="downloaded_update_summary">Nedlastet</string>
+    <string name="backup_rom_title">Opprett sikkerhetskopi</string>
+    <string name="backup_rom_summary">Ta sikkerhetskopi av eksisterende ROM før oppdatering</string>
+
+    <string name="update_check_title">Sjekk for oppdateringer</string>
+    <string name="check_manual">Manuelt</string>
+    <string name="check_on_boot">For hver boot</string>
+    <string name="check_twice_daily">To ganger daglig</string>
+    <string name="check_daily">Daglig</string>
+    <string name="check_weekly">Ukentlig</string>
+    <string name="check_bi_weekly">Annenhver uke</string>
+    <string name="check_monthly">Månedlig</string>
+
+    <string name="update_type_title">Oppdateringstyper</string>
+    <string name="type_all">Alle versjoner (kun Stabile)</string>
+    <string name="type_all_incl_nightly">Alle versjoner (inkl. Nightlies)</string>
+    <string name="type_new">Nye versjoner (kun Stabile)</string>
+    <string name="type_new_incl_nightly">Nye versjoner (inkl. Nightlies)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Sjekker etter oppdateringer</string>
+    <string name="no_updates_found">Ingen nye oppdateringer funnet</string>
+    <string name="not_new_updates_found_ticker">Nye oppdateringer er tilgjengelig</string>
+    <string name="not_new_updates_found_title">Nye oppdateringer</string>
+    <string name="not_new_updates_found_body">{0} oppdatering(er) tilgjengelig for nedlasting</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Avbryt nedlasting</string>
+    <string name="confirm_download_cancelation_dialog_message">Du er i ferd med å avbryte pågående nedlasting, er du sikker?</string>
+    <string name="download_cancelled">Nedlasting avbrutt</string>
+    <string name="download_already_running">En nedlasting pågår allerede</string>
+    <string name="unable_to_download_file">Kunne ikke laste ned oppdateringsfil</string>
+    <string name="download_not_found">Nedlasting ikke funnet</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Error. MD5 sjekksum missmatch</string>
+    <string name="md5_check_cancelled">MD5-verifisering avbrutt</string>
+    <string name="md5_verification_failed">MD5-verifisering mislykket</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Installer oppdatering</string>
+    <string name="apply_update_dialog_text">Du er i ferd med å oppgradere til {0}.\n\nHvis du fortsetter vil telefonen foreta en omstart til recovery-modus for å gjennomføre installasjonen</string>
+    <string name="apply_trying_to_get_root_access">Forsøker å oppnå root-tilgang for å kunne foreta en omstart til recovery-modus</string>
+    <string name="apply_unable_to_reboot_toast">Kunne ikke starte opp i recovery-modus</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Slett fil</string>
+    <string name="confirm_delete_dialog_message">Du er i ferd med å fjerne den nedlastede oppdateringsfilen, er du sikker?</string>
+    <string name="confirm_delete_all_dialog_message">Du er i ferd med å fjerne alle nedlastede oppdateringsfiler, er du sikker?</string>
+    <string name="delete_single_update_success_message">Oppdatering {0} slettet</string>
+    <string name="delete_updates_failure_message">Det oppsto en feil ved sletting av oppdateringsfil</string>
+    <string name="delete_updates_noFolder_message">Oppdateringsmappe ikke funnet</string>
+    <string name="delete_updates_success_message">Alle nedlastede oppdateringerer slettet</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Enhet:</string>
+    <string name="sysinfo_running">Kjører:</string>
+    <string name="sysinfo_last_check">Sist sjekk:</string>
+</resources>
