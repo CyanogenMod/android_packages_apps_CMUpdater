@@ -10,6 +10,7 @@
 
     <!-- General strings -->
     <string name="app_name">CM frissítő</string>
+    <string name="display_name">Frissítések</string>
     <string name="unknown">Ismeretlen</string>
 
     <!-- Menu and dialog box strings -->
