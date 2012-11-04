@@ -8,6 +8,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">CM Updater</string>
+    <string name="display_name">Aggiornamenti</string>
     <string name="unknown">Sconosciuto</string>
     <string name="menu_refresh">Aggiorna</string>
     <string name="menu_delete">Cancella</string>
