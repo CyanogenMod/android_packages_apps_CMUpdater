@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">CM Updater</string>
+    <string name="display_name">Mises à jour</string>
+    <string name="unknown">Inconnu</string>
+
+    <string name="menu_refresh">Rafraîchir</string>
+    <string name="menu_delete">Effacer</string>
+    <string name="menu_delete_all">Supprimer les téléchargements</string>
+    <string name="menu_system_info">Infos système</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Annuler</string>
+    <string name="dialog_yes">Oui</string>
+    <string name="dialog_no">Non</string>
+    <string name="dialog_update">Mise à jour</string>
+    <string name="dialog_close">Fermer</string>
+
+    <string name="available_updates_title">Mises à jour disponibles</string>
+    <string name="no_available_updates_intro">La dernière vérification n\'a pas trouvé de mises à jour disponible. Pour vérifier manuellement les mises à jour, utilisez le bouton Actualiser.</string>
+    <string name="new_update_summary">Nouvelle</string>
+    <string name="downloaded_update_summary">Téléchargée</string>
+    <string name="installed_update_summary">Installée</string>
+    <string name="backup_rom_title">Créer un backup</string>
+    <string name="backup_rom_summary">Créer un backup de la ROM existante avant de mettre à jour</string>
+
+    <!-- si vous voyez une meilleure maniere de traduire la phase suivante, allez y -->
+    <string name="update_check_title">Vérifier les mises à jour</string>
+    <string name="check_manual">Manuellement</string>
+    <string name="check_on_boot">À chaque démarrage</string>
+    <string name="check_twice_daily">Deux fois par jour</string>
+    <string name="check_daily">Quotidiennement</string>
+    <string name="check_weekly">Hebdomadairement</string>
+    <string name="check_bi_weekly">Deux fois par mois</string>
+    <string name="check_monthly">Mensuellement</string>
+
+    <string name="update_type_title">Mettre à jour :</string>
+    <string name="type_all">Toutes les versions (stable uniq.)</string>
+    <string name="type_all_incl_nightly">Toutes les versions (Nightlies incl.)</string>
+    <string name="type_new">Nouvelles versions (Stable uniq.)</string>
+    <string name="type_new_incl_nightly">Nouvelles versions (Nightlies incl.)</string>
+
+    <string name="checking_for_updates">Recherche de mises à jour</string>
+    <string name="no_updates_found">Aucune nouvelle mise à jour trouvée</string>
+    <string name="not_new_updates_found_ticker">De nouvelles mises à jour sont disponibles</string>
+    <string name="not_new_updates_found_title">Nouvelles mises à jour</string>
+    <string name="not_new_updates_found_body">{0} mise(s) à jour disponible au téléchargement</string>
+
+    <string name="confirm_download_cancelation_dialog_title">Annuler le téléchargement</string>
+    <string name="confirm_download_cancelation_dialog_message">Vous êtes sur le point d\'annuler le téléchargement en cours, OK pour continuer?</string>
+    <string name="download_cancelled">Téléchargement annulé</string>
+    <string name="download_already_running">Un téléchargement est déjà en cours</string>
+    <string name="unable_to_download_file">Impossible de télécharger le fichier de mise à jour</string>
+    <string name="download_not_found">Téléchargement introuvable</string>
+
+    <string name="apply_existing_update_md5error_message">Erreur, la somme de contrôle MD5 ne correspond pas</string>
+    <string name="md5_check_cancelled">Vérification de la somme de contrôle MD5 annulée</string>
+    <string name="md5_verification_failed">la vérification de la somme de contrôle MD5 a échouée</string>
+
+    <string name="apply_update_dialog_title">Appliquer la mise à jour</string>
+    <string name="apply_update_dialog_text">Vous êtes sur le point de passer à {0}.\n\nSi vous appuyez sur Mettre à jour, l\'appareil redémarrera automatiquement en mode recovery pour installer la mise à jour.\n
+          \nRemarque: Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
+    <string name="apply_trying_to_get_root_access">Tentative d\'obtention d\'un accès root pour redémarrer en mode recovery</string>
+    <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode recovery</string>
+
+    <string name="confirm_delete_dialog_title">Supprimer le fichier</string>
+    <string name="confirm_delete_dialog_message">Vous êtes sur le point de supprimer le fichier de mise à jour téléchargé, OK pour continuer?</string>
+    <string name="confirm_delete_all_dialog_message">Vous êtes sur le point de supprimer tous les fichiers de mise à jour téléchargés, OK pour continuer?</string>
+    <string name="delete_single_update_success_message">Mise à jour {0} supprimée</string>
+    <string name="delete_updates_failure_message">Une erreur est survenue lors de la suppression des fichiers de mise à jour</string>
+    <string name="delete_updates_noFolder_message">Dossier de mise à jour introuvable</string>
+    <string name="delete_updates_success_message">Tous les fichiers de mises à jour téléchargés ont été supprimés</string>
+
+    <string name="sysinfo_device">Appareil:</string>
+    <string name="sysinfo_running">Version:</string>
+    <string name="sysinfo_last_check">Dernière vérif:</string>
+
+    <string name="no_changelog_alert">Pas de changelog disponible</string>
+    <string name="failed_to_load_changelog">Impossible de charger le changelog</string>
+    <string name="changelog_dialog_title">Changelog</string>
+</resources>
