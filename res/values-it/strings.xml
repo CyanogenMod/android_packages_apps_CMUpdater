@@ -59,7 +59,7 @@
     <string name="apply_trying_to_get_root_access">Richiesta dei permessi root per il riavvio in recovery</string>
     <string name="apply_unable_to_reboot_toast">Impossibile riavviare in recovery</string>
     <string name="confirm_delete_dialog_title">Cancella file</string>
-    <string name="confirm_delete_dialog_message">Premere Ok per cancellare il file di aggiornamento scaricato</string>
+    <string name="confirm_delete_dialog_message">Si sta per cancellare il file di aggiornamento scaricato. Confermare?</string>
     <string name="confirm_delete_all_dialog_message">Si stanno per cancellare tutti gli aggiornamenti scaricati. Confermare?</string>
     <string name="delete_single_update_success_message">Aggiornamento {0} cancellato</string>
     <string name="delete_updates_failure_message">Errore durante la cancellazione dell\'aggiornamento</string>
