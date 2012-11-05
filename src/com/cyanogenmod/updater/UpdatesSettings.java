@@ -309,7 +309,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
                 // Create the download request and set some basic parameters
                 String fullFolderPath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                        + Constants.UPDATES_FOLDER;
+                        + "/" + Constants.UPDATES_FOLDER;
                 //If directory doesn't exist, create it
                 File directory = new File(fullFolderPath);
                 if (!directory.exists()) {

@@ -17,7 +17,7 @@ public class Constants {
     public static final String DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z"; 
 
     // Download related
-    public static final String UPDATES_FOLDER = "/cmupdater";
+    public static final String UPDATES_FOLDER = "cmupdater";
     public static final String DOWNLOAD_ID = "download_id";
     public static final String DOWNLOAD_FULLPATH = "download_fullpath";
     public static final String DOWNLOAD_MD5 = "download_md5";
