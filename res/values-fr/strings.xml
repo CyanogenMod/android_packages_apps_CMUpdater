@@ -21,7 +21,7 @@
     <string name="dialog_cancel">Annuler</string>
     <string name="dialog_yes">Oui</string>
     <string name="dialog_no">Non</string>
-    <string name="dialog_update">Mise à jour</string>
+    <string name="dialog_update">Mettre à jour</string>
     <string name="dialog_close">Fermer</string>
 
     <string name="available_updates_title">Mises à jour disponibles</string>
@@ -43,7 +43,7 @@
     <string name="check_monthly">Mensuellement</string>
 
     <string name="update_type_title">Mettre à jour :</string>
-    <string name="type_all">Toutes les versions (stable uniq.)</string>
+    <string name="type_all">Toutes les versions (Stable uniq.)</string>
     <string name="type_all_incl_nightly">Toutes les versions (Nightlies incl.)</string>
     <string name="type_new">Nouvelles versions (Stable uniq.)</string>
     <string name="type_new_incl_nightly">Nouvelles versions (Nightlies incl.)</string>
@@ -63,10 +63,10 @@
 
     <string name="apply_existing_update_md5error_message">Erreur, la somme de contrôle MD5 ne correspond pas</string>
     <string name="md5_check_cancelled">Vérification de la somme de contrôle MD5 annulée</string>
-    <string name="md5_verification_failed">la vérification de la somme de contrôle MD5 a échouée</string>
+    <string name="md5_verification_failed">La vérification de la somme de contrôle MD5 a échouée</string>
 
     <string name="apply_update_dialog_title">Appliquer la mise à jour</string>
-    <string name="apply_update_dialog_text">Vous êtes sur le point de passer à {0}.\n\nSi vous appuyez sur Mettre à jour, l\'appareil redémarrera automatiquement en mode recovery pour installer la mise à jour.\n
+    <string name="apply_update_dialog_text">Vous êtes sur le point de passer à {0}.\n\nSi vous appuyez sur \'Mettre à jour\', l\'appareil redémarrera automatiquement en mode recovery pour installer la mise à jour.\n
           \nRemarque: Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
     <string name="apply_trying_to_get_root_access">Tentative d\'obtention d\'un accès root pour redémarrer en mode recovery</string>
     <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode recovery</string>
