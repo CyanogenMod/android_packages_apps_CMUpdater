@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (C) 2012 The CyanogenMod Project
 
      Licensed under the GNU GPLv2 license
@@ -8,22 +8,29 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Aktualizace CM</string>
+    <string name="display_name">Aktualizace</string>
     <string name="unknown">Neznámý</string>
+
     <string name="menu_refresh">Obnovit</string>
     <string name="menu_delete">Smazat</string>
     <string name="menu_delete_all">Odstranit stažené soubory</string>
     <string name="menu_system_info">Informace o systému</string>
+
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Zrušit</string>
     <string name="dialog_yes">Ano</string>
     <string name="dialog_no">Ne</string>
     <string name="dialog_update">Aktualizovat</string>
+    <string name="dialog_close">Zavřít</string>
+
     <string name="available_updates_title">Dostupné aktualizace</string>
     <string name="no_available_updates_intro">Nebyly nalezeny žádné aktualizace. Pro ruční vyhledání aktualizací stiskněte tlačítko Obnovit</string>
     <string name="new_update_summary">Nová</string>
-    <string name="downloaded_update_summary">Staženo</string>
+    <string name="downloaded_update_summary">Stažena</string>
+    <string name="installed_update_summary">Nainstalována</string>
     <string name="backup_rom_title">Vytvořit zálohu</string>
     <string name="backup_rom_summary">Zálohovat současnou ROM před aktualizací</string>
+
     <string name="update_check_title">Vyhledat aktualizace</string>
     <string name="check_manual">Ručně</string>
     <string name="check_on_boot">Při každém spuštění</string>
@@ -32,38 +39,48 @@
     <string name="check_weekly">Týdně</string>
     <string name="check_bi_weekly">Ob týden</string>
     <string name="check_monthly">Měsíčně</string>
+
     <string name="update_type_title">Typy aktualizací</string>
     <string name="type_all">Všechny verze (pouze stabilní)</string>
     <string name="type_all_incl_nightly">Všechny verze (včetně nightlies)</string>
     <string name="type_new">Nové verze (pouze stabilní)</string>
     <string name="type_new_incl_nightly">Nové verze (včetně nightlies)</string>
+
     <string name="checking_for_updates">Vyhledávání aktualizací</string>
     <string name="no_updates_found">Žádné nové aktualizace nenalezeny</string>
-    <string name="not_new_updates_found_ticker">Jsou k dispozici nové aktualizace</string>
+    <string name="not_new_updates_found_ticker">Nové aktualizace k dispozici</string>
     <string name="not_new_updates_found_title">Nové aktualizace</string>
-    <string name="not_new_updates_found_body">{0} Aktualizace(cí) k dispozici ke stažení</string>
+    <string name="not_new_updates_found_body">Aktualizací ke stažení: {0}</string>
+
     <string name="confirm_download_cancelation_dialog_title">Zrušit stahování</string>
-    <string name="confirm_download_cancelation_dialog_message">Chystáte se zrušit aktuální stahování, chcete pokračovat?</string>
+    <string name="confirm_download_cancelation_dialog_message">Opravdu chcete zrušit aktuální stahování?</string>
     <string name="download_cancelled">Stahování zrušeno</string>
     <string name="download_already_running">Stahování již běží</string>
     <string name="unable_to_download_file">Nelze stáhnout aktualizační soubor</string>
     <string name="download_not_found">Soubor pro stažení nenalezen</string>
-    <string name="apply_existing_update_md5error_message">Chyba. MD5 kontrolní součet nesouhlasí</string>
+
+    <string name="apply_existing_update_md5error_message">Chyba MD5 kontrolního součtu souboru</string>
     <string name="md5_check_cancelled">MD5 kontrola byla zrušena</string>
     <string name="md5_verification_failed">Ověření MD5 se nezdařilo</string>
+
     <string name="apply_update_dialog_title">Použít aktualizaci</string>
-    <string name="apply_update_dialog_text">Chystáte se aktualizovat na {0}.\n\nPokud stisknete Aktualizovat, telefon se restartuje do Recovery režimu pro instalaci aktualizace</string>
-    <string name="apply_trying_to_get_root_access">Zkouším získat práva Root k restartu do Recovery režimu</string>
-    <string name="apply_unable_to_reboot_toast">Nelze restartovat do Recovery režimu</string>
+    <string name="apply_update_dialog_text">Chystáte se aktualizovat na {0}.\n\nPokud stisknete Aktualizovat, telefon se restartuje do režimu Recovery, kde budete pokračovat v instalaci aktualizace.\n\nPoznámka: tato funkce vyžaduje nainstalovaný kompatibilní režim Recovery nebo je nutné instalaci provést ručně.</string>
+    <string name="apply_trying_to_get_root_access">Získávají se práva root k restartu do režimu Recovery</string>
+    <string name="apply_unable_to_reboot_toast">Nelze restartovat do režimu Recovery</string>
+
     <string name="confirm_delete_dialog_title">Smazat soubor</string>
-    <string name="confirm_delete_dialog_message">Chystáte se smazat soubor aktualizace, chcete pokračovat?</string>
-    <string name="confirm_delete_all_dialog_message">Chystáte se smazat všechny soubory aktualizací, chcete pokračovat?</string>
+    <string name="confirm_delete_dialog_message">Opravdu chcete smazat soubor aktualizace?</string>
+    <string name="confirm_delete_all_dialog_message">Opravdu chcete smazat všechny soubory aktualizací?</string>
     <string name="delete_single_update_success_message">Aktualizace {0} odstraněna</string>
-    <string name="delete_updates_failure_message">Během odstraňování souboru aktualizace se vyskytla chyba
-  </string>
-    <string name="delete_updates_noFolder_message">Složka aktualizace nebyla nalezena</string>
-    <string name="delete_updates_success_message">Všechny stažené aktualizace odstraněny</string>
+    <string name="delete_updates_failure_message">Během odstraňování souboru aktualizace se vyskytla chyba</string>
+    <string name="delete_updates_noFolder_message">Adresář aktualizací nenalezen</string>
+    <string name="delete_updates_success_message">Všechny stažené soubory aktualizací smazány</string>
+
     <string name="sysinfo_device">Zařízení:</string>
     <string name="sysinfo_running">Současný:</string>
     <string name="sysinfo_last_check">Poslední kontrola:</string>
+
+    <string name="no_changelog_alert">Není dostupný seznam změn</string>
+    <string name="failed_to_load_changelog">Nelze načíst seznam změn</string>
+    <string name="changelog_dialog_title">Seznam změn</string>
 </resources>
