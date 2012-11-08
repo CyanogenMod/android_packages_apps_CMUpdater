@@ -1,6 +1,7 @@
 <resources>
 
-    <string name="app_name">"Actualizare"</string>
+    <string name="app_name">"Actualizări CM"</string>
+    <string name="display_name">Actualizări"</string>
     <string name="unknown">"Necunoscut"</string>
     <string name="menu_refresh">"Reîmprospătare"</string>
     <string name="menu_delete">"Ştergeţi"</string>
