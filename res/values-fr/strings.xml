@@ -55,7 +55,7 @@
     <string name="not_new_updates_found_body">{0} mise(s) à jour disponible au téléchargement</string>
 
     <string name="confirm_download_cancelation_dialog_title">Annuler le téléchargement</string>
-    <string name="confirm_download_cancelation_dialog_message">Vous êtes sur le point d\'annuler le téléchargement en cours, OK pour continuer?</string>
+    <string name="confirm_download_cancelation_dialog_message">Vous êtes sur le point d\'annuler le téléchargement en cours, souhaitez-vous continuer?</string>
     <string name="download_cancelled">Téléchargement annulé</string>
     <string name="download_already_running">Un téléchargement est déjà en cours</string>
     <string name="unable_to_download_file">Impossible de télécharger le fichier de mise à jour</string>
@@ -63,17 +63,17 @@
 
     <string name="apply_existing_update_md5error_message">Erreur, la somme de contrôle MD5 ne correspond pas</string>
     <string name="md5_check_cancelled">Vérification de la somme de contrôle MD5 annulée</string>
-    <string name="md5_verification_failed">La vérification de la somme de contrôle MD5 a échouée</string>
+    <string name="md5_verification_failed">La vérification de la somme de contrôle MD5 a échoué</string>
 
     <string name="apply_update_dialog_title">Appliquer la mise à jour</string>
-    <string name="apply_update_dialog_text">Vous êtes sur le point de passer à {0}.\n\nSi vous appuyez sur \'Mettre à jour\', l\'appareil redémarrera automatiquement en mode recovery pour installer la mise à jour.\n
+    <string name="apply_update_dialog_text">Vous êtes sur le point de passer à {0}.\n\nSi vous appuyez sur Mettre à jour, l\'appareil redémarrera automatiquement en mode recovery pour installer la mise à jour.\n
           \nRemarque: Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
     <string name="apply_trying_to_get_root_access">Tentative d\'obtention d\'un accès root pour redémarrer en mode recovery</string>
     <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode recovery</string>
 
     <string name="confirm_delete_dialog_title">Supprimer le fichier</string>
-    <string name="confirm_delete_dialog_message">Vous êtes sur le point de supprimer le fichier de mise à jour téléchargé, OK pour continuer?</string>
-    <string name="confirm_delete_all_dialog_message">Vous êtes sur le point de supprimer tous les fichiers de mise à jour téléchargés, OK pour continuer?</string>
+    <string name="confirm_delete_dialog_message">Vous êtes sur le point de supprimer le fichier de mise à jour téléchargé, souhaitez-vous continuer?</string>
+    <string name="confirm_delete_all_dialog_message">Vous êtes sur le point de supprimer tous les fichiers de mise à jour téléchargés, souhaitez-vous continuer?</string>
     <string name="delete_single_update_success_message">Mise à jour {0} supprimée</string>
     <string name="delete_updates_failure_message">Une erreur est survenue lors de la suppression des fichiers de mise à jour</string>
     <string name="delete_updates_noFolder_message">Dossier de mise à jour introuvable</string>
