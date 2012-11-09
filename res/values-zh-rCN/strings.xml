@@ -10,6 +10,7 @@
 
     <!-- General strings -->
     <string name="app_name">CM 更新器</string>
+    <string name="display_name">更新</string>
     <string name="unknown">未知</string>
 
     <!-- Menu and dialog box strings -->
@@ -28,7 +29,7 @@
     <!-- Settings strings -->
     <string name="available_updates_title">可用更新</string>
     <string name="no_available_updates_intro">最后一次刷新没有找到可用的更新. 使用刷新按钮来手动检查更新.</string>
-    <string name="new_update_summary">新的更新</string>
+    <string name="new_update_summary">新版本</string>
     <string name="downloaded_update_summary">已下载</string>
     <string name="installed_update_summary">已安装</string>
     <string name="backup_rom_title">创建备份</string>
