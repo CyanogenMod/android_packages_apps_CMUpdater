@@ -19,8 +19,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
@@ -146,19 +144,11 @@ public class UpdateCheckService extends Service {
         mToastHandler.sendMessage(mToastHandler.obtainMessage(0, ex));
     }
 
-    private boolean isOnline() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnected()) {
-            return true;
-        }
-        return false;
-    }
-
     private void checkForNewUpdates() {
-        if (!isOnline()) {
+        if (!UpdatesSettings.isOnline(getBaseContext())) {
             // Only check for updates if the device is actually connected to a network
             Log.i(TAG, "Could not check for updates. Not connected to the network.");
+
             return;
         }
 

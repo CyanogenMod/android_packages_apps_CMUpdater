@@ -10,6 +10,7 @@
 package com.cyanogenmod.updater;
 
 import android.app.ActionBar;
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
@@ -24,6 +25,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -278,8 +281,8 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
     @Override
     protected void onResume() {
-            super.onResume();
-            mUpdateHandler.post(updateProgress);
+        super.onResume();
+        mUpdateHandler.post(updateProgress);
     }
 
     @Override
@@ -293,6 +296,13 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
     //*********************************************************
 
     protected void startDownload(String key) {
+
+        // If there is no internet connection, display a message and return.
+        if (!isOnline(getBaseContext())) {
+            Toast.makeText(this, R.string.data_connection_required, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (mDownloading) {
             Toast.makeText(this, R.string.download_already_running, Toast.LENGTH_LONG).show();
             return;
@@ -455,7 +465,23 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         return getString(R.string.unknown);
     }
 
+    public static boolean isOnline(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()) {
+            return true;
+        }
+        return false;
+    }
+
     public void checkForUpdates() {
+
+        // If there is no internet connection, display a message and return.
+        if (!isOnline(getBaseContext())) {
+            Toast.makeText(this, R.string.data_connection_required, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         //Refresh the Layout when UpdateCheck finished
         UpdateCheckTask task = new UpdateCheckTask(this);
         task.execute((Void) null);
