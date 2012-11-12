@@ -56,7 +56,7 @@
     <string name="not_new_updates_found_ticker">Neue Updates sind verfügbar</string>
     <string name="not_new_updates_found_title">Neue Updates</string>
     <string name="not_new_updates_found_body">{0} Update(s) zum Download verfügbar</string>
-    <string name="data_connection_required">Eine Daten-Verbindung wird benötigt.</string>
+    <string name="data_connection_required">Eine Datenverbindung wird benötigt.</string>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">Download abbrechen</string>
