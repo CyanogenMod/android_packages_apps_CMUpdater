@@ -15,7 +15,7 @@
     <string name="menu_refresh">Rafraîchir</string>
     <string name="menu_delete">Effacer</string>
     <string name="menu_delete_all">Supprimer les téléchargements</string>
-    <string name="menu_system_info">Infos système</string>
+    <string name="menu_system_info">Informations système</string>
 
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Annuler</string>
@@ -29,8 +29,8 @@
     <string name="new_update_summary">Nouvelle</string>
     <string name="downloaded_update_summary">Téléchargée</string>
     <string name="installed_update_summary">Installée</string>
-    <string name="backup_rom_title">Créer un backup</string>
-    <string name="backup_rom_summary">Créer un backup de la ROM existante avant de mettre à jour</string>
+    <string name="backup_rom_title">Créer une sauvegarde</string>
+    <string name="backup_rom_summary">Créer une sauvegarde de la ROM existante avant de mettre à jour</string>
 
     <!-- si vous voyez une meilleure maniere de traduire la phase suivante, allez y -->
     <string name="update_check_title">Vérifier les mises à jour</string>
@@ -53,9 +53,10 @@
     <string name="not_new_updates_found_ticker">De nouvelles mises à jour sont disponibles</string>
     <string name="not_new_updates_found_title">Nouvelles mises à jour</string>
     <string name="not_new_updates_found_body">{0} mise(s) à jour disponible au téléchargement</string>
+    <string name="data_connection_required">Une connexion internet est nécessaire.</string>
 
     <string name="confirm_download_cancelation_dialog_title">Annuler le téléchargement</string>
-    <string name="confirm_download_cancelation_dialog_message">Vous êtes sur le point d\'annuler le téléchargement en cours, souhaitez-vous continuer?</string>
+    <string name="confirm_download_cancelation_dialog_message">Vous êtes sur le point d\'annuler le téléchargement en cours, souhaitez-vous continuer ?</string>
     <string name="download_cancelled">Téléchargement annulé</string>
     <string name="download_already_running">Un téléchargement est déjà en cours</string>
     <string name="unable_to_download_file">Impossible de télécharger le fichier de mise à jour</string>
@@ -67,23 +68,23 @@
 
     <string name="apply_update_dialog_title">Appliquer la mise à jour</string>
     <string name="apply_update_dialog_text">Vous êtes sur le point de passer à {0}.\n\nSi vous appuyez sur Mettre à jour, l\'appareil redémarrera automatiquement en mode recovery pour installer la mise à jour.\n
-          \nRemarque: Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
+          \nRemarque : Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
     <string name="apply_trying_to_get_root_access">Tentative d\'obtention d\'un accès root pour redémarrer en mode recovery</string>
     <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode recovery</string>
 
     <string name="confirm_delete_dialog_title">Supprimer le fichier</string>
-    <string name="confirm_delete_dialog_message">Vous êtes sur le point de supprimer le fichier de mise à jour téléchargé, souhaitez-vous continuer?</string>
-    <string name="confirm_delete_all_dialog_message">Vous êtes sur le point de supprimer tous les fichiers de mise à jour téléchargés, souhaitez-vous continuer?</string>
+    <string name="confirm_delete_dialog_message">Vous êtes sur le point de supprimer le fichier de mise à jour téléchargé, souhaitez-vous continuer ?</string>
+    <string name="confirm_delete_all_dialog_message">Vous êtes sur le point de supprimer tous les fichiers de mise à jour téléchargés, souhaitez-vous continuer ?</string>
     <string name="delete_single_update_success_message">Mise à jour {0} supprimée</string>
     <string name="delete_updates_failure_message">Une erreur est survenue lors de la suppression des fichiers de mise à jour</string>
     <string name="delete_updates_noFolder_message">Dossier de mise à jour introuvable</string>
     <string name="delete_updates_success_message">Tous les fichiers de mises à jour téléchargés ont été supprimés</string>
 
-    <string name="sysinfo_device">Appareil:</string>
-    <string name="sysinfo_running">Version:</string>
-    <string name="sysinfo_last_check">Dernière vérif:</string>
+    <string name="sysinfo_device">Appareil :</string>
+    <string name="sysinfo_running">Version :</string>
+    <string name="sysinfo_last_check">Dernière vérif. :</string>
 
-    <string name="no_changelog_alert">Pas de changelog disponible</string>
-    <string name="failed_to_load_changelog">Impossible de charger le changelog</string>
-    <string name="changelog_dialog_title">Changelog</string>
+    <string name="no_changelog_alert">Pas de note de mise à jour disponible</string>
+    <string name="failed_to_load_changelog">Impossible de charger la note de mise à jour</string>
+    <string name="changelog_dialog_title">Note de mise à jour</string>
 </resources>
