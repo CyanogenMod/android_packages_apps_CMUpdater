@@ -10,6 +10,7 @@
 
     <!-- General strings -->
     <string name="app_name">CM-Updater</string>
+    <string name="display_name">Updates</string>
     <string name="unknown">Unbekannt</string>
 
     <!-- Menu and dialog box strings -->
@@ -55,6 +56,7 @@
     <string name="not_new_updates_found_ticker">Neue Updates sind verfügbar</string>
     <string name="not_new_updates_found_title">Neue Updates</string>
     <string name="not_new_updates_found_body">{0} Update(s) zum Download verfügbar</string>
+    <string name="data_connection_required">Eine Daten-Verbindung wird benötigt.</string>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">Download abbrechen</string>
