@@ -51,6 +51,7 @@
     <string name="not_new_updates_found_ticker">Nové aktualizace k dispozici</string>
     <string name="not_new_updates_found_title">Nové aktualizace</string>
     <string name="not_new_updates_found_body">Aktualizací ke stažení: {0}</string>
+    <string name="data_connection_required">Je vyžadováno připojení k internetu</string>
 
     <string name="confirm_download_cancelation_dialog_title">Zrušit stahování</string>
     <string name="confirm_download_cancelation_dialog_message">Opravdu chcete zrušit aktuální stahování?</string>
