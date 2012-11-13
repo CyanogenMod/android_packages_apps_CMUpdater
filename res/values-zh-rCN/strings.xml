@@ -56,6 +56,7 @@
     <string name="not_new_updates_found_ticker">找到了可用的更新</string>
     <string name="not_new_updates_found_title">新更新</string>
     <string name="not_new_updates_found_body">{0} 个可下载的更新</string>
+    <string name="data_connection_required">需要一个有效的数据链接</string>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">取消下载</string>
