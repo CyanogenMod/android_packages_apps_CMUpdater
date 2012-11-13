@@ -45,6 +45,7 @@
     <string name="not_new_updates_found_ticker">Nuovi aggiornamenti disponibili</string>
     <string name="not_new_updates_found_title">Nuovi aggiornamenti</string>
     <string name="not_new_updates_found_body">{0} aggiornamento/i disponibile/i per il download</string>
+    <string name="data_connection_required">È richiesta una connessione dati.</string>
     <string name="confirm_download_cancelation_dialog_title">Annullare il download?</string>
     <string name="confirm_download_cancelation_dialog_message">Si sta per annullare il download corrente. Confermare?</string>
     <string name="download_cancelled">Download annullato</string>
