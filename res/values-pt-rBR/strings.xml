@@ -71,4 +71,6 @@
     <string name="no_changelog_alert">Nenhum registro de mudanças disponível</string>
     <string name="failed_to_load_changelog">Não foi possível carregar o registro de mudanças</string>
     <string name="changelog_dialog_title">Registro de mudanças</string>
+    <string name="display_name">Atualizações</string>
+    <string name="data_connection_required">Uma conexão de dados é necessária</string>
 </resources>
