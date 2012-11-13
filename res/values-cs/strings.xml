@@ -8,7 +8,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Aktualizace CM</string>
-    <string name="display_name">Aktualizace</string>
+    <string name="display_name">Aktualizace CM</string>
     <string name="unknown">Neznámý</string>
 
     <string name="menu_refresh">Obnovit</string>
@@ -24,7 +24,7 @@
     <string name="dialog_close">Zavřít</string>
 
     <string name="available_updates_title">Dostupné aktualizace</string>
-    <string name="no_available_updates_intro">Nebyly nalezeny žádné aktualizace. Pro ruční vyhledání aktualizací stiskněte tlačítko Obnovit</string>
+    <string name="no_available_updates_intro">Nebyly nalezeny žádné aktualizace. Pro ruční vyhledání aktualizací stiskněte tlačítko Obnovit.</string>
     <string name="new_update_summary">Nová</string>
     <string name="downloaded_update_summary">Stažena</string>
     <string name="installed_update_summary">Nainstalována</string>
@@ -47,10 +47,11 @@
     <string name="type_new_incl_nightly">Nové verze (včetně nightlies)</string>
 
     <string name="checking_for_updates">Vyhledávání aktualizací</string>
-    <string name="no_updates_found">Žádné nové aktualizace nenalezeny</string>
+    <string name="no_updates_found">Nové aktualizace nenalezeny</string>
     <string name="not_new_updates_found_ticker">Nové aktualizace k dispozici</string>
     <string name="not_new_updates_found_title">Nové aktualizace</string>
     <string name="not_new_updates_found_body">Aktualizací ke stažení: {0}</string>
+    <string name="data_connection_required">Je vyžadováno připojení k internetu</string>
 
     <string name="confirm_download_cancelation_dialog_title">Zrušit stahování</string>
     <string name="confirm_download_cancelation_dialog_message">Opravdu chcete zrušit aktuální stahování?</string>
@@ -77,7 +78,7 @@
     <string name="delete_updates_success_message">Všechny stažené soubory aktualizací smazány</string>
 
     <string name="sysinfo_device">Zařízení:</string>
-    <string name="sysinfo_running">Současný:</string>
+    <string name="sysinfo_running">Nainstalovaná verze:</string>
     <string name="sysinfo_last_check">Poslední kontrola:</string>
 
     <string name="no_changelog_alert">Není dostupný seznam změn</string>
