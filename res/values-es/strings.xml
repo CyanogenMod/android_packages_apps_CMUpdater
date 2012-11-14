@@ -2,11 +2,13 @@
 <!-- Copyright (C) 2012 The CyanogenMod Project
 
      Licensed under the GNU GPLv2 license
+
      The text of the license can be found in the LICENSE file
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">CM Updater</string>
+    <string name="display_name">Actualizaciones</string>
     <string name="unknown">Desconocida</string>
     <string name="menu_refresh">Refrescar</string>
     <string name="menu_delete">Borrar</string>
@@ -43,6 +45,7 @@
     <string name="not_new_updates_found_ticker">Hay actualizaciones disponibles</string>
     <string name="not_new_updates_found_title">Nuevas actualizaciones</string>
     <string name="not_new_updates_found_body">{0} actualización(es) disponible(s) para descargar</string>
+    <string name="data_connection_required">Es necesaria una conexión de datos.</string>
     <string name="confirm_download_cancelation_dialog_title">Cancelar descarga</string>
     <string name="confirm_download_cancelation_dialog_message">¿Cancelar la descarga actual?</string>
     <string name="download_cancelled">Descarga cancelada</string>
