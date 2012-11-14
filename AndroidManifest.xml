@@ -27,6 +27,7 @@
             android:launchMode="singleTop"
             android:hardwareAccelerated="true"
             android:label="@string/display_name"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:excludeFromRecents="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
