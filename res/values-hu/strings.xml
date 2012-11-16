@@ -56,6 +56,7 @@
     <string name="not_new_updates_found_ticker">Új frissítések elérhetőek</string>
     <string name="not_new_updates_found_title">Új frissítések</string>
     <string name="not_new_updates_found_body">{0} frissítés letölthető</string>
+    <string name="data_connection_required">Adatkapcsolat szükséges.</string>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">Megszakítja a letöltést?</string>
