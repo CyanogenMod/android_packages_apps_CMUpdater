@@ -204,17 +204,23 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
         // Display the appropriate preference style
         switch (mStyle) {
             case STYLE_DOWNLOADED:
-                // Show the install image and summary of 'Downloaded'
-                mUpdatesButton.setImageResource(R.drawable.ic_tab_install);
-                mUpdatesButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
-                        mParent.startUpdate(mUpdateInfo);
-                    }
-                });
-                mSummaryText.setText(R.string.downloaded_update_summary);
-                mSummaryText.setVisibility(View.VISIBLE);
-                mProgressBar.setVisibility(View.GONE);
+            	if (mUpdatesButton != null) {
+	                // Show the install image and summary of 'Downloaded'
+	                mUpdatesButton.setImageResource(R.drawable.ic_tab_install);
+	                mUpdatesButton.setOnClickListener(new OnClickListener() {
+	                    @Override
+	                    public void onClick(View arg0) {
+	                        mParent.startUpdate(mUpdateInfo);
+	                    }
+	                });
+            	}
+            	if (mSummaryText != null) {
+	                mSummaryText.setText(R.string.downloaded_update_summary);
+	                mSummaryText.setVisibility(View.VISIBLE);
+            	}
+            	if (mProgressBar != null) {
+            		mProgressBar.setVisibility(View.GONE);
+            	}
                 break;
 
             case STYLE_DOWNLOADING:
