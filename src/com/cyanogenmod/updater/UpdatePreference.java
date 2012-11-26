@@ -13,6 +13,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -201,6 +202,10 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
     }
 
     private void showStyle() {
+        if (mUpdatesButton == null || mSummaryText == null || mProgressBar == null) {
+            Log.w(TAG, "Tried to set UI style, but UI elements were null (not yet bound).");
+            return;
+        }
         // Display the appropriate preference style
         switch (mStyle) {
             case STYLE_DOWNLOADED:
@@ -212,8 +217,10 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
                         mParent.startUpdate(mUpdateInfo);
                     }
                 });
+
                 mSummaryText.setText(R.string.downloaded_update_summary);
                 mSummaryText.setVisibility(View.VISIBLE);
+
                 mProgressBar.setVisibility(View.GONE);
                 break;
 
