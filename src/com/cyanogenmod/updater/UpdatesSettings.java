@@ -33,6 +33,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.preference.CheckBoxPreference;
@@ -836,7 +837,10 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                         */
 
                         // Add the update folder/file name
-                        String cmd = "echo '--update_package="+getStorageMountpoint()
+                        // Emulated external storage moved to user-specific paths in 4.2
+                        String userPath = Environment.isExternalStorageEmulated() ? ("/" + UserHandle.myUserId()) : "";
+
+                        String cmd = "echo '--update_package="+getStorageMountpoint() + userPath
                                 + "/" + Constants.UPDATES_FOLDER + "/" + updateInfo.getFileName()
                                 + "' >> /cache/recovery/command\n";
                         os.write(cmd.getBytes());
