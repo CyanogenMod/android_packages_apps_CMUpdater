@@ -41,7 +41,7 @@
     <string name="check_twice_daily">Zweimal täglich</string>
     <string name="check_daily">Täglich</string>
     <string name="check_weekly">Wöchentlich</string>
-    <string name="check_bi_weekly">Zweimal wöchentlich</string>
+    <string name="check_bi_weekly">Zweiwöchentlich</string>
     <string name="check_monthly">Monatlich</string>
 
     <string name="update_type_title">Update-Typen</string>
