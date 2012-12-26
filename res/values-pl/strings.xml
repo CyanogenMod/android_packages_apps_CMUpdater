@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- General strings -->
+    <string name="app_name">CM Updater</string>
+    <string name="display_name">Updates</string>
+    <string name="unknown">Nieznany</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Odśwież</string>
+    <string name="menu_delete">Usuń</string>
+    <string name="menu_delete_all">Usuń pobrane aktualizacje</string>
+    <string name="menu_system_info">Informacje o systemie</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Anuluj</string>
+    <string name="dialog_yes">Tak</string>
+    <string name="dialog_no">Nie</string>
+    <string name="dialog_update">Aktualizuj</string>
+    <string name="dialog_close">Zamknij</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Dostępne aktualizacje</string>
+    <string name="no_available_updates_intro">Ostatnie sprawdzenie nie zwróciło żadnych dostępnych aktualizacji. W celu ręcznego sprawdzenia dostępności nowych aktualizacji kliknij przycisk Odśwież.</string>
+    <string name="new_update_summary">Nowa</string>
+    <string name="downloaded_update_summary">Do pobrania</string>
+    <string name="installed_update_summary">Zainstalowana</string>
+    <string name="backup_rom_title">Stwórz kopię zapasową</string>
+    <string name="backup_rom_summary">Stwórz kopię zapasową obecnego ROMu przed aktualizacją.</string>
+
+    <string name="update_check_title">Sprawdzanie aktualizacji</string>
+    <string name="check_manual">Ręczne</string>
+    <string name="check_on_boot">Przy każdym uruchomieniu</string>
+    <string name="check_twice_daily">Dwa razy dziennie</string>
+    <string name="check_daily">Codziennie</string>
+    <string name="check_weekly">Cotygodniowo</string>
+    <string name="check_bi_weekly">Co drugi tydzień</string>
+    <string name="check_monthly">Miesięcznie</string>
+
+    <string name="update_type_title">Typy aktualizacji</string>
+    <string name="type_all">Wszystkie wersje (tylko stabilne)</string>
+    <string name="type_all_incl_nightly">Wszystkie wersje (w tym nocne buildy)</string>
+    <string name="type_new">Nowe wersje (tylko stabilne)</string>
+    <string name="type_new_incl_nightly">Nowe wersje (w tym nocne buildy)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Sprawdzanie aktualizacji</string>
+    <string name="no_updates_found">Nie znaleziono nowych aktualizacji</string>
+    <string name="not_new_updates_found_ticker">Nowe aktualizacje są dostępne</string>
+    <string name="not_new_updates_found_title">Nowe aktualizacje</string>
+    <string name="not_new_updates_found_body">{0} dostępnych aktualizacji</string>
+    <string name="data_connection_required">Połączenie z siecią jest wymanage.</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Anuluj pobieranie</string>
+    <string name="confirm_download_cancelation_dialog_message">Zamierzasz przerwać obecne pobieranie. Kliknij OK, aby przerwać</string>
+    <string name="download_cancelled">Anulowano pobieranie</string>
+    <string name="download_already_running">Pobieranie już trwa</string>
+    <string name="unable_to_download_file">Nie można pobrać aktualizacji</string>
+    <string name="download_not_found">Nie znaleziono pobranej aktualizacji</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Błąd. Niepoprawna suma MD5</string>
+    <string name="md5_check_cancelled">Sprawdzanie sumy MD5 zostało anulowane</string>
+    <string name="md5_verification_failed">Weryfikacja sumy MD5 zakończyła się niepowodzeniem</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Zastosuj aktualizację</string>
+    <string name="apply_update_dialog_text">Zamierzasz aktualizować telefon do {0}.\n\nJeśli klikniesz Aktualizuj urządzenie uruchomi się ponownie w trybie recovery w celu zainstalowania aktualizacji.\n
+        \nUwaga: Ta funkcja wymaga kompatybilnego tryby recovery. W innym przypadku aktualizacja musi być zainstalowana ręcznie.</string>
+    <string name="apply_trying_to_get_root_access">Próba dostania praw root`a w celu uruchomienia w trybie recovery.</string>
+    <string name="apply_unable_to_reboot_toast">Nie można uruchomić telefonu w trybie recovery</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Usuń plik</string>
+    <string name="confirm_delete_dialog_message">Zamierzasz usunąc pobraną aktualizację. Kliknij OK, aby kontynuować</string>
+    <string name="confirm_delete_all_dialog_message">Zamierzasz usunąć wszystkie pobrane aktualizacje. Kliknij OK, aby kontynuować</string>
+    <string name="delete_single_update_success_message">Aktualizacja {0} została usunięta</string>
+    <string name="delete_updates_failure_message">Błąd podczas usuwania aktualizacji</string>
+    <string name="delete_updates_noFolder_message">Folder aktualizacji nie został znaleziony.</string>
+    <string name="delete_updates_success_message">Usunięto wszystkie pobrane aktualizacje</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Urządzenie:</string>
+    <string name="sysinfo_running">System:</string>
+    <string name="sysinfo_last_check">Ostatnie sprawdzenie:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">Brak listy zmian</string>
+    <string name="failed_to_load_changelog">Nie można odczytać listy zmian</string>
+    <string name="changelog_dialog_title">Lista zmian</string>
+</resources>
