@@ -85,7 +85,7 @@ public class UpdateCheckService extends Service {
         // Get the System Mod string
         mSystemMod = TESTING_DOWNLOAD ? "cmtestdevice" : SysUtils.getSystemProperty(Customization.BOARD);
         if (mSystemMod == null) {
-                Log.i(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
+            Log.i(TAG, "Unable to determine System's Mod version. Updater will show all available updates");
         }
     }
 
@@ -106,11 +106,14 @@ public class UpdateCheckService extends Service {
     }
 
     @Override
+    public boolean onUnbind(Intent intent) {
+        cancelUpdateCheck();
+        return super.onUnbind(intent);
+    }
+
+    @Override
     public void onDestroy() {
-        mCallbacks.kill();
-        if (mTask != null && mTask.getStatus() != AsyncTask.Status.FINISHED) {
-            mTask.cancel(true);
-        }
+        cancelUpdateCheck();
         super.onDestroy();
     }
 
@@ -120,7 +123,11 @@ public class UpdateCheckService extends Service {
     private class AutoCheckForUpdatesTask extends AsyncTask<Void, Void, Integer> {
         @Override
         protected Integer doInBackground(Void... params) {
-            checkForNewUpdates();
+            if (!isCancelled()) {
+                checkForNewUpdates();
+            } else {
+                Log.i(TAG, "Update check cancelled by the user.");
+            }
             return null;
         }
     }
@@ -142,6 +149,13 @@ public class UpdateCheckService extends Service {
 
     private void displayExceptionToast(String ex) {
         mToastHandler.sendMessage(mToastHandler.obtainMessage(0, ex));
+    }
+
+    private void cancelUpdateCheck() {
+        mCallbacks.kill();
+        if (mTask != null) {
+            mTask.cancel(true);
+        }
     }
 
     private void checkForNewUpdates() {

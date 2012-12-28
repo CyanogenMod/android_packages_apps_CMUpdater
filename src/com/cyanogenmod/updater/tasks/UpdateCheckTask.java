@@ -46,6 +46,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
             public void onCancel(DialogInterface dialog) {
                 if (!isCancelled()) {
                     cancel(true);
+                    unbindAndStop();
                 }
             }
         });
@@ -56,7 +57,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
         mProgressDialog.show();
         mServiceIntent = new Intent(IUpdateCheckService.class.getName());
         ComponentName comp = mParent.startService(mServiceIntent);
-        if (comp == null) {
+        if (mComp == null) {
             Log.e(TAG, "startService failed");
             mBound = false;
         } else {
@@ -69,9 +70,11 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
         if (mBound) {
             try {
                 while (mService == null) {
-                    // Wait till the Service is bound
+                    // Wait till the Service is bound 
                 }
-                mService.checkForUpdates();
+                if (!isCancelled()) {
+                    mService.checkForUpdates();
+                }
             } catch (RemoteException e) {
                 Log.e(TAG, "Exception on calling UpdateCheckService", e);
             }
@@ -81,26 +84,29 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void result) {
-        if (mBound) {
-            mParent.unbindService(mConnection);
-            mBound = false;
-        }
-        mParent.stopService(mServiceIntent);
+        unbindAndStop();
         mParent.updateLayout();
     }
 
     @Override
     protected void onCancelled() {
-        if (mBound) {
-            mParent.unbindService(mConnection);
-            mBound = false;
-        }
-        mParent.stopService(mServiceIntent);
+        unbindAndStop();
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
         }
         mParent.updateLayout();
         super.onCancelled();
+    }
+
+    /**
+     * Unbinds and stops the UpdateCheckService.
+     */
+    private void unbindAndStop() {
+        if (mBound) {
+            mParent.unbindService(mConnection);
+            mBound = false;
+        }
+        mParent.stopService(mServiceIntent);
     }
 
     /**
