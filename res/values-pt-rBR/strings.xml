@@ -9,7 +9,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Atualizador CM</string>
     <string name="unknown">Desconhecido</string>
-    <string name="menu_refresh">Recarregar</string>
+    <string name="menu_refresh">Atualizar</string>
     <string name="menu_delete">Excluir</string>
     <string name="menu_delete_all">Excluir downloads</string>
     <string name="menu_system_info">Info. do sistema</string>
@@ -19,7 +19,7 @@
     <string name="dialog_no">Não</string>
     <string name="dialog_update">Atualizar</string>
     <string name="available_updates_title">Atualizações disponíveis</string>
-    <string name="no_available_updates_intro">A ultima verificação não encontrou nenhuma atualização. Para verificar manualmente por novas atualizações, use o botão Recarregar</string>
+    <string name="no_available_updates_intro">A ultima verificação não encontrou nenhuma atualização. Para verificar manualmente por novas atualizações, use o botão Atualizar</string>
     <string name="new_update_summary">Novo</string>
     <string name="downloaded_update_summary">Baixado</string>
     <string name="backup_rom_title">Criar cópia de segurança</string>
@@ -43,7 +43,7 @@
     <string name="not_new_updates_found_title">Novas atualizações</string>
     <string name="not_new_updates_found_body">{0} atualização(ões) está(ão) para baixar</string>
     <string name="confirm_download_cancelation_dialog_title">Cancelar download</string>
-    <string name="confirm_download_cancelation_dialog_message">Vocês está prestes a cancelar o download atual. Pressione OK para continuar</string>
+    <string name="confirm_download_cancelation_dialog_message">Vocês está prestes a cancelar o download atual. Pressione Sim para continuar</string>
     <string name="download_cancelled">Download foi cancelado</string>
     <string name="download_already_running">Um download já está em andamento</string>
     <string name="unable_to_download_file">Não foi possível baixar o arquivo de atualização</string>
@@ -57,8 +57,8 @@
     <string name="apply_trying_to_get_root_access">Tentando obter acesso root para reiniciar no modo de recuperação</string>
     <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar para a recuperação</string>
     <string name="confirm_delete_dialog_title">Excluir arquivo</string>
-    <string name="confirm_delete_dialog_message">Você está prestes a excluir o arquivo de atualização baixado. Pressione OK para proceder</string>
-    <string name="confirm_delete_all_dialog_message">Você está prestes a excluir todos os arquivos de atualização baixados. Pressione OK para proceder</string>
+    <string name="confirm_delete_dialog_message">Você está prestes a excluir o arquivo de atualização baixado. Pressione Sim para proceder</string>
+    <string name="confirm_delete_all_dialog_message">Você está prestes a excluir todos os arquivos de atualização baixados. Pressione Sim para proceder</string>
     <string name="delete_single_update_success_message">Atualização {0} foi excluída</string>
     <string name="delete_updates_failure_message">Houve um erro ao excluir o arquivo de atualização</string>
     <string name="delete_updates_noFolder_message">Pasta de atualização não foi encontrada</string>
