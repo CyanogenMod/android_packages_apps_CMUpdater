@@ -56,8 +56,7 @@ public class UpdateCheckTask extends AsyncTask<Void, Void, Void> {
     protected void onPreExecute() {
         mProgressDialog.show();
         mServiceIntent = new Intent(IUpdateCheckService.class.getName());
-        ComponentName comp = mParent.startService(mServiceIntent);
-        if (mComp == null) {
+        if (mParent.startService(mServiceIntent) == null) {
             Log.e(TAG, "startService failed");
             mBound = false;
         } else {
