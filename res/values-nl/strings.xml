@@ -85,4 +85,6 @@
     <string name="no_changelog_alert">Geen changelog beschikbaar</string>
     <string name="failed_to_load_changelog">Kan changelog niet laden</string>
     <string name="changelog_dialog_title">Changelog</string>
+
+    <string name="data_connection_required">Gegevensverbinding vereist</string>
 </resources>
