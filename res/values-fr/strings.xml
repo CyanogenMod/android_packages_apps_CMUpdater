@@ -42,14 +42,14 @@
     <string name="check_bi_weekly">Deux fois par mois</string>
     <string name="check_monthly">Mensuellement</string>
 
-    <string name="update_type_title">Versions à rechercher\u00A0:</string>
+    <string name="update_type_title">Versions à rechercher</string>
     <string name="type_all">Toutes les versions (stable uniq.)</string>
     <string name="type_all_incl_nightly">Toutes les versions (dont Nightlies)</string>
     <string name="type_new">Nouvelles versions (stable uniq.)</string>
     <string name="type_new_incl_nightly">Nouvelles versions (dont Nightlies)</string>
 
     <string name="checking_for_updates">Recherche de mises à jour</string>
-    <string name="no_updates_found">Aucune nouvelle mise à jour trouvée</string>
+    <string name="no_updates_found">Aucune nouvelle mise à jour disponible</string>
     <string name="not_new_updates_found_ticker">De nouvelles mises à jour sont disponibles</string>
     <string name="not_new_updates_found_title">Nouvelles mises à jour</string>
     <string name="not_new_updates_found_body">{0} mise(s) à jour disponible au téléchargement</string>
@@ -67,8 +67,7 @@
     <string name="md5_verification_failed">La vérification de la somme de contrôle MD5 a échoué</string>
 
     <string name="apply_update_dialog_title">Appliquer la mise à jour</string>
-    <string name="apply_update_dialog_text">Vous êtes sur le point de passer à {0}.\n\nSi vous appuyez sur Mettre à jour, l\'appareil redémarrera automatiquement en mode recovery pour installer la mise à jour.\n
-          \nRemarque\u00A0: Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
+    <string name="apply_update_dialog_text">Vous êtes sur le point de passer à {0}.\n\nSi vous appuyez sur \"Mettre à jour\", l\u0027appareil redémarrera automatiquement en mode recovery pour installer la mise à jour.\n\nRemarque\u00A0: Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
     <string name="apply_trying_to_get_root_access">Tentative d\'obtention d\'un accès root pour redémarrer en mode recovery</string>
     <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode recovery</string>
 
@@ -82,7 +81,7 @@
 
     <string name="sysinfo_device">Appareil\u00A0:</string>
     <string name="sysinfo_running">Version actuelle\u00A0:</string>
-    <string name="sysinfo_last_check">Dernière vérif.\u00A0:</string>
+    <string name="sysinfo_last_check">Dernière vérification\u00A0:</string>
 
     <string name="no_changelog_alert">Pas de note de mise à jour disponible</string>
     <string name="failed_to_load_changelog">Impossible de charger la note de mise à jour</string>
