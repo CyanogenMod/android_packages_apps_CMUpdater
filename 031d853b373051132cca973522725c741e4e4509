@@ -1,0 +1,9 @@
+Change-Id: I031d853b373051132cca973522725c741e4e4509
+Code-Review+2: David van Tonder <david.vantonder@gmail.com>
+Verified+1: David van Tonder <david.vantonder@gmail.com>
+Code-Review+1: Delphin PETER <delphinpeter@gmail.com>
+Submitted-by: David van Tonder <david.vantonder@gmail.com>
+Submitted-at: Tue, 01 Jan 2013 07:02:05 -0800
+Reviewed-on: http://review.cyanogenmod.org/29403
+Project: CyanogenMod/android_packages_apps_CMUpdater
+Branch: refs/heads/cm-10.1
