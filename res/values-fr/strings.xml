@@ -67,7 +67,7 @@
     <string name="md5_verification_failed">La vérification de la somme de contrôle MD5 a échoué</string>
 
     <string name="apply_update_dialog_title">Appliquer la mise à jour</string>
-    <string name="apply_update_dialog_text">Vous êtes sur le point de passer à {0}.\n\nSi vous appuyez sur \"Mettre à jour\", l\u0027appareil redémarrera automatiquement en mode recovery pour installer la mise à jour.\n\nRemarque\u00A0: Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
+    <string name="apply_update_dialog_text">Vous êtes sur le point de passer à {0}.\n\nSi vous appuyez sur \"Mettre à jour\", l\u0027\u0027appareil redémarrera automatiquement en mode recovery pour installer la mise à jour.\n\nRemarque\u00A0: Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
     <string name="apply_trying_to_get_root_access">Tentative d\'obtention d\'un accès root pour redémarrer en mode recovery</string>
     <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode recovery</string>
 
