@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- General strings -->
+    <string name="app_name">Ενημερώσεις CM</string>
+    <string name="display_name">Ενημερώσεις</string>
+    <string name="unknown">Άγνωστο</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Ανανέωση</string>
+    <string name="menu_delete">Διαγραφή</string>
+    <string name="menu_delete_all">Διαγραφή λήψεων</string>
+    <string name="menu_system_info">Πληροφορίες συστήματος</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Άκυρο</string>
+    <string name="dialog_yes">Ναι</string>
+    <string name="dialog_no">Όχι</string>
+    <string name="dialog_update">Ενημέρωση</string>
+    <string name="dialog_close">Κλείσιμο</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Διαθέσιμες ενημερώσεις</string>
+    <string name="no_available_updates_intro">Ο τελευταίος έλεγχος δεν βρήκε διαθέσιμες ενημερώσεις. Για να ελέγξετε για νέες ενημερώσεις, χρησιμοποιήστε το κουμπί Ανανέωση.</string>
+    <string name="new_update_summary">Νέο</string>
+    <string name="downloaded_update_summary">Κατεβασμένες</string>
+    <string name="installed_update_summary">Εγκατεστημένες</string>
+    <string name="backup_rom_title">Δημιουργία αντίγραφου ασφαλείας</string>
+    <string name="backup_rom_summary">Δημιουργία αντίγραφου ασφαλείας της τρέχουσας ROM πριν την αναβάθμιση</string>
+
+    <string name="update_check_title">Έλεγχος ενημερώσεων</string>
+    <string name="check_manual">Χειροκίνητος</string>
+    <string name="check_on_boot">Σε κάθε εκκίνηση</string>
+    <string name="check_twice_daily">Δύο φορές ημερησίως</string>
+    <string name="check_daily">Κάθε μέρα</string>
+    <string name="check_weekly">Κάθε εβδομάδα</string>
+    <string name="check_bi_weekly">Κάθε 2 εβδομάδες</string>
+    <string name="check_monthly">Κάθε μήνα</string>
+
+    <string name="update_type_title">Τύποι ενημερώσεων</string>
+    <string name="type_all">Όλες οι εκδόσεις (Μόνο Stable)</string>
+    <string name="type_all_incl_nightly">Όλες οι εκδόσεις (συμπεριλ. Nightlies)</string>
+    <string name="type_new">Νέες εκδόσεις (Μόνο Stable)</string>
+    <string name="type_new_incl_nightly">Νέες εκδόσεις (συμπεριλ. Nightlies)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Έλεγχος για ενημερώσεις</string>
+    <string name="no_updates_found">Δεν βρέθηκαν ενημερώσεις</string>
+    <string name="not_new_updates_found_ticker">Υπάρχουν διαθέσιμες ενημερώσεις</string>
+    <string name="not_new_updates_found_title">Νέες ενημερώσεις</string>
+    <string name="not_new_updates_found_body">{0} διαθέσιμες ενημερώσεις</string>
+    <string name="data_connection_required">Απαιτείται σύνδεση δεδομένων.</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Ακύρωση λήψης</string>
+    <string name="confirm_download_cancelation_dialog_message">Είστε έτοιμος να ακυρώσετε την τρέχουσα λήψη. Συνέχεια;</string>
+    <string name="download_cancelled">Η λήψη ακυρώθηκε</string>
+    <string name="download_already_running">Μια λήψη εκτελείται ήδη</string>
+    <string name="unable_to_download_file">Δεν είναι δυνατή η λήψη της ενημέρωσης</string>
+    <string name="download_not_found">Η λήψη δεν βρέθηκε</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Σφάλμα. Αναντιστοιχία MD5 checksum</string>
+    <string name="md5_check_cancelled">Ο έλεγχος του MD5 ακυρώθηκε</string>
+    <string name="md5_verification_failed">Η επαλήθευση του MD5 απέτυχε</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Εφαρμογή ενημέρωσης</string>
+    <string name="apply_update_dialog_text">Πρόκειται να αναβαθμίσετε σε {0}.\n\nΑν πατήσετε το πλήκτρο Ενημέρωση, η συσκευή θα κάνει επανεκκίνηση σε recovery mode για να εγκαταστήσετε την ενημέρωση.\n
+        \nNote: Σημείωση: Αυτή η λειτουργία απαιτεί μια συμβατή recovery αλλιώς η ενημέρωση θα πρέπει να εγκατασταθεί χειροκίνητα.</string>
+    <string name="apply_trying_to_get_root_access">Προσπάθεια πρόσβασης root για επανεκκίνηση σε recovery mode</string>
+    <string name="apply_unable_to_reboot_toast">Δεν είναι δυνατή η επανεκκίνηση σε recovery mode</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Διαγραφή αρχείου</string>
+    <string name="confirm_delete_dialog_message">Πρόκειται να διαγράψετε το αρχείο της ενημέρωσης. Συνέχεια;</string>
+    <string name="confirm_delete_all_dialog_message">Πρόκειται να διαγράψετε όλα τα αρχεία των ενημερώσεων. Συνέχεια;</string>
+    <string name="delete_single_update_success_message">Η ενημέρωση {0} διαγράφηκε</string>
+    <string name="delete_updates_failure_message">Υπήρξε ένα σφάλμα κατά τη διαγραφή της ενημέρωσης</string>
+    <string name="delete_updates_noFolder_message">Ο φάκελος ενημερώσεων δεν βρέθηκε</string>
+    <string name="delete_updates_success_message">Όλες οι ενημερώσεις διαγράφηκαν</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Συσκευή:</string>
+    <string name="sysinfo_running">Τρέχει:</string>
+    <string name="sysinfo_last_check">Τελευταίος έλεγχος:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">Δεν υπάρχει διαθέσιμο αρχείο αλλαγών</string>
+    <string name="failed_to_load_changelog">Δεν είναι δυνατή η φόρτωση του αρχείου αλλαγών</string>
+    <string name="changelog_dialog_title">Αρχείο αλλαγών</string>
+</resources>
