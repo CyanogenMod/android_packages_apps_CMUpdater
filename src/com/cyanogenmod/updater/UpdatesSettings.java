@@ -406,7 +406,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.confirm_download_cancelation_dialog_title);
         builder.setMessage(R.string.confirm_download_cancelation_dialog_message);
-        builder.setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Set the preference back to new style
                 UpdatePreference pref = findMatchingPreference(mFileName);
@@ -426,7 +426,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                 Toast.makeText(UpdatesSettings.this, R.string.download_cancelled, Toast.LENGTH_SHORT).show();
             }
         });
-        builder.setNegativeButton(R.string.dialog_no, null);
+        builder.setNegativeButton(R.string.dialog_cancel, null);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -731,14 +731,14 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.confirm_delete_dialog_title);
         builder.setMessage(R.string.confirm_delete_all_dialog_message);
-        builder.setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // We are OK to delete, trigger it
                 deleteOldUpdates();
                 updateLayout();
             }
         });
-        builder.setNegativeButton(R.string.dialog_no, null);
+        builder.setNegativeButton(R.string.dialog_cancel, null);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
