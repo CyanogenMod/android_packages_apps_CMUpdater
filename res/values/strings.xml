@@ -60,7 +60,7 @@
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">Cancel download</string>
-    <string name="confirm_download_cancelation_dialog_message">You are about to cancel the current download, OK to proceed?</string>
+    <string name="confirm_download_cancelation_dialog_message">Cancel the current download?</string>
     <string name="download_cancelled">Download cancelled</string>
     <string name="download_already_running">A download is already running</string>
     <string name="unable_to_download_file">Unable to download the update file</string>
@@ -80,8 +80,8 @@
 
     <!-- deleting -->
     <string name="confirm_delete_dialog_title">Delete file</string>
-    <string name="confirm_delete_dialog_message">You are about to delete the downloaded update file, OK to proceed?</string>
-    <string name="confirm_delete_all_dialog_message">You are about to delete all downloaded update files, OK to proceed?</string>
+    <string name="confirm_delete_dialog_message">Delete the selected update file?</string>
+    <string name="confirm_delete_all_dialog_message">Delete all downloaded update files?</string>
     <string name="delete_single_update_success_message">Update {0} deleted</string>
     <string name="delete_updates_failure_message">There was an error deleting the update file</string>
     <string name="delete_updates_noFolder_message">Update folder not found</string>
