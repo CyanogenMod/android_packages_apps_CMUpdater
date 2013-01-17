@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- General strings -->
+    <string name="app_name">מעדכן CM</string>
+    <string name="display_name">עדכונים</string>
+    <string name="unknown">לא ידוע</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">רענן</string>
+    <string name="menu_delete">מחק</string>
+    <string name="menu_delete_all">מחק הורדות</string>
+    <string name="menu_system_info">מידע מערכת</string>
+
+    <string name="dialog_ok">אישור</string>
+    <string name="dialog_cancel">ביטול</string>
+    <string name="dialog_yes">כן</string>
+    <string name="dialog_no">לא</string>
+    <string name="dialog_update">עדכן</string>
+    <string name="dialog_close">סגור</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">עדכונים זמינים</string>
+    <string name="no_available_updates_intro">הבדיקה האחרונה לא מצאה אף עדכון. כדי לבדוק באופן ידני, השתמש במקש \"רענן\".</string>
+    <string name="new_update_summary">חדש</string>
+    <string name="downloaded_update_summary">הורד</string>
+    <string name="installed_update_summary">מותקן</string>
+    <string name="backup_rom_title">צור גיבוי</string>
+    <string name="backup_rom_summary">גבה את ה-ROM הנוכחי לפני התקנה.</string>
+
+    <string name="update_check_title">בדיקת עדכונים</string>
+    <string name="check_manual">ידנית</string>
+    <string name="check_on_boot">בכל אתחול</string>
+    <string name="check_twice_daily">פעמיים ביום</string>
+    <string name="check_daily">יומית</string>
+    <string name="check_weekly">שבועית</string>
+    <string name="check_bi_weekly">אחת לשבועיים</string>
+    <string name="check_monthly">חודשית</string>
+
+    <string name="update_type_title">סוגי עדכונים</string>
+    <string name="type_all">כל הגרסאות (יציבות בלבד)</string>
+    <string name="type_all_incl_nightly">כל הגרסאות (כולל ליליות)</string>
+    <string name="type_new">גרסאות חדשות (יציבות בלבד)</string>
+    <string name="type_new_incl_nightly">גרסאות חדשות (כולל ליליות)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">מחפש עדכונים</string>
+    <string name="no_updates_found">לא נמצאו עדכונים חדשים</string>
+    <string name="not_new_updates_found_ticker">עדכונים חדשים זמינים</string>
+    <string name="not_new_updates_found_title">עדכונים חדשים</string>
+    <string name="not_new_updates_found_body">{0} עדכונים זמינים להורדה</string>
+    <string name="data_connection_required">נדרש חיבור נתונים.</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">בטל הורדה</string>
+    <string name="confirm_download_cancelation_dialog_message">אתה עומד לבטל את ההורדה הנוכחית, לחץ על \"כן\" להמשך.</string>
+    <string name="download_cancelled">ההורדה בוטלה</string>
+    <string name="download_already_running">הורדה כבר מתבצעת</string>
+    <string name="unable_to_download_file">הורדת קובץ העדכון נכשלה</string>
+    <string name="download_not_found">ההורדה לא נמצאה</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">שגיאה. חוסר התאמה במחרוזת ה-MD5</string>
+    <string name="md5_check_cancelled">בדיקת MD5 בוטלה</string>
+    <string name="md5_verification_failed">אימות MD5 נכשל</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">החל עדכון</string>
+    <string name="apply_update_dialog_text">אתה עומד לעדכן ל-{0}.\n\nאם תלחץ על \"עדכן\", המכשיר יאתחל את עצמו למצב \"Rocovery\" על מנת להתקין את העדכון.\n
+        \nהערה: אפשרות זו דורשת Recovery תואם, או שפעולת התקנת העדכונים תיאלץ להיעשות באופן ידני.</string>
+    <string name="apply_trying_to_get_root_access">מנסה להשיג גישת root כדי לאתחל למצב \"Recovery\"</string>
+    <string name="apply_unable_to_reboot_toast">נכשל לאתחל למצב \"Recovery\"</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">מחק קובץ</string>
+    <string name="confirm_delete_dialog_message">אתה עומד למחוק את הקובץ הנוכחי, לחץ על \"כן\" להמשך.</string>
+    <string name="confirm_delete_all_dialog_message">אתה עומד למחוק את כל קובצי העדכון שהורדו, לחץ על \"כן\" להמשך.</string>
+    <string name="delete_single_update_success_message">עדכון {0} נמחק</string>
+    <string name="delete_updates_failure_message">אירעה שגיאה בעת נסיון למחוק את הקובץ</string>
+    <string name="delete_updates_noFolder_message">תיקיית העדכונים לא נמצאה</string>
+    <string name="delete_updates_success_message">כל העדכונים שהורדו נמחקו</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">מכשיר:</string>
+    <string name="sysinfo_running">מריץ:</string>
+    <string name="sysinfo_last_check">בדיקה אחרונה:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">תיעוד שינויים לא זמין</string>
+    <string name="failed_to_load_changelog">נכשל בטעינת תיעוד השינויים</string>
+    <string name="changelog_dialog_title">תיעוד שינויים</string>
+</resources>
