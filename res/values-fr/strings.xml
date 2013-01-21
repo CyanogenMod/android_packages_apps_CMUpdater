@@ -72,8 +72,8 @@
     <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode recovery</string>
 
     <string name="confirm_delete_dialog_title">Supprimer le fichier</string>
-    <string name="confirm_delete_dialog_message">Vous êtes sur le point de supprimer le fichier de mise à jour téléchargé, souhaitez-vous continuer\u00A0?</string>
-    <string name="confirm_delete_all_dialog_message">Vous êtes sur le point de supprimer tous les fichiers de mise à jour téléchargés, souhaitez-vous continuer\u00A0?</string>
+    <string name="confirm_delete_dialog_message">Supprimer le fichier de mise à jour sélectionné\u00A0?</string>
+    <string name="confirm_delete_all_dialog_message">Supprimer tous les fichiers de mise à jour\u00A0?</string>
     <string name="delete_single_update_success_message">Mise à jour {0} supprimée</string>
     <string name="delete_updates_failure_message">Une erreur est survenue lors de la suppression des fichiers de mise à jour</string>
     <string name="delete_updates_noFolder_message">Dossier de mise à jour introuvable</string>
