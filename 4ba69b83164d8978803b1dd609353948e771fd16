@@ -1,0 +1,12 @@
+Change-Id: I4ba69b83164d8978803b1dd609353948e771fd16
+Code-Review+1: coudu <coudu@wanadoo.fr>
+Code-Review+2: Marco Brohet <therbom@gmail.com>
+Code-Review+1: Florent Imfloflo <imfloflo@gmail.com>
+Code-Review+1: Delphin PETER <delphinpeter@gmail.com>
+Verified+1: Cid
+Code-Review+1: Gaétan Porcellana <gaetan@porcellana.me>
+Submitted-by: Marco Brohet <therbom@gmail.com>
+Submitted-at: Tue, 22 Jan 2013 07:34:01 -0800
+Reviewed-on: http://review.cyanogenmod.org/30632
+Project: CyanogenMod/android_packages_apps_CMUpdater
+Branch: refs/heads/cm-10.1
