@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- General strings -->
+    <string name="app_name">CM Updater</string>
+    <string name="display_name">Atnaujinimai</string>
+    <string name="unknown">Nežinomas</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Tikrinti</string>
+    <string name="menu_delete">Trinti</string>
+    <string name="menu_delete_all">Trinti atsiųstus</string>
+    <string name="menu_system_info">Sistemos informacija</string>
+
+    <string name="dialog_ok">Gerai</string>
+    <string name="dialog_cancel">Atšaukti</string>
+    <string name="dialog_yes">Taip</string>
+    <string name="dialog_no">Ne</string>
+    <string name="dialog_update">Atnaujinti</string>
+    <string name="dialog_close">Uždaryti</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Galimi atnaujinimai</string>
+    <string name="no_available_updates_intro">Paskutinį kartą nerasta jokių atnaujinimų. Norint pamatyti ar yra atnaijinimas, bakstelkite ant Tikrinti.</string>
+    <string name="new_update_summary">Naujas</string>
+    <string name="downloaded_update_summary">Atsiųstas</string>
+    <string name="installed_update_summary">Įdiegtas</string>
+    <string name="backup_rom_title">Kurti atsarginę kopiją</string>
+    <string name="backup_rom_summary">Kurti atsarginę kopiją esamos versijos prieš atnaujinimą</string>
+
+    <string name="update_check_title">Tikrinti atnaujinimams</string>
+    <string name="check_manual">Rankiniu būdu</string>
+    <string name="check_on_boot">Įsijungimo metu</string>
+    <string name="check_twice_daily">Du kartus per dieną</string>
+    <string name="check_daily">Kas dieną</string>
+    <string name="check_weekly">Kas savaitę</string>
+    <string name="check_bi_weekly">Kas antrą savaitę</string>
+    <string name="check_monthly">Kas mėnesį</string>
+
+    <string name="update_type_title">Atnaujinimų tipai</string>
+    <string name="type_all">Visos versijos (Tik stabilios)</string>
+    <string name="type_all_incl_nightly">Visos versijos (su. Naktinėmis)</string>
+    <string name="type_new">Naujos versijos (Tik stabilios)</string>
+    <string name="type_new_incl_nightly">Naujos versijos (su. Naktinėmis)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Tikrinama</string>
+    <string name="no_updates_found">Atnaujinimų nerasta</string>
+    <string name="not_new_updates_found_ticker">Atnaujinimai rasti</string>
+    <string name="not_new_updates_found_title">Atnaujinimai</string>
+    <string name="not_new_updates_found_body">{0} atnaujinimas(ų) pasiekiami</string>
+    <string name="data_connection_required">Reikalingas duomenų ryšys.</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Atšaukti siuntimą</string>
+    <string name="confirm_download_cancelation_dialog_message">Ruošiatės atšaukti siuntimą, tęsti?</string>
+    <string name="download_cancelled">Siuntimas atšauktas</string>
+    <string name="download_already_running">Jau atsiunčiama</string>
+    <string name="unable_to_download_file">Nepavyko atsiųsti atnaujinimo</string>
+    <string name="download_not_found">Failas nerastas</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Klaida. MD5 rezultatai nesutampa</string>
+    <string name="md5_check_cancelled">MD5 tikrinimas atšauktas</string>
+    <string name="md5_verification_failed">MD5 tikrinimo klaida</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Atnaujinti</string>
+    <string name="apply_update_dialog_text">Ruošiatės atnaujinti į {0}.\n\nJei spausite atnaujinti, Įrenginys persikraus ir pats įdiegs atnaujinimą.\n
+        \nPastaba: Šiai funkcijai reikalingas tinkamas recovery.</string>
+    <string name="apply_trying_to_get_root_access">Ruošiamasi atnaujinimui</string>
+    <string name="apply_unable_to_reboot_toast">Nepavyko perkrauti</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Trinti failą</string>
+    <string name="confirm_delete_dialog_message">Ruošiatės trinti atsiųstą atnaujinimą, tęsti?</string>
+    <string name="confirm_delete_all_dialog_message">Ruošiatės trinti visus atsiųstus atnaujinimus, tęsti?</string>
+    <string name="delete_single_update_success_message">Atnaujinimas {0} ištrintas</string>
+    <string name="delete_updates_failure_message">Nepavyko ištrinti atnaujinimo</string>
+    <string name="delete_updates_noFolder_message">Atnaujinimo aplankas nerastas</string>
+    <string name="delete_updates_success_message">Visi parsiųsti atnaujinimai ištrinti</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Įrenginys:</string>
+    <string name="sysinfo_running">Įdiegta:</string>
+    <string name="sysinfo_last_check">Tikrinta:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">Pakeitimų sąrašas nepasiekiamas</string>
+    <string name="failed_to_load_changelog">Nepavyko parodyti pakeitimų sąrašo</string>
+    <string name="changelog_dialog_title">Pakeitimų sąrašas</string>
+</resources>
