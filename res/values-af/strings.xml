@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- General strings -->
+    <string name="app_name">CM Opgradeerder</string>
+    <string name="display_name">Opgraderings</string>
+    <string name="unknown">Onbekend</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Herlaai</string>
+    <string name="menu_delete">Verwyder</string>
+    <string name="menu_delete_all">Verwyder alles</string>
+    <string name="menu_system_info">Stelsel inligting</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Kanselleer</string>
+    <string name="dialog_yes">Ja</string>
+    <string name="dialog_no">Nee</string>
+    <string name="dialog_update">Opgradeer</string>
+    <string name="dialog_close">Sluit</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Beskikbare opgraderings</string>
+    <string name="no_available_updates_intro">Tydens laaste outamatiese soek is geen beskikbare opgraderings gevind nie. Om self te soek, gebruik die Herlaai knoppie.</string>
+    <string name="new_update_summary">Nuut</string>
+    <string name="downloaded_update_summary">Afgelaai</string>
+    <string name="installed_update_summary">Geïnstalleer</string>
+    <string name="backup_rom_title">Rugsteuning</string>
+    <string name="backup_rom_summary">Maak \'n rugsteunkopie van huidige ROM voor opgradering</string>
+
+    <string name="update_check_title">Soek vir opgraderings</string>
+    <string name="check_manual">Handmatig</string>
+    <string name="check_on_boot">Op elke \'boot\'</string>
+    <string name="check_twice_daily">Twee keer per dag</string>
+    <string name="check_daily">Daagliks</string>
+    <string name="check_weekly">Weekliks</string>
+    <string name="check_bi_weekly">Twee-weekliks</string>
+    <string name="check_monthly">Maandeliks</string>
+
+    <string name="update_type_title">Opgradering tipes</string>
+    <string name="type_all">Alle weergawes (slegs stabiel)</string>
+    <string name="type_all_incl_nightly">Alle weergawes  (insl. \'Nightlies\')</string>
+    <string name="type_new">Nuwe weergawes (slegs stabiel)</string>
+    <string name="type_new_incl_nightly">Nuwe weerwages (insl. \'Nightlies\')</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Soek vir opgraderings.</string>
+    <string name="no_updates_found">Geen nuwe upgraderings gevind nie</string>
+    <string name="not_new_updates_found_ticker">Nuwe opgraderings is beskikbaar</string>
+    <string name="not_new_updates_found_title">Nuwe opgraderings</string>
+    <string name="not_new_updates_found_body">{0} opgradering(s) beskikbaar vir aflaai</string>
+    <string name="data_connection_required">\'n Data verbinding word benodig.</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Kanselleer aflaai</string>
+    <string name="confirm_download_cancelation_dialog_message">Die huidige aflaai gaan gekanselleer work, Ok om voort te gaan?</string>
+    <string name="download_cancelled">Aflaai is gekanselleer</string>
+    <string name="download_already_running">\'n Aflaai is reeds aan die gang</string>
+    <string name="unable_to_download_file">Kon nie die lêer aflaai nie</string>
+    <string name="download_not_found">Die afgelaaide lêer kon nie gevind word nie</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Fout. MD5 kontrolesom nie-ooreenstemming</string>
+    <string name="md5_check_cancelled">MD5 nagaan gekanselleer</string>
+    <string name="md5_verification_failed">MD5 verifikasie het misluk</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Pas opgradering toe</string>
+    <string name="apply_update_dialog_text">Die toestel gaan opgegradeer word na {0}\n\nAs u die Opgradeer knoppie druk sal die toestel self herlaai om die opgradering te installeer.\n\nLet wel: Hierdie funksie vereis \'n versoenbaare \'recovery\' andersins sal die opgradering handmatig geïnstalleer moet word</string>
+    <string name="apply_trying_to_get_root_access">Probeer root-toegang verkry om te herlaai</string>
+    <string name="apply_unable_to_reboot_toast">Kon nie herlaai in \'recovery\' nie</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Skrap lêer</string>
+    <string name="confirm_delete_dialog_message">Die afgelaaide lêer gaan verwyder word, Ok om voort te gaan?</string>
+    <string name="confirm_delete_all_dialog_message">Al die afgelaaide lêers gaan verwyder word, Ok om voort te gaan?</string>
+    <string name="delete_single_update_success_message">Opgradering {0} geskrap</string>
+    <string name="delete_updates_failure_message">Daar was \'n fout tydens die verwydering van die lêer</string>
+    <string name="delete_updates_noFolder_message">Opgradering vouer nie gevind nie</string>
+    <string name="delete_updates_success_message">Alle afgelaaide opgraderings geskrap</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Toestel:</string>
+    <string name="sysinfo_running">Huidiglik:</string>
+    <string name="sysinfo_last_check">Laaste soek:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">Geen Veranderinge-log beskikbaar nie</string>
+    <string name="failed_to_load_changelog">Kon nie Veranderinge-log laai nie</string>
+    <string name="changelog_dialog_title">Veranderinge-log</string>
+
+</resources>
