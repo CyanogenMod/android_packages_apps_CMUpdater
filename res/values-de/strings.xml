@@ -9,7 +9,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- General strings -->
-    <string name="app_name">CM-Updater</string>
+    <string name="app_name">CyanogenMod-Updater</string>
     <string name="display_name">Updates</string>
     <string name="unknown">Unbekannt</string>
 
@@ -17,7 +17,7 @@
     <string name="menu_refresh">Aktualisieren</string>
     <string name="menu_delete">Löschen</string>
     <string name="menu_delete_all">Downloads löschen</string>
-    <string name="menu_system_info">Systeminformation</string>
+    <string name="menu_system_info">Systeminformationen</string>
 
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Abbrechen</string>
@@ -28,14 +28,14 @@
 
     <!-- Settings strings -->
     <string name="available_updates_title">Verfügbare Updates</string>
-    <string name="no_available_updates_intro">Es wurden keine Updates gefunden. Um manuell auf eine neue Version zu prüfen, drücke \"Aktualisieren\".</string>
+    <string name="no_available_updates_intro">Es wurden keine Updates gefunden. \"Aktualisieren\" berühren, um manuell auf eine neue Version zu prüfen.</string>
     <string name="new_update_summary">Neu</string>
     <string name="downloaded_update_summary">Heruntergeladen</string>
     <string name="installed_update_summary">Installiert</string>
     <string name="backup_rom_title">Backup erstellen</string>
     <string name="backup_rom_summary">Aktuelles ROM vor dem Update sichern</string>
 
-    <string name="update_check_title">Prüfe auf Updates</string>
+    <string name="update_check_title">Überprüfungsintervall</string>
     <string name="check_manual">Manuell</string>
     <string name="check_on_boot">Bei jedem Start</string>
     <string name="check_twice_daily">Zweimal täglich</string>
@@ -45,18 +45,18 @@
     <string name="check_monthly">Monatlich</string>
 
     <string name="update_type_title">Update-Typen</string>
-    <string name="type_all">Alle Versionen\n(nur Stable)</string>
-    <string name="type_all_incl_nightly">Alle Versionen\n(inkl. Nightlies)</string>
-    <string name="type_new">Neue Versionen\n(nur Stable)</string>
-    <string name="type_new_incl_nightly">Neue Versionen\n(inkl. Nightlies)</string>
+    <string name="type_all">Nur stabile Versionen</string>
+    <string name="type_all_incl_nightly">Alle Versionen (inkl. Nightlies)</string>
+    <string name="type_new">Nur neue stabile Versionen</string>
+    <string name="type_new_incl_nightly">Neue Versionen (inkl. Nightlies)</string>
 
     <!-- Update checking -->
-    <string name="checking_for_updates">Prüfe auf Updates</string>
+    <string name="checking_for_updates">Updates werden gesucht</string>
     <string name="no_updates_found">Keine Updates gefunden</string>
     <string name="not_new_updates_found_ticker">Neue Updates sind verfügbar</string>
     <string name="not_new_updates_found_title">Neue Updates</string>
     <string name="not_new_updates_found_body">{0} Update(s) zum Download verfügbar</string>
-    <string name="data_connection_required">Eine Datenverbindung wird benötigt.</string>
+    <string name="data_connection_required">Eine Datenverbindung wird benötigt</string>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">Download abbrechen</string>
@@ -73,12 +73,12 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Update installieren</string>
-    <string name="apply_update_dialog_text">Bereit zum Update auf {0}.\n\nNach dem Drücken auf Update, wird das Gerät im Recovery-Modus gestartet, um das Update durchzuführen.\n\nDiese Funktion erfordert ein kompatibles Recovery-System.</string>
-    <string name="apply_trying_to_get_root_access">Root-Zugriff anfordern, um in den Recovery-Modus zu starten.</string>
+    <string name="apply_update_dialog_text">Bereit zum Update auf {0}.\n\nNach dem Start des Updates wird das Gerät im Recovery-Modus gestartet, um das Update durchzuführen.\n\nHinweis: Diese Funktion erfordert ein kompatibles Recovery-System, anderenfalls muss das Update manuell installiert werden.</string>
+    <string name="apply_trying_to_get_root_access">Es wird Root-Zugriff angefordert, um in den Recovery-Modus zu starten</string>
     <string name="apply_unable_to_reboot_toast">Neustart in den Recovery-Modus nicht möglich</string>
 
     <!-- deleting -->
-    <string name="confirm_delete_dialog_title">Lösche Datei</string>
+    <string name="confirm_delete_dialog_title">Datei löschen</string>
     <string name="confirm_delete_dialog_message">Soll die heruntergeladene Update-Datei gelöscht werden?</string>
     <string name="confirm_delete_all_dialog_message">Sollen alle heruntergeladenen Update-Dateien gelöscht werden?</string>
     <string name="delete_single_update_success_message">Update {0} gelöscht</string>
@@ -92,7 +92,7 @@
     <string name="sysinfo_last_check">Letzte Prüfung:</string>
 
     <!-- changelog strings -->
-    <string name="no_changelog_alert">Kein Changelog verfügbar</string>
-    <string name="failed_to_load_changelog">Changelog konnte nicht geladen werden</string>
-    <string name="changelog_dialog_title">Changelog</string>
+    <string name="no_changelog_alert">Kein Änderungsprotokoll verfügbar</string>
+    <string name="failed_to_load_changelog">Änderungsprotokoll konnte nicht geladen werden</string>
+    <string name="changelog_dialog_title">Änderungsprotokoll</string>
 </resources>
