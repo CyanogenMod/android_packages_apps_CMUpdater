@@ -57,6 +57,7 @@ import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.State;
 import com.cyanogenmod.updater.service.UpdateCheckService;
 import com.cyanogenmod.updater.tasks.UpdateCheckTask;
+import com.cyanogenmod.updater.tasks.UpdatePreparationTask;
 import com.cyanogenmod.updater.utils.SysUtils;
 import com.cyanogenmod.updater.utils.UpdateFilter;
 
@@ -67,7 +68,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -505,7 +505,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
         // Read existing Updates
         List<String> existingFilenames = null;
-        mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/cmupdater");
+        mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/" + Constants.UPDATES_FOLDER);
         FilenameFilter f = new UpdateFilter(".zip");
         File[] files = mUpdateFolder.listFiles(f);
 
@@ -793,6 +793,18 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                 android.R.style.TextAppearance_DeviceDefault_Small);
     }
 
+    public void triggerReboot() {
+        // Trigger the reboot
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        powerManager.reboot("recovery");
+    }
+
+    public void updatePreparationFailed() {
+        // Preparation failed so tell the user and clear the state flag
+        Toast.makeText(this, R.string.apply_unable_to_reboot_toast, Toast.LENGTH_SHORT).show();
+        mStartUpdateVisible = false;
+    }
+
     protected void startUpdate(final UpdateInfo updateInfo) {
         // Prevent the dialog from being triggered more than once
         if (mStartUpdateVisible) {
@@ -812,6 +824,13 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             builder.setMessage(dialogBody);
             builder.setPositiveButton(R.string.dialog_update, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
+                    boolean useCachePartition = getResources().getBoolean(R.bool.useCachePartition);
+                    List<String> commands = new ArrayList<String>();
+                    String updatePackage;
+
+                    // Dismiss the are-you-sure dialog
+                    dialog.dismiss();
+
                     /*
                      * Should perform the following steps.
                      * 0.- Ask the user for a confirmation (already done when we reach here)
@@ -821,39 +840,45 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                      * 4.- echo '--update_package=SDCARD:update.zip' >> /cache/recovery/command
                      * 5.- reboot recovery
                      */
-                    try {
-                        // Set the 'boot recovery' command
-                        Process p = Runtime.getRuntime().exec("sh");
-                        OutputStream os = p.getOutputStream();
-                        os.write("mkdir -p /cache/recovery/\n".getBytes());
-                        os.write("echo 'boot-recovery' >/cache/recovery/command\n".getBytes());
 
-                        // See if backups are enabled and add the nandroid flag
-                        /* TODO: add this back once we have a way of doing backups that is not recovery specific
-                        SharedPreferences prefs = getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
-                        if (prefs.getBoolean(Constants.BACKUP_PREF, true)) {
-                            os.write("echo '--nandroid'  >> /cache/recovery/command\n".getBytes());
-                        }
-                        */
+                    // Set the 'boot recovery' command
+                    commands.add("mkdir -p /cache/recovery/");
+                    commands.add("echo 'boot-recovery' >/cache/recovery/command");
 
-                        // Add the update folder/file name
+                    // See if backups are enabled and add the nandroid flag
+                    /* TODO: add this back once we have a way of doing backups that is not recovery specific
+                    SharedPreferences prefs = getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+                    if (prefs.getBoolean(Constants.BACKUP_PREF, true)) {
+                        commands.add("echo '--nandroid'  >> /cache/recovery/command");
+                    }
+                    */
+
+                    if (useCachePartition) {
+                        // DownloadManager cannot download directly to /cache so copy the update package that
+                        // was downloaded to external storage.
+                        // 0.- Make the directory in case it doesn't exist (mkdir -p /cache/cmupdater)
+                        // 1.- Remove any old updates (rm -rf /cache/cmupdater)
+                        // 2.- Copy the update package from the download area (cp <src> /cache/cmupdater)
+                        String srcFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"
+                            + Constants.UPDATES_FOLDER + "/" + updateInfo.getFileName();
+                        String dstPath = "/cache/" + Constants.UPDATES_FOLDER;
+                        commands.add("rm -rf " + dstPath);
+                        commands.add("mkdir -p " + dstPath);
+                        commands.add("cp " + srcFile + " " + dstPath);
+                        updatePackage = dstPath + "/" + updateInfo.getFileName();
+                    } else {
                         // Emulated external storage moved to user-specific paths in 4.2
                         String userPath = Environment.isExternalStorageEmulated() ? ("/" + UserHandle.myUserId()) : "";
 
-                        String cmd = "echo '--update_package="+getStorageMountpoint() + userPath
-                                + "/" + Constants.UPDATES_FOLDER + "/" + updateInfo.getFileName()
-                                + "' >> /cache/recovery/command\n";
-                        os.write(cmd.getBytes());
-                        os.flush();
-
-                        // Trigger the reboot
-                        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-                        powerManager.reboot("recovery");
-
-                    } catch (IOException e) {
-                        Log.e(TAG, "Unable to reboot into recovery mode:", e);
-                        Toast.makeText(UpdatesSettings.this, R.string.apply_unable_to_reboot_toast, Toast.LENGTH_SHORT).show();
+                        // Form the path to the package file as seen in recovery
+                        updatePackage = getStorageMountpoint() + userPath + "/" + Constants.UPDATES_FOLDER
+                            + "/" + updateInfo.getFileName();
                     }
+
+                    commands.add("echo '--update_package=" + updatePackage + "' >> /cache/recovery/command");
+
+                    UpdatePreparationTask task = new UpdatePreparationTask(UpdatesSettings.this, commands, useCachePartition);
+                    task.execute((Void) null);
                 }
             });
             builder.setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
@@ -871,6 +896,12 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         StorageVolume[] volumes = sm.getVolumeList();
         String primaryStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath();
         boolean alternateIsInternal = getResources().getBoolean(R.bool.alternateIsInternal);
+        boolean useCachePartition = getResources().getBoolean(R.bool.useCachePartition);
+
+        if (useCachePartition) {
+            // place the update file on the cache partition
+            return "/cache";
+        }
 
         if (volumes.length <= 1) {
             // single storage, assume only /sdcard exists
