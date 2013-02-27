@@ -11,4 +11,7 @@
     <string name="conf_update_server_url_def" translatable="false">http://get.cm/api</string>
     <string name="conf_changelog_url" translatable="false">http://localhost/changelog.xml</string>
     <bool name="alternateIsInternal">false</bool>
+
+    <!-- Set to use the /cache partition to store the update file. -->
+    <bool name="useCachePartition">false</bool>
 </resources>
