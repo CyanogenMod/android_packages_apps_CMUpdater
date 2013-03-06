@@ -349,7 +349,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                     // Do nothing
                 }
                 request.setTitle(getString(R.string.app_name));
-                request.setDescription(ui.getFileName());
                 request.setDestinationUri(Uri.parse(fullFilePath));
                 request.setAllowedOverRoaming(false);
                 request.setVisibleInDownloadsUi(false);
