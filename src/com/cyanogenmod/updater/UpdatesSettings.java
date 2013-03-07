@@ -36,6 +36,7 @@ import android.os.PowerManager;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
+import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -895,6 +896,13 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                     return "/emmc";
                 }
             };
+        }
+        /* Provide a method to specify the recovery sdcard location where updates
+         * will be on systems with non-standard sdcard naming.
+         */
+        String valueCMUpdaterSD = SystemProperties.get("ro.cm.updater.sdcard", "");
+        if (valueCMUpdaterSD != null) {
+            return "/" + SystemProperties.get("ro.cm.updater.sdcard");
         }
         // Not found, assume non-alternate
         return "/sdcard";
