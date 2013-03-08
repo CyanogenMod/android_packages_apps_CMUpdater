@@ -58,8 +58,8 @@
     <string name="not_new_updates_found_body">{0} обновления(ий) доступно для загрузки</string>
 
     <!-- Downloads -->
-    <string name="confirm_download_cancelation_dialog_title">Отменить загрузку?</string>
-    <string name="confirm_download_cancelation_dialog_message">Вы можете возобновить загрузку позже, запустив обновление ещё раз</string>
+    <string name="confirm_download_cancelation_dialog_title">Отменить загрузку</string>
+    <string name="confirm_download_cancelation_dialog_message">Отменить текущую загрузку?</string>
     <string name="download_cancelled">Загрузка отменена</string>
     <string name="download_already_running">Загрузка уже выполняется</string>
     <string name="unable_to_download_file">Не удалось загрузить файл обновления</string>
@@ -71,14 +71,14 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Применить обновление</string>
-    <string name="apply_update_dialog_text">Вы собираетесь обновиться на {0}.\n\nПри нажатии кнопки \"Обновить\", устройство перезагрузится в режим recovery для установки обновления. \n\nПримечание: эта функция требует совместимого recovery, в противном случае обновление необходимо установить вручную.</string>
+    <string name="apply_update_dialog_text">Вы собираетесь обновиться на {0}.\n\nПри нажатии кнопки \"Обновить\", устройство перезагрузится в режим recovery для установки обновления. \n\nПримечание: эта функция требует совместимого recovery, в противном случае обновление необходимо установить вручную</string>
     <string name="apply_trying_to_get_root_access">Попытка получить root-доступ для перезагрузки в режим recovery</string>
     <string name="apply_unable_to_reboot_toast">Невозможно перезагрузиться в режим recovery</string>
 
     <!-- deleting -->
     <string name="confirm_delete_dialog_title">Удалить файл</string>
-    <string name="confirm_delete_dialog_message">Вы собираетесь удалить загруженный файл обновления. Нажмите \"Да\" для продолжения.</string>
-    <string name="confirm_delete_all_dialog_message">Вы собираетесь удалить все загруженные файлы обновлений. Нажмите \"Да\" для продолжения.</string>
+    <string name="confirm_delete_dialog_message">Удалить выбранный файл обновления?</string>
+    <string name="confirm_delete_all_dialog_message">Удалить все загруженные файлы обновлений?</string>
     <string name="delete_single_update_success_message">Обновление {0} удалено</string>
     <string name="delete_updates_failure_message">Произошла ошибка при удалении файла обновления</string>
     <string name="delete_updates_noFolder_message">Каталог с обновлениями не найден</string>
