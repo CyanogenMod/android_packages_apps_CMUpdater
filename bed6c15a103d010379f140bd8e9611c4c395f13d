@@ -1,0 +1,11 @@
+Change-Id: Ibed6c15a103d010379f140bd8e9611c4c395f13d
+Code-Review+1: Pavel Volkov <marshmollow@gmail.com>
+Code-Review+2: Marco Brohet <therbom@gmail.com>
+Code-Review+1: Dmitriy Chermenev <chdiman86@gmail.com>
+Verified+1: Cid
+Code-Review+1: Vladislav Koldobskiy <nevergone.ru@gmail.com>
+Submitted-by: Marco Brohet <therbom@gmail.com>
+Submitted-at: Fri, 08 Mar 2013 10:30:58 -0800
+Reviewed-on: http://review.cyanogenmod.org/33449
+Project: CyanogenMod/android_packages_apps_CMUpdater
+Branch: refs/heads/cm-10.1
