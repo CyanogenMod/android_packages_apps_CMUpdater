@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- General strings -->
+    <string name="app_name">CM Updater</string>
+    <string name="display_name">Оновлення</string>
+    <string name="unknown">Невідомий</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Оновити</string>
+    <string name="menu_delete">Видалити</string>
+    <string name="menu_delete_all">Видалити завантаження</string>
+    <string name="menu_system_info">Інформація про систему</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Скасувати</string>
+    <string name="dialog_yes">Так</string>
+    <string name="dialog_no">Ні</string>
+    <string name="dialog_update">Оновити</string>
+    <string name="dialog_close">Закрити</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Доступні оновлення</string>
+    <string name="no_available_updates_intro">Остання перевірка не виявиладоступних оновлень. Щоб перевірити наявність оонвлень вручну, натисніть кнопку \"Оновити\"</string>
+    <string name="new_update_summary">Нове</string>
+    <string name="downloaded_update_summary">Завантажене</string>
+    <string name="installed_update_summary">Встановлене</string>
+    <string name="backup_rom_title">Створити РК</string>
+    <string name="backup_rom_summary">Створити резервну копію перед оновленням</string>
+
+    <string name="update_check_title">Перевірка оновлень</string>
+    <string name="check_manual">Вручну</string>
+    <string name="check_on_boot">При увімкненні пристрою</string>
+    <string name="check_twice_daily">Двічі на день</string>
+    <string name="check_daily">Щоденно</string>
+    <string name="check_weekly">Кожного тижні</string>
+    <string name="check_bi_weekly">Раз на два тижні</string>
+    <string name="check_monthly">Щомісяця</string>
+
+    <string name="update_type_title">Тип оновлення</string>
+    <string name="type_all">Всі версії (Тільки стабільні)</string>
+    <string name="type_all_incl_nightly">Всі версії (Включаючи нічні)</string>
+    <string name="type_new">Нові версії (Тільки стабільні)</string>
+    <string name="type_new_incl_nightly">Нові версії (Включаючи нічні)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Перевірка оновлень\u2026</string>
+    <string name="no_updates_found">Оновлень не знайдено</string>
+    <string name="not_new_updates_found_ticker">Доступні нові оновлення</string>
+    <string name="not_new_updates_found_title">Нові оновлення</string>
+    <string name="not_new_updates_found_body">{0} обновлень(ня) доступно для завантаження</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Скасувати завантаження?</string>
+    <string name="confirm_download_cancelation_dialog_message">Ви можете продовжити завантаження пізніше, запустивши оновлення ще раз</string>
+    <string name="download_cancelled">Завантаження скасоване</string>
+    <string name="download_already_running">Завантаження вже відбувається</string>
+    <string name="unable_to_download_file">Не вдалось завантажити файл оновлення</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Помилка! Невідповідність контрольної суми MD5</string>
+    <string name="md5_check_cancelled">Перевірка MD5 була скасована</string>
+    <string name="md5_verification_failed">Не вдалось виконати перевірку MD5</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Застосувати оновлення</string>
+    <string name="apply_update_dialog_text">Ви збираєтесь оновитись на {0}.\n\nПри натиску кнопки \"Оновити\", пристрій перезавантажиться у режим recovery для оновлення. \n\nЗамітка: ця функція потребує сумісного recovery, в зворотньому випадку оновлення необхідно встановити вручну.</string>
+    <string name="apply_trying_to_get_root_access">Помилка отримати root-доступ для перезавантаження у режим recovery</string>
+    <string name="apply_unable_to_reboot_toast">Неможливо перезавантажитись у режим recovery</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Видалити файл</string>
+    <string name="confirm_delete_dialog_message">Ви збираєтесь видалити завантажений файл оновлення. Натисніть \"Так\" для продовження.</string>
+    <string name="confirm_delete_all_dialog_message">Ви збираєтесь видалити всі завантажені файли оновлення. Натисніть \"Так\" для продовження.</string>
+    <string name="delete_single_update_success_message">Оновлення {0} видалено</string>
+    <string name="delete_updates_failure_message">Сталась помилка при видаленні файлу оновлення</string>
+    <string name="delete_updates_noFolder_message">Папка з оновленнями не знайдена</string>
+    <string name="delete_updates_success_message">Всі завантажені оновлення видалено</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Пристрій:</string>
+    <string name="sysinfo_running">Версія:</string>
+    <string name="sysinfo_last_check">Остання перевірка:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">Список змін недоступний</string>
+    <string name="failed_to_load_changelog">Не вдається завантажити список змін</string>
+    <string name="changelog_dialog_title">Список змін</string>
+</resources>
