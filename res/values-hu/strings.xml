@@ -53,23 +53,23 @@
     <!-- Update checking -->
     <string name="checking_for_updates">Frissítések keresése</string>
     <string name="no_updates_found">Nem található új frissítés</string>
-    <string name="not_new_updates_found_ticker">Új frissítések elérhetőek</string>
+    <string name="not_new_updates_found_ticker">Új frissítések érhetőek el</string>
     <string name="not_new_updates_found_title">Új frissítések</string>
     <string name="not_new_updates_found_body">{0} frissítés letölthető</string>
     <string name="data_connection_required">Adatkapcsolat szükséges.</string>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">Megszakítja a letöltést?</string>
-    <string name="confirm_download_cancelation_dialog_message">Később folytatni tudja a letöltést, amennyiben ugyan ezt a frissítést választja újra</string>
+    <string name="confirm_download_cancelation_dialog_message">Később folytatni tudja a letöltést, amennyiben ugyanezt a frissítést választja újra</string>
     <string name="download_cancelled">Letöltés megszakítva</string>
-    <string name="download_already_running">A letöltés jelenles is fut</string>
+    <string name="download_already_running">A letöltés jelenleg is fut</string>
     <string name="unable_to_download_file">Nem sikerült letölteni a frissítő fájlt</string>
     <string name="download_not_found">Nem található a letöltés</string>
 
     <!-- MD5 related strings -->
     <string name="apply_existing_update_md5error_message">Hiba. Eltérő MD5 ellenőrzőösszeg</string>
-    <string name="md5_check_cancelled">MD5 ellenőrzés törölve</string>
-    <string name="md5_verification_failed">MD5 ellenőrzése sikertelen</string>
+    <string name="md5_check_cancelled">MD5 ellenőrzés megszakítva</string>
+    <string name="md5_verification_failed">MD5 ellenőrzési hiba</string>
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Frissítés alkalmazása</string>
@@ -89,7 +89,7 @@
     <!-- System info strings -->
     <string name="sysinfo_device">Eszköz:</string>
     <string name="sysinfo_running">Futó verzió:</string>
-    <string name="sysinfo_last_check">Utóljára ellenőrizve:</string>
+    <string name="sysinfo_last_check">Utoljára ellenőrizve:</string>
 
     <!-- changelog strings -->
     <string name="no_changelog_alert">A változások listája nem elérhető</string>
