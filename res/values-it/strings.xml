@@ -47,7 +47,7 @@
     <string name="not_new_updates_found_body">{0} aggiornamento/i disponibile/i per il download</string>
     <string name="data_connection_required">È richiesta una connessione dati.</string>
     <string name="confirm_download_cancelation_dialog_title">Annullare il download?</string>
-    <string name="confirm_download_cancelation_dialog_message">Si sta per annullare il download corrente. Confermare?</string>
+    <string name="confirm_download_cancelation_dialog_message">Annullare il download corrente?</string>
     <string name="download_cancelled">Download annullato</string>
     <string name="download_already_running">Un download è già in corso</string>
     <string name="unable_to_download_file">Impossibile effettuare il download dell\'aggiornamento</string>
@@ -60,8 +60,8 @@
     <string name="apply_trying_to_get_root_access">Richiesta dei permessi root per il riavvio in recovery</string>
     <string name="apply_unable_to_reboot_toast">Impossibile riavviare in recovery</string>
     <string name="confirm_delete_dialog_title">Cancella file</string>
-    <string name="confirm_delete_dialog_message">Si sta per cancellare il file di aggiornamento scaricato. Confermare?</string>
-    <string name="confirm_delete_all_dialog_message">Si stanno per cancellare tutti gli aggiornamenti scaricati. Confermare?</string>
+    <string name="confirm_delete_dialog_message">Cancellare il file di aggiornamento selezionato?</string>
+    <string name="confirm_delete_all_dialog_message">Cancellare tutti gli aggiornamenti scaricati?</string>
     <string name="delete_single_update_success_message">Aggiornamento {0} cancellato</string>
     <string name="delete_updates_failure_message">Errore durante la cancellazione dell\'aggiornamento</string>
     <string name="delete_updates_noFolder_message">Cartella degli aggiornamenti non trovata</string>
