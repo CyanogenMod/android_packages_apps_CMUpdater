@@ -74,7 +74,7 @@
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Εφαρμογή ενημέρωσης</string>
     <string name="apply_update_dialog_text">Πρόκειται να αναβαθμίσετε σε {0}.\n\nΑν πατήσετε το πλήκτρο Ενημέρωση, η συσκευή θα κάνει επανεκκίνηση σε recovery mode για να εγκαταστήσετε την ενημέρωση.\n
-        \nNote: Σημείωση: Αυτή η λειτουργία απαιτεί μια συμβατή recovery αλλιώς η ενημέρωση θα πρέπει να εγκατασταθεί χειροκίνητα.</string>
+        \nΣημείωση: Αυτή η λειτουργία απαιτεί μια συμβατή recovery αλλιώς η ενημέρωση θα πρέπει να εγκατασταθεί χειροκίνητα.</string>
     <string name="apply_trying_to_get_root_access">Προσπάθεια πρόσβασης root για επανεκκίνηση σε recovery mode</string>
     <string name="apply_unable_to_reboot_toast">Δεν είναι δυνατή η επανεκκίνηση σε recovery mode</string>
 
