@@ -47,20 +47,17 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <category android:name="android.intent.category.HOME"/>
             </intent-filter>
         </receiver>
         <receiver android:name="com.cyanogenmod.updater.receiver.DownloadCompletedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
-                <category android:name="android.intent.category.HOME"/>
             </intent-filter>
         </receiver>
 
         <receiver android:name="com.cyanogenmod.updater.receiver.NotificationClickReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"/>
-                <category android:name="android.intent.category.HOME"/>
             </intent-filter>
         </receiver>
 
