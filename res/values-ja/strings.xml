@@ -26,7 +26,7 @@
 
     <!-- Settings strings -->
     <string name="available_updates_title">利用できるアップデート</string>
-    <string name="no_available_updates_intro">前回のチェックでは$利用可能なアップデートは見つかりませんでした。更新ボタンを使って手動で新しいアップデートを確認できます。</string>
+    <string name="no_available_updates_intro">前回のチェックでは利用可能なアップデートは見つかりませんでした。更新ボタンを使って手動で新しいアップデートを確認できます。</string>
     <string name="new_update_summary">新しいアップデート</string>
     <string name="downloaded_update_summary">ダウンロード済</string>
     <string name="backup_rom_title">バックアップの作成</string>
@@ -49,38 +49,38 @@
 
     <!-- Update checking -->
     <string name="checking_for_updates">アップデートを確認中</string>
-    <string name="no_updates_found">新しいアップデートはありません</string>
-    <string name="not_new_updates_found_ticker">新しいアップデートが利用できます</string>
+    <string name="no_updates_found">新しいアップデートはありません。</string>
+    <string name="not_new_updates_found_ticker">新しいアップデートが利用できます。</string>
     <string name="not_new_updates_found_title">新しいアップデート</string>
-    <string name="not_new_updates_found_body">{0}つのアップデートがダウンロードできます</string>
+    <string name="not_new_updates_found_body">アップデートファイル{0}がダウンロードできます。</string>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">ダウンロードをキャンセル</string>
     <string name="confirm_download_cancelation_dialog_message">現在のダウンロードをキャンセルしようとしています。 よろしいですか?</string>
-    <string name="download_cancelled">ダウンロードはキャンセルされました</string>
-    <string name="download_already_running">ダウンロードはすでに実行中です</string>
-    <string name="unable_to_download_file">アップデートファイルをダウンロードできません</string>
-    <string name="download_not_found">ダウンロードは見つかりませんでした</string>
+    <string name="download_cancelled">ダウンロードはキャンセルされました。</string>
+    <string name="download_already_running">ダウンロードはすでに実行中です。</string>
+    <string name="unable_to_download_file">アップデートファイルをダウンロードできません。</string>
+    <string name="download_not_found">ダウンロードは見つかりませんでした。</string>
 
     <!-- MD5 related strings -->
-    <string name="apply_existing_update_md5error_message">エラー MD5チェックサムが一致しません</string>
-    <string name="md5_check_cancelled">MD5チェックはキャンセルされました</string>
-    <string name="md5_verification_failed">MD5確認に失敗しました</string>
+    <string name="apply_existing_update_md5error_message">エラー MD5チェックサムが一致しません。</string>
+    <string name="md5_check_cancelled">MD5チェックはキャンセルされました。</string>
+    <string name="md5_verification_failed">MD5確認に失敗しました。</string>
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">アップデートを適用</string>
-    <string name="apply_update_dialog_text">{0} にアップグレードしようとしています.\n\n更新を押すと端末は再起動後、自動でリカバリーモードに移行しアップデートをインストールします。</string>
-    <string name="apply_trying_to_get_root_access">リカバリーモードへ再起動するためにroot権限を取得します</string>
-    <string name="apply_unable_to_reboot_toast">リカバリーモードへ再起動できません</string>
+    <string name="apply_update_dialog_text">{0} にアップグレードしようとしています。\n\n更新を押すと端末は再起動後、自動でリカバリーモードに移行しアップデートをインストールします。</string>
+    <string name="apply_trying_to_get_root_access">リカバリーモードへ再起動するためにroot権限を取得します。</string>
+    <string name="apply_unable_to_reboot_toast">リカバリーモードへ再起動できません。</string>
 
     <!-- deleting -->
     <string name="confirm_delete_dialog_title">ファイルの削除</string>
     <string name="confirm_delete_dialog_message">ダウンロードしたアップデートファイルを削除しようとしています。よろしいですか?</string>
     <string name="confirm_delete_all_dialog_message">すべてのダウンロードしたアップデートファイルを削除しようとしています。よろしいですか?</string>
-    <string name="delete_single_update_success_message">{0}つのアップデートは削除されました</string>
-    <string name="delete_updates_failure_message">アップデートファイルの削除中にエラーがありました</string>
-    <string name="delete_updates_noFolder_message">アップデートフォルダが見つかりませんでした</string>
-    <string name="delete_updates_success_message">すべてのダウンロードしたアップデートファイルは削除されました</string>
+    <string name="delete_single_update_success_message">アップデートファイル{0}は削除されました。</string>
+    <string name="delete_updates_failure_message">アップデートファイルの削除中にエラーがありました。</string>
+    <string name="delete_updates_noFolder_message">アップデートフォルダが見つかりませんでした。</string>
+    <string name="delete_updates_success_message">すべてのダウンロードしたアップデートファイルは削除されました。</string>
 
     <!-- System info strings -->
     <string name="sysinfo_device">デバイス:</string>
