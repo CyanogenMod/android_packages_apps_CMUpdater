@@ -96,4 +96,16 @@
     <string name="no_changelog_alert">No changelog available</string>
     <string name="failed_to_load_changelog">Unable to load changelog</string>
     <string name="changelog_dialog_title">Changelog</string>
+
+    <!-- DashClock extension strings -->
+    <string name="extension_label">CyanogenMod Updates</string>
+    <string name="extension_description">Displays number of new updates available.</string>
+    <plurals name="extension_status">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> update</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> updates</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod update</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod updates</item>
+    </plurals>
 </resources>
