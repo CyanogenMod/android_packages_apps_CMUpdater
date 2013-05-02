@@ -190,7 +190,7 @@ public class UpdateCheckService extends Service {
         prefs.edit().putBoolean(Constants.BOOT_CHECK_COMPLETED, true).apply();
 
         int updateCountRoms = availableUpdates.getRomCount();
-        int updateCount = availableUpdates.getUpdateCount();
+        int updateCount = availableUpdates.getUpdateCount(getApplicationContext());
 
         // Write to log
         Log.i(TAG, "The update check successfully completed at " + d.toString() + " and found "
