@@ -209,7 +209,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
                 mUpdatesButton.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View arg0) {
-                        mParent.startUpdate(mUpdateInfo);
+//                        mParent.startUpdate(mUpdateInfo);
                     }
                 });
                 mSummaryText.setText(R.string.downloaded_update_summary);
