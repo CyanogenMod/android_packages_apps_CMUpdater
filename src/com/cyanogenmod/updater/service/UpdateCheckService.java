@@ -67,6 +67,9 @@ public class UpdateCheckService extends Service {
     // This is for internal testing only
     private static final boolean TESTING_DOWNLOAD = false;
 
+    public static final String ACTION_UPDATE_DATA_UPDATED = "com.cyanogenmod.cmupdater.action.UPDATE_DATA_UPDATED";
+    public static final String EXTRA_COUNT = "count";
+
     private final RemoteCallbackList<IUpdateCheckServiceCallback> mCallbacks = new RemoteCallbackList<IUpdateCheckServiceCallback>();
     private String mSystemMod;
     private String mSystemRom;
@@ -318,6 +321,10 @@ public class UpdateCheckService extends Service {
         FullUpdateInfo ful = filterUpdates(retValue, State.loadState(this));
         if (!romException) {
             State.saveState(this, retValue);
+
+            Intent updateIntent = new Intent(ACTION_UPDATE_DATA_UPDATED);
+            updateIntent.putExtra(EXTRA_COUNT, ful.getUpdateCount());
+            sendBroadcast(updateIntent);
         }
         return ful;
     }
