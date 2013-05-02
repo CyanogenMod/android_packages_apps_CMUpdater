@@ -71,16 +71,14 @@ public class UpdateInfo implements Parcelable, Serializable {
      */
     public void setName(String _name) {
         if (_name != null) {
-            name = _name.trim();
+            name = _name.trim().replaceAll("\\.zip$", "");
         } else {
             name = "";
         }
-        name.replaceAll(".zip$","");
     }
 
     /**
      * Get Name
-     * returns INCR: + name, if its an incremental udpate
      */
     public String getName() {
         return name;
