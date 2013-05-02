@@ -9,8 +9,12 @@
 
 package com.cyanogenmod.updater.customTypes;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -71,9 +75,14 @@ public class FullUpdateInfo implements Parcelable, Serializable {
         return incrementalRoms.size();
     }
 
-    public int getUpdateCount() {
+    public int getUpdateCount(Context context) {
         int romssize = roms == null ? 0 : roms.size();
         int incrementalromssize = incrementalRoms == null ? 0 : incrementalRoms.size();
+        
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        sp.edit().putInt("numUpdates", romssize + incrementalromssize).apply();
+		Log.d("IMPORTANT FROM FullUpdateInfo", "" + sp.getInt("numUpdates", -99));
+        
         return romssize + incrementalromssize;
     }
 }
