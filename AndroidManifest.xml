@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cyanogenmod.updater"
-    android:versionCode="2"
-    android:versionName="2.0" >
+    android:versionCode="3"
+    android:versionName="2.1" >
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -23,6 +23,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
 
+        <service android:name="com.cyanogenmod.updater.service.CMDashClockExtension"
+            android:icon="@drawable/cid"
+            android:label="@string/extension_label"
+            android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA">
+            <intent-filter>
+                <action android:name="com.google.android.apps.dashclock.Extension" />
+            </intent-filter>
+            <meta-data android:name="protocolVersion" android:value="1" />
+            <meta-data android:name="description"
+                android:value="@string/extension_description" />
+        </service>
+
         <activity
             android:name=".UpdatesSettings"
             android:launchMode="singleTop"
@@ -36,8 +48,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.cyanogenmod.updater.service.UpdateCheckService"
-                 android:process="com.cyanogenmod.updater.updater.service.UpdateCheckService">
+        <service android:name="com.cyanogenmod.updater.service.UpdateCheckService">
             <intent-filter>
                 <action android:name="com.cyanogenmod.updater.interfaces.IUpdateCheckService"/>
             </intent-filter>
@@ -58,6 +69,12 @@
         <receiver android:name="com.cyanogenmod.updater.receiver.NotificationClickReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.cyanogenmod.updater.receiver.DataUpdateReceiver">
+            <intent-filter>
+                <action android:name="com.cyanogenmod.cmupdater.action.UPDATE_DATA_UPDATED"/>
             </intent-filter>
         </receiver>
 
