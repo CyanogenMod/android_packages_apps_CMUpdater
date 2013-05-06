@@ -55,7 +55,10 @@
     <string name="no_updates_found">No new updates found</string>
     <string name="not_new_updates_found_ticker">New updates are available</string>
     <string name="not_new_updates_found_title">New updates</string>
-    <string name="not_new_updates_found_body">{0} update(s) available for download</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> update available for download</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> updates available for download</item>
+    </plurals>
     <string name="data_connection_required">A data connection is required.</string>
 
     <!-- Downloads -->
@@ -73,7 +76,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Apply update</string>
-    <string name="apply_update_dialog_text">You are about to upgrade to {0}.\n\nIf you press Update, the device will restart itself in recovery mode to install the update.\n
+    <string name="apply_update_dialog_text">You are about to upgrade to <xliff:g id="filename">%s</xliff:g>.\n\nIf you press Update, the device will restart itself in recovery mode to install the update.\n
         \nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
     <string name="apply_trying_to_get_root_access">Trying to get root access to reboot in recovery mode</string>
     <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
@@ -82,7 +85,7 @@
     <string name="confirm_delete_dialog_title">Delete file</string>
     <string name="confirm_delete_dialog_message">Delete the selected update file?</string>
     <string name="confirm_delete_all_dialog_message">Delete all downloaded update files?</string>
-    <string name="delete_single_update_success_message">Update {0} deleted</string>
+    <string name="delete_single_update_success_message">Update <xliff:g id="filename">%s</xliff:g> deleted</string>
     <string name="delete_updates_failure_message">There was an error deleting the update file</string>
     <string name="delete_updates_noFolder_message">Update folder not found</string>
     <string name="delete_updates_success_message">All downloaded updates deleted</string>

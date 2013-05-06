@@ -55,7 +55,9 @@
     <string name="no_updates_found">Nem található új frissítés</string>
     <string name="not_new_updates_found_ticker">Új frissítések érhetőek el</string>
     <string name="not_new_updates_found_title">Új frissítések</string>
-    <string name="not_new_updates_found_body">{0} frissítés letölthető</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> frissítés letölthető</item>
+    </plurals>
     <string name="data_connection_required">Adatkapcsolat szükséges.</string>
 
     <!-- Downloads -->
@@ -73,7 +75,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Frissítés alkalmazása</string>
-    <string name="apply_update_dialog_text">Frissítés a következőre: {0}.\n\nA telepítéshez koppintson a Frissítés gombra, az eszköz újra fog indulni Recovery módban.</string>
+    <string name="apply_update_dialog_text">Frissítés a következőre: <xliff:g id="filename">%s</xliff:g>.\n\nA telepítéshez koppintson a Frissítés gombra, az eszköz újra fog indulni Recovery módban.</string>
     <string name="apply_trying_to_get_root_access">Root jogosultság megszerzésének kísérlete a Recovery módban való újraindításhoz</string>
     <string name="apply_unable_to_reboot_toast">Nem lehetséges az újraindítás Recovery módban</string>
 
@@ -81,7 +83,7 @@
     <string name="confirm_delete_dialog_title">Fájl törlése</string>
     <string name="confirm_delete_dialog_message">Biztosan törölni szeretné a letöltött frissítő fájlt?</string>
     <string name="confirm_delete_all_dialog_message">Biztosan törölni szeretné az összes letöltött frissítő fájlt?</string>
-    <string name="delete_single_update_success_message">{0} frissítés törölve</string>
+    <string name="delete_single_update_success_message"><xliff:g id="filename">%s</xliff:g> frissítés törölve</string>
     <string name="delete_updates_failure_message">Hiba történt a frissítő fájlok törlésekor</string>
     <string name="delete_updates_noFolder_message">Frissítéseket tartalmazó mappa nem található</string>
     <string name="delete_updates_success_message">Az összes letöltött frissítés törölve</string>

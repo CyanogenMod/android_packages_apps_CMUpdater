@@ -43,7 +43,10 @@
     <string name="no_updates_found">Päivityksiä ei löytynyt</string>
     <string name="not_new_updates_found_ticker">Päivityksiä saatavilla</string>
     <string name="not_new_updates_found_title">Uudet päivitykset</string>
-    <string name="not_new_updates_found_body">{0} päivitys(tä) valmiina ladattavaksi</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> päivitys valmiina ladattavaksi</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> päivitystä valmiina ladattavaksi</item>
+    </plurals>
     <string name="confirm_download_cancelation_dialog_title">Peruuta lataus</string>
     <string name="confirm_download_cancelation_dialog_message">Olet perumassa latauksen, paina OK jatkaaksesi</string>
     <string name="download_cancelled">Lataus peruttu</string>
@@ -54,14 +57,14 @@
     <string name="md5_check_cancelled">MD5 tarkistus peruttu</string>
     <string name="md5_verification_failed">MD5 varmistus epäonnistui</string>
     <string name="apply_update_dialog_title">Asenna päivitys</string>
-    <string name="apply_update_dialog_text">Olet päivittämässä versioon {0}.\n\nJos painat Päivitä, laite käynnistyy uudelleen Recovery-tilaan asentaakseen päivityksen.\n
+    <string name="apply_update_dialog_text">Olet päivittämässä versioon <xliff:g id="filename">%s</xliff:g>.\n\nJos painat Päivitä, laite käynnistyy uudelleen Recovery-tilaan asentaakseen päivityksen.\n
         \nHuomautus: Tämä ominaisuus vaatii yhteensopivan Recoveryn tai päivitykset eivät asennu automaattisesti</string>
     <string name="apply_trying_to_get_root_access">Haetaan root-oikeuksia Recovery-tilan käynnistämiseksi</string>
     <string name="apply_unable_to_reboot_toast">Recovery-tilan käynnistäminen epäonnistui</string>
     <string name="confirm_delete_dialog_title">Poista tiedosto</string>
     <string name="confirm_delete_dialog_message">Olet poistamassa ladatun päivitystiedoston, paina OK jatkaaksesi</string>
     <string name="confirm_delete_all_dialog_message">Olet poistamassa kaikki ladatut päivitystiedostot, paina OK jatkaaksesi</string>
-    <string name="delete_single_update_success_message">Päivitys {0} poistettu</string>
+    <string name="delete_single_update_success_message">Päivitys <xliff:g id="filename">%s</xliff:g> poistettu</string>
     <string name="delete_updates_failure_message">Virhe poistettaessa päivitystiedostoa</string>
     <string name="delete_updates_noFolder_message">Päivityskansiota ei löydy</string>
     <string name="delete_updates_success_message">Kaikki päivitykset poistettu</string>
