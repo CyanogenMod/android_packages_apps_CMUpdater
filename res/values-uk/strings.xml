@@ -55,7 +55,9 @@
     <string name="no_updates_found">Оновлень не знайдено</string>
     <string name="not_new_updates_found_ticker">Доступні нові оновлення</string>
     <string name="not_new_updates_found_title">Нові оновлення</string>
-    <string name="not_new_updates_found_body">{0} обновлень(ня) доступно для завантаження</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> обновлень(ня) доступно для завантаження</item>
+    </plurals>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">Скасувати завантаження?</string>
@@ -71,7 +73,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Застосувати оновлення</string>
-    <string name="apply_update_dialog_text">Ви збираєтесь оновитись на {0}.\n\nПри натиску кнопки \"Оновити\", пристрій перезавантажиться у режим recovery для оновлення. \n\nЗамітка: ця функція потребує сумісного recovery, в зворотньому випадку оновлення необхідно встановити вручну.</string>
+    <string name="apply_update_dialog_text">Ви збираєтесь оновитись на <xliff:g id="filename">%s</xliff:g>.\n\nПри натиску кнопки \"Оновити\", пристрій перезавантажиться у режим recovery для оновлення. \n\nЗамітка: ця функція потребує сумісного recovery, в зворотньому випадку оновлення необхідно встановити вручну.</string>
     <string name="apply_trying_to_get_root_access">Помилка отримати root-доступ для перезавантаження у режим recovery</string>
     <string name="apply_unable_to_reboot_toast">Неможливо перезавантажитись у режим recovery</string>
 
@@ -79,7 +81,7 @@
     <string name="confirm_delete_dialog_title">Видалити файл</string>
     <string name="confirm_delete_dialog_message">Ви збираєтесь видалити завантажений файл оновлення. Натисніть \"Так\" для продовження.</string>
     <string name="confirm_delete_all_dialog_message">Ви збираєтесь видалити всі завантажені файли оновлення. Натисніть \"Так\" для продовження.</string>
-    <string name="delete_single_update_success_message">Оновлення {0} видалено</string>
+    <string name="delete_single_update_success_message">Оновлення <xliff:g id="filename">%s</xliff:g> видалено</string>
     <string name="delete_updates_failure_message">Сталась помилка при видаленні файлу оновлення</string>
     <string name="delete_updates_noFolder_message">Папка з оновленнями не знайдена</string>
     <string name="delete_updates_success_message">Всі завантажені оновлення видалено</string>
