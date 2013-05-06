@@ -52,7 +52,10 @@
     <string name="no_updates_found">Geen nieuwe updates gevonden</string>
     <string name="not_new_updates_found_ticker">Er zijn nieuwe updates beschikbaar</string>
     <string name="not_new_updates_found_title">Nieuwe updates</string>
-    <string name="not_new_updates_found_body">{0} update(s) beschikbaar om te downloaden</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> update beschikbaar om te downloaden</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> updates beschikbaar om te downloaden</item>
+    </plurals>
 
     <string name="confirm_download_cancelation_dialog_title">Download annuleren</string>
     <string name="confirm_download_cancelation_dialog_message">Weet u zeker dat u de download wilt annuleren?</string>
@@ -66,14 +69,14 @@
     <string name="md5_verification_failed">MD5-verificatie mislukt</string>
 
     <string name="apply_update_dialog_title">Update toepassen</string>
-    <string name="apply_update_dialog_text">Uw systeem wordt bijgewerkt naar {0}.\n\nWanneer u op \'Bijwerken\' tikt, herstart de telefoon zichzelf naar recovery om de update te installeren.\n\nLet op: hiervoor is een compatibele recovery vereist, anders moeten updates handmatig worden geïnstalleerd.</string>
+    <string name="apply_update_dialog_text">Uw systeem wordt bijgewerkt naar <xliff:g id="filename">%s</xliff:g>.\n\nWanneer u op \'Bijwerken\' tikt, herstart de telefoon zichzelf naar recovery om de update te installeren.\n\nLet op: hiervoor is een compatibele recovery vereist, anders moeten updates handmatig worden geïnstalleerd.</string>
     <string name="apply_trying_to_get_root_access">Root-toegang verkrijgen om te herstarten naar recovery\u2026</string>
     <string name="apply_unable_to_reboot_toast">Kan niet herstarten naar recovery</string>
 
     <string name="confirm_delete_dialog_title">Bestand verwijderen</string>
     <string name="confirm_delete_dialog_message">Weet u zeker dat u het gedownloade updatebestand wilt verwijderen?</string>
     <string name="confirm_delete_all_dialog_message">Weet u zeker dat u alle gedownloade updatebestanden wilt verwijderen?</string>
-    <string name="delete_single_update_success_message">Update {0} verwijderd</string>
+    <string name="delete_single_update_success_message">Update <xliff:g id="filename">%s</xliff:g> verwijderd</string>
     <string name="delete_updates_failure_message">Kan updatebestand niet verwijderen</string>
     <string name="delete_updates_noFolder_message">Kan updatemap niet vinden</string>
     <string name="delete_updates_success_message">Alle gedownloade updates zijn verwijderd</string>

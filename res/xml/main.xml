@@ -13,25 +13,27 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
      <ListPreference
-        android:key="pref_update_check"
-        android:dialogTitle="@string/update_check_title"
-        android:title="@string/update_check_title"
-        android:entries="@array/update_check_entries"
-        android:entryValues="@array/update_check_values"/>
+         android:key="pref_update_check_interval"
+         android:persistent="false"
+         android:dialogTitle="@string/update_check_title"
+         android:title="@string/update_check_title"
+         android:entries="@array/update_check_entries"
+         android:entryValues="@array/update_check_values"/>
 
      <ListPreference
-        android:key="pref_update_type"
-        android:dialogTitle="@string/update_type_title"
-        android:title="@string/update_type_title"
-        android:entries="@array/update_type_entries"
-        android:entryValues="@array/update_type_values"/>
+         android:key="pref_update_types"
+         android:persistent="false"
+         android:dialogTitle="@string/update_type_title"
+         android:title="@string/update_type_title"
+         android:entries="@array/update_type_entries"
+         android:entryValues="@array/update_type_values"/>
 
      <!-- TODO: add this back once we have a way of doing backups that is not recovery specific
      <CheckBoxPreference
-        android:key="pref_backup_rom"
-        android:defaultValue="true"
-        android:title="@string/backup_rom_title" 
-        android:summary="@string/backup_rom_summary" />
+         android:key="pref_backup_rom"
+         android:defaultValue="true"
+         android:title="@string/backup_rom_title"
+         android:summary="@string/backup_rom_summary" />
     -->
 
     <PreferenceCategory
