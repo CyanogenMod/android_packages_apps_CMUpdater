@@ -48,11 +48,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.cyanogenmod.updater.service.UpdateCheckService">
-            <intent-filter>
-                <action android:name="com.cyanogenmod.updater.interfaces.IUpdateCheckService"/>
-            </intent-filter>
-        </service>
+        <service android:name="com.cyanogenmod.updater.service.UpdateCheckService" />
 
         <receiver android:name="com.cyanogenmod.updater.receiver.UpdateCheckReceiver">
             <intent-filter>

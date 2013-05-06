@@ -55,7 +55,9 @@
     <string name="no_updates_found">לא נמצאו עדכונים חדשים</string>
     <string name="not_new_updates_found_ticker">עדכונים חדשים זמינים</string>
     <string name="not_new_updates_found_title">עדכונים חדשים</string>
-    <string name="not_new_updates_found_body">{0} עדכונים זמינים להורדה</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> עדכונים זמינים להורדה</item>
+    </plurals>
     <string name="data_connection_required">נדרש חיבור נתונים.</string>
 
     <!-- Downloads -->
@@ -73,7 +75,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">החל עדכון</string>
-    <string name="apply_update_dialog_text">אתה עומד לעדכן ל-{0}.\n\nאם תלחץ על \"עדכן\", המכשיר יאתחל את עצמו למצב \"Rocovery\" על מנת להתקין את העדכון.\n
+    <string name="apply_update_dialog_text">אתה עומד לעדכן ל-<xliff:g id="filename">%s</xliff:g>.\n\nאם תלחץ על \"עדכן\", המכשיר יאתחל את עצמו למצב \"Rocovery\" על מנת להתקין את העדכון.\n
         \nהערה: אפשרות זו דורשת Recovery תואם, או שפעולת התקנת העדכונים תיאלץ להיעשות באופן ידני.</string>
     <string name="apply_trying_to_get_root_access">מנסה להשיג גישת root כדי לאתחל למצב \"Recovery\"</string>
     <string name="apply_unable_to_reboot_toast">נכשל לאתחל למצב \"Recovery\"</string>
@@ -82,7 +84,7 @@
     <string name="confirm_delete_dialog_title">מחק קובץ</string>
     <string name="confirm_delete_dialog_message">אתה עומד למחוק את הקובץ הנוכחי, לחץ על \"כן\" להמשך.</string>
     <string name="confirm_delete_all_dialog_message">אתה עומד למחוק את כל קובצי העדכון שהורדו, לחץ על \"כן\" להמשך.</string>
-    <string name="delete_single_update_success_message">עדכון {0} נמחק</string>
+    <string name="delete_single_update_success_message">עדכון <xliff:g id="filename">%s</xliff:g> נמחק</string>
     <string name="delete_updates_failure_message">אירעה שגיאה בעת נסיון למחוק את הקובץ</string>
     <string name="delete_updates_noFolder_message">תיקיית העדכונים לא נמצאה</string>
     <string name="delete_updates_success_message">כל העדכונים שהורדו נמחקו</string>

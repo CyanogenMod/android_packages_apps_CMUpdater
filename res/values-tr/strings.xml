@@ -54,7 +54,9 @@
     <string name="no_updates_found">Yeni güncelleme yok</string>
     <string name="not_new_updates_found_ticker">Yeni güncelleme var</string>
     <string name="not_new_updates_found_title">Yeni güncellemeler</string>
-    <string name="not_new_updates_found_body">İndirilebilir {0} güncelleme var</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="other">İndirilebilir <xliff:g id="count">%d</xliff:g> güncelleme var</item>
+    </plurals>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">İndirmeyi iptal et</string>
@@ -71,7 +73,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Güncellemeyi uygula</string>
-    <string name="apply_update_dialog_text">{0} güncellemesi yapılacak.\n\nGüncelleye bastığınızda, güncellemeyi kurmak için cihaz kurtarma modunda yeniden başlatılacak.\n\nBu özellik, uyumlu bir Kurtarma bölümü gerektirir, aksi takdirde güncellemelerin elle kurulması gerekir.</string>
+    <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> güncellemesi yapılacak.\n\nGüncelleye bastığınızda, güncellemeyi kurmak için cihaz kurtarma modunda yeniden başlatılacak.\n\nBu özellik, uyumlu bir Kurtarma bölümü gerektirir, aksi takdirde güncellemelerin elle kurulması gerekir.</string>
     <string name="apply_trying_to_get_root_access">Kurtarma modunda yönetici erişimi sağlanıyor</string>
     <string name="apply_unable_to_reboot_toast">Kurtarma modu için sistem yeniden başlatılamadı</string>
 
@@ -79,7 +81,7 @@
     <string name="confirm_delete_dialog_title">Dosya sil</string>
     <string name="confirm_delete_dialog_message">İndirilen güncelleme dosyalarını silmek istiyor musunuz?</string>
     <string name="confirm_delete_all_dialog_message">İndirilen tüm güncelleme dosyalarını silmek istiyor musunuz?</string>
-    <string name="delete_single_update_success_message">{0} güncellemesi silindi</string>
+    <string name="delete_single_update_success_message"><xliff:g id="filename">%s</xliff:g> güncellemesi silindi</string>
     <string name="delete_updates_failure_message">Güncelleme dosyasını silerken hata oluştu</string>
     <string name="delete_updates_noFolder_message">Güncelleme klasörü bulunamadı</string>
     <string name="delete_updates_success_message">İndirilen tüm güncellemeler silindi</string>
