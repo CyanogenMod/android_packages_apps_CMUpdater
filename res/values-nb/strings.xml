@@ -6,7 +6,7 @@
      The text of the license can be found in the LICENSE file
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">CM Oppdateringsapp</string>
     <string name="display_name">Oppdateringer</string>
     <string name="unknown">Ukjent</string>
@@ -44,7 +44,10 @@
     <string name="no_updates_found">Ingen nye oppdateringer funnet</string>
     <string name="not_new_updates_found_ticker">Nye oppdateringer er tilgjengelig</string>
     <string name="not_new_updates_found_title">Nye oppdateringer</string>
-    <string name="not_new_updates_found_body">{0} oppdatering(er) tilgjengelig for nedlasting</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> oppdatering tilgjengelig for nedlasting</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> oppdateringer tilgjengelig for nedlasting</item>
+    </plurals>
     <string name="data_connection_required">En datatilkobling er nødvendig.</string>
     <string name="confirm_download_cancelation_dialog_title">Avbryt nedlasting</string>
     <string name="confirm_download_cancelation_dialog_message">Du er i ferd med å avbryte pågående nedlasting, er du sikker?</string>
@@ -56,13 +59,13 @@
     <string name="md5_check_cancelled">MD5-verifisering avbrutt</string>
     <string name="md5_verification_failed">MD5-verifisering mislykket</string>
     <string name="apply_update_dialog_title">Installer oppdatering</string>
-    <string name="apply_update_dialog_text">Du er i ferd med å oppgradere til {0}.\n\nHvis du fortsetter vil telefonen foreta en omstart til recovery-modus for å gjennomføre installasjonen</string>
+    <string name="apply_update_dialog_text">Du er i ferd med å oppgradere til <xliff:g id="filename">%s</xliff:g>.\n\nHvis du fortsetter vil telefonen foreta en omstart til recovery-modus for å gjennomføre installasjonen</string>
     <string name="apply_trying_to_get_root_access">Forsøker å oppnå root-tilgang for å kunne foreta en omstart til recovery-modus</string>
     <string name="apply_unable_to_reboot_toast">Kunne ikke starte opp i recovery-modus</string>
     <string name="confirm_delete_dialog_title">Slett fil</string>
     <string name="confirm_delete_dialog_message">Du er i ferd med å fjerne den nedlastede oppdateringsfilen, er du sikker?</string>
     <string name="confirm_delete_all_dialog_message">Du er i ferd med å fjerne alle nedlastede oppdateringsfiler, er du sikker?</string>
-    <string name="delete_single_update_success_message">Oppdatering {0} slettet</string>
+    <string name="delete_single_update_success_message">Oppdatering <xliff:g id="filename">%s</xliff:g> slettet</string>
     <string name="delete_updates_failure_message">Det oppsto en feil ved sletting av oppdateringsfil</string>
     <string name="delete_updates_noFolder_message">Oppdateringsmappe ikke funnet</string>
     <string name="delete_updates_success_message">Alle nedlastede oppdateringerer slettet</string>

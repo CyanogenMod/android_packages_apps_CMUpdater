@@ -55,7 +55,9 @@
     <string name="no_updates_found">Atnaujinimų nerasta</string>
     <string name="not_new_updates_found_ticker">Atnaujinimai rasti</string>
     <string name="not_new_updates_found_title">Atnaujinimai</string>
-    <string name="not_new_updates_found_body">{0} atnaujinimas(ų) pasiekiami</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> atnaujinimas(ų) pasiekiami</item>
+    </plurals>
     <string name="data_connection_required">Reikalingas duomenų ryšys.</string>
 
     <!-- Downloads -->
@@ -73,7 +75,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Atnaujinti</string>
-    <string name="apply_update_dialog_text">Ruošiatės atnaujinti į {0}.\n\nJei spausite atnaujinti, Įrenginys persikraus ir pats įdiegs atnaujinimą.\n
+    <string name="apply_update_dialog_text">Ruošiatės atnaujinti į <xliff:g id="filename">%s</xliff:g>.\n\nJei spausite atnaujinti, Įrenginys persikraus ir pats įdiegs atnaujinimą.\n
         \nPastaba: Šiai funkcijai reikalingas tinkamas recovery.</string>
     <string name="apply_trying_to_get_root_access">Ruošiamasi atnaujinimui</string>
     <string name="apply_unable_to_reboot_toast">Nepavyko perkrauti</string>
@@ -82,7 +84,7 @@
     <string name="confirm_delete_dialog_title">Trinti failą</string>
     <string name="confirm_delete_dialog_message">Ruošiatės trinti atsiųstą atnaujinimą, tęsti?</string>
     <string name="confirm_delete_all_dialog_message">Ruošiatės trinti visus atsiųstus atnaujinimus, tęsti?</string>
-    <string name="delete_single_update_success_message">Atnaujinimas {0} ištrintas</string>
+    <string name="delete_single_update_success_message">Atnaujinimas <xliff:g id="filename">%s</xliff:g> ištrintas</string>
     <string name="delete_updates_failure_message">Nepavyko ištrinti atnaujinimo</string>
     <string name="delete_updates_noFolder_message">Atnaujinimo aplankas nerastas</string>
     <string name="delete_updates_success_message">Visi parsiųsti atnaujinimai ištrinti</string>
