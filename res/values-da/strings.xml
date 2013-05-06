@@ -51,9 +51,12 @@
     <string name="no_updates_found">Ingen nye opdateringer fundet</string>
     <string name="not_new_updates_found_ticker">Nye opdateringer er tilgængelige</string>
     <string name="not_new_updates_found_title">Nye opdateringer</string>
-    <string name="not_new_updates_found_body">{0} opdatering(er) tilgængelige til download</string>
-    <string name="data_connection_required">Der kræves en dataforbindelse.</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> opdatering tilgængelige til download</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> opdateringer tilgængelige til download</item>
+    </plurals>
 
+    <string name="data_connection_required">Der kræves en dataforbindelse.</string>
     <string name="confirm_download_cancelation_dialog_title">Annuller download</string>
     <string name="confirm_download_cancelation_dialog_message">Du skal til at annullere den nuværende download, OK at fortsætte?</string>
     <string name="download_cancelled">Download annulleret</string>
@@ -66,14 +69,14 @@
     <string name="md5_verification_failed">MD5-bekræftelse mislykkedes</string>
 
     <string name="apply_update_dialog_title">Anvend opdatering</string>
-    <string name="apply_update_dialog_text">Du skal til at opgradere til {0}.\n\nHvis du trykker Opdatér, vil telefonen genstarte til tilstanden recovery for at installere opdateringen</string>
+    <string name="apply_update_dialog_text">Du skal til at opgradere til <xliff:g id="filename">%s</xliff:g>.\n\nHvis du trykker Opdatér, vil telefonen genstarte til tilstanden recovery for at installere opdateringen</string>
     <string name="apply_trying_to_get_root_access">Prøver at få root-adgang for at genstarte i tilstanden recovery</string>
     <string name="apply_unable_to_reboot_toast">Kan ikke genstarte til recovery</string>
 
     <string name="confirm_delete_dialog_title">Slet fil</string>
     <string name="confirm_delete_dialog_message">Du skal til at slette den downloadede opdateringsfil, OK at fortsætte?</string>
     <string name="confirm_delete_all_dialog_message">Du skal til at slette alle downloadede opdateringsfiler, OK at fortsætte?</string>
-    <string name="delete_single_update_success_message">Opdatering {0} slettet</string>
+    <string name="delete_single_update_success_message">Opdatering <xliff:g id="filename">%s</xliff:g> slettet</string>
     <string name="delete_updates_failure_message">Der opstod en fejl ved sletning af opdateringsfilen</string>
     <string name="delete_updates_noFolder_message">Opdateringsmappen findes ikke</string>
     <string name="delete_updates_success_message">Alle downloadede opdateringer slettet</string>

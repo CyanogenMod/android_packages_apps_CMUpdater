@@ -9,16 +9,14 @@
 
 package com.cyanogenmod.updater.utils;
 
+import android.text.TextUtils;
 import android.util.Log;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -27,19 +25,19 @@ public class MD5 {
     private static final String TAG = "MD5";
 
     public static boolean checkMD5(String md5, File updateFile) {
-        if (md5 == null || md5.equals("") || updateFile == null) {
-            Log.e(TAG, "MD5 String NULL or UpdateFile NULL");
+        if (TextUtils.isEmpty(md5) || updateFile == null) {
+            Log.e(TAG, "MD5 string empty or updateFile null");
             return false;
         }
 
         String calculatedDigest = calculateMD5(updateFile);
         if (calculatedDigest == null) {
-            Log.e(TAG, "calculatedDigest NULL");
+            Log.e(TAG, "calculatedDigest null");
             return false;
         }
 
-        Log.i(TAG, "Calculated digest: " + calculatedDigest);
-        Log.i(TAG, "Provided digest: " + md5);
+        Log.v(TAG, "Calculated digest: " + calculatedDigest);
+        Log.v(TAG, "Provided digest: " + md5);
 
         return calculatedDigest.equalsIgnoreCase(md5);
     }
@@ -49,7 +47,7 @@ public class MD5 {
         try {
             digest = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
-            Log.e(TAG, "Exception while getting Digest", e);
+            Log.e(TAG, "Exception while getting digest", e);
             return null;
         }
 
@@ -82,29 +80,5 @@ public class MD5 {
                 Log.e(TAG, "Exception on closing MD5 input stream", e);
             }
         }
-    }
-
-    public static String getRecoveryMD5() {
-        String MD5string = "";
-        String recoveryFilename = "/dev/mtd/mtd1";
-        try {
-            Process p = Runtime.getRuntime().exec("su");
-            OutputStream os = p.getOutputStream();
-            os.write(("md5sum " + recoveryFilename).getBytes());
-            os.flush();
-            os.close();
-            InputStream is = p.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String str = br.readLine();
-            MD5string = str.split("  ")[0].trim();
-            is.close();
-            br.close();
-            p.destroy();
-        } catch (Exception e) {
-            Log.e(TAG, "Exception on getting Recovery MD5", e);
-            return null;
-        }
-        Log.i(TAG, "Recovery MD5: " + MD5string);
-        return MD5string;
     }
 }
