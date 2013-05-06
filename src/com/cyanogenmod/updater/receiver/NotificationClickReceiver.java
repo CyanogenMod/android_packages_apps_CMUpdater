@@ -16,8 +16,6 @@ import android.content.Intent;
 import com.cyanogenmod.updater.UpdatesSettings;
 
 public class NotificationClickReceiver extends BroadcastReceiver{
-    private static String TAG = "NotificationClickReceiver";
-
     @Override
     public void onReceive(Context context, Intent intent) {
 

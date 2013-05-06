@@ -55,7 +55,10 @@
     <string name="no_updates_found">Keine Updates gefunden</string>
     <string name="not_new_updates_found_ticker">Neue Updates sind verfügbar</string>
     <string name="not_new_updates_found_title">Neue Updates</string>
-    <string name="not_new_updates_found_body">{0} Update(s) zum Download verfügbar</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> Update zum Download verfügbar</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> Updates zum Download verfügbar</item>
+    </plurals>
     <string name="data_connection_required">Eine Datenverbindung wird benötigt</string>
 
     <!-- Downloads -->
@@ -73,7 +76,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Update installieren</string>
-    <string name="apply_update_dialog_text">Bereit zum Update auf {0}.\n\nNach dem Start des Updates wird das Gerät im Recovery-Modus gestartet, um das Update durchzuführen.\n\nHinweis: Diese Funktion erfordert ein kompatibles Recovery-System, anderenfalls muss das Update manuell installiert werden.</string>
+    <string name="apply_update_dialog_text">Bereit zum Update auf <xliff:g id="filename">%s</xliff:g>.\n\nNach dem Start des Updates wird das Gerät im Recovery-Modus gestartet, um das Update durchzuführen.\n\nHinweis: Diese Funktion erfordert ein kompatibles Recovery-System, anderenfalls muss das Update manuell installiert werden.</string>
     <string name="apply_trying_to_get_root_access">Es wird Root-Zugriff angefordert, um in den Recovery-Modus zu starten</string>
     <string name="apply_unable_to_reboot_toast">Neustart in den Recovery-Modus nicht möglich</string>
 
@@ -81,7 +84,7 @@
     <string name="confirm_delete_dialog_title">Datei löschen</string>
     <string name="confirm_delete_dialog_message">Soll die heruntergeladene Update-Datei gelöscht werden?</string>
     <string name="confirm_delete_all_dialog_message">Sollen alle heruntergeladenen Update-Dateien gelöscht werden?</string>
-    <string name="delete_single_update_success_message">Update {0} gelöscht</string>
+    <string name="delete_single_update_success_message">Update <xliff:g id="filename">%s</xliff:g> gelöscht</string>
     <string name="delete_updates_failure_message">Beim Löschen der Datei ist ein Fehler aufgetreten</string>
     <string name="delete_updates_noFolder_message">Update-Verzeichnis nicht gefunden</string>
     <string name="delete_updates_success_message">Alle heruntergeladenen Update-Dateien wurden gelöscht</string>

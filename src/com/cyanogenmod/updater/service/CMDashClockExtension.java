@@ -16,19 +16,14 @@ import android.util.Log;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.UpdatesSettings;
-import com.cyanogenmod.updater.customization.Customization;
-import com.cyanogenmod.updater.customTypes.FullUpdateInfo;
-import com.cyanogenmod.updater.customTypes.UpdateInfo;
-import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.State;
-import com.cyanogenmod.updater.utils.SysUtils;
+import com.cyanogenmod.updater.misc.UpdateInfo;
 import com.google.android.apps.dashclock.api.DashClockExtension;
 import com.google.android.apps.dashclock.api.ExtensionData;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 
 public class CMDashClockExtension extends DashClockExtension {
     private static final String TAG = "CMDashClockExtension";
@@ -47,17 +42,7 @@ public class CMDashClockExtension extends DashClockExtension {
 
     @Override
     protected void onUpdateData(int reason) {
-        ArrayList<UpdateInfo> updates = new ArrayList<UpdateInfo>();
-
-        try {
-            FullUpdateInfo updateInfo = State.loadState(this);
-            if (updateInfo != null) {
-                updates.addAll(updateInfo.roms);
-                updates.addAll(updateInfo.incrementalRoms);
-            }
-        } catch (IOException e) {
-            // ignored, updates is initialized correctly
-        }
+        LinkedList<UpdateInfo> updates = State.loadState(this);
 
         Log.d(TAG, "Update dash clock for " + updates.size() + " updates");
 
@@ -70,14 +55,17 @@ public class CMDashClockExtension extends DashClockExtension {
             @Override
             public int compare(UpdateInfo lhs, UpdateInfo rhs) {
                 /* sort by date descending */
-                return rhs.getDate().compareTo(lhs.getDate());
+                long lhsDate = lhs.getDate();
+                long rhsDate = rhs.getDate();
+                if (lhsDate < rhsDate) {
+                    return 1;
+                }
+                if (lhsDate > rhsDate) {
+                    return -1;
+                }
+                return 0;
             }
         });
-
-        String systemTypeMatch = SysUtils.getSystemProperty(Customization.BOARD);
-        if (!TextUtils.isEmpty(systemTypeMatch)) {
-            systemTypeMatch = "-" + systemTypeMatch + "$";
-        }
 
         final int count = updates.size();
         final Resources res = getResources();
@@ -87,12 +75,7 @@ public class CMDashClockExtension extends DashClockExtension {
             if (expandedBody.length() > 0) {
                 expandedBody.append("\n");
             }
-            String name = updates.get(i).getName();
-            if (!TextUtils.isEmpty(systemTypeMatch)) {
-                name = name.replaceAll(systemTypeMatch, "");
-            }
-
-            expandedBody.append(name);
+            expandedBody.append(updates.get(i).getName());
         }
 
         // Publish the extension data update.

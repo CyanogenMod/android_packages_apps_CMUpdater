@@ -21,13 +21,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.text.TextUtils;
 
-import com.cyanogenmod.updater.customTypes.UpdateInfo;
+import com.cyanogenmod.updater.misc.UpdateInfo;
 
 public class UpdatePreference extends Preference implements OnClickListener, OnLongClickListener {
-    private static final String TAG = "UpdatePreference";
-
     private static final float DISABLED_ALPHA = 0.4f;
     public static final int STYLE_NEW = 1;
     public static final int STYLE_DOWNLOADING = 2;
@@ -35,20 +32,19 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
     public static final int STYLE_INSTALLED = 4;
 
     private final UpdatesSettings mParent;
+    private UpdateInfo mUpdateInfo = null;
+    private int mStyle;
+
     private ImageView mUpdatesButton;
     private TextView mTitleText;
     private TextView mSummaryText;
     private View mUpdatesPref;
-    private int mStyle;
-    private String mTitle;
     private ProgressBar mProgressBar;
-    private UpdateInfo mUpdateInfo = null;
 
-    public UpdatePreference(UpdatesSettings parent, UpdateInfo ui, String title, int style) {
+    public UpdatePreference(UpdatesSettings parent, UpdateInfo ui, int style) {
         super(parent, null, R.style.UpdatesPreferenceStyle);
         setLayoutResource(R.layout.preference_updates);
         mParent = parent;
-        mTitle = title;
         mStyle = style;
         mUpdateInfo = ui;
     }
@@ -90,41 +86,43 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
 
     @Override
     public void onClick(View v) {
-        String changeLog = ( TextUtils.isEmpty(mUpdateInfo.getChanges()) ? mParent.getResources().getString(R.string.no_changelog_alert) : mUpdateInfo.getChanges() );
-        if (changeLog.equals(mParent.getResources().getString(R.string.no_changelog_alert))
-                || changeLog.equals(mParent.getResources().getString(R.string.failed_to_load_changelog))) {
-            // No changelog to show, display a toast
-            Toast.makeText(mParent.getBaseContext(), changeLog, Toast.LENGTH_SHORT).show();
+        String changeLog = mUpdateInfo.getChangeLog();
+
+        if (changeLog == null) {
+            // Change log could not be fetched
+            Toast.makeText(mParent, R.string.failed_to_load_changelog, Toast.LENGTH_SHORT).show();
+        } else if (changeLog.isEmpty()) {
+            // Change log is empty
+            Toast.makeText(mParent, R.string.no_changelog_alert, Toast.LENGTH_SHORT).show();
         } else {
             // Prepare the dialog box content
-            WebView chngLog = new WebView(mParent);
-            chngLog.getSettings().setTextZoom(80);
-            chngLog.setBackgroundColor(mParent.getResources().getColor(android.R.color.darker_gray));
-            chngLog.loadDataWithBaseURL(null, changeLog, "text/html", "utf-8", null);
+            WebView changeLogView = new WebView(mParent);
+            changeLogView.getSettings().setTextZoom(80);
+            changeLogView.setBackgroundColor(mParent.getResources().getColor(android.R.color.darker_gray));
+            changeLogView.loadDataWithBaseURL(null, changeLog, "text/html", "utf-8", null);
 
             // Prepare the dialog box
-            AlertDialog.Builder builder = new AlertDialog.Builder(mParent);
-            builder.setTitle(mParent.getResources().getString(R.string.changelog_dialog_title));
-            builder.setView(chngLog);
-            builder.setPositiveButton(R.string.dialog_close, null);
-            final AlertDialog dialog = builder.create();
-            dialog.show();
+            new AlertDialog.Builder(mParent)
+                    .setTitle(R.string.changelog_dialog_title)
+                    .setView(changeLogView)
+                    .setPositiveButton(R.string.dialog_close, null)
+                    .show();
         }
     }
 
     private void confirmDelete() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(mParent);
-        builder.setTitle(R.string.confirm_delete_dialog_title);
-        builder.setMessage(R.string.confirm_delete_dialog_message);
-        builder.setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                // We are OK to delete, trigger it
-                mParent.deleteUpdate(getKey());
-            }
-        });
-        builder.setNegativeButton(R.string.dialog_cancel, null);
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        new AlertDialog.Builder(mParent)
+                .setTitle(R.string.confirm_delete_dialog_title)
+                .setMessage(R.string.confirm_delete_dialog_message)
+                .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // We are OK to delete, trigger it
+                        mParent.deleteUpdate(getKey());
+                    }
+                })
+                .setNegativeButton(R.string.dialog_cancel, null)
+                .show();
     }
 
     @Override
@@ -185,6 +183,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
         if (mUpdatesPref != null) {
             mUpdatesPref.setEnabled(true);
             mUpdatesPref.setLongClickable(true);
+
             final boolean enabled = isEnabled();
             mUpdatesPref.setOnClickListener(enabled ? this : null);
             if (!enabled) {
@@ -192,7 +191,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
             }
 
             // Set the title text
-            mTitleText.setText(mTitle);
+            mTitleText.setText(mUpdateInfo.getName());
             mTitleText.setVisibility(View.VISIBLE);
 
             // Show the proper style view
@@ -208,7 +207,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
                 mUpdatesButton.setImageResource(R.drawable.ic_tab_install);
                 mUpdatesButton.setOnClickListener(new OnClickListener() {
                     @Override
-                    public void onClick(View arg0) {
+                    public void onClick(View v) {
                         mParent.startUpdate(mUpdateInfo);
                     }
                 });
@@ -222,7 +221,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
                 mUpdatesButton.setImageResource(R.drawable.ic_tab_cancel);
                 mUpdatesButton.setOnClickListener(new OnClickListener() {
                     @Override
-                    public void onClick(View arg0) {
+                    public void onClick(View v) {
                         mParent.stopDownload();
                     }
                 });
@@ -245,7 +244,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
                 mUpdatesButton.setImageResource(R.drawable.ic_tab_download);
                 mUpdatesButton.setOnClickListener(new OnClickListener() {
                     @Override
-                    public void onClick(View arg0) {
+                    public void onClick(View v) {
                         mParent.startDownload(getKey());
                     }
                 });
@@ -255,5 +254,4 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
                 break;
         }
     }
-
 }
