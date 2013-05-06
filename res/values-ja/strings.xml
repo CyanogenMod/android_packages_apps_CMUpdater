@@ -52,7 +52,9 @@
     <string name="no_updates_found">新しいアップデートはありません</string>
     <string name="not_new_updates_found_ticker">新しいアップデートが利用できます</string>
     <string name="not_new_updates_found_title">新しいアップデート</string>
-    <string name="not_new_updates_found_body">{0}つのアップデートがダウンロードできます</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="other"><xliff:g id="count">%d</xliff:g>つのアップデートがダウンロードできます</item>
+    </plurals>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">ダウンロードをキャンセル</string>
@@ -69,7 +71,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">アップデートを適用</string>
-    <string name="apply_update_dialog_text">{0} にアップグレードしようとしています.\n\n更新を押すと端末は再起動後、自動でリカバリーモードに移行しアップデートをインストールします。</string>
+    <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> にアップグレードしようとしています.\n\n更新を押すと端末は再起動後、自動でリカバリーモードに移行しアップデートをインストールします。</string>
     <string name="apply_trying_to_get_root_access">リカバリーモードへ再起動するためにroot権限を取得します</string>
     <string name="apply_unable_to_reboot_toast">リカバリーモードへ再起動できません</string>
 
@@ -77,7 +79,7 @@
     <string name="confirm_delete_dialog_title">ファイルの削除</string>
     <string name="confirm_delete_dialog_message">ダウンロードしたアップデートファイルを削除しようとしています。よろしいですか?</string>
     <string name="confirm_delete_all_dialog_message">すべてのダウンロードしたアップデートファイルを削除しようとしています。よろしいですか?</string>
-    <string name="delete_single_update_success_message">{0}つのアップデートは削除されました</string>
+    <string name="delete_single_update_success_message"><xliff:g id="filename">%s</xliff:g>つのアップデートは削除されました</string>
     <string name="delete_updates_failure_message">アップデートファイルの削除中にエラーがありました</string>
     <string name="delete_updates_noFolder_message">アップデートフォルダが見つかりませんでした</string>
     <string name="delete_updates_success_message">すべてのダウンロードしたアップデートファイルは削除されました</string>
