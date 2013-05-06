@@ -12,63 +12,76 @@ package com.cyanogenmod.updater.misc;
 import android.content.Context;
 import android.util.Log;
 
-import com.cyanogenmod.updater.customTypes.FullUpdateInfo;
-import com.cyanogenmod.updater.customization.Customization;
-
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.LinkedList;
 
 public class State {
     private static final String TAG = "State";
+    private static final String FILENAME = "cmupdater.state";
 
-    public static void saveState(Context ctx, Serializable mAvailableUpdates) throws IOException {
+    public static void saveState(Context context, LinkedList<UpdateInfo> availableUpdates) {
         ObjectOutputStream oos = null;
         FileOutputStream fos = null;
         try {
-            File f = new File(ctx.getCacheDir(), Customization.STORED_STATE_FILENAME);
+            File f = new File(context.getCacheDir(), FILENAME);
             fos = new FileOutputStream(f);
             oos = new ObjectOutputStream(fos);
-            Map<String, Serializable> data = new HashMap<String, Serializable>();
-            data.put(Constants.KEY_AVAILABLE_UPDATES, mAvailableUpdates);
-            oos.writeObject(data);
+            oos.writeObject(availableUpdates);
             oos.flush();
-        } catch (Exception ex) {
-            Log.e(TAG, "Exception on saving Instance State", ex);
+        } catch (IOException e) {
+            Log.e(TAG, "Exception on saving instance state", e);
         } finally {
-            if (oos != null) {
-                oos.close();
-            }
-            if (fos != null) {
-                fos.close();
+            try {
+                if (oos != null) {
+                    oos.close();
+                }
+                if (fos != null) {
+                    fos.close();
+                }
+            } catch (IOException e) {
+                // ignored, can't do anything anyway
             }
         }
     }
 
     @SuppressWarnings("unchecked")
-    public static FullUpdateInfo loadState(Context ctx) throws IOException {
-        FullUpdateInfo availableUpdates = new FullUpdateInfo();
+    public static LinkedList<UpdateInfo> loadState(Context context) {
+        LinkedList<UpdateInfo> availableUpdates = new LinkedList<UpdateInfo>();
         ObjectInputStream ois = null;
         FileInputStream fis = null;
         try {
-            File f = new File(ctx.getCacheDir(), Customization.STORED_STATE_FILENAME);
+            File f = new File(context.getCacheDir(), FILENAME);
             fis = new FileInputStream(f);
             ois = new ObjectInputStream(fis);
-            Map<String, Serializable> data = (HashMap<String, Serializable>) ois.readObject();
-            Object o = data.get(Constants.KEY_AVAILABLE_UPDATES);
-            if (o != null) availableUpdates = (FullUpdateInfo) o;
+
+            Object o = ois.readObject();
+            if (o != null && o instanceof LinkedList<?>) {
+                availableUpdates = (LinkedList<UpdateInfo>) o;
+            }
         } catch (ClassNotFoundException e) {
             Log.e(TAG, "Unable to load stored class", e);
-        } catch (FileNotFoundException ex) {
-            Log.i(TAG, "No State Info stored");
+        } catch (IllegalArgumentException e) {
+            Log.d(TAG, "Unexpected state file format", e);
+        } catch (FileNotFoundException e) {
+            Log.i(TAG, "No state info stored");
         } catch (IOException e) {
-            Log.e(TAG, "Exception on Loading State", e);
+            Log.e(TAG, "Exception on loading state", e);
         } finally {
-            if (ois != null) {
-                ois.close();
-            }
-            if (fis != null) {
-                fis.close();
+            try {
+                if (ois != null) {
+                    ois.close();
+                }
+                if (fis != null) {
+                    fis.close();
+                }
+            } catch (IOException e) {
+                // ignored, can't do anything anyway
             }
         }
         return availableUpdates;

@@ -55,7 +55,10 @@
     <string name="no_updates_found">Geen nuwe upgraderings gevind nie</string>
     <string name="not_new_updates_found_ticker">Nuwe opgraderings is beskikbaar</string>
     <string name="not_new_updates_found_title">Nuwe opgraderings</string>
-    <string name="not_new_updates_found_body">{0} opgradering(s) beskikbaar vir aflaai</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> opgradering beskikbaar vir aflaai</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> opgraderings beskikbaar vir aflaai</item>
+    </plurals>
     <string name="data_connection_required">\'n Data verbinding word benodig.</string>
 
     <!-- Downloads -->
@@ -73,7 +76,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Pas opgradering toe</string>
-    <string name="apply_update_dialog_text">Die toestel gaan opgegradeer word na {0}\n\nAs u die Opgradeer knoppie druk sal die toestel self herlaai om die opgradering te installeer.\n\nLet wel: Hierdie funksie vereis \'n versoenbaare \'recovery\' andersins sal die opgradering handmatig geïnstalleer moet word</string>
+    <string name="apply_update_dialog_text">Die toestel gaan opgegradeer word na <xliff:g id="filename">%s</xliff:g>\n\nAs u die Opgradeer knoppie druk sal die toestel self herlaai om die opgradering te installeer.\n\nLet wel: Hierdie funksie vereis \'n versoenbaare \'recovery\' andersins sal die opgradering handmatig geïnstalleer moet word</string>
     <string name="apply_trying_to_get_root_access">Probeer root-toegang verkry om te herlaai</string>
     <string name="apply_unable_to_reboot_toast">Kon nie herlaai in \'recovery\' nie</string>
 
@@ -81,7 +84,7 @@
     <string name="confirm_delete_dialog_title">Skrap lêer</string>
     <string name="confirm_delete_dialog_message">Die afgelaaide lêer gaan verwyder word, Ok om voort te gaan?</string>
     <string name="confirm_delete_all_dialog_message">Al die afgelaaide lêers gaan verwyder word, Ok om voort te gaan?</string>
-    <string name="delete_single_update_success_message">Opgradering {0} geskrap</string>
+    <string name="delete_single_update_success_message">Opgradering <xliff:g id="filename">%s</xliff:g> geskrap</string>
     <string name="delete_updates_failure_message">Daar was \'n fout tydens die verwydering van die lêer</string>
     <string name="delete_updates_noFolder_message">Opgradering vouer nie gevind nie</string>
     <string name="delete_updates_success_message">Alle afgelaaide opgraderings geskrap</string>

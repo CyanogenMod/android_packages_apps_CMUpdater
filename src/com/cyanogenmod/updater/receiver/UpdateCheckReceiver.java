@@ -9,17 +9,17 @@
 
 package com.cyanogenmod.updater.receiver;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.service.UpdateCheckService;
+import com.cyanogenmod.updater.utils.Utils;
 
 import java.util.Date;
 
@@ -29,7 +29,7 @@ public class UpdateCheckReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         // Load the required settings from preferences
-        SharedPreferences prefs = context.getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         int updateFrequency = prefs.getInt(Constants.UPDATE_CHECK_PREF, Constants.UPDATE_FREQ_WEEKLY);
 
         // Check if we are set to manual updates and don't do anything
@@ -57,7 +57,7 @@ public class UpdateCheckReceiver extends BroadcastReceiver {
             if (!bootCheckCompleted) {
                 Log.i(TAG, "Start an on-boot check");
                 Intent i = new Intent(context, UpdateCheckService.class);
-                i.putExtra(Constants.CHECK_FOR_UPDATE, true);
+                i.setAction(UpdateCheckService.ACTION_CHECK_SCHEDULED);
                 context.startService(i);
             } else {
                 // Nothing to do
@@ -66,23 +66,7 @@ public class UpdateCheckReceiver extends BroadcastReceiver {
             }
         } else if (updateFrequency > 0) {
             Log.i(TAG, "Scheduling future, repeating update checks.");
-            scheduleUpdateService(context, updateFrequency * 1000);
+            Utils.scheduleUpdateService(context, updateFrequency * 1000);
         }
-    }
-
-    private void scheduleUpdateService(Context context, int updateFrequency) {
-        // Load the required settings from preferences
-        SharedPreferences prefs = context.getSharedPreferences("CMUpdate", Context.MODE_MULTI_PROCESS);
-        Date lastCheck = new Date(prefs.getLong(Constants.LAST_UPDATE_CHECK_PREF, 0));
-
-        // Get the intent ready
-        Intent i = new Intent(context, UpdateCheckService.class);
-        i.putExtra(Constants.CHECK_FOR_UPDATE, true);
-        PendingIntent pi = PendingIntent.getService(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        // Clear any old alarms and schedule the new alarm
-        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        am.cancel(pi);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, lastCheck.getTime() + updateFrequency, updateFrequency, pi);
     }
 }
