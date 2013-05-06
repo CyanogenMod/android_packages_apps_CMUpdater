@@ -50,7 +50,9 @@
     <string name="no_updates_found">Nové aktualizace nenalezeny</string>
     <string name="not_new_updates_found_ticker">Nové aktualizace k dispozici</string>
     <string name="not_new_updates_found_title">Nové aktualizace</string>
-    <string name="not_new_updates_found_body">Aktualizací ke stažení: {0}</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="other">Aktualizací ke stažení: <xliff:g id="count">%d</xliff:g></item>
+    </plurals>
     <string name="data_connection_required">Je vyžadováno připojení k internetu</string>
 
     <string name="confirm_download_cancelation_dialog_title">Zrušit stahování</string>
@@ -65,14 +67,14 @@
     <string name="md5_verification_failed">Ověření MD5 se nezdařilo</string>
 
     <string name="apply_update_dialog_title">Použít aktualizaci</string>
-    <string name="apply_update_dialog_text">Chystáte se aktualizovat na {0}.\n\nPokud stisknete Aktualizovat, telefon se restartuje do režimu Recovery, kde budete pokračovat v instalaci aktualizace.\n\nPoznámka: tato funkce vyžaduje nainstalovaný kompatibilní režim Recovery nebo je nutné instalaci provést ručně.</string>
+    <string name="apply_update_dialog_text">Chystáte se aktualizovat na <xliff:g id="filename">%s</xliff:g>.\n\nPokud stisknete Aktualizovat, telefon se restartuje do režimu Recovery, kde budete pokračovat v instalaci aktualizace.\n\nPoznámka: tato funkce vyžaduje nainstalovaný kompatibilní režim Recovery nebo je nutné instalaci provést ručně.</string>
     <string name="apply_trying_to_get_root_access">Získávají se práva root k restartu do režimu Recovery</string>
     <string name="apply_unable_to_reboot_toast">Nelze restartovat do režimu Recovery</string>
 
     <string name="confirm_delete_dialog_title">Smazat soubor</string>
     <string name="confirm_delete_dialog_message">Opravdu chcete smazat soubor aktualizace?</string>
     <string name="confirm_delete_all_dialog_message">Opravdu chcete smazat všechny soubory aktualizací?</string>
-    <string name="delete_single_update_success_message">Aktualizace {0} odstraněna</string>
+    <string name="delete_single_update_success_message">Aktualizace <xliff:g id="filename">%s</xliff:g> odstraněna</string>
     <string name="delete_updates_failure_message">Během odstraňování souboru aktualizace se vyskytla chyba</string>
     <string name="delete_updates_noFolder_message">Adresář aktualizací nenalezen</string>
     <string name="delete_updates_success_message">Všechny stažené soubory aktualizací smazány</string>

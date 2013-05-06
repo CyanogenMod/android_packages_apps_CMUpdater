@@ -41,7 +41,10 @@
     <string name="no_updates_found">Nenhuma atualização foi encontrada</string>
     <string name="not_new_updates_found_ticker">Novas atualizações estão disponíveis</string>
     <string name="not_new_updates_found_title">Novas atualizações</string>
-    <string name="not_new_updates_found_body">{0} atualização(ões) está(ão) para baixar</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> atualização está para baixar</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> atualizaçãões estão para baixar</item>
+    </plurals>
     <string name="confirm_download_cancelation_dialog_title">Cancelar download</string>
     <string name="confirm_download_cancelation_dialog_message">Cancelar o download atual?</string>
     <string name="download_cancelled">Download foi cancelado</string>
@@ -52,14 +55,14 @@
     <string name="md5_check_cancelled">Verificação MD5 foi cancelada</string>
     <string name="md5_verification_failed">Verificação MD5 falhou</string>
     <string name="apply_update_dialog_title">Aplicar atualização</string>
-    <string name="apply_update_dialog_text">Vocês está prestes a atualizar para {0}.\n\nSe você pressionar Atualizar, o dispositivo irá reiniciar no modo de recuperação e instalar a atualização.\n
+    <string name="apply_update_dialog_text">Vocês está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.\n\nSe você pressionar Atualizar, o dispositivo irá reiniciar no modo de recuperação e instalar a atualização.\n
         \nNote: Esta função requer um modo de recuperação compatível ou as atualizações irão precisar de serem instaladas manualmente</string>
     <string name="apply_trying_to_get_root_access">Tentando obter acesso root para reiniciar no modo de recuperação</string>
     <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar para a recuperação</string>
     <string name="confirm_delete_dialog_title">Excluir arquivo</string>
     <string name="confirm_delete_dialog_message">Excluir o arquivo de atualização selecionado?</string>
     <string name="confirm_delete_all_dialog_message">Excluir todos os arquivos de atualização baixados?</string>
-    <string name="delete_single_update_success_message">Atualização {0} foi excluída</string>
+    <string name="delete_single_update_success_message">Atualização <xliff:g id="filename">%s</xliff:g> foi excluída</string>
     <string name="delete_updates_failure_message">Houve um erro ao excluir o arquivo de atualização</string>
     <string name="delete_updates_noFolder_message">Pasta de atualização não foi encontrada</string>
     <string name="delete_updates_success_message">Todas as atualizações foram excluídas</string>
