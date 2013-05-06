@@ -55,7 +55,10 @@
     <string name="no_updates_found">Обновлений не найдено</string>
     <string name="not_new_updates_found_ticker">Доступны новые обновления</string>
     <string name="not_new_updates_found_title">Новые обновления</string>
-    <string name="not_new_updates_found_body">{0} обновления(ий) доступно для загрузки</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> обновление доступно для загрузки</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> обновления(ий) доступно для загрузки</item>
+    </plurals>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">Отменить загрузку</string>
@@ -71,7 +74,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Применить обновление</string>
-    <string name="apply_update_dialog_text">Вы собираетесь обновиться на {0}.\n\nПри нажатии кнопки \"Обновить\", устройство перезагрузится в режим recovery для установки обновления. \n\nПримечание: эта функция требует совместимого recovery, в противном случае обновление необходимо установить вручную</string>
+    <string name="apply_update_dialog_text">Вы собираетесь обновиться на <xliff:g id="filename">%s</xliff:g>.\n\nПри нажатии кнопки \"Обновить\", устройство перезагрузится в режим recovery для установки обновления. \n\nПримечание: эта функция требует совместимого recovery, в противном случае обновление необходимо установить вручную</string>
     <string name="apply_trying_to_get_root_access">Попытка получить root-доступ для перезагрузки в режим recovery</string>
     <string name="apply_unable_to_reboot_toast">Невозможно перезагрузиться в режим recovery</string>
 
@@ -79,7 +82,7 @@
     <string name="confirm_delete_dialog_title">Удалить файл</string>
     <string name="confirm_delete_dialog_message">Удалить выбранный файл обновления?</string>
     <string name="confirm_delete_all_dialog_message">Удалить все загруженные файлы обновлений?</string>
-    <string name="delete_single_update_success_message">Обновление {0} удалено</string>
+    <string name="delete_single_update_success_message">Обновление <xliff:g id="filename">%s</xliff:g> удалено</string>
     <string name="delete_updates_failure_message">Произошла ошибка при удалении файла обновления</string>
     <string name="delete_updates_noFolder_message">Каталог с обновлениями не найден</string>
     <string name="delete_updates_success_message">Все загруженные обновления удалены</string>
