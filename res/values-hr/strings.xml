@@ -52,7 +52,10 @@
     <string name="no_updates_found">Nema novi ažuriranja</string>
     <string name="not_new_updates_found_ticker">Dostupna su nova ažuriranja</string>
     <string name="not_new_updates_found_title">Nova ažuriranja</string>
-    <string name="not_new_updates_found_body">{0} ažuriranje(a) dostupna su za preuzimanje</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> ažuriranje dostupna su za preuzimanje</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> ažuriranja dostupna su za preuzimanje</item>
+    </plurals>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">Prekini preuzimanje?</string>
@@ -69,7 +72,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Primjeni ažuriranje</string>
-    <string name="apply_update_dialog_text">Ažurirati ćete na {0}.\n\nAko pritisnete Ažuriraj telefon će se sam restartirati u recovery kako bi instalirao ažuriranje</string>
+    <string name="apply_update_dialog_text">Ažurirati ćete na <xliff:g id="filename">%s</xliff:g>.\n\nAko pritisnete Ažuriraj telefon će se sam restartirati u recovery kako bi instalirao ažuriranje</string>
     <string name="apply_trying_to_get_root_access">Dobijanje root pristupa kako bi se telefon restartirao u recovery</string>
     <string name="apply_unable_to_reboot_toast">Neuspjelo restartiranje u recovery</string>
 
@@ -77,7 +80,7 @@
     <string name="confirm_delete_dialog_title">Obriši datoteku</string>
     <string name="confirm_delete_dialog_message">Obrisati će se preuzeta datoteka ažuriranja. Nastaviti?</string>
     <string name="confirm_delete_all_dialog_message">Obrisati ćete sve preuzete datoteke ažuriranja. Nastaviti?</string>
-    <string name="delete_single_update_success_message">Ažuriranje {0} obrisano</string>
+    <string name="delete_single_update_success_message">Ažuriranje <xliff:g id="filename">%s</xliff:g> obrisano</string>
     <string name="delete_updates_failure_message">Dogodila se greška prilikom brisanja datoteke ažuriranja</string>
     <string name="delete_updates_noFolder_message">Nije pronađen Folder ažuriranja</string>
     <string name="delete_updates_success_message">Sve preuzete datoteke ažuriranja su obrisane</string>
