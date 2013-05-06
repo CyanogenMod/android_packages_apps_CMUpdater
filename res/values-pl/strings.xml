@@ -55,7 +55,9 @@
     <string name="no_updates_found">Brak dostępnych aktualizacji</string>
     <string name="not_new_updates_found_ticker">Dostępne są nowe aktualizacje</string>
     <string name="not_new_updates_found_title">Nowe aktualizacje</string>
-    <string name="not_new_updates_found_body">Liczba aktualizacji dostępnych do pobrania: {0}</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="other">Liczba aktualizacji dostępnych do pobrania: <xliff:g id="count">%d</xliff:g></item>
+    </plurals>
     <string name="data_connection_required">Wymagane połączenie z Internetem.</string>
 
     <!-- Downloads -->
@@ -73,7 +75,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Zastosuj zaktualizację</string>
-    <string name="apply_update_dialog_text">Zostanie dokonana aktualizacja do {0}.\n\nWciśnięcie Zaktualizuj uruchomi urządzenie ponownie w trybie odzyskiwania, aby zainstalować aktualizację.\n\nUwaga: ta funkcja wymaga kompatybilnego trybu odzyskiwania, w innym przypadku aktualizacji będzie należało dokonać ręcznie.</string>
+    <string name="apply_update_dialog_text">Zostanie dokonana aktualizacja do <xliff:g id="filename">%s</xliff:g>.\n\nWciśnięcie Zaktualizuj uruchomi urządzenie ponownie w trybie odzyskiwania, aby zainstalować aktualizację.\n\nUwaga: ta funkcja wymaga kompatybilnego trybu odzyskiwania, w innym przypadku aktualizacji będzie należało dokonać ręcznie.</string>
     <string name="apply_trying_to_get_root_access">Próba uzyskania dostępu administracyjnego, aby uruchomić urządzenie w trybie odzyskiwania</string>
     <string name="apply_unable_to_reboot_toast">Przejście w tryb odzyskiwania się nie powiodło</string>
 
@@ -81,7 +83,7 @@
     <string name="confirm_delete_dialog_title">Usuń plik</string>
     <string name="confirm_delete_dialog_message">Pobrany plik aktualizacji zostanie usunięty, kontynuować?</string>
     <string name="confirm_delete_all_dialog_message">Wszystkie pobranie pliki aktualizacji zostaną usunięte, kontynuować?</string>
-    <string name="delete_single_update_success_message">Aktualizacja {0} usunięta</string>
+    <string name="delete_single_update_success_message">Aktualizacja <xliff:g id="filename">%s</xliff:g> usunięta</string>
     <string name="delete_updates_failure_message">Wystąpił błąd podczas usuwania pliku aktualizacji</string>
     <string name="delete_updates_noFolder_message">Nie odnaleziono folderu aktualizacji</string>
     <string name="delete_updates_success_message">Wszystkie pobrane aktualizacje usunięte</string>
