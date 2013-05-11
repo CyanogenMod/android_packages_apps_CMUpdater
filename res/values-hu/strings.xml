@@ -97,4 +97,12 @@
     <string name="no_changelog_alert">A változások listája nem elérhető</string>
     <string name="failed_to_load_changelog">Nem lehet betölteni a változások listáját</string>
     <string name="changelog_dialog_title">Változások listája</string>
+    <string name="extension_label">CyanogenMod frissítések</string>
+    <string name="extension_description">Megjeleníti az elérhető frissítések számát.</string>
+    <plurals name="extension_status">
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> frissítés</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod frissítés</item>
+    </plurals>
 </resources>
