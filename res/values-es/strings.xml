@@ -75,4 +75,14 @@
     <string name="no_changelog_alert">No hay registro de cambios</string>
     <string name="failed_to_load_changelog">Imposible cargar el registro de cambios</string>
     <string name="changelog_dialog_title">Registro de cambios</string>
+    <string name="extension_label">Actualizaciones de CyanogenMod</string>
+    <string name="extension_description">Mostrar el número de actualizaciones nuevas disponibles.</string>
+    <plurals name="extension_status">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> actualización</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> actualizaciones</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> actualización de CyanogenMod</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> actualizaciones de CyanogenMod</item>
+    </plurals>
 </resources>
