@@ -51,7 +51,6 @@
     <string name="no_updates_found">Ingen nye opdateringer fundet</string>
     <string name="not_new_updates_found_ticker">Nye opdateringer er tilgængelige</string>
     <string name="not_new_updates_found_title">Nye opdateringer</string>
-    <string name="not_new_updates_found_body">{0} opdatering(er) tilgængelige til download</string>
     <plurals name="not_new_updates_found_body">
         <item quantity="one"><xliff:g id="count">%d</xliff:g> opdatering tilgængelige til download</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> opdateringer tilgængelige til download</item>
@@ -89,4 +88,15 @@
     <string name="no_changelog_alert">Ingen ændringslog tilgængelig</string>
     <string name="failed_to_load_changelog">Kan ikke indlæse ændringslog</string>
     <string name="changelog_dialog_title">Ændringslog</string>
+    <string name="extension_label">CyanogenMod-opdateringer</string>
+    <string name="extension_description">Viser antal nye opdateringer tilgængelige.</string>
+    <plurals name="extension_status">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> opdatering</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> opdateringer</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod-opdatering</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod-opdateringer</item>
+    </plurals>
+
 </resources>
