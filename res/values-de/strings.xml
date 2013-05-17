@@ -98,4 +98,16 @@
     <string name="no_changelog_alert">Kein Änderungsprotokoll verfügbar</string>
     <string name="failed_to_load_changelog">Änderungsprotokoll konnte nicht geladen werden</string>
     <string name="changelog_dialog_title">Änderungsprotokoll</string>
+
+    <!-- DashClock extension strings -->
+    <string name="extension_label">CyanogenMod-Updates</string>
+    <string name="extension_description">Zeigt die Anzahl der verfügbaren CM-Updates an.</string>
+    <plurals name="extension_status">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> Update</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> Updates</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod-Update</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod-Updates</item>
+    </plurals>
 </resources>
