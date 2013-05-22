@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import com.cyanogenmod.updater.utils.Utils;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class UpdateInfo implements Parcelable, Serializable {
     private static final long serialVersionUID = 5499890003569313403L;
@@ -113,6 +114,46 @@ public class UpdateInfo implements Parcelable, Serializable {
 
     public void setChangeLog(String changeLog) {
         mChangeLog = changeLog;
+    }
+
+    public boolean isNewerThanInstalled() {
+        int[] installedVersion = canonicalizeVersion(Utils.getInstalledVersion(false));
+        int[] ourVersion = canonicalizeVersion(mVersion);
+
+        if (installedVersion.length < ourVersion.length) {
+            installedVersion = Arrays.copyOf(installedVersion, ourVersion.length);
+        } else if (installedVersion.length > ourVersion.length) {
+            ourVersion = Arrays.copyOf(ourVersion, installedVersion.length);
+        }
+
+        for (int i = 0; i < ourVersion.length; i++) {
+            if (ourVersion[i] > installedVersion[i]) {
+                return true;
+            }
+            if (ourVersion[i] < installedVersion[i]) {
+                return false;
+            }
+        }
+
+        // Version strings match, so compare build dates.
+        // Account for the fact that the jenkins timestamp is for build completion,
+        // not the actual build.date prop
+        return mBuildDate > Utils.getInstalledBuildDate() + 3600;
+    }
+
+    private int[] canonicalizeVersion(String versionString) {
+        String[] parts = versionString.split("\\.");
+        int[] version = new int[parts.length];
+
+        for (int i = 0; i < parts.length; i++) {
+            try {
+                version[i] = Integer.valueOf(parts[i]);
+            } catch (NumberFormatException e) {
+                version[i] = 0;
+            }
+        }
+
+        return version;
     }
 
     private void initializeName(String fileName) {
