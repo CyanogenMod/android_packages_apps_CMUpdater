@@ -136,7 +136,7 @@ public class UpdateCheckService extends IntentService {
 
         if (availableUpdates.isEmpty()) {
             mToastHandler.sendMessage(mToastHandler.obtainMessage(0, R.string.no_updates_found, 0));
-        } else {
+        } else if (!mCurrentCheckIsManual) {
             // There are updates available
             // The notification should launch the main app
             Intent i = new Intent(this, UpdatesSettings.class);
