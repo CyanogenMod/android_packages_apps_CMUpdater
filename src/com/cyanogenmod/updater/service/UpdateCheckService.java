@@ -48,7 +48,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -302,7 +301,7 @@ public class UpdateCheckService extends IntentService {
         boolean includeAll = updateType == Constants.UPDATE_TYPE_ALL_STABLE
             || updateType == Constants.UPDATE_TYPE_ALL_NIGHTLY;
 
-        if (!includeAll && !isNewerThanInstalled(ui.getVersion(), ui.getDate())) {
+        if (!includeAll && !ui.isNewerThanInstalled()) {
             Log.d(TAG, "Build " + fileName + " is older than the installed build");
             return null;
         }
@@ -387,41 +386,6 @@ public class UpdateCheckService extends IntentService {
                 }
             }
         }
-    }
-
-    private int[] canonicalizeVersion(String versionString) {
-        String[] parts = versionString.split("\\.");
-        int[] version = new int[parts.length];
-
-        for (int i = 0; i < parts.length; i++) {
-            try {
-                version[i] = Integer.valueOf(parts[i]);
-            } catch (NumberFormatException e) {
-                version[i] = 0;
-            }
-        }
-
-        return version;
-    }
-
-    private boolean isNewerThanInstalled(String version, long date) {
-        int[] currentVersion = canonicalizeVersion(Utils.getInstalledVersion(false));
-        int[] newVersion = canonicalizeVersion(version);
-
-        if (currentVersion.length < newVersion.length) {
-            currentVersion = Arrays.copyOf(currentVersion, newVersion.length);
-        } else if (currentVersion.length > newVersion.length) {
-            newVersion = Arrays.copyOf(newVersion, currentVersion.length);
-        }
-
-        for (int i = 0; i < newVersion.length; i++) {
-            if (newVersion[i] > currentVersion[i]) {
-                return true;
-            }
-        }
-
-        // The jenkins timestamp is for build completion, not the actual build.date prop
-        return date > Utils.getInstalledBuildDate() + 3600;
     }
 
     private synchronized boolean isCancelled() {
