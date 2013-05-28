@@ -22,9 +22,9 @@
     <string name="dialog_close">Zavrieť</string>
     <string name="available_updates_title">Dostupné aktualizácie</string>
     <string name="no_available_updates_intro">Poslednou kontrolou sa nenašli žiadne dostupné aktualizácie. Použite tlačidlo Obnoviť na ručnú kontrolu nových aktualizácií.</string>
-    <string name="new_update_summary">Nové</string>
-    <string name="downloaded_update_summary">Prevzaté</string>
-    <string name="installed_update_summary">Nainštalované</string>
+    <string name="new_update_summary">Nová</string>
+    <string name="downloaded_update_summary">Prevzatá</string>
+    <string name="installed_update_summary">Nainštalovaná</string>
     <string name="backup_rom_title">Vytvoriť zálohu</string>
     <string name="backup_rom_summary">Vytvorenie zálohy aktuálnej ROM pred aktualizáciou</string>
     <string name="update_check_title">Kontrolovať aktualizácie</string>
