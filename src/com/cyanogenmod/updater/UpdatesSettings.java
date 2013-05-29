@@ -66,7 +66,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class UpdatesSettings extends PreferenceActivity implements OnPreferenceChangeListener {
+public class UpdatesSettings extends PreferenceActivity implements
+        OnPreferenceChangeListener, UpdatePreference.OnReadyListener, UpdatePreference.OnActionListener {
     private static String TAG = "UpdatesSettings";
 
     // intent extras
@@ -115,6 +116,8 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mDownloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+
         // Load the layouts
         addPreferencesFromResource(R.xml.main);
         mUpdatesList = (PreferenceCategory) findPreference(UPDATES_CATEGORY);
@@ -142,33 +145,12 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         mBackupRom.setChecked(mPrefs.getBoolean(Constants.BACKUP_PREF, true));
         */
 
-        // Determine if there are any in-progress downloads
-        mDownloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-        mDownloadId = mPrefs.getLong(Constants.DOWNLOAD_ID, -1);
-        if (mDownloadId >= 0) {
-            Cursor c = mDownloadManager.query(new DownloadManager.Query().setFilterById(mDownloadId));
-            if (c == null || !c.moveToFirst()) {
-                Toast.makeText(this, R.string.download_not_found, Toast.LENGTH_LONG).show();
-            } else {
-                String fileName = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
-                int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
-                if (fileName != null && status != DownloadManager.STATUS_FAILED) {
-                    File file = new File(fileName);
-                    mFileName = file.getName().replace(".partial", "");
-                }
-            }
-            if (c != null) {
-                c.close();
-            }
-        }
-
         // Set 'HomeAsUp' feature of the actionbar to fit better into Settings
         final ActionBar bar = getActionBar();
         bar.setDisplayHomeAsUpEnabled(true);
 
-        // Turn on the Options Menu and update the layout
+        // Turn on the Options Menu
         invalidateOptionsMenu();
-        updateLayout();
     }
 
     @Override
@@ -227,6 +209,12 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
     }
 
     @Override
+    public void onReady(UpdatePreference pref) {
+        pref.setOnReadyListener(null);
+        mUpdateHandler.post(mUpdateProgress);
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mUpdateCheck) {
             int value = Integer.valueOf((String) newValue);
@@ -247,16 +235,40 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
     @Override
     protected void onStart() {
-        super.onResume();
+        super.onStart();
+
+        // Determine if there are any in-progress downloads
+        mDownloadId = mPrefs.getLong(Constants.DOWNLOAD_ID, -1);
+        if (mDownloadId >= 0) {
+            Cursor c = mDownloadManager.query(new DownloadManager.Query().setFilterById(mDownloadId));
+            if (c == null || !c.moveToFirst()) {
+                Toast.makeText(this, R.string.download_not_found, Toast.LENGTH_LONG).show();
+            } else {
+                String fileName = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+                int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
+		Log.d(TAG, "download running on start, name " + fileName + " status " + status);
+                if (fileName != null) {
+                    if (status == DownloadManager.STATUS_PENDING
+                            || status == DownloadManager.STATUS_RUNNING
+                            || status == DownloadManager.STATUS_PAUSED) {
+                        File file = new File(fileName);
+                        mFileName = file.getName().replace(".partial", "");
+                    }
+                }
+            }
+            if (c != null) {
+                c.close();
+            }
+        }
+
         updateLayout();
-        mUpdateHandler.post(mUpdateProgress);
         registerReceiver(mUpdateCheckFinishedReceiver,
                 new IntentFilter(UpdateCheckService.ACTION_CHECK_FINISHED));
     }
 
     @Override
     protected void onStop() {
-        super.onPause();
+        super.onStop();
         mUpdateHandler.removeCallbacks(mUpdateProgress);
         unregisterReceiver(mUpdateCheckFinishedReceiver);
         if (mProgressDialog != null) {
@@ -265,7 +277,8 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         }
     }
 
-    /* package */ void startDownload(String key) {
+    @Override
+    public void onStartDownload(UpdatePreference pref) {
         // If there is no internet connection, display a message and return.
         if (!Utils.isOnline(this)) {
             Toast.makeText(this, R.string.data_connection_required, Toast.LENGTH_SHORT).show();
@@ -277,60 +290,60 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             return;
         }
 
-        UpdatePreference pref = findMatchingPreference(key);
-        if (pref != null) {
-            // We have a match, get ready to trigger the download
-            mDownloadingPreference = pref;
-            UpdateInfo ui = mDownloadingPreference.getUpdateInfo();
-            if (ui != null) {
-                mDownloadingPreference.setStyle(UpdatePreference.STYLE_DOWNLOADING);
+        // We have a match, get ready to trigger the download
+        mDownloadingPreference = pref;
 
-                // Create the download request and set some basic parameters
-                String fullFolderPath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                        + "/" + Constants.UPDATES_FOLDER;
-
-                // If directory doesn't exist, create it
-                File directory = new File(fullFolderPath);
-                if (!directory.exists()) {
-                    directory.mkdirs();
-                    Log.d(TAG, "UpdateFolder created");
-                }
-
-                // Save the Changelog content to the sdcard for later use
-                writeLogFile(ui.getFileName(), ui.getChangeLog());
-
-                // Build the name of the file to download, adding .partial at the end.  It will get
-                // stripped off when the download completes
-                String fullFilePath = "file://" + fullFolderPath + "/" + ui.getFileName() + ".partial";
-
-                Request request = new Request(Uri.parse(ui.getDownloadUrl()));
-                String userAgent = Utils.getUserAgentString(this);
-                if (userAgent != null) {
-                    request.addRequestHeader("User-Agent", userAgent);
-                }
-                request.addRequestHeader("Cache-Control", "no-cache");
-
-                request.setTitle(getString(R.string.app_name));
-                request.setDestinationUri(Uri.parse(fullFilePath));
-                request.setAllowedOverRoaming(false);
-                request.setVisibleInDownloadsUi(false);
-
-                // TODO: this could/should be made configurable
-                request.setAllowedOverMetered(true);
-
-                // Start the download
-                mDownloadId = mDownloadManager.enqueue(request);
-                mFileName = ui.getFileName();
-                mDownloading = true;
-
-                // Store in shared preferences
-                mPrefs.edit()
-                        .putLong(Constants.DOWNLOAD_ID, mDownloadId)
-                        .putString(Constants.DOWNLOAD_MD5, ui.getMD5Sum())
-                        .apply();
-                mUpdateHandler.post(mUpdateProgress);
-            }
+        UpdateInfo ui = mDownloadingPreference.getUpdateInfo();
+        if (ui == null) {
+            return;
         }
+
+        mDownloadingPreference.setStyle(UpdatePreference.STYLE_DOWNLOADING);
+
+        // Create the download request and set some basic parameters
+        String fullFolderPath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                + "/" + Constants.UPDATES_FOLDER;
+
+        // If directory doesn't exist, create it
+        File directory = new File(fullFolderPath);
+        if (!directory.exists()) {
+            directory.mkdirs();
+            Log.d(TAG, "UpdateFolder created");
+        }
+
+        // Save the Changelog content to the sdcard for later use
+        writeLogFile(ui.getFileName(), ui.getChangeLog());
+
+        // Build the name of the file to download, adding .partial at the end.  It will get
+        // stripped off when the download completes
+        String fullFilePath = "file://" + fullFolderPath + "/" + ui.getFileName() + ".partial";
+
+        Request request = new Request(Uri.parse(ui.getDownloadUrl()));
+        String userAgent = Utils.getUserAgentString(this);
+        if (userAgent != null) {
+            request.addRequestHeader("User-Agent", userAgent);
+        }
+        request.addRequestHeader("Cache-Control", "no-cache");
+
+        request.setTitle(getString(R.string.app_name));
+        request.setDestinationUri(Uri.parse(fullFilePath));
+        request.setAllowedOverRoaming(false);
+        request.setVisibleInDownloadsUi(false);
+
+        // TODO: this could/should be made configurable
+        request.setAllowedOverMetered(true);
+
+        // Start the download
+        mDownloadId = mDownloadManager.enqueue(request);
+        mFileName = ui.getFileName();
+        mDownloading = true;
+
+        // Store in shared preferences
+        mPrefs.edit()
+                .putLong(Constants.DOWNLOAD_ID, mDownloadId)
+                .putString(Constants.DOWNLOAD_MD5, ui.getMD5Sum())
+                .apply();
+        mUpdateHandler.post(mUpdateProgress);
     }
 
     private Runnable mUpdateProgress = new Runnable() {
@@ -348,34 +361,50 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             q.setFilterById(mDownloadId);
 
             Cursor cursor = mDownloadManager.query(q);
-            if (cursor == null) {
-                return;
-            }
+            int status;
 
-            if (!cursor.moveToFirst()) {
-                cursor.close();
-                return;
-            }
-
-            int downloadedBytes = cursor.getInt(
-                    cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
-            int totalBytes = cursor.getInt(
-                    cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
-
-            if (totalBytes < 0) {
-                progressBar.setIndeterminate(true);
+            if (cursor == null || !cursor.moveToFirst()) {
+                // DownloadCompletedReceiver has likely already removed the download
+                // from the DB due to failure or MD5 mismatch
+                status = DownloadManager.STATUS_FAILED;
             } else {
-                progressBar.setIndeterminate(false);
-                progressBar.setMax(totalBytes);
-                progressBar.setProgress(downloadedBytes);
+                status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS));
             }
 
-            cursor.close();
-            mUpdateHandler.postDelayed(this, 1000);
+            switch (status) {
+                case DownloadManager.STATUS_PENDING:
+                    progressBar.setIndeterminate(true);
+                    break;
+                case DownloadManager.STATUS_PAUSED:
+                case DownloadManager.STATUS_RUNNING:
+                    int downloadedBytes = cursor.getInt(
+                        cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
+                    int totalBytes = cursor.getInt(
+                        cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
+
+                    progressBar.setIndeterminate(totalBytes < 0);
+                    progressBar.setMax(totalBytes);
+                    progressBar.setProgress(downloadedBytes);
+                    break;
+                case DownloadManager.STATUS_FAILED:
+                    mDownloadingPreference.setStyle(UpdatePreference.STYLE_NEW);
+                    mDownloadId = -1;
+                    mFileName = null;
+                    mDownloading = false;
+                    break;
+            }
+
+            if (cursor != null) {
+                cursor.close();
+            }
+            if (status != DownloadManager.STATUS_FAILED) {
+                mUpdateHandler.postDelayed(this, 1000);
+            }
         }
     };
 
-    /* package */ void stopDownload() {
+    @Override
+    public void onStopDownload(final UpdatePreference pref) {
         if (!mDownloading || mFileName == null) {
             return;
         }
@@ -387,10 +416,7 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Set the preference back to new style
-                        UpdatePreference pref = findMatchingPreference(mFileName);
-                        if (pref != null) {
-                            pref.setStyle(UpdatePreference.STYLE_NEW);
-                        }
+                        pref.setStyle(UpdatePreference.STYLE_NEW);
 
                         // We are OK to stop download, trigger it
                         mDownloadManager.remove(mDownloadId);
@@ -419,25 +445,11 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         String fileName = new File(fullPathName).getName();
 
         // Find the matching preference so we can retrieve the UpdateInfo
-        UpdatePreference pref = findMatchingPreference(fileName);
+        UpdatePreference pref = (UpdatePreference) mUpdatesList.findPreference(fileName);
         if (pref != null) {
-            UpdateInfo ui = pref.getUpdateInfo();
             pref.setStyle(UpdatePreference.STYLE_DOWNLOADED);
-            startUpdate(ui);
+            onStartUpdate(pref);
         }
-    }
-
-    private UpdatePreference findMatchingPreference(String key) {
-        if (mUpdatesList != null) {
-            // Find the matching preference
-            for (int i = 0; i < mUpdatesList.getPreferenceCount(); i++) {
-                UpdatePreference pref = (UpdatePreference) mUpdatesList.getPreference(i);
-                if (pref.getKey().equals(key)) {
-                    return pref;
-                }
-            }
-        }
-        return null;
     }
 
     private String mapCheckValue(Integer value) {
@@ -591,12 +603,13 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
             }
 
             UpdatePreference up = new UpdatePreference(this, ui, style);
+            up.setOnActionListener(this);
             up.setKey(ui.getFileName());
 
             // If we have an in progress download, link the preference
             if (isDownloading) {
                 mDownloadingPreference = up;
-                mUpdateHandler.post(mUpdateProgress);
+                up.setOnReadyListener(this);
                 mDownloading = true;
             }
 
@@ -614,8 +627,9 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         }
     }
 
-    public boolean deleteUpdate(String fileName) {
-        boolean success = false;
+    @Override
+    public void onDeleteUpdate(UpdatePreference pref) {
+        final String fileName = pref.getKey();
 
         if (mUpdateFolder.exists() && mUpdateFolder.isDirectory()) {
             File zipFileToDelete = new File(mUpdateFolder, fileName);
@@ -625,14 +639,12 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
                 zipFileToDelete.delete();
             } else {
                 Log.d(TAG, "Update to delete not found");
-                return false;
+                return;
             }
 
             if (logFileToDelete.exists()) {
                 logFileToDelete.delete();
             }
-
-            success = true;
 
             String message = getString(R.string.delete_single_update_success_message, fileName);
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -644,7 +656,6 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
 
         // Update the list
         updateLayout();
-        return success;
     }
 
     private void confirmDeleteAll() {
@@ -717,7 +728,10 @@ public class UpdatesSettings extends PreferenceActivity implements OnPreferenceC
         messageView.setTextAppearance(this, android.R.style.TextAppearance_DeviceDefault_Small);
     }
 
-    /* package */ void startUpdate(final UpdateInfo updateInfo) {
+    @Override
+    public void onStartUpdate(UpdatePreference pref) {
+        final UpdateInfo updateInfo = pref.getUpdateInfo();
+
         // Prevent the dialog from being triggered more than once
         if (mStartUpdateVisible) {
             return;
