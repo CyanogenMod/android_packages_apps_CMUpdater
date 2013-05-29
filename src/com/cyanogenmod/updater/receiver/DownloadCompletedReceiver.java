@@ -83,6 +83,10 @@ public class DownloadCompletedReceiver extends BroadcastReceiver{
                 // We failed. Clear the file and reset everything
                 dm.remove(id);
 
+                if (completedFile.exists()) {
+                    completedFile.delete();
+                }
+
                 // Remove the log file if it exists
                 File logFileToDelete = new File(completedFileFullPath + ".changelog");
                 if (logFileToDelete.exists()) {
