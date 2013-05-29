@@ -60,7 +60,7 @@
     <string name="md5_check_cancelled">Kontrola MD5 bola zrušená</string>
     <string name="md5_verification_failed">Overenie MD5 zlyhalo</string>
     <string name="apply_update_dialog_title">Aplikovať aktualizáciu</string>
-    <string name="apply_update_dialog_text">Chystáte sa inovovať na {0}.\n\nAk stlačíte tlačidlo Aktualizovať, zariadenie sa samé reštartuje do režimu recovery kvôli inštalácii aktualizácie.\n
+    <string name="apply_update_dialog_text">Chystáte sa inovovať na verziu <xliff:g id="filename">%s</xliff:g>.\n\nAk stlačíte tlačidlo Aktualizovať, zariadenie sa samé reštartuje do režimu recovery kvôli inštalácii aktualizácie.\n
         \nPoznámka: Táto funkcia vyžaduje kompatibilné Recovery, inak budú musieť byť aktualizácie inštalované ručne.</string>
     <string name="apply_trying_to_get_root_access">Pokus o získanie administrátorského prístupu na reštartovanie do režimu recovery</string>
     <string name="apply_unable_to_reboot_toast">Nie je možný reštart do režimu recovery</string>
