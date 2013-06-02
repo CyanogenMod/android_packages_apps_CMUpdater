@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 The CyanogenMod Project
+<!-- Copyright (C) 2012-2013 The CyanogenMod Project
 
      Licensed under the GNU GPLv2 license
 
      The text of the license can be found in the LICENSE file
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">CyanogenMod-updates</string>
     <string name="display_name">Updates</string>
     <string name="unknown">Onbekend</string>
@@ -56,6 +54,7 @@
         <item quantity="one"><xliff:g id="count">%d</xliff:g> update beschikbaar om te downloaden</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> updates beschikbaar om te downloaden</item>
     </plurals>
+    <string name="data_connection_required">Gegevensverbinding vereist</string>
 
     <string name="confirm_download_cancelation_dialog_title">Download annuleren</string>
     <string name="confirm_download_cancelation_dialog_message">Weet u zeker dat u de download wilt annuleren?</string>
@@ -89,5 +88,14 @@
     <string name="failed_to_load_changelog">Kan changelog niet laden</string>
     <string name="changelog_dialog_title">Changelog</string>
 
-    <string name="data_connection_required">Gegevensverbinding vereist</string>
+    <string name="extension_label">CyanogenMod updates</string>
+    <string name="extension_description">Toont aantal nieuwe beschikbare updates.</string>
+    <plurals name="extension_status">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> update</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> updates</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod update</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod updates</item>
+    </plurals>
 </resources>
