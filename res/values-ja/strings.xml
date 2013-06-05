@@ -71,7 +71,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">アップデートを適用</string>
-    <string name="apply_update_dialog_text"><xliff:g id="filename">%</xliff:g> にアップグレードしようとしています。\n\n更新を押すと端末は再起動後、自動でリカバリーモードに移行しアップデートをインストールします。</string>
+    <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> にアップグレードしようとしています。\n\n更新を押すと端末は再起動後、自動でリカバリーモードに移行しアップデートをインストールします。</string>
     <string name="apply_trying_to_get_root_access">リカバリーモードへ再起動するためにroot権限を取得します。</string>
     <string name="apply_unable_to_reboot_toast">リカバリーモードへ再起動できません。</string>
 
