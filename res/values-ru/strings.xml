@@ -16,7 +16,7 @@
     <!-- Menu and dialog box strings -->
     <string name="menu_refresh">Обновить</string>
     <string name="menu_delete">Удалить</string>
-    <string name="menu_delete_all">Удалить загрузки</string>
+    <string name="menu_delete_all">Удалить загруженные</string>
     <string name="menu_system_info">Информация о системе</string>
 
     <string name="dialog_ok">OK</string>
@@ -30,9 +30,9 @@
     <string name="available_updates_title">Доступные обновления</string>
     <string name="no_available_updates_intro">Последняя проверка не обнаружила доступных обновлений. Чтобы проверить наличие обновлений вручную, нажмите кнопку \"Обновить\"</string>
     <string name="new_update_summary">Новое</string>
-    <string name="downloaded_update_summary">Загруженное</string>
-    <string name="installed_update_summary">Установленное</string>
-    <string name="backup_rom_title">Создать РК</string>
+    <string name="downloaded_update_summary">Загружено</string>
+    <string name="installed_update_summary">Установлено</string>
+    <string name="backup_rom_title">Резервное копирование</string>
     <string name="backup_rom_summary">Создать резервную копию перед обновлением</string>
 
     <string name="update_check_title">Проверка обновлений</string>
@@ -56,8 +56,8 @@
     <string name="not_new_updates_found_ticker">Доступны новые обновления</string>
     <string name="not_new_updates_found_title">Новые обновления</string>
     <plurals name="not_new_updates_found_body">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> обновление доступно для загрузки</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> обновления(ий) доступно для загрузки</item>
+        <item quantity="one">Новых обновлений: <xliff:g id="count">%d</xliff:g></item>
+        <item quantity="other">Новых обновлений: <xliff:g id="count">%d</xliff:g></item>
     </plurals>
 
     <!-- Downloads -->
@@ -96,4 +96,5 @@
     <string name="no_changelog_alert">Список изменений не доступен</string>
     <string name="failed_to_load_changelog">Не удаётся загрузить список изменений</string>
     <string name="changelog_dialog_title">Список изменений</string>
+
 </resources>
