@@ -1,0 +1,99 @@
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- General strings -->
+    <string name="app_name">CM Обновления</string>
+    <string name="display_name">Обновления</string>
+    <string name="unknown">Неизвестно</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Презареди</string>
+    <string name="menu_delete">Изтрий</string>
+    <string name="menu_delete_all">Изтрий изтеглянията</string>
+    <string name="menu_system_info">Сестемна информация</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Прекрати</string>
+    <string name="dialog_yes">Да</string>
+    <string name="dialog_no">Не</string>
+    <string name="dialog_update">Обнови</string>
+    <string name="dialog_close">Затвори</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Налични обновления</string>
+    <string name="no_available_updates_intro">Последната проверка не намери нови обновления. За да проверите ръчно, натиснете бутон "Презареди".</string>
+    <string name="new_update_summary">Нов</string>
+    <string name="downloaded_update_summary">Изтеглен</string>
+    <string name="installed_update_summary">Инсталиран</string>
+    <string name="backup_rom_title">Създай рез. копие</string>
+    <string name="backup_rom_summary">Състави резервно копие преди обновяване на системата</string>
+
+    <string name="update_check_title">Проверка за обновления</string>
+    <string name="check_manual">Ръчно</string>
+    <string name="check_on_boot">На всяко стартиране</string>
+    <string name="check_twice_daily">Два пъти дневно</string>
+    <string name="check_daily">Всеки ден</string>
+    <string name="check_weekly">Седмично</string>
+    <string name="check_bi_weekly">Два пъти седмично</string>
+    <string name="check_monthly">Месечно</string>
+
+    <string name="update_type_title">Видове обновления</string>
+    <string name="type_all">Всички версии\n(само стабилни)</string>
+    <string name="type_all_incl_nightly">Всички версси\n(вкл. Nightlies)</string>
+    <string name="type_new">Нови версии\n(само стабилни)</string>
+    <string name="type_new_incl_nightly">Нови версии\n(вкл. Nightlies)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Проверка за обновления</string>
+    <string name="no_updates_found">Не са намерени нови обновления</string>
+    <string name="not_new_updates_found_ticker">Намерени са нови обновления</string>
+    <string name="not_new_updates_found_title">Нови обновления</string>
+    <string name="not_new_updates_found_body">{0} обновление(я) налични за изтегляне</string>
+    <string name="data_connection_required">Нужна е връзка с Интернет.</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Спрете изтеглянето.</string>
+    <string name="confirm_download_cancelation_dialog_message">Спиране на изтеглянето?</string>
+    <string name="download_cancelled">Спряно изтегляне</string>
+    <string name="download_already_running">Вече има активно изтегляне</string>
+    <string name="unable_to_download_file">Не е възможно да бъде изтеглен файлът</string>
+    <string name="download_not_found">Не е намерен файлът</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Грешка.MD5 не съвпада</string>
+    <string name="md5_check_cancelled">MD5 проверката спряна</string>
+    <string name="md5_verification_failed">MD5 проверката неуспешна</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Инсталиране на обновление</string>
+    <string name="apply_update_dialog_text">Вие ще обновите системата до {0}.\n\nАко натистете Обнови, телефонът ще се рестъртира в Recovery режим, за да инсталира обновлението. \n\nТази функция изисква съвместимо Recovery меню.</string>
+    <string name="apply_trying_to_get_root_access">Опит за достъп до root права,за зареждане в Recovery.</string>
+    <string name="apply_unable_to_reboot_toast">Не е възможно да се зареди Recovery</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Изтрийте файла</string>
+    <string name="confirm_delete_dialog_message">Изтриване на избрания файл?</string>
+    <string name="confirm_delete_all_dialog_message">Изтриване на всички изтеглени обновления?</string>
+    <string name="delete_single_update_success_message">Обновление {0} изтрито</string>
+    <string name="delete_updates_failure_message">Възникна грешка при изтриването на файла</string>
+    <string name="delete_updates_noFolder_message">Не е намерена папка Обновления</string>
+    <string name="delete_updates_success_message">Всички изтеглени обновления са изтрити</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Устройство:</string>
+    <string name="sysinfo_running">Версия:</string>
+    <string name="sysinfo_last_check">Последна проверка:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">Няма Лист-обновления</string>
+    <string name="failed_to_load_changelog">Не е възможно да се зареди Лист-обновления</string>
+    <string name="changelog_dialog_title">Лист-обновления</string>
+</resources>
+
