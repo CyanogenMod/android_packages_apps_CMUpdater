@@ -86,4 +86,17 @@
     <string name="no_changelog_alert">Není dostupný seznam změn</string>
     <string name="failed_to_load_changelog">Nelze načíst seznam změn</string>
     <string name="changelog_dialog_title">Seznam změn</string>
+
+    <string name="extension_label">Aktualizace CyanogenMod</string>
+    <string name="extension_description">Zobrazení počtu nových dostupných aktualizací.</string>
+    <plurals name="extension_status">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> aktualizace</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> aktualizace</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> aktualizací</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod aktualizace</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> CyanogenMod aktualizace</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod aktualizací</item>
+    </plurals>
 </resources>
