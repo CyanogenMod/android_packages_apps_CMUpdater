@@ -99,4 +99,16 @@
     <string name="failed_to_load_changelog">Kon nie Veranderinge-log laai nie</string>
     <string name="changelog_dialog_title">Veranderinge-log</string>
 
+    <!-- DashClock extension strings -->
+    <string name="extension_label">CyanogenMod opgraderings</string>
+    <string name="extension_description">Vertoon die aantal nuwe opgraderings beskikbaar</string>
+    <plurals name="extension_status">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> opgradering</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> opgraderings</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod opgradering</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod opgraderings</item>
+    </plurals>
+
 </resources>
