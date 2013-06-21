@@ -59,6 +59,7 @@
         <item quantity="one">Новых обновлений: <xliff:g id="count">%d</xliff:g></item>
         <item quantity="other">Новых обновлений: <xliff:g id="count">%d</xliff:g></item>
     </plurals>
+    <string name="data_connection_required">Необходимо интернет-подключение</string>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">Отменить загрузку</string>
