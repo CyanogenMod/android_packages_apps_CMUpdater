@@ -32,7 +32,7 @@
     <string name="new_update_summary">Нов</string>
     <string name="downloaded_update_summary">Изтеглен</string>
     <string name="installed_update_summary">Инсталиран</string>
-    <string name="backup_rom_title">Създай рез. копие</string>
+    <string name="backup_rom_title">Създай резервно копие</string>
     <string name="backup_rom_summary">Състави резервно копие преди обновяване на системата</string>
 
     <string name="update_check_title">Проверка за обновления</string>
