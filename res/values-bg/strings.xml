@@ -24,7 +24,7 @@
     <string name="dialog_yes">Да</string>
     <string name="dialog_no">Не</string>
     <string name="dialog_update">Обнови</string>
-    <string name="dialog_close">Затвори</string>
+    <string name="dialog_close">Изход</string>
 
     <!-- Settings strings -->
     <string name="available_updates_title">Налични обновления</string>
