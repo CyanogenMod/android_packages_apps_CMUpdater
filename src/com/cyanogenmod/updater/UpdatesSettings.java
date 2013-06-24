@@ -574,6 +574,10 @@ public class UpdatesSettings extends PreferenceActivity implements
     }
 
     private void writeLogFile(String fileName, String log) {
+        if (log == null) {
+            return;
+        }
+
         File logFile = new File(mUpdateFolder, fileName + ".changelog");
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(logFile));
