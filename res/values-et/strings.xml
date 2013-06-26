@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">CM Värskendaja</string>
+    <string name="unknown">Tundmatu</string>
+    <string name="menu_refresh">Värskenda</string>
+    <string name="menu_delete">Kustuta</string>
+    <string name="menu_delete_all">Kustuta allalaadimised</string>
+    <string name="menu_system_info">Süsteemi teave</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Tühista</string>
+    <string name="dialog_yes">Jah</string>
+    <string name="dialog_no">Ei</string>
+    <string name="dialog_update">Värskenda</string>
+    <string name="dialog_close">Sule</string>
+    <string name="available_updates_title">Saadaval olevad värskendused</string>
+    <string name="no_available_updates_intro">Viimati kui kotrolliti, siis ei leitud ühdegi värskendust. Et kontrollida värskenduseid uuesti, siis vajutage Uuenda</string>
+    <string name="new_update_summary">Uus</string>
+    <string name="downloaded_update_summary">Allalaaditud</string>
+    <string name="installed_update_summary">Installitud</string>
+    <string name="backup_rom_title">Loo varukoopia</string>
+    <string name="backup_rom_summary">Varunda praegune ROM enne värkenduse installimist</string>
+    <string name="update_check_title">Värskenduste kontrollimine</string>
+    <string name="check_manual">Uueandades</string>
+    <string name="check_on_boot">Igal käivitamisel</string>
+    <string name="check_twice_daily">Kaks korda päevas</string>
+    <string name="check_daily">Iga päev</string>
+    <string name="check_weekly">Iga nädal</string>
+    <string name="check_bi_weekly">Iga teisel nädalal</string>
+    <string name="check_monthly">Igakuiselt</string>
+    <string name="update_type_title">Värskenduste tüüpid</string>
+    <string name="type_all">Kõik versioonid (ainult stabiilsed)</string>
+    <string name="type_all_incl_nightly">Kõik versioonid (ka Nightly-versioonid)</string>
+    <string name="type_new">Uued versioonid (ainult stabiilsed)</string>
+    <string name="type_new_incl_nightly">Uuded versioonid (ka Nightly-versioonid)</string>
+    <string name="checking_for_updates">Kontrollitakse väskendusi</string>
+    <string name="no_updates_found">Värskendusi ei leitud</string>
+    <string name="not_new_updates_found_ticker">Värskendusi on saadaval</string>
+    <string name="not_new_updates_found_title">Uued värskendused</string>
+    <string name="not_new_updates_found_body">{0} värskendus(t) valmis allalaadimiseks</string>
+    <string name="confirm_download_cancelation_dialog_title">Tühista allalaadimine</string>
+    <string name="confirm_download_cancelation_dialog_message">Oled tühistamas allalaadimise, vajuta OK jätkamiseks</string>
+    <string name="download_cancelled">Laadimine tühistatud</string>
+    <string name="download_already_running">Allalaadimine on juba käimas</string>
+    <string name="unable_to_download_file">Värskendus loendi laadimine ei õnnestu</string>
+    <string name="download_not_found">Allalaadimist ei leitud</string>
+    <string name="apply_existing_update_md5error_message">Viga. MD5-kontrollkoodid ei kattu</string>
+    <string name="md5_check_cancelled">MD5 kontrollimine tühistatud</string>
+    <string name="md5_verification_failed">MD5 kinnitamine ebaõnnestus</string>
+    <string name="apply_update_dialog_title">Installi värskendus</string>
+    <string name="apply_update_dialog_text">Oled värskendamas selle versiooni {0}.\n\nKui vajutad Värskenda, seade käivitub uuesti Recovery-režiimi et saaks installida värskenduse.\n
+        \nTähelepanu: See funktsioon nõuab ühilduva Recovery või värskenduseid ei või installita automaatselt</string>
+    <string name="apply_trying_to_get_root_access">Taotletakse root õigusi Recovery-režiimi käivitamiseks</string>
+    <string name="apply_unable_to_reboot_toast">Recovery-režiimi käivitamine ebaõnnestus</string>
+    <string name="confirm_delete_dialog_title">Kustuta fail</string>
+    <string name="confirm_delete_dialog_message">Oled kustutamas allalaaditud värskendusfaili, jätkamiseks vajutage OK nuppu</string>
+    <string name="confirm_delete_all_dialog_message">Oled kustutamas kõik allalaaditud värskendusfailid, jätkamiseks vajutage OK nuppu</string>
+    <string name="delete_single_update_success_message">Värskendus {0} eemaldatud</string>
+    <string name="delete_updates_failure_message">Viga eemaldades värskendusfaili</string>
+    <string name="delete_updates_noFolder_message">Värskendus kausta ei leitud</string>
+    <string name="delete_updates_success_message">Kõik uuendused eemaldatud</string>
+    <string name="sysinfo_device">Seade:</string>
+    <string name="sysinfo_running">Versioon:</string>
+    <string name="sysinfo_last_check">Viimati kontrollitud:</string>
+    <string name="no_changelog_alert">Muutus logi ei ole saadaval</string>
+    <string name="failed_to_load_changelog">Muutus logi allalaadimine ebaõnnestus</string>
+    <string name="changelog_dialog_title">Muutus logi</string>
+</resources>
