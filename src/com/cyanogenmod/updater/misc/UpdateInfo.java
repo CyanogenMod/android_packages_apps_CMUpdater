@@ -136,9 +136,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         }
 
         // Version strings match, so compare build dates.
-        // Account for the fact that the jenkins timestamp is for build completion,
-        // not the actual build.date prop
-        return mBuildDate > Utils.getInstalledBuildDate() + 3600;
+        return mBuildDate > Utils.getInstalledBuildDate();
     }
 
     private int[] canonicalizeVersion(String versionString) {

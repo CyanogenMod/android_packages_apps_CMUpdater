@@ -56,9 +56,10 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.cyanogenmod.updater.receiver.DownloadCompletedReceiver">
+        <receiver android:name="com.cyanogenmod.updater.receiver.DownloadReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+                <action android:name="com.cyanogenmod.cmupdater.action.START_DOWNLOAD"/>
             </intent-filter>
         </receiver>
 

@@ -18,6 +18,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,6 +29,7 @@ import com.cyanogenmod.updater.UpdatesSettings;
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.State;
 import com.cyanogenmod.updater.misc.UpdateInfo;
+import com.cyanogenmod.updater.receiver.DownloadReceiver;
 import com.cyanogenmod.updater.utils.Utils;
 
 import org.apache.http.HttpEntity;
@@ -48,6 +50,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -69,6 +73,9 @@ public class UpdateCheckService extends IntentService {
     public static final String ACTION_CHECK_FINISHED = "com.cyanogenmod.cmupdater.action.UPDATE_CHECK_FINISHED";
     // extra for ACTION_UPDATE_DATA_UPDATED
     public static final String EXTRA_UPDATE_COUNT = "update_count";
+
+    // max. number of updates listed in the expanded notification
+    private static final int EXPANDED_NOTIF_UPDATE_COUNT = 4;
 
     private boolean mCancelRequested;
     private boolean mCurrentCheckIsManual;
@@ -134,7 +141,7 @@ public class UpdateCheckService extends IntentService {
         Log.i(TAG, "The update check successfully completed at " + d + " and found "
                 + availableUpdates.size() + " updates.");
 
-        if (availableUpdates.isEmpty()) {
+        if (availableUpdates.isEmpty() && mCurrentCheckIsManual) {
             mToastHandler.sendMessage(mToastHandler.obtainMessage(0, R.string.no_updates_found, 0));
         } else if (!mCurrentCheckIsManual) {
             // There are updates available
@@ -156,6 +163,46 @@ public class UpdateCheckService extends IntentService {
                     .setContentText(text)
                     .setContentIntent(contentIntent)
                     .setAutoCancel(true);
+
+            Collections.sort(availableUpdates, new Comparator<UpdateInfo>() {
+                @Override
+                public int compare(UpdateInfo lhs, UpdateInfo rhs) {
+                    /* sort by date descending */
+                    long lhsDate = lhs.getDate();
+                    long rhsDate = rhs.getDate();
+                    if (lhsDate == rhsDate) {
+                        return 0;
+                    }
+                    return lhsDate < rhsDate ? 1 : -1;
+                }
+            });
+
+            Notification.InboxStyle inbox = new Notification.InboxStyle(builder)
+                    .setBigContentTitle(text);
+            int added = 0, count = availableUpdates.size();
+
+            for (UpdateInfo ui : availableUpdates) {
+                if (added < EXPANDED_NOTIF_UPDATE_COUNT) {
+                    inbox.addLine(ui.getName());
+                    added++;
+                }
+            }
+            if (added != count) {
+                inbox.setSummaryText(res.getString(R.string.not_additional_count, count - added));
+            }
+            builder.setStyle(inbox);
+            builder.setNumber(count);
+
+            if (count == 1) {
+                i = new Intent(this, DownloadReceiver.class);
+                i.setAction(DownloadReceiver.ACTION_START_DOWNLOAD);
+                i.putExtra(DownloadReceiver.EXTRA_UPDATE_INFO, (Parcelable) availableUpdates.getFirst());
+                PendingIntent downloadIntent = PendingIntent.getBroadcast(this, 0, i,
+                        PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
+
+                builder.addAction(R.drawable.ic_tab_download,
+                        res.getString(R.string.not_action_download), downloadIntent);
+            }
 
             // Trigger the notification
             NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

@@ -11,29 +11,116 @@ package com.cyanogenmod.updater.receiver;
 
 import android.app.DownloadManager;
 import android.app.DownloadManager.Query;
+import android.app.DownloadManager.Request;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.UpdatesSettings;
 import com.cyanogenmod.updater.misc.Constants;
+import com.cyanogenmod.updater.misc.UpdateInfo;
 import com.cyanogenmod.updater.utils.MD5;
+import com.cyanogenmod.updater.utils.Utils;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
-public class DownloadCompletedReceiver extends BroadcastReceiver{
+public class DownloadReceiver extends BroadcastReceiver{
+    private static final String TAG = "DownloadReceiver";
+
+    public static final String ACTION_START_DOWNLOAD = "com.cyanogenmod.cmupdater.action.START_DOWNLOAD";
+    public static final String EXTRA_UPDATE_INFO = "update_info";
+
+    public static final String ACTION_DOWNLOAD_STARTED = "com.cyanogenmod.cmupdater.action.DOWNLOAD_STARTED";
+
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        // Get the ID of the currently running CMUpdater download and the one just finished
+        String action = intent.getAction();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        if (ACTION_START_DOWNLOAD.equals(action)) {
+            UpdateInfo ui = (UpdateInfo) intent.getParcelableExtra(EXTRA_UPDATE_INFO);
+            handleStartDownload(context, prefs, ui);
+        } else if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
+            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+            handleDownloadComplete(context, prefs, id);
+        }
+    }
+
+    private void handleStartDownload(Context context, SharedPreferences prefs, UpdateInfo ui) {
+        // If directory doesn't exist, create it
+        File directory = Utils.makeUpdateFolder();
+        if (!directory.exists()) {
+            directory.mkdirs();
+            Log.d(TAG, "UpdateFolder created");
+        }
+
+        // Save the Changelog content to the sdcard for later use
+        writeLogFile(ui.getFileName(), ui.getChangeLog());
+
+        // Build the name of the file to download, adding .partial at the end.  It will get
+        // stripped off when the download completes
+        String fullFilePath = "file://" + directory.getAbsolutePath() + "/" + ui.getFileName() + ".partial";
+
+        Request request = new Request(Uri.parse(ui.getDownloadUrl()));
+        String userAgent = Utils.getUserAgentString(context);
+        if (userAgent != null) {
+            request.addRequestHeader("User-Agent", userAgent);
+        }
+        request.addRequestHeader("Cache-Control", "no-cache");
+
+        request.setTitle(context.getString(R.string.app_name));
+        request.setDestinationUri(Uri.parse(fullFilePath));
+        request.setAllowedOverRoaming(false);
+        request.setVisibleInDownloadsUi(false);
+
+        // TODO: this could/should be made configurable
+        request.setAllowedOverMetered(true);
+
+        // Start the download
+        final DownloadManager dm =
+                (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        long downloadId = dm.enqueue(request);
+
+        // Store in shared preferences
+        prefs.edit()
+                .putLong(Constants.DOWNLOAD_ID, downloadId)
+                .putString(Constants.DOWNLOAD_MD5, ui.getMD5Sum())
+                .apply();
+
+        Utils.cancelNotification(context);
+
+        Intent intent = new Intent(ACTION_DOWNLOAD_STARTED);
+        intent.putExtra(DownloadManager.EXTRA_DOWNLOAD_ID, downloadId);
+        context.sendBroadcast(intent);
+    }
+
+    private void writeLogFile(String fileName, String log) {
+        if (log == null) {
+            return;
+        }
+
+        File logFile = new File(Utils.makeUpdateFolder(), fileName + ".changelog");
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(logFile));
+            bw.write(log);
+            bw.close();
+        } catch (IOException e) {
+            Log.e(TAG, "File write failed", e);
+        }
+    }
+
+    private void handleDownloadComplete(Context context, SharedPreferences prefs, long id) {
         long enqueued = prefs.getLong(Constants.DOWNLOAD_ID, -1);
-        long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
 
         if (enqueued < 0 || id < 0 || id != enqueued) {
             return;

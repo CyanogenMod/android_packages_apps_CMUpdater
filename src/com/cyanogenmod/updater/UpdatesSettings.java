@@ -12,8 +12,6 @@ package com.cyanogenmod.updater;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
-import android.app.DownloadManager.Request;
-import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,10 +21,10 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
@@ -49,15 +47,14 @@ import android.widget.Toast;
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.State;
 import com.cyanogenmod.updater.misc.UpdateInfo;
+import com.cyanogenmod.updater.receiver.DownloadReceiver;
 import com.cyanogenmod.updater.service.UpdateCheckService;
 import com.cyanogenmod.updater.utils.UpdateFilter;
 import com.cyanogenmod.updater.utils.Utils;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -101,14 +98,21 @@ public class UpdatesSettings extends PreferenceActivity implements
 
     private Handler mUpdateHandler = new Handler();
 
-    private BroadcastReceiver mUpdateCheckFinishedReceiver = new BroadcastReceiver() {
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (mProgressDialog != null) {
-                mProgressDialog.dismiss();
-                mProgressDialog = null;
+            String action = intent.getAction();
+
+            if (DownloadReceiver.ACTION_DOWNLOAD_STARTED.equals(action)) {
+                mDownloadId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+                mUpdateHandler.post(mUpdateProgress);
+            } else if (UpdateCheckService.ACTION_CHECK_FINISHED.equals(action)) {
+                if (mProgressDialog != null) {
+                    mProgressDialog.dismiss();
+                    mProgressDialog = null;
+                }
+                updateLayout();
             }
-            updateLayout();
         }
     };
 
@@ -256,8 +260,10 @@ public class UpdatesSettings extends PreferenceActivity implements
         }
 
         updateLayout();
-        registerReceiver(mUpdateCheckFinishedReceiver,
-                new IntentFilter(UpdateCheckService.ACTION_CHECK_FINISHED));
+
+        IntentFilter filter = new IntentFilter(UpdateCheckService.ACTION_CHECK_FINISHED);
+        filter.addAction(DownloadReceiver.ACTION_DOWNLOAD_STARTED);
+        registerReceiver(mReceiver, filter);
 
         checkForDownloadCompleted(getIntent());
         setIntent(null);
@@ -267,7 +273,7 @@ public class UpdatesSettings extends PreferenceActivity implements
     protected void onStop() {
         super.onStop();
         mUpdateHandler.removeCallbacks(mUpdateProgress);
-        unregisterReceiver(mUpdateCheckFinishedReceiver);
+        unregisterReceiver(mReceiver);
         if (mProgressDialog != null) {
             mProgressDialog.cancel();
             mProgressDialog = null;
@@ -296,56 +302,21 @@ public class UpdatesSettings extends PreferenceActivity implements
         }
 
         mDownloadingPreference.setStyle(UpdatePreference.STYLE_DOWNLOADING);
-
-        // Create the download request and set some basic parameters
-        String fullFolderPath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                + "/" + Constants.UPDATES_FOLDER;
-
-        // If directory doesn't exist, create it
-        File directory = new File(fullFolderPath);
-        if (!directory.exists()) {
-            directory.mkdirs();
-            Log.d(TAG, "UpdateFolder created");
-        }
-
-        // Save the Changelog content to the sdcard for later use
-        writeLogFile(ui.getFileName(), ui.getChangeLog());
-
-        // Build the name of the file to download, adding .partial at the end.  It will get
-        // stripped off when the download completes
-        String fullFilePath = "file://" + fullFolderPath + "/" + ui.getFileName() + ".partial";
-
-        Request request = new Request(Uri.parse(ui.getDownloadUrl()));
-        String userAgent = Utils.getUserAgentString(this);
-        if (userAgent != null) {
-            request.addRequestHeader("User-Agent", userAgent);
-        }
-        request.addRequestHeader("Cache-Control", "no-cache");
-
-        request.setTitle(getString(R.string.app_name));
-        request.setDestinationUri(Uri.parse(fullFilePath));
-        request.setAllowedOverRoaming(false);
-        request.setVisibleInDownloadsUi(false);
-
-        // TODO: this could/should be made configurable
-        request.setAllowedOverMetered(true);
-
-        // Start the download
-        mDownloadId = mDownloadManager.enqueue(request);
         mFileName = ui.getFileName();
         mDownloading = true;
 
-        // Store in shared preferences
-        mPrefs.edit()
-                .putLong(Constants.DOWNLOAD_ID, mDownloadId)
-                .putString(Constants.DOWNLOAD_MD5, ui.getMD5Sum())
-                .apply();
+        // Start the download
+        Intent intent = new Intent(this, DownloadReceiver.class);
+        intent.setAction(DownloadReceiver.ACTION_START_DOWNLOAD);
+        intent.putExtra(DownloadReceiver.EXTRA_UPDATE_INFO, (Parcelable) ui);
+        sendBroadcast(intent);
+
         mUpdateHandler.post(mUpdateProgress);
     }
 
     private Runnable mUpdateProgress = new Runnable() {
         public void run() {
-            if (!mDownloading || mDownloadingPreference == null) {
+            if (!mDownloading || mDownloadingPreference == null || mDownloadId < 0) {
                 return;
             }
 
@@ -361,7 +332,7 @@ public class UpdatesSettings extends PreferenceActivity implements
             int status;
 
             if (cursor == null || !cursor.moveToFirst()) {
-                // DownloadCompletedReceiver has likely already removed the download
+                // DownloadReceiver has likely already removed the download
                 // from the DB due to failure or MD5 mismatch
                 status = DownloadManager.STATUS_FAILED;
             } else {
@@ -511,7 +482,7 @@ public class UpdatesSettings extends PreferenceActivity implements
         // Read existing Updates
         ArrayList<String> existingFiles = new ArrayList<String>();
 
-        mUpdateFolder = new File(Environment.getExternalStorageDirectory() + "/cmupdater");
+        mUpdateFolder = Utils.makeUpdateFolder();
         File[] files = mUpdateFolder.listFiles(new UpdateFilter(".zip"));
 
         // If Folder Exists and Updates are present(with md5files)
@@ -524,7 +495,7 @@ public class UpdatesSettings extends PreferenceActivity implements
         }
 
         // Clear the notification if one exists
-        ((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).cancel(R.string.not_new_updates_found_title);
+        Utils.cancelNotification(this);
 
         // Build list of updates
         LinkedList<UpdateInfo> availableUpdates = State.loadState(this);
@@ -571,21 +542,6 @@ public class UpdatesSettings extends PreferenceActivity implements
         }
 
         return text.toString();
-    }
-
-    private void writeLogFile(String fileName, String log) {
-        if (log == null) {
-            return;
-        }
-
-        File logFile = new File(mUpdateFolder, fileName + ".changelog");
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(logFile));
-            bw.write(log);
-            bw.close();
-        } catch (IOException e) {
-            Log.e(TAG, "File write failed", e);
-        }
     }
 
     private void refreshPreferences(LinkedList<UpdateInfo> updates) {
