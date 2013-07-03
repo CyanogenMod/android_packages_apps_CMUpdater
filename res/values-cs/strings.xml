@@ -53,6 +53,8 @@
     <plurals name="not_new_updates_found_body">
         <item quantity="other">Aktualizací ke stažení: <xliff:g id="count">%d</xliff:g></item>
     </plurals>
+    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> další</string>
+    <string name="not_action_download">Stáhnout</string>
     <string name="data_connection_required">Je vyžadováno připojení k internetu</string>
 
     <string name="confirm_download_cancelation_dialog_title">Zrušit stahování</string>
@@ -61,6 +63,10 @@
     <string name="download_already_running">Stahování již běží</string>
     <string name="unable_to_download_file">Nelze stáhnout aktualizační soubor</string>
     <string name="download_not_found">Soubor pro stažení nenalezen</string>
+    <string name="not_download_success">Aktualizace úspěšně stáhnuta</string>
+    <string name="not_download_failure">Aktualizaci nelze stáhnout</string>
+    <string name="not_action_install_update">Restartovat a nainstalovat</string>
+    <string name="not_download_install_notice"> Aktualizace <xliff:g id="filename">%s</xliff:g> byla úspěšně stáhnuta. Stisknutím \'Restartovat a nainstalovat\', bude zařízení restartováno a bude provedena automatická instalace aktualizace.\n\nPoznámka: pro automatickou instalaci je vyžadován kompatibilní Recovery manažer.</string>
 
     <string name="apply_existing_update_md5error_message">Chyba MD5 kontrolního součtu souboru</string>
     <string name="md5_check_cancelled">MD5 kontrola byla zrušena</string>
