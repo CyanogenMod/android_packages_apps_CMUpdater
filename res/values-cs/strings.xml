@@ -53,6 +53,8 @@
     <plurals name="not_new_updates_found_body">
         <item quantity="other">Aktualizací ke stažení: <xliff:g id="count">%d</xliff:g></item>
     </plurals>
+    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> další</string>
+    <string name="not_action_download">Stáhnout</string>
     <string name="data_connection_required">Je vyžadováno připojení k internetu</string>
 
     <string name="confirm_download_cancelation_dialog_title">Zrušit stahování</string>
