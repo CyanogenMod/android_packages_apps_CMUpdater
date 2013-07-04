@@ -59,6 +59,8 @@
         <item quantity="one"><xliff:g id="count">%d</xliff:g> opgradering beskikbaar vir aflaai</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> opgraderings beskikbaar vir aflaai</item>
     </plurals>
+    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> ander</string>
+    <string name="not_action_download">Laai af</string>
     <string name="data_connection_required">\'n Data verbinding word benodig.</string>
 
     <!-- Downloads -->
