@@ -84,4 +84,6 @@
         <item quantity="one"><xliff:g id="count">%d</xliff:g> aktualizacja CyanogenMod</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> aktualizacji CyanogenMod</item>
     </plurals>
+    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> więcej</string>
+    <string name="not_action_download">Pobierz</string>
 </resources>
