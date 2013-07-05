@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- General strings -->
+    <string name="app_name">CM 업데이터</string>
+    <string name="display_name">업데이트</string>
+    <string name="unknown">알 수 없음</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">새로 고침</string>
+    <string name="menu_delete">삭제</string>
+    <string name="menu_delete_all">다운로드 삭제</string>
+    <string name="menu_system_info">시스템 정보</string>
+
+    <string name="dialog_ok">확인</string>
+    <string name="dialog_cancel">취소</string>
+    <string name="dialog_yes">예</string>
+    <string name="dialog_no">아니오</string>
+    <string name="dialog_update">업데이트</string>
+    <string name="dialog_close">닫기</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">사용 가능한 업데이트</string>
+    <string name="no_available_updates_intro">The last check did not find any available updates. To manually check for new updates, use the Refresh button.</string>
+    <string name="new_update_summary">새로운 업데이트</string>
+    <string name="downloaded_update_summary">다운로드된 업데이트</string>
+    <string name="installed_update_summary">설치된 업데이트</string>
+    <string name="backup_rom_title">백업 생성</string>
+    <string name="backup_rom_summary">업데이트를 설치하기 전에 ROM을 백업합니다.</string>
+
+    <string name="update_check_title">업데이트 확인</string>
+    <string name="check_manual">수동</string>
+    <string name="check_on_boot">부팅때마다</string>
+    <string name="check_twice_daily">하루에 두 번</string>
+    <string name="check_daily">하루에 한 번</string>
+    <string name="check_weekly">일주일에 한 번</string>
+    <string name="check_bi_weekly">일주일에 두 번</string>
+    <string name="check_monthly">한달에 한 번</string>
+
+    <string name="update_type_title">업데이트 종류</string>
+    <string name="type_all">모든 버전 (안정화 버전)</string>
+    <string name="type_all_incl_nightly">모든 버전 (나이틀리 포함)</string>
+    <string name="type_new">새로운 버전 (안정화 버전)</string>
+    <string name="type_new_incl_nightly">새로운 버전 (나이틀리 포함)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">@string/update_check_title</string>
+    <string name="no_updates_found">새로운 업데이트 없음</string>
+    <string name="not_new_updates_found_ticker">새로운 업데이트 발견!</string>
+    <string name="not_new_updates_found_title">새로운 업데이트</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g>개의 업데이트가 발견되었습니다.</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g>개의 업데이트들이 발견되었습니다,</item>
+    </plurals>
+    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> 더보기</string>
+    <string name="not_action_download">다운로드</string>
+    <string name="data_connection_required">인터넷 연결이 필요합니다.</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">다운로드 취소</string>
+    <string name="confirm_download_cancelation_dialog_message">다운로드를 취소하시겠습니까?</string>
+    <string name="download_cancelled">다운로드 취소됨</string>
+    <string name="download_already_running">다운로드가 이미 실행중입니다.</string>
+    <string name="unable_to_download_file">업데이트 파일을 다운로드 할 수 없습니다,</string>
+    <string name="download_not_found">다운로드가 발견되지 않았습니다.</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">MD5 체크섬이 맞지 않습니다.</string>
+    <string name="md5_check_cancelled">MD5 확인이 취소되었습니다.</string>
+    <string name="md5_verification_failed">MD5 확인 실패!</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">업데이트 적용</string>
+    <string name="apply_update_dialog_text">You are about to upgrade to <xliff:g id="filename">%s</xliff:g>.\n\nIf you press Update, the device will restart itself in recovery mode to install the update.\n
+        \nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
+    <string name="apply_trying_to_get_root_access">리커버리 모드로 재부팅하기 위해 루트 권한을 얻는 중입니다...</string>
+    <string name="apply_unable_to_reboot_toast">리커버리 모드로 재부팅 실패</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">파일 제거</string>
+    <string name="confirm_delete_dialog_message">선택한 파일을 삭제하시겠습니까?</string>
+    <string name="confirm_delete_all_dialog_message">모든 다운로드된 파일을 삭제하시겠습니까?</string>
+    <string name="delete_single_update_success_message"><xliff:g id="filename">%s</xliff:g> 업데이트 제거됨.</string>
+    <string name="delete_updates_failure_message">업데이트 파일을 제거하는 중 오류가 발생하였습니다.</string>
+    <string name="delete_updates_noFolder_message">업데이트 저장 폴더가 없습니다.</string>
+    <string name="delete_updates_success_message">모든 업데이트 파일이 제거되었습니다,</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">기기 :</string>
+    <string name="sysinfo_running">ROM 버전 :</string>
+    <string name="sysinfo_last_check">마지막 업데이트 확인 :</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">변경 사항 파일이 없습니다.</string>
+    <string name="failed_to_load_changelog">변경 사항 파일을 열 수 없었습니다.</string>
+    <string name="changelog_dialog_title">변경 사항</string>
+
+    <!-- DashClock extension strings -->
+    <string name="extension_label">CyanogenMod 업데이트</string>
+    <string name="extension_description">업데이트의 개수를 표시해 줍니다.</string>
+    <plurals name="extension_status">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g>개의 업데이트</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g>개의 업데이트들</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g>개의 CyanogenMod 업데이트</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g>개의 CyanogenMod 업데이트들</item>
+    </plurals>
+</resources>
