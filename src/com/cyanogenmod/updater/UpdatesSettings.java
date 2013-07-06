@@ -25,10 +25,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Parcelable;
-import android.os.PowerManager;
-import android.os.UserHandle;
-import android.os.storage.StorageManager;
-import android.os.storage.StorageVolume;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -56,7 +52,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -110,6 +105,11 @@ public class UpdatesSettings extends PreferenceActivity implements
                 if (mProgressDialog != null) {
                     mProgressDialog.dismiss();
                     mProgressDialog = null;
+                }
+                int count = intent.getIntExtra(UpdateCheckService.EXTRA_NEW_UPDATE_COUNT, -1);
+                if (count == 0) {
+                    Toast.makeText(UpdatesSettings.this, R.string.no_updates_found,
+                            Toast.LENGTH_SHORT).show();
                 }
                 updateLayout();
             }
@@ -468,6 +468,7 @@ public class UpdatesSettings extends PreferenceActivity implements
                 Intent cancelIntent = new Intent(UpdatesSettings.this, UpdateCheckService.class);
                 cancelIntent.setAction(UpdateCheckService.ACTION_CANCEL_CHECK);
                 startService(cancelIntent);
+                mProgressDialog = null;
             }
         });
 
@@ -720,7 +721,13 @@ public class UpdatesSettings extends PreferenceActivity implements
                 .setPositiveButton(R.string.dialog_update, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        triggerUpdate(updateInfo);
+                        try {
+                            Utils.triggerUpdate(UpdatesSettings.this, updateInfo.getFileName());
+                        } catch (IOException e) {
+                            Log.e(TAG, "Unable to reboot into recovery mode", e);
+                            Toast.makeText(UpdatesSettings.this, R.string.apply_unable_to_reboot_toast,
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 })
                 .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
@@ -730,83 +737,5 @@ public class UpdatesSettings extends PreferenceActivity implements
                     }
                 })
                 .show();
-    }
-
-    private void triggerUpdate(UpdateInfo updateInfo) {
-        /*
-         * Should perform the following steps.
-         * 0.- Ask the user for a confirmation (already done when we reach here)
-         * 1.- mkdir -p /cache/recovery
-         * 2.- echo 'boot-recovery' > /cache/recovery/command
-         * 3.- if(mBackup) echo '--nandroid'  >> /cache/recovery/command
-         * 4.- echo '--update_package=SDCARD:update.zip' >> /cache/recovery/command
-         * 5.- reboot recovery
-         */
-        try {
-            // Set the 'boot recovery' command
-            Process p = Runtime.getRuntime().exec("sh");
-            OutputStream os = p.getOutputStream();
-            os.write("mkdir -p /cache/recovery/\n".getBytes());
-            os.write("echo 'boot-recovery' >/cache/recovery/command\n".getBytes());
-
-            // See if backups are enabled and add the nandroid flag
-            /* TODO: add this back once we have a way of doing backups that is not recovery specific
-               if (mPrefs.getBoolean(Constants.BACKUP_PREF, true)) {
-               os.write("echo '--nandroid'  >> /cache/recovery/command\n".getBytes());
-               }
-               */
-
-            // Add the update folder/file name
-            // Emulated external storage moved to user-specific paths in 4.2
-            String userPath = Environment.isExternalStorageEmulated() ? ("/" + UserHandle.myUserId()) : "";
-
-            String cmd = "echo '--update_package=" + getStorageMountpoint() + userPath
-                + "/" + Constants.UPDATES_FOLDER + "/" + updateInfo.getFileName()
-                + "' >> /cache/recovery/command\n";
-            os.write(cmd.getBytes());
-            os.flush();
-
-            // Trigger the reboot
-            PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-            powerManager.reboot("recovery");
-        } catch (IOException e) {
-            Log.e(TAG, "Unable to reboot into recovery mode", e);
-            Toast.makeText(UpdatesSettings.this, R.string.apply_unable_to_reboot_toast, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private String getStorageMountpoint() {
-        StorageManager sm = (StorageManager) getSystemService(Context.STORAGE_SERVICE);
-        StorageVolume[] volumes = sm.getVolumeList();
-        String primaryStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-        boolean alternateIsInternal = getResources().getBoolean(R.bool.alternateIsInternal);
-
-        if (volumes.length <= 1) {
-            // single storage, assume only /sdcard exists
-            return "/sdcard";
-        }
-
-        for (int i = 0; i < volumes.length; i++) {
-            StorageVolume v = volumes[i];
-            if (v.getPath().equals(primaryStoragePath)) {
-                /* This is the primary storage, where we stored the update file
-                 *
-                 * For CM10, a non-removable storage (partition or FUSE)
-                 * will always be primary. But we have older recoveries out there 
-                 * in which /sdcard is the microSD, and the internal partition is 
-                 * mounted at /emmc.
-                 *
-                 * At buildtime, we try to automagically guess from recovery.fstab
-                 * what's the recovery configuration for this device. If "/emmc"
-                 * exists, and the primary isn't removable, we assume it will be 
-                 * mounted there.
-                 */ 
-                if (!v.isRemovable() && alternateIsInternal) {
-                    return "/emmc";
-                }
-            };
-        }
-        // Not found, assume non-alternate
-        return "/sdcard";
     }
 }
