@@ -12,6 +12,9 @@ package com.cyanogenmod.updater.receiver;
 import android.app.DownloadManager;
 import android.app.DownloadManager.Query;
 import android.app.DownloadManager.Request;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +23,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.UpdatesSettings;
@@ -141,7 +143,12 @@ public class DownloadReceiver extends BroadcastReceiver{
         }
 
         final int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
-        int failureToastResId = -1;
+        int failureMessageResId = -1;
+        File updateFile = null;
+
+        Intent updateIntent = new Intent(context, UpdatesSettings.class);
+        updateIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
 
         if (status == DownloadManager.STATUS_SUCCESSFUL) {
             // Get the full path name of the downloaded file and the MD5
@@ -152,26 +159,22 @@ public class DownloadReceiver extends BroadcastReceiver{
             String completedFileFullPath = partialFileFullPath.replace(".partial", "");
 
             File partialFile = new File(partialFileFullPath);
-            File completedFile = new File(completedFileFullPath);
-            partialFile.renameTo(completedFile);
+            updateFile = new File(completedFileFullPath);
+            partialFile.renameTo(updateFile);
 
             String downloadedMD5 = prefs.getString(Constants.DOWNLOAD_MD5, "");
 
             // Start the MD5 check of the downloaded file
-            if (MD5.checkMD5(downloadedMD5, completedFile)) {
+            if (MD5.checkMD5(downloadedMD5, updateFile)) {
                 // We passed. Bring the main app to the foreground and trigger download completed
-                Intent i = new Intent(context, UpdatesSettings.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                        Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                i.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_ID, id);
-                i.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_PATH, completedFileFullPath);
-                context.startActivity(i);
+                updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_ID, id);
+                updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_PATH, completedFileFullPath);
             } else {
                 // We failed. Clear the file and reset everything
                 dm.remove(id);
 
-                if (completedFile.exists()) {
-                    completedFile.delete();
+                if (updateFile.exists()) {
+                    updateFile.delete();
                 }
 
                 // Remove the log file if it exists
@@ -180,13 +183,13 @@ public class DownloadReceiver extends BroadcastReceiver{
                     logFileToDelete.delete();
                 }
 
-                failureToastResId = R.string.md5_verification_failed;
+                failureMessageResId = R.string.md5_verification_failed;
             }
         } else if (status == DownloadManager.STATUS_FAILED) {
             // The download failed, reset
             dm.remove(id);
 
-            failureToastResId = R.string.unable_to_download_file;
+            failureMessageResId = R.string.unable_to_download_file;
         }
 
         // Clear the shared prefs
@@ -197,8 +200,27 @@ public class DownloadReceiver extends BroadcastReceiver{
 
         c.close();
 
-        if (failureToastResId >= 0) {
-            Toast.makeText(context, failureToastResId, Toast.LENGTH_LONG).show();
+        // Get the notification ready
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 1,
+                updateIntent, PendingIntent.FLAG_ONE_SHOT);
+        Notification.Builder builder = new Notification.Builder(context)
+                .setSmallIcon(R.drawable.cm_updater)
+                .setWhen(System.currentTimeMillis())
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true);
+
+        if (failureMessageResId >= 0) {
+            builder.setContentTitle(context.getString(R.string.not_download_failure));
+            builder.setContentText(context.getString(failureMessageResId));
+            builder.setTicker(context.getString(R.string.not_download_failure));
+        } else {
+            builder.setContentTitle(context.getString(R.string.not_download_success));
+            builder.setContentText(UpdateInfo.extractUiName(updateFile.getName()));
+            builder.setTicker(context.getString(R.string.not_download_success));
         }
+
+        final NotificationManager nm =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        nm.notify(R.string.not_download_success, builder.build());
     }
 }

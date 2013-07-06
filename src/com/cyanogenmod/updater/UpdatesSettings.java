@@ -111,6 +111,11 @@ public class UpdatesSettings extends PreferenceActivity implements
                     mProgressDialog.dismiss();
                     mProgressDialog = null;
                 }
+                int count = intent.getIntExtra(UpdateCheckService.EXTRA_NEW_UPDATE_COUNT, -1);
+                if (count == 0) {
+                    Toast.makeText(UpdatesSettings.this, R.string.no_updates_found,
+                            Toast.LENGTH_SHORT).show();
+                }
                 updateLayout();
             }
         }
@@ -468,6 +473,7 @@ public class UpdatesSettings extends PreferenceActivity implements
                 Intent cancelIntent = new Intent(UpdatesSettings.this, UpdateCheckService.class);
                 cancelIntent.setAction(UpdateCheckService.ACTION_CANCEL_CHECK);
                 startService(cancelIntent);
+                mProgressDialog = null;
             }
         });
 

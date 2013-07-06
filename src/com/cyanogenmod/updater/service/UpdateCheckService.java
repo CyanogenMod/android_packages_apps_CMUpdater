@@ -16,13 +16,10 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.os.Handler;
-import android.os.Message;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.UpdatesSettings;
@@ -69,26 +66,18 @@ public class UpdateCheckService extends IntentService {
     public static final String ACTION_CANCEL_CHECK = "com.cyanogenmod.cmupdater.action.CANCEL_CHECK";
 
     // broadcast actions
-    public static final String ACTION_UPDATE_DATA_UPDATED = "com.cyanogenmod.cmupdater.action.UPDATE_DATA_UPDATED";
     public static final String ACTION_CHECK_FINISHED = "com.cyanogenmod.cmupdater.action.UPDATE_CHECK_FINISHED";
-    // extra for ACTION_UPDATE_DATA_UPDATED
+    // extra for ACTION_CHECK_FINISHED: total amount of found updates
     public static final String EXTRA_UPDATE_COUNT = "update_count";
+    // extra for ACTION_CHECK_FINISHED: amount of updates that are newer than what is installed
+    public static final String EXTRA_REAL_UPDATE_COUNT = "real_update_count";
+    // extra for ACTION_CHECK_FINISHED: amount of updates that were found for the first time
+    public static final String EXTRA_NEW_UPDATE_COUNT = "new_update_count";
 
     // max. number of updates listed in the expanded notification
     private static final int EXPANDED_NOTIF_UPDATE_COUNT = 4;
 
-    private boolean mCancelRequested;
-    private boolean mCurrentCheckIsManual;
-
-    private final Handler mToastHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            if (msg.arg1 != 0) {
-                Toast.makeText(UpdateCheckService.this, msg.arg1, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(UpdateCheckService.this, (String) msg.obj, Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
+    private HttpRequestExecutor mHttpExecutor;
 
     public UpdateCheckService() {
         super("UpdateCheckService");
@@ -97,7 +86,10 @@ public class UpdateCheckService extends IntentService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (TextUtils.equals(intent.getAction(), ACTION_CANCEL_CHECK)) {
-            mCancelRequested = true;
+            synchronized (this) {
+                mHttpExecutor.abort();
+            }
+
             return START_NOT_STICKY;
         }
 
@@ -107,8 +99,7 @@ public class UpdateCheckService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         synchronized (this) {
-            mCancelRequested = false;
-            mCurrentCheckIsManual = TextUtils.equals(intent.getAction(), ACTION_CHECK_MANUAL);
+            mHttpExecutor = new HttpRequestExecutor();
         }
 
         if (!Utils.isOnline(this)) {
@@ -118,15 +109,16 @@ public class UpdateCheckService extends IntentService {
         }
 
         // Start the update check
+        Intent finishedIntent = new Intent(ACTION_CHECK_FINISHED);
         LinkedList<UpdateInfo> availableUpdates;
         try {
-            availableUpdates = getAvailableUpdates();
+            availableUpdates = getAvailableUpdatesAndFillIntent(finishedIntent);
         } catch (IOException e) {
             Log.e(TAG, "Could not check for updates", e);
             availableUpdates = null;
         }
 
-        if (availableUpdates == null || isCancelled()) {
+        if (availableUpdates == null || mHttpExecutor.isAborted()) {
             return;
         }
 
@@ -137,22 +129,25 @@ public class UpdateCheckService extends IntentService {
                 .putBoolean(Constants.BOOT_CHECK_COMPLETED, true)
                 .apply();
 
+        int realUpdateCount = finishedIntent.getIntExtra(EXTRA_REAL_UPDATE_COUNT, 0);
+        boolean checkIsManual = TextUtils.equals(intent.getAction(), ACTION_CHECK_MANUAL);
+
         // Write to log
         Log.i(TAG, "The update check successfully completed at " + d + " and found "
-                + availableUpdates.size() + " updates.");
+                + availableUpdates.size() + " updates ("
+                + realUpdateCount + " newer than installed)");
 
-        if (availableUpdates.isEmpty() && mCurrentCheckIsManual) {
-            mToastHandler.sendMessage(mToastHandler.obtainMessage(0, R.string.no_updates_found, 0));
-        } else if (!mCurrentCheckIsManual) {
+        if (!checkIsManual && realUpdateCount != 0) {
             // There are updates available
             // The notification should launch the main app
             Intent i = new Intent(this, UpdatesSettings.class);
             i.putExtra(UpdatesSettings.EXTRA_UPDATE_LIST_UPDATED, true);
-            PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_ONE_SHOT);
+            PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
+                    PendingIntent.FLAG_ONE_SHOT);
 
             Resources res = getResources();
             String text = res.getQuantityString(R.plurals.not_new_updates_found_body,
-                    availableUpdates.size(), availableUpdates.size());
+                    realUpdateCount, realUpdateCount);
 
             // Get the notification ready
             Notification.Builder builder = new Notification.Builder(this)
@@ -164,7 +159,14 @@ public class UpdateCheckService extends IntentService {
                     .setContentIntent(contentIntent)
                     .setAutoCancel(true);
 
-            Collections.sort(availableUpdates, new Comparator<UpdateInfo>() {
+            LinkedList<UpdateInfo> realUpdates = new LinkedList<UpdateInfo>();
+            for (UpdateInfo ui : availableUpdates) {
+                if (ui.isNewerThanInstalled()) {
+                    realUpdates.add(ui);
+                }
+            }
+
+            Collections.sort(realUpdates, new Comparator<UpdateInfo>() {
                 @Override
                 public int compare(UpdateInfo lhs, UpdateInfo rhs) {
                     /* sort by date descending */
@@ -179,9 +181,9 @@ public class UpdateCheckService extends IntentService {
 
             Notification.InboxStyle inbox = new Notification.InboxStyle(builder)
                     .setBigContentTitle(text);
-            int added = 0, count = availableUpdates.size();
+            int added = 0, count = realUpdates.size();
 
-            for (UpdateInfo ui : availableUpdates) {
+            for (UpdateInfo ui : realUpdates) {
                 if (added < EXPANDED_NOTIF_UPDATE_COUNT) {
                     inbox.addLine(ui.getName());
                     added++;
@@ -191,12 +193,12 @@ public class UpdateCheckService extends IntentService {
                 inbox.setSummaryText(res.getString(R.string.not_additional_count, count - added));
             }
             builder.setStyle(inbox);
-            builder.setNumber(count);
+            builder.setNumber(availableUpdates.size());
 
             if (count == 1) {
                 i = new Intent(this, DownloadReceiver.class);
                 i.setAction(DownloadReceiver.ACTION_START_DOWNLOAD);
-                i.putExtra(DownloadReceiver.EXTRA_UPDATE_INFO, (Parcelable) availableUpdates.getFirst());
+                i.putExtra(DownloadReceiver.EXTRA_UPDATE_INFO, (Parcelable) realUpdates.getFirst());
                 PendingIntent downloadIntent = PendingIntent.getBroadcast(this, 0, i,
                         PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -209,7 +211,7 @@ public class UpdateCheckService extends IntentService {
             nm.notify(R.string.not_new_updates_found_title, builder.build());
         }
 
-        sendBroadcast(new Intent(ACTION_CHECK_FINISHED));
+        sendBroadcast(finishedIntent);
     }
 
     private void addRequestHeaders(HttpRequestBase request) {
@@ -220,7 +222,7 @@ public class UpdateCheckService extends IntentService {
         request.addHeader("Cache-Control", "no-cache");
     }
 
-    private LinkedList<UpdateInfo> getAvailableUpdates() throws IOException {
+    private LinkedList<UpdateInfo> getAvailableUpdatesAndFillIntent(Intent intent) throws IOException {
         // Get the type of update we should check for
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int updateType = prefs.getInt(Constants.UPDATE_TYPE_PREF, 0);
@@ -238,15 +240,8 @@ public class UpdateCheckService extends IntentService {
         }
         addRequestHeaders(request);
 
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpResponse response = httpClient.execute(request);
-
-        if (isCancelled() || response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
-            return null;
-        }
-
-        HttpEntity entity = response.getEntity();
-        if (entity == null) {
+        HttpEntity entity = mHttpExecutor.execute(request);
+        if (entity == null || mHttpExecutor.isAborted()) {
             return null;
         }
 
@@ -260,15 +255,25 @@ public class UpdateCheckService extends IntentService {
         String json = EntityUtils.toString(entity, "UTF-8");
         LinkedList<UpdateInfo> updates = parseJSON(json, updateType, knownUpdates);
 
-        if (isCancelled()) {
+        if (mHttpExecutor.isAborted()) {
             return null;
         }
 
-        State.saveState(this, updates);
+        int newUpdates = 0, realUpdates = 0;
+        for (UpdateInfo ui : updates) {
+            if (!lastUpdates.contains(ui)) {
+                newUpdates++;
+            }
+            if (ui.isNewerThanInstalled()) {
+                realUpdates++;
+            }
+        }
 
-        Intent updateIntent = new Intent(ACTION_UPDATE_DATA_UPDATED);
-        updateIntent.putExtra(EXTRA_UPDATE_COUNT, updates.size());
-        sendBroadcast(updateIntent);
+        intent.putExtra(EXTRA_UPDATE_COUNT, updates.size());
+        intent.putExtra(EXTRA_REAL_UPDATE_COUNT, realUpdates);
+        intent.putExtra(EXTRA_NEW_UPDATE_COUNT, newUpdates);
+
+        State.saveState(this, updates);
 
         return updates;
     }
@@ -305,7 +310,7 @@ public class UpdateCheckService extends IntentService {
             Log.d(TAG, "Got update JSON data with " + length + " entries");
 
             for (int i = 0; i < length; i++) {
-                if (isCancelled()) {
+                if (mHttpExecutor.isAborted()) {
                     break;
                 }
                 if (updateList.isNull(i)) {
@@ -370,20 +375,13 @@ public class UpdateCheckService extends IntentService {
     private void fetchChangeLog(UpdateInfo info, String url) {
         Log.d(TAG, "Getting change log for " + info + ", url " + url);
 
-        HttpClient httpClient = new DefaultHttpClient();
         BufferedReader reader = null;
 
         try {
             HttpGet request = new HttpGet(URI.create(url));
             addRequestHeaders(request);
 
-            HttpResponse response = httpClient.execute(request);
-            HttpEntity entity = null;
-
-            if (!isCancelled() && response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                entity = response.getEntity();
-            }
-
+            HttpEntity entity = mHttpExecutor.execute(request);
             if (entity != null) {
                 reader = new BufferedReader(new InputStreamReader(entity.getContent()), 2 * 1024);
                 StringBuilder changeLogBuilder = new StringBuilder();
@@ -392,7 +390,7 @@ public class UpdateCheckService extends IntentService {
 
                 while ((line = reader.readLine()) != null) {
                     line = line.trim();
-                    if (isCancelled()) {
+                    if (mHttpExecutor.isAborted()) {
                         break;
                     }
                     if (line.isEmpty()) {
@@ -435,12 +433,45 @@ public class UpdateCheckService extends IntentService {
         }
     }
 
-    private synchronized boolean isCancelled() {
-        if (mCancelRequested && mCurrentCheckIsManual) {
-            return true;
+    private static class HttpRequestExecutor {
+        private HttpClient mHttpClient;
+        private HttpRequestBase mRequest;
+        private boolean mAborted;
+
+        public HttpRequestExecutor() {
+            mHttpClient = new DefaultHttpClient();
+            mAborted = false;
         }
 
-        return false;
-    }
+        public HttpEntity execute(HttpRequestBase request) throws IOException {
+            synchronized (this) {
+                mAborted = false;
+                mRequest = request;
+            }
 
+            HttpResponse response = mHttpClient.execute(request);
+            HttpEntity entity = null;
+
+            if (!mAborted && response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                entity = response.getEntity();
+            }
+
+            synchronized (this) {
+                mRequest = null;
+            }
+
+            return entity;
+        }
+
+        public synchronized void abort() {
+            if (mRequest != null) {
+                mRequest.abort();
+            }
+            mAborted = true;
+        }
+
+        public synchronized boolean isAborted() {
+            return mAborted;
+        }
+    }
 }
