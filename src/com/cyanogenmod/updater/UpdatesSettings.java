@@ -111,6 +111,11 @@ public class UpdatesSettings extends PreferenceActivity implements
                     mProgressDialog.dismiss();
                     mProgressDialog = null;
                 }
+                int count = intent.getIntExtra(UpdateCheckService.EXTRA_UPDATE_COUNT, -1);
+                if (count == 0) {
+                    Toast.makeText(UpdatesSettings.this, R.string.no_updates_found,
+                            Toast.LENGTH_SHORT).show();
+                }
                 updateLayout();
             }
         }

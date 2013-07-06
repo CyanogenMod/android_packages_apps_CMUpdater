@@ -16,13 +16,10 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.os.Handler;
-import android.os.Message;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.UpdatesSettings;
@@ -69,9 +66,8 @@ public class UpdateCheckService extends IntentService {
     public static final String ACTION_CANCEL_CHECK = "com.cyanogenmod.cmupdater.action.CANCEL_CHECK";
 
     // broadcast actions
-    public static final String ACTION_UPDATE_DATA_UPDATED = "com.cyanogenmod.cmupdater.action.UPDATE_DATA_UPDATED";
     public static final String ACTION_CHECK_FINISHED = "com.cyanogenmod.cmupdater.action.UPDATE_CHECK_FINISHED";
-    // extra for ACTION_UPDATE_DATA_UPDATED
+    // extra for ACTION_CHECK_FINISHED
     public static final String EXTRA_UPDATE_COUNT = "update_count";
 
     // max. number of updates listed in the expanded notification
@@ -79,16 +75,6 @@ public class UpdateCheckService extends IntentService {
 
     private boolean mCancelRequested;
     private boolean mCurrentCheckIsManual;
-
-    private final Handler mToastHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            if (msg.arg1 != 0) {
-                Toast.makeText(UpdateCheckService.this, msg.arg1, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(UpdateCheckService.this, (String) msg.obj, Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
 
     public UpdateCheckService() {
         super("UpdateCheckService");
@@ -141,9 +127,7 @@ public class UpdateCheckService extends IntentService {
         Log.i(TAG, "The update check successfully completed at " + d + " and found "
                 + availableUpdates.size() + " updates.");
 
-        if (availableUpdates.isEmpty() && mCurrentCheckIsManual) {
-            mToastHandler.sendMessage(mToastHandler.obtainMessage(0, R.string.no_updates_found, 0));
-        } else if (!mCurrentCheckIsManual) {
+        if (!availableUpdates.isEmpty() && !mCurrentCheckIsManual) {
             // There are updates available
             // The notification should launch the main app
             Intent i = new Intent(this, UpdatesSettings.class);
@@ -209,7 +193,9 @@ public class UpdateCheckService extends IntentService {
             nm.notify(R.string.not_new_updates_found_title, builder.build());
         }
 
-        sendBroadcast(new Intent(ACTION_CHECK_FINISHED));
+        Intent finishedIntent = new Intent(ACTION_CHECK_FINISHED);
+        finishedIntent.putExtra(EXTRA_UPDATE_COUNT, availableUpdates.size());
+        sendBroadcast(finishedIntent);
     }
 
     private void addRequestHeaders(HttpRequestBase request) {
@@ -265,10 +251,6 @@ public class UpdateCheckService extends IntentService {
         }
 
         State.saveState(this, updates);
-
-        Intent updateIntent = new Intent(ACTION_UPDATE_DATA_UPDATED);
-        updateIntent.putExtra(EXTRA_UPDATE_COUNT, updates.size());
-        sendBroadcast(updateIntent);
 
         return updates;
     }
