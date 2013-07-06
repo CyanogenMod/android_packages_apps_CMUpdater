@@ -21,6 +21,7 @@
         android:icon="@drawable/ic_launcher"
         android:theme="@android:style/Theme.Holo"
         android:label="@string/app_name"
+        android:name="com.cyanogenmod.updater.UpdateApplication"
         android:supportsRtl="true">
 
         <service android:name="com.cyanogenmod.updater.service.CMDashClockExtension"
@@ -69,9 +70,9 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name="com.cyanogenmod.updater.receiver.DataUpdateReceiver">
+        <receiver android:name="com.cyanogenmod.updater.receiver.CheckFinishReceiver">
             <intent-filter>
-                <action android:name="com.cyanogenmod.cmupdater.action.UPDATE_DATA_UPDATED"/>
+                <action android:name="com.cyanogenmod.cmupdater.action.UPDATE_CHECK_FINISHED"/>
             </intent-filter>
         </receiver>
 

@@ -55,7 +55,7 @@ public class UpdateCheckReceiver extends BroadcastReceiver {
             if (!bootCheckCompleted) {
                 Log.i(TAG, "Start an on-boot check");
                 Intent i = new Intent(context, UpdateCheckService.class);
-                i.setAction(UpdateCheckService.ACTION_CHECK_SCHEDULED);
+                i.setAction(UpdateCheckService.ACTION_CHECK);
                 context.startService(i);
             } else {
                 // Nothing to do

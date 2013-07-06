@@ -38,6 +38,8 @@ public class UpdateInfo implements Parcelable, Serializable {
     private String mMd5Sum;
     private String mChangeLog;
 
+    private Boolean mIsNewerThanInstalled;
+
     public UpdateInfo(String fileName, long date, String url,
             String md5, Type type, String changeLog) {
         initializeName(fileName);
@@ -117,6 +119,10 @@ public class UpdateInfo implements Parcelable, Serializable {
     }
 
     public boolean isNewerThanInstalled() {
+        if (mIsNewerThanInstalled != null) {
+            return mIsNewerThanInstalled;
+        }
+
         int[] installedVersion = canonicalizeVersion(Utils.getInstalledVersion(false));
         int[] ourVersion = canonicalizeVersion(mVersion);
 
@@ -128,15 +134,21 @@ public class UpdateInfo implements Parcelable, Serializable {
 
         for (int i = 0; i < ourVersion.length; i++) {
             if (ourVersion[i] > installedVersion[i]) {
-                return true;
+                mIsNewerThanInstalled = true;
+                break;
             }
             if (ourVersion[i] < installedVersion[i]) {
-                return false;
+                mIsNewerThanInstalled = false;
+                break;
             }
         }
 
-        // Version strings match, so compare build dates.
-        return mBuildDate > Utils.getInstalledBuildDate();
+        if (mIsNewerThanInstalled == null) {
+            // Version strings match, so compare build dates.
+            mIsNewerThanInstalled = mBuildDate > Utils.getInstalledBuildDate();
+        }
+
+        return mIsNewerThanInstalled;
     }
 
     private int[] canonicalizeVersion(String versionString) {
@@ -157,14 +169,18 @@ public class UpdateInfo implements Parcelable, Serializable {
     private void initializeName(String fileName) {
         mFileName = fileName;
         if (!TextUtils.isEmpty(fileName)) {
-            String deviceType = Utils.getDeviceType();
-            mUiName = fileName.replaceAll("\\.zip$", "");
-            mUiName = mUiName.replaceAll("-" + deviceType + "-?", "");
+            mUiName = extractUiName(fileName);
             mVersion = fileName.replaceAll(".*?([0-9.]+?)-.+","$1");
         } else {
             mUiName = null;
             mVersion = null;
         }
+    }
+
+    public static String extractUiName(String fileName) {
+        String deviceType = Utils.getDeviceType();
+        String uiName = fileName.replaceAll("\\.zip$", "");
+        return uiName.replaceAll("-" + deviceType + "-?", "");
     }
 
     @Override
