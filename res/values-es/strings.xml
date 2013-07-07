@@ -48,6 +48,8 @@
         <item quantity="one"><xliff:g id="count">%d</xliff:g> actualización disponible para descargar</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> actualizaciones disponibles para descargar</item>
     </plurals>
+    <string name="not_additional_count">y <xliff:g id="count">%d</xliff:g> más</string>
+    <string name="not_action_download">Descargar</string>
     <string name="data_connection_required">Es necesaria una conexión de datos.</string>
     <string name="confirm_download_cancelation_dialog_title">Cancelar descarga</string>
     <string name="confirm_download_cancelation_dialog_message">¿Cancelar la descarga actual?</string>
