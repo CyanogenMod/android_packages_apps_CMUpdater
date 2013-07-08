@@ -41,7 +41,7 @@
     <string name="check_twice_daily">Zweimal täglich</string>
     <string name="check_daily">Täglich</string>
     <string name="check_weekly">Wöchentlich</string>
-    <string name="check_bi_weekly">Zweimal wöchentlich</string>
+    <string name="check_bi_weekly">Zweiwöchentlich</string>
     <string name="check_monthly">Monatlich</string>
 
     <string name="update_type_title">Update-Typen</string>
@@ -52,7 +52,7 @@
 
     <!-- Update checking -->
     <string name="checking_for_updates">Updates werden gesucht</string>
-    <string name="no_updates_found">Keine Updates gefunden</string>
+    <string name="no_updates_found">Keine neuen Updates gefunden</string>
     <string name="not_new_updates_found_ticker">Neue Updates sind verfügbar</string>
     <string name="not_new_updates_found_title">Neue Updates</string>
     <plurals name="not_new_updates_found_body">
@@ -70,6 +70,10 @@
     <string name="download_already_running">Es ist bereits ein Download aktiv</string>
     <string name="unable_to_download_file">Update konnte nicht heruntergeladen werden</string>
     <string name="download_not_found">Download nicht gefunden</string>
+    <string name="not_download_success">Update-Download abgeschlossen</string>
+    <string name="not_download_failure">Update-Download fehlgeschlagen</string>
+    <string name="not_action_install_update">Neu starten und installieren</string>
+    <string name="not_download_install_notice">Das Update <xliff:g id="filename">%s</xliff:g> wurde erfolgreich heruntergeladen. Beim Berühren von \"Neu starten und installieren\" wird das Gerät neu gestartet, um das Update zu installieren.\n\nHinweis: Für die Installation wird ein kompatibles Recovery-System benötigt.</string>
 
     <!-- MD5 related strings -->
     <string name="apply_existing_update_md5error_message">Fehler: MD5-Prüfsumme stimmt nicht überein</string>
