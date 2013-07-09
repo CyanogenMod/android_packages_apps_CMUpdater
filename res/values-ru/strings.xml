@@ -69,6 +69,11 @@
     <string name="download_cancelled">Загрузка отменена</string>
     <string name="download_already_running">Загрузка уже выполняется</string>
     <string name="unable_to_download_file">Не удалось загрузить файл обновления</string>
+    <string name="download_not_found">Обновление не найдено</string>
+    <string name="not_download_success">Обновление загружено</string>
+    <string name="not_download_failure">Обновление не загружено</string>
+    <string name="not_action_install_update">Перезагрузить и установить</string>
+    <string name="not_download_install_notice">Обновление <xliff:g id="filename">%s</xliff:g> успешно загружено. При нажатии \"Перезагрузить и установить\", устройство перезагрузится для установки обновления.\n\nПримечание: требуется совместимый Recovery для автоматической установки обновлений.</string>
 
     <!-- MD5 related strings -->
     <string name="apply_existing_update_md5error_message">Ошибка! Несоответствие контрольной суммы MD5</string>
@@ -77,9 +82,9 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Применить обновление</string>
-    <string name="apply_update_dialog_text">Вы собираетесь обновиться на <xliff:g id="filename">%s</xliff:g>.\n\nПри нажатии кнопки \"Обновить\", устройство перезагрузится в режим recovery для установки обновления. \n\nПримечание: эта функция требует совместимого recovery, в противном случае обновление необходимо установить вручную</string>
-    <string name="apply_trying_to_get_root_access">Попытка получить root-доступ для перезагрузки в режим recovery</string>
-    <string name="apply_unable_to_reboot_toast">Невозможно перезагрузиться в режим recovery</string>
+    <string name="apply_update_dialog_text">Вы собираетесь обновиться на <xliff:g id="filename">%s</xliff:g>.\n\nПри нажатии кнопки \"Обновить\", устройство перезагрузится в режим Recovery для установки обновления. \n\nПримечание: эта функция требует совместимого Recovery, в противном случае обновление необходимо установить вручную</string>
+    <string name="apply_trying_to_get_root_access">Попытка получить root-доступ для перезагрузки в режим Recovery</string>
+    <string name="apply_unable_to_reboot_toast">Невозможно перезагрузиться в режим Recovery</string>
 
     <!-- deleting -->
     <string name="confirm_delete_dialog_title">Удалить файл</string>
