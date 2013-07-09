@@ -69,6 +69,11 @@
     <string name="download_cancelled">Загрузка отменена</string>
     <string name="download_already_running">Загрузка уже выполняется</string>
     <string name="unable_to_download_file">Не удалось загрузить файл обновления</string>
+    <string name="download_not_found">Обновление не найдено</string>
+    <string name="not_download_success">Обновление загружено</string>
+    <string name="not_download_failure">Обновление не загружено</string>
+    <string name="not_action_install_update">Перезагрузить и установить</string>
+    <string name="not_download_install_notice">Обновление <xliff:g id="filename">%s</xliff:g> успешно загружено. При нажатии \"Перезагрузить и установить\", устройство перезагрузится для установки обновления.\n\nПримечание: требуется совместимый Recovery для автоматической установки обновлений.</string>
 
     <!-- MD5 related strings -->
     <string name="apply_existing_update_md5error_message">Ошибка! Несоответствие контрольной суммы MD5</string>
