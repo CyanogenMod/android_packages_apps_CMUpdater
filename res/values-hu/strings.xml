@@ -60,6 +60,10 @@
     <string name="download_already_running">A letöltés jelenleg is fut</string>
     <string name="unable_to_download_file">Nem sikerült letölteni a frissítő fájlt</string>
     <string name="download_not_found">Nem található a letöltés</string>
+    <string name="not_download_success">Frissítés sikeresen letöltve</string>
+    <string name="not_download_failure">Frissítés letöltése sikertelen</string>
+    <string name="not_action_install_update">Újraindítás és telepítés</string>
+    <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> nevű frissítés sikeresen letöltve. Amikor az \"Újraindítás és telepítés\" gombra kattint, az eszköz újraindítja magát a frissítés telepítéshez.\n\nMegjegyzés: Az automatikus telepítéshez szükség van egy kompatibilis Recovery módra.</string>
     <string name="apply_existing_update_md5error_message">Hiba. Eltérő MD5 ellenőrzőösszeg</string>
     <string name="md5_check_cancelled">MD5 ellenőrzés megszakítva</string>
     <string name="md5_verification_failed">MD5 ellenőrzési hiba</string>
