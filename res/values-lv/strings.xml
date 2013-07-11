@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012, 2013 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">CM Atjauninātājs</string>
+    <string name="display_name">Atjauninājumi</string>
+    <string name="unknown">Nezināms</string>
+    <string name="menu_refresh">Atsvaidzināt</string>
+    <string name="menu_delete">Dzēst</string>
+    <string name="menu_delete_all">Dzēst lejupielādes</string>
+    <string name="menu_system_info">Sistēmas info</string>
+    <string name="dialog_ok">Labi</string>
+    <string name="dialog_cancel">Atcelt</string>
+    <string name="dialog_yes">Jā</string>
+    <string name="dialog_no">Nē</string>
+    <string name="dialog_update">Atjaunināt</string>
+    <string name="dialog_close">Aizvērt</string>
+    <string name="available_updates_title">Pieejamie atjauninājumi</string>
+    <string name="no_available_updates_intro">Pēdējās pārbaudes laikā netika atrasti atjauninājumi. Lai manuāli pārbaudītu atjauninājumus, izmantojiet pogu Atsvaidzināt.</string>
+    <string name="new_update_summary">Jauns</string>
+    <string name="downloaded_update_summary">Lejupielādēts</string>
+    <string name="installed_update_summary">Uzstādīts</string>
+    <string name="backup_rom_title">Izveidot rezerves kopiju</string>
+    <string name="backup_rom_summary">Izveidot esošā ROM rezerves kopiju pirms atjaunināšanas</string>
+    <string name="update_check_title">Pārbaudīt atjauninājumus</string>
+    <string name="check_manual">Manuāli</string>
+    <string name="check_on_boot">Pie katras palaišanas</string>
+    <string name="check_twice_daily">Divreiz dienā</string>
+    <string name="check_daily">Reizi dienā</string>
+    <string name="check_weekly">Reizi nedēļā</string>
+    <string name="check_bi_weekly">Reizi divās nedēļās</string>
+    <string name="check_monthly">Reizi mēnesī</string>
+    <string name="update_type_title">Atjauninājumu tipi</string>
+    <string name="type_all">Visas versijas (tikai Stabilās)</string>
+    <string name="type_all_incl_nightly">Visas versijas (arī Nakts būvējumi)</string>
+    <string name="type_new">Jaunās versijas (tikai Stabilās)</string>
+    <string name="type_new_incl_nightly">Jaunās versijas (arī Nakts būvējumi)</string>
+    <string name="checking_for_updates">Pārbauda atjauninājumus</string>
+    <string name="no_updates_found">Nav atrasti jauni atjauninājumi</string>
+    <string name="not_new_updates_found_ticker">Pieejami jauni atjauninājumi</string>
+    <string name="not_new_updates_found_title">Jauni atjauninājumi</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> atjauninājums pieejams lejupielādēšanai</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> atjauninājumi pieejami lejupielādēšanai</item>
+    </plurals>
+    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> papildus</string>
+    <string name="not_action_download">Lejupielādēt</string>
+    <string name="data_connection_required">Nepieciešams datu savienojums.</string>
+    <string name="confirm_download_cancelation_dialog_title">Atcelt lejupielādi</string>
+    <string name="confirm_download_cancelation_dialog_message">Atcelt notiekošo lejupielādi?</string>
+    <string name="download_cancelled">Lejupielāde atcelta</string>
+    <string name="download_already_running">Lejupielāde jau notiek</string>
+    <string name="unable_to_download_file">Nav iespējams lejupielādēt atjauninājuma failu</string>
+    <string name="download_not_found">Lejupielāde nav atrasta</string>
+    <string name="not_download_success">Atjauninājums lejupielādēts sekmīgi</string>
+    <string name="not_download_failure">Atjauninājuma lejupielāde ir izgāzusies</string>
+    <string name="not_action_install_update">Pārstartēt un uzstādīt</string>
+    <string name="not_download_install_notice">Atjauninājums <xliff:g id="filename">%s</xliff:g> ticis veiksmīgi lejupielādēts. Pieskaroties \'Pārstartēt un uzstādīt\', ierīce restartēsies, lai uzstādītu atjauninājumu.\n\nPiezīme: Saderīgs Recovery ir nepieciešams, lai uzstādīšana notiktu automātiski.</string>
+    <string name="apply_existing_update_md5error_message">Kļūda. MD5 kontrolsummas nesakritība</string>
+    <string name="md5_check_cancelled">MD5 pārbaude tika atcelta</string>
+    <string name="md5_verification_failed">MD5 pārbaude izgāzās</string>
+    <string name="apply_update_dialog_title">Uzstādīt atjauninājumu</string>
+    <string name="apply_update_dialog_text">Tiks veikts uzlabojums uz <xliff:g id="filename">%s</xliff:g>.\n\nNospiežot Atjaunināt, ierīce restartēsies recovery režīmā, lai uzstādītu atjauninājumu.\n
+        \nPiezīme: Automātiskai atjaunošanai nepieciešams saderīgs Recovery, pretējā gadījumā jauninājumus jāuzstāda manuāli.</string>
+    <string name="apply_trying_to_get_root_access">Mēģina saņemt root pieeju, lai restartētos recovery režīmā</string>
+    <string name="apply_unable_to_reboot_toast">Neizdevās restartēties recovery režīmā</string>
+    <string name="confirm_delete_dialog_title">Dzēst failu</string>
+    <string name="confirm_delete_dialog_message">Dzēst izvēlēto jauninājuma failu?</string>
+    <string name="confirm_delete_all_dialog_message">Dzēst visus lejupielādētos atjauninājumu failus?</string>
+    <string name="delete_single_update_success_message">Atjauninājums <xliff:g id="filename">%s</xliff:g> dzēsts</string>
+    <string name="delete_updates_failure_message">Notika kļūme dzēšot atjauninājuma failu</string>
+    <string name="delete_updates_noFolder_message">Atjauninājumu mape netika atrasta</string>
+    <string name="delete_updates_success_message">Visi lejupielādētie atjauninājumi dzēsti</string>
+    <string name="sysinfo_device">Ierīce:</string>
+    <string name="sysinfo_running">Darbojas:</string>
+    <string name="sysinfo_last_check">Pēdējā pārbaude:</string>
+    <string name="no_changelog_alert">Nav pieejams izmaiņu žurnāls</string>
+    <string name="failed_to_load_changelog">Neizdevās ielādēt izmaiņu žurnālu</string>
+    <string name="changelog_dialog_title">Izmaiņu žurnāls</string>
+    <string name="extension_label">CyanogenMod Atjauninājumi</string>
+    <string name="extension_description">Parāda pieejamo jauno atjauninājumu skaitu.</string>
+    <plurals name="extension_status">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> atjauninājums</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> atjauninājumi</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod atjauninājums</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod atjauninājumi</item>
+    </plurals>
+</resources>
