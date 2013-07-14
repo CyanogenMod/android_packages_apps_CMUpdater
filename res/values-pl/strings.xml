@@ -84,4 +84,10 @@
         <item quantity="one"><xliff:g id="count">%d</xliff:g> aktualizacja CyanogenMod</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> aktualizacji CyanogenMod</item>
     </plurals>
+    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> więcej</string>
+    <string name="not_action_download">Pobierz</string>
+    <string name="not_download_success">Pobieranie aktualizacji zakończone sukcesem</string>
+    <string name="not_download_failure">Nie udało się pobrać aktualizacji</string>
+    <string name="not_action_install_update">Uruchom ponownie i zainstaluj</string>
+    <string name="not_download_install_notice">Aktualizacja <xliff:g id="filename">%s</xliff:g> została pobrana pomyślnie. Po wybraniu \'Uruchom ponownie i zainstaluj\', urządzenie zostanie zrestartowane w celu instalacji.\n\nUwaga: Wymagana jest kompatybilna aplikacja Recovery, aby proces mógł przebiec automatycznie.</string>
 </resources>
