@@ -45,8 +45,11 @@
     <string name="not_new_updates_found_ticker">Υπάρχουν διαθέσιμες ενημερώσεις</string>
     <string name="not_new_updates_found_title">Νέες ενημερώσεις</string>
     <plurals name="not_new_updates_found_body">
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> διαθέσιμες ενημερώσεις</item>
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> διαθέσιμη ενημέρωση για λήψη</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> διαθέσιμες ενημερώσεις για λήψη</item>
     </plurals>
+    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> more</string>
+    <string name="not_action_download">Download</string>
     <string name="data_connection_required">Απαιτείται σύνδεση δεδομένων.</string>
     <string name="confirm_download_cancelation_dialog_title">Ακύρωση λήψης</string>
     <string name="confirm_download_cancelation_dialog_message">Ακύρωση της τρέχουσας λήψης;</string>
@@ -54,6 +57,10 @@
     <string name="download_already_running">Μια λήψη εκτελείται ήδη</string>
     <string name="unable_to_download_file">Δεν είναι δυνατή η λήψη της ενημέρωσης</string>
     <string name="download_not_found">Η λήψη δεν βρέθηκε</string>
+    <string name="not_download_success">Η λήψη της ενημέρωσης ολοκληρώθηκε με επιτυχία</string>
+    <string name="not_download_failure">Η λήψη της ενημέρωσης ήταν ανεπιτυχής</string>
+    <string name="not_action_install_update">Επανεκκίνηση και εγκατάσταση</string>
+    <string name="not_download_install_notice">Η λήψη της ενημέρωσης <xliff:g id="filename">%s</xliff:g> ολοκληρώθηκε με επιτυχία. Αν πατήσετε \'Επανεκκίνηση και εγκατάσταση\', η συσκευή θα κάνει επανεκκίνηση και θα εγκαταστήσει την ενημέρωση.\n\nΣημείωση: Απαιτείται μια συμβατή Recovery για την λειτουργία της αυτόματης εγκατάστασης.</string>
     <string name="apply_existing_update_md5error_message">Σφάλμα. Αναντιστοιχία MD5 checksum</string>
     <string name="md5_check_cancelled">Ο έλεγχος του MD5 ακυρώθηκε</string>
     <string name="md5_verification_failed">Η επαλήθευση του MD5 απέτυχε</string>
