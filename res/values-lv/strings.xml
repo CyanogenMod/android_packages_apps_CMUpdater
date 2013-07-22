@@ -48,7 +48,9 @@
         <item quantity="one"><xliff:g id="count">%d</xliff:g> atjauninājums pieejams lejupielādēšanai</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> atjauninājumi pieejami lejupielādēšanai</item>
     </plurals>
-    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> papildus</string>
+    <plurals name="not_additional_count">
+        <item quantity="other">+ <xliff:g id="count">%d</xliff:g> papildus</item>
+    </plurals>
     <string name="not_action_download">Lejupielādēt</string>
     <string name="data_connection_required">Nepieciešams datu savienojums.</string>
     <string name="confirm_download_cancelation_dialog_title">Atcelt lejupielādi</string>

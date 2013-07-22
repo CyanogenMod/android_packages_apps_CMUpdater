@@ -59,7 +59,9 @@
         <item quantity="one">Новых обновлений: <xliff:g id="count">%d</xliff:g></item>
         <item quantity="other">Новых обновлений: <xliff:g id="count">%d</xliff:g></item>
     </plurals>
-    <string name="not_additional_count">+ ещё <xliff:g id="count">%d</xliff:g></string>
+    <plurals name="not_additional_count">
+        <item quantity="other">+ ещё <xliff:g id="count">%d</xliff:g></item>
+    </plurals>
     <string name="not_action_download">Загрузить</string>
     <string name="data_connection_required">Необходимо интернет-подключение</string>
 

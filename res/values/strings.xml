@@ -59,7 +59,9 @@
         <item quantity="one"><xliff:g id="count">%d</xliff:g> update available for download</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> updates available for download</item>
     </plurals>
-    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> more</string>
+    <plurals name="not_additional_count">
+        <item quantity="other">+ <xliff:g id="count">%d</xliff:g> more</item>
+    </plurals>
     <string name="not_action_download">Download</string>
     <string name="data_connection_required">A data connection is required.</string>
 

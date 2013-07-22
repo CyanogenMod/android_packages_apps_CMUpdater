@@ -190,7 +190,8 @@ public class UpdateCheckService extends IntentService {
                 }
             }
             if (added != count) {
-                inbox.setSummaryText(res.getString(R.string.not_additional_count, count - added));
+                inbox.setSummaryText(res.getQuantityString(R.plurals.not_additional_count,
+                            count - added, count - added));
             }
             builder.setStyle(inbox);
             builder.setNumber(availableUpdates.size());

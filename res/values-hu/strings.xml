@@ -51,7 +51,6 @@
     <string name="no_updates_found">Nem található új frissítés</string>
     <string name="not_new_updates_found_ticker">Új frissítések érhetőek el</string>
     <string name="not_new_updates_found_title">Új frissítések</string>
-    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> darab</string>
     <string name="not_action_download">Letöltés</string>
     <string name="data_connection_required">Adatkapcsolat szükséges.</string>
     <string name="confirm_download_cancelation_dialog_title">Megszakítja a letöltést?</string>
