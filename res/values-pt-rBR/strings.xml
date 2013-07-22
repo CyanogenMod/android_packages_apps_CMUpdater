@@ -86,7 +86,9 @@
         <item quantity="one"><xliff:g id="count" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> atualização CyanogenMod</item>
         <item quantity="other"><xliff:g id="count" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> atualizações CyanogenMod</item>
     </plurals>
-    <string name="not_additional_count">+ <xliff:g id="count" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> atualizações</string>
+    <plurals name="not_additional_count">
+        <item quantity="other">+ <xliff:g id="count" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> atualizações</item>
+    </plurals>
     <string name="not_action_download">Baixar</string>
     <string name="not_download_success">Atualização foi baixada com sucesso</string>
     <string name="not_download_failure">Erro ao baixar a atualização</string>

@@ -54,7 +54,9 @@
         <item quantity="one"><xliff:g id="count">%d</xliff:g> update beschikbaar om te downloaden</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> updates beschikbaar om te downloaden</item>
     </plurals>
-    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> andere</string>
+    <plurals name="not_additional_count">
+        <item quantity="other">+ <xliff:g id="count">%d</xliff:g> andere</item>
+    </plurals>
     <string name="not_action_download">Downloaden</string>
     <string name="data_connection_required">Gegevensverbinding vereist</string>
 

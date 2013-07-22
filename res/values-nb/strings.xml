@@ -48,7 +48,9 @@
         <item quantity="one"><xliff:g id="count">%d</xliff:g> oppdatering tilgjengelig for nedlasting</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> oppdateringer tilgjengelig for nedlasting</item>
     </plurals>
-    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> flere</string>
+    <plurals name="not_additional_count">
+        <item quantity="other">+ <xliff:g id="count">%d</xliff:g> flere</item>
+    </plurals>
     <string name="not_action_download">Last ned</string>
     <string name="data_connection_required">En datatilkobling er nødvendig.</string>
     <string name="confirm_download_cancelation_dialog_title">Avbryt nedlasting</string>

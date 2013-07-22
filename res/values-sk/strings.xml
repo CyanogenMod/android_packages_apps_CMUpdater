@@ -49,7 +49,9 @@
         <item quantity="few">Sú dostupné <xliff:g id="count">%d</xliff:g> aktualizácie na prevzatie</item>
         <item quantity="other">Je dostupných <xliff:g id="count">%d</xliff:g> aktualizácií na prevzatie</item>
     </plurals>
-    <string name="not_additional_count">+ ďalších <xliff:g id="count">%d</xliff:g></string>
+    <plurals name="not_additional_count">
+        <item quantity="other">+ ďalších <xliff:g id="count">%d</xliff:g></item>
+    </plurals>
     <string name="not_action_download">Prevziať</string>
     <string name="data_connection_required">Vyžaduje sa dátové pripojenie.</string>
     <string name="confirm_download_cancelation_dialog_title">Zrušenie preberania</string>
