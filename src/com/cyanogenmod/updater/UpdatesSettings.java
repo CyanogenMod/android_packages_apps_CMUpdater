@@ -555,7 +555,7 @@ public class UpdatesSettings extends PreferenceActivity implements
         mUpdatesList.removeAll();
 
         // Convert the installed version name to the associated filename
-        String installedZip = "cm-" + Utils.getInstalledVersion(true) + ".zip";
+        String installedZip = "cm-" + Utils.getInstalledVersion() + ".zip";
 
         // Add the updates
         for (UpdateInfo ui : updates) {
@@ -686,7 +686,7 @@ public class UpdatesSettings extends PreferenceActivity implements
         String time = DateFormat.getTimeFormat(this).format(lastCheck);
 
         String message = getString(R.string.sysinfo_device) + " " + Utils.getDeviceType() + "\n\n"
-                + getString(R.string.sysinfo_running) + " " + Utils.getInstalledVersion(true) + "\n\n"
+                + getString(R.string.sysinfo_running) + " " + Utils.getInstalledVersion() + "\n\n"
                 + getString(R.string.sysinfo_last_check) + " " + date + " " + time;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
