@@ -57,12 +57,12 @@ public class Utils {
         return SystemProperties.get("ro.cm.device");
     }
 
-    public static String getInstalledVersion(boolean fullVersionString) {
-        String version = SystemProperties.get("ro.cm.version");
-        if (!fullVersionString) {
-            version = version.replaceAll("([0-9.]+?)-.+","$1");
-        }
-        return version;
+    public static String getInstalledVersion() {
+        return SystemProperties.get("ro.cm.version");
+    }
+
+    public static int getInstalledApiLevel() {
+        return SystemProperties.getInt("ro.build.version.sdk", 0);
     }
 
     public static long getInstalledBuildDate() {

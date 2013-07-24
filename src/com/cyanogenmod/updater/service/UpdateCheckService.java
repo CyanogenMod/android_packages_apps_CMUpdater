@@ -333,6 +333,7 @@ public class UpdateCheckService extends IntentService {
         String fileName = obj.getString("filename");
         String url = obj.getString("url");
         String md5 = obj.getString("md5sum");
+        int apiLevel = obj.getInt("api_level");
         long timestamp = obj.getLong("timestamp");
         String typeString = obj.getString("channel");
         UpdateInfo.Type type;
@@ -349,7 +350,7 @@ public class UpdateCheckService extends IntentService {
             type = UpdateInfo.Type.UNKNOWN;
         }
 
-        UpdateInfo ui = new UpdateInfo(fileName, timestamp, url, md5, type, null);
+        UpdateInfo ui = new UpdateInfo(fileName, timestamp, apiLevel, url, md5, type, null);
         boolean includeAll = updateType == Constants.UPDATE_TYPE_ALL_STABLE
             || updateType == Constants.UPDATE_TYPE_ALL_NIGHTLY;
 
