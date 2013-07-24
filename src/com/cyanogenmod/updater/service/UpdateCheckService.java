@@ -16,6 +16,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -67,6 +68,8 @@ public class UpdateCheckService extends IntentService {
 
     // broadcast actions
     public static final String ACTION_CHECK_FINISHED = "com.cyanogenmod.cmupdater.action.UPDATE_CHECK_FINISHED";
+    // extra for ACTION_CHECK: whether or not the check was automatic
+    public static final String EXTRA_AUTOMATIC_CHECK = "automatic_check";
     // extra for ACTION_CHECK_FINISHED: total amount of found updates
     public static final String EXTRA_UPDATE_COUNT = "update_count";
     // extra for ACTION_CHECK_FINISHED: amount of updates that are newer than what is installed
@@ -110,11 +113,15 @@ public class UpdateCheckService extends IntentService {
             return;
         }
 
+        // Load intent extras, if available.
+        Bundle extras = intent.getExtras();
+        boolean automaticCheck = intent.getBooleanExtra(EXTRA_AUTOMATIC_CHECK, false);
+
         // Start the update check
         Intent finishedIntent = new Intent(ACTION_CHECK_FINISHED);
         LinkedList<UpdateInfo> availableUpdates;
         try {
-            availableUpdates = getAvailableUpdatesAndFillIntent(finishedIntent);
+            availableUpdates = getAvailableUpdatesAndFillIntent(finishedIntent, automaticCheck);
         } catch (IOException e) {
             Log.e(TAG, "Could not check for updates", e);
             availableUpdates = null;
@@ -225,13 +232,22 @@ public class UpdateCheckService extends IntentService {
         request.addHeader("Cache-Control", "no-cache");
     }
 
-    private LinkedList<UpdateInfo> getAvailableUpdatesAndFillIntent(Intent intent) throws IOException {
+    private LinkedList<UpdateInfo> getAvailableUpdatesAndFillIntent(Intent intent,
+            boolean automaticCheck) throws IOException {
         // Get the type of update we should check for
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int updateType = prefs.getInt(Constants.UPDATE_TYPE_PREF, 0);
 
         // Get the actual ROM Update Server URL
-        URI updateServerUri = URI.create(getString(R.string.conf_update_server_url_def));
+        URI updateServerUri;
+        if (automaticCheck) {
+            int updateFrequency = prefs.getInt(Constants.UPDATE_CHECK_PREF,
+                    Constants.UPDATE_FREQ_WEEKLY);
+            updateServerUri = URI.create(getString(R.string.conf_update_server_url_def) +
+                    "?updateFrequency=" + updateFrequency);
+        } else {
+            updateServerUri = URI.create(getString(R.string.conf_update_server_url_def));
+        }
         HttpPost request = new HttpPost(updateServerUri);
 
         try {
