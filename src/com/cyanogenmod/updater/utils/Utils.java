@@ -96,6 +96,7 @@ public class Utils {
         // Get the intent ready
         Intent i = new Intent(context, UpdateCheckService.class);
         i.setAction(UpdateCheckService.ACTION_CHECK);
+        i.putExtra(UpdateCheckService.EXTRA_AUTOMATIC_CHECK, true);
         PendingIntent pi = PendingIntent.getService(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Clear any old alarms and schedule the new alarm
