@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">CM uuendamine</string>
+    <string name="display_name">Uuendused</string>
+    <string name="unknown">Tundmatu</string>
+    <string name="menu_refresh">Värskenda</string>
+    <string name="menu_delete">Kustuta</string>
+    <string name="menu_delete_all">Kustuta kõik</string>
+    <string name="menu_system_info">Süsteemi teave</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Tühista</string>
+    <string name="dialog_yes">Jah</string>
+    <string name="dialog_no">Ei</string>
+    <string name="dialog_update">Uuenda</string>
+    <string name="dialog_close">Sulge</string>
+    <string name="available_updates_title">Saadaolevad uuendused</string>
+    <string name="no_available_updates_intro">Viimasel kontrollimisel ei leitud ühtegi uuendust. Uuenduste uueks kontrolliks vajutage värskendamise nuppu.</string>
+    <string name="new_update_summary">Uus</string>
+    <string name="downloaded_update_summary">Allalaaditud</string>
+    <string name="installed_update_summary">Paigaldatud</string>
+    <string name="backup_rom_title">Varukoopia loomine</string>
+    <string name="backup_rom_summary">Enne uuenduse paigaldamist loo vanast ROM-ist varukoopia</string>
+    <string name="update_check_title">Uuenduste kontrollimine</string>
+    <string name="check_manual">Käsitsi</string>
+    <string name="check_on_boot">Igal käivitamisel</string>
+    <string name="check_twice_daily">Kaks korda päevas</string>
+    <string name="check_daily">Iga päev</string>
+    <string name="check_weekly">Iga nädal</string>
+    <string name="check_bi_weekly">Iga teisel nädalal</string>
+    <string name="check_monthly">Igakuiselt</string>
+    <string name="update_type_title">Uuenduste tüübid</string>
+    <string name="type_all">Kõik versioonid (ainult stabiilsed)</string>
+    <string name="type_all_incl_nightly">Kõik versioonid (ka Nightly)</string>
+    <string name="type_new">Uued versioonid (ainult stabiilsed)</string>
+    <string name="type_new_incl_nightly">Uued versioonid (ka Nightly)</string>
+    <string name="checking_for_updates">Uuenduste kontrollimine</string>
+    <string name="no_updates_found">Uuendusi ei leitud</string>
+    <string name="not_new_updates_found_ticker">Uued uuendused on saadaval</string>
+    <string name="not_new_updates_found_title">Uued uuendused</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> uuendus allalaadimiseks saadaval</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> uuendust allalaadimiseks saadaval</item>
+    </plurals>
+    <string name="not_additional_count">+ veel <xliff:g id="count">%d</xliff:g></string>
+    <string name="not_action_download">Laadi alla</string>
+    <string name="data_connection_required">Uuenduste kontrolliks on vaja andmeside ühendust</string>
+    <string name="confirm_download_cancelation_dialog_title">Katkesta allalaadimine</string>
+    <string name="confirm_download_cancelation_dialog_message">Kas katkestada käimasolev allalaadimine?</string>
+    <string name="download_cancelled">Allalaadimine katkestatud</string>
+    <string name="download_already_running">Allalaadimine on juba käimas</string>
+    <string name="unable_to_download_file">Uuenduse faili allalaadimine ebaõnnestus</string>
+    <string name="download_not_found">Allalaadimist ei leitud</string>
+    <string name="not_download_success">Uuendus edukalt alla laaditud</string>
+    <string name="not_download_failure">Uuenduse allalaadimine ebaõnnestus</string>
+    <string name="not_action_install_update">Taaskäivita ja paigalda</string>
+    <string name="not_download_install_notice">Uuendus <xliff:g id="filename">%s</xliff:g> on edukalt alla laaditud. Kui puudutad \'Taaskäivita ja paigalda\', teeb seade uuenduse paigaldamiseks taaskäivituse.\n\nMärkus: Automaatse paigalduse toimimseks on vaja, et seadme taasterežiim seda toetaks.</string>
+    <string name="apply_existing_update_md5error_message">Viga. MD5 kontrollsummad ei kattu.</string>
+    <string name="md5_check_cancelled">MD5 kontrollimine katkestatud</string>
+    <string name="md5_verification_failed">MD5 kontrollimine ebaõnnestus</string>
+    <string name="apply_update_dialog_title">Uuenduse paigaldamine</string>
+    <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> versioonile uuendamine.\n\nKui vajutad \'Uuenda\', käivitub seade uuenduse paigaldamiseks taasterežiimis.\n
+        \nTähelepanu: See nõuab automaatset paigaldust toetatavat taasterežiimi, vastasel korral tuleb uuendus paigaldada käsitsi.</string>
+    <string name="apply_trying_to_get_root_access">Taotletakse root õigusi Recovery-režiimi käivitamiseks</string>
+    <string name="apply_unable_to_reboot_toast">Recovery-režiimi käivitamine ebaõnnestus</string>
+    <string name="confirm_delete_dialog_title">Faili kustutamine</string>
+    <string name="confirm_delete_dialog_message">Oled kustutamas allalaaditud värskendusfaili, jätkamiseks vajutage OK nuppu</string>
+    <string name="confirm_delete_all_dialog_message">Oled kustutamas kõik allalaaditud värskendusfailid, jätkamiseks vajutage OK nuppu</string>
+    <string name="delete_single_update_success_message">Värskendus {0} eemaldatud</string>
+    <string name="delete_updates_failure_message">Viga eemaldades värskendusfaili</string>
+    <string name="delete_updates_noFolder_message">Värskendus kausta ei leitud</string>
+    <string name="delete_updates_success_message">Kõik uuendused eemaldatud</string>
+    <string name="sysinfo_device">Seade:</string>
+    <string name="sysinfo_running">Versioon:</string>
+    <string name="sysinfo_last_check">Viimati kontrollitud:</string>
+    <string name="no_changelog_alert">Muudatuste nimekiri pole saadaval</string>
+    <string name="failed_to_load_changelog">Muudatuste nimekirja allalaadimine ebaõnnestus</string>
+    <string name="changelog_dialog_title">Muudatuste nimekiri</string>
+    <string name="extension_label">CyanogenMod uuendused</string>
+    <string name="extension_description">Näitab saadaolevate uuenduste arvu</string>
+    <plurals name="extension_status">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> uuendus</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> uuendust</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod uuendus</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod uuendust</item>
+    </plurals>
+</resources>
