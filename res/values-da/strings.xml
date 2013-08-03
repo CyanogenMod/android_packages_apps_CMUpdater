@@ -55,6 +55,8 @@
         <item quantity="one"><xliff:g id="count">%d</xliff:g> opdatering tilgængelige til download</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> opdateringer tilgængelige til download</item>
     </plurals>
+    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> flere</string>
+    <string name="not_action_download">Download</string>
 
     <string name="data_connection_required">Der kræves en dataforbindelse.</string>
     <string name="confirm_download_cancelation_dialog_title">Annuller download</string>
@@ -63,6 +65,10 @@
     <string name="download_already_running">En download kører allerede</string>
     <string name="unable_to_download_file">Kan ikke downloade opdateringsfilen</string>
     <string name="download_not_found">Download ikke fundet</string>
+    <string name="not_download_success">Opdatering downloadet korrekt</string>
+    <string name="not_download_failure">Kunne ikke downloade opdatering</string>
+    <string name="not_action_install_update">Genstart og installér</string>
+    <string name="not_download_install_notice">Opdateringen <xliff:g id="filename">%s</xliff:g> blev downloadet korrekt. Når der trykkes \'Genstart og installér\', vil enheden genstarte sig selv for at installere opdateringen.\n\nNB: En kompatibel recovery er påkrævet, for at installeringen kan foregå automatisk.</string>
 
     <string name="apply_existing_update_md5error_message">Fejl. MD5-kontrolsum passer ikke</string>
     <string name="md5_check_cancelled">MD5-tjek blev annulleret</string>
