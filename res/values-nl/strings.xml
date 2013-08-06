@@ -66,6 +66,10 @@
     <string name="download_already_running">Er is al een andere download bezig</string>
     <string name="unable_to_download_file">Kan updatebestand niet downloaden</string>
     <string name="download_not_found">Download niet gevonden</string>
+    <string name="not_download_success">Update succesvol gedownload</string>
+    <string name="not_download_failure">Update downloaden mislukt</string>
+    <string name="not_action_install_update">Herstarten en installeren</string>
+    <string name="not_download_install_notice">Update <xliff:g id="filename">%s</xliff:g> is succesvol gedownload. Wanneer u op \'Herstarten en installeren\' tikt, zal het apparaat herstarten om de update te installeren.\n\nLet op: een compatibele recovery is vereist om de installatie automatisch uit te voeren.</string>
 
     <string name="apply_existing_update_md5error_message">Fout: MD5-hashes niet gelijk</string>
     <string name="md5_check_cancelled">MD5-verificatie geannuleerd</string>
