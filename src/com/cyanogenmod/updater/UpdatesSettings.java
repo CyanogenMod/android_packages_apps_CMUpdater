@@ -258,6 +258,8 @@ public class UpdatesSettings extends PreferenceActivity implements
             if (c != null) {
                 c.close();
             }
+        } else {
+            resetDownloadState();
         }
 
         updateLayout();
@@ -357,9 +359,7 @@ public class UpdatesSettings extends PreferenceActivity implements
                     break;
                 case DownloadManager.STATUS_FAILED:
                     mDownloadingPreference.setStyle(UpdatePreference.STYLE_NEW);
-                    mDownloadId = -1;
-                    mFileName = null;
-                    mDownloading = false;
+                    resetDownloadState();
                     break;
             }
 
@@ -390,9 +390,7 @@ public class UpdatesSettings extends PreferenceActivity implements
                         // We are OK to stop download, trigger it
                         mDownloadManager.remove(mDownloadId);
                         mUpdateHandler.removeCallbacks(mUpdateProgress);
-                        mDownloadId = -1;
-                        mFileName = null;
-                        mDownloading = false;
+                        resetDownloadState();
 
                         // Clear the stored data from shared preferences
                         mPrefs.edit()
@@ -423,8 +421,6 @@ public class UpdatesSettings extends PreferenceActivity implements
             return;
         }
 
-        mDownloading = false;
-
         String fileName = new File(fullPathName).getName();
 
         // Find the matching preference so we can retrieve the UpdateInfo
@@ -433,6 +429,15 @@ public class UpdatesSettings extends PreferenceActivity implements
             pref.setStyle(UpdatePreference.STYLE_DOWNLOADED);
             onStartUpdate(pref);
         }
+
+        resetDownloadState();
+    }
+
+    private void resetDownloadState() {
+        mDownloadId = -1;
+        mFileName = null;
+        mDownloading = false;
+        mDownloadingPreference = null;
     }
 
     private String mapCheckValue(Integer value) {
