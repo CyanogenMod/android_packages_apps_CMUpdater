@@ -44,6 +44,7 @@
     <string name="no_updates_found">Aucune nouvelle mise à jour disponible</string>
     <string name="not_new_updates_found_ticker">De nouvelles mises à jour sont disponibles</string>
     <string name="not_new_updates_found_title">Nouvelles mises à jour</string>
+    <string name="not_action_download">Télécharger</string>
     <string name="data_connection_required">Une connexion internet est nécessaire.</string>
     <string name="confirm_download_cancelation_dialog_title">Annuler le téléchargement</string>
     <string name="confirm_download_cancelation_dialog_message">Vous êtes sur le point d\'annuler le téléchargement en cours, souhaitez-vous continuer\u00A0?</string>
@@ -51,6 +52,11 @@
     <string name="download_already_running">Un téléchargement est déjà en cours</string>
     <string name="unable_to_download_file">Impossible de télécharger le fichier de mise à jour</string>
     <string name="download_not_found">Téléchargement introuvable</string>
+    <string name="not_download_success">Téléchargement de la mise à jour réussi</string>
+    <string name="not_download_failure">Téléchargement de la mise à jour échoué</string>
+    <string name="not_action_install_update">Redémarrer et installer</string>
+    <string name="not_download_install_notice">Téléchargement de la mise à jour <xliff:g id="filename">%s</xliff:g> réussi. Lorsque vous appuierez sur \'Redémarrer et installer\', votre appareil redémarrera automatiquement pour installer la mise à jour.
+      \n\nRemarque\u00A0: Un recovery compatible est nécessaire pour une installation automatique, sinon les mises à jour devront être installées manuellement.</string>
     <string name="apply_existing_update_md5error_message">Erreur, la somme de contrôle MD5 ne correspond pas</string>
     <string name="md5_check_cancelled">Vérification de la somme de contrôle MD5 annulée</string>
     <string name="md5_verification_failed">La vérification de la somme de contrôle MD5 a échoué</string>
