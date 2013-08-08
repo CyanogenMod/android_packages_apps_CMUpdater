@@ -8,6 +8,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">CM Updater</string>
+    <string name="display_name">Päivitykset</string>
     <string name="unknown">Tuntematon</string>
     <string name="menu_refresh">Päivitä</string>
     <string name="menu_delete">Poista</string>
@@ -74,4 +75,21 @@
     <string name="no_changelog_alert">Ei muutoslokia saatavilla</string>
     <string name="failed_to_load_changelog">Muutoslokin lataaminen epäonnistui</string>
     <string name="changelog_dialog_title">Muutosloki</string>
+    <string name="not_additional_count">+ <xliff:g id="count">%d</xliff:g> lisää</string>
+    <string name="not_action_download">Lataa</string>
+    <string name="data_connection_required">Datayhteys tarvitaan.</string>
+    <string name="not_download_success">Päivitys ladattu onnistuneesti</string>
+    <string name="not_download_failure">Päivityksen lataaminen epäonnistui</string>
+    <string name="not_action_install_update">Käynnistä uudelleen ja asenna</string>
+    <string name="not_download_install_notice">Päivityksen <xliff:g id="filename">%s</xliff:g> lataaminen onnistui. Kun painat \'Käynnistä uudelleen ja asenna\', laite käynnistyy uudelleen ja asenta päivityksen.\n\nHuomautus: Tämä ominaisuus tarvitsee yhteensopivan Recoveryn tai päivitykset eivät asennu automaattisesti.</string>
+    <string name="extension_label">CyanogenMod-päivitykset</string>
+    <string name="extension_description">Näyttää uusien saatavilla olevien päivitysten määrän.</string>
+    <plurals name="extension_status">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> päivitys</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> päivitystä</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod-päivitys</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod-päivitystä</item>
+    </plurals>
 </resources>
