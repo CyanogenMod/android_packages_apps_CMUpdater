@@ -28,7 +28,7 @@
 
     <!-- Settings strings -->
     <string name="available_updates_title">Tillgängliga uppdateringar</string>
-    <string name="no_available_updates_intro">Vis senaste kontrollen hittades inga tillgängliga uppdateringar. För att manuellt söka efter uppdateringar använd uppdateringsknappen.</string>
+    <string name="no_available_updates_intro">Vid senaste kontrollen hittades inga tillgängliga uppdateringar. För att manuellt söka efter uppdateringar använd uppdateringsknappen.</string>
     <string name="new_update_summary">Ny</string>
     <string name="downloaded_update_summary">Nedladdade</string>
     <string name="installed_update_summary">Installerad</string>
