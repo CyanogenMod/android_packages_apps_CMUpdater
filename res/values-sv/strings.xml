@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- General strings -->
+    <string name="app_name">CM Uppdaterare</string>
+    <string name="display_name">Uppdateringar</string>
+    <string name="unknown">Okänd</string>
+
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Uppdatera</string>
+    <string name="menu_delete">Ta bort</string>
+    <string name="menu_delete_all">Ta bort nedladdningar</string>
+    <string name="menu_system_info">System information</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Avbryt</string>
+    <string name="dialog_yes">Ja</string>
+    <string name="dialog_no">Nej</string>
+    <string name="dialog_update">Uppdatera</string>
+    <string name="dialog_close">Stäng</string>
+
+    <!-- Settings strings -->
+    <string name="available_updates_title">Tillgängliga uppdateringar</string>
+    <string name="no_available_updates_intro">Vid senaste kontrollen hittades inga tillgängliga uppdateringar. För att manuellt söka efter uppdateringar använd uppdateringsknappen.</string>
+    <string name="new_update_summary">Ny</string>
+    <string name="downloaded_update_summary">Nedladdade</string>
+    <string name="installed_update_summary">Installerad</string>
+    <string name="backup_rom_title">Skapa kopia</string>
+    <string name="backup_rom_summary">Säkerhetskopiera nuvarande ROM innan uppdatering</string>
+
+    <string name="update_check_title">Sök efter uppdateringar</string>
+    <string name="check_manual">Manuellt</string>
+    <string name="check_on_boot">Vid varje uppstart</string>
+    <string name="check_twice_daily">2gånger dagligen</string>
+    <string name="check_daily">Dagligen</string>
+    <string name="check_weekly">Veckovis</string>
+    <string name="check_bi_weekly">Varannan Vecka</string>
+    <string name="check_monthly">Månadsvis</string>
+
+    <string name="update_type_title">Uppdaterings val</string>
+    <string name="type_all">Alla versioner (Endast stabila)</string>
+    <string name="type_all_incl_nightly">Alla versioner (inkl. testversioner)</string>
+    <string name="type_new">Nya versioner (Endast stabila)</string>
+    <string name="type_new_incl_nightly">Nya versioner (inkl. testversioner)</string>
+
+    <!-- Update checking -->
+    <string name="checking_for_updates">Söker efter uppdateringar</string>
+    <string name="no_updates_found">Inga nya uppdateringar funna</string>
+    <string name="not_new_updates_found_ticker">Nya uppdateringar funna</string>
+    <string name="not_new_updates_found_title">Nya uppdateringar</string>
+    <string name="not_new_updates_found_body">{0} uppdatering(ar) tillgängliga för nedladdning</string>
+    <string name="data_connection_required">En internetanslutning måste finnas tillgänglig.</string>
+
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Avbryt Nedladdning</string>
+    <string name="confirm_download_cancelation_dialog_message">Avbryt nuvarande nedladdning?</string>
+    <string name="download_cancelled">Nedladdning Avbruten</string>
+    <string name="download_already_running">En nedladdning körs redan</string>
+    <string name="unable_to_download_file">Kan ej ladda ned uppteringen</string>
+    <string name="download_not_found">Nedladdning ej funnen</string>
+
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Error. MD5 checksumma felaktig</string>
+    <string name="md5_check_cancelled">MD5 kontroll avbröts</string>
+    <string name="md5_verification_failed">MD5 kontroll godkändes ej</string>
+
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Uppdatera</string>
+    <string name="apply_update_dialog_text">Du kommer att uppgradera till {0}.\n\nom du trycker uppdatera, enheter kommer att startas om i recovery läge och installera uppdateringen.\n
+        \nInformation: Denna funktion kräver en kompatibel recovery i annat fall måste uppdateringen göras manuellt.</string>
+    <string name="apply_trying_to_get_root_access">Försöker få root åtkomst för att starta om i recovery läge</string>
+    <string name="apply_unable_to_reboot_toast">Kan inte starta i recovery läge</string>
+
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Ta bort fil</string>
+    <string name="confirm_delete_dialog_message">Ta bort markerad fil?</string>
+    <string name="confirm_delete_all_dialog_message">Ta bort alla nedladdade filer?</string>
+    <string name="delete_single_update_success_message">Uppdatering {0} borttagen</string>
+    <string name="delete_updates_failure_message">Kunde inte ta bort filen</string>
+    <string name="delete_updates_noFolder_message">Uppdateringsmapp ej funnen</string>
+    <string name="delete_updates_success_message">Alla nedladdade uppdateringar borttagna</string>
+
+    <!-- System info strings -->
+    <string name="sysinfo_device">Modell:</string>
+    <string name="sysinfo_running">Kör:</string>
+    <string name="sysinfo_last_check">Senaste kontroll:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">Ingen ändringslogg tillgänglig</string>
+    <string name="failed_to_load_changelog">Kan ej ladda ändringslogg</string>
+    <string name="changelog_dialog_title">Ändringslogg</string>
+</resources>
