@@ -60,6 +60,10 @@
     <string name="download_already_running">Preberanie je už spustené</string>
     <string name="unable_to_download_file">Nie je možné prevziať súbor aktualizácie</string>
     <string name="download_not_found">Prevzatie sa nenašlo</string>
+    <string name="not_download_success">Aktualizácia bola úspešne prevzatá</string>
+    <string name="not_download_failure">Aktualizácia nebola úspešne prevzatá</string>
+    <string name="not_action_install_update">Reštartovať a inštalovať</string>
+    <string name="not_download_install_notice">Aktualizácia <xliff:g id="filename">%s</xliff:g> bola úspešne prevzatá. Ťuknutím na \'Reštartovať a inštalovať\' sa zariadenie reštartuje, kvôli inštalácii aktualizácie.\n\nPoznámka: Na automatickú inštaláciu sa požaduje kompatibilné Recovery.</string>
     <string name="apply_existing_update_md5error_message">Chyba. Kontrolný medzisúčet MD5 nesúhlasí</string>
     <string name="md5_check_cancelled">Kontrola MD5 bola zrušená</string>
     <string name="md5_verification_failed">Overenie MD5 zlyhalo</string>
