@@ -48,6 +48,9 @@
         <item quantity="one"><xliff:g id="count">%d</xliff:g>個更新可供下載</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g>個更新可供下載</item>
     </plurals>
+    <plurals name="not_additional_count">
+        <item quantity="other">+ <xliff:g id="count">%d</xliff:g> 更多</item>
+    </plurals>
     <string name="data_connection_required">需要資料連線。</string>
     <string name="confirm_download_cancelation_dialog_title">取消下載</string>
     <string name="confirm_download_cancelation_dialog_message">取消目前下載?</string>
@@ -55,14 +58,19 @@
     <string name="download_already_running">已經有下載正在執行</string>
     <string name="unable_to_download_file">無法下載更新檔案</string>
     <string name="download_not_found">找不到下載項目</string>
+    <string name="not_action_download">下載</string>
+    <string name="not_download_success">成功下載更新</string>
+    <string name="not_download_failure">更新下載失敗</string>
+    <string name="not_action_install_update">重新開機並安裝</string>
+    <string name="not_download_install_notice">更新檔 <xliff:g id="filename">%s</xliff:g> 已成功下載。 當觸碰 \'重新開機並安裝\'時， 該裝置將重新啟動安裝更新。\n\n注：運行自動安裝需要一個相容的 Recovery。</string>
     <string name="apply_existing_update_md5error_message">錯誤。MD5驗證碼不相符</string>
     <string name="md5_check_cancelled">MD5檢查已被取消</string>
     <string name="md5_verification_failed">MD5驗證失敗</string>
     <string name="apply_update_dialog_title">應用更新</string>
-    <string name="apply_update_dialog_text">您將更新到<xliff:g id="filename">%s</xliff:g>.\n\n如果您按下更新，裝置將會自行重新啟動進入recovery模式安裝更新。\n
-        \n注意：這項功能需要相容的recovery，否則將會需要手動安裝更新。</string>
-    <string name="apply_trying_to_get_root_access">正在嘗試取得root存取以開機進入recovery模式</string>
-    <string name="apply_unable_to_reboot_toast">無法重新開機進入recovery</string>
+    <string name="apply_update_dialog_text">您將更新到<xliff:g id="filename">%s</xliff:g>.\n\n如果您按下更新，裝置將會自行重新啟動進入Recovery模式安裝更新。\n
+        \n注意：這項功能需要相容的Recovery，否則將會需要手動安裝更新。</string>
+    <string name="apply_trying_to_get_root_access">正在嘗試取得Root存取以開機進入Recovery模式</string>
+    <string name="apply_unable_to_reboot_toast">無法重新開機進入Recovery</string>
     <string name="confirm_delete_dialog_title">刪除檔案</string>
     <string name="confirm_delete_dialog_message">刪除已選取的更新檔案?</string>
     <string name="confirm_delete_all_dialog_message">刪除所有下載的更新檔案?</string>
