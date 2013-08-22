@@ -10,6 +10,7 @@
 
     <!-- General strings -->
     <string name="app_name">CMアップデータ</string>
+    <string name="display_name">アップデート</string>
     <string name="unknown">不明</string>
 
     <!-- Menu and dialog box strings -->
@@ -23,12 +24,14 @@
     <string name="dialog_yes">はい</string>
     <string name="dialog_no">いいえ</string>
     <string name="dialog_update">更新</string>
+    <string name="dialog_close">閉じる</string>
 
     <!-- Settings strings -->
     <string name="available_updates_title">利用できるアップデート</string>
-    <string name="no_available_updates_intro">前回のチェックでは利用可能なアップデートは見つかりませんでした。更新ボタンを使って手動で新しいアップデートを確認できます。</string>
+    <string name="no_available_updates_intro">前回のチェックでは利用できるアップデートは見つかりませんでした。更新ボタンを使って手動で新しいアップデートを確認できます。</string>
     <string name="new_update_summary">新しいアップデート</string>
     <string name="downloaded_update_summary">ダウンロード済</string>
+    <string name="installed_update_summary">インストール済</string>
     <string name="backup_rom_title">バックアップの作成</string>
     <string name="backup_rom_summary">アップデートの前に現在のROMをバックアップする</string>
 
@@ -55,6 +58,11 @@
     <plurals name="not_new_updates_found_body">
         <item quantity="other"><xliff:g id="count">%d</xliff:g> 個のアップデートファイルがダウンロードできます</item>
     </plurals>
+    <plurals name="not_additional_count">
+        <item quantity="other">さらに <xliff:g id="count">%d</xliff:g> 個</item>
+    </plurals>
+    <string name="not_action_download">ダウンロード</string>
+    <string name="data_connection_required">データコネクションが必要です。</string>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">ダウンロードをキャンセル</string>
@@ -63,6 +71,10 @@
     <string name="download_already_running">ダウンロードはすでに実行中です。</string>
     <string name="unable_to_download_file">アップデートファイルをダウンロードできません。</string>
     <string name="download_not_found">ダウンロードは見つかりませんでした。</string>
+    <string name="not_download_success">アップデートのダウンロードは成功しました</string>
+    <string name="not_download_failure">アップデートのダウンロードは失敗しました</string>
+    <string name="not_action_install_update">再起動してインストール</string>
+    <string name="not_download_install_notice">アップデート <xliff:g id="filename">%s</xliff:g> のダウンロードが完了しました。\'再起動してインストール\'をタッチすると、端末は再起動してアップデートをインストールします。\n\nノート: インストールを自動的に行うには互換性のあるリカバリが必要です。</string>
 
     <!-- MD5 related strings -->
     <string name="apply_existing_update_md5error_message">エラー MD5チェックサムが一致しません。</string>
@@ -88,4 +100,22 @@
     <string name="sysinfo_device">デバイス:</string>
     <string name="sysinfo_running">稼働中:</string>
     <string name="sysinfo_last_check">最終チェック:</string>
+
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">更新履歴はありません</string>
+    <string name="failed_to_load_changelog">更新履歴をロードできませんでした</string>
+    <string name="changelog_dialog_title">更新履歴</string>
+
+    <!-- DashClock extension strings -->
+    <string name="extension_label">CyanogenMod アップデート</string>
+    <string name="extension_description">利用できる新しいアップデートの数を表示する。</string>
+    <plurals name="extension_status">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> 個のアップデート</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> 個のアップデート</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> 個の CyanogenMod アップデート</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> 個の CyanogenMod アップデート</item>
+    </plurals>
+
 </resources>
