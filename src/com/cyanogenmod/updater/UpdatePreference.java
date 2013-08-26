@@ -114,6 +114,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
     }
 
     private void confirmDelete() {
+        if(new File(getKey().exitst())){
         AlertDialog.Builder builder = new AlertDialog.Builder(mParent);
         builder.setTitle(R.string.confirm_delete_dialog_title);
         builder.setMessage(R.string.confirm_delete_dialog_message);
@@ -126,6 +127,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
         builder.setNegativeButton(R.string.dialog_cancel, null);
         AlertDialog dialog = builder.create();
         dialog.show();
+        }
     }
 
     @Override
