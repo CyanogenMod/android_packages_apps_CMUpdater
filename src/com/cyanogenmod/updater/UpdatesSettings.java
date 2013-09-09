@@ -374,7 +374,9 @@ public class UpdatesSettings extends PreferenceActivity implements
 
     @Override
     public void onStopDownload(final UpdatePreference pref) {
-        if (!mDownloading || mFileName == null) {
+        if (!mDownloading || mFileName == null || mDownloadId < 0) {
+            pref.setStyle(UpdatePreference.STYLE_NEW);
+            resetDownloadState();
             return;
         }
 
