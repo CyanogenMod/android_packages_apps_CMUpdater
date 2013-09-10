@@ -107,6 +107,7 @@
     <string name="no_changelog_alert">No changelog available</string>
     <string name="failed_to_load_changelog">Unable to load changelog</string>
     <string name="changelog_dialog_title">Changelog</string>
+    <string name="loading_changelog">Loading\u2026</string>
 
     <!-- DashClock extension strings -->
     <string name="extension_label">CyanogenMod Updates</string>
