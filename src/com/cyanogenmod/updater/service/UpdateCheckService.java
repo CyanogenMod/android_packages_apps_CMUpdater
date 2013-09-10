@@ -45,6 +45,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
@@ -247,14 +249,10 @@ public class UpdateCheckService extends IntentService {
         }
 
         LinkedList<UpdateInfo> lastUpdates = State.loadState(this);
-        HashMap<String, UpdateInfo> knownUpdates = new HashMap<String, UpdateInfo>();
-        for (UpdateInfo ui : lastUpdates) {
-            knownUpdates.put(ui.getFileName(), ui);
-        }
 
         // Read the ROM Infos
         String json = EntityUtils.toString(entity, "UTF-8");
-        LinkedList<UpdateInfo> updates = parseJSON(json, updateType, knownUpdates);
+        LinkedList<UpdateInfo> updates = parseJSON(json, updateType);
 
         if (mHttpExecutor.isAborted()) {
             return null;
@@ -300,8 +298,7 @@ public class UpdateCheckService extends IntentService {
         return request;
     }
 
-    private LinkedList<UpdateInfo> parseJSON(String jsonString, int updateType,
-            HashMap<String, UpdateInfo> knownUpdates) {
+    private LinkedList<UpdateInfo> parseJSON(String jsonString, int updateType) {
         LinkedList<UpdateInfo> updates = new LinkedList<UpdateInfo>();
         try {
             JSONObject result = new JSONObject(jsonString);
@@ -318,7 +315,7 @@ public class UpdateCheckService extends IntentService {
                     continue;
                 }
                 JSONObject item = updateList.getJSONObject(i);
-                UpdateInfo info = parseUpdateJSONObject(item, updateType, knownUpdates);
+                UpdateInfo info = parseUpdateJSONObject(item, updateType);
                 if (info != null) {
                     updates.add(info);
                 }
@@ -329,8 +326,7 @@ public class UpdateCheckService extends IntentService {
         return updates;
     }
 
-    private UpdateInfo parseUpdateJSONObject(JSONObject obj, int updateType,
-            HashMap<String, UpdateInfo> knownUpdates) throws JSONException {
+    private UpdateInfo parseUpdateJSONObject(JSONObject obj, int updateType) throws JSONException {
         String fileName = obj.getString("filename");
         String url = obj.getString("url");
         String md5 = obj.getString("md5sum");
@@ -351,7 +347,7 @@ public class UpdateCheckService extends IntentService {
             type = UpdateInfo.Type.UNKNOWN;
         }
 
-        UpdateInfo ui = new UpdateInfo(fileName, timestamp, apiLevel, url, md5, type, null);
+        UpdateInfo ui = new UpdateInfo(fileName, timestamp, apiLevel, url, md5, type);
         boolean includeAll = updateType == Constants.UPDATE_TYPE_ALL_STABLE
             || updateType == Constants.UPDATE_TYPE_ALL_NIGHTLY;
 
@@ -362,12 +358,7 @@ public class UpdateCheckService extends IntentService {
 
         // fetch change log after checking whether to include this build to
         // avoid useless network traffic
-
-        UpdateInfo known = knownUpdates.get(fileName);
-        if (known != null && known.getChangeLog() != null && TextUtils.equals(md5, known.getMD5Sum())) {
-            // no need to re-fetch change log if we know the build
-            ui.setChangeLog(known.getChangeLog());
-        } else {
+        if (!ui.getChangeLogFile(this).exists()) {
             fetchChangeLog(ui, obj.getString("changes"));
         }
 
@@ -378,17 +369,20 @@ public class UpdateCheckService extends IntentService {
         Log.d(TAG, "Getting change log for " + info + ", url " + url);
 
         BufferedReader reader = null;
+        BufferedWriter writer = null;
+        boolean finished = false;
 
         try {
             HttpGet request = new HttpGet(URI.create(url));
             addRequestHeaders(request);
 
             HttpEntity entity = mHttpExecutor.execute(request);
+            writer = new BufferedWriter(new FileWriter(info.getChangeLogFile(this)));
+
             if (entity != null) {
                 reader = new BufferedReader(new InputStreamReader(entity.getContent()), 2 * 1024);
-                StringBuilder changeLogBuilder = new StringBuilder();
+                boolean categoryMatch = false, hasData = false;
                 String line;
-                boolean categoryMatch = false;
 
                 while ((line = reader.readLine()) != null) {
                     line = line.trim();
@@ -402,28 +396,34 @@ public class UpdateCheckService extends IntentService {
                     if (line.startsWith("=")) {
                         categoryMatch = !categoryMatch;
                     } else if (categoryMatch) {
-                        if (changeLogBuilder.length() != 0) {
-                            changeLogBuilder.append("<br />");
+                        if (hasData) {
+                            writer.append("<br />");
                         }
-                        changeLogBuilder.append("<b><u>");
-                        changeLogBuilder.append(line);
-                        changeLogBuilder.append("</u></b>").append("<br />");
+                        writer.append("<b><u>");
+                        writer.append(line);
+                        writer.append("</u></b>");
+                        writer.append("<br />");
+                        hasData = true;
                     } else if (line.startsWith("*")) {
-                        changeLogBuilder.append("<br /><b>");
-                        changeLogBuilder.append(line.replaceAll("\\*", ""));
-                        changeLogBuilder.append("</b>").append("<br />");
+                        writer.append("<br /><b>");
+                        writer.append(line.replaceAll("\\*", ""));
+                        writer.append("</b>");
+                        writer.append("<br />");
+                        hasData = true;
                     } else {
-                        changeLogBuilder.append("&#8226;&nbsp;").append(line).append("<br />");
+                        writer.append("&#8226;&nbsp;");
+                        writer.append(line);
+                        writer.append("<br />");
+                        hasData = true;
                     }
                 }
-                info.setChangeLog(changeLogBuilder.toString());
             } else {
-                info.setChangeLog("");
+                writer.write("");
             }
+            finished = true;
         } catch (IOException e) {
-            // leave the change log in info untouched in this case
-            // (either it had a change log already, in which case it makes no sense to kill
-            //  it; or - more likely - it was already null before)
+            Log.e(TAG, "Downloading change log for " + info + " failed", e);
+            // keeping finished at false will delete the partially written file below
         } finally {
             if (reader != null) {
                 try {
@@ -432,6 +432,17 @@ public class UpdateCheckService extends IntentService {
                     // ignore, not much we can do anyway
                 }
             }
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    // ignore, not much we can do anyway
+                }
+            }
+        }
+
+        if (!finished) {
+            info.getChangeLogFile(this).delete();
         }
     }
 

@@ -20,14 +20,15 @@ import java.io.FilenameFilter;
 public class UpdateFilter implements FilenameFilter {
     private final String[] mExtension;
 
-    public UpdateFilter(String Extensions) {
-        mExtension = Extensions.split("\\|");
+    public UpdateFilter(String extensions) {
+        mExtension = extensions.split("\\|");
     }
 
     public boolean accept(File dir, String name) {
-        for (String Ext : mExtension) {
-            if (name.endsWith(Ext))
+        for (String extension : mExtension) {
+            if (name.endsWith(extension)) {
                 return true;
+            }
         }
         return false;
     }

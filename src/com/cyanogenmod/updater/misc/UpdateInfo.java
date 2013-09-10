@@ -9,14 +9,15 @@
 
 package com.cyanogenmod.updater.misc;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
 import com.cyanogenmod.updater.utils.Utils;
 
+import java.io.File;
 import java.io.Serializable;
-import java.util.Arrays;
 
 public class UpdateInfo implements Parcelable, Serializable {
     private static final long serialVersionUID = 5499890003569313403L;
@@ -36,34 +37,29 @@ public class UpdateInfo implements Parcelable, Serializable {
     private long mBuildDate;
     private String mDownloadUrl;
     private String mMd5Sum;
-    private String mChangeLog;
 
     private Boolean mIsNewerThanInstalled;
 
     public UpdateInfo(String fileName, long date, int apiLevel, String url,
-            String md5, Type type, String changeLog) {
+            String md5, Type type) {
         initializeName(fileName);
         mBuildDate = date;
         mApiLevel = apiLevel;
         mDownloadUrl = url;
         mMd5Sum = md5;
         mType = type;
-        mChangeLog = changeLog;
     }
 
-    public UpdateInfo(String fileName, String changeLog) {
-        this(fileName, 0, 0, null, null, Type.UNKNOWN, changeLog);
+    public UpdateInfo(String fileName) {
+        this(fileName, 0, 0, null, null, Type.UNKNOWN);
     }
 
     private UpdateInfo(Parcel in) {
         readFromParcel(in);
     }
 
-    /**
-      * Return changelog
-      */
-    public String getChangeLog() {
-        return mChangeLog;
+    public File getChangeLogFile(Context context) {
+        return new File(context.getCacheDir(), mFileName + ".changelog");
     }
 
     /**
@@ -106,10 +102,6 @@ public class UpdateInfo implements Parcelable, Serializable {
      */
     public String getDownloadUrl() {
         return mDownloadUrl;
-    }
-
-    public void setChangeLog(String changeLog) {
-        mChangeLog = changeLog;
     }
 
     public boolean isNewerThanInstalled() {
@@ -190,7 +182,6 @@ public class UpdateInfo implements Parcelable, Serializable {
         out.writeLong(mBuildDate);
         out.writeString(mDownloadUrl);
         out.writeString(mMd5Sum);
-        out.writeString(mChangeLog);
     }
 
     private void readFromParcel(Parcel in) {
@@ -201,6 +192,5 @@ public class UpdateInfo implements Parcelable, Serializable {
         mBuildDate = in.readLong();
         mDownloadUrl = in.readString();
         mMd5Sum = in.readString();
-        mChangeLog = in.readString();
     }
 }

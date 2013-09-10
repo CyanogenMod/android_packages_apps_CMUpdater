@@ -48,11 +48,8 @@ import com.cyanogenmod.updater.service.UpdateCheckService;
 import com.cyanogenmod.updater.utils.UpdateFilter;
 import com.cyanogenmod.updater.utils.Utils;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -489,12 +486,11 @@ public class UpdatesSettings extends PreferenceActivity implements
 
     private void updateLayout() {
         // Read existing Updates
-        ArrayList<String> existingFiles = new ArrayList<String>();
+        LinkedList<String> existingFiles = new LinkedList<String>();
 
         mUpdateFolder = Utils.makeUpdateFolder();
         File[] files = mUpdateFolder.listFiles(new UpdateFilter(".zip"));
 
-        // If Folder Exists and Updates are present(with md5files)
         if (mUpdateFolder.exists() && mUpdateFolder.isDirectory() && files != null) {
             for (File file : files) {
                 if (file.isFile()) {
@@ -508,10 +504,10 @@ public class UpdatesSettings extends PreferenceActivity implements
 
         // Build list of updates
         LinkedList<UpdateInfo> availableUpdates = State.loadState(this);
-        LinkedList<UpdateInfo> updates = new LinkedList<UpdateInfo>();
+        final LinkedList<UpdateInfo> updates = new LinkedList<UpdateInfo>();
 
         for (String fileName : existingFiles) {
-            updates.add(new UpdateInfo(fileName, readLogFile(fileName)));
+            updates.add(new UpdateInfo(fileName));
         }
         for (UpdateInfo update : availableUpdates) {
             // Only add updates to the list that are not already downloaded
@@ -531,26 +527,30 @@ public class UpdatesSettings extends PreferenceActivity implements
 
         // Update the preference list
         refreshPreferences(updates);
-    }
 
-    private String readLogFile(String fileName) {
-        StringBuilder text = new StringBuilder();
+        // Prune obsolete change log files
+        new Thread() {
+            @Override
+            public void run() {
+                File[] files = getCacheDir().listFiles(new UpdateFilter(".changelog"));
+                if (files == null) {
+                    return;
+                }
 
-        File logFile = new File(mUpdateFolder, fileName + ".changelog");
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(logFile));
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                text.append(line);
-                text.append('\n');
+                for (File file : files) {
+                    boolean updateExists = false;
+                    for (UpdateInfo info : updates) {
+                        if (file.getName().startsWith(info.getFileName())) {
+                            updateExists = true;
+                            break;
+                        }
+                    }
+                    if (!updateExists) {
+                        file.delete();
+                    }
+                }
             }
-            br.close();
-        } catch (IOException e) {
-            return null;
-        }
-
-        return text.toString();
+        }.start();
     }
 
     private void refreshPreferences(LinkedList<UpdateInfo> updates) {
@@ -613,17 +613,12 @@ public class UpdatesSettings extends PreferenceActivity implements
 
         if (mUpdateFolder.exists() && mUpdateFolder.isDirectory()) {
             File zipFileToDelete = new File(mUpdateFolder, fileName);
-            File logFileToDelete = new File(mUpdateFolder, fileName + ".changelog");
 
             if (zipFileToDelete.exists()) {
                 zipFileToDelete.delete();
             } else {
                 Log.d(TAG, "Update to delete not found");
                 return;
-            }
-
-            if (logFileToDelete.exists()) {
-                logFileToDelete.delete();
             }
 
             String message = getString(R.string.delete_single_update_success_message, fileName);
