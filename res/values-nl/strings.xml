@@ -95,6 +95,7 @@
     <string name="no_changelog_alert">Geen changelog beschikbaar</string>
     <string name="failed_to_load_changelog">Kan changelog niet laden</string>
     <string name="changelog_dialog_title">Changelog</string>
+    <string name="loading_changelog">Laden\u2026</string>
 
     <string name="extension_label">CyanogenMod-updates</string>
     <string name="extension_description">Aantal nieuwe beschikbare updates tonen.</string>
