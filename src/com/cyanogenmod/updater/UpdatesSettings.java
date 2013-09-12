@@ -223,10 +223,24 @@ public class UpdatesSettings extends PreferenceActivity implements
             Utils.scheduleUpdateService(this, value * 1000);
             return true;
         } else if (preference == mUpdateType) {
-            int value = Integer.valueOf((String) newValue);
-            mPrefs.edit().putInt(Constants.UPDATE_TYPE_PREF, value).apply();
-            mUpdateType.setSummary(mUpdateType.getEntries()[value]);
-            checkForUpdates();
+            final int value = Integer.valueOf((String) newValue);
+            if (value == Constants.UPDATE_TYPE_NEW_NIGHTLY
+                    || value == Constants.UPDATE_TYPE_ALL_NIGHTLY) {
+                new AlertDialog.Builder(this)
+                    .setTitle(R.string.nightly_alert_title)
+                    .setMessage(R.string.nightly_alert)
+                    .setPositiveButton(getString(R.string.dialog_ok),
+                            new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            updateUpdatesType(value);
+                        }
+                    })
+                    .setNegativeButton(R.string.dialog_cancel, null)
+                    .show();
+                return false;
+            } else {
+                updateUpdatesType(value);
+            }
             return true;
         }
 
@@ -404,6 +418,12 @@ public class UpdatesSettings extends PreferenceActivity implements
                 })
                 .setNegativeButton(R.string.dialog_cancel, null)
                 .show();
+    }
+
+    private void updateUpdatesType(int type) {
+        mPrefs.edit().putInt(Constants.UPDATE_TYPE_PREF, type).apply();
+        mUpdateType.setSummary(mUpdateType.getEntries()[type]);
+        checkForUpdates();
     }
 
     private void checkForDownloadCompleted(Intent intent) {
