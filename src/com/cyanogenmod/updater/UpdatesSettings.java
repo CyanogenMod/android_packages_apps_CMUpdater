@@ -226,7 +226,21 @@ public class UpdatesSettings extends PreferenceActivity implements
             int value = Integer.valueOf((String) newValue);
             mPrefs.edit().putInt(Constants.UPDATE_TYPE_PREF, value).apply();
             mUpdateType.setSummary(mUpdateType.getEntries()[value]);
-            checkForUpdates();
+            if (value == Constants.UPDATE_TYPE_NEW_NIGHTLY || value == Constants.UPDATE_TYPE_ALL_NIGHTLY) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(getString(R.string.nightly_alert))
+                    .setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            checkForUpdates();
+                        }
+                    }
+                );
+                AlertDialog alert = builder.create();
+                alert.show();
+            } else {
+                checkForUpdates();
+            }
             return true;
         }
 

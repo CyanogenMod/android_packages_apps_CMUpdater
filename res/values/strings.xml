@@ -49,6 +49,7 @@
     <string name="type_all_incl_nightly">All versions (incl. Nightlies)</string>
     <string name="type_new">New versions (Stable only)</string>
     <string name="type_new_incl_nightly">New versions (incl. Nightlies)</string>
+    <string name="nightly_alert">You have selected to include nightly updates for your device in this list.  These are experimental and should be used with caution.  If you complain about them \'bricking\' your phone, ciwrl will personally come kick your dog.</string>
 
     <!-- Update checking -->
     <string name="checking_for_updates">Checking for updates</string>
