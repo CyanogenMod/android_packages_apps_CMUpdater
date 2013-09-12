@@ -107,6 +107,7 @@
     <string name="no_changelog_alert">Kein Änderungsprotokoll verfügbar</string>
     <string name="failed_to_load_changelog">Änderungsprotokoll konnte nicht geladen werden</string>
     <string name="changelog_dialog_title">Änderungsprotokoll</string>
+    <string name="loading_changelog">Lade\u2026</string>
 
     <!-- DashClock extension strings -->
     <string name="extension_label">CyanogenMod-Updates</string>
