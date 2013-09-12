@@ -49,6 +49,8 @@
     <string name="type_all_incl_nightly">All versions (incl. Nightlies)</string>
     <string name="type_new">New versions (Stable only)</string>
     <string name="type_new_incl_nightly">New versions (incl. Nightlies)</string>
+    <string name="nightly_alert">You have selected to include nightly updates for your device in this list.  These are unsupported and should be used with caution.</string>
+    <string name="nightly_alert_title">Nightly Builds Warning</string>
 
     <!-- Update checking -->
     <string name="checking_for_updates">Checking for updates</string>
