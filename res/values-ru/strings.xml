@@ -14,7 +14,7 @@
     <string name="unknown">Неизвестный</string>
 
     <!-- Menu and dialog box strings -->
-    <string name="menu_refresh">Обновить</string>
+    <string name="menu_refresh">Проверить</string>
     <string name="menu_delete">Удалить</string>
     <string name="menu_delete_all">Удалить загруженные</string>
     <string name="menu_system_info">Информация о системе</string>
@@ -28,7 +28,7 @@
 
     <!-- Settings strings -->
     <string name="available_updates_title">Доступные обновления</string>
-    <string name="no_available_updates_intro">Последняя проверка не обнаружила доступных обновлений. Чтобы проверить наличие обновлений вручную, нажмите кнопку \"Обновить\"</string>
+    <string name="no_available_updates_intro">Последняя проверка не обнаружила доступных обновлений. Чтобы проверить наличие обновлений вручную, нажмите кнопку «Проверить»</string>
     <string name="new_update_summary">Новое</string>
     <string name="downloaded_update_summary">Загружено</string>
     <string name="installed_update_summary">Установлено</string>
@@ -56,8 +56,9 @@
     <string name="not_new_updates_found_ticker">Доступны новые обновления</string>
     <string name="not_new_updates_found_title">Новые обновления</string>
     <plurals name="not_new_updates_found_body">
-        <item quantity="one">Новых обновлений: <xliff:g id="count">%d</xliff:g></item>
-        <item quantity="other">Новых обновлений: <xliff:g id="count">%d</xliff:g></item>
+        <item quantity="one">Доступно <xliff:g id="count">%d</xliff:g> обновление системы</item>
+        <item quantity="few">Доступно <xliff:g id="count">%d</xliff:g> обновления системы</item>
+        <item quantity="other">Доступно <xliff:g id="count">%d</xliff:g> обновлений системы</item>
     </plurals>
     <plurals name="not_additional_count">
         <item quantity="other">+ ещё <xliff:g id="count">%d</xliff:g></item>
@@ -75,7 +76,7 @@
     <string name="not_download_success">Обновление загружено</string>
     <string name="not_download_failure">Обновление не загружено</string>
     <string name="not_action_install_update">Перезагрузить и установить</string>
-    <string name="not_download_install_notice">Обновление <xliff:g id="filename">%s</xliff:g> успешно загружено. При нажатии \"Перезагрузить и установить\", устройство перезагрузится для установки обновления.\n\nПримечание: требуется совместимый Recovery для автоматической установки обновлений.</string>
+    <string name="not_download_install_notice">Обновление «<xliff:g id="filename">%s</xliff:g>» успешно загружено. При нажатии «Перезагрузить и установить», устройство перезагрузится для установки обновления.\n\nПримечание: требуется совместимый Recovery для автоматической установки обновлений.</string>
 
     <!-- MD5 related strings -->
     <string name="apply_existing_update_md5error_message">Ошибка! Несоответствие контрольной суммы MD5</string>
@@ -84,7 +85,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Применить обновление</string>
-    <string name="apply_update_dialog_text">Вы собираетесь обновиться на <xliff:g id="filename">%s</xliff:g>.\n\nПри нажатии кнопки \"Обновить\", устройство перезагрузится в режим Recovery для установки обновления. \n\nПримечание: эта функция требует совместимого Recovery, в противном случае обновление необходимо установить вручную</string>
+    <string name="apply_update_dialog_text">Вы собираетесь обновиться на «<xliff:g id="filename">%s</xliff:g>».\n\nПри нажатии кнопки «Обновить», устройство перезагрузится в режим Recovery для установки обновления. \n\nПримечание: эта функция требует совместимого Recovery, в противном случае обновление необходимо установить вручную.</string>
     <string name="apply_trying_to_get_root_access">Попытка получить root-доступ для перезагрузки в режим Recovery</string>
     <string name="apply_unable_to_reboot_toast">Невозможно перезагрузиться в режим Recovery</string>
 
@@ -92,7 +93,7 @@
     <string name="confirm_delete_dialog_title">Удалить файл</string>
     <string name="confirm_delete_dialog_message">Удалить выбранный файл обновления?</string>
     <string name="confirm_delete_all_dialog_message">Удалить все загруженные файлы обновлений?</string>
-    <string name="delete_single_update_success_message">Обновление <xliff:g id="filename">%s</xliff:g> удалено</string>
+    <string name="delete_single_update_success_message">Обновление «<xliff:g id="filename">%s</xliff:g>» удалено</string>
     <string name="delete_updates_failure_message">Произошла ошибка при удалении файла обновления</string>
     <string name="delete_updates_noFolder_message">Каталог с обновлениями не найден</string>
     <string name="delete_updates_success_message">Все загруженные обновления удалены</string>
@@ -103,19 +104,22 @@
     <string name="sysinfo_last_check">Последняя проверка:</string>
 
     <!-- changelog strings -->
-    <string name="no_changelog_alert">Список изменений не доступен</string>
+    <string name="no_changelog_alert">Список изменений недоступен</string>
     <string name="failed_to_load_changelog">Не удаётся загрузить список изменений</string>
     <string name="changelog_dialog_title">Список изменений</string>
+    <string name="loading_changelog">Загрузка\u2026</string>
 
     <!-- DashClock extension strings -->
     <string name="extension_label">Обновления CyanogenMod</string>
     <string name="extension_description">Показывает количество доступных обновлений</string>
     <plurals name="extension_status">
-        <item quantity="one">Новых обновлений: <xliff:g id="count">%d</xliff:g></item>
-        <item quantity="other">Новых обновлений: <xliff:g id="count">%d</xliff:g></item>
+        <item quantity="one">Доступно <xliff:g id="count">%d</xliff:g> обновление системы</item>
+        <item quantity="few">Доступно <xliff:g id="count">%d</xliff:g> обновления системы</item>
+        <item quantity="other">Доступно <xliff:g id="count">%d</xliff:g> обновлений системы</item>
     </plurals>
     <plurals name="extension_expandedTitle">
-        <item quantity="one">Новых обновлений CyanogenMod: <xliff:g id="count">%d</xliff:g></item>
-        <item quantity="other">Новых обновлений CyanogenMod: <xliff:g id="count">%d</xliff:g></item>
+        <item quantity="one">Доступно <xliff:g id="count">%d</xliff:g> обновление CyanogenMod</item>
+        <item quantity="few">Доступно <xliff:g id="count">%d</xliff:g> обновления CyanogenMod</item>
+        <item quantity="other">Доступно <xliff:g id="count">%d</xliff:g> обновлений CyanogenMod</item>
     </plurals>
 </resources>
