@@ -52,8 +52,8 @@
     <string name="download_already_running">Un téléchargement est déjà en cours</string>
     <string name="unable_to_download_file">Impossible de télécharger le fichier de mise à jour</string>
     <string name="download_not_found">Téléchargement introuvable</string>
-    <string name="not_download_success">Téléchargement de la mise à jour réussi</string>
-    <string name="not_download_failure">Téléchargement de la mise à jour échoué</string>
+    <string name="not_download_success">Téléchargement réussi</string>
+    <string name="not_download_failure">Téléchargement échoué</string>
     <string name="not_action_install_update">Redémarrer et installer</string>
     <string name="not_download_install_notice">Téléchargement de la mise à jour <xliff:g id="filename">%s</xliff:g> réussi. Lorsque vous appuierez sur \'Redémarrer et installer\', votre appareil redémarrera automatiquement pour installer la mise à jour.
       \n\nRemarque\u00A0: Un recovery compatible est nécessaire pour une installation automatique, sinon les mises à jour devront être installées manuellement.</string>
@@ -61,7 +61,7 @@
     <string name="md5_check_cancelled">Vérification de la somme de contrôle MD5 annulée</string>
     <string name="md5_verification_failed">La vérification de la somme de contrôle MD5 a échoué</string>
     <string name="apply_update_dialog_title">Appliquer la mise à jour</string>
-    <string name="apply_update_dialog_text">Vous êtes sur le point de passer à <xliff:g id="filename">%s</xliff:g>.\n\nSi vous appuyez sur \"Mettre à jour\", l\u0027\u0027appareil redémarrera automatiquement en mode recovery pour installer la mise à jour.\n\nRemarque\u00A0: Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
+    <string name="apply_update_dialog_text">Vous êtes sur le point de passer à <xliff:g id="filename">%s</xliff:g>.\n\nSi vous appuyez sur \"Mettre à jour\", l\'appareil redémarrera automatiquement en mode recovery pour installer la mise à jour.\n\nRemarque\u00A0: Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
     <string name="apply_trying_to_get_root_access">Tentative d\'obtention d\'un accès root pour redémarrer en mode recovery</string>
     <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode recovery</string>
     <string name="confirm_delete_dialog_title">Supprimer le fichier</string>
@@ -77,6 +77,7 @@
     <string name="no_changelog_alert">Pas de note de mise à jour disponible</string>
     <string name="failed_to_load_changelog">Impossible de charger la note de mise à jour</string>
     <string name="changelog_dialog_title">Note de mise à jour</string>
+    <string name="loading_changelog">Chargement\u2026</string>
     <string name="extension_label">Mises à jour CyanogenMod</string>
     <string name="extension_description">Affiche le nombre de mises à jour disponibles.</string>
 </resources>
