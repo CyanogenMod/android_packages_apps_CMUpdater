@@ -72,6 +72,10 @@
     <string name="download_already_running">\'n Aflaai is reeds aan die gang</string>
     <string name="unable_to_download_file">Kon nie die lêer aflaai nie</string>
     <string name="download_not_found">Die afgelaaide lêer kon nie gevind word nie</string>
+    <string name="not_download_success">Opdatering suksesvol afgelaai</string>
+    <string name="not_download_failure">Opdatering aflaai was onsuksesvol </string>
+    <string name="not_action_install_update">Herlaai en installeer</string>
+    <string name="not_download_install_notice">Die lêer <xliff:g id="filename">%s</xliff:g> is suksesvol afgelaai. Wanneer jy \'Herlaai en installeer\' raak, sal die toestel self herlaai en die opgradering installeer.\n\nNota:\'n Versoenbare \'Recovery\' is nodig vir die installasie om outomaties te werk.</string>
 
     <!-- MD5 related strings -->
     <string name="apply_existing_update_md5error_message">Fout. MD5 kontrolesom nie-ooreenstemming</string>
@@ -102,6 +106,7 @@
     <string name="no_changelog_alert">Geen Veranderinge-log beskikbaar nie</string>
     <string name="failed_to_load_changelog">Kon nie Veranderinge-log laai nie</string>
     <string name="changelog_dialog_title">Veranderinge-log</string>
+    <string name="loading_changelog">Laai\u2026</string>
 
     <!-- DashClock extension strings -->
     <string name="extension_label">CyanogenMod opgraderings</string>
