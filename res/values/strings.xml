@@ -53,6 +53,7 @@
     <!-- Update checking -->
     <string name="checking_for_updates">Checking for updates</string>
     <string name="no_updates_found">No new updates found</string>
+    <string name="update_check_failed">The update check failed. Please check your internet connection and try again later.</string>
     <string name="not_new_updates_found_ticker">New updates are available</string>
     <string name="not_new_updates_found_title">New updates</string>
     <plurals name="not_new_updates_found_body">

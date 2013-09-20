@@ -107,6 +107,9 @@ public class UpdatesSettings extends PreferenceActivity implements
                     if (count == 0) {
                         Toast.makeText(UpdatesSettings.this, R.string.no_updates_found,
                                 Toast.LENGTH_SHORT).show();
+                    } else if (count < 0) {
+                        Toast.makeText(UpdatesSettings.this, R.string.update_check_failed,
+                                Toast.LENGTH_LONG).show();
                     }
                 }
                 updateLayout();

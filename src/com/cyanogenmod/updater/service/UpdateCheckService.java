@@ -89,7 +89,9 @@ public class UpdateCheckService extends IntentService {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (TextUtils.equals(intent.getAction(), ACTION_CANCEL_CHECK)) {
             synchronized (this) {
-                mHttpExecutor.abort();
+                if (mHttpExecutor != null) {
+                    mHttpExecutor.abort();
+                }
             }
 
             return START_NOT_STICKY;
@@ -121,6 +123,7 @@ public class UpdateCheckService extends IntentService {
         }
 
         if (availableUpdates == null || mHttpExecutor.isAborted()) {
+            sendBroadcast(finishedIntent);
             return;
         }
 
