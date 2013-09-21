@@ -48,6 +48,7 @@
 
     <string name="checking_for_updates">Controleren op updates\u2026</string>
     <string name="no_updates_found">Geen nieuwe updates gevonden</string>
+    <string name="update_check_failed">Kan niet controleren op updates. Controleer uw internetverbinding en probeer het later opnieuw</string>
     <string name="not_new_updates_found_ticker">Er zijn nieuwe updates beschikbaar</string>
     <string name="not_new_updates_found_title">Nieuwe updates</string>
     <plurals name="not_new_updates_found_body">
