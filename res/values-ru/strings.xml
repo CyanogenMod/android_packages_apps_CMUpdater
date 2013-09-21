@@ -9,7 +9,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- General strings -->
-    <string name="app_name">CM Updater</string>
+    <string name="app_name">Обновление CyanogenMod</string>
     <string name="display_name">Обновления</string>
     <string name="unknown">Неизвестный</string>
 
@@ -28,7 +28,7 @@
 
     <!-- Settings strings -->
     <string name="available_updates_title">Доступные обновления</string>
-    <string name="no_available_updates_intro">Последняя проверка не обнаружила доступных обновлений. Чтобы проверить наличие обновлений вручную, нажмите кнопку «Проверить»</string>
+    <string name="no_available_updates_intro">Установлена последняя версия CyanogenMod. Нажмите кнопку «Проверить», чтобы выполнить поиск доступных обновлений.</string>
     <string name="new_update_summary">Новое</string>
     <string name="downloaded_update_summary">Загружено</string>
     <string name="installed_update_summary">Установлено</string>
@@ -44,17 +44,18 @@
     <string name="check_bi_weekly">Раз в две недели</string>
     <string name="check_monthly">Ежемесячно</string>
 
-    <string name="update_type_title">Тип обновления</string>
-    <string name="type_all">Все версии (Только стабильные)</string>
-    <string name="type_all_incl_nightly">Все версии (Включая ночные сборки)</string>
-    <string name="type_new">Новые версии (Только стабильные)</string>
-    <string name="type_new_incl_nightly">Новые версии (Включая ночные сборки)</string>
+    <string name="update_type_title">Тип обновлений</string>
+    <string name="type_all">Все версии (только стабильные)</string>
+    <string name="type_all_incl_nightly">Все версии (включая ночные сборки)</string>
+    <string name="type_new">Новые версии (только стабильные)</string>
+    <string name="type_new_incl_nightly">Новые версии (включая ночные сборки)</string>
 
     <!-- Update checking -->
-    <string name="checking_for_updates">Проверка обновлений...</string>
+    <string name="checking_for_updates">Проверка обновлений\u2026</string>
     <string name="no_updates_found">Обновлений не найдено</string>
-    <string name="not_new_updates_found_ticker">Доступны новые обновления</string>
-    <string name="not_new_updates_found_title">Новые обновления</string>
+    <string name="update_check_failed">Не удалось выполнить поиск обновлений. Проверьте подключение к Интернету и повторите попытку.</string>
+    <string name="not_new_updates_found_ticker">Доступно обновление системы</string>
+    <string name="not_new_updates_found_title">Обновления CyanogenMod</string>
     <plurals name="not_new_updates_found_body">
         <item quantity="one">Доступно <xliff:g id="count">%d</xliff:g> обновление системы</item>
         <item quantity="few">Доступно <xliff:g id="count">%d</xliff:g> обновления системы</item>
@@ -74,9 +75,9 @@
     <string name="unable_to_download_file">Не удалось загрузить файл обновления</string>
     <string name="download_not_found">Обновление не найдено</string>
     <string name="not_download_success">Обновление загружено</string>
-    <string name="not_download_failure">Обновление не загружено</string>
+    <string name="not_download_failure">Ошибка загрузки обновления</string>
     <string name="not_action_install_update">Перезагрузить и установить</string>
-    <string name="not_download_install_notice">Обновление «<xliff:g id="filename">%s</xliff:g>» успешно загружено. При нажатии «Перезагрузить и установить», устройство перезагрузится для установки обновления.\n\nПримечание: требуется совместимый Recovery для автоматической установки обновлений.</string>
+    <string name="not_download_install_notice">Обновление «<xliff:g id="filename">%s</xliff:g>» успешно загружено. При нажатии «Перезагрузить и установить» устройство перезагрузится для установки обновления.</string>
 
     <!-- MD5 related strings -->
     <string name="apply_existing_update_md5error_message">Ошибка! Несоответствие контрольной суммы MD5</string>
@@ -84,9 +85,9 @@
     <string name="md5_verification_failed">Не удалось выполнить проверку MD5</string>
 
     <!-- Apply update strings -->
-    <string name="apply_update_dialog_title">Применить обновление</string>
-    <string name="apply_update_dialog_text">Вы собираетесь обновиться на «<xliff:g id="filename">%s</xliff:g>».\n\nПри нажатии кнопки «Обновить», устройство перезагрузится в режим Recovery для установки обновления. \n\nПримечание: эта функция требует совместимого Recovery, в противном случае обновление необходимо установить вручную.</string>
-    <string name="apply_trying_to_get_root_access">Попытка получить root-доступ для перезагрузки в режим Recovery</string>
+    <string name="apply_update_dialog_title">Установить обновление</string>
+    <string name="apply_update_dialog_text">Вы собираетесь обновиться на «<xliff:g id="filename">%s</xliff:g>».\n\nПри нажатии кнопки «Обновить» устройство перезагрузится в режим Recovery для установки обновления. \n\nПримечание: эта функция требует совместимого Recovery, в противном случае обновление необходимо установить вручную.</string>
+    <string name="apply_trying_to_get_root_access">Попытка получить права суперпользователя для перезагрузки в режим Recovery\u2026</string>
     <string name="apply_unable_to_reboot_toast">Невозможно перезагрузиться в режим Recovery</string>
 
     <!-- deleting -->
