@@ -49,6 +49,7 @@
 
     <string name="checking_for_updates">Buscant actualitzacions</string>
     <string name="no_updates_found">No s\'han trobat noves actualitzacions</string>
+<string name="update_check_failed">No s\'ha pogut verificar si hi ha actualitzacions disponibles. Si us plau verifica la teva connexió d\'internet i intenta-ho una altra vegada més tard.</string>
     <string name="not_new_updates_found_ticker">Noves actualitzacions disponibles</string>
     <string name="not_new_updates_found_title">Noves actualitzacions</string>
     <plurals name="not_new_updates_found_body">
