@@ -49,6 +49,7 @@
     <string name="type_new_incl_nightly">Új verzió (beleértve Nightly-kat)</string>
     <string name="checking_for_updates">Frissítések keresése</string>
     <string name="no_updates_found">Nem található új frissítés</string>
+    <string name="update_check_failed">Nem sikerült frissítéseket keresni. Ellenőrizze internetkapcsolatát, majd próbálja újra.</string>
     <string name="not_new_updates_found_ticker">Új frissítések érhetőek el</string>
     <string name="not_new_updates_found_title">Új frissítések</string>
     <string name="not_action_download">Letöltés</string>
