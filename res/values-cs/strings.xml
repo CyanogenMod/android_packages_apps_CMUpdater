@@ -48,6 +48,7 @@
 
     <string name="checking_for_updates">Vyhledávání aktualizací</string>
     <string name="no_updates_found">Nové aktualizace nenalezeny</string>
+    <string name="update_check_failed">Zjištění nové verze selhalo. Prosím zkontrolujte připojení k internetu a pokus opakujte.</string>
     <string name="not_new_updates_found_ticker">Nové aktualizace k dispozici</string>
     <string name="not_new_updates_found_title">Nové aktualizace</string>
     <plurals name="not_new_updates_found_body">
@@ -94,6 +95,7 @@
     <string name="no_changelog_alert">Není dostupný seznam změn</string>
     <string name="failed_to_load_changelog">Nelze načíst seznam změn</string>
     <string name="changelog_dialog_title">Seznam změn</string>
+    <string name="loading_changelog">Načítání\u2026</string>
 
     <string name="extension_label">Aktualizace CyanogenMod</string>
     <string name="extension_description">Zobrazení počtu nových dostupných aktualizací.</string>
