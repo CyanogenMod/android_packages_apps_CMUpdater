@@ -399,8 +399,8 @@ public class UpdatesSettings extends PreferenceActivity implements
 
                         // Clear the stored data from shared preferences
                         mPrefs.edit()
-                                .putLong(Constants.DOWNLOAD_ID, mDownloadId)
-                                .putString(Constants.DOWNLOAD_MD5, "")
+                                .remove(Constants.DOWNLOAD_ID)
+                                .remove(Constants.DOWNLOAD_MD5)
                                 .apply();
 
                         Toast.makeText(UpdatesSettings.this,
