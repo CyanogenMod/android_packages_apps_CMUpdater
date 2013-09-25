@@ -49,10 +49,13 @@
     <string name="type_all_incl_nightly">Alle Versionen (inkl. Nightlies)</string>
     <string name="type_new">Nur neue stabile Versionen</string>
     <string name="type_new_incl_nightly">Neue Versionen (inkl. Nightlies)</string>
+    <string name="nightly_alert">Sie haben ausgewählt, dass auch Nightlies angezeigt werden. Diese werden nicht unterstützt und sollten mit Vorsicht installiert werden.</string>
+    <string name="nightly_alert_title">Achtung</string>
 
     <!-- Update checking -->
     <string name="checking_for_updates">Updates werden gesucht</string>
     <string name="no_updates_found">Keine neuen Updates gefunden</string>
+    <string name="update_check_failed">Die Suche nach Updates ist fehlgeschlagen. Bitte überprüfen Sie die Internetverbindung und versuchen es später erneut.</string>
     <string name="not_new_updates_found_ticker">Neue Updates sind verfügbar</string>
     <string name="not_new_updates_found_title">Neue Updates</string>
     <plurals name="not_new_updates_found_body">
