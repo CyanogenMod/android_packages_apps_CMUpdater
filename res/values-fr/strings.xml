@@ -42,6 +42,7 @@
     <string name="type_new_incl_nightly">Nouvelles versions (dont Nightlies)</string>
     <string name="checking_for_updates">Recherche de mises à jour</string>
     <string name="no_updates_found">Aucune nouvelle mise à jour disponible</string>
+    <string name="update_check_failed">La vérification a échoué. Vérifiez votre connexion internet et réessayez ultérieurement.</string>
     <string name="not_new_updates_found_ticker">De nouvelles mises à jour sont disponibles</string>
     <string name="not_new_updates_found_title">Nouvelles mises à jour</string>
     <string name="not_action_download">Télécharger</string>
