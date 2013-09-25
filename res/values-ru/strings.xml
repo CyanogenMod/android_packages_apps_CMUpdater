@@ -49,6 +49,8 @@
     <string name="type_all_incl_nightly">Все версии (включая ночные сборки)</string>
     <string name="type_new">Новые версии (только стабильные)</string>
     <string name="type_new_incl_nightly">Новые версии (включая ночные сборки)</string>
+    <string name="nightly_alert">Вы включили в список обновлений для поиска «ночные сборки». Помните, что техническая поддержка по ним не предоставляется.</string>
+    <string name="nightly_alert_title">Внимание!</string>
 
     <!-- Update checking -->
     <string name="checking_for_updates">Проверка обновлений\u2026</string>
