@@ -95,4 +95,7 @@
     <string name="not_action_install_update">Reiniciar e instalar</string>
     <string name="not_download_install_notice">A atualização <xliff:g id="filename" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%s</xliff:g> foi baixada com sucesso. Ao tocar \'Reiniciar e instalar\', o dispositivo irá reiniciar sozinho e instalar a atualização.\n\nNota: Uma Recuperação compatível é necessária para a atualização funcionar automaticamente.</string>
     <string name="loading_changelog">Carregando\u2026</string>
+    <string name="nightly_alert">Você selecionou para incluir atualizações diárias na lista. Estas não têm suporte e devem ser usadas com cuidado.</string>
+    <string name="nightly_alert_title">Cuidado</string>
+    <string name="update_check_failed">Falha ao verificar por atualização. Favor verificar sua conexão com a internet e tentar novamente mais tarde.</string>
 </resources>
