@@ -36,10 +36,12 @@
     <string name="check_bi_weekly">Bimensuelle</string>
     <string name="check_monthly">Mensuelle</string>
     <string name="update_type_title">Versions à rechercher</string>
-    <string name="type_all">Toutes les versions (stable uniq.)</string>
-    <string name="type_all_incl_nightly">Toutes les versions (dont Nightlies)</string>
-    <string name="type_new">Nouvelles versions (stable uniq.)</string>
-    <string name="type_new_incl_nightly">Nouvelles versions (dont Nightlies)</string>
+    <string name="type_all">Toutes les versions stables</string>
+    <string name="type_all_incl_nightly">Toutes les versions dont celles de développement</string>
+    <string name="type_new">Uniquement les nouvelles versions stables</string>
+    <string name="type_new_incl_nightly">Uniquement les nouvelles versions dont celles de développement</string>
+    <string name="nightly_alert">Vous avez choisi d\'inclure à votre liste les versions de développement. Ces versions n\'ont pas de support et elles doivent être utilisées avec précaution.</string>
+    <string name="nightly_alert_title">Avertissement</string>
     <string name="checking_for_updates">Recherche de mises à jour</string>
     <string name="no_updates_found">Aucune nouvelle mise à jour disponible</string>
     <string name="update_check_failed">La vérification a échoué. Vérifiez votre connexion internet et réessayez ultérieurement.</string>
@@ -56,13 +58,12 @@
     <string name="not_download_success">Téléchargement réussi</string>
     <string name="not_download_failure">Téléchargement échoué</string>
     <string name="not_action_install_update">Redémarrer et installer</string>
-    <string name="not_download_install_notice">Téléchargement de la mise à jour <xliff:g id="filename">%s</xliff:g> réussi. Lorsque vous appuierez sur \'Redémarrer et installer\', votre appareil redémarrera automatiquement pour installer la mise à jour.
-      \n\nRemarque\u00A0: Un recovery compatible est nécessaire pour une installation automatique, sinon les mises à jour devront être installées manuellement.</string>
+    <string name="not_download_install_notice">Téléchargement de la mise à jour <xliff:g id="filename">%s</xliff:g> réussi. Lorsque vous appuierez sur \"Redémarrer et installer\", votre appareil redémarrera automatiquement pour installer la mise à jour.\n\nRemarque\u00A0: Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
     <string name="apply_existing_update_md5error_message">Erreur, la somme de contrôle MD5 ne correspond pas</string>
     <string name="md5_check_cancelled">Vérification de la somme de contrôle MD5 annulée</string>
     <string name="md5_verification_failed">La vérification de la somme de contrôle MD5 a échoué</string>
     <string name="apply_update_dialog_title">Appliquer la mise à jour</string>
-    <string name="apply_update_dialog_text">Vous êtes sur le point de passer à <xliff:g id="filename">%s</xliff:g>.\n\nSi vous appuyez sur \"Mettre à jour\", l\'appareil redémarrera automatiquement en mode recovery pour installer la mise à jour.\n\nRemarque\u00A0: Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
+    <string name="apply_update_dialog_text">Vous êtes sur le point d\'installer <xliff:g id="filename">%s</xliff:g>.\n\nLorsque vous appuierez sur \"Mettre à jour\", votre appareil redémarrera automatiquement pour installer la mise à jour.\n\nRemarque\u00A0: Cette fonction nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
     <string name="apply_trying_to_get_root_access">Tentative d\'obtention d\'un accès root pour redémarrer en mode recovery</string>
     <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode recovery</string>
     <string name="confirm_delete_dialog_title">Supprimer le fichier</string>
