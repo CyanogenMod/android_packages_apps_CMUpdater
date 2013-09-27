@@ -40,6 +40,8 @@
     <string name="type_all_incl_nightly">Todas (incl. no estables)</string>
     <string name="type_new">Nuevas (sólo estables)</string>
     <string name="type_new_incl_nightly">Nuevas (incl. no estables)</string>
+    <string name="nightly_alert">Has elegido incluir actualizaciones no estables en esta lista. Este tipo de actualizaciones no disponen de soporte al usuario y deberían ser utilizadas con precaución.</string>
+    <string name="nightly_alert_title">Advertencia</string>
     <string name="checking_for_updates">Comprobando actualizaciones\u2026</string>
     <string name="no_updates_found">No hay nuevas actualizaciones</string>
     <string name="update_check_failed">Falló la comprobación de actualizaciones. Por favor, verifica la conexión a Internet e inténtalo nuevamente.</string>
