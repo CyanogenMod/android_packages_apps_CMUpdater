@@ -40,8 +40,11 @@
     <string name="type_all_incl_nightly">Όλες οι εκδόσεις (συμπεριλ. Nightlies)</string>
     <string name="type_new">Νέες εκδόσεις (Μόνο Stable)</string>
     <string name="type_new_incl_nightly">Νέες εκδόσεις (συμπεριλ. Nightlies)</string>
+    <string name="nightly_alert">Επιλέξατε να εμφανίζετε ενημερώσεις nightly σε αυτή τη λίστα. Αυτές οι ενημερώσεις δεν υποστηρίζονται επίσημα και θα πρέπει να χρησιμοποιούνται με προσοχή.</string>
+    <string name="nightly_alert_title">Προσοχή</string>
     <string name="checking_for_updates">Έλεγχος για ενημερώσεις</string>
     <string name="no_updates_found">Δεν βρέθηκαν ενημερώσεις</string>
+    <string name="update_check_failed">Ο έλεγχος για ενημερώσεις απέτυχε. Παρακαλώ ελέγξτε την σύνδεσή σας στο διαδίκτυο και προσπαθήστε αργότερα.</string>
     <string name="not_new_updates_found_ticker">Υπάρχουν διαθέσιμες ενημερώσεις</string>
     <string name="not_new_updates_found_title">Νέες ενημερώσεις</string>
     <plurals name="not_new_updates_found_body">
@@ -83,6 +86,7 @@
     <string name="no_changelog_alert">Δεν υπάρχει διαθέσιμο αρχείο αλλαγών</string>
     <string name="failed_to_load_changelog">Δεν είναι δυνατή η φόρτωση του αρχείου αλλαγών</string>
     <string name="changelog_dialog_title">Αρχείο αλλαγών</string>
+    <string name="loading_changelog">Φόρτωση\u2026</string>
     <string name="extension_label">Ενημερώσεις CyanogenMod</string>
     <string name="extension_description">Εμφανίζει τον αριθμό των διαθέσιμων νέων ενημερώσεων.</string>
     <plurals name="extension_status">
