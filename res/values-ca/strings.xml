@@ -41,11 +41,13 @@
     <string name="check_bi_weekly">Bi-setmanalment</string>
     <string name="check_monthly">Mensualment</string>
 
-    <string name="update_type_title">Update types</string>
+    <string name="update_type_title">Tipus d\'actualitzacions</string>
     <string name="type_all">Totes les versions (Només estables)</string>
     <string name="type_all_incl_nightly">Totes les versions (incl. Nightlies)</string>
-    <string name="type_new">Noves versions (Només etables)</string>
+    <string name="type_new">Noves versions (Només estables)</string>
     <string name="type_new_incl_nightly">Noves versions (incl. Nightlies)</string>
+    <string name="nightly_alert">Has seleccionat incloure les actualitzacions tipus nightly en aquesta llista. Aquestes no tenen suport i han de ser utilitzades amb precaució.</string>
+    <string name="nightly_alert_title">Alerta</string>
 
     <string name="checking_for_updates">Buscant actualitzacions</string>
     <string name="no_updates_found">No s\'han trobat noves actualitzacions</string>
@@ -73,7 +75,7 @@
     <string name="not_action_install_update">Reinicia i instal·la</string>
     <string name="not_download_install_notice">L\'actualització <xliff:g id="filename">%s</xliff:g> s\'ha descarregat satisfactòriament. Quan apretis \'Reinicia i instal·la\', el dispositiu es reiniciarà ell mateix cap al mode de recuperació per tal d\'instal·lar l\'actualització.\n\nNota: Aquesta característica necessita un sistema de recuperació (Recovery) compatible o l\'actualització haurà de ser instal·lada manualment.</string>
 
-    <string name="apply_existing_update_md5error_message">Error. Difèrencia en la verificació MD5</string>
+    <string name="apply_existing_update_md5error_message">Error. Diferència en la verificació MD5</string>
     <string name="md5_check_cancelled">La verificació MD5 s\'ha cancel·lat</string>
     <string name="md5_verification_failed">La verificació MD5 ha fallat</string>
 
