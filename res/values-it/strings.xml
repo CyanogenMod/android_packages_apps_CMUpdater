@@ -40,8 +40,11 @@
     <string name="type_all_incl_nightly">Tutte le versioni (Nightlies incluse)</string>
     <string name="type_new">Nuove versioni stabili</string>
     <string name="type_new_incl_nightly">Nuove versioni (Nightlies incluse)</string>
+    <string name="nightly_alert">Hai scelto di includere le nightlies nella lista di aggiornamenti. Nota bene che non sono supportate e andrebbero usate con cautela.</string>
+    <string name="nightly_alert_title">Attenzione</string>
     <string name="checking_for_updates">Controllo aggiornamenti</string>
     <string name="no_updates_found">Nessun nuovo aggiornamento</string>
+    <string name="update_check_failed">La verifica di aggiornamenti è fallita. Controlla la connessione ad internet e riprova più tardi.</string>
     <string name="not_new_updates_found_ticker">Nuovi aggiornamenti disponibili</string>
     <string name="not_new_updates_found_title">Nuovi aggiornamenti</string>
     <plurals name="not_new_updates_found_body">
@@ -83,6 +86,7 @@
     <string name="no_changelog_alert">Nessun changelog disponibile</string>
     <string name="failed_to_load_changelog">Impossibile caricare il changelog</string>
     <string name="changelog_dialog_title">Changelog</string>
+    <string name="loading_changelog">Caricando\u2026</string>
     <string name="extension_label">Aggiornamenti CyanogenMod</string>
     <string name="extension_description">Mostra il numero dei nuovi aggiornamenti disponibili.</string>
     <plurals name="extension_status">
