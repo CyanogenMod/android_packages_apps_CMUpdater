@@ -87,6 +87,8 @@
     <string name="changelog_dialog_title">Záznam zmien</string>
     <string name="extension_label">Aktualizácie CyanogenMod</string>
     <string name="extension_description">Zobrazí počet nových dostupných aktualizácií.</string>
+    <string name="loading_changelog">Načítavanie\u2026</string>
+    <string name="update_check_failed">Kontrola aktualizácií zlyhala. Skontrolujte prosím svoje internetové pripojenie a skúste to znova neskôr.</string>
     <plurals name="extension_status">
         <item quantity="one"><xliff:g id="count">%d</xliff:g> aktualizácia</item>
         <item quantity="few"><xliff:g id="count">%d</xliff:g> aktualizácie</item>
