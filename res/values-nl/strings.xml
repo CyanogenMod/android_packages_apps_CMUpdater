@@ -42,9 +42,11 @@
 
     <string name="update_type_title">Soort updates</string>
     <string name="type_all">Alle versies (alleen Stable)</string>
-    <string name="type_all_incl_nightly">Alle versies (incl. Nightlies)</string>
+    <string name="type_all_incl_nightly">Alle versies (incl. Nightly)</string>
     <string name="type_new">Nieuwe versies (alleen Stable)</string>
-    <string name="type_new_incl_nightly">Nieuwe versies (incl. Nightlies)</string>
+    <string name="type_new_incl_nightly">Nieuwe versies (incl. Nightly)</string>
+    <string name="nightly_alert">U heeft gekozen om Nightly-builds te gebruiken. Deze builds worden niet ondersteund en moeten voorzichten worden gebruikt.</string>
+    <string name="nightly_alert_title">Let op</string>
 
     <string name="checking_for_updates">Controleren op updates\u2026</string>
     <string name="no_updates_found">Geen nieuwe updates gevonden</string>
