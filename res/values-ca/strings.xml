@@ -82,7 +82,7 @@
     <string name="apply_update_dialog_title">Aplica actualització</string>
     <string name="apply_update_dialog_text">Estàs a punt d\'actualitzar a <xliff:g id="filename">%s</xliff:g>.\n\nSi apretes Actualitza, el dispositiu es reiniciarà ell mateix cap al mode de recuperació per tal d\'instal·lar l\'actualització.\n
         \nNota: Aquesta característica necessita un sistema de recuperació (Recovery) compatible o l\'actualització haurà de ser instal·lada manualment.</string>
-    <string name="apply_trying_to_get_root_access">Intentant aconseguir accés root per reinciar en mode recuperació</string>
+    <string name="apply_trying_to_get_root_access">Intentant aconseguir accés root per reiniciar en mode recuperació</string>
     <string name="apply_unable_to_reboot_toast">Impossible reiniciar en mode recuperació</string>
 
     <string name="confirm_delete_dialog_title">Esborra arxiu</string>
