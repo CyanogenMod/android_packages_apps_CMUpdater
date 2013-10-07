@@ -183,8 +183,8 @@ public class DownloadReceiver extends BroadcastReceiver{
 
         // Clear the shared prefs
         prefs.edit()
-                .putString(Constants.DOWNLOAD_MD5, "")
-                .putLong(Constants.DOWNLOAD_ID, -1)
+                .remove(Constants.DOWNLOAD_MD5)
+                .remove(Constants.DOWNLOAD_ID)
                 .apply();
 
         c.close();
