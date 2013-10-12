@@ -40,6 +40,8 @@
     <string name="type_all_incl_nightly">Všetky verzie (vrátane nočných zostáv)</string>
     <string name="type_new">Nové verzie (iba stabilné)</string>
     <string name="type_new_incl_nightly">Nové verzie (vrátane nočných zostáv)</string>
+    <string name="nightly_alert">Vybrali ste, že chcete zahrnúť nočné aktualizácie do tohto zoznamu. Tieto aktualizácie nie sú podporované a mali by byť používané s opatrnosťou.</string>
+    <string name="nightly_alert_title">Upozornenie</string>
     <string name="checking_for_updates">Kontrolujú sa aktualizácie</string>
     <string name="no_updates_found">Nenašli sa žiadne nové aktualizácie</string>
     <string name="not_new_updates_found_ticker">Sú dostupné nové aktualizácie</string>
