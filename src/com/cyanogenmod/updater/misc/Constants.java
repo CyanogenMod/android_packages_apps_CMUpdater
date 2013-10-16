@@ -14,6 +14,7 @@ public class Constants {
     public static final String UPDATES_FOLDER = "cmupdater";
     public static final String DOWNLOAD_ID = "download_id";
     public static final String DOWNLOAD_MD5 = "download_md5";
+    public static final String DOWNLOAD_INCREMENTAL_FOR = "download_incremental_for";
 
     // Preferences
     public static final String ENABLE_PREF = "pref_enable_updates";

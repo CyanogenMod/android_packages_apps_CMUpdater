@@ -336,6 +336,7 @@ public class UpdateCheckService extends IntentService {
         int apiLevel = obj.getInt("api_level");
         long timestamp = obj.getLong("timestamp");
         String typeString = obj.getString("channel");
+        String incremental = obj.getString("incremental");
         UpdateInfo.Type type;
 
         if (TextUtils.equals(typeString, "stable")) {
@@ -350,7 +351,7 @@ public class UpdateCheckService extends IntentService {
             type = UpdateInfo.Type.UNKNOWN;
         }
 
-        UpdateInfo ui = new UpdateInfo(fileName, timestamp, apiLevel, url, md5, type);
+        UpdateInfo ui = new UpdateInfo(fileName, timestamp, apiLevel, url, md5, type, incremental);
         boolean includeAll = updateType == Constants.UPDATE_TYPE_ALL_STABLE
             || updateType == Constants.UPDATE_TYPE_ALL_NIGHTLY;
 
