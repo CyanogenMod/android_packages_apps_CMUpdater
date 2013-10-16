@@ -25,7 +25,7 @@ endif
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
-LOCAL_STATIC_JAVA_LIBRARIES := dashclockapi
+LOCAL_STATIC_JAVA_LIBRARIES := dashclockapi ion
 
 LOCAL_PACKAGE_NAME := CMUpdater
 
