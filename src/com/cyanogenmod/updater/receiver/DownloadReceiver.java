@@ -32,6 +32,9 @@ import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.UpdateInfo;
 import com.cyanogenmod.updater.utils.MD5;
 import com.cyanogenmod.updater.utils.Utils;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,6 +49,16 @@ public class DownloadReceiver extends BroadcastReceiver{
 
     private static final String ACTION_INSTALL_UPDATE = "com.cyanogenmod.cmupdater.action.INSTALL_UPDATE";
     private static final String EXTRA_FILENAME = "filename";
+
+    private static class DeltaRequestBody {
+        private String source_incremental;
+        private String target_incremental;
+
+        public DeltaRequestBody(String sourceIncremental, String targetIncremental) {
+            this.source_incremental = sourceIncremental;
+            this.target_incremental = targetIncremental;
+        }
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -71,7 +84,106 @@ public class DownloadReceiver extends BroadcastReceiver{
         }
     }
 
-    private void handleStartDownload(Context context, SharedPreferences prefs, UpdateInfo ui) {
+    private void getAvailableDeltas(Context context, UpdateInfo ui,
+            FutureCallback<JsonObject> callback) {
+        String sourceIncremental = Utils.getIncremental();
+        Log.d(TAG, "Looking for incremental ota for source=" + sourceIncremental + ", target="
+                + ui.getIncremental());
+        String apiUrl = context.getString(R.string.conf_update_server_url_def) + "/v1/build/get_delta";
+        DeltaRequestBody deltaRequestBody = new DeltaRequestBody(sourceIncremental,
+                ui.getIncremental());
+        Ion.with(context, apiUrl)
+                .addHeader("Content-Type", "application/json")
+                .setJsonObjectBody(deltaRequestBody)
+                .asJsonObject()
+                .setCallback(callback);
+    }
+
+    private void handleStartDownload(final Context context, final SharedPreferences prefs,
+            final UpdateInfo ui) {
+        // Try to fetch an incremental
+        getAvailableDeltas(context, ui, new FutureCallback<JsonObject>() {
+            @Override
+            public void onCompleted(Exception e, JsonObject jsonObject) {
+                if (jsonObject != null) {
+                    if (jsonObject.get("errors") == null) {
+                        final long date = jsonObject.get("date_created_unix").getAsLong();
+                        final String fileName = jsonObject.get("filename").getAsString();
+                        final String url = jsonObject.get("download_url").getAsString();
+                        // We will never go backwards with an incremental, safe to assume
+                        // API level is the same.
+                        final int apiLevel = ui.getApiLevel();
+                        final String md5 = jsonObject.get("md5sum").getAsString();
+                        final UpdateInfo.Type type = UpdateInfo.Type.INCREMENTAL;
+                        final String incremental = jsonObject.get("incremental").getAsString();
+
+                        UpdateInfo incrementalUpdateInfo = new UpdateInfo(fileName, date, apiLevel,
+                                url, md5, type, incremental);
+
+                        downloadIncremental(context, prefs, incrementalUpdateInfo, ui.getFileName());
+                        return;
+                    }
+                }
+                downloadFullZip(context, prefs, ui);
+            }
+        });
+    }
+
+    private long enqueueDownload(Context context, String downloadUrl, String fullFilePath) {
+        Request request = new Request(Uri.parse(downloadUrl));
+        String userAgent = Utils.getUserAgentString(context);
+        if (userAgent != null) {
+            request.addRequestHeader("User-Agent", userAgent);
+        }
+        request.setTitle(context.getString(R.string.app_name));
+        request.setDestinationUri(Uri.parse(fullFilePath));
+        request.setAllowedOverRoaming(false);
+        request.setVisibleInDownloadsUi(false);
+
+        // TODO: this could/should be made configurable
+        request.setAllowedOverMetered(true);
+
+        final DownloadManager dm =
+                (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        return dm.enqueue(request);
+    }
+
+    private void downloadIncremental(Context context, SharedPreferences prefs, UpdateInfo ui,
+            String originalName) {
+        Log.v(TAG, "Downloading incremental zip: " + ui.getDownloadUrl());
+        // If directory doesn't exist, create it
+        File directory = Utils.makeUpdateFolder();
+        if (!directory.exists()) {
+            directory.mkdirs();
+            Log.d(TAG, "UpdateFolder created");
+        }
+
+        // Build the name of the file to download, adding .partial at the end.  It will get
+        // stripped off when the download completes
+        String sourceIncremental = Utils.getIncremental();
+        String targetIncremental = ui.getIncremental();
+        String fileName = "incremental-" + sourceIncremental + "-" + targetIncremental + ".zip";
+        String fullFilePath = "file://" + directory.getAbsolutePath() + "/" + fileName + ".partial";
+
+        long downloadId = enqueueDownload(context, ui.getDownloadUrl(), fullFilePath);
+
+        // Store in shared preferences
+        prefs.edit()
+                .putLong(Constants.DOWNLOAD_ID, downloadId)
+                .putString(Constants.DOWNLOAD_MD5, ui.getMD5Sum())
+                .putString(Constants.DOWNLOAD_INCREMENTAL_FOR, originalName)
+                .apply();
+
+        Utils.cancelNotification(context);
+
+        Intent intent = new Intent(ACTION_DOWNLOAD_STARTED);
+        intent.putExtra(DownloadManager.EXTRA_DOWNLOAD_ID, downloadId);
+        context.sendBroadcast(intent);
+    }
+
+    private void downloadFullZip(Context context, SharedPreferences prefs, UpdateInfo ui) {
+        Log.v(TAG, "Downloading full zip");
+
         // If directory doesn't exist, create it
         File directory = Utils.makeUpdateFolder();
         if (!directory.exists()) {
@@ -83,25 +195,7 @@ public class DownloadReceiver extends BroadcastReceiver{
         // stripped off when the download completes
         String fullFilePath = "file://" + directory.getAbsolutePath() + "/" + ui.getFileName() + ".partial";
 
-        Request request = new Request(Uri.parse(ui.getDownloadUrl()));
-        String userAgent = Utils.getUserAgentString(context);
-        if (userAgent != null) {
-            request.addRequestHeader("User-Agent", userAgent);
-        }
-        request.addRequestHeader("Cache-Control", "no-cache");
-
-        request.setTitle(context.getString(R.string.app_name));
-        request.setDestinationUri(Uri.parse(fullFilePath));
-        request.setAllowedOverRoaming(false);
-        request.setVisibleInDownloadsUi(false);
-
-        // TODO: this could/should be made configurable
-        request.setAllowedOverMetered(true);
-
-        // Start the download
-        final DownloadManager dm =
-                (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-        long downloadId = dm.enqueue(request);
+        long downloadId = enqueueDownload(context, ui.getDownloadUrl(), fullFilePath);
 
         // Store in shared preferences
         prefs.edit()
@@ -118,6 +212,7 @@ public class DownloadReceiver extends BroadcastReceiver{
 
     private void handleDownloadComplete(Context context, SharedPreferences prefs, long id) {
         long enqueued = prefs.getLong(Constants.DOWNLOAD_ID, -1);
+        String incrementalFor = prefs.getString(Constants.DOWNLOAD_INCREMENTAL_FOR, null);
 
         if (enqueued < 0 || id < 0 || id != enqueued) {
             return;
@@ -164,6 +259,8 @@ public class DownloadReceiver extends BroadcastReceiver{
                 // We passed. Bring the main app to the foreground and trigger download completed
                 updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_ID, id);
                 updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_PATH, completedFileFullPath);
+                updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_INCREMENTAL_FOR,
+                        incrementalFor);
             } else {
                 // We failed. Clear the file and reset everything
                 dm.remove(id);
@@ -185,6 +282,7 @@ public class DownloadReceiver extends BroadcastReceiver{
         prefs.edit()
                 .remove(Constants.DOWNLOAD_MD5)
                 .remove(Constants.DOWNLOAD_ID)
+                .remove(Constants.DOWNLOAD_INCREMENTAL_FOR)
                 .apply();
 
         c.close();
