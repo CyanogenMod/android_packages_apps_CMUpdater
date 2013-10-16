@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cyanogenmod.updater"
     android:versionCode="3"
-    android:versionName="2.1" >
+    android:versionName="2.2" >
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -50,6 +50,7 @@
         </activity>
 
         <service android:name="com.cyanogenmod.updater.service.UpdateCheckService" />
+        <service android:name="com.cyanogenmod.updater.service.DownloadService" />
 
         <receiver android:name="com.cyanogenmod.updater.receiver.UpdateCheckReceiver">
             <intent-filter>
