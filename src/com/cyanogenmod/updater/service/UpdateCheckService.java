@@ -29,17 +29,14 @@ import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.State;
 import com.cyanogenmod.updater.misc.UpdateInfo;
 import com.cyanogenmod.updater.receiver.DownloadReceiver;
+import com.cyanogenmod.updater.utils.HttpRequestExecutor;
 import com.cyanogenmod.updater.utils.Utils;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,7 +51,6 @@ import java.net.URI;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 public class UpdateCheckService extends IntentService {
@@ -347,6 +343,7 @@ public class UpdateCheckService extends IntentService {
         int apiLevel = obj.getInt("api_level");
         long timestamp = obj.getLong("timestamp");
         String typeString = obj.getString("channel");
+        String incremental = obj.getString("incremental");
         UpdateInfo.Type type;
 
         if (TextUtils.equals(typeString, "stable")) {
@@ -361,7 +358,7 @@ public class UpdateCheckService extends IntentService {
             type = UpdateInfo.Type.UNKNOWN;
         }
 
-        UpdateInfo ui = new UpdateInfo(fileName, timestamp, apiLevel, url, md5, type);
+        UpdateInfo ui = new UpdateInfo(fileName, timestamp, apiLevel, url, md5, type, incremental);
         boolean includeAll = updateType == Constants.UPDATE_TYPE_ALL_STABLE
             || updateType == Constants.UPDATE_TYPE_ALL_NIGHTLY;
 
@@ -457,48 +454,6 @@ public class UpdateCheckService extends IntentService {
 
         if (!finished) {
             info.getChangeLogFile(this).delete();
-        }
-    }
-
-    private static class HttpRequestExecutor {
-        private HttpClient mHttpClient;
-        private HttpRequestBase mRequest;
-        private boolean mAborted;
-
-        public HttpRequestExecutor() {
-            mHttpClient = new DefaultHttpClient();
-            mAborted = false;
-        }
-
-        public HttpEntity execute(HttpRequestBase request) throws IOException {
-            synchronized (this) {
-                mAborted = false;
-                mRequest = request;
-            }
-
-            HttpResponse response = mHttpClient.execute(request);
-            HttpEntity entity = null;
-
-            if (!mAborted && response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                entity = response.getEntity();
-            }
-
-            synchronized (this) {
-                mRequest = null;
-            }
-
-            return entity;
-        }
-
-        public synchronized void abort() {
-            if (mRequest != null) {
-                mRequest.abort();
-            }
-            mAborted = true;
-        }
-
-        public synchronized boolean isAborted() {
-            return mAborted;
         }
     }
 }

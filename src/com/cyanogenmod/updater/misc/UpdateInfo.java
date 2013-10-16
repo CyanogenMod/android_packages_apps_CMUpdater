@@ -18,16 +18,21 @@ import com.cyanogenmod.updater.utils.Utils;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UpdateInfo implements Parcelable, Serializable {
     private static final long serialVersionUID = 5499890003569313403L;
+    private static final Pattern sIncrementalPattern =
+            Pattern.compile("^incremental-(.*)-(.*).zip$");
 
     public enum Type {
         UNKNOWN,
         STABLE,
         RC,
         SNAPSHOT,
-        NIGHTLY
+        NIGHTLY,
+        INCREMENTAL
     };
 
     private String mUiName;
@@ -37,21 +42,23 @@ public class UpdateInfo implements Parcelable, Serializable {
     private long mBuildDate;
     private String mDownloadUrl;
     private String mMd5Sum;
+    private String mIncremental;
 
     private Boolean mIsNewerThanInstalled;
 
     public UpdateInfo(String fileName, long date, int apiLevel, String url,
-            String md5, Type type) {
+            String md5, Type type, String incremental) {
         initializeName(fileName);
         mBuildDate = date;
         mApiLevel = apiLevel;
         mDownloadUrl = url;
         mMd5Sum = md5;
         mType = type;
+        mIncremental = incremental;
     }
 
     public UpdateInfo(String fileName) {
-        this(fileName, 0, 0, null, null, Type.UNKNOWN);
+        this(fileName, 0, 0, null, null, Type.UNKNOWN, null);
     }
 
     private UpdateInfo(Parcel in) {
@@ -60,6 +67,13 @@ public class UpdateInfo implements Parcelable, Serializable {
 
     public File getChangeLogFile(Context context) {
         return new File(context.getCacheDir(), mFileName + ".changelog");
+    }
+
+    /**
+     * Get API level
+     */
+    public int getApiLevel() {
+        return mApiLevel;
     }
 
     /**
@@ -74,6 +88,13 @@ public class UpdateInfo implements Parcelable, Serializable {
      */
     public String getFileName() {
         return mFileName;
+    }
+
+    /**
+     * Set file name
+     */
+    public void setFileName(String fileName) {
+        mFileName = fileName;
     }
 
     /**
@@ -102,6 +123,25 @@ public class UpdateInfo implements Parcelable, Serializable {
      */
     public String getDownloadUrl() {
         return mDownloadUrl;
+    }
+
+    /**
+     * Get incremental version
+     */
+    public String getIncremental() {
+        return mIncremental;
+    }
+
+    /**
+     * Whether or not this is an incremental update
+     */
+    public boolean isIncremental() {
+        Matcher matcher = sIncrementalPattern.matcher(getFileName());
+        if (matcher.find() && matcher.groupCount() == 2) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean isNewerThanInstalled() {
@@ -155,7 +195,8 @@ public class UpdateInfo implements Parcelable, Serializable {
                 && mType.equals(ui.mType)
                 && mBuildDate == ui.mBuildDate
                 && TextUtils.equals(mDownloadUrl, ui.mDownloadUrl)
-                && TextUtils.equals(mMd5Sum, ui.mMd5Sum);
+                && TextUtils.equals(mMd5Sum, ui.mMd5Sum)
+                && TextUtils.equals(mIncremental, ui.mIncremental);
     }
 
     public static final Parcelable.Creator<UpdateInfo> CREATOR = new Parcelable.Creator<UpdateInfo>() {
@@ -182,6 +223,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         out.writeLong(mBuildDate);
         out.writeString(mDownloadUrl);
         out.writeString(mMd5Sum);
+        out.writeString(mIncremental);
     }
 
     private void readFromParcel(Parcel in) {
@@ -192,5 +234,6 @@ public class UpdateInfo implements Parcelable, Serializable {
         mBuildDate = in.readLong();
         mDownloadUrl = in.readString();
         mMd5Sum = in.readString();
+        mIncremental = in.readString();
     }
 }
