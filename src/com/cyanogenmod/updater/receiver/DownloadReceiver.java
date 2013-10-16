@@ -11,7 +11,6 @@ package com.cyanogenmod.updater.receiver;
 
 import android.app.DownloadManager;
 import android.app.DownloadManager.Query;
-import android.app.DownloadManager.Request;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -20,7 +19,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -30,6 +28,7 @@ import com.cyanogenmod.updater.UpdateApplication;
 import com.cyanogenmod.updater.UpdatesSettings;
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.UpdateInfo;
+import com.cyanogenmod.updater.service.DownloadService;
 import com.cyanogenmod.updater.utils.MD5;
 import com.cyanogenmod.updater.utils.Utils;
 
@@ -54,7 +53,7 @@ public class DownloadReceiver extends BroadcastReceiver{
 
         if (ACTION_START_DOWNLOAD.equals(action)) {
             UpdateInfo ui = (UpdateInfo) intent.getParcelableExtra(EXTRA_UPDATE_INFO);
-            handleStartDownload(context, prefs, ui);
+            handleStartDownload(context, ui);
         } else if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
             handleDownloadComplete(context, prefs, id);
@@ -71,53 +70,13 @@ public class DownloadReceiver extends BroadcastReceiver{
         }
     }
 
-    private void handleStartDownload(Context context, SharedPreferences prefs, UpdateInfo ui) {
-        // If directory doesn't exist, create it
-        File directory = Utils.makeUpdateFolder();
-        if (!directory.exists()) {
-            directory.mkdirs();
-            Log.d(TAG, "UpdateFolder created");
-        }
-
-        // Build the name of the file to download, adding .partial at the end.  It will get
-        // stripped off when the download completes
-        String fullFilePath = "file://" + directory.getAbsolutePath() + "/" + ui.getFileName() + ".partial";
-
-        Request request = new Request(Uri.parse(ui.getDownloadUrl()));
-        String userAgent = Utils.getUserAgentString(context);
-        if (userAgent != null) {
-            request.addRequestHeader("User-Agent", userAgent);
-        }
-        request.addRequestHeader("Cache-Control", "no-cache");
-
-        request.setTitle(context.getString(R.string.app_name));
-        request.setDestinationUri(Uri.parse(fullFilePath));
-        request.setAllowedOverRoaming(false);
-        request.setVisibleInDownloadsUi(false);
-
-        // TODO: this could/should be made configurable
-        request.setAllowedOverMetered(true);
-
-        // Start the download
-        final DownloadManager dm =
-                (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-        long downloadId = dm.enqueue(request);
-
-        // Store in shared preferences
-        prefs.edit()
-                .putLong(Constants.DOWNLOAD_ID, downloadId)
-                .putString(Constants.DOWNLOAD_MD5, ui.getMD5Sum())
-                .apply();
-
-        Utils.cancelNotification(context);
-
-        Intent intent = new Intent(ACTION_DOWNLOAD_STARTED);
-        intent.putExtra(DownloadManager.EXTRA_DOWNLOAD_ID, downloadId);
-        context.sendBroadcast(intent);
+    private void handleStartDownload(Context context, UpdateInfo ui) {
+        DownloadService.start(context, ui);
     }
 
     private void handleDownloadComplete(Context context, SharedPreferences prefs, long id) {
         long enqueued = prefs.getLong(Constants.DOWNLOAD_ID, -1);
+        String incrementalFor = prefs.getString(Constants.DOWNLOAD_INCREMENTAL_FOR, null);
 
         if (enqueued < 0 || id < 0 || id != enqueued) {
             return;
@@ -164,6 +123,8 @@ public class DownloadReceiver extends BroadcastReceiver{
                 // We passed. Bring the main app to the foreground and trigger download completed
                 updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_ID, id);
                 updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_PATH, completedFileFullPath);
+                updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_INCREMENTAL_FOR,
+                        incrementalFor);
             } else {
                 // We failed. Clear the file and reset everything
                 dm.remove(id);
@@ -185,6 +146,7 @@ public class DownloadReceiver extends BroadcastReceiver{
         prefs.edit()
                 .remove(Constants.DOWNLOAD_MD5)
                 .remove(Constants.DOWNLOAD_ID)
+                .remove(Constants.DOWNLOAD_INCREMENTAL_FOR)
                 .apply();
 
         c.close();
