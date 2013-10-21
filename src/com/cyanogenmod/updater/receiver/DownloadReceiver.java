@@ -139,7 +139,13 @@ public class DownloadReceiver extends BroadcastReceiver{
 
         final int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
         int failureMessageResId = -1;
-        File updateFile = null;
+
+        String partialFileFullPath = c.getString(
+                c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+        String completedFileFullPath = partialFileFullPath != null
+                ? partialFileFullPath.replace(".partial", "") : null;
+        File partialFile = partialFileFullPath != null ? new File(partialFileFullPath) : null;
+        File updateFile = completedFileFullPath != null ? new File(completedFileFullPath) : null;
 
         Intent updateIntent = new Intent(context, UpdatesSettings.class);
         updateIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
@@ -149,12 +155,6 @@ public class DownloadReceiver extends BroadcastReceiver{
             // Get the full path name of the downloaded file and the MD5
 
             // Strip off the .partial at the end to get the completed file
-            String partialFileFullPath = c.getString(
-                    c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
-            String completedFileFullPath = partialFileFullPath.replace(".partial", "");
-
-            File partialFile = new File(partialFileFullPath);
-            updateFile = new File(completedFileFullPath);
             partialFile.renameTo(updateFile);
 
             String downloadedMD5 = prefs.getString(Constants.DOWNLOAD_MD5, "");
@@ -165,20 +165,22 @@ public class DownloadReceiver extends BroadcastReceiver{
                 updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_ID, id);
                 updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_PATH, completedFileFullPath);
             } else {
-                // We failed. Clear the file and reset everything
-                dm.remove(id);
-
-                if (updateFile.exists()) {
-                    updateFile.delete();
-                }
-
                 failureMessageResId = R.string.md5_verification_failed;
             }
         } else if (status == DownloadManager.STATUS_FAILED) {
-            // The download failed, reset
+            failureMessageResId = R.string.unable_to_download_file;
+        }
+
+        if (failureMessageResId >= 0) {
+            // We failed. Clear the file and reset everything
             dm.remove(id);
 
-            failureMessageResId = R.string.unable_to_download_file;
+            if (partialFile != null && partialFile.exists()) {
+                partialFile.delete();
+            }
+            if (updateFile != null && updateFile.exists()) {
+                updateFile.delete();
+            }
         }
 
         // Clear the shared prefs
@@ -199,7 +201,7 @@ public class DownloadReceiver extends BroadcastReceiver{
         } else {
             // Get the notification ready
             PendingIntent contentIntent = PendingIntent.getActivity(context, 1,
-                    updateIntent, PendingIntent.FLAG_ONE_SHOT);
+                    updateIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
             Notification.Builder builder = new Notification.Builder(context)
                     .setSmallIcon(R.drawable.cm_updater)
                     .setWhen(System.currentTimeMillis())
