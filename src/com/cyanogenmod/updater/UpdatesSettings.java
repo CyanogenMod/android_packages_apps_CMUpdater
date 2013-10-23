@@ -21,7 +21,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -245,19 +244,21 @@ public class UpdatesSettings extends PreferenceActivity implements
             if (c == null || !c.moveToFirst()) {
                 Toast.makeText(this, R.string.download_not_found, Toast.LENGTH_LONG).show();
             } else {
+                String fileName = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
                 int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
-                Uri uri = Uri.parse(c.getString(c.getColumnIndex(DownloadManager.COLUMN_URI)));
-                if (status == DownloadManager.STATUS_PENDING
-                        || status == DownloadManager.STATUS_RUNNING
-                        || status == DownloadManager.STATUS_PAUSED) {
-                    mFileName = uri.getLastPathSegment();
+                if (fileName != null) {
+                    if (status == DownloadManager.STATUS_PENDING
+                            || status == DownloadManager.STATUS_RUNNING
+                            || status == DownloadManager.STATUS_PAUSED) {
+                        File file = new File(fileName);
+                        mFileName = file.getName().replace(".partial", "");
+                    }
                 }
             }
             if (c != null) {
                 c.close();
             }
-        }
-        if (mDownloadId < 0 || mFileName == null) {
+        } else {
             resetDownloadState();
         }
 
@@ -352,13 +353,9 @@ public class UpdatesSettings extends PreferenceActivity implements
                     int totalBytes = cursor.getInt(
                         cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
 
-                    if (totalBytes < 0) {
-                        progressBar.setIndeterminate(true);
-                    } else {
-                        progressBar.setIndeterminate(false);
-                        progressBar.setMax(totalBytes);
-                        progressBar.setProgress(downloadedBytes);
-                    }
+                    progressBar.setIndeterminate(totalBytes < 0);
+                    progressBar.setMax(totalBytes);
+                    progressBar.setProgress(downloadedBytes);
                     break;
                 case DownloadManager.STATUS_FAILED:
                     mDownloadingPreference.setStyle(UpdatePreference.STYLE_NEW);
