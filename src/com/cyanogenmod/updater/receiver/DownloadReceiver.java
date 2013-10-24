@@ -199,7 +199,7 @@ public class DownloadReceiver extends BroadcastReceiver{
         } else {
             // Get the notification ready
             PendingIntent contentIntent = PendingIntent.getActivity(context, 1,
-                    updateIntent, PendingIntent.FLAG_ONE_SHOT);
+                    updateIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
             Notification.Builder builder = new Notification.Builder(context)
                     .setSmallIcon(R.drawable.cm_updater)
                     .setWhen(System.currentTimeMillis())
