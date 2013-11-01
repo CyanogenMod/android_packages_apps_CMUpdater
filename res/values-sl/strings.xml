@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Posodobi CM</string>
+    <string name="display_name">Posodobitve</string>
+    <string name="unknown">Neznano</string>
+    <string name="menu_refresh">Osveži</string>
+    <string name="menu_delete">Odstrani</string>
+    <string name="menu_delete_all">Odstrani prenos</string>
+    <string name="menu_system_info">Sistemske informacije</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Prekliči</string>
+    <string name="dialog_yes">Da</string>
+    <string name="dialog_no">Ne</string>
+    <string name="dialog_update">Posodobi</string>
+    <string name="dialog_close">Zapri</string>
+    <string name="available_updates_title">Posodobitve so na voljo</string>
+    <string name="no_available_updates_intro">Zadnji pregled ni našel nobenih posodobitev na voljo. Uporabi gumb Osveži, da ročno preveriš dostopnost novih posodobitev.</string>
+    <string name="new_update_summary">Nova</string>
+    <string name="downloaded_update_summary">Prenešena</string>
+    <string name="installed_update_summary">Nameščena</string>
+    <string name="backup_rom_title">Ustvari varnostno kopijo</string>
+    <string name="backup_rom_summary">Ustvari varnostno kopijo trenutnega ROMa pred posodobitvijo</string>
+    <string name="update_check_title">Preveri za posodobitve</string>
+    <string name="check_manual">Ročno</string>
+    <string name="check_on_boot">Na vsakem zagonu</string>
+    <string name="check_twice_daily">Dvakrat dnevno</string>
+    <string name="check_daily">Dnevno</string>
+    <string name="check_weekly">Tedensko</string>
+    <string name="check_bi_weekly">Dvakrat tedensko</string>
+    <string name="check_monthly">Mesečno</string>
+    <string name="update_type_title">Tip posodoobitve</string>
+    <string name="type_all">Vse različice (samo stabilne)</string>
+    <string name="type_all_incl_nightly">Vse različice (vključno Nightly posodobitve)</string>
+    <string name="type_new">Nove različice (samo stabilne)</string>
+    <string name="type_new_incl_nightly">Nove različice (vključno Nightly posodobitve)</string>
+    <string name="nightly_alert">Izbral si vključitev nočnih posodobitve na tem seznamu. Te posodobitve so nepodprte in jih je treba uporabljati z previdnostjo.</string>
+    <string name="nightly_alert_title">Previdnost</string>
+    <string name="checking_for_updates">Preverjam posodobitve</string>
+    <string name="no_updates_found">Ni novih posodobitev</string>
+    <string name="not_new_updates_found_ticker">Posodobitve so na voljo</string>
+    <string name="not_new_updates_found_title">Nove posodobitve</string>
+    <plurals name="not_new_updates_found_body">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> posodobitev je na voljo za prenos</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> posodobitvi sta na voljo za prenos</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> posodobitve so na voljo za prenos</item>
+    </plurals>
+    <plurals name="not_additional_count">
+        <item quantity="other">+ več <xliff:g id="count">%d</xliff:g></item>
+    </plurals>
+    <string name="not_action_download">Prenesi</string>
+    <string name="data_connection_required">Potrebna je podatkovna povezava</string>
+    <string name="confirm_download_cancelation_dialog_title">Prekliči prenos</string>
+    <string name="confirm_download_cancelation_dialog_message">Prekliči trenuten prenos?</string>
+    <string name="download_cancelled">Prenos preklican</string>
+    <string name="download_already_running">Prenos je že v teku</string>
+    <string name="unable_to_download_file">Ne morem prenesti datoteke za posodobitev</string>
+    <string name="download_not_found">Posodobitev ni bilo mogoče najti</string>
+    <string name="not_download_success">Posodobitev je bila uspešno prenešena</string>
+    <string name="not_download_failure">Posodobitev ni bila uspešno prenešena</string>
+    <string name="not_action_install_update">Ponovni zagon in namestitev</string>
+    <string name="not_download_install_notice">Posodobitev <xliff:g id="filename">%s</xliff:g> je bila uspešno prenešena. Ob dotiku \ 'Ponovni zagon in namestitev \', se bo naprava sama ponovno zagnala in namestila posodobitev \ n \ nOpomba: Za samodejno namestitev je potrebna združljiva Recovery.</string>
+    <string name="apply_existing_update_md5error_message">Napaka. Vmesni seštevek MD5 neusklajen</string>
+    <string name="md5_check_cancelled">Preverjanje MD5 je bilo preklicano</string>
+    <string name="md5_verification_failed">Preverjanje MD5 ni uspelo</string>
+    <string name="apply_update_dialog_title">Namesti posodobitev</string>
+    <string name="apply_update_dialog_text">Nameravaš namestiti <xliff:g id="filename">%s</xliff:g>.\n\nČe pritisneš Posodobi se bo naprava ponovno zagnala v Recovery in namestila posodobitev.\n
+        \nOpomba: Ta funkcija zahteva združljivo Recovery, drugače boš moral posodobitev namestiti ročno.</string>
+    <string name="apply_trying_to_get_root_access">Poskušam pridobiti skrbniški dostop za zagon v Recovery</string>
+    <string name="apply_unable_to_reboot_toast">Ni bilo mogoče ponovno zagnati v Recovery</string>
+    <string name="confirm_delete_dialog_title">Izbriši datoteko</string>
+    <string name="confirm_delete_dialog_message">Izbriši vse izbrane datoteke?</string>
+    <string name="confirm_delete_all_dialog_message">Izbriši vse prenešene datoteke?</string>
+    <string name="delete_single_update_success_message">Posodobitev  <xliff:g id="filename">%s</xliff:g> izbrisana</string>
+    <string name="delete_updates_failure_message">Prišlo je do napake pri brisanju datoteke za posodobitev</string>
+    <string name="delete_updates_noFolder_message">Mape z posodobitvami ni bilo mogoče najti</string>
+    <string name="delete_updates_success_message">Vse prenešene posodobitve so izbrisane</string>
+    <string name="sysinfo_device">Naprava:</string>
+    <string name="sysinfo_running">Deluje na:</string>
+    <string name="sysinfo_last_check">Zadnji pregled:</string>
+    <string name="no_changelog_alert">Zapis sprememb ni na voljo</string>
+    <string name="failed_to_load_changelog">Zapis sprememb ni bilo mogoče naložiti</string>
+    <string name="changelog_dialog_title">Zapis sprememb</string>
+	<string name="loading_changelog">Nalaganje\u2026</string>
+	
+    <string name="extension_label">CyanogenMod posodobitve</string>
+    <string name="extension_description">Prikaže število novih posodobitev ki so na voljo.</string>
+    
+    <string name="update_check_failed">Preverjanje posodobitev ni uspelo. Prosim preveri internetno povezavo in poskusi znova pozneje.</string>
+    <plurals name="extension_status">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> posodobitev</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> posodobitvi</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> posodobitve</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod posodobitev</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> CyanogenMod posodobitvi</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod posodobitve</item>
+    </plurals>
+</resources>
