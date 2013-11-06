@@ -31,6 +31,8 @@ LOCAL_PACKAGE_NAME := CMUpdater
 
 LOCAL_PROGUARD_FLAGS := -include $(LOCAL_PATH)/proguard.flags
 
+LOCAL_PRIVILEGED_MODULE := true
+
 include $(BUILD_PACKAGE)
 
 ##################################################
