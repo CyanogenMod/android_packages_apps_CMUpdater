@@ -40,8 +40,7 @@
     <string name="check_weekly">Setmanalment</string>
     <string name="check_bi_weekly">Bi-setmanalment</string>
     <string name="check_monthly">Mensualment</string>
-
-    <string name="update_type_title">Tipus d\'actualitzacions</string>
+    <string name="update_type_title">Tipus d\'actualització</string>
     <string name="type_all">Totes les versions (Només estables)</string>
     <string name="type_all_incl_nightly">Totes les versions (incl. Nightlies)</string>
     <string name="type_new">Noves versions (Només estables)</string>
