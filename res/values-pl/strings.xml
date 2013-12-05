@@ -92,4 +92,8 @@
     <string name="not_download_failure">Nie udało się pobrać aktualizacji</string>
     <string name="not_action_install_update">Uruchom ponownie i zainstaluj</string>
     <string name="not_download_install_notice">Aktualizacja <xliff:g id="filename">%s</xliff:g> została pobrana pomyślnie. Po wybraniu \'Uruchom ponownie i zainstaluj\', urządzenie zostanie zrestartowane w celu instalacji.\n\nUwaga: Wymagana jest kompatybilna aplikacja Recovery, aby proces mógł przebiec automatycznie.</string>
+    <string name="nightly_alert">Nocne aktualizacje aktywowane. Nie są one wspierane i powinny być używane ze szczególną ostrożnością.</string>
+    <string name="nightly_alert_title">Uwaga!</string>
+    <string name="loading_changelog">Wczytywanie\u2026</string>
+    <string name="update_check_failed">Nie udało się wyszukać aktualizacji. Proszę sprawdzić połączenie internetowe i spróbować ponownie.</string>
 </resources>
