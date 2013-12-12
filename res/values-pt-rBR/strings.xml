@@ -41,10 +41,6 @@
     <string name="no_updates_found">Nenhuma atualização foi encontrada</string>
     <string name="not_new_updates_found_ticker">Novas atualizações estão disponíveis</string>
     <string name="not_new_updates_found_title">Novas atualizações</string>
-    <plurals name="not_new_updates_found_body">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> atualização está para baixar</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> atualizações estão para baixar</item>
-    </plurals>
     <string name="confirm_download_cancelation_dialog_title">Cancelar download</string>
     <string name="confirm_download_cancelation_dialog_message">Cancelar o download atual?</string>
     <string name="download_cancelled">Download foi cancelado</string>
@@ -56,7 +52,7 @@
     <string name="md5_verification_failed">Verificação MD5 falhou</string>
     <string name="apply_update_dialog_title">Aplicar atualização</string>
     <string name="apply_update_dialog_text">Vocês está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.\n\nSe você pressionar Atualizar, o dispositivo irá reiniciar no modo de recuperação e instalar a atualização.\n
-        \nNote: Esta função requer um modo de recuperação compatível ou as atualizações irão precisar de serem instaladas manualmente</string>
+        \nNota: Esta função requer um modo de recuperação compatível ou as atualizações irão precisar de serem instaladas manualmente</string>
     <string name="apply_trying_to_get_root_access">Tentando obter acesso root para reiniciar no modo de recuperação</string>
     <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar para a recuperação</string>
     <string name="confirm_delete_dialog_title">Excluir arquivo</string>
@@ -78,17 +74,6 @@
     <string name="data_connection_required">Uma conexão de dados é necessária</string>
     <string name="extension_label">Atualizações CyanogenMod</string>
     <string name="extension_description">Exibir o número de atualizações disponíveis</string>
-    <plurals name="extension_status">
-        <item quantity="one"><xliff:g id="count" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> atualização</item>
-        <item quantity="other"><xliff:g id="count" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> atualizações</item>
-    </plurals>
-    <plurals name="extension_expandedTitle">
-        <item quantity="one"><xliff:g id="count" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> atualização CyanogenMod</item>
-        <item quantity="other"><xliff:g id="count" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> atualizações CyanogenMod</item>
-    </plurals>
-    <plurals name="not_additional_count">
-        <item quantity="other">+ <xliff:g id="count" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> atualizações</item>
-    </plurals>
     <string name="not_action_download">Baixar</string>
     <string name="not_download_success">Atualização foi baixada com sucesso</string>
     <string name="not_download_failure">Erro ao baixar a atualização</string>
