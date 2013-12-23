@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012-2013 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="app_name">ตัวจัดการอัพเดต CM</string>
+  <string name="display_name">อัพเดต</string>
+  <string name="unknown">ไม่ทราบ</string>
+  <string name="menu_refresh">โหลดใหม่</string>
+  <string name="menu_delete">ลบ</string>
+  <string name="menu_delete_all">ลบสิ่งที่ดาวน์โหลดไว้</string>
+  <string name="menu_system_info">ข้อมูลระบบ</string>
+  <string name="dialog_ok">ตกลง</string>
+  <string name="dialog_cancel">ยกเลิก</string>
+  <string name="dialog_yes">ใช่</string>
+  <string name="dialog_no">ไม่</string>
+  <string name="dialog_update">อัพเดต</string>
+  <string name="dialog_close">ปิด</string>
+  <string name="available_updates_title">อัพเดตที่พร้อมให้ดาวน์โหลด</string>
+  <string name="no_available_updates_intro">การตรวจสอบครั้งล่าสุดไม่พบอัพเดตที่พร้อมดาวน์โหลดใดๆ เพื่อทำการตรวจสอบด้วยตนเอง กดปุ่ม โหลดใหม่</string>
+  <string name="new_update_summary">ใหม่</string>
+  <string name="downloaded_update_summary">ดาวน์โหลดแล้ว</string>
+  <string name="installed_update_summary">ติดตั้งแล้ว</string>
+  <string name="backup_rom_title">สร้างข้อมูลสำรอง</string>
+  <string name="backup_rom_summary">สำรอง ROM ปัจจุบันก่อนการอัพเดท</string>
+  <string name="update_check_title">ตรวจสอบอัพเดต</string>
+  <string name="check_manual">ด้วยตัวเอง</string>
+  <string name="check_on_boot">เมื่อเปิดเครื่องทุกครั้ง</string>
+  <string name="check_twice_daily">ทุกๆ 2 วัน</string>
+  <string name="check_daily">รายวัน</string>
+  <string name="check_weekly">รายสัปดาห์</string>
+  <string name="check_bi_weekly">ทุกๆ 2 สัปดาห์</string>
+  <string name="check_monthly">รายเดือน</string>
+  <string name="update_type_title">ประเภทการอัพเดต</string>
+  <string name="type_all">ทุกเวอร์ชั่น (ที่เสถียรเท่านั้น)</string>
+  <string name="type_all_incl_nightly">ทุกเวอร์ชั่น (รวมถึงรุ่นทดสอบ)</string>
+  <string name="type_new">เวอร์ชั่นใหม่ (ที่เสถียรเท่านั้น)</string>
+  <string name="type_new_incl_nightly">เวอร์ชั่นใหม่ (รวมถึงรุ่นทดสอบ)</string>
+  <string name="nightly_alert">คุณเลือกทีจะรวมรุ่นทดสอบในรายการ กรุณาใช้ด้วยความระมัดระวัง</string>
+  <string name="nightly_alert_title">ข้อควรระวัง</string>
+  <string name="checking_for_updates">กำลังตรวจสอบการอัพเดต</string>
+  <string name="no_updates_found">ไม่พบการอัพเดต</string>
+  <string name="update_check_failed">การตรวจสอบล้มเหลว โปรดตรวจสอบการเชื่อมต่ออินเตอร์เน็ตของคุณ และลองอีกครั้ง</string>
+  <string name="not_new_updates_found_ticker">ตรวจพบการอัพเดตใหม่</string>
+  <string name="not_new_updates_found_title">อัพเดตใหม่</string>
+  <string name="not_action_download">ดาวน์โหลด</string>
+  <string name="data_connection_required">จำเป็นต้องเชื่อมต่ออินเตอร์เน็ต</string>
+  <string name="confirm_download_cancelation_dialog_title">ยกเลิกการดาวน์โหลด</string>
+  <string name="confirm_download_cancelation_dialog_message">ยกเลิกการดาวน์โหลดปัจจุบัน</string>
+  <string name="download_cancelled">การดาวน์โหลดถูกยกเลิกแล้ว</string>
+  <string name="download_already_running">กำลังดาวน์โหลดอยู่</string>
+  <string name="unable_to_download_file">ไม่สามารถดาวน์โหลดไฟล์อัพเดตได้</string>
+  <string name="download_not_found">ไม่พบดาวน์โหลด</string>
+  <string name="not_download_success">ดาวน์โหลดการอัพเดตสำเร็จ</string>
+  <string name="not_download_failure">ดาวน์โหลดการอัพเดตไม่สำเร็จ</string>
+  <string name="not_action_install_update">เริ่มระบบใหม่และติดตั้งอัพเดต</string>
+  <string name="not_download_install_notice">ดาวน์โหลดอัพเดต <xliff:g id="filename">%s</xliff:g>เสร็จแล้ว เมื่อแตะ "เริ่มระบบใหม่และติดตั้ง",ระบบจะเริ่มระบบใหม่และติดตั้งอัพเดตด้วยตัวเอง\n\nหมายเหตุ: ต้องการ recovery ที่รองรับ การติดตั้งอัตโนมัติถึงจะทำงาน</string>
+  <string name="apply_existing_update_md5error_message">ผิดพลาด MD5 ไม่ตรงกัน</string>
+  <string name="md5_check_cancelled">การตรวจสอบ MD5 ถูกยกเลิก</string>
+  <string name="md5_verification_failed">การตรวจสอบ MD5 ล้มเหลว</string>
+  <string name="apply_update_dialog_title">ใช้งานอัพเดต</string>
+  <string name="apply_update_dialog_text">คุณกำลังจะอัพเดตเป็น <xliff:g id="filename">%s</xliff:g>\nถ้าคุณแตะ "อัพเดต" อุปกรณ์ของคุณจะเริ่มระบบใหม่และติดตั้งอัพเดตด้วยมันตัวมันเอง\n\nหมายเหตุ: การทำงานนี้ต้องการ recovery ที่เข้ากันได้ หรือคุณต้องติดตั้งอัพเดตด้วยตัวคุณเอง</string>
+  <string name="apply_trying_to_get_root_access">กำลังลองขอสิทธิ Root เพื่อเริ่มระบบเป็นรูปแบบ recovery</string>
+  <string name="apply_unable_to_reboot_toast">ไม่สามารถเข้าสู่ recovery ได้</string>
+  <string name="confirm_delete_dialog_title">ลบไฟล์</string>
+  <string name="confirm_delete_dialog_message">ต้องการลบไฟล์อัพเดตที่เลือกไว้หรือไม่ ?</string>
+  <string name="confirm_delete_all_dialog_message">ต้องการลบไฟล์อัพเดตทั้งหมดหรือไม่</string>
+  <string name="delete_single_update_success_message">อัพเดต <xliff:g id="filename">%s</xliff:g> ถูกลบ</string>
+  <string name="delete_updates_failure_message">พบข้อผิดพลาดขณะลบอัพเดต</string>
+  <string name="delete_updates_noFolder_message">ไม่พบโฟลเดอร์อัพเดต</string>
+  <string name="delete_updates_success_message">ไฟล์อัพเดตทั้งหมดถูกลบแล้ว</string>
+  <string name="sysinfo_device">อุปกรณ์</string>
+  <string name="sysinfo_running">กำลังทำงาน:</string>
+  <string name="sysinfo_last_check">ตรวจสอบครั้งล่าสุด :</string>
+  <string name="no_changelog_alert">ไม่พบความเปลี่ยนแปลง</string>
+  <string name="failed_to_load_changelog">ไม่สามารถโหลดความเปลี่ยนแปลงได้</string>
+  <string name="changelog_dialog_title">ความเปลี่ยนแปลง</string>
+  <string name="loading_changelog">กำลังโหลด\u2026</string>
+  <string name="extension_label">อัพเดต CyanogenMod</string>
+  <string name="extension_description">แสดงจำนวนการอัพเดตใหม่</string>
+  <plurals name="not_new_updates_found_body">
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> อัพเดตสามารถดาวน์โหลดได้</item>
+  </plurals>
+  <plurals name="not_additional_count">
+    <item quantity="other">+ <xliff:g id="count">%d</xliff:g>มากกว่า</item>
+  </plurals>
+  <plurals name="extension_status">
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> อัพเดต</item>
+  </plurals>
+  <plurals name="extension_expandedTitle">
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> อัพเดต CyanogenMod</item>
+  </plurals>
+</resources>
