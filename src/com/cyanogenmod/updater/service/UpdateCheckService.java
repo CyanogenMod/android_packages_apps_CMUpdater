@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Parcelable;
+import android.os.SystemProperties;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -228,13 +229,23 @@ public class UpdateCheckService extends IntentService {
         request.addHeader("Cache-Control", "no-cache");
     }
 
+    private URI getServerURI() {
+        String propertyUpdateUri = SystemProperties.get("cm.updater.uri");
+        if (propertyUpdateUri != null) {
+            return URI.create(propertyUpdateUri);
+        }
+
+        String configUpdateUri = getString(R.string.conf_update_server_url_def);
+        return URI.create(configUpdateUri);
+    }
+
     private LinkedList<UpdateInfo> getAvailableUpdatesAndFillIntent(Intent intent) throws IOException {
         // Get the type of update we should check for
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int updateType = prefs.getInt(Constants.UPDATE_TYPE_PREF, 0);
 
         // Get the actual ROM Update Server URL
-        URI updateServerUri = URI.create(getString(R.string.conf_update_server_url_def));
+        URI updateServerUri = getServerURI();
         HttpPost request = new HttpPost(updateServerUri);
 
         try {
