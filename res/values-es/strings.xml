@@ -47,13 +47,6 @@
     <string name="update_check_failed">Falló la comprobación de actualizaciones. Por favor, verifica la conexión a Internet e inténtalo nuevamente.</string>
     <string name="not_new_updates_found_ticker">Hay actualizaciones disponibles</string>
     <string name="not_new_updates_found_title">Nuevas actualizaciones</string>
-    <plurals name="not_new_updates_found_body">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> actualización disponible para descargar</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> actualizaciones disponibles para descargar</item>
-    </plurals>
-    <plurals name="not_additional_count">
-        <item quantity="other">y <xliff:g id="count">%d</xliff:g> más</item>
-    </plurals>
     <string name="not_action_download">Descargar</string>
     <string name="data_connection_required">Es necesaria una conexión de datos.</string>
     <string name="confirm_download_cancelation_dialog_title">Cancelar descarga</string>
@@ -89,12 +82,4 @@
     <string name="loading_changelog">Cargando\u2026</string>
     <string name="extension_label">Actualizaciones de CyanogenMod</string>
     <string name="extension_description">Mostrar el número de actualizaciones nuevas disponibles.</string>
-    <plurals name="extension_status">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> actualización</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> actualizaciones</item>
-    </plurals>
-    <plurals name="extension_expandedTitle">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> actualización de CyanogenMod</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> actualizaciones de CyanogenMod</item>
-    </plurals>
 </resources>
