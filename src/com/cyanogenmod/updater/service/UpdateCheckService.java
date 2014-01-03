@@ -231,7 +231,7 @@ public class UpdateCheckService extends IntentService {
 
     private URI getServerURI() {
         String propertyUpdateUri = SystemProperties.get("cm.updater.uri");
-        if (propertyUpdateUri != null) {
+        if (!TextUtils.isEmpty(propertyUpdateUri)) {
             return URI.create(propertyUpdateUri);
         }
 
