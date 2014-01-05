@@ -8,7 +8,9 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <style name="AppTheme" parent="android:Theme.Light" />
+    <style name="Theme.Main" parent="@android:style/Theme.Holo">
+        <item name="android:actionBarStyle">@android:style/Widget.Holo.ActionBar.Solid</item>
+    </style>
 
     <style name="UpdatesPreferenceStyle">
         <item name="android:layout">@layout/preference_updates</item>
