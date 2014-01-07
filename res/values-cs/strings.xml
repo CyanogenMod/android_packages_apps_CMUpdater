@@ -53,12 +53,6 @@
     <string name="update_check_failed">Zjištění nové verze selhalo. Prosím zkontrolujte připojení k internetu a pokus opakujte.</string>
     <string name="not_new_updates_found_ticker">Nové aktualizace k dispozici</string>
     <string name="not_new_updates_found_title">Nové aktualizace</string>
-    <plurals name="not_new_updates_found_body">
-        <item quantity="other">Aktualizací ke stažení: <xliff:g id="count">%d</xliff:g></item>
-    </plurals>
-    <plurals name="not_additional_count">
-        <item quantity="other">+ <xliff:g id="count">%d</xliff:g> další</item>
-    </plurals>
     <string name="not_action_download">Stáhnout</string>
     <string name="data_connection_required">Je vyžadováno připojení k internetu</string>
 
@@ -101,14 +95,4 @@
 
     <string name="extension_label">Aktualizace CyanogenMod</string>
     <string name="extension_description">Zobrazení počtu nových dostupných aktualizací.</string>
-    <plurals name="extension_status">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> aktualizace</item>
-        <item quantity="few"><xliff:g id="count">%d</xliff:g> aktualizace</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> aktualizací</item>
-    </plurals>
-    <plurals name="extension_expandedTitle">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod aktualizace</item>
-        <item quantity="few"><xliff:g id="count">%d</xliff:g> CyanogenMod aktualizace</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod aktualizací</item>
-    </plurals>
 </resources>
