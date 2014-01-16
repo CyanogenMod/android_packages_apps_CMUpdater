@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 The CyanogenMod Project
+<!--
+     Copyright (C) 2012-2014 The CyanogenMod Project
 
      Licensed under the GNU GPLv2 license
 
@@ -7,83 +8,90 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">actualizador CM</string>
+    <!-- General strings -->
+    <string name="app_name">Actualizações</string>
+    <string name="display_name">Actualizações</string>
     <string name="unknown">Desconhecido</string>
-    <string name="menu_refresh">Actualizar</string>
-    <string name="menu_delete">Eliminar</string>
-    <string name="menu_delete_all">Eliminar downloads</string>
-    <string name="menu_system_info">Info. do sistema</string>
+    <!-- Menu and dialog box strings -->
+    <string name="menu_refresh">Verificar</string>
+    <string name="menu_delete">Remover</string>
+    <string name="menu_delete_all">Remover todos os ficheiros</string>
+    <string name="menu_system_info">Informações do sistema</string>
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Cancelar</string>
     <string name="dialog_yes">Sim</string>
     <string name="dialog_no">Não</string>
     <string name="dialog_update">Actualizar</string>
+    <string name="dialog_close">Fechar</string>
+    <!-- Settings strings -->
     <string name="available_updates_title">Actualizações disponíveis</string>
-    <string name="no_available_updates_intro">A ultima verificação não encontrou nenhuma actualização. Para verificar manualmente se exitem novas actualizações, use o botão actualizar</string>
+    <string name="no_available_updates_intro">A última verificação não encontrou actualizações disponíveis. Para verificar manualmente, utilize o botão \'Verificar\'.</string>
     <string name="new_update_summary">Novo</string>
-    <string name="downloaded_update_summary">Download terminado</string>
+    <string name="downloaded_update_summary">Pronto a instalar</string>
+    <string name="installed_update_summary">Instalado</string>
     <string name="backup_rom_title">Criar cópia de segurança</string>
-    <string name="backup_rom_summary">Fazer cópia de segurança da ROM actual antes de actualizar</string>
-    <string name="update_check_title">Verificar por actualizações</string>
+    <string name="backup_rom_summary">Criar cópia de segurança do sistema actual antes de actualizar</string>
+    <string name="update_check_title">Tipos de atualização</string>
     <string name="check_manual">Manual</string>
-    <string name="check_on_boot">Em todo arranque</string>
-    <string name="check_twice_daily">Duas vezes ao dia</string>
+    <string name="check_on_boot">No arranque</string>
+    <string name="check_twice_daily">Duas vezes por dia</string>
     <string name="check_daily">Diariamente</string>
     <string name="check_weekly">Semanalmente</string>
     <string name="check_bi_weekly">Quinzenalmente</string>
     <string name="check_monthly">Mensalmente</string>
-    <string name="update_type_title">Tipos de actualização</string>
-    <string name="type_all">Todas as versões (somente estável)</string>
+    <string name="update_type_title">Tipo de verificação</string>
+    <string name="type_all">Todas as versões (estáveis)</string>
     <string name="type_all_incl_nightly">Todas as versões (incl. Nightlies)</string>
-    <string name="type_new">Novas versões (somente estável)</string>
+    <string name="type_new">Novas versões (estáveis)</string>
     <string name="type_new_incl_nightly">Novas versões (incl. Nightlies)</string>
-    <string name="checking_for_updates">A Verificar actualizações</string>
-    <string name="no_updates_found">Nenhuma actualização encontrada</string>
-    <string name="not_new_updates_found_ticker">Estão disponíveis novas actualizações</string>
+    <string name="nightly_alert">A opção escolhida inclui versões que podem ser instáveis e não suportadas, utilize com precaução.</string>
+    <string name="nightly_alert_title">Cuidado</string>
+    <!-- Update checking -->
+    <string name="checking_for_updates">A verificar actualizações</string>
+    <string name="no_updates_found">Não foram encontradas actualizações</string>
+    <string name="update_check_failed">Ocorreu um problema. Por favor verifique o estado da sua ligação à internet e tente de novo.</string>
+    <string name="not_new_updates_found_ticker">Novas actualizações disponíveis</string>
     <string name="not_new_updates_found_title">Novas actualizações</string>
-    <plurals name="not_new_updates_found_body">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> actualização está para baixar</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> actualizações estão para baixar</item>
-    </plurals>
-    <string name="confirm_download_cancelation_dialog_title">Cancelar download</string>
-    <string name="confirm_download_cancelation_dialog_message">Cancelar o download actual?</string>
-    <string name="download_cancelled">Download foi cancelado</string>
-    <string name="download_already_running">Um download já está em andamento</string>
-    <string name="unable_to_download_file">Não foi possível baixar o arquivo de actualização</string>
-    <string name="download_not_found">Download não foi encontrado</string>
-    <string name="apply_existing_update_md5error_message">Erro. Verificação MD5 incompatível</string>
-    <string name="md5_check_cancelled">Verificação MD5 foi cancelada</string>
-    <string name="md5_verification_failed">Verificação MD5 falhou</string>
-    <string name="apply_update_dialog_title">Aplicar actualização</string>
-    <string name="apply_update_dialog_text">Vocês está prestes a actualizar para <xliff:g id="filename">%s</xliff:g>.\n\nSe você pressionar actualizar, o dispositivo irá reiniciar no modo de recuperação e instalar a actualização.\n
-        \nNote: Esta função requer um modo de recuperação compatível ou as actualizações irão precisar de serem instaladas manualmente</string>
-    <string name="apply_trying_to_get_root_access">Tentando obter acesso root para reiniciar no modo de recuperação</string>
-    <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar para a recuperação</string>
-    <string name="confirm_delete_dialog_title">Remover arquivo</string>
-    <string name="confirm_delete_dialog_message">Remover o arquivo de actualização selecionado?</string>
-    <string name="confirm_delete_all_dialog_message">Remover todos os arquivos de actualização baixados?</string>
-    <string name="delete_single_update_success_message">actualização <xliff:g id="filename">%s</xliff:g> foi removida</string>
-    <string name="delete_updates_failure_message">Houve um erro ao remover o arquivo de actualização</string>
-    <string name="delete_updates_noFolder_message">Pasta de actualização não foi encontrada</string>
-    <string name="delete_updates_success_message">Todas as actualizações foram removidas</string>
+    <string name="not_action_download">Descarregar</string>
+    <string name="data_connection_required">Necessário estar ligado à internet.</string>
+    <!-- Downloads -->
+    <string name="confirm_download_cancelation_dialog_title">Cancelar</string>
+    <string name="confirm_download_cancelation_dialog_message">Deseja cancelar a actualização?</string>
+    <string name="download_cancelled">Cancelado</string>
+    <string name="download_already_running">Uma actualização já está em curso</string>
+    <string name="unable_to_download_file">Ocorreu um problema a obter o ficheiro de actualização</string>
+    <string name="download_not_found">O ficheiro não disponível</string>
+    <string name="not_download_success">O ficheiro de actualização foi obtido com sucesso</string>
+    <string name="not_download_failure">Não foi possível obter o ficheiro de actualização</string>
+    <string name="not_action_install_update">Reiniciar e instalar</string>
+    <string name="not_download_install_notice">O ficheiro de actualização <xliff:g id="filename">%s</xliff:g> foi obtido com sucesso. Para actualizar toque em \'Reiniciar e instalar\', o dispositivo irá reiniciar e actualizar automaticamente.\n\nNota: É necessário um modo de recuperação compatível para que a actualização seja feita automaticamente.</string>
+    <!-- MD5 related strings -->
+    <string name="apply_existing_update_md5error_message">Ocorreu um problema na verificação do ficheiro</string>
+    <string name="md5_check_cancelled">A verificação do ficheiro foi cancelada</string>
+    <string name="md5_verification_failed">A verificação do ficheiro falhou</string>
+    <!-- Apply update strings -->
+    <string name="apply_update_dialog_title">Instalar actualização</string>
+    <string name="apply_update_dialog_text">Está prestes a actualizar para <xliff:g id="filename">%s</xliff:g>.\n\nSe carregar em \'Actualizar\', o dispositivo irá reiniciar e actualizar automaticamente.\n\nNota: É necessário um modo de recuperação compatível para que a actualização seja feita automaticamente.</string>
+    <string name="apply_trying_to_get_root_access">A tentar obter acesso para reiniciar no modo de recuperação</string>
+    <string name="apply_unable_to_reboot_toast">Ocorreu um problema a reiniciar no modo de recuperação</string>
+    <!-- deleting -->
+    <string name="confirm_delete_dialog_title">Ficheiros de actualização</string>
+    <string name="confirm_delete_dialog_message">Deseja remover o ficheiro seleccionado?</string>
+    <string name="confirm_delete_all_dialog_message">Remover todos os ficheiros?</string>
+    <string name="delete_single_update_success_message">O ficheiro <xliff:g id="filename">%s</xliff:g> foi removido</string>
+    <string name="delete_updates_failure_message">Ocorreu um problema ao remover o ficheiro</string>
+    <string name="delete_updates_noFolder_message">Localização das actualizações não encontrada</string>
+    <string name="delete_updates_success_message">Todos os ficheiros foram apagados</string>
+    <!-- System info strings -->
     <string name="sysinfo_device">Dispositivo:</string>
-    <string name="sysinfo_running">A correr:</string>
+    <string name="sysinfo_running">Versão actual:</string>
     <string name="sysinfo_last_check">Última verificação:</string>
-    <string name="dialog_close">Fechar</string>
-    <string name="installed_update_summary">Instalado</string>
-    <string name="no_changelog_alert">Nenhum registro de mudanças disponível</string>
-    <string name="failed_to_load_changelog">Não foi possível carregar o registro de mudanças</string>
-    <string name="changelog_dialog_title">Registro de mudanças</string>
-    <string name="display_name">actualizações</string>
-    <string name="data_connection_required">Uma ligação de dados é necessária</string>
-    <string name="extension_label">actualizações CyanogenMod</string>
-    <string name="extension_description">Exibir o número de actualizações disponíveis</string>
-    <plurals name="extension_status">
-        <item quantity="one"><xliff:g id="count" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> actualização</item>
-        <item quantity="other"><xliff:g id="count" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> actualizações</item>
-    </plurals>
-    <plurals name="extension_expandedTitle">
-        <item quantity="one"><xliff:g id="count" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> actualização CyanogenMod</item>
-        <item quantity="other"><xliff:g id="count" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> actualizações CyanogenMod</item>
-    </plurals>
+    <!-- changelog strings -->
+    <string name="no_changelog_alert">Lista de alterações indisponível</string>
+    <string name="failed_to_load_changelog">Ocorreu um problema a carregar a lista de alterações</string>
+    <string name="changelog_dialog_title">Lista de alterações</string>
+    <string name="loading_changelog">A carregar\u2026</string>
+    <!-- DashClock extension strings -->
+    <string name="extension_label">Actualizações</string>
+    <string name="extension_description">Visualizar actualizações disponíveis.</string>
 </resources>
