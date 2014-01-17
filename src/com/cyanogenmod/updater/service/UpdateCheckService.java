@@ -300,6 +300,7 @@ public class UpdateCheckService extends IntentService {
         JSONObject params = new JSONObject();
         params.put("device", TESTING_DOWNLOAD ? "cmtestdevice" : Utils.getDeviceType());
         params.put("channels", channels);
+        params.put("source_incremental", Utils.getIncremental());
 
         JSONObject request = new JSONObject();
         request.put("method", "get_all_builds");
