@@ -59,15 +59,15 @@
     <string name="not_download_success">Atnaujinimas sėkmingai atsiųstas</string>
     <string name="not_download_failure">Nepavyko atsisiųsti atnaujinimo</string>
     <string name="not_action_install_update">Perkrauti ir įdiegti</string>
-    <string name="not_download_install_notice">Atnaujinimas <xliff:g id="filename">%s</xliff:g> sėkmingai atsiųstas. Spaudžiant \'Perkrauti ir įdiegti\' , įrenginys persikraus ir pats įdiegs atnaujinimą.\n\nPastaba: Reikalinga suderinama Recovery programa, kad įdiegimas veiktų automatiškai.</string>
+    <string name="not_download_install_notice">Atnaujinimas <xliff:g id="filename">%s</xliff:g> sėkmingai atsiųstas. Spaudžiant \„Perkrauti ir įdiegti\“ , įrenginys persikraus ir pats įdiegs atnaujinimą.\n\nPastaba: Reikalinga suderinama atkūrimo programa, kad įdiegimas veiktų automatiškai.</string>
     <string name="apply_existing_update_md5error_message">Klaida. MD5 kontrolinė suma nesutampa</string>
     <string name="md5_check_cancelled">MD5 patikrinimas atšauktas</string>
     <string name="md5_verification_failed">MD5 patikrinimas nepavyko</string>
     <string name="apply_update_dialog_title">Įdiegti atnaujinimą</string>
-    <string name="apply_update_dialog_text">Ruošiatės atnaujinti į <xliff:g id="filename">%s</xliff:g>.\n\nJei spausite Atnaujinti, įrenginys persikraus ir pats įdiegs atnaujinimą.\n\nPastaba: Ši funkcija reikalauja suderinamos Recovery programos, arba teks atnaujinimą diegti rankiniu būdu.</string>
+    <string name="apply_update_dialog_text">Ruošiatės atnaujinti į <xliff:g id="filename">%s</xliff:g>.\n\nJei spausite Atnaujinti, įrenginys persikraus ir pats įdiegs atnaujinimą.\n\nPastaba: Ši funkcija reikalauja suderinamos atkūrimo programos, arba teks atnaujinimą diegti rankiniu būdu.</string>
     <string name="apply_trying_to_get_root_access">Bandoma gauti root prieigą dėl persikrovimo į atkūrimo režimą</string>
     <string name="apply_unable_to_reboot_toast">Nepavyko persikrauti į atkūrimo režimą</string>
-    <string name="confirm_delete_dialog_title">Ištrinti failą(-us)</string>
+    <string name="confirm_delete_dialog_title">Ištrinti failą (-us)</string>
     <string name="confirm_delete_dialog_message">Ruošiatės trinti atsiųstą atnaujinimą, tęsti?</string>
     <string name="confirm_delete_all_dialog_message">Ruošiatės trinti visus atsiųstus atnaujinimus, tęsti?</string>
     <string name="delete_single_update_success_message">Atnaujinimas <xliff:g id="filename">%s</xliff:g> ištrintas</string>
