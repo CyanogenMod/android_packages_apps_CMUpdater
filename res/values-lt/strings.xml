@@ -59,7 +59,7 @@
     <string name="not_download_success">Atnaujinimas sėkmingai atsiųstas</string>
     <string name="not_download_failure">Nepavyko atsisiųsti atnaujinimo</string>
     <string name="not_action_install_update">Perkrauti ir įdiegti</string>
-    <string name="not_download_install_notice">Atnaujinimas <xliff:g id="filename">%s</xliff:g> sėkmingai atsiųstas. Spaudžiant \„Perkrauti ir įdiegti\“ , įrenginys persikraus ir pats įdiegs atnaujinimą.\n\nPastaba: Reikalinga suderinama atkūrimo programa, kad įdiegimas veiktų automatiškai.</string>
+    <string name="not_download_install_notice">"Atnaujinimas <xliff:g id="filename">%s</xliff:g> sėkmingai atsiųstas. Spaudžiant „Perkrauti ir įdiegti“ , įrenginys persikraus ir pats įdiegs atnaujinimą.\n\nPastaba: Reikalinga suderinama atkūrimo programa, kad įdiegimas veiktų automatiškai."</string>
     <string name="apply_existing_update_md5error_message">Klaida. MD5 kontrolinė suma nesutampa</string>
     <string name="md5_check_cancelled">MD5 patikrinimas atšauktas</string>
     <string name="md5_verification_failed">MD5 patikrinimas nepavyko</string>
