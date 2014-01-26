@@ -40,8 +40,11 @@
     <string name="type_all_incl_nightly">所有版本 (包括 Nightly 版)</string>
     <string name="type_new">新版本 (仅稳定版)</string>
     <string name="type_new_incl_nightly">新版本 (包括 Nightly 版)</string>
+    <string name="nightly_alert">您刚选择在表里加入 nightly 新版本。 这些版本是不受支持的, 应该小心使用。</string>
+    <string name="nightly_alert_title">小心</string>
     <string name="checking_for_updates">正在检查更新</string>
     <string name="no_updates_found">没有找到新的更新</string>
+    <string name="update_check_failed">检查更新失败。 请您检查您的因特网连接并下次再尝试。</string>
     <string name="not_new_updates_found_ticker">找到了可用的更新</string>
     <string name="not_new_updates_found_title">新的更新</string>
     <plurals name="not_new_updates_found_body">
@@ -49,6 +52,7 @@
         <item quantity="other"><xliff:g id="count">%d</xliff:g> 个可下载的更新</item>
     </plurals>
     <plurals name="not_additional_count">
+        <item quantity="one">+ <xliff:g id="count">%d</xliff:g> 个</item>
         <item quantity="other">+ <xliff:g id="count">%d</xliff:g> 个</item>
     </plurals>
     <string name="not_action_download">下载</string>
@@ -83,6 +87,7 @@
     <string name="no_changelog_alert">无可用的更改记录</string>
     <string name="failed_to_load_changelog">无法读取更改记录</string>
     <string name="changelog_dialog_title">更改记录</string>
+    <string name="loading_changelog">正处理着\u2026</string>
     <string name="extension_label">CyanogenMod 更新</string>
     <string name="extension_description">显示有多少个可用的新更新。</string>
     <plurals name="extension_status">
