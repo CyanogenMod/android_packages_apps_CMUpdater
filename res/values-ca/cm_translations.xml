@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2012-2014 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="app_name">Actualitzador CM</string>
+  <string name="display_name">Actualitzacions</string>
+  <string name="unknown">Desconegut</string>
+  <string name="menu_refresh">Refresca</string>
+  <string name="menu_delete">Esborra</string>
+  <string name="menu_delete_all">Esborra descàrregues</string>
+  <string name="menu_system_info">Info sistema</string>
+  <string name="dialog_ok">Accepta</string>
+  <string name="dialog_cancel">Cancel·la</string>
+  <string name="dialog_yes">Sí</string>
+  <string name="dialog_no">No</string>
+  <string name="dialog_update">Actualitza</string>
+  <string name="dialog_close">Tanca</string>
+  <string name="available_updates_title">Actualitzacions disponibles</string>
+  <string name="no_available_updates_intro">La darrera vegada que s\'ha buscat no s\'ha trobat cap actualització disponible. Per buscar manualment noves actualitzacions, utilitza el botó Refresca.</string>
+  <string name="new_update_summary">Nova</string>
+  <string name="downloaded_update_summary">Descarregat</string>
+  <string name="installed_update_summary">Instal·lat</string>
+  <string name="backup_rom_title">Crea una còpia de seguretat</string>
+  <string name="backup_rom_summary">Fes una còpia de seguretat de la ROM existent abans d\'actualitzar</string>
+  <string name="update_check_title">Busca actualitzacions</string>
+  <string name="check_manual">Manual</string>
+  <string name="check_on_boot">En cada arrancada</string>
+  <string name="check_twice_daily">Dues vegades al dia</string>
+  <string name="check_daily">Diàriament</string>
+  <string name="check_weekly">Setmanalment</string>
+  <string name="check_bi_weekly">Bi-setmanalment</string>
+  <string name="check_monthly">Mensualment</string>
+  <string name="update_type_title">Tipus d\'actualització</string>
+  <string name="type_all">Totes les versions (Només estables)</string>
+  <string name="type_all_incl_nightly">Totes les versions (incl. Nightlies)</string>
+  <string name="type_new">Noves versions (Només estables)</string>
+  <string name="type_new_incl_nightly">Noves versions (incl. Nightlies)</string>
+  <string name="nightly_alert">Has seleccionat incloure les actualitzacions tipus nightly en aquesta llista. Aquestes no tenen suport i han de ser utilitzades amb precaució.</string>
+  <string name="nightly_alert_title">Alerta</string>
+  <string name="checking_for_updates">Buscant actualitzacions</string>
+  <string name="no_updates_found">No s\'han trobat noves actualitzacions</string>
+  <string name="update_check_failed">No s\'ha pogut verificar si hi ha actualitzacions disponibles. Si us plau verifica la teva connexió d\'internet i intenta-ho una altra vegada més tard.</string>
+  <string name="not_new_updates_found_ticker">Noves actualitzacions disponibles</string>
+  <string name="not_new_updates_found_title">Noves actualitzacions</string>
+  <string name="not_action_download">Descarrega</string>
+  <string name="data_connection_required">Fa falta una connexió de dades.</string>
+  <string name="confirm_download_cancelation_dialog_title">Cancel·la descàrrega</string>
+  <string name="confirm_download_cancelation_dialog_message">Cancel·lar la descàrrega actual?</string>
+  <string name="download_cancelled">Descàrrega cancel·lada</string>
+  <string name="download_already_running">Ja s\'està descarregant</string>
+  <string name="unable_to_download_file">Impossible descarregar l\'arxiu d\'actualització</string>
+  <string name="download_not_found">No s\'ha trobat la descàrrega</string>
+  <string name="not_download_success">Actualització descarregada satisfactòriament</string>
+  <string name="not_download_failure">Descàrrega de l\'actualització fallida</string>
+  <string name="not_action_install_update">Reinicia i instal·la</string>
+  <string name="not_download_install_notice">L\u0027actualització <xliff:g id="filename">%s</xliff:g> s\u0027ha descarregat satisfactòriament. Quan apretis \u2018Reinicia i instal·la\u2019, el dispositiu es reiniciarà ell mateix per tal d\u0027instal·lar l'actualització.
+
+Nota: Es necessita un sistema de recuperació, Recovery, compatible o l\u0027actualització haurà de ser instal·lada manualment.</string>
+  <string name="apply_existing_update_md5error_message">Error. Diferència en la verificació MD5</string>
+  <string name="md5_check_cancelled">La verificació MD5 s\'ha cancel·lat</string>
+  <string name="md5_verification_failed">La verificació MD5 ha fallat</string>
+  <string name="apply_update_dialog_title">Aplica actualització</string>
+  <string name="apply_update_dialog_text">Estàs a punt d\u0027actualitzar a <xliff:g id="filename">%s</xliff:g>.
+
+Si apretes Actualitza, el dispositiu es reiniciarà ell mateix cap al mode de recuperació per tal d\u0027instal·lar l\u0027actualització.
+        
+Nota: Aquesta característica necessita un sistema de recuperació, Recovery, compatible o l\u0027actualització haurà de ser instal·lada manualment.</string>
+  <string name="apply_trying_to_get_root_access">Intentant aconseguir accés root per reiniciar en mode recuperació</string>
+  <string name="apply_unable_to_reboot_toast">Impossible reiniciar en mode recuperació</string>
+  <string name="confirm_delete_dialog_title">Esborra arxiu</string>
+  <string name="confirm_delete_dialog_message">Vols esborrar l\'arxiu d\'actualització seleccionat?</string>
+  <string name="confirm_delete_all_dialog_message">Vols esborrar tots els arxius d\'actualitzacions descarregats?</string>
+  <string name="delete_single_update_success_message">Actualització <xliff:g id="filename">%s</xliff:g> esborrada</string>
+  <string name="delete_updates_failure_message">Hi ha hagut un error esborrant l\'arxiu d\'actualització</string>
+  <string name="delete_updates_noFolder_message">No s\'ha trobat la carpeta de l\'actualització</string>
+  <string name="delete_updates_success_message">Totes les actualitzacions descarregades s\'han esborrat</string>
+  <string name="sysinfo_device">Dispositiu:</string>
+  <string name="sysinfo_running">Executant:</string>
+  <string name="sysinfo_last_check">Darrera verificació:</string>
+  <string name="no_changelog_alert">No hi ha un registre de canvis disponible</string>
+  <string name="failed_to_load_changelog">No es pot carregar el registre de canvis</string>
+  <string name="changelog_dialog_title">Registre de canvis</string>
+  <string name="loading_changelog">Carregant\u2026</string>
+  <string name="extension_label">Actualitzacions CyanogenMod</string>
+  <string name="extension_description">Mostra el nombre de noves actualitzacions disponibles.</string>
+  <plurals name="not_new_updates_found_body">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> actualització disponible per a descarregar</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> actualitzacions disponibles per a descarregar</item>
+  </plurals>
+  <plurals name="not_additional_count">
+    <item quantity="one">+ <xliff:g id="count">%d</xliff:g> més</item>
+    <item quantity="other">+ <xliff:g id="count">%d</xliff:g> més</item>
+  </plurals>
+  <plurals name="extension_status">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> actualització</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> actualitzacions</item>
+  </plurals>
+  <plurals name="extension_expandedTitle">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> actualització CyanogenMod</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> actualitzacions CyanogenMod</item>
+  </plurals>
+</resources>
