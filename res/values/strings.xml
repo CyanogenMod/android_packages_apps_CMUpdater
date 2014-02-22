@@ -71,7 +71,7 @@
     <string name="not_download_success">Update downloaded successfully</string>
     <string name="not_download_failure">Update download was unsuccessful</string>
     <string name="not_action_install_update">Reboot and install</string>
-    <string name="not_download_install_notice">The update <xliff:g id="filename">%s</xliff:g> was successfully downloaded. When touching \u2018Reboot and install\u2019, the device will restart itself to install the update.\n\nNote: A compatible Recovery is required for the installation to work automatically.</string>
+    <string name="not_download_install_notice">The update <xliff:g id="filename">%s</xliff:g> was successfully downloaded. When touching \'Reboot and install\', the device will restart itself to install the update.\n\nNote: A compatible Recovery is required for the installation to work automatically.</string>
 
     <!-- MD5 related strings -->
     <string name="apply_existing_update_md5error_message">Error. MD5 checksum mismatch</string>
