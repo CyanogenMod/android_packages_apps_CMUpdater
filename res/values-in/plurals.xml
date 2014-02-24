@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2014 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="not_new_updates_found_body">
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> pembaruan tersedia untuk diunduh</item>
+    </plurals>
+    <plurals name="not_additional_count">
+        <item quantity="other">+ <xliff:g id="count">%d</xliff:g> lebih banyak</item>
+    </plurals>
+    <plurals name="extension_status">
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> pembaruan</item>
+    </plurals>
+    <plurals name="extension_expandedTitle">
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> pembaruan CyanogenMod</item>
+    </plurals>
+</resources>
