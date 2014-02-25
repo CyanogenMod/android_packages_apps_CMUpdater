@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2012-2014 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="app_name">Pengemaskini CM</string>
+  <string name="display_name">Kemaskini</string>
+  <string name="unknown">Tidak diketahui</string>
+  <string name="menu_refresh">Muat semula</string>
+  <string name="menu_delete">Buang</string>
+  <string name="menu_delete_all">Hapuskan muat turun</string>
+  <string name="menu_system_info">Info sistem</string>
+  <string name="dialog_ok">OK</string>
+  <string name="dialog_cancel">Batal</string>
+  <string name="dialog_yes">Ya</string>
+  <string name="dialog_no">Tidak</string>
+  <string name="dialog_update">Kemaskini</string>
+  <string name="dialog_close">Tutup</string>
+  <string name="available_updates_title">Kemaskini yang ada</string>
+  <string name="no_available_updates_intro">Semakan terakhir tidak menjumpai sebarang kemaskini. Untuk semak secara manual, gunakan butang Semak Kembali</string>
+  <string name="new_update_summary">Baru</string>
+  <string name="downloaded_update_summary">Dimuat turun</string>
+  <string name="installed_update_summary">Dipasang</string>
+  <string name="backup_rom_title">Buat data sandaran</string>
+  <string name="backup_rom_summary">Sandarkan ROM sedia ada sebelum mengemaskini</string>
+  <string name="update_check_title">Semak kemaskini</string>
+  <string name="check_manual">Manual</string>
+  <string name="check_on_boot">Setiap kali but</string>
+  <string name="check_twice_daily">Dua kali sehari</string>
+  <string name="check_daily">Setiap hari</string>
+  <string name="check_weekly">Setiap minggu</string>
+  <string name="check_bi_weekly">Setiap 2 minggu</string>
+  <string name="check_monthly">Setiap bulan</string>
+  <string name="update_type_title">Jenis kemaskini</string>
+  <string name="type_all">Semua versi (hanya Stable)</string>
+  <string name="type_all_incl_nightly">Semua versi (termasuk Nightlies)</string>
+  <string name="type_new">Versi baru (hanya Stable)</string>
+  <string name="type_new_incl_nightly">Versi baru (termasuk Nightlies)</string>
+  <string name="nightly_alert">Anda telah memilih untuk memasukkan kemaskini semalaman dalam senarai ini. Ini tidak disokong dan patut digunakan dengan berhati-hati.</string>
+  <string name="nightly_alert_title">Amaran</string>
+  <string name="checking_for_updates">Menyemak kemaskini</string>
+  <string name="no_updates_found">Tiada kemaskini dijumpai</string>
+  <string name="update_check_failed">Semakan kemaskini gagal. Sila semak sambungan internet anda dan cuba lagi.</string>
+  <string name="not_new_updates_found_ticker">Kemaskini baru sudah ada</string>
+  <string name="not_new_updates_found_title">Kemaskini baru</string>
+  <string name="not_action_download">Muat turun</string>
+  <string name="data_connection_required">Sambungan data diperlukan.</string>
+  <string name="confirm_download_cancelation_dialog_title">Batal muat turun</string>
+  <string name="confirm_download_cancelation_dialog_message">Batalkan muat turun semasa ini?</string>
+  <string name="download_cancelled">Muat turun dibatalkan</string>
+  <string name="download_already_running">Muat turun sedang berjalan</string>
+  <string name="unable_to_download_file">Tidak dapat muat turun fail kemaskini</string>
+  <string name="download_not_found">Muat turun tidak dijumpai</string>
+  <string name="not_download_success">Kemaskini berjaya dimuat turun</string>
+  <string name="not_download_failure">Muat turun kemaskini tidak berjaya</string>
+  <string name="not_action_install_update">Hidupkan semula dan pasang</string>
+  <string name="apply_existing_update_md5error_message">Ralat. MD5 tidak sepadan</string>
+  <string name="md5_check_cancelled">semakan MD5 dibatalkan</string>
+  <string name="md5_verification_failed">pengesahan MD5 gagal</string>
+  <string name="apply_update_dialog_title">Terima kemaskini</string>
+  <string name="apply_trying_to_get_root_access">Cubaan untuk mendapat akses root untuk hidupkan semula ke mod pemulihan</string>
+  <string name="apply_unable_to_reboot_toast">Tidak dapat hidup semula ke pemulihan</string>
+  <string name="confirm_delete_dialog_title">Padam fail</string>
+  <string name="confirm_delete_dialog_message">Padam fail kemaskini pilihan?</string>
+  <string name="confirm_delete_all_dialog_message">Padam semua fail kemaskini yang dimuat turun?</string>
+  <string name="delete_single_update_success_message">Kemaskini <xliff:g id="filename">%s</xliff:g> dipadam</string>
+  <string name="delete_updates_failure_message">Berlaku ralat memadam fail kemaskini</string>
+  <string name="delete_updates_noFolder_message">Direktori kemaskini tidak dijumpai</string>
+  <string name="delete_updates_success_message">Semua kemaskini yang dimuat turun dipadam</string>
+  <string name="sysinfo_device">Peranti:</string>
+  <string name="sysinfo_running">Versi digunakan:</string>
+  <string name="sysinfo_last_check">Tarikh akhir disemak:</string>
+  <string name="no_changelog_alert">Tiada log perubahan</string>
+  <string name="failed_to_load_changelog">Tidak dapat memuat log perubahan</string>
+  <string name="changelog_dialog_title">Log perubahan</string>
+  <string name="loading_changelog">Memuat\u2026</string>
+  <string name="extension_label">Kemaskini CyanogenMod</string>
+  <string name="extension_description">Papar jumlah kemaskini baru yang ada.</string>
+</resources>
