@@ -10,11 +10,15 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="not_new_updates_found_body">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> update beschikbaar om te downloaden</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> updates beschikbaar om te downloaden</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> indirilebilir güncelleme bulundu</item>
+  </plurals>
+  <plurals name="not_additional_count">
+    <item quantity="other">+ <xliff:g id="count">%d</xliff:g> daha</item>
+  </plurals>
+  <plurals name="extension_status">
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> güncelleme</item>
   </plurals>
   <plurals name="extension_expandedTitle">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod-update</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod-updates</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod güncellemesi</item>
   </plurals>
 </resources>
