@@ -9,19 +9,18 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <plurals name="not_new_updates_found_body">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> update available for download</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> updates available for download</item>
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> update beschikbaar om te downloaden</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> updates beschikbaar om te downloaden</item>
     </plurals>
     <plurals name="not_additional_count">
-        <item quantity="one">+ <xliff:g id="count">%d</xliff:g> more</item>
-        <item quantity="other">+ <xliff:g id="count">%d</xliff:g> more</item>
+        <item quantity="other">+ <xliff:g id="count">%d</xliff:g> andere</item>
     </plurals>
     <plurals name="extension_status">
         <item quantity="one"><xliff:g id="count">%d</xliff:g> update</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> updates</item>
     </plurals>
     <plurals name="extension_expandedTitle">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod update</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod updates</item>
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod-update</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod-updates</item>
     </plurals>
 </resources>
