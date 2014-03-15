@@ -166,18 +166,19 @@ public class DownloadReceiver extends BroadcastReceiver{
             PendingIntent contentIntent = PendingIntent.getActivity(context, 1,
                     updateIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
             Notification.Builder builder = new Notification.Builder(context)
-                    .setSmallIcon(R.drawable.cm_updater)
                     .setWhen(System.currentTimeMillis())
                     .setContentIntent(contentIntent)
                     .setAutoCancel(true);
 
             if (failureMessageResId >= 0) {
+                builder.setSmallIcon(android.R.drawable.stat_notify_error);
                 builder.setContentTitle(context.getString(R.string.not_download_failure));
                 builder.setContentText(context.getString(failureMessageResId));
                 builder.setTicker(context.getString(R.string.not_download_failure));
             } else {
                 String updateUiName = UpdateInfo.extractUiName(updateFile.getName());
 
+                builder.setSmallIcon(R.drawable.cm_updater);
                 builder.setContentTitle(context.getString(R.string.not_download_success));
                 builder.setContentText(updateUiName);
                 builder.setTicker(context.getString(R.string.not_download_success));
