@@ -24,7 +24,7 @@
   <string name="dialog_close">Κλείσιμο</string>
   <string name="available_updates_title">Διαθέσιμες ενημερώσεις</string>
   <string name="no_available_updates_intro">Ο τελευταίος έλεγχος δεν βρήκε διαθέσιμες ενημερώσεις. Για να ελέγξετε για νέες ενημερώσεις χειροκίνητα, χρησιμοποιήστε το κουμπί Ανανέωση.</string>
-  <string name="new_update_summary">Νέες</string>
+  <string name="new_update_summary">Νέο</string>
   <string name="downloaded_update_summary">Κατεβασμένες</string>
   <string name="installed_update_summary">Εγκατεστημένες</string>
   <string name="backup_rom_title">Δημιουργία αντίγραφου ασφαλείας</string>
@@ -60,17 +60,12 @@
   <string name="not_download_success">Η λήψη της ενημέρωσης ολοκληρώθηκε με επιτυχία</string>
   <string name="not_download_failure">Η λήψη της ενημέρωσης ήταν ανεπιτυχής</string>
   <string name="not_action_install_update">Επανεκκίνηση και εγκατάσταση</string>
-  <string name="not_download_install_notice">Η λήψη της ενημέρωσης <xliff:g id="filename">%s</xliff:g> ολοκληρώθηκε με επιτυχία. Αν πατήσετε \'Επανεκκίνηση και εγκατάσταση\', η συσκευή θα κάνει επανεκκίνηση και θα εγκαταστήσει την ενημέρωση.\n\nΣημείωση: Απαιτείται μια συμβατή Recovery για την λειτουργία της αυτόματης εγκατάστασης.</string>
+  <string name="not_download_install_notice">Η λήψη της ενημέρωσης <xliff:g id="filename">%s</xliff:g> ολοκληρώθηκε με επιτυχία. Αν πατήσετε \'Επανεκκίνηση και εγκατάσταση\', η συσκευή θα κάνει επανεκκίνηση και θα εγκαταστήσει την ενημέρωση.\n\nΣημείωση: Απαιτείται μια συμβατή recovery για την λειτουργία της αυτόματης εγκατάστασης.</string>
   <string name="apply_existing_update_md5error_message">Σφάλμα. Αναντιστοιχία MD5 checksum</string>
   <string name="md5_check_cancelled">Ο έλεγχος του MD5 ακυρώθηκε</string>
   <string name="md5_verification_failed">Η επαλήθευση του MD5 απέτυχε</string>
   <string name="apply_update_dialog_title">Εφαρμογή ενημέρωσης</string>
-  <string name="apply_update_dialog_text">Πρόκειται να αναβαθμίσετε σε <xliff:g id="filename">%s</xliff:g>.
-
-Αν πατήσετε το πλήκτρο Ενημέρωση, η συσκευή θα κάνει επανεκκίνηση σε λειτουργία recovery για να εγκαταστήσετε την ενημέρωση.
-
-
-Σημείωση: Αυτή η λειτουργία απαιτεί μια συμβατή recovery αλλιώς η ενημέρωση θα πρέπει να εγκατασταθεί χειροκίνητα.</string>
+  <string name="apply_update_dialog_text">Πρόκειται να αναβαθμίσετε σε <xliff:g id="filename">%s</xliff:g>.\n\nΑν πατήσετε το πλήκτρο Ενημέρωση, η συσκευή θα κάνει επανεκκίνηση σε λειτουργία recovery για να εγκαταστήσετε την ενημέρωση.\n\nΣημείωση: Αυτή η λειτουργία απαιτεί μια συμβατή recovery αλλιώς η ενημέρωση θα πρέπει να εγκατασταθεί χειροκίνητα.</string>
   <string name="apply_trying_to_get_root_access">Προσπάθεια πρόσβασης root για επανεκκίνηση σε λειτουργία recovery</string>
   <string name="apply_unable_to_reboot_toast">Δεν είναι δυνατή η επανεκκίνηση σε λειτουργία recovery</string>
   <string name="confirm_delete_dialog_title">Διαγραφή αρχείου</string>
