@@ -14,6 +14,7 @@ import android.app.DownloadManager.Query;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.StatusBarManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -61,6 +62,8 @@ public class DownloadReceiver extends BroadcastReceiver{
             String fileName = intent.getStringExtra(EXTRA_FILENAME);
             try {
                 Utils.triggerUpdate(context, fileName);
+                StatusBarManager sb = (StatusBarManager) context.getSystemService(Context.STATUS_BAR_SERVICE);
+                sb.collapsePanels();
             } catch (IOException e) {
                 Log.e(TAG, "Unable to reboot into recovery mode", e);
                 Toast.makeText(context, R.string.apply_unable_to_reboot_toast,
