@@ -14,6 +14,7 @@ import android.app.DownloadManager.Query;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.StatusBarManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -67,6 +68,8 @@ public class DownloadReceiver extends BroadcastReceiver{
                             Toast.LENGTH_SHORT).show();
                 Utils.cancelNotification(context);
             }
+            StatusBarManager sb = (StatusBarManager) context.getSystemService(Context.STATUS_BAR_SERVICE);
+            sb.collapsePanels();
         }
     }
 
