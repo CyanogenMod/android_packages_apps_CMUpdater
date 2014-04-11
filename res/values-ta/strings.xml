@@ -9,6 +9,5 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="check_daily">每天</string>
-  <string name="check_monthly">每月</string>
+  <string name="not_action_download">பதிவிறக்கம்</string>
 </resources>
