@@ -13,8 +13,8 @@
   <string name="display_name">Aggiornamenti</string>
   <string name="unknown">Sconosciuto</string>
   <string name="menu_refresh">Aggiorna</string>
-  <string name="menu_delete">Cancella</string>
-  <string name="menu_delete_all">Cancella i download</string>
+  <string name="menu_delete">Elimina</string>
+  <string name="menu_delete_all">Elimina i download</string>
   <string name="menu_system_info">Info di sistema</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Annulla</string>
@@ -68,13 +68,13 @@
   <string name="apply_update_dialog_text">Si sta per aggiornare a <xliff:g id="filename">%s</xliff:g>.\n\nPremendo Aggiorna, il dispositivo verrà riavviato in modalità recovery per l\'installazione dell\'aggiornamento\n\nNota: questa caratteristica richiede una recovery compatibile; in caso contrario sarà necessario installare gli aggiornamenti manualmente</string>
   <string name="apply_trying_to_get_root_access">Richiesta dei permessi root per il riavvio in recovery</string>
   <string name="apply_unable_to_reboot_toast">Impossibile riavviare in recovery</string>
-  <string name="confirm_delete_dialog_title">Cancella file</string>
-  <string name="confirm_delete_dialog_message">Cancellare il file di aggiornamento selezionato?</string>
-  <string name="confirm_delete_all_dialog_message">Cancellare tutti gli aggiornamenti scaricati?</string>
-  <string name="delete_single_update_success_message">Aggiornamento <xliff:g id="filename">%s</xliff:g> cancellato</string>
-  <string name="delete_updates_failure_message">Errore durante la cancellazione dell\'aggiornamento</string>
+  <string name="confirm_delete_dialog_title">Elimina file</string>
+  <string name="confirm_delete_dialog_message">Eliminare il file di aggiornamento selezionato?</string>
+  <string name="confirm_delete_all_dialog_message">Eliminare tutti gli aggiornamenti scaricati?</string>
+  <string name="delete_single_update_success_message">Aggiornamento <xliff:g id="filename">%s</xliff:g> eliminato</string>
+  <string name="delete_updates_failure_message">Errore durante l\'eliminazione dell\'aggiornamento</string>
   <string name="delete_updates_noFolder_message">Cartella degli aggiornamenti non trovata</string>
-  <string name="delete_updates_success_message">Tutti gli aggiornamenti cancellati</string>
+  <string name="delete_updates_success_message">Tutti gli aggiornamenti eliminati</string>
   <string name="sysinfo_device">Dispositivo:</string>
   <string name="sysinfo_running">ROM installata:</string>
   <string name="sysinfo_last_check">Ultima verifica:</string>
