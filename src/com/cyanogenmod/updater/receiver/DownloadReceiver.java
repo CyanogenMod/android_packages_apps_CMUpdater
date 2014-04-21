@@ -59,6 +59,8 @@ public class DownloadReceiver extends BroadcastReceiver{
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
             handleDownloadComplete(context, prefs, id);
         } else if (ACTION_INSTALL_UPDATE.equals(action)) {
+            StatusBarManager sb = (StatusBarManager) context.getSystemService(Context.STATUS_BAR_SERVICE);
+            sb.collapsePanels();
             String fileName = intent.getStringExtra(EXTRA_FILENAME);
             try {
                 Utils.triggerUpdate(context, fileName);
@@ -68,8 +70,6 @@ public class DownloadReceiver extends BroadcastReceiver{
                             Toast.LENGTH_SHORT).show();
                 Utils.cancelNotification(context);
             }
-            StatusBarManager sb = (StatusBarManager) context.getSystemService(Context.STATUS_BAR_SERVICE);
-            sb.collapsePanels();
         }
     }
 

@@ -13,6 +13,10 @@
     <item quantity="one"><xliff:g id="count">%d</xliff:g> update beschikbaar om te downloaden</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> updates beschikbaar om te downloaden</item>
   </plurals>
+  <plurals name="not_additional_count">
+    <item quantity="one">+ <xliff:g id="count">%d</xliff:g> andere</item>
+    <item quantity="other">+ <xliff:g id="count">%d</xliff:g> andere</item>
+  </plurals>
   <plurals name="extension_status">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> update</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> updates</item>

@@ -16,7 +16,6 @@
   <string name="menu_delete">Usuń</string>
   <string name="menu_delete_all">Usuń pobrane</string>
   <string name="menu_system_info">Informacje systemowe</string>
-  <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Anuluj</string>
   <string name="dialog_yes">Tak</string>
   <string name="dialog_no">Nie</string>
@@ -37,10 +36,7 @@
   <string name="check_weekly">Co tydzień</string>
   <string name="check_bi_weekly">Dwa razy w tygodniu</string>
   <string name="check_monthly">Raz w miesiącu</string>
-  <string name="update_type_title">Typy aktualizacji</string>
-  <string name="type_all">Tylko wersje stabilne</string>
   <string name="type_all_incl_nightly">Wszystkie wersje (w tym nocne)</string>
-  <string name="type_new">Nowe wersje (Tylko stabilne)</string>
   <string name="type_new_incl_nightly">Nowe wersje (w tym nocne)</string>
   <string name="nightly_alert">Zgodziłeś się na wyświetlanie aktualizacji \"nightly\". Wersje te mogą być niestabilne i nie są wspierane.</string>
   <string name="nightly_alert_title">Ostrzeżenie</string>

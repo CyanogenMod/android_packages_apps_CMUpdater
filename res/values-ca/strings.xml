@@ -23,7 +23,7 @@
   <string name="dialog_update">Actualitza</string>
   <string name="dialog_close">Tanca</string>
   <string name="available_updates_title">Actualitzacions disponibles</string>
-  <string name="no_available_updates_intro">La darrera vegada que s\'ha buscat no s\'ha trobat cap actualització disponible. Per buscar manualment noves actualitzacions, utilitza el botó Refresca.</string>
+  <string name="no_available_updates_intro">La darrera comprovació no ha trobat cap actualització disponible. Per buscar manualment noves actualitzacions, utilitza el botó Refresca.</string>
   <string name="new_update_summary">Nova</string>
   <string name="downloaded_update_summary">Descarregat</string>
   <string name="installed_update_summary">Instal·lat</string>
