@@ -60,7 +60,7 @@
   <string name="not_download_success">Päivitys ladattu onnistuneesti</string>
   <string name="not_download_failure">Päivityksen lataaminen epäonnistui</string>
   <string name="not_action_install_update">Käynnistä uudelleen ja asenna</string>
-  <string name="not_download_install_notice">Päivityksen <xliff:g id="filename">%s</xliff:g> lataaminen onnistui. Kun painat \'Käynnistä uudelleen ja asenna\', laite käynnistyy uudelleen ja asenta päivityksen.\n\nHuomautus: Tämä ominaisuus tarvitsee yhteensopivan Recoveryn tai päivitykset eivät asennu automaattisesti.</string>
+  <string name="not_download_install_notice">Päivityksen <xliff:g id="filename">%s</xliff:g> lataaminen onnistui. Kun painat \'Käynnistä uudelleen ja asenna\', laite käynnistyy uudelleen ja asentaa päivityksen.\n\nHuomautus: Tämä ominaisuus tarvitsee yhteensopivan Recoveryn tai päivitykset eivät asennu automaattisesti.</string>
   <string name="apply_existing_update_md5error_message">Virhe. MD5-tarkistuskoodit eivät täsmää</string>
   <string name="md5_check_cancelled">MD5 tarkistus peruttu</string>
   <string name="md5_verification_failed">MD5 varmistus epäonnistui</string>
