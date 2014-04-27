@@ -13,9 +13,9 @@
   <string name="display_name">Aktualizácie</string>
   <string name="unknown">Neznáme</string>
   <string name="menu_refresh">Obnoviť</string>
-  <string name="menu_delete">Odstrániť</string>
+  <string name="menu_delete">Vymazať</string>
   <string name="menu_delete_all">Vymazať prevzatia</string>
-  <string name="menu_system_info">Systémové informácie</string>
+  <string name="menu_system_info">Informácie o systéme</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Zrušiť</string>
   <string name="dialog_yes">Áno</string>

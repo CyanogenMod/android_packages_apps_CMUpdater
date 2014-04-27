@@ -16,6 +16,7 @@
   <string name="menu_delete">Supprimer</string>
   <string name="menu_delete_all">Supprimer les téléchargements</string>
   <string name="menu_system_info">Informations système</string>
+  <string name="dialog_ok">Ok</string>
   <string name="dialog_cancel">Annuler</string>
   <string name="dialog_yes">Oui</string>
   <string name="dialog_no">Non</string>
