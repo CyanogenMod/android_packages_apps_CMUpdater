@@ -17,13 +17,13 @@
   <string name="menu_delete_all">Избришите преузимања</string>
   <string name="menu_system_info">Информације о систему</string>
   <string name="dialog_ok">OK</string>
-  <string name="dialog_cancel">Откажите</string>
+  <string name="dialog_cancel">Откажи</string>
   <string name="dialog_yes">Да</string>
   <string name="dialog_no">Не</string>
-  <string name="dialog_update">Ажурирајте</string>
-  <string name="dialog_close">Затворите</string>
+  <string name="dialog_update">Ажурирај</string>
+  <string name="dialog_close">Затвори</string>
   <string name="available_updates_title">Доступна ажурирања</string>
-  <string name="no_available_updates_intro">Последња провера није нашла никакве доступне исправке. Да бисте ручно проверили нове исправке, користите дугме за освежавање.</string>
+  <string name="no_available_updates_intro">Последња провера није нашла никаква доступна ажурирања. Да би сте ручно проверили нова ажурирања, користите дугме за освежавање.</string>
   <string name="new_update_summary">Ново</string>
   <string name="downloaded_update_summary">Преузето</string>
   <string name="installed_update_summary">Инсталирано</string>
@@ -60,23 +60,23 @@
   <string name="not_download_success">Ажурирање је успешно преузето</string>
   <string name="not_download_failure">Ажурирање није успешно преузето</string>
   <string name="not_action_install_update">Рестартуј и инсталирај</string>
-  <string name="not_download_install_notice">Ажурирање <xliff:g id="filename">%s</xliff:g> је успешно преузето. Када додирнете \'Рестартуј и инсталирај\', уређај ће се поново покренути да инсталира исправку.\n\n Напомена: Компатибилни опоравак је потребан за аутоматску инсталацију.</string>
+  <string name="not_download_install_notice">Ажурирање <xliff:g id="filename">%s</xliff:g> је успешно преузето. Када додирнете \'Рестартуј и инсталирај\', уређај ће се поново покренути да инсталира исправку.\n\nНапомена: Компатибилни опоравак је потребан за аутоматску инсталацију.</string>
   <string name="apply_existing_update_md5error_message">Грешка. MD5 није усклађен</string>
   <string name="md5_check_cancelled">MD5 провера је отказана</string>
   <string name="md5_verification_failed">MD5 провера неуспешна</string>
   <string name="apply_update_dialog_title">Примените ажурирање</string>
-  <string name="apply_update_dialog_text">Ви сте на надоградњи на <xliff:g id="filename">%s</xliff:g>.\n\n Ако притиснете Ажурирај, уређај ће се поново покренути у режиму опоравка да инсталира исправку.\n\n Напомена: Ова функција захтева компатибилни режим опоравка или ћете морати да инсталирате исправке ручно.</string>
+  <string name="apply_update_dialog_text">Ви сте на надоградњи на <xliff:g id="filename">%s</xliff:g>.\n\nАко притиснете Ажурирај, уређај ће се поново покренути у режиму опоравка да инсталира исправку.\n\n Напомена: Ова функција захтева компатибилни режим опоравка или ћете морати ажурирања да инсталирате ручно.</string>
   <string name="apply_trying_to_get_root_access">Покушавање да се добије root приступ да рестартује у режиму опоравка</string>
   <string name="apply_unable_to_reboot_toast">Немогуће да се рестартује у опоравку</string>
   <string name="confirm_delete_dialog_title">Избрисати фајл</string>
   <string name="confirm_delete_dialog_message">Избришите изабрану датотеку за ажурирање?</string>
-  <string name="confirm_delete_all_dialog_message">Обриши све преузете датотеке ажурирања?</string>
+  <string name="confirm_delete_all_dialog_message">Избришите све преузете датотеке ажурирања?</string>
   <string name="delete_single_update_success_message">Ажурирање <xliff:g id="filename">%s</xliff:g> је обрисано</string>
   <string name="delete_updates_failure_message">Дошло је до грешке приликом брисања фајла за ажурирање</string>
   <string name="delete_updates_noFolder_message">Фасцикла Ажурирање није пронађена</string>
   <string name="delete_updates_success_message">Сва преузета ажурирања су избрисана</string>
   <string name="sysinfo_device">Уређај:</string>
-  <string name="sysinfo_running">Покрећем:</string>
+  <string name="sysinfo_running">Тренутна верзија:</string>
   <string name="sysinfo_last_check">Последња провера:</string>
   <string name="no_changelog_alert">Нема доступних дневника промена</string>
   <string name="failed_to_load_changelog">Није могуће учитати дневник промена</string>

@@ -31,7 +31,7 @@
   <string name="backup_rom_summary">Fes una còpia de seguretat de la ROM existent abans d\'actualitzar</string>
   <string name="update_check_title">Busca actualitzacions</string>
   <string name="check_manual">Manual</string>
-  <string name="check_on_boot">En cada arrancada</string>
+  <string name="check_on_boot">En cada arrencada</string>
   <string name="check_twice_daily">Dues vegades al dia</string>
   <string name="check_daily">Diàriament</string>
   <string name="check_weekly">Setmanalment</string>
@@ -60,7 +60,7 @@
   <string name="not_download_success">Actualització descarregada satisfactòriament</string>
   <string name="not_download_failure">Descàrrega de l\'actualització fallida</string>
   <string name="not_action_install_update">Reinicia i instal·la</string>
-  <string name="not_download_install_notice">L\'actualització <xliff:g id="filename">%s</xliff:g> s\'ha descarregat satisfactòriament. Quan apretis \'Reinicia i instal·la\', el dispositiu es reiniciarà ell mateix cap al mode de recuperació per tal d\'instal·lar l\'actualització.\n\nNota: Aquesta característica necessita un sistema de recuperació (Recovery) compatible o l\'actualització haurà de ser instal·lada manualment.</string>
+  <string name="not_download_install_notice">L\'actualització <xliff:g id="filename">%s</xliff:g> s\'ha descarregat satisfactòriament. Quan apretis \'Reinicia i instal·la\', el dispositiu es reiniciarà ell mateix per tal d\'instal·lar l\'actualització.\n\nNota: Aquesta característica necessita un sistema de recuperació (Recovery) compatible per a que funcioni la instal·lació automàticament.</string>
   <string name="apply_existing_update_md5error_message">Error. Diferència en la verificació MD5</string>
   <string name="md5_check_cancelled">La verificació MD5 s\'ha cancel·lat</string>
   <string name="md5_verification_failed">La verificació MD5 ha fallat</string>
