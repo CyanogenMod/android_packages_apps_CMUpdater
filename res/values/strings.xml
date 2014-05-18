@@ -107,4 +107,9 @@
     <!-- DashClock extension strings -->
     <string name="extension_label">CyanogenMod Updates</string>
     <string name="extension_description">Displays number of new updates available.</string>
+
+    <!-- Skip kernel update option -->
+    <string name="skip_kernel_update_title">Skip kernel update</string>
+    <string name="skip_kernel_update_summary">Don't flash boot image when upgrading</string>
+    <string name="skip_kernel_update_alert">Skipping the kernel update may prevent your device from booting after an upgrade. Proceed with caution.</string>
 </resources>

@@ -245,6 +245,21 @@ public class UpdatesSettings extends PreferenceActivity implements
                 updateUpdatesType(value);
             }
             return true;
+        } else if (preference == mSkipKernelUpdate) {
+            final boolean value = Boolean.valueOf((String) newValue);
+            if (value) {
+              new AlertDialog.Builder(this)
+                  .setTitle(R.string.nightly_alert_title)
+                  .setMessage(R.string.skip_kernel_update_alert)
+                  .setPositiveButton(getString(R.string.dialog_ok),
+                          new DialogInterface.OnClickListener() {
+                      public void onClick(DialogInterface dialog, int id) {
+                          updateUpdatesType(value);
+                      }
+                  })
+                  .setNegativeButton(R.string.dialog_cancel, null)
+                  .show();
+              }
         }
 
         return false;

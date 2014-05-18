@@ -28,6 +28,11 @@
          android:entries="@array/update_type_entries"
          android:entryValues="@array/update_type_values"/>
 
+     <CheckBoxPreference
+         android:key="skip_kernel_update"
+         android:title="@string/skip_kernel_update_title"
+         android:summary="@string/skip_kernel_update_summary" />
+
      <!-- TODO: add this back once we have a way of doing backups that is not recovery specific
      <CheckBoxPreference
          android:key="pref_backup_rom"
