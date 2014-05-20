@@ -72,7 +72,7 @@
   <string name="confirm_delete_dialog_message">Deseja eliminar o ficheiro selecionado?</string>
   <string name="confirm_delete_all_dialog_message">Eliminar todos os ficheiros transferidos?</string>
   <string name="delete_single_update_success_message">A atualização <xliff:g id="filename">%s</xliff:g> foi eliminada</string>
-  <string name="delete_updates_failure_message">Ocorreu um problema ao remover o ficheiro</string>
+  <string name="delete_updates_failure_message">Ocorreu um problema ao eliminar o ficheiro</string>
   <string name="delete_updates_noFolder_message">Localização das atualizações não encontrada</string>
   <string name="delete_updates_success_message">Todos os ficheiros foram eliminados</string>
   <string name="sysinfo_device">Dispositivo:</string>

@@ -42,7 +42,7 @@
   <string name="type_all_incl_nightly">すべてのバージョン（Nightlyを含む）</string>
   <string name="type_new">新しいバージョン（Stableのみ）</string>
   <string name="type_new_incl_nightly">新しいバージョン（Nightlyを含む）</string>
-  <string name="nightly_alert">このリストにNightlyアップデートを含めるようにしました。これらはサポートの対象外であり、注意して使用してください。</string>
+  <string name="nightly_alert">このリストにNightlyアップデートを含めるようにしました。これらはサポートの対象外ですので、注意して使用してください。</string>
   <string name="nightly_alert_title">注意</string>
   <string name="checking_for_updates">アップデートを確認中</string>
   <string name="no_updates_found">新しいアップデートはありません</string>
@@ -57,15 +57,15 @@
   <string name="download_already_running">ダウンロードはすでに実行中です</string>
   <string name="unable_to_download_file">アップデートファイルをダウンロードできません</string>
   <string name="download_not_found">ダウンロードが見つかりませんでした</string>
-  <string name="not_download_success">アップデートのダウンロードに成功しました</string>
-  <string name="not_download_failure">アップデートのダウンロードに失敗しました</string>
+  <string name="not_download_success">アップデートのダウンロードが完了しました</string>
+  <string name="not_download_failure">アップデートがダウンロードできませんでした</string>
   <string name="not_action_install_update">再起動してインストール</string>
-  <string name="not_download_install_notice">アップデート<xliff:g id="filename">%s</xliff:g>のダウンロードが完了しました。｢再起動してインストール｣をタッチすると、アップデートをインストールするために端末は再起動します。\n\n注意: インストールを自動的に行うには互換性のあるリカバリーが必要です。</string>
+  <string name="not_download_install_notice">アップデート<xliff:g id="filename">%s</xliff:g>のダウンロードが完了しました。｢再起動してインストール｣をタッチすると、アップデートをインストールするために端末は再起動します。\n\n注意: インストールを自動で行うには互換性のあるリカバリーが必要です。</string>
   <string name="apply_existing_update_md5error_message">エラー。MD5チェックサムが一致しません。</string>
   <string name="md5_check_cancelled">MD5チェックはキャンセルされました。</string>
   <string name="md5_verification_failed">MD5の確認に失敗しました。</string>
   <string name="apply_update_dialog_title">アップデートを適用</string>
-  <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g>にアップグレードしようとしています。\n\n更新を押すとアップデートをインストールするために端末はリカバリーモードで再起動します。\n\n注意: この機能には互換性のあるリカバリーが必要です、そうでなければ手動でインストールする必要があります。</string>
+  <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g>にアップグレードしようとしています。\n\nアップデートボタンを押すとアップデートをインストールするために端末はリカバリーモードで再起動します。\n\n注意: この機能には互換性のあるリカバリーが必要です、そうでなければ手動でインストールする必要があります。</string>
   <string name="apply_trying_to_get_root_access">リカバリーモードで再起動するためにルートアクセスを取得します</string>
   <string name="apply_unable_to_reboot_toast">リカバリーモードで再起動できません</string>
   <string name="confirm_delete_dialog_title">ファイルを削除</string>
