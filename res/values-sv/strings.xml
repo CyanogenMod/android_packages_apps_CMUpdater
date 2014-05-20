@@ -13,7 +13,7 @@
   <string name="display_name">Uppdateringar</string>
   <string name="unknown">Okänd</string>
   <string name="menu_refresh">Kontrollera</string>
-  <string name="menu_delete">Radera</string>
+  <string name="menu_delete">Ta bort</string>
   <string name="menu_delete_all">Radera nedladdningar</string>
   <string name="menu_system_info">Systeminformation</string>
   <string name="dialog_ok">OK</string>
@@ -68,13 +68,13 @@
   <string name="apply_update_dialog_text">Du är på väg att uppdatera till <xliff:g id="filename">%s</xliff:g>.\n\nOm du trycker på Uppdatera kommer enheten att starta om till Recoveryläge för att installera uppdateringen.\n\nObs: Denna funktion kräver ett kompatibelt Recoveryläge. I annat fall måste uppdateringarna installeras manuellt.</string>
   <string name="apply_trying_to_get_root_access">Begär rooträttigheter för att kunna starta om till Recoveryläge</string>
   <string name="apply_unable_to_reboot_toast">Kan inte starta om till Recoveryläge</string>
-  <string name="confirm_delete_dialog_title">Radera fil</string>
+  <string name="confirm_delete_dialog_title">Ta bort fil</string>
   <string name="confirm_delete_dialog_message">Radera uppdateringen?</string>
-  <string name="confirm_delete_all_dialog_message">Radera alla nedladdade uppdateringar?</string>
+  <string name="confirm_delete_all_dialog_message">Ta bort alla nedladdade uppdateringar?</string>
   <string name="delete_single_update_success_message">Uppdateringen <xliff:g id="filename">%s</xliff:g> raderades</string>
-  <string name="delete_updates_failure_message">Det skedde ett fel vid raderingen av uppdateringen</string>
+  <string name="delete_updates_failure_message">Det skedde ett fel vid borttagning av uppdateringen</string>
   <string name="delete_updates_noFolder_message">Uppdateringsmappen kan inte hittas</string>
-  <string name="delete_updates_success_message">Alla nedladdade uppdateringar raderade</string>
+  <string name="delete_updates_success_message">Alla nedladdade uppdateringar borttagna</string>
   <string name="sysinfo_device">Enhet:</string>
   <string name="sysinfo_running">ROM:</string>
   <string name="sysinfo_last_check">Senaste kontroll:</string>

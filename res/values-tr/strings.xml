@@ -9,7 +9,7 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">CM Güncellemeleri</string>
+  <string name="app_name">CM Güncelleyici</string>
   <string name="display_name">Güncellemeler</string>
   <string name="unknown">Bilinmeyen</string>
   <string name="menu_refresh">Yenile</string>
@@ -49,31 +49,27 @@
   <string name="update_check_failed">Güncelleme kontrolü başarısız oldu. Lütfen internet bağlantınızı kontrol edin ve daha sonra tekrar deneyin.</string>
   <string name="not_new_updates_found_ticker">Yeni güncelleme var</string>
   <string name="not_new_updates_found_title">Yeni güncellemeler</string>
-  <string name="not_action_download">Download</string>
+  <string name="not_action_download">İndir</string>
   <string name="data_connection_required">Veri bağlantısı gerekli</string>
   <string name="confirm_download_cancelation_dialog_title">İndirmeyi iptal et</string>
-  <string name="confirm_download_cancelation_dialog_message">Devam eden indirmeyi iptal etmek istediğinizden emin misiniz?</string>
+  <string name="confirm_download_cancelation_dialog_message">Devam eden indirme iptal edilsin mi?</string>
   <string name="download_cancelled">İndirme iptal edildi</string>
-  <string name="download_already_running">İndirme zaten devam ediyor</string>
+  <string name="download_already_running">Bir indirme zaten devam ediyor</string>
   <string name="unable_to_download_file">Güncelleme dosyası indirilemiyor</string>
   <string name="download_not_found">İndirme bulunamadı</string>
   <string name="not_download_success">Güncelleme başarıyla indirildi</string>
   <string name="not_download_failure">Güncelleme indirme başarısız oldu</string>
-  <string name="not_action_install_update">Yeniden başlat ve kur</string>
+  <string name="not_action_install_update">Yeniden başlat ve Yükle</string>
   <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> güncellemesi başarıyla indirildi. \'Yeniden başlat ve Yükle\' ye dokunduğunuzda, cihaz güncellemeyi yüklemek için kendini yeniden başlatacak.\n\nNot: Yüklemenin otomatik çalışması için uygun bir Kurtarma ortamı gereklidir.</string>
   <string name="apply_existing_update_md5error_message">Hata. MD5 eşleşmedi</string>
   <string name="md5_check_cancelled">MD5 kontrolü iptal edildi</string>
   <string name="md5_verification_failed">MD5 doğrulama hatası</string>
   <string name="apply_update_dialog_title">Güncellemeyi uygula</string>
-  <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> güncellemesi yapılacak.
-
-Güncelleye bastığınızda, güncellemeyi kurmak için cihaz kurtarma modunda yeniden başlatılacak.
-
-Not: Bu özellik, uyumlu bir Kurtarma bölümü gerektirir, aksi takdirde güncellemelerin elle kurulması gerekir.</string>
-  <string name="apply_trying_to_get_root_access">Kurtarma modunda yönetici erişimi sağlanıyor</string>
+  <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> güncellemesi yapılacak.\n\nGüncelleye bastığınızda, güncellemeyi kurmak için cihaz kurtarma modunda yeniden başlatılacak.\n\nNot: Bu özellik, uyumlu bir Kurtarma bölümü gerektirir, aksi takdirde güncellemelerin elle kurulması gerekir.</string>
+  <string name="apply_trying_to_get_root_access">Kurtarma modunda başlatmak için yetkili kullanıcı erişimi sağlamaya çalışılıyor</string>
   <string name="apply_unable_to_reboot_toast">Kurtarma modu için sistem yeniden başlatılamadı</string>
   <string name="confirm_delete_dialog_title">Dosya sil</string>
-  <string name="confirm_delete_dialog_message">İndirilen güncelleme dosyalarını silmek istiyor musunuz?</string>
+  <string name="confirm_delete_dialog_message">Seçilen güncelleme dosyası silinsin mi?</string>
   <string name="confirm_delete_all_dialog_message">İndirilen tüm güncelleme dosyalarını silmek istiyor musunuz?</string>
   <string name="delete_single_update_success_message"><xliff:g id="filename">%s</xliff:g> güncellemesi silindi</string>
   <string name="delete_updates_failure_message">Güncelleme dosyasını silerken hata oluştu</string>
