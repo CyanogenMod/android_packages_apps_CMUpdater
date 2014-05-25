@@ -34,7 +34,7 @@
   <string name="check_on_boot">При увімкненні пристрою</string>
   <string name="check_twice_daily">Двічі на день</string>
   <string name="check_daily">Щоденно</string>
-  <string name="check_weekly">Кожного тижні</string>
+  <string name="check_weekly">Кожного тижня</string>
   <string name="check_bi_weekly">Раз на два тижні</string>
   <string name="check_monthly">Щомісяця</string>
   <string name="update_type_title">Тип оновлення</string>
@@ -65,11 +65,9 @@
   <string name="md5_check_cancelled">Перевірка MD5 була скасована</string>
   <string name="md5_verification_failed">Не вдалось виконати перевірку MD5</string>
   <string name="apply_update_dialog_title">Застосувати оновлення</string>
-  <string name="apply_update_dialog_text">Ви збираєтесь оновитись на <xliff:g id="filename">%s</xliff:g>.\n\n
-Якщо Ви натиснете Оновити, пристрій перезавантажиться у режим Відновлення для оновлення.\n\n
-Замітка: ця функція потребує сумісна програма Відновлення (Recovery), в зворотньому випадку оновлення необхідно встановити вручну.</string>
-  <string name="apply_trying_to_get_root_access">Помилка отримати root-доступ для перезавантаження у режим Відновлення</string>
-  <string name="apply_unable_to_reboot_toast">Неможливо перезавантажитись у режим Відновлення</string>
+  <string name="apply_update_dialog_text">Ви збираєтесь оновитись на <xliff:g id="filename">%s</xliff:g>.\n\nЯкщо Ви натиснете Оновити, пристрій перезавантажиться у режим відновлення для встановлення.\n\nЗамітка: ця функція потребує сумісну програму відновлення (Recovery), в зворотньому випадку оновлення необхідно встановити вручну.</string>
+  <string name="apply_trying_to_get_root_access">Спроба отримати root-доступ для перезавантаження у режим відновлення</string>
+  <string name="apply_unable_to_reboot_toast">Неможливо перезавантажитись у режим відновлення</string>
   <string name="confirm_delete_dialog_title">Видалити файл</string>
   <string name="confirm_delete_dialog_message">Ви збираєтесь видалити завантажений файл оновлення. Натисніть Так для продовження.</string>
   <string name="confirm_delete_all_dialog_message">Ви збираєтесь видалити всі завантажені файли оновлення. Натисніть Так для продовження.</string>
