@@ -31,7 +31,6 @@
     <string-array name="update_type_entries" translatable="false">
         <item>@string/type_new</item>
         <item>@string/type_new_incl_nightly</item>
-        <item>@string/type_all</item>
         <item>@string/type_all_incl_nightly</item>
     </string-array>
 
@@ -39,6 +38,5 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
-        <item>3</item>
     </string-array>
 </resources>

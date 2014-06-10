@@ -228,7 +228,7 @@ public class UpdatesSettings extends PreferenceActivity implements
         } else if (preference == mUpdateType) {
             final int value = Integer.valueOf((String) newValue);
             if (value == Constants.UPDATE_TYPE_NEW_NIGHTLY
-                    || value == Constants.UPDATE_TYPE_ALL_NIGHTLY) {
+                    || value == Constants.UPDATE_TYPE_ALL) {
                 new AlertDialog.Builder(this)
                     .setTitle(R.string.nightly_alert_title)
                     .setMessage(R.string.nightly_alert)
@@ -236,6 +236,7 @@ public class UpdatesSettings extends PreferenceActivity implements
                             new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             updateUpdatesType(value);
+                            mUpdateType.setValueIndex(value);
                         }
                     })
                     .setNegativeButton(R.string.dialog_cancel, null)
