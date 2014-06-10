@@ -36,6 +36,5 @@ public class Constants {
     // Update types
     public static final int UPDATE_TYPE_NEW_STABLE = 0;
     public static final int UPDATE_TYPE_NEW_NIGHTLY = 1;
-    public static final int UPDATE_TYPE_ALL_STABLE = 2;
-    public static final int UPDATE_TYPE_ALL_NIGHTLY = 3;
+    public static final int UPDATE_TYPE_ALL = 2;
 }
