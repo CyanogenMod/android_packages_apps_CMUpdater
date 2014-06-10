@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Raz za dva týždne</string>
   <string name="check_monthly">Mesačne</string>
   <string name="update_type_title">Typy aktualizácií</string>
-  <string name="type_all">Všetky verzie (iba stabilné)</string>
   <string name="type_all_incl_nightly">Všetky verzie (vrátane nočných zostáv)</string>
   <string name="type_new">Nové verzie (iba stabilné)</string>
   <string name="type_new_incl_nightly">Nové verzie (vrátane nočných zostáv)</string>

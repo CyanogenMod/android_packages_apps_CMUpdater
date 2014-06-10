@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Ob týden</string>
   <string name="check_monthly">Měsíčně</string>
   <string name="update_type_title">Typy aktualizací</string>
-  <string name="type_all">Všechny verze (pouze stabilní)</string>
   <string name="type_all_incl_nightly">Všechny verze (včetně nightlies)</string>
   <string name="type_new">Nové verze (pouze stabilní)</string>
   <string name="type_new_incl_nightly">Nové verze (včetně nightlies)</string>

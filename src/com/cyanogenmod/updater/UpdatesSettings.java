@@ -143,6 +143,13 @@ public class UpdatesSettings extends PreferenceActivity implements
 
         if (mUpdateType != null) {
             int type = mPrefs.getInt(Constants.UPDATE_TYPE_PREF, 0);
+            if (type >= mUpdateType.getEntries().length) {
+                // We previously removed an entry from this entries list,
+                // so if a user has the old index (3) selected still,
+                // an IndexOutOfBounds exception will be thrown.
+                // Let's reset them to a sane default.
+                type = 0;
+            }
             mUpdateType.setValue(String.valueOf(type));
             mUpdateType.setSummary(mUpdateType.getEntries()[type]);
             mUpdateType.setOnPreferenceChangeListener(this);
@@ -228,7 +235,7 @@ public class UpdatesSettings extends PreferenceActivity implements
         } else if (preference == mUpdateType) {
             final int value = Integer.valueOf((String) newValue);
             if (value == Constants.UPDATE_TYPE_NEW_NIGHTLY
-                    || value == Constants.UPDATE_TYPE_ALL_NIGHTLY) {
+                    || value == Constants.UPDATE_TYPE_ALL) {
                 new AlertDialog.Builder(this)
                     .setTitle(R.string.nightly_alert_title)
                     .setMessage(R.string.nightly_alert)
@@ -236,6 +243,7 @@ public class UpdatesSettings extends PreferenceActivity implements
                             new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             updateUpdatesType(value);
+                            mUpdateType.setValueIndex(value);
                         }
                     })
                     .setNegativeButton(R.string.dialog_cancel, null)

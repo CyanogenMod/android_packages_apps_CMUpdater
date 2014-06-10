@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">אחת לשבועיים</string>
   <string name="check_monthly">חודשית</string>
   <string name="update_type_title">סוגי עדכונים</string>
-  <string name="type_all">כל הגרסאות (יציבות בלבד)</string>
   <string name="type_all_incl_nightly">כל הגרסאות (כולל ליליות)</string>
   <string name="type_new">גרסאות חדשות (יציבות בלבד)</string>
   <string name="type_new_incl_nightly">גרסאות חדשות (כולל ליליות)</string>
