@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Varannan vecka</string>
   <string name="check_monthly">Månadsvis</string>
   <string name="update_type_title">Typ av uppdatering</string>
-  <string name="type_all">Alla versioner (Endast stabila)</string>
   <string name="type_all_incl_nightly">Alla versioner (inkl. Nightlies)</string>
   <string name="type_new">Nya versioner (Endast stabila)</string>
   <string name="type_new_incl_nightly">Nya versioner (inkl. Nightlies)</string>

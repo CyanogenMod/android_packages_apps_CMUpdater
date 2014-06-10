@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Kas antrą savaitę</string>
   <string name="check_monthly">Kas mėnesį</string>
   <string name="update_type_title">Atnaujinimų tipai</string>
-  <string name="type_all">Visos versijos (Tik stabilios)</string>
   <string name="type_all_incl_nightly">Visos versijos (su. Naktinėmis)</string>
   <string name="type_new">Naujos versijos (Tik stabilios)</string>
   <string name="type_new_incl_nightly">Naujos versijos (su. Naktinėmis)</string>

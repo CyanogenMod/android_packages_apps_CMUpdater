@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Twee-weekliks</string>
   <string name="check_monthly">Maandeliks</string>
   <string name="update_type_title">Opgradering tipes</string>
-  <string name="type_all">Alle weergawes (slegs stabiel)</string>
   <string name="type_all_incl_nightly">Alle weergawes  (insl. Daaglikse bywerkings)</string>
   <string name="type_new">Nuwe weergawes (slegs stabiel)</string>
   <string name="type_new_incl_nightly">Nuwe weerwages (insl. Daaglikse bywerkings)</string>

@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Dwi-mingguan</string>
   <string name="check_monthly">Bulanan</string>
   <string name="update_type_title">Jenis pembaruan</string>
-  <string name="type_all">Semua versi (stabil saja)</string>
   <string name="type_all_incl_nightly">Semua versi (termasuk Nightlies)</string>
   <string name="type_new">Versi baru (stabil saja)</string>
   <string name="type_new_incl_nightly">Versi baru (termasuk Nightlies)</string>
