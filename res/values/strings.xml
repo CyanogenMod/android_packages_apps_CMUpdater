@@ -45,11 +45,10 @@
     <string name="check_monthly">Monthly</string>
 
     <string name="update_type_title">Update types</string>
-    <string name="type_all">All versions (Stable only)</string>
-    <string name="type_all_incl_nightly">All versions (incl. Nightlies)</string>
-    <string name="type_new">New versions (Stable only)</string>
-    <string name="type_new_incl_nightly">New versions (incl. Nightlies)</string>
-    <string name="nightly_alert">You have selected to include nightly updates in this list. These are unsupported and should be used with caution.</string>
+    <string name="type_all_incl_nightly">All versions</string>
+    <string name="type_new">Release channel</string>
+    <string name="type_new_incl_nightly">Developement channel</string>
+    <string name="nightly_alert">You have selected to include developer updates in this list. These are unsupported and should be used with caution.</string>
     <string name="nightly_alert_title">Caution</string>
 
     <!-- Update checking -->

@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Annenhver uke</string>
   <string name="check_monthly">Månedlig</string>
   <string name="update_type_title">Oppdateringstyper</string>
-  <string name="type_all">Alle versjoner (kun Stabile)</string>
   <string name="type_all_incl_nightly">Alle versjoner (inkl. Nightlies)</string>
   <string name="type_new">Nye versjoner (kun Stabile)</string>
   <string name="type_new_incl_nightly">Nye versjoner (inkl. Nightlies)</string>

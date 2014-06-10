@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">مرتين أسبوعيا</string>
   <string name="check_monthly">شهرياً</string>
   <string name="update_type_title">أنواع التحديث</string>
-  <string name="type_all">كافة الإصدارات (مستقرة فقط)</string>
   <string name="type_all_incl_nightly">كافة الإصدارات (بما في ذلك ليلية)</string>
   <string name="type_new">إصدارات جديدة (مستقرة فقط)</string>
   <string name="type_new_incl_nightly">إصدارات جديدة (بما في ذلك ليلية)</string>

@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Cada dos semanas</string>
   <string name="check_monthly">Mensualmente</string>
   <string name="update_type_title">Tipo de actualización</string>
-  <string name="type_all">Todas (solo estables)</string>
   <string name="type_all_incl_nightly">Todas (incl. no estables)</string>
   <string name="type_new">Nuevas (solo estables)</string>
   <string name="type_new_incl_nightly">Nuevas (incl. no estables)</string>

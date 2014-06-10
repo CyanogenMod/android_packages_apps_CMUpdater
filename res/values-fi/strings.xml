@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Joka toinen viikko</string>
   <string name="check_monthly">Kuukausittain</string>
   <string name="update_type_title">Päivitysten tyypit</string>
-  <string name="type_all">Kaikki versiot (vain vakaat)</string>
   <string name="type_all_incl_nightly">Kaikki versiot (myös Nightly-versiot)</string>
   <string name="type_new">Uudet versiot (vain vakaat)</string>
   <string name="type_new_incl_nightly">Uudet versiot (Myös Nightly-versiot)</string>
