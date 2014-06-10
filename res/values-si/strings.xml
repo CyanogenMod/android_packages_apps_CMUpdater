@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">දෙසතියකට වරක්</string>
   <string name="check_monthly">මාස්පතා</string>
   <string name="update_type_title">යාවත්කාලීන ආකාර</string>
-  <string name="type_all">සියලු අනුවාද (ස්ථාවර පමණයි)</string>
   <string name="type_all_incl_nightly">සියලු අනුවාද (දෛනික තැනීම්ද ඇතුළුව)</string>
   <string name="type_new">නව අනුවාද (ස්ථාවර පමණයි)</string>
   <string name="type_new_incl_nightly">නව අනුවාද (දෛනික තැනීම්ද ඇතුළුව)</string>

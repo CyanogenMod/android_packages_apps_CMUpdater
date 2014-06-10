@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Quinzenalmente</string>
   <string name="check_monthly">Mensalmente</string>
   <string name="update_type_title">Tipos de atualização</string>
-  <string name="type_all">Todas as versões (Apenas estáveis)</string>
   <string name="type_all_incl_nightly">Todas as versões (incl. Nightlies)</string>
   <string name="type_new">Novas versões (Apenas estáveis)</string>
   <string name="type_new_incl_nightly">Novas versões (incl. Nightlies)</string>

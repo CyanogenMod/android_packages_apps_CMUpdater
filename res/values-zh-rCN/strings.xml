@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">两周一次</string>
   <string name="check_monthly">每月一次</string>
   <string name="update_type_title">更新类型</string>
-  <string name="type_all">所有版本 (仅稳定版)</string>
   <string name="type_all_incl_nightly">所有版本 (包括 Nightly 版)</string>
   <string name="type_new">新版本 (仅稳定版)</string>
   <string name="type_new_incl_nightly">新版本 (包括 Nightly 版)</string>

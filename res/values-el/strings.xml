@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Κάθε 2 εβδομάδες</string>
   <string name="check_monthly">Κάθε μήνα</string>
   <string name="update_type_title">Τύποι ενημερώσεων</string>
-  <string name="type_all">Όλες οι εκδόσεις (Μόνο Stable)</string>
   <string name="type_all_incl_nightly">Όλες οι εκδόσεις (συμπεριλ. Nightlies)</string>
   <string name="type_new">Νέες εκδόσεις (Μόνο Stable)</string>
   <string name="type_new_incl_nightly">Νέες εκδόσεις (συμπεριλ. Nightlies)</string>

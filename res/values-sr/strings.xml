@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Двонедељно</string>
   <string name="check_monthly">Месечно</string>
   <string name="update_type_title">Типови ажурирања</string>
-  <string name="type_all">Све верзије (Само стабилне)</string>
   <string name="type_all_incl_nightly">Све верзије (Ноћне су укључене)</string>
   <string name="type_new">Нове верзије (Само стабилне)</string>
   <string name="type_new_incl_nightly">Нове верзије (Ноћне су укључене)</string>
