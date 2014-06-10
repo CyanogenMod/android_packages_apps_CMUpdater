@@ -14,7 +14,7 @@
   <string name="unknown">Непознато</string>
   <string name="menu_refresh">Освежи</string>
   <string name="menu_delete">Избриши</string>
-  <string name="menu_delete_all">Избриши преузимања</string>
+  <string name="menu_delete_all">Избришите преузимања</string>
   <string name="menu_system_info">Информације о систему</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Откажи</string>
@@ -23,13 +23,13 @@
   <string name="dialog_update">Ажурирај</string>
   <string name="dialog_close">Затвори</string>
   <string name="available_updates_title">Доступна ажурирања</string>
-  <string name="no_available_updates_intro">Последња провера није нашла никаква доступна ажурирања. Да би ручно проверио за нова ажурирања, користи дугме за освежавање.</string>
+  <string name="no_available_updates_intro">Последња провера није нашла никаква доступна ажурирања. Да би сте ручно проверили нова ажурирања, користите дугме за освежавање.</string>
   <string name="new_update_summary">Ново</string>
   <string name="downloaded_update_summary">Преузето</string>
   <string name="installed_update_summary">Инсталирано</string>
-  <string name="backup_rom_title">Резервна копија</string>
-  <string name="backup_rom_summary">Направи резервну копију ROM-а пре ажурирања</string>
-  <string name="update_check_title">Провери за ажурирања</string>
+  <string name="backup_rom_title">Направи резервну копију</string>
+  <string name="backup_rom_summary">Резервна копија ROM-а пре ажурирања</string>
+  <string name="update_check_title">Проверите за ажурирања</string>
   <string name="check_manual">Ручно</string>
   <string name="check_on_boot">При сваком покретању</string>
   <string name="check_twice_daily">Два пута дневно</string>
@@ -38,21 +38,20 @@
   <string name="check_bi_weekly">Двонедељно</string>
   <string name="check_monthly">Месечно</string>
   <string name="update_type_title">Типови ажурирања</string>
-  <string name="type_all">Све верзије (само стабилне)</string>
-  <string name="type_all_incl_nightly">Све верзије (ноћне су укључене)</string>
-  <string name="type_new">Нове верзије (само стабилне)</string>
-  <string name="type_new_incl_nightly">Нове верзије (ноћне су укључене)</string>
-  <string name="nightly_alert">Изабрао си да буду укључена ноћна ажурирања у овој листи. Она су неподржана и треба да се користе са опрезом.</string>
+  <string name="type_all_incl_nightly">Све верзије (Ноћне су укључене)</string>
+  <string name="type_new">Нове верзије (Само стабилне)</string>
+  <string name="type_new_incl_nightly">Нове верзије (Ноћне су укључене)</string>
+  <string name="nightly_alert">Изабрали сте да буду укључена ноћна ажурирања у овој листи. Она су неподржана и треба да се користе са опрезом.</string>
   <string name="nightly_alert_title">Опрез</string>
   <string name="checking_for_updates">Провера нове верзије је у току</string>
   <string name="no_updates_found">Нове везије нису пронађене</string>
-  <string name="update_check_failed">Провера ажурирања није успела. Провери своју интернет везу и покушај поново касније.</string>
+  <string name="update_check_failed">Провера ажурирања није успела. Молимо Вас да проверите своју интернет везу и покушајте поново касније.</string>
   <string name="not_new_updates_found_ticker">Нова ажурирања су доступна</string>
   <string name="not_new_updates_found_title">Нова ажурирања</string>
   <string name="not_action_download">Преузимање</string>
   <string name="data_connection_required">Неопходна је веза за пренос података.</string>
-  <string name="confirm_download_cancelation_dialog_title">Откажи преузимање</string>
-  <string name="confirm_download_cancelation_dialog_message">Откажи тренутно преузимање?</string>
+  <string name="confirm_download_cancelation_dialog_title">Откажите преузимање</string>
+  <string name="confirm_download_cancelation_dialog_message">Отказивање тренутног преузимања?</string>
   <string name="download_cancelled">Преузимање je отказано</string>
   <string name="download_already_running">Преузимање је већ покренуто</string>
   <string name="unable_to_download_file">Немогуће је преузети датотеку за ажурирање</string>
@@ -60,28 +59,28 @@
   <string name="not_download_success">Ажурирање је успешно преузето</string>
   <string name="not_download_failure">Ажурирање није успешно преузето</string>
   <string name="not_action_install_update">Рестартуј и инсталирај</string>
-  <string name="not_download_install_notice">Ажурирање <xliff:g id="filename">%s</xliff:g> је успешно преузето. Када додирнеш \'Рестартуј и инсталирај\', уређај ће се поново покренути да инсталира ажурирање.\n\nНапомена: Компатибилни \'Опоравак\' је потребан за аутоматску инсталацију.</string>
+  <string name="not_download_install_notice">Ажурирање <xliff:g id="filename">%s</xliff:g> је успешно преузето. Када додирнете \'Рестартуј и инсталирај\', уређај ће се поново покренути да инсталира исправку.\n\nНапомена: Компатибилни опоравак је потребан за аутоматску инсталацију.</string>
   <string name="apply_existing_update_md5error_message">Грешка. MD5 није усклађен</string>
   <string name="md5_check_cancelled">MD5 провера је отказана</string>
   <string name="md5_verification_failed">MD5 провера неуспешна</string>
-  <string name="apply_update_dialog_title">Примени ажурирање</string>
-  <string name="apply_update_dialog_text">Надоградња на <xliff:g id="filename">%s</xliff:g>.\n\nАко притиснеш Ажурирај, уређај ће се поново покренути у \'Опоравак\' да инсталира ажурирање.\n\n Напомена: Ова функција захтева компатибилни \'Опоравак\' или ћеш морати ажурирања да инсталираш ручно.</string>
-  <string name="apply_trying_to_get_root_access">Покушавање да се добије root приступ да се рестартује у режиму опоравка</string>
-  <string name="apply_unable_to_reboot_toast">Немогуће да се рестартује у опоравак</string>
-  <string name="confirm_delete_dialog_title">Избриши фајл</string>
-  <string name="confirm_delete_dialog_message">Избриши изабрани фајл за ажурирање?</string>
-  <string name="confirm_delete_all_dialog_message">Избриши све преузете фајлове ажурирања?</string>
-  <string name="delete_single_update_success_message">Ажурирање <xliff:g id="filename">%s</xliff:g> је избрисано</string>
+  <string name="apply_update_dialog_title">Примените ажурирање</string>
+  <string name="apply_update_dialog_text">Ви сте на надоградњи на <xliff:g id="filename">%s</xliff:g>.\n\nАко притиснете Ажурирај, уређај ће се поново покренути у режиму опоравка да инсталира исправку.\n\n Напомена: Ова функција захтева компатибилни режим опоравка или ћете морати ажурирања да инсталирате ручно.</string>
+  <string name="apply_trying_to_get_root_access">Покушавање да се добије root приступ да рестартује у режиму опоравка</string>
+  <string name="apply_unable_to_reboot_toast">Немогуће да се рестартује у опоравку</string>
+  <string name="confirm_delete_dialog_title">Избрисати фајл</string>
+  <string name="confirm_delete_dialog_message">Избришите изабрану датотеку за ажурирање?</string>
+  <string name="confirm_delete_all_dialog_message">Избришите све преузете датотеке ажурирања?</string>
+  <string name="delete_single_update_success_message">Ажурирање <xliff:g id="filename">%s</xliff:g> је обрисано</string>
   <string name="delete_updates_failure_message">Дошло је до грешке приликом брисања фајла за ажурирање</string>
   <string name="delete_updates_noFolder_message">Фасцикла Ажурирање није пронађена</string>
   <string name="delete_updates_success_message">Сва преузета ажурирања су избрисана</string>
   <string name="sysinfo_device">Уређај:</string>
-  <string name="sysinfo_running">Систем:</string>
+  <string name="sysinfo_running">Тренутна верзија:</string>
   <string name="sysinfo_last_check">Последња провера:</string>
-  <string name="no_changelog_alert">Нема доступних евиденција измена</string>
-  <string name="failed_to_load_changelog">Није могуће учитати евиденцију измена</string>
-  <string name="changelog_dialog_title">Евиденција измена</string>
+  <string name="no_changelog_alert">Нема доступних дневника промена</string>
+  <string name="failed_to_load_changelog">Није могуће учитати дневник промена</string>
+  <string name="changelog_dialog_title">Дневник промена</string>
   <string name="loading_changelog">Учитавање\u2026</string>
-  <string name="extension_label">Системска ажурирања</string>
-  <string name="extension_description">Приказује број нових доступних ажурирања.</string>
+  <string name="extension_label">CyanogenMod ажурирања</string>
+  <string name="extension_description">Приказује број нових ажурирања на располагању.</string>
 </resources>

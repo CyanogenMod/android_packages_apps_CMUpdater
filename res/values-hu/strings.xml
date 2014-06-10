@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Kéthetente</string>
   <string name="check_monthly">Havonta</string>
   <string name="update_type_title">Frissítés típusa</string>
-  <string name="type_all">Minden verzió (csak stabil kiadás)</string>
   <string name="type_all_incl_nightly">Minden verzió (beleértve a Nightly-kat)</string>
   <string name="type_new">Új verzió (csak stabil kiadás)</string>
   <string name="type_new_incl_nightly">Új verzió (beleértve Nightly-kat)</string>

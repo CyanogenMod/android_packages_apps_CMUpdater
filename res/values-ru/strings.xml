@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Раз в две недели</string>
   <string name="check_monthly">Ежемесячно</string>
   <string name="update_type_title">Тип обновлений</string>
-  <string name="type_all">Все версии (только стабильные)</string>
   <string name="type_all_incl_nightly">Все версии (включая ночные сборки)</string>
   <string name="type_new">Новые версии (только стабильные)</string>
   <string name="type_new_incl_nightly">Новые версии (включая ночные сборки)</string>

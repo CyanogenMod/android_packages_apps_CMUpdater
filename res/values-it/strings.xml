@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">Ogni due settimane</string>
   <string name="check_monthly">Una volta al mese</string>
   <string name="update_type_title">Tipo di aggiornamenti</string>
-  <string name="type_all">Tutte le versioni (solo stabili)</string>
   <string name="type_all_incl_nightly">Tutte le versioni (nightly incluse)</string>
   <string name="type_new">Nuove versioni (solo stabili)</string>
   <string name="type_new_incl_nightly">Nuove versioni (nightly incluse)</string>

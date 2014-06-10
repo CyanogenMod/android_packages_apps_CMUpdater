@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">週2回</string>
   <string name="check_monthly">毎月</string>
   <string name="update_type_title">アップデートタイプ</string>
-  <string name="type_all">すべてのバージョン（Stableのみ）</string>
   <string name="type_all_incl_nightly">すべてのバージョン（Nightlyを含む）</string>
   <string name="type_new">新しいバージョン（Stableのみ）</string>
   <string name="type_new_incl_nightly">新しいバージョン（Nightlyを含む）</string>

@@ -38,7 +38,6 @@
   <string name="check_bi_weekly">İki haftada bir</string>
   <string name="check_monthly">Aylık</string>
   <string name="update_type_title">Güncelleme türleri</string>
-  <string name="type_all">Tüm sürümler (Sadece kararlı)</string>
   <string name="type_all_incl_nightly">Tüm sürümler (Günlük dahil)</string>
   <string name="type_new">Yeni sürümler (Sadece kararlı)</string>
   <string name="type_new_incl_nightly">Yeni sürümler (Günlük dahil)</string>
