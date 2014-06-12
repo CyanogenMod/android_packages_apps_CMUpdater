@@ -23,7 +23,7 @@
   <string name="dialog_update">アップデート</string>
   <string name="dialog_close">閉じる</string>
   <string name="available_updates_title">利用可能なアップデート</string>
-  <string name="no_available_updates_intro">前回の確認では利用可能なアップデートは見つかりませんでした。新しいアップデートを手動で確認するには、更新ボタンを使用してください。</string>
+  <string name="no_available_updates_intro">前回の確認では利用可能なアップデートは見つかりませんでした。新しいアップデートを手動で確認するには更新ボタンを使用してください。</string>
   <string name="new_update_summary">新しいアップデート</string>
   <string name="downloaded_update_summary">ダウンロード済み</string>
   <string name="installed_update_summary">インストール済み</string>
@@ -53,7 +53,7 @@
   <string name="data_connection_required">データコネクションが必要です。</string>
   <string name="confirm_download_cancelation_dialog_title">ダウンロードをキャンセル</string>
   <string name="confirm_download_cancelation_dialog_message">このダウンロードをキャンセルしますか？</string>
-  <string name="download_cancelled">ダウンロードはキャンセルされました。</string>
+  <string name="download_cancelled">ダウンロードはキャンセルされました</string>
   <string name="download_already_running">ダウンロードはすでに実行中です</string>
   <string name="unable_to_download_file">アップデートファイルをダウンロードできません</string>
   <string name="download_not_found">ダウンロードが見つかりませんでした</string>
@@ -74,7 +74,7 @@
   <string name="delete_single_update_success_message">アップデートファイル<xliff:g id="filename">%s</xliff:g>は削除されました</string>
   <string name="delete_updates_failure_message">アップデートファイルの削除中にエラーが発生しました</string>
   <string name="delete_updates_noFolder_message">アップデートフォルダが見つかりません</string>
-  <string name="delete_updates_success_message">ダウンロードしたすべてのアップデートファイルは削除されました</string>
+  <string name="delete_updates_success_message">ダウンロードしたすべてのアップデートファイルを削除しました</string>
   <string name="sysinfo_device">端末:</string>
   <string name="sysinfo_running">実行中:</string>
   <string name="sysinfo_last_check">最終チェック:</string>
