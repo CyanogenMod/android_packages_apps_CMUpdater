@@ -38,14 +38,14 @@
   <string name="check_bi_weekly">Двонедељно</string>
   <string name="check_monthly">Месечно</string>
   <string name="update_type_title">Типови ажурирања</string>
-  <string name="type_all_incl_nightly">Све верзије (ноћне су укључене)</string>
-  <string name="type_new">Нове верзије (само стабилне)</string>
-  <string name="type_new_incl_nightly">Нове верзије (ноћне су укључене)</string>
-  <string name="nightly_alert">Изабрао си да буду укључена ноћна ажурирања у овој листи. Она су неподржана и треба да се користе са опрезом.</string>
+  <string name="type_all_incl_nightly">Све верзије</string>
+  <string name="type_new">Стабилне верзије</string>
+  <string name="type_new_incl_nightly">Развојне верзије</string>
+  <string name="nightly_alert">Изабрао си да буду укључена развојна ажурирања у овој листи. Она су неподржана и треба да се користе са опрезом.</string>
   <string name="nightly_alert_title">Опрез</string>
-  <string name="checking_for_updates">Провера нове верзије је у току</string>
-  <string name="no_updates_found">Нове везије нису пронађене</string>
-  <string name="update_check_failed">Провера ажурирања није успела. Провери своју интернет везу и покушај поново касније.</string>
+  <string name="checking_for_updates">Провера за ажурирања</string>
+  <string name="no_updates_found">Нису пронађена нова ажурирања</string>
+  <string name="update_check_failed">Провера за ажурирања није успела. Провери своју интернет везу и покушај поново касније.</string>
   <string name="not_new_updates_found_ticker">Нова ажурирања су доступна</string>
   <string name="not_new_updates_found_title">Нова ажурирања</string>
   <string name="not_action_download">Преузимање</string>
@@ -54,7 +54,7 @@
   <string name="confirm_download_cancelation_dialog_message">Откажи тренутно преузимање?</string>
   <string name="download_cancelled">Преузимање je отказано</string>
   <string name="download_already_running">Преузимање је већ покренуто</string>
-  <string name="unable_to_download_file">Немогуће је преузети датотеку за ажурирање</string>
+  <string name="unable_to_download_file">Не може да се преузме фајл за ажурирање</string>
   <string name="download_not_found">Преузимање није пронађено</string>
   <string name="not_download_success">Ажурирање је успешно преузето</string>
   <string name="not_download_failure">Ажурирање није успешно преузето</string>
@@ -64,7 +64,7 @@
   <string name="md5_check_cancelled">MD5 провера је отказана</string>
   <string name="md5_verification_failed">MD5 провера неуспешна</string>
   <string name="apply_update_dialog_title">Примени ажурирање</string>
-  <string name="apply_update_dialog_text">Надоградња на <xliff:g id="filename">%s</xliff:g>.\n\nАко притиснеш Ажурирај, уређај ће се поново покренути у \'Опоравак\' да инсталира ажурирање.\n\n Напомена: Ова функција захтева компатибилни \'Опоравак\' или ћеш морати ажурирања да инсталираш ручно.</string>
+  <string name="apply_update_dialog_text">Надоградња на <xliff:g id="filename">%s</xliff:g>.\n\nАко притиснеш Ажурирај, уређај ће се поново покренути у \'Опоравак\' да инсталира ажурирање.\n\nНапомена: Ова функција захтева компатибилни \'Опоравак\' или ћеш морати ажурирање да инсталираш ручно.</string>
   <string name="apply_trying_to_get_root_access">Покушавање да се добије root приступ да се рестартује у режиму опоравка</string>
   <string name="apply_unable_to_reboot_toast">Немогуће да се рестартује у опоравак</string>
   <string name="confirm_delete_dialog_title">Избриши фајл</string>

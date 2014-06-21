@@ -38,10 +38,10 @@
   <string name="check_bi_weekly">Ogni due settimane</string>
   <string name="check_monthly">Una volta al mese</string>
   <string name="update_type_title">Tipo di aggiornamenti</string>
-  <string name="type_all_incl_nightly">Tutte le versioni (nightly incluse)</string>
-  <string name="type_new">Nuove versioni (solo stabili)</string>
-  <string name="type_new_incl_nightly">Nuove versioni (nightly incluse)</string>
-  <string name="nightly_alert">Hai scelto di includere le nightly nella lista di aggiornamenti. Nota bene che non sono supportate e andrebbero usate con cautela.</string>
+  <string name="type_all_incl_nightly">Tutte le versioni</string>
+  <string name="type_new">Canale di rilascio</string>
+  <string name="type_new_incl_nightly">Canale di sviluppo</string>
+  <string name="nightly_alert">Hai scelto di includere aggiornamenti in fase di sviluppo in questa lista. Questi non sono supportati e andrebbero usati con cautela.</string>
   <string name="nightly_alert_title">Attenzione</string>
   <string name="checking_for_updates">Controllo aggiornamenti</string>
   <string name="no_updates_found">Nessun nuovo aggiornamento</string>

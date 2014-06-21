@@ -38,10 +38,10 @@
   <string name="check_bi_weekly">Bi-setmanalment</string>
   <string name="check_monthly">Mensualment</string>
   <string name="update_type_title">Tipus d\'actualització</string>
-  <string name="type_all_incl_nightly">Totes les versions (incl. Nightlies)</string>
-  <string name="type_new">Noves versions (Només estables)</string>
-  <string name="type_new_incl_nightly">Noves versions (incl. Nightlies)</string>
-  <string name="nightly_alert">Has seleccionat incloure les actualitzacions tipus nightly en aquesta llista. Aquestes no tenen suport i han de ser utilitzades amb precaució.</string>
+  <string name="type_all_incl_nightly">Totes les versions</string>
+  <string name="type_new">Canal estable</string>
+  <string name="type_new_incl_nightly">Canal de desenvolupament</string>
+  <string name="nightly_alert">Has seleccionat incloure les actualitzacions de tipus desenvolupador en aquesta llista. Aquestes no tenen suport i han de ser utilitzades amb precaució.</string>
   <string name="nightly_alert_title">Alerta</string>
   <string name="checking_for_updates">Buscant actualitzacions</string>
   <string name="no_updates_found">No s\'han trobat noves actualitzacions</string>

@@ -38,10 +38,6 @@
   <string name="check_bi_weekly">Ob týden</string>
   <string name="check_monthly">Měsíčně</string>
   <string name="update_type_title">Typy aktualizací</string>
-  <string name="type_all_incl_nightly">Všechny verze (včetně nightlies)</string>
-  <string name="type_new">Nové verze (pouze stabilní)</string>
-  <string name="type_new_incl_nightly">Nové verze (včetně nightlies)</string>
-  <string name="nightly_alert">Byla zvolena možnost zahrnout do seznamu i noční sestavení (night-build). Tyto sestavení nejsou oficiálně podporovány a měli by být používány s opatrností.</string>
   <string name="nightly_alert_title">Varování</string>
   <string name="checking_for_updates">Vyhledávání aktualizací</string>
   <string name="no_updates_found">Nové aktualizace nenalezeny</string>

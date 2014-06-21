@@ -38,10 +38,6 @@
   <string name="check_bi_weekly">Twee-weekliks</string>
   <string name="check_monthly">Maandeliks</string>
   <string name="update_type_title">Opgradering tipes</string>
-  <string name="type_all_incl_nightly">Alle weergawes  (insl. Daaglikse bywerkings)</string>
-  <string name="type_new">Nuwe weergawes (slegs stabiel)</string>
-  <string name="type_new_incl_nightly">Nuwe weerwages (insl. Daaglikse bywerkings)</string>
-  <string name="nightly_alert">Jy het gekies om Daaglikse bywerkings by hierdie lys in te sluit. Hulle word nie ondersteun nie en word op eie risiko gebruik.</string>
   <string name="nightly_alert_title">Versigtig</string>
   <string name="checking_for_updates">Soek vir opgraderings.</string>
   <string name="no_updates_found">Geen nuwe upgraderings gevind nie</string>

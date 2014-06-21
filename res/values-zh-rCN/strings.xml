@@ -38,10 +38,10 @@
   <string name="check_bi_weekly">两周一次</string>
   <string name="check_monthly">每月一次</string>
   <string name="update_type_title">更新类型</string>
-  <string name="type_all_incl_nightly">所有版本 (包括 Nightly 版)</string>
-  <string name="type_new">新版本 (仅稳定版)</string>
-  <string name="type_new_incl_nightly">新版本 (包括 Nightly 版)</string>
-  <string name="nightly_alert">您刚选择在表里加入 nightly 新版本。 这些版本是不受支持的, 应该小心使用。</string>
+  <string name="type_all_incl_nightly">所有版本</string>
+  <string name="type_new">正式版本</string>
+  <string name="type_new_incl_nightly">开发版本</string>
+  <string name="nightly_alert">您在此列表中已选择包括开发人员更新。这些是不受支持的，应谨慎使用。</string>
   <string name="nightly_alert_title">小心</string>
   <string name="checking_for_updates">正在检查更新</string>
   <string name="no_updates_found">没有找到新的更新</string>

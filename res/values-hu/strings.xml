@@ -38,10 +38,10 @@
   <string name="check_bi_weekly">Kéthetente</string>
   <string name="check_monthly">Havonta</string>
   <string name="update_type_title">Frissítés típusa</string>
-  <string name="type_all_incl_nightly">Minden verzió (beleértve a Nightly-kat)</string>
-  <string name="type_new">Új verzió (csak stabil kiadás)</string>
-  <string name="type_new_incl_nightly">Új verzió (beleértve Nightly-kat)</string>
-  <string name="nightly_alert">Választásának megfelelően a Nightly frissítések is meg fognak jelenni a listán. Ezek nem támogatottak, ezért csak saját felelősségére használja őket!</string>
+  <string name="type_all_incl_nightly">Minden verzió</string>
+  <string name="type_new">Kiadási csatorna</string>
+  <string name="type_new_incl_nightly">Fejlesztési csatorna</string>
+  <string name="nightly_alert">Választásának megfelelően a Nightly frissítések is meg fognak jelenni a listán. Ezek nem támogatottak, ezért csak saját felelősségére használja őket.</string>
   <string name="nightly_alert_title">Vigyázat!</string>
   <string name="checking_for_updates">Frissítések keresése</string>
   <string name="no_updates_found">Nem található új frissítés</string>
