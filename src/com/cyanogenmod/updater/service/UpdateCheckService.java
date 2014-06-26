@@ -87,7 +87,8 @@ public class UpdateCheckService extends IntentService {
         if (TextUtils.equals(intent.getAction(), ACTION_CANCEL_CHECK)) {
             synchronized (this) {
                 if (mHttpExecutor != null) {
-                    mHttpExecutor.abort();
+                    cleanupHttpExecutor(mHttpExecutor);
+                    mHttpExecutor = null;
                 }
             }
 
@@ -215,6 +216,19 @@ public class UpdateCheckService extends IntentService {
         }
 
         sendBroadcast(finishedIntent);
+    }
+
+    // HttpRequestExecutor.abort() may cause network activity, which must not happen in the
+    // main thread. Spawn off the cleanup into a separate thread to avoid crashing due to
+    // NetworkOnMainThreadException.
+    private void cleanupHttpExecutor(final HttpRequestExecutor executor) {
+        final Thread abortThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                executor.abort();
+            }
+        });
+        abortThread.start();
     }
 
     private void addRequestHeaders(HttpRequestBase request) {
