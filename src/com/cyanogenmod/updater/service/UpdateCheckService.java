@@ -85,10 +85,19 @@ public class UpdateCheckService extends IntentService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (TextUtils.equals(intent.getAction(), ACTION_CANCEL_CHECK)) {
-            synchronized (this) {
-                if (mHttpExecutor != null) {
-                    mHttpExecutor.abort();
-                }
+            try {
+                // We are currently in the UIThread. Networking should be done in a
+                // background thread.
+                final Thread abortThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        abort();
+                    }
+                });
+                abortThread.start();
+                abortThread.join(5000L);
+            } catch (InterruptedException e) {
+                // Ignore
             }
 
             return START_NOT_STICKY;
@@ -215,6 +224,14 @@ public class UpdateCheckService extends IntentService {
         }
 
         sendBroadcast(finishedIntent);
+    }
+
+    private void abort() {
+        synchronized (this) {
+            if (mHttpExecutor != null) {
+                mHttpExecutor.abort();
+            }
+        }
     }
 
     private void addRequestHeaders(HttpRequestBase request) {
