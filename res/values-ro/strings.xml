@@ -23,7 +23,7 @@
   <string name="dialog_update">Actualizați</string>
   <string name="dialog_close">Închideți</string>
   <string name="available_updates_title">Actualizări disponibile</string>
-  <string name="no_available_updates_intro">Ultima verificare nu a găsit actualizări disponibile. Pentru a verifica manual existenţa actualizărilor noi, utilizaţi butonul Reîmprospătare.</string>
+  <string name="no_available_updates_intro">Ultima verificare nu a găsit actualizări disponibile. Pentru a verifica manual existența actualizărilor noi, utilizați butonul Reîmprospătare.</string>
   <string name="new_update_summary">Nou</string>
   <string name="downloaded_update_summary">Descărcat</string>
   <string name="installed_update_summary">Instalat</string>
@@ -63,8 +63,8 @@
   <string name="apply_existing_update_md5error_message">Eroare. Nepotrivire MD5</string>
   <string name="md5_check_cancelled">Verificarea MD5 revocată</string>
   <string name="md5_verification_failed">Verificarea MD5 nu a reușit</string>
-  <string name="apply_update_dialog_title">Aplicaţi actualizarea</string>
-  <string name="apply_update_dialog_text">Intenționaţi să faceți upgrade la <xliff:g id="filename">%s</xliff:g>.\n\nDacă apăsați Actualizare, dispozitivul va reporni în modul recovery pentru a instala actualizarea.\n\nNotă: această caracteristică necesită Recovery compatibil sau actualizările trebuie să fie instalate manual.</string>
+  <string name="apply_update_dialog_title">Aplicați actualizarea</string>
+  <string name="apply_update_dialog_text">Intenționați să faceți upgrade la <xliff:g id="filename">%s</xliff:g>.\n\nDacă apăsați Actualizare, dispozitivul va reporni în modul recovery pentru a instala actualizarea.\n\nNotă: această caracteristică necesită Recovery compatibil sau actualizările trebuie să fie instalate manual.</string>
   <string name="apply_trying_to_get_root_access">Încercare de a obține acces root pentru repornire în modul de Recovery</string>
   <string name="apply_unable_to_reboot_toast">Nu se poate reporni în Recovery</string>
   <string name="confirm_delete_dialog_title">Ștergeți fișierul</string>

@@ -38,6 +38,10 @@
   <string name="check_bi_weekly">Joka toinen viikko</string>
   <string name="check_monthly">Kuukausittain</string>
   <string name="update_type_title">Päivitysten tyypit</string>
+  <string name="type_all_incl_nightly">Kaikki versiot</string>
+  <string name="type_new">Julkaisukanava</string>
+  <string name="type_new_incl_nightly">Kehitysversioiden kanava</string>
+  <string name="nightly_alert">Olet valinnut kehittäjille tarkoitetut päivitykset listalle. Näitä ei tueta virallisesti, käytä omalla vastuulla.</string>
   <string name="nightly_alert_title">Varoitus</string>
   <string name="checking_for_updates">Tarkistetaan päivityksiä</string>
   <string name="no_updates_found">Päivityksiä ei löytynyt</string>

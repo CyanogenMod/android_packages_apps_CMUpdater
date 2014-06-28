@@ -38,6 +38,10 @@
   <string name="check_bi_weekly">Zweiwöchentlich</string>
   <string name="check_monthly">Monatlich</string>
   <string name="update_type_title">Update-Typen</string>
+  <string name="type_all_incl_nightly">Alle Versionen</string>
+  <string name="type_new">Freigabe-Versionen</string>
+  <string name="type_new_incl_nightly">Entwickler-Versionen</string>
+  <string name="nightly_alert">Sie haben festgelegt, dass auch Entwickler-Versionen angezeigt werden. Für diese Versionen kann keine Unterstützung geleistet werden.  Aus diesem Grund sollten Entwickler-Versionen mit Vorsicht installiert werden.</string>
   <string name="nightly_alert_title">Achtung</string>
   <string name="checking_for_updates">Updates werden gesucht</string>
   <string name="no_updates_found">Keine neuen Updates gefunden</string>
