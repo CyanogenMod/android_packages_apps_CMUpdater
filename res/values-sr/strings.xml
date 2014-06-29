@@ -9,7 +9,7 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">CM Ажурирање</string>
+  <string name="app_name">СМ Ажурирање</string>
   <string name="display_name">Ажурирања</string>
   <string name="unknown">Непознато</string>
   <string name="menu_refresh">Освежи</string>

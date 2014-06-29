@@ -37,7 +37,7 @@
   <string name="check_weekly">毎週</string>
   <string name="check_bi_weekly">週2回</string>
   <string name="check_monthly">毎月</string>
-  <string name="update_type_title">アップデートタイプ</string>
+  <string name="update_type_title">アップデートの種類</string>
   <string name="type_all_incl_nightly">すべてのバージョン</string>
   <string name="type_new">リリースチャンネル</string>
   <string name="type_new_incl_nightly">開発チャンネル</string>
@@ -59,7 +59,7 @@
   <string name="not_download_success">アップデートのダウンロードが完了しました</string>
   <string name="not_download_failure">アップデートをダウンロードできませんでした</string>
   <string name="not_action_install_update">再起動してインストール</string>
-  <string name="not_download_install_notice">アップデート<xliff:g id="filename">%s</xliff:g>のダウンロードが完了しました。｢再起動してインストール｣をタッチすると、アップデートをインストールするために端末は再起動します。\n\n注意: インストールを自動で行うには、互換性のあるリカバリーが必要です。</string>
+  <string name="not_download_install_notice">アップデート<xliff:g id="filename">%s</xliff:g>のダウンロードが完了しました。｢再起動してインストール｣をタッチすると、アップデートをインストールするために端末は再起動します。\n\n注意: 自動的にインストールを行うには、互換性のあるリカバリーが必要です。</string>
   <string name="apply_existing_update_md5error_message">エラー。MD5チェックサムが一致しません。</string>
   <string name="md5_check_cancelled">MD5チェックはキャンセルされました。</string>
   <string name="md5_verification_failed">MD5の確認に失敗しました。</string>
