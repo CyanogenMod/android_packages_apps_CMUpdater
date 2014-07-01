@@ -87,7 +87,8 @@ public class UpdateCheckService extends IntentService {
         if (TextUtils.equals(intent.getAction(), ACTION_CANCEL_CHECK)) {
             synchronized (this) {
                 if (mHttpExecutor != null) {
-                    mHttpExecutor.abort();
+                    cleanupHttpExecutor(mHttpExecutor);
+                    mHttpExecutor = null;
                 }
             }
 
@@ -217,6 +218,19 @@ public class UpdateCheckService extends IntentService {
         sendBroadcast(finishedIntent);
     }
 
+    // HttpRequestExecutor.abort() may cause network activity, which must not happen in the
+    // main thread. Spawn off the cleanup into a separate thread to avoid crashing due to
+    // NetworkOnMainThreadException.
+    private void cleanupHttpExecutor(final HttpRequestExecutor executor) {
+        final Thread abortThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                executor.abort();
+            }
+        });
+        abortThread.start();
+    }
+
     private void addRequestHeaders(HttpRequestBase request) {
         String userAgent = Utils.getUserAgentString(this);
         if (userAgent != null) {
@@ -289,12 +303,19 @@ public class UpdateCheckService extends IntentService {
 
     private JSONObject buildUpdateRequest(int updateType) throws JSONException {
         JSONArray channels = new JSONArray();
-        channels.put("stable");
-        channels.put("snapshot");
-        channels.put("RC");
-        if (updateType == Constants.UPDATE_TYPE_NEW_NIGHTLY
-                || updateType == Constants.UPDATE_TYPE_ALL_NIGHTLY) {
-            channels.put("nightly");
+
+        switch(updateType) {
+            case Constants.UPDATE_TYPE_ALL:
+                channels.put("snapshot");
+                channels.put("nightly");
+                break;
+            case Constants.UPDATE_TYPE_NEW_NIGHTLY:
+                channels.put("nightly");
+                break;
+            case Constants.UPDATE_TYPE_NEW_SNAPSHOT:
+            default:
+                channels.put("snapshot");
+                break;
         }
 
         JSONObject params = new JSONObject();
@@ -360,8 +381,7 @@ public class UpdateCheckService extends IntentService {
         }
 
         UpdateInfo ui = new UpdateInfo(fileName, timestamp, apiLevel, url, md5, type, incremental);
-        boolean includeAll = updateType == Constants.UPDATE_TYPE_ALL_STABLE
-            || updateType == Constants.UPDATE_TYPE_ALL_NIGHTLY;
+        boolean includeAll = updateType == Constants.UPDATE_TYPE_ALL;
 
         if (!includeAll && !ui.isNewerThanInstalled()) {
             Log.d(TAG, "Build " + fileName + " is older than the installed build");

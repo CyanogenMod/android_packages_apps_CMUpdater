@@ -38,11 +38,10 @@
   <string name="check_bi_weekly">Annenhver uke</string>
   <string name="check_monthly">Månedlig</string>
   <string name="update_type_title">Oppdateringstyper</string>
-  <string name="type_all">Alle versjoner (kun Stabile)</string>
-  <string name="type_all_incl_nightly">Alle versjoner (inkl. Nightlies)</string>
-  <string name="type_new">Nye versjoner (kun Stabile)</string>
-  <string name="type_new_incl_nightly">Nye versjoner (inkl. Nightlies)</string>
-  <string name="nightly_alert">Du har valgt å inkludere nightly builds i din liste. Disse er uten støtte og burde brukes med forsiktighet.</string>
+  <string name="type_all_incl_nightly">Alle versjoner</string>
+  <string name="type_new">Utgivelses kanal</string>
+  <string name="type_new_incl_nightly">Utviklings kanal</string>
+  <string name="nightly_alert">Du har valgt å inkludere nattlige bygg i din liste. Disse er uten støtte og burde brukes med forsiktighet.</string>
   <string name="nightly_alert_title">Forsiktig</string>
   <string name="checking_for_updates">Sjekker etter oppdateringer</string>
   <string name="no_updates_found">Ingen nye oppdateringer funnet</string>

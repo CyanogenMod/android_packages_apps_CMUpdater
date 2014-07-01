@@ -38,11 +38,6 @@
   <string name="check_bi_weekly">Раз на два тижні</string>
   <string name="check_monthly">Щомісяця</string>
   <string name="update_type_title">Тип оновлення</string>
-  <string name="type_all">Всі версії (Тільки стабільні)</string>
-  <string name="type_all_incl_nightly">Всі версії (Включаючи нічні)</string>
-  <string name="type_new">Нові версії (Тільки стабільні)</string>
-  <string name="type_new_incl_nightly">Нові версії (Включаючи нічні)</string>
-  <string name="nightly_alert">Ви вибрали включити нічні оновлення в цьому списку. Вони не підтримуються і повинні бути використані з обережністю.</string>
   <string name="nightly_alert_title">Увага</string>
   <string name="checking_for_updates">Перевірка оновлень\u2026</string>
   <string name="no_updates_found">Оновлень не знайдено</string>

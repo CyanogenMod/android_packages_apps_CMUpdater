@@ -38,11 +38,10 @@
   <string name="check_bi_weekly">אחת לשבועיים</string>
   <string name="check_monthly">חודשית</string>
   <string name="update_type_title">סוגי עדכונים</string>
-  <string name="type_all">כל הגרסאות (יציבות בלבד)</string>
-  <string name="type_all_incl_nightly">כל הגרסאות (כולל ליליות)</string>
-  <string name="type_new">גרסאות חדשות (יציבות בלבד)</string>
-  <string name="type_new_incl_nightly">גרסאות חדשות (כולל ליליות)</string>
-  <string name="nightly_alert">בחרת לכלול עדכונים ליליים ברשימה. גרסאות אלה לא נתמכות ולכן השתמשו בזהירות!</string>
+  <string name="type_all_incl_nightly">כל הגרסאות</string>
+  <string name="type_new">ערוץ הפצה</string>
+  <string name="type_new_incl_nightly">ערוץ פיתוח</string>
+  <string name="nightly_alert">בחרת לכלול עדכונים ליליים ברשימה. גרסאות אלה לא נתמכות, השתמש בזהירות.</string>
   <string name="nightly_alert_title">בזהירות</string>
   <string name="checking_for_updates">מחפש עדכונים</string>
   <string name="no_updates_found">לא נמצאו עדכונים חדשים</string>

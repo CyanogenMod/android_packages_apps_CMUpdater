@@ -38,10 +38,9 @@
   <string name="check_bi_weekly">Quinzenalmente</string>
   <string name="check_monthly">Mensalmente</string>
   <string name="update_type_title">Tipos de atualização</string>
-  <string name="type_all">Todas as versões (somente Estável)</string>
-  <string name="type_all_incl_nightly">Todas as versões (incl. Nightlies)</string>
-  <string name="type_new">Novas versões (somente Estável)</string>
-  <string name="type_new_incl_nightly">Novas versões (incl. Nightlies)</string>
+  <string name="type_all_incl_nightly">Todas as versões</string>
+  <string name="type_new">Canal de lançamento</string>
+  <string name="type_new_incl_nightly">Canal de desenvolvimento</string>
   <string name="nightly_alert">Você selecionou para incluir atualizações diárias na lista. Estas não têm suporte e devem ser usadas com cuidado.</string>
   <string name="nightly_alert_title">Cuidado</string>
   <string name="checking_for_updates">Verificando por atualizações</string>

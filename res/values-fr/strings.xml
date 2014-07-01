@@ -38,10 +38,9 @@
   <string name="check_bi_weekly">Bimensuelle</string>
   <string name="check_monthly">Mensuelle</string>
   <string name="update_type_title">Versions à rechercher</string>
-  <string name="type_all">Toutes les versions stables</string>
-  <string name="type_all_incl_nightly">Toutes les versions dont celles de développement</string>
-  <string name="type_new">Uniquement les nouvelles versions stables</string>
-  <string name="type_new_incl_nightly">Uniquement les nouvelles versions dont celles de développement</string>
+  <string name="type_all_incl_nightly">Toutes les versions</string>
+  <string name="type_new">Version stable</string>
+  <string name="type_new_incl_nightly">Version de développement</string>
   <string name="nightly_alert">Vous avez choisi d\'inclure à votre liste les versions de développement. Ces versions ne disposent pas de support technique et doivent être utilisées avec précaution.</string>
   <string name="nightly_alert_title">Avertissement</string>
   <string name="checking_for_updates">Recherche de mises à jour</string>

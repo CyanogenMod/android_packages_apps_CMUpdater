@@ -38,11 +38,10 @@
   <string name="check_bi_weekly">Quinzenalmente</string>
   <string name="check_monthly">Mensalmente</string>
   <string name="update_type_title">Tipos de atualização</string>
-  <string name="type_all">Todas as versões (Apenas estáveis)</string>
-  <string name="type_all_incl_nightly">Todas as versões (incl. Nightlies)</string>
-  <string name="type_new">Novas versões (Apenas estáveis)</string>
-  <string name="type_new_incl_nightly">Novas versões (incl. Nightlies)</string>
-  <string name="nightly_alert">Escolheu incluir atualizações nightly nesta lista. Estas não são suportadas e devem ser usadas com cuidado.</string>
+  <string name="type_all_incl_nightly">Todas as versões</string>
+  <string name="type_new">Versões estáveis</string>
+  <string name="type_new_incl_nightly">Versões nigthly</string>
+  <string name="nightly_alert">Escolheu incluir versões nightly nesta lista. Estas não são suportadas e devem ser usadas com cuidado.</string>
   <string name="nightly_alert_title">Cuidado</string>
   <string name="checking_for_updates">A procurar atualizações</string>
   <string name="no_updates_found">Não foram encontradas novas atualizações</string>

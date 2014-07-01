@@ -38,11 +38,10 @@
   <string name="check_bi_weekly">مرتين أسبوعيا</string>
   <string name="check_monthly">شهرياً</string>
   <string name="update_type_title">أنواع التحديث</string>
-  <string name="type_all">كافة الإصدارات (مستقرة فقط)</string>
-  <string name="type_all_incl_nightly">كافة الإصدارات (بما في ذلك ليلية)</string>
-  <string name="type_new">إصدارات جديدة (مستقرة فقط)</string>
-  <string name="type_new_incl_nightly">إصدارات جديدة (بما في ذلك ليلية)</string>
-  <string name="nightly_alert">قمت بتحديد ان تتضمين التحديثات الليلية في هذه القائمة. وهذه غير معتمدة، وينبغي أن تستخدم بحذر.</string>
+  <string name="type_all_incl_nightly">كل الإصدارات</string>
+  <string name="type_new">إنطلاق القناة</string>
+  <string name="type_new_incl_nightly">مطورين القناة</string>
+  <string name="nightly_alert">قمت بتحديد لتضمين تحديثات المطور في هذه القائمة. وهذه غير معتمدة، وينبغي أن تستخدم بحذر.</string>
   <string name="nightly_alert_title">تنبيه</string>
   <string name="checking_for_updates">التحقق من وجود تحديثات</string>
   <string name="no_updates_found">لا توجد تحديثات جديدة</string>

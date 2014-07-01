@@ -38,8 +38,7 @@
   <string name="check_bi_weekly">Cada dos semanas</string>
   <string name="check_monthly">Mensualmente</string>
   <string name="update_type_title">Tipo de actualización</string>
-  <string name="type_all">Todas (solo estables)</string>
-  <string name="type_all_incl_nightly">Todas (incl. no estables)</string>
+  <string name="type_all_incl_nightly">Todas las versiones</string>
   <string name="type_new">Nuevas (solo estables)</string>
   <string name="type_new_incl_nightly">Nuevas (incl. no estables)</string>
   <string name="nightly_alert">Has elegido incluir actualizaciones no estables en esta lista. Este tipo de actualizaciones no disponen de soporte al usuario y deberían ser utilizadas con precaución.</string>
