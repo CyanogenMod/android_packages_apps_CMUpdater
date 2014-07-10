@@ -185,7 +185,7 @@ public class DownloadReceiver extends BroadcastReceiver{
 
                 Notification.BigTextStyle style = new Notification.BigTextStyle();
                 style.setBigContentTitle(context.getString(R.string.not_download_success));
-                style.bigText(context.getString(R.string.not_download_install_notice, updateUiName));
+                style.bigText(context.getString(R.string.apply_update_dialog_text, updateUiName));
                 builder.setStyle(style);
 
                 Intent installIntent = new Intent(context, DownloadReceiver.class);
