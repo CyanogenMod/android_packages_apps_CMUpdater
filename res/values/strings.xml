@@ -79,7 +79,7 @@
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Apply update</string>
-    <string name="apply_update_dialog_text">You are about to upgrade to <xliff:g id="filename">%s</xliff:g>.\n\nIf you press Update, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
+    <string name="apply_update_dialog_text">You are about to upgrade to <xliff:g id="filename">%s</xliff:g>.\n\nIf you press Update, the device will restart itself in recovery mode to install the update.\n\nNote: A compatible Recovery is required for the installation to work automatically.</string>
     <string name="apply_trying_to_get_root_access">Trying to get root access to reboot in recovery mode</string>
     <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
 
