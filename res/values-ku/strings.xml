@@ -20,7 +20,7 @@
   <string name="dialog_cancel">پاشگەزبوونەوە</string>
   <string name="dialog_yes">بەڵێ</string>
   <string name="dialog_no">نەخێر</string>
-  <string name="dialog_update">نوێکردنەوە</string>
+  <string name="dialog_update">نوێچالاکردنی</string>
   <string name="dialog_close">داخستن</string>
   <string name="available_updates_title">نوێکردنەوەکانی بەردەست</string>
   <string name="no_available_updates_intro">دوایین پشکنین هیچ نوێکردنەوەیەکی بەردەستی نەدۆزیەوە. بۆ بە دەستکاری پشکنین بۆ نوێکردنەوەکان، دوگمەی تازەکردنەوە بەکاربهێنە.</string>
@@ -28,7 +28,7 @@
   <string name="downloaded_update_summary">داگرتراوە</string>
   <string name="installed_update_summary">دامەزرێنراوە</string>
   <string name="backup_rom_title">دروستکردنی پاشەکەوت</string>
-  <string name="backup_rom_summary">پاشەکەوتکردنی ڕوومی ئیستا پێش نوێکردنەوە</string>
+  <string name="backup_rom_summary">پاشەکەوتکردنی ڕوومی ئیستا پێش نوێچالاکردنی</string>
   <string name="update_check_title">پشکنین بۆ نوێکردنەوەکان</string>
   <string name="check_manual">دەستی</string>
   <string name="check_on_boot">له‌گه‌ڵ هه‌موو داگیرسانێک</string>
@@ -80,7 +80,7 @@
   <string name="no_changelog_alert">تۆماری گۆڕانکاری لەبەردەستدا نیە</string>
   <string name="failed_to_load_changelog">ناتاونرێت تۆماری گۆڕانکاری بهێنرێت</string>
   <string name="changelog_dialog_title">تۆماری گۆڕانکاری</string>
-  <string name="loading_changelog">کردنەوەی\u2026</string>
+  <string name="loading_changelog">چالاکردنی\u2026</string>
   <string name="extension_label">نوێکردنەوەی سیانۆجین</string>
   <string name="extension_description">پیشاندانی ژمارەی نوێکردنەوە ئامادەکان.</string>
 </resources>
