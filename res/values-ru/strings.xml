@@ -37,7 +37,7 @@
   <string name="check_weekly">Еженедельно</string>
   <string name="check_bi_weekly">Раз в две недели</string>
   <string name="check_monthly">Ежемесячно</string>
-  <string name="update_type_title">Тип обновлений</string>
+  <string name="update_type_title">Канал обновлений</string>
   <string name="type_all_incl_nightly">Все версии</string>
   <string name="type_new">Канал релиза</string>
   <string name="type_new_incl_nightly">Канал разработки</string>

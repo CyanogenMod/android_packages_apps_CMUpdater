@@ -59,7 +59,7 @@
   <string name="not_download_success">更新已成功下载</string>
   <string name="not_download_failure">下载更新失败</string>
   <string name="not_action_install_update">重启并安装</string>
-  <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> 已成功下载。点击 \'重启并安装\' 时，设备将重新启动并安装更新。\n\n注意：自动安装过程需要一个兼容的恢复程序。</string>
+  <string name="not_download_install_notice">更新 <xliff:g id="filename">%s</xliff:g> 已成功下载。点击“重启并安装”，设备将重新启动并安装更新。\n\n注意：自动安装过程需要一个兼容的恢复程序。</string>
   <string name="apply_existing_update_md5error_message">错误。MD5 值不匹配</string>
   <string name="md5_check_cancelled">MD5 检测已被取消</string>
   <string name="md5_verification_failed">MD5 检测失败</string>

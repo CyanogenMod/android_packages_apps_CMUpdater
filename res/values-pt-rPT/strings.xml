@@ -40,7 +40,7 @@
   <string name="update_type_title">Tipos de atualização</string>
   <string name="type_all_incl_nightly">Todas as versões</string>
   <string name="type_new">Versões estáveis</string>
-  <string name="type_new_incl_nightly">Versões nigthly</string>
+  <string name="type_new_incl_nightly">Versões nightly</string>
   <string name="nightly_alert">Escolheu incluir versões nightly nesta lista. Estas não são suportadas e devem ser usadas com cuidado.</string>
   <string name="nightly_alert_title">Cuidado</string>
   <string name="checking_for_updates">A procurar atualizações</string>
