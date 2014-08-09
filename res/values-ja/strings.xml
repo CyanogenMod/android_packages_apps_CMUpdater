@@ -41,7 +41,7 @@
   <string name="type_all_incl_nightly">すべてのバージョン</string>
   <string name="type_new">リリースチャンネル</string>
   <string name="type_new_incl_nightly">開発チャンネル</string>
-  <string name="nightly_alert">このリストに開発者向けのアップデートを含めるようにしました。これらはサポートの対象外ですので、注意して使用してください。</string>
+  <string name="nightly_alert">このリストに開発者向けのアップデートを含めることを選択しています。これらはサポートの対象外ですので、注意して使用してください。</string>
   <string name="nightly_alert_title">注意</string>
   <string name="checking_for_updates">アップデートを確認中</string>
   <string name="no_updates_found">新しいアップデートはありません</string>
