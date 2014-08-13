@@ -11,9 +11,6 @@ package com.cyanogenmod.updater.receiver;
 
 import android.app.DownloadManager;
 import android.app.DownloadManager.Query;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.StatusBarManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -44,8 +41,8 @@ public class DownloadReceiver extends BroadcastReceiver{
 
     public static final String ACTION_DOWNLOAD_STARTED = "com.cyanogenmod.cmupdater.action.DOWNLOAD_STARTED";
 
-    private static final String ACTION_INSTALL_UPDATE = "com.cyanogenmod.cmupdater.action.INSTALL_UPDATE";
-    private static final String EXTRA_FILENAME = "filename";
+    static final String ACTION_INSTALL_UPDATE = "com.cyanogenmod.cmupdater.action.INSTALL_UPDATE";
+    static final String EXTRA_FILENAME = "filename";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -86,37 +83,26 @@ public class DownloadReceiver extends BroadcastReceiver{
         }
 
         DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-        Query query = new Query();
-        query.setFilterById(id);
-
-        Cursor c = dm.query(query);
-        if (c == null) {
-            return;
-        }
-
-        if (!c.moveToFirst()) {
-            c.close();
-            return;
-        }
-
-        final int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
-        int failureMessageResId = -1;
-        File updateFile = null;
 
         Intent updateIntent = new Intent(context, UpdatesSettings.class);
         updateIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
                 Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
 
+        int status = fetchDownloadStatus(dm, id);
         if (status == DownloadManager.STATUS_SUCCESSFUL) {
             // Get the full path name of the downloaded file and the MD5
 
             // Strip off the .partial at the end to get the completed file
-            String partialFileFullPath = c.getString(
-                    c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+            String partialFileFullPath = fetchDownloadPartialPath(dm, id);
+
+            if (partialFileFullPath == null) {
+                displayErrorResult(context, updateIntent, R.string.unable_to_download_file);
+            }
+
             String completedFileFullPath = partialFileFullPath.replace(".partial", "");
 
             File partialFile = new File(partialFileFullPath);
-            updateFile = new File(completedFileFullPath);
+            File updateFile = new File(completedFileFullPath);
             partialFile.renameTo(updateFile);
 
             String downloadedMD5 = prefs.getString(Constants.DOWNLOAD_MD5, "");
@@ -128,6 +114,7 @@ public class DownloadReceiver extends BroadcastReceiver{
                 updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_PATH, completedFileFullPath);
                 updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_INCREMENTAL_FOR,
                         incrementalFor);
+                displaySuccessResult(context, updateIntent, updateFile);
             } else {
                 // We failed. Clear the file and reset everything
                 dm.remove(id);
@@ -135,14 +122,12 @@ public class DownloadReceiver extends BroadcastReceiver{
                 if (updateFile.exists()) {
                     updateFile.delete();
                 }
-
-                failureMessageResId = R.string.md5_verification_failed;
+                displayErrorResult(context, updateIntent, R.string.md5_verification_failed);
             }
         } else if (status == DownloadManager.STATUS_FAILED) {
             // The download failed, reset
             dm.remove(id);
-
-            failureMessageResId = R.string.unable_to_download_file;
+            displayErrorResult(context, updateIntent, R.string.unable_to_download_file);
         }
 
         // Clear the shared prefs
@@ -151,56 +136,52 @@ public class DownloadReceiver extends BroadcastReceiver{
                 .remove(Constants.DOWNLOAD_ID)
                 .remove(Constants.DOWNLOAD_INCREMENTAL_FOR)
                 .apply();
+    }
 
-        c.close();
+    private String fetchDownloadPartialPath(DownloadManager dm, long id) {
+        DownloadManager.Query query = new DownloadManager.Query();
+        query.setFilterById(id);
+        Cursor c = dm.query(query);
+        try {
+            if (c.moveToFirst()) {
+                return c.getString(
+                        c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+            }
+        } finally {
+            c.close();
+        }
+        return null;
+    }
 
+    private int fetchDownloadStatus(DownloadManager dm, long id) {
+        Query query = new Query();
+        query.setFilterById(id);
+        Cursor c = dm.query(query);
+        try {
+            if (c.moveToFirst()) {
+                return c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
+            }
+        } finally {
+            c.close();
+        }
+        return DownloadManager.STATUS_FAILED;
+    }
+
+    private void displayErrorResult(Context context, Intent updateIntent, int failureMessageResId) {
         final UpdateApplication app = (UpdateApplication) context.getApplicationContext();
         if (app.isMainActivityActive()) {
-            if (failureMessageResId >= 0) {
-                Toast.makeText(context, failureMessageResId, Toast.LENGTH_LONG).show();
-            } else {
-                context.startActivity(updateIntent);
-            }
+            Toast.makeText(context, failureMessageResId, Toast.LENGTH_LONG).show();
         } else {
-            // Get the notification ready
-            PendingIntent contentIntent = PendingIntent.getActivity(context, 1,
-                    updateIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
-            Notification.Builder builder = new Notification.Builder(context)
-                    .setWhen(System.currentTimeMillis())
-                    .setContentIntent(contentIntent)
-                    .setAutoCancel(true);
+            DownloadNotifier.notifyDownloadError(context, updateIntent, failureMessageResId);
+        }
+    }
 
-            if (failureMessageResId >= 0) {
-                builder.setSmallIcon(android.R.drawable.stat_notify_error);
-                builder.setContentTitle(context.getString(R.string.not_download_failure));
-                builder.setContentText(context.getString(failureMessageResId));
-                builder.setTicker(context.getString(R.string.not_download_failure));
-            } else {
-                String updateUiName = UpdateInfo.extractUiName(updateFile.getName());
-
-                builder.setSmallIcon(R.drawable.cm_updater);
-                builder.setContentTitle(context.getString(R.string.not_download_success));
-                builder.setContentText(updateUiName);
-                builder.setTicker(context.getString(R.string.not_download_success));
-
-                Notification.BigTextStyle style = new Notification.BigTextStyle();
-                style.setBigContentTitle(context.getString(R.string.not_download_success));
-                style.bigText(context.getString(R.string.not_download_install_notice, updateUiName));
-                builder.setStyle(style);
-
-                Intent installIntent = new Intent(context, DownloadReceiver.class);
-                installIntent.setAction(ACTION_INSTALL_UPDATE);
-                installIntent.putExtra(EXTRA_FILENAME, updateFile.getName());
-
-                PendingIntent installPi = PendingIntent.getBroadcast(context, 0,
-                        installIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
-                builder.addAction(R.drawable.ic_tab_install,
-                        context.getString(R.string.not_action_install_update), installPi);
-            }
-
-            final NotificationManager nm =
-                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            nm.notify(R.string.not_download_success, builder.build());
+    private void displaySuccessResult(Context context, Intent updateIntent, File updateFile) {
+        final UpdateApplication app = (UpdateApplication) context.getApplicationContext();
+        if (app.isMainActivityActive()) {
+            context.startActivity(updateIntent);
+        } else {
+            DownloadNotifier.notifyDownloadComplete(context, updateIntent, updateFile);
         }
     }
 }
