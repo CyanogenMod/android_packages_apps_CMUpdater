@@ -571,7 +571,9 @@ public class UpdatesSettings extends PreferenceActivity implements
         final LinkedList<UpdateInfo> updates = new LinkedList<UpdateInfo>();
 
         for (String fileName : existingFiles) {
-            updates.add(new UpdateInfo(fileName));
+            UpdateInfo.Builder builder = new UpdateInfo.Builder();
+            builder.setFileName(fileName);
+            updates.add(builder.build());
         }
         for (UpdateInfo update : availableUpdates) {
             // Only add updates to the list that are not already downloaded
