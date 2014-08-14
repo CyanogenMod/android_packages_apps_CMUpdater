@@ -359,32 +359,20 @@ public class UpdateCheckService extends IntentService {
     }
 
     private UpdateInfo parseUpdateJSONObject(JSONObject obj, int updateType) throws JSONException {
-        String fileName = obj.getString("filename");
-        String url = obj.getString("url");
-        String md5 = obj.getString("md5sum");
-        int apiLevel = obj.getInt("api_level");
-        long timestamp = obj.getLong("timestamp");
-        String typeString = obj.getString("channel");
-        String incremental = obj.getString("incremental");
-        UpdateInfo.Type type;
+        UpdateInfo ui = new UpdateInfo.Builder()
+                .setFileName(obj.getString("filename"))
+                .setDownloadUrl(obj.getString("url"))
+                .setMD5Sum(obj.getString("md5sum"))
+                .setApiLevel(obj.getInt("api_level"))
+                .setBuildDate(obj.getLong("timestamp"))
+                .setType(obj.getString("channel"))
+                .setIncremental(obj.getString("incremental"))
+                .build();
 
-        if (TextUtils.equals(typeString, "stable")) {
-            type = UpdateInfo.Type.STABLE;
-        } else if (TextUtils.equals(typeString, "RC")) {
-            type = UpdateInfo.Type.RC;
-        } else if (TextUtils.equals(typeString, "snapshot")) {
-            type = UpdateInfo.Type.SNAPSHOT;
-        } else if (TextUtils.equals(typeString, "nightly")) {
-            type = UpdateInfo.Type.NIGHTLY;
-        } else {
-            type = UpdateInfo.Type.UNKNOWN;
-        }
-
-        UpdateInfo ui = new UpdateInfo(fileName, timestamp, apiLevel, url, md5, type, incremental);
         boolean includeAll = updateType == Constants.UPDATE_TYPE_ALL;
 
         if (!includeAll && !ui.isNewerThanInstalled()) {
-            Log.d(TAG, "Build " + fileName + " is older than the installed build");
+            Log.d(TAG, "Build " + ui.getFileName() + " is older than the installed build");
             return null;
         }
 

@@ -139,21 +139,21 @@ public class DownloadService extends IntentService {
 
     private UpdateInfo parseJSON(String json, UpdateInfo ui) {
         try {
-            JSONObject jsonObject = new JSONObject(json);
+            JSONObject obj = new JSONObject(json);
 
-            if (jsonObject.has("errors")) {
+            if (obj.has("errors")) {
                 return null;
             }
 
-            long date = jsonObject.getLong("date_created_unix");
-            String fileName = jsonObject.getString("filename");
-            String url = jsonObject.getString("download_url");
-            int apiLevel = ui.getApiLevel();
-            String md5 = jsonObject.getString("md5sum");
-            UpdateInfo.Type type = UpdateInfo.Type.INCREMENTAL;
-            String incremental = jsonObject.getString("incremental");
-
-            return new UpdateInfo(fileName, date, apiLevel, url, md5, type, incremental);
+            return new UpdateInfo.Builder()
+                    .setFileName(obj.getString("filename"))
+                    .setDownloadUrl(obj.getString("download_url"))
+                    .setMD5Sum(obj.getString("md5sum"))
+                    .setApiLevel(ui.getApiLevel())
+                    .setBuildDate(obj.getLong("date_created_unix"))
+                    .setType(UpdateInfo.Type.INCREMENTAL)
+                    .setIncremental(obj.getString("incremental"))
+                    .build();
         } catch (JSONException e) {
             Log.e(TAG, "JSONException", e);
             return null;
