@@ -16,8 +16,6 @@ import android.content.Context;
 import android.content.Intent;
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.misc.UpdateInfo;
-import com.cyanogenmod.updater.receiver.DownloadReceiver;
-
 import java.io.File;
 
 public class DownloadNotifier {
