@@ -49,10 +49,26 @@ public class HttpRequestExecutor {
     }
 
     public synchronized void abort() {
-        if (mRequest != null) {
-            mRequest.abort();
+        if (mAborted) {
+            return;
         }
         mAborted = true;
+        if (mRequest != null) {
+            abortRequest(mRequest);
+        }
+    }
+
+    private void abortRequest(final HttpRequestBase request) {
+        // HttpRequestBase.abort() may cause network activity, which must not happen in the
+        // main thread. Spawn off the cleanup into a separate thread to avoid crashing due
+        // to NetworkOnMainThreadException.
+        final Thread abortThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                request.abort();
+            }
+        });
+        abortThread.start();
     }
 
     public synchronized boolean isAborted() {
