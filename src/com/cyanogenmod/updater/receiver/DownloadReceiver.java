@@ -74,7 +74,7 @@ public class DownloadReceiver extends BroadcastReceiver{
         if (enqueued < 0 || id < 0 || id != enqueued) {
             return;
         }
-        
+
         String downloadedMD5 = prefs.getString(Constants.DOWNLOAD_MD5, "");
         String incrementalFor = prefs.getString(Constants.DOWNLOAD_INCREMENTAL_FOR, null);
 
