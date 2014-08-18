@@ -39,18 +39,14 @@ public class DownloadCompleteIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        long id;
-        String downloadedMD5;
-        String incrementalFor;
-
-        if (intent.hasExtra(Constants.DOWNLOAD_ID) &&
-                intent.hasExtra(Constants.DOWNLOAD_MD5)) {
-            id = intent.getLongExtra(Constants.DOWNLOAD_ID, -1);
-            downloadedMD5 = intent.getStringExtra(Constants.DOWNLOAD_MD5);
-            incrementalFor = intent.getStringExtra(Constants.DOWNLOAD_INCREMENTAL_FOR);
-        } else {
+        if (!intent.hasExtra(Constants.DOWNLOAD_ID) ||
+                !intent.hasExtra(Constants.DOWNLOAD_MD5)) {
             return;
         }
+
+        long id = intent.getLongExtra(Constants.DOWNLOAD_ID, -1);
+        String downloadedMD5 = intent.getStringExtra(Constants.DOWNLOAD_MD5);
+        String incrementalFor = intent.getStringExtra(Constants.DOWNLOAD_INCREMENTAL_FOR);
 
         Intent updateIntent = new Intent(this, UpdatesSettings.class);
         updateIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
@@ -77,8 +73,8 @@ public class DownloadCompleteIntentService extends IntentService {
             if (MD5.checkMD5(downloadedMD5, updateFile)) {
                 // We passed. Bring the main app to the foreground and trigger download completed
                 updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_ID, id);
-                updateIntent.putExtra(
-                        UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_PATH, completedFileFullPath);
+                updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_PATH,
+                        completedFileFullPath);
                 updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_INCREMENTAL_FOR,
                         incrementalFor);
                 displaySuccessResult(updateIntent, updateFile);
