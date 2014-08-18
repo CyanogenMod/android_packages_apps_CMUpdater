@@ -21,23 +21,23 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+
 import com.cyanogenmod.updater.R;
+import com.cyanogenmod.updater.UpdateApplication;
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.UpdateInfo;
 import com.cyanogenmod.updater.receiver.DownloadReceiver;
-import com.cyanogenmod.updater.utils.HttpRequestExecutor;
+import com.cyanogenmod.updater.requests.UpdatesJsonObjectRequest;
 import com.cyanogenmod.updater.utils.Utils;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 
 public class DownloadService extends IntentService {
@@ -45,7 +45,6 @@ public class DownloadService extends IntentService {
 
     private static final String EXTRA_UPDATE_INFO = "update_info";
 
-    private HttpRequestExecutor mHttpExecutor;
     private SharedPreferences mPrefs;
 
     public static void start(Context context, UpdateInfo ui) {
@@ -60,7 +59,6 @@ public class DownloadService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        mHttpExecutor = new HttpRequestExecutor();
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         UpdateInfo ui = intent.getParcelableExtra(EXTRA_UPDATE_INFO);
 
@@ -76,23 +74,8 @@ public class DownloadService extends IntentService {
         Log.d(TAG, "Looking for incremental ota for source=" + sourceIncremental + ", target="
                 + ui.getIncremental());
 
-        HttpPost request = buildRequest(sourceIncremental, ui);
-        HttpEntity entity = mHttpExecutor.execute(request);
-        if (entity == null || mHttpExecutor.isAborted()) {
-            downloadFullZip(ui);
-            return;
-        }
-
-        String json = EntityUtils.toString(entity, "UTF-8");
-        UpdateInfo incrementalUpdateInfo = parseJSON(json, ui);
-
-        if (incrementalUpdateInfo == null) {
-            downloadFullZip(ui);
-            return;
-        } else {
-            downloadIncremental(incrementalUpdateInfo, ui.getFileName());
-            return;
-        }
+        UpdatesJsonObjectRequest request = buildRequest(sourceIncremental, ui);
+        UpdateApplication.getQueue().add(request);
     }
 
     private String getServerUri() {
@@ -104,26 +87,48 @@ public class DownloadService extends IntentService {
         return getString(R.string.conf_update_server_url_def);
     }
 
-    private HttpPost buildRequest(String sourceIncremental, UpdateInfo ui) {
+    private UpdatesJsonObjectRequest buildRequest(String sourceIncremental, final UpdateInfo ui) {
         URI requestUri = URI.create(getServerUri() + "/v1/build/get_delta");
-        HttpPost request = new HttpPost(requestUri);
-
-        // Add request headers
-        String userAgent = Utils.getUserAgentString(this);
-        if (userAgent != null) {
-            request.addHeader("User-Agent", userAgent);
-        }
-        request.addHeader("Content-Type", "application/json");
+        UpdatesJsonObjectRequest request;
 
         // Set request body
         try {
-            JSONObject requestBody = buildRequestBody(sourceIncremental, ui);
-            request.setEntity(new StringEntity(requestBody.toString()));
+            request = new UpdatesJsonObjectRequest(requestUri.toASCIIString(),
+                    Utils.getUserAgentString(this), buildRequestBody(sourceIncremental, ui),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            VolleyLog.v("Response:%n %s", response);
+                            if (TextUtils.isEmpty(response.toString())) {
+                                downloadFullZip(ui);
+                                return;
+                            }
+
+                            UpdateInfo incrementalUpdateInfo = parseJSON(response.toString(), ui);
+
+                            if (incrementalUpdateInfo == null) {
+                                downloadFullZip(ui);
+                                return;
+                            } else {
+                                downloadIncremental(incrementalUpdateInfo, ui.getFileName());
+                                return;
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.e("Error: ", error.getMessage());
+                }
+
+            });
+            // Add request headers
+            String userAgent = Utils.getUserAgentString(this);
+            if (userAgent != null) {
+                request.addHeader("User-Agent", userAgent);
+            }
+            request.addHeader("Content-Type", "application/json");
         } catch (JSONException e) {
             Log.e(TAG, "JSONException", e);
-            return null;
-        } catch (UnsupportedEncodingException e) {
-            Log.e(TAG, "UnsupportedEncodingException", e);
             return null;
         }
 
