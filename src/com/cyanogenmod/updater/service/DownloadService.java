@@ -21,32 +21,33 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+
 import com.cyanogenmod.updater.R;
+import com.cyanogenmod.updater.UpdateApplication;
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.UpdateInfo;
 import com.cyanogenmod.updater.receiver.DownloadReceiver;
-import com.cyanogenmod.updater.utils.HttpRequestExecutor;
+import com.cyanogenmod.updater.requests.UpdatesJsonObjectRequest;
 import com.cyanogenmod.updater.utils.Utils;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 
-public class DownloadService extends IntentService {
+public class DownloadService extends IntentService
+        implements Response.Listener<JSONObject>, Response.ErrorListener {
     private static final String TAG = DownloadService.class.getSimpleName();
 
     private static final String EXTRA_UPDATE_INFO = "update_info";
 
-    private HttpRequestExecutor mHttpExecutor;
     private SharedPreferences mPrefs;
+    private UpdateInfo mInfo = null;
 
     public static void start(Context context, UpdateInfo ui) {
         Intent intent = new Intent(context, DownloadService.class);
@@ -60,39 +61,28 @@ public class DownloadService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        mHttpExecutor = new HttpRequestExecutor();
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        UpdateInfo ui = intent.getParcelableExtra(EXTRA_UPDATE_INFO);
+        mInfo = intent.getParcelableExtra(EXTRA_UPDATE_INFO);
+
+        if (mInfo == null) {
+            Log.e(TAG, "Intent UpdateInfo extras were null");
+            return;
+        }
 
         try {
-            getIncremental(ui);
+            getIncremental();
         } catch (IOException e) {
-            downloadFullZip(ui);
+            downloadFullZip();
         }
     }
 
-    private void getIncremental(UpdateInfo ui) throws IOException {
+    private void getIncremental() throws IOException {
         String sourceIncremental = Utils.getIncremental();
         Log.d(TAG, "Looking for incremental ota for source=" + sourceIncremental + ", target="
-                + ui.getIncremental());
+                + mInfo.getIncremental());
 
-        HttpPost request = buildRequest(sourceIncremental, ui);
-        HttpEntity entity = mHttpExecutor.execute(request);
-        if (entity == null || mHttpExecutor.isAborted()) {
-            downloadFullZip(ui);
-            return;
-        }
-
-        String json = EntityUtils.toString(entity, "UTF-8");
-        UpdateInfo incrementalUpdateInfo = parseJSON(json, ui);
-
-        if (incrementalUpdateInfo == null) {
-            downloadFullZip(ui);
-            return;
-        } else {
-            downloadIncremental(incrementalUpdateInfo, ui.getFileName());
-            return;
-        }
+        UpdatesJsonObjectRequest request = buildRequest(sourceIncremental);
+        ((UpdateApplication) getApplicationContext()).getQueue().add(request);
     }
 
     private String getServerUri() {
@@ -104,40 +94,31 @@ public class DownloadService extends IntentService {
         return getString(R.string.conf_update_server_url_def);
     }
 
-    private HttpPost buildRequest(String sourceIncremental, UpdateInfo ui) {
+    private UpdatesJsonObjectRequest buildRequest(String sourceIncremental) {
         URI requestUri = URI.create(getServerUri() + "/v1/build/get_delta");
-        HttpPost request = new HttpPost(requestUri);
-
-        // Add request headers
-        String userAgent = Utils.getUserAgentString(this);
-        if (userAgent != null) {
-            request.addHeader("User-Agent", userAgent);
-        }
-        request.addHeader("Content-Type", "application/json");
+        UpdatesJsonObjectRequest request;
 
         // Set request body
         try {
-            JSONObject requestBody = buildRequestBody(sourceIncremental, ui);
-            request.setEntity(new StringEntity(requestBody.toString()));
+            request = new UpdatesJsonObjectRequest(requestUri.toASCIIString(),
+                    Utils.getUserAgentString(this), buildRequestBody(sourceIncremental),
+                    this, this);
         } catch (JSONException e) {
             Log.e(TAG, "JSONException", e);
-            return null;
-        } catch (UnsupportedEncodingException e) {
-            Log.e(TAG, "UnsupportedEncodingException", e);
             return null;
         }
 
         return request;
     }
 
-    private JSONObject buildRequestBody(String sourceIncremental, UpdateInfo ui) throws JSONException {
+    private JSONObject buildRequestBody(String sourceIncremental) throws JSONException {
         JSONObject body = new JSONObject();
         body.put("source_incremental", sourceIncremental);
-        body.put("target_incremental", ui.getIncremental());
+        body.put("target_incremental", mInfo.getIncremental());
         return body;
     }
 
-    private UpdateInfo parseJSON(String json, UpdateInfo ui) {
+    private UpdateInfo parseJSON(String json) {
         try {
             JSONObject obj = new JSONObject(json);
 
@@ -149,7 +130,7 @@ public class DownloadService extends IntentService {
                     .setFileName(obj.getString("filename"))
                     .setDownloadUrl(obj.getString("download_url"))
                     .setMD5Sum(obj.getString("md5sum"))
-                    .setApiLevel(ui.getApiLevel())
+                    .setApiLevel(mInfo.getApiLevel())
                     .setBuildDate(obj.getLong("date_created_unix"))
                     .setType(UpdateInfo.Type.INCREMENTAL)
                     .setIncremental(obj.getString("incremental"))
@@ -178,8 +159,8 @@ public class DownloadService extends IntentService {
         return dm.enqueue(request);
     }
 
-    private void downloadIncremental(UpdateInfo ui, String originalName) {
-        Log.v(TAG, "Downloading incremental zip: " + ui.getDownloadUrl());
+    private void downloadIncremental(String originalName) {
+        Log.v(TAG, "Downloading incremental zip: " + mInfo.getDownloadUrl());
         // If directory doesn't exist, create it
         File directory = Utils.makeUpdateFolder();
         if (!directory.exists()) {
@@ -190,16 +171,16 @@ public class DownloadService extends IntentService {
         // Build the name of the file to download, adding .partial at the end.  It will get
         // stripped off when the download completes
         String sourceIncremental = Utils.getIncremental();
-        String targetIncremental = ui.getIncremental();
+        String targetIncremental = mInfo.getIncremental();
         String fileName = "incremental-" + sourceIncremental + "-" + targetIncremental + ".zip";
         String fullFilePath = "file://" + directory.getAbsolutePath() + "/" + fileName + ".partial";
 
-        long downloadId = enqueueDownload(ui.getDownloadUrl(), fullFilePath);
+        long downloadId = enqueueDownload(mInfo.getDownloadUrl(), fullFilePath);
 
         // Store in shared preferences
         mPrefs.edit()
                 .putLong(Constants.DOWNLOAD_ID, downloadId)
-                .putString(Constants.DOWNLOAD_MD5, ui.getMD5Sum())
+                .putString(Constants.DOWNLOAD_MD5, mInfo.getMD5Sum())
                 .putString(Constants.DOWNLOAD_INCREMENTAL_FOR, originalName)
                 .apply();
 
@@ -210,7 +191,7 @@ public class DownloadService extends IntentService {
         sendBroadcast(intent);
     }
 
-    private void downloadFullZip(UpdateInfo ui) {
+    private void downloadFullZip() {
         Log.v(TAG, "Downloading full zip");
 
         // If directory doesn't exist, create it
@@ -222,14 +203,14 @@ public class DownloadService extends IntentService {
 
         // Build the name of the file to download, adding .partial at the end.  It will get
         // stripped off when the download completes
-        String fullFilePath = "file://" + directory.getAbsolutePath() + "/" + ui.getFileName() + ".partial";
+        String fullFilePath = "file://" + directory.getAbsolutePath() + "/" + mInfo.getFileName() + ".partial";
 
-        long downloadId = enqueueDownload(ui.getDownloadUrl(), fullFilePath);
+        long downloadId = enqueueDownload(mInfo.getDownloadUrl(), fullFilePath);
 
         // Store in shared preferences
         mPrefs.edit()
                 .putLong(Constants.DOWNLOAD_ID, downloadId)
-                .putString(Constants.DOWNLOAD_MD5, ui.getMD5Sum())
+                .putString(Constants.DOWNLOAD_MD5, mInfo.getMD5Sum())
                 .apply();
 
         Utils.cancelNotification(this);
@@ -237,5 +218,29 @@ public class DownloadService extends IntentService {
         Intent intent = new Intent(DownloadReceiver.ACTION_DOWNLOAD_STARTED);
         intent.putExtra(DownloadManager.EXTRA_DOWNLOAD_ID, downloadId);
         sendBroadcast(intent);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        VolleyLog.e("Error: ", error.getMessage());
+    }
+
+    @Override
+    public void onResponse(JSONObject response) {
+        VolleyLog.v("Response:%n %s", response);
+        if (TextUtils.isEmpty(response.toString())) {
+            downloadFullZip();
+            return;
+        }
+
+        UpdateInfo incrementalUpdateInfo = parseJSON(response.toString());
+
+        if (incrementalUpdateInfo == null) {
+            downloadFullZip();
+            return;
+        } else {
+            downloadIncremental(mInfo.getFileName());
+            return;
+        }
     }
 }
