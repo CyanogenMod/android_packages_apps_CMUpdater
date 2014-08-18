@@ -22,28 +22,29 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.UpdateApplication;
+import com.cyanogenmod.updater.requests.ChangeLogRequest;
+import com.cyanogenmod.updater.requests.UpdatesJsonObjectRequest;
 import com.cyanogenmod.updater.UpdatesSettings;
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.State;
 import com.cyanogenmod.updater.misc.UpdateInfo;
 import com.cyanogenmod.updater.receiver.DownloadReceiver;
-import com.cyanogenmod.updater.utils.HttpRequestExecutor;
 import com.cyanogenmod.updater.utils.Utils;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -53,7 +54,9 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class UpdateCheckService extends IntentService {
+public class UpdateCheckService extends IntentService
+        implements Response.ErrorListener, Response.Listener<JSONObject> {
+
     private static final String TAG = "UpdateCheckService";
 
     // Set this to true if the update service should check for smaller, test updates
@@ -76,8 +79,6 @@ public class UpdateCheckService extends IntentService {
     // max. number of updates listed in the expanded notification
     private static final int EXPANDED_NOTIF_UPDATE_COUNT = 4;
 
-    private HttpRequestExecutor mHttpExecutor;
-
     public UpdateCheckService() {
         super("UpdateCheckService");
     }
@@ -85,13 +86,7 @@ public class UpdateCheckService extends IntentService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (TextUtils.equals(intent.getAction(), ACTION_CANCEL_CHECK)) {
-            synchronized (this) {
-                if (mHttpExecutor != null) {
-                    cleanupHttpExecutor(mHttpExecutor);
-                    mHttpExecutor = null;
-                }
-            }
-
+            ((UpdateApplication) getApplicationContext()).getQueue().cancelAll(null);
             return START_NOT_STICKY;
         }
 
@@ -100,27 +95,18 @@ public class UpdateCheckService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        synchronized (this) {
-            mHttpExecutor = new HttpRequestExecutor();
-        }
-
         if (!Utils.isOnline(this)) {
             // Only check for updates if the device is actually connected to a network
             Log.i(TAG, "Could not check for updates. Not connected to the network.");
             return;
         }
+        getAvailableUpdates();
+    }
 
-        // Start the update check
-        Intent finishedIntent = new Intent(ACTION_CHECK_FINISHED);
-        LinkedList<UpdateInfo> availableUpdates;
-        try {
-            availableUpdates = getAvailableUpdatesAndFillIntent(finishedIntent);
-        } catch (IOException e) {
-            Log.e(TAG, "Could not check for updates", e);
-            availableUpdates = null;
-        }
+    private void recordAvailableUpdates(LinkedList<UpdateInfo> availableUpdates,
+            Intent finishedIntent) {
 
-        if (availableUpdates == null || mHttpExecutor.isAborted()) {
+        if (availableUpdates == null) {
             sendBroadcast(finishedIntent);
             return;
         }
@@ -194,7 +180,7 @@ public class UpdateCheckService extends IntentService {
             }
             if (added != count) {
                 inbox.setSummaryText(res.getQuantityString(R.plurals.not_additional_count,
-                            count - added, count - added));
+                        count - added, count - added));
             }
             builder.setStyle(inbox);
             builder.setNumber(availableUpdates.size());
@@ -218,27 +204,6 @@ public class UpdateCheckService extends IntentService {
         sendBroadcast(finishedIntent);
     }
 
-    // HttpRequestExecutor.abort() may cause network activity, which must not happen in the
-    // main thread. Spawn off the cleanup into a separate thread to avoid crashing due to
-    // NetworkOnMainThreadException.
-    private void cleanupHttpExecutor(final HttpRequestExecutor executor) {
-        final Thread abortThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                executor.abort();
-            }
-        });
-        abortThread.start();
-    }
-
-    private void addRequestHeaders(HttpRequestBase request) {
-        String userAgent = Utils.getUserAgentString(this);
-        if (userAgent != null) {
-            request.addHeader("User-Agent", userAgent);
-        }
-        request.addHeader("Cache-Control", "no-cache");
-    }
-
     private URI getServerURI() {
         String propertyUpdateUri = SystemProperties.get("cm.updater.uri");
         if (!TextUtils.isEmpty(propertyUpdateUri)) {
@@ -249,56 +214,23 @@ public class UpdateCheckService extends IntentService {
         return URI.create(configUpdateUri);
     }
 
-    private LinkedList<UpdateInfo> getAvailableUpdatesAndFillIntent(Intent intent) throws IOException {
+    private void getAvailableUpdates() {
         // Get the type of update we should check for
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int updateType = prefs.getInt(Constants.UPDATE_TYPE_PREF, 0);
 
         // Get the actual ROM Update Server URL
         URI updateServerUri = getServerURI();
-        HttpPost request = new HttpPost(updateServerUri);
-
+        UpdatesJsonObjectRequest request;
         try {
-            JSONObject requestJson = buildUpdateRequest(updateType);
-            request.setEntity(new StringEntity(requestJson.toString()));
+            request = new UpdatesJsonObjectRequest(updateServerUri.toASCIIString(),
+                    Utils.getUserAgentString(this), buildUpdateRequest(updateType), this, this);
         } catch (JSONException e) {
             Log.e(TAG, "Could not build request", e);
-            return null;
-        }
-        addRequestHeaders(request);
-
-        HttpEntity entity = mHttpExecutor.execute(request);
-        if (entity == null || mHttpExecutor.isAborted()) {
-            return null;
+            return;
         }
 
-        LinkedList<UpdateInfo> lastUpdates = State.loadState(this);
-
-        // Read the ROM Infos
-        String json = EntityUtils.toString(entity, "UTF-8");
-        LinkedList<UpdateInfo> updates = parseJSON(json, updateType);
-
-        if (mHttpExecutor.isAborted()) {
-            return null;
-        }
-
-        int newUpdates = 0, realUpdates = 0;
-        for (UpdateInfo ui : updates) {
-            if (!lastUpdates.contains(ui)) {
-                newUpdates++;
-            }
-            if (ui.isNewerThanInstalled()) {
-                realUpdates++;
-            }
-        }
-
-        intent.putExtra(EXTRA_UPDATE_COUNT, updates.size());
-        intent.putExtra(EXTRA_REAL_UPDATE_COUNT, realUpdates);
-        intent.putExtra(EXTRA_NEW_UPDATE_COUNT, newUpdates);
-
-        State.saveState(this, updates);
-
-        return updates;
+        ((UpdateApplication) getApplicationContext()).getQueue().add(request);
     }
 
     private JSONObject buildUpdateRequest(int updateType) throws JSONException {
@@ -317,7 +249,6 @@ public class UpdateCheckService extends IntentService {
                 channels.put("snapshot");
                 break;
         }
-
         JSONObject params = new JSONObject();
         params.put("device", TESTING_DOWNLOAD ? "cmtestdevice" : Utils.getDeviceType());
         params.put("channels", channels);
@@ -340,9 +271,6 @@ public class UpdateCheckService extends IntentService {
             Log.d(TAG, "Got update JSON data with " + length + " entries");
 
             for (int i = 0; i < length; i++) {
-                if (mHttpExecutor.isAborted()) {
-                    break;
-                }
                 if (updateList.isNull(i)) {
                     continue;
                 }
@@ -385,60 +313,48 @@ public class UpdateCheckService extends IntentService {
         return ui;
     }
 
-    private void fetchChangeLog(UpdateInfo info, String url) {
-        Log.d(TAG, "Getting change log for " + info + ", url " + url);
-
+    private void parseChangeLogFromResponse(UpdateInfo info, String response) {
+        boolean finished = false;
         BufferedReader reader = null;
         BufferedWriter writer = null;
-        boolean finished = false;
 
         try {
-            HttpGet request = new HttpGet(URI.create(url));
-            addRequestHeaders(request);
+            writer = new BufferedWriter(
+                    new FileWriter(info.getChangeLogFile(UpdateCheckService.this)));
+            ByteArrayInputStream bais = new ByteArrayInputStream(response.getBytes());
+            reader = new BufferedReader(new InputStreamReader(bais), 2 * 1024);
+            boolean categoryMatch = false, hasData = false;
+            String line;
 
-            HttpEntity entity = mHttpExecutor.execute(request);
-            writer = new BufferedWriter(new FileWriter(info.getChangeLogFile(this)));
-
-            if (entity != null) {
-                reader = new BufferedReader(new InputStreamReader(entity.getContent()), 2 * 1024);
-                boolean categoryMatch = false, hasData = false;
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    line = line.trim();
-                    if (mHttpExecutor.isAborted()) {
-                        break;
-                    }
-                    if (line.isEmpty()) {
-                        continue;
-                    }
-
-                    if (line.startsWith("=")) {
-                        categoryMatch = !categoryMatch;
-                    } else if (categoryMatch) {
-                        if (hasData) {
-                            writer.append("<br />");
-                        }
-                        writer.append("<b><u>");
-                        writer.append(line);
-                        writer.append("</u></b>");
-                        writer.append("<br />");
-                        hasData = true;
-                    } else if (line.startsWith("*")) {
-                        writer.append("<br /><b>");
-                        writer.append(line.replaceAll("\\*", ""));
-                        writer.append("</b>");
-                        writer.append("<br />");
-                        hasData = true;
-                    } else {
-                        writer.append("&#8226;&nbsp;");
-                        writer.append(line);
-                        writer.append("<br />");
-                        hasData = true;
-                    }
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty()) {
+                    continue;
                 }
-            } else {
-                writer.write("");
+
+                if (line.startsWith("=")) {
+                    categoryMatch = !categoryMatch;
+                } else if (categoryMatch) {
+                    if (hasData) {
+                        writer.append("<br />");
+                    }
+                    writer.append("<b><u>");
+                    writer.append(line);
+                    writer.append("</u></b>");
+                    writer.append("<br />");
+                    hasData = true;
+                } else if (line.startsWith("*")) {
+                    writer.append("<br /><b>");
+                    writer.append(line.replaceAll("\\*", ""));
+                    writer.append("</b>");
+                    writer.append("<br />");
+                    hasData = true;
+                } else {
+                    writer.append("&#8226;&nbsp;");
+                    writer.append(line);
+                    writer.append("<br />");
+                    hasData = true;
+                }
             }
             finished = true;
         } catch (IOException e) {
@@ -462,7 +378,56 @@ public class UpdateCheckService extends IntentService {
         }
 
         if (!finished) {
-            info.getChangeLogFile(this).delete();
+            info.getChangeLogFile(UpdateCheckService.this).delete();
         }
+    }
+
+    private void fetchChangeLog(final UpdateInfo info, String url) {
+        Log.d(TAG, "Getting change log for " + info + ", url " + url);
+
+        final Response.Listener<String> successListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                VolleyLog.v("Response:%n %s", response);
+                parseChangeLogFromResponse(info, response);
+            }
+        };
+
+        ChangeLogRequest request = new ChangeLogRequest(Request.Method.GET, url,
+                Utils.getUserAgentString(this), successListener, this);
+
+        ((UpdateApplication) getApplicationContext()).getQueue().add(request);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError volleyError) {
+        VolleyLog.e("Error: ", volleyError.getMessage());
+    }
+
+    @Override
+    public void onResponse(JSONObject jsonObject) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        int updateType = prefs.getInt(Constants.UPDATE_TYPE_PREF, 0);
+
+        LinkedList<UpdateInfo> lastUpdates = State.loadState(this);
+        LinkedList<UpdateInfo> updates = parseJSON(jsonObject.toString(), updateType);
+
+        int newUpdates = 0, realUpdates = 0;
+        for (UpdateInfo ui : updates) {
+            if (!lastUpdates.contains(ui)) {
+                newUpdates++;
+            }
+            if (ui.isNewerThanInstalled()) {
+                realUpdates++;
+            }
+        }
+
+        Intent intent = new Intent(ACTION_CHECK_FINISHED);
+        intent.putExtra(EXTRA_UPDATE_COUNT, updates.size());
+        intent.putExtra(EXTRA_REAL_UPDATE_COUNT, realUpdates);
+        intent.putExtra(EXTRA_NEW_UPDATE_COUNT, newUpdates);
+
+        recordAvailableUpdates(updates, intent);
+        State.saveState(this, updates);
     }
 }
