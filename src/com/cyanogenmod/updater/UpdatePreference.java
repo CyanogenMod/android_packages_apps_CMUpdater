@@ -25,6 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cyanogenmod.updater.misc.FetchChangeLogTask;
 import com.cyanogenmod.updater.misc.UpdateInfo;
 
 import java.io.File;
@@ -131,42 +132,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
     @Override
     public void onClick(View v) {
         final Context context = getContext();
-        final File changeLog = mUpdateInfo.getChangeLogFile(context);
-
-        if (!changeLog.exists()) {
-            // Change log could not be fetched
-            Toast.makeText(context, R.string.failed_to_load_changelog, Toast.LENGTH_SHORT).show();
-        } else if (changeLog.length() == 0) {
-            // Change log is empty
-            Toast.makeText(context, R.string.no_changelog_alert, Toast.LENGTH_SHORT).show();
-        } else {
-            // Prepare the dialog box content
-            final LayoutInflater inflater = LayoutInflater.from(context);
-            final View view = inflater.inflate(R.layout.change_log_dialog, null);
-            final View progressContainer = view.findViewById(R.id.progress);
-            final NotifyingWebView changeLogView =
-                    (NotifyingWebView) view.findViewById(R.id.changelog);
-
-            changeLogView.setOnInitialContentReadyListener(
-                    new NotifyingWebView.OnInitialContentReadyListener() {
-                @Override
-                public void onInitialContentReady(WebView webView) {
-                    progressContainer.setVisibility(View.GONE);
-                    changeLogView.setVisibility(View.VISIBLE);
-                }
-            });
-            changeLogView.getSettings().setTextZoom(80);
-            changeLogView.setBackgroundColor(
-                    context.getResources().getColor(android.R.color.darker_gray));
-            changeLogView.loadUrl(Uri.fromFile(changeLog).toString());
-
-            // Prepare the dialog box
-            new AlertDialog.Builder(context)
-                    .setTitle(R.string.changelog_dialog_title)
-                    .setView(view)
-                    .setPositiveButton(R.string.dialog_close, null)
-                    .show();
-        }
+        new FetchChangeLogTask(context, mUpdateInfo).execute();
     }
 
     private void confirmDelete() {
