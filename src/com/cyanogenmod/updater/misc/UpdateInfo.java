@@ -40,6 +40,7 @@ public class UpdateInfo implements Parcelable, Serializable {
     private int mApiLevel;
     private long mBuildDate;
     private String mDownloadUrl;
+    private String mChangelogUrl;
     private String mMd5Sum;
     private String mIncremental;
 
@@ -111,6 +112,13 @@ public class UpdateInfo implements Parcelable, Serializable {
      */
     public String getDownloadUrl() {
         return mDownloadUrl;
+    }
+
+    /**
+     * Get changelog location
+     */
+    public String getChangelogUrl() {
+        return mChangelogUrl;
     }
 
     /**
@@ -223,6 +231,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         private int mApiLevel;
         private long mBuildDate;
         private String mDownloadUrl;
+        private String mChangelogUrl;
         private String mMd5Sum;
         private String mIncremental;
 
@@ -274,6 +283,11 @@ public class UpdateInfo implements Parcelable, Serializable {
             return this;
         }
 
+        public Builder setChangelogUrl(String changelogUrl) {
+            mChangelogUrl = changelogUrl;
+            return this;
+        }
+
         public Builder setMD5Sum(String md5Sum) {
             mMd5Sum = md5Sum;
             return this;
@@ -292,6 +306,7 @@ public class UpdateInfo implements Parcelable, Serializable {
             info.mApiLevel = mApiLevel;
             info.mBuildDate = mBuildDate;
             info.mDownloadUrl = mDownloadUrl;
+            info.mChangelogUrl = mChangelogUrl;
             info.mMd5Sum = mMd5Sum;
             info.mIncremental = mIncremental;
             return info;
