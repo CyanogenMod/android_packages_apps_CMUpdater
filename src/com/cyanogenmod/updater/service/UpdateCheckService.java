@@ -22,14 +22,12 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.UpdateApplication;
-import com.cyanogenmod.updater.requests.ChangeLogRequest;
 import com.cyanogenmod.updater.requests.UpdatesJsonObjectRequest;
 import com.cyanogenmod.updater.UpdatesSettings;
 import com.cyanogenmod.updater.misc.Constants;
@@ -42,12 +40,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.Collections;
 import java.util.Comparator;
@@ -292,6 +284,7 @@ public class UpdateCheckService extends IntentService
         UpdateInfo ui = new UpdateInfo.Builder()
                 .setFileName(obj.getString("filename"))
                 .setDownloadUrl(obj.getString("url"))
+                .setChangelogUrl(obj.getString("changes"))
                 .setMD5Sum(obj.getString("md5sum"))
                 .setApiLevel(obj.getInt("api_level"))
                 .setBuildDate(obj.getLong("timestamp"))
@@ -306,100 +299,7 @@ public class UpdateCheckService extends IntentService
             return null;
         }
 
-        // fetch change log after checking whether to include this build to
-        // avoid useless network traffic
-        if (!ui.getChangeLogFile(this).exists()) {
-            fetchChangeLog(ui, obj.getString("changes"));
-        }
-
         return ui;
-    }
-
-    private void parseChangeLogFromResponse(UpdateInfo info, String response) {
-        boolean finished = false;
-        BufferedReader reader = null;
-        BufferedWriter writer = null;
-
-        try {
-            writer = new BufferedWriter(
-                    new FileWriter(info.getChangeLogFile(UpdateCheckService.this)));
-            ByteArrayInputStream bais = new ByteArrayInputStream(response.getBytes());
-            reader = new BufferedReader(new InputStreamReader(bais), 2 * 1024);
-            boolean categoryMatch = false, hasData = false;
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                line = line.trim();
-                if (line.isEmpty()) {
-                    continue;
-                }
-
-                if (line.startsWith("=")) {
-                    categoryMatch = !categoryMatch;
-                } else if (categoryMatch) {
-                    if (hasData) {
-                        writer.append("<br />");
-                    }
-                    writer.append("<b><u>");
-                    writer.append(line);
-                    writer.append("</u></b>");
-                    writer.append("<br />");
-                    hasData = true;
-                } else if (line.startsWith("*")) {
-                    writer.append("<br /><b>");
-                    writer.append(line.replaceAll("\\*", ""));
-                    writer.append("</b>");
-                    writer.append("<br />");
-                    hasData = true;
-                } else {
-                    writer.append("&#8226;&nbsp;");
-                    writer.append(line);
-                    writer.append("<br />");
-                    hasData = true;
-                }
-            }
-            finished = true;
-        } catch (IOException e) {
-            Log.e(TAG, "Downloading change log for " + info + " failed", e);
-            // keeping finished at false will delete the partially written file below
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    // ignore, not much we can do anyway
-                }
-            }
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-                    // ignore, not much we can do anyway
-                }
-            }
-        }
-
-        if (!finished) {
-            info.getChangeLogFile(UpdateCheckService.this).delete();
-        }
-    }
-
-    private void fetchChangeLog(final UpdateInfo info, String url) {
-        Log.d(TAG, "Getting change log for " + info + ", url " + url);
-
-        final Response.Listener<String> successListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                VolleyLog.v("Response:%n %s", response);
-                parseChangeLogFromResponse(info, response);
-            }
-        };
-
-        ChangeLogRequest request = new ChangeLogRequest(Request.Method.GET, url,
-                Utils.getUserAgentString(this), successListener, this);
-        request.setTag(TAG);
-
-        ((UpdateApplication) getApplicationContext()).getQueue().add(request);
     }
 
     @Override
