@@ -150,14 +150,14 @@ public class DownloadService extends IntentService
         }
     }
 
-    private long enqueueDownload(String downloadUrl, String fullFilePath) {
+    private long enqueueDownload(String downloadUrl, String localFilePath) {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(downloadUrl));
         String userAgent = Utils.getUserAgentString(this);
         if (userAgent != null) {
             request.addRequestHeader("User-Agent", userAgent);
         }
         request.setTitle(getString(R.string.app_name));
-        request.setDestinationUri(Uri.parse(fullFilePath));
+        request.setDestinationUri(Uri.parse(localFilePath));
         request.setAllowedOverRoaming(false);
         request.setVisibleInDownloadsUi(false);
 
@@ -182,9 +182,9 @@ public class DownloadService extends IntentService
         String sourceIncremental = Utils.getIncremental();
         String targetIncremental = mFullUpdateInfo.getIncremental();
         String fileName = "incremental-" + sourceIncremental + "-" + targetIncremental + ".zip";
-        String fullFilePath = "file://" + directory.getAbsolutePath() + "/" + fileName + ".partial";
+        String incrementalFilePath = "file://" + directory.getAbsolutePath() + "/" + fileName + ".partial";
 
-        long downloadId = enqueueDownload(mIncrementalUpdateInfo.getDownloadUrl(), fullFilePath);
+        long downloadId = enqueueDownload(mIncrementalUpdateInfo.getDownloadUrl(), incrementalFilePath);
 
         // Store in shared preferences
         mPrefs.edit()
