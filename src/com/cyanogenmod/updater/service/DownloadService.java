@@ -167,8 +167,8 @@ public class DownloadService extends IntentService
         return dm.enqueue(request);
     }
 
-    private void downloadIncremental(String originalName) {
-        Log.v(TAG, "Downloading incremental zip: " + mInfo.getDownloadUrl());
+    private void downloadIncremental(UpdateInfo incrementalUpdateInfo) {
+        Log.v(TAG, "Downloading incremental zip: " + incrementalUpdateInfo.getDownloadUrl());
         // If directory doesn't exist, create it
         File directory = Utils.makeUpdateFolder();
         if (!directory.exists()) {
@@ -183,13 +183,13 @@ public class DownloadService extends IntentService
         String fileName = "incremental-" + sourceIncremental + "-" + targetIncremental + ".zip";
         String fullFilePath = "file://" + directory.getAbsolutePath() + "/" + fileName + ".partial";
 
-        long downloadId = enqueueDownload(mInfo.getDownloadUrl(), fullFilePath);
+        long downloadId = enqueueDownload(incrementalUpdateInfo.getDownloadUrl(), fullFilePath);
 
         // Store in shared preferences
         mPrefs.edit()
                 .putLong(Constants.DOWNLOAD_ID, downloadId)
-                .putString(Constants.DOWNLOAD_MD5, mInfo.getMD5Sum())
-                .putString(Constants.DOWNLOAD_INCREMENTAL_FOR, originalName)
+                .putString(Constants.DOWNLOAD_MD5, incrementalUpdateInfo.getMD5Sum())
+                .putString(Constants.DOWNLOAD_INCREMENTAL_FOR, mInfo.getFileName())
                 .apply();
 
         Utils.cancelNotification(this);
@@ -242,7 +242,7 @@ public class DownloadService extends IntentService
         if (incrementalUpdateInfo == null) {
             downloadFullZip();
         } else {
-            downloadIncremental(mInfo.getFileName());
+            downloadIncremental(incrementalUpdateInfo);
         }
     }
 }
