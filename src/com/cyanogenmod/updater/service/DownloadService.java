@@ -47,7 +47,8 @@ public class DownloadService extends IntentService
     private static final String EXTRA_UPDATE_INFO = "update_info";
 
     private SharedPreferences mPrefs;
-    private UpdateInfo mInfo = null;
+    private UpdateInfo mFullUpdateInfo = null;
+    private UpdateInfo mIncrementalUpdateInfo = null;
 
     public static void start(Context context, UpdateInfo ui) {
         Intent intent = new Intent(context, DownloadService.class);
@@ -62,9 +63,9 @@ public class DownloadService extends IntentService
     @Override
     protected void onHandleIntent(Intent intent) {
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        mInfo = intent.getParcelableExtra(EXTRA_UPDATE_INFO);
+        mFullUpdateInfo = intent.getParcelableExtra(EXTRA_UPDATE_INFO);
 
-        if (mInfo == null) {
+        if (mFullUpdateInfo == null) {
             Log.e(TAG, "Intent UpdateInfo extras were null");
             return;
         }
@@ -79,7 +80,7 @@ public class DownloadService extends IntentService
     private void getIncremental() throws IOException {
         String sourceIncremental = Utils.getIncremental();
         Log.d(TAG, "Looking for incremental ota for source=" + sourceIncremental + ", target="
-                + mInfo.getIncremental());
+                + mFullUpdateInfo.getIncremental());
 
         UpdatesJsonObjectRequest request = buildRequest(sourceIncremental);
         ((UpdateApplication) getApplicationContext()).getQueue().add(request);
@@ -114,7 +115,7 @@ public class DownloadService extends IntentService
     private JSONObject buildRequestBody(String sourceIncremental) throws JSONException {
         JSONObject body = new JSONObject();
         body.put("source_incremental", sourceIncremental);
-        body.put("target_incremental", mInfo.getIncremental());
+        body.put("target_incremental", mFullUpdateInfo.getIncremental());
         return body;
     }
 
@@ -138,7 +139,7 @@ public class DownloadService extends IntentService
                     .setFileName(obj.getString("filename"))
                     .setDownloadUrl(obj.getString("download_url"))
                     .setMD5Sum(obj.getString("md5sum"))
-                    .setApiLevel(mInfo.getApiLevel())
+                    .setApiLevel(mFullUpdateInfo.getApiLevel())
                     .setBuildDate(obj.getLong("date_created_unix"))
                     .setType(UpdateInfo.Type.INCREMENTAL)
                     .setIncremental(obj.getString("incremental"))
@@ -167,8 +168,8 @@ public class DownloadService extends IntentService
         return dm.enqueue(request);
     }
 
-    private void downloadIncremental(String originalName) {
-        Log.v(TAG, "Downloading incremental zip: " + mInfo.getDownloadUrl());
+    private void downloadIncremental() {
+        Log.v(TAG, "Downloading incremental zip: " + mIncrementalUpdateInfo.getDownloadUrl());
         // If directory doesn't exist, create it
         File directory = Utils.makeUpdateFolder();
         if (!directory.exists()) {
@@ -179,17 +180,17 @@ public class DownloadService extends IntentService
         // Build the name of the file to download, adding .partial at the end.  It will get
         // stripped off when the download completes
         String sourceIncremental = Utils.getIncremental();
-        String targetIncremental = mInfo.getIncremental();
+        String targetIncremental = mFullUpdateInfo.getIncremental();
         String fileName = "incremental-" + sourceIncremental + "-" + targetIncremental + ".zip";
         String fullFilePath = "file://" + directory.getAbsolutePath() + "/" + fileName + ".partial";
 
-        long downloadId = enqueueDownload(mInfo.getDownloadUrl(), fullFilePath);
+        long downloadId = enqueueDownload(mIncrementalUpdateInfo.getDownloadUrl(), fullFilePath);
 
         // Store in shared preferences
         mPrefs.edit()
                 .putLong(Constants.DOWNLOAD_ID, downloadId)
-                .putString(Constants.DOWNLOAD_MD5, mInfo.getMD5Sum())
-                .putString(Constants.DOWNLOAD_INCREMENTAL_FOR, originalName)
+                .putString(Constants.DOWNLOAD_MD5, mIncrementalUpdateInfo.getMD5Sum())
+                .putString(Constants.DOWNLOAD_INCREMENTAL_FOR, mFullUpdateInfo.getFileName())
                 .apply();
 
         Utils.cancelNotification(this);
@@ -212,14 +213,14 @@ public class DownloadService extends IntentService
         // Build the name of the file to download, adding .partial at the end.  It will get
         // stripped off when the download completes
         String fullFilePath = "file://" + directory.getAbsolutePath() +
-                "/" + mInfo.getFileName() + ".partial";
+                "/" + mFullUpdateInfo.getFileName() + ".partial";
 
-        long downloadId = enqueueDownload(mInfo.getDownloadUrl(), fullFilePath);
+        long downloadId = enqueueDownload(mFullUpdateInfo.getDownloadUrl(), fullFilePath);
 
         // Store in shared preferences
         mPrefs.edit()
                 .putLong(Constants.DOWNLOAD_ID, downloadId)
-                .putString(Constants.DOWNLOAD_MD5, mInfo.getMD5Sum())
+                .putString(Constants.DOWNLOAD_MD5, mFullUpdateInfo.getMD5Sum())
                 .apply();
 
         Utils.cancelNotification(this);
@@ -238,11 +239,11 @@ public class DownloadService extends IntentService
     public void onResponse(JSONObject response) {
         VolleyLog.v("Response:%n %s", response);
 
-        UpdateInfo incrementalUpdateInfo = jsonToInfo(response);
-        if (incrementalUpdateInfo == null) {
+        mIncrementalUpdateInfo = jsonToInfo(response);
+        if (mIncrementalUpdateInfo == null) {
             downloadFullZip();
         } else {
-            downloadIncremental(mInfo.getFileName());
+            downloadIncremental();
         }
     }
 }
