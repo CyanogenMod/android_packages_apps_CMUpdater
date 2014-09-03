@@ -34,31 +34,20 @@ public class UpdateInfo implements Parcelable, Serializable {
         NIGHTLY,
         INCREMENTAL
     };
-
     private String mUiName;
     private String mFileName;
     private Type mType;
     private int mApiLevel;
     private long mBuildDate;
     private String mDownloadUrl;
+    private String mChangelogUrl;
     private String mMd5Sum;
     private String mIncremental;
 
     private Boolean mIsNewerThanInstalled;
 
-    public UpdateInfo(String fileName, long date, int apiLevel, String url,
-            String md5, Type type, String incremental) {
-        initializeName(fileName);
-        mBuildDate = date;
-        mApiLevel = apiLevel;
-        mDownloadUrl = url;
-        mMd5Sum = md5;
-        mType = type;
-        mIncremental = incremental;
-    }
-
-    public UpdateInfo(String fileName) {
-        this(fileName, 0, 0, null, null, Type.UNKNOWN, null);
+    private UpdateInfo() {
+        // Use the builder
     }
 
     private UpdateInfo(Parcel in) {
@@ -126,6 +115,13 @@ public class UpdateInfo implements Parcelable, Serializable {
     }
 
     /**
+     * Get changelog location
+     */
+    public String getChangelogUrl() {
+        return mChangelogUrl;
+    }
+
+    /**
      * Get incremental version
      */
     public String getIncremental() {
@@ -158,15 +154,6 @@ public class UpdateInfo implements Parcelable, Serializable {
         }
 
         return mIsNewerThanInstalled;
-    }
-
-    private void initializeName(String fileName) {
-        mFileName = fileName;
-        if (!TextUtils.isEmpty(fileName)) {
-            mUiName = extractUiName(fileName);
-        } else {
-            mUiName = null;
-        }
     }
 
     public static String extractUiName(String fileName) {
@@ -235,5 +222,104 @@ public class UpdateInfo implements Parcelable, Serializable {
         mDownloadUrl = in.readString();
         mMd5Sum = in.readString();
         mIncremental = in.readString();
+    }
+
+    public static class Builder {
+        private String mUiName;
+        private String mFileName;
+        private Type mType = Type.UNKNOWN;
+        private int mApiLevel;
+        private long mBuildDate;
+        private String mDownloadUrl;
+        private String mChangelogUrl;
+        private String mMd5Sum;
+        private String mIncremental;
+
+
+        public Builder setName(String uiName) {
+            mUiName = uiName;
+            return this;
+        }
+
+        public Builder setFileName(String fileName) {
+            initializeName(fileName);
+            return this;
+        }
+
+        public Builder setType(String typeString) {
+            Type type;
+            if (TextUtils.equals(typeString, "stable")) {
+                type = UpdateInfo.Type.STABLE;
+            } else if (TextUtils.equals(typeString, "RC")) {
+                type = UpdateInfo.Type.RC;
+            } else if (TextUtils.equals(typeString, "snapshot")) {
+                type = UpdateInfo.Type.SNAPSHOT;
+            } else if (TextUtils.equals(typeString, "nightly")) {
+                type = UpdateInfo.Type.NIGHTLY;
+            } else {
+                type = UpdateInfo.Type.UNKNOWN;
+            }
+            mType = type;
+            return this;
+        }
+
+        public Builder setType(Type type) {
+            mType = type;
+            return this;
+        }
+
+        public Builder setApiLevel(int apiLevel) {
+            mApiLevel = apiLevel;
+            return this;
+        }
+
+        public Builder setBuildDate(long buildDate) {
+            mBuildDate = buildDate;
+            return this;
+        }
+
+        public Builder setDownloadUrl(String downloadUrl) {
+            mDownloadUrl = downloadUrl;
+            return this;
+        }
+
+        public Builder setChangelogUrl(String changelogUrl) {
+            mChangelogUrl = changelogUrl;
+            return this;
+        }
+
+        public Builder setMD5Sum(String md5Sum) {
+            mMd5Sum = md5Sum;
+            return this;
+        }
+
+        public Builder setIncremental(String incremental) {
+            mIncremental = incremental;
+            return this;
+        }
+
+        public UpdateInfo build() {
+            UpdateInfo info = new UpdateInfo();
+            info.mUiName = mUiName;
+            info.mFileName = mFileName;
+            info.mType = mType;
+            info.mApiLevel = mApiLevel;
+            info.mBuildDate = mBuildDate;
+            info.mDownloadUrl = mDownloadUrl;
+            info.mChangelogUrl = mChangelogUrl;
+            info.mMd5Sum = mMd5Sum;
+            info.mIncremental = mIncremental;
+            return info;
+        }
+
+
+        private void initializeName(String fileName) {
+            mFileName = fileName;
+            if (!TextUtils.isEmpty(fileName)) {
+                mUiName = extractUiName(fileName);
+            } else {
+                mUiName = null;
+            }
+        }
     }
 }

@@ -13,15 +13,20 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 public class UpdateApplication extends Application implements
         Application.ActivityLifecycleCallbacks {
 
     private boolean mMainActivityActive;
+    private RequestQueue mRequestQueue;
 
     @Override
     public void onCreate() {
         mMainActivityActive = false;
         registerActivityLifecycleCallbacks(this);
+        mRequestQueue = Volley.newRequestQueue(this);
     }
 
     @Override
@@ -60,5 +65,9 @@ public class UpdateApplication extends Application implements
 
     public boolean isMainActivityActive() {
         return mMainActivityActive;
+    }
+
+    public RequestQueue getQueue() {
+        return mRequestQueue;
     }
 }
