@@ -15,14 +15,11 @@
 
     <!-- Menu and dialog box strings -->
     <string name="menu_refresh">Refresh</string>
-    <string name="menu_delete">Delete</string>
     <string name="menu_delete_all">Delete downloads</string>
     <string name="menu_system_info">System info</string>
 
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Cancel</string>
-    <string name="dialog_yes">Yes</string>
-    <string name="dialog_no">No</string>
     <string name="dialog_update">Update</string>
     <string name="dialog_close">Close</string>
 
@@ -32,8 +29,6 @@
     <string name="new_update_summary">New</string>
     <string name="downloaded_update_summary">Downloaded</string>
     <string name="installed_update_summary">Installed</string>
-    <string name="backup_rom_title">Create backup</string>
-    <string name="backup_rom_summary">Backup existing ROM before updating</string>
 
     <string name="update_check_title">Check for updates</string>
     <string name="check_manual">Manual</string>
@@ -73,14 +68,11 @@
     <string name="not_download_install_notice">The update <xliff:g id="filename">%s</xliff:g> was successfully downloaded. When touching \'Reboot and install\', the device will restart itself to install the update.\n\nNote: A compatible Recovery is required for the installation to work automatically.</string>
 
     <!-- MD5 related strings -->
-    <string name="apply_existing_update_md5error_message">Error. MD5 checksum mismatch</string>
-    <string name="md5_check_cancelled">MD5 check was cancelled</string>
     <string name="md5_verification_failed">MD5 verification failed</string>
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Apply update</string>
     <string name="apply_update_dialog_text">You are about to upgrade to <xliff:g id="filename">%s</xliff:g>.\n\nIf you press Update, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
-    <string name="apply_trying_to_get_root_access">Trying to get root access to reboot in recovery mode</string>
     <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
 
     <!-- deleting -->
@@ -99,7 +91,6 @@
 
     <!-- changelog strings -->
     <string name="no_changelog_alert">No changelog available</string>
-    <string name="failed_to_load_changelog">Unable to load changelog</string>
     <string name="changelog_dialog_title">Changelog</string>
     <string name="loading_changelog">Loading\u2026</string>
 
