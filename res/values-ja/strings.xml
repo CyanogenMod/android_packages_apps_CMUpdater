@@ -13,13 +13,10 @@
   <string name="display_name">アップデート</string>
   <string name="unknown">不明</string>
   <string name="menu_refresh">更新</string>
-  <string name="menu_delete">削除</string>
   <string name="menu_delete_all">ダウンロードを削除</string>
   <string name="menu_system_info">システム情報</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">キャンセル</string>
-  <string name="dialog_yes">はい</string>
-  <string name="dialog_no">いいえ</string>
   <string name="dialog_update">アップデート</string>
   <string name="dialog_close">閉じる</string>
   <string name="available_updates_title">利用可能なアップデート</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">新しいアップデート</string>
   <string name="downloaded_update_summary">ダウンロード済み</string>
   <string name="installed_update_summary">インストール済み</string>
-  <string name="backup_rom_title">バックアップを作成</string>
-  <string name="backup_rom_summary">アップデートする前に既存のROMをバックアップする</string>
   <string name="update_check_title">アップデートの確認</string>
   <string name="check_manual">手動</string>
   <string name="check_on_boot">ブート時</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">アップデートをダウンロードできませんでした</string>
   <string name="not_action_install_update">再起動してインストール</string>
   <string name="not_download_install_notice">アップデート<xliff:g id="filename">%s</xliff:g>のダウンロードが完了しました。｢再起動してインストール｣をタップすると、アップデートをインストールするために端末は再起動します。\n\n注意: インストールを自動的に行うには、互換性のあるリカバリーが必要です。</string>
-  <string name="apply_existing_update_md5error_message">エラー。MD5チェックサムが一致しません。</string>
-  <string name="md5_check_cancelled">MD5チェックはキャンセルされました。</string>
   <string name="md5_verification_failed">MD5を検証できませんでした</string>
   <string name="apply_update_dialog_title">アップデートを適用</string>
   <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g>にアップグレードしようとしています。\n\nアップデートを押すと、アップデートをインストールするために端末はリカバリーモードで再起動します。\n\n注意: この機能は互換性のあるリカバリーが必要で、互換性がなければ手動でインストールする必要があります。</string>
-  <string name="apply_trying_to_get_root_access">リカバリーモードで再起動するためにルートアクセスを取得しています</string>
   <string name="apply_unable_to_reboot_toast">リカバリーモードで再起動できませんでした</string>
   <string name="confirm_delete_dialog_title">ファイルを削除</string>
   <string name="confirm_delete_dialog_message">選択したアップデートファイルを削除しますか？</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">実行中:</string>
   <string name="sysinfo_last_check">前回の確認:</string>
   <string name="no_changelog_alert">更新履歴はありません</string>
-  <string name="failed_to_load_changelog">更新履歴を読み込めませんでした</string>
   <string name="changelog_dialog_title">更新履歴</string>
   <string name="loading_changelog">読み込み中\u2026</string>
   <string name="extension_label">CyanogenModアップデート</string>

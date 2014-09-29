@@ -13,13 +13,10 @@
   <string name="display_name">ปรับปรุงรุ่น</string>
   <string name="unknown">ไม่ทราบ</string>
   <string name="menu_refresh">โหลดใหม่</string>
-  <string name="menu_delete">ลบ</string>
   <string name="menu_delete_all">ลบสิ่งที่ดาวน์โหลดไว้</string>
   <string name="menu_system_info">ข้อมูลระบบ</string>
   <string name="dialog_ok">ตกลง</string>
   <string name="dialog_cancel">ยกเลิก</string>
-  <string name="dialog_yes">ใช่</string>
-  <string name="dialog_no">ไม่</string>
   <string name="dialog_update">ปรับปรุงรุ่น</string>
   <string name="dialog_close">ปิด</string>
   <string name="available_updates_title">การปรับปรุงที่พร้อมให้ดาวน์โหลด</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">ใหม่</string>
   <string name="downloaded_update_summary">ดาวน์โหลดแล้ว</string>
   <string name="installed_update_summary">ติดตั้งแล้ว</string>
-  <string name="backup_rom_title">สร้างข้อมูลสำรอง</string>
-  <string name="backup_rom_summary">สำรอง ROM ปัจจุบันก่อนการปรับปรุงรุ่น</string>
   <string name="update_check_title">ตรวจสอบอัพเดต</string>
   <string name="check_manual">ด้วยตัวเอง</string>
   <string name="check_on_boot">เมื่อเปิดเครื่องทุกครั้ง</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">ดาวน์โหลดการอัพเดตไม่สำเร็จ</string>
   <string name="not_action_install_update">เริ่มระบบใหม่และติดตั้งอัพเดต</string>
   <string name="not_download_install_notice">ดาวน์โหลดอัพเดต <xliff:g id="filename">%s</xliff:g>เสร็จแล้ว เมื่อแตะ \"เริ่มระบบใหม่และติดตั้ง\",ระบบจะเริ่มระบบใหม่และติดตั้งอัพเดตด้วยตัวเอง\n\nหมายเหตุ: ต้องการ recovery ที่รองรับ การติดตั้งอัตโนมัติถึงจะทำงาน</string>
-  <string name="apply_existing_update_md5error_message">ผิดพลาด MD5 ไม่ตรงกัน</string>
-  <string name="md5_check_cancelled">การตรวจสอบ MD5 ถูกยกเลิก</string>
   <string name="md5_verification_failed">การตรวจสอบ MD5 ล้มเหลว</string>
   <string name="apply_update_dialog_title">ใช้งานอัพเดต</string>
   <string name="apply_update_dialog_text">คุณกำลังจะอัพเดตเป็น <xliff:g id="filename">%s</xliff:g>\nถ้าคุณแตะ \"อัพเดต\" อุปกรณ์ของคุณจะเริ่มระบบใหม่และติดตั้งอัพเดตด้วยมันตัวมันเอง\n\nหมายเหตุ: การทำงานนี้ต้องการ recovery ที่เข้ากันได้ หรือคุณต้องติดตั้งอัพเดตด้วยตัวคุณเอง</string>
-  <string name="apply_trying_to_get_root_access">กำลังลองขอสิทธิ Root เพื่อเริ่มระบบเป็นรูปแบบ recovery</string>
   <string name="apply_unable_to_reboot_toast">ไม่สามารถเข้าสู่ recovery ได้</string>
   <string name="confirm_delete_dialog_title">ลบไฟล์</string>
   <string name="confirm_delete_dialog_message">ต้องการลบไฟล์การปรับปรุงรุ่นที่เลือกไว้หรือไม่ ?</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">กำลังทำงาน:</string>
   <string name="sysinfo_last_check">ตรวจสอบครั้งล่าสุด :</string>
   <string name="no_changelog_alert">ไม่พบความเปลี่ยนแปลง</string>
-  <string name="failed_to_load_changelog">ไม่สามารถโหลดความเปลี่ยนแปลงได้</string>
   <string name="changelog_dialog_title">ความเปลี่ยนแปลง</string>
   <string name="loading_changelog">กำลังโหลด\u2026</string>
   <string name="extension_label">การปรับปรุงรุ่น CyanogenMod</string>

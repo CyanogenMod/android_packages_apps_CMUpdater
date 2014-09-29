@@ -13,13 +13,10 @@
   <string name="display_name">Atualizações</string>
   <string name="unknown">Desconhecido</string>
   <string name="menu_refresh">Procurar</string>
-  <string name="menu_delete">Eliminar</string>
   <string name="menu_delete_all">Eliminar transferências</string>
   <string name="menu_system_info">Informações do sistema</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Cancelar</string>
-  <string name="dialog_yes">Sim</string>
-  <string name="dialog_no">Não</string>
   <string name="dialog_update">Atualizar</string>
   <string name="dialog_close">Fechar</string>
   <string name="available_updates_title">Atualizações disponíveis</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">Nova</string>
   <string name="downloaded_update_summary">Transferida</string>
   <string name="installed_update_summary">Instalada</string>
-  <string name="backup_rom_title">Criar cópia de segurança</string>
-  <string name="backup_rom_summary">Criar cópia de segurança do sistema atual antes de atualizar</string>
   <string name="update_check_title">Procurar atualizações</string>
   <string name="check_manual">Manual</string>
   <string name="check_on_boot">No arranque</string>
@@ -43,7 +38,7 @@
   <string name="type_new_incl_nightly">Versões nightly</string>
   <string name="nightly_alert">Escolheu incluir versões nightly nesta lista. Estas não são suportadas e devem ser usadas com cuidado.</string>
   <string name="nightly_alert_title">Cuidado</string>
-  <string name="checking_for_updates">A procurar atualizações</string>
+  <string name="checking_for_updates">A procurar atualizações\u2026</string>
   <string name="no_updates_found">Não foram encontradas novas atualizações</string>
   <string name="update_check_failed">A procura por atualizações falhou. Por favor verifique o estado da sua ligação à internet e tente de novo.</string>
   <string name="not_new_updates_found_ticker">Estão disponíveis novas atualizações</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">Não foi possível transferir o ficheiro de atualização</string>
   <string name="not_action_install_update">Reiniciar e instalar</string>
   <string name="not_download_install_notice">A atualização <xliff:g id="filename">%s</xliff:g> foi transferida com sucesso. Quando pressionar \'Reiniciar e instalar\', o dispositivo reiniciar-se-à para instalar a atualização.\n\nNota: É necessária uma Recuperação compatível para que a instalação seja automática.</string>
-  <string name="apply_existing_update_md5error_message">Ocorreu um problema na verificação MD5 do ficheiro</string>
-  <string name="md5_check_cancelled">A verificação MD5 do ficheiro foi cancelada</string>
   <string name="md5_verification_failed">A verificação MD5 do ficheiro falhou</string>
   <string name="apply_update_dialog_title">Instalar atualização</string>
   <string name="apply_update_dialog_text">Está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.\n\nSe carregar em Atualizar, o dispositivo irá reiniciar e atualizar automaticamente.\n\nNota: É necessário um modo de recuperação compatível para que a atualização seja feita automaticamente.</string>
-  <string name="apply_trying_to_get_root_access">A tentar obter acesso root para reiniciar no modo de recuperação</string>
   <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar no modo de recuperação</string>
   <string name="confirm_delete_dialog_title">Eliminar ficheiro</string>
   <string name="confirm_delete_dialog_message">Deseja eliminar o ficheiro selecionado?</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">Versão atual:</string>
   <string name="sysinfo_last_check">Última verificação:</string>
   <string name="no_changelog_alert">Lista de alterações indisponível</string>
-  <string name="failed_to_load_changelog">Não foi possível carregar a lista de alterações</string>
   <string name="changelog_dialog_title">Lista de alterações</string>
   <string name="loading_changelog">A carregar\u2026</string>
   <string name="extension_label">Atualizações CyanogenMod</string>

@@ -13,13 +13,10 @@
   <string name="display_name">Güncellemeler</string>
   <string name="unknown">Bilinmeyen</string>
   <string name="menu_refresh">Yenile</string>
-  <string name="menu_delete">Sil</string>
   <string name="menu_delete_all">İndirilenleri sil</string>
   <string name="menu_system_info">Sistem bilgisi</string>
   <string name="dialog_ok">Tamam</string>
   <string name="dialog_cancel">İptal</string>
-  <string name="dialog_yes">Evet</string>
-  <string name="dialog_no">Hayır</string>
   <string name="dialog_update">Güncelle</string>
   <string name="dialog_close">Kapat</string>
   <string name="available_updates_title">İndirilebilir güncellemeler</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">Yeni</string>
   <string name="downloaded_update_summary">İndirildi</string>
   <string name="installed_update_summary">Kuruldu</string>
-  <string name="backup_rom_title">Yedek oluştur</string>
-  <string name="backup_rom_summary">Sistemi güncellemeden varolan ROM\'u yedekle</string>
   <string name="update_check_title">Güncellemeleri kontrol et</string>
   <string name="check_manual">Elle</string>
   <string name="check_on_boot">Sistem her açıldığında</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">Güncelleme indirme başarısız oldu</string>
   <string name="not_action_install_update">Yeniden başlat ve Yükle</string>
   <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> güncellemesi başarıyla indirildi. \'Yeniden başlat ve Yükle\' ye dokunduğunuzda, cihaz güncellemeyi yüklemek için kendini yeniden başlatacak.\n\nNot: Yüklemenin otomatik çalışması için uygun bir Kurtarma ortamı gereklidir.</string>
-  <string name="apply_existing_update_md5error_message">Hata. MD5 eşleşmedi</string>
-  <string name="md5_check_cancelled">MD5 kontrolü iptal edildi</string>
   <string name="md5_verification_failed">MD5 doğrulama hatası</string>
   <string name="apply_update_dialog_title">Güncellemeyi uygula</string>
   <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> güncellemesi yapılacak.\n\nGüncelleye bastığınızda, güncellemeyi kurmak için cihaz kurtarma modunda yeniden başlatılacak.\n\nNot: Bu özellik, uyumlu bir Kurtarma bölümü gerektirir, aksi takdirde güncellemelerin elle kurulması gerekir.</string>
-  <string name="apply_trying_to_get_root_access">Kurtarma modunda başlatmak için yetkili kullanıcı erişimi sağlamaya çalışılıyor</string>
   <string name="apply_unable_to_reboot_toast">Kurtarma modu için sistem yeniden başlatılamadı</string>
   <string name="confirm_delete_dialog_title">Dosya sil</string>
   <string name="confirm_delete_dialog_message">Seçilen güncelleme dosyası silinsin mi?</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">Çalışan:</string>
   <string name="sysinfo_last_check">Son kontrol:</string>
   <string name="no_changelog_alert">Değişiklik kaydı yok</string>
-  <string name="failed_to_load_changelog">Değişiklik kaydı yüklenemedi</string>
   <string name="changelog_dialog_title">Değişiklik kaydı</string>
   <string name="loading_changelog">Yükleniyor\u2026</string>
   <string name="extension_label">CyanogenMod Güncellemeleri</string>

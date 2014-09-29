@@ -13,13 +13,10 @@
   <string name="display_name">Aktualizácie</string>
   <string name="unknown">Neznáme</string>
   <string name="menu_refresh">Obnoviť</string>
-  <string name="menu_delete">Vymazať</string>
   <string name="menu_delete_all">Vymazať prevzatia</string>
   <string name="menu_system_info">Informácie o systéme</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Zrušiť</string>
-  <string name="dialog_yes">Áno</string>
-  <string name="dialog_no">Nie</string>
   <string name="dialog_update">Aktualizovať</string>
   <string name="dialog_close">Zavrieť</string>
   <string name="available_updates_title">Dostupné aktualizácie</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">Nová</string>
   <string name="downloaded_update_summary">Prevzatá</string>
   <string name="installed_update_summary">Nainštalovaná</string>
-  <string name="backup_rom_title">Vytvoriť zálohu</string>
-  <string name="backup_rom_summary">Vytvoriť zálohu aktuálnej ROM pred aktualizáciou</string>
   <string name="update_check_title">Skontrolovať aktualizácie</string>
   <string name="check_manual">Ručne</string>
   <string name="check_on_boot">Pri každom spustení</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">Aktualizácia nebola úspešne prevzatá</string>
   <string name="not_action_install_update">Reštartovať a inštalovať</string>
   <string name="not_download_install_notice">Aktualizácia <xliff:g id="filename">%s</xliff:g> bola úspešne prevzatá. Ťuknutím na \'Reštartovať a inštalovať\' sa zariadenie reštartuje, kvôli inštalácii aktualizácie.\n\nPoznámka: Na automatickú inštaláciu sa požaduje kompatibilné Recovery.</string>
-  <string name="apply_existing_update_md5error_message">Chyba. Kontrolný súčet MD5 sa nezhoduje</string>
-  <string name="md5_check_cancelled">Kontrola MD5 bola zrušená</string>
   <string name="md5_verification_failed">Overenie MD5 zlyhalo</string>
   <string name="apply_update_dialog_title">Aplikovať aktualizáciu</string>
   <string name="apply_update_dialog_text">Chystáte sa inovovať na verziu <xliff:g id="filename">%s</xliff:g>.\n\nAk stlačíte tlačidlo Aktualizovať, zariadenie sa samé reštartuje do režimu recovery kvôli inštalácii aktualizácie.\n\nPoznámka: Táto funkcia vyžaduje kompatibilné Recovery, inak budú musieť byť aktualizácie inštalované ručne.</string>
-  <string name="apply_trying_to_get_root_access">Pokus o získanie root prístupu na reštartovanie do režimu Recovery</string>
   <string name="apply_unable_to_reboot_toast">Nemožno reštartovať do Recovery</string>
   <string name="confirm_delete_dialog_title">Vymazať súbor</string>
   <string name="confirm_delete_dialog_message">Vymazať vybraný súbor aktualizácie?</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">Beží na:</string>
   <string name="sysinfo_last_check">Posledná kontrola:</string>
   <string name="no_changelog_alert">Nedostupný zoznam zmien</string>
-  <string name="failed_to_load_changelog">Nemožno načítať zoznam zmien</string>
   <string name="changelog_dialog_title">Zoznam zmien</string>
   <string name="loading_changelog">Prebieha načítavanie\u2026</string>
   <string name="extension_label">Aktualizácie CyanogenMod</string>

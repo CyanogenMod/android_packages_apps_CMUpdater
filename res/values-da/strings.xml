@@ -13,13 +13,10 @@
   <string name="display_name">Opdateringer</string>
   <string name="unknown">Ukendt</string>
   <string name="menu_refresh">Genopfrisk</string>
-  <string name="menu_delete">Slet</string>
   <string name="menu_delete_all">Slet downloads</string>
   <string name="menu_system_info">System-info</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Annuller</string>
-  <string name="dialog_yes">Ja</string>
-  <string name="dialog_no">Nej</string>
   <string name="dialog_update">Opdatér</string>
   <string name="dialog_close">Luk</string>
   <string name="available_updates_title">Tilgængelige opdateringer</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">Ny</string>
   <string name="downloaded_update_summary">Downloadet</string>
   <string name="installed_update_summary">Installeret</string>
-  <string name="backup_rom_title">Lav backup</string>
-  <string name="backup_rom_summary">Backup eksisterende ROM før opdatering</string>
   <string name="update_check_title">Søg efter opdateringer</string>
   <string name="check_manual">Manuelt</string>
   <string name="check_on_boot">Ved hver opstart</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">Kunne ikke downloade opdatering</string>
   <string name="not_action_install_update">Genstart og installér</string>
   <string name="not_download_install_notice">Opdateringen <xliff:g id="filename">%s</xliff:g> blev downloadet korrekt. Når der trykkes \'Genstart og installér\', vil enheden genstarte sig selv for at installere opdateringen.\n\nNB: En kompatibel recovery er påkrævet, for at installeringen kan foregå automatisk.</string>
-  <string name="apply_existing_update_md5error_message">Fejl. MD5-kontrolsum passer ikke</string>
-  <string name="md5_check_cancelled">MD5-tjek blev annulleret</string>
   <string name="md5_verification_failed">MD5-bekræftelse mislykkedes</string>
   <string name="apply_update_dialog_title">Anvend opdatering</string>
   <string name="apply_update_dialog_text">Du skal til at opgradere til <xliff:g id="filename">%s</xliff:g>.\n\nHvis du trykker Opdatér, vil telefonen genstarte til tilstanden recovery for at installere opdateringen</string>
-  <string name="apply_trying_to_get_root_access">Prøver at få root-adgang for at genstarte i tilstanden recovery</string>
   <string name="apply_unable_to_reboot_toast">Kan ikke genstarte til recovery</string>
   <string name="confirm_delete_dialog_title">Slet fil</string>
   <string name="confirm_delete_dialog_message">Du skal til at slette den downloadede opdateringsfil, OK at fortsætte?</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">Kører:</string>
   <string name="sysinfo_last_check">Sidste søgning:</string>
   <string name="no_changelog_alert">Ingen ændringslog tilgængelig</string>
-  <string name="failed_to_load_changelog">Kan ikke indlæse ændringslog</string>
   <string name="changelog_dialog_title">Ændringslog</string>
   <string name="loading_changelog">Indlæser\u2026</string>
   <string name="extension_label">CyanogenMod-opdateringer</string>

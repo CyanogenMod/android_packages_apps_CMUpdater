@@ -13,13 +13,10 @@
   <string name="display_name">Atualizações</string>
   <string name="unknown">Desconhecido</string>
   <string name="menu_refresh">Atualizar</string>
-  <string name="menu_delete">Excluir</string>
   <string name="menu_delete_all">Excluir downloads</string>
   <string name="menu_system_info">Info. do sistema</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Cancelar</string>
-  <string name="dialog_yes">Sim</string>
-  <string name="dialog_no">Não</string>
   <string name="dialog_update">Atualizar</string>
   <string name="dialog_close">Fechar</string>
   <string name="available_updates_title">Atualizações disponíveis</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">Novo</string>
   <string name="downloaded_update_summary">Baixado</string>
   <string name="installed_update_summary">Instalado</string>
-  <string name="backup_rom_title">Criar cópia de segurança</string>
-  <string name="backup_rom_summary">Criar cópia de segurança da ROM atual antes de atualizar</string>
   <string name="update_check_title">Verificar por atualizações</string>
   <string name="check_manual">Manual</string>
   <string name="check_on_boot">Em toda inicialização</string>
@@ -60,8 +55,6 @@
   <string name="not_download_failure">Erro ao baixar a atualização</string>
   <string name="not_action_install_update">Reiniciar e instalar</string>
   <string name="not_download_install_notice">A atualização <xliff:g id="filename">%s</xliff:g> foi baixada com sucesso. Ao tocar \'Reiniciar e instalar\', o dispositivo irá reiniciar sozinho e instalar a atualização.\n\nNota: Uma Recuperação compatível é necessária para a atualização funcionar automaticamente.</string>
-  <string name="apply_existing_update_md5error_message">Erro. Verificação MD5 incompatível</string>
-  <string name="md5_check_cancelled">Verificação MD5 foi cancelada</string>
   <string name="md5_verification_failed">Verificação MD5 falhou</string>
   <string name="apply_update_dialog_title">Aplicar atualização</string>
   <string name="apply_update_dialog_text">Vocês está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.
@@ -70,7 +63,6 @@ Se você pressionar Atualizar, o dispositivo irá reiniciar no modo de recupera�
 
         
 Note: Esta função requer um modo de recuperação compatível ou as atualizações terão de ser instalas manualmente.</string>
-  <string name="apply_trying_to_get_root_access">Tentando obter acesso superusuário para reiniciar no modo de recuperação</string>
   <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar para a recuperação</string>
   <string name="confirm_delete_dialog_title">Excluir arquivo</string>
   <string name="confirm_delete_dialog_message">Excluir o arquivo de atualização selecionado?</string>
@@ -83,7 +75,6 @@ Note: Esta função requer um modo de recuperação compatível ou as atualizaç
   <string name="sysinfo_running">Rodando:</string>
   <string name="sysinfo_last_check">Última verificação:</string>
   <string name="no_changelog_alert">Nenhum registro de mudanças disponível</string>
-  <string name="failed_to_load_changelog">Não foi possível carregar o registro de mudanças</string>
   <string name="changelog_dialog_title">Registro de mudanças</string>
   <string name="loading_changelog">Carregando\u2026</string>
   <string name="extension_label">Atualizações CyanogenMod</string>

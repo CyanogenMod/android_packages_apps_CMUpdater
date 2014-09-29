@@ -13,13 +13,10 @@
   <string name="display_name">Uppdateringar</string>
   <string name="unknown">Okänd</string>
   <string name="menu_refresh">Kontrollera</string>
-  <string name="menu_delete">Ta bort</string>
   <string name="menu_delete_all">Radera nedladdningar</string>
   <string name="menu_system_info">Systeminformation</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Avbryt</string>
-  <string name="dialog_yes">Ja</string>
-  <string name="dialog_no">Nej</string>
   <string name="dialog_update">Uppdatera</string>
   <string name="dialog_close">Stäng</string>
   <string name="available_updates_title">Tillgängliga uppdateringar</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">Ny</string>
   <string name="downloaded_update_summary">Nedladdad</string>
   <string name="installed_update_summary">Installerad</string>
-  <string name="backup_rom_title">Skapa säkerhetskopia</string>
-  <string name="backup_rom_summary">Säkerhetskopiera nuvarande ROM innan uppdatering</string>
   <string name="update_check_title">Kontrollfrekvens</string>
   <string name="check_manual">Manuell</string>
   <string name="check_on_boot">Vid uppstart</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">Nedladdningen misslyckades</string>
   <string name="not_action_install_update">Starta om och installera</string>
   <string name="not_download_install_notice">Uppdateringen <xliff:g id="filename">%s</xliff:g> laddades ned med framgång. När du trycker på \'Starta om och installera\' kommer enheten att starta om för att installera uppdateringen.\n\nObs: En kompatibel Recovery krävs för att installationen ska fungera automatiskt.</string>
-  <string name="apply_existing_update_md5error_message">Fel. MD5-kontrollsumman matchar inte</string>
-  <string name="md5_check_cancelled">MD5-kontroll avbröts</string>
   <string name="md5_verification_failed">MD5-verifiering misslyckades</string>
   <string name="apply_update_dialog_title">Tillämpa uppdatering</string>
   <string name="apply_update_dialog_text">Du är på väg att uppdatera till <xliff:g id="filename">%s</xliff:g>.\n\nOm du trycker på Uppdatera kommer enheten att starta om till Recoveryläge för att installera uppdateringen.\n\nObs: Denna funktion kräver ett kompatibelt Recoveryläge. I annat fall måste uppdateringarna installeras manuellt.</string>
-  <string name="apply_trying_to_get_root_access">Begär rooträttigheter för att kunna starta om till Recoveryläge</string>
   <string name="apply_unable_to_reboot_toast">Kan inte starta om till Recoveryläge</string>
   <string name="confirm_delete_dialog_title">Ta bort fil</string>
   <string name="confirm_delete_dialog_message">Radera uppdateringen?</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">ROM:</string>
   <string name="sysinfo_last_check">Senaste kontroll:</string>
   <string name="no_changelog_alert">Ingen ändringslogg tillgänglig</string>
-  <string name="failed_to_load_changelog">Kan inte ladda ändringsloggen</string>
   <string name="changelog_dialog_title">Ändringslogg</string>
   <string name="loading_changelog">Laddar\u2026</string>
   <string name="extension_label">CyanogenMod-uppdateringar</string>
