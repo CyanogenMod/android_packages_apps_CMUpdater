@@ -13,13 +13,10 @@
   <string name="display_name">نوێکردنەوەکان</string>
   <string name="unknown">نەزانراو</string>
   <string name="menu_refresh">تازەکردنەوە</string>
-  <string name="menu_delete">سڕینەوە</string>
   <string name="menu_delete_all">سڕینەوەی داگیراوەکان</string>
   <string name="menu_system_info">زانیاری سیسته‌م</string>
   <string name="dialog_ok">باشە</string>
   <string name="dialog_cancel">پاشگەزبوونەوە</string>
-  <string name="dialog_yes">بەڵێ</string>
-  <string name="dialog_no">نەخێر</string>
   <string name="dialog_update">نوێچالاکردنی</string>
   <string name="dialog_close">داخستن</string>
   <string name="available_updates_title">نوێکردنەوەکانی بەردەست</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">نوێ</string>
   <string name="downloaded_update_summary">داگیراوه‌کانراوە</string>
   <string name="installed_update_summary">دامەزرێنراوە</string>
-  <string name="backup_rom_title">دروستکردنی پاشەکەوت</string>
-  <string name="backup_rom_summary">پاشەکەوتکردنی ڕوومی ئیستا پێش نوێچالاکردنی</string>
   <string name="update_check_title">پشکنین بۆ نوێکردنەوەکان</string>
   <string name="check_manual">دەستی</string>
   <string name="check_on_boot">له‌گه‌ڵ هه‌موو داگیرسانێک</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">داگرتنی نوێکردنه‌وه‌ سه‌رکه‌وتوونه‌بوو</string>
   <string name="not_action_install_update">ڕیستارت کردنه‌وه‌ و دابه‌زاندن</string>
   <string name="not_download_install_notice">نوێکردنه‌وه‌ی  <xliff:g id="filename">%s</xliff:g> به‌ سه‌رکه‌وتووی داگیرا. کاتێک ده‌ستت نا به‌ \"ڕیستارت و دابه‌زاندن\"، ئه‌وه‌ ئامێره‌که‌ ڕیستارت ده‌بێته‌وه‌ و نوێکردنه‌وه‌کان داده‌به‌زێت.\n\nتێبینی:گه‌ڕانه‌وه‌یه‌کی گونجاو پێویسته‌ بۆ دابه‌زاندن بۆ کارکردنی خۆکارانه‌.</string>
-  <string name="apply_existing_update_md5error_message">هه‌ڵه‌، پشکنینی کلیلی MD5 نه‌گونجاوه‌</string>
-  <string name="md5_check_cancelled">پشکنینی MD5 لابرا</string>
   <string name="md5_verification_failed">گونجاندنی MD5 سه‌رکه‌وتوونه‌بوو</string>
   <string name="apply_update_dialog_title">جێبەجێکردنی نوێکردنەوە</string>
   <string name="apply_update_dialog_text">تۆ خه‌ریکی نوێکردنه‌وه‌ی  <xliff:g id="filename">%s</xliff:g>.\n\n.ئه‌گه‌ر نوێکردنه‌وه‌ بکه‌یت.ئه‌وه‌ ئامێره‌که‌ ده‌کوژێته‌وه‌ و داده‌گیرسێته‌وه‌ و ده‌چێته‌ باری گه‌ڕانه‌وه‌ بۆ دابه‌زاندنی نوێکاری.\n\nتێبینی:پێویسته‌ گه‌ڕانه‌وه‌یه‌کی گونجاوت هه‌بێ بۆ نوێکردنه‌وه‌.</string>
-  <string name="apply_trying_to_get_root_access">هەوڵبدە ڕێگەپێدانی ڕۆتت هەبێ بۆ چوونە ناو دۆخی ڕیکەڤەری</string>
   <string name="apply_unable_to_reboot_toast">ناتوانرێت بچێتە دۆخی ڕیکەڤەری</string>
   <string name="confirm_delete_dialog_title">سڕینەوەی فایل</string>
   <string name="confirm_delete_dialog_message">سڕینەوەی فایلی دیاریکراوی نوێکردنەوە؟</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">وەشانی ئێستا:</string>
   <string name="sysinfo_last_check">دواین پشکنین:</string>
   <string name="no_changelog_alert">تۆماری گۆڕانکاری لەبەردەستدا نیە</string>
-  <string name="failed_to_load_changelog">ناتاونرێت تۆماری گۆڕانکاری بهێنرێت</string>
   <string name="changelog_dialog_title">تۆماری گۆڕانکاری</string>
   <string name="loading_changelog">چالاکردنی\u2026</string>
   <string name="extension_label">نوێکردنەوەی سیانۆجین</string>

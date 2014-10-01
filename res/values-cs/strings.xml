@@ -13,13 +13,10 @@
   <string name="display_name">Aktualizace CM</string>
   <string name="unknown">Neznámý</string>
   <string name="menu_refresh">Obnovit</string>
-  <string name="menu_delete">Smazat</string>
   <string name="menu_delete_all">Odstranit stažené soubory</string>
   <string name="menu_system_info">Informace o systému</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Zrušit</string>
-  <string name="dialog_yes">Ano</string>
-  <string name="dialog_no">Ne</string>
   <string name="dialog_update">Aktualizovat</string>
   <string name="dialog_close">Zavřít</string>
   <string name="available_updates_title">Dostupné aktualizace</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">Nová</string>
   <string name="downloaded_update_summary">Stažena</string>
   <string name="installed_update_summary">Nainstalována</string>
-  <string name="backup_rom_title">Vytvořit zálohu</string>
-  <string name="backup_rom_summary">Zálohovat současnou ROM před aktualizací</string>
   <string name="update_check_title">Vyhledat aktualizace</string>
   <string name="check_manual">Ručně</string>
   <string name="check_on_boot">Při každém spuštění</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">Aktualizaci nelze stáhnout</string>
   <string name="not_action_install_update">Restartovat a nainstalovat</string>
   <string name="not_download_install_notice">Aktualizace <xliff:g id="filename">%s</xliff:g> byla úspěšně stáhnutá. Stisknutím \u201aRestartovat a nainstalovat\u2018, bude zařízení restartováno a bude provedena automatická instalace aktualizace.\n\nPoznámka: pro automatickou instalaci je vyžadován kompatibilní Recovery manažer.</string>
-  <string name="apply_existing_update_md5error_message">Chyba MD5 kontrolního součtu souboru</string>
-  <string name="md5_check_cancelled">MD5 kontrola byla zrušena</string>
   <string name="md5_verification_failed">Ověření MD5 se nezdařilo</string>
   <string name="apply_update_dialog_title">Použít aktualizaci</string>
   <string name="apply_update_dialog_text">Chystáte se aktualizovat na <xliff:g id="filename">%s</xliff:g>.\n\nPokud stisknete Aktualizovat, telefon se restartuje do režimu Recovery, kde budete pokračovat v instalaci aktualizace.\n\nPoznámka: tato funkce vyžaduje nainstalovaný kompatibilní režim Recovery nebo je nutné instalaci provést ručně.</string>
-  <string name="apply_trying_to_get_root_access">Získávají se práva root k restartu do režimu Recovery</string>
   <string name="apply_unable_to_reboot_toast">Nelze restartovat do režimu Recovery</string>
   <string name="confirm_delete_dialog_title">Smazat soubor</string>
   <string name="confirm_delete_dialog_message">Opravdu chcete smazat soubor aktualizace?</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">Nainstalovaná verze:</string>
   <string name="sysinfo_last_check">Poslední kontrola:</string>
   <string name="no_changelog_alert">Není dostupný seznam změn</string>
-  <string name="failed_to_load_changelog">Nelze načíst seznam změn</string>
   <string name="changelog_dialog_title">Seznam změn</string>
   <string name="loading_changelog">Načítání\u2026</string>
   <string name="extension_label">Aktualizace CyanogenMod</string>

@@ -13,13 +13,10 @@
   <string name="display_name">Оновлення</string>
   <string name="unknown">Невідомий</string>
   <string name="menu_refresh">Оновити</string>
-  <string name="menu_delete">Видалити</string>
   <string name="menu_delete_all">Видалити завантаження</string>
   <string name="menu_system_info">Інформація про систему</string>
   <string name="dialog_ok">ОК</string>
   <string name="dialog_cancel">Скасувати</string>
-  <string name="dialog_yes">Так</string>
-  <string name="dialog_no">Ні</string>
   <string name="dialog_update">Оновити</string>
   <string name="dialog_close">Закрити</string>
   <string name="available_updates_title">Доступні оновлення</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">Нове</string>
   <string name="downloaded_update_summary">Завантажене</string>
   <string name="installed_update_summary">Встановлене</string>
-  <string name="backup_rom_title">Створити РК</string>
-  <string name="backup_rom_summary">Створити резервну копію перед оновленням</string>
   <string name="update_check_title">Перевірка оновлень</string>
   <string name="check_manual">Вручну</string>
   <string name="check_on_boot">При увімкненні пристрою</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">Оновлення не завантажено</string>
   <string name="not_action_install_update">Перезавантажити і встановити</string>
   <string name="not_download_install_notice">Оновлення «<xliff:g id="filename">%s</xliff:g>» успішно завантажено. Натисніть \'Перезавантажити і встановити\', щоб виконати його встановлення.</string>
-  <string name="apply_existing_update_md5error_message">Помилка! Невідповідність контрольної суми MD5</string>
-  <string name="md5_check_cancelled">Перевірка MD5 була скасована</string>
   <string name="md5_verification_failed">Не вдалось виконати перевірку MD5</string>
   <string name="apply_update_dialog_title">Застосувати оновлення</string>
   <string name="apply_update_dialog_text">Ви збираєтесь оновитись на <xliff:g id="filename">%s</xliff:g>.\n\nЯкщо Ви натиснете Оновити, пристрій перезавантажиться у Recovery для встановлення.\n\nЗамітка: ця функція потребує сумісне Recovery, в зворотньому випадку оновлення необхідно встановити вручну.</string>
-  <string name="apply_trying_to_get_root_access">Спроба отримати root-доступ для перезавантаження у Recovery</string>
   <string name="apply_unable_to_reboot_toast">Неможливо перезавантажитись у Recovery</string>
   <string name="confirm_delete_dialog_title">Видалити файл</string>
   <string name="confirm_delete_dialog_message">Ви збираєтесь видалити завантажений файл оновлення. Натисніть Так для продовження.</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">Версія:</string>
   <string name="sysinfo_last_check">Остання перевірка:</string>
   <string name="no_changelog_alert">Список змін недоступний</string>
-  <string name="failed_to_load_changelog">Не вдається завантажити список змін</string>
   <string name="changelog_dialog_title">Список змін</string>
   <string name="loading_changelog">Завантажується\u2026</string>
   <string name="extension_label">Оновлення CyanogenMod</string>

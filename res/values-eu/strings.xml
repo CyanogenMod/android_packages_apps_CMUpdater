@@ -13,13 +13,10 @@
   <string name="display_name">Eguneraketak</string>
   <string name="unknown">Ezezaguna</string>
   <string name="menu_refresh">Berritu</string>
-  <string name="menu_delete">Ezabatu</string>
   <string name="menu_delete_all">Deskargak ezabatu</string>
   <string name="menu_system_info">Sistemaren informazioa</string>
   <string name="dialog_ok">Ondo da</string>
   <string name="dialog_cancel">Ezeztu</string>
-  <string name="dialog_yes">Bai</string>
-  <string name="dialog_no">Ez</string>
   <string name="dialog_update">Eguneratu</string>
   <string name="dialog_close">Itxi</string>
   <string name="available_updates_title">Eskuragarri dauden eguneraketak</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">Berria</string>
   <string name="downloaded_update_summary">Deskargatuta</string>
   <string name="installed_update_summary">Instalatuta</string>
-  <string name="backup_rom_title">Babeskopia</string>
-  <string name="backup_rom_summary">ROM-aren babeskopia egin eguneraketa burutu aurretik</string>
   <string name="update_check_title">Eguneraketak bilatu</string>
   <string name="check_manual">Eskuz</string>
   <string name="check_on_boot">Pizte bakoitzean</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">Eguneraketaren deskargak huts egin du</string>
   <string name="not_action_install_update">Berrabiarazi eta instalatu</string>
   <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> eguneraketa arrakastaz deskargatu da. \u00ABBerrabiarazi eta instalatu\u00BB sakatuz, gailua eguneraketa instalatzeko berrabiaraziko da.\n\nAbisua: Ardura behar ez duen instalazio baterako recovery bateragarri bat beharrezkoa da.</string>
-  <string name="apply_existing_update_md5error_message">Akatsa. MD5 berrespena ez dator bat</string>
-  <string name="md5_check_cancelled">MD5 berrespena ezeztu egin da</string>
   <string name="md5_verification_failed">MD5 berrespenak huts egin du</string>
   <string name="apply_update_dialog_title">Eguneraketa ezarri</string>
   <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> eguneraketa arrakastaz deskargatu da.\n\n \u00ABEguneratu\u00BB sakatuz, gailua eguneraketa instalatzeko berrabiaraziko da.\n\nAbisua: Ardura behar ez duen instalazio baterako recovery bateragarri bat beharrezkoa da.</string>
-  <string name="apply_trying_to_get_root_access">Recovery moduan berrabiatzeko Supererabiltzaile baimena lortzen saiatzen</string>
   <string name="apply_unable_to_reboot_toast">Ezinezkoa recovery moduan berrabiatzea</string>
   <string name="confirm_delete_dialog_title">Fitxategia ezabatu</string>
   <string name="confirm_delete_dialog_message">Deskargatutako eguneraketa ezabatu?</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">Exekutatzen:</string>
   <string name="sysinfo_last_check">Azken bilaketa:</string>
   <string name="no_changelog_alert">Ez dago aldaketa erregistrorik</string>
-  <string name="failed_to_load_changelog">Ezinezkoa da aldakteta erregistroa irekitzea</string>
   <string name="changelog_dialog_title">Aldaketa erregistroa</string>
   <string name="loading_changelog">Kargatzen\u2026</string>
   <string name="extension_label">Cyanogenmod eguneraketak</string>

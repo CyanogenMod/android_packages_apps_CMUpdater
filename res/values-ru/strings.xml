@@ -13,13 +13,10 @@
   <string name="display_name">Обновления</string>
   <string name="unknown">Неизвестно</string>
   <string name="menu_refresh">Проверить</string>
-  <string name="menu_delete">Удалить</string>
   <string name="menu_delete_all">Удалить загруженные</string>
   <string name="menu_system_info">Информация о системе</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Отмена</string>
-  <string name="dialog_yes">Да</string>
-  <string name="dialog_no">Нет</string>
   <string name="dialog_update">Обновить</string>
   <string name="dialog_close">Закрыть</string>
   <string name="available_updates_title">Доступные обновления</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">Новое</string>
   <string name="downloaded_update_summary">Загружено</string>
   <string name="installed_update_summary">Установлено</string>
-  <string name="backup_rom_title">Резервное копирование</string>
-  <string name="backup_rom_summary">Создать резервную копию перед обновлением</string>
   <string name="update_check_title">Проверка обновлений</string>
   <string name="check_manual">Вручную</string>
   <string name="check_on_boot">При включении устройства</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">Ошибка загрузки обновления</string>
   <string name="not_action_install_update">Перезагрузить и установить</string>
   <string name="not_download_install_notice">Обновление «<xliff:g id="filename">%s</xliff:g>» успешно загружено. Нажмите «Перезагрузить и установить», чтобы выполнить его установку.</string>
-  <string name="apply_existing_update_md5error_message">Ошибка! Несоответствие контрольной суммы MD5</string>
-  <string name="md5_check_cancelled">Проверка MD5 была отменена</string>
   <string name="md5_verification_failed">Не удалось выполнить проверку MD5</string>
   <string name="apply_update_dialog_title">Подтверждение обновления</string>
   <string name="apply_update_dialog_text">Будет выполнено обновление до версии «<xliff:g id="filename">%s</xliff:g>».\n\nПри нажатии кнопки «Обновить» устройство перезагрузится в режим восстановления для установки этого обновления. \n\nПримечание: эта функция требует совместимого Recovery. В противном случае обновление будет необходимо установить вручную.</string>
-  <string name="apply_trying_to_get_root_access">Попытка получить права суперпользователя для перезагрузки в режим восстановления\u2026</string>
   <string name="apply_unable_to_reboot_toast">Невозможно перезагрузиться в режим восстановления</string>
   <string name="confirm_delete_dialog_title">Удалить файл</string>
   <string name="confirm_delete_dialog_message">Удалить выбранный файл обновления?</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">Версия:</string>
   <string name="sysinfo_last_check">Последняя проверка:</string>
   <string name="no_changelog_alert">Список изменений недоступен</string>
-  <string name="failed_to_load_changelog">Не удаётся загрузить список изменений</string>
   <string name="changelog_dialog_title">Список изменений</string>
   <string name="loading_changelog">Загрузка\u2026</string>
   <string name="extension_label">Обновления системы</string>

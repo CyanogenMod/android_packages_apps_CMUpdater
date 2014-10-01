@@ -13,13 +13,10 @@
   <string name="display_name">Actualizări</string>
   <string name="unknown">Necunoscut</string>
   <string name="menu_refresh">Reîmprospătare</string>
-  <string name="menu_delete">Ștergeți</string>
   <string name="menu_delete_all">Ștergeți descărcările</string>
   <string name="menu_system_info">Informații despre sistem</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Revocați</string>
-  <string name="dialog_yes">Da</string>
-  <string name="dialog_no">Nu</string>
   <string name="dialog_update">Actualizați</string>
   <string name="dialog_close">Închideți</string>
   <string name="available_updates_title">Actualizări disponibile</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">Nou</string>
   <string name="downloaded_update_summary">Descărcat</string>
   <string name="installed_update_summary">Instalat</string>
-  <string name="backup_rom_title">Creați copie de rezervă</string>
-  <string name="backup_rom_summary">Creați copie de rezervă înainte de actualizare</string>
   <string name="update_check_title">Verificați actualizări</string>
   <string name="check_manual">Manual</string>
   <string name="check_on_boot">La fiecare pornire</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">Descărcarea actualizării a eșuat</string>
   <string name="not_action_install_update">Reporniți și instalați</string>
   <string name="not_download_install_notice">Actualizarea <xliff:g id="filename">%s</xliff:g> s-a descărcat cu succes. Când atingeți \'Repornire și instalare\', dispozitivul se va reporni pentru a instala actualizarea.\n\nNotă: Aveți nevoie de un Recovery compatibil pentru ca instalarea să se facă în mod automat.</string>
-  <string name="apply_existing_update_md5error_message">Eroare. Nepotrivire MD5</string>
-  <string name="md5_check_cancelled">Verificarea MD5 revocată</string>
   <string name="md5_verification_failed">Verificarea MD5 nu a reușit</string>
   <string name="apply_update_dialog_title">Aplicați actualizarea</string>
   <string name="apply_update_dialog_text">Intenționați să faceți upgrade la <xliff:g id="filename">%s</xliff:g>.\n\nDacă apăsați Actualizare, dispozitivul va reporni în modul recovery pentru a instala actualizarea.\n\nNotă: această caracteristică necesită Recovery compatibil sau actualizările trebuie să fie instalate manual.</string>
-  <string name="apply_trying_to_get_root_access">Încercare de a obține acces root pentru repornire în modul de Recovery</string>
   <string name="apply_unable_to_reboot_toast">Nu se poate reporni în Recovery</string>
   <string name="confirm_delete_dialog_title">Ștergeți fișierul</string>
   <string name="confirm_delete_dialog_message">Șterge fișierul de actualizare selectat?</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">Rulează:</string>
   <string name="sysinfo_last_check">Ultima verificare:</string>
   <string name="no_changelog_alert">Niciun jurnal de modificări disponibil</string>
-  <string name="failed_to_load_changelog">Imposibil de încărcat jurnalul de modificări</string>
   <string name="changelog_dialog_title">Jurnal modificări</string>
   <string name="loading_changelog">Încărcare\u2026</string>
   <string name="extension_label">Actualizări CyanogenMod</string>

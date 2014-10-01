@@ -13,13 +13,10 @@
   <string name="display_name">Oppdateringer</string>
   <string name="unknown">Ukjent</string>
   <string name="menu_refresh">Oppdater</string>
-  <string name="menu_delete">Slett</string>
   <string name="menu_delete_all">Fjern nedlastinger</string>
   <string name="menu_system_info">Systeminfo</string>
   <string name="dialog_ok">Ok</string>
   <string name="dialog_cancel">Avbryt</string>
-  <string name="dialog_yes">Ja</string>
-  <string name="dialog_no">Nei</string>
   <string name="dialog_update">Oppdater</string>
   <string name="dialog_close">Lukk</string>
   <string name="available_updates_title">Tilgjengelige oppdateringer</string>
@@ -27,8 +24,6 @@
   <string name="new_update_summary">Ny</string>
   <string name="downloaded_update_summary">Nedlastet</string>
   <string name="installed_update_summary">Installert</string>
-  <string name="backup_rom_title">Opprett sikkerhetskopi</string>
-  <string name="backup_rom_summary">Ta sikkerhetskopi av eksisterende ROM før oppdatering</string>
   <string name="update_check_title">Sjekk for oppdateringer</string>
   <string name="check_manual">Manuelt</string>
   <string name="check_on_boot">For hver boot</string>
@@ -60,12 +55,9 @@
   <string name="not_download_failure">Nedlasting av oppdatering var ikke vellykket</string>
   <string name="not_action_install_update">Start på nytt og installer</string>
   <string name="not_download_install_notice">Nedlastingen av <xliff:g id="filename">%s</xliff:g> var vellykket. Når du trykker på \'Start på nytt og installer\', vil enheten starte på nytt, for så å installere oppdateringen.\n\nMerk: En kompatibel recovery-versjon er påkrevd for at installeringen skal kunne utføres.</string>
-  <string name="apply_existing_update_md5error_message">Feil. MD5 sjekksum samsvarer ikke</string>
-  <string name="md5_check_cancelled">MD5-verifisering avbrutt</string>
   <string name="md5_verification_failed">MD5-verifisering mislykket</string>
   <string name="apply_update_dialog_title">Installer oppdatering</string>
   <string name="apply_update_dialog_text">Du er i ferd med å oppgradere til <xliff:g id="filename">%s</xliff:g>.\n\nHvis du fortsetter vil telefonen foreta en omstart til recovery-modus for å gjennomføre installasjonen</string>
-  <string name="apply_trying_to_get_root_access">Forsøker å oppnå root-tilgang for å kunne foreta en omstart til recovery-modus</string>
   <string name="apply_unable_to_reboot_toast">Kunne ikke starte opp i recovery-modus</string>
   <string name="confirm_delete_dialog_title">Slett fil</string>
   <string name="confirm_delete_dialog_message">Du er i ferd med å fjerne den nedlastede oppdateringsfilen, er du sikker?</string>
@@ -78,7 +70,6 @@
   <string name="sysinfo_running">Kjører:</string>
   <string name="sysinfo_last_check">Sist sjekk:</string>
   <string name="no_changelog_alert">Endringslogg ikke tilgjengelig</string>
-  <string name="failed_to_load_changelog">Kunne ikke hente endringsloggen</string>
   <string name="changelog_dialog_title">Endringslogg</string>
   <string name="loading_changelog">Laster\u2026</string>
   <string name="extension_label">CyanogenMod Oppdateringer</string>
