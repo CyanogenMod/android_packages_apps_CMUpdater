@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -76,7 +77,6 @@ public class UpdatesSettings extends PreferenceActivity implements
     private SharedPreferences mPrefs;
     private CheckBoxPreference mBackupRom;
     private ListPreference mUpdateCheck;
-    private ListPreference mUpdateType;
 
     private PreferenceCategory mUpdatesList;
     private UpdatePreference mDownloadingPreference;
@@ -130,7 +130,6 @@ public class UpdatesSettings extends PreferenceActivity implements
         addPreferencesFromResource(R.xml.main);
         mUpdatesList = (PreferenceCategory) findPreference(UPDATES_CATEGORY);
         mUpdateCheck = (ListPreference) findPreference(Constants.UPDATE_CHECK_PREF);
-        mUpdateType = (ListPreference) findPreference(Constants.UPDATE_TYPE_PREF);
 
         // Load the stored preference data
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -141,18 +140,15 @@ public class UpdatesSettings extends PreferenceActivity implements
             mUpdateCheck.setOnPreferenceChangeListener(this);
         }
 
-        if (mUpdateType != null) {
-            int type = mPrefs.getInt(Constants.UPDATE_TYPE_PREF, 0);
-            if (type >= mUpdateType.getEntries().length) {
-                // We previously removed an entry from this entries list,
-                // so if a user has the old index (3) selected still,
-                // an IndexOutOfBounds exception will be thrown.
-                // Let's reset them to a sane default.
-                type = 0;
+        int updateTypePref = mPrefs.getInt(Constants.UPDATE_TYPE_PREF,
+                Constants.UPDATE_TYPE_NEW_SNAPSHOT);
+        String cmReleaseType = getCmReleaseType();
+        if (cmReleaseType.equals(Constants.CM_RELEASETYPE_SNAPSHOT)) {
+            if (updateTypePref != Constants.UPDATE_TYPE_NEW_SNAPSHOT) {
+                updateUpdatesType(Constants.UPDATE_TYPE_NEW_SNAPSHOT);
             }
-            mUpdateType.setValue(String.valueOf(type));
-            mUpdateType.setSummary(mUpdateType.getEntries()[type]);
-            mUpdateType.setOnPreferenceChangeListener(this);
+        } else if (updateTypePref != Constants.UPDATE_TYPE_NEW_NIGHTLY) {
+            updateUpdatesType(Constants.UPDATE_TYPE_NEW_NIGHTLY);
         }
 
         /* TODO: add this back once we have a way of doing backups that is not recovery specific
@@ -231,27 +227,6 @@ public class UpdatesSettings extends PreferenceActivity implements
             mPrefs.edit().putInt(Constants.UPDATE_CHECK_PREF, value).apply();
             mUpdateCheck.setSummary(mapCheckValue(value));
             Utils.scheduleUpdateService(this, value * 1000);
-            return true;
-        } else if (preference == mUpdateType) {
-            final int value = Integer.valueOf((String) newValue);
-            if (value == Constants.UPDATE_TYPE_NEW_NIGHTLY
-                    || value == Constants.UPDATE_TYPE_ALL) {
-                new AlertDialog.Builder(this)
-                    .setTitle(R.string.nightly_alert_title)
-                    .setMessage(R.string.nightly_alert)
-                    .setPositiveButton(getString(R.string.dialog_ok),
-                            new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            updateUpdatesType(value);
-                            mUpdateType.setValueIndex(value);
-                        }
-                    })
-                    .setNegativeButton(R.string.dialog_cancel, null)
-                    .show();
-                return false;
-            } else {
-                updateUpdatesType(value);
-            }
             return true;
         }
 
@@ -454,7 +429,6 @@ public class UpdatesSettings extends PreferenceActivity implements
 
     private void updateUpdatesType(int type) {
         mPrefs.edit().putInt(Constants.UPDATE_TYPE_PREF, type).apply();
-        mUpdateType.setSummary(mUpdateType.getEntries()[type]);
         checkForUpdates();
     }
 
@@ -829,5 +803,17 @@ public class UpdatesSettings extends PreferenceActivity implements
                     }
                 })
                 .show();
+    }
+
+    private String getCmReleaseType() {
+        try {
+            String cmReleaseType = SystemProperties.get(
+                    Constants.PROPERTY_CM_RELEASETYPE);
+            if (!cmReleaseType.isEmpty()) {
+                return cmReleaseType;
+            }
+        } catch (RuntimeException ignored) {
+        }
+        return Constants.CM_RELEASETYPE_NIGHTLY;
     }
 }
