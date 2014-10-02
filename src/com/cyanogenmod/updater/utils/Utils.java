@@ -26,6 +26,7 @@ import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.cyanogenmod.updater.R;
@@ -182,5 +183,24 @@ public class Utils {
         }
         // Not found, assume non-alternate
         return "/sdcard";
+    }
+
+    public static int getUpdateType() {
+        int updateType = Constants.UPDATE_TYPE_NIGHTLY;
+        try {
+            String cmReleaseType = SystemProperties.get(
+                    Constants.PROPERTY_CM_RELEASETYPE);
+
+            // Treat anything that is not SNAPSHOT as NIGHTLY
+            if (!cmReleaseType.isEmpty()) {
+                if (TextUtils.equals(cmReleaseType,
+                        Constants.CM_RELEASETYPE_SNAPSHOT)) {
+                    updateType = Constants.UPDATE_TYPE_SNAPSHOT;
+                }
+            }
+        } catch (RuntimeException ignored) {
+        }
+
+        return updateType;
     }
 }
