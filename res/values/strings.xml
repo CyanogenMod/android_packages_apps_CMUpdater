@@ -39,6 +39,7 @@
     <string name="check_bi_weekly">Bi-weekly</string>
     <string name="check_monthly">Monthly</string>
 
+    <!-- Deprecated -->
     <string name="update_type_title">Update types</string>
     <string name="type_all_incl_nightly">All versions</string>
     <string name="type_new">Release channel</string>
@@ -87,6 +88,7 @@
     <!-- System info strings -->
     <string name="sysinfo_device">Device:</string>
     <string name="sysinfo_running">Running:</string>
+    <string name="sysinfo_update_channel">Update channel:</string>
     <string name="sysinfo_last_check">Last check:</string>
 
     <!-- changelog strings -->
