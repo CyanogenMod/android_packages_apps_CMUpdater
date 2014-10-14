@@ -32,11 +32,6 @@
   <string name="check_weekly">每星期</string>
   <string name="check_bi_weekly">每兩星期</string>
   <string name="check_monthly">每月</string>
-  <string name="update_type_title">更新類型</string>
-  <string name="type_all_incl_nightly">所有版本</string>
-  <string name="type_new">正式版本</string>
-  <string name="type_new_incl_nightly">開發版本</string>
-  <string name="nightly_alert_title">注意</string>
   <string name="checking_for_updates">正在檢查更新</string>
   <string name="no_updates_found">沒有找到新的更新</string>
   <string name="update_check_failed">檢查更新失敗。請檢查您的互聯網連接並稍後再試。</string>

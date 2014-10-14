@@ -32,12 +32,6 @@
   <string name="check_weekly">Kas savaitę</string>
   <string name="check_bi_weekly">Kas antrą savaitę</string>
   <string name="check_monthly">Kas mėnesį</string>
-  <string name="update_type_title">Atnaujinimų tipai</string>
-  <string name="type_all_incl_nightly">Visos versijos</string>
-  <string name="type_new">Išleidimo kanalas</string>
-  <string name="type_new_incl_nightly">Plėtros kanalas</string>
-  <string name="nightly_alert">Pasirinkote įtraukti kūrėjo atnaujinimus į šį sąrašą. Šie atnaujinimai yra neišbandyti ir turėtų būti naudojami atsargiai.</string>
-  <string name="nightly_alert_title">Dėmesio</string>
   <string name="checking_for_updates">Ieškoma atnaujinimų</string>
   <string name="no_updates_found">Atnaujinimų nerasta</string>
   <string name="update_check_failed">Atnaujinimų rasti nepavyko. Prašome patikrinti savo interneto ryšį ir bandyti dar kartą.</string>

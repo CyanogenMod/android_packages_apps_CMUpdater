@@ -32,12 +32,6 @@
   <string name="check_weekly">هەفتانە</string>
   <string name="check_bi_weekly">هه‌فتانه‌</string>
   <string name="check_monthly">مانگانە</string>
-  <string name="update_type_title">جۆری نوێکردنەوە</string>
-  <string name="type_all_incl_nightly">هه‌موو وه‌شانه‌کان</string>
-  <string name="type_new">کەناڵی بڵاوکردنەوە</string>
-  <string name="type_new_incl_nightly">کەناڵی پەرەپێدەر</string>
-  <string name="nightly_alert">تۆ گه‌شه‌ی نوێکه‌ره‌وه‌ت هه‌ڵبژارد له‌م لیسته‌،که‌ ئه‌مانه‌ کارپێنه‌کراون و له‌وانه‌یه‌ زه‌ره‌رمه‌ند بن.</string>
-  <string name="nightly_alert_title">مه‌ترسی</string>
   <string name="checking_for_updates">پشکنین بۆ نوێکردنه‌وه‌</string>
   <string name="no_updates_found">هیچ نوێکردنه‌وه‌یه‌ک نه‌دۆزرایه‌وه‌</string>
   <string name="update_check_failed">پشکنین بۆ نوێکردنه‌وه‌ هه‌ڵه‌ی تێکه‌وت ، تکایه‌ بزانه‌ ئینته‌رنیتت هه‌یه‌ یان دواتر هه‌وڵبده‌ره‌وه‌.</string>

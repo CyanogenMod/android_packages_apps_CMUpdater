@@ -32,12 +32,6 @@
   <string name="check_weekly">每周一次</string>
   <string name="check_bi_weekly">两周一次</string>
   <string name="check_monthly">每月一次</string>
-  <string name="update_type_title">更新类型</string>
-  <string name="type_all_incl_nightly">所有版本</string>
-  <string name="type_new">正式版本</string>
-  <string name="type_new_incl_nightly">开发版本</string>
-  <string name="nightly_alert">您在此列表中已选择包括开发人员更新。这些是不受支持的，应谨慎使用。</string>
-  <string name="nightly_alert_title">小心</string>
   <string name="checking_for_updates">正在检查更新</string>
   <string name="no_updates_found">没有找到新的更新</string>
   <string name="update_check_failed">检查更新失败。 请您检查您的网络连接并稍后重试。</string>

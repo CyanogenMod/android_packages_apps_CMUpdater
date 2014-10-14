@@ -32,12 +32,6 @@
   <string name="check_weekly">Wekelijks</string>
   <string name="check_bi_weekly">Tweewekelijks</string>
   <string name="check_monthly">Maandelijks</string>
-  <string name="update_type_title">Soort updates</string>
-  <string name="type_all_incl_nightly">Alle versies</string>
-  <string name="type_new">Release-versie</string>
-  <string name="type_new_incl_nightly">Ontwikkelaarsversie</string>
-  <string name="nightly_alert">U heeft ervoor gekozen ook ontwikkelaar-updates in de lijst weer te geven. Deze worden niet ondersteund en moeten voorzichtig worden gebruikt.</string>
-  <string name="nightly_alert_title">Let op</string>
   <string name="checking_for_updates">Controleren op updates\u2026</string>
   <string name="no_updates_found">Geen nieuwe updates gevonden</string>
   <string name="update_check_failed">Kan niet controleren op updates. Controleer uw internetverbinding en probeer het later opnieuw</string>

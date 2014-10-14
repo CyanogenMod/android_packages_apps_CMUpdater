@@ -32,12 +32,6 @@
   <string name="check_weekly">Ogni settimana</string>
   <string name="check_bi_weekly">Ogni due settimane</string>
   <string name="check_monthly">Una volta al mese</string>
-  <string name="update_type_title">Tipo di aggiornamenti</string>
-  <string name="type_all_incl_nightly">Tutte le versioni</string>
-  <string name="type_new">Canale di rilascio</string>
-  <string name="type_new_incl_nightly">Canale di sviluppo</string>
-  <string name="nightly_alert">Hai scelto di includere aggiornamenti in fase di sviluppo in questa lista. Questi non sono supportati e andrebbero usati con cautela.</string>
-  <string name="nightly_alert_title">Attenzione</string>
   <string name="checking_for_updates">Controllo aggiornamenti</string>
   <string name="no_updates_found">Nessun nuovo aggiornamento</string>
   <string name="update_check_failed">La verifica di aggiornamenti è fallita. Controlla la connessione ad internet e riprova più tardi.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">Tutti gli aggiornamenti eliminati</string>
   <string name="sysinfo_device">Dispositivo:</string>
   <string name="sysinfo_running">ROM installata:</string>
+  <string name="sysinfo_update_channel">Canale aggiornamento:</string>
   <string name="sysinfo_last_check">Ultima verifica:</string>
   <string name="no_changelog_alert">Nessun changelog disponibile</string>
   <string name="changelog_dialog_title">Changelog</string>

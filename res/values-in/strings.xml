@@ -32,12 +32,6 @@
   <string name="check_weekly">Mingguan</string>
   <string name="check_bi_weekly">Dwi-mingguan</string>
   <string name="check_monthly">Bulanan</string>
-  <string name="update_type_title">Jenis pembaruan</string>
-  <string name="type_all_incl_nightly">Semua versi</string>
-  <string name="type_new">Channel rilis</string>
-  <string name="type_new_incl_nightly">Channel pengembangan</string>
-  <string name="nightly_alert">Anda telah memilih untuk memasukkan update pengembang dalam daftar ini. Ini tidak didukung dan harus digunakan dengan hati-hati.</string>
-  <string name="nightly_alert_title">Hati-hati</string>
   <string name="checking_for_updates">Memeriksa pembaruan</string>
   <string name="no_updates_found">Tidak ada pembaruan baru yang ditemukan</string>
   <string name="update_check_failed">Pemeriksaan pembaruan gagal. Silakan periksa koneksi internet anda dan coba lagi nanti.</string>

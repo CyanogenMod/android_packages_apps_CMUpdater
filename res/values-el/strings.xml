@@ -32,12 +32,6 @@
   <string name="check_weekly">Κάθε εβδομάδα</string>
   <string name="check_bi_weekly">Κάθε 2 εβδομάδες</string>
   <string name="check_monthly">Κάθε μήνα</string>
-  <string name="update_type_title">Τύποι ενημερώσεων</string>
-  <string name="type_all_incl_nightly">Όλες οι εκδόσεις</string>
-  <string name="type_new">Σταθερές εκδόσεις</string>
-  <string name="type_new_incl_nightly">Εκδόσεις για προγραμματιστές</string>
-  <string name="nightly_alert">Επιλέξατε να εμφανίζετε ενημερώσεις για προγραμματιστές σε αυτή τη λίστα. Αυτές οι ενημερώσεις δεν υποστηρίζονται επίσημα και θα πρέπει να χρησιμοποιούνται με προσοχή.</string>
-  <string name="nightly_alert_title">Προσοχή</string>
   <string name="checking_for_updates">Έλεγχος για ενημερώσεις</string>
   <string name="no_updates_found">Δεν βρέθηκαν ενημερώσεις</string>
   <string name="update_check_failed">Ο έλεγχος για ενημερώσεις απέτυχε. Παρακαλώ ελέγξτε την σύνδεσή σας στο διαδίκτυο και προσπαθήστε αργότερα.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">Όλες οι ενημερώσεις διαγράφηκαν</string>
   <string name="sysinfo_device">Συσκευή:</string>
   <string name="sysinfo_running">Τρέχει:</string>
+  <string name="sysinfo_update_channel">Τύπος ενημερώσεων:</string>
   <string name="sysinfo_last_check">Τελευταίος έλεγχος:</string>
   <string name="no_changelog_alert">Δεν υπάρχει διαθέσιμο αρχείο αλλαγών</string>
   <string name="changelog_dialog_title">Αρχείο αλλαγών</string>

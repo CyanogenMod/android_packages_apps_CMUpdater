@@ -32,12 +32,6 @@
   <string name="check_weekly">Haftalık</string>
   <string name="check_bi_weekly">İki haftada bir</string>
   <string name="check_monthly">Aylık</string>
-  <string name="update_type_title">Güncelleme türleri</string>
-  <string name="type_all_incl_nightly">Tüm sürümler</string>
-  <string name="type_new">Yayın kanalı</string>
-  <string name="type_new_incl_nightly">Geliştirme kanalı</string>
-  <string name="nightly_alert">Listede geliştirici güncellemelerini dahil etmeyi seçtiniz. Bu güncellemeler desteklenmemektedir ve dikkatle kullanılmalıdır.</string>
-  <string name="nightly_alert_title">Dikkat</string>
   <string name="checking_for_updates">Güncellemeler kontrol ediliyor</string>
   <string name="no_updates_found">Yeni güncelleme yok</string>
   <string name="update_check_failed">Güncelleme kontrolü başarısız oldu. Lütfen internet bağlantınızı kontrol edin ve daha sonra tekrar deneyin.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">İndirilen tüm güncellemeler silindi</string>
   <string name="sysinfo_device">Cihaz:</string>
   <string name="sysinfo_running">Çalışan:</string>
+  <string name="sysinfo_update_channel">Güncelleme kanalı:</string>
   <string name="sysinfo_last_check">Son kontrol:</string>
   <string name="no_changelog_alert">Değişiklik kaydı yok</string>
   <string name="changelog_dialog_title">Değişiklik kaydı</string>

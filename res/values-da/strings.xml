@@ -32,12 +32,6 @@
   <string name="check_weekly">Ugentligt</string>
   <string name="check_bi_weekly">To gange ugentligt</string>
   <string name="check_monthly">Månedligt</string>
-  <string name="update_type_title">Opdateringstyper</string>
-  <string name="type_all_incl_nightly">Alle versioner</string>
-  <string name="type_new">Udgivelseskanal</string>
-  <string name="type_new_incl_nightly">Udviklingskanal</string>
-  <string name="nightly_alert">Du har valgt at inkludere udviklingsopdateringer i denne liste. De er ikke supporteret og bør anvendes med forsigtighed.</string>
-  <string name="nightly_alert_title">Forsigtig</string>
   <string name="checking_for_updates">Søg efter opdateringer</string>
   <string name="no_updates_found">Ingen nye opdateringer fundet</string>
   <string name="update_check_failed">Kunne ikke søge efter opdateringer. Kontrollér venligst din internetforbindelse, og prøv igen senere.</string>
