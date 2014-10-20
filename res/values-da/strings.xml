@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Alle downloadede opdateringer slettet</string>
   <string name="sysinfo_device">Enhed:</string>
   <string name="sysinfo_running">Kører:</string>
+  <string name="sysinfo_update_channel">Opdateringskanal:</string>
   <string name="sysinfo_last_check">Sidste søgning:</string>
   <string name="no_changelog_alert">Ingen ændringslog tilgængelig</string>
   <string name="changelog_dialog_title">Ændringslog</string>

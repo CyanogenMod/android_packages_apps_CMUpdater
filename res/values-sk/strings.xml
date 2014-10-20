@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Všetky prevzaté aktualizácie boli vymazané</string>
   <string name="sysinfo_device">Zariadenie:</string>
   <string name="sysinfo_running">Beží na:</string>
+  <string name="sysinfo_update_channel">Kanál aktualizácie:</string>
   <string name="sysinfo_last_check">Posledná kontrola:</string>
   <string name="no_changelog_alert">Nedostupný zoznam zmien</string>
   <string name="changelog_dialog_title">Zoznam zmien</string>

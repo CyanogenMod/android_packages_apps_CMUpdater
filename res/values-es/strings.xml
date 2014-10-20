@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Todas las actualizaciones fueron borradas</string>
   <string name="sysinfo_device">Dispositivo:</string>
   <string name="sysinfo_running">Ejecutando:</string>
+  <string name="sysinfo_update_channel">Canal de actualización:</string>
   <string name="sysinfo_last_check">Última comprobación:</string>
   <string name="no_changelog_alert">No hay registro de cambios</string>
   <string name="changelog_dialog_title">Registro de cambios</string>

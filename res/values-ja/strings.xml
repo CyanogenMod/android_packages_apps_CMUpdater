@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">ダウンロードしたすべてのアップデートファイルを削除しました</string>
   <string name="sysinfo_device">端末:</string>
   <string name="sysinfo_running">実行中:</string>
+  <string name="sysinfo_update_channel">アップデートチャンネル:</string>
   <string name="sysinfo_last_check">前回の確認:</string>
   <string name="no_changelog_alert">更新履歴はありません</string>
   <string name="changelog_dialog_title">更新履歴</string>

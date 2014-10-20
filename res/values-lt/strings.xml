@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Visi atsiųsti atnaujinimai ištrinti</string>
   <string name="sysinfo_device">Įrenginys:</string>
   <string name="sysinfo_running">Įdiegta:</string>
+  <string name="sysinfo_update_channel">Atnaujinti kanalą:</string>
   <string name="sysinfo_last_check">Tikrinta:</string>
   <string name="no_changelog_alert">Pakeitimų sąrašas nepasiekiamas</string>
   <string name="changelog_dialog_title">Pakeitimai</string>

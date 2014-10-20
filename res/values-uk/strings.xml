@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Всі завантажені оновлення видалено</string>
   <string name="sysinfo_device">Пристрій:</string>
   <string name="sysinfo_running">Версія:</string>
+  <string name="sysinfo_update_channel">Канал оновлень:</string>
   <string name="sysinfo_last_check">Остання перевірка:</string>
   <string name="no_changelog_alert">Список змін недоступний</string>
   <string name="changelog_dialog_title">Список змін</string>

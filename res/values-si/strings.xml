@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">සියලු භාගතකල යාවත්කාලීනයන් මකා දැමුණි</string>
   <string name="sysinfo_device">උපාංගය:</string>
   <string name="sysinfo_running">ධාවනය වෙමින්:</string>
+  <string name="sysinfo_update_channel">යාවත්කාලක නාලිකාව:</string>
   <string name="sysinfo_last_check">අවසන් පිරික්සීම:</string>
   <string name="no_changelog_alert">වෙනස්කම් ලොගයක් ලබාගත නොහැක</string>
   <string name="changelog_dialog_title">වෙනස්කම් ලොගය</string>

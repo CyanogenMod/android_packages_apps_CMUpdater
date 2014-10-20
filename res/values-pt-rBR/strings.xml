@@ -67,6 +67,7 @@ Note: Esta função requer um modo de recuperação compatível ou as atualizaç
   <string name="delete_updates_success_message">Todas as atualizações foram excluídas</string>
   <string name="sysinfo_device">Dispositivo:</string>
   <string name="sysinfo_running">Rodando:</string>
+  <string name="sysinfo_update_channel">Canal de atualização:</string>
   <string name="sysinfo_last_check">Última verificação:</string>
   <string name="no_changelog_alert">Nenhum registro de mudanças disponível</string>
   <string name="changelog_dialog_title">Registro de mudanças</string>

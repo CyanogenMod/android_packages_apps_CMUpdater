@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Totes les actualitzacions descarregades s\'han esborrat</string>
   <string name="sysinfo_device">Dispositiu:</string>
   <string name="sysinfo_running">Executant:</string>
+  <string name="sysinfo_update_channel">Canal d\'actualitzacions:</string>
   <string name="sysinfo_last_check">Darrera verificació:</string>
   <string name="no_changelog_alert">No hi ha un registre de canvis disponible</string>
   <string name="changelog_dialog_title">Registre de canvis</string>

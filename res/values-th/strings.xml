@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">ไฟล์อัพเดตทั้งหมดถูกลบแล้ว</string>
   <string name="sysinfo_device">อุปกรณ์</string>
   <string name="sysinfo_running">กำลังทำงาน:</string>
+  <string name="sysinfo_update_channel">ช่องทางอัพเดต:</string>
   <string name="sysinfo_last_check">ตรวจสอบครั้งล่าสุด :</string>
   <string name="no_changelog_alert">ไม่พบความเปลี่ยนแปลง</string>
   <string name="changelog_dialog_title">ความเปลี่ยนแปลง</string>

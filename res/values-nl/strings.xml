@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Alle gedownloade updates zijn verwijderd</string>
   <string name="sysinfo_device">Apparaat:</string>
   <string name="sysinfo_running">Huidige:</string>
+  <string name="sysinfo_update_channel">Update-versie:</string>
   <string name="sysinfo_last_check">Laatst gecontroleerd:</string>
   <string name="no_changelog_alert">Geen changelog beschikbaar</string>
   <string name="changelog_dialog_title">Changelog</string>

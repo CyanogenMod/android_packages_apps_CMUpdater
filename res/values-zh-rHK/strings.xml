@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">已刪除所有已下載的更新</string>
   <string name="sysinfo_device">裝置：</string>
   <string name="sysinfo_running">正在執行：</string>
+  <string name="sysinfo_update_channel">更新類型：</string>
   <string name="sysinfo_last_check">最後檢查：</string>
   <string name="no_changelog_alert">沒有提供更新日誌</string>
   <string name="changelog_dialog_title">更新日誌</string>

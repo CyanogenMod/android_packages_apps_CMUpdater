@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Az összes letöltött frissítés törölve</string>
   <string name="sysinfo_device">Eszköz:</string>
   <string name="sysinfo_running">Futó verzió:</string>
+  <string name="sysinfo_update_channel">Frissítési csatorna:</string>
   <string name="sysinfo_last_check">Utoljára ellenőrizve:</string>
   <string name="no_changelog_alert">A változások listája nem elérhető</string>
   <string name="changelog_dialog_title">Változások listája</string>

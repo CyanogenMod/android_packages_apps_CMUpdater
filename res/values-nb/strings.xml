@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Alle nedlastede oppdateringerer slettet</string>
   <string name="sysinfo_device">Enhet:</string>
   <string name="sysinfo_running">Kjører:</string>
+  <string name="sysinfo_update_channel">Oppdateringskanal:</string>
   <string name="sysinfo_last_check">Sist sjekk:</string>
   <string name="no_changelog_alert">Endringslogg ikke tilgjengelig</string>
   <string name="changelog_dialog_title">Endringslogg</string>
