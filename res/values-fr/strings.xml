@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Tous les fichiers de mises à jour téléchargés ont été supprimés</string>
   <string name="sysinfo_device">Appareil\u00A0:</string>
   <string name="sysinfo_running">Version actuelle\u00A0:</string>
+  <string name="sysinfo_update_channel">Canal de mise à jour :</string>
   <string name="sysinfo_last_check">Dernière vérification\u00A0:</string>
   <string name="no_changelog_alert">Aucune note de mise à jour disponible</string>
   <string name="changelog_dialog_title">Note de version</string>

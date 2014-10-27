@@ -66,6 +66,7 @@ Uwaga: Ta funkcja wymaga kompatybilnego recovery. W przeciwnym wypadku aktualiza
   <string name="delete_updates_success_message">Usunięto wszystkie pobrane aktualizacje</string>
   <string name="sysinfo_device">Urządzenie:</string>
   <string name="sysinfo_running">Działająca:</string>
+  <string name="sysinfo_update_channel">Kanał aktualizacji:</string>
   <string name="sysinfo_last_check">Ostatnie sprawdzenie:</string>
   <string name="no_changelog_alert">Dziennik zmian jest niedostępny</string>
   <string name="changelog_dialog_title">Dziennik zmian</string>
