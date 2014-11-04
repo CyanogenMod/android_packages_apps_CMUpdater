@@ -32,12 +32,6 @@
   <string name="check_weekly">Hetente</string>
   <string name="check_bi_weekly">Kéthetente</string>
   <string name="check_monthly">Havonta</string>
-  <string name="update_type_title">Frissítés típusa</string>
-  <string name="type_all_incl_nightly">Minden verzió</string>
-  <string name="type_new">Kiadási csatorna</string>
-  <string name="type_new_incl_nightly">Fejlesztési csatorna</string>
-  <string name="nightly_alert">Választásának megfelelően a Nightly frissítések is meg fognak jelenni a listán. Ezek nem támogatottak, ezért csak saját felelősségére használja őket.</string>
-  <string name="nightly_alert_title">Vigyázat!</string>
   <string name="checking_for_updates">Frissítések keresése</string>
   <string name="no_updates_found">Nem található új frissítés</string>
   <string name="update_check_failed">Nem sikerült frissítéseket keresni. Ellenőrizze internetkapcsolatát, majd próbálja újra.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">Az összes letöltött frissítés törölve</string>
   <string name="sysinfo_device">Eszköz:</string>
   <string name="sysinfo_running">Futó verzió:</string>
+  <string name="sysinfo_update_channel">Frissítési csatorna:</string>
   <string name="sysinfo_last_check">Utoljára ellenőrizve:</string>
   <string name="no_changelog_alert">A változások listája nem elérhető</string>
   <string name="changelog_dialog_title">Változások listája</string>

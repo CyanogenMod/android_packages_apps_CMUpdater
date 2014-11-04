@@ -32,12 +32,6 @@
   <string name="check_weekly">Semanalmente</string>
   <string name="check_bi_weekly">Cada dos semanas</string>
   <string name="check_monthly">Mensualmente</string>
-  <string name="update_type_title">Tipo de actualización</string>
-  <string name="type_all_incl_nightly">Todas las versiones</string>
-  <string name="type_new">Nuevas (solo estables)</string>
-  <string name="type_new_incl_nightly">Nuevas (incl. no estables)</string>
-  <string name="nightly_alert">Has elegido incluir actualizaciones no estables en esta lista. Este tipo de actualizaciones no disponen de soporte al usuario y deberían ser utilizadas con precaución.</string>
-  <string name="nightly_alert_title">Advertencia</string>
   <string name="checking_for_updates">Comprobando actualizaciones\u2026</string>
   <string name="no_updates_found">No hay nuevas actualizaciones</string>
   <string name="update_check_failed">Falló la comprobación de actualizaciones. Por favor, verifica la conexión a Internet e inténtalo nuevamente.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">Todas las actualizaciones fueron borradas</string>
   <string name="sysinfo_device">Dispositivo:</string>
   <string name="sysinfo_running">Ejecutando:</string>
+  <string name="sysinfo_update_channel">Canal de actualización:</string>
   <string name="sysinfo_last_check">Última comprobación:</string>
   <string name="no_changelog_alert">No hay registro de cambios</string>
   <string name="changelog_dialog_title">Registro de cambios</string>

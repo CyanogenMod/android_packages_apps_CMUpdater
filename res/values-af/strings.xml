@@ -32,12 +32,6 @@
   <string name="check_weekly">Weekliks</string>
   <string name="check_bi_weekly">Twee-weekliks</string>
   <string name="check_monthly">Maandeliks</string>
-  <string name="update_type_title">Opgradering tipes</string>
-  <string name="type_all_incl_nightly">Alle weergawes</string>
-  <string name="type_new">Vrystellings kanaal</string>
-  <string name="type_new_incl_nightly">Ontwikkelings kanaal</string>
-  <string name="nightly_alert">Jy het gekies om Daaglikse bywerkings by hierdie lys in te sluit. Hulle word nie ondersteun nie en word op eie risiko gebruik.</string>
-  <string name="nightly_alert_title">Versigtig</string>
   <string name="checking_for_updates">Soek vir opgraderings.</string>
   <string name="no_updates_found">Geen nuwe upgraderings gevind nie</string>
   <string name="update_check_failed">Die opgradering soektog het misluk. Gaan asseblief die internet konneksie na en probeer weer later.</string>

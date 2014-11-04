@@ -32,12 +32,6 @@
   <string name="check_weekly">Ukentlig</string>
   <string name="check_bi_weekly">Annenhver uke</string>
   <string name="check_monthly">Månedlig</string>
-  <string name="update_type_title">Oppdateringstyper</string>
-  <string name="type_all_incl_nightly">Alle versjoner</string>
-  <string name="type_new">Utgivelses kanal</string>
-  <string name="type_new_incl_nightly">Utviklings kanal</string>
-  <string name="nightly_alert">Du har valgt å inkludere nattlige bygg i din liste. Disse er uten støtte og burde brukes med forsiktighet.</string>
-  <string name="nightly_alert_title">Forsiktig</string>
   <string name="checking_for_updates">Sjekker etter oppdateringer</string>
   <string name="no_updates_found">Ingen nye oppdateringer funnet</string>
   <string name="update_check_failed">Oppdateringskontrollen feilet. Sjekk internettilkoblingen og prøv på nytt senere.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">Alle nedlastede oppdateringerer slettet</string>
   <string name="sysinfo_device">Enhet:</string>
   <string name="sysinfo_running">Kjører:</string>
+  <string name="sysinfo_update_channel">Oppdateringskanal:</string>
   <string name="sysinfo_last_check">Sist sjekk:</string>
   <string name="no_changelog_alert">Endringslogg ikke tilgjengelig</string>
   <string name="changelog_dialog_title">Endringslogg</string>

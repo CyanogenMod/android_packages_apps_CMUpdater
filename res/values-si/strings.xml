@@ -32,12 +32,6 @@
   <string name="check_weekly">සතිපතා</string>
   <string name="check_bi_weekly">දෙසතියකට වරක්</string>
   <string name="check_monthly">මාස්පතා</string>
-  <string name="update_type_title">යාවත්කාලීන ආකාර</string>
-  <string name="type_all_incl_nightly">සියලු අනුවාද</string>
-  <string name="type_new">නිකුත් කිරීමේ නාලිකාව</string>
-  <string name="type_new_incl_nightly">සංවර්ධනයේ නාලිකාව</string>
-  <string name="nightly_alert">මෙම ලැයිස්තුවේ වර්ධක තැනූ යාවත්කාලීනයන්ද ඇතුළත් කිරීමට ඔබ තෝරා ඇත. මේවා පූර්ණ සහායනොදක්වන අතර අවදානම අනුදැන භාවිතා කලයුතුවේ.</string>
-  <string name="nightly_alert_title">අවදානම් සහිතය</string>
   <string name="checking_for_updates">යාවත්කාලීනයන් සඳහා පිරික්සමින්</string>
   <string name="no_updates_found">කිසිඳු නව යාවත්කාලීනයක් සොයානොගැනුණි</string>
   <string name="update_check_failed">යාවත්කාල පිරික්සීම අසමත්විය. කරුණාකර ඔබගේ අන්තර්ජාල සම්බන්ධතාව පරීක්ෂාකර පසුව යලි උත්සාහ කරන්න.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">සියලු භාගතකල යාවත්කාලීනයන් මකා දැමුණි</string>
   <string name="sysinfo_device">උපාංගය:</string>
   <string name="sysinfo_running">ධාවනය වෙමින්:</string>
+  <string name="sysinfo_update_channel">යාවත්කාලක නාලිකාව:</string>
   <string name="sysinfo_last_check">අවසන් පිරික්සීම:</string>
   <string name="no_changelog_alert">වෙනස්කම් ලොගයක් ලබාගත නොහැක</string>
   <string name="changelog_dialog_title">වෙනස්කම් ලොගය</string>

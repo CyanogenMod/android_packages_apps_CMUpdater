@@ -32,12 +32,6 @@
   <string name="check_weekly">매주</string>
   <string name="check_bi_weekly">격주</string>
   <string name="check_monthly">매월</string>
-  <string name="update_type_title">업데이트 유형</string>
-  <string name="type_all_incl_nightly">모든 버전</string>
-  <string name="type_new">릴리즈 채널</string>
-  <string name="type_new_incl_nightly">개발 채널</string>
-  <string name="nightly_alert">목록에 개발 버전을 표시하도록 설정했습니다. 개발 버전들은 정식으로 지원되지 않으므로 사용에 주의가 필요합니다.</string>
-  <string name="nightly_alert_title">주의</string>
   <string name="checking_for_updates">업데이트를 확인 합니다.</string>
   <string name="no_updates_found">새로운 업데이트를 발견하지 못했습니다.</string>
   <string name="update_check_failed">업데이트를 확인 하지 못했습니다. 귀하의 인터넷 연결을 확인 하고 나중에 다시 시도 하십시오.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">다운로드된 업데이트를 모두 삭제하였습니다.</string>
   <string name="sysinfo_device">기기:</string>
   <string name="sysinfo_running">실행 중:</string>
+  <string name="sysinfo_update_channel">업데이트 채널:</string>
   <string name="sysinfo_last_check">마지막 확인:</string>
   <string name="no_changelog_alert">변경 사항을 찾을 수 없습니다.</string>
   <string name="changelog_dialog_title">변경 사항</string>

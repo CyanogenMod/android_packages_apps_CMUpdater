@@ -39,13 +39,6 @@
     <string name="check_bi_weekly">Bi-weekly</string>
     <string name="check_monthly">Monthly</string>
 
-    <string name="update_type_title">Update types</string>
-    <string name="type_all_incl_nightly">All versions</string>
-    <string name="type_new">Release channel</string>
-    <string name="type_new_incl_nightly">Development channel</string>
-    <string name="nightly_alert">You have selected to include developer updates in this list. These are unsupported and should be used with caution.</string>
-    <string name="nightly_alert_title">Caution</string>
-
     <!-- Update checking -->
     <string name="checking_for_updates">Checking for updates</string>
     <string name="no_updates_found">No new updates found</string>
@@ -87,6 +80,7 @@
     <!-- System info strings -->
     <string name="sysinfo_device">Device:</string>
     <string name="sysinfo_running">Running:</string>
+    <string name="sysinfo_update_channel">Update channel:</string>
     <string name="sysinfo_last_check">Last check:</string>
 
     <!-- changelog strings -->

@@ -32,12 +32,6 @@
   <string name="check_weekly">Co tydzień</string>
   <string name="check_bi_weekly">Dwa razy w tygodniu</string>
   <string name="check_monthly">Raz w miesiącu</string>
-  <string name="update_type_title">Typy aktualizacji</string>
-  <string name="type_all_incl_nightly">Wszystkie wersje</string>
-  <string name="type_new">Kanał wydań</string>
-  <string name="type_new_incl_nightly">Kanał deweloperski</string>
-  <string name="nightly_alert">Wybrano by na liście aktualizacji pojawiały się wersje deweloperskie. Wydania te nie są oficjalnie wspierane, a więc powinny być użytkowane ze szczególną ostrożnością.</string>
-  <string name="nightly_alert_title">Ostrzeżenie</string>
   <string name="checking_for_updates">Szukam aktualizacji</string>
   <string name="no_updates_found">Nie znaleziono nowych aktualizacji</string>
   <string name="update_check_failed">Szukanie aktualizacji zakończone niepowodzeniem. Sprawdź połączenie z Internetem i spróbuj później.</string>
@@ -72,6 +66,7 @@ Uwaga: Ta funkcja wymaga kompatybilnego recovery. W przeciwnym wypadku aktualiza
   <string name="delete_updates_success_message">Usunięto wszystkie pobrane aktualizacje</string>
   <string name="sysinfo_device">Urządzenie:</string>
   <string name="sysinfo_running">Działająca:</string>
+  <string name="sysinfo_update_channel">Kanał aktualizacji:</string>
   <string name="sysinfo_last_check">Ostatnie sprawdzenie:</string>
   <string name="no_changelog_alert">Dziennik zmian jest niedostępny</string>
   <string name="changelog_dialog_title">Dziennik zmian</string>

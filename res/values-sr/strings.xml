@@ -32,12 +32,6 @@
   <string name="check_weekly">Недељно</string>
   <string name="check_bi_weekly">Двонедељно</string>
   <string name="check_monthly">Месечно</string>
-  <string name="update_type_title">Типови ажурирања</string>
-  <string name="type_all_incl_nightly">Све верзије</string>
-  <string name="type_new">Стабилне верзије</string>
-  <string name="type_new_incl_nightly">Развојне верзије</string>
-  <string name="nightly_alert">Изабрао си да буду укључена развојна ажурирања у овој листи. Она су неподржана и треба да се користе са опрезом.</string>
-  <string name="nightly_alert_title">Опрез</string>
   <string name="checking_for_updates">Провера за ажурирања</string>
   <string name="no_updates_found">Нису пронађена нова ажурирања</string>
   <string name="update_check_failed">Провера за ажурирања није успела. Провери своју интернет везу и покушај поново касније.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">Сва преузета ажурирања су избрисана</string>
   <string name="sysinfo_device">Уређај:</string>
   <string name="sysinfo_running">Систем:</string>
+  <string name="sysinfo_update_channel">Канал ажурирања:</string>
   <string name="sysinfo_last_check">Последња провера:</string>
   <string name="no_changelog_alert">Нема доступних евиденција измена</string>
   <string name="changelog_dialog_title">Евиденција измена</string>

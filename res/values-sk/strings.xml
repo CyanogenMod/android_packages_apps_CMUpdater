@@ -32,12 +32,6 @@
   <string name="check_weekly">Týždenne</string>
   <string name="check_bi_weekly">Raz za dva týždne</string>
   <string name="check_monthly">Mesačne</string>
-  <string name="update_type_title">Typy aktualizácií</string>
-  <string name="type_all_incl_nightly">Všetky verzie</string>
-  <string name="type_new">Kanál vydaní</string>
-  <string name="type_new_incl_nightly">Vývojársky kanál</string>
-  <string name="nightly_alert">Vybrali ste, že chcete zahrnúť vývojárske aktualizácie do tohto zoznamu. Tieto aktualizácie nie sú podporované a mali by byť používané s opatrnosťou.</string>
-  <string name="nightly_alert_title">Upozornenie</string>
   <string name="checking_for_updates">Kontrolovanie aktualizácií</string>
   <string name="no_updates_found">Nenašli sa žiadne nové aktualizácie</string>
   <string name="update_check_failed">Kontrola aktualizácií zlyhala. Skontrolujte prosím vaše internetové pripojenie a skúste to znova neskôr.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">Všetky prevzaté aktualizácie boli vymazané</string>
   <string name="sysinfo_device">Zariadenie:</string>
   <string name="sysinfo_running">Beží na:</string>
+  <string name="sysinfo_update_channel">Kanál aktualizácie:</string>
   <string name="sysinfo_last_check">Posledná kontrola:</string>
   <string name="no_changelog_alert">Nedostupný zoznam zmien</string>
   <string name="changelog_dialog_title">Zoznam zmien</string>

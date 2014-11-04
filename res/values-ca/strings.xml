@@ -32,12 +32,6 @@
   <string name="check_weekly">Setmanalment</string>
   <string name="check_bi_weekly">Bi-setmanalment</string>
   <string name="check_monthly">Mensualment</string>
-  <string name="update_type_title">Tipus d\'actualització</string>
-  <string name="type_all_incl_nightly">Totes les versions</string>
-  <string name="type_new">Canal estable</string>
-  <string name="type_new_incl_nightly">Canal de desenvolupament</string>
-  <string name="nightly_alert">Has seleccionat incloure les actualitzacions de tipus desenvolupador en aquesta llista. Aquestes no tenen suport i han de ser utilitzades amb precaució.</string>
-  <string name="nightly_alert_title">Alerta</string>
   <string name="checking_for_updates">Buscant actualitzacions</string>
   <string name="no_updates_found">No s\'han trobat noves actualitzacions</string>
   <string name="update_check_failed">No s\'ha pogut verificar si hi ha actualitzacions disponibles. Si us plau verifica la teva connexió d\'internet i intenta-ho una altra vegada més tard.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">Totes les actualitzacions descarregades s\'han esborrat</string>
   <string name="sysinfo_device">Dispositiu:</string>
   <string name="sysinfo_running">Executant:</string>
+  <string name="sysinfo_update_channel">Canal d\'actualitzacions:</string>
   <string name="sysinfo_last_check">Darrera verificació:</string>
   <string name="no_changelog_alert">No hi ha un registre de canvis disponible</string>
   <string name="changelog_dialog_title">Registre de canvis</string>

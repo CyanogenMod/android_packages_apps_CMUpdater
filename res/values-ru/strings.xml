@@ -32,12 +32,6 @@
   <string name="check_weekly">Еженедельно</string>
   <string name="check_bi_weekly">Раз в две недели</string>
   <string name="check_monthly">Ежемесячно</string>
-  <string name="update_type_title">Канал обновлений</string>
-  <string name="type_all_incl_nightly">Все версии</string>
-  <string name="type_new">Канал релиза</string>
-  <string name="type_new_incl_nightly">Канал разработки</string>
-  <string name="nightly_alert">Вы включили в список обновлений для поиска версии для разработчиков. Помните, что техническая поддержка по ним не предоставляется.</string>
-  <string name="nightly_alert_title">Внимание!</string>
   <string name="checking_for_updates">Проверка обновлений\u2026</string>
   <string name="no_updates_found">Обновлений не найдено</string>
   <string name="update_check_failed">Не удалось выполнить поиск обновлений. Проверьте подключение к Интернету и повторите попытку.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">Все загруженные обновления удалены</string>
   <string name="sysinfo_device">Устройство:</string>
   <string name="sysinfo_running">Версия:</string>
+  <string name="sysinfo_update_channel">Канал обновлений:</string>
   <string name="sysinfo_last_check">Последняя проверка:</string>
   <string name="no_changelog_alert">Список изменений недоступен</string>
   <string name="changelog_dialog_title">Список изменений</string>

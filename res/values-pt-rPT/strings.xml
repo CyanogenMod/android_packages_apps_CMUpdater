@@ -32,12 +32,6 @@
   <string name="check_weekly">Semanalmente</string>
   <string name="check_bi_weekly">Quinzenalmente</string>
   <string name="check_monthly">Mensalmente</string>
-  <string name="update_type_title">Tipos de atualização</string>
-  <string name="type_all_incl_nightly">Todas as versões</string>
-  <string name="type_new">Versões estáveis</string>
-  <string name="type_new_incl_nightly">Versões nightly</string>
-  <string name="nightly_alert">Escolheu incluir versões nightly nesta lista. Estas não são suportadas e devem ser usadas com cuidado.</string>
-  <string name="nightly_alert_title">Cuidado</string>
   <string name="checking_for_updates">A procurar atualizações\u2026</string>
   <string name="no_updates_found">Não foram encontradas novas atualizações</string>
   <string name="update_check_failed">A procura por atualizações falhou. Por favor verifique o estado da sua ligação à internet e tente de novo.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">Todos os ficheiros foram eliminados</string>
   <string name="sysinfo_device">Dispositivo:</string>
   <string name="sysinfo_running">Versão atual:</string>
+  <string name="sysinfo_update_channel">Tipo de atualização:</string>
   <string name="sysinfo_last_check">Última verificação:</string>
   <string name="no_changelog_alert">Lista de alterações indisponível</string>
   <string name="changelog_dialog_title">Lista de alterações</string>

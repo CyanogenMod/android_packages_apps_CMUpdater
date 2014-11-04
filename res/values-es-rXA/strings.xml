@@ -32,12 +32,6 @@
   <string name="check_weekly">Selmanalmente</string>
   <string name="check_bi_weekly">Cada dos selmanes</string>
   <string name="check_monthly">Mensualmente</string>
-  <string name="update_type_title">Triba d\'anovamientu</string>
-  <string name="type_all_incl_nightly">Toles versiones</string>
-  <string name="type_new">Canal estable</string>
-  <string name="type_new_incl_nightly">Canal de desendolcu</string>
-  <string name="nightly_alert">Seleicionaste incluyir los anovamientos de desendolcu nesta llista. Estos anovamientos nun tienen sofitu téunicu y han usase con procuru.</string>
-  <string name="nightly_alert_title">Avisu</string>
   <string name="checking_for_updates">Comprobando anovamientos\u2026</string>
   <string name="no_updates_found">Nun hai anovamientos nuevos</string>
   <string name="update_check_failed">Falló la comprobación d\'anovamientos. Por favor, verifica la conexón a Internet y inténtalo de nueves.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">Desaniciáronse tolos anovamientos</string>
   <string name="sysinfo_device">Preséu:</string>
   <string name="sysinfo_running">Executando:</string>
+  <string name="sysinfo_update_channel">Canal d\'anovamientu:</string>
   <string name="sysinfo_last_check">Cabera comprobación:</string>
   <string name="no_changelog_alert">Nun hai rexistru de cambeos</string>
   <string name="changelog_dialog_title">Rexistru de cambeos</string>

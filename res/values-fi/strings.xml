@@ -32,12 +32,6 @@
   <string name="check_weekly">Viikoittain</string>
   <string name="check_bi_weekly">Joka toinen viikko</string>
   <string name="check_monthly">Kuukausittain</string>
-  <string name="update_type_title">Päivitysten tyypit</string>
-  <string name="type_all_incl_nightly">Kaikki versiot</string>
-  <string name="type_new">Julkaisukanava</string>
-  <string name="type_new_incl_nightly">Kehitysversioiden kanava</string>
-  <string name="nightly_alert">Olet valinnut kehittäjille tarkoitetut päivitykset listalle. Näitä ei tueta virallisesti, käytä omalla vastuulla.</string>
-  <string name="nightly_alert_title">Varoitus</string>
   <string name="checking_for_updates">Tarkistetaan päivityksiä</string>
   <string name="no_updates_found">Päivityksiä ei löytynyt</string>
   <string name="update_check_failed">Päivitysten tarkistaminen epäonnistui. Tarkista internet-yhteytesi ja yritä uudelleen.</string>
@@ -68,6 +62,7 @@
   <string name="delete_updates_success_message">Kaikki päivitykset poistettu</string>
   <string name="sysinfo_device">Laite:</string>
   <string name="sysinfo_running">Versio:</string>
+  <string name="sysinfo_update_channel">Päivitysversio:</string>
   <string name="sysinfo_last_check">Viimeisin tarkistus:</string>
   <string name="no_changelog_alert">Ei muutoslokia saatavilla</string>
   <string name="changelog_dialog_title">Muutosloki</string>

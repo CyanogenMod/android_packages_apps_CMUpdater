@@ -32,12 +32,6 @@
   <string name="check_weekly">Săptămânal</string>
   <string name="check_bi_weekly">Două ori pe săptămână</string>
   <string name="check_monthly">Lunar</string>
-  <string name="update_type_title">Tipuri de actualizări</string>
-  <string name="type_all_incl_nightly">Toate versiunile</string>
-  <string name="type_new">Canal release</string>
-  <string name="type_new_incl_nightly">Canal dezvoltare</string>
-  <string name="nightly_alert">Ai selectat includerea actualizărilor pentru dezvoltatori în această listă. Acestea nu beneficiază de asistență și trebuie folosite cu precauție.</string>
-  <string name="nightly_alert_title">Atenție</string>
   <string name="checking_for_updates">Căutare actualizări</string>
   <string name="no_updates_found">Nu s-au găsit actualizări noi</string>
   <string name="update_check_failed">Verificarea actualizării a eșuat. Vă rugăm să verificați conexiunea la internet și să încercați din nou mai târziu.</string>

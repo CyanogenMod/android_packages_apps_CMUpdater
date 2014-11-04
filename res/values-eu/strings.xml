@@ -32,12 +32,6 @@
   <string name="check_weekly">Astero</string>
   <string name="check_bi_weekly">Bi astetan behin</string>
   <string name="check_monthly">Hilabetero</string>
-  <string name="update_type_title">Eguneraketa mota</string>
-  <string name="type_all_incl_nightly">Bertsio guztiak</string>
-  <string name="type_new">Berriak (egonkorrak bakarrik)</string>
-  <string name="type_new_incl_nightly">Berriak (ezegonkorrak barne)</string>
-  <string name="nightly_alert">Zerrendan eguneraketa ez egonkorrak ere egotea aukeratu duzu. Eguneraketa mota hauek ez daukate erabiltzailearekiko laguntza eta kontuz erabili beharko lirateke.</string>
-  <string name="nightly_alert_title">Kontuz</string>
   <string name="checking_for_updates">Eguneraketak bilatzen\u2026</string>
   <string name="no_updates_found">Ez da eguneraketa berririk aurkitu</string>
   <string name="update_check_failed">Eguneraketa bilaketak huts egin du. Interneterako konexioa berretsi eta berriro saiatu, mesedez.</string>

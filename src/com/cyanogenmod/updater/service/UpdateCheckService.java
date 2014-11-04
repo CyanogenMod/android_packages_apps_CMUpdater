@@ -208,8 +208,7 @@ public class UpdateCheckService extends IntentService
 
     private void getAvailableUpdates() {
         // Get the type of update we should check for
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        int updateType = prefs.getInt(Constants.UPDATE_TYPE_PREF, 0);
+        int updateType = Utils.getUpdateType();
 
         // Get the actual ROM Update Server URL
         URI updateServerUri = getServerURI();
@@ -231,16 +230,12 @@ public class UpdateCheckService extends IntentService
         JSONArray channels = new JSONArray();
 
         switch(updateType) {
-            case Constants.UPDATE_TYPE_ALL:
+            case Constants.UPDATE_TYPE_SNAPSHOT:
                 channels.put("snapshot");
-                channels.put("nightly");
                 break;
-            case Constants.UPDATE_TYPE_NEW_NIGHTLY:
-                channels.put("nightly");
-                break;
-            case Constants.UPDATE_TYPE_NEW_SNAPSHOT:
+            case Constants.UPDATE_TYPE_NIGHTLY:
             default:
-                channels.put("snapshot");
+                channels.put("nightly");
                 break;
         }
         JSONObject params = new JSONObject();
@@ -292,7 +287,7 @@ public class UpdateCheckService extends IntentService
                 .setIncremental(obj.getString("incremental"))
                 .build();
 
-        boolean includeAll = updateType == Constants.UPDATE_TYPE_ALL;
+        boolean includeAll = updateType == Constants.UPDATE_TYPE_NIGHTLY;
 
         if (!includeAll && !ui.isNewerThanInstalled()) {
             Log.d(TAG, "Build " + ui.getFileName() + " is older than the installed build");
@@ -309,8 +304,7 @@ public class UpdateCheckService extends IntentService
 
     @Override
     public void onResponse(JSONObject jsonObject) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        int updateType = prefs.getInt(Constants.UPDATE_TYPE_PREF, 0);
+        int updateType = Utils.getUpdateType();
 
         LinkedList<UpdateInfo> lastUpdates = State.loadState(this);
         LinkedList<UpdateInfo> updates = parseJSON(jsonObject.toString(), updateType);

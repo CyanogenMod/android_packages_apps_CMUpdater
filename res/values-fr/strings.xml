@@ -32,12 +32,6 @@
   <string name="check_weekly">Hebdomadaire</string>
   <string name="check_bi_weekly">Bimensuelle</string>
   <string name="check_monthly">Mensuelle</string>
-  <string name="update_type_title">Versions à rechercher</string>
-  <string name="type_all_incl_nightly">Toutes les versions</string>
-  <string name="type_new">Version stable</string>
-  <string name="type_new_incl_nightly">Version de développement</string>
-  <string name="nightly_alert">Vous avez choisi d\'inclure à votre liste les versions de développement. Ces versions ne disposent pas de support technique et doivent être utilisées avec précaution.</string>
-  <string name="nightly_alert_title">Avertissement</string>
   <string name="checking_for_updates">Recherche de mises à jour</string>
   <string name="no_updates_found">Aucune nouvelle mise à jour disponible</string>
   <string name="update_check_failed">La vérification a échoué. Vérifiez votre connexion internet et réessayez ultérieurement.</string>
@@ -68,8 +62,9 @@
   <string name="delete_updates_success_message">Tous les fichiers de mises à jour téléchargés ont été supprimés</string>
   <string name="sysinfo_device">Appareil\u00A0:</string>
   <string name="sysinfo_running">Version actuelle\u00A0:</string>
+  <string name="sysinfo_update_channel">Canal de mise à jour :</string>
   <string name="sysinfo_last_check">Dernière vérification\u00A0:</string>
-  <string name="no_changelog_alert">Pas de note de mise à jour disponible</string>
+  <string name="no_changelog_alert">Aucune note de mise à jour disponible</string>
   <string name="changelog_dialog_title">Note de version</string>
   <string name="loading_changelog">Chargement\u2026</string>
   <string name="extension_label">Mises à jour CyanogenMod</string>
