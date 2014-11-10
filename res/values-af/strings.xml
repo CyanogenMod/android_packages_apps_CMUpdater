@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Alle afgelaaide opgraderings geskrap</string>
   <string name="sysinfo_device">Toestel:</string>
   <string name="sysinfo_running">Huidiglik:</string>
+  <string name="sysinfo_update_channel">Opgradeer Kanaal:</string>
   <string name="sysinfo_last_check">Laaste soek:</string>
   <string name="no_changelog_alert">Geen Veranderinge-log beskikbaar nie</string>
   <string name="changelog_dialog_title">Veranderinge-log</string>
