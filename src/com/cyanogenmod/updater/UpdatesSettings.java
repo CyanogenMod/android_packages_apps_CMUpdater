@@ -212,6 +212,16 @@ public class UpdatesSettings extends PreferenceActivity implements
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        // If running on a phone, remove padding around the listview
+        if (!Utils.isTablet(this)) {
+            getListView().setPadding(0, 0, 0, 0);
+        }
+    }
+
+    @Override
     public void onReady(UpdatePreference pref) {
         pref.setOnReadyListener(null);
         mUpdateHandler.post(mUpdateProgress);
