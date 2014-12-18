@@ -26,6 +26,8 @@ public class UpdateInfo implements Parcelable, Serializable {
     private static final Pattern sIncrementalPattern =
             Pattern.compile("^incremental-(.*)-(.*).zip$");
 
+    public static final String CHANGELOG_EXTENSION = ".changelog.html";
+
     public enum Type {
         UNKNOWN,
         STABLE,
@@ -55,7 +57,7 @@ public class UpdateInfo implements Parcelable, Serializable {
     }
 
     public File getChangeLogFile(Context context) {
-        return new File(context.getCacheDir(), mFileName + ".changelog");
+        return new File(context.getCacheDir(), mFileName + CHANGELOG_EXTENSION);
     }
 
     /**

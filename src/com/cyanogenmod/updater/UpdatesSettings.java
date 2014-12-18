@@ -577,7 +577,7 @@ public class UpdatesSettings extends PreferenceActivity implements
         new Thread() {
             @Override
             public void run() {
-                File[] files = getCacheDir().listFiles(new UpdateFilter(".changelog"));
+                File[] files = getCacheDir().listFiles(new UpdateFilter(UpdateInfo.CHANGELOG_EXTENSION));
                 if (files == null) {
                     return;
                 }
