@@ -35,7 +35,7 @@
   <string name="checking_for_updates">Kontrolovanie aktualizácií</string>
   <string name="no_updates_found">Nenašli sa žiadne nové aktualizácie</string>
   <string name="update_check_failed">Kontrola aktualizácií zlyhala. Skontrolujte prosím vaše internetové pripojenie a skúste to znova neskôr.</string>
-  <string name="not_new_updates_found_ticker">Sú dostupné nové aktualizácie</string>
+  <string name="not_new_updates_found_ticker">K dispozícii sú nové aktualizácie</string>
   <string name="not_new_updates_found_title">Nové aktualizácie</string>
   <string name="not_action_download">Download</string>
   <string name="data_connection_required">Vyžaduje sa dátové pripojenie.</string>

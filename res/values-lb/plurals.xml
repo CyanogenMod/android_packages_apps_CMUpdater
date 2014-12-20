@@ -9,8 +9,20 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="not_new_updates_found_body">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> Aktualiséierung disponibel fir erofzelueden</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> Aktualiséierungen disponibel fir erofzelueden</item>
+  </plurals>
+  <plurals name="not_additional_count">
+    <item quantity="one">+ <xliff:g id="count">%d</xliff:g> méi</item>
+    <item quantity="other">+ <xliff:g id="count">%d</xliff:g> méi</item>
+  </plurals>
   <plurals name="extension_status">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> Update</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> Updates</item>
+  </plurals>
+  <plurals name="extension_expandedTitle">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod-Aktualiséierung</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod-Aktualiséierungen</item>
   </plurals>
 </resources>
