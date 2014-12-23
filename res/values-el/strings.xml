@@ -21,9 +21,9 @@
   <string name="dialog_close">Κλείσιμο</string>
   <string name="available_updates_title">Διαθέσιμες ενημερώσεις</string>
   <string name="no_available_updates_intro">Ο τελευταίος έλεγχος δεν βρήκε διαθέσιμες ενημερώσεις. Για να ελέγξετε για νέες ενημερώσεις χειροκίνητα, χρησιμοποιήστε το κουμπί Ανανέωση.</string>
-  <string name="new_update_summary">Νέες</string>
-  <string name="downloaded_update_summary">Κατεβασμένες</string>
-  <string name="installed_update_summary">Εγκατεστημένες</string>
+  <string name="new_update_summary">Νέα</string>
+  <string name="downloaded_update_summary">Λήφθηκε</string>
+  <string name="installed_update_summary">Εγκαταστάθηκε</string>
   <string name="update_check_title">Έλεγχος ενημερώσεων</string>
   <string name="check_manual">Χειροκίνητος</string>
   <string name="check_on_boot">Σε κάθε εκκίνηση</string>

@@ -20,7 +20,7 @@
   <string name="dialog_update">업데이트</string>
   <string name="dialog_close">닫기</string>
   <string name="available_updates_title">사용 가능한 업데이트</string>
-  <string name="no_available_updates_intro">마지막 확인에서 사용 가능한 업데이트를 찾지 못했습니다. 새로운 업데이트를 수동으로 확인하려면 새로 고침 버튼을 탭하십시오.</string>
+  <string name="no_available_updates_intro">마지막으로 확인했을때, 업데이트를 찾지 못했습니다. 수동으로 새 업데이트를 확인하려면 새로고침 버튼을 누르세요.</string>
   <string name="new_update_summary">신규</string>
   <string name="downloaded_update_summary">다운로드됨</string>
   <string name="installed_update_summary">설치됨</string>
