@@ -24,7 +24,7 @@
   <string name="new_update_summary">Nová</string>
   <string name="downloaded_update_summary">Prevzatá</string>
   <string name="installed_update_summary">Nainštalovaná</string>
-  <string name="update_check_title">Skontrolovať aktualizácie</string>
+  <string name="update_check_title">Kontrolovať aktualizácie</string>
   <string name="check_manual">Ručne</string>
   <string name="check_on_boot">Pri každom spustení</string>
   <string name="check_twice_daily">Dvakrát denne</string>
