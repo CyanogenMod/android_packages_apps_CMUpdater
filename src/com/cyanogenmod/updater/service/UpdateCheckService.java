@@ -289,8 +289,15 @@ public class UpdateCheckService extends IntentService
 
         boolean includeAll = updateType == Constants.UPDATE_TYPE_NIGHTLY;
 
-        if (!includeAll && !ui.isNewerThanInstalled()) {
-            Log.d(TAG, "Build " + ui.getFileName() + " is older than the installed build");
+        if (includeAll) {
+            if (ui.getApiLevel() < Utils.getInstalledApiLevel()) {
+                Log.d(TAG, "Build " + ui.getFileName() + " has an older API "
+                    + "level than the installed build");
+                return null;
+            }
+        } else if (!ui.isNewerThanInstalled()) {
+            Log.d(TAG, "Build " + ui.getFileName() + " is older than the "
+                + "installed build");
             return null;
         }
 
