@@ -287,9 +287,7 @@ public class UpdateCheckService extends IntentService
                 .setIncremental(obj.getString("incremental"))
                 .build();
 
-        boolean includeAll = updateType == Constants.UPDATE_TYPE_NIGHTLY;
-
-        if (!includeAll && !ui.isNewerThanInstalled()) {
+        if (!ui.isNewerThanInstalled()) {
             Log.d(TAG, "Build " + ui.getFileName() + " is older than the installed build");
             return null;
         }
