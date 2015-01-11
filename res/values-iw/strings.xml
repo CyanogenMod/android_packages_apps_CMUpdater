@@ -63,6 +63,7 @@
   <string name="delete_updates_success_message">כל העדכונים שהורדו נמחקו</string>
   <string name="sysinfo_device">מכשיר:</string>
   <string name="sysinfo_running">מריץ:</string>
+  <string name="sysinfo_update_channel">עדכן ערוץ:</string>
   <string name="sysinfo_last_check">בדיקה אחרונה:</string>
   <string name="no_changelog_alert">תיעוד שינויים לא זמין</string>
   <string name="changelog_dialog_title">תיעוד שינויים</string>
