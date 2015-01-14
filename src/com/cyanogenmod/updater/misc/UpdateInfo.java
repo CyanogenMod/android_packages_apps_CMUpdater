@@ -25,8 +25,11 @@ public class UpdateInfo implements Parcelable, Serializable {
     private static final long serialVersionUID = 5499890003569313403L;
     private static final Pattern sIncrementalPattern =
             Pattern.compile("^incremental-(.*)-(.*).zip$");
+    private static final Pattern sCMVersionPattern =
+            Pattern.compile(".*?(\\d+)", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 
     public static final String CHANGELOG_EXTENSION = ".changelog.html";
+    public static final int INVALID_API_LEVEL = 0;
 
     public enum Type {
         UNKNOWN,
@@ -147,8 +150,15 @@ public class UpdateInfo implements Parcelable, Serializable {
             return mIsNewerThanInstalled;
         }
 
-        int installedApiLevel = Utils.getInstalledApiLevel();
-        if (installedApiLevel != mApiLevel && mApiLevel > 0) {
+        int installedApiLevel = Utils.getInstalledApiLevel();;
+        if (mApiLevel == INVALID_API_LEVEL) {
+            Matcher m = sCMVersionPattern.matcher(getFileName());
+            if (m.find()) {
+                mIsNewerThanInstalled = Integer.parseInt(m.group(1)) > installedApiLevel;
+            } else {
+                mIsNewerThanInstalled = false;
+            }
+        } else if (installedApiLevel != mApiLevel && mApiLevel > 0) {
             mIsNewerThanInstalled = mApiLevel > installedApiLevel;
         } else {
             // API levels match, so compare build dates.
