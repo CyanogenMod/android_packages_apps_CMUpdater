@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2012 The CyanogenMod Project
+ * Copyright (C) 2012-2015 The CyanogenMod Project
  *
- * * Licensed under the GNU GPLv2 license
+ * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
  * or at https://www.gnu.org/licenses/gpl-2.0.txt
@@ -28,7 +28,8 @@ public class UpdateCheckReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         // Load the required settings from preferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        int updateFrequency = prefs.getInt(Constants.UPDATE_CHECK_PREF, Constants.UPDATE_FREQ_WEEKLY);
+        int updateFrequency = prefs.getInt(Constants.UPDATE_CHECK_PREF,
+                Constants.UPDATE_FREQ_WEEKLY);
 
         // Check if we are set to manual updates and don't do anything
         if (updateFrequency == Constants.UPDATE_FREQ_NONE) {
@@ -39,7 +40,8 @@ public class UpdateCheckReceiver extends BroadcastReceiver {
         final String action = intent.getAction();
         if (ConnectivityManager.CONNECTIVITY_ACTION.equals(action)) {
             // Connectivity has changed
-            boolean hasConnection = !intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
+            boolean hasConnection = !intent.getBooleanExtra(
+                    ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
             Log.i(TAG, "Got connectivity change, has connection: " + hasConnection);
             if (!hasConnection) {
                 return;

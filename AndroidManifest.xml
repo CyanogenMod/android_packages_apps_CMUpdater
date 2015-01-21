@@ -1,22 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2012-2015 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cyanogenmod.updater"
-    android:versionCode="3"
-    android:versionName="2.2" >
+    android:versionCode="4"
+    android:versionName="2.3">
 
-    <uses-sdk
-        android:minSdkVersion="21" />
+    <uses-sdk android:minSdkVersion="21" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.REBOOT"/>
-    <uses-permission android:name="android.permission.RECOVERY"/>
-    <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM"/>
-    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.REBOOT" />
+    <uses-permission android:name="android.permission.RECOVERY" />
+    <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -25,25 +33,14 @@
         android:name="com.cyanogenmod.updater.UpdateApplication"
         android:supportsRtl="true">
 
-        <service android:name="com.cyanogenmod.updater.service.CMDashClockExtension"
-            android:icon="@drawable/ic_extension_cid"
-            android:label="@string/extension_label"
-            android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA">
-            <intent-filter>
-                <action android:name="com.google.android.apps.dashclock.Extension" />
-            </intent-filter>
-            <meta-data android:name="protocolVersion" android:value="1" />
-            <meta-data android:name="description"
-                android:value="@string/extension_description" />
-        </service>
-
         <activity
             android:name=".UpdatesSettings"
             android:launchMode="singleTop"
             android:hardwareAccelerated="true"
             android:label="@string/display_name"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:excludeFromRecents="true" >
+            android:excludeFromRecents="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -56,29 +53,28 @@
 
         <receiver android:name="com.cyanogenmod.updater.receiver.UpdateCheckReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
         <receiver android:name="com.cyanogenmod.updater.receiver.DownloadReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
-                <action android:name="com.cyanogenmod.cmupdater.action.START_DOWNLOAD"/>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+                <action android:name="com.cyanogenmod.cmupdater.action.START_DOWNLOAD" />
             </intent-filter>
         </receiver>
 
         <receiver android:name="com.cyanogenmod.updater.receiver.NotificationClickReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"/>
+                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
             </intent-filter>
         </receiver>
 
         <receiver android:name="com.cyanogenmod.updater.receiver.CheckFinishReceiver">
             <intent-filter>
-                <action android:name="com.cyanogenmod.cmupdater.action.UPDATE_CHECK_FINISHED"/>
+                <action android:name="com.cyanogenmod.cmupdater.action.UPDATE_CHECK_FINISHED" />
             </intent-filter>
         </receiver>
-
     </application>
-
 </manifest>

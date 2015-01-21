@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2012 The CyanogenMod Project
+ * Copyright (C) 2012-2015 The CyanogenMod Project
  *
- * * Licensed under the GNU GPLv2 license
+ * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
  * or at https://www.gnu.org/licenses/gpl-2.0.txt
@@ -159,14 +159,17 @@ public class DownloadService extends IntentService
 
     private void downloadIncremental(UpdateInfo incrementalUpdateInfo) {
         Log.v(TAG, "Downloading incremental zip: " + incrementalUpdateInfo.getDownloadUrl());
+
         // Build the name of the file to download, adding .partial at the end.  It will get
         // stripped off when the download completes
         String sourceIncremental = Utils.getIncremental();
         String targetIncremental = mInfo.getIncremental();
         String fileName = "incremental-" + sourceIncremental + "-" + targetIncremental + ".zip";
-        String incrementalFilePath = "file://" + getUpdateDirectory().getAbsolutePath() + "/" + fileName + ".partial";
+        String incrementalFilePath = "file://" + getUpdateDirectory().getAbsolutePath() + "/"
+                + fileName + ".partial";
 
-        long downloadId = enqueueDownload(incrementalUpdateInfo.getDownloadUrl(), incrementalFilePath);
+        long downloadId = enqueueDownload(incrementalUpdateInfo.getDownloadUrl(),
+                incrementalFilePath);
 
         // Store in shared preferences
         mPrefs.edit()
@@ -187,8 +190,8 @@ public class DownloadService extends IntentService
 
         // Build the name of the file to download, adding .partial at the end.  It will get
         // stripped off when the download completes
-        String fullFilePath = "file://" + getUpdateDirectory().getAbsolutePath() +
-                "/" + mInfo.getFileName() + ".partial";
+        String fullFilePath = "file://" + getUpdateDirectory().getAbsolutePath()
+                + "/" + mInfo.getFileName() + ".partial";
 
         long downloadId = enqueueDownload(mInfo.getDownloadUrl(), fullFilePath);
 

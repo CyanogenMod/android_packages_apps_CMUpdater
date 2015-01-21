@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2012 The CyanogenMod Project (DvTonder)
+ * Copyright (C) 2012-2015 The CyanogenMod Project
  *
- * * Licensed under the GNU GPLv2 license
+ * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
  * or at https://www.gnu.org/licenses/gpl-2.0.txt
@@ -18,7 +18,6 @@ import com.android.volley.toolbox.Volley;
 
 public class UpdateApplication extends Application implements
         Application.ActivityLifecycleCallbacks {
-
     private boolean mMainActivityActive;
     private RequestQueue mRequestQueue;
 
@@ -31,22 +30,27 @@ public class UpdateApplication extends Application implements
 
     @Override
     public void onActivityCreated (Activity activity, Bundle savedInstanceState) {
+        // Do nothing here
     }
 
     @Override
     public void onActivityDestroyed (Activity activity) {
+        // Do nothing here
     }
 
     @Override
     public void onActivityPaused (Activity activity) {
+        // Do nothing here
     }
 
     @Override
     public void onActivityResumed (Activity activity) {
+        // Do nothing here
     }
 
     @Override
     public void onActivitySaveInstanceState (Activity activity, Bundle outState) {
+        // Do nothing here
     }
 
     @Override

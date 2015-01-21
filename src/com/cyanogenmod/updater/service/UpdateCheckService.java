@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2012 The CyanogenMod Project
+ * Copyright (C) 2012-2015 The CyanogenMod Project
  *
- * * Licensed under the GNU GPLv2 license
+ * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
  * or at https://www.gnu.org/licenses/gpl-2.0.txt
@@ -48,27 +48,26 @@ import java.util.LinkedList;
 
 public class UpdateCheckService extends IntentService
         implements Response.ErrorListener, Response.Listener<JSONObject> {
-
     private static final String TAG = "UpdateCheckService";
 
     // Set this to true if the update service should check for smaller, test updates
     // This is for internal testing only
     private static final boolean TESTING_DOWNLOAD = false;
 
-    // request actions
+    // Request actions
     public static final String ACTION_CHECK = "com.cyanogenmod.cmupdater.action.CHECK";
     public static final String ACTION_CANCEL_CHECK = "com.cyanogenmod.cmupdater.action.CANCEL_CHECK";
 
-    // broadcast actions
+    // Broadcast actions
     public static final String ACTION_CHECK_FINISHED = "com.cyanogenmod.cmupdater.action.UPDATE_CHECK_FINISHED";
-    // extra for ACTION_CHECK_FINISHED: total amount of found updates
+    // Extra for ACTION_CHECK_FINISHED: total amount of found updates
     public static final String EXTRA_UPDATE_COUNT = "update_count";
-    // extra for ACTION_CHECK_FINISHED: amount of updates that are newer than what is installed
+    // Extra for ACTION_CHECK_FINISHED: amount of updates that are newer than what is installed
     public static final String EXTRA_REAL_UPDATE_COUNT = "real_update_count";
-    // extra for ACTION_CHECK_FINISHED: amount of updates that were found for the first time
+    // Extra for ACTION_CHECK_FINISHED: amount of updates that were found for the first time
     public static final String EXTRA_NEW_UPDATE_COUNT = "new_update_count";
 
-    // max. number of updates listed in the expanded notification
+    // Max. number of updates listed in the expanded notification
     private static final int EXPANDED_NOTIF_UPDATE_COUNT = 4;
 
     public UpdateCheckService() {
@@ -97,7 +96,6 @@ public class UpdateCheckService extends IntentService
 
     private void recordAvailableUpdates(LinkedList<UpdateInfo> availableUpdates,
             Intent finishedIntent) {
-
         if (availableUpdates == null) {
             sendBroadcast(finishedIntent);
             return;
@@ -150,7 +148,7 @@ public class UpdateCheckService extends IntentService
             Collections.sort(realUpdates, new Comparator<UpdateInfo>() {
                 @Override
                 public int compare(UpdateInfo lhs, UpdateInfo rhs) {
-                    /* sort by date descending */
+                    // Sort by date descending
                     long lhsDate = lhs.getDate();
                     long rhsDate = rhs.getDate();
                     if (lhsDate == rhsDate) {
@@ -238,6 +236,7 @@ public class UpdateCheckService extends IntentService
                 channels.put("nightly");
                 break;
         }
+
         JSONObject params = new JSONObject();
         params.put("device", TESTING_DOWNLOAD ? "cmtestdevice" : Utils.getDeviceType());
         params.put("channels", channels);

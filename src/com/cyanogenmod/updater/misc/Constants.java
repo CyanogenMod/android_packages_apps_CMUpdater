@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2012 The CyanogenMod Project
+ * Copyright (C) 2012-2015 The CyanogenMod Project
  *
- * * Licensed under the GNU GPLv2 license
+ * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
  * or at https://www.gnu.org/licenses/gpl-2.0.txt
@@ -18,7 +18,6 @@ public class Constants {
 
     // Preferences
     public static final String ENABLE_PREF = "pref_enable_updates";
-    public static final String BACKUP_PREF = "pref_backup_rom";
     public static final String UPDATE_CHECK_PREF = "pref_update_check_interval";
     public static final String UPDATE_TYPE_PREF = "pref_update_types";
     public static final String LAST_UPDATE_CHECK_PREF = "pref_last_update_check";

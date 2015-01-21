@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2012 The CyanogenMod Project
+ * Copyright (C) 2012-2015 The CyanogenMod Project
  *
- * * Licensed under the GNU GPLv2 license
+ * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
  * or at https://www.gnu.org/licenses/gpl-2.0.txt
@@ -36,6 +36,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         NIGHTLY,
         INCREMENTAL
     };
+
     private String mUiName;
     private String mFileName;
     private Type mType;
@@ -95,7 +96,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         return mType;
     }
 
-   /**
+    /**
      * Get MD5
      */
     public String getMD5Sum() {
@@ -151,7 +152,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         if (installedApiLevel != mApiLevel && mApiLevel > 0) {
             mIsNewerThanInstalled = mApiLevel > installedApiLevel;
         } else {
-            // API levels match, so compare build dates.
+            // API levels match, so compare build dates
             mIsNewerThanInstalled = mBuildDate > Utils.getInstalledBuildDate();
         }
 
@@ -188,7 +189,8 @@ public class UpdateInfo implements Parcelable, Serializable {
                 && TextUtils.equals(mIncremental, ui.mIncremental);
     }
 
-    public static final Parcelable.Creator<UpdateInfo> CREATOR = new Parcelable.Creator<UpdateInfo>() {
+    public static final Parcelable.Creator<UpdateInfo> CREATOR =
+            new Parcelable.Creator<UpdateInfo>() {
         public UpdateInfo createFromParcel(Parcel in) {
             return new UpdateInfo(in);
         }
@@ -236,7 +238,6 @@ public class UpdateInfo implements Parcelable, Serializable {
         private String mChangelogUrl;
         private String mMd5Sum;
         private String mIncremental;
-
 
         public Builder setName(String uiName) {
             mUiName = uiName;
@@ -313,7 +314,6 @@ public class UpdateInfo implements Parcelable, Serializable {
             info.mIncremental = mIncremental;
             return info;
         }
-
 
         private void initializeName(String fileName) {
             mFileName = fileName;

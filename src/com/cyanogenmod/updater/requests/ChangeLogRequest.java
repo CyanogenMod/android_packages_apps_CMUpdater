@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2014 The CyanogenMod Project
+ * Copyright (C) 2014-2015 The CyanogenMod Project
  *
- * * Licensed under the GNU GPLv2 license
+ * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
  * or at https://www.gnu.org/licenses/gpl-2.0.txt
@@ -20,7 +20,7 @@ public class ChangeLogRequest extends StringRequest {
     private String mUserAgent;
 
     public ChangeLogRequest(int method, String url, String userAgent,
-           Response.Listener<String> listener, Response.ErrorListener errorListener) {
+            Response.Listener<String> listener, Response.ErrorListener errorListener) {
         super(method, url, listener, errorListener);
         mUserAgent = userAgent;
     }

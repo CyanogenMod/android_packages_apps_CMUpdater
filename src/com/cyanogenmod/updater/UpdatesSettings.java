@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2012 The CyanogenMod Project (DvTonder)
+ * Copyright (C) 2012-2015 The CyanogenMod Project
  *
- * * Licensed under the GNU GPLv2 license
+ * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
  * or at https://www.gnu.org/licenses/gpl-2.0.txt
@@ -60,11 +60,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class UpdatesSettings extends PreferenceActivity implements
-        OnPreferenceChangeListener, UpdatePreference.OnReadyListener, UpdatePreference.OnActionListener {
+public class UpdatesSettings extends PreferenceActivity implements OnPreferenceChangeListener,
+        UpdatePreference.OnReadyListener, UpdatePreference.OnActionListener {
     private static String TAG = "UpdatesSettings";
 
-    // intent extras
+    // Intent extras
     public static final String EXTRA_UPDATE_LIST_UPDATED = "update_list_updated";
     public static final String EXTRA_FINISHED_DOWNLOAD_ID = "download_id";
     public static final String EXTRA_FINISHED_DOWNLOAD_PATH = "download_path";
@@ -77,7 +77,6 @@ public class UpdatesSettings extends PreferenceActivity implements
     private static final int MENU_SYSTEM_INFO = 2;
 
     private SharedPreferences mPrefs;
-    private CheckBoxPreference mBackupRom;
     private ListPreference mUpdateCheck;
 
     private PreferenceCategory mUpdatesList;
@@ -150,11 +149,6 @@ public class UpdatesSettings extends PreferenceActivity implements
             updateUpdatesType(updateType);
         }
 
-        /* TODO: add this back once we have a way of doing backups that is not recovery specific
-        mBackupRom = (CheckBoxPreference) findPreference(Constants.BACKUP_PREF);
-        mBackupRom.setChecked(mPrefs.getBoolean(Constants.BACKUP_PREF, true));
-        */
-
         // Set 'HomeAsUp' feature of the actionbar to fit better into Settings
         final ActionBar bar = getActionBar();
         bar.setDisplayHomeAsUpEnabled(true);
@@ -171,10 +165,10 @@ public class UpdatesSettings extends PreferenceActivity implements
                         | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
         menu.add(0, MENU_DELETE_ALL, 0, R.string.menu_delete_all)
-            .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+                .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 
         menu.add(0, MENU_SYSTEM_INFO, 0, R.string.menu_system_info)
-            .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+                .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 
         return true;
     }
@@ -185,15 +179,12 @@ public class UpdatesSettings extends PreferenceActivity implements
             case MENU_REFRESH:
                 checkForUpdates();
                 return true;
-
             case MENU_DELETE_ALL:
                 confirmDeleteAll();
                 return true;
-
             case MENU_SYSTEM_INFO:
                 showSysInfo();
                 return true;
-
             case android.R.id.home:
                 onBackPressed();
                 return true;
@@ -579,7 +570,8 @@ public class UpdatesSettings extends PreferenceActivity implements
         new Thread() {
             @Override
             public void run() {
-                File[] files = getCacheDir().listFiles(new UpdateFilter(UpdateInfo.CHANGELOG_EXTENSION));
+                File[] files = getCacheDir().listFiles(
+                        new UpdateFilter(UpdateInfo.CHANGELOG_EXTENSION));
                 if (files == null) {
                     return;
                 }
@@ -696,9 +688,11 @@ public class UpdatesSettings extends PreferenceActivity implements
             String message = getString(R.string.delete_single_update_success_message, fileName);
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         } else if (!mUpdateFolder.exists()) {
-            Toast.makeText(this, R.string.delete_updates_noFolder_message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.delete_updates_noFolder_message,
+                    Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, R.string.delete_updates_failure_message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.delete_updates_failure_message,
+                    Toast.LENGTH_SHORT).show();
         }
 
         // Update the list
@@ -723,18 +717,21 @@ public class UpdatesSettings extends PreferenceActivity implements
 
     private boolean deleteOldUpdates() {
         boolean success;
-        //mUpdateFolder: Foldername with fullpath of SDCARD
+        // mUpdateFolder: Foldername with fullpath of SDCARD
         if (mUpdateFolder.exists() && mUpdateFolder.isDirectory()) {
             deleteDir(mUpdateFolder);
             mUpdateFolder.mkdir();
             success = true;
-            Toast.makeText(this, R.string.delete_updates_success_message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.delete_updates_success_message,
+                    Toast.LENGTH_SHORT).show();
         } else if (!mUpdateFolder.exists()) {
             success = false;
-            Toast.makeText(this, R.string.delete_updates_noFolder_message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.delete_updates_noFolder_message,
+                    Toast.LENGTH_SHORT).show();
         } else {
             success = false;
-            Toast.makeText(this, R.string.delete_updates_failure_message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.delete_updates_failure_message,
+                    Toast.LENGTH_SHORT).show();
         }
         return success;
     }
@@ -749,6 +746,7 @@ public class UpdatesSettings extends PreferenceActivity implements
                 }
             }
         }
+
         // The directory is now empty so delete it
         return dir.delete();
     }
@@ -807,7 +805,8 @@ public class UpdatesSettings extends PreferenceActivity implements
                             Utils.triggerUpdate(UpdatesSettings.this, updateInfo.getFileName());
                         } catch (IOException e) {
                             Log.e(TAG, "Unable to reboot into recovery mode", e);
-                            Toast.makeText(UpdatesSettings.this, R.string.apply_unable_to_reboot_toast,
+                            Toast.makeText(UpdatesSettings.this,
+                                    R.string.apply_unable_to_reboot_toast,
                                     Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -87,8 +87,4 @@
     <string name="no_changelog_alert">No changelog available</string>
     <string name="changelog_dialog_title">Changelog</string>
     <string name="loading_changelog">Loading\u2026</string>
-
-    <!-- DashClock extension strings -->
-    <string name="extension_label">CyanogenMod Updates</string>
-    <string name="extension_description">Displays number of new updates available.</string>
 </resources>

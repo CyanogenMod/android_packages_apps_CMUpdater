@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2014 The CyanogenMod Project
+ * Copyright (C) 2014-2015 The CyanogenMod Project
  *
- * * Licensed under the GNU GPLv2 license
+ * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
  * or at https://www.gnu.org/licenses/gpl-2.0.txt
@@ -19,7 +19,6 @@ import com.cyanogenmod.updater.misc.UpdateInfo;
 import java.io.File;
 
 public class DownloadNotifier {
-
     private DownloadNotifier() {
         // Don't instantiate me bro
     }
@@ -60,8 +59,8 @@ public class DownloadNotifier {
 
     private static Notification.Builder createBaseContentBuilder(Context context,
             Intent updateIntent) {
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 1,
-                updateIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 1, updateIntent,
+                PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
 
         return new Notification.Builder(context)
                 .setWhen(System.currentTimeMillis())
@@ -69,13 +68,12 @@ public class DownloadNotifier {
                 .setAutoCancel(true);
     }
 
-
     private static PendingIntent createInstallPendingIntent(Context context, File updateFile) {
         Intent installIntent = new Intent(context, DownloadReceiver.class);
         installIntent.setAction(DownloadReceiver.ACTION_INSTALL_UPDATE);
         installIntent.putExtra(DownloadReceiver.EXTRA_FILENAME, updateFile.getName());
 
-        return PendingIntent.getBroadcast(context, 0,
-                installIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getBroadcast(context, 0, installIntent,
+                PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
     }
 }

@@ -19,14 +19,4 @@
     <item quantity="few">+ ещё <xliff:g id="count">%d</xliff:g></item>
     <item quantity="other">+ ещё <xliff:g id="count">%d</xliff:g></item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one">Доступно <xliff:g id="count">%d</xliff:g> обновление системы</item>
-    <item quantity="few">Доступно <xliff:g id="count">%d</xliff:g> обновления системы</item>
-    <item quantity="other">Доступно <xliff:g id="count">%d</xliff:g> обновлений системы</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one">Доступно <xliff:g id="count">%d</xliff:g> обновление CyanogenMod</item>
-    <item quantity="few">Доступно <xliff:g id="count">%d</xliff:g> обновления CyanogenMod</item>
-    <item quantity="other">Доступно <xliff:g id="count">%d</xliff:g> обновлений CyanogenMod</item>
-  </plurals>
 </resources>

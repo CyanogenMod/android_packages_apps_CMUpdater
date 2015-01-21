@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2012 The CyanogenMod Project
+ * Copyright (C) 2012-2015 The CyanogenMod Project
  *
- * * Licensed under the GNU GPLv2 license
+ * Licensed under the GNU GPLv2 license
  *
  * The text of the license can be found in the LICENSE file
  * or at https://www.gnu.org/licenses/gpl-2.0.txt
@@ -15,7 +15,7 @@ import java.io.FilenameFilter;
 /**
  * Filename Filter for getting only Files that matches the Given Extensions 
  * Extensions can be split with |
- * Example: .zip|.md5sum  
+ * Example: .zip|.md5sum
  */
 public class UpdateFilter implements FilenameFilter {
     private final String[] mExtension;
