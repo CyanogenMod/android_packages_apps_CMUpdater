@@ -21,16 +21,4 @@
     <item quantity="many">+ <xliff:g id="count">%d</xliff:g> још</item>
     <item quantity="other">+ <xliff:g id="count">%d</xliff:g> још</item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> ажурирање</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> ажурирања</item>
-    <item quantity="many"><xliff:g id="count">%d</xliff:g> ажурирања</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> ажурирања</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod ажурирање</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> CyanogenMod ажурирања</item>
-    <item quantity="many"><xliff:g id="count">%d</xliff:g> CyanogenMod ажурирања</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod ажурирања</item>
-  </plurals>
 </resources>

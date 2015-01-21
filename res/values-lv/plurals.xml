@@ -19,14 +19,4 @@
     <item quantity="one">+ <xliff:g id="count">%d</xliff:g> vairāk</item>
     <item quantity="other">+ <xliff:g id="count">%d</xliff:g> vairāk</item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="zero"><xliff:g id="count">%d</xliff:g> atjaunojums</item>
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> atjaunojums</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> atjaunojumi</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="zero"><xliff:g id="count">%d</xliff:g> CyanogenMod atjaunojums</item>
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod atjaunojums</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod atjaunojumi</item>
-  </plurals>
 </resources>

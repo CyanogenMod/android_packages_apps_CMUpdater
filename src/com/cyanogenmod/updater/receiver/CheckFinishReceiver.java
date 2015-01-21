@@ -13,13 +13,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.cyanogenmod.updater.service.CMDashClockExtension;
-
 public class CheckFinishReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent i = new Intent(context, CMDashClockExtension.class);
-        i.setAction(CMDashClockExtension.ACTION_DATA_UPDATE);
-        context.startService(i);
+        // Do nothing here
     }
 }
