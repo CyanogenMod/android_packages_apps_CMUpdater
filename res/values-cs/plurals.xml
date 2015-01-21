@@ -19,14 +19,4 @@
     <item quantity="few">+ <xliff:g id="count">%d</xliff:g> další</item>
     <item quantity="other">+ <xliff:g id="count">%d</xliff:g> dalších</item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> aktualizace</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> aktualizace</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> aktualizací</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod aktualizace</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> CyanogenMod aktualizace</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod aktualizací</item>
-  </plurals>
 </resources>

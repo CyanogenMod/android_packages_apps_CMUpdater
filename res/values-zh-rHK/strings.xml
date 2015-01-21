@@ -67,6 +67,4 @@
   <string name="no_changelog_alert">沒有提供更新日誌</string>
   <string name="changelog_dialog_title">更新日誌</string>
   <string name="loading_changelog">正在載入\u2026</string>
-  <string name="extension_label">CyanogenMod 更新</string>
-  <string name="extension_description">顯示可用新更新的數目。</string>
 </resources>
