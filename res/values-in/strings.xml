@@ -67,6 +67,4 @@
   <string name="no_changelog_alert">Tidak ada daftar perubahan tersedia</string>
   <string name="changelog_dialog_title">Daftar perubahan</string>
   <string name="loading_changelog">Memuat\u2026</string>
-  <string name="extension_label">Pembaruan CyanogenMod</string>
-  <string name="extension_description">Menampilkan jumlah pembaruan baru yang tersedia.</string>
 </resources>
