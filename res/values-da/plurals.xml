@@ -17,12 +17,4 @@
     <item quantity="one">+ <xliff:g id="count">%d</xliff:g> flere</item>
     <item quantity="other">+ <xliff:g id="count">%d</xliff:g> flere</item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> opdatering</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> opdateringer</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod-opdatering</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod-opdateringer</item>
-  </plurals>
 </resources>

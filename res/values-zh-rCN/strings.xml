@@ -67,6 +67,4 @@
   <string name="no_changelog_alert">无可用的更改记录</string>
   <string name="changelog_dialog_title">更改记录</string>
   <string name="loading_changelog">正在加载\u2026</string>
-  <string name="extension_label">CyanogenMod 更新</string>
-  <string name="extension_description">显示有多少个可用的新更新。</string>
 </resources>

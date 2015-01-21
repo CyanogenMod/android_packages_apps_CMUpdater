@@ -17,12 +17,4 @@
     <item quantity="one">+ තව <xliff:g id="count">%d</xliff:g></item>
     <item quantity="other">+ තව <xliff:g id="count">%d</xliff:g></item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> යාවත්කාලීනයක්</item>
-    <item quantity="other">යාවත්කාලීනයන් <xliff:g id="count">%d</xliff:g></item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod යාවත්කාලීනයක්</item>
-    <item quantity="other">CyanogenMod යාවත්කාලීනයන් <xliff:g id="count">%d</xliff:g></item>
-  </plurals>
 </resources>

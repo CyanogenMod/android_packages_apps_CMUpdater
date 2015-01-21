@@ -17,12 +17,4 @@
     <item quantity="one">נוסף <xliff:g id="count">%d</xliff:g></item>
     <item quantity="other">נוספים <xliff:g id="count">%d</xliff:g></item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one">עדכון <xliff:g id="count">%d</xliff:g></item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> עדכונים</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one">עדכון CyanogenMod יחיד</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> עדכוני CyanogenMod</item>
-  </plurals>
 </resources>

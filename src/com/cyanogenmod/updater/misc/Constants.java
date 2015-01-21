@@ -18,7 +18,6 @@ public class Constants {
 
     // Preferences
     public static final String ENABLE_PREF = "pref_enable_updates";
-    public static final String BACKUP_PREF = "pref_backup_rom";
     public static final String UPDATE_CHECK_PREF = "pref_update_check_interval";
     public static final String UPDATE_TYPE_PREF = "pref_update_types";
     public static final String LAST_UPDATE_CHECK_PREF = "pref_last_update_check";

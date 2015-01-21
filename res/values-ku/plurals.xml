@@ -17,12 +17,4 @@
     <item quantity="one">+ <xliff:g id="count">%d</xliff:g> زیاتر</item>
     <item quantity="other">+ <xliff:g id="count">%d</xliff:g> زیاتر</item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> نوێکردنەوە</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> نوێکردنەوەکان</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> نوێکردنەوەی سیانۆگێنمۆد</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> نوێکردنەوەکانی سیانۆجینمۆد</item>
-  </plurals>
 </resources>

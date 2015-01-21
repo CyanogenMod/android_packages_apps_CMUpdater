@@ -67,6 +67,4 @@
   <string name="no_changelog_alert">Ingen ændringslog tilgængelig</string>
   <string name="changelog_dialog_title">Ændringslog</string>
   <string name="loading_changelog">Indlæser\u2026</string>
-  <string name="extension_label">CyanogenMod-opdateringer</string>
-  <string name="extension_description">Viser antal nye tilgængelige opdateringer.</string>
 </resources>
