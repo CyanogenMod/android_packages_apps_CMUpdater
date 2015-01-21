@@ -19,14 +19,4 @@
     <item quantity="few">+ <xliff:g id="count">%d</xliff:g> daugiau</item>
     <item quantity="other">+ <xliff:g id="count">%d</xliff:g> daugiau</item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> atnaujinimas</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> atnaujinimai</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> atnaujinimų</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> „CyanogenMod“ atnaujinimas</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> „CyanogenMod“ atnaujinimai</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> „CyanogenMod“ atnaujinimų</item>
-  </plurals>
 </resources>

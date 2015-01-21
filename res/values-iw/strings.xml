@@ -67,6 +67,4 @@
   <string name="no_changelog_alert">תיעוד שינויים לא זמין</string>
   <string name="changelog_dialog_title">תיעוד שינויים</string>
   <string name="loading_changelog">טוען\u2026</string>
-  <string name="extension_label">עדכוני CyanogenMod</string>
-  <string name="extension_description">הצג מספר של עדכונים חדשים.</string>
 </resources>
