@@ -67,6 +67,4 @@
   <string name="no_changelog_alert">වෙනස්කම් ලොගයක් ලබාගත නොහැක</string>
   <string name="changelog_dialog_title">වෙනස්කම් ලොගය</string>
   <string name="loading_changelog">පූරණයවෙමින්\u2026</string>
-  <string name="extension_label">CyanogenMod යාවත්කාලීනයන්</string>
-  <string name="extension_description">ලැබීඇති නව යාවත්කාලීනයන් ගණන විදහා පෙන්වයි.</string>
 </resources>

@@ -15,10 +15,4 @@
   <plurals name="not_additional_count">
     <item quantity="other">+ <xliff:g id="count">%d</xliff:g>개 더</item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="other"><xliff:g id="count">%d</xliff:g>개의 업데이트</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="other"><xliff:g id="count">%d</xliff:g>개의 CyanogenMod 업데이트</item>
-  </plurals>
 </resources>

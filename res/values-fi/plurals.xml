@@ -17,12 +17,4 @@
     <item quantity="one">+ <xliff:g id="count">%d</xliff:g> lisää</item>
     <item quantity="other">+ <xliff:g id="count">%d</xliff:g> lisää</item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> päivitys</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> päivitystä</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod päivitys</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> CyanogenMod päivitystä</item>
-  </plurals>
 </resources>

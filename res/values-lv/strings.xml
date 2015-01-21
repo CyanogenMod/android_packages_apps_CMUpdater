@@ -68,6 +68,4 @@
   <string name="no_changelog_alert">Nav pieejams izmaiņu žurnāls</string>
   <string name="changelog_dialog_title">Izmaiņu žurnāls</string>
   <string name="loading_changelog">Ielādē\u2026</string>
-  <string name="extension_label">CyanogenMod atjaunojumi</string>
-  <string name="extension_description">Parāda pieejamo jauno atjaunojumu skaitu.</string>
 </resources>

@@ -67,6 +67,4 @@
   <string name="no_changelog_alert">Nun hai rexistru de cambeos</string>
   <string name="changelog_dialog_title">Rexistru de cambeos</string>
   <string name="loading_changelog">Cargando\u2026</string>
-  <string name="extension_label">Anovamientos de CyanogenMod</string>
-  <string name="extension_description">Amosar el númberu d\'anovamientos nuevos disponibles.</string>
 </resources>

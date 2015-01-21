@@ -67,6 +67,4 @@
   <string name="no_changelog_alert">변경 사항을 찾을 수 없습니다.</string>
   <string name="changelog_dialog_title">변경 사항</string>
   <string name="loading_changelog">불러 오는 중\u2026</string>
-  <string name="extension_label">CyanogenMod 업데이트</string>
-  <string name="extension_description">새로운 업데이트 수를 표시합니다.</string>
 </resources>
