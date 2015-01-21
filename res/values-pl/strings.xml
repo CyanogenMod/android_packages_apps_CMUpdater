@@ -71,6 +71,4 @@ Uwaga: Ta funkcja wymaga kompatybilnego recovery. W przeciwnym wypadku aktualiza
   <string name="no_changelog_alert">Dziennik zmian jest niedostępny</string>
   <string name="changelog_dialog_title">Dziennik zmian</string>
   <string name="loading_changelog">Ładowanie\u2026</string>
-  <string name="extension_label">Aktualizacje CyanogenMod</string>
-  <string name="extension_description">Pokazuje liczbę dostępnych aktualizacji.</string>
 </resources>

@@ -19,14 +19,4 @@
     <item quantity="few">+ încă <xliff:g id="count">%d</xliff:g></item>
     <item quantity="other">+ încă <xliff:g id="count">%d</xliff:g></item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> actualizare</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> actualizări</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> de actualizări</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> actualizare CyanogenMod</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> actualizări CyanogenMod</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> de actualizări CyanogenMod</item>
-  </plurals>
 </resources>

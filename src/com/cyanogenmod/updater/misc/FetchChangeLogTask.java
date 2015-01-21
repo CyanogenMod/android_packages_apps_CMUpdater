@@ -1,10 +1,17 @@
 /*
- * Copyright (C) 2014 The CyanogenMod Project
+ * Copyright (C) 2014-2015 The CyanogenMod Project
  *
- * * Licensed under the GNU GPLv2 license
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * The text of the license can be found in the LICENSE file
- * or at https://www.gnu.org/licenses/gpl-2.0.txt
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.cyanogenmod.updater.misc;
@@ -73,8 +80,7 @@ public class FetchChangeLogTask extends AsyncTask<UpdateInfo, Void, Void>
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         final View view = inflater.inflate(R.layout.change_log_dialog, null);
         final View progressContainer = view.findViewById(R.id.progress);
-        mChangeLogView =
-                (NotifyingWebView) view.findViewById(R.id.changelog);
+        mChangeLogView = (NotifyingWebView) view.findViewById(R.id.changelog);
 
         mChangeLogView.setOnInitialContentReadyListener(
                 new NotifyingWebView.OnInitialContentReadyListener() {
@@ -127,6 +133,7 @@ public class FetchChangeLogTask extends AsyncTask<UpdateInfo, Void, Void>
                 }
             }
         };
+
         // We need to make a blocking request here
         RequestFuture<String> future = RequestFuture.newFuture();
         ChangeLogRequest request = new ChangeLogRequest(Request.Method.GET, info.getChangelogUrl(),
@@ -150,8 +157,7 @@ public class FetchChangeLogTask extends AsyncTask<UpdateInfo, Void, Void>
         BufferedWriter writer = null;
 
         try {
-            writer = new BufferedWriter(
-                    new FileWriter(info.getChangeLogFile(mContext)));
+            writer = new BufferedWriter(new FileWriter(info.getChangeLogFile(mContext)));
             ByteArrayInputStream bais = new ByteArrayInputStream(response.getBytes());
             reader = new BufferedReader(new InputStreamReader(bais), 2 * 1024);
             boolean categoryMatch = false, hasData = false;
@@ -187,23 +193,23 @@ public class FetchChangeLogTask extends AsyncTask<UpdateInfo, Void, Void>
                     hasData = true;
                 }
             }
+
             finished = true;
         } catch (IOException e) {
             Log.e(TAG, "Downloading change log for " + info + " failed", e);
-            // keeping finished at false will delete the partially written file below
         } finally {
             if (reader != null) {
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    // ignore, not much we can do anyway
+                    // Do nothing here
                 }
             }
             if (writer != null) {
                 try {
                     writer.close();
                 } catch (IOException e) {
-                    // ignore, not much we can do anyway
+                    // Do nothing here
                 }
             }
         }
@@ -217,6 +223,7 @@ public class FetchChangeLogTask extends AsyncTask<UpdateInfo, Void, Void>
     public void onDismiss(DialogInterface dialogInterface) {
         // Cancel all pending requests
         ((UpdateApplication) mContext.getApplicationContext()).getQueue().cancelAll(TAG);
+
         // Clean up
         mChangeLogView.destroy();
         mChangeLogView = null;

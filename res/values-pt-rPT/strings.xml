@@ -67,6 +67,4 @@
   <string name="no_changelog_alert">Lista de alterações indisponível</string>
   <string name="changelog_dialog_title">Lista de alterações</string>
   <string name="loading_changelog">A carregar\u2026</string>
-  <string name="extension_label">Atualizações CyanogenMod</string>
-  <string name="extension_description">Mostra o número de novas atualizações disponíveis.</string>
 </resources>

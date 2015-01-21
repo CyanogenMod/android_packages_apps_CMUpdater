@@ -1,10 +1,17 @@
 /*
- * Copyright (C) 2014 The CyanogenMod Project
+ * Copyright (C) 2014-2015 The CyanogenMod Project
  *
- * * Licensed under the GNU GPLv2 license
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * The text of the license can be found in the LICENSE file
- * or at https://www.gnu.org/licenses/gpl-2.0.txt
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.cyanogenmod.updater.receiver;
@@ -19,7 +26,6 @@ import com.cyanogenmod.updater.misc.UpdateInfo;
 import java.io.File;
 
 public class DownloadNotifier {
-
     private DownloadNotifier() {
         // Don't instantiate me bro
     }
@@ -60,8 +66,8 @@ public class DownloadNotifier {
 
     private static Notification.Builder createBaseContentBuilder(Context context,
             Intent updateIntent) {
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 1,
-                updateIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 1, updateIntent,
+                PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
 
         return new Notification.Builder(context)
                 .setWhen(System.currentTimeMillis())
@@ -69,13 +75,12 @@ public class DownloadNotifier {
                 .setAutoCancel(true);
     }
 
-
     private static PendingIntent createInstallPendingIntent(Context context, File updateFile) {
         Intent installIntent = new Intent(context, DownloadReceiver.class);
         installIntent.setAction(DownloadReceiver.ACTION_INSTALL_UPDATE);
         installIntent.putExtra(DownloadReceiver.EXTRA_FILENAME, updateFile.getName());
 
-        return PendingIntent.getBroadcast(context, 0,
-                installIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getBroadcast(context, 0, installIntent,
+                PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
     }
 }
