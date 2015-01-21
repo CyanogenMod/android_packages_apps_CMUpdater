@@ -19,14 +19,4 @@
     <item quantity="few">+ ще <xliff:g id="count">%d</xliff:g></item>
     <item quantity="other">+ ще <xliff:g id="count">%d</xliff:g></item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> оновлення</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> оновлення</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> оновлень</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> оновлення CyanogenMod</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> оновлення CyanogenMod</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> оновлень CyanogenMod</item>
-  </plurals>
 </resources>

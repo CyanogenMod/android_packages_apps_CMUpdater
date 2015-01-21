@@ -67,6 +67,4 @@
   <string name="no_changelog_alert">No hi ha un registre de canvis disponible</string>
   <string name="changelog_dialog_title">Registre de canvis</string>
   <string name="loading_changelog">S\'està carregant\u2026</string>
-  <string name="extension_label">Actualitzacions CyanogenMod</string>
-  <string name="extension_description">Mostra el nombre de noves actualitzacions disponibles.</string>
 </resources>

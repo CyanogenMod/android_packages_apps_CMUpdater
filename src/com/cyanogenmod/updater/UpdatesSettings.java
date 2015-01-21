@@ -77,7 +77,6 @@ public class UpdatesSettings extends PreferenceActivity implements
     private static final int MENU_SYSTEM_INFO = 2;
 
     private SharedPreferences mPrefs;
-    private CheckBoxPreference mBackupRom;
     private ListPreference mUpdateCheck;
 
     private PreferenceCategory mUpdatesList;
@@ -149,11 +148,6 @@ public class UpdatesSettings extends PreferenceActivity implements
         if (updateTypePref != updateType) {
             updateUpdatesType(updateType);
         }
-
-        /* TODO: add this back once we have a way of doing backups that is not recovery specific
-        mBackupRom = (CheckBoxPreference) findPreference(Constants.BACKUP_PREF);
-        mBackupRom.setChecked(mPrefs.getBoolean(Constants.BACKUP_PREF, true));
-        */
 
         // Set 'HomeAsUp' feature of the actionbar to fit better into Settings
         final ActionBar bar = getActionBar();

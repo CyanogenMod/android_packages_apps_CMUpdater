@@ -67,6 +67,4 @@
   <string name="no_changelog_alert">Geen Veranderinge-log beskikbaar nie</string>
   <string name="changelog_dialog_title">Veranderinge-log</string>
   <string name="loading_changelog">Laai\u2026</string>
-  <string name="extension_label">CyanogenMod opgraderings</string>
-  <string name="extension_description">Vertoon die aantal nuwe opgraderings beskikbaar</string>
 </resources>

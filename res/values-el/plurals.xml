@@ -17,12 +17,4 @@
     <item quantity="one">+ <xliff:g id="count">%d</xliff:g> ακόμη</item>
     <item quantity="other">+ <xliff:g id="count">%d</xliff:g> ακόμη</item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> ενημέρωση</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> ενημερώσεις</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> ενημέρωση CyanogenMod</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> ενημερώσεις CyanogenMod</item>
-  </plurals>
 </resources>

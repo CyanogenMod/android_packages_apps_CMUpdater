@@ -17,12 +17,4 @@
     <item quantity="one">eta <xliff:g id="count">%d</xliff:g> gehiago</item>
     <item quantity="other">eta <xliff:g id="count">%d</xliff:g> gehiago</item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one">Eguneraketa <xliff:g id="count">%d</xliff:g></item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> eguneraketa</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one">CyanogenMod-en eguneraketa <xliff:g id="count">%d</xliff:g></item>
-    <item quantity="other">CyanogenMod-en <xliff:g id="count">%d</xliff:g> eguneraketa</item>
-  </plurals>
 </resources>
