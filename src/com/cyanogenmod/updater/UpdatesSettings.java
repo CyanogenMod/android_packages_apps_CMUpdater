@@ -42,6 +42,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.internal.util.cm.ScreenType;
+
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.State;
 import com.cyanogenmod.updater.misc.UpdateInfo;
@@ -216,7 +218,7 @@ public class UpdatesSettings extends PreferenceActivity implements
         super.onResume();
 
         // If running on a phone, remove padding around the listview
-        if (!Utils.isTablet(this)) {
+        if (!ScreenType.isTablet(this)) {
             getListView().setPadding(0, 0, 0, 0);
         }
     }
