@@ -22,6 +22,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -70,6 +71,10 @@ public class UpdateCheckService extends IntentService
 
     // max. number of updates listed in the expanded notification
     private static final int EXPANDED_NOTIF_UPDATE_COUNT = 4;
+
+    // DefaultRetryPolicy values for Volley
+    private static final int UPDATE_REQUEST_TIMEOUT = 5000; // 5 seconds
+    private static final int UPDATE_REQUEST_MAX_RETRIES = 3;
 
     public UpdateCheckService() {
         super("UpdateCheckService");
@@ -216,6 +221,9 @@ public class UpdateCheckService extends IntentService
         try {
             request = new UpdatesJsonObjectRequest(updateServerUri.toASCIIString(),
                     Utils.getUserAgentString(this), buildUpdateRequest(updateType), this, this);
+            // Improve request error tolerance
+            request.setRetryPolicy(new DefaultRetryPolicy(UPDATE_REQUEST_TIMEOUT,
+                        UPDATE_REQUEST_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             // Set the tag for the request, reuse logging tag
             request.setTag(TAG);
         } catch (JSONException e) {
