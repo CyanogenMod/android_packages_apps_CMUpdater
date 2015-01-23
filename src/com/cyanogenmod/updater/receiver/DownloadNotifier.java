@@ -33,7 +33,7 @@ public class DownloadNotifier {
                 .bigText(context.getString(R.string.not_download_install_notice, updateUiName));
 
         Notification.Builder builder = createBaseContentBuilder(context, updateIntent)
-                .setSmallIcon(R.drawable.cm_updater)
+                .setSmallIcon(R.drawable.ic_system_update)
                 .setContentTitle(context.getString(R.string.not_download_success))
                 .setContentText(updateUiName)
                 .setTicker(context.getString(R.string.not_download_success))
