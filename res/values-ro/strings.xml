@@ -47,7 +47,7 @@
   <string name="download_not_found">Descărcarea nu a fost găsită</string>
   <string name="not_download_success">Descărcarea actualizării a reușit</string>
   <string name="not_download_failure">Descărcarea actualizării a eșuat</string>
-  <string name="not_action_install_update">Reporniți și instalați</string>
+  <string name="not_action_install_update">Repornire și instalare</string>
   <string name="not_download_install_notice">Actualizarea <xliff:g id="filename">%s</xliff:g> s-a descărcat cu succes. Când atingeți \'Repornire și instalare\', dispozitivul se va reporni pentru a instala actualizarea.\n\nNotă: Aveți nevoie de un Recovery compatibil pentru ca instalarea să se facă în mod automat.</string>
   <string name="md5_verification_failed">Verificarea MD5 nu a reușit</string>
   <string name="apply_update_dialog_title">Aplicați actualizarea</string>
@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Toate actualizările descărcate au fost șterse</string>
   <string name="sysinfo_device">Dispozitiv:</string>
   <string name="sysinfo_running">Rulează:</string>
+  <string name="sysinfo_update_channel">Canalul de actualizare:</string>
   <string name="sysinfo_last_check">Ultima verificare:</string>
   <string name="no_changelog_alert">Niciun jurnal de modificări disponibil</string>
   <string name="changelog_dialog_title">Jurnal modificări</string>

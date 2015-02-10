@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Alle heruntergeladenen Update-Dateien wurden gelöscht</string>
   <string name="sysinfo_device">Gerät:</string>
   <string name="sysinfo_running">Version:</string>
+  <string name="sysinfo_update_channel">Update-Typ:</string>
   <string name="sysinfo_last_check">Letzte Prüfung:</string>
   <string name="no_changelog_alert">Kein Änderungsprotokoll verfügbar</string>
   <string name="changelog_dialog_title">Änderungsprotokoll</string>

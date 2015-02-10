@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">هەموو نوێکردنەوە داگیراوەکان سڕانەوە</string>
   <string name="sysinfo_device">ئامێر:</string>
   <string name="sysinfo_running">وەشانی ئێستا:</string>
+  <string name="sysinfo_update_channel">ڕێڕەوی بەڕۆژکردنەوە:</string>
   <string name="sysinfo_last_check">دواین پشکنین:</string>
   <string name="no_changelog_alert">تۆماری گۆڕانکاری لەبەردەستدا نیە</string>
   <string name="changelog_dialog_title">تۆماری گۆڕانکاری</string>

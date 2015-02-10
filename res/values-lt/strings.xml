@@ -12,18 +12,18 @@
   <string name="app_name">CM atnaujinimai</string>
   <string name="display_name">Atnaujinimai</string>
   <string name="unknown">Nežinoma</string>
-  <string name="menu_refresh">Tikrinti</string>
-  <string name="menu_delete_all">Ištrinti atsiųstus</string>
+  <string name="menu_refresh">Atnaujinti</string>
+  <string name="menu_delete_all">Ištrinti atsisiuntimus</string>
   <string name="menu_system_info">Sistemos informacija</string>
   <string name="dialog_ok">Gerai</string>
   <string name="dialog_cancel">Atšaukti</string>
   <string name="dialog_update">Atnaujinti</string>
   <string name="dialog_close">Uždaryti</string>
   <string name="available_updates_title">Galimi atnaujinimai</string>
-  <string name="no_available_updates_intro">Paskutinį kartą nerasta jokių atnaujinimų. Norint pamatyti ar yra atnaujinimas, bakstelkite ant „Tikrinti“.</string>
+  <string name="no_available_updates_intro">Paskutinį kartą nerasta jokių galimų atnaujinimų. Kad rankiniu būdu ieškotumėte naujų atnaujinimų, naudokite mygtuką „Atnaujinti“.</string>
   <string name="new_update_summary">Naujas</string>
-  <string name="downloaded_update_summary">Atsiųstas</string>
-  <string name="installed_update_summary">Įdiegtas</string>
+  <string name="downloaded_update_summary">Atsisiųstas</string>
+  <string name="installed_update_summary">Įdiegta</string>
   <string name="update_check_title">Tikrinti atnaujinimus</string>
   <string name="check_manual">Rankiniu būdu</string>
   <string name="check_on_boot">Kiekvieno įjungimo metu</string>
@@ -35,38 +35,38 @@
   <string name="checking_for_updates">Ieškoma atnaujinimų</string>
   <string name="no_updates_found">Atnaujinimų nerasta</string>
   <string name="update_check_failed">Atnaujinimų rasti nepavyko. Prašome patikrinti savo interneto ryšį ir bandyti dar kartą.</string>
-  <string name="not_new_updates_found_ticker">Atnaujinimai rasti</string>
+  <string name="not_new_updates_found_ticker">Galimi nauji atnaujinimai</string>
   <string name="not_new_updates_found_title">Atnaujinimai</string>
   <string name="not_action_download">Atsisiųsti</string>
   <string name="data_connection_required">Reikalingas duomenų ryšys.</string>
-  <string name="confirm_download_cancelation_dialog_title">Atšaukti atsiuntimą</string>
-  <string name="confirm_download_cancelation_dialog_message">Atšaukti dabartinį siuntimą?</string>
-  <string name="download_cancelled">Atsiuntimas atšauktas</string>
-  <string name="download_already_running">Atsiuntimas vykdomas</string>
+  <string name="confirm_download_cancelation_dialog_title">Atšaukti atsisiuntimą</string>
+  <string name="confirm_download_cancelation_dialog_message">Atšaukti dabartinį atsisiuntimą?</string>
+  <string name="download_cancelled">Atsisiuntimas atšauktas</string>
+  <string name="download_already_running">Atsisiuntimas vykdomas</string>
   <string name="unable_to_download_file">Nepavyksta atsisiųsti atnaujinimo</string>
-  <string name="download_not_found">Atsiuntimas nerastas</string>
-  <string name="not_download_success">Atnaujinimas sėkmingai atsiųstas</string>
+  <string name="download_not_found">Atsisiuntimas nerastas</string>
+  <string name="not_download_success">Atnaujinimas sėkmingai atsisiųstas</string>
   <string name="not_download_failure">Nepavyko atsisiųsti atnaujinimo</string>
   <string name="not_action_install_update">Perkrauti ir įdiegti</string>
-  <string name="not_download_install_notice">Atnaujinimas <xliff:g id="filename">%s</xliff:g> sėkmingai atsiųstas. Spaudžiant „Perkrauti ir įdiegti“ , įrenginys persikraus ir pats įdiegs atnaujinimą.\n\nPastaba: Reikalinga suderinama atkūrimo programa, kad įdiegimas veiktų automatiškai.</string>
+  <string name="not_download_install_notice">Atnaujinimas <xliff:g id="filename">%s</xliff:g> sėkmingai atsisiųstas. Spaudžiant „Perkrauti ir įdiegti“ , įrenginys persikraus ir pats įdiegs atnaujinimą.\n\nPastaba: Reikalinga suderinama atkūrimo programa, kad įdiegimas veiktų automatiškai.</string>
   <string name="md5_verification_failed">Nepavyko patikrinti MD5</string>
   <string name="apply_update_dialog_title">Įdiegti atnaujinimą</string>
   <string name="apply_update_dialog_text">Ruošiatės atnaujinti į <xliff:g id="filename">%s</xliff:g>.\n\nJei spausite „Atnaujinti“, įrenginys persikraus ir pats įdiegs atnaujinimą.\n\nPastaba: Ši funkcija reikalauja suderinamos atkūrimo programos, arba atnaujinimą teks diegti rankiniu būdu.</string>
-  <string name="apply_unable_to_reboot_toast">Nepavyko persikrauti į atkūrimo režimą</string>
+  <string name="apply_unable_to_reboot_toast">Nepavyko perkrauti į atkūrimo režimą</string>
   <string name="confirm_delete_dialog_title">Ištrinti failą (-us)</string>
-  <string name="confirm_delete_dialog_message">Ruošiatės ištrinti atsiųstą atnaujinimą, tęsti?</string>
-  <string name="confirm_delete_all_dialog_message">Ruošiatės ištrinti visus atsiųstus atnaujinimus, tęsti?</string>
+  <string name="confirm_delete_dialog_message">Ištrinti pasirinktą atnaujinimo failą?</string>
+  <string name="confirm_delete_all_dialog_message">Ištrinti visus atsisiųstus atnaujinimo failus?</string>
   <string name="delete_single_update_success_message">Atnaujinimas <xliff:g id="filename">%s</xliff:g> ištrintas</string>
   <string name="delete_updates_failure_message">Nepavyko ištrinti atnaujinimo</string>
   <string name="delete_updates_noFolder_message">Atnaujinimo aplankas nerastas</string>
-  <string name="delete_updates_success_message">Visi atsiųsti atnaujinimai ištrinti</string>
+  <string name="delete_updates_success_message">Visi atsisiųsti atnaujinimai ištrinti</string>
   <string name="sysinfo_device">Įrenginys:</string>
   <string name="sysinfo_running">Įdiegta:</string>
-  <string name="sysinfo_update_channel">Atnaujinti kanalą:</string>
+  <string name="sysinfo_update_channel">Atnaujinimo kanalas:</string>
   <string name="sysinfo_last_check">Tikrinta:</string>
   <string name="no_changelog_alert">Pakeitimų sąrašas nepasiekiamas</string>
-  <string name="changelog_dialog_title">Pakeitimai</string>
+  <string name="changelog_dialog_title">Pakeitimų sąrašas</string>
   <string name="loading_changelog">Įkeliama\u2026</string>
   <string name="extension_label">„CyanogenMod“ atnaujinimai</string>
-  <string name="extension_description">Rodyti atnaujinimų skaičių.</string>
+  <string name="extension_description">Rodo naujų galimų atnaujinimų skaičių.</string>
 </resources>
