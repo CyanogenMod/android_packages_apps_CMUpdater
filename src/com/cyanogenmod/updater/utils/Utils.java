@@ -160,17 +160,17 @@ public class Utils {
             if (v.getPath().equals(primaryStoragePath)) {
                 /* This is the primary storage, where we stored the update file
                  *
-                 * For CM12, a non-removable storage (partition or FUSE)
-                 * will always be primary. But we have devices out there in which
-                 * /sdcard is the microSD, and/or an emmc partition
+                 * For CM, a non-removable storage (partition or FUSE)
+                 * will always be primary. But we have devices out there which
+                 * use microSD, and/or an emmc partition
                  */
-                if (!v.isRemovable() && Environment.isExternalStorageEmulated()) {
-                    return "/data/media";
+                if (!v.isRemovable() && !Environment.isExternalStorageEmulated()) {
+                    return primaryStoragePath;
                 }
             };
         }
-        // Not found, assume non-datamedia device
-        return "/sdcard";
+        // Not found, assume datamedia device
+        return "/data/media";
     }
 
     public static int getUpdateType() {
