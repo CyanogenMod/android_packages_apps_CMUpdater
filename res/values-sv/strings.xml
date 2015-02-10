@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">Alla nedladdade uppdateringar borttagna</string>
   <string name="sysinfo_device">Enhet:</string>
   <string name="sysinfo_running">ROM:</string>
+  <string name="sysinfo_update_channel">Uppdateringskanal:</string>
   <string name="sysinfo_last_check">Senaste kontroll:</string>
   <string name="no_changelog_alert">Ingen ändringslogg tillgänglig</string>
   <string name="changelog_dialog_title">Ändringslogg</string>

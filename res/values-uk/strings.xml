@@ -20,7 +20,7 @@
   <string name="dialog_update">Оновити</string>
   <string name="dialog_close">Закрити</string>
   <string name="available_updates_title">Доступні оновлення</string>
-  <string name="no_available_updates_intro">Остання перевірка не виявила доступних оновлень. Щоб перевірити наявність оновлень вручну, натисніть кнопку Оновити.</string>
+  <string name="no_available_updates_intro">Остання перевірка не виявила доступних оновлень. Щоб перевірити наявність оновлень вручну, натисніть кнопку «Оновити».</string>
   <string name="new_update_summary">Нове</string>
   <string name="downloaded_update_summary">Завантажене</string>
   <string name="installed_update_summary">Встановлене</string>
@@ -48,7 +48,7 @@
   <string name="not_download_success">Оновлення завантажено</string>
   <string name="not_download_failure">Оновлення не завантажено</string>
   <string name="not_action_install_update">Перезавантажити і встановити</string>
-  <string name="not_download_install_notice">Оновлення «<xliff:g id="filename">%s</xliff:g>» успішно завантажено. Натисніть \'Перезавантажити і встановити\', щоб виконати його встановлення.</string>
+  <string name="not_download_install_notice">Оновлення «<xliff:g id="filename">%s</xliff:g>» успішно завантажено. Натисніть «Перезавантажити і встановити», щоб виконати його встановлення.</string>
   <string name="md5_verification_failed">Не вдалось виконати перевірку MD5</string>
   <string name="apply_update_dialog_title">Застосувати оновлення</string>
   <string name="apply_update_dialog_text">Ви збираєтесь оновитись на <xliff:g id="filename">%s</xliff:g>.\n\nЯкщо Ви натиснете Оновити, пристрій перезавантажиться у Recovery для встановлення.\n\nЗамітка: ця функція потребує сумісне Recovery, в зворотньому випадку оновлення необхідно встановити вручну.</string>

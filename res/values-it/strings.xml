@@ -14,7 +14,7 @@
   <string name="unknown">Sconosciuto</string>
   <string name="menu_refresh">Aggiorna</string>
   <string name="menu_delete_all">Elimina i download</string>
-  <string name="menu_system_info">Info di sistema</string>
+  <string name="menu_system_info">Informazioni di sistema</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Annulla</string>
   <string name="dialog_update">Aggiorna</string>
@@ -39,7 +39,7 @@
   <string name="not_new_updates_found_title">Nuovi aggiornamenti</string>
   <string name="not_action_download">Scarica</string>
   <string name="data_connection_required">È richiesta una connessione dati.</string>
-  <string name="confirm_download_cancelation_dialog_title">Annullare il download?</string>
+  <string name="confirm_download_cancelation_dialog_title">Annulla il download</string>
   <string name="confirm_download_cancelation_dialog_message">Annullare il download corrente?</string>
   <string name="download_cancelled">Download annullato</string>
   <string name="download_already_running">Un download è già in corso</string>
@@ -48,8 +48,8 @@
   <string name="not_download_success">Aggiornamento scaricato con successo</string>
   <string name="not_download_failure">Impossibile scaricare l\'aggiornamento</string>
   <string name="not_action_install_update">Riavvia e installa</string>
-  <string name="not_download_install_notice">L\'aggiornamento <xliff:g id="filename">%s</xliff:g> è stato scaricato con successo. Premendo \'Riavvia e installa\', il dispositivo verrà riavviato per installare l\'aggiornamento.\n\nNota: E\' necessaria una recovery compatibile affinché funzioni l\'installazione automatica.</string>
-  <string name="md5_verification_failed">Verifica MD5 fallita</string>
+  <string name="not_download_install_notice">L\'aggiornamento <xliff:g id="filename">%s</xliff:g> è stato scaricato con successo. Premendo \'Riavvia e installa\', il dispositivo verrà riavviato per installare l\'aggiornamento.\n\nNota: è necessaria una recovery compatibile affinché l\'installazione automatica funzioni.</string>
+  <string name="md5_verification_failed">Verifica MD5 non riuscita</string>
   <string name="apply_update_dialog_title">Applica aggiornamento</string>
   <string name="apply_update_dialog_text">Si sta per aggiornare a <xliff:g id="filename">%s</xliff:g>.\n\nPremendo Aggiorna, il dispositivo verrà riavviato in modalità recovery per l\'installazione dell\'aggiornamento\n\nNota: questa caratteristica richiede una recovery compatibile; in caso contrario sarà necessario installare gli aggiornamenti manualmente</string>
   <string name="apply_unable_to_reboot_toast">Impossibile riavviare in recovery</string>
@@ -61,12 +61,12 @@
   <string name="delete_updates_noFolder_message">Cartella degli aggiornamenti non trovata</string>
   <string name="delete_updates_success_message">Tutti gli aggiornamenti eliminati</string>
   <string name="sysinfo_device">Dispositivo:</string>
-  <string name="sysinfo_running">ROM installata:</string>
+  <string name="sysinfo_running">In esecuzione:</string>
   <string name="sysinfo_update_channel">Canale aggiornamento:</string>
   <string name="sysinfo_last_check">Ultima verifica:</string>
   <string name="no_changelog_alert">Nessun changelog disponibile</string>
   <string name="changelog_dialog_title">Changelog</string>
-  <string name="loading_changelog">Caricando\u2026</string>
+  <string name="loading_changelog">Caricamento in corso\u2026</string>
   <string name="extension_label">Aggiornamenti CyanogenMod</string>
-  <string name="extension_description">Mostra il numero dei nuovi aggiornamenti disponibili.</string>
+  <string name="extension_description">Visualizza il numero dei nuovi aggiornamenti disponibili.</string>
 </resources>

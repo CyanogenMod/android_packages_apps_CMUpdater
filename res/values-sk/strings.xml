@@ -9,7 +9,7 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Aktualizátor CM</string>
+  <string name="app_name">Aktualizácie CM</string>
   <string name="display_name">Aktualizácie</string>
   <string name="unknown">Neznáme</string>
   <string name="menu_refresh">Obnoviť</string>
@@ -24,7 +24,7 @@
   <string name="new_update_summary">Nová</string>
   <string name="downloaded_update_summary">Prevzatá</string>
   <string name="installed_update_summary">Nainštalovaná</string>
-  <string name="update_check_title">Skontrolovať aktualizácie</string>
+  <string name="update_check_title">Kontrolovať aktualizácie</string>
   <string name="check_manual">Ručne</string>
   <string name="check_on_boot">Pri každom spustení</string>
   <string name="check_twice_daily">Dvakrát denne</string>
@@ -35,7 +35,7 @@
   <string name="checking_for_updates">Kontrolovanie aktualizácií</string>
   <string name="no_updates_found">Nenašli sa žiadne nové aktualizácie</string>
   <string name="update_check_failed">Kontrola aktualizácií zlyhala. Skontrolujte prosím vaše internetové pripojenie a skúste to znova neskôr.</string>
-  <string name="not_new_updates_found_ticker">Sú dostupné nové aktualizácie</string>
+  <string name="not_new_updates_found_ticker">K dispozícii sú nové aktualizácie</string>
   <string name="not_new_updates_found_title">Nové aktualizácie</string>
   <string name="not_action_download">Download</string>
   <string name="data_connection_required">Vyžaduje sa dátové pripojenie.</string>
@@ -48,10 +48,10 @@
   <string name="not_download_success">Aktualizácia bola úspešne prevzatá</string>
   <string name="not_download_failure">Aktualizácia nebola úspešne prevzatá</string>
   <string name="not_action_install_update">Reštartovať a inštalovať</string>
-  <string name="not_download_install_notice">Aktualizácia <xliff:g id="filename">%s</xliff:g> bola úspešne prevzatá. Ťuknutím na \'Reštartovať a inštalovať\' sa zariadenie reštartuje, kvôli inštalácii aktualizácie.\n\nPoznámka: Na automatickú inštaláciu sa požaduje kompatibilné Recovery.</string>
+  <string name="not_download_install_notice">Aktualizácia <xliff:g id="filename">%s</xliff:g> bola úspešne prevzatá. Kliknutím na \'Reštartovať a inštalovať\' sa zariadenie reštartuje kvôli inštalácii aktualizácie.\n\nPoznámka: Na automatickú inštaláciu sa požaduje kompatibilné Recovery.</string>
   <string name="md5_verification_failed">Overenie MD5 zlyhalo</string>
   <string name="apply_update_dialog_title">Aplikovať aktualizáciu</string>
-  <string name="apply_update_dialog_text">Chystáte sa inovovať na verziu <xliff:g id="filename">%s</xliff:g>.\n\nAk stlačíte tlačidlo Aktualizovať, zariadenie sa samé reštartuje do režimu recovery kvôli inštalácii aktualizácie.\n\nPoznámka: Táto funkcia vyžaduje kompatibilné Recovery, inak budú musieť byť aktualizácie inštalované ručne.</string>
+  <string name="apply_update_dialog_text">Chystáte sa inovovať na verziu <xliff:g id="filename">%s</xliff:g>.\n\nAk stlačíte tlačidlo Aktualizovať, zariadenie sa samé reštartuje do režimu Recovery kvôli inštalácii aktualizácie.\n\nPoznámka: Táto funkcia vyžaduje kompatibilné Recovery, inak budú musieť byť aktualizácie inštalované ručne.</string>
   <string name="apply_unable_to_reboot_toast">Nemožno reštartovať do Recovery</string>
   <string name="confirm_delete_dialog_title">Vymazať súbor</string>
   <string name="confirm_delete_dialog_message">Vymazať vybraný súbor aktualizácie?</string>
@@ -61,10 +61,10 @@
   <string name="delete_updates_noFolder_message">Priečinok s aktualizáciou sa nenašiel</string>
   <string name="delete_updates_success_message">Všetky prevzaté aktualizácie boli vymazané</string>
   <string name="sysinfo_device">Zariadenie:</string>
-  <string name="sysinfo_running">Beží na:</string>
-  <string name="sysinfo_update_channel">Kanál aktualizácie:</string>
+  <string name="sysinfo_running">Zostava:</string>
+  <string name="sysinfo_update_channel">Kanál aktualizácií:</string>
   <string name="sysinfo_last_check">Posledná kontrola:</string>
-  <string name="no_changelog_alert">Nedostupný zoznam zmien</string>
+  <string name="no_changelog_alert">Nie je dostupný žiadny zoznam zmien</string>
   <string name="changelog_dialog_title">Zoznam zmien</string>
   <string name="loading_changelog">Prebieha načítavanie\u2026</string>
   <string name="extension_label">Aktualizácie CyanogenMod</string>
