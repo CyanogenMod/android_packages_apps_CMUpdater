@@ -136,41 +136,19 @@ public class Utils {
            */
 
         // Add the update folder/file name
-        // Emulated external storage moved to user-specific paths in 4.2
-        String userPath = Environment.isExternalStorageEmulated() ? ("/" + UserHandle.myUserId()) : "";
-
-        String cmd = "echo '--update_package=" + getStorageMountpoint(context) + userPath
-            + "/" + Constants.UPDATES_FOLDER + "/" + updateFileName
-            + "' >> /cache/recovery/command\n";
+        String primaryStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        // If data media rewrite the path to bypass the sd card fuse layer and trigger uncrypt
+        String directPath = Environment.getMediaStorageDirectory().getAbsolutePath();
+        String updatePath = Environment.isExternalStorageEmulated() ? directPath :
+                primaryStoragePath;
+        String cmd = "echo '--update_package=" + updatePath + "/" + Constants.UPDATES_FOLDER + "/"
+                + updateFileName + "' >> /cache/recovery/command\n";
         os.write(cmd.getBytes());
         os.flush();
 
         // Trigger the reboot
         PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         powerManager.reboot("recovery");
-    }
-
-    private static String getStorageMountpoint(Context context) {
-        StorageManager sm = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
-        StorageVolume[] volumes = sm.getVolumeList();
-        String primaryStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-
-        for (int i = 0; i < volumes.length; i++) {
-            StorageVolume v = volumes[i];
-            if (v.getPath().equals(primaryStoragePath)) {
-                /* This is the primary storage, where we stored the update file
-                 *
-                 * For CM12, a non-removable storage (partition or FUSE)
-                 * will always be primary. But we have devices out there in which
-                 * /sdcard is the microSD, and/or an emmc partition
-                 */
-                if (!v.isRemovable() && Environment.isExternalStorageEmulated()) {
-                    return "/data/media";
-                }
-            };
-        }
-        // Not found, assume non-datamedia device
-        return "/sdcard";
     }
 
     public static int getUpdateType() {
