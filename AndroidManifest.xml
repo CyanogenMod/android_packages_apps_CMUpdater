@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cyanogenmod.updater"
     android:versionCode="3"
-    android:versionName="2.2" >
+    android:versionName="2.2"
+    android:sharedUserId="android.uid.system" >
 
     <uses-sdk
         android:minSdkVersion="21" />
