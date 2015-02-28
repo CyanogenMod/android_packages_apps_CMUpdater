@@ -38,7 +38,7 @@
   <string name="not_new_updates_found_ticker">Yeniləmələr var</string>
   <string name="not_new_updates_found_title">Yeni yeniləmələr</string>
   <string name="not_action_download">Endir</string>
-  <string name="data_connection_required">Məlumat bağlantısı lazımdır.</string>
+  <string name="data_connection_required">Verilənlər bağlantısı lazımdır.</string>
   <string name="confirm_download_cancelation_dialog_title">Endirməni ləğv et</string>
   <string name="confirm_download_cancelation_dialog_message">Davam edən endirmə ləğv edilsin?</string>
   <string name="download_cancelled">Endirmə ləğv edildi</string>

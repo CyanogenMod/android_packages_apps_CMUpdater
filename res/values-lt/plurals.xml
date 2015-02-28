@@ -10,9 +10,9 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="not_new_updates_found_body">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> galimas atnaujinimas</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> galimi atnaujinimai</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> galimų atnaujinimų</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> pasiekiamas atnaujinimas atsisiuntimui</item>
+    <item quantity="few"><xliff:g id="count">%d</xliff:g> pasiekiami atnaujinimai atsisiuntimui</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> pasiekiamų atnaujinimų atsisiuntimui</item>
   </plurals>
   <plurals name="not_additional_count">
     <item quantity="one">+ <xliff:g id="count">%d</xliff:g> daugiau</item>
