@@ -26,7 +26,7 @@
   <string name="installed_update_summary">Įdiegta</string>
   <string name="update_check_title">Tikrinti atnaujinimus</string>
   <string name="check_manual">Rankiniu būdu</string>
-  <string name="check_on_boot">Kiekvieno įjungimo metu</string>
+  <string name="check_on_boot">Kiekvieno paleidimo metu</string>
   <string name="check_twice_daily">Du kartus per dieną</string>
   <string name="check_daily">Kas dieną</string>
   <string name="check_weekly">Kas savaitę</string>

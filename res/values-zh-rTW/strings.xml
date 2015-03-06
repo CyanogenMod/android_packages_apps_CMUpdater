@@ -34,11 +34,11 @@
   <string name="check_monthly">每月</string>
   <string name="checking_for_updates">正在檢查更新</string>
   <string name="no_updates_found">沒有找到新的更新</string>
-  <string name="update_check_failed">更新檢查失敗。請檢查您的網際網路連線並稍後重試。</string>
+  <string name="update_check_failed">更新檢查失敗。請檢查您的網路連線並稍後重試。</string>
   <string name="not_new_updates_found_ticker">有可用的更新</string>
   <string name="not_new_updates_found_title">新的更新</string>
   <string name="not_action_download">下載</string>
-  <string name="data_connection_required">需要資料連接。</string>
+  <string name="data_connection_required">需要網路連線。</string>
   <string name="confirm_download_cancelation_dialog_title">取消下載</string>
   <string name="confirm_download_cancelation_dialog_message">取消目前的下載？</string>
   <string name="download_cancelled">下載已取消</string>
