@@ -67,6 +67,4 @@
   <string name="no_changelog_alert">Muudatuste nimekiri ei ole saadaval</string>
   <string name="changelog_dialog_title">Muudatuste nimekiri</string>
   <string name="loading_changelog">Alustamine\u2026</string>
-  <string name="extension_label">CyanogenMod uuendused</string>
-  <string name="extension_description">Näita uute uuenduste arvu.</string>
 </resources>

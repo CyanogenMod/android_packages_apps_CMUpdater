@@ -17,12 +17,4 @@
     <item quantity="one">+ <xliff:g id="count">%d</xliff:g>টি আরো</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g>টি আরো</item>
   </plurals>
-  <plurals name="extension_status">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g>টি আপডেট</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g>টি আপডেট</item>
-  </plurals>
-  <plurals name="extension_expandedTitle">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> টি সায়ানোজেনমড আপডেট</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> টি সায়ানোজেনমড আপডেট</item>
-  </plurals>
 </resources>
