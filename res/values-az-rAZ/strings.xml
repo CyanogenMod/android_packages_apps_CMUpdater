@@ -12,15 +12,15 @@
   <string name="app_name">CM Yeniləyici</string>
   <string name="display_name">Yeniləmələr</string>
   <string name="unknown">Bilinməyən</string>
-  <string name="menu_refresh">Təzələ</string>
+  <string name="menu_refresh">Yenilə</string>
   <string name="menu_delete_all">Endirmələri sil</string>
   <string name="menu_system_info">Sistem məlumatı</string>
-  <string name="dialog_ok">Ok</string>
+  <string name="dialog_ok">Oldu</string>
   <string name="dialog_cancel">İmtina</string>
   <string name="dialog_update">Yenilə</string>
   <string name="dialog_close">Bağla</string>
   <string name="available_updates_title">Yeniləmələr mövcuddur</string>
-  <string name="no_available_updates_intro">Son yoxlamadan sonra yeniləmə tapılmadı. Yeniləmələri əllə yoxlamaq üçün Təzələ düyməsindən istifadə edin.</string>
+  <string name="no_available_updates_intro">Son yoxlamadan sonra yeniləmə tapılmadı. Yeniləmələri əllə yoxlamaq üçün Yenilə düyməsindən istifadə edin.</string>
   <string name="new_update_summary">Yeni</string>
   <string name="downloaded_update_summary">Endirildi</string>
   <string name="installed_update_summary">Quraşdırılıb</string>
@@ -47,4 +47,24 @@
   <string name="download_not_found">Endirmə tapılmadı</string>
   <string name="not_download_success">Yeniləmə uğurla endirildi</string>
   <string name="not_download_failure">Yeniləməni endirmək uğursuz oldu</string>
+  <string name="not_action_install_update">Yenidən başlat və quraşdır</string>
+  <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> yeniləməsi uğurla endirildi. \'Yenidən başlat və Quraşdır\'a toxunanda, cihaz yeniləməni quraşdırmaq üçün özünü yenidən başladacaq.\n\nQeyd: Quraşdırmanın avtomatik işləməsi üçün uyğun Bərpa mühiti lazımdır.</string>
+  <string name="md5_verification_failed">MD5 yoxlanış xətası</string>
+  <string name="apply_update_dialog_title">Yeniləməni tətbiq et</string>
+  <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> yeniləməsi ediləcək.\n\nYeniləyə basanda cihaz yeniləməni quraşdırmaq üçün bərpa rejimində yenidən başlayacaq.\n\nQeyd: Bu özəlliyin uyğun bir Bərpa mühitinə ehtiyacı var, əks halda yeniləmələr əllə quraşdırılmalıdır.</string>
+  <string name="apply_unable_to_reboot_toast">Bərpa rejimi üçün yenidən başladıla bilmədi</string>
+  <string name="confirm_delete_dialog_title">Faylı sil</string>
+  <string name="confirm_delete_dialog_message">Seçilmiş yeniləmə faylı silinsin?</string>
+  <string name="confirm_delete_all_dialog_message">Bütün endirilmiş yeniləmələr silinsin?</string>
+  <string name="delete_single_update_success_message"><xliff:g id="filename">%s</xliff:g> yeniləmə faylı silindi</string>
+  <string name="delete_updates_failure_message">Yeniləmə faylını silərkən xəta baş verdi</string>
+  <string name="delete_updates_noFolder_message">Yeniləmə qovluğu tapılmadı</string>
+  <string name="delete_updates_success_message">Endirilən bütün yeniləmələr silindi</string>
+  <string name="sysinfo_device">Cihaz:</string>
+  <string name="sysinfo_running">Versiya:</string>
+  <string name="sysinfo_update_channel">Yeniləmə kanalı:</string>
+  <string name="sysinfo_last_check">Son yoxlama:</string>
+  <string name="no_changelog_alert">Dəyişiklik qeydi yoxdur</string>
+  <string name="changelog_dialog_title">Dəyişiklik qeydi</string>
+  <string name="loading_changelog">Yüklənir\u2026</string>
 </resources>
