@@ -64,7 +64,7 @@
   <string name="sysinfo_running">Version actuelle\u00A0:</string>
   <string name="sysinfo_update_channel">Canal de mise à jour :</string>
   <string name="sysinfo_last_check">Dernière vérification\u00A0:</string>
-  <string name="no_changelog_alert">Aucune note de mise à jour disponible</string>
+  <string name="no_changelog_alert">Aucune note de version disponible</string>
   <string name="changelog_dialog_title">Note de version</string>
   <string name="loading_changelog">Chargement\u2026</string>
   <string name="extension_label">Mises à jour CyanogenMod</string>
