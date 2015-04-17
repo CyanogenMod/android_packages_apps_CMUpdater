@@ -48,11 +48,8 @@
   <string name="not_download_success">Eguneraketa arrakastaz deskargatu da</string>
   <string name="not_download_failure">Eguneraketaren deskargak huts egin du</string>
   <string name="not_action_install_update">Berrabiarazi eta instalatu</string>
-  <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> eguneraketa arrakastaz deskargatu da. \u00ABBerrabiarazi eta instalatu\u00BB sakatuz, gailua eguneraketa instalatzeko berrabiaraziko da.\n\nAbisua: Ardura behar ez duen instalazio baterako recovery bateragarri bat beharrezkoa da.</string>
   <string name="md5_verification_failed">MD5 berrespenak huts egin du</string>
   <string name="apply_update_dialog_title">Eguneraketa ezarri</string>
-  <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> eguneraketa arrakastaz deskargatu da.\n\n \u00ABEguneratu\u00BB sakatuz, gailua eguneraketa instalatzeko berrabiaraziko da.\n\nAbisua: Ardura behar ez duen instalazio baterako recovery bateragarri bat beharrezkoa da.</string>
-  <string name="apply_unable_to_reboot_toast">Ezinezkoa recovery moduan berrabiatzea</string>
   <string name="confirm_delete_dialog_title">Fitxategia ezabatu</string>
   <string name="confirm_delete_dialog_message">Deskargatutako eguneraketa ezabatu?</string>
   <string name="confirm_delete_all_dialog_message">Deskargatutako eguneraketa guztiak ezabatu?</string>
