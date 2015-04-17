@@ -33,8 +33,8 @@
   <string name="check_bi_weekly">Kas antrą savaitę</string>
   <string name="check_monthly">Kas mėnesį</string>
   <string name="checking_for_updates">Ieškoma atnaujinimų</string>
-  <string name="no_updates_found">Atnaujinimų nerasta</string>
-  <string name="update_check_failed">Atnaujinimų rasti nepavyko. Prašome patikrinti savo interneto ryšį ir bandyti dar kartą.</string>
+  <string name="no_updates_found">Nerasta naujų atnaujinimų</string>
+  <string name="update_check_failed">Atnaujinimų patikrinti nepavyko. Prašome patikrinti savo interneto ryšį ir bandyti dar kartą.</string>
   <string name="not_new_updates_found_ticker">Pasiekiami nauji atnaujinimai</string>
   <string name="not_new_updates_found_title">Atnaujinimai</string>
   <string name="not_action_download">Atsisiųsti</string>
