@@ -38,6 +38,20 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".UpdatesSettingsTv"
+        android:theme="@style/Theme.Tv"
+            android:launchMode="singleTop"
+            android:hardwareAccelerated="true"
+            android:label="@string/display_name"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:excludeFromRecents="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+        </activity>
+
         <service android:name="com.cyanogenmod.updater.service.UpdateCheckService" />
         <service android:name="com.cyanogenmod.updater.service.DownloadService" />
         <service android:name="com.cyanogenmod.updater.service.DownloadCompleteIntentService" />

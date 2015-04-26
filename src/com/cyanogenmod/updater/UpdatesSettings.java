@@ -33,6 +33,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
@@ -69,6 +70,9 @@ public class UpdatesSettings extends PreferenceActivity implements
     public static final String EXTRA_FINISHED_DOWNLOAD_ID = "download_id";
     public static final String EXTRA_FINISHED_DOWNLOAD_PATH = "download_path";
     public static final String EXTRA_FINISHED_DOWNLOAD_INCREMENTAL_FOR = "download_incremental_for";
+
+    public static final String KEY_SYSTEM_INFO = "system_info";
+    private static final String KEY_DELETE_ALL = "delete_all";
 
     private static final String UPDATES_CATEGORY = "updates_category";
 
@@ -128,7 +132,11 @@ public class UpdatesSettings extends PreferenceActivity implements
         mDownloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
 
         // Load the layouts
-        addPreferencesFromResource(R.xml.main);
+        if (!Utils.hasLeanback(this)) {
+            addPreferencesFromResource(R.xml.main);
+        } else {
+            addPreferencesFromResource(R.xml.main_tv);
+        }
         mUpdatesList = (PreferenceCategory) findPreference(UPDATES_CATEGORY);
         mUpdateCheck = (ListPreference) findPreference(Constants.UPDATE_CHECK_PREF);
 
@@ -150,11 +158,23 @@ public class UpdatesSettings extends PreferenceActivity implements
         }
 
         // Set 'HomeAsUp' feature of the actionbar to fit better into Settings
-        final ActionBar bar = getActionBar();
-        bar.setDisplayHomeAsUpEnabled(true);
+        if (!Utils.hasLeanback(this)) {
+            final ActionBar bar = getActionBar();
+            bar.setDisplayHomeAsUpEnabled(true);
 
-        // Turn on the Options Menu
-        invalidateOptionsMenu();
+            // Turn on the Options Menu
+            invalidateOptionsMenu();
+        }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == findPreference(KEY_SYSTEM_INFO)) {
+            checkForUpdates();
+        } else if (preference == findPreference(KEY_DELETE_ALL)) {
+            confirmDeleteAll();
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     @Override
@@ -667,7 +687,11 @@ public class UpdatesSettings extends PreferenceActivity implements
         if (mUpdatesList.getPreferenceCount() == 0) {
             Preference pref = new Preference(this);
             pref.setLayoutResource(R.layout.preference_empty_list);
-            pref.setTitle(R.string.no_available_updates_intro);
+            if (!Utils.hasLeanback(this)) {
+                pref.setTitle(R.string.no_available_updates_intro);
+            } else {
+                pref.setTitle(R.string.no_available_updates_intro_tv);
+            }
             pref.setEnabled(false);
             mUpdatesList.addPreference(pref);
         }

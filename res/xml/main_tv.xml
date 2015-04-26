@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/display_name"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <Preference android:key="system_info"
+            android:title="@string/menu_system_info_tv"
+            android:summary="@string/unknown"/>
+
+    <Preference android:key="delete_all"
+            android:title="@string/confirm_delete_dialog_title_tv"/>
+
+     <ListPreference
+         android:key="pref_update_check_interval"
+         android:persistent="false"
+         android:dialogTitle="@string/update_check_title"
+         android:title="@string/update_check_title"
+         android:entries="@array/update_check_entries"
+         android:entryValues="@array/update_check_values"/>
+
+    <PreferenceCategory
+        android:key="updates_category"
+        android:title="@string/available_updates_title">
+    </PreferenceCategory>
+
+</PreferenceScreen>
