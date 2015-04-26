@@ -169,4 +169,13 @@ public class Utils {
 
         return updateType;
     }
+
+    public static String getCmReleaseType() {
+        String cmReleaseType = Constants.CM_RELEASETYPE_NIGHTLY;
+        int updateType = Utils.getUpdateType();
+        if (updateType == Constants.UPDATE_TYPE_SNAPSHOT) {
+            cmReleaseType = Constants.CM_RELEASETYPE_SNAPSHOT;
+        }
+        return cmReleaseType;
+    }
 }

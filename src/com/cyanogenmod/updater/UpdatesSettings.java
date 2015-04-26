@@ -70,24 +70,24 @@ public class UpdatesSettings extends PreferenceActivity implements
     public static final String EXTRA_FINISHED_DOWNLOAD_PATH = "download_path";
     public static final String EXTRA_FINISHED_DOWNLOAD_INCREMENTAL_FOR = "download_incremental_for";
 
-    private static final String UPDATES_CATEGORY = "updates_category";
+    protected static final String UPDATES_CATEGORY = "updates_category";
 
     private static final int MENU_REFRESH = 0;
     private static final int MENU_DELETE_ALL = 1;
     private static final int MENU_SYSTEM_INFO = 2;
 
-    private SharedPreferences mPrefs;
-    private ListPreference mUpdateCheck;
+    protected SharedPreferences mPrefs;
+    protected ListPreference mUpdateCheck;
 
-    private PreferenceCategory mUpdatesList;
+    protected static PreferenceCategory mUpdatesList;
     private UpdatePreference mDownloadingPreference;
 
     private File mUpdateFolder;
 
     private boolean mStartUpdateVisible = false;
-    private ProgressDialog mProgressDialog;
+    protected ProgressDialog mProgressDialog;
 
-    private DownloadManager mDownloadManager;
+    protected static DownloadManager mDownloadManager;
     private boolean mDownloading = false;
     private long mDownloadId;
     private String mFileName;
