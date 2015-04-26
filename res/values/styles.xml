@@ -16,6 +16,12 @@
         <item name="android:actionBarStyle">@style/Theme.ActionBar.SubSettings</item>
     </style>
 
+    <style name="ThemeTv" parent="style/Theme.Leanback">
+        <item name="android:colorPrimary">@color/theme_primary</item>
+        <item name="android:colorPrimaryDark">@color/theme_primary_dark</item>
+        <item name="android:colorAccent">@color/theme_accent</item>
+    </style>
+
     <style name="UpdatesPreferenceStyle">
         <item name="android:layout">@layout/preference_updates</item>
     </style>

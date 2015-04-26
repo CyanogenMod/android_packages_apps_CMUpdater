@@ -69,7 +69,9 @@ public class UpdatesSettings extends PreferenceActivity implements
     public static final String EXTRA_FINISHED_DOWNLOAD_ID = "download_id";
     public static final String EXTRA_FINISHED_DOWNLOAD_PATH = "download_path";
     public static final String EXTRA_FINISHED_DOWNLOAD_INCREMENTAL_FOR = "download_incremental_for";
-
+    private static final String KEY_SYSTEM_INFO = "system_info";
+    private static final String KEY_REFESH = "refesh";
+    private static final String KEY_DELETE_ALL = "delete_all";
     private static final String UPDATES_CATEGORY = "updates_category";
 
     private static final int MENU_REFRESH = 0;
@@ -128,9 +130,15 @@ public class UpdatesSettings extends PreferenceActivity implements
         mDownloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
 
         // Load the layouts
-        addPreferencesFromResource(R.xml.main);
+        if (!Utils.hasLeanback(this)) {
+            addPreferencesFromResource(R.xml.main);
+        } else {
+            setTheme(R.style.ThemeTv);
+            addPreferencesFromResource(R.xml.main_tv);
+        }
         mUpdatesList = (PreferenceCategory) findPreference(UPDATES_CATEGORY);
         mUpdateCheck = (ListPreference) findPreference(Constants.UPDATE_CHECK_PREF);
+        setStringSummary(KEY_SYSTEM_INFO, createSysinfoMessage());
 
         // Load the stored preference data
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -150,11 +158,13 @@ public class UpdatesSettings extends PreferenceActivity implements
         }
 
         // Set 'HomeAsUp' feature of the actionbar to fit better into Settings
-        final ActionBar bar = getActionBar();
-        bar.setDisplayHomeAsUpEnabled(true);
+        if (!Utils.hasLeanback(this)) {
+            final ActionBar bar = getActionBar();
+            bar.setDisplayHomeAsUpEnabled(true);
 
-        // Turn on the Options Menu
-        invalidateOptionsMenu();
+            // Turn on the Options Menu
+            invalidateOptionsMenu();
+        }
     }
 
     @Override
@@ -776,6 +786,24 @@ public class UpdatesSettings extends PreferenceActivity implements
         messageView.setTextAppearance(this, android.R.style.TextAppearance_DeviceDefault_Small);
     }
 
+    private String createSysinfoMessage() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        long lastCheck = prefs.getLong(Constants.LAST_UPDATE_CHECK_PREF, 0);
+        String date = DateFormat.getLongDateFormat(this).format(lastCheck);
+        String time = DateFormat.getTimeFormat(this).format(lastCheck);
+        String cmReleaseType = Constants.CM_RELEASETYPE_NIGHTLY;
+        int updateType = Utils.getUpdateType();
+        if (updateType == Constants.UPDATE_TYPE_SNAPSHOT) {
+            cmReleaseType = Constants.CM_RELEASETYPE_SNAPSHOT;
+        }
+        String sysinfomessage = getString(R.string.sysinfo_device) + " "
+                + Utils.getDeviceType() + getString(R.string.sysinfo_running) + " "
+                + Utils.getInstalledVersion() + "\n\n" + getString(R.string.sysinfo_update_channel)
+                + " " + cmReleaseType + getString(R.string.sysinfo_last_check) + " "
+                + date + " " + time;
+        return sysinfomessage;
+    }
+
     @Override
     public void onStartUpdate(UpdatePreference pref) {
         final UpdateInfo updateInfo = pref.getUpdateInfo();
@@ -813,5 +841,14 @@ public class UpdatesSettings extends PreferenceActivity implements
                     }
                 })
                 .show();
+    }
+
+    private void setStringSummary(String preference, String value) {
+        try {
+            findPreference(preference).setSummary(value);
+        } catch (RuntimeException e) {
+            findPreference(preference).setSummary(
+                getResources().getString(R.string.unknown));
+        }
     }
 }
