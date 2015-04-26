@@ -128,7 +128,11 @@ public class UpdatesSettings extends PreferenceActivity implements
         mDownloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
 
         // Load the layouts
-        addPreferencesFromResource(R.xml.main);
+        if (!Utils.hasLeanback(this)) {
+            addPreferencesFromResource(R.xml.main);
+        } else {
+            addPreferencesFromResource(R.xml.main_tv);
+        }
         mUpdatesList = (PreferenceCategory) findPreference(UPDATES_CATEGORY);
         mUpdateCheck = (ListPreference) findPreference(Constants.UPDATE_CHECK_PREF);
 
@@ -150,11 +154,13 @@ public class UpdatesSettings extends PreferenceActivity implements
         }
 
         // Set 'HomeAsUp' feature of the actionbar to fit better into Settings
-        final ActionBar bar = getActionBar();
-        bar.setDisplayHomeAsUpEnabled(true);
+        if (!Utils.hasLeanback(this)) {
+            final ActionBar bar = getActionBar();
+            bar.setDisplayHomeAsUpEnabled(true);
 
-        // Turn on the Options Menu
-        invalidateOptionsMenu();
+            // Turn on the Options Menu
+            invalidateOptionsMenu();
+        }
     }
 
     @Override
