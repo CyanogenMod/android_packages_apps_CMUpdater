@@ -17,7 +17,7 @@
     </style>
 
     <style name="Theme.Tv" parent="style/Theme.Leanback">
-        <item name="android:textSize">24dp</item>
+        <item name="android:textSize">18dp</item>
     </style>
 
     <style name="UpdatesPreferenceStyle">
