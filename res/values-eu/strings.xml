@@ -50,10 +50,10 @@
   <string name="not_action_install_update">Berrabiarazi eta instalatu</string>
   <string name="md5_verification_failed">MD5 berrespenak huts egin du</string>
   <string name="apply_update_dialog_title">Eguneraketa ezarri</string>
-  <string name="confirm_delete_dialog_title">Fitxategia ezabatu</string>
-  <string name="confirm_delete_dialog_message">Deskargatutako eguneraketa ezabatu?</string>
-  <string name="confirm_delete_all_dialog_message">Deskargatutako eguneraketa guztiak ezabatu?</string>
-  <string name="delete_single_update_success_message"><xliff:g id="filename">%s</xliff:g> eguneraketa ezabatuta</string>
+  <string name="confirm_delete_dialog_title">Ezabatu fitxategia</string>
+  <string name="confirm_delete_dialog_message">Ezabatu aukeratutako eguneraketa fitxategia?</string>
+  <string name="confirm_delete_all_dialog_message">Ezabatu deskargatutako eguneraketa fitxategi guztiak?</string>
+  <string name="delete_single_update_success_message"><xliff:g id="filename">%s</xliff:g> eguneraketa ezabatu da</string>
   <string name="delete_updates_failure_message">Akats bat egon da eguneraketa ezabatzerakoan</string>
   <string name="delete_updates_noFolder_message">Eguneraketen karpeta ez da aurkitu</string>
   <string name="delete_updates_success_message">Deskargatutako eguneraketa guztiak ezabatu dira</string>

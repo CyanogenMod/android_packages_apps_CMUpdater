@@ -51,7 +51,7 @@
   <string name="not_download_install_notice">Téléchargement de la mise à jour <xliff:g id="filename">%s</xliff:g> réussi. Lorsque vous appuierez sur « Redémarrer et installer », votre appareil redémarrera automatiquement pour installer la mise à jour.\n\nRemarque\u00A0: Cette opération nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
   <string name="md5_verification_failed">La vérification de la somme de contrôle MD5 a échoué</string>
   <string name="apply_update_dialog_title">Appliquer la mise à jour</string>
-  <string name="apply_update_dialog_text">Vous êtes sur le point d\'installer <xliff:g id="filename">%s</xliff:g>.\n\nLorsque vous appuierez sur \"Mettre à jour\", votre appareil redémarrera automatiquement pour installer la mise à jour.\n\nRemarque\u00A0: Cette opération nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
+  <string name="apply_update_dialog_text">Vous êtes sur le point d\'installer <xliff:g id="filename">%s</xliff:g>.\n\nLorsque vous appuierez sur « Mettre à jour », votre appareil redémarrera automatiquement pour installer la mise à jour.\n\nRemarque\u00A0: Cette opération nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
   <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode recovery</string>
   <string name="confirm_delete_dialog_title">Supprimer le fichier</string>
   <string name="confirm_delete_dialog_message">Supprimer le fichier de mise à jour sélectionné\u00A0?</string>
