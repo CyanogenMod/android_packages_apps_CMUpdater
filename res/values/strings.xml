@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2012-2014 The CyanogenMod Project
+     Copyright (C) 2012-2015 The CyanogenMod Project
 
      Licensed under the GNU GPLv2 license
 
@@ -27,7 +27,7 @@
     <!-- Settings strings -->
     <string name="available_updates_title">Available updates</string>
     <string name="no_available_updates_intro">The last check did not find any available updates. To manually check for new updates, use the Refresh button.</string>
-    <string name="no_available_updates_intro_tv">The last check did not find any available updates. To manually check for new updates, Click System information.</string>
+    <string name="no_available_updates_intro_tv">The last check did not find any available updates. To manually check for new updates, click \'System information\'.</string>
     <string name="new_update_summary">New</string>
     <string name="downloaded_update_summary">Downloaded</string>
     <string name="installed_update_summary">Installed</string>
