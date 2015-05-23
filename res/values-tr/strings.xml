@@ -15,12 +15,14 @@
   <string name="menu_refresh">Yenile</string>
   <string name="menu_delete_all">İndirilenleri sil</string>
   <string name="menu_system_info">Sistem bilgisi</string>
+  <string name="menu_system_info_tv">Sistem bilgisi: Güncelleme listesini yenilemek için tıklayın</string>
   <string name="dialog_ok">Tamam</string>
   <string name="dialog_cancel">İptal</string>
   <string name="dialog_update">Güncelle</string>
   <string name="dialog_close">Kapat</string>
   <string name="available_updates_title">İndirilebilir güncellemeler</string>
   <string name="no_available_updates_intro">Son kontrolde güncelleme bulunamadı. Yeni güncellemeleri elle kontrol etmek için Yenile düğmesini kullanın.</string>
+  <string name="no_available_updates_intro_tv">Son kontrolde güncelleme bulunmadı. Yeni güncellemeleri kontrol etmek için, \'Sistem bilgisini\'ni tıklayın.</string>
   <string name="new_update_summary">Yeni</string>
   <string name="downloaded_update_summary">İndirildi</string>
   <string name="installed_update_summary">Kuruldu</string>
@@ -54,6 +56,7 @@
   <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> güncellemesi yapılacak.\n\nGüncelleye bastığınızda, güncellemeyi kurmak için cihaz kurtarma modunda yeniden başlatılacak.\n\nNot: Bu özellik, uyumlu bir Kurtarma bölümü gerektirir, aksi takdirde güncellemelerin elle kurulması gerekir.</string>
   <string name="apply_unable_to_reboot_toast">Kurtarma modu için sistem yeniden başlatılamadı</string>
   <string name="confirm_delete_dialog_title">Dosya sil</string>
+  <string name="confirm_delete_dialog_title_tv">İndirilen tüm güncellemeleri dahili bellekten kaldırmak için tıklayın</string>
   <string name="confirm_delete_dialog_message">Seçilen güncelleme dosyası silinsin mi?</string>
   <string name="confirm_delete_all_dialog_message">İndirilen tüm güncelleme dosyalarını silmek istiyor musunuz?</string>
   <string name="delete_single_update_success_message"><xliff:g id="filename">%s</xliff:g> güncellemesi silindi</string>

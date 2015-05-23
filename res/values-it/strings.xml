@@ -22,6 +22,7 @@
   <string name="dialog_close">Chiudi</string>
   <string name="available_updates_title">Aggiornamenti disponibili</string>
   <string name="no_available_updates_intro">Nessun aggiornamento trovato con l\'ultima verifica. Per controllare manualmente la presenza di nuovi aggiornamenti, premere il pulsante Aggiorna</string>
+  <string name="no_available_updates_intro_tv">L\'ultimo controllo non ha trovato aggiornamenti disponibili. Per controllare manualmente la disponibilità di nuovi aggiornamenti, fai clic su Informazioni di sistema.</string>
   <string name="new_update_summary">Nuovo</string>
   <string name="downloaded_update_summary">Scaricato</string>
   <string name="installed_update_summary">Installato</string>

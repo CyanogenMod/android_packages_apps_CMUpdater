@@ -15,12 +15,14 @@
   <string name="menu_refresh">Refrescar</string>
   <string name="menu_delete_all">Borrar descargas</string>
   <string name="menu_system_info">Información del sistema</string>
+  <string name="menu_system_info_tv">Información del sistema: haz clic para refrescar la lista de actualizaciones</string>
   <string name="dialog_ok">Aceptar</string>
   <string name="dialog_cancel">Cancelar</string>
   <string name="dialog_update">Actualizar</string>
   <string name="dialog_close">Cerrar</string>
   <string name="available_updates_title">Actualizaciones disponibles</string>
   <string name="no_available_updates_intro">No se encontraron actualizaciones en la última comprobación. Pulsa el botón Refrescar para comprobar si existen nuevas actualizaciones.</string>
+  <string name="no_available_updates_intro_tv">La última comprobación no encontró ninguna actualización disponible. Para comprobar manualmente nuevas actualizaciones, haz clic en \u00ABInformación del sistema\u00BB.</string>
   <string name="new_update_summary">Nueva</string>
   <string name="downloaded_update_summary">Descargada</string>
   <string name="installed_update_summary">Instalada</string>
@@ -54,6 +56,7 @@
   <string name="apply_update_dialog_text">Se va a proceder a actualizar a la versión <xliff:g id="filename">%s</xliff:g>.\n\nPulsando sobre \u00ABActualizar\u00BB, el dispositivo se reiniciará para instalar la actualización.\n\nAviso: Será necesario disponer de un recovery compatible para una instalación desatendida.</string>
   <string name="apply_unable_to_reboot_toast">Imposible reiniciar en modo recovery</string>
   <string name="confirm_delete_dialog_title">Borrar archivo</string>
+  <string name="confirm_delete_dialog_title_tv">Haz clic para eliminar todas las actualizaciones descargadas en el almacenamiento interno</string>
   <string name="confirm_delete_dialog_message">¿Borrar la actualización descargada?</string>
   <string name="confirm_delete_all_dialog_message">¿Borrar todas las actualizaciones descargadas?</string>
   <string name="delete_single_update_success_message">Actualización <xliff:g id="filename">%s</xliff:g> borrada</string>
