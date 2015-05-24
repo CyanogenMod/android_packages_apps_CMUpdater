@@ -50,7 +50,7 @@
   <string name="not_download_success">Aktualiséierung erfollegräich erofgelueden</string>
   <string name="not_download_failure">D\'Erofluede vun der Aktualiséierung ass feelgeschloen</string>
   <string name="not_action_install_update">Nei starten an installéieren</string>
-  <string name="not_download_install_notice">D\'Aktualiséierung <xliff:g id="filename">%s</xliff:g> gouf erfollegräich erofgelueden. Wann \'Nei starten an installéieren\' gedréckt gëtt, start den Apparat nei an installéiert d\'Aktualiséierung.\n\nNotiz: E kompatibele Recovery-System gëtt gebraucht fir datt d\'Installatioun automatesch geet.</string>
+  <string name="not_download_install_notice">D\'Aktualiséierung <xliff:g id="filename">%s</xliff:g> gouf erfollegräich erofgelueden. Wann \'Nei starten an installéieren\' gedréckt gëtt, start den Apparat nei an installéiert d\'Aktualiséierung.\n\nHiwäis: E kompatibele Recovery-System gëtt gebraucht fir datt d\'Installatioun automatesch geet.</string>
   <string name="md5_verification_failed">MD5-Verifikatioun feelgeschloen</string>
   <string name="apply_update_dialog_title">Aktualiséierung installéieren</string>
   <string name="apply_update_dialog_text">Prett fir d\'Aktualiséierung op <xliff:g id="filename">%s</xliff:g>.\n\nNo der Bestätegung gëtt den Apparat am Recuperatiounsmodus gestartet, fir d\'Aktualiséierung duerchzeféieren.\n\nHiwäis: Dës Funktioun setzt viraus datt e kompatibele Recuperatiounssystem installéiert ass, anerefalls muss d\'Aktualiséierung manuell installéiert ginn.</string>

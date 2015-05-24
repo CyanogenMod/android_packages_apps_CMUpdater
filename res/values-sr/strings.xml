@@ -15,12 +15,14 @@
   <string name="menu_refresh">Освежи</string>
   <string name="menu_delete_all">Избриши преузимања</string>
   <string name="menu_system_info">Информације о систему</string>
+  <string name="menu_system_info_tv">Системске информације: Додирни да освежиш листу ажурирања</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Откажи</string>
   <string name="dialog_update">Ажурирај</string>
   <string name="dialog_close">Затвори</string>
   <string name="available_updates_title">Доступна ажурирања</string>
   <string name="no_available_updates_intro">Последња провера није нашла никаква доступна ажурирања. Да би ручно проверио за нова ажурирања, користи дугме за освежавање.</string>
+  <string name="no_available_updates_intro_tv">Задња провера није пронашла доступна ажурирања. Да ручно провериш нова ажурирања додирни \'Системске информације\'.</string>
   <string name="new_update_summary">Ново</string>
   <string name="downloaded_update_summary">Преузето</string>
   <string name="installed_update_summary">Инсталирано</string>
@@ -54,6 +56,7 @@
   <string name="apply_update_dialog_text">Надоградња на <xliff:g id="filename">%s</xliff:g>.\n\nАко притиснеш Ажурирај, уређај ће се поново покренути у \'Опоравак\' да инсталира ажурирање.\n\nНапомена: Ова функција захтева компатибилни \'Опоравак\' или ћеш морати ажурирање да инсталираш ручно.</string>
   <string name="apply_unable_to_reboot_toast">Немогуће да се рестартује у опоравак</string>
   <string name="confirm_delete_dialog_title">Избриши фајл</string>
+  <string name="confirm_delete_dialog_title_tv">Додирни да уклониш сва скинута ажурирања из унутрашњег складишта</string>
   <string name="confirm_delete_dialog_message">Избриши изабрани фајл за ажурирање?</string>
   <string name="confirm_delete_all_dialog_message">Избриши све преузете фајлове ажурирања?</string>
   <string name="delete_single_update_success_message">Ажурирање <xliff:g id="filename">%s</xliff:g> је избрисано</string>

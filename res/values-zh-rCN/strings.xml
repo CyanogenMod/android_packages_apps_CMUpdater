@@ -15,12 +15,14 @@
   <string name="menu_refresh">刷新</string>
   <string name="menu_delete_all">删除下载</string>
   <string name="menu_system_info">系统信息</string>
+  <string name="menu_system_info_tv">系统信息：点击以刷新更新列表</string>
   <string name="dialog_ok">确定</string>
   <string name="dialog_cancel">取消</string>
   <string name="dialog_update">更新</string>
   <string name="dialog_close">关闭</string>
   <string name="available_updates_title">可用更新</string>
   <string name="no_available_updates_intro">最后一次刷新没有找到可用的更新。使用刷新按钮来手动检查更新。</string>
+  <string name="no_available_updates_intro_tv">最后一次检查并没有发现任何可用的更新。要手动检查新的更新，请点击“系统信息”。</string>
   <string name="new_update_summary">新版本</string>
   <string name="downloaded_update_summary">已下载</string>
   <string name="installed_update_summary">已安装</string>
@@ -54,6 +56,7 @@
   <string name="apply_update_dialog_text">您将要更新到 <xliff:g id="filename">%s</xliff:g>。\n\n如果您选择更新，您的设备将会重启到恢复模式并安装更新。\n\n注意：此功能需要一个兼容的恢复程序，否则您将需要手动安装更新。</string>
   <string name="apply_unable_to_reboot_toast">无法重启到恢复模式</string>
   <string name="confirm_delete_dialog_title">删除文件</string>
+  <string name="confirm_delete_dialog_title_tv">点击以移除所有已下载到内部存储的更新</string>
   <string name="confirm_delete_dialog_message">您确定要删除此更新文件？</string>
   <string name="confirm_delete_all_dialog_message">您确定要删除所有已下载的更新文件？</string>
   <string name="delete_single_update_success_message">更新 <xliff:g id="filename">%s</xliff:g> 已被删除</string>

@@ -15,6 +15,7 @@
   <string name="menu_refresh">רענן</string>
   <string name="menu_delete_all">מחק הורדות</string>
   <string name="menu_system_info">מידע מערכת</string>
+  <string name="menu_system_info_tv">מידע מערכת: לחץ כדי לרענן את רשימת העדכונים</string>
   <string name="dialog_ok">אישור</string>
   <string name="dialog_cancel">ביטול</string>
   <string name="dialog_update">עדכן</string>
@@ -55,6 +56,7 @@
         \nהערה: אפשרות זו דורשת Recovery תואם, או שפעולת התקנת העדכונים תיאלץ להיעשות באופן ידני.</string>
   <string name="apply_unable_to_reboot_toast">נכשל לאתחל למצב \"Recovery\"</string>
   <string name="confirm_delete_dialog_title">מחק קובץ</string>
+  <string name="confirm_delete_dialog_title_tv">לחץ כאן כדי להסיר מהאחסון הפנימי את כל העדכונים שהורדו</string>
   <string name="confirm_delete_dialog_message">אתה עומד למחוק את הקובץ הנוכחי, לחץ על \"כן\" להמשך.</string>
   <string name="confirm_delete_all_dialog_message">אתה עומד למחוק את כל קובצי העדכון שהורדו, לחץ על \"כן\" להמשך.</string>
   <string name="delete_single_update_success_message">עדכון <xliff:g id="filename">%s</xliff:g> נמחק</string>

@@ -15,12 +15,14 @@
   <string name="menu_refresh">Herlaai</string>
   <string name="menu_delete_all">Verwyder alles</string>
   <string name="menu_system_info">Stelsel inligting</string>
+  <string name="menu_system_info_tv">Stelsel inligting: Raak om opdaterings lys te verfris</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Kanselleer</string>
   <string name="dialog_update">Opgradeer</string>
   <string name="dialog_close">Sluit</string>
   <string name="available_updates_title">Beskikbare opgraderings</string>
   <string name="no_available_updates_intro">Tydens laaste outamatiese soek is geen beskikbare opgraderings gevind nie. Om self te soek, gebruik die Herlaai knoppie.</string>
+  <string name="no_available_updates_intro_tv">Die laaste kyk het geen opdaterings gevind nie. Om handmatig te kyk vir nuwe opdaterings, raak \'Stelsel inligting\'.</string>
   <string name="new_update_summary">Nuut</string>
   <string name="downloaded_update_summary">Afgelaai</string>
   <string name="installed_update_summary">Geïnstalleer</string>
@@ -54,6 +56,7 @@
   <string name="apply_update_dialog_text">Die toestel gaan opgegradeer word na <xliff:g id="filename">%s</xliff:g>\n\nAs u die Opgradeer knoppie druk sal die toestel self herlaai om die opgradering te installeer.\n\nLet wel: Hierdie funksie vereis \'n versoenbaare \'recovery\' andersins sal die opgradering handmatig geïnstalleer moet word</string>
   <string name="apply_unable_to_reboot_toast">Kon nie herlaai in \'recovery\' nie</string>
   <string name="confirm_delete_dialog_title">Skrap lêer</string>
+  <string name="confirm_delete_dialog_title_tv">Raak om alle afgelaaide opdaterings van interne spasie te verwyder</string>
   <string name="confirm_delete_dialog_message">Die afgelaaide lêer gaan verwyder word, Ok om voort te gaan?</string>
   <string name="confirm_delete_all_dialog_message">Al die afgelaaide lêers gaan verwyder word, Ok om voort te gaan?</string>
   <string name="delete_single_update_success_message">Opgradering <xliff:g id="filename">%s</xliff:g> geskrap</string>

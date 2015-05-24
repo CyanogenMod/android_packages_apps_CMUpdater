@@ -15,12 +15,14 @@
   <string name="menu_refresh">Oppdater</string>
   <string name="menu_delete_all">Fjern nedlastinger</string>
   <string name="menu_system_info">Systeminfo</string>
+  <string name="menu_system_info_tv">Systeminformasjon: Klikk for å oppdatere oppdateringsliste</string>
   <string name="dialog_ok">Ok</string>
   <string name="dialog_cancel">Avbryt</string>
   <string name="dialog_update">Oppdater</string>
   <string name="dialog_close">Lukk</string>
   <string name="available_updates_title">Tilgjengelige oppdateringer</string>
   <string name="no_available_updates_intro">Siste oppdateringsjekk fant ingen tilgjengelige oppdateringer. Bruk oppdateringsknappen for å manuelt sjekke for nye oppdateringer</string>
+  <string name="no_available_updates_intro_tv">Den siste sjekken fant ingen flere oppdateringer. For å manuelt sjekke for oppdateringer, trykk på \'system informasjon\'.</string>
   <string name="new_update_summary">Ny</string>
   <string name="downloaded_update_summary">Nedlastet</string>
   <string name="installed_update_summary">Installert</string>
@@ -54,6 +56,7 @@
   <string name="apply_update_dialog_text">Du er i ferd med å oppgradere til <xliff:g id="filename">%s</xliff:g>.\n\nHvis du fortsetter vil telefonen foreta en omstart til recovery-modus for å gjennomføre installasjonen</string>
   <string name="apply_unable_to_reboot_toast">Kunne ikke starte opp i recovery-modus</string>
   <string name="confirm_delete_dialog_title">Slett fil</string>
+  <string name="confirm_delete_dialog_title_tv">Klikk for å fjerne alle nedlastede oppdateringer fra intern lagringskapasitet</string>
   <string name="confirm_delete_dialog_message">Du er i ferd med å fjerne den nedlastede oppdateringsfilen, er du sikker?</string>
   <string name="confirm_delete_all_dialog_message">Du er i ferd med å fjerne alle nedlastede oppdateringsfiler, er du sikker?</string>
   <string name="delete_single_update_success_message">Oppdatering <xliff:g id="filename">%s</xliff:g> slettet</string>
