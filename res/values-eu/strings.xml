@@ -13,9 +13,9 @@
   <string name="display_name">Eguneraketak</string>
   <string name="unknown">Ezezaguna</string>
   <string name="menu_refresh">Berritu</string>
-  <string name="menu_delete_all">Deskargak ezabatu</string>
+  <string name="menu_delete_all">Ezabatu deskargak</string>
   <string name="menu_system_info">Sistemaren informazioa</string>
-  <string name="dialog_ok">Ondo da</string>
+  <string name="dialog_ok">Ados</string>
   <string name="dialog_cancel">Ezeztu</string>
   <string name="dialog_update">Eguneratu</string>
   <string name="dialog_close">Itxi</string>
@@ -24,9 +24,9 @@
   <string name="new_update_summary">Berria</string>
   <string name="downloaded_update_summary">Deskargatuta</string>
   <string name="installed_update_summary">Instalatuta</string>
-  <string name="update_check_title">Eguneraketak bilatu</string>
+  <string name="update_check_title">Bilatu eguneraketak</string>
   <string name="check_manual">Eskuz</string>
-  <string name="check_on_boot">Pizte bakoitzean</string>
+  <string name="check_on_boot">Abio bakoitzean</string>
   <string name="check_twice_daily">Birritan egunero</string>
   <string name="check_daily">Egunero</string>
   <string name="check_weekly">Astero</string>
@@ -34,24 +34,27 @@
   <string name="check_monthly">Hilabetero</string>
   <string name="checking_for_updates">Eguneraketak bilatzen\u2026</string>
   <string name="no_updates_found">Ez da eguneraketa berririk aurkitu</string>
-  <string name="update_check_failed">Eguneraketa bilaketak huts egin du. Interneterako konexioa berretsi eta berriro saiatu, mesedez.</string>
+  <string name="update_check_failed">Eguneraketa bilaketak huts egin du. Interneterako konexioa egiaztatu eta berriro saiatu, mesedez.</string>
   <string name="not_new_updates_found_ticker">Eguneraketa berriak eskuragarri daude</string>
   <string name="not_new_updates_found_title">Eguneraketa berriak</string>
-  <string name="not_action_download">Deskargatu</string>
+  <string name="not_action_download">Deskarga</string>
   <string name="data_connection_required">Datu konexio bat beharrezkoa da.</string>
-  <string name="confirm_download_cancelation_dialog_title">Deskarga ezeztatu</string>
-  <string name="confirm_download_cancelation_dialog_message">Uneko deskarga ezeztatu?</string>
-  <string name="download_cancelled">Dezkarga ezeztua</string>
-  <string name="download_already_running">Deskarga bat jada martxan dago</string>
-  <string name="unable_to_download_file">Ezinezkoa da eguneraketa deskargatzea</string>
+  <string name="confirm_download_cancelation_dialog_title">Utzi deskarga</string>
+  <string name="confirm_download_cancelation_dialog_message">Utzi uneko deskarga?</string>
+  <string name="download_cancelled">Deskarga utzi da</string>
+  <string name="download_already_running">Deskarga bat jada abian dago jada</string>
+  <string name="unable_to_download_file">Ezin izan da eguneraketa fitxategia deskargatu</string>
   <string name="download_not_found">Deskarga ez da aurkitu</string>
-  <string name="not_download_success">Eguneraketa arrakastaz deskargatu da</string>
+  <string name="not_download_success">Eguneraketa ondo deskargatu da</string>
   <string name="not_download_failure">Eguneraketaren deskargak huts egin du</string>
   <string name="not_action_install_update">Berrabiarazi eta instalatu</string>
+  <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> eguneraketa ondo deskargatu da. \'Berrabiarazi eta instalatu\' sakatuz, gailua eguneraketa instalatzeko berrabiaraziko da.\n\nOharra: Ardura behar ez duen instalazio baterako berreskuratze aplikazio bateragarri bat beharrezkoa da.</string>
   <string name="md5_verification_failed">MD5 berrespenak huts egin du</string>
   <string name="apply_update_dialog_title">Eguneraketa ezarri</string>
+  <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> bertsioa instalatzera zoaz.\n\nEguneratu sakatzean, gailua  berreskuratze moduan berrabiaraziko da eguneraketa instalatzeko.\n\nOharra: Berreskuratze aplikazio bateragarri bat behar du ezaugarri honek, bestela eguneraketak eskuz instalatu beharko dira.</string>
+  <string name="apply_unable_to_reboot_toast">Ezin izan da berreskuratze moduan berrabiarazi</string>
   <string name="confirm_delete_dialog_title">Ezabatu fitxategia</string>
-  <string name="confirm_delete_dialog_message">Ezabatu aukeratutako eguneraketa fitxategia?</string>
+  <string name="confirm_delete_dialog_message">Ezabatu hautatutako eguneraketa fitxategia?</string>
   <string name="confirm_delete_all_dialog_message">Ezabatu deskargatutako eguneraketa fitxategi guztiak?</string>
   <string name="delete_single_update_success_message"><xliff:g id="filename">%s</xliff:g> eguneraketa ezabatu da</string>
   <string name="delete_updates_failure_message">Akats bat egon da eguneraketa ezabatzerakoan</string>
@@ -59,10 +62,11 @@
   <string name="delete_updates_success_message">Deskargatutako eguneraketa guztiak ezabatu dira</string>
   <string name="sysinfo_device">Gailua:</string>
   <string name="sysinfo_running">Exekutatzen:</string>
+  <string name="sysinfo_update_channel">Eguneraketa kanala:</string>
   <string name="sysinfo_last_check">Azken bilaketa:</string>
-  <string name="no_changelog_alert">Ez dago aldaketa erregistrorik</string>
-  <string name="changelog_dialog_title">Aldaketa erregistroa</string>
+  <string name="no_changelog_alert">Ez dago aldaketa-egunkaririk</string>
+  <string name="changelog_dialog_title">Aldaketa-egunkaria</string>
   <string name="loading_changelog">Kargatzen\u2026</string>
   <string name="extension_label">Cyanogenmod eguneraketak</string>
-  <string name="extension_description">Eskuragarri dauden eguneraketa kantitatea erakutsi.</string>
+  <string name="extension_description">Eskuragarri dauden eguneraketa kopurua erakusten du</string>
 </resources>
