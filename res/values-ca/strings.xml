@@ -14,7 +14,7 @@
   <string name="unknown">Desconegut</string>
   <string name="menu_refresh">Refresca</string>
   <string name="menu_delete_all">Esborra descàrregues</string>
-  <string name="menu_system_info">Info sistema</string>
+  <string name="menu_system_info">Info del sistema</string>
   <string name="dialog_ok">D\'acord</string>
   <string name="dialog_cancel">Cancel·la</string>
   <string name="dialog_update">Actualitza</string>
