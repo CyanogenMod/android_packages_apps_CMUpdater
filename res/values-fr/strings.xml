@@ -15,12 +15,14 @@
   <string name="menu_refresh">Actualiser</string>
   <string name="menu_delete_all">Supprimer les téléchargements</string>
   <string name="menu_system_info">Informations système</string>
+  <string name="menu_system_info_tv">Information système : cliquez ici pour actualiser la liste des mises à jour</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Annuler</string>
   <string name="dialog_update">Mettre à jour</string>
   <string name="dialog_close">Fermer</string>
   <string name="available_updates_title">Mises à jour disponibles</string>
   <string name="no_available_updates_intro">Aucune mise à jour disponible lors de la dernière vérification. Pour vérifier manuellement les mises à jour, utilisez le bouton Actualiser.</string>
+  <string name="no_available_updates_intro_tv">Aucune mise à jour n\'a été trouvée lors de la dernière vérification. Pour vérifier manuellement, appuyez sur \"Information système\".</string>
   <string name="new_update_summary">Nouvelle</string>
   <string name="downloaded_update_summary">Téléchargée</string>
   <string name="installed_update_summary">Installée</string>
@@ -54,6 +56,7 @@
   <string name="apply_update_dialog_text">Vous êtes sur le point d\'installer <xliff:g id="filename">%s</xliff:g>.\n\nLorsque vous appuierez sur « Mettre à jour », votre appareil redémarrera automatiquement pour installer la mise à jour.\n\nRemarque\u00A0: Cette opération nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
   <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode recovery</string>
   <string name="confirm_delete_dialog_title">Supprimer le fichier</string>
+  <string name="confirm_delete_dialog_title_tv">Cliquez pour supprimer les mises à jour téléchargées du stockage interne</string>
   <string name="confirm_delete_dialog_message">Supprimer le fichier de mise à jour sélectionné\u00A0?</string>
   <string name="confirm_delete_all_dialog_message">Supprimer tous les fichiers de mise à jour\u00A0?</string>
   <string name="delete_single_update_success_message">Mise à jour <xliff:g id="filename">%s</xliff:g> supprimée</string>
