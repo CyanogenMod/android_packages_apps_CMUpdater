@@ -9,7 +9,9 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="app_name">CM ĝisdatigilo</string>
   <string name="display_name">Ĝisdatigoj</string>
+  <string name="unknown">Nekonata</string>
   <string name="menu_refresh">Aktualiga klavo</string>
   <string name="menu_system_info">Sistem-informoj</string>
   <string name="menu_system_info_tv">Sistem-informoj: klaku tien por ĝisdatigi liston</string>
@@ -21,6 +23,7 @@
   <string name="no_available_updates_intro_tv">Lasta kontrolo ne trovis disponeblajn ĝisdatigojn. Por kontroli mane, klaku \'Sistem-informoj\'-n.</string>
   <string name="new_update_summary">Nova</string>
   <string name="downloaded_update_summary">Elŝutita</string>
+  <string name="installed_update_summary">Instalita</string>
   <string name="update_check_title">Kontroli ĝisdatigojn</string>
   <string name="check_manual">Mane</string>
   <string name="check_on_boot">Dum praŝargo</string>
@@ -43,6 +46,7 @@
   <string name="download_not_found">Elŝuto ne trovebla</string>
   <string name="not_download_success">Ĝisdatigo sukcese elŝutiĝis</string>
   <string name="not_action_install_update">Restartigi kaj instali</string>
+  <string name="not_download_install_notice">Ĝisdatigo <xliff:g id="filename">%s</xliff:g> sukcese elŝutiĝis. Post tajpo sur \'Restartigi kaj instali\', la aparato restartiĝos kaj instalos ĝisdatigon.\n\nNoto: Kongrua riparado estas postulata por aŭtomata instalado.</string>
   <string name="md5_verification_failed">MD5 kontrolo fiaskis</string>
   <string name="apply_update_dialog_title">Apliki ĝisdatigon</string>
   <string name="apply_update_dialog_text">Vi estas instalonta la  <xliff:g id="filename">%s</xliff:g> dosieron.\n\nPost premo de la \"Ĝisdatigo\" butono, la aparato restartos per riparada reĝimo por instali la ĝisdatigon.\n\nNoto : Tiu funkcio postulas kongruan riparadon, alikaze vi instalu ĝin mane.</string>
@@ -57,6 +61,7 @@
   <string name="sysinfo_device">Aparato:</string>
   <string name="sysinfo_running">Aktuala versio:</string>
   <string name="sysinfo_update_channel">Ĝisdatiga kanalo:</string>
+  <string name="sysinfo_last_check">Lasta kontrolado:</string>
   <string name="no_changelog_alert">Neniu ŝanĝoprotokolo disponeblas</string>
   <string name="changelog_dialog_title">Ŝanĝoprotokolo</string>
   <string name="loading_changelog">Ŝarĝante\u2026</string>
