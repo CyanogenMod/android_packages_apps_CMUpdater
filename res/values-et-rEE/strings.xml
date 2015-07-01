@@ -15,12 +15,14 @@
   <string name="menu_refresh">Värskenda</string>
   <string name="menu_delete_all">Allalaetud failide kustutamine</string>
   <string name="menu_system_info">Süsteemi info</string>
+  <string name="menu_system_info_tv">Süsteemiteave: Kliki et uuenduste nimekirja värskendada</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Tühista</string>
   <string name="dialog_update">Uuenda</string>
   <string name="dialog_close">Sulge</string>
   <string name="available_updates_title">Saadaval uuendused</string>
   <string name="no_available_updates_intro">Viimasel kontrollimisel uuendusi ei leitud. Käsitsi kontrollimiseks kasutage Värskenda nuppu.</string>
+  <string name="no_available_updates_intro_tv">Viimane kontroll ei leidnud ühtegi saadaolevat värskendust. Et käsitsi kontrollida uusi uuendusi, kliki \'Süsteemiteave\'.</string>
   <string name="new_update_summary">Uus</string>
   <string name="downloaded_update_summary">Allalaetud</string>
   <string name="installed_update_summary">Paigaldatud</string>
@@ -54,6 +56,7 @@
   <string name="apply_update_dialog_text">Oled uuendamas versioonile <xliff:g id="filename">%s</xliff:g>.\n\nVajutades \'Uuenda\' nuppu seade taaskäivitub taastamise režiimi ja paigaldab uuenduse.\n\nPane tähele: kokkusobiva taastamise režiimi puudumisel tuleb uuendus paigaldada käsitsi.</string>
   <string name="apply_unable_to_reboot_toast">Taaskäivitamine taastamise režiimi nurjus</string>
   <string name="confirm_delete_dialog_title">Faili kustutamine</string>
+  <string name="confirm_delete_dialog_title_tv">Kliki et eemaldada kõik allalaetud uuendused sisemisest salvestusseadmest</string>
   <string name="confirm_delete_dialog_message">Kustuta valitud uuenduse fail?</string>
   <string name="confirm_delete_all_dialog_message">Kustuta kõik allalaetud uuenduste failid?</string>
   <string name="delete_single_update_success_message">Uuendus <xliff:g id="filename">%s</xliff:g> on kustutatud</string>

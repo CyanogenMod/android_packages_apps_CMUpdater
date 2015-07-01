@@ -59,13 +59,13 @@
   <string name="confirm_delete_dialog_title_tv">לחץ כאן כדי להסיר מהאחסון הפנימי את כל העדכונים שהורדו</string>
   <string name="confirm_delete_dialog_message">אתה עומד למחוק את הקובץ הנוכחי, לחץ על \"כן\" להמשך.</string>
   <string name="confirm_delete_all_dialog_message">אתה עומד למחוק את כל קובצי העדכון שהורדו, לחץ על \"כן\" להמשך.</string>
-  <string name="delete_single_update_success_message">העדכון <xliff:g id="filename">%s</xliff:g> נמחק</string>
+  <string name="delete_single_update_success_message">עדכון <xliff:g id="filename">%s</xliff:g> נמחק</string>
   <string name="delete_updates_failure_message">אירעה שגיאה בעת הנסיון למחוק את הקובץ</string>
-  <string name="delete_updates_noFolder_message">תיקיית העדכונים לא נמצאה</string>
+  <string name="delete_updates_noFolder_message">תיקיית עדכונים לא נמצאה</string>
   <string name="delete_updates_success_message">כל העדכונים שהורדו נמחקו</string>
   <string name="sysinfo_device">מכשיר:</string>
   <string name="sysinfo_running">מריץ:</string>
-  <string name="sysinfo_update_channel">עדכן ערוץ:</string>
+  <string name="sysinfo_update_channel">ערוץ עדכון:</string>
   <string name="sysinfo_last_check">בדיקה אחרונה:</string>
   <string name="no_changelog_alert">רשימת שינויים לא זמינה</string>
   <string name="changelog_dialog_title">רשימת שינויים</string>

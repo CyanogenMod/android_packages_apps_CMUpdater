@@ -13,11 +13,13 @@
   <string name="display_name">Ĝisdatigoj</string>
   <string name="unknown">Nekonata</string>
   <string name="menu_refresh">Aktualiga klavo</string>
+  <string name="menu_delete_all">Forigi elŝutaĵojn</string>
   <string name="menu_system_info">Sistem-informoj</string>
   <string name="menu_system_info_tv">Sistem-informoj: klaku tien por ĝisdatigi liston</string>
   <string name="dialog_ok">Konfirmi</string>
   <string name="dialog_cancel">Rezigni</string>
   <string name="dialog_update">Aktualigi</string>
+  <string name="dialog_close">Fermi</string>
   <string name="available_updates_title">Ĝisdatigoj disponeblaj</string>
   <string name="no_available_updates_intro">Lasta kontrolo ne trovis disponeblajn ĝisdatigojn. Por kontroli mane, uzu Aktualigan butonon.</string>
   <string name="no_available_updates_intro_tv">Lasta kontrolo ne trovis disponeblajn ĝisdatigojn. Por kontroli mane, klaku \'Sistem-informoj\'-n.</string>
@@ -32,6 +34,7 @@
   <string name="check_weekly">Ĉiu-semajne</string>
   <string name="check_bi_weekly">Dufoje monate</string>
   <string name="check_monthly">Ĉiu-monate</string>
+  <string name="checking_for_updates">Kontrolado de ĝisdatigoj</string>
   <string name="no_updates_found">Neniu ĝisdatigo disponebla</string>
   <string name="update_check_failed">Kontrolo de ĝisdatigoj fiaskis. Bonvolu kontroli vian interretan konekton kaj provu denove.</string>
   <string name="not_new_updates_found_ticker">Novaj ĝisdatigoj disponeblaj</string>
@@ -45,6 +48,7 @@
   <string name="unable_to_download_file">Ne eblas elŝuti la ĝisdatigon</string>
   <string name="download_not_found">Elŝuto ne trovebla</string>
   <string name="not_download_success">Ĝisdatigo sukcese elŝutiĝis</string>
+  <string name="not_download_failure">Elŝutado fiaskis</string>
   <string name="not_action_install_update">Restartigi kaj instali</string>
   <string name="not_download_install_notice">Ĝisdatigo <xliff:g id="filename">%s</xliff:g> sukcese elŝutiĝis. Post tajpo sur \'Restartigi kaj instali\', la aparato restartiĝos kaj instalos ĝisdatigon.\n\nNoto: Kongrua riparado estas postulata por aŭtomata instalado.</string>
   <string name="md5_verification_failed">MD5 kontrolo fiaskis</string>
@@ -58,6 +62,7 @@
   <string name="delete_single_update_success_message">Ĝisdatigo <xliff:g id="filename">%s</xliff:g> forigita</string>
   <string name="delete_updates_failure_message">Forigado de ĝisdatigo fiaskis</string>
   <string name="delete_updates_noFolder_message">Ĝisdatiga dosierujo ne troveblas</string>
+  <string name="delete_updates_success_message">Ĉiuj elŝutaĵoj sukcese forigitaj</string>
   <string name="sysinfo_device">Aparato:</string>
   <string name="sysinfo_running">Aktuala versio:</string>
   <string name="sysinfo_update_channel">Ĝisdatiga kanalo:</string>
