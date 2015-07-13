@@ -10,7 +10,6 @@
 package com.cyanogenmod.updater.service;
 
 import android.app.IntentService;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -19,6 +18,7 @@ import android.content.res.Resources;
 import android.os.Parcelable;
 import android.os.SystemProperties;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -136,7 +136,7 @@ public class UpdateCheckService extends IntentService
                     realUpdateCount, realUpdateCount);
 
             // Get the notification ready
-            Notification.Builder builder = new Notification.Builder(this)
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                     .setSmallIcon(R.drawable.ic_system_update)
                     .setWhen(System.currentTimeMillis())
                     .setTicker(res.getString(R.string.not_new_updates_found_ticker))
@@ -165,7 +165,7 @@ public class UpdateCheckService extends IntentService
                 }
             });
 
-            Notification.InboxStyle inbox = new Notification.InboxStyle(builder)
+            NotificationCompat.InboxStyle inbox = new NotificationCompat.InboxStyle(builder)
                     .setBigContentTitle(text);
             int added = 0, count = realUpdates.size();
 
@@ -191,6 +191,16 @@ public class UpdateCheckService extends IntentService
 
                 builder.addAction(R.drawable.ic_tab_download,
                         res.getString(R.string.not_action_download), downloadIntent);
+
+                // Wearable download action
+                NotificationCompat.WearableExtender extender
+                        = new NotificationCompat.WearableExtender();
+                NotificationCompat.Action wearAction = new NotificationCompat.Action.Builder(
+                        R.drawable.ic_action_download,
+                        res.getString(R.string.not_action_download), downloadIntent)
+                        .build();
+                extender.addAction(wearAction);
+                builder.extend(extender);;
             }
 
             // Trigger the notification
