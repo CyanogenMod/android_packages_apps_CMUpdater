@@ -9,13 +9,15 @@
 
 package com.cyanogenmod.updater.receiver;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
+
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.misc.UpdateInfo;
+
 import java.io.File;
 
 public class DownloadNotifier {
@@ -28,11 +30,11 @@ public class DownloadNotifier {
             Intent updateIntent, File updateFile) {
         String updateUiName = UpdateInfo.extractUiName(updateFile.getName());
 
-        Notification.BigTextStyle style = new Notification.BigTextStyle()
+        NotificationCompat.BigTextStyle style = new NotificationCompat.BigTextStyle()
                 .setBigContentTitle(context.getString(R.string.not_download_success))
                 .bigText(context.getString(R.string.not_download_install_notice, updateUiName));
 
-        Notification.Builder builder = createBaseContentBuilder(context, updateIntent)
+        NotificationCompat.Builder builder = createBaseContentBuilder(context, updateIntent)
                 .setSmallIcon(R.drawable.ic_system_update)
                 .setContentTitle(context.getString(R.string.not_download_success))
                 .setContentText(updateUiName)
@@ -42,13 +44,23 @@ public class DownloadNotifier {
                 context.getString(R.string.not_action_install_update),
                 createInstallPendingIntent(context, updateFile));
 
+        // Wearable install action
+        NotificationCompat.WearableExtender extender = new NotificationCompat.WearableExtender();
+        NotificationCompat.Action wearInstallAction = new NotificationCompat.Action.Builder(
+                R.drawable.ic_system_update,
+                context.getString(R.string.not_action_install_update),
+                createInstallPendingIntent(context, updateFile))
+                .build();
+        extender.addAction(wearInstallAction);
+        builder.extend(extender);
+
         ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE))
                 .notify(R.string.not_download_success, builder.build());
     }
 
     public static void notifyDownloadError(Context context,
             Intent updateIntent, int failureMessageResId) {
-        Notification.Builder builder = createBaseContentBuilder(context, updateIntent)
+        NotificationCompat.Builder builder = createBaseContentBuilder(context, updateIntent)
                 .setSmallIcon(android.R.drawable.stat_notify_error)
                 .setContentTitle(context.getString(R.string.not_download_failure))
                 .setContentText(context.getString(failureMessageResId))
@@ -58,12 +70,12 @@ public class DownloadNotifier {
                 .notify(R.string.not_download_success, builder.build());
     }
 
-    private static Notification.Builder createBaseContentBuilder(Context context,
+    private static NotificationCompat.Builder createBaseContentBuilder(Context context,
             Intent updateIntent) {
         PendingIntent contentIntent = PendingIntent.getActivity(context, 1,
                 updateIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
 
-        return new Notification.Builder(context)
+        return new NotificationCompat.Builder(context)
                 .setWhen(System.currentTimeMillis())
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true);
