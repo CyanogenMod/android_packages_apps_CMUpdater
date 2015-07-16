@@ -143,6 +143,7 @@ public class UpdateCheckService extends IntentService
                     .setContentTitle(res.getString(R.string.not_new_updates_found_title))
                     .setContentText(text)
                     .setContentIntent(contentIntent)
+                    .setLocalOnly(true)
                     .setAutoCancel(true);
 
             LinkedList<UpdateInfo> realUpdates = new LinkedList<UpdateInfo>();
@@ -191,16 +192,6 @@ public class UpdateCheckService extends IntentService
 
                 builder.addAction(R.drawable.ic_tab_download,
                         res.getString(R.string.not_action_download), downloadIntent);
-
-                // Wearable download action
-                NotificationCompat.WearableExtender extender
-                        = new NotificationCompat.WearableExtender();
-                NotificationCompat.Action wearAction = new NotificationCompat.Action.Builder(
-                        R.drawable.ic_action_download,
-                        res.getString(R.string.not_action_download), downloadIntent)
-                        .build();
-                extender.addAction(wearAction);
-                builder.extend(extender);;
             }
 
             // Trigger the notification
