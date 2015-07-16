@@ -41,18 +41,8 @@ public class DownloadNotifier {
                 .setTicker(context.getString(R.string.not_download_success))
                 .setStyle(style)
                 .addAction(R.drawable.ic_tab_install,
-                context.getString(R.string.not_action_install_update),
-                createInstallPendingIntent(context, updateFile));
-
-        // Wearable install action
-        NotificationCompat.WearableExtender extender = new NotificationCompat.WearableExtender();
-        NotificationCompat.Action wearInstallAction = new NotificationCompat.Action.Builder(
-                R.drawable.ic_system_update,
-                context.getString(R.string.not_action_install_update),
-                createInstallPendingIntent(context, updateFile))
-                .build();
-        extender.addAction(wearInstallAction);
-        builder.extend(extender);
+                        context.getString(R.string.not_action_install_update),
+                        createInstallPendingIntent(context, updateFile));
 
         ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE))
                 .notify(R.string.not_download_success, builder.build());
@@ -78,6 +68,7 @@ public class DownloadNotifier {
         return new NotificationCompat.Builder(context)
                 .setWhen(System.currentTimeMillis())
                 .setContentIntent(contentIntent)
+                .setLocalOnly(true)
                 .setAutoCancel(true);
     }
 
