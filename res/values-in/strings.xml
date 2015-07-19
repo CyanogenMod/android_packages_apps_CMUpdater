@@ -22,6 +22,7 @@
   <string name="dialog_close">Tutup</string>
   <string name="available_updates_title">Pembaruan tersedia</string>
   <string name="no_available_updates_intro">Cek terakhir tidak menemukan adanya pembaruan yang tersedia. Untuk memeriksa secara manual untuk pembaruan terkini, gunakan tombol Segarkan.</string>
+  <string name="no_available_updates_intro_tv">Pengecekan terakhir tidak menemukan update yang tersedia. Untuk secara manual memeriksa update baru, klik \'Informasi Sistem\'.</string>
   <string name="new_update_summary">Baru</string>
   <string name="downloaded_update_summary">Terunduh</string>
   <string name="installed_update_summary">Terpasang</string>
@@ -55,6 +56,7 @@
   <string name="apply_update_dialog_text">Anda akan meng-upgrade ke <xliff:g id="filename">%s</xliff:g>.\n\nJika anda menekan Perbarui, perangkat akan dinyalakan ulang dalam modus pemulihan untuk memasang pembaruan.\n\nCatatan: Fitur ini memerlukan Pemulihan yang kompatibel atau pembaruan harus dipasang secara manual.</string>
   <string name="apply_unable_to_reboot_toast">Tidak dapat menyalakan ulang ke pemulihan</string>
   <string name="confirm_delete_dialog_title">Hapus berkas</string>
+  <string name="confirm_delete_dialog_title_tv">Klik untuk menghapus semua unduhan pembaruan dari penyimpanan internal</string>
   <string name="confirm_delete_dialog_message">Hapus berkas pembaruan yang terpilih?</string>
   <string name="confirm_delete_all_dialog_message">Hapus semua berkas pembaruan yang sudah diunduh?</string>
   <string name="delete_single_update_success_message">Pembaruan <xliff:g id="filename">%s</xliff:g> dihapus</string>
