@@ -15,12 +15,14 @@
   <string name="menu_refresh">ताज़ा करें</string>
   <string name="menu_delete_all">डाउनलोडों को हटाएँ</string>
   <string name="menu_system_info">सिस्टम जानकारी</string>
+  <string name="menu_system_info_tv">सिस्टम जानकारी: अद्यतन सूची को ताज़ा करने के लिए क्लिक करें</string>
   <string name="dialog_ok">ठीक है</string>
   <string name="dialog_cancel">रद्द करें</string>
   <string name="dialog_update">अद्यतन करें</string>
   <string name="dialog_close">बंद करें</string>
   <string name="available_updates_title">उपलब्ध अद्यतन</string>
   <string name="no_available_updates_intro">अंतिम जाँच में कोई उपलब्ध अद्यतन नहीं मिला। नए अद्यतनों के लिए स्वयं जाँचने के लिए, ताज़ा करें बटन का उपयोग करें।</string>
+  <string name="no_available_updates_intro_tv">अंतिम जाँच में कोई उपलब्ध अद्यतन नहीं मिले। नए अद्यतनों के लिए स्वयं जाँचने हेतु, \'सिस्टम जानकारी\' को क्लिक करें।</string>
   <string name="new_update_summary">नया</string>
   <string name="downloaded_update_summary">डाउनलोड किया गया</string>
   <string name="installed_update_summary">स्थापित</string>
@@ -54,6 +56,7 @@
   <string name="apply_update_dialog_text">आप <xliff:g id="filename">%s</xliff:g> में अद्यतन करने जा रहे हैं।\n\nयदि आप अद्यतन को दबाएँगे, तो उपकरण अद्यतन को स्थापित करने के लिए रिकवरी मोड में रीस्टार्ट करेगा।\n\nटिप्पणी: इस सुविधा के लिए संगत रिकवरी की आवश्यकता है, अन्यथा आपको स्वयं अद्यतनों को स्थापित करना पड़ेगा।</string>
   <string name="apply_unable_to_reboot_toast">रिकवरी में बूट करने में असमर्थ</string>
   <string name="confirm_delete_dialog_title">फ़ाइल को हटाएँ</string>
+  <string name="confirm_delete_dialog_title_tv">आंतरिक भंडारण से डाउनलोड किए गए सभी अद्यतनों को हटाने के लिए क्लिक करें</string>
   <string name="confirm_delete_dialog_message">चयनित अद्यतन फ़ाइल को हटा दें?</string>
   <string name="confirm_delete_all_dialog_message">डाउनलोड की गई सभी अद्यतन फ़ाइलों को हटा दें?</string>
   <string name="delete_single_update_success_message">अद्यतन <xliff:g id="filename">%s</xliff:g> हटा दिया गया</string>
