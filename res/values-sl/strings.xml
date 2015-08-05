@@ -28,7 +28,7 @@
   <string name="installed_update_summary">Nameščeno</string>
   <string name="update_check_title">Preveri za posodobitve</string>
   <string name="check_manual">Ročno</string>
-  <string name="check_on_boot">Ob vsakem vklopu naprave</string>
+  <string name="check_on_boot">Ob vsakem zagonu</string>
   <string name="check_twice_daily">Dvakrat dnevno</string>
   <string name="check_daily">Dnevno</string>
   <string name="check_weekly">Tedensko</string>
