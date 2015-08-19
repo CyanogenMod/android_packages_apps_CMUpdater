@@ -62,6 +62,7 @@
   <string name="delete_updates_success_message">حذف كافة التحديثات المحملة</string>
   <string name="sysinfo_device">الجهاز:</string>
   <string name="sysinfo_running">يعمل:</string>
+  <string name="sysinfo_update_channel">تحديث القناة:</string>
   <string name="sysinfo_last_check">الاختيار الأخير:</string>
   <string name="no_changelog_alert">لا تغيير المتاحة</string>
   <string name="changelog_dialog_title">سجل التغير</string>
