@@ -53,7 +53,7 @@
   <string name="not_download_install_notice">アップデート<xliff:g id="filename">%s</xliff:g>のダウンロードが完了しました。｢再起動してインストール｣をタップすると、アップデートをインストールするために端末は再起動します。\n\n注意: インストールを自動で行うには、互換性のあるリカバリーが必要です。</string>
   <string name="md5_verification_failed">MD5を検証できませんでした</string>
   <string name="apply_update_dialog_title">アップデートを適用</string>
-  <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g>にアップグレードしようとしています。\n\nアップデートを押すと、アップデートをインストールするために端末はリカバリーモードで再起動します。\n\n注意: この機能は互換性のあるリカバリーが必要なので、互換性がなければ手動でインストールする必要があります。</string>
+  <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g>にアップグレードしようとしています。\n\nアップデートを押すと、アップデートをインストールするために端末はリカバリーモードで再起動します。\n\n注意: この機能は互換性のあるリカバリーが必要ですので、互換性がなければ手動でインストールする必要があります。</string>
   <string name="apply_unable_to_reboot_toast">リカバリーモードで再起動できませんでした</string>
   <string name="confirm_delete_dialog_title">ファイルを削除</string>
   <string name="confirm_delete_dialog_title_tv">クリックして内部ストレージからすべてのダウンロードしたアップデートを削除</string>

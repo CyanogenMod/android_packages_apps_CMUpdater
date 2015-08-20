@@ -24,7 +24,7 @@
   <string name="no_available_updates_intro">در آخرین بررسی بروزرسانی یافت نشد. برای بررسی دستی، از دکمه‌ی تازه کردن استفاده کنید.</string>
   <string name="no_available_updates_intro_tv">در آخرین بررسی بروزرسانی یافت نشد. برای بررسی دستی، روی \'اطلاعات سیستم\' بزنید.</string>
   <string name="new_update_summary">جدید</string>
-  <string name="downloaded_update_summary">دریافت‌شده</string>
+  <string name="downloaded_update_summary">دانلودشده</string>
   <string name="installed_update_summary">نصب‌شده</string>
   <string name="update_check_title">بررسی برای بروزرسانی</string>
   <string name="check_manual">دستی</string>
@@ -39,18 +39,18 @@
   <string name="update_check_failed">بررسی بروزرسانی انجام نشد. اتصال اینترنت خود را بررسی و دوباره سعی کنید.</string>
   <string name="not_new_updates_found_ticker">بروزرسانی جدید موجود است</string>
   <string name="not_new_updates_found_title">بروزرسانی‌های جدید</string>
-  <string name="not_action_download">دریافت</string>
+  <string name="not_action_download">دانلود</string>
   <string name="data_connection_required">اتصال داده مورد نیاز است.</string>
-  <string name="confirm_download_cancelation_dialog_title">لغو دریافت</string>
-  <string name="confirm_download_cancelation_dialog_message">دریافت فعلی را لغو می‌کنید؟</string>
-  <string name="download_cancelled">دریافت لغو شد</string>
-  <string name="download_already_running">یک دریافت از قبل در حال اجراست</string>
-  <string name="unable_to_download_file">ناتوان در دانلود فایل بروزرسانی</string>
+  <string name="confirm_download_cancelation_dialog_title">لغو دانلود</string>
+  <string name="confirm_download_cancelation_dialog_message">دانلود فعلی را لغو می کنید؟</string>
+  <string name="download_cancelled">دانلود لغو شد</string>
+  <string name="download_already_running">دانلودی از قبل در حال اجراست</string>
+  <string name="unable_to_download_file">قادر به دانلود فایل بروزرسانی نیست</string>
   <string name="download_not_found">دانلود پیدا نشد</string>
   <string name="not_download_success">بروزرسانی با موفقیت دانلود شد</string>
   <string name="not_download_failure">دانلود بروزرسانی ناموفق بود</string>
   <string name="not_action_install_update">راه‌اندازی مجدد و نصب</string>
-  <string name="not_download_install_notice">بروزرسانی <xliff:g id="filename">%s</xliff:g> با موفقیت دانلود شد. هنگام لمس \'راه‌اندازی مجدد و نصب\'، دستگاه خود را برای نصب بروزرسانی راه‌اندازی مجدد خواهد کرد.\n\n توجه: یک ریکاوری سازگار برای نصب اتوماتیک مورد نیاز است.</string>
+  <string name="not_download_install_notice">بروزرسانی <xliff:g id="filename">%s</xliff:g> با موفقیت دانلود شد. هنگام لمس \'راه‌اندازی مجدد و نصب\'، دستگاه، خود را برای نصب بروزرسانی راه‌اندازی مجدد خواهد کرد.\n\n توجه: ریکاوری سازگاری برای نصب اتوماتیک مورد نیاز است.</string>
   <string name="md5_verification_failed">MD5 تایید نشد</string>
   <string name="apply_update_dialog_title">انجام بروزرسانی</string>
   <string name="apply_update_dialog_text">درصدد بروزرسانی به <xliff:g id="filename">%s</xliff:g> هستید.\n\n اگر بروزرسانی را بزنید، دستگاه خود را برای نصب بروزرسانی در حالت ریکاوری راه‌اندازی مجدد خوهد کرد.\n\n توجه: این قابلیت به یک ریکاوری سازگار نیاز دارد در غیر این صورت بروزرسانی‌ها باید به صورت دستی نصب شوند.</string>
