@@ -18,8 +18,8 @@
     <item quantity="other">+ <xliff:g id="count">%d</xliff:g> méi</item>
   </plurals>
   <plurals name="extension_status">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> Update</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> Updates</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> Aktualiséierung</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> Aktualiséierungen</item>
   </plurals>
   <plurals name="extension_expandedTitle">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> CyanogenMod-Aktualiséierung</item>

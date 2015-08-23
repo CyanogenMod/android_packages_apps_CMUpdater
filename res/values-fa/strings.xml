@@ -15,13 +15,17 @@
   <string name="menu_delete_all">حذف دریافتی‌ها</string>
   <string name="dialog_ok">بسیارخب</string>
   <string name="dialog_cancel">لغو</string>
-  <string name="downloaded_update_summary">دریافت‌شده</string>
-  <string name="not_action_download">دریافت</string>
-  <string name="confirm_download_cancelation_dialog_title">لغو دریافت</string>
-  <string name="confirm_download_cancelation_dialog_message">دریافت فعلی را لغو می کنید؟</string>
-  <string name="download_cancelled">دریافت لغو شد</string>
-  <string name="download_not_found">دریافت پیدا نشد</string>
-  <string name="not_download_success">بروزرسانی با موفقیت دریافت شد</string>
+  <string name="downloaded_update_summary">دانلودشده</string>
+  <string name="not_action_download">دانلود</string>
+  <string name="confirm_download_cancelation_dialog_title">لغو دانلود</string>
+  <string name="confirm_download_cancelation_dialog_message">دانلود فعلی را لغو می کنید؟</string>
+  <string name="download_cancelled">دانلود لغو شد</string>
+  <string name="download_already_running">دانلودی از قبل در حال اجراست</string>
+  <string name="unable_to_download_file">قادر به دانلود فایل بروزرسانی نیست</string>
+  <string name="download_not_found">دانلود پیدا نشد</string>
+  <string name="not_download_success">بروزرسانی با موفقیت دانلود شد</string>
+  <string name="not_download_failure">دانلود بروزرسانی ناموفق بود</string>
+  <string name="not_download_install_notice">بروزرسانی <xliff:g id="filename">%s</xliff:g> با موفقیت دانلود شد. هنگام لمس \'راه‌اندازی مجدد و نصب\'، دستگاه، خود را برای نصب بروزرسانی راه‌اندازی مجدد خواهد کرد.\n\n توجه: ریکاوری سازگاری برای نصب اتوماتیک مورد نیاز است.</string>
   <string name="confirm_delete_dialog_title">حذف فایل</string>
   <string name="no_changelog_alert">هیچ تغییری موجود نیست</string>
   <string name="changelog_dialog_title">لیست تغییرات</string>
