@@ -10,6 +10,12 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="not_new_updates_found_body">
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> بروزرسانی برای دریافت موجود است</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> بروزرسانی برای دانلود موجود است</item>
+  </plurals>
+  <plurals name="not_additional_count">
+    <item quantity="other">+ <xliff:g id="count">%d </xliff:g> بیشتر</item>
+  </plurals>
+  <plurals name="extension_status">
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> بروزرسانی</item>
   </plurals>
 </resources>
