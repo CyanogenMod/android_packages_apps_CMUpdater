@@ -17,12 +17,4 @@
     <item quantity="many"><xliff:g id="count">%d</xliff:g> تحديثات متوفرة للتحميل</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> تحديثات متوفرة للتحميل</item>
   </plurals>
-  <plurals name="not_additional_count">
-    <item quantity="zero">+ <xliff:g id="count">%d</xliff:g> أكثر</item>
-    <item quantity="one">+ <xliff:g id="count">%d</xliff:g> أكثر</item>
-    <item quantity="two">+ <xliff:g id="count">%d</xliff:g> أكثر</item>
-    <item quantity="few">+ <xliff:g id="count">%d</xliff:g> أكثر</item>
-    <item quantity="many">+ <xliff:g id="count">%d</xliff:g> أكثر</item>
-    <item quantity="other">+ <xliff:g id="count">%d</xliff:g> أكثر</item>
-  </plurals>
 </resources>

@@ -22,7 +22,7 @@
   <string name="dialog_close">Uždaryti</string>
   <string name="available_updates_title">Pasiekiami atnaujinimai</string>
   <string name="no_available_updates_intro">Paskutinį kartą nerasta jokių pasiekiamų atnaujinimų. Kad rankiniu būdu ieškotumėte naujų atnaujinimų, naudokite mygtuką „Atnaujinti“.</string>
-  <string name="no_available_updates_intro_tv">Paskutinį patikrinimą nerastą jokių galimų atnaujinimų. Kad rankiniu būdu ieškotumėte naujų atnaujinimų, spauskite „Sistemos informacija“.</string>
+  <string name="no_available_updates_intro_tv">Paskutinį patikrinimą nerastą jokių pasiekiamų atnaujinimų. Kad rankiniu būdu ieškotumėte naujų atnaujinimų, spauskite „Sistemos informacija“.</string>
   <string name="new_update_summary">Naujas</string>
   <string name="downloaded_update_summary">Atsisiųstas</string>
   <string name="installed_update_summary">Įdiegta</string>
