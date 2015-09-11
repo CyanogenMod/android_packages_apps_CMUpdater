@@ -54,6 +54,7 @@
   <string name="apply_update_dialog_text">您將升級到<xliff:g id="filename">%s</xliff:g>。\n\n如果您按下更新，裝置將自動重新啟動修復模式 (Recovery) 下安裝更新。\n\n注意：此功能需要一個兼容的修復模式 (Recovery)，否則將會需要手動安裝更新。</string>
   <string name="apply_unable_to_reboot_toast">無法重啟進入修復 (Recovery) 模式</string>
   <string name="confirm_delete_dialog_title">刪除檔案</string>
+  <string name="confirm_delete_dialog_title_tv">按下即可從內部儲存空間移除所有已下載的更新</string>
   <string name="confirm_delete_dialog_message">刪除已選取的更新檔案?</string>
   <string name="confirm_delete_all_dialog_message">刪除所有下載的更新檔案?</string>
   <string name="delete_single_update_success_message">更新<xliff:g id="filename">%s</xliff:g>已被刪除</string>

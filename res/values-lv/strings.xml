@@ -15,12 +15,14 @@
   <string name="menu_refresh">Atjaunot</string>
   <string name="menu_delete_all">Dzēst lejuplādes</string>
   <string name="menu_system_info">Sistēmas info</string>
+  <string name="menu_system_info_tv">Sistēmas informācija: Spiediet, lai pārprasītu atjaunojumu sarakstu</string>
   <string name="dialog_ok">Labi</string>
   <string name="dialog_cancel">Atcelt</string>
   <string name="dialog_update">Atjaunot</string>
   <string name="dialog_close">Aizvērt</string>
   <string name="available_updates_title">Pieejamie atjaunojumi</string>
   <string name="no_available_updates_intro">Pēdējās pārbaudes laikā atjaunojumi netika atrasti. Lai manuāli pārbaudītu atjaunojumus, izmantojiet pogu Atjaunot.</string>
+  <string name="no_available_updates_intro_tv">Pēdējā pārbaude neatrada jaunus atjaunojumus. Lai meklētu atjaunojumus nospiediet \'Sistēmas Informācija\'.</string>
   <string name="new_update_summary">Jauns</string>
   <string name="downloaded_update_summary">Lejuplādēts</string>
   <string name="installed_update_summary">Uzstādīts</string>
@@ -55,6 +57,7 @@
         \nPiezīme: Automātiskai atjaunošanai nepieciešama saderīga atjaunošana, pretējā gadījumā atjaunojumus jāuzstāda manuāli.</string>
   <string name="apply_unable_to_reboot_toast">Neizdevās pārsāknēties atjaunošanas režīmā</string>
   <string name="confirm_delete_dialog_title">Dzēst failu</string>
+  <string name="confirm_delete_dialog_title_tv">Spiediet, lai dzēstu visus lejuplādētos atjaunojumus no iekšējās atmiņas</string>
   <string name="confirm_delete_dialog_message">Dzēst izvēlēto atjaunojuma failu?</string>
   <string name="confirm_delete_all_dialog_message">Dzēst visus lejuplādētos atjaunojumu failus?</string>
   <string name="delete_single_update_success_message">Atjaunojums <xliff:g id="filename">%s</xliff:g> izdzēsts</string>
