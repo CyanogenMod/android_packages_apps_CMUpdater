@@ -12,13 +12,11 @@
   <plurals name="not_new_updates_found_body">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> ажурирање доступно за преузимање</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> ажурирања доступна за преузимање</item>
-    <item quantity="many"><xliff:g id="count">%d</xliff:g> ажурирања доступних за преузимање</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> ажурирања доступна за преузимање</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> ажурирања доступних за преузимање</item>
   </plurals>
   <plurals name="not_additional_count">
     <item quantity="one">+ <xliff:g id="count">%d</xliff:g> још</item>
     <item quantity="few">+ <xliff:g id="count">%d</xliff:g> још</item>
-    <item quantity="many">+ <xliff:g id="count">%d</xliff:g> још</item>
     <item quantity="other">+ <xliff:g id="count">%d</xliff:g> још</item>
   </plurals>
 </resources>
