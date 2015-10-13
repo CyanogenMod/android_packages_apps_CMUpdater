@@ -25,7 +25,7 @@
   <string name="no_available_updates_intro_tv">Viimeisin tarkistus ei löytänyt päivityksiä. Tarkistaaksesi päivitykset manuaalisesti, valitse \'Järjestelmätiedot\'.</string>
   <string name="new_update_summary">Uusi</string>
   <string name="downloaded_update_summary">Ladatut</string>
-  <string name="installed_update_summary">Asennetut</string>
+  <string name="installed_update_summary">Asennettu</string>
   <string name="update_check_title">Päivitysten tarkastus</string>
   <string name="check_manual">Päivitettäessä</string>
   <string name="check_on_boot">Jokaisella käynnistyksellä</string>

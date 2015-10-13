@@ -15,12 +15,14 @@
   <string name="menu_refresh">重新整理</string>
   <string name="menu_delete_all">刪除下載項目</string>
   <string name="menu_system_info">系統資訊</string>
+  <string name="menu_system_info_tv">系統資訊: 按一下重新整理以更新清單</string>
   <string name="dialog_ok">確定</string>
   <string name="dialog_cancel">取消</string>
   <string name="dialog_update">更新</string>
   <string name="dialog_close">關閉</string>
   <string name="available_updates_title">可用更新</string>
   <string name="no_available_updates_intro">上次檢查並未發現任何可用的更新。輕觸重新整理按鈕即可手動檢查新的更新。</string>
+  <string name="no_available_updates_intro_tv">上次檢查找不到任何可用的更新，要手動檢查更新，請按\'系統資訊\'。</string>
   <string name="new_update_summary">新版本</string>
   <string name="downloaded_update_summary">已下載</string>
   <string name="installed_update_summary">已安裝</string>
@@ -54,6 +56,7 @@
   <string name="apply_update_dialog_text">您將更新至 <xliff:g id="filename">%s</xliff:g>。\n\n如果您按下更新，裝置將重新啟動進入 Recovery 模式並安裝更新。\n\n注意：這項功能需要相容的 Recovery，否則將需要手動安裝更新。</string>
   <string name="apply_unable_to_reboot_toast">無法重新啟動進入 Recovery</string>
   <string name="confirm_delete_dialog_title">刪除檔案</string>
+  <string name="confirm_delete_dialog_title_tv">按下以從內部儲存空間移除所有已下載的更新</string>
   <string name="confirm_delete_dialog_message">刪除已選取的更新檔案？</string>
   <string name="confirm_delete_all_dialog_message">刪除所有已下載的更新檔案？</string>
   <string name="delete_single_update_success_message">更新「<xliff:g id="filename">%s</xliff:g>」已刪除</string>
