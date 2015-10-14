@@ -138,7 +138,8 @@ public class Utils {
         // Add the update folder/file name
         String primaryStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath();
         // If data media rewrite the path to bypass the sd card fuse layer and trigger uncrypt
-        String directPath = Environment.getMediaStorageDirectory().getAbsolutePath();
+        String directPath = Environment.maybeTranslateEmulatedPathToInternal(
+                new File(primaryStoragePath)).getAbsolutePath();
         String updatePath = Environment.isExternalStorageEmulated() ? directPath :
                 primaryStoragePath;
         String cmd = "echo '--update_package=" + updatePath + "/" + Constants.UPDATES_FOLDER + "/"
