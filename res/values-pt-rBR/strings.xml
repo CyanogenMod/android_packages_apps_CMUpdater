@@ -55,10 +55,10 @@
   <string name="apply_update_dialog_title">Aplicar atualização</string>
   <string name="apply_update_dialog_text">Vocês está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.
 
-Se você pressionar Atualizar, o dispositivo irá reiniciar no modo de recuperação e instalar a atualização.
+Se você pressionar Atualizar, o dispositivo irá reiniciar no modo de Recuperação e instalar a atualização.
 
-        
-Note: Esta função requer um modo de recuperação compatível ou as atualizações terão de ser instalas manualmente.</string>
+
+AVISO: Esta função requer uma Recuperação compatível ou as atualizações terão de ser instaladas manualmente.</string>
   <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar para a recuperação</string>
   <string name="confirm_delete_dialog_title">Excluir arquivo</string>
   <string name="confirm_delete_dialog_title_tv">Clique para remover todas as atualizações baixadas que estão no armazenamento interno</string>
