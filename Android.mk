@@ -12,11 +12,15 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v17-leanback \
     volley
 
+LOCAL_JAVA_LIBRARIES := org.apache.http.legacy
+
 LOCAL_RESOURCE_DIR := \
     $(TOP)/frameworks/support/v17/leanback/res \
+    $(TOP)/frameworks/support/v7/recyclerview/res \
     $(LOCAL_PATH)/res
 
-LOCAL_AAPT_FLAGS := --auto-add-overlay --extra-packages android.support.v17.leanback
+LOCAL_AAPT_FLAGS := --auto-add-overlay --extra-packages android.support.v17.leanback \
+                    --extra-packages android.support.v7.recyclerview
 
 LOCAL_PACKAGE_NAME := CMUpdater
 
