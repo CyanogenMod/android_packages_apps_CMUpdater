@@ -1,3 +1,7 @@
 -keep class com.cyanogenmod.updater.UpdatesSettings {
   *;
 }
+
+# Needed when building against the Marshmallow SDK
+-dontwarn com.android.**
+-dontwarn android.support.**
