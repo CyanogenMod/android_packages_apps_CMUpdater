@@ -95,7 +95,7 @@ public class DownloadService extends IntentService
     }
 
     private UpdatesJsonObjectRequest buildRequest(String sourceIncremental) {
-        URI requestUri = URI.create(getServerUri() + "/v1/build/get_delta");
+        URI requestUri = URI.create(getServerUri());
         UpdatesJsonObjectRequest request;
 
         // Set request body
