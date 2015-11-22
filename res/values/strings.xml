@@ -50,6 +50,10 @@
     <string name="not_action_download">Download</string>
     <string name="data_connection_required">A data connection is required.</string>
 
+    <!-- Permission check -->
+    <string name="permission_not_granted_dialog_title">Permission not granted</string>
+    <string name="permission_not_granted_dialog_message">The permission to write to external storage was not granted. Cannot download update.</string>
+
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">Cancel download</string>
     <string name="confirm_download_cancelation_dialog_message">Cancel the current download?</string>
