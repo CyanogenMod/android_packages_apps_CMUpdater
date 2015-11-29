@@ -10,6 +10,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v7-recyclerview \
     android-support-v13 \
     android-support-v17-leanback \
+    org.cyanogenmod.platform.internal \
     volley
 
 LOCAL_RESOURCE_DIR := \

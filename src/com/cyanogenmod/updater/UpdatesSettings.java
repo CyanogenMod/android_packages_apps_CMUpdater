@@ -44,8 +44,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/*import com.android.internal.util.cm.ScreenType;*/
-
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.State;
 import com.cyanogenmod.updater.misc.UpdateInfo;
@@ -53,6 +51,8 @@ import com.cyanogenmod.updater.receiver.DownloadReceiver;
 import com.cyanogenmod.updater.service.UpdateCheckService;
 import com.cyanogenmod.updater.utils.UpdateFilter;
 import com.cyanogenmod.updater.utils.Utils;
+
+import cyanogenmod.util.ScreenType;
 
 import java.io.File;
 import java.io.IOException;
@@ -238,9 +238,9 @@ public class UpdatesSettings extends PreferenceActivity implements
         super.onResume();
 
         // If running on a phone, remove padding around the listview
-        /*if (!ScreenType.isTablet(this)) {
+        if (!ScreenType.isTablet(this)) {
             getListView().setPadding(0, 0, 0, 0);
-        }*/
+        }
     }
 
     @Override
