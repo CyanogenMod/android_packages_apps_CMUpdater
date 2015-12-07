@@ -12,4 +12,7 @@
   <plurals name="not_new_updates_found_body">
     <item quantity="other"><xliff:g id="count">%d</xliff:g> bản cập nhật có sẵn</item>
   </plurals>
+  <plurals name="not_additional_count">
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> nữa</item>
+  </plurals>
 </resources>
