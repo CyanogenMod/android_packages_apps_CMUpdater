@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Nouvelles mises à jour</string>
   <string name="not_action_download">Télécharger</string>
   <string name="data_connection_required">Une connexion internet est nécessaire.</string>
+  <string name="permission_not_granted_dialog_title">Autorisation non accordée</string>
+  <string name="permission_not_granted_dialog_message">L\'autorisation d\'écriture sur le stockage externe n\'a pas été accordée. La mise à jour ne peut pas être téléchargée.</string>
   <string name="confirm_download_cancelation_dialog_title">Annuler le téléchargement</string>
   <string name="confirm_download_cancelation_dialog_message">Annuler le téléchargement en cours\u00A0?</string>
   <string name="download_cancelled">Téléchargement annulé</string>

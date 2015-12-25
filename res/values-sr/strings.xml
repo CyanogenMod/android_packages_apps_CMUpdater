@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Нова ажурирања</string>
   <string name="not_action_download">Преузимање</string>
   <string name="data_connection_required">Неопходна је веза за пренос података.</string>
+  <string name="permission_not_granted_dialog_title">Није добијена дозвола</string>
+  <string name="permission_not_granted_dialog_message">Дозвола за писање на спољно складиште није одобрена. Није могуће скинути ажурирање.</string>
   <string name="confirm_download_cancelation_dialog_title">Откажи преузимање</string>
   <string name="confirm_download_cancelation_dialog_message">Откажи тренутно преузимање?</string>
   <string name="download_cancelled">Преузимање je отказано</string>

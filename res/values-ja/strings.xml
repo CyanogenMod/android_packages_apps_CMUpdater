@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">新しいアップデート</string>
   <string name="not_action_download">ダウンロード</string>
   <string name="data_connection_required">データ接続が必要です。</string>
+  <string name="permission_not_granted_dialog_title">権限が許可されていません</string>
+  <string name="permission_not_granted_dialog_message">外部ストレージの書き込み権限が許可されていないため、アップデートをダウンロードできません。</string>
   <string name="confirm_download_cancelation_dialog_title">ダウンロードをキャンセル</string>
   <string name="confirm_download_cancelation_dialog_message">このダウンロードをキャンセルしますか？</string>
   <string name="download_cancelled">ダウンロードをキャンセルしました</string>

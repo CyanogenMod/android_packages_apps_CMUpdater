@@ -15,12 +15,14 @@
   <string name="menu_refresh">Refrescar</string>
   <string name="menu_delete_all">Desaniciar descargues</string>
   <string name="menu_system_info">Información del sistema</string>
+  <string name="menu_system_info_tv">Información del sistema: Primi pa refrescar la llista d\'anovamientos</string>
   <string name="dialog_ok">Aceutar</string>
   <string name="dialog_cancel">Encaboxar</string>
   <string name="dialog_update">Anovar</string>
   <string name="dialog_close">Zarrar</string>
   <string name="available_updates_title">Anovamientos disponibles</string>
   <string name="no_available_updates_intro">Nun s\'atoparon anovamientos na cabera comprobación. Calca nel botón Refrescar pa comprobar si hai anovamientos nuevos.</string>
+  <string name="no_available_updates_intro_tv">La cabera comprobación nun alcontró anovamientos. Pa comprobar anovamientos, clic en «información del sistema»</string>
   <string name="new_update_summary">Nuevu</string>
   <string name="downloaded_update_summary">Descargáu</string>
   <string name="installed_update_summary">Instaláu</string>
@@ -54,6 +56,7 @@
   <string name="apply_update_dialog_text">Va aniciase\'l procesu d\'anovar a la versión <xliff:g id="filename">%s</xliff:g>.\n\nCalcando sobre \u00ABAnovar\u00BB, el preséu va reaniciase pa instalar l\'anovamientu.\n\nAvisu: Ye necesario disponer d\'un recovery compatible pa una instalación desatendida.</string>
   <string name="apply_unable_to_reboot_toast">Imposible reaniciar en mou recovery</string>
   <string name="confirm_delete_dialog_title">Desaniciar ficheru</string>
+  <string name="confirm_delete_dialog_title_tv">Clic pa desaniciar del almacenamientu int. los anovamientos</string>
   <string name="confirm_delete_dialog_message">¿Desaniciar l\'anovamientu descargáu?</string>
   <string name="confirm_delete_all_dialog_message">¿Desaniciar tolos anovamientos descargaos?</string>
   <string name="delete_single_update_success_message">Anovamientu <xliff:g id="filename">%s</xliff:g> desaniciáu</string>

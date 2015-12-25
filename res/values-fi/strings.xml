@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Uudet päivitykset</string>
   <string name="not_action_download">Lataa</string>
   <string name="data_connection_required">Verkkoyhteys tarvitaan.</string>
+  <string name="permission_not_granted_dialog_title">Käyttöoikeutta ei ole myönnetty</string>
+  <string name="permission_not_granted_dialog_message">Oikeutta kirjoittaa ulkoiseen tallennustilaan ei ollut myönnetty. Päivitystä ei voida ladata.</string>
   <string name="confirm_download_cancelation_dialog_title">Peruuta lataus</string>
   <string name="confirm_download_cancelation_dialog_message">Peruuta nykyinen lataus?</string>
   <string name="download_cancelled">Lataus peruttu</string>

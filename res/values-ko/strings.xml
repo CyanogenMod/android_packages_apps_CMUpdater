@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">새 업데이트</string>
   <string name="not_action_download">다운로드</string>
   <string name="data_connection_required">데이터 연결이 필요합니다.</string>
+  <string name="permission_not_granted_dialog_title">권한이 부여되지 않았습니다</string>
+  <string name="permission_not_granted_dialog_message">외부 저장 장치에 쓰기 권한이 부여되지 않았습니다. 업데이트를 다운로드 할 수 없습니다.</string>
   <string name="confirm_download_cancelation_dialog_title">다운로드 취소</string>
   <string name="confirm_download_cancelation_dialog_message">현재 다운로드를 취소하시겠습니까?</string>
   <string name="download_cancelled">다운로드 취소됨</string>

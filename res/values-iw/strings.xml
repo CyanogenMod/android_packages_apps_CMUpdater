@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">עדכונים חדשים</string>
   <string name="not_action_download">הורדה</string>
   <string name="data_connection_required">נדרש חיבור נתונים.</string>
+  <string name="permission_not_granted_dialog_title">הרשאה לא ניתנה</string>
+  <string name="permission_not_granted_dialog_message">ההרשאה לכתיבה לאחסון חיצוני לא ניתנה. לא ניתן להוריד את העדכון.</string>
   <string name="confirm_download_cancelation_dialog_title">בטל הורדה</string>
   <string name="confirm_download_cancelation_dialog_message">לבטל את ההורדה הנוכחית?</string>
   <string name="download_cancelled">ההורדה בוטלה</string>

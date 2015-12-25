@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Noves actualitzacions</string>
   <string name="not_action_download">Descarrega</string>
   <string name="data_connection_required">Fa falta una connexió de dades.</string>
+  <string name="permission_not_granted_dialog_title">Permís no otorgat</string>
+  <string name="permission_not_granted_dialog_message">El permís per escriure en un emmagatzematge extern no ha estat otorgat. No es pot descarregar l\'actualització.</string>
   <string name="confirm_download_cancelation_dialog_title">Cancel·la descàrrega</string>
   <string name="confirm_download_cancelation_dialog_message">Cancel·lar la descàrrega actual?</string>
   <string name="download_cancelled">Descàrrega cancel·lada</string>

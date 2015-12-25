@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">新的更新</string>
   <string name="not_action_download">下载</string>
   <string name="data_connection_required">需要数据连接。</string>
+  <string name="permission_not_granted_dialog_title">未授予权限</string>
+  <string name="permission_not_granted_dialog_message">未被授予写入外部存储的权限。无法下载更新。</string>
   <string name="confirm_download_cancelation_dialog_title">取消下载</string>
   <string name="confirm_download_cancelation_dialog_message">取消当前的下载？</string>
   <string name="download_cancelled">下载已取消</string>

@@ -9,65 +9,8 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">تحديث CM</string>
-  <string name="display_name">التحديثات</string>
-  <string name="unknown">غير معروف</string>
-  <string name="menu_refresh">تحديث</string>
-  <string name="menu_delete_all">حذف التنزيلات</string>
-  <string name="menu_system_info">معلومات النظام</string>
   <string name="menu_system_info_tv">معلومات النظام: انقر لتحديث قائمة التحديثات</string>
-  <string name="dialog_ok">موافق</string>
-  <string name="dialog_cancel">الغاء</string>
-  <string name="dialog_update">تحديث</string>
-  <string name="dialog_close">أغلق</string>
-  <string name="available_updates_title">التحديثات المتوفرة</string>
-  <string name="no_available_updates_intro">الفخ الأخير لم يجد أية تحديثات متوفرة. للبحث عن التحديثات الجديدة يدوياً، استخدم زر التحديث.</string>
   <string name="no_available_updates_intro_tv">المسح الأخير لم يجد أية تحديثات متوفرة. للبحث عن التحديثات الجديدة يدوياً، استخدم زر ’معلومات النظام‘.</string>
-  <string name="new_update_summary">جديد</string>
-  <string name="downloaded_update_summary">تم التنزيل</string>
-  <string name="installed_update_summary">مثبت</string>
-  <string name="update_check_title">التحقق من وجود تحديثات</string>
-  <string name="check_manual">يدوي</string>
-  <string name="check_on_boot">في كل تشغيل</string>
-  <string name="check_twice_daily">مرتين يوميا</string>
-  <string name="check_daily">يومياً</string>
-  <string name="check_weekly">أسبوعياً</string>
-  <string name="check_bi_weekly">مرتين أسبوعيا</string>
-  <string name="check_monthly">شهرياً</string>
-  <string name="checking_for_updates">التحقق من وجود تحديثات</string>
-  <string name="no_updates_found">لا توجد تحديثات جديدة</string>
-  <string name="update_check_failed">فشل التحقق من التحديث. الرجاء التحقق من اتصال الإنترنت الخاص بك وحاول مرة أخرى لاحقاً.</string>
-  <string name="not_new_updates_found_ticker">تتوفر تحديثات جديدة</string>
-  <string name="not_new_updates_found_title">تحديثات جديدة</string>
-  <string name="not_action_download">تحميل</string>
-  <string name="data_connection_required">مطلوب اتصال بيانات.</string>
-  <string name="confirm_download_cancelation_dialog_title">إلغاء التحميل</string>
-  <string name="confirm_download_cancelation_dialog_message">إلغاء التحميل الحالي؟</string>
-  <string name="download_cancelled">إلغاء التحميل</string>
-  <string name="download_already_running">يتم بالفعل تشغيل التحميل</string>
-  <string name="unable_to_download_file">غير قادر على تحميل ملف التحديث</string>
-  <string name="download_not_found">لم يتم العثور على تحميل</string>
-  <string name="not_download_success">التحديث تم تحميلها بنجاح</string>
-  <string name="not_download_failure">تحميل التحديث فشل</string>
-  <string name="not_action_install_update">إعادة تشغيل وتثبيت</string>
-  <string name="not_download_install_notice">تم بنجاح تحميل تحديث<xliff:g id="filename">%s</xliff:g> عند لمس \'إعادة التشغيل وتثبيت\'، الجهاز سيتم إعادة تشغيل لتثبيت التحديث. \n\n ملاحضة: ركفري متوافقة مطلوب من أجل التثبيت يعمل بشكل تلقائي.</string>
-  <string name="md5_verification_failed">فشل التحقق من MD5</string>
-  <string name="apply_update_dialog_title">تطبيق التحديث</string>
-  <string name="apply_update_dialog_text">أنت على وشك الترقية إلى<xliff:g id="filename">%s</xliff:g>.\n\n لك اضغط على التحديث، الجهاز سيقوم بإعادة تشغيل نفسها في وضع الركفري\n\n ملاحضة: تتطلب هذه الميزة استرداد متوافقة، أو سوف تحتاج إلى التحديثات ليتم تثبيتها يدوياً.</string>
-  <string name="apply_unable_to_reboot_toast">غير قادر على إعادة التسغيل إلى الركفري</string>
-  <string name="confirm_delete_dialog_title">حذف الملف</string>
   <string name="confirm_delete_dialog_title_tv">انقر لإزالة كافة التحديثات التي تم تحميلها من سعة التخزين الداخلية</string>
-  <string name="confirm_delete_dialog_message">حذف ملف التحديث المحدد؟</string>
-  <string name="confirm_delete_all_dialog_message">حذف جميع ملفات التحديث التي تم تنزيلها؟</string>
-  <string name="delete_single_update_success_message">تحديث <xliff:g id="filename">%s</xliff:g> حذف</string>
-  <string name="delete_updates_failure_message">حدث خطأ أثناء حذف ملف التحديث</string>
-  <string name="delete_updates_noFolder_message">لم يتم العثور على المجلد التحديث</string>
-  <string name="delete_updates_success_message">حذف كافة التحديثات المحملة</string>
-  <string name="sysinfo_device">الجهاز:</string>
-  <string name="sysinfo_running">يعمل:</string>
   <string name="sysinfo_update_channel">قناة التحديث:</string>
-  <string name="sysinfo_last_check">الاختيار الأخير:</string>
-  <string name="no_changelog_alert">لا تغيير المتاحة</string>
-  <string name="changelog_dialog_title">سجل التغير</string>
-  <string name="loading_changelog">تحميل\u2026</string>
 </resources>

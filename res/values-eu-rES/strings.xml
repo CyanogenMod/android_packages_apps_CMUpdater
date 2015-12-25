@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Eguneraketa berriak</string>
   <string name="not_action_download">Deskarga</string>
   <string name="data_connection_required">Datu konexio bat beharrezkoa da.</string>
+  <string name="permission_not_granted_dialog_title">Baimena ukatuta</string>
+  <string name="permission_not_granted_dialog_message">Kanpo biltegiratzera idazteko baimena ukatu da. Ezin da eguneraketa deskargatu.</string>
   <string name="confirm_download_cancelation_dialog_title">Utzi deskarga</string>
   <string name="confirm_download_cancelation_dialog_message">Utzi uneko deskarga?</string>
   <string name="download_cancelled">Deskarga utzi da</string>
@@ -52,7 +54,7 @@
   <string name="not_action_install_update">Berrabiarazi eta instalatu</string>
   <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> eguneraketa ondo deskargatu da. \'Berrabiarazi eta instalatu\' sakatuz, gailua eguneraketa instalatzeko berrabiaraziko da.\n\nOharra: Ardura behar ez duen instalazio baterako berreskuratze aplikazio bateragarri bat beharrezkoa da.</string>
   <string name="md5_verification_failed">MD5 berrespenak huts egin du</string>
-  <string name="apply_update_dialog_title">Eguneraketa ezarri</string>
+  <string name="apply_update_dialog_title">Aplikatu eguneraketa</string>
   <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> bertsioa instalatzera zoaz.\n\nEguneratu sakatzean, gailua  berreskuratze moduan berrabiaraziko da eguneraketa instalatzeko.\n\nOharra: Berreskuratze aplikazio bateragarri bat behar du ezaugarri honek, bestela eguneraketak eskuz instalatu beharko dira.</string>
   <string name="apply_unable_to_reboot_toast">Ezin izan da berreskuratze moduan berrabiarazi</string>
   <string name="confirm_delete_dialog_title">Ezabatu fitxategia</string>

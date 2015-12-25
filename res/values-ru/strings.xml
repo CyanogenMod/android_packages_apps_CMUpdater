@@ -24,7 +24,7 @@
   <string name="no_available_updates_intro">Установлена последняя версия CyanogenMod. Нажмите кнопку «Проверить», чтобы выполнить поиск доступных обновлений.</string>
   <string name="no_available_updates_intro_tv">Установлена последняя версия CyanogenMod. Нажмите кнопку «Сведения о системе», чтобы выполнить поиск доступных обновлений.</string>
   <string name="new_update_summary">Новое</string>
-  <string name="downloaded_update_summary">Загружено</string>
+  <string name="downloaded_update_summary">Скачано на устройство</string>
   <string name="installed_update_summary">Установлено</string>
   <string name="update_check_title">Проверка обновлений</string>
   <string name="check_manual">Вручную</string>
@@ -41,13 +41,15 @@
   <string name="not_new_updates_found_title">Обновления CyanogenMod</string>
   <string name="not_action_download">Загрузить</string>
   <string name="data_connection_required">Необходимо интернет-подключение</string>
+  <string name="permission_not_granted_dialog_title">Доступ запрещён</string>
+  <string name="permission_not_granted_dialog_message">Нет разрешения записи на внешний носитель. Не удается загрузить обновление.</string>
   <string name="confirm_download_cancelation_dialog_title">Отменить загрузку</string>
   <string name="confirm_download_cancelation_dialog_message">Отменить текущую загрузку?</string>
   <string name="download_cancelled">Загрузка отменена</string>
   <string name="download_already_running">Загрузка уже выполняется</string>
   <string name="unable_to_download_file">Не удалось загрузить файл обновления</string>
   <string name="download_not_found">Обновление не найдено</string>
-  <string name="not_download_success">Обновление загружено</string>
+  <string name="not_download_success">Обновление системы скачано</string>
   <string name="not_download_failure">Ошибка загрузки обновления</string>
   <string name="not_action_install_update">Перезагрузить и установить</string>
   <string name="not_download_install_notice">Обновление «<xliff:g id="filename">%s</xliff:g>» успешно загружено. Нажмите «Перезагрузить и установить», чтобы выполнить его установку.</string>

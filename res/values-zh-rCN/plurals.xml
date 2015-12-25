@@ -13,6 +13,6 @@
     <item quantity="other"><xliff:g id="count">%d</xliff:g> 个更新可下载</item>
   </plurals>
   <plurals name="not_additional_count">
-    <item quantity="other">+ <xliff:g id="count">%d</xliff:g> 更多</item>
+    <item quantity="other">+ <xliff:g id="count">%d</xliff:g> 个更多</item>
   </plurals>
 </resources>

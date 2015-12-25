@@ -15,12 +15,14 @@
   <string name="menu_refresh">Yenilə</string>
   <string name="menu_delete_all">Endirmələri sil</string>
   <string name="menu_system_info">Sistem məlumatı</string>
+  <string name="menu_system_info_tv">Sistem məlumatı: Yeniləmə siyahısını təzələmək üçün klikləyin</string>
   <string name="dialog_ok">Oldu</string>
   <string name="dialog_cancel">İmtina</string>
   <string name="dialog_update">Yenilə</string>
   <string name="dialog_close">Bağla</string>
   <string name="available_updates_title">Yeniləmələr mövcuddur</string>
   <string name="no_available_updates_intro">Son yoxlamadan sonra yeniləmə tapılmadı. Yeniləmələri əllə yoxlamaq üçün Yenilə düyməsindən istifadə edin.</string>
+  <string name="no_available_updates_intro_tv">Son yoxlamada yeniləmə tapılmadı. Yeniləmələri əllə yoxlamaq üçün \"Sistem məlumatı\"na klikləyin.</string>
   <string name="new_update_summary">Yeni</string>
   <string name="downloaded_update_summary">Endirildi</string>
   <string name="installed_update_summary">Quraşdırılıb</string>
@@ -54,6 +56,7 @@
   <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> yeniləməsi ediləcək.\n\nYeniləyə basanda cihaz yeniləməni quraşdırmaq üçün bərpa rejimində yenidən başlayacaq.\n\nQeyd: Bu özəlliyin uyğun bir Bərpa mühitinə ehtiyacı var, əks halda yeniləmələr əllə quraşdırılmalıdır.</string>
   <string name="apply_unable_to_reboot_toast">Bərpa rejimi üçün yenidən başladıla bilmədi</string>
   <string name="confirm_delete_dialog_title">Faylı sil</string>
+  <string name="confirm_delete_dialog_title_tv">Endirilmiş bütün yeniləmələri daxili yaddaşdan silmək üçün klikləyin</string>
   <string name="confirm_delete_dialog_message">Seçilmiş yeniləmə faylı silinsin?</string>
   <string name="confirm_delete_all_dialog_message">Bütün endirilmiş yeniləmələr silinsin?</string>
   <string name="delete_single_update_success_message"><xliff:g id="filename">%s</xliff:g> yeniləmə faylı silindi</string>
