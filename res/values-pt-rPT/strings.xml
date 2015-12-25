@@ -12,17 +12,17 @@
   <string name="app_name">Atualizador CM</string>
   <string name="display_name">Atualizações</string>
   <string name="unknown">Desconhecido</string>
-  <string name="menu_refresh">Procurar</string>
+  <string name="menu_refresh">Atualizar</string>
   <string name="menu_delete_all">Eliminar transferências</string>
   <string name="menu_system_info">Informações do sistema</string>
-  <string name="menu_system_info_tv">Informações do sistema: clique para atualizar a lista</string>
+  <string name="menu_system_info_tv">Informações do sistema: toque para atualizar a lista</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Cancelar</string>
   <string name="dialog_update">Atualizar</string>
   <string name="dialog_close">Fechar</string>
   <string name="available_updates_title">Atualizações disponíveis</string>
   <string name="no_available_updates_intro">A última verificação não encontrou atualizações disponíveis. Para verificar manualmente, utilize o botão Procurar.</string>
-  <string name="no_available_updates_intro_tv">O última verificação não encontrou quaisquer atualizações disponíveis. Para verificar novas atualizações manualmente, clique em \'Informações de sistema\'.</string>
+  <string name="no_available_updates_intro_tv">A última verificação não encontrou atualizações disponíveis. Para verificar novas atualizações manualmente, toque em \'Informações de sistema\'.</string>
   <string name="new_update_summary">Nova</string>
   <string name="downloaded_update_summary">Transferida</string>
   <string name="installed_update_summary">Instalada</string>
@@ -44,21 +44,21 @@
   <string name="confirm_download_cancelation_dialog_title">Cancelar transferências</string>
   <string name="confirm_download_cancelation_dialog_message">Deseja cancelar a transferência atual?</string>
   <string name="download_cancelled">Transferência cancelada</string>
-  <string name="download_already_running">Já está uma transferência em curso</string>
+  <string name="download_already_running">Já existe uma transferência em curso</string>
   <string name="unable_to_download_file">Não foi possível transferir o ficheiro de atualização</string>
   <string name="download_not_found">Transferência não disponível</string>
   <string name="not_download_success">O ficheiro de atualização foi transferido com sucesso</string>
   <string name="not_download_failure">Não foi possível transferir o ficheiro de atualização</string>
   <string name="not_action_install_update">Reiniciar e instalar</string>
-  <string name="not_download_install_notice">A atualização <xliff:g id="filename">%s</xliff:g> foi transferida com sucesso. Quando pressionar \'Reiniciar e instalar\', o dispositivo reiniciar-se-à para instalar a atualização.\n\nNota: É necessária uma Recuperação compatível para que a instalação seja automática.</string>
+  <string name="not_download_install_notice">A atualização <xliff:g id="filename">%s</xliff:g> foi transferida com sucesso. Quando pressionar \'Reiniciar e instalar\', o dispositivo reiniciar-se-á para instalar a atualização.\n\nNota: É necessária uma Recuperação compatível para que a instalação seja automática.</string>
   <string name="md5_verification_failed">A verificação MD5 do ficheiro falhou</string>
   <string name="apply_update_dialog_title">Instalar atualização</string>
   <string name="apply_update_dialog_text">Está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.\n\nSe carregar em Atualizar, o dispositivo irá reiniciar e atualizar automaticamente.\n\nNota: É necessário um modo de recuperação compatível para que a atualização seja feita automaticamente.</string>
   <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar no modo de recuperação</string>
   <string name="confirm_delete_dialog_title">Eliminar ficheiro</string>
-  <string name="confirm_delete_dialog_title_tv">Clique para remover do armazenamento interno todas as atualizações transferidas</string>
-  <string name="confirm_delete_dialog_message">Deseja eliminar o ficheiro selecionado?</string>
-  <string name="confirm_delete_all_dialog_message">Eliminar todos os ficheiros transferidos?</string>
+  <string name="confirm_delete_dialog_title_tv">Clique para apagar do armazenamento interno todas as atualizações transferidas</string>
+  <string name="confirm_delete_dialog_message">Deseja eliminar o ficheiro de atualizações selecionado?</string>
+  <string name="confirm_delete_all_dialog_message">Eliminar todos os ficheiros de atualização transferidos?</string>
   <string name="delete_single_update_success_message">A atualização <xliff:g id="filename">%s</xliff:g> foi eliminada</string>
   <string name="delete_updates_failure_message">Ocorreu um problema ao eliminar o ficheiro</string>
   <string name="delete_updates_noFolder_message">Localização das atualizações não encontrada</string>
