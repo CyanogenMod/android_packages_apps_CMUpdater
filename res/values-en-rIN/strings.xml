@@ -15,12 +15,14 @@
   <string name="menu_refresh">Refresh</string>
   <string name="menu_delete_all">Delete downloads</string>
   <string name="menu_system_info">System info</string>
+  <string name="menu_system_info_tv">System information: Click to refresh updates list</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Cancel</string>
   <string name="dialog_update">Update</string>
   <string name="dialog_close">Close</string>
   <string name="available_updates_title">Available updates</string>
   <string name="no_available_updates_intro">The last check did not find any available updates. To manually check for new updates, use the Refresh button.</string>
+  <string name="no_available_updates_intro_tv">The last check did not find any available updates. To manually check for new updates, click \'System information\'.</string>
   <string name="new_update_summary">New</string>
   <string name="downloaded_update_summary">Downloaded</string>
   <string name="installed_update_summary">Installed</string>
@@ -54,6 +56,7 @@
   <string name="apply_update_dialog_text">You are about to upgrade to <xliff:g id="filename">%s</xliff:g>.\n\nIf you press Update, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
   <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
   <string name="confirm_delete_dialog_title">Delete file</string>
+  <string name="confirm_delete_dialog_title_tv">Click to remove all downloaded updates from internal storage</string>
   <string name="confirm_delete_dialog_message">Delete the selected update file?</string>
   <string name="confirm_delete_all_dialog_message">Delete all downloaded update files?</string>
   <string name="delete_single_update_success_message">Update <xliff:g id="filename">%s</xliff:g> deleted</string>

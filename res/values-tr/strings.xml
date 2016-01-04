@@ -22,7 +22,7 @@
   <string name="dialog_close">Kapat</string>
   <string name="available_updates_title">İndirilebilir güncellemeler</string>
   <string name="no_available_updates_intro">Son kontrolde güncelleme bulunamadı. Yeni güncellemeleri elle kontrol etmek için Yenile düğmesini kullanın.</string>
-  <string name="no_available_updates_intro_tv">Son kontrolde güncelleme bulunmadı. Yeni güncellemeleri kontrol etmek için, \'Sistem bilgisini\'ni tıklayın.</string>
+  <string name="no_available_updates_intro_tv">Son kontrolde güncelleme bulunmadı. Yeni güncellemeleri kontrol etmek için \'Sistem bilgisini\'ni tıklayın.</string>
   <string name="new_update_summary">Yeni</string>
   <string name="downloaded_update_summary">İndirildi</string>
   <string name="installed_update_summary">Kuruldu</string>
@@ -49,7 +49,7 @@
   <string name="download_not_found">İndirme bulunamadı</string>
   <string name="not_download_success">Güncelleme başarıyla indirildi</string>
   <string name="not_download_failure">Güncelleme indirme başarısız oldu</string>
-  <string name="not_action_install_update">Yeniden başlat ve Yükle</string>
+  <string name="not_action_install_update">Yeniden başlat ve yükle</string>
   <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> güncellemesi başarıyla indirildi. \'Yeniden başlat ve Yükle\' ye dokunduğunuzda, cihaz güncellemeyi yüklemek için kendini yeniden başlatacak.\n\nNot: Yüklemenin otomatik çalışması için uygun bir Kurtarma ortamı gereklidir.</string>
   <string name="md5_verification_failed">MD5 doğrulama hatası</string>
   <string name="apply_update_dialog_title">Güncellemeyi uygula</string>
@@ -60,8 +60,6 @@
   <string name="confirm_delete_dialog_message">Seçilen güncelleme dosyası silinsin mi?</string>
   <string name="confirm_delete_all_dialog_message">İndirilen tüm güncelleme dosyalarını silmek istiyor musunuz?</string>
   <string name="delete_single_update_success_message"><xliff:g id="filename">%s</xliff:g> güncellemesi silindi</string>
-  <string name="delete_updates_failure_message">Güncelleme dosyasını silerken hata oluştu</string>
-  <string name="delete_updates_noFolder_message">Güncelleme klasörü bulunamadı</string>
   <string name="delete_updates_success_message">İndirilen tüm güncellemeler silindi</string>
   <string name="sysinfo_device">Cihaz:</string>
   <string name="sysinfo_running">Çalışan:</string>
