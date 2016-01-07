@@ -24,6 +24,10 @@ import com.cyanogenmod.updater.receiver.DownloadNotifier;
 import com.cyanogenmod.updater.utils.MD5;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 public class DownloadCompleteIntentService extends IntentService {
     private DownloadManager mDm;
@@ -64,27 +68,38 @@ public class DownloadCompleteIntentService extends IntentService {
                 displayErrorResult(updateIntent, R.string.unable_to_download_file);
             }
 
-            String completedFileFullPath = partialFileFullPath.replace(".partial", "");
+            String destName = new File(partialFileFullPath).getName().replace(".partial", "");
+            String destPath = Utils.makeUpdateFolder().getPath() + "/" + destName;
+            File destFile = new File(destPath);
 
-            File partialFile = new File(partialFileFullPath);
-            File updateFile = new File(completedFileFullPath);
-            partialFile.renameTo(updateFile);
+            try {
+                FileOutputStream outStream = new FileOutputStream(destFile);
+
+                ParcelFileDescriptor file = mDm.openDownloadedFile(id);
+                FileInputStream inStream = new FileInputStream(file.getFileDescriptor());
+
+                FileChannel inChannel = inStream.getChannel();
+                FileChannel outChannel = outStream.getChannel();
+                inChannel.transferTo(0, inChannel.size(), outChannel);
+            } catch (IOException e) {
+                displayErrorResult(updateIntent, R.string.unable_to_download_file);
+                return;
+            } finally {
+                mDm.remove(id);
+            }
 
             // Start the MD5 check of the downloaded file
-            if (MD5.checkMD5(downloadedMD5, updateFile)) {
+            if (MD5.checkMD5(downloadedMD5, destFile)) {
                 // We passed. Bring the main app to the foreground and trigger download completed
                 updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_ID, id);
                 updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_PATH,
-                        completedFileFullPath);
+                        destPath);
                 updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_INCREMENTAL_FOR,
                         incrementalFor);
-                displaySuccessResult(updateIntent, updateFile);
+                displaySuccessResult(updateIntent, destFile);
             } else {
-                // We failed. Clear the file and reset everything
-                mDm.remove(id);
-
-                if (updateFile.exists()) {
-                    updateFile.delete();
+                if (destFile.exists()) {
+                    destFile.delete();
                 }
                 displayErrorResult(updateIntent, R.string.md5_verification_failed);
             }
