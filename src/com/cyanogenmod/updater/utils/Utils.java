@@ -42,9 +42,8 @@ public class Utils {
         // this class is not supposed to be instantiated
     }
 
-    public static File makeUpdateFolder() {
-        return new File(Environment.getExternalStorageDirectory(),
-                Constants.UPDATES_FOLDER);
+    public static File makeUpdateFolder(Context context) {
+        return context.getDir(Constants.UPDATES_FOLDER, Context.MODE_PRIVATE);
     }
 
     public static void cancelNotification(Context context) {
@@ -113,13 +112,8 @@ public class Utils {
     }
 
     public static void triggerUpdate(Context context, String updateFileName) throws IOException {
-        // Add the update folder/file name
-        File primaryStorage = Environment.getExternalStorageDirectory();
-        // If the path is emulated, translate it, if not return the original path
-        String updatePath = Environment.maybeTranslateEmulatedPathToInternal(
-                primaryStorage).getAbsolutePath();
         // Create the path for the update package
-        String updatePackagePath = updatePath + "/" + Constants.UPDATES_FOLDER + "/" + updateFileName;
+        String updatePackagePath = makeUpdateFolder(context).getPath() + "/" + updateFileName;
 
         // Reboot into recovery and trigger the update
         android.os.RecoverySystem.installPackage(context, new File(updatePackagePath));

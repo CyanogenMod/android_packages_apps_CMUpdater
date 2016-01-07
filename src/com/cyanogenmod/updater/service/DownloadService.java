@@ -146,7 +146,6 @@ public class DownloadService extends IntentService
             request.addRequestHeader("User-Agent", userAgent);
         }
         request.setTitle(getString(R.string.app_name));
-        request.setDestinationUri(Uri.parse(localFilePath));
         request.setAllowedOverRoaming(false);
         request.setVisibleInDownloadsUi(false);
 
@@ -206,14 +205,7 @@ public class DownloadService extends IntentService
     }
 
     private File getUpdateDirectory() {
-        // If directory doesn't exist, create it
-        File directory = Utils.makeUpdateFolder();
-        if (!directory.exists()) {
-            directory.mkdirs();
-            Log.d(TAG, "UpdateFolder created");
-        }
-
-        return directory;
+        return Utils.makeUpdateFolder(getApplicationContext());
     }
 
     @Override
