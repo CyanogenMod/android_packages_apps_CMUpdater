@@ -69,7 +69,8 @@ public class DownloadCompleteIntentService extends IntentService {
             }
 
             String destName = new File(partialFileFullPath).getName().replace(".partial", "");
-            String destPath = Utils.makeUpdateFolder().getPath() + "/" + destName;
+            String destPath = Utils.makeUpdateFolder(getApplicationContext()).getPath() + "/"
+                    + destName;
             File destFile = new File(destPath);
 
             try {

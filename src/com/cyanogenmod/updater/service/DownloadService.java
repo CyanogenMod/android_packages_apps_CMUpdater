@@ -205,14 +205,7 @@ public class DownloadService extends IntentService
     }
 
     private File getUpdateDirectory() {
-        // If directory doesn't exist, create it
-        File directory = Utils.makeUpdateFolder();
-        if (!directory.exists()) {
-            directory.mkdirs();
-            Log.d(TAG, "UpdateFolder created");
-        }
-
-        return directory;
+        return Utils.makeUpdateFolder(getApplicationContext());
     }
 
     @Override
