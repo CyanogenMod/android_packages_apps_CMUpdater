@@ -146,7 +146,6 @@ public class DownloadService extends IntentService
             request.addRequestHeader("User-Agent", userAgent);
         }
         request.setTitle(getString(R.string.app_name));
-        request.setDestinationUri(Uri.parse(localFilePath));
         request.setAllowedOverRoaming(false);
         request.setVisibleInDownloadsUi(false);
 
