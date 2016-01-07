@@ -19,7 +19,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
@@ -33,8 +32,6 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
@@ -63,8 +60,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class UpdatesSettings extends PreferenceActivity implements
-        OnPreferenceChangeListener, UpdatePreference.OnReadyListener, UpdatePreference.OnActionListener,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        OnPreferenceChangeListener, UpdatePreference.OnReadyListener, UpdatePreference.OnActionListener {
     private static String TAG = "UpdatesSettings";
 
     // intent extras
@@ -81,8 +77,6 @@ public class UpdatesSettings extends PreferenceActivity implements
     private static final int MENU_REFRESH = 0;
     private static final int MENU_DELETE_ALL = 1;
     private static final int MENU_SYSTEM_INFO = 2;
-
-    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
     private SharedPreferences mPrefs;
     private ListPreference mUpdateCheck;
@@ -331,19 +325,7 @@ public class UpdatesSettings extends PreferenceActivity implements
         // We have a match, get ready to trigger the download
         mDownloadingPreference = pref;
 
-        // But check permissions first - download will be started in the callback
-        int permissionCheck = ContextCompat.checkSelfPermission(pref.getContext(),
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            // permission already granted, start the download
-            startDownload();
-        } else {
-            // permission not granted, request it from the user
-            ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-        }
-
+        startDownload();
     }
 
     private Runnable mUpdateProgress = new Runnable() {
@@ -725,31 +707,6 @@ public class UpdatesSettings extends PreferenceActivity implements
 
         // Update the list
         updateLayout();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[],
-                                           int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
-                // if request is cancelled, the result arrays are empty
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay!
-                    startDownload();
-                } else {
-                    // permission was not granted, cannot download
-                    mDownloadingPreference = null;
-                    new AlertDialog.Builder(this)
-                            .setTitle(R.string.permission_not_granted_dialog_title)
-                            .setMessage(R.string.permission_not_granted_dialog_message)
-                            .setPositiveButton(R.string.dialog_ok, null)
-                            .show();
-                    return;
-                }
-                break;
-            }
-        }
     }
 
     private void startDownload() {
