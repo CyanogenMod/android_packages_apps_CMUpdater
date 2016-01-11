@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Új frissítések</string>
   <string name="not_action_download">Letöltés</string>
   <string name="data_connection_required">Adatkapcsolat szükséges.</string>
+  <string name="permission_not_granted_dialog_title">Az engedély nincs megadva</string>
+  <string name="permission_not_granted_dialog_message">A külső tároló írási engedély nem került megadásra. A frissítés letöltése nem lehetséges.</string>
   <string name="confirm_download_cancelation_dialog_title">Megszakítja a letöltést?</string>
   <string name="confirm_download_cancelation_dialog_message">Később folytatni tudja a letöltést, amennyiben ugyanezt a frissítést választja újra</string>
   <string name="download_cancelled">Letöltés megszakítva</string>

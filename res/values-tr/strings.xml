@@ -22,7 +22,7 @@
   <string name="dialog_close">Kapat</string>
   <string name="available_updates_title">İndirilebilir güncellemeler</string>
   <string name="no_available_updates_intro">Son kontrolde güncelleme bulunamadı. Yeni güncellemeleri elle kontrol etmek için Yenile düğmesini kullanın.</string>
-  <string name="no_available_updates_intro_tv">Son kontrolde güncelleme bulunmadı. Yeni güncellemeleri kontrol etmek için, \'Sistem bilgisini\'ni tıklayın.</string>
+  <string name="no_available_updates_intro_tv">Son kontrolde güncelleme bulunmadı. Yeni güncellemeleri kontrol etmek için \'Sistem bilgisini\'ni tıklayın.</string>
   <string name="new_update_summary">Yeni</string>
   <string name="downloaded_update_summary">İndirildi</string>
   <string name="installed_update_summary">Kuruldu</string>
@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Yeni güncellemeler</string>
   <string name="not_action_download">İndir</string>
   <string name="data_connection_required">Veri bağlantısı gerekli</string>
+  <string name="permission_not_granted_dialog_title">İzin verilmedi</string>
+  <string name="permission_not_granted_dialog_message">Harici depolama birimine yazma izni verilmedi. Güncelleme indirilemiyor.</string>
   <string name="confirm_download_cancelation_dialog_title">İndirmeyi iptal et</string>
   <string name="confirm_download_cancelation_dialog_message">Devam eden indirme iptal edilsin mi?</string>
   <string name="download_cancelled">İndirme iptal edildi</string>
@@ -49,7 +51,7 @@
   <string name="download_not_found">İndirme bulunamadı</string>
   <string name="not_download_success">Güncelleme başarıyla indirildi</string>
   <string name="not_download_failure">Güncelleme indirme başarısız oldu</string>
-  <string name="not_action_install_update">Yeniden başlat ve Yükle</string>
+  <string name="not_action_install_update">Yeniden başlat ve yükle</string>
   <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> güncellemesi başarıyla indirildi. \'Yeniden başlat ve Yükle\' ye dokunduğunuzda, cihaz güncellemeyi yüklemek için kendini yeniden başlatacak.\n\nNot: Yüklemenin otomatik çalışması için uygun bir Kurtarma ortamı gereklidir.</string>
   <string name="md5_verification_failed">MD5 doğrulama hatası</string>
   <string name="apply_update_dialog_title">Güncellemeyi uygula</string>

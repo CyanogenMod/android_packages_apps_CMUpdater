@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Nieuwe updates</string>
   <string name="not_action_download">Downloaden</string>
   <string name="data_connection_required">Gegevensverbinding vereist</string>
+  <string name="permission_not_granted_dialog_title">Machtiging niet verleend</string>
+  <string name="permission_not_granted_dialog_message">Machtigingen om naar de externe opslag te schrijven werd niet verleend. Kan update niet downloaden.</string>
   <string name="confirm_download_cancelation_dialog_title">Download annuleren</string>
   <string name="confirm_download_cancelation_dialog_message">Weet u zeker dat u de download wilt annuleren?</string>
   <string name="download_cancelled">Download geannuleeerd</string>

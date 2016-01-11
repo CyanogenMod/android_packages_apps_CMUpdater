@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Neue Updates</string>
   <string name="not_action_download">Herunterladen</string>
   <string name="data_connection_required">Eine Datenverbindung wird benötigt</string>
+  <string name="permission_not_granted_dialog_title">Berechtigung nicht erteilt</string>
+  <string name="permission_not_granted_dialog_message">Die Berechtigung, den externen Speicher zu beschreiben, wurde nicht erteilt. Das Update kann nicht heruntergeladen werden.</string>
   <string name="confirm_download_cancelation_dialog_title">Download abbrechen</string>
   <string name="confirm_download_cancelation_dialog_message">Soll der Download abgebrochen werden?</string>
   <string name="download_cancelled">Download abgebrochen</string>

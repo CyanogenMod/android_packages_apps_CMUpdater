@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Novas atualizações</string>
   <string name="not_action_download">Baixar</string>
   <string name="data_connection_required">Uma conexão de dados é necessária</string>
+  <string name="permission_not_granted_dialog_title">Permissão não concedida</string>
+  <string name="permission_not_granted_dialog_message">A permissão para escrever no armazenamento externo não foi concedida. Não é possível baixar a atualização.</string>
   <string name="confirm_download_cancelation_dialog_title">Cancelar download</string>
   <string name="confirm_download_cancelation_dialog_message">Cancelar o download atual?</string>
   <string name="download_cancelled">Download foi cancelado</string>

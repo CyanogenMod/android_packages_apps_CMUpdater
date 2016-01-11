@@ -9,21 +9,26 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="app_name">Actualizador de CM</string>
   <string name="display_name">Actualizaciones</string>
   <string name="unknown">Desconocida</string>
+  <string name="menu_refresh">Actualizar</string>
   <string name="menu_delete_all">Borrar descargas</string>
   <string name="menu_system_info">Información del sistema</string>
+  <string name="menu_system_info_tv">Información del sistema: haz clic para actualizar la lista</string>
   <string name="dialog_ok">Aceptar</string>
   <string name="dialog_cancel">Cancelar</string>
   <string name="dialog_update">Actualizar</string>
   <string name="dialog_close">Cerrar</string>
   <string name="available_updates_title">Actualizaciones disponibles</string>
+  <string name="no_available_updates_intro">No se encontraron actualizaciones en la última comprobación. Pulsa el botón Actualizar para comprobar si existen nuevas actualizaciones.</string>
   <string name="no_available_updates_intro_tv">La última comprobación no encontró ninguna actualización disponible. Para comprobar manualmente nuevas actualizaciones, haz clic en \'Información del sistema\'.</string>
   <string name="new_update_summary">Nueva</string>
   <string name="downloaded_update_summary">Descargada</string>
   <string name="installed_update_summary">Instalada</string>
   <string name="update_check_title">Comprobar actualizaciones</string>
   <string name="check_manual">Manualmente</string>
+  <string name="check_on_boot">En cada arranque</string>
   <string name="check_twice_daily">Dos veces al día</string>
   <string name="check_daily">Diariamente</string>
   <string name="check_weekly">Semanalmente</string>
@@ -31,6 +36,7 @@
   <string name="check_monthly">Mensualmente</string>
   <string name="checking_for_updates">Comprobando actualizaciones</string>
   <string name="no_updates_found">No hay nuevas actualizaciones</string>
+  <string name="update_check_failed">Error en la comprobación de actualizaciones. Por favor, verifica la conexión a Internet e inténtalo nuevamente.</string>
   <string name="not_new_updates_found_ticker">Hay actualizaciones disponibles</string>
   <string name="not_new_updates_found_title">Nuevas actualizaciones</string>
   <string name="not_action_download">Descargar</string>
@@ -43,11 +49,13 @@
   <string name="download_already_running">Hay una descarga en curso</string>
   <string name="unable_to_download_file">Error al descargar la actualización</string>
   <string name="download_not_found">Descarga no encontrada</string>
-  <string name="not_download_success">Actualización descargada</string>
+  <string name="not_download_success">Actualización descargada correctamente</string>
   <string name="not_download_failure">Actualización no descargada</string>
   <string name="not_action_install_update">Reiniciar e instalar</string>
+  <string name="not_download_install_notice">La actualización <xliff:g id="filename">%s</xliff:g> fue descargada correctamente. Pulsando sobre \'Reiniciar e instalar\', el dispositivo se reiniciará para instalar la actualización.\n\nAviso: Será necesario disponer de un Recovery compatible para una instalación desatendida.</string>
   <string name="md5_verification_failed">Falló la verificación MD5</string>
   <string name="apply_update_dialog_title">Aplicar actualización</string>
+  <string name="apply_update_dialog_text">Se va a proceder a actualizar a la versión <xliff:g id="filename">%s</xliff:g>.\n\nPulsando sobre Actualizar, el dispositivo se reiniciará para instalar la actualización.\n\nAviso: Será necesario disponer de un recovery compatible para una instalación desatendida.</string>
   <string name="apply_unable_to_reboot_toast">No se puede reiniciar en modo recovery</string>
   <string name="confirm_delete_dialog_title">Eliminar archivo</string>
   <string name="confirm_delete_dialog_title_tv">Haz clic para eliminar todas las actualizaciones descargadas en el almacenamiento interno</string>
@@ -58,6 +66,10 @@
   <string name="delete_updates_noFolder_message">No se encontró la carpeta de actualizaciones</string>
   <string name="delete_updates_success_message">Todas las actualizaciones descargadas fueron borradas</string>
   <string name="sysinfo_device">Dispositivo:</string>
+  <string name="sysinfo_running">Ejecutando:</string>
+  <string name="sysinfo_update_channel">Canal de actualización:</string>
   <string name="sysinfo_last_check">Última comprobación:</string>
   <string name="no_changelog_alert">No hay registro de cambios</string>
+  <string name="changelog_dialog_title">Registro de cambios</string>
+  <string name="loading_changelog">Cargando\u2026</string>
 </resources>

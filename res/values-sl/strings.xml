@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Nove posodobitve</string>
   <string name="not_action_download">Prenesi</string>
   <string name="data_connection_required">Zahtevana je podatkovna povezava.</string>
+  <string name="permission_not_granted_dialog_title">Dovoljenje ni odobreno</string>
+  <string name="permission_not_granted_dialog_message">Dovoljenje za pisanje na zunanjo pomnilniško napravo ni bilo odobreno. Posodobitve ni mogoče prejeti.</string>
   <string name="confirm_download_cancelation_dialog_title">Prekliči prenos</string>
   <string name="confirm_download_cancelation_dialog_message">Prekliči trenutni prenos?</string>
   <string name="download_cancelled">Prenos preklican</string>
