@@ -60,6 +60,8 @@
   <string name="confirm_delete_dialog_message">Seçilen güncelleme dosyası silinsin mi?</string>
   <string name="confirm_delete_all_dialog_message">İndirilen tüm güncelleme dosyalarını silmek istiyor musunuz?</string>
   <string name="delete_single_update_success_message"><xliff:g id="filename">%s</xliff:g> güncellemesi silindi</string>
+  <string name="delete_updates_failure_message">Güncelleme dosyasını silerken hata oluştu</string>
+  <string name="delete_updates_noFolder_message">Güncelleme klasörü bulunamadı</string>
   <string name="delete_updates_success_message">İndirilen tüm güncellemeler silindi</string>
   <string name="sysinfo_device">Cihaz:</string>
   <string name="sysinfo_running">Çalışan:</string>

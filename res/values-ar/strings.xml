@@ -45,6 +45,8 @@
   <string name="confirm_download_cancelation_dialog_message">إلغاء التنزيل الحالي؟</string>
   <string name="download_cancelled">تم إلغاء التنزيل</string>
   <string name="download_already_running">يتم بالفعل تشغيل التحميل</string>
+  <string name="unable_to_download_file">يتعذر تحميل ملف التحديث</string>
+  <string name="download_not_found">عدم العثور على تنزيل</string>
   <string name="not_download_success">التحديث تم تحميله بنجاح</string>
   <string name="not_download_failure">فشل تحميل التحديث</string>
   <string name="not_action_install_update">إعادة تمهيد وتثبيت</string>
@@ -53,10 +55,19 @@
   <string name="apply_update_dialog_title">تطبيق التحديث</string>
   <string name="apply_update_dialog_text">أنت على وشك الترقية إلى<xliff:g id="filename">%s</xliff:g>.\n\n إذا قمت بالضغط على التحديث، الجهاز سيقوم بإعادة تشغيل نفسه في وضع الاسترداد لتثبيت التحديث.\n\n ملاحظة: تتطلب هذه الميزة عملية استرداد أو تحديثات متوافقة والتي سيلزم تثبيتها يدوياً.</string>
   <string name="apply_unable_to_reboot_toast">تعذر إعادة التمهيد في عملية الاسترداد</string>
+  <string name="confirm_delete_dialog_title">حذف الملف</string>
   <string name="confirm_delete_dialog_title_tv">انقر لإزالة كافة التحديثات التي تم تحميلها من سعة التخزين الداخلية</string>
   <string name="confirm_delete_dialog_message">حذف ملف التحديث المحدد؟</string>
   <string name="confirm_delete_all_dialog_message">حذف جميع ملفات التحديث التي تم تنزيلها؟</string>
   <string name="delete_single_update_success_message">تحديث <xliff:g id="filename">%s</xliff:g> تم الحذف</string>
   <string name="delete_updates_failure_message">حدث خطأ أثناء حذف ملف التحديث</string>
+  <string name="delete_updates_noFolder_message">تعذر العثور على مجلد التحديث</string>
+  <string name="delete_updates_success_message">حذف كل التحديثات التي تم تنزيلها</string>
+  <string name="sysinfo_device">الجهاز:</string>
+  <string name="sysinfo_running">تشغيل:</string>
   <string name="sysinfo_update_channel">قناة التحديث:</string>
+  <string name="sysinfo_last_check">التحقق الأخير:</string>
+  <string name="no_changelog_alert">لا يتاح تغيير للسجل</string>
+  <string name="changelog_dialog_title">سجل التغير</string>
+  <string name="loading_changelog">تحميل\u2026</string>
 </resources>
