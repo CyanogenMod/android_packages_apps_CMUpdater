@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Nové aktualizace</string>
   <string name="not_action_download">Stáhnout</string>
   <string name="data_connection_required">Je vyžadováno připojení k internetu</string>
+  <string name="permission_not_granted_dialog_title">Oprávnění není uděleno</string>
+  <string name="permission_not_granted_dialog_message">Oprávnění pro zápis na externí úložiště nebylo uděleno. Nelze stahovat aktualizace.</string>
   <string name="confirm_download_cancelation_dialog_title">Zrušit stahování</string>
   <string name="confirm_download_cancelation_dialog_message">Opravdu chcete zrušit aktuální stahování?</string>
   <string name="download_cancelled">Stahování zrušeno</string>

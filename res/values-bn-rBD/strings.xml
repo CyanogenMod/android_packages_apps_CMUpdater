@@ -15,6 +15,7 @@
   <string name="menu_refresh">রিফ্রেশ</string>
   <string name="menu_delete_all">ডাউনলোড সমূহ মুছে ফেলুন</string>
   <string name="menu_system_info">সিস্টেমের তথ্য</string>
+  <string name="menu_system_info_tv">সিস্টেমের তথ্য: নতুন আধুনিকীকরণের তালিকা পেতে ক্লিক করুন</string>
   <string name="dialog_ok">ওকে</string>
   <string name="dialog_cancel">বাতিল</string>
   <string name="dialog_update">আধুনিকীকরণ</string>
@@ -54,6 +55,7 @@
   <string name="apply_update_dialog_text">আপনি আধুনিকীকরণ করতে চলেছেন <xliff:g id="filename">%s</xliff:g>।\n\nআপনি যদি আধুনিকীকরণ চাপেন, ডিভাইসটি নিজেই পুনরায় চালু হবে পুনরুদ্ধারের মোডে আধুনিকীকরণ ইনস্টল করতে।\n\nদ্রষ্টব্যঃ এই বৈশিষ্ট্যটির একটি সামঞ্জস্যপূর্ণ পুনরুদ্ধারের প্রয়োজন হবে অথবা ম্যানুয়ালী ইনস্টল করতে হবে।</string>
   <string name="apply_unable_to_reboot_toast">পুনরুদ্ধারে পুনরায় চালু করতে অক্ষম</string>
   <string name="confirm_delete_dialog_title">ফাইল ডিলিট করুন</string>
+  <string name="confirm_delete_dialog_title_tv">অভ্যন্তরীণ ভাণ্ডার থেকে ডাউনলোড করা সকল আধুনিকীকরণ অপসারণ করতে ক্লিক করুন</string>
   <string name="confirm_delete_dialog_message">নির্বাচিত আধুনিকীকরণ ফাইল গুলি মুছে দিতে চান?</string>
   <string name="confirm_delete_all_dialog_message">সকল ডাউনলোড করা আধুনিকীকরণ ফাইল মুছে ফেলা হবে?</string>
   <string name="delete_single_update_success_message">আধুনিকীকরণ <xliff:g id="filename">%s</xliff:g> মুছে ফেলা হয়েছে</string>

@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Nye oppdateringer</string>
   <string name="not_action_download">Last ned</string>
   <string name="data_connection_required">En datatilkobling er nødvendig.</string>
+  <string name="permission_not_granted_dialog_title">Ingen tilgang</string>
+  <string name="permission_not_granted_dialog_message">Tillatelsen skrive til ekstern lagring ble ikke innvilget. Kan ikke laste ned oppdateringen.</string>
   <string name="confirm_download_cancelation_dialog_title">Avbryt nedlasting</string>
   <string name="confirm_download_cancelation_dialog_message">Du er i ferd med å avbryte pågående nedlasting, er du sikker?</string>
   <string name="download_cancelled">Nedlasting avbrutt</string>
