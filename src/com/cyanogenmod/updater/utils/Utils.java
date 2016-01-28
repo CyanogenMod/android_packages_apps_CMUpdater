@@ -43,7 +43,7 @@ public class Utils {
     }
 
     public static File makeUpdateFolder() {
-        return new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
+        return new File(Environment.getExternalStorageDirectory(),
                 Constants.UPDATES_FOLDER);
     }
 
@@ -136,12 +136,10 @@ public class Utils {
            */
 
         // Add the update folder/file name
-        String primaryStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        File primaryStorage = Environment.getExternalStorageDirectory();
         // If data media rewrite the path to bypass the sd card fuse layer and trigger uncrypt
-        String directPath = Environment.maybeTranslateEmulatedPathToInternal(
-                new File(primaryStoragePath)).getAbsolutePath();
-        String updatePath = Environment.isExternalStorageEmulated() ? directPath :
-                primaryStoragePath;
+        String updatePath = Environment.maybeTranslateEmulatedPathToInternal(
+                primaryStorage).getAbsolutePath();
         String cmd = "echo '--update_package=" + updatePath + "/" + Constants.UPDATES_FOLDER + "/"
                 + updateFileName + "' >> /cache/recovery/command\n";
         os.write(cmd.getBytes());
