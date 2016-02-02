@@ -15,7 +15,7 @@
   <string name="menu_refresh">Osveži</string>
   <string name="menu_delete_all">Izbriši prenose</string>
   <string name="menu_system_info">Sistemski podatki</string>
-  <string name="menu_system_info_tv">Sistemski podatki: Kliknite, da osvežite seznam posodobitev</string>
+  <string name="menu_system_info_tv">Sistemski podatki: kliknite, da osvežite seznam posodobitev</string>
   <string name="dialog_ok">V redu</string>
   <string name="dialog_cancel">Prekliči</string>
   <string name="dialog_update">Posodobi</string>
