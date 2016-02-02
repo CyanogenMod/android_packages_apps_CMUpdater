@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Nye opdateringer</string>
   <string name="not_action_download">Download</string>
   <string name="data_connection_required">Der kræves en dataforbindelse.</string>
+  <string name="permission_not_granted_dialog_title">Adgang nægtet</string>
+  <string name="permission_not_granted_dialog_message">Tilladelse til at skrive til ekstern lagerplads er ikke givet. Kan ikke hente opdateringen.</string>
   <string name="confirm_download_cancelation_dialog_title">Annuller download</string>
   <string name="confirm_download_cancelation_dialog_message">Du skal til at annullere den nuværende download, OK at fortsætte?</string>
   <string name="download_cancelled">Download annulleret</string>

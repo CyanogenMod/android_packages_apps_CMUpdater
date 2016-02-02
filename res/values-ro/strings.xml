@@ -39,6 +39,8 @@
   <string name="not_new_updates_found_title">Actualizări noi</string>
   <string name="not_action_download">Descarcă</string>
   <string name="data_connection_required">Este necesară o conexiune de date.</string>
+  <string name="permission_not_granted_dialog_title">Permisiune neacordată</string>
+  <string name="permission_not_granted_dialog_message">Permisiunea de a scrie pe stocarea externă neacordată. Nu se poate descărca actualizarea.</string>
   <string name="confirm_download_cancelation_dialog_title">Revocați descărcarea</string>
   <string name="confirm_download_cancelation_dialog_message">Intenționați să revocați descărcarea curentă?</string>
   <string name="download_cancelled">Descărcare revocată</string>
