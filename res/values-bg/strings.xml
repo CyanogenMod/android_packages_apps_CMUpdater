@@ -21,12 +21,12 @@
   <string name="dialog_update">Актуализирай</string>
   <string name="dialog_close">Затваряне</string>
   <string name="available_updates_title">Налични актуализации</string>
-  <string name="no_available_updates_intro">При последната проверка не са намери нови актуализации. Натиснете бутона \"Опресняване\" за да стартирате нова проверка.</string>
-  <string name="no_available_updates_intro_tv">При последната проверка не са намери нови актуализации. Натиснете бутона \"Информация за системата\" за да стартирате нова проверка.</string>
+  <string name="no_available_updates_intro">При последната проверка не са открити нови актуализации. Натиснете бутона \"Опресняване\" за да стартирате нова проверка.</string>
+  <string name="no_available_updates_intro_tv">При последната проверка не са открити нови актуализации. Натиснете бутона \"Информация за системата\" за да стартирате нова проверка.</string>
   <string name="new_update_summary">Нова</string>
   <string name="downloaded_update_summary">Свалена</string>
   <string name="installed_update_summary">Инсталирана</string>
-  <string name="update_check_title">Проверяване за актуализации</string>
+  <string name="update_check_title">Проверка за актуализации</string>
   <string name="check_manual">Ръчно</string>
   <string name="check_on_boot">При всяко включване</string>
   <string name="check_twice_daily">Два пъти дневно</string>
@@ -34,7 +34,7 @@
   <string name="check_weekly">Ежеседмично</string>
   <string name="check_bi_weekly">Два пъти седмично</string>
   <string name="check_monthly">Ежемесечно</string>
-  <string name="checking_for_updates">Проверяване за актуализации</string>
+  <string name="checking_for_updates">Проверка за актуализации</string>
   <string name="no_updates_found">Няма нови актуализации</string>
   <string name="update_check_failed">Проверката за актуализации се провали. Моля проверете връзката с интернет и опитайте отново по-късно.</string>
   <string name="not_new_updates_found_ticker">Налични са нови актуализации</string>

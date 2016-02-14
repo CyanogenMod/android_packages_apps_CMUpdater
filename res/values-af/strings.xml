@@ -41,6 +41,8 @@
   <string name="not_new_updates_found_title">Nuwe opgraderings</string>
   <string name="not_action_download">Laai af</string>
   <string name="data_connection_required">\'n Data verbinding word benodig.</string>
+  <string name="permission_not_granted_dialog_title">Toegang geweier</string>
+  <string name="permission_not_granted_dialog_message">Die toegang om na eksterne spasie te skryf is geweier. Kan nie aflaai nie.</string>
   <string name="confirm_download_cancelation_dialog_title">Kanselleer aflaai</string>
   <string name="confirm_download_cancelation_dialog_message">Die huidige aflaai gaan gekanselleer work, Ok om voort te gaan?</string>
   <string name="download_cancelled">Aflaai is gekanselleer</string>

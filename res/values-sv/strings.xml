@@ -42,6 +42,7 @@
   <string name="not_action_download">Ladda ned</string>
   <string name="data_connection_required">Du måste ha tillgång till Internet.</string>
   <string name="permission_not_granted_dialog_title">Behörighet ej beviljad</string>
+  <string name="permission_not_granted_dialog_message">Behörighet att skriva till extern lagring beviljades inte. Kan inte ladda ner uppdatering.</string>
   <string name="confirm_download_cancelation_dialog_title">Avbryt nedladdning</string>
   <string name="confirm_download_cancelation_dialog_message">Avbryt nedladdning?</string>
   <string name="download_cancelled">Nedladdningen avbruten</string>
