@@ -40,14 +40,14 @@
   <string name="not_new_updates_found_ticker">Neue Updates sind verfügbar</string>
   <string name="not_new_updates_found_title">Neue Updates</string>
   <string name="not_action_download">Herunterladen</string>
-  <string name="data_connection_required">Eine Datenverbindung wird benötigt</string>
+  <string name="data_connection_required">Eine Datenverbindung wird benötigt.</string>
   <string name="confirm_download_cancelation_dialog_title">Download abbrechen</string>
-  <string name="confirm_download_cancelation_dialog_message">Soll der Download abgebrochen werden?</string>
+  <string name="confirm_download_cancelation_dialog_message">Soll der aktuelle Download abgebrochen werden?</string>
   <string name="download_cancelled">Download abgebrochen</string>
-  <string name="download_already_running">Es ist bereits ein Download aktiv</string>
+  <string name="download_already_running">Es ist bereits ein Download aktiv.</string>
   <string name="unable_to_download_file">Update konnte nicht heruntergeladen werden</string>
   <string name="download_not_found">Download nicht gefunden</string>
-  <string name="not_download_success">Update-Download abgeschlossen</string>
+  <string name="not_download_success">Update erfolgreich heruntergeladen</string>
   <string name="not_download_failure">Update-Download fehlgeschlagen</string>
   <string name="not_action_install_update">Neu starten und installieren</string>
   <string name="not_download_install_notice">Das Update <xliff:g id="filename">%s</xliff:g> wurde erfolgreich heruntergeladen. Beim Berühren von \"Neu starten und installieren\" wird das Gerät neu gestartet, um das Update zu installieren.\n\nHinweis: Für die Installation wird ein kompatibles Recovery-System benötigt.</string>
@@ -57,10 +57,10 @@
   <string name="apply_unable_to_reboot_toast">Neustart in den Recovery-Modus nicht möglich</string>
   <string name="confirm_delete_dialog_title">Datei löschen</string>
   <string name="confirm_delete_dialog_title_tv">Berühren, um alle heruntergeladenen Updates aus dem internen Speicher zu löschen</string>
-  <string name="confirm_delete_dialog_message">Soll die heruntergeladene Update-Datei gelöscht werden?</string>
+  <string name="confirm_delete_dialog_message">Soll die ausgewählte Update-Datei gelöscht werden?</string>
   <string name="confirm_delete_all_dialog_message">Sollen alle heruntergeladenen Update-Dateien gelöscht werden?</string>
   <string name="delete_single_update_success_message">Update <xliff:g id="filename">%s</xliff:g> gelöscht</string>
-  <string name="delete_updates_failure_message">Beim Löschen der Datei ist ein Fehler aufgetreten</string>
+  <string name="delete_updates_failure_message">Beim Löschen der Datei ist ein Fehler aufgetreten.</string>
   <string name="delete_updates_noFolder_message">Update-Verzeichnis nicht gefunden</string>
   <string name="delete_updates_success_message">Alle heruntergeladenen Update-Dateien wurden gelöscht</string>
   <string name="sysinfo_device">Gerät:</string>
@@ -69,5 +69,5 @@
   <string name="sysinfo_last_check">Letzte Prüfung:</string>
   <string name="no_changelog_alert">Kein Änderungsprotokoll verfügbar</string>
   <string name="changelog_dialog_title">Änderungsprotokoll</string>
-  <string name="loading_changelog">Wird geladen\u2026</string>
+  <string name="loading_changelog">Laden\u2026</string>
 </resources>

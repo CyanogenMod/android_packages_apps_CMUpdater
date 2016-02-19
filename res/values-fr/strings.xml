@@ -22,13 +22,13 @@
   <string name="dialog_close">Fermer</string>
   <string name="available_updates_title">Mises à jour disponibles</string>
   <string name="no_available_updates_intro">Aucune mise à jour disponible lors de la dernière vérification. Pour vérifier manuellement les mises à jour, utilisez le bouton Actualiser.</string>
-  <string name="no_available_updates_intro_tv">Aucune mise à jour n\'a été trouvée lors de la dernière vérification. Pour vérifier manuellement, appuyez sur \"Information système\".</string>
+  <string name="no_available_updates_intro_tv">Aucune mise à jour n\'a été trouvée lors de la dernière vérification. Pour vérifier manuellement, appuyez sur « Information système ».</string>
   <string name="new_update_summary">Nouvelle</string>
   <string name="downloaded_update_summary">Téléchargée</string>
   <string name="installed_update_summary">Installée</string>
-  <string name="update_check_title">Fréquence de vérification</string>
-  <string name="check_manual">Manuelle</string>
-  <string name="check_on_boot">Au démarrage</string>
+  <string name="update_check_title">Rechercher des mises à jour</string>
+  <string name="check_manual">Manuellement</string>
+  <string name="check_on_boot">À chaque démarrage</string>
   <string name="check_twice_daily">Deux fois par jour</string>
   <string name="check_daily">Quotidienne</string>
   <string name="check_weekly">Hebdomadaire</string>
