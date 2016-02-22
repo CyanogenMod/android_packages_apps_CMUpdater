@@ -22,13 +22,13 @@
   <string name="dialog_close">Fermer</string>
   <string name="available_updates_title">Mises à jour disponibles</string>
   <string name="no_available_updates_intro">Aucune mise à jour disponible lors de la dernière vérification. Pour vérifier manuellement les mises à jour, utilisez le bouton Actualiser.</string>
-  <string name="no_available_updates_intro_tv">Aucune mise à jour n\'a été trouvée lors de la dernière vérification. Pour vérifier manuellement, appuyez sur \"Information système\".</string>
+  <string name="no_available_updates_intro_tv">Aucune mise à jour n\'a été trouvée lors de la dernière vérification. Pour vérifier manuellement, appuyez sur « Information système ».</string>
   <string name="new_update_summary">Nouvelle</string>
   <string name="downloaded_update_summary">Téléchargée</string>
   <string name="installed_update_summary">Installée</string>
-  <string name="update_check_title">Fréquence de vérification</string>
-  <string name="check_manual">Manuelle</string>
-  <string name="check_on_boot">Au démarrage</string>
+  <string name="update_check_title">Rechercher des mises à jour</string>
+  <string name="check_manual">Manuellement</string>
+  <string name="check_on_boot">À chaque démarrage</string>
   <string name="check_twice_daily">Deux fois par jour</string>
   <string name="check_daily">Quotidienne</string>
   <string name="check_weekly">Hebdomadaire</string>
@@ -40,25 +40,25 @@
   <string name="not_new_updates_found_ticker">De nouvelles mises à jour sont disponibles</string>
   <string name="not_new_updates_found_title">Nouvelles mises à jour</string>
   <string name="not_action_download">Télécharger</string>
-  <string name="data_connection_required">Une connexion internet est nécessaire.</string>
+  <string name="data_connection_required">Une connexion de données est nécessaire.</string>
   <string name="permission_not_granted_dialog_title">Autorisation non accordée</string>
   <string name="permission_not_granted_dialog_message">L\'autorisation d\'écriture sur le stockage externe n\'a pas été accordée. La mise à jour ne peut pas être téléchargée.</string>
   <string name="confirm_download_cancelation_dialog_title">Annuler le téléchargement</string>
-  <string name="confirm_download_cancelation_dialog_message">Annuler le téléchargement en cours\u00A0?</string>
+  <string name="confirm_download_cancelation_dialog_message">Annuler le téléchargement en cours ?</string>
   <string name="download_cancelled">Téléchargement annulé</string>
   <string name="download_already_running">Un téléchargement est déjà en cours</string>
   <string name="unable_to_download_file">Impossible de télécharger le fichier de mise à jour</string>
   <string name="download_not_found">Téléchargement introuvable</string>
-  <string name="not_download_success">Téléchargement réussi</string>
-  <string name="not_download_failure">Téléchargement échoué</string>
+  <string name="not_download_success">Téléchargement de la mise à jour réussi</string>
+  <string name="not_download_failure">Le téléchargement de la mise à jour a échoué</string>
   <string name="not_action_install_update">Redémarrer et installer</string>
-  <string name="not_download_install_notice">Téléchargement de la mise à jour <xliff:g id="filename">%s</xliff:g> réussi. Lorsque vous appuierez sur « Redémarrer et installer », votre appareil redémarrera automatiquement pour installer la mise à jour.\n\nRemarque\u00A0: Cette opération nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
+  <string name="not_download_install_notice">Téléchargement de la mise à jour <xliff:g id="filename">%s</xliff:g> réussi. Lorsque vous appuierez sur « Redémarrer et installer », votre appareil redémarrera automatiquement pour installer la mise à jour.\n\nRemarque : Cette opération nécessite un mode Récupération compatible pour que l\'installation puisse se faire automatiquement.</string>
   <string name="md5_verification_failed">La vérification de la somme de contrôle MD5 a échoué</string>
   <string name="apply_update_dialog_title">Appliquer la mise à jour</string>
-  <string name="apply_update_dialog_text">Vous êtes sur le point d\'installer <xliff:g id="filename">%s</xliff:g>.\n\nLorsque vous appuierez sur « Mettre à jour », votre appareil redémarrera automatiquement pour installer la mise à jour.\n\nRemarque\u00A0: Cette opération nécessite un recovery compatible, sinon les mises à jour devront être installées manuellement.</string>
-  <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode recovery</string>
+  <string name="apply_update_dialog_text">Vous êtes sur le point d\'installer <xliff:g id="filename">%s</xliff:g>.\n\nLorsque vous appuierez sur « Mettre à jour », votre appareil redémarrera automatiquement en mode récupération pour installer la mise à jour.\n\nRemarque\u00A0: Cette opération nécessite un mode récupération compatible, sinon les mises à jour devront être installées manuellement.</string>
+  <string name="apply_unable_to_reboot_toast">Impossible de redémarrer en mode récupération</string>
   <string name="confirm_delete_dialog_title">Supprimer le fichier</string>
-  <string name="confirm_delete_dialog_title_tv">Cliquez pour supprimer les mises à jour téléchargées du stockage interne</string>
+  <string name="confirm_delete_dialog_title_tv">Cliquer pour supprimer les mises à jour téléchargées du stockage interne</string>
   <string name="confirm_delete_dialog_message">Supprimer le fichier de mise à jour sélectionné\u00A0?</string>
   <string name="confirm_delete_all_dialog_message">Supprimer tous les fichiers de mise à jour\u00A0?</string>
   <string name="delete_single_update_success_message">Mise à jour <xliff:g id="filename">%s</xliff:g> supprimée</string>

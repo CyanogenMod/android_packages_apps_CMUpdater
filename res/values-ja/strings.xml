@@ -22,7 +22,7 @@
   <string name="dialog_close">閉じる</string>
   <string name="available_updates_title">利用可能なアップデート</string>
   <string name="no_available_updates_intro">前回の確認では利用可能なアップデートは見つかりませんでした。更新ボタンを使って新しいアップデートを手動で確認できます。</string>
-  <string name="no_available_updates_intro_tv">最後の確認では利用可能なアップデートは見つかりませんでした。新しいアップデートを手動で確認するには「システム情報」をクリックしてください。</string>
+  <string name="no_available_updates_intro_tv">最後の確認では利用可能なアップデートは見つかりませんでした。新しいアップデートを手動で確認するには[システム情報]をクリックしてください。</string>
   <string name="new_update_summary">新しいアップデート</string>
   <string name="downloaded_update_summary">ダウンロード済み</string>
   <string name="installed_update_summary">インストール済み</string>
