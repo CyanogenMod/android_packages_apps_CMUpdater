@@ -12,7 +12,7 @@
   <string name="app_name">Обновление CyanogenMod</string>
   <string name="display_name">Обновления</string>
   <string name="unknown">Неизвестно</string>
-  <string name="menu_refresh">Проверить</string>
+  <string name="menu_refresh">Обновить</string>
   <string name="menu_delete_all">Удалить загруженные</string>
   <string name="menu_system_info">Информация о системе</string>
   <string name="menu_system_info_tv">Сведения о системе: нажмите, чтобы выполнить поиск обновлений</string>
@@ -35,7 +35,7 @@
   <string name="check_bi_weekly">Раз в две недели</string>
   <string name="check_monthly">Ежемесячно</string>
   <string name="checking_for_updates">Проверка обновлений\u2026</string>
-  <string name="no_updates_found">Обновлений не найдено</string>
+  <string name="no_updates_found">Обновления не найдены</string>
   <string name="update_check_failed">Не удалось выполнить поиск обновлений. Проверьте подключение к Интернету и повторите попытку.</string>
   <string name="not_new_updates_found_ticker">Доступно обновление системы</string>
   <string name="not_new_updates_found_title">Обновления CyanogenMod</string>
@@ -52,10 +52,10 @@
   <string name="not_download_success">Обновление системы скачано</string>
   <string name="not_download_failure">Ошибка загрузки обновления</string>
   <string name="not_action_install_update">Перезагрузить и установить</string>
-  <string name="not_download_install_notice">Обновление «<xliff:g id="filename">%s</xliff:g>» успешно загружено. Нажмите «Перезагрузить и установить», чтобы выполнить его установку.</string>
+  <string name="not_download_install_notice">Обновление «<xliff:g id="filename">%s</xliff:g>» загружено. Нажмите «Перезагрузить и установить», чтобы перезагрузить устройство и выполнить установку.\n\nПримечание: для автоматической установки необходим совместимый режим восстановления.</string>
   <string name="md5_verification_failed">Не удалось выполнить проверку MD5</string>
-  <string name="apply_update_dialog_title">Подтверждение обновления</string>
-  <string name="apply_update_dialog_text">Будет выполнено обновление до версии «<xliff:g id="filename">%s</xliff:g>».\n\nПри нажатии кнопки «Обновить» устройство перезагрузится в режим восстановления для установки этого обновления. \n\nПримечание: эта функция требует совместимого Recovery. В противном случае обновление будет необходимо установить вручную.</string>
+  <string name="apply_update_dialog_title">Применение обновления</string>
+  <string name="apply_update_dialog_text">Будет выполнено обновление до версии «<xliff:g id="filename">%s</xliff:g>».\n\nПри нажатии кнопки «Обновить» устройство перезагрузится и перейдет в режим восстановления для установки этого обновления. \n\nПримечание: для этой функции необходим совместимый режим восстановления, в противном случае обновление придется установить вручную.</string>
   <string name="apply_unable_to_reboot_toast">Невозможно перезагрузиться в режим восстановления</string>
   <string name="confirm_delete_dialog_title">Удалить файл</string>
   <string name="confirm_delete_dialog_title_tv">Нажмите, чтобы удалить все загруженные обновления из внутренней памяти</string>

@@ -15,7 +15,7 @@
   <string name="menu_refresh">Kontrollera</string>
   <string name="menu_delete_all">Radera nedladdningar</string>
   <string name="menu_system_info">Systeminformation</string>
-  <string name="menu_system_info_tv">Systeminformation: Klicka för att uppdatera uppdateringslistan</string>
+  <string name="menu_system_info_tv">Systeminformation: Klicka för att ladda om uppdateringslistan</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Avbryt</string>
   <string name="dialog_update">Uppdatera</string>
