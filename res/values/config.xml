@@ -8,6 +8,6 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- CMUpdate Config Strings -->
-    <string name="conf_update_server_url_def" translatable="false">https://download.cyanogenmod.org/api</string>
+    <string name="conf_update_server_url_def" translatable="false">https://dl.dropboxusercontent.com/u/93757059/OnePlusTugaPowerCM13/ota/bacon/api.json</string>
     <string name="conf_changelog_url" translatable="false">http://localhost/changelog.xml</string>
 </resources>
