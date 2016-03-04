@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">מעדכן CM</string>
   <string name="display_name">עדכונים</string>
   <string name="unknown">לא ידוע</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">רענן</string>
   <string name="menu_delete_all">מחק הורדות</string>
   <string name="menu_system_info">מידע מערכת</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">ביטול</string>
   <string name="dialog_update">עדכן</string>
   <string name="dialog_close">סגור</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">עדכונים זמינים</string>
   <string name="no_available_updates_intro">הבדיקה האחרונה לא מצאה אף עדכון. כדי לבדוק באופן ידני, השתמש במקש \"רענן\".</string>
   <string name="no_available_updates_intro_tv">לא נמצאו עדכונים זמינים בבדיקה האחרונה. כדי לבצע בדיקה באופן ידני, לחץ על \"מידע מערכת\".</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">שבועית</string>
   <string name="check_bi_weekly">אחת לשבועיים</string>
   <string name="check_monthly">חודשית</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">מחפש עדכונים</string>
   <string name="no_updates_found">לא נמצאו עדכונים חדשים</string>
   <string name="update_check_failed">בדיקת העדכון נכשלה. בדוק את החיבור שלך לאינטרנט ונסה שוב מאוחר יותר.</string>
@@ -41,8 +45,10 @@
   <string name="not_new_updates_found_title">עדכונים חדשים</string>
   <string name="not_action_download">הורדה</string>
   <string name="data_connection_required">נדרש חיבור נתונים.</string>
+  <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">הרשאה לא ניתנה</string>
   <string name="permission_not_granted_dialog_message">ההרשאה לכתיבה לאחסון חיצוני לא ניתנה. לא ניתן להוריד את העדכון.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">בטל הורדה</string>
   <string name="confirm_download_cancelation_dialog_message">לבטל את ההורדה הנוכחית?</string>
   <string name="download_cancelled">ההורדה בוטלה</string>
@@ -53,10 +59,13 @@
   <string name="not_download_failure">הורדת העדכון נכשלה</string>
   <string name="not_action_install_update">אתחל והתקן</string>
   <string name="not_download_install_notice">העדכון <xliff:g id="filename">%s</xliff:g> הורד בהצלחה. כאשר תלחץ על \'אתחל והתקן\', המכשיר יאתחל את עצמו ויתקין את העדכון.\n\nשים לב: דרוש Recovery מתאים בשביל שההתקנה תעבוד באופן אוטומטי.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">אימות MD5 נכשל</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">החל עדכון</string>
   <string name="apply_update_dialog_text">אתה עומד לעדכן ל-<xliff:g id="filename">%s</xliff:g>.\n\nאם תלחץ על \"עדכן\", המכשיר יאתחל את עצמו למצב \"Rocovery\" על מנת להתקין את העדכון.\n\nהערה: אפשרות זו דורשת Recovery תואם, או שפעולת התקנת העדכונים תיאלץ להיעשות באופן ידני.</string>
   <string name="apply_unable_to_reboot_toast">נכשל לאתחל למצב \"Recovery\"</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">מחק קובץ</string>
   <string name="confirm_delete_dialog_title_tv">לחץ כאן כדי להסיר מהאחסון הפנימי את כל העדכונים שהורדו</string>
   <string name="confirm_delete_dialog_message">אתה עומד למחוק את הקובץ הנוכחי, לחץ על \"כן\" להמשך.</string>
@@ -65,10 +74,12 @@
   <string name="delete_updates_failure_message">אירעה שגיאה בעת הנסיון למחוק את הקובץ</string>
   <string name="delete_updates_noFolder_message">תיקיית עדכונים לא נמצאה</string>
   <string name="delete_updates_success_message">כל העדכונים שהורדו נמחקו</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">מכשיר:</string>
   <string name="sysinfo_running">מריץ:</string>
   <string name="sysinfo_update_channel">ערוץ עדכון:</string>
   <string name="sysinfo_last_check">בדיקה אחרונה:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">רשימת שינויים לא זמינה</string>
   <string name="changelog_dialog_title">רשימת שינויים</string>
   <string name="loading_changelog">טוען\u2026</string>

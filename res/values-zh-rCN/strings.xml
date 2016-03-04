@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM 更新器</string>
   <string name="display_name">更新</string>
   <string name="unknown">未知</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">刷新</string>
   <string name="menu_delete_all">删除下载</string>
   <string name="menu_system_info">系统信息</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">取消</string>
   <string name="dialog_update">更新</string>
   <string name="dialog_close">关闭</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">可用更新</string>
   <string name="no_available_updates_intro">最后一次刷新没有找到可用的更新。使用刷新按钮来手动检查更新。</string>
   <string name="no_available_updates_intro_tv">最后一次检查并没有发现任何可用的更新。要手动检查新的更新，请点击“系统信息”。</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">每周一次</string>
   <string name="check_bi_weekly">两周一次</string>
   <string name="check_monthly">每月一次</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">正在检查更新</string>
   <string name="no_updates_found">没有找到新的更新</string>
   <string name="update_check_failed">检查更新失败。 请您检查您的网络连接并稍后重试。</string>
@@ -41,8 +45,10 @@
   <string name="not_new_updates_found_title">新的更新</string>
   <string name="not_action_download">下载</string>
   <string name="data_connection_required">需要数据连接。</string>
+  <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">未授予权限</string>
   <string name="permission_not_granted_dialog_message">未被授予写入外部存储的权限。无法下载更新。</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">取消下载</string>
   <string name="confirm_download_cancelation_dialog_message">取消当前的下载？</string>
   <string name="download_cancelled">下载已取消</string>
@@ -53,10 +59,13 @@
   <string name="not_download_failure">下载更新失败</string>
   <string name="not_action_install_update">重启并安装</string>
   <string name="not_download_install_notice">更新 <xliff:g id="filename">%s</xliff:g> 已成功下载。点击“重启并安装”，设备将重新启动并安装更新。\n\n注意：自动安装过程需要一个兼容的恢复程序。</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 验证失败</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">应用更新</string>
   <string name="apply_update_dialog_text">您将要更新到 <xliff:g id="filename">%s</xliff:g>。\n\n如果您选择更新，您的设备将会重启到恢复模式并安装更新。\n\n注意：此功能需要一个兼容的恢复程序，否则您将需要手动安装更新。</string>
   <string name="apply_unable_to_reboot_toast">无法重启到恢复模式</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">删除文件</string>
   <string name="confirm_delete_dialog_title_tv">点击以移除所有已下载到内部存储的更新</string>
   <string name="confirm_delete_dialog_message">您确定要删除此更新文件？</string>
@@ -65,10 +74,12 @@
   <string name="delete_updates_failure_message">删除更新时发生错误</string>
   <string name="delete_updates_noFolder_message">未找到更新文件夹</string>
   <string name="delete_updates_success_message">所有已下载的更新文件已被删除</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">设备:</string>
   <string name="sysinfo_running">目前运行:</string>
   <string name="sysinfo_update_channel">更新通道：</string>
   <string name="sysinfo_last_check">最后一次检查时间:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">无可用的更改记录</string>
   <string name="changelog_dialog_title">更改记录</string>
   <string name="loading_changelog">正在加载\u2026</string>

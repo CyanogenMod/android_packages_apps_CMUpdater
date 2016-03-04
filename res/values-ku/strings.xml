@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM نوێکەرەوەی</string>
   <string name="display_name">نوێکردنەوەکان</string>
   <string name="unknown">نەزانراو</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">تازەکردنەوە</string>
   <string name="menu_delete_all">سڕینەوەی داگیراوەکان</string>
   <string name="menu_system_info">زانیاری سیسته‌م</string>
@@ -19,6 +21,7 @@
   <string name="dialog_cancel">پاشگەزبوونەوە</string>
   <string name="dialog_update">نوێچالاکردنی</string>
   <string name="dialog_close">داخستن</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">نوێکردنەوەکانی بەردەست</string>
   <string name="no_available_updates_intro">دوایین پشکنین هیچ نوێکردنەوەیەکی بەردەستی نەدۆزیەوە. بۆ بە دەستکاری پشکنین بۆ نوێکردنەوەکان، دوگمەی تازەکردنەوە بەکاربهێنە.</string>
   <string name="new_update_summary">نوێ</string>
@@ -32,6 +35,7 @@
   <string name="check_weekly">هەفتانە</string>
   <string name="check_bi_weekly">هه‌فتانه‌</string>
   <string name="check_monthly">مانگانە</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">پشکنین بۆ نوێکردنه‌وه‌</string>
   <string name="no_updates_found">هیچ نوێکردنه‌وه‌یه‌ک نه‌دۆزرایه‌وه‌</string>
   <string name="update_check_failed">پشکنین بۆ نوێکردنه‌وه‌ هه‌ڵه‌ی تێکه‌وت ، تکایه‌ بزانه‌ ئینته‌رنیتت هه‌یه‌ یان دواتر هه‌وڵبده‌ره‌وه‌.</string>
@@ -39,6 +43,8 @@
   <string name="not_new_updates_found_title">نوێکردنەوەی نوێ</string>
   <string name="not_action_download">داگرتن</string>
   <string name="data_connection_required">په‌یوه‌ندی داتا پێویسته‌.</string>
+  <!-- Permission check -->
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">پاشگەزبوونەی داگرتن</string>
   <string name="confirm_download_cancelation_dialog_message">لابردنی داگرتنی ئێستا؟</string>
   <string name="download_cancelled">داگرتن وه‌ستێنرا</string>
@@ -49,10 +55,13 @@
   <string name="not_download_failure">داگرتنی نوێکردنه‌وه‌ سه‌رکه‌وتوونه‌بوو</string>
   <string name="not_action_install_update">ڕیستارت کردنه‌وه‌ و دابه‌زاندن</string>
   <string name="not_download_install_notice">نوێکردنه‌وه‌ی  <xliff:g id="filename">%s</xliff:g> به‌ سه‌رکه‌وتووی داگیرا. کاتێک ده‌ستت نا به‌ \"ڕیستارت و دابه‌زاندن\"، ئه‌وه‌ ئامێره‌که‌ ڕیستارت ده‌بێته‌وه‌ و نوێکردنه‌وه‌کان داده‌به‌زێت.\n\nتێبینی:گه‌ڕانه‌وه‌یه‌کی گونجاو پێویسته‌ بۆ دابه‌زاندن بۆ کارکردنی خۆکارانه‌.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">گونجاندنی MD5 سه‌رکه‌وتوونه‌بوو</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">جێبەجێکردنی نوێکردنەوە</string>
   <string name="apply_update_dialog_text">تۆ خه‌ریکی نوێکردنه‌وه‌ی  <xliff:g id="filename">%s</xliff:g>.\n\n.ئه‌گه‌ر نوێکردنه‌وه‌ بکه‌یت.ئه‌وه‌ ئامێره‌که‌ ده‌کوژێته‌وه‌ و داده‌گیرسێته‌وه‌ و ده‌چێته‌ باری گه‌ڕانه‌وه‌ بۆ دابه‌زاندنی نوێکاری.\n\nتێبینی:پێویسته‌ گه‌ڕانه‌وه‌یه‌کی گونجاوت هه‌بێ بۆ نوێکردنه‌وه‌.</string>
   <string name="apply_unable_to_reboot_toast">ناتوانرێت بچێتە دۆخی ڕیکەڤەری</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">سڕینەوەی فایل</string>
   <string name="confirm_delete_dialog_message">سڕینەوەی فایلی دیاریکراوی نوێکردنەوە؟</string>
   <string name="confirm_delete_all_dialog_message">سڕینەوەی هەموو فایلە داگیراوەکانی نوێکردنەوە؟</string>
@@ -60,10 +69,12 @@
   <string name="delete_updates_failure_message">هەڵەیەک ڕوویدا لەکاتی سڕینەوەی فایلی نوێکردنەوەدا</string>
   <string name="delete_updates_noFolder_message">فۆڵدەری نوێکردنەوە نەدۆزرایەوە</string>
   <string name="delete_updates_success_message">هەموو نوێکردنەوە داگیراوەکان سڕانەوە</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">ئامێر:</string>
   <string name="sysinfo_running">وەشانی ئێستا:</string>
   <string name="sysinfo_update_channel">ڕێڕەوی بەڕۆژکردنەوە:</string>
   <string name="sysinfo_last_check">دواین پشکنین:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">تۆماری گۆڕانکاری لەبەردەستدا نیە</string>
   <string name="changelog_dialog_title">تۆماری گۆڕانکاری</string>
   <string name="loading_changelog">چالاکردنی\u2026</string>

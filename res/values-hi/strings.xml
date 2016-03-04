@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">सीएम अद्यतनकर्ता</string>
   <string name="display_name">अद्यतन</string>
   <string name="unknown">अज्ञात</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">ताज़ा करें</string>
   <string name="menu_delete_all">डाउनलोडों को हटाएँ</string>
   <string name="menu_system_info">सिस्टम जानकारी</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">रद्द करें</string>
   <string name="dialog_update">अद्यतन करें</string>
   <string name="dialog_close">बंद करें</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">उपलब्ध अद्यतन</string>
   <string name="no_available_updates_intro">अंतिम जाँच में कोई उपलब्ध अद्यतन नहीं मिला। नए अद्यतनों के लिए स्वयं जाँचने के लिए, ताज़ा करें बटन का उपयोग करें।</string>
   <string name="no_available_updates_intro_tv">अंतिम जाँच में कोई उपलब्ध अद्यतन नहीं मिले। नए अद्यतनों के लिए स्वयं जाँचने हेतु, \'सिस्टम जानकारी\' को क्लिक करें।</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">साप्ताहिक</string>
   <string name="check_bi_weekly">सप्ताह में दो बार</string>
   <string name="check_monthly">मासिक</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">अद्यतनों के लिए जाँचें</string>
   <string name="no_updates_found">कोई नए अद्यतन नहीं मिले</string>
   <string name="update_check_failed">अद्यतन जाँच विफल हुआ। कृपया अपने इंटरनेट कनेक्शन की जाँच करें और बाद में फिर से कोशिश करें।</string>
@@ -41,6 +45,8 @@
   <string name="not_new_updates_found_title">नए अद्यतन</string>
   <string name="not_action_download">डाउनलोड करें</string>
   <string name="data_connection_required">डेटा कनेक्शन चाहिए।</string>
+  <!-- Permission check -->
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">डाउनलोड को रद्द करें</string>
   <string name="confirm_download_cancelation_dialog_message">वर्तमान डाउनलोड को रद्द कर दें?</string>
   <string name="download_cancelled">डाउनलोड रद्द कर दिया गया</string>
@@ -51,10 +57,13 @@
   <string name="not_download_failure">अद्यतन को डाउनलोड नहीं किया जा सका</string>
   <string name="not_action_install_update">रीबूट करें और स्थापित करें</string>
   <string name="not_download_install_notice">अद्यतन <xliff:g id="filename">%s</xliff:g> सफलतापूर्वक डाउनलोड किया गया। \'रीबूट करें और स्थापित करें\' को छूने पर उपकरण रीस्टार्ट करेगा और अद्यतन को स्थापित करेगा।\n\nटिप्पणी: स्थापन तभी स्वतः काम करेगा जब संगत रिकवरी उपलब्ध हो।</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">एमडी5 सत्यापन विफल हुआ</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">अद्यतन को लागू करें</string>
   <string name="apply_update_dialog_text">आप <xliff:g id="filename">%s</xliff:g> में अद्यतन करने जा रहे हैं।\n\nयदि आप अद्यतन को दबाएँगे, तो उपकरण अद्यतन को स्थापित करने के लिए रिकवरी मोड में रीस्टार्ट करेगा।\n\nटिप्पणी: इस सुविधा के लिए संगत रिकवरी की आवश्यकता है, अन्यथा आपको स्वयं अद्यतनों को स्थापित करना पड़ेगा।</string>
   <string name="apply_unable_to_reboot_toast">रिकवरी में बूट करने में असमर्थ</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">फ़ाइल को हटाएँ</string>
   <string name="confirm_delete_dialog_title_tv">आंतरिक भंडारण से डाउनलोड किए गए सभी अद्यतनों को हटाने के लिए क्लिक करें</string>
   <string name="confirm_delete_dialog_message">चयनित अद्यतन फ़ाइल को हटा दें?</string>
@@ -63,10 +72,12 @@
   <string name="delete_updates_failure_message">अद्यतन फ़ाइल को हटाते समय त्रुटि हुई</string>
   <string name="delete_updates_noFolder_message">अद्यतन फ़ोल्डर नहीं मिला</string>
   <string name="delete_updates_success_message">डाउनलोड किए गए सभी अद्यतनों को हटा दिया गया</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">उपकरण:</string>
   <string name="sysinfo_running">इस पर चल रहा है:</string>
   <string name="sysinfo_update_channel">अद्यतन चैनल:</string>
   <string name="sysinfo_last_check">अंतिम जाँच:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">कोई परिवर्तन लॉग उपलब्ध नहीं है</string>
   <string name="changelog_dialog_title">परिवर्तन लॉग</string>
   <string name="loading_changelog">लोड कर रहे हैं\u2026</string>

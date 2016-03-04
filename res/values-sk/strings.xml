@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Aktualizácie CM</string>
   <string name="display_name">Aktualizácie</string>
   <string name="unknown">Neznáme</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Obnoviť</string>
   <string name="menu_delete_all">Vymazať prevzatia</string>
   <string name="menu_system_info">Informácie o systéme</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Zrušiť</string>
   <string name="dialog_update">Aktualizovať</string>
   <string name="dialog_close">Zavrieť</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Dostupné aktualizácie</string>
   <string name="no_available_updates_intro">Posledná kontrola nenašla žiadne dostupné aktualizácie. Použite tlačidlo Obnoviť na ručnú kontrolu nových aktualizácií.</string>
   <string name="no_available_updates_intro_tv">Posledná kontrola nenašla žiadne dostupné aktualizácie. Ak chcete ručne skontrolovať nové aktualizácie, kliknutite na položku \"Informácie o systéme\".</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Týždenne</string>
   <string name="check_bi_weekly">Raz za dva týždne</string>
   <string name="check_monthly">Mesačne</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Kontrolovanie aktualizácií</string>
   <string name="no_updates_found">Nenašli sa žiadne nové aktualizácie</string>
   <string name="update_check_failed">Kontrola aktualizácií zlyhala. Skontrolujte prosím vaše internetové pripojenie a skúste to znova neskôr.</string>
@@ -41,6 +45,8 @@
   <string name="not_new_updates_found_title">Nové aktualizácie</string>
   <string name="not_action_download">Download</string>
   <string name="data_connection_required">Vyžaduje sa dátové pripojenie.</string>
+  <!-- Permission check -->
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Zrušenie preberania</string>
   <string name="confirm_download_cancelation_dialog_message">Zrušiť aktuálne preberanie?</string>
   <string name="download_cancelled">Preberanie bolo zrušené</string>
@@ -51,10 +57,13 @@
   <string name="not_download_failure">Aktualizácia nebola úspešne prevzatá</string>
   <string name="not_action_install_update">Reštartovať a inštalovať</string>
   <string name="not_download_install_notice">Aktualizácia <xliff:g id="filename">%s</xliff:g> bola úspešne prevzatá. Kliknutím na \'Reštartovať a inštalovať\' sa zariadenie reštartuje kvôli inštalácii aktualizácie.\n\nPoznámka: Na automatickú inštaláciu sa požaduje kompatibilné Recovery.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Overenie MD5 zlyhalo</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aplikovať aktualizáciu</string>
   <string name="apply_update_dialog_text">Chystáte sa inovovať na verziu <xliff:g id="filename">%s</xliff:g>.\n\nAk stlačíte tlačidlo Aktualizovať, zariadenie sa samé reštartuje do režimu Recovery kvôli inštalácii aktualizácie.\n\nPoznámka: Táto funkcia vyžaduje kompatibilné Recovery, inak budú musieť byť aktualizácie inštalované ručne.</string>
   <string name="apply_unable_to_reboot_toast">Nemožno reštartovať do Recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Vymazať súbor</string>
   <string name="confirm_delete_dialog_title_tv">Kliknutím odstránite všetky prevzaté aktualizácie z interného ukladacieho priestoru</string>
   <string name="confirm_delete_dialog_message">Vymazať vybraný súbor aktualizácie?</string>
@@ -63,10 +72,12 @@
   <string name="delete_updates_failure_message">Vyskytla sa chyba pri mazaní súboru aktualizácie</string>
   <string name="delete_updates_noFolder_message">Priečinok s aktualizáciou sa nenašiel</string>
   <string name="delete_updates_success_message">Všetky prevzaté aktualizácie boli vymazané</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Zariadenie:</string>
   <string name="sysinfo_running">Zostava:</string>
   <string name="sysinfo_update_channel">Kanál aktualizácií:</string>
   <string name="sysinfo_last_check">Posledná kontrola:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Nie je dostupný žiadny zoznam zmien</string>
   <string name="changelog_dialog_title">Zoznam zmien</string>
   <string name="loading_changelog">Prebieha načítavanie\u2026</string>

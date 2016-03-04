@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM Opgradeerder</string>
   <string name="display_name">Opgraderings</string>
   <string name="unknown">Onbekend</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Herlaai</string>
   <string name="menu_delete_all">Verwyder alles</string>
   <string name="menu_system_info">Stelsel inligting</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Kanselleer</string>
   <string name="dialog_update">Opgradeer</string>
   <string name="dialog_close">Sluit</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Beskikbare opgraderings</string>
   <string name="no_available_updates_intro">Tydens laaste outamatiese soek is geen beskikbare opgraderings gevind nie. Om self te soek, gebruik die Herlaai knoppie.</string>
   <string name="no_available_updates_intro_tv">Die laaste kyk het geen opdaterings gevind nie. Om handmatig te kyk vir nuwe opdaterings, raak \'Stelsel inligting\'.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Weekliks</string>
   <string name="check_bi_weekly">Twee-weekliks</string>
   <string name="check_monthly">Maandeliks</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Soek vir opgraderings.</string>
   <string name="no_updates_found">Geen nuwe upgraderings gevind nie</string>
   <string name="update_check_failed">Die opgradering soektog het misluk. Gaan asseblief die internet konneksie na en probeer weer later.</string>
@@ -41,8 +45,10 @@
   <string name="not_new_updates_found_title">Nuwe opgraderings</string>
   <string name="not_action_download">Laai af</string>
   <string name="data_connection_required">\'n Data verbinding word benodig.</string>
+  <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Toegang geweier</string>
   <string name="permission_not_granted_dialog_message">Die toegang om na eksterne spasie te skryf is geweier. Kan nie aflaai nie.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Kanselleer aflaai</string>
   <string name="confirm_download_cancelation_dialog_message">Die huidige aflaai gaan gekanselleer work, Ok om voort te gaan?</string>
   <string name="download_cancelled">Aflaai is gekanselleer</string>
@@ -53,10 +59,13 @@
   <string name="not_download_failure">Opdatering aflaai was onsuksesvol </string>
   <string name="not_action_install_update">Herlaai en installeer</string>
   <string name="not_download_install_notice">Die lêer <xliff:g id="filename">%s</xliff:g> is suksesvol afgelaai. Wanneer jy \'Herlaai en installeer\' raak, sal die toestel self herlaai en die opgradering installeer.\n\nNota:\'n Versoenbare \'Recovery\' is nodig vir die installasie om outomaties te werk.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 verifikasie het misluk</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Pas opgradering toe</string>
   <string name="apply_update_dialog_text">Die toestel gaan opgegradeer word na <xliff:g id="filename">%s</xliff:g>\n\nAs u die Opgradeer knoppie druk sal die toestel self herlaai om die opgradering te installeer.\n\nLet wel: Hierdie funksie vereis \'n versoenbaare \'recovery\' andersins sal die opgradering handmatig geïnstalleer moet word</string>
   <string name="apply_unable_to_reboot_toast">Kon nie herlaai in \'recovery\' nie</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Skrap lêer</string>
   <string name="confirm_delete_dialog_title_tv">Raak om alle afgelaaide opdaterings van interne spasie te verwyder</string>
   <string name="confirm_delete_dialog_message">Die afgelaaide lêer gaan verwyder word, Ok om voort te gaan?</string>
@@ -65,10 +74,12 @@
   <string name="delete_updates_failure_message">Daar was \'n fout tydens die verwydering van die lêer</string>
   <string name="delete_updates_noFolder_message">Opgradering vouer nie gevind nie</string>
   <string name="delete_updates_success_message">Alle afgelaaide opgraderings geskrap</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Toestel:</string>
   <string name="sysinfo_running">Huidiglik:</string>
   <string name="sysinfo_update_channel">Opgradeer Kanaal:</string>
   <string name="sysinfo_last_check">Laaste soek:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Geen Veranderinge-log beskikbaar nie</string>
   <string name="changelog_dialog_title">Veranderinge-log</string>
   <string name="loading_changelog">Laai\u2026</string>

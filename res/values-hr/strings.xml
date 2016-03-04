@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM Ažuriranja</string>
   <string name="display_name">Ažuriranja</string>
   <string name="unknown">Nepoznato</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Osvježi</string>
   <string name="menu_delete_all">Izbriši preuzimanja</string>
   <string name="menu_system_info">Informacije sustava</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Odustani</string>
   <string name="dialog_update">Ažuriraj</string>
   <string name="dialog_close">Zatvori</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Dostupna ažuriranja</string>
   <string name="no_available_updates_intro">Posljednja provjera nije pronašla nikakva ažuriranja. Za ručnu provjeru novih ažuriranja koristite tipku za osvježavanje.</string>
   <string name="no_available_updates_intro_tv">Posljednja provjera nije pronašla nikakva ažuriranja. Za ručnu provjeru novih ažuriranja dodirnite \"Sistemske informacije\".</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Tjedno</string>
   <string name="check_bi_weekly">Svaka 2 tjedna</string>
   <string name="check_monthly">Mjesečno</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Tražim ažuriranja</string>
   <string name="no_updates_found">Nema novi ažuriranja</string>
   <string name="update_check_failed">Pretraga ažuriranja neuspješna. Molimo vas provjerite vašu internetsku vezu i pokušajte ponovno kasnije.</string>
@@ -41,8 +45,10 @@
   <string name="not_new_updates_found_title">Nova ažuriranja</string>
   <string name="not_action_download">Preuzmi</string>
   <string name="data_connection_required">Mobilna veza je potrebna.</string>
+  <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Dozvola nije odobrena</string>
   <string name="permission_not_granted_dialog_message">Dozvola za pisanjem na vanjsku pohranu nije odobrena. Preuzimanje ažuriranja nije moguće.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Prekini preuzimanje</string>
   <string name="confirm_download_cancelation_dialog_message">Želite li prekinuti preuzimanje ažuriranja?</string>
   <string name="download_cancelled">Preuzimanje prekinuto</string>
@@ -53,10 +59,13 @@
   <string name="not_download_failure">Preuzimanje ažuriranja neuspješno</string>
   <string name="not_action_install_update">Ponovno pokreni i instaliraj</string>
   <string name="not_download_install_notice">Ažuriranje <xliff:g id="filename">%s</xliff:g> je uspješno preuzeto. Pri odabiru \'Ponovno pokreni i instaliraj\', uređaj će se ponovno pokrenuti i instalirati ažuriranje.\n\nNapomena: Podržani Način oporavka je potreban kako bi instalacija automatski bila pokrenuta.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Neuspjela MD5 provjera</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Primjeni ažuriranje</string>
   <string name="apply_update_dialog_text">Ažurirati ćete na <xliff:g id="filename">%s</xliff:g>.\n\nAko pritisnete Ažuriraj, telefon će se sam restartirati u način oporavka kako bi instalirao ažuriranje.</string>
   <string name="apply_unable_to_reboot_toast">Neuspjelo restartanje u način oporavka</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Obriši datoteku</string>
   <string name="confirm_delete_dialog_title_tv">Kliknite da biste uklonili sva preuzeta ažuriranja iz interne memorije</string>
   <string name="confirm_delete_dialog_message">Obrisati će se preuzeta datoteka ažuriranja. Nastaviti?</string>
@@ -65,10 +74,12 @@
   <string name="delete_updates_failure_message">Dogodila se pogreška prilikom brisanja datoteke</string>
   <string name="delete_updates_noFolder_message">Mapa ažuriranja nije pronađena</string>
   <string name="delete_updates_success_message">Preuzete datoteke su izbrisane</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Uređaj:</string>
   <string name="sysinfo_running">Izvodi:</string>
   <string name="sysinfo_update_channel">Kanal:</string>
   <string name="sysinfo_last_check">Zadnja provjera:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Dnevnik izmjena nije dostupan</string>
   <string name="changelog_dialog_title">Dnevnik izmjena</string>
   <string name="loading_changelog">Učitavanje\u2026</string>

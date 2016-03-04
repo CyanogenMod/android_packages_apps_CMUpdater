@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Aktualizace CM</string>
   <string name="display_name">Aktualizace CM</string>
   <string name="unknown">Neznámý</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Obnovit</string>
   <string name="menu_delete_all">Odstranit stažené soubory</string>
   <string name="menu_system_info">Informace o systému</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Zrušit</string>
   <string name="dialog_update">Aktualizovat</string>
   <string name="dialog_close">Zavřít</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Dostupné aktualizace</string>
   <string name="no_available_updates_intro">Nebyly nalezeny žádné aktualizace. Pro ruční vyhledání aktualizací stiskněte tlačítko Obnovit.</string>
   <string name="no_available_updates_intro_tv">Poslední kontrolou nebyly nalezeny žádné aktualizace. Ruční kontrolu nových aktualizací provedete dotykem na „Systémové informace“.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Týdně</string>
   <string name="check_bi_weekly">Ob týden</string>
   <string name="check_monthly">Měsíčně</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Vyhledávání aktualizací</string>
   <string name="no_updates_found">Nové aktualizace nenalezeny</string>
   <string name="update_check_failed">Zjištění nové verze selhalo. Prosím zkontrolujte připojení k internetu a pokus opakujte.</string>
@@ -41,8 +45,10 @@
   <string name="not_new_updates_found_title">Nové aktualizace</string>
   <string name="not_action_download">Stáhnout</string>
   <string name="data_connection_required">Je vyžadováno připojení k internetu</string>
+  <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Oprávnění není uděleno</string>
   <string name="permission_not_granted_dialog_message">Oprávnění pro zápis na externí úložiště nebylo uděleno. Nelze stahovat aktualizace.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Zrušit stahování</string>
   <string name="confirm_download_cancelation_dialog_message">Opravdu chcete zrušit aktuální stahování?</string>
   <string name="download_cancelled">Stahování zrušeno</string>
@@ -53,10 +59,13 @@
   <string name="not_download_failure">Aktualizaci nelze stáhnout</string>
   <string name="not_action_install_update">Restartovat a nainstalovat</string>
   <string name="not_download_install_notice">Aktualizace <xliff:g id="filename">%s</xliff:g> byla úspěšně stáhnutá. Stisknutím \u201aRestartovat a nainstalovat\u2018, bude zařízení restartováno a bude provedena automatická instalace aktualizace.\n\nPoznámka: pro automatickou instalaci je vyžadován kompatibilní Recovery manažer.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Ověření MD5 se nezdařilo</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Použít aktualizaci</string>
   <string name="apply_update_dialog_text">Chystáte se aktualizovat na <xliff:g id="filename">%s</xliff:g>.\n\nPokud stisknete Aktualizovat, telefon se restartuje do režimu Recovery, kde budete pokračovat v instalaci aktualizace.\n\nPoznámka: tato funkce vyžaduje nainstalovaný kompatibilní režim Recovery nebo je nutné instalaci provést ručně.</string>
   <string name="apply_unable_to_reboot_toast">Nelze restartovat do režimu Recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Smazat soubor</string>
   <string name="confirm_delete_dialog_title_tv">Dotykem odstranit všechny stáhnuté aktualizace z interního úložiště</string>
   <string name="confirm_delete_dialog_message">Opravdu chcete smazat soubor aktualizace?</string>
@@ -65,10 +74,12 @@
   <string name="delete_updates_failure_message">Během mazání souboru aktualizace se vyskytla chyba</string>
   <string name="delete_updates_noFolder_message">Adresář aktualizací nenalezen</string>
   <string name="delete_updates_success_message">Všechny stažené soubory aktualizací smazány</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Zařízení:</string>
   <string name="sysinfo_running">Nainstalovaná verze:</string>
   <string name="sysinfo_update_channel">Aktualizační kanál:</string>
   <string name="sysinfo_last_check">Poslední kontrola:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Není dostupný seznam změn</string>
   <string name="changelog_dialog_title">Seznam změn</string>
   <string name="loading_changelog">Načítání\u2026</string>

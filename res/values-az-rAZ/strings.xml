@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM Yeniləyici</string>
   <string name="display_name">Yeniləmələr</string>
   <string name="unknown">Bilinməyən</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Yenilə</string>
   <string name="menu_delete_all">Endirmələri sil</string>
   <string name="menu_system_info">Sistem məlumatı</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">İmtina</string>
   <string name="dialog_update">Yenilə</string>
   <string name="dialog_close">Bağla</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Yeniləmələr mövcuddur</string>
   <string name="no_available_updates_intro">Son yoxlamadan sonra yeniləmə tapılmadı. Yeniləmələri əllə yoxlamaq üçün Yenilə düyməsindən istifadə edin.</string>
   <string name="no_available_updates_intro_tv">Son yoxlamada yeniləmə tapılmadı. Yeniləmələri əllə yoxlamaq üçün \"Sistem məlumatı\"na klikləyin.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Həftəlik</string>
   <string name="check_bi_weekly">İki həftədən bir</string>
   <string name="check_monthly">Aylıq</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Yeniləmələr yoxlanılır</string>
   <string name="no_updates_found">Yeni yeniləmələr yoxdur</string>
   <string name="update_check_failed">Yeniləmələr yoxlana bilmədi. Zəhmət olmasa internet bağlantınızı yoxlayıb yenidən cəhd edin.</string>
@@ -41,6 +45,8 @@
   <string name="not_new_updates_found_title">Yeni yeniləmələr</string>
   <string name="not_action_download">Endir</string>
   <string name="data_connection_required">Verilənlər bağlantısı lazımdır.</string>
+  <!-- Permission check -->
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Endirməni ləğv et</string>
   <string name="confirm_download_cancelation_dialog_message">Davam edən endirmə ləğv edilsin?</string>
   <string name="download_cancelled">Endirmə ləğv edildi</string>
@@ -51,10 +57,13 @@
   <string name="not_download_failure">Yeniləməni endirmək uğursuz oldu</string>
   <string name="not_action_install_update">Yenidən başlat və quraşdır</string>
   <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> yeniləməsi uğurla endirildi. \'Yenidən başlat və Quraşdır\'a toxunanda, cihaz yeniləməni quraşdırmaq üçün özünü yenidən başladacaq.\n\nQeyd: Quraşdırmanın avtomatik işləməsi üçün uyğun Bərpa mühiti lazımdır.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 yoxlanış xətası</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Yeniləməni tətbiq et</string>
   <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> yeniləməsi ediləcək.\n\nYeniləyə basanda cihaz yeniləməni quraşdırmaq üçün bərpa rejimində yenidən başlayacaq.\n\nQeyd: Bu özəlliyin uyğun bir Bərpa mühitinə ehtiyacı var, əks halda yeniləmələr əllə quraşdırılmalıdır.</string>
   <string name="apply_unable_to_reboot_toast">Bərpa rejimi üçün yenidən başladıla bilmədi</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Faylı sil</string>
   <string name="confirm_delete_dialog_title_tv">Endirilmiş bütün yeniləmələri daxili yaddaşdan silmək üçün klikləyin</string>
   <string name="confirm_delete_dialog_message">Seçilmiş yeniləmə faylı silinsin?</string>
@@ -63,10 +72,12 @@
   <string name="delete_updates_failure_message">Yeniləmə faylını silərkən xəta baş verdi</string>
   <string name="delete_updates_noFolder_message">Yeniləmə qovluğu tapılmadı</string>
   <string name="delete_updates_success_message">Endirilən bütün yeniləmələr silindi</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Cihaz:</string>
   <string name="sysinfo_running">Versiya:</string>
   <string name="sysinfo_update_channel">Yeniləmə kanalı:</string>
   <string name="sysinfo_last_check">Son yoxlama:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Dəyişiklik qeydi yoxdur</string>
   <string name="changelog_dialog_title">Dəyişiklik qeydi</string>
   <string name="loading_changelog">Yüklənir\u2026</string>

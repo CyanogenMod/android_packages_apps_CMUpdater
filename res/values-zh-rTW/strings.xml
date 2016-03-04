@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM 更新器</string>
   <string name="display_name">更新</string>
   <string name="unknown">不明</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">重新整理</string>
   <string name="menu_delete_all">刪除下載項目</string>
   <string name="menu_system_info">系統資訊</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">取消</string>
   <string name="dialog_update">更新</string>
   <string name="dialog_close">關閉</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">可用更新</string>
   <string name="no_available_updates_intro">上次檢查並未發現任何可用的更新。輕觸重新整理按鈕即可手動檢查新的更新。</string>
   <string name="no_available_updates_intro_tv">上次檢查找不到任何可用的更新，要手動檢查更新，請按\'系統資訊\'。</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">每星期</string>
   <string name="check_bi_weekly">每兩星期</string>
   <string name="check_monthly">每月</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">正在檢查更新</string>
   <string name="no_updates_found">沒有找到新的更新</string>
   <string name="update_check_failed">更新檢查失敗。請檢查您的網路連線並稍後重試。</string>
@@ -41,8 +45,10 @@
   <string name="not_new_updates_found_title">新的更新</string>
   <string name="not_action_download">下載</string>
   <string name="data_connection_required">需要網路連線。</string>
+  <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">未授予權限</string>
   <string name="permission_not_granted_dialog_message">未授予寫入外部儲存空間的權限。無法下載更新。</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">取消下載</string>
   <string name="confirm_download_cancelation_dialog_message">取消目前的下載？</string>
   <string name="download_cancelled">下載已取消</string>
@@ -53,10 +59,13 @@
   <string name="not_download_failure">下載更新失敗</string>
   <string name="not_action_install_update">重新啟動並安裝</string>
   <string name="not_download_install_notice">成功下載更新檔案「<xliff:g id="filename">%s</xliff:g>」。輕觸「重新啟動並安裝」後，裝置將重新啟動並安裝更新。\n\n注意：自動完成安裝需要相容的 Recovery。</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 驗證失敗</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">套用更新</string>
   <string name="apply_update_dialog_text">您將更新至 <xliff:g id="filename">%s</xliff:g>。\n\n如果您按下更新，裝置將重新啟動進入 Recovery 模式並安裝更新。\n\n注意：這項功能需要相容的 Recovery，否則將需要手動安裝更新。</string>
   <string name="apply_unable_to_reboot_toast">無法重新啟動進入 Recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">刪除檔案</string>
   <string name="confirm_delete_dialog_title_tv">按下以從內部儲存空間移除所有已下載的更新</string>
   <string name="confirm_delete_dialog_message">刪除已選取的更新檔案？</string>
@@ -65,10 +74,12 @@
   <string name="delete_updates_failure_message">刪除更新檔案時出現錯誤</string>
   <string name="delete_updates_noFolder_message">找不到更新資料夾</string>
   <string name="delete_updates_success_message">已刪除所有下載的更新</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">裝置：</string>
   <string name="sysinfo_running">目前執行：</string>
   <string name="sysinfo_update_channel">更新頻道：</string>
   <string name="sysinfo_last_check">上次檢查：</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">沒有更新日誌</string>
   <string name="changelog_dialog_title">更新日誌</string>
   <string name="loading_changelog">載入中\u2026</string>

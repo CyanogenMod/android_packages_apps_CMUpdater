@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Systemuppdateringar</string>
   <string name="display_name">Uppdateringar</string>
   <string name="unknown">Okänd</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Kontrollera</string>
   <string name="menu_delete_all">Radera nedladdningar</string>
   <string name="menu_system_info">Systeminformation</string>
@@ -20,13 +22,14 @@
   <string name="dialog_cancel">Avbryt</string>
   <string name="dialog_update">Uppdatera</string>
   <string name="dialog_close">Stäng</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Tillgängliga uppdateringar</string>
   <string name="no_available_updates_intro">Den senaste kontrollen fann inga nya uppdateringar. Använd kontrolleraknappen för att söka efter uppdateringar manuellt.</string>
   <string name="no_available_updates_intro_tv">Den senaste kontrollen hittade inga nya uppdateringar. Tryck på knappen \'Systeminformation\' för att söka efter uppdateringar manuellt.</string>
   <string name="new_update_summary">Ny</string>
   <string name="downloaded_update_summary">Nedladdad</string>
   <string name="installed_update_summary">Installerad</string>
-  <string name="update_check_title">Kontrollfrekvens</string>
+  <string name="update_check_title">Sök efter uppdateringar</string>
   <string name="check_manual">Manuell</string>
   <string name="check_on_boot">Vid uppstart</string>
   <string name="check_twice_daily">Två gånger om dagen</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Veckovis</string>
   <string name="check_bi_weekly">Varannan vecka</string>
   <string name="check_monthly">Månadsvis</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Söker efter uppdateringar</string>
   <string name="no_updates_found">Hittade inga nya uppdateringar</string>
   <string name="update_check_failed">Sökningen efter uppdateringar misslyckades. Var god kontrollera din internetanslutning och försök igen senare.</string>
@@ -41,8 +45,10 @@
   <string name="not_new_updates_found_title">Nya uppdateringar</string>
   <string name="not_action_download">Ladda ned</string>
   <string name="data_connection_required">Du måste ha tillgång till Internet.</string>
+  <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Behörighet ej beviljad</string>
   <string name="permission_not_granted_dialog_message">Behörighet att skriva till extern lagring beviljades inte. Kan inte ladda ner uppdatering.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Avbryt nedladdning</string>
   <string name="confirm_download_cancelation_dialog_message">Avbryt nedladdning?</string>
   <string name="download_cancelled">Nedladdningen avbruten</string>
@@ -53,10 +59,13 @@
   <string name="not_download_failure">Nedladdningen misslyckades</string>
   <string name="not_action_install_update">Starta om och installera</string>
   <string name="not_download_install_notice">Uppdateringen <xliff:g id="filename">%s</xliff:g> laddades ned med framgång. När du trycker på \'Starta om och installera\' kommer enheten att starta om för att installera uppdateringen.\n\nObs: En kompatibel Recovery krävs för att installationen ska fungera automatiskt.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5-verifiering misslyckades</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Tillämpa uppdatering</string>
   <string name="apply_update_dialog_text">Du är på väg att uppdatera till <xliff:g id="filename">%s</xliff:g>.\n\nOm du trycker på Uppdatera kommer enheten att starta om till Recoveryläge för att installera uppdateringen.\n\nObs: Denna funktion kräver ett kompatibelt Recoveryläge. I annat fall måste uppdateringarna installeras manuellt.</string>
   <string name="apply_unable_to_reboot_toast">Kan inte starta om till Recoveryläge</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Ta bort fil</string>
   <string name="confirm_delete_dialog_title_tv">Klicka för att ta bort alla nerladdade uppdateringar från internlagring</string>
   <string name="confirm_delete_dialog_message">Radera uppdateringen?</string>
@@ -65,10 +74,12 @@
   <string name="delete_updates_failure_message">Det skedde ett fel vid borttagning av uppdateringen</string>
   <string name="delete_updates_noFolder_message">Uppdateringsmappen kan inte hittas</string>
   <string name="delete_updates_success_message">Alla nedladdade uppdateringar borttagna</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Enhet:</string>
   <string name="sysinfo_running">ROM:</string>
   <string name="sysinfo_update_channel">Uppdateringskanal:</string>
   <string name="sysinfo_last_check">Senaste kontroll:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Ingen ändringslogg tillgänglig</string>
   <string name="changelog_dialog_title">Ändringslogg</string>
   <string name="loading_changelog">Laddar\u2026</string>
