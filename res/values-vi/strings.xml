@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Trình cập nhật CM</string>
   <string name="display_name">Cập nhật</string>
   <string name="unknown">Không rõ</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Làm mới</string>
   <string name="menu_delete_all">Xoá mục tải xuống</string>
   <string name="menu_system_info">Thông tin hệ thống</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Huỷ</string>
   <string name="dialog_update">Cập nhật</string>
   <string name="dialog_close">Đóng</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Bản cập nhật có sẵn</string>
   <string name="no_available_updates_intro">Lần kiểm tra gần nhất không tìm thấy bản cập nhật khả dụng nào cả. Để kiểm tra thủ công, hãy dùng nút Làm mới.</string>
   <string name="no_available_updates_intro_tv">Lần kiểm tra gần nhất không tìm thấy bản cập nhật khả dụng nào cả. Để kiểm tra thủ công, hãy nhấn \'Thông tin hệ thống\'.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Hàng tuần</string>
   <string name="check_bi_weekly">Hai tuần một lần</string>
   <string name="check_monthly">Hàng tháng</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Đang kiểm tra bản cập nhật</string>
   <string name="no_updates_found">Không tìm thấy bản cập nhật mới</string>
   <string name="update_check_failed">Kiểm tra bản cập nhật không thành công. Xin vui lòng kiểm tra kết nối internet của bạn và thử lại sau.</string>
@@ -41,6 +45,8 @@
   <string name="not_new_updates_found_title">Bản cập nhật mới</string>
   <string name="not_action_download">Tải về</string>
   <string name="data_connection_required">Yêu cầu kết nối dữ liệu.</string>
+  <!-- Permission check -->
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Hủy bỏ tải xuống</string>
   <string name="confirm_download_cancelation_dialog_message">Huỷ tác vụ tải xuống hiện tại?</string>
   <string name="download_cancelled">Đã huỷ tải xuống</string>
@@ -51,10 +57,13 @@
   <string name="not_download_failure">Tải xuống bản cập nhật không thành công</string>
   <string name="not_action_install_update">Khởi động lại và cài đặt</string>
   <string name="not_download_install_notice">Bản cập nhật <xliff:g id="filename"> %s </xliff:g> đã tải xuống thành công. Khi chạm vào \'Khởi động lại và cài đặt\', thiết bị sẽ tự khởi động lại để cài đặt bản cập nhật.\n\nLưu ý: Cần có một bản Recovery tương thích cho tiến trình cài đặt làm việc tự động.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Xác minh MD5 thất bại</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Áp dụng cập nhật</string>
   <string name="apply_update_dialog_text">Bạn chuẩn bị nâng cấp lên <xliff:g id="filename"> %s </xliff:g>. \n\nNếu bạn bấm vào Cập nhật, điện thoại sẽ tự khởi động lại vào chế độ recovery để cài đặt cập nhật.\n\nLưu ý: tính năng này yêu cầu một bản recovery tương thích hoặc bản cập nhật sẽ cần phải được cài đặt theo cách thủ công.</string>
   <string name="apply_unable_to_reboot_toast">Không thể khởi động lại vào recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Xoá tập tin</string>
   <string name="confirm_delete_dialog_title_tv">Nhấn để xoá tất cả bản cập nhật đã tải xuống từ bộ nhớ trong</string>
   <string name="confirm_delete_dialog_message">Xóa các tập tin cập nhật được chọn?</string>
@@ -63,10 +72,12 @@
   <string name="delete_updates_failure_message">Đã có lỗi khi xóa tập tin cập nhật</string>
   <string name="delete_updates_noFolder_message">Không tìm thấy thư mục cập nhật</string>
   <string name="delete_updates_success_message">Đã xóa tất cả các tập tin cập nhật đã tải xuống</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Thiết bị:</string>
   <string name="sysinfo_running">Đang chạy:</string>
   <string name="sysinfo_update_channel">Kênh cập nhật:</string>
   <string name="sysinfo_last_check">Kiểm tra lần cuối:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Không có nhật ký thay đổi</string>
   <string name="changelog_dialog_title">Nhật ký thay đổi</string>
   <string name="loading_changelog">Đang tải\u2026</string>

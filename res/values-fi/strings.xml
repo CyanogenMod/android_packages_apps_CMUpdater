@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM Updater</string>
   <string name="display_name">Päivitykset</string>
   <string name="unknown">Tuntematon</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Päivitä</string>
   <string name="menu_delete_all">Poista lataukset</string>
   <string name="menu_system_info">Järjestelmän tiedot</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Peruuta</string>
   <string name="dialog_update">Päivitä</string>
   <string name="dialog_close">Sulje</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Saatavilla olevat päivitykset</string>
   <string name="no_available_updates_intro">Viimeisin tarkistus ei löytänyt yhtään päivitystä. Tarkistaaksesi päivitykset, paina Päivitä</string>
   <string name="no_available_updates_intro_tv">Viimeisin tarkistus ei löytänyt päivityksiä. Tarkistaaksesi päivitykset manuaalisesti, valitse \'Järjestelmätiedot\'.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Viikoittain</string>
   <string name="check_bi_weekly">Joka toinen viikko</string>
   <string name="check_monthly">Kuukausittain</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Tarkistetaan päivityksiä</string>
   <string name="no_updates_found">Päivityksiä ei löytynyt</string>
   <string name="update_check_failed">Päivitysten tarkistaminen epäonnistui. Tarkista internet-yhteytesi ja yritä uudelleen.</string>
@@ -41,8 +45,10 @@
   <string name="not_new_updates_found_title">Uudet päivitykset</string>
   <string name="not_action_download">Lataa</string>
   <string name="data_connection_required">Verkkoyhteys tarvitaan.</string>
+  <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Käyttöoikeutta ei ole myönnetty</string>
   <string name="permission_not_granted_dialog_message">Oikeutta kirjoittaa ulkoiseen tallennustilaan ei ollut myönnetty. Päivitystä ei voida ladata.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Peruuta lataus</string>
   <string name="confirm_download_cancelation_dialog_message">Peruuta nykyinen lataus?</string>
   <string name="download_cancelled">Lataus peruttu</string>
@@ -53,10 +59,13 @@
   <string name="not_download_failure">Päivityksen lataaminen epäonnistui</string>
   <string name="not_action_install_update">Käynnistä uudelleen ja asenna</string>
   <string name="not_download_install_notice">Päivityksen <xliff:g id="filename">%s</xliff:g> lataaminen onnistui. Kun painat \'Käynnistä uudelleen ja asenna\', laite käynnistyy uudelleen ja asentaa päivityksen.\n\nHuomautus: Tämä ominaisuus tarvitsee yhteensopivan Recoveryn tai päivitykset eivät asennu automaattisesti.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 varmistus epäonnistui</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Asenna päivitys</string>
   <string name="apply_update_dialog_text">Olet päivittämässä versioon <xliff:g id="filename">%s</xliff:g>.\n\nJos painat Päivitä, laite käynnistyy uudelleen Recovery-tilaan asentaakseen päivityksen.\n\nHuomautus: Tämä ominaisuus vaatii yhteensopivan Recoveryn tai päivitykset eivät asennu automaattisesti.</string>
   <string name="apply_unable_to_reboot_toast">Recovery-tilaan käynnistäminen epäonnistui</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Poista tiedosto</string>
   <string name="confirm_delete_dialog_title_tv">Paina poistaaksesi kaikki ladatut päivitykset sisäisestä tallennustilasta</string>
   <string name="confirm_delete_dialog_message">Poista valittu päivitystiedosto?</string>
@@ -65,10 +74,12 @@
   <string name="delete_updates_failure_message">Virhe poistettaessa päivitystiedostoa</string>
   <string name="delete_updates_noFolder_message">Päivityskansiota ei löydy</string>
   <string name="delete_updates_success_message">Kaikki päivitykset poistettu</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Laite:</string>
   <string name="sysinfo_running">Versio:</string>
   <string name="sysinfo_update_channel">Päivitysversio:</string>
   <string name="sysinfo_last_check">Viimeisin tarkistus:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Ei muutoslokia saatavilla</string>
   <string name="changelog_dialog_title">Muutosloki</string>
   <string name="loading_changelog">Ladataan\u2026</string>

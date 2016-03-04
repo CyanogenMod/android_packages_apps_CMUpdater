@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Ενημερώσεις CM</string>
   <string name="display_name">Ενημερώσεις</string>
   <string name="unknown">Άγνωστο</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Ανανέωση</string>
   <string name="menu_delete_all">Διαγραφή λήψεων</string>
   <string name="menu_system_info">Πληροφορίες συστήματος</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Ακύρωση</string>
   <string name="dialog_update">Ενημέρωση</string>
   <string name="dialog_close">Κλείσιμο</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Διαθέσιμες ενημερώσεις</string>
   <string name="no_available_updates_intro">Ο τελευταίος έλεγχος δεν βρήκε διαθέσιμες ενημερώσεις. Για να ελέγξετε για νέες ενημερώσεις χειροκίνητα, χρησιμοποιήστε το κουμπί Ανανέωση.</string>
   <string name="no_available_updates_intro_tv">Ο τελευταίος έλεγχος δεν βρήκε διαθέσιμες ενημερώσεις. Για να ελέγξετε για νέες ενημερώσεις, κάντε κλικ στις \'Πληροφορίες συστήματος\'.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Κάθε εβδομάδα</string>
   <string name="check_bi_weekly">Κάθε 2 εβδομάδες</string>
   <string name="check_monthly">Κάθε μήνα</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Έλεγχος για ενημερώσεις</string>
   <string name="no_updates_found">Δεν βρέθηκαν ενημερώσεις</string>
   <string name="update_check_failed">Ο έλεγχος για ενημερώσεις απέτυχε. Παρακαλώ ελέγξτε την σύνδεσή σας στο διαδίκτυο και προσπαθήστε αργότερα.</string>
@@ -41,8 +45,10 @@
   <string name="not_new_updates_found_title">Νέες ενημερώσεις</string>
   <string name="not_action_download">Λήψη</string>
   <string name="data_connection_required">Απαιτείται σύνδεση δεδομένων.</string>
+  <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Η άδεια δεν χορηγήθηκε</string>
   <string name="permission_not_granted_dialog_message">Η άδεια για εγγραφή στον εξωτερικό αποθηκευτικό χώρο δεν χορηγήθηκε. Δεν είναι δυνατή η λήψη της ενημέρωσης.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Ακύρωση λήψης</string>
   <string name="confirm_download_cancelation_dialog_message">Ακύρωση της τρέχουσας λήψης;</string>
   <string name="download_cancelled">Η λήψη ακυρώθηκε</string>
@@ -53,10 +59,13 @@
   <string name="not_download_failure">Η λήψη της ενημέρωσης ήταν ανεπιτυχής</string>
   <string name="not_action_install_update">Επανεκκίνηση και εγκατάσταση</string>
   <string name="not_download_install_notice">Η λήψη της ενημέρωσης <xliff:g id="filename">%s</xliff:g> ολοκληρώθηκε με επιτυχία. Αν πατήσετε \'Επανεκκίνηση και εγκατάσταση\', η συσκευή θα κάνει επανεκκίνηση και θα εγκαταστήσει την ενημέρωση.\n\nΣημείωση: Απαιτείται μια συμβατή recovery για την λειτουργία της αυτόματης εγκατάστασης.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Η επαλήθευση του MD5 απέτυχε</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Εφαρμογή ενημέρωσης</string>
   <string name="apply_update_dialog_text">Πρόκειται να αναβαθμίσετε σε <xliff:g id="filename">%s</xliff:g>.\n\nΑν πατήσετε το πλήκτρο Ενημέρωση, η συσκευή θα κάνει επανεκκίνηση σε λειτουργία recovery για να εγκαταστήσετε την ενημέρωση.\n\nΣημείωση: Αυτή η λειτουργία απαιτεί μια συμβατή recovery αλλιώς η ενημέρωση θα πρέπει να εγκατασταθεί χειροκίνητα.</string>
   <string name="apply_unable_to_reboot_toast">Δεν είναι δυνατή η επανεκκίνηση σε λειτουργία recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Διαγραφή αρχείου</string>
   <string name="confirm_delete_dialog_title_tv">Κάντε κλικ για να καταργήσετε όλες τις αποθηκευμένες ενημερώσεις από τον εσωτερικό αποθηκευτικό χώρο</string>
   <string name="confirm_delete_dialog_message">Διαγραφή του επιλεγμένου αρχείου ενημέρωσης;</string>
@@ -65,10 +74,12 @@
   <string name="delete_updates_failure_message">Υπήρξε ένα σφάλμα κατά τη διαγραφή της ενημέρωσης</string>
   <string name="delete_updates_noFolder_message">Ο φάκελος ενημερώσεων δεν βρέθηκε</string>
   <string name="delete_updates_success_message">Όλες οι ενημερώσεις διαγράφηκαν</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Συσκευή:</string>
   <string name="sysinfo_running">Τρέχει:</string>
   <string name="sysinfo_update_channel">Τύπος ενημερώσεων:</string>
   <string name="sysinfo_last_check">Τελευταίος έλεγχος:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Δεν υπάρχει διαθέσιμο αρχείο αλλαγών</string>
   <string name="changelog_dialog_title">Αρχείο αλλαγών</string>
   <string name="loading_changelog">Φόρτωση\u2026</string>

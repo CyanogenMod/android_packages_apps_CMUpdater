@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Actualitzador CM</string>
   <string name="display_name">Actualitzacions</string>
   <string name="unknown">Desconegut</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Refresca</string>
   <string name="menu_delete_all">Esborra descàrregues</string>
   <string name="menu_system_info">Info del sistema</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Cancel·la</string>
   <string name="dialog_update">Actualitza</string>
   <string name="dialog_close">Tanca</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Actualitzacions disponibles</string>
   <string name="no_available_updates_intro">La darrera comprovació no ha trobat cap actualització disponible. Per buscar manualment noves actualitzacions, utilitza el botó Refresca.</string>
   <string name="no_available_updates_intro_tv">La darrera comprovació no va trobar actualitzacions disponibles. Per comprovar manualment noves actualitzacions, fesu clic a \"Info del sistema\".</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Setmanalment</string>
   <string name="check_bi_weekly">Bi-setmanalment</string>
   <string name="check_monthly">Mensualment</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Buscant actualitzacions</string>
   <string name="no_updates_found">No s\'han trobat noves actualitzacions</string>
   <string name="update_check_failed">No s\'ha pogut verificar si hi ha actualitzacions disponibles. Si us plau verifica la teva connexió d\'internet i intenta-ho una altra vegada més tard.</string>
@@ -41,8 +45,10 @@
   <string name="not_new_updates_found_title">Noves actualitzacions</string>
   <string name="not_action_download">Descarrega</string>
   <string name="data_connection_required">Fa falta una connexió de dades.</string>
+  <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Permís no otorgat</string>
   <string name="permission_not_granted_dialog_message">El permís per escriure en un emmagatzematge extern no ha estat otorgat. No es pot descarregar l\'actualització.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Cancel·la descàrrega</string>
   <string name="confirm_download_cancelation_dialog_message">Cancel·lar la descàrrega actual?</string>
   <string name="download_cancelled">Descàrrega cancel·lada</string>
@@ -53,10 +59,13 @@
   <string name="not_download_failure">Descàrrega de l\'actualització fallida</string>
   <string name="not_action_install_update">Reinicia i instal·la</string>
   <string name="not_download_install_notice">L\'actualització <xliff:g id="filename">%s</xliff:g> s\'ha descarregat satisfactòriament. Quan apretis \'Reinicia i instal·la\', el dispositiu es reiniciarà ell mateix per tal d\'instal·lar l\'actualització.\n\nNota: Aquesta característica necessita un sistema de recuperació (Recovery) compatible per a que funcioni la instal·lació automàticament.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">La verificació MD5 ha fallat</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aplica actualització</string>
   <string name="apply_update_dialog_text">Estàs a punt d\'actualitzar a <xliff:g id="filename">%s</xliff:g>.\n\nSi apretes Actualitza, el dispositiu es reiniciarà ell mateix cap al mode de recuperació per tal d\'instal·lar l\'actualització.\n\nNota: Aquesta característica necessita un sistema de recuperació (Recovery) compatible o l\'actualització haurà de ser instal·lada manualment.</string>
   <string name="apply_unable_to_reboot_toast">Impossible reiniciar en mode recuperació</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Esborra fitxer</string>
   <string name="confirm_delete_dialog_title_tv">Clica per eliminar totes les actualitzacions descarregades de l\'emmagatzematge intern</string>
   <string name="confirm_delete_dialog_message">Vols esborrar el fitxer d\'actualització seleccionat?</string>
@@ -65,10 +74,12 @@
   <string name="delete_updates_failure_message">Hi ha hagut un error esborrant l\'arxiu d\'actualització</string>
   <string name="delete_updates_noFolder_message">No s\'ha trobat la carpeta de l\'actualització</string>
   <string name="delete_updates_success_message">Totes les actualitzacions descarregades s\'han esborrat</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Dispositiu:</string>
   <string name="sysinfo_running">Executant:</string>
   <string name="sysinfo_update_channel">Canal d\'actualitzacions:</string>
   <string name="sysinfo_last_check">Darrera verificació:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">No hi ha un registre de canvis disponible</string>
   <string name="changelog_dialog_title">Registre de canvis</string>
   <string name="loading_changelog">S\'està carregant\u2026</string>

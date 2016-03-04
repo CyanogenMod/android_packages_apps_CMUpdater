@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Posodobilnik CM</string>
   <string name="display_name">Posodobitve</string>
   <string name="unknown">Neznano</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Osveži</string>
   <string name="menu_delete_all">Izbriši prenose</string>
   <string name="menu_system_info">Sistemski podatki</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Prekliči</string>
   <string name="dialog_update">Posodobi</string>
   <string name="dialog_close">Zapri</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Razpoložljive posodobitve</string>
   <string name="no_available_updates_intro">Ob zadnjem preverjanju ni bilo najdenih novih posodobitev. Da ročno preverite za posodobitve, uporabite gumb Osveži.</string>
   <string name="no_available_updates_intro_tv">Zadnje preverjanje ni našlo razpoložljivih posodobitev. Da ročno preverite za nove posodobitve, kliknite \'Sistemski podatki\'.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Tedensko</string>
   <string name="check_bi_weekly">Dvakrat tedensko</string>
   <string name="check_monthly">Mesečno</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Preverjanje za posodobitve</string>
   <string name="no_updates_found">Ni najdenih novih posodobitev</string>
   <string name="update_check_failed">Preverjanje za posodobitve je spodletelo. Preverite svojo internetno povezavo in poskusite znova kasneje.</string>
@@ -41,8 +45,10 @@
   <string name="not_new_updates_found_title">Nove posodobitve</string>
   <string name="not_action_download">Prenesi</string>
   <string name="data_connection_required">Zahtevana je podatkovna povezava.</string>
+  <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Dovoljenje ni odobreno</string>
   <string name="permission_not_granted_dialog_message">Dovoljenje za pisanje na zunanjo pomnilniško napravo ni bilo odobreno. Posodobitve ni mogoče prejeti.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Prekliči prenos</string>
   <string name="confirm_download_cancelation_dialog_message">Prekliči trenutni prenos?</string>
   <string name="download_cancelled">Prenos preklican</string>
@@ -53,10 +59,13 @@
   <string name="not_download_failure">Prenos posodobitve je bil uspešen</string>
   <string name="not_action_install_update">Ponovno zaženi in namesti</string>
   <string name="not_download_install_notice">Posodobitev <xliff:g id="filename">%s</xliff:g> je bila uspešno prenesena. Ko se boste dotaknili \'Ponovno zaženi in namesti\', se bo naprava ponovno zagnala in namestila posodobitev.\n\nOpomba: Za samodejno namestitev je zahtevana združljiva Obnovitev.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Preverjanje MD5 je spodletelo</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Uveljavi posodobitev</string>
   <string name="apply_update_dialog_text">Ste pred nadgradnjo na <xliff:g id="filename">%s</xliff:g>.\n\nČe pritisnete Posodobi, se bo naprava ponovno zagnala v obnovitvenem načinu, da se namesti posodobitev.\n\nOpomba: Ta značilnost zahteva združljivo Obnovitev ali pa boste morali posodobitve namestiti ročno.</string>
   <string name="apply_unable_to_reboot_toast">Ponovni zagon v obnovitev ni mogoč</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Izbriši datoteko</string>
   <string name="confirm_delete_dialog_title_tv">Kliknite, da odstranite vse prenesene posodobitve iz notranje pomnilniške naprave</string>
   <string name="confirm_delete_dialog_message">Izbriši izbrano posodobitveno datoteko?</string>
@@ -65,10 +74,12 @@
   <string name="delete_updates_failure_message">Napaka pri brisanju posodobitvene datoteke</string>
   <string name="delete_updates_noFolder_message">Mapa za posodobitve ni bila najdena</string>
   <string name="delete_updates_success_message">Vse prenesene posodobitve izbrisane</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Naprava:</string>
   <string name="sysinfo_running">V izvajanju:</string>
   <string name="sysinfo_update_channel">Posodobitveni kanal:</string>
   <string name="sysinfo_last_check">Zadnje preverjanje:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Dnevnik sprememb ni na voljo</string>
   <string name="changelog_dialog_title">Dnevnik sprememb</string>
   <string name="loading_changelog">Nalaganje \u2026</string>

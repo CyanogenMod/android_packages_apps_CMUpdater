@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Atualizador CM</string>
   <string name="display_name">Atualizações</string>
   <string name="unknown">Desconhecido</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Atualizar</string>
   <string name="menu_delete_all">Excluir downloads</string>
   <string name="menu_system_info">Info. do sistema</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Cancelar</string>
   <string name="dialog_update">Atualizar</string>
   <string name="dialog_close">Fechar</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Atualizações disponíveis</string>
   <string name="no_available_updates_intro">A ultima verificação não encontrou nenhuma atualização. Para verificar manualmente por novas atualizações, use o botão Atualizar</string>
   <string name="no_available_updates_intro_tv">A última verificação não encontrou nenhuma atualização. Para verificar manualmente se há novas atualizações, clique em \"Informações do sistema\".</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Semanalmente</string>
   <string name="check_bi_weekly">Quinzenalmente</string>
   <string name="check_monthly">Mensalmente</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Verificando por atualizações</string>
   <string name="no_updates_found">Nenhuma atualização foi encontrada</string>
   <string name="update_check_failed">Falha ao verificar por atualização. Favor verificar sua conexão com a internet e tentar novamente mais tarde.</string>
@@ -41,8 +45,10 @@
   <string name="not_new_updates_found_title">Novas atualizações</string>
   <string name="not_action_download">Baixar</string>
   <string name="data_connection_required">Uma conexão de dados é necessária</string>
+  <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Permissão não concedida</string>
   <string name="permission_not_granted_dialog_message">A permissão para escrever no armazenamento externo não foi concedida. Não é possível baixar a atualização.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Cancelar download</string>
   <string name="confirm_download_cancelation_dialog_message">Cancelar o download atual?</string>
   <string name="download_cancelled">Download foi cancelado</string>
@@ -53,7 +59,9 @@
   <string name="not_download_failure">Erro ao baixar a atualização</string>
   <string name="not_action_install_update">Reiniciar e instalar</string>
   <string name="not_download_install_notice">A atualização <xliff:g id="filename">%s</xliff:g> foi baixada com sucesso. Ao tocar \'Reiniciar e instalar\', o dispositivo irá reiniciar sozinho e instalar a atualização.\n\nNota: Uma Recuperação compatível é necessária para a atualização funcionar automaticamente.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Verificação MD5 falhou</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aplicar atualização</string>
   <string name="apply_update_dialog_text">Vocês está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.
 
@@ -62,6 +70,7 @@ Se você pressionar Atualizar, o dispositivo irá reiniciar no modo de Recupera�
 
 AVISO: Esta função requer uma Recuperação compatível ou as atualizações terão de ser instaladas manualmente.</string>
   <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar para a recuperação</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Excluir arquivo</string>
   <string name="confirm_delete_dialog_title_tv">Clique para remover todas as atualizações baixadas que estão no armazenamento interno</string>
   <string name="confirm_delete_dialog_message">Excluir o arquivo de atualização selecionado?</string>
@@ -70,10 +79,12 @@ AVISO: Esta função requer uma Recuperação compatível ou as atualizações t
   <string name="delete_updates_failure_message">Houve um erro ao excluir o arquivo de atualização</string>
   <string name="delete_updates_noFolder_message">Pasta de atualização não foi encontrada</string>
   <string name="delete_updates_success_message">Todas as atualizações foram excluídas</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Dispositivo:</string>
   <string name="sysinfo_running">Rodando:</string>
   <string name="sysinfo_update_channel">Canal de atualização:</string>
   <string name="sysinfo_last_check">Última verificação:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Nenhum registro de mudanças disponível</string>
   <string name="changelog_dialog_title">Registro de mudanças</string>
   <string name="loading_changelog">Carregando\u2026</string>
