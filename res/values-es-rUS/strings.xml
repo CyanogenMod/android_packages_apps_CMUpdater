@@ -10,19 +10,77 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
+  <string name="app_name">CM Updater</string>
+  <string name="display_name">Actualizaciones</string>
+  <string name="unknown">Desconocido</string>
   <!-- Menu and dialog box strings -->
+  <string name="menu_refresh">Actualizar</string>
+  <string name="menu_delete_all">Eliminar descargas</string>
+  <string name="menu_system_info">Información del sistema</string>
+  <string name="menu_system_info_tv">Información del sistema: haz clic para actualizar la lista</string>
+  <string name="dialog_ok">Aceptar</string>
+  <string name="dialog_cancel">Cancelar</string>
+  <string name="dialog_update">Actualizar</string>
+  <string name="dialog_close">Cerrar</string>
   <!-- Settings strings -->
+  <string name="available_updates_title">Actualizaciones disponibles</string>
   <string name="no_available_updates_intro">La última comprobación no encontró actualizaciones disponibles. Para buscar nuevas actualizaciones, utiliza el botón Actualizar.</string>
+  <string name="no_available_updates_intro_tv">La última comprobación no encontró ninguna actualización disponible. Para comprobar manualmente nuevas actualizaciones, haz clic en \'Información del sistema\'.</string>
+  <string name="new_update_summary">Nuevo</string>
+  <string name="downloaded_update_summary">Descargada</string>
+  <string name="installed_update_summary">Instalados</string>
+  <string name="update_check_title">Buscar actualizaciones</string>
+  <string name="check_manual">Manual</string>
+  <string name="check_on_boot">En cada inicio</string>
+  <string name="check_twice_daily">Dos veces al día</string>
+  <string name="check_daily">Diariamente</string>
+  <string name="check_weekly">Semanalmente</string>
+  <string name="check_bi_weekly">Cada dos semanas</string>
+  <string name="check_monthly">Mensualmente</string>
   <!-- Update checking -->
+  <string name="checking_for_updates">Buscando actualizaciones</string>
+  <string name="no_updates_found">No se encontraron nuevas actualizaciones</string>
   <string name="update_check_failed">Error en la búsqueda de actualizaciones. Comprueba tu conexión a internet e intenta de nuevo más tarde.</string>
+  <string name="not_new_updates_found_ticker">Hay nuevas actualizaciones disponibles</string>
+  <string name="not_new_updates_found_title">Nuevas actualizaciones</string>
+  <string name="not_action_download">Descargas</string>
+  <string name="data_connection_required">Se necesita una conexión de datos.</string>
   <!-- Permission check -->
+  <string name="permission_not_granted_dialog_title">Permiso no concedido</string>
+  <string name="permission_not_granted_dialog_message">No se concedió el permiso para escribir en almacenamiento externo. No se puede descargar la actualización.</string>
   <!-- Downloads -->
+  <string name="confirm_download_cancelation_dialog_title">Cancelar descarga</string>
+  <string name="confirm_download_cancelation_dialog_message">¿Cancelar la descarga actual?</string>
+  <string name="download_cancelled">Descarga cancelada</string>
+  <string name="download_already_running">Hay una descarga en curso</string>
+  <string name="unable_to_download_file">No se pudo descargar el archivo de actualización</string>
+  <string name="download_not_found">Descarga no encontrada</string>
+  <string name="not_download_success">Actualización descargada exitosamente</string>
+  <string name="not_download_failure">La descarga de la actualización no se completó</string>
+  <string name="not_action_install_update">Reiniciar e instalar</string>
   <string name="not_download_install_notice">La actualización <xliff:g id="filename">%s</xliff:g> se descargó correctamente. Al pulsar \"Reiniciar e instalar\", el dispositivo se reiniciará para instalar la actualización.\n\nNota: se requiere una recuperación compatible para que la instalación funcione automáticamente.</string>
   <!-- MD5 related strings -->
+  <string name="md5_verification_failed">Error de verificación MD5</string>
   <!-- Apply update strings -->
+  <string name="apply_update_dialog_title">Aplicar la actualización</string>
   <string name="apply_update_dialog_text">Estás por actualizar a <xliff:g id="filename">%s</xliff:g>.\n\nSi presionas Actualizar, se reiniciará el dispositivo en modo recuperación para instalar la actualización.\n\nNota: esta función requiere una recuperación compatible o las actualizaciones deberán instalarse manualmente.</string>
   <string name="apply_unable_to_reboot_toast">No se pudo reiniciar en modo recuperación</string>
   <!-- deleting -->
+  <string name="confirm_delete_dialog_title">Eliminar archivo</string>
+  <string name="confirm_delete_dialog_title_tv">Haz clic para eliminar todas las actualizaciones descargadas en el almacenamiento interno</string>
+  <string name="confirm_delete_dialog_message">¿Eliminar el archivo de actualización seleccionado?</string>
+  <string name="confirm_delete_all_dialog_message">¿Eliminar todos los archivos de actualizaciones descargados?</string>
+  <string name="delete_single_update_success_message">Actualización <xliff:g id="filename">%s</xliff:g> eliminada</string>
+  <string name="delete_updates_failure_message">Ocurrió un error al eliminar el archivo de actualización</string>
+  <string name="delete_updates_noFolder_message">No se encontró la carpeta de actualizaciones</string>
+  <string name="delete_updates_success_message">Se eliminaron todas las actualizaciones descargadas</string>
   <!-- System info strings -->
+  <string name="sysinfo_device">Dispositivo:</string>
+  <string name="sysinfo_running">Ejecutando:</string>
+  <string name="sysinfo_update_channel">Canal de actualización:</string>
+  <string name="sysinfo_last_check">Última comprobación:</string>
   <!-- changelog strings -->
+  <string name="no_changelog_alert">Registro de cambios no disponible</string>
+  <string name="changelog_dialog_title">Changelog</string>
+  <string name="loading_changelog">Cargando\u2026</string>
 </resources>

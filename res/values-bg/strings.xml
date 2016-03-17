@@ -47,7 +47,7 @@
   <string name="data_connection_required">Нужна е връзка с интернет.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Разрешение не е предоставено</string>
-  <string name="permission_not_granted_dialog_message">Не е дадено разрешение за запис на външна памет за съхранение. Актуализацията не може да се изтегли.</string>
+  <string name="permission_not_granted_dialog_message">Не е дадено разрешение за запис на външна памет за съхранение. Не може да изтеглите актуализацията.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Отказ от изтеглянето</string>
   <string name="confirm_download_cancelation_dialog_message">Да бъде ли отказано текущото изтегляне?</string>

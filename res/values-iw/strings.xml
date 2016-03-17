@@ -14,17 +14,17 @@
   <string name="display_name">עדכונים</string>
   <string name="unknown">לא ידוע</string>
   <!-- Menu and dialog box strings -->
-  <string name="menu_refresh">רענן</string>
+  <string name="menu_refresh">רענון</string>
   <string name="menu_delete_all">מחק הורדות</string>
   <string name="menu_system_info">מידע מערכת</string>
-  <string name="menu_system_info_tv">מידע מערכת: לחץ כדי לרענן את רשימת העדכונים</string>
+  <string name="menu_system_info_tv">מידע מערכת: לחץ לרענון רשימת העדכונים</string>
   <string name="dialog_ok">אישור</string>
   <string name="dialog_cancel">ביטול</string>
   <string name="dialog_update">עדכן</string>
   <string name="dialog_close">סגור</string>
   <!-- Settings strings -->
   <string name="available_updates_title">עדכונים זמינים</string>
-  <string name="no_available_updates_intro">הבדיקה האחרונה לא מצאה אף עדכון. כדי לבדוק באופן ידני, השתמש במקש \"רענן\".</string>
+  <string name="no_available_updates_intro">הבדיקה האחרונה לא מצאה אף עדכון. כדי לבדוק באופן ידני, השתמש בלחצן \"רענון\".</string>
   <string name="no_available_updates_intro_tv">לא נמצאו עדכונים זמינים בבדיקה האחרונה. כדי לבצע בדיקה באופן ידני, לחץ על \"מידע מערכת\".</string>
   <string name="new_update_summary">חדש</string>
   <string name="downloaded_update_summary">הורד</string>
@@ -52,26 +52,26 @@
   <string name="confirm_download_cancelation_dialog_title">בטל הורדה</string>
   <string name="confirm_download_cancelation_dialog_message">לבטל את ההורדה הנוכחית?</string>
   <string name="download_cancelled">ההורדה בוטלה</string>
-  <string name="download_already_running">הורדה כבר מתבצעת</string>
+  <string name="download_already_running">ההורדה כבר מתבצעת</string>
   <string name="unable_to_download_file">הורדת קובץ העדכון נכשלה</string>
   <string name="download_not_found">ההורדה לא נמצאה</string>
   <string name="not_download_success">העדכון הורד בהצלחה</string>
   <string name="not_download_failure">הורדת העדכון נכשלה</string>
   <string name="not_action_install_update">אתחל והתקן</string>
-  <string name="not_download_install_notice">העדכון <xliff:g id="filename">%s</xliff:g> הורד בהצלחה. כאשר תלחץ על \'אתחל והתקן\', המכשיר יאתחל את עצמו ויתקין את העדכון.\n\nשים לב: דרוש Recovery מתאים בשביל שההתקנה תעבוד באופן אוטומטי.</string>
+  <string name="not_download_install_notice">העדכון <xliff:g id="filename">%s</xliff:g> הורד בהצלחה. כאשר תלחץ על \'אתחל והתקן\', המכשיר יאתחל את עצמו ויתקין את העדכון.\n\nשים לב: דרוש שחזור מתאים כדי שההתקנה תעבוד באופן אוטומטי.</string>
   <!-- MD5 related strings -->
   <string name="md5_verification_failed">אימות MD5 נכשל</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">החל עדכון</string>
-  <string name="apply_update_dialog_text">אתה עומד לעדכן ל-<xliff:g id="filename">%s</xliff:g>.\n\nאם תלחץ על \"עדכן\", המכשיר יאתחל את עצמו למצב \"Rocovery\" על מנת להתקין את העדכון.\n\nהערה: אפשרות זו דורשת Recovery תואם, או שפעולת התקנת העדכונים תיאלץ להיעשות באופן ידני.</string>
-  <string name="apply_unable_to_reboot_toast">נכשל לאתחל למצב \"Recovery\"</string>
+  <string name="apply_update_dialog_text">אתה עומד לשדרג ל-<xliff:g id="filename">%s</xliff:g>.\n\nאם תלחץ על \"עדכן\", המכשיר יאתחל את עצמו למצב \"שחזור\" על מנת להתקין את העדכון.\n\nהערה: אפשרות זו דורשת שחזור תואם, או שפעולת התקנת העדכונים תיאלץ להיעשות באופן ידני.</string>
+  <string name="apply_unable_to_reboot_toast">נכשל אתחול למצב \"שחזור\"</string>
   <!-- deleting -->
   <string name="confirm_delete_dialog_title">מחק קובץ</string>
   <string name="confirm_delete_dialog_title_tv">לחץ כאן כדי להסיר מהאחסון הפנימי את כל העדכונים שהורדו</string>
-  <string name="confirm_delete_dialog_message">אתה עומד למחוק את הקובץ הנוכחי, לחץ על \"כן\" להמשך.</string>
+  <string name="confirm_delete_dialog_message">אתה עומד למחוק את הקובץ העדכון שנבחר, לחץ על \"כן\" להמשך.</string>
   <string name="confirm_delete_all_dialog_message">אתה עומד למחוק את כל קובצי העדכון שהורדו, לחץ על \"כן\" להמשך.</string>
   <string name="delete_single_update_success_message">עדכון <xliff:g id="filename">%s</xliff:g> נמחק</string>
-  <string name="delete_updates_failure_message">אירעה שגיאה בעת הנסיון למחוק את הקובץ</string>
+  <string name="delete_updates_failure_message">אירעה שגיאה בעת הניסיון למחוק את הקובץ המעודכן</string>
   <string name="delete_updates_noFolder_message">תיקיית עדכונים לא נמצאה</string>
   <string name="delete_updates_success_message">כל העדכונים שהורדו נמחקו</string>
   <!-- System info strings -->
