@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">সিএম আধুনিকীকরণ</string>
   <string name="display_name">হালনাগাদ সমূহ</string>
   <string name="unknown">অজানা</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">রিফ্রেশ</string>
   <string name="menu_delete_all">ডাউনলোড সমূহ মুছে ফেলুন</string>
   <string name="menu_system_info">সিস্টেমের তথ্য</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">বাতিল</string>
   <string name="dialog_update">আধুনিকীকরণ</string>
   <string name="dialog_close">বন্ধ</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">হাল নাগাদ উপলব্ধ</string>
   <string name="no_available_updates_intro">শেষ পরীক্ষায় কোনো আপডেট খুঁজে পায়নি। নিজে নতুন আপডেটের পরীক্ষার জন্য, রিফ্রেশ বোতাম ব্যবহার করুন।</string>
   <string name="new_update_summary">নতুন</string>
@@ -33,6 +36,7 @@
   <string name="check_weekly">সাপ্তাহিক</string>
   <string name="check_bi_weekly">অর্ধ সাপ্তাহিক</string>
   <string name="check_monthly">মাসিক</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">হালনাগাদের জন্য পরীক্ষা করা হচ্ছে</string>
   <string name="no_updates_found">কোন নতুন হালনাগাদের সন্ধান পাওয়া যায়নি</string>
   <string name="update_check_failed">আধুনিকীকরণ পরীক্ষা ব্যর্থ হয়েছে। অনুগ্রহ করে আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং পরে আবার চেষ্টা করুন।</string>
@@ -40,6 +44,7 @@
   <string name="not_new_updates_found_title">নতুন হালনাগাদ গুলো</string>
   <string name="not_action_download">ডাউনলোড</string>
   <string name="data_connection_required">ডাটা কানেকশন দরকার।</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">ডাউনলোড বাতিল</string>
   <string name="confirm_download_cancelation_dialog_message">বর্তমান ডাউনলোডটি বাতিল করতে চান?</string>
   <string name="download_cancelled">ডাউনলোড বাতিল করা হয়েছে</string>
@@ -50,10 +55,13 @@
   <string name="not_download_failure">আধুনিকীকরণ ডাউনলোড ব্যর্থ হয়েছে</string>
   <string name="not_action_install_update">পুনরায় চালু এবং ইন্সটল করুন</string>
   <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> আধুনিকীকরণ সফলভাবে ডাউনলোড করা হয়েছে। যখন \'পুনরায় বুট এবং ইনস্টল\' স্পর্শ করা হবে, ডিভাইসটি নিজেই পুনরায় চালু হবে আধুনিকীকরণ ইনস্টল করতে।\n\nদ্রষ্টব্যঃ একটি সামঞ্জস্যপূর্ণ পুনরুদ্ধারের প্রয়োজন হবে ইনস্টলেশন স্বয়ংক্রিয়ভাবে হওয়ার জন্য।</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 যাচাইকরণের ব্যর্থ হয়েছে</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">আধুনিকীকরণ প্রয়োগ করুন</string>
   <string name="apply_update_dialog_text">আপনি আধুনিকীকরণ করতে চলেছেন <xliff:g id="filename">%s</xliff:g>।\n\nআপনি যদি আধুনিকীকরণ চাপেন, ডিভাইসটি নিজেই পুনরায় চালু হবে পুনরুদ্ধারের মোডে আধুনিকীকরণ ইনস্টল করতে।\n\nদ্রষ্টব্যঃ এই বৈশিষ্ট্যটির একটি সামঞ্জস্যপূর্ণ পুনরুদ্ধারের প্রয়োজন হবে অথবা ম্যানুয়ালী ইনস্টল করতে হবে।</string>
   <string name="apply_unable_to_reboot_toast">পুনরুদ্ধারে পুনরায় চালু করতে অক্ষম</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">ফাইল ডিলিট করুন</string>
   <string name="confirm_delete_dialog_title_tv">অভ্যন্তরীণ ভাণ্ডার থেকে ডাউনলোড করা সকল আধুনিকীকরণ অপসারণ করতে ক্লিক করুন</string>
   <string name="confirm_delete_dialog_message">নির্বাচিত আধুনিকীকরণ ফাইল গুলি মুছে দিতে চান?</string>
@@ -62,10 +70,12 @@
   <string name="delete_updates_failure_message">আধুনিকীকরণ ফাইলটি মুছে ফেলার সময় একটি ত্রুটি ছিল</string>
   <string name="delete_updates_noFolder_message">আধুনিকীকরণ ফোল্ডার খুঁজে পাওয়া যায়নি</string>
   <string name="delete_updates_success_message">সব ডাউনলোড করা আধুনিকীকরণ মুছে ফেলা হয়েছে</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">ডিভাইসঃ</string>
   <string name="sysinfo_running">চলমানঃ</string>
   <string name="sysinfo_update_channel">আধুনিকীকরণ চ্যানেলঃ</string>
   <string name="sysinfo_last_check">সর্বশেষ পরীক্ষাঃ</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">কোন পরিবর্তন পাওয়া যায়নি</string>
   <string name="changelog_dialog_title">পরিবর্তন</string>
   <string name="loading_changelog">লোড হচ্ছে\u2026</string>

@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM ನವೀಕರಣಕರ್ತ</string>
   <string name="display_name">ನವೀಕರಣೆಗಳು</string>
   <string name="unknown">ಅಜ್ಞಾತ</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">ರಿಫ್ರೆಶ್</string>
   <string name="menu_delete_all">ಡೌನ್‍ಲೋಡ್‍ಗಳನ್ನು ಅಳಿಸು</string>
   <string name="menu_system_info">ಸಿಸ್ಟಂ ಮಾಹಿತಿ</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">ರದ್ದು</string>
   <string name="dialog_update">ನವೀಕರಿಸು</string>
   <string name="dialog_close">ಮುಚ್ಚು</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">ಲಭ್ಯವಿರುವ ನವೀಕರಣೆಗಳು</string>
   <string name="no_available_updates_intro">ಕಳೆದ ಬಾರಿ ಪರೀಕ್ಷಿಸಿದಾಗ ಯಾವುದೇ ಲಭ್ಯವಿರುವ ನವೀಕರಣೆಗಳು ಪತ್ತೆಯಾಗಿರಲಿಲ್ಲ. ಹೊಸ ನವೀಕರಣೆಗಳಿಗಾಗಿ ನೀವೇ ಸ್ವತಃ ಪರೀಕ್ಷಿಸಲು ರೀಫ್ರೆಶ್ ಬಟನ್ ಉಪಯೋಗಿಸಿ.</string>
   <string name="no_available_updates_intro_tv">ಕಳೆದ ಬಾರಿ ಪರೀಕ್ಷಿಸಿದಾಗ ಯಾವುದೇ ಲಭ್ಯವಿರುವ ನವೀಕರಣೆಗಳು ಪತ್ತೆಯಾಗಿರಲಿಲ್ಲ. ಹೊಸ ನವೀಕರಣೆಗಳಿಗಾಗಿ ನೀವೇ ಸ್ವತಃ ಪರೀಕ್ಷಿಸಲು, \'ಸಿಸ್ಟಂ ಮಾಹಿತಿ\'ಯನ್ನು ಒತ್ತಿ.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">ವಾರಕ್ಕೊಮ್ಮೆ</string>
   <string name="check_bi_weekly">ಪಾಕ್ಷಿಕ</string>
   <string name="check_monthly">ತಿಂಗಳಿಗೊಮ್ಮೆ</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">ನವೀಕರಣೆಗಳಿಗಾಗಿ ಪರೀಕ್ಷಿಸುತ್ತಿದೆ</string>
   <string name="no_updates_found">ಯಾವುದೇ ಹೊಸ ನವೀಕರಣೆಗಳು ಪತ್ತೆಯಾಗಲಿಲ್ಲ</string>
   <string name="update_check_failed">ನವೀಕರಣೆ ಪರಿಶೀಲನೆ ವಿಫಲವಾಗಿದೆ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಅಂತರ್ಜಾಲ ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ ನಂತರ ಪ್ರಯತ್ನಿಸಿ.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">ಹೊಸ ನವೀಕರಣೆಗಳು</string>
   <string name="not_action_download">ಡೌನ್‍ಲೋಡ್</string>
   <string name="data_connection_required">ಡೇಟಾ ಸಂಪರ್ಕದ ಅಗತ್ಯವಿದೆ.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">ಡೌನ್‍ಲೋಡ್ ರದ್ದುಗೊಳಿಸಿ</string>
   <string name="confirm_download_cancelation_dialog_message">ಪ್ರಸ್ತುತ ಡೌನ್‍ಲೋಡ್ ರದ್ದುಗೊಳಿಸುವುದೇ?</string>
   <string name="download_cancelled">ಡೌನ್‍ಲೋಡ್ ರದ್ದುಗೊಳಿಸಲಾಗಿದೆ</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">ನವೀಕರಣೆ ಡೌನ್‍ಲೋಡ್ ಅಸಫಲವಾಗಿದೆ</string>
   <string name="not_action_install_update">ರಿಬೂಟ್ ಮಾಡಿ ಸ್ಥಾಪಿಸು</string>
   <string name="not_download_install_notice">ನವೀಕರಣೆ <xliff:g id="filename">%s</xliff:g> ಯಶಸ್ವಿಯಾಗಿ ಡೌನ್‍ಲೋಡ್ ಆಗಿದೆ. \'ರಿಬೂಟ್ ಮಾಡಿ ಸ್ಥಾಪಿಸು\' ಸ್ಪರ್ಶಿಸಿದಾಗ, ಸಾಧನವು ನವೀಕರಣೆಯನ್ನು ಸ್ಥಾಪಿಸಲು  ಸ್ವಯಂ ರೀಸ್ಟಾರ್ಟ್‍ಗೊಳ್ಳುತ್ತದೆ.\n\nಗಮನಿಸಿ: ಸ್ಥಾಪನೆಯು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಕೆಲಸ ಮಾಡಲು ಹೊಂದಿಕೊಳ್ಳುವ ರಿಕವರಿಯ ಅಗತ್ಯವಿದೆ.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 ಪ್ರಮಾಣೀಕರಣ ವಿಫಲವಾಗಿದೆ</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">ನವೀಕರಣೆ ಅನ್ವಯಿಸು</string>
   <string name="apply_update_dialog_text">ನೀವು ಈಗ <xliff:g id="filename">%s</xliff:g>ಗೆ ಅಪ್‍ಗ್ರೇಡ್ ಮಾಡಲು ಹೋಗುತ್ತಿದ್ದೀರಿ.\n\nನೀವು ನವೀಕರಿಸು ಒತ್ತಿದರೆ, ಸಾಧನವು ನವೀಕರಣೆಯನ್ನು ಸ್ಥಾಪಿಸಲು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ರಿಕವರಿ ಮೂಡ್‍ಗೆ ರೀಸ್ಟಾರ್ಟ್ ಆಗುತ್ತದೆ.\n\nಗಮನಿಸಿ: ಈ ವೈಶಿಷ್ಟ್ಯಕ್ಕೆ ಹೊಂದಿಕೊಳ್ಳುವ ರಿಕವರಿಯ ಅಗತ್ಯವಿದೆ ಇಲ್ಲವಾದರೆ ನವೀಕರಣೆಯನ್ನು ನೀವೇ ಸ್ವತಃ ಸ್ಥಾಪಿಸಬೇಕಾಗುತ್ತದೆ.</string>
   <string name="apply_unable_to_reboot_toast">ರಿಕವರಿಗೆ ರಿಬೂಟ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">ಕಡತವನ್ನು ಅಳಿಸು</string>
   <string name="confirm_delete_dialog_title_tv">ಡೌನ್‍ಲೋಡ್ ಮಾಡಲಾದ ಎಲ್ಲಾ ನವೀಕರಣೆಗಳನ್ನು ಆಂತರಿಕ ಸಂಗ್ರಹಣೆಯಿಂದ ಅಳಿಸಲು ಸ್ಪರ್ಶಿಸಿ</string>
   <string name="confirm_delete_dialog_message">ಆಯ್ಕೆಮಾಡಿದ ನವೀಕರಣೆ ಕಡತ ಅಳಿಸುವುದೇ?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">ನವೀಕರಣೆ ಕಡತವನ್ನು ಅಳಿಸಲು ಒಂದು ದೋಷವಿದೆ</string>
   <string name="delete_updates_noFolder_message">ನವೀಕರಣೆ ಫೋಲ್ಡರ್ ಪತ್ತೆಯಾಗಲಿಲ್ಲ</string>
   <string name="delete_updates_success_message">ಎಲ್ಲಾ ಡೌನ್‍ಲೋಡ್ ಮಾಡಿದ ನವೀಕರಣೆಗಳನ್ನು ಅಳಿಸಲಾಗಿದೆ</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">ಸಾಧನ:</string>
   <string name="sysinfo_running">ಚಾಲನೆಯಲ್ಲಿರುವುದು:</string>
   <string name="sysinfo_update_channel">ನವೀಕರಣೆ ಚಾನೆಲ್:</string>
   <string name="sysinfo_last_check">ಕೊನೆಯ ಪರಿಶೀಲನೆ:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">ಯಾವುದೇ ಬದಲಾವಣೆಲಾಗ್ ಲಭ್ಯವಿಲ್ಲ</string>
   <string name="changelog_dialog_title">ಬದಲಾವಣೆಲಾಗ್</string>
   <string name="loading_changelog">ಲೋಡಿಂಗ್\u2026</string>

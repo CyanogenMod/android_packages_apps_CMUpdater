@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">СМ Ажурирање</string>
   <string name="display_name">Ажурирања</string>
   <string name="unknown">Непознато</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Освежи</string>
   <string name="menu_delete_all">Избриши преузимања</string>
   <string name="menu_system_info">Информације о систему</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Откажи</string>
   <string name="dialog_update">Ажурирај</string>
   <string name="dialog_close">Затвори</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Доступна ажурирања</string>
   <string name="no_available_updates_intro">Последња провера није нашла никаква доступна ажурирања. Да би ручно проверио за нова ажурирања, користи дугме за освежавање.</string>
   <string name="no_available_updates_intro_tv">Задња провера није пронашла доступна ажурирања. Да ручно провериш нова ажурирања додирни \'Системске информације\'.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Недељно</string>
   <string name="check_bi_weekly">Двонедељно</string>
   <string name="check_monthly">Месечно</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Провера за ажурирања</string>
   <string name="no_updates_found">Нису пронађена нова ажурирања</string>
   <string name="update_check_failed">Провера за ажурирања није успела. Провери своју интернет везу и покушај поново касније.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Нова ажурирања</string>
   <string name="not_action_download">Преузимање</string>
   <string name="data_connection_required">Неопходна је веза за пренос података.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Откажи преузимање</string>
   <string name="confirm_download_cancelation_dialog_message">Откажи тренутно преузимање?</string>
   <string name="download_cancelled">Преузимање je отказано</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Ажурирање није успешно преузето</string>
   <string name="not_action_install_update">Рестартуј и инсталирај</string>
   <string name="not_download_install_notice">Ажурирање <xliff:g id="filename">%s</xliff:g> је успешно преузето. Када додирнеш \'Рестартуј и инсталирај\', уређај ће се поново покренути да инсталира ажурирање.\n\nНапомена: Компатибилни \'Опоравак\' је потребан за аутоматску инсталацију.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 провера није успела</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Примени ажурирање</string>
   <string name="apply_update_dialog_text">Надоградња на <xliff:g id="filename">%s</xliff:g>.\n\nАко притиснеш Ажурирај, уређај ће се поново покренути у \'Опоравак\' да инсталира ажурирање.\n\nНапомена: Ова функција захтева компатибилни \'Опоравак\' или ћеш морати ажурирање да инсталираш ручно.</string>
   <string name="apply_unable_to_reboot_toast">Немогуће да се рестартује у опоравак</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Избриши фајл</string>
   <string name="confirm_delete_dialog_title_tv">Додирни да уклониш сва скинута ажурирања из унутрашњег складишта</string>
   <string name="confirm_delete_dialog_message">Избриши изабрани фајл за ажурирање?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Дошло је до грешке приликом брисања фајла за ажурирање</string>
   <string name="delete_updates_noFolder_message">Фасцикла Ажурирање није пронађена</string>
   <string name="delete_updates_success_message">Сва преузета ажурирања су избрисана</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Уређај:</string>
   <string name="sysinfo_running">Систем:</string>
   <string name="sysinfo_update_channel">Канал ажурирања:</string>
   <string name="sysinfo_last_check">Последња провера:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Нема доступних евиденција измена</string>
   <string name="changelog_dialog_title">Евиденција измена</string>
   <string name="loading_changelog">Учитавање\u2026</string>

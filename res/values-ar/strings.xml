@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">مُحدّث CM</string>
   <string name="display_name">التحديثات</string>
   <string name="unknown">غير معروف</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">تحديث</string>
   <string name="menu_delete_all">حذف التنزيلات</string>
   <string name="menu_system_info">معلومات النظام</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">الغاء</string>
   <string name="dialog_update">تحديث</string>
   <string name="dialog_close">إغلاق</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">التحديثات المتوفرة</string>
   <string name="no_available_updates_intro">لم يعثر آخر فحص على أي تحديثات متاحة. للفحص يدوياً عن تحديثات جديدة، استخدم زر تحديث.</string>
   <string name="no_available_updates_intro_tv">المسح الأخير لم يجد أية تحديثات متوفرة. للبحث عن التحديثات الجديدة يدوياً، استخدم زر ’معلومات النظام‘.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">أسبوعياً</string>
   <string name="check_bi_weekly">مرتين أسبوعيا</string>
   <string name="check_monthly">شهرياً</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">التحقق من وجود تحديثات</string>
   <string name="no_updates_found">عدم العثور على تحديثات جديدة</string>
   <string name="update_check_failed">فشل التحقق من وجود تحديث. الرجاء التحقق من اتصالك بالإنترنت وأعد المحاولة لاحقاً.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">تحديثات جديدة</string>
   <string name="not_action_download">تنزيل</string>
   <string name="data_connection_required">مطلوب اتصال بيانات.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">إلغاء التنزيل</string>
   <string name="confirm_download_cancelation_dialog_message">إلغاء التنزيل الحالي؟</string>
   <string name="download_cancelled">تم إلغاء التنزيل</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">فشل تحميل التحديث</string>
   <string name="not_action_install_update">إعادة تمهيد وتثبيت</string>
   <string name="not_download_install_notice">تم بنجاح تنزيل التحديث<xliff:g id="filename">%s</xliff:g> عند لمس \'إعادة التمهيد والتثبيت\'، الجهاز سيتم إعادة تشغيله لتثبيت التحديث. \n\n ملاحظة: الاسترداد المتوافق لازم لعلمية التثبيت للعمل بشكل تلقائي.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">فشل التحقق من صحة MD5</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">تطبيق التحديث</string>
   <string name="apply_update_dialog_text">أنت على وشك الترقية إلى<xliff:g id="filename">%s</xliff:g>.\n\n إذا قمت بالضغط على التحديث، الجهاز سيقوم بإعادة تشغيل نفسه في وضع الاسترداد لتثبيت التحديث.\n\n ملاحظة: تتطلب هذه الميزة عملية استرداد أو تحديثات متوافقة والتي سيلزم تثبيتها يدوياً.</string>
   <string name="apply_unable_to_reboot_toast">تعذر إعادة التمهيد في عملية الاسترداد</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">حذف الملف</string>
   <string name="confirm_delete_dialog_title_tv">انقر لإزالة كافة التحديثات التي تم تحميلها من سعة التخزين الداخلية</string>
   <string name="confirm_delete_dialog_message">حذف ملف التحديث المحدد؟</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">حدث خطأ أثناء حذف ملف التحديث</string>
   <string name="delete_updates_noFolder_message">تعذر العثور على مجلد التحديث</string>
   <string name="delete_updates_success_message">حذف كل التحديثات التي تم تنزيلها</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">الجهاز:</string>
   <string name="sysinfo_running">تشغيل:</string>
   <string name="sysinfo_update_channel">قناة التحديث:</string>
   <string name="sysinfo_last_check">التحقق الأخير:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">لا يتاح تغيير للسجل</string>
   <string name="changelog_dialog_title">سجل التغير</string>
   <string name="loading_changelog">تحميل\u2026</string>

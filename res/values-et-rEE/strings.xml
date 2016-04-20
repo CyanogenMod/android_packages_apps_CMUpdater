@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM Uuendaja</string>
   <string name="display_name">Uuendused</string>
   <string name="unknown">Teadmata</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Värskenda</string>
   <string name="menu_delete_all">Allalaetud failide kustutamine</string>
   <string name="menu_system_info">Süsteemi info</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Tühista</string>
   <string name="dialog_update">Uuenda</string>
   <string name="dialog_close">Sulge</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Saadaval uuendused</string>
   <string name="no_available_updates_intro">Viimasel kontrollimisel uuendusi ei leitud. Käsitsi kontrollimiseks kasutage Värskenda nuppu.</string>
   <string name="no_available_updates_intro_tv">Viimane kontroll ei leidnud ühtegi saadaolevat värskendust. Et käsitsi kontrollida uusi uuendusi, kliki \'Süsteemiteave\'.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Kord nädalas</string>
   <string name="check_bi_weekly">Kord kahe nädala jooksul</string>
   <string name="check_monthly">Kord kuus</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Kontrollin uuendusi</string>
   <string name="no_updates_found">Uusi uuendusi ei ole</string>
   <string name="update_check_failed">Uuenduste kontroll nurjus. Kontrollige oma internetiühendust ja proovige hiljem uuesti.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Uued uuendused</string>
   <string name="not_action_download">Lae alla</string>
   <string name="data_connection_required">Andmeühendus on nõutav.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Katkesta allalaadimine</string>
   <string name="confirm_download_cancelation_dialog_message">Kas katkestame praeguse allalaadimise?</string>
   <string name="download_cancelled">Allalaadimine katkestatud</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Uuenduse allalaadimine nurjus</string>
   <string name="not_action_install_update">Taaskäivita ja paigalda</string>
   <string name="not_download_install_notice">Uuendus <xliff:g id="filename">%s</xliff:g> laeti alla. Vajutades \'Taaskäivita ja paigalda\' nuppu seade taaskäivitub taastamise režiimi ja paigaldab uuenduse.\n\nPane tähele: kokkusobiva taastamise režiimi puudumisel tuleb uuendus paigaldada käsitsi.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 kontrollimine ebaõnnestus</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Rakenda uuendused</string>
   <string name="apply_update_dialog_text">Oled uuendamas versioonile <xliff:g id="filename">%s</xliff:g>.\n\nVajutades \'Uuenda\' nuppu seade taaskäivitub taastamise režiimi ja paigaldab uuenduse.\n\nPane tähele: kokkusobiva taastamise režiimi puudumisel tuleb uuendus paigaldada käsitsi.</string>
   <string name="apply_unable_to_reboot_toast">Taaskäivitamine taastamise režiimi nurjus</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Faili kustutamine</string>
   <string name="confirm_delete_dialog_title_tv">Kliki kõikide allalaetud uuenduste kustutamiseks sisemälust</string>
   <string name="confirm_delete_dialog_message">Kustuta valitud uuenduse fail?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Viga uuenduse faili kustutamisel</string>
   <string name="delete_updates_noFolder_message">Uuenduste kausta ei leitud</string>
   <string name="delete_updates_success_message">Kõik allalaetud uuendused on kustutatud</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Seade:</string>
   <string name="sysinfo_running">On töös:</string>
   <string name="sysinfo_update_channel">Uuenduste kanal:</string>
   <string name="sysinfo_last_check">Viimati kontrolliti:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Muudatuste nimekiri ei ole saadaval</string>
   <string name="changelog_dialog_title">Muudatuste nimekiri</string>
   <string name="loading_changelog">Alustamine\u2026</string>

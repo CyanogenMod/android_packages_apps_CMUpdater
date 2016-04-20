@@ -9,24 +9,27 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Atualizador CM</string>
   <string name="display_name">Atualizações</string>
   <string name="unknown">Desconhecido</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Atualizar</string>
   <string name="menu_delete_all">Excluir downloads</string>
   <string name="menu_system_info">Info. do sistema</string>
-  <string name="menu_system_info_tv">Informações do sistema: Clique para atualizar a lista de atualizações</string>
+  <string name="menu_system_info_tv">Informações do sistema: Clique para atualizar a lista</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Cancelar</string>
   <string name="dialog_update">Atualizar</string>
   <string name="dialog_close">Fechar</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Atualizações disponíveis</string>
-  <string name="no_available_updates_intro">A ultima verificação não encontrou nenhuma atualização. Para verificar manualmente por novas atualizações, use o botão Atualizar</string>
+  <string name="no_available_updates_intro">A ultima verificação não encontrou nenhuma atualização. Para verificar manualmente por novas atualizações, use o botão Atualizar.</string>
   <string name="no_available_updates_intro_tv">A última verificação não encontrou nenhuma atualização. Para verificar manualmente se há novas atualizações, clique em \"Informações do sistema\".</string>
-  <string name="new_update_summary">Novo</string>
-  <string name="downloaded_update_summary">Baixado</string>
-  <string name="installed_update_summary">Instalado</string>
-  <string name="update_check_title">Verificar por atualizações</string>
+  <string name="new_update_summary">Nova</string>
+  <string name="downloaded_update_summary">Baixada</string>
+  <string name="installed_update_summary">Instalada</string>
+  <string name="update_check_title">Verificar atualizações</string>
   <string name="check_manual">Manual</string>
   <string name="check_on_boot">Em toda inicialização</string>
   <string name="check_twice_daily">Duas vezes ao dia</string>
@@ -34,44 +37,46 @@
   <string name="check_weekly">Semanalmente</string>
   <string name="check_bi_weekly">Quinzenalmente</string>
   <string name="check_monthly">Mensalmente</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Verificando por atualizações</string>
-  <string name="no_updates_found">Nenhuma atualização foi encontrada</string>
-  <string name="update_check_failed">Falha ao verificar por atualização. Favor verificar sua conexão com a internet e tentar novamente mais tarde.</string>
-  <string name="not_new_updates_found_ticker">Novas atualizações estão disponíveis</string>
+  <string name="no_updates_found">Nenhuma atualização encontrada</string>
+  <string name="update_check_failed">Falha ao verificar por atualização. Verifique sua conexão com a internet e tente novamente mais tarde.</string>
+  <string name="not_new_updates_found_ticker">Novas atualizações disponíveis</string>
   <string name="not_new_updates_found_title">Novas atualizações</string>
   <string name="not_action_download">Baixar</string>
-  <string name="data_connection_required">Uma conexão de dados é necessária</string>
+  <string name="data_connection_required">Uma conexão de dados é necessária.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Cancelar download</string>
   <string name="confirm_download_cancelation_dialog_message">Cancelar o download atual?</string>
-  <string name="download_cancelled">Download foi cancelado</string>
-  <string name="download_already_running">Um download já está em andamento</string>
+  <string name="download_cancelled">Download cancelado</string>
+  <string name="download_already_running">Download já está em andamento</string>
   <string name="unable_to_download_file">Não foi possível baixar o arquivo de atualização</string>
-  <string name="download_not_found">Download não foi encontrado</string>
-  <string name="not_download_success">Atualização foi baixada com sucesso</string>
-  <string name="not_download_failure">Erro ao baixar a atualização</string>
+  <string name="download_not_found">Download não encontrado</string>
+  <string name="not_download_success">Atualização baixada com sucesso</string>
+  <string name="not_download_failure">Erro ao baixar atualização</string>
   <string name="not_action_install_update">Reiniciar e instalar</string>
-  <string name="not_download_install_notice">A atualização <xliff:g id="filename">%s</xliff:g> foi baixada com sucesso. Ao tocar \'Reiniciar e instalar\', o dispositivo irá reiniciar sozinho e instalar a atualização.\n\nNota: Uma Recuperação compatível é necessária para a atualização funcionar automaticamente.</string>
-  <string name="md5_verification_failed">Verificação MD5 falhou</string>
+  <string name="not_download_install_notice">A atualização <xliff:g id="filename">%s</xliff:g> foi baixada. Ao tocar \'Reiniciar e instalar\', o dispositivo irá reiniciar sozinho e instalar a atualização.\n\nObservação: Uma Recuperação compatível é necessária para a atualização funcionar automaticamente.</string>
+  <!-- MD5 related strings -->
+  <string name="md5_verification_failed">Falha na verificação MD5</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aplicar atualização</string>
-  <string name="apply_update_dialog_text">Vocês está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.
-
-Se você pressionar Atualizar, o dispositivo irá reiniciar no modo de Recuperação e instalar a atualização.
-
-
-AVISO: Esta função requer uma Recuperação compatível ou as atualizações terão de ser instaladas manualmente.</string>
-  <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar para a recuperação</string>
+  <string name="apply_update_dialog_text">Vocês está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.\n\nSe você pressionar Atualizar, o dispositivo irá reiniciar no modo de Recuperação e instalar a atualização.\n\nObservação: Esta função requer uma Recuperação compatível ou as atualizações terão de ser instaladas manualmente.</string>
+  <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar na recuperação</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Excluir arquivo</string>
   <string name="confirm_delete_dialog_title_tv">Clique para remover todas as atualizações baixadas que estão no armazenamento interno</string>
   <string name="confirm_delete_dialog_message">Excluir o arquivo de atualização selecionado?</string>
   <string name="confirm_delete_all_dialog_message">Excluir todos os arquivos de atualização baixados?</string>
-  <string name="delete_single_update_success_message">Atualização <xliff:g id="filename">%s</xliff:g> foi excluída</string>
+  <string name="delete_single_update_success_message">A atualização <xliff:g id="filename">%s</xliff:g> foi excluída</string>
   <string name="delete_updates_failure_message">Houve um erro ao excluir o arquivo de atualização</string>
-  <string name="delete_updates_noFolder_message">Pasta de atualização não foi encontrada</string>
-  <string name="delete_updates_success_message">Todas as atualizações foram excluídas</string>
+  <string name="delete_updates_noFolder_message">Pasta de atualização não encontrada</string>
+  <string name="delete_updates_success_message">Todas as atualizações baixadas foram excluídas</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Dispositivo:</string>
-  <string name="sysinfo_running">Rodando:</string>
+  <string name="sysinfo_running">Em execução:</string>
   <string name="sysinfo_update_channel">Canal de atualização:</string>
   <string name="sysinfo_last_check">Última verificação:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Nenhum registro de mudanças disponível</string>
   <string name="changelog_dialog_title">Registro de mudanças</string>
   <string name="loading_changelog">Carregando\u2026</string>

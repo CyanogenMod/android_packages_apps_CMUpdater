@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM Güncelleyici</string>
   <string name="display_name">Güncellemeler</string>
   <string name="unknown">Bilinmeyen</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Yenile</string>
   <string name="menu_delete_all">İndirilenleri sil</string>
   <string name="menu_system_info">Sistem bilgisi</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">İptal</string>
   <string name="dialog_update">Güncelle</string>
   <string name="dialog_close">Kapat</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">İndirilebilir güncellemeler</string>
   <string name="no_available_updates_intro">Son kontrolde güncelleme bulunamadı. Yeni güncellemeleri elle kontrol etmek için Yenile düğmesini kullanın.</string>
   <string name="no_available_updates_intro_tv">Son kontrolde güncelleme bulunmadı. Yeni güncellemeleri kontrol etmek için \'Sistem bilgisini\'ni tıklayın.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Haftalık</string>
   <string name="check_bi_weekly">İki haftada bir</string>
   <string name="check_monthly">Aylık</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Güncellemeler kontrol ediliyor</string>
   <string name="no_updates_found">Yeni güncelleme yok</string>
   <string name="update_check_failed">Güncelleme kontrolü başarısız oldu. Lütfen internet bağlantınızı kontrol edin ve daha sonra tekrar deneyin.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Yeni güncellemeler</string>
   <string name="not_action_download">İndir</string>
   <string name="data_connection_required">Veri bağlantısı gerekli</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">İndirmeyi iptal et</string>
   <string name="confirm_download_cancelation_dialog_message">Devam eden indirme iptal edilsin mi?</string>
   <string name="download_cancelled">İndirme iptal edildi</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Güncelleme indirme başarısız oldu</string>
   <string name="not_action_install_update">Yeniden başlat ve yükle</string>
   <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> güncellemesi başarıyla indirildi. \'Yeniden başlat ve Yükle\' ye dokunduğunuzda, cihaz güncellemeyi yüklemek için kendini yeniden başlatacak.\n\nNot: Yüklemenin otomatik çalışması için uygun bir Kurtarma ortamı gereklidir.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 doğrulama hatası</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Güncellemeyi uygula</string>
   <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> güncellemesi yapılacak.\n\nGüncelleye bastığınızda, güncellemeyi kurmak için cihaz kurtarma modunda yeniden başlatılacak.\n\nNot: Bu özellik, uyumlu bir Kurtarma bölümü gerektirir, aksi takdirde güncellemelerin elle kurulması gerekir.</string>
   <string name="apply_unable_to_reboot_toast">Kurtarma modu için sistem yeniden başlatılamadı</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Dosya sil</string>
   <string name="confirm_delete_dialog_title_tv">İndirilen tüm güncellemeleri dahili bellekten kaldırmak için tıklayın</string>
   <string name="confirm_delete_dialog_message">Seçilen güncelleme dosyası silinsin mi?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Güncelleme dosyasını silerken hata oluştu</string>
   <string name="delete_updates_noFolder_message">Güncelleme klasörü bulunamadı</string>
   <string name="delete_updates_success_message">İndirilen tüm güncellemeler silindi</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Cihaz:</string>
   <string name="sysinfo_running">Çalışan:</string>
   <string name="sysinfo_update_channel">Güncelleme kanalı:</string>
   <string name="sysinfo_last_check">Son kontrol:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Değişiklik kaydı yok</string>
   <string name="changelog_dialog_title">Değişiklik kaydı</string>
   <string name="loading_changelog">Yükleniyor\u2026</string>

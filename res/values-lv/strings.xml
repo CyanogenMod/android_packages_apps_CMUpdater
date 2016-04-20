@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM atjaunotājs</string>
   <string name="display_name">Atjaunojumi</string>
   <string name="unknown">Nezināms</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Atjaunot</string>
   <string name="menu_delete_all">Dzēst lejuplādes</string>
   <string name="menu_system_info">Sistēmas info</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Atcelt</string>
   <string name="dialog_update">Atjaunot</string>
   <string name="dialog_close">Aizvērt</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Pieejamie atjaunojumi</string>
   <string name="no_available_updates_intro">Pēdējās pārbaudes laikā atjaunojumi netika atrasti. Lai manuāli pārbaudītu atjaunojumus, izmantojiet pogu Atjaunot.</string>
   <string name="no_available_updates_intro_tv">Pēdējā pārbaude neatrada jaunus atjaunojumus. Lai meklētu atjaunojumus nospiediet \'Sistēmas Informācija\'.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Reizi nedēļā</string>
   <string name="check_bi_weekly">Reizi divās nedēļās</string>
   <string name="check_monthly">Reizi mēnesī</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Pārbauda atjaunojumus</string>
   <string name="no_updates_found">Jauni atjaunojumi nav atrasti</string>
   <string name="update_check_failed">Atjaunojuma pārbaude neizdevās. Lūdzu, pārbaudiet interneta savienojumu un mēģiniet vēlreiz vēlāk.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Jauni atjaunojumi</string>
   <string name="not_action_download">Lejuplādēt</string>
   <string name="data_connection_required">Nepieciešams datu savienojums.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Atcelt lejuplādi</string>
   <string name="confirm_download_cancelation_dialog_message">Atcelt lejuplādi?</string>
   <string name="download_cancelled">Lejuplāde atcelta</string>
@@ -51,11 +56,14 @@
   <string name="not_download_failure">Atjaunojuma lejuplāde neizdevās</string>
   <string name="not_action_install_update">Pārsāknēt un uzstādīt</string>
   <string name="not_download_install_notice">Atjaunojums <xliff:g id="filename">%s</xliff:g> ir veiksmīgi lejuplādēts. Pieskaroties \'Pārsāknēt un uzstādīt\', iekārta pārsāknēsies, lai uzstādītu atjaunojumu.\n\nPiezīme: lai uzstādīšana notiktu automātiski, nepieciešama saderīga atjaunošana.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 pārbaude izgāzās</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Uzstādīt atjaunojumu</string>
   <string name="apply_update_dialog_text">Tiks veikts atjaunojums uz <xliff:g id="filename">%s</xliff:g>.\n\nNospiežot Atjaunot, iekārta pārsāknēsies atjaunošanas režīmā, lai uzstādītu atjaunojumu.\n
         \nPiezīme: Automātiskai atjaunošanai nepieciešama saderīga atjaunošana, pretējā gadījumā atjaunojumus jāuzstāda manuāli.</string>
   <string name="apply_unable_to_reboot_toast">Neizdevās pārsāknēties atjaunošanas režīmā</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Dzēst failu</string>
   <string name="confirm_delete_dialog_title_tv">Spiediet, lai dzēstu visus lejuplādētos atjaunojumus no iekšējās atmiņas</string>
   <string name="confirm_delete_dialog_message">Dzēst izvēlēto atjaunojuma failu?</string>
@@ -64,10 +72,12 @@
   <string name="delete_updates_failure_message">Dzēšot atjaunojuma failu, notika kļūme</string>
   <string name="delete_updates_noFolder_message">Atjaunojumu mape netika atrasta</string>
   <string name="delete_updates_success_message">Visi lejuplādētie atjaunojumi izdzēsti</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Iekārta:</string>
   <string name="sysinfo_running">Darbojas:</string>
   <string name="sysinfo_update_channel">Atjaunojumu kanāls:</string>
   <string name="sysinfo_last_check">Pēdējā pārbaude:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Nav pieejams izmaiņu žurnāls</string>
   <string name="changelog_dialog_title">Izmaiņu žurnāls</string>
   <string name="loading_changelog">Ielādē\u2026</string>

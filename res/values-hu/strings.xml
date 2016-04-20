@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM Frissítő</string>
   <string name="display_name">Frissítések</string>
   <string name="unknown">Ismeretlen</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Frissítés</string>
   <string name="menu_delete_all">Letöltések törlése</string>
   <string name="menu_system_info">Rendszer információ</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Mégse</string>
   <string name="dialog_update">Frissítés</string>
   <string name="dialog_close">Bezárás</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Elérhető frissítések</string>
   <string name="no_available_updates_intro">Az utolsó ellenőrzés nem talált elérhető frissítést. A manuális ellenőrizéshez használja a Frissítés gombot</string>
   <string name="no_available_updates_intro_tv">Az utolsó ellenőrzés nem talált elérhető frissítést. A manuális ellenőrizéshez használja a \"Rendszer információ\" gombot.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Hetente</string>
   <string name="check_bi_weekly">Kéthetente</string>
   <string name="check_monthly">Havonta</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Frissítések keresése</string>
   <string name="no_updates_found">Nem található új frissítés</string>
   <string name="update_check_failed">Nem sikerült frissítéseket keresni. Ellenőrizze internetkapcsolatát, majd próbálja újra.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Új frissítések</string>
   <string name="not_action_download">Letöltés</string>
   <string name="data_connection_required">Adatkapcsolat szükséges.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Megszakítja a letöltést?</string>
   <string name="confirm_download_cancelation_dialog_message">Később folytatni tudja a letöltést, amennyiben ugyanezt a frissítést választja újra</string>
   <string name="download_cancelled">Letöltés megszakítva</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Frissítés letöltése sikertelen</string>
   <string name="not_action_install_update">Újraindítás és telepítés</string>
   <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> nevű frissítés sikeresen letöltve. Amikor az \"Újraindítás és telepítés\" gombra kattint, az eszköz újraindítja magát a frissítés telepítéshez.\n\nMegjegyzés: Az automatikus telepítéshez szükség van egy kompatibilis Recovery módra.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 ellenőrzési hiba</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Frissítés alkalmazása</string>
   <string name="apply_update_dialog_text">Frissítés a következőre: <xliff:g id="filename">%s</xliff:g>.\n\nA telepítéshez koppintson a Frissítés gombra, az eszköz újra fog indulni Recovery módban.</string>
   <string name="apply_unable_to_reboot_toast">Nem lehetséges az újraindítás Recovery módban</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Fájl törlése</string>
   <string name="confirm_delete_dialog_title_tv">Ide kattintva eltávolíthatja a letöltött frissítéseket a belső tárolóról</string>
   <string name="confirm_delete_dialog_message">Biztosan törölni szeretné a letöltött frissítő fájlt?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Hiba történt a frissítő fájlok törlésekor</string>
   <string name="delete_updates_noFolder_message">Frissítéseket tartalmazó mappa nem található</string>
   <string name="delete_updates_success_message">Az összes letöltött frissítés törölve</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Eszköz:</string>
   <string name="sysinfo_running">Futó verzió:</string>
   <string name="sysinfo_update_channel">Frissítési csatorna:</string>
   <string name="sysinfo_last_check">Utoljára ellenőrizve:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">A változások listája nem elérhető</string>
   <string name="changelog_dialog_title">Változások listája</string>
   <string name="loading_changelog">Betöltés\u2026</string>

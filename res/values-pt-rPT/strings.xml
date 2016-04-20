@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Atualizador CM</string>
   <string name="display_name">Atualizações</string>
   <string name="unknown">Desconhecido</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Atualizar</string>
   <string name="menu_delete_all">Eliminar transferências</string>
   <string name="menu_system_info">Informações do sistema</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Cancelar</string>
   <string name="dialog_update">Atualizar</string>
   <string name="dialog_close">Fechar</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Atualizações disponíveis</string>
   <string name="no_available_updates_intro">A última verificação não encontrou atualizações disponíveis. Para verificar manualmente, utilize o botão Procurar.</string>
   <string name="no_available_updates_intro_tv">A última verificação não encontrou atualizações disponíveis. Para verificar novas atualizações manualmente, toque em \'Informações de sistema\'.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Semanalmente</string>
   <string name="check_bi_weekly">Quinzenalmente</string>
   <string name="check_monthly">Mensalmente</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">A procurar atualizações\u2026</string>
   <string name="no_updates_found">Não foram encontradas novas atualizações</string>
   <string name="update_check_failed">A procura por atualizações falhou. Por favor verifique o estado da sua ligação à internet e tente de novo.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Novas atualizações</string>
   <string name="not_action_download">Transferir</string>
   <string name="data_connection_required">É necessária uma ligação de dados.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Cancelar transferências</string>
   <string name="confirm_download_cancelation_dialog_message">Deseja cancelar a transferência atual?</string>
   <string name="download_cancelled">Transferência cancelada</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Não foi possível transferir o ficheiro de atualização</string>
   <string name="not_action_install_update">Reiniciar e instalar</string>
   <string name="not_download_install_notice">A atualização <xliff:g id="filename">%s</xliff:g> foi transferida com sucesso. Quando pressionar \'Reiniciar e instalar\', o dispositivo reiniciar-se-á para instalar a atualização.\n\nNota: É necessária uma Recuperação compatível para que a instalação seja automática.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">A verificação MD5 do ficheiro falhou</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Instalar atualização</string>
   <string name="apply_update_dialog_text">Está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.\n\nSe carregar em Atualizar, o dispositivo irá reiniciar e atualizar automaticamente.\n\nNota: É necessário um modo de recuperação compatível para que a atualização seja feita automaticamente.</string>
   <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar no modo de recuperação</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Eliminar ficheiro</string>
   <string name="confirm_delete_dialog_title_tv">Clique para apagar do armazenamento interno todas as atualizações transferidas</string>
   <string name="confirm_delete_dialog_message">Deseja eliminar o ficheiro de atualizações selecionado?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Ocorreu um problema ao eliminar o ficheiro</string>
   <string name="delete_updates_noFolder_message">Localização das atualizações não encontrada</string>
   <string name="delete_updates_success_message">Todos os ficheiros foram eliminados</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Dispositivo:</string>
   <string name="sysinfo_running">Versão atual:</string>
   <string name="sysinfo_update_channel">Tipo de atualização:</string>
   <string name="sysinfo_last_check">Última verificação:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Lista de alterações indisponível</string>
   <string name="changelog_dialog_title">Lista de alterações</string>
   <string name="loading_changelog">A carregar\u2026</string>

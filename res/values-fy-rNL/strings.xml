@@ -9,6 +9,16 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
+  <!-- Menu and dialog box strings -->
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Annulearje</string>
+  <!-- Settings strings -->
+  <!-- Update checking -->
+  <!-- Downloads -->
+  <!-- MD5 related strings -->
+  <!-- Apply update strings -->
+  <!-- deleting -->
+  <!-- System info strings -->
+  <!-- changelog strings -->
 </resources>

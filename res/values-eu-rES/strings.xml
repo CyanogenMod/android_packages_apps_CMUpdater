@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM eguneratzailea</string>
   <string name="display_name">Eguneraketak</string>
   <string name="unknown">Ezezaguna</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Berritu</string>
   <string name="menu_delete_all">Ezabatu deskargak</string>
   <string name="menu_system_info">Sistemaren informazioa</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Ezeztu</string>
   <string name="dialog_update">Eguneratu</string>
   <string name="dialog_close">Itxi</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Eskuragarri dauden eguneraketak</string>
   <string name="no_available_updates_intro">Azken bilaketan ez da eguneraketarik aurkitu. Sakatu Berritu botoia eguneraketa berririk dagoen bilatzeko.</string>
   <string name="no_available_updates_intro_tv">Azken egiaztaketan ez ziren eguneraketak aurkitu. Eguneraketak eskuz bilatzeko, sakatu \'\'Sistemaren informazioa\'.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Astero</string>
   <string name="check_bi_weekly">Bi astetan behin</string>
   <string name="check_monthly">Hilabetero</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Eguneraketak bilatzen\u2026</string>
   <string name="no_updates_found">Ez da eguneraketa berririk aurkitu</string>
   <string name="update_check_failed">Eguneraketa bilaketak huts egin du. Interneterako konexioa egiaztatu eta berriro saiatu, mesedez.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Eguneraketa berriak</string>
   <string name="not_action_download">Deskarga</string>
   <string name="data_connection_required">Datu konexio bat beharrezkoa da.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Utzi deskarga</string>
   <string name="confirm_download_cancelation_dialog_message">Utzi uneko deskarga?</string>
   <string name="download_cancelled">Deskarga utzi da</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Eguneraketaren deskargak huts egin du</string>
   <string name="not_action_install_update">Berrabiarazi eta instalatu</string>
   <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> eguneraketa ondo deskargatu da. \'Berrabiarazi eta instalatu\' sakatuz, gailua eguneraketa instalatzeko berrabiaraziko da.\n\nOharra: Ardura behar ez duen instalazio baterako berreskuratze aplikazio bateragarri bat beharrezkoa da.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 berrespenak huts egin du</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aplikatu eguneraketa</string>
   <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g> bertsioa instalatzera zoaz.\n\nEguneratu sakatzean, gailua  berreskuratze moduan berrabiaraziko da eguneraketa instalatzeko.\n\nOharra: Berreskuratze aplikazio bateragarri bat behar du ezaugarri honek, bestela eguneraketak eskuz instalatu beharko dira.</string>
   <string name="apply_unable_to_reboot_toast">Ezin izan da berreskuratze moduan berrabiarazi</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Ezabatu fitxategia</string>
   <string name="confirm_delete_dialog_title_tv">Sakatu deskargatutako eguneraketa guztiak ezabatzeko barne biltegiratzetik</string>
   <string name="confirm_delete_dialog_message">Ezabatu hautatutako eguneraketa fitxategia?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Akats bat egon da eguneraketa ezabatzerakoan</string>
   <string name="delete_updates_noFolder_message">Eguneraketen karpeta ez da aurkitu</string>
   <string name="delete_updates_success_message">Deskargatutako eguneraketa guztiak ezabatu dira</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Gailua:</string>
   <string name="sysinfo_running">Exekutatzen:</string>
   <string name="sysinfo_update_channel">Eguneraketa kanala:</string>
   <string name="sysinfo_last_check">Azken bilaketa:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Ez dago aldaketa-egunkaririk</string>
   <string name="changelog_dialog_title">Aldaketa-egunkaria</string>
   <string name="loading_changelog">Kargatzen\u2026</string>

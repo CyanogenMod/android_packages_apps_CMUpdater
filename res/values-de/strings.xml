@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CyanogenMod-Updater</string>
   <string name="display_name">Updates</string>
   <string name="unknown">Unbekannt</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Aktualisieren</string>
   <string name="menu_delete_all">Downloads löschen</string>
   <string name="menu_system_info">Systeminformationen</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Abbrechen</string>
   <string name="dialog_update">Update</string>
   <string name="dialog_close">Schließen</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Verfügbare Updates</string>
   <string name="no_available_updates_intro">Es wurden keine Updates gefunden. Berühren Sie \"Aktualisieren\", um manuell nach neuen Updates zu suchen.</string>
   <string name="no_available_updates_intro_tv">Bei der letzten Prüfung wurden keine Updates gefunden. Um manuell nach Updates zu suchen \"Systeminformationen\" berühren.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Wöchentlich</string>
   <string name="check_bi_weekly">Zweiwöchentlich</string>
   <string name="check_monthly">Monatlich</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Updates werden gesucht</string>
   <string name="no_updates_found">Keine neuen Updates gefunden</string>
   <string name="update_check_failed">Die Suche nach Updates ist fehlgeschlagen. Bitte überprüfen Sie die Internetverbindung und versuchen Sie es später erneut.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Neue Updates</string>
   <string name="not_action_download">Herunterladen</string>
   <string name="data_connection_required">Eine Datenverbindung wird benötigt.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Download abbrechen</string>
   <string name="confirm_download_cancelation_dialog_message">Soll der aktuelle Download abgebrochen werden?</string>
   <string name="download_cancelled">Download abgebrochen</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Update-Download fehlgeschlagen</string>
   <string name="not_action_install_update">Neu starten und installieren</string>
   <string name="not_download_install_notice">Das Update <xliff:g id="filename">%s</xliff:g> wurde erfolgreich heruntergeladen. Beim Berühren von \"Neu starten und installieren\" wird das Gerät neu gestartet, um das Update zu installieren.\n\nHinweis: Für die Installation wird ein kompatibles Recovery-System benötigt.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5-Prüfung fehlgeschlagen</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Update installieren</string>
   <string name="apply_update_dialog_text">Bereit zum Update auf <xliff:g id="filename">%s</xliff:g>.\n\nNach dem Start des Updates wird das Gerät im Recovery-Modus gestartet, um das Update durchzuführen.\n\nHinweis: Diese Funktion erfordert ein kompatibles Recovery-System, anderenfalls muss das Update manuell installiert werden.</string>
   <string name="apply_unable_to_reboot_toast">Neustart in den Recovery-Modus nicht möglich</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Datei löschen</string>
   <string name="confirm_delete_dialog_title_tv">Berühren, um alle heruntergeladenen Updates aus dem internen Speicher zu löschen</string>
   <string name="confirm_delete_dialog_message">Soll die ausgewählte Update-Datei gelöscht werden?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Beim Löschen der Datei ist ein Fehler aufgetreten.</string>
   <string name="delete_updates_noFolder_message">Update-Verzeichnis nicht gefunden</string>
   <string name="delete_updates_success_message">Alle heruntergeladenen Update-Dateien wurden gelöscht</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Gerät:</string>
   <string name="sysinfo_running">Version:</string>
   <string name="sysinfo_update_channel">Update-Typ:</string>
   <string name="sysinfo_last_check">Letzte Prüfung:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Kein Änderungsprotokoll verfügbar</string>
   <string name="changelog_dialog_title">Änderungsprotokoll</string>
   <string name="loading_changelog">Laden\u2026</string>

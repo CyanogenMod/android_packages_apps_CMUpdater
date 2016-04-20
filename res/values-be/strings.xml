@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Абнаўленне CyanogenMod</string>
   <string name="display_name">Абнаўленні</string>
   <string name="unknown">Невядома</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Праверыць</string>
   <string name="menu_delete_all">Выдаліць спампаваныя</string>
   <string name="menu_system_info">Звесткі пра сістэму</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Скасаванне</string>
   <string name="dialog_update">Абнавіць</string>
   <string name="dialog_close">Зачыніць</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Даступныя абнаўленні</string>
   <string name="no_available_updates_intro">Усталявана апошняя версія CyanogenMod. Націсніце кнопку \"Праверыць\", каб выканаць пошук даступных абнаўленняў.</string>
   <string name="no_available_updates_intro_tv">Усталявана апошняя версія CyanogenMod. Націсніце кнопку \"Звесткі пра сістэму\", каб выканаць пошук даступных абнаўленняў.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Штотыдзень</string>
   <string name="check_bi_weekly">Раз на два тыдні</string>
   <string name="check_monthly">Штомесяц</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Праверка абнаўленняў</string>
   <string name="no_updates_found">Абнаўленні не знойдзены</string>
   <string name="update_check_failed">Не атрымалася праверыць наяўнасць абнаўленняў. Калі ласка, праверце стан злучэння з Інтэрнэтам і паспрабуйце наноў.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Новыя абнаўленні</string>
   <string name="not_action_download">Спампаваць</string>
   <string name="data_connection_required">Неабходна злучэнне з Інтэрнэтам.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Скасаваць спампоўку</string>
   <string name="confirm_download_cancelation_dialog_message">Скасаваць гэтую спампоўку?</string>
   <string name="download_cancelled">Спампоўка скасаваная</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Не атрымалася спампаваць абнаўленне</string>
   <string name="not_action_install_update">Перезагрузіць ды ўсталяваць</string>
   <string name="not_download_install_notice">Абнаўленне <xliff:g id="filename">%s</xliff:g> паспяхова загружана.\n\nНацісніце «Перазагрузіць ды ўсталяваць», каб выканаць яго ўсталёўку.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Не атрымалася выканаць праверку MD5</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Ужыць абнаўленне</string>
   <string name="apply_update_dialog_text">Будзе выканана абнаўленне да версіі <xliff:g id="filename">%s</xliff:g>.\n\nПры націсканні кнопкі \"Абнавіць\" прыладу перазагрузіцца ў рэжым аднаўлення для ўсталёўкі гэтага абновы. \n\nзаўвага: гэта функцыя патрабуе сумяшчальнага Recovery. У адваротным выпадку абнаўленне трэба будзе ўсталяваць ручна.</string>
   <string name="apply_unable_to_reboot_toast">Не атрымалася перазагрузіцца ў Recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Выдаліць файл</string>
   <string name="confirm_delete_dialog_title_tv">Націсніце, каб выдаліць усе загружаныя абнаўленні з унутранай памяці</string>
   <string name="confirm_delete_dialog_message">Ці выдаліць абраны файл абнаўлення?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Адбылася памылка пры выдаленні файла абновы</string>
   <string name="delete_updates_noFolder_message">Тэчка з абнаўленнямі не знойдзеная</string>
   <string name="delete_updates_success_message">Усе спампаваныя абнаўленні выдалены</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Прылада:</string>
   <string name="sysinfo_running">Версія:</string>
   <string name="sysinfo_update_channel">Канал абнаўленняў:</string>
   <string name="sysinfo_last_check">Апошняя праверка:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Спіс зменаў не даступны</string>
   <string name="changelog_dialog_title">Спіс зменаў</string>
   <string name="loading_changelog">Загрузка\u2026</string>

@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Оновлення CyanogenMod</string>
   <string name="display_name">Оновлення</string>
   <string name="unknown">Невідомий</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Оновити</string>
   <string name="menu_delete_all">Видалити завантаження</string>
   <string name="menu_system_info">Інформація про систему</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Скасувати</string>
   <string name="dialog_update">Оновити</string>
   <string name="dialog_close">Закрити</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Доступні оновлення</string>
   <string name="no_available_updates_intro">Остання перевірка не виявила доступних оновлень. Щоб перевірити наявність оновлень вручну, натисніть кнопку «Оновити».</string>
   <string name="no_available_updates_intro_tv">Остання перевірка не знайшла доступних оновленнь. Щоб вручну перевірити наявність оновлень, натисніть кнопку \"Інформація про систему\".</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Кожного тижня</string>
   <string name="check_bi_weekly">Раз на два тижні</string>
   <string name="check_monthly">Щомісяця</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Перевірка оновлень\u2026</string>
   <string name="no_updates_found">Оновлень не знайдено</string>
   <string name="update_check_failed">Перевірка оновлення не вдалась. Будь-ласка перевірте з’єднання з мережею і спробуйте ще раз.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Нові оновлення</string>
   <string name="not_action_download">Завантажити</string>
   <string name="data_connection_required">Необхідне з’єднання з мережею.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Скасувати завантаження?</string>
   <string name="confirm_download_cancelation_dialog_message">Ви можете продовжити завантаження пізніше, запустивши оновлення ще раз</string>
   <string name="download_cancelled">Завантаження скасоване</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Оновлення не завантажено</string>
   <string name="not_action_install_update">Перезавантажити і встановити</string>
   <string name="not_download_install_notice">Оновлення «<xliff:g id="filename">%s</xliff:g>» успішно завантажено. Натисніть «Перезавантажити і встановити», щоб виконати його встановлення.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Не вдалось виконати перевірку MD5</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Застосувати оновлення</string>
   <string name="apply_update_dialog_text">Ви збираєтесь оновитись на <xliff:g id="filename">%s</xliff:g>.\n\nЯкщо Ви натиснете Оновити, пристрій перезавантажиться у Recovery для встановлення.\n\nЗамітка: ця функція потребує сумісне Recovery, в зворотньому випадку оновлення необхідно встановити вручну.</string>
   <string name="apply_unable_to_reboot_toast">Неможливо перезавантажитись у Recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Видалити файл</string>
   <string name="confirm_delete_dialog_title_tv">Натисніть, щоб видалити всі завантажені оновлення з вбудованого сховища</string>
   <string name="confirm_delete_dialog_message">Ви збираєтесь видалити завантажений файл оновлення. Натисніть Так для продовження.</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Сталась помилка при видаленні файлу оновлення</string>
   <string name="delete_updates_noFolder_message">Папка з оновленнями не знайдена</string>
   <string name="delete_updates_success_message">Всі завантажені оновлення видалено</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Пристрій:</string>
   <string name="sysinfo_running">Версія:</string>
   <string name="sysinfo_update_channel">Канал оновлень:</string>
   <string name="sysinfo_last_check">Остання перевірка:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Список змін недоступний</string>
   <string name="changelog_dialog_title">Список змін</string>
   <string name="loading_changelog">Завантажується\u2026</string>

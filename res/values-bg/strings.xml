@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Актуализации за СМ</string>
+  <!-- General strings -->
+  <string name="app_name">СМ Актуализатор</string>
   <string name="display_name">Актуализации</string>
   <string name="unknown">Неизвестна</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Опресняване</string>
   <string name="menu_delete_all">Изтриване на изтеглените файлове</string>
   <string name="menu_system_info">Информация за системата</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Отказ</string>
   <string name="dialog_update">Актуализирай</string>
   <string name="dialog_close">Затваряне</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Налични актуализации</string>
   <string name="no_available_updates_intro">При последната проверка не са открити нови актуализации. Натиснете бутона \"Опресняване\" за да стартирате нова проверка.</string>
   <string name="no_available_updates_intro_tv">При последната проверка не са открити нови актуализации. Натиснете бутона \"Информация за системата\" за да стартирате нова проверка.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Ежеседмично</string>
   <string name="check_bi_weekly">Два пъти седмично</string>
   <string name="check_monthly">Ежемесечно</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Проверка за актуализации</string>
   <string name="no_updates_found">Няма нови актуализации</string>
   <string name="update_check_failed">Проверката за актуализации се провали. Моля проверете връзката с интернет и опитайте отново по-късно.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Нови актуализации</string>
   <string name="not_action_download">Изтегляне</string>
   <string name="data_connection_required">Нужна е връзка с интернет.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Отказ от изтеглянето</string>
   <string name="confirm_download_cancelation_dialog_message">Да бъде ли отказано текущото изтегляне?</string>
   <string name="download_cancelled">Изтеглянето е отказано</string>
@@ -50,11 +55,14 @@
   <string name="not_download_success">Актуализацията е изтеглена успешно</string>
   <string name="not_download_failure">Актуализацията не е изтеглена</string>
   <string name="not_action_install_update">Рестартиране и инсталиране</string>
-  <string name="not_download_install_notice">Актуализацията <xliff:g id="filename">%s </xliff:g> е успешно изтеглена. Когато натиснете \"Рестартиране и инсталирате\", устройството ще се рестартира за да инсталира актуализацията.\n\nБележка: необходимо е съвместимо Recovery за автоматично инсталиране.</string>
+  <string name="not_download_install_notice">Актуализацията <xliff:g id="filename">%s </xliff:g> е успешно изтеглена. Когато натиснете \"Рестартиране и инсталирате\", устройството ще се рестартира за да инсталира актуализацията.\n\nЗабележка: Тази функцията изисква съвместим режим на възстановяване за автоматично инсталиране.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Неуспешна проверка на MD5</string>
-  <string name="apply_update_dialog_title">Прилагане на актуализация</string>
-  <string name="apply_update_dialog_text">На път сте да актуализирате до <xliff:g id="filename">%s</xliff:g>.\n\nАко натиснете \"Актуализация\" устройството ще се рестартира в режим Recovery и ще приложи актуализацията.\n\nБележка: Функцията изисква съвместимо Recovery или ще се наложи да приложите актуализацията ръчно.</string>
-  <string name="apply_unable_to_reboot_toast">Рестартирането в режим Recovery не е възможно</string>
+  <!-- Apply update strings -->
+  <string name="apply_update_dialog_title">Приложи актуализацията</string>
+  <string name="apply_update_dialog_text">На път сте да актуализирате до версия <xliff:g id="filename">%s</xliff:g>.\n\nАко натиснете бутона \"Актуализирай\" устройството ще премине в режим на възстановяване, за да приложи тази актуализация..\n\n Забележка: Тази функцията изисква съвместим режим на възстановяване, в противен случай ще трябва да приложите актуализацията ръчно.</string>
+  <string name="apply_unable_to_reboot_toast">Не може да се рестартира в режим на възстановяване</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Изтриване на файл</string>
   <string name="confirm_delete_dialog_title_tv">Натиснете, за премахване на всички изтеглени актуализации от вътрешното хранилище</string>
   <string name="confirm_delete_dialog_message">Да бъде ли изтрит файлът на избраната актуализация?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Възникна грешка при изтриването</string>
   <string name="delete_updates_noFolder_message">Папката с актуализациите не е намерена</string>
   <string name="delete_updates_success_message">Всичко свалени актиализации са изтрити</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Устройство:</string>
   <string name="sysinfo_running">Работи с:</string>
   <string name="sysinfo_update_channel">Актуализационен канал:</string>
   <string name="sysinfo_last_check">Последна проверка:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Регистара на промените е недостъпен</string>
   <string name="changelog_dialog_title">Списък с промените</string>
   <string name="loading_changelog">Зареждане\u2026</string>

@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM 更新器</string>
   <string name="display_name">更新</string>
   <string name="unknown">不明</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">重新整理</string>
   <string name="menu_delete_all">刪除下載項目</string>
   <string name="menu_system_info">系統資訊</string>
@@ -19,6 +21,7 @@
   <string name="dialog_cancel">取消</string>
   <string name="dialog_update">更新</string>
   <string name="dialog_close">關閉</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">可用的更新</string>
   <string name="no_available_updates_intro">最後一次檢查沒有發現任何可用的更新，使用「重新整理」按鈕手動檢查新的更新。</string>
   <string name="new_update_summary">新版本</string>
@@ -32,6 +35,7 @@
   <string name="check_weekly">每星期</string>
   <string name="check_bi_weekly">每兩星期</string>
   <string name="check_monthly">每月</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">正在檢查更新</string>
   <string name="no_updates_found">沒有找到新的更新</string>
   <string name="update_check_failed">檢查更新失敗。請檢查您的互聯網連接並稍後再試。</string>
@@ -39,6 +43,7 @@
   <string name="not_new_updates_found_title">新更新</string>
   <string name="not_action_download">下載</string>
   <string name="data_connection_required">需要一個數據連接。</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">取消下載</string>
   <string name="confirm_download_cancelation_dialog_message">取消目前的下載？</string>
   <string name="download_cancelled">下載已取消</string>
@@ -49,10 +54,13 @@
   <string name="not_download_failure">更新下載失敗</string>
   <string name="not_action_install_update">重新啟動並安裝</string>
   <string name="not_download_install_notice">更新檔 <xliff:g id="filename">%s</xliff:g> 已成功下載。 當輕觸「重新啟動並安裝」時， 該裝置將重新啟動安裝更新。\n\n注意：執行自動安裝需要一個相容的修復 (Recovery) 程式。</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 驗證失敗</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">套用更新</string>
   <string name="apply_update_dialog_text">您將升級到<xliff:g id="filename">%s</xliff:g>。\n\n如果您按下更新，裝置將自動重新啟動修復模式 (Recovery) 下安裝更新。\n\n注意：此功能需要一個兼容的修復模式 (Recovery)，否則將會需要手動安裝更新。</string>
   <string name="apply_unable_to_reboot_toast">無法重啟進入修復 (Recovery) 模式</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">刪除檔案</string>
   <string name="confirm_delete_dialog_title_tv">按下即可從內部儲存空間移除所有已下載的更新</string>
   <string name="confirm_delete_dialog_message">刪除已選取的更新檔案?</string>
@@ -61,10 +69,12 @@
   <string name="delete_updates_failure_message">刪除更新檔案時出現錯誤</string>
   <string name="delete_updates_noFolder_message">找不到更新資料夾</string>
   <string name="delete_updates_success_message">已刪除所有已下載的更新</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">裝置：</string>
   <string name="sysinfo_running">正在執行：</string>
   <string name="sysinfo_update_channel">更新類型：</string>
   <string name="sysinfo_last_check">最後檢查：</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">沒有提供更新日誌</string>
   <string name="changelog_dialog_title">更新日誌</string>
   <string name="loading_changelog">正在載入\u2026</string>

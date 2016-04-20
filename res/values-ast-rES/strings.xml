@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Anovador CM</string>
   <string name="display_name">Anovamientos</string>
   <string name="unknown">Desconocíu</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Refrescar</string>
   <string name="menu_delete_all">Desaniciar descargues</string>
   <string name="menu_system_info">Información del sistema</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Encaboxar</string>
   <string name="dialog_update">Anovar</string>
   <string name="dialog_close">Zarrar</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Anovamientos disponibles</string>
   <string name="no_available_updates_intro">Nun s\'atoparon anovamientos na cabera comprobación. Calca nel botón Refrescar pa comprobar si hai anovamientos nuevos.</string>
   <string name="no_available_updates_intro_tv">La cabera comprobación nun alcontró anovamientos. Pa comprobar anovamientos, clic en «información del sistema»</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Selmanalmente</string>
   <string name="check_bi_weekly">Cada dos selmanes</string>
   <string name="check_monthly">Mensualmente</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Comprobando anovamientos\u2026</string>
   <string name="no_updates_found">Nun hai anovamientos nuevos</string>
   <string name="update_check_failed">Falló la comprobación d\'anovamientos. Por favor, verifica la conexón a Internet y inténtalo de nueves.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Anovamientos nuevos</string>
   <string name="not_action_download">Descargar</string>
   <string name="data_connection_required">Ye necesario una conexón de datos.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Encaboxar descarga</string>
   <string name="confirm_download_cancelation_dialog_message">¿Encaboxar la descarga actual?</string>
   <string name="download_cancelled">Descarga encaboxada</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Anovamientu non descargáu</string>
   <string name="not_action_install_update">Reaniciar ya instalar</string>
   <string name="not_download_install_notice">L\'anovamientu <xliff:g id="filename">%s</xliff:g> descargóse correutamente. Calcando sobre \u00ABReaniciar ya instalar\u00BB, el preséu va reaniciase pa instalar l\'anovamientu.\n\nAvisu: Ye necesario disponer d\'un recovery compatible pa una instalación desatendida.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Falló la verificación MD5</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aplicar anovamientu</string>
   <string name="apply_update_dialog_text">Va aniciase\'l procesu d\'anovar a la versión <xliff:g id="filename">%s</xliff:g>.\n\nCalcando sobre \u00ABAnovar\u00BB, el preséu va reaniciase pa instalar l\'anovamientu.\n\nAvisu: Ye necesario disponer d\'un recovery compatible pa una instalación desatendida.</string>
   <string name="apply_unable_to_reboot_toast">Imposible reaniciar en mou recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Desaniciar ficheru</string>
   <string name="confirm_delete_dialog_title_tv">Clic pa desaniciar del almacenamientu int. los anovamientos</string>
   <string name="confirm_delete_dialog_message">¿Desaniciar l\'anovamientu descargáu?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Hebo un fallu al desaniciar l\'anovamientu</string>
   <string name="delete_updates_noFolder_message">Carpeta d\'anovamientos non atopada</string>
   <string name="delete_updates_success_message">Desaniciáronse tolos anovamientos</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Preséu:</string>
   <string name="sysinfo_running">Executando:</string>
   <string name="sysinfo_update_channel">Canal d\'anovamientu:</string>
   <string name="sysinfo_last_check">Cabera comprobación:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Nun hai rexistru de cambeos</string>
   <string name="changelog_dialog_title">Rexistru de cambeos</string>
   <string name="loading_changelog">Cargando\u2026</string>

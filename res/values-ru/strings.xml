@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Обновление CyanogenMod</string>
   <string name="display_name">Обновления</string>
   <string name="unknown">Неизвестно</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Обновить</string>
   <string name="menu_delete_all">Удалить загруженные</string>
   <string name="menu_system_info">Информация о системе</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Отмена</string>
   <string name="dialog_update">Обновить</string>
   <string name="dialog_close">Закрыть</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Доступные обновления</string>
   <string name="no_available_updates_intro">Установлена последняя версия CyanogenMod. Нажмите кнопку «Проверить», чтобы выполнить поиск доступных обновлений.</string>
   <string name="no_available_updates_intro_tv">Установлена последняя версия CyanogenMod. Нажмите кнопку «Сведения о системе», чтобы выполнить поиск доступных обновлений.</string>
@@ -34,13 +37,15 @@
   <string name="check_weekly">Еженедельно</string>
   <string name="check_bi_weekly">Раз в две недели</string>
   <string name="check_monthly">Ежемесячно</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Проверка обновлений\u2026</string>
   <string name="no_updates_found">Обновления не найдены</string>
   <string name="update_check_failed">Не удалось выполнить поиск обновлений. Проверьте подключение к Интернету и повторите попытку.</string>
   <string name="not_new_updates_found_ticker">Доступно обновление системы</string>
   <string name="not_new_updates_found_title">Обновления CyanogenMod</string>
   <string name="not_action_download">Загрузить</string>
-  <string name="data_connection_required">Необходимо интернет-подключение</string>
+  <string name="data_connection_required">Необходимо подключение к Интернету</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Отменить загрузку</string>
   <string name="confirm_download_cancelation_dialog_message">Отменить текущую загрузку?</string>
   <string name="download_cancelled">Загрузка отменена</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Ошибка загрузки обновления</string>
   <string name="not_action_install_update">Перезагрузить и установить</string>
   <string name="not_download_install_notice">Обновление «<xliff:g id="filename">%s</xliff:g>» загружено. Нажмите «Перезагрузить и установить», чтобы перезагрузить устройство и выполнить установку.\n\nПримечание: для автоматической установки необходим совместимый режим восстановления.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Не удалось выполнить проверку MD5</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Применение обновления</string>
   <string name="apply_update_dialog_text">Будет выполнено обновление до версии «<xliff:g id="filename">%s</xliff:g>».\n\nПри нажатии кнопки «Обновить» устройство перезагрузится и перейдет в режим восстановления для установки этого обновления. \n\nПримечание: для этой функции необходим совместимый режим восстановления, в противном случае обновление придется установить вручную.</string>
   <string name="apply_unable_to_reboot_toast">Невозможно перезагрузиться в режим восстановления</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Удалить файл</string>
   <string name="confirm_delete_dialog_title_tv">Нажмите, чтобы удалить все загруженные обновления из внутренней памяти</string>
   <string name="confirm_delete_dialog_message">Удалить выбранный файл обновления?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Произошла ошибка при удалении файла обновления</string>
   <string name="delete_updates_noFolder_message">Каталог с обновлениями не найден</string>
   <string name="delete_updates_success_message">Все загруженные обновления удалены</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Устройство:</string>
   <string name="sysinfo_running">Версия:</string>
   <string name="sysinfo_update_channel">Канал обновлений:</string>
   <string name="sysinfo_last_check">Последняя проверка:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Список изменений недоступен</string>
   <string name="changelog_dialog_title">Список изменений</string>
   <string name="loading_changelog">Загрузка\u2026</string>
