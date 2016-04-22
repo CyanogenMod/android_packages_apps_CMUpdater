@@ -94,4 +94,15 @@
     <string name="no_changelog_alert">No changelog available</string>
     <string name="changelog_dialog_title">Changelog</string>
     <string name="loading_changelog">Loading\u2026</string>
+
+    <!--Fixes accessibility issues adding missing button labels-->
+    <!--Adding label for 'downloaded' status of mUpdatesButton-->
+    <string name="install_btn">Install now</string>
+    <!--Adding label for 'downloading' status of mUpdatesButton-->
+    <string name="cancel_btn">Cancel download</string>
+    <!--Adding label for 'installed' status of mUpdatesButton-->
+    <string name="installed_btn">Already installed</string>
+    <!--Adding label for 'new' status of mUpdatesButton-->
+    <string name="download_btn">Download now</string>
+
 </resources>
