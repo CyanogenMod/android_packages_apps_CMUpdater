@@ -39,7 +39,7 @@
   <string name="check_monthly">Ежемесячно</string>
   <!-- Update checking -->
   <string name="checking_for_updates">Проверка обновлений\u2026</string>
-  <string name="no_updates_found">Обновления не найдены</string>
+  <string name="no_updates_found">Нет доступных обновлений</string>
   <string name="update_check_failed">Не удалось выполнить поиск обновлений. Проверьте подключение к Интернету и повторите попытку.</string>
   <string name="not_new_updates_found_ticker">Доступно обновление системы</string>
   <string name="not_new_updates_found_title">Обновления CyanogenMod</string>
