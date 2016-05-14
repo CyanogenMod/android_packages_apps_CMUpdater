@@ -10,14 +10,77 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
+  <string name="app_name">CM புதுப்பிப்பான்</string>
+  <string name="display_name">புதுப்பித்தல்கள்</string>
+  <string name="unknown">தெரியாதது</string>
   <!-- Menu and dialog box strings -->
+  <string name="menu_refresh">புதுப்பி</string>
+  <string name="menu_delete_all">பதிவிறக்கங்களை நீக்கு</string>
+  <string name="menu_system_info">கணினி தகவல்</string>
+  <string name="menu_system_info_tv">கணினி தகவல்: புதுப்பித்தல்கள் பட்டியலை புதுப்பிக்க கிளிக் செய்க</string>
+  <string name="dialog_ok">சரி</string>
+  <string name="dialog_cancel">ரத்துசெய்</string>
+  <string name="dialog_update">புதுப்பி</string>
+  <string name="dialog_close">மூடு</string>
   <!-- Settings strings -->
+  <string name="available_updates_title">கிடைக்கின்ற புதுப்பித்தல்கள்</string>
+  <string name="no_available_updates_intro">கடைசி சரிபார்ப்பு கிடைக்கின்ற புதுப்பித்தல்கள் எதையும் கண்டுபிடிக்கவில்லை. புதிய புதுப்பித்தல்களுக்காக கைமுறையாக பரிசோதிக்க, புதுப்பி பொத்தானை பயன்படுத்துக.</string>
+  <string name="no_available_updates_intro_tv">கடைசி சரிபார்ப்பு கிடைக்கின்ற புதுப்பித்தல்கள் எதையும் கண்டுபிடிக்கவில்லை. புதிய புதுப்பித்தல்களை கைமுறையாக பரிசோதிக்க, கிளிக்\'கணினி தகவல்\'.</string>
+  <string name="new_update_summary">புதியதாக</string>
+  <string name="downloaded_update_summary">பதிவிறக்கப்பட்டது</string>
+  <string name="installed_update_summary">நிறுவப்பட்டது</string>
+  <string name="update_check_title">புதுப்பிப்புகள் உள்ளதா பார்</string>
+  <string name="check_manual">கைமுறை</string>
+  <string name="check_on_boot">ஒவ்வொரு இயக்கத்திலும்</string>
+  <string name="check_twice_daily">தினமும் இருமுறை</string>
+  <string name="check_daily">தினந்தோறும்</string>
+  <string name="check_weekly">வாரந்தோறும்</string>
+  <string name="check_bi_weekly">வாரம் இருமுறை</string>
+  <string name="check_monthly">மாதம்தோறும்</string>
   <!-- Update checking -->
+  <string name="checking_for_updates">புதுப்பித்தல்களுக்காக சரிபார்க்கிறது</string>
+  <string name="no_updates_found">புதிய புதுப்பித்தல்கள் எதுவும் கண்டுபிடிக்கப்படவில்லை.</string>
+  <string name="update_check_failed">புதுப்பித்தல் சரிபார்ப்பு தோல்வியுற்றது. தயவுசெய்து உங்கள் இணைய இணைப்பை சரிபார்த்து மீண்டும் முயற்சிக்கவும்.</string>
+  <string name="not_new_updates_found_ticker">புதிய புதுப்பித்தல்கள் கிடைக்கின்றன</string>
+  <string name="not_new_updates_found_title">புதிய புதுப்பித்தல்கள்</string>
+  <string name="not_action_download">இறக்கு</string>
+  <string name="data_connection_required">தரவு இணைப்பு ஒன்று தேவைப்படுகின்றது.</string>
   <!-- Permission check -->
+  <string name="permission_not_granted_dialog_title">அனுமதி வழங்கப்படவில்லை.</string>
+  <string name="permission_not_granted_dialog_message">வெளிப்புற சேமிப்பகத்தில் எழுதுவதற்கான அனுமதி வழங்கப்படவில்லை. புதுப்பித்தலை பதிவிறக்க முடியாது.</string>
   <!-- Downloads -->
+  <string name="confirm_download_cancelation_dialog_title">பதிவிறக்கத்தை ரத்துசெய்.</string>
+  <string name="confirm_download_cancelation_dialog_message">நடப்பு பதிவிறக்கத்தை ரத்துசெய்யவா?</string>
+  <string name="download_cancelled">பதிவிறக்கம் ரத்துசெய்யப்பட்டது</string>
+  <string name="download_already_running">பதிவிறக்கம் முன்னமே இயங்கிக்கொண்டு இருக்கிறது</string>
+  <string name="unable_to_download_file">புதுப்பித்தல் கோப்பை பதிவிறக முடியவில்லை</string>
+  <string name="download_not_found">பதிவிறக்கம் கண்டுபிடிக்கப்படவில்லை</string>
+  <string name="not_download_success">புதுப்பித்தல் வெற்றிகரமாக பதிவிறக்கம்செய்யப்பட்டது</string>
+  <string name="not_download_failure">புதுப்பித்தல் பதிவிறக்கம் வெற்றியடையவில்லை</string>
+  <string name="not_action_install_update">மறு இயக்கம் செய்து நிறுவு</string>
+  <string name="not_download_install_notice">புதுப்பித்தல் <xliff:g id="filename">%s</xliff:g>வெற்றிகரமாக பதிவிறக்கப்பட்டது. \’மறு இயக்கம் செய்து நிறுவு\'ஐ தொடும்போது, புதுப்பித்தலை நிறுவ சாதனமானது தன்னையா மறுதுவக்கம் செய்யும்.\n\n குறிப்பு: நிறுவல் தானியக்கமாக செயல்பட ஒரு இணக்கமான மீட்பு தேவைப்படும்.</string>
   <!-- MD5 related strings -->
+  <string name="md5_verification_failed">MDS சரிபார்ப்பு தோல்வியுற்றது</string>
   <!-- Apply update strings -->
+  <string name="apply_update_dialog_title">புதுப்பித்தலை பயன்படுத்து</string>
+  <string name="apply_update_dialog_text">நீங்கள் <xliff:g id="filename">%s</xliff:g>க்கு புதுப்பிக்க உள்ளீர்கள். \n\n நீங்கள் புதுப்பித்தலை அழுத்தினால், புதுப்பித்தலை நிறுவ சாதனமானது மீட்பு பயன்முறையிலே தன்னையே மறுதுவக்கம் செய்யும்.\n\n குறிப்பு: இந்த அம்சத்திற்கு ஒரு இணக்கமான மீட்பு தேவை அல்லது புதுப்பித்தல்கள் கைமுறையாக நிறுவப்பட வேண்டும்.</string>
+  <string name="apply_unable_to_reboot_toast">மீட்புக்குள் மறு இயக்கம் செய்ய முடியவில்லை.</string>
   <!-- deleting -->
+  <string name="confirm_delete_dialog_title">கோப்பை நீக்கு</string>
+  <string name="confirm_delete_dialog_title_tv">உட்புற சேமிப்பகத்தில் இருந்து அனைத்து பதிவிறக்கப்பட்ட புதுப்பித்தல்களையும் நீக்க கிளிக் செய்</string>
+  <string name="confirm_delete_dialog_message">தேர்ந்தெடுக்கப்பட்ட புதுப்பித்தல் கோப்பை நீக்கவா?</string>
+  <string name="confirm_delete_all_dialog_message">அனைத்து பதிவிறக்கப்பட்ட கோப்புகளையும் நீக்கவா?</string>
+  <string name="delete_single_update_success_message">புதுப்பித்தல் <xliff:g id="filename">%s</xliff:g> நீக்கப்பட்டது</string>
+  <string name="delete_updates_failure_message">புதுப்பித்தல் கோப்பை நீக்குவதில் ஒரு பிழை ஏற்பட்டது</string>
+  <string name="delete_updates_noFolder_message">புதுப்பித்தல் கோப்புறை கிடைக்கவில்லை</string>
+  <string name="delete_updates_success_message">அனைத்து பதிவிறக்கப்பட்ட புதுப்பித்தல்களும் நீக்கப்பட்டன.</string>
   <!-- System info strings -->
+  <string name="sysinfo_device">சாதனம்:</string>
+  <string name="sysinfo_running">இயங்குகிறது:</string>
+  <string name="sysinfo_update_channel">புதுப்பித்தல் சேனல்:</string>
+  <string name="sysinfo_last_check">கடைசி சரிபார்ப்பு:</string>
   <!-- changelog strings -->
+  <string name="no_changelog_alert">மாற்றப்பதிவு எதுவும் கிடைக்கவில்லை</string>
+  <string name="changelog_dialog_title">மாற்றபதிப்பு</string>
+  <string name="loading_changelog">ஏற்றுகிறது...</string>
 </resources>

@@ -10,14 +10,77 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
+  <string name="app_name">CM అప్డేటర్</string>
+  <string name="display_name">నవీకరణలు</string>
+  <string name="unknown">తెలియదు</string>
   <!-- Menu and dialog box strings -->
+  <string name="menu_refresh">రిఫ్రెష్ చేయి</string>
+  <string name="menu_delete_all">డౌన్లోడ్ చేయబడినవాటిని తొలిగించుము</string>
+  <string name="menu_system_info">సిస్టమ్ సమాచారం</string>
+  <string name="menu_system_info_tv">సిస్టమ్ సమాచారం: నవీకరణల జాబితాను రీఫ్రెష్‌ చేయడానికి క్లిక్ చేయుము</string>
+  <string name="dialog_ok">సరే</string>
+  <string name="dialog_cancel">రద్దు చేయి</string>
+  <string name="dialog_update">నవీకరించండి</string>
+  <string name="dialog_close">మూసివేయి</string>
   <!-- Settings strings -->
+  <string name="available_updates_title">అందుబాటులో ఉన్న నవీకరణలు</string>
+  <string name="no_available_updates_intro">గత పరిశీలనలో అందుబాటులో ఉన్న ఎటువంటి నవీకరణలు కనుగొనబడలేదు. క్రొత్త నవీకరణలకై మాన్యువల్‌గా పరిశీలించడం కొరకు, రీఫ్రెష్ బటన్ ఉపయోగించండి.</string>
+  <string name="no_available_updates_intro_tv">గత పరిశీలనలో అందుబాటులో ఉన్న ఎటువంటి నవీకరణలు కనుగొనబడలేదు. క్రొత్త నవీకరణలకై మాన్యువల్‌గా పరిశీలించడం కొరకు, \'సిస్టమ్ సమాచారం\'ను క్లిక్ చేయండి.</string>
+  <string name="new_update_summary">కొత్త</string>
+  <string name="downloaded_update_summary">డౌన్‌లోడ్ చేయబడినవి</string>
+  <string name="installed_update_summary">ఇన్‌స్టాల్ చేయబడింది</string>
+  <string name="update_check_title">అప్‌డేట్‌ల కొరకు చెక్ చేయి</string>
+  <string name="check_manual">మాన్యువల్</string>
+  <string name="check_on_boot">ప్రతి ఒక్క బూటుతో</string>
+  <string name="check_twice_daily">రోజుకు రెండుసార్లు</string>
+  <string name="check_daily">రోజువారీ</string>
+  <string name="check_weekly">వారానికి ఒకసారి</string>
+  <string name="check_bi_weekly">వారానికి రెండుసార్లు</string>
+  <string name="check_monthly">నెలవారీ</string>
   <!-- Update checking -->
+  <string name="checking_for_updates">నవీకరణల కోసం తనిఖీ చేస్తోంది</string>
+  <string name="no_updates_found">క్రొత్త నవీకరణలు కనుగొనబడలేదు</string>
+  <string name="update_check_failed">నవీకరణ తనిఖీ విఫలమయింది. దయచేసి మీ ఇంటర్నెట్ కనెక్షనును పరిశీలించండి మరియు కాసేపు ఆగి మరలా ప్రయత్నించండి.</string>
+  <string name="not_new_updates_found_ticker">క్రొత్త నవీకరణలు అందుబాటులో ఉన్నాయి.</string>
+  <string name="not_new_updates_found_title">క్రొత్త నవీకరణలు</string>
+  <string name="not_action_download">డౌన్‌లోడ్ చేయి</string>
+  <string name="data_connection_required">ఒక డేటా కనెక్షన్ అవసరం ఉంది.</string>
   <!-- Permission check -->
+  <string name="permission_not_granted_dialog_title">అనుమతి ఇవ్వబడలేదు</string>
+  <string name="permission_not_granted_dialog_message">బాహ్య నిల్వలో వ్రాయడానికి అనుమతి ఇవ్వబడలేదు. నవీకరించుటను డౌన్‌లోడ్ చేయలేకపోయింది.</string>
   <!-- Downloads -->
+  <string name="confirm_download_cancelation_dialog_title">డౌన్లోడును రద్దు చేయుము</string>
+  <string name="confirm_download_cancelation_dialog_message">ప్రస్తుత డౌన్లోడును రద్దు చేయాలా?</string>
+  <string name="download_cancelled">డౌన్లోడ్ రద్దు చేయబడింది</string>
+  <string name="download_already_running">ఒక డౌన్లోడ్ ఇప్పటికే నడుస్తూ ఉంది</string>
+  <string name="unable_to_download_file">నవీకరణ ఫైలును డౌన్లోడ్ చేయడం సాధ్యపడలేదు</string>
+  <string name="download_not_found">డౌన్లోడ్ కనుగొనబడలేదు</string>
+  <string name="not_download_success">నవీకరణ విజయవంతంగా డౌన్లోడ్ చేయబడింది</string>
+  <string name="not_download_failure">నవీకరణ డౌన్లోడ్ విజయవంతం కాలేదు</string>
+  <string name="not_action_install_update">రీబూట్ మరియు ఇన్స్టాల్</string>
+  <string name="not_download_install_notice">నవీకరణ <xliff:g id="filename">%s</xliff:g> విజయవంతంగా డౌన్లోడ్ చేయబడింది. \'రీబూట్ మరియు ఇన్స్టాల్\'ను తాకేటప్పుడు, నవీకరణను ఇన్స్టాల్ చేసేందుకు పరికరం దానంతట అదే తిరిగి ప్రారంభమవుతుంది. \n\nగమనిక: వ్యవస్థాపన స్వయంచాలకంగా పనిచేయడానికి ఒక అనుకూల పునరుద్ధరణ అవసరమవుతుంది.</string>
   <!-- MD5 related strings -->
+  <string name="md5_verification_failed">MD5 నిర్ధారణ విఫలమయింది</string>
   <!-- Apply update strings -->
+  <string name="apply_update_dialog_title">నవీకరణను వర్తింపజేయుము</string>
+  <string name="apply_update_dialog_text">మీరు <xliff:g id="filename">%s</xliff:g>కు ఉన్నతీకరించబడబోతున్నారు. \n\nఒకవేళ మీరు అప్డేట్ నొక్కినట్లయితే, నవీకరణను ఇన్స్టాల్ చేసేందుకు పరికరం దానంతట అదే పునరుద్ధరణ మోడులో తిరిగి ప్రారంభమవుతోంది.\n\nగమనిక: ఈ లక్షణానికి ఒక అనుకూల పునరుద్ధరణ లేదా నవీకరణలను మాన్యువలుగా ఇన్స్టాల్ చేయవలసి ఉంటుంది.</string>
+  <string name="apply_unable_to_reboot_toast">పునరుద్ధరణలోకి రీబూట్ చేయడం సాధ్యపడలేదు</string>
   <!-- deleting -->
+  <string name="confirm_delete_dialog_title">ఫైలును తొలిగించుము</string>
+  <string name="confirm_delete_dialog_title_tv">అన్ని డౌన్లోడ్ చేయబడిన నవీకరణలను అంతర్గత నిల్వ నుండి తొలిగించడానికి క్లిక్ చేయండి</string>
+  <string name="confirm_delete_dialog_message">ఎంచుకోబడిన నవీకరణ ఫైలును తొలిగించాలా?</string>
+  <string name="confirm_delete_all_dialog_message">డౌన్లోడ్ చేయబడిన అన్ని నవీకరణ ఫైళ్ళను తొలిగించాలా?</string>
+  <string name="delete_single_update_success_message">నవీకరణ  <xliff:g id="filename">%s</xliff:g> తొలిగించబడింది</string>
+  <string name="delete_updates_failure_message">నవీకరణ చేయబడిన ఫైలును తొలిగించడంలో ఒక దోషం ఏర్పడింది</string>
+  <string name="delete_updates_noFolder_message">నవీకరణ సంచిక కనుగొనబడలేదు</string>
+  <string name="delete_updates_success_message">డౌన్లోడ్ చేయబడిన నవీకరణలు అన్నీ తొలిగించబడ్డాయి</string>
   <!-- System info strings -->
+  <string name="sysinfo_device">పరికరం:</string>
+  <string name="sysinfo_running">నడుస్తూ ఉంది:</string>
+  <string name="sysinfo_update_channel">నవీకరణ ఛానల్:</string>
+  <string name="sysinfo_last_check">ఆఖరి పరిశీలన:</string>
   <!-- changelog strings -->
+  <string name="no_changelog_alert">చేంజ్ లాగ్ అందుబాటులో లేదు</string>
+  <string name="changelog_dialog_title">చేంజ్ లాగ్</string>
+  <string name="loading_changelog">లోడ్ చేస్తోంది…</string>
 </resources>
