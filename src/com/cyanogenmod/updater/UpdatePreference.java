@@ -246,6 +246,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
             case STYLE_DOWNLOADED:
                 // Show the install image and summary of 'Downloaded'
                 mUpdatesButton.setImageResource(R.drawable.ic_tab_install);
+                mUpdatesButton.setContentDescription(getString(R.string.install_btn));
                 mUpdatesButton.setEnabled(true);
                 mSummaryText.setText(R.string.downloaded_update_summary);
                 mSummaryText.setVisibility(View.VISIBLE);
@@ -255,6 +256,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
             case STYLE_DOWNLOADING:
                 // Show the cancel button image and progress bar
                 mUpdatesButton.setImageResource(R.drawable.ic_tab_cancel);
+                mUpdatesButton.setContentDescription(getString(R.string.cancel_btn));
                 mUpdatesButton.setEnabled(true);
                 mProgressBar.setVisibility(View.VISIBLE);
                 mSummaryText.setVisibility(View.GONE);
@@ -263,6 +265,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
             case STYLE_INSTALLED:
                 // Show the installed button image and summary of 'Installed'
                 mUpdatesButton.setImageResource(R.drawable.ic_tab_installed);
+                mUpdatesButton.setContentDescription(getString(R.string.installed_btn));
                 mUpdatesButton.setEnabled(false);
                 mSummaryText.setText(R.string.installed_update_summary);
                 mSummaryText.setVisibility(View.VISIBLE);
@@ -273,6 +276,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
             default:
                 // Show the download button image and summary of 'New'
                 mUpdatesButton.setImageResource(R.drawable.ic_tab_download);
+                mUpdatesButton.setContentDescription(getString(R.string.download_btn));
                 mUpdatesButton.setEnabled(true);
                 mSummaryText.setText(R.string.new_update_summary);
                 mSummaryText.setVisibility(View.VISIBLE);
