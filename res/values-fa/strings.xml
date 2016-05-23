@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">بروزرسان CM</string>
   <string name="display_name">بروزرسانی‌ها</string>
   <string name="unknown">ناشناخته</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">تازه کردن</string>
   <string name="menu_delete_all">حذف دانلودها</string>
   <string name="menu_system_info">اطلاعات سیستم</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">لغو</string>
   <string name="dialog_update">بروزرسانی</string>
   <string name="dialog_close">بستن</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">بروزرسانی‌های موجود</string>
   <string name="no_available_updates_intro">در آخرین بررسی بروزرسانی یافت نشد. برای بررسی دستی، از دکمه‌ی تازه کردن استفاده کنید.</string>
   <string name="no_available_updates_intro_tv">در آخرین بررسی بروزرسانی یافت نشد. برای بررسی دستی، روی \'اطلاعات سیستم\' بزنید.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">هفتگی</string>
   <string name="check_bi_weekly">دوهفته یک بار</string>
   <string name="check_monthly">ماهیانه</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">بررسی برای بروزرسانی</string>
   <string name="no_updates_found">بروزرسانی جدیدی یافت نشد</string>
   <string name="update_check_failed">بررسی بروزرسانی انجام نشد. اتصال اینترنت خود را بررسی و دوباره سعی کنید.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">بروزرسانی‌های جدید</string>
   <string name="not_action_download">دانلود</string>
   <string name="data_connection_required">اتصال داده مورد نیاز است.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">لغو دانلود</string>
   <string name="confirm_download_cancelation_dialog_message">دانلود فعلی را لغو می کنید؟</string>
   <string name="download_cancelled">دانلود لغو شد</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">دانلود بروزرسانی ناموفق بود</string>
   <string name="not_action_install_update">راه‌اندازی مجدد و نصب</string>
   <string name="not_download_install_notice">بروزرسانی <xliff:g id="filename">%s</xliff:g> با موفقیت دانلود شد. هنگام لمس \'راه‌اندازی مجدد و نصب\'، دستگاه، خود را برای نصب بروزرسانی مجددا راه‌اندازی خواهد کرد.\n\n توجه: ریکاوری سازگاری برای نصب اتوماتیک مورد نیاز است.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 تایید نشد</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">انجام بروزرسانی</string>
   <string name="apply_update_dialog_text">درصدد بروزرسانی به <xliff:g id="filename">%s</xliff:g> هستید.\n\n اگر بروزرسانی را بزنید، دستگاه، خود را برای نصب بروزرسانی در حالت ریکاوری مجددا راه‌اندازی خوهد کرد.\n\n توجه: این قابلیت به یک ریکاوری سازگار نیاز دارد در غیر این صورت بروزرسانی‌ها باید به صورت دستی نصب شوند.</string>
   <string name="apply_unable_to_reboot_toast">ناتوان در راه‌اندازی مجدد  به ریکاوری</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">حذف فایل</string>
   <string name="confirm_delete_dialog_title_tv">برای حذف همه‌ی  بروزرسانی‌های دانلود شده از حافظه داخلی کلیک کنید</string>
   <string name="confirm_delete_dialog_message">فایل بروزرسانی انتخاب شده را حذف می‌کنید؟</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">خطا در حذف فایل بروزرسانی</string>
   <string name="delete_updates_noFolder_message">پوشه بروزرسانی پیدا نشد</string>
   <string name="delete_updates_success_message">تمام بروزرسانی‌های دانلودشده حذف شد</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">دستگاه:</string>
   <string name="sysinfo_running">در حال اجرا:</string>
   <string name="sysinfo_update_channel">کانال بروزرسانی:</string>
   <string name="sysinfo_last_check">آخرین بررسی:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">هیچ تغییری موجود نیست</string>
   <string name="changelog_dialog_title">لیست تغییرات</string>
   <string name="loading_changelog">بارگذاری\u2026</string>

@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM Oppdateringsapp</string>
   <string name="display_name">Oppdateringer</string>
   <string name="unknown">Ukjent</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Oppdater</string>
   <string name="menu_delete_all">Fjern nedlastinger</string>
   <string name="menu_system_info">Systeminfo</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Avbryt</string>
   <string name="dialog_update">Oppdater</string>
   <string name="dialog_close">Lukk</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Tilgjengelige oppdateringer</string>
   <string name="no_available_updates_intro">Siste oppdateringsjekk fant ingen tilgjengelige oppdateringer. Bruk oppdateringsknappen for å manuelt sjekke for nye oppdateringer</string>
   <string name="no_available_updates_intro_tv">Den siste sjekken fant ingen flere oppdateringer. For å manuelt sjekke for oppdateringer, trykk på \'system informasjon\'.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Ukentlig</string>
   <string name="check_bi_weekly">Annenhver uke</string>
   <string name="check_monthly">Månedlig</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Sjekker etter oppdateringer</string>
   <string name="no_updates_found">Ingen nye oppdateringer funnet</string>
   <string name="update_check_failed">Oppdateringskontrollen feilet. Sjekk internettilkoblingen og prøv på nytt senere.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Nye oppdateringer</string>
   <string name="not_action_download">Last ned</string>
   <string name="data_connection_required">En datatilkobling er nødvendig.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Avbryt nedlasting</string>
   <string name="confirm_download_cancelation_dialog_message">Du er i ferd med å avbryte pågående nedlasting, er du sikker?</string>
   <string name="download_cancelled">Nedlasting avbrutt</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Nedlasting av oppdatering var ikke vellykket</string>
   <string name="not_action_install_update">Start på nytt og installer</string>
   <string name="not_download_install_notice">Nedlastingen av <xliff:g id="filename">%s</xliff:g> var vellykket. Når du trykker på \'Start på nytt og installer\', vil enheten starte på nytt, for så å installere oppdateringen.\n\nMerk: En kompatibel recovery-versjon er påkrevd for at installeringen skal kunne utføres.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5-verifisering mislykket</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Installer oppdatering</string>
   <string name="apply_update_dialog_text">Du er i ferd med å oppgradere til <xliff:g id="filename">%s</xliff:g>.\n\nHvis du fortsetter vil telefonen foreta en omstart til recovery-modus for å gjennomføre installasjonen</string>
   <string name="apply_unable_to_reboot_toast">Kunne ikke starte opp i recovery-modus</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Slett fil</string>
   <string name="confirm_delete_dialog_title_tv">Klikk for å fjerne alle nedlastede oppdateringer fra intern lagringskapasitet</string>
   <string name="confirm_delete_dialog_message">Du er i ferd med å fjerne den nedlastede oppdateringsfilen, er du sikker?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Det oppsto en feil ved sletting av oppdateringsfil</string>
   <string name="delete_updates_noFolder_message">Oppdateringsmappe ikke funnet</string>
   <string name="delete_updates_success_message">Alle nedlastede oppdateringerer slettet</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Enhet:</string>
   <string name="sysinfo_running">Kjører:</string>
   <string name="sysinfo_update_channel">Oppdateringskanal:</string>
   <string name="sysinfo_last_check">Sist sjekk:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Endringslogg ikke tilgjengelig</string>
   <string name="changelog_dialog_title">Endringslogg</string>
   <string name="loading_changelog">Laster\u2026</string>

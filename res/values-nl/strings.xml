@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CyanogenMod-updates</string>
   <string name="display_name">Updates</string>
   <string name="unknown">Onbekend</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Vernieuwen</string>
   <string name="menu_delete_all">Downloads verwijderen</string>
   <string name="menu_system_info">Systeeminformatie</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Annuleren</string>
   <string name="dialog_update">Bijwerken</string>
   <string name="dialog_close">Sluiten</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Beschikbare updates</string>
   <string name="no_available_updates_intro">De laatste keer zijn geen updates gevonden. Om handmatig te controleren, tikt u op \'Vernieuwen\'</string>
   <string name="no_available_updates_intro_tv">Er zijn geen updates gevonden tijdens de laatste controle. Om handmatig op nieuwe updates te controleren, gaat u naar Systeeminformatie.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Wekelijks</string>
   <string name="check_bi_weekly">Tweewekelijks</string>
   <string name="check_monthly">Maandelijks</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Controleren op updates\u2026</string>
   <string name="no_updates_found">Geen nieuwe updates gevonden</string>
   <string name="update_check_failed">Kan niet controleren op updates. Controleer uw internetverbinding en probeer het later opnieuw</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Nieuwe updates</string>
   <string name="not_action_download">Downloaden</string>
   <string name="data_connection_required">Gegevensverbinding vereist</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Download annuleren</string>
   <string name="confirm_download_cancelation_dialog_message">Weet u zeker dat u de download wilt annuleren?</string>
   <string name="download_cancelled">Download geannuleeerd</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Update downloaden mislukt</string>
   <string name="not_action_install_update">Herstarten en installeren</string>
   <string name="not_download_install_notice">Update <xliff:g id="filename">%s</xliff:g> is succesvol gedownload. Wanneer u op \'Herstarten en installeren\' tikt, zal het apparaat herstarten om de update te installeren. Let op: een compatibele recovery is vereist om de installatie automatisch uit te voeren.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5-verificatie mislukt</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Update toepassen</string>
   <string name="apply_update_dialog_text">Uw systeem wordt bijgewerkt naar <xliff:g id="filename">%s</xliff:g>.\n\nWanneer u op \'Bijwerken\' tikt, zal het apparaat herstarten om de update te installeren.\n\nLet op: een compatibele recovery is vereist, anders moet de update handmatig worden geïnstalleerd.</string>
   <string name="apply_unable_to_reboot_toast">Kan niet herstarten naar recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Bestand verwijderen</string>
   <string name="confirm_delete_dialog_title_tv">Klik om alle gedownloade updates te verwijderen van de interne opslag</string>
   <string name="confirm_delete_dialog_message">Weet u zeker dat u het gedownloade updatebestand wilt verwijderen?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Kan updatebestand niet verwijderen</string>
   <string name="delete_updates_noFolder_message">Kan updatemap niet vinden</string>
   <string name="delete_updates_success_message">Alle gedownloade updates zijn verwijderd</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Apparaat:</string>
   <string name="sysinfo_running">Huidige:</string>
   <string name="sysinfo_update_channel">Update-versie:</string>
   <string name="sysinfo_last_check">Laatst gecontroleerd:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Geen changelog beschikbaar</string>
   <string name="changelog_dialog_title">Changelog</string>
   <string name="loading_changelog">Laden\u2026</string>

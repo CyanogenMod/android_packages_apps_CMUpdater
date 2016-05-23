@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CMアップデータ</string>
   <string name="display_name">アップデート</string>
   <string name="unknown">不明</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">更新</string>
   <string name="menu_delete_all">ダウンロードを削除</string>
   <string name="menu_system_info">システム情報</string>
@@ -20,9 +22,10 @@
   <string name="dialog_cancel">キャンセル</string>
   <string name="dialog_update">アップデート</string>
   <string name="dialog_close">閉じる</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">利用可能なアップデート</string>
   <string name="no_available_updates_intro">前回の確認では利用可能なアップデートは見つかりませんでした。更新ボタンを使って新しいアップデートを手動で確認できます。</string>
-  <string name="no_available_updates_intro_tv">最後の確認では利用可能なアップデートは見つかりませんでした。新しいアップデートを手動で確認するには「システム情報」をクリックしてください。</string>
+  <string name="no_available_updates_intro_tv">最後の確認では利用可能なアップデートは見つかりませんでした。新しいアップデートを手動で確認するには[システム情報]をクリックしてください。</string>
   <string name="new_update_summary">新しいアップデート</string>
   <string name="downloaded_update_summary">ダウンロード済み</string>
   <string name="installed_update_summary">インストール済み</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">毎週</string>
   <string name="check_bi_weekly">週2回</string>
   <string name="check_monthly">毎月</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">アップデートを確認中</string>
   <string name="no_updates_found">新しいアップデートはありません</string>
   <string name="update_check_failed">アップデートを確認できませんでした。インターネット接続を確認して、しばらくしてからもう一度お試しください。</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">新しいアップデート</string>
   <string name="not_action_download">ダウンロード</string>
   <string name="data_connection_required">データ接続が必要です。</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">ダウンロードをキャンセル</string>
   <string name="confirm_download_cancelation_dialog_message">このダウンロードをキャンセルしますか？</string>
   <string name="download_cancelled">ダウンロードをキャンセルしました</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">アップデートをダウンロードできませんでした</string>
   <string name="not_action_install_update">再起動してインストール</string>
   <string name="not_download_install_notice">アップデート<xliff:g id="filename">%s</xliff:g>のダウンロードが完了しました。｢再起動してインストール｣をタップすると、アップデートをインストールするために端末は再起動します。\n\n注意: インストールを自動で行うには、互換性のあるリカバリーが必要です。</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5を検証できませんでした</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">アップデートを適用</string>
   <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g>にアップグレードしようとしています。\n\nアップデートを押すと、アップデートをインストールするために端末はリカバリーモードで再起動します。\n\n注意: この機能は互換性のあるリカバリーが必要ですので、互換性がなければ手動でインストールする必要があります。</string>
   <string name="apply_unable_to_reboot_toast">リカバリーモードで再起動できませんでした</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">ファイルを削除</string>
   <string name="confirm_delete_dialog_title_tv">クリックして内部ストレージからすべてのダウンロードしたアップデートを削除</string>
   <string name="confirm_delete_dialog_message">選択したアップデートファイルを削除しますか？</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">アップデートファイルの削除中にエラーが発生しました</string>
   <string name="delete_updates_noFolder_message">アップデートフォルダが見つかりませんでした</string>
   <string name="delete_updates_success_message">ダウンロードしたすべてのアップデートファイルを削除しました</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">端末:</string>
   <string name="sysinfo_running">実行中:</string>
   <string name="sysinfo_update_channel">アップデートチャンネル:</string>
   <string name="sysinfo_last_check">前回の確認:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">更新履歴はありません</string>
   <string name="changelog_dialog_title">更新履歴</string>
   <string name="loading_changelog">読み込み中\u2026</string>

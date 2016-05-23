@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CyanogenMod-Aktualiséierer</string>
   <string name="display_name">Aktualiséierungen</string>
   <string name="unknown">Onbekannt</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Opfrëschen</string>
   <string name="menu_delete_all">Downloads läschen</string>
   <string name="menu_system_info">Systeminformatiounen</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Ofbriechen</string>
   <string name="dialog_update">Aktualiséieren</string>
   <string name="dialog_close">Zoumaachen</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Disponibel Aktualiséierungen</string>
   <string name="no_available_updates_intro">Bei der leschter Iwwerpréiwung goufe keng Aktualiséierunge fonnt. Fir manuell no neien Aktualiséierungen ze sichen, benotz de Knäppchen \"Opfrëschen\".</string>
   <string name="no_available_updates_intro_tv">Bei der leschter Kontroll  konnte keng Aktualiséierunge fonnt ginn. Fir manuell ze sichen, dréck op \"Systeminformatioun\".</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Eemol pro Woch</string>
   <string name="check_bi_weekly">Zweemol d\'Woch</string>
   <string name="check_monthly">All Mount</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Aktualiséierunge gi gesicht</string>
   <string name="no_updates_found">Keng nei Aktualiséierunge fonnt</string>
   <string name="update_check_failed">D\'Sich no Aktualiséierungen ass feelgeschloen. Kontrolléier w.e.g. deng Internetconnectioun a versich méi spéit nees.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Nei Aktualiséierungen</string>
   <string name="not_action_download">Eroflueden</string>
   <string name="data_connection_required">Et gëtt eng Dateconnectioun gebraucht.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Eroflueden ofbriechen</string>
   <string name="confirm_download_cancelation_dialog_message">D\'Eroflueden ofbriechen?</string>
   <string name="download_cancelled">Eroflueden ofgebrach</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">D\'Erofluede vun der Aktualiséierung ass feelgeschloen</string>
   <string name="not_action_install_update">Nei starten an installéieren</string>
   <string name="not_download_install_notice">D\'Aktualiséierung <xliff:g id="filename">%s</xliff:g> gouf erfollegräich erofgelueden. Wann \'Nei starten an installéieren\' gedréckt gëtt, start den Apparat nei an installéiert d\'Aktualiséierung.\n\nHiwäis: E kompatibele Recovery-System gëtt gebraucht fir datt d\'Installatioun automatesch geet.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5-Verifikatioun feelgeschloen</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aktualiséierung installéieren</string>
   <string name="apply_update_dialog_text">Prett fir d\'Aktualiséierung op <xliff:g id="filename">%s</xliff:g>.\n\nNo der Bestätegung gëtt den Apparat am Recuperatiounsmodus gestartet, fir d\'Aktualiséierung duerchzeféieren.\n\nHiwäis: Dës Funktioun setzt viraus datt e kompatibele Recuperatiounssystem installéiert ass, anerefalls muss d\'Aktualiséierung manuell installéiert ginn.</string>
   <string name="apply_unable_to_reboot_toast">Kann net an de Recuperatiounsmodus starten</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Fichier läschen</string>
   <string name="confirm_delete_dialog_title_tv">Dréck fir all déi erofgelueden Aktualiséierunge vum interne Späicher ze läschen</string>
   <string name="confirm_delete_dialog_message">Den ausgewielten Aktualiséierungsfichier läschen?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Beim Läsche vum Aktualiséierungsfichier gouf et e Feeler</string>
   <string name="delete_updates_noFolder_message">Aktualiséierungsdossier net fonnt</string>
   <string name="delete_updates_success_message">All déi erofgelueden Aktualiséierunge goufe geläscht</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Apparat:</string>
   <string name="sysinfo_running">Aktuell Versioun:</string>
   <string name="sysinfo_update_channel">Kanal aktualiséieren:</string>
   <string name="sysinfo_last_check">Lescht Iwwerpréiwung:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Et si keng Ännerungshiwäiser disponibel</string>
   <string name="changelog_dialog_title">Ännerungshiwäiser</string>
   <string name="loading_changelog">Gëtt gelueden\u2026</string>
