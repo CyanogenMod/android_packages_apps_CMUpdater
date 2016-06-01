@@ -11,10 +11,14 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="not_new_updates_found_body">
     <item quantity="one">עדכון <xliff:g id="count">%d</xliff:g> זמין להורדה</item>
+    <item quantity="two"><xliff:g id="count">%d</xliff:g> עדכונים זמינים להורדה</item>
+    <item quantity="many"><xliff:g id="count">%d</xliff:g> עדכונים זמינים להורדה</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> עדכונים זמינים להורדה</item>
   </plurals>
   <plurals name="not_additional_count">
     <item quantity="one">+ <xliff:g id="count">%d</xliff:g> נוסף</item>
+    <item quantity="two">+ <xliff:g id="count">%d</xliff:g> נוספים</item>
+    <item quantity="many">+ <xliff:g id="count">%d</xliff:g> נוספים</item>
     <item quantity="other">+ <xliff:g id="count">%d</xliff:g> נוספים</item>
   </plurals>
 </resources>
