@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM යාවත්කාලකය</string>
   <string name="display_name">යාවත්කාලීනයන්</string>
   <string name="unknown">නොදනී</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">නැවුම් කරන්න</string>
   <string name="menu_delete_all">බාගැනීම් මකන්න</string>
   <string name="menu_system_info">පද්ධතියේ තොරතුරු</string>
@@ -19,6 +21,7 @@
   <string name="dialog_cancel">අවලංගුයි</string>
   <string name="dialog_update">යාවත්කාල කරන්න</string>
   <string name="dialog_close">වහන්න</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">ලබාගතහැකි  යාවත්කාලීනයන්</string>
   <string name="no_available_updates_intro">අවසන් පිරික්සීමේදී කිසිඳු යාවත්කාලීනයක් සොයානොගැනුණි. හස්තීයව නව යාවත්කාලීනයන් සඳහා පිරික්සීමට, නැවුම් කරන්න බොත්තම භාවිතා කරන්න.</string>
   <string name="new_update_summary">අලුත්</string>
@@ -32,6 +35,7 @@
   <string name="check_weekly">සතිපතා</string>
   <string name="check_bi_weekly">දෙසතියකට වරක්</string>
   <string name="check_monthly">මාස්පතා</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">යාවත්කාලීනයන් සඳහා පිරික්සමින්</string>
   <string name="no_updates_found">කිසිඳු නව යාවත්කාලීනයක් සොයානොගැනුණි</string>
   <string name="update_check_failed">යාවත්කාල පිරික්සීම අසමත්විය. කරුණාකර ඔබගේ අන්තර්ජාල සම්බන්ධතාව පරීක්ෂාකර පසුව යලි උත්සාහ කරන්න.</string>
@@ -39,6 +43,7 @@
   <string name="not_new_updates_found_title">නව යාවත්කාලීනයන්</string>
   <string name="not_action_download">බාගන්න</string>
   <string name="data_connection_required">දත්ත සම්බන්ධතාවක් අවශ්‍යවේ.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">බාගැනීම අවලංගු කරන්න</string>
   <string name="confirm_download_cancelation_dialog_message">පවත්නා බාගැනීම අවලංගු කරන්නද?</string>
   <string name="download_cancelled">බාගැනීම අවලංගුයි</string>
@@ -49,10 +54,13 @@
   <string name="not_download_failure">යාවත්කාලීනය බාගැනීම අසාර්ථකය</string>
   <string name="not_action_install_update">ස්ථාපනයට යලි පණගන්වන්න</string>
   <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> යාවත්කාලීනය සාර්ථක ලෙස භාගතකෙරුණි. \'ස්ථාපනයට යලි පණගන්වන්න\' ස්පර්ශකළ විට, යාවත්කාලීනය ස්ථාපනය සඳහා උපාංගය නැවත පණගැන්වෙනු ඇත.\n\nසටහන: ස්ථාපනය ඉබේම ක්‍රියාකිරීමට නම් ගැළපෙන ප්‍රතිසාධකයක් අවශ්‍යවේ.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 සත්‍යාපනය අසමත්විය</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">යාවත්කාලීනය යොදන්න</string>
   <string name="apply_update_dialog_text">ඔබ <xliff:g id="filename">%s</xliff:g> වෙත උත්ශ්‍රේණි වීමට සූදානමේ සිටී.\n\nඔබ යාවත්කාල කරන්න එබුව හොත්, යාවත්කාලීනය ස්ථාපනය වීම සඳහා උපාංගය ප්‍රතිසාධන ප්‍රකාරයට නැවත පණගැන්වෙනු ඇත.\n\nසටහන: මෙම විශේෂාංගය සඳහා ගැළපෙන ප්‍රතිසාධකයක් අවශ්‍යවේ නැතිනම් යාවත්කාලීනයන් හස්තීයව ස්ථාපනය කිරීමට සිදුවෙනු ඇත.</string>
   <string name="apply_unable_to_reboot_toast">ප්‍රතිසාධකය වෙත නැවත පණගැන්වීමට නොහැක</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">ගොනුව මකන්න</string>
   <string name="confirm_delete_dialog_message">තෝරාගත් යාවත්කාලීන ගොනුව මකන්නද?</string>
   <string name="confirm_delete_all_dialog_message">භාගතකල සියලු යාවත්කාලීන ගොනු මකන්නද?</string>
@@ -60,10 +68,12 @@
   <string name="delete_updates_failure_message">යාවත්කාලීන ගොනුව මකාදැමීමේදී දෝෂයක් ඇතිවුනි</string>
   <string name="delete_updates_noFolder_message">යාවත්කාලීන ෆෝල්ඩරය සොයාගත නොහැක</string>
   <string name="delete_updates_success_message">සියලු භාගතකල යාවත්කාලීනයන් මකා දැමුණි</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">උපාංගය:</string>
   <string name="sysinfo_running">ධාවනය වෙමින්:</string>
   <string name="sysinfo_update_channel">යාවත්කාලක නාලිකාව:</string>
   <string name="sysinfo_last_check">අවසන් පිරික්සීම:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">වෙනස්කම් ලොගයක් ලබාගත නොහැක</string>
   <string name="changelog_dialog_title">වෙනස්කම් ලොගය</string>
   <string name="loading_changelog">පූරණයවෙමින්\u2026</string>

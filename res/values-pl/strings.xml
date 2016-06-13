@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Aktualizacje CM</string>
   <string name="display_name">Aktualizacje</string>
   <string name="unknown">Nieznane</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Odśwież</string>
   <string name="menu_delete_all">Usuń pobrane</string>
   <string name="menu_system_info">Informacje systemowe</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Anuluj</string>
   <string name="dialog_update">Aktualizuj</string>
   <string name="dialog_close">Zamknij</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Dostępne aktualizacje</string>
   <string name="no_available_updates_intro">Ostatnie sprawdzanie nie wykryło żadnych aktualizacji. Kliknij przycisk \'Odśwież\', aby sprawdzić czy są dostępne nowe aktualizacje.</string>
   <string name="no_available_updates_intro_tv">Ostatnie sprawdzanie nie znalazło żadnych dostępnych aktualizacji. Aby ręcznie sprawdzić dostępność nowych aktualizacji kliknij \"Informacje o systemie\".</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Co tydzień</string>
   <string name="check_bi_weekly">Dwa razy w tygodniu</string>
   <string name="check_monthly">Raz w miesiącu</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Szukam aktualizacji</string>
   <string name="no_updates_found">Nie znaleziono nowych aktualizacji</string>
   <string name="update_check_failed">Szukanie aktualizacji zakończone niepowodzeniem. Sprawdź połączenie z Internetem i spróbuj później.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Nowe aktualizacje</string>
   <string name="not_action_download">Pobierz</string>
   <string name="data_connection_required">Wymagane połączenie z Internetem.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Anuluj pobieranie</string>
   <string name="confirm_download_cancelation_dialog_message">Anulować trwające pobieranie?</string>
   <string name="download_cancelled">Anulowano pobieranie</string>
@@ -51,7 +56,9 @@
   <string name="not_download_failure">Pobieranie aktualizacji zakończone niepowodzeniem</string>
   <string name="not_action_install_update">Uruchom ponownie i zainstaluj</string>
   <string name="not_download_install_notice">Aktualizacja <xliff:g id="filename">%s</xliff:g> została pobrana pomyślnie. Po wybraniu \'Uruchom ponownie i zainstaluj\', urządzenie zostanie zrestartowane w celu instalacji.\n\nUwaga: Wymagana jest kompatybilna aplikacja Recovery, aby proces mógł przebiec automatycznie.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Weryfikacja MD5 zakończona niepowodzeniem</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Zastosuj aktualizację</string>
   <string name="apply_update_dialog_text">Jesteś o krok od aktualizacji do <xliff:g id="filename">%s</xliff:g>.
 
@@ -59,6 +66,7 @@ Po naciśnięciu przycisku Aktualizuj, urządzenie wyłączy się i przejdzie do
         
 Uwaga: Ta funkcja wymaga kompatybilnego recovery. W przeciwnym wypadku aktualizacje będą musiały zostać zainstalowane ręcznie.</string>
   <string name="apply_unable_to_reboot_toast">Nie można przejść do trybu recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Usuń plik</string>
   <string name="confirm_delete_dialog_title_tv">Kliknij, aby usunąć wszystkie pobrane aktualizacje z pamięci wewnętrznej</string>
   <string name="confirm_delete_dialog_message">Usunąć wybrany plik aktualizacji?</string>
@@ -67,10 +75,12 @@ Uwaga: Ta funkcja wymaga kompatybilnego recovery. W przeciwnym wypadku aktualiza
   <string name="delete_updates_failure_message">Wystąpił błąd podczas usuwania plików aktualizacji</string>
   <string name="delete_updates_noFolder_message">Folder aktualizacji nie został odnaleziony</string>
   <string name="delete_updates_success_message">Usunięto wszystkie pobrane aktualizacje</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Urządzenie:</string>
   <string name="sysinfo_running">Działająca:</string>
   <string name="sysinfo_update_channel">Kanał aktualizacji:</string>
   <string name="sysinfo_last_check">Ostatnie sprawdzenie:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Dziennik zmian jest niedostępny</string>
   <string name="changelog_dialog_title">Dziennik zmian</string>
   <string name="loading_changelog">Ładowanie\u2026</string>

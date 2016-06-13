@@ -9,18 +9,23 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM يېڭىلىغۇچ</string>
   <string name="display_name">يېڭىلانمىلار</string>
   <string name="unknown">يوچۇن</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">يېڭىلا</string>
   <string name="menu_delete_all">چۈشۈرگەنلەرنى ئۆچۈر</string>
   <string name="menu_system_info">سىستېما ئۇچۇرى</string>
+  <string name="menu_system_info_tv">سىستېما ئۇچۇرى: چىكىپ تىزىملىكنى يېڭىلاڭ</string>
   <string name="dialog_ok">جەزملە</string>
   <string name="dialog_cancel">ۋاز كەچ</string>
   <string name="dialog_update">يېڭىلا</string>
   <string name="dialog_close">ياپ</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">ئىشلىتىلىشچان يېڭىلاشلار</string>
   <string name="no_available_updates_intro">ئاخىرقى يېڭىلاش ئىشلەتكىلى بولىدىغان ھېچقانداق  يېڭىلانمىنى تاپالمىدى. يېڭى يېڭىلاشلارنى قولدا تەكشۈرۈش ئۈچۈن يېڭىلا توپچىنى چېكىڭ.</string>
+  <string name="no_available_updates_intro_tv">ئەڭ ئاخىرى قېتىم تەكشۈرگەندە ھېچقانداق ئىشلەتكىلى بۇلدىغان يېڭىلانما بايقىمىدى. قول بىلەن يېڭىلانما تەكشۈرۈش ئۈچۈن، \"سىستېما ئۇچۇرى\" نى بېسىڭ.</string>
   <string name="new_update_summary">يېڭى</string>
   <string name="downloaded_update_summary">چۈشۈرۈلگىنى</string>
   <string name="installed_update_summary">ئورنىتىلغان</string>
@@ -32,13 +37,15 @@
   <string name="check_weekly">ھەر ھەپتىدە</string>
   <string name="check_bi_weekly">ئىككى ھەپتىدە بىر</string>
   <string name="check_monthly">ھەر ئايدا</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">يېڭىلانمىنى تەكشۈرۈۋاتىدۇ</string>
   <string name="no_updates_found">يېڭى نەشرى تېپىلمىدى</string>
-  <string name="update_check_failed">يېڭىلاشنى تەكشۈرەلمىدى. ئىنتېرنېت باغلىنىشىڭىزنى تەكشۈرۈپ ئاندىن قايتا سىناڭ.</string>
+  <string name="update_check_failed">يېڭىلاشنى تەكشۈرەلمىدى. ئىنتېرنېت ئۇلىنىشىڭىزنى تەكشۈرۈپ ئاندىن قايتا سىناڭ.</string>
   <string name="not_new_updates_found_ticker">يېڭى نەشرى بار</string>
   <string name="not_new_updates_found_title">يېڭى نەشرى</string>
   <string name="not_action_download">چۈشۈر</string>
-  <string name="data_connection_required">سانلىق مەلۇمات باغلىنىشى زۆرۈر.</string>
+  <string name="data_connection_required">سانلىق مەلۇماتقا ئۇلىنىشى زۆرۈر.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">چۈشۈرۈشتىن ۋاز كەچ</string>
   <string name="confirm_download_cancelation_dialog_message">نۆۋەتتىكى چۈشۈرۈشتىن ۋاز كېچەمدۇ؟</string>
   <string name="download_cancelled">چۈشۈرۈشتىن ۋاز كەچتى</string>
@@ -49,21 +56,27 @@
   <string name="not_download_failure">يېڭىلاشنى چۈشۈرەلمىدى</string>
   <string name="not_action_install_update">قايتا قوزغىتىپ ئورنات</string>
   <string name="not_download_install_notice">بۇ <xliff:g id="filename">%s</xliff:g> يېڭىلاش مۇۋەپپەقىيەتلىك چۈشۈرۈلدى. «قايتا قوزغىتىپ ئورنات»نى چەككەندە، ئۈسكۈنە قايتا قوزغىلىپ يېڭىلاشنى ئورنىتىدۇ.\n\nدىققەت: بۇ ئورنىتىشنىڭ ئاپتوماتىك ئىشلىشى ئۈچۈن ماسلىشىدىغان ئەسلىگە كەلتۈرگۈچ بولۇشى كېرەك.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 نى دەلىللىيەلمىدى</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">يېڭىلاشنى قوللان</string>
   <string name="apply_update_dialog_text">سىز <xliff:g id="filename">%s</xliff:g> غا يېڭىلىماقچى بولۇۋاتىسىز.\n\nئەگەر يېڭىلانى چەكسىڭىز، ئۈسكۈنە ئۆزلۈكىدىن قايتا قوزغىلىپ ئەسلىگە كەلتۈرۈش ھالىتىگە كىرىپ يېڭىلاشنى ئورنىتىدۇ.\n \nدىققەت: بۇ ئىقتىدار ئۈچۈن ماسلىشىدىغان ئەسلىگە كەلتۈرگۈچ بولۇشى كېرەك ياكى يېڭىلاشنى قولدا ئورنىتىش كېرەك.</string>
   <string name="apply_unable_to_reboot_toast">ئەسلىگە قايتۇرۇش ھالىتىدە قايتا قوزغىتالمايدۇ</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">ھۆججەت ئۆچۈر</string>
+  <string name="confirm_delete_dialog_title_tv">چىكىپ ئىچكى ساقلانمىغا چۈشۈرۈلگەن بارلىق يېڭىلانمىلارنى ئۆچۈرۈش</string>
   <string name="confirm_delete_dialog_message">تاللانغان يېڭىلاش ھۆججىتىنى ئۆچۈرەمدۇ؟</string>
   <string name="confirm_delete_all_dialog_message">چۈشۈرگەن ھەممە يېڭىلاش ھۆججەتلىرىنى ئۆچۈرەمدۇ؟</string>
   <string name="delete_single_update_success_message">يېڭىلاش <xliff:g id="filename">%s</xliff:g> ئۆچۈرۈلدى</string>
   <string name="delete_updates_failure_message">يېڭىلاش ھۆججىتىنى ئۆچۈرۈۋاتقاندا خاتالىق كۆرۈلدى</string>
   <string name="delete_updates_noFolder_message">يېڭىلاش قىسقۇچى تېپىلمىدى</string>
   <string name="delete_updates_success_message">ھەممە يېڭىلاشلار ئۆچۈرۈلدى</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">ئۈسكۈنە:</string>
   <string name="sysinfo_running">ئىجرا قىلىنىۋاتقىنى:</string>
   <string name="sysinfo_update_channel">يېڭىلاش قانىلى:</string>
   <string name="sysinfo_last_check">ئاخىرقى تەكشۈرۈش:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">ئىشلىتىلىشچان ئۆزگىرىش خاتىرىسى يوق</string>
   <string name="changelog_dialog_title">ئۆزگىرىش خاتىرىسى</string>
   <string name="loading_changelog">يۈكلەۋاتىدۇ\u2026</string>

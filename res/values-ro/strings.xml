@@ -9,16 +9,19 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">Actualizări CM</string>
   <string name="display_name">Actualizări</string>
   <string name="unknown">Necunoscut</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Reîmprospătare</string>
   <string name="menu_delete_all">Ștergeți descărcările</string>
-  <string name="menu_system_info">Informații despre sistem</string>
+  <string name="menu_system_info">Informații sistem</string>
   <string name="dialog_ok">OK</string>
-  <string name="dialog_cancel">Revocați</string>
+  <string name="dialog_cancel">Anulare</string>
   <string name="dialog_update">Actualizați</string>
   <string name="dialog_close">Închideți</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Actualizări disponibile</string>
   <string name="no_available_updates_intro">Ultima verificare nu a găsit actualizări disponibile. Pentru a verifica manual existența actualizărilor noi, utilizați butonul Reîmprospătare.</string>
   <string name="new_update_summary">Nou</string>
@@ -32,6 +35,7 @@
   <string name="check_weekly">Săptămânal</string>
   <string name="check_bi_weekly">Două ori pe săptămână</string>
   <string name="check_monthly">Lunar</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Căutare actualizări</string>
   <string name="no_updates_found">Nu s-au găsit actualizări noi</string>
   <string name="update_check_failed">Verificarea actualizării a eșuat. Vă rugăm să verificați conexiunea la internet și să încercați din nou mai târziu.</string>
@@ -39,6 +43,7 @@
   <string name="not_new_updates_found_title">Actualizări noi</string>
   <string name="not_action_download">Descarcă</string>
   <string name="data_connection_required">Este necesară o conexiune de date.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Revocați descărcarea</string>
   <string name="confirm_download_cancelation_dialog_message">Intenționați să revocați descărcarea curentă?</string>
   <string name="download_cancelled">Descărcare revocată</string>
@@ -49,10 +54,13 @@
   <string name="not_download_failure">Descărcarea actualizării a eșuat</string>
   <string name="not_action_install_update">Repornire și instalare</string>
   <string name="not_download_install_notice">Actualizarea <xliff:g id="filename">%s</xliff:g> s-a descărcat cu succes. Când atingeți \'Repornire și instalare\', dispozitivul se va reporni pentru a instala actualizarea.\n\nNotă: Aveți nevoie de un Recovery compatibil pentru ca instalarea să se facă în mod automat.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Verificarea MD5 nu a reușit</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aplicați actualizarea</string>
   <string name="apply_update_dialog_text">Intenționați să faceți upgrade la <xliff:g id="filename">%s</xliff:g>.\n\nDacă apăsați Actualizare, dispozitivul va reporni în modul recovery pentru a instala actualizarea.\n\nNotă: această caracteristică necesită Recovery compatibil sau actualizările trebuie să fie instalate manual.</string>
   <string name="apply_unable_to_reboot_toast">Nu se poate reporni în Recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Ștergeți fișierul</string>
   <string name="confirm_delete_dialog_message">Șterge fișierul de actualizare selectat?</string>
   <string name="confirm_delete_all_dialog_message">Șterge toate fișierele de actualizare?</string>
@@ -60,10 +68,12 @@
   <string name="delete_updates_failure_message">Eroare la ștergerea fișierului de actualizare</string>
   <string name="delete_updates_noFolder_message">Folder-ul de actualizare nu a fost găsit</string>
   <string name="delete_updates_success_message">Toate actualizările descărcate au fost șterse</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Dispozitiv:</string>
   <string name="sysinfo_running">Rulează:</string>
   <string name="sysinfo_update_channel">Canalul de actualizare:</string>
   <string name="sysinfo_last_check">Ultima verificare:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Niciun jurnal de modificări disponibil</string>
   <string name="changelog_dialog_title">Jurnal modificări</string>
   <string name="loading_changelog">Încărcare\u2026</string>

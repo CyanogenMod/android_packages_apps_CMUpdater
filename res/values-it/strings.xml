@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM Updater</string>
   <string name="display_name">Aggiornamenti</string>
   <string name="unknown">Sconosciuto</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Aggiorna</string>
   <string name="menu_delete_all">Elimina i download</string>
   <string name="menu_system_info">Informazioni di sistema</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Annulla</string>
   <string name="dialog_update">Aggiorna</string>
   <string name="dialog_close">Chiudi</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Aggiornamenti disponibili</string>
   <string name="no_available_updates_intro">Nessun aggiornamento trovato con l\'ultima verifica. Per controllare manualmente la presenza di nuovi aggiornamenti, premere il pulsante Aggiorna</string>
   <string name="no_available_updates_intro_tv">L\'ultimo controllo non ha trovato aggiornamenti disponibili. Per controllare manualmente la disponibilità di nuovi aggiornamenti, fai clic su Informazioni di sistema.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Ogni settimana</string>
   <string name="check_bi_weekly">Ogni due settimane</string>
   <string name="check_monthly">Una volta al mese</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Controllo aggiornamenti</string>
   <string name="no_updates_found">Nessun nuovo aggiornamento</string>
   <string name="update_check_failed">La verifica di aggiornamenti è fallita. Controlla la connessione ad internet e riprova più tardi.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Nuovi aggiornamenti</string>
   <string name="not_action_download">Scarica</string>
   <string name="data_connection_required">È richiesta una connessione dati.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Annulla il download</string>
   <string name="confirm_download_cancelation_dialog_message">Annullare il download corrente?</string>
   <string name="download_cancelled">Download annullato</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Impossibile scaricare l\'aggiornamento</string>
   <string name="not_action_install_update">Riavvia e installa</string>
   <string name="not_download_install_notice">L\'aggiornamento <xliff:g id="filename">%s</xliff:g> è stato scaricato con successo. Premendo \'Riavvia e installa\', il dispositivo verrà riavviato per installare l\'aggiornamento.\n\nNota: è necessaria una recovery compatibile affinché l\'installazione automatica funzioni.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">Verifica MD5 non riuscita</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Applica aggiornamento</string>
   <string name="apply_update_dialog_text">Si sta per aggiornare a <xliff:g id="filename">%s</xliff:g>.\n\nPremendo Aggiorna, il dispositivo verrà riavviato in modalità recovery per l\'installazione dell\'aggiornamento\n\nNota: questa caratteristica richiede una recovery compatibile; in caso contrario sarà necessario installare gli aggiornamenti manualmente</string>
   <string name="apply_unable_to_reboot_toast">Impossibile riavviare in recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Elimina file</string>
   <string name="confirm_delete_dialog_title_tv">Fai click per rimuovere tutti i download scaricti nella memoria interna</string>
   <string name="confirm_delete_dialog_message">Eliminare il file di aggiornamento selezionato?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Errore durante l\'eliminazione dell\'aggiornamento</string>
   <string name="delete_updates_noFolder_message">Cartella degli aggiornamenti non trovata</string>
   <string name="delete_updates_success_message">Tutti gli aggiornamenti eliminati</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Dispositivo:</string>
   <string name="sysinfo_running">In esecuzione:</string>
   <string name="sysinfo_update_channel">Canale aggiornamento:</string>
   <string name="sysinfo_last_check">Ultima verifica:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Nessun changelog disponibile</string>
   <string name="changelog_dialog_title">Changelog</string>
   <string name="loading_changelog">Caricamento in corso\u2026</string>

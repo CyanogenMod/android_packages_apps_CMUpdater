@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM ĝisdatigilo</string>
   <string name="display_name">Ĝisdatigoj</string>
   <string name="unknown">Nekonata</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Aktualiga klavo</string>
   <string name="menu_delete_all">Forigi elŝutaĵojn</string>
   <string name="menu_system_info">Sistem-informoj</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Rezigni</string>
   <string name="dialog_update">Aktualigi</string>
   <string name="dialog_close">Fermi</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Ĝisdatigoj disponeblaj</string>
   <string name="no_available_updates_intro">Lasta kontrolo ne trovis disponeblajn ĝisdatigojn. Por kontroli mane, uzu Aktualigan butonon.</string>
   <string name="no_available_updates_intro_tv">Lasta kontrolo ne trovis disponeblajn ĝisdatigojn. Por kontroli mane, klaku \'Sistem-informoj\'-n.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Ĉiu-semajne</string>
   <string name="check_bi_weekly">Dufoje monate</string>
   <string name="check_monthly">Ĉiu-monate</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Kontrolado de ĝisdatigoj</string>
   <string name="no_updates_found">Neniu ĝisdatigo disponebla</string>
   <string name="update_check_failed">Kontrolo de ĝisdatigoj fiaskis. Bonvolu kontroli vian interretan konekton kaj provu denove.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Novaj ĝisdatigoj</string>
   <string name="not_action_download">Elŝuti</string>
   <string name="data_connection_required">Konekto bezonata.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Nuligi elŝuton</string>
   <string name="confirm_download_cancelation_dialog_message">Ĉu nuligi aktualan elŝuton?</string>
   <string name="download_cancelled">Elŝuto nuligita</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Elŝutado fiaskis</string>
   <string name="not_action_install_update">Restartigi kaj instali</string>
   <string name="not_download_install_notice">Ĝisdatigo <xliff:g id="filename">%s</xliff:g> sukcese elŝutiĝis. Post tajpo sur \'Restartigi kaj instali\', la aparato restartiĝos kaj instalos ĝisdatigon.\n\nNoto: Kongrua riparado estas postulata por aŭtomata instalado.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 kontrolo fiaskis</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Apliki ĝisdatigon</string>
   <string name="apply_update_dialog_text">Vi estas instalonta la  <xliff:g id="filename">%s</xliff:g> dosieron.\n\nPost premo de la \"Ĝisdatigo\" butono, la aparato restartos per riparada reĝimo por instali la ĝisdatigon.\n\nNoto : Tiu funkcio postulas kongruan riparadon, alikaze vi instalu ĝin mane.</string>
   <string name="apply_unable_to_reboot_toast">Neeblas restartigi per riparada reĝimo</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Forigi dosieron</string>
   <string name="confirm_delete_dialog_title_tv">Klaku tien por forigi  ĉiujn ĝisdatigojn elŝutitajn el la interna memorilo</string>
   <string name="confirm_delete_dialog_message">Ĉu forigi la elektitan ĝisdatigon?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Forigado de ĝisdatigo fiaskis</string>
   <string name="delete_updates_noFolder_message">Ĝisdatiga dosierujo ne troveblas</string>
   <string name="delete_updates_success_message">Ĉiuj elŝutaĵoj sukcese forigitaj</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Aparato:</string>
   <string name="sysinfo_running">Aktuala versio:</string>
   <string name="sysinfo_update_channel">Ĝisdatiga kanalo:</string>
   <string name="sysinfo_last_check">Lasta kontrolado:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Neniu ŝanĝoprotokolo disponeblas</string>
   <string name="changelog_dialog_title">Ŝanĝoprotokolo</string>
   <string name="loading_changelog">Ŝarĝante\u2026</string>

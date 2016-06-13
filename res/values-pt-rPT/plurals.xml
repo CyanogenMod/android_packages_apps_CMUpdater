@@ -10,8 +10,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="not_new_updates_found_body">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> atualização disponível para tranferência</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> atualizações disponíveis para tranferência</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> atualização disponível para transferência</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> atualizações disponíveis para transferência</item>
   </plurals>
   <plurals name="not_additional_count">
     <item quantity="one">+ <xliff:g id="count">%d</xliff:g> mais</item>

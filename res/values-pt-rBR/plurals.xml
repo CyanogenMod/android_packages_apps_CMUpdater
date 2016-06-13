@@ -14,7 +14,7 @@
     <item quantity="other"><xliff:g id="count">%d</xliff:g> atualizações estão disponíveis para baixar</item>
   </plurals>
   <plurals name="not_additional_count">
-    <item quantity="one">+ <xliff:g id="count">%d</xliff:g> mais</item>
-    <item quantity="other">+ <xliff:g id="count">%d</xliff:g> mais</item>
+    <item quantity="one">+ <xliff:g id="count">%d</xliff:g> a mais</item>
+    <item quantity="other">+ <xliff:g id="count">%d</xliff:g> a mais</item>
   </plurals>
 </resources>

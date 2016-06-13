@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM-opdatering</string>
   <string name="display_name">Opdateringer</string>
   <string name="unknown">Ukendt</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Genopfrisk</string>
   <string name="menu_delete_all">Slet downloads</string>
   <string name="menu_system_info">System-info</string>
@@ -20,6 +22,7 @@
   <string name="dialog_cancel">Annuller</string>
   <string name="dialog_update">Opdatér</string>
   <string name="dialog_close">Luk</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Tilgængelige opdateringer</string>
   <string name="no_available_updates_intro">Den sidste søgning fandt ingen tilgængelige opdateringer. Brug knappen Genopfrisk for at søge efter opdateringer manuelt</string>
   <string name="no_available_updates_intro_tv">Seneste tjek fandt ikke nogen tilgængelige opdateringer. For at tjekke efter nye opdateringer manuelt, klik på \'Systemoplysninger\'.</string>
@@ -34,6 +37,7 @@
   <string name="check_weekly">Ugentligt</string>
   <string name="check_bi_weekly">To gange ugentligt</string>
   <string name="check_monthly">Månedligt</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Søg efter opdateringer</string>
   <string name="no_updates_found">Ingen nye opdateringer fundet</string>
   <string name="update_check_failed">Kunne ikke søge efter opdateringer. Kontrollér venligst din internetforbindelse, og prøv igen senere.</string>
@@ -41,6 +45,7 @@
   <string name="not_new_updates_found_title">Nye opdateringer</string>
   <string name="not_action_download">Download</string>
   <string name="data_connection_required">Der kræves en dataforbindelse.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Annuller download</string>
   <string name="confirm_download_cancelation_dialog_message">Du skal til at annullere den nuværende download, OK at fortsætte?</string>
   <string name="download_cancelled">Download annulleret</string>
@@ -51,10 +56,13 @@
   <string name="not_download_failure">Kunne ikke downloade opdatering</string>
   <string name="not_action_install_update">Genstart og installér</string>
   <string name="not_download_install_notice">Opdateringen <xliff:g id="filename">%s</xliff:g> blev downloadet korrekt. Når der trykkes \'Genstart og installér\', vil enheden genstarte sig selv for at installere opdateringen.\n\nNB: En kompatibel recovery er påkrævet, for at installeringen kan foregå automatisk.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5-bekræftelse mislykkedes</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Anvend opdatering</string>
   <string name="apply_update_dialog_text">Du skal til at opgradere til <xliff:g id="filename">%s</xliff:g>.\n\nHvis du trykker Opdatér, vil telefonen genstarte til tilstanden recovery for at installere opdateringen</string>
   <string name="apply_unable_to_reboot_toast">Kan ikke genstarte til recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Slet fil</string>
   <string name="confirm_delete_dialog_title_tv">Klik for at fjerne alle hentede opdateringer fra det interne lager</string>
   <string name="confirm_delete_dialog_message">Du skal til at slette den downloadede opdateringsfil, OK at fortsætte?</string>
@@ -63,10 +71,12 @@
   <string name="delete_updates_failure_message">Der opstod en fejl ved sletning af opdateringsfilen</string>
   <string name="delete_updates_noFolder_message">Opdateringsmappen findes ikke</string>
   <string name="delete_updates_success_message">Alle downloadede opdateringer slettet</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Enhed:</string>
   <string name="sysinfo_running">Kører:</string>
   <string name="sysinfo_update_channel">Opdateringskanal:</string>
   <string name="sysinfo_last_check">Sidste søgning:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">Ingen ændringslog tilgængelig</string>
   <string name="changelog_dialog_title">Ændringslog</string>
   <string name="loading_changelog">Indlæser\u2026</string>

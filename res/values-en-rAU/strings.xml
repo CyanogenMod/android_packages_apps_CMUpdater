@@ -9,9 +9,11 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- General strings -->
   <string name="app_name">CM Updater</string>
   <string name="display_name">Updates</string>
   <string name="unknown">Unknown</string>
+  <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Refresh</string>
   <string name="menu_delete_all">Delete downloads</string>
   <string name="menu_system_info">System info</string>
@@ -19,6 +21,7 @@
   <string name="dialog_cancel">Cancel</string>
   <string name="dialog_update">Update</string>
   <string name="dialog_close">Close</string>
+  <!-- Settings strings -->
   <string name="available_updates_title">Available updates</string>
   <string name="no_available_updates_intro">The last check did not find any available updates. To manually check for new updates, use the Refresh button.</string>
   <string name="new_update_summary">New</string>
@@ -32,6 +35,7 @@
   <string name="check_weekly">Weekly</string>
   <string name="check_bi_weekly">Bi-weekly</string>
   <string name="check_monthly">Monthly</string>
+  <!-- Update checking -->
   <string name="checking_for_updates">Checking for updates</string>
   <string name="no_updates_found">No new updates found</string>
   <string name="update_check_failed">The update check failed. Please check your Internet connection and try again later.</string>
@@ -39,6 +43,7 @@
   <string name="not_new_updates_found_title">New updates</string>
   <string name="not_action_download">Download</string>
   <string name="data_connection_required">A data connection is required.</string>
+  <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Cancel download</string>
   <string name="confirm_download_cancelation_dialog_message">Cancel the current download?</string>
   <string name="download_cancelled">Download cancelled</string>
@@ -49,10 +54,13 @@
   <string name="not_download_failure">Update download was unsuccessful</string>
   <string name="not_action_install_update">Reboot and install</string>
   <string name="not_download_install_notice">The update <xliff:g id="filename">%s</xliff:g> was successfully downloaded. When touching \'Reboot and install\', the device will restart itself to install the update.\n\nNote: A compatible Recovery is required for the installation to work automatically.</string>
+  <!-- MD5 related strings -->
   <string name="md5_verification_failed">MD5 verification failed</string>
+  <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Apply update</string>
   <string name="apply_update_dialog_text">You are about to upgrade to <xliff:g id="filename">%s</xliff:g>.\n\nIf you press Update, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
   <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
+  <!-- deleting -->
   <string name="confirm_delete_dialog_title">Delete file</string>
   <string name="confirm_delete_dialog_message">Delete the selected update file?</string>
   <string name="confirm_delete_all_dialog_message">Delete all downloaded update files?</string>
@@ -60,10 +68,12 @@
   <string name="delete_updates_failure_message">There was an error deleting the update file</string>
   <string name="delete_updates_noFolder_message">Update folder not found</string>
   <string name="delete_updates_success_message">All downloaded updates deleted</string>
+  <!-- System info strings -->
   <string name="sysinfo_device">Device:</string>
   <string name="sysinfo_running">Running:</string>
   <string name="sysinfo_update_channel">Update channel:</string>
   <string name="sysinfo_last_check">Last check:</string>
+  <!-- changelog strings -->
   <string name="no_changelog_alert">No changelog available</string>
   <string name="changelog_dialog_title">Changelog</string>
   <string name="loading_changelog">Loading\u2026</string>
