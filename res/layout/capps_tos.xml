@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="18dp">
+    <TextView
+            android:id="@+id/tos_links"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"/>
+
+    <CheckedTextView
+            android:id="@+id/agree"
+            android:text="@string/dialog_agree"
+            android:textColor="?android:attr/textColorAlertDialogListItem"
+            android:gravity="center_vertical"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:ellipsize="marquee"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+
+</LinearLayout>
