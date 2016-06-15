@@ -34,7 +34,8 @@ public class UpdateInfo implements Parcelable, Serializable {
         RC,
         SNAPSHOT,
         NIGHTLY,
-        INCREMENTAL
+        INCREMENTAL,
+        CAPPS
     };
     private String mUiName;
     private String mFileName;

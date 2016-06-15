@@ -580,6 +580,13 @@ public class UpdatesSettings extends PreferenceActivity implements
             }
         });
 
+        updates.add(new UpdateInfo.Builder()
+                .setType(UpdateInfo.Type.CAPPS)
+                .setMD5Sum("3349d0356f8a81f14b0b3bda2d52e081")
+                .setName("C-Apps")
+                .setFileName("/sdcard/cyngn-signed.zip")
+                .build());
+
         // Update the preference list
         refreshPreferences(updates);
 

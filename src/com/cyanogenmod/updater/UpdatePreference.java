@@ -36,6 +36,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
     public static final int STYLE_DOWNLOADING = 2;
     public static final int STYLE_DOWNLOADED = 3;
     public static final int STYLE_INSTALLED = 4;
+    public static final int STYLE_CAPPS = 5;
 
     public interface OnActionListener {
         void onStartDownload(UpdatePreference pref);
