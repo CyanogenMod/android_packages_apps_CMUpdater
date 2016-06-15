@@ -116,10 +116,10 @@ public class Utils {
         // Add the update folder/file name
         File primaryStorage = Environment.getExternalStorageDirectory();
         // If the path is emulated, translate it, if not return the original path
-        String updatePath = Environment.maybeTranslateEmulatedPathToInternal(
-                primaryStorage).getAbsolutePath();
         // Create the path for the update package
-        String updatePackagePath = updatePath + "/" + Constants.UPDATES_FOLDER + "/" + updateFileName;
+        String updatePackagePath = primaryStorage + "/" + Constants.UPDATES_FOLDER + "/" + updateFileName;
+        String updatePath = Environment.maybeTranslateEmulatedPathToInternal(
+                new File(updatePackagePath)).getAbsolutePath();
 
         /*
          * maybeTranslateEmulatedPathToInternal requires that we have a full path to a file (not just
@@ -129,10 +129,10 @@ public class Utils {
          * a sane way, manually perform the translation that is needed in order for uncrypt to be
          * able to find the file.
          */
-        updatePackagePath = updatePackagePath.replace("storage/emulated", "data/media");
+        updatePath = updatePath.replace("storage/emulated", "data/media");
 
         // Reboot into recovery and trigger the update
-        android.os.RecoverySystem.installPackage(context, new File(updatePackagePath));
+        android.os.RecoverySystem.installPackage(context, new File(updatePath));
     }
 
     public static int getUpdateType() {
