@@ -24,6 +24,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.preference.ListPreference;
@@ -56,16 +57,20 @@ import org.cyanogenmod.internal.util.ScreenType;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import benchmarks.regression.R;
+
 public class UpdatesSettings extends PreferenceActivity implements
         OnPreferenceChangeListener, UpdatePreference.OnReadyListener, UpdatePreference.OnActionListener,
         ActivityCompat.OnRequestPermissionsResultCallback {
     private static String TAG = "UpdatesSettings";
+    private static final String KEY_SHOW_CAPPS = "key_show_capps";
 
     // intent extras
     public static final String EXTRA_UPDATE_LIST_UPDATED = "update_list_updated";
@@ -81,6 +86,7 @@ public class UpdatesSettings extends PreferenceActivity implements
     private static final int MENU_REFRESH = 0;
     private static final int MENU_DELETE_ALL = 1;
     private static final int MENU_SYSTEM_INFO = 2;
+    private static final int MENU_SYSTEM_SHOW_CAPPS = 3;
 
     private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
@@ -196,12 +202,23 @@ public class UpdatesSettings extends PreferenceActivity implements
         menu.add(0, MENU_SYSTEM_INFO, 0, R.string.menu_system_info)
             .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 
+        menu.add(0, MENU_SYSTEM_SHOW_CAPPS, 0, R.string.menu_show_capps)
+                .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW)
+                .setCheckable(true);
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case MENU_SYSTEM_SHOW_CAPPS:
+                item.setChecked(!item.isChecked());
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                        .edit()
+                        .putBoolean(KEY_SHOW_CAPPS, item.isChecked())
+                        .apply();
+                return true;
             case MENU_REFRESH:
                 checkForUpdates();
                 return true;
@@ -580,6 +597,16 @@ public class UpdatesSettings extends PreferenceActivity implements
             }
         });
 
+        final File externalStorageDirectory = Environment.getExternalStorageDirectory();
+        Log.d(TAG, "external storage dir: " + externalStorageDirectory);
+        updates.add(0, new UpdateInfo.Builder()
+                .setType(UpdateInfo.Type.CAPPS)
+                .setMD5Sum("" /* package verification will make sure its valid */)
+                .setDownloadUrl(getApplicationContext().getString(R.string.capps_download_url))
+                .setFileName(getApplicationContext().getString(R.string.capps_file_name))
+                .setName(getApplicationContext().getString(R.string.capps_name))
+                .build());
+
         // Update the preference list
         refreshPreferences(updates);
 
@@ -658,6 +685,8 @@ public class UpdatesSettings extends PreferenceActivity implements
                 style = UpdatePreference.STYLE_DOWNLOADING;
             } else if (haveIncremental) {
                 style = UpdatePreference.STYLE_DOWNLOADED;
+            } else if (ui.getType() == UpdateInfo.Type.CAPPS) {
+                style = UpdatePreference.STYLE_CAPPS;
             } else if (ui.getFileName().equals(installedZip)) {
                 // This is the currently installed version
                 style = UpdatePreference.STYLE_INSTALLED;
