@@ -9,6 +9,16 @@
 
 package com.cyanogenmod.updater;
 
+import com.cyanogenmod.updater.misc.Constants;
+import com.cyanogenmod.updater.misc.State;
+import com.cyanogenmod.updater.misc.UpdateInfo;
+import com.cyanogenmod.updater.receiver.DownloadReceiver;
+import com.cyanogenmod.updater.service.UpdateCheckService;
+import com.cyanogenmod.updater.utils.UpdateFilter;
+import com.cyanogenmod.updater.utils.Utils;
+
+import org.cyanogenmod.internal.util.ScreenType;
+
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
@@ -24,6 +34,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.preference.ListPreference;
@@ -35,6 +46,7 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
@@ -43,16 +55,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.cyanogenmod.updater.misc.Constants;
-import com.cyanogenmod.updater.misc.State;
-import com.cyanogenmod.updater.misc.UpdateInfo;
-import com.cyanogenmod.updater.receiver.DownloadReceiver;
-import com.cyanogenmod.updater.service.UpdateCheckService;
-import com.cyanogenmod.updater.utils.UpdateFilter;
-import com.cyanogenmod.updater.utils.Utils;
-
-import org.cyanogenmod.internal.util.ScreenType;
 
 import java.io.File;
 import java.io.IOException;
@@ -66,7 +68,9 @@ public class UpdatesSettings extends PreferenceActivity implements
         OnPreferenceChangeListener, UpdatePreference.OnReadyListener, UpdatePreference.OnActionListener,
         ActivityCompat.OnRequestPermissionsResultCallback {
     private static String TAG = "UpdatesSettings";
+    private static final String KEY_SHOW_CAPPS = "key_show_capps";
 
+    public static final String ACTION_GET_CAPPS = "com.cyanogenmod.updater.action.GET_CAPPS";
     // intent extras
     public static final String EXTRA_UPDATE_LIST_UPDATED = "update_list_updated";
     public static final String EXTRA_FINISHED_DOWNLOAD_ID = "download_id";
@@ -81,6 +85,7 @@ public class UpdatesSettings extends PreferenceActivity implements
     private static final int MENU_REFRESH = 0;
     private static final int MENU_DELETE_ALL = 1;
     private static final int MENU_SYSTEM_INFO = 2;
+    private static final int MENU_SYSTEM_SHOW_CAPPS = 3;
 
     private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
@@ -112,6 +117,8 @@ public class UpdatesSettings extends PreferenceActivity implements
 
     private Handler mUpdateHandler = new Handler();
 
+    private boolean mAutoOpenCapps;
+
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -142,6 +149,10 @@ public class UpdatesSettings extends PreferenceActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (mAutoOpenCapps = TextUtils.equals(ACTION_GET_CAPPS, getIntent().getAction())) {
+            setShowCapps(true);
+        }
 
         mDownloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
 
@@ -206,12 +217,28 @@ public class UpdatesSettings extends PreferenceActivity implements
         menu.add(0, MENU_SYSTEM_INFO, 0, R.string.menu_system_info)
             .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 
+        menu.add(0, MENU_SYSTEM_SHOW_CAPPS, 0, R.string.menu_show_capps)
+                .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW)
+                .setCheckable(true);
+
         return true;
+    }
+
+    private void setShowCapps(boolean show) {
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                .edit()
+                .putBoolean(KEY_SHOW_CAPPS, show)
+                .apply();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case MENU_SYSTEM_SHOW_CAPPS:
+                item.setChecked(!item.isChecked());
+                setShowCapps(item.isChecked());
+                checkForUpdates();
+                return true;
             case MENU_REFRESH:
                 checkForUpdates();
                 return true;
@@ -586,6 +613,17 @@ public class UpdatesSettings extends PreferenceActivity implements
             }
         });
 
+        if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                .getBoolean(KEY_SHOW_CAPPS, false)) {
+            updates.add(0, new UpdateInfo.Builder()
+                    .setType(UpdateInfo.Type.CAPPS)
+                    .setMD5Sum("" /* package verification will make sure its valid */)
+                    .setDownloadUrl(getApplicationContext().getString(R.string.capps_download_url))
+                    .setFileName(getApplicationContext().getString(R.string.capps_file_name))
+                    .setName(getApplicationContext().getString(R.string.capps_name))
+                    .build());
+        }
+
         // Update the preference list
         refreshPreferences(updates);
 
@@ -664,6 +702,8 @@ public class UpdatesSettings extends PreferenceActivity implements
                 style = UpdatePreference.STYLE_DOWNLOADING;
             } else if (haveIncremental) {
                 style = UpdatePreference.STYLE_DOWNLOADED;
+            } else if (ui.getType() == UpdateInfo.Type.CAPPS) {
+                style = UpdatePreference.STYLE_CAPPS;
             } else if (ui.getFileName().equals(installedZip)) {
                 // This is the currently installed version
                 style = UpdatePreference.STYLE_INSTALLED;
@@ -686,6 +726,10 @@ public class UpdatesSettings extends PreferenceActivity implements
 
             // Add to the list
             mUpdatesList.addPreference(up);
+            if (mAutoOpenCapps && style == UpdatePreference.STYLE_CAPPS) {
+                mAutoOpenCapps = false;
+                up.onClick(getListView());
+            }
         }
 
         // If no updates are in the list, show the default message

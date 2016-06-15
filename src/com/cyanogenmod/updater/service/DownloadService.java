@@ -44,6 +44,9 @@ public class DownloadService extends IntentService
         implements Response.Listener<JSONObject>, Response.ErrorListener {
     private static final String TAG = DownloadService.class.getSimpleName();
 
+    public static final String ACTION_DOWNLOAD_CAPPS
+            = "com.cyangogenmod.updater.action.DOWNLOAD_CAPPS";
+
     private static final String EXTRA_UPDATE_INFO = "update_info";
 
     private SharedPreferences mPrefs;
