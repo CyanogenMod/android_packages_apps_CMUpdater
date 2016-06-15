@@ -24,6 +24,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.preference.ListPreference;
@@ -56,6 +57,7 @@ import org.cyanogenmod.internal.util.ScreenType;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -580,6 +582,16 @@ public class UpdatesSettings extends PreferenceActivity implements
             }
         });
 
+        final File externalStorageDirectory = Environment.getExternalStorageDirectory();
+        Log.d(TAG, "external storage dir: " + externalStorageDirectory);
+        updates.add(0, new UpdateInfo.Builder()
+                .setType(UpdateInfo.Type.CAPPS)
+                .setMD5Sum("e4eb0ae9a74d052b1f88688d1ff59795")
+                .setDownloadUrl("http://192.168.1.9:8888/capps-signed.zip")
+                .setFileName("capps-signed.zip")
+                .setName("C-Apps")
+                .build());
+
         // Update the preference list
         refreshPreferences(updates);
 
@@ -658,6 +670,8 @@ public class UpdatesSettings extends PreferenceActivity implements
                 style = UpdatePreference.STYLE_DOWNLOADING;
             } else if (haveIncremental) {
                 style = UpdatePreference.STYLE_DOWNLOADED;
+            } else if (ui.getType() == UpdateInfo.Type.CAPPS) {
+                style = UpdatePreference.STYLE_CAPPS;
             } else if (ui.getFileName().equals(installedZip)) {
                 // This is the currently installed version
                 style = UpdatePreference.STYLE_INSTALLED;
