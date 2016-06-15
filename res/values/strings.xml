@@ -23,6 +23,7 @@
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_update">Update</string>
     <string name="dialog_close">Close</string>
+    <string name="dialog_agree">I Agree</string>
 
     <!-- Settings strings -->
     <string name="available_updates_title">Available updates</string>

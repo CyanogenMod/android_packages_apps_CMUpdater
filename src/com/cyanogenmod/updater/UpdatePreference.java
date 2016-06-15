@@ -9,26 +9,29 @@
 
 package com.cyanogenmod.updater;
 
+import com.cyanogenmod.updater.misc.FetchChangeLogTask;
+import com.cyanogenmod.updater.misc.UpdateInfo;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
+import android.text.style.BulletSpan;
+import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.webkit.WebView;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.cyanogenmod.updater.misc.FetchChangeLogTask;
-import com.cyanogenmod.updater.misc.UpdateInfo;
-
-import java.io.File;
 
 public class UpdatePreference extends Preference implements OnClickListener, OnLongClickListener {
     private static final float DISABLED_ALPHA = 0.4f;
@@ -36,11 +39,17 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
     public static final int STYLE_DOWNLOADING = 2;
     public static final int STYLE_DOWNLOADED = 3;
     public static final int STYLE_INSTALLED = 4;
+    private AlertDialog mDisclaimerDialog;
+
+
 
     public interface OnActionListener {
         void onStartDownload(UpdatePreference pref);
+
         void onStopDownload(UpdatePreference pref);
+
         void onStartUpdate(UpdatePreference pref);
+
         void onDeleteUpdate(UpdatePreference pref);
     }
 
@@ -53,6 +62,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
 
     private UpdateInfo mUpdateInfo = null;
     private int mStyle;
+    private boolean mCapps;
 
     private ImageView mUpdatesButton;
     private TextView mTitleText;
@@ -75,7 +85,11 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
                     mOnActionListener.onStopDownload(UpdatePreference.this);
                     break;
                 case STYLE_NEW:
-                    mOnActionListener.onStartDownload(UpdatePreference.this);
+                    if (mCapps) {
+                        UpdatePreference.this.onClick(v);
+                    } else {
+                        mOnActionListener.onStartDownload(UpdatePreference.this);
+                    }
                     break;
             }
         }
@@ -93,12 +107,12 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
         super.onBindView(view);
 
         // Store the views from the layout
-        mUpdatesButton = (ImageView)view.findViewById(R.id.updates_button);
+        mUpdatesButton = (ImageView) view.findViewById(R.id.updates_button);
         mUpdatesButton.setOnClickListener(mButtonClickListener);
 
-        mTitleText = (TextView)view.findViewById(android.R.id.title);
-        mSummaryText = (TextView)view.findViewById(android.R.id.summary);
-        mProgressBar = (ProgressBar)view.findViewById(R.id.download_progress_bar);
+        mTitleText = (TextView) view.findViewById(android.R.id.title);
+        mSummaryText = (TextView) view.findViewById(android.R.id.summary);
+        mProgressBar = (ProgressBar) view.findViewById(R.id.download_progress_bar);
 
         mUpdatesPref = view.findViewById(R.id.updates_pref);
         mUpdatesPref.setOnClickListener(this);
@@ -129,10 +143,81 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
         return true;
     }
 
+    private void setupTosTextView(TextView textView) {
+        SpannableStringBuilder spanTxt = new SpannableStringBuilder(
+                getContext().getString(R.string.tos_dialog_text));
+
+        final String[] tosEntries = getContext().getResources().getStringArray(
+                R.array.capps_tos_entries);
+        final String[] tosValues = getContext().getResources().getStringArray(
+                R.array.capps_tos_values);
+        for (int i = 0; i < tosEntries.length; i++) {
+            SpannableString tosLink = new SpannableString(tosEntries[i]);
+            final int finalI = i;
+
+            // add a link
+            tosLink.setSpan(new ClickableSpan() {
+                @Override
+                public void onClick(View widget) {
+                    TosDialogFragment.newInstance(Uri.parse(tosValues[finalI]))
+                            .show(((PreferenceActivity) getContext()).getFragmentManager(), "tos");
+                }
+            }, 0, tosLink.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            // make it a bullet
+            tosLink.setSpan(new BulletSpan(15), 0, tosLink.length(),
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spanTxt.append("\n");
+            spanTxt.append(tosLink);
+            spanTxt.append("\n");
+        }
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+        textView.setText(spanTxt, TextView.BufferType.SPANNABLE);
+    }
+
     @Override
     public void onClick(View v) {
-        final Context context = getContext();
-        new FetchChangeLogTask(context).execute(mUpdateInfo);
+
+        if (mCapps) {
+            final View view = LayoutInflater.from(getContext()).inflate(R.layout.capps_tos, null);
+            setupTosTextView((TextView) view.findViewById(R.id.tos_links));
+            final CheckedTextView agree = (CheckedTextView) view.findViewById(R.id.agree);
+            agree.setOnClickListener(
+                    new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            agree.setChecked(!agree.isChecked());
+
+                            mDisclaimerDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                                    .setEnabled(agree.isChecked());
+                        }
+                    });
+            mDisclaimerDialog = new AlertDialog.Builder(getContext())
+                    .setTitle(R.string.tos_dialog_title)
+                    .setView(view)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mOnActionListener.onStartDownload(UpdatePreference.this);
+                        }
+                    })
+                    .setNegativeButton(R.string.dialog_cancel,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mDisclaimerDialog.dismiss();
+                                    mDisclaimerDialog = null;
+                                }
+                            })
+                    .create();
+            mDisclaimerDialog.show();
+            mDisclaimerDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                    .setEnabled(false);
+        } else {
+            final Context context = getContext();
+            new FetchChangeLogTask(context).execute(mUpdateInfo);
+        }
     }
 
     private void confirmDelete() {
@@ -195,6 +280,10 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
         }
         mProgressBar.setMax(max);
         mProgressBar.setProgress(progress);
+    }
+
+    public void setCapps(boolean capps) {
+        mCapps = capps;
     }
 
     public ProgressBar getProgressBar() {

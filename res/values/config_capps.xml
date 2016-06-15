@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2014 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="capps_tos_entries" translatable="false">
+        <item>Cyanogen\'s Terms of Service</item>
+        <item>Truecaller\s Terms of Service</item>
+    </string-array>
+
+    <string-array name="capps_tos_values" translatable="false">
+        <item>https://cyngn.com/legal/terms-of-use</item>
+        <item>https://www.truecaller.com/terms-of-service</item>
+    </string-array>
+
+    <string name="capps_get_shortcut_name">Get C-Apps</string>
+    <string name="capps_name" translatable="false">C-Apps</string>
+    <string name="tos_dialog_title">Disclaimer</string>
+    <string name="tos_dialog_text">You must agree to the following terms before continuing\n</string>
+    <string name="menu_show_capps">Show C-Apps</string>
+</resources>
