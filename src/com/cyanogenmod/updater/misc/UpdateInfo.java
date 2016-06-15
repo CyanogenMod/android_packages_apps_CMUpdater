@@ -18,6 +18,7 @@ import com.cyanogenmod.updater.utils.Utils;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,6 +28,7 @@ public class UpdateInfo implements Parcelable, Serializable {
             Pattern.compile("^incremental-(.*)-(.*).zip$");
 
     public static final String CHANGELOG_EXTENSION = ".changelog.html";
+    private List<String> mTosUrls;
 
     public enum Type {
         UNKNOWN,
@@ -34,7 +36,8 @@ public class UpdateInfo implements Parcelable, Serializable {
         RC,
         SNAPSHOT,
         NIGHTLY,
-        INCREMENTAL
+        INCREMENTAL,
+        CAPPS
     };
     private String mUiName;
     private String mFileName;
@@ -128,6 +131,10 @@ public class UpdateInfo implements Parcelable, Serializable {
      */
     public String getIncremental() {
         return mIncremental;
+    }
+
+    public List<String> getTosUrls() {
+        return mTosUrls;
     }
 
     /**
@@ -236,6 +243,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         private String mChangelogUrl;
         private String mMd5Sum;
         private String mIncremental;
+        private List<String> mToUrls;
 
 
         public Builder setName(String uiName) {
@@ -258,6 +266,8 @@ public class UpdateInfo implements Parcelable, Serializable {
                 type = UpdateInfo.Type.SNAPSHOT;
             } else if (TextUtils.equals(typeString, "nightly")) {
                 type = UpdateInfo.Type.NIGHTLY;
+            } else if (TextUtils.equals(typeString, "capps")) {
+                type = UpdateInfo.Type.CAPPS;
             } else {
                 type = UpdateInfo.Type.UNKNOWN;
             }
@@ -300,6 +310,11 @@ public class UpdateInfo implements Parcelable, Serializable {
             return this;
         }
 
+        public Builder setTosUrls(List<String> mTosUrls) {
+            mToUrls = mTosUrls;
+            return this;
+        }
+
         public UpdateInfo build() {
             UpdateInfo info = new UpdateInfo();
             info.mUiName = mUiName;
@@ -311,6 +326,7 @@ public class UpdateInfo implements Parcelable, Serializable {
             info.mChangelogUrl = mChangelogUrl;
             info.mMd5Sum = mMd5Sum;
             info.mIncremental = mIncremental;
+            info.mTosUrls = mToUrls;
             return info;
         }
 

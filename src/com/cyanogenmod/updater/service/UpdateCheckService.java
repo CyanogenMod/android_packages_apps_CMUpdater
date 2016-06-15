@@ -247,10 +247,15 @@ public class UpdateCheckService extends IntentService
                 channels.put("nightly");
                 break;
         }
+        if (showCapps()) {
+            channels.put("capps");
+        }
+
         JSONObject params = new JSONObject();
         params.put("device", TESTING_DOWNLOAD ? "cmtestdevice" : Utils.getDeviceType());
         params.put("channels", channels);
         params.put("source_incremental", Utils.getIncremental());
+        params.put("version", Utils.getInstalledVersion());
 
         JSONObject request = new JSONObject();
         request.put("method", "get_all_builds");
@@ -263,6 +268,7 @@ public class UpdateCheckService extends IntentService
         LinkedList<UpdateInfo> updates = new LinkedList<UpdateInfo>();
         try {
             JSONObject result = new JSONObject(jsonString);
+            Log.d(TAG, "result: " + result.toString(2));
             JSONArray updateList = result.getJSONArray("result");
             int length = updateList.length();
 
@@ -296,12 +302,23 @@ public class UpdateCheckService extends IntentService
                 .setIncremental(obj.getString("incremental"))
                 .build();
 
-        if (!ui.isNewerThanInstalled()) {
+        if (ui.getType() == UpdateInfo.Type.CAPPS) {
+//            ui.setFileName((getApplicationContext().getString(R.string.capps_name)));
+            if (!showCapps()) {
+                Log.d(TAG, "capps disabled, not including.");
+                return null;
+            }
+        } else if (!ui.isNewerThanInstalled()) {
             Log.d(TAG, "Build " + ui.getFileName() + " is older than the installed build");
             return null;
         }
 
         return ui;
+    }
+
+    private boolean showCapps() {
+        return PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+            .getBoolean(UpdatesSettings.KEY_SHOW_CAPPS, false);
     }
 
     @Override
