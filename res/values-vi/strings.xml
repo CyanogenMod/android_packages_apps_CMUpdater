@@ -47,7 +47,6 @@
   <string name="data_connection_required">Yêu cầu kết nối dữ liệu.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Chưa được cấp quyền truy cập</string>
-  <string name="permission_not_granted_dialog_message">Chưa được cấp quyền ghi vào bộ nhớ ngoài. Không thể tải về bản cập nhật.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Hủy bỏ tải xuống</string>
   <string name="confirm_download_cancelation_dialog_message">Huỷ tác vụ tải xuống hiện tại?</string>

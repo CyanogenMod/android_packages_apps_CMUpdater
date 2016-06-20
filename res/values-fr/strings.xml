@@ -47,7 +47,6 @@
   <string name="data_connection_required">Une connexion de données est nécessaire.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Autorisation non accordée</string>
-  <string name="permission_not_granted_dialog_message">L\'autorisation d\'écriture sur le stockage externe n\'a pas été accordée. La mise à jour ne peut pas être téléchargée.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Annuler le téléchargement</string>
   <string name="confirm_download_cancelation_dialog_message">Annuler le téléchargement en cours\u00A0?</string>

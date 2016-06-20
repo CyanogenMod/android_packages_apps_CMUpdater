@@ -47,7 +47,6 @@
   <string name="data_connection_required">É necessária uma ligação de dados.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Permissão não concedida</string>
-  <string name="permission_not_granted_dialog_message">A permissão para escrever no armazenamento externo não foi concedida. Não é possível transferir a atualização.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Cancelar transferências</string>
   <string name="confirm_download_cancelation_dialog_message">Deseja cancelar a transferência atual?</string>

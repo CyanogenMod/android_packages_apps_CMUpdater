@@ -45,7 +45,6 @@
   <string name="data_connection_required">Este necesară o conexiune de date.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Permisiune neacordată</string>
-  <string name="permission_not_granted_dialog_message">Permisiunea de a scrie pe stocarea externă neacordată. Nu se poate descărca actualizarea.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Revocați descărcarea</string>
   <string name="confirm_download_cancelation_dialog_message">Intenționați să revocați descărcarea curentă?</string>

@@ -47,7 +47,6 @@
   <string name="data_connection_required">Неабходна злучэнне з Інтэрнэтам.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Доступ забаронены</string>
-  <string name="permission_not_granted_dialog_message">Адсутнічае дазвол на запіс для знешняга назапашвальніка. Не адтрымалася сцягнуць абнаўленне.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Скасаваць спампоўку</string>
   <string name="confirm_download_cancelation_dialog_message">Скасаваць гэтую спампоўку?</string>

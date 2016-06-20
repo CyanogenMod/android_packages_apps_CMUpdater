@@ -47,7 +47,6 @@
   <string name="data_connection_required">Необхідне з’єднання з мережею.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Дозвіл не надано</string>
-  <string name="permission_not_granted_dialog_message">Не було надано дозвіл на запис до зовнішнього сховища. Не вдалося завантажити оновлення.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Скасувати завантаження?</string>
   <string name="confirm_download_cancelation_dialog_message">Ви можете продовжити завантаження пізніше, запустивши оновлення ще раз</string>

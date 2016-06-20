@@ -47,7 +47,6 @@
   <string name="data_connection_required">ಡೇಟಾ ಸಂಪರ್ಕದ ಅಗತ್ಯವಿದೆ.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">ಅನುಮತಿ ಮಂಜೂರಾಗಿಲ್ಲ</string>
-  <string name="permission_not_granted_dialog_message">ಬಾಹ್ಯ ಸಂಗ್ರಹಕ್ಕೆ ಬರೆಯಲು ಅನುಮತಿ ಪರವಾನಗಿ ನೀಡಲಾಗಿಲ್ಲ. ಡೌನ್‌ಲೋಡ್‌ ಮಾಡಲಾಗದು.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">ಡೌನ್‍ಲೋಡ್ ರದ್ದುಗೊಳಿಸಿ</string>
   <string name="confirm_download_cancelation_dialog_message">ಪ್ರಸ್ತುತ ಡೌನ್‍ಲೋಡ್ ರದ್ದುಗೊಳಿಸುವುದೇ?</string>

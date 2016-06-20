@@ -47,7 +47,7 @@
   <string name="data_connection_required">Eine Datenverbindung wird benötigt.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Berechtigung nicht erteilt</string>
-  <string name="permission_not_granted_dialog_message">Die Berechtigung, den externen Speicher zu beschreiben, wurde nicht erteilt. Das Update kann nicht heruntergeladen werden.</string>
+  <string name="permission_not_granted_dialog_message">Die Berechtigung, den externen Speicher zu beschreiben, wurde nicht erteilt.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Download abbrechen</string>
   <string name="confirm_download_cancelation_dialog_message">Soll der aktuelle Download abgebrochen werden?</string>

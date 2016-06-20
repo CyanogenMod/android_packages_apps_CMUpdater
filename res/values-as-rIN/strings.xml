@@ -47,7 +47,6 @@
   <string name="data_connection_required">ডাটা সংযোগ আৱশ্যক।</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">অনুমতি মঞ্জুৰ হোৱা নাই</string>
-  <string name="permission_not_granted_dialog_message">বাহ্যিক ষ্ট\'ৰেজলৈ লিখাৰ অনুমতি মঞ্জুৰ কৰা হোৱা নাই। আপডেট ডাউনলোড কৰিব নোৱাৰি।</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">ডাউনলোড বাতিল কৰক</string>
   <string name="confirm_download_cancelation_dialog_message">চলিত ডাউনলোড বাতিল কৰিব?</string>

@@ -47,7 +47,6 @@
   <string name="data_connection_required">ડેટા જોડાણ આવશ્યક છે.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">પરવાનગી નથી</string>
-  <string name="permission_not_granted_dialog_message">બાહ્ય સંગ્રહ લખવાની પરવાનગી આપવામાં આવી નહીં. અપડેટ ડાઉનલોડ થઈ શકતા નથી</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">ડાઉનલોડ રદ કરો</string>
   <string name="confirm_download_cancelation_dialog_message">શું હાલનું ડાઉનલોડ રદ કરવું છે?</string>

@@ -47,7 +47,6 @@
   <string name="data_connection_required">डेटा कनेक्शन आवश्यक आहे.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">परवानगी मंजूर नाही</string>
-  <string name="permission_not_granted_dialog_message">बाह्य संग्रहावर लिहिण्याची परवानगी मंजूर झाली नाही. अद्यतन डाउनलोड करू शकत नाही.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">डाउनलोड रद्द करा</string>
   <string name="confirm_download_cancelation_dialog_message">चालू डाउनलोड रद्द करायचे?</string>

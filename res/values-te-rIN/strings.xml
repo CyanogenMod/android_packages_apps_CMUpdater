@@ -47,7 +47,6 @@
   <string name="data_connection_required">ఒక డేటా కనెక్షన్ అవసరం ఉంది.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">అనుమతి ఇవ్వబడలేదు</string>
-  <string name="permission_not_granted_dialog_message">బాహ్య నిల్వలో వ్రాయడానికి అనుమతి ఇవ్వబడలేదు. నవీకరించుటను డౌన్‌లోడ్ చేయలేకపోయింది.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">డౌన్లోడును రద్దు చేయుము</string>
   <string name="confirm_download_cancelation_dialog_message">ప్రస్తుత డౌన్లోడును రద్దు చేయాలా?</string>

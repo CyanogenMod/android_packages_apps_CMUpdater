@@ -47,7 +47,6 @@
   <string name="data_connection_required">مطلوب اتصال بيانات.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">لم يمنح الإذن</string>
-  <string name="permission_not_granted_dialog_message">لم يمنح الإذن للكتابة على وحدة التخزين الخارجية. لا يمكن التنزيل.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">إلغاء التنزيل</string>
   <string name="confirm_download_cancelation_dialog_message">إلغاء التنزيل الحالي؟</string>

@@ -47,7 +47,6 @@
   <string name="data_connection_required">سانلىق مەلۇماتقا ئۇلىنىشى زۆرۈر.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">ھوقۇق بېرىلمىدى</string>
-  <string name="permission_not_granted_dialog_message">سىرتقى ساقلىغۇچقا يېزىش ھوقۇقىغا ئېرىشەلمىدى. چۈشۈرۈشكە ئامالسىز.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">چۈشۈرۈشتىن ۋاز كەچ</string>
   <string name="confirm_download_cancelation_dialog_message">نۆۋەتتىكى چۈشۈرۈشتىن ۋاز كېچەمدۇ؟</string>

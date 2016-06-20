@@ -47,7 +47,6 @@
   <string name="data_connection_required">ଏକ ଡାଟା ସଂଯୋଗ୍ର ଆବଶ୍ୟକତା ଅଛି।</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">ଅନୁମତି ଗ୍ରହଣ କରାଗଲା ନାହିଁ</string>
-  <string name="permission_not_granted_dialog_message">ବାହ୍ୟ ଷ୍ଟୋରେଜ୍‍ରେ ଲେଖିବା ପାଇଁ ଅନୁମତି ଗ୍ରହଣ କରାଗଲା ନାହିଁ ଅ୍ଦ୍ୟତନ ଡାଉନ୍‍ଲୋଡ୍‍ କରିହେବ ନାହିଁ।</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">ଡାଉନଲୋଡ୍ ବାତିଲ୍ କରନ୍ତୁ</string>
   <string name="confirm_download_cancelation_dialog_message">ସ୍ମ୍ପ୍ରତି ଡାଉନଲୋଡ୍ ବାତିଲ୍ କରିବେ କି?</string>

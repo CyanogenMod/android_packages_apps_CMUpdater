@@ -47,7 +47,7 @@
   <string name="data_connection_required">Απαιτείται σύνδεση δεδομένων.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Η άδεια δεν χορηγήθηκε</string>
-  <string name="permission_not_granted_dialog_message">Η άδεια για εγγραφή στον εξωτερικό αποθηκευτικό χώρο δεν χορηγήθηκε. Δεν είναι δυνατή η λήψη της ενημέρωσης.</string>
+  <string name="permission_not_granted_dialog_message">Η άδεια για εγγραφή στον εξωτερικό αποθηκευτικό χώρο δεν χορηγήθηκε.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Ακύρωση λήψης</string>
   <string name="confirm_download_cancelation_dialog_message">Ακύρωση της τρέχουσας λήψης;</string>

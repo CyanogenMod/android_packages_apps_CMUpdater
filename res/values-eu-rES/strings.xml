@@ -47,7 +47,7 @@
   <string name="data_connection_required">Datu konexio bat beharrezkoa da.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Baimena ukatuta</string>
-  <string name="permission_not_granted_dialog_message">Kanpo biltegiratzera idazteko baimena ukatu da. Ezin da eguneraketa deskargatu.</string>
+  <string name="permission_not_granted_dialog_message">Kanpo biltegiratzean idazteko baimena ukatu da.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Utzi deskarga</string>
   <string name="confirm_download_cancelation_dialog_message">Utzi uneko deskarga?</string>

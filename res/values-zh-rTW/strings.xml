@@ -47,7 +47,6 @@
   <string name="data_connection_required">需要網路連線。</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">未授予權限</string>
-  <string name="permission_not_granted_dialog_message">未授予寫入外部儲存空間的權限。無法下載更新。</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">取消下載</string>
   <string name="confirm_download_cancelation_dialog_message">取消目前的下載？</string>

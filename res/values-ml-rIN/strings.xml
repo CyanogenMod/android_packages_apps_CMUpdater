@@ -47,7 +47,6 @@
   <string name="data_connection_required">ഒരു ഡാറ്റ കണക്ഷൻ ആവശ്യമാണ്.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">അനുമതി നൽകിയില്ല</string>
-  <string name="permission_not_granted_dialog_message">ബാഹ്യ സംഭരണം എഴുതുവാൻ അനുമതി ലഭ്യമല്ല. അപ്ഡേറ്റ് ഡൗൺലോഡ് ചെയ്യാൻ കഴിയില്ല.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">ഡൗൺലോഡ് റദ്ദാക്കുക</string>
   <string name="confirm_download_cancelation_dialog_message">നിലവിലെ ഡൗൺലോഡ് റദ്ദാക്കണോ?</string>

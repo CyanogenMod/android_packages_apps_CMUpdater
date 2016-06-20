@@ -47,7 +47,6 @@
   <string name="data_connection_required">Ye necesario una conexón de datos.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Permisu non concedíu</string>
-  <string name="permission_not_granted_dialog_message">Nun se concedió\'l permisu d\'escritura nel almacenamientu internu, Nun pue baxase l\'anovamientu.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Encaboxar descarga</string>
   <string name="confirm_download_cancelation_dialog_message">¿Encaboxar la descarga actual?</string>

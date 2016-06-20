@@ -47,7 +47,6 @@
   <string name="data_connection_required">Sambungan data diperlukan.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Izin tidak diberikan</string>
-  <string name="permission_not_granted_dialog_message">Izin menulis ke penyimpanan eksternal tidak diberikan. Tidak dapat mengunduh pembaruan.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Batalkan unduhan</string>
   <string name="confirm_download_cancelation_dialog_message">Batalkan unduhan saat ini?</string>

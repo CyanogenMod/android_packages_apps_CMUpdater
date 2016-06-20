@@ -47,7 +47,6 @@
   <string name="data_connection_required">தரவு இணைப்பு ஒன்று தேவைப்படுகின்றது.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">அனுமதி வழங்கப்படவில்லை.</string>
-  <string name="permission_not_granted_dialog_message">வெளிப்புற சேமிப்பகத்தில் எழுதுவதற்கான அனுமதி வழங்கப்படவில்லை. புதுப்பித்தலை பதிவிறக்க முடியாது.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">பதிவிறக்கத்தை ரத்துசெய்.</string>
   <string name="confirm_download_cancelation_dialog_message">நடப்பு பதிவிறக்கத்தை ரத்துசெய்யவா?</string>

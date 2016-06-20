@@ -15,7 +15,6 @@
   <!-- Update checking -->
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Permiso no concedido</string>
-  <string name="permission_not_granted_dialog_message">No se concedió el permiso para escribir en almacenamiento externo. No se puede descargar la actualización.</string>
   <!-- Downloads -->
   <!-- MD5 related strings -->
   <!-- Apply update strings -->

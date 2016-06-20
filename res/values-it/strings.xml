@@ -47,7 +47,7 @@
   <string name="data_connection_required">È richiesta una connessione dati.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Permesso non concesso</string>
-  <string name="permission_not_granted_dialog_message">Il permesso per accedere alla memoria esterna non è stato concesso. Impossibile scaricare l\'aggiornamento.</string>
+  <string name="permission_not_granted_dialog_message">Il permesso di accedere alla memoria interna non è stato concesso. Impossibile avviare download.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Annulla il download</string>
   <string name="confirm_download_cancelation_dialog_message">Annullare il download corrente?</string>

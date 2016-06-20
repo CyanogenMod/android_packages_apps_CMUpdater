@@ -47,7 +47,7 @@
   <string name="data_connection_required">Zahtevana je podatkovna povezava.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Dovoljenje ni odobreno</string>
-  <string name="permission_not_granted_dialog_message">Dovoljenje za pisanje na zunanjo pomnilniško napravo ni bilo odobreno. Posodobitve ni mogoče prejeti.</string>
+  <string name="permission_not_granted_dialog_message">Dovoljenje za pisanje na zunanjo pomnilniško napravo ni bilo odobreno.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Prekliči prenos</string>
   <string name="confirm_download_cancelation_dialog_message">Prekliči trenutni prenos?</string>

@@ -47,7 +47,6 @@
   <string name="data_connection_required">Veri bağlantısı gerekli</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">İzin verilmedi</string>
-  <string name="permission_not_granted_dialog_message">Harici depolama birimine yazma izni verilmedi. Güncelleme indirilemiyor.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">İndirmeyi iptal et</string>
   <string name="confirm_download_cancelation_dialog_message">Devam eden indirme iptal edilsin mi?</string>

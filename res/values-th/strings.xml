@@ -47,7 +47,6 @@
   <string name="data_connection_required">จำเป็นต้องเชื่อมต่ออินเตอร์เน็ต</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">ไม่ได้รับอนุญาต</string>
-  <string name="permission_not_granted_dialog_message">ไม่ได้รับสิทธิ์ในการเขียนที่เก็บข้อมูลภายนอก ไม่สามารถดาวน์โหลดการปรับปรุงได้</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">ยกเลิกการดาวน์โหลด</string>
   <string name="confirm_download_cancelation_dialog_message">ยกเลิกการดาวน์โหลดปัจจุบันหรือไม่</string>
