@@ -47,6 +47,7 @@
   <string name="data_connection_required">Mobilna veza je potrebna.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Dozvola nije odobrena</string>
+  <string name="permission_not_granted_dialog_message">Dozvola za pisanjem na vanjsku pohranu nije odobrena.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Prekini preuzimanje</string>
   <string name="confirm_download_cancelation_dialog_message">Želite li prekinuti preuzimanje ažuriranja?</string>

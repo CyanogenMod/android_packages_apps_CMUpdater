@@ -47,6 +47,7 @@
   <string name="data_connection_required">Der kræves en dataforbindelse.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Adgang nægtet</string>
+  <string name="permission_not_granted_dialog_message">Tilladelsen til at skrive til eksternt lager var ikke givet.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Annuller download</string>
   <string name="confirm_download_cancelation_dialog_message">Du skal til at annullere den nuværende download, OK at fortsætte?</string>
