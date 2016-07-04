@@ -47,6 +47,7 @@
   <string name="data_connection_required">נדרש חיבור נתונים.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">הרשאה לא ניתנה</string>
+  <string name="permission_not_granted_dialog_message">לא ניתנה הרשאה לכתוב לאחסון חיצוני.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">בטל הורדה</string>
   <string name="confirm_download_cancelation_dialog_message">לבטל את ההורדה הנוכחית?</string>
