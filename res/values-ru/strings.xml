@@ -47,6 +47,7 @@
   <string name="data_connection_required">Необходимо подключение к Интернету</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Доступ запрещён</string>
+  <string name="permission_not_granted_dialog_message">Разрешение на запись на внешний носитель не предоставлено.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Отменить загрузку</string>
   <string name="confirm_download_cancelation_dialog_message">Отменить текущую загрузку?</string>
