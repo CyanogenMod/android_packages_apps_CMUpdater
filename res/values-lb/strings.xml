@@ -46,6 +46,8 @@
   <string name="not_action_download">Eroflueden</string>
   <string name="data_connection_required">Et gëtt eng Dateconnectioun gebraucht.</string>
   <!-- Permission check -->
+  <string name="permission_not_granted_dialog_title">Berechtegung net erdeelt</string>
+  <string name="permission_not_granted_dialog_message">D\'Berechtegung fir op den externen Späicher ze schreiwen gouf net erdeelt.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Eroflueden ofbriechen</string>
   <string name="confirm_download_cancelation_dialog_message">D\'Eroflueden ofbriechen?</string>
