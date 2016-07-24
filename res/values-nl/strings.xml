@@ -47,6 +47,7 @@
   <string name="data_connection_required">Gegevensverbinding vereist</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Machtiging niet verleend</string>
+  <string name="permission_not_granted_dialog_message">Machtiging om naar de externe opslag te schrijven werd niet verleend.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Download annuleren</string>
   <string name="confirm_download_cancelation_dialog_message">Weet u zeker dat u de download wilt annuleren?</string>
