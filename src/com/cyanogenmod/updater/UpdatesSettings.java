@@ -978,6 +978,12 @@ public class UpdatesSettings extends PreferenceActivity implements
                 .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing and allow the dialog to be dismissed
+                    }
+                })
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
                         mStartUpdateVisible = false;
                     }
                 })
