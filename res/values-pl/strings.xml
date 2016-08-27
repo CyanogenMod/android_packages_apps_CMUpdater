@@ -47,6 +47,7 @@
   <string name="data_connection_required">Wymagane połączenie z Internetem.</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Odmowa dostępu</string>
+  <string name="permission_not_granted_dialog_message">Nie przyznano uprawnienia do zapisu na pamięci zewnętrznej.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Anuluj pobieranie</string>
   <string name="confirm_download_cancelation_dialog_message">Anulować trwające pobieranie?</string>
