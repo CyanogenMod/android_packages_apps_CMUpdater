@@ -46,6 +46,8 @@
   <string name="not_action_download">Descargar</string>
   <string name="data_connection_required">Requírese unha conexión de datos.</string>
   <!-- Permission check -->
+  <string name="permission_not_granted_dialog_title">Permiso non concedido</string>
+  <string name="permission_not_granted_dialog_message">Non se concedeu permiso para escribir no almacenamento externo. Non se pode descargar a actualización.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Anular a descarga</string>
   <string name="confirm_download_cancelation_dialog_message">Anular a descarga actual?</string>
