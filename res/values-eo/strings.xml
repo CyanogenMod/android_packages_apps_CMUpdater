@@ -10,7 +10,6 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
-  <string name="app_name">CM ĝisdatigilo</string>
   <string name="display_name">Ĝisdatigoj</string>
   <string name="unknown">Nekonata</string>
   <!-- Menu and dialog box strings -->
