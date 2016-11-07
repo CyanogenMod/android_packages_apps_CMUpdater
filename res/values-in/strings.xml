@@ -64,7 +64,7 @@
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Terapkan pembaruan</string>
   <string name="apply_update_dialog_text">Anda akan meningkatkan ke <xliff:g id="filename">%s</xliff:g>.\n\nJika Anda menekan Perbarui, perangkat akan dimulai ulang dalam mode recovery untuk memasang pembaruan.\n\nPerhatian: Fitur ini memerlukan Recovery yang kompatibel, jika tidak pembaruan harus diinstal secara manual.</string>
-  <string name="apply_unable_to_reboot_toast">Tidak dapat memulai ulang ke pemulihan</string>
+  <string name="apply_unable_to_reboot_toast">Tidak dapat memulai ulang ke recovery</string>
   <!-- deleting -->
   <string name="confirm_delete_dialog_title">Hapus berkas</string>
   <string name="confirm_delete_dialog_title_tv">Klik untuk menghapus semua unduhan pembaruan dari penyimpanan internal</string>
