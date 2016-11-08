@@ -1,45 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2012-2015 The CyanogenMod Project
-
-     Licensed under the GNU GPLv2 license
-
-     The text of the license can be found in the LICENSE file
-     or at https://www.gnu.org/licenses/gpl-2.0.txt
--->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- General strings -->
+<resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">CM Updater</string>
-    <string name="display_name">Updates</string>
-    <string name="unknown">Unknown</string>
 
-    <!-- Menu and dialog box strings -->
-    <string name="menu_refresh">Refresh</string>
-    <string name="menu_delete_all">Delete downloads</string>
-    <string name="menu_system_info">System info</string>
-    <string name="menu_system_info_tv">System information: Click to refresh updates list</string>
-
-    <string name="dialog_ok">OK</string>
-    <string name="dialog_cancel">Cancel</string>
-    <string name="dialog_update">Update</string>
-    <string name="dialog_close">Close</string>
-
-    <!-- Settings strings -->
-    <string name="available_updates_title">Available updates</string>
-    <string name="no_available_updates_intro">The last check did not find any available updates. To manually check for new updates, use the Refresh button.</string>
-    <string name="no_available_updates_intro_tv">The last check did not find any available updates. To manually check for new updates, click \'System information\'.</string>
-    <string name="new_update_summary">New</string>
-    <string name="downloaded_update_summary">Downloaded</string>
-    <string name="installed_update_summary">Installed</string>
-
-    <string name="update_check_title">Check for updates</string>
-    <string name="check_manual">Manual</string>
-    <string name="check_on_boot">On every boot</string>
-    <string name="check_twice_daily">Twice daily</string>
-    <string name="check_daily">Daily</string>
-    <string name="check_weekly">Weekly</string>
-    <string name="check_bi_weekly">Bi-weekly</string>
-    <string name="check_monthly">Monthly</string>
 
     <!-- Update checking -->
     <string name="checking_for_updates">Checking for updates</string>
@@ -49,10 +10,6 @@
     <string name="not_new_updates_found_title">New updates</string>
     <string name="not_action_download">Download</string>
     <string name="data_connection_required">A data connection is required.</string>
-
-    <!-- Permission check -->
-    <string name="permission_not_granted_dialog_title">Permission not granted</string>
-    <string name="permission_not_granted_dialog_message">Permission to write to external storage was not granted.</string>
 
     <!-- Downloads -->
     <string name="confirm_download_cancelation_dialog_title">Cancel download</string>
@@ -66,32 +23,25 @@
     <string name="not_action_install_update">Reboot and install</string>
     <string name="not_download_install_notice">The update <xliff:g id="filename">%s</xliff:g> was successfully downloaded. When touching \'Reboot and install\', the device will restart itself to install the update.\n\nNote: A compatible Recovery is required for the installation to work automatically.</string>
 
-    <!-- MD5 related strings -->
-    <string name="md5_verification_failed">MD5 verification failed</string>
+    <!-- Just reorder the chars, do not add or remove them.
+    Example: MMMM dd, yyyy -> January 01, 1970 -->
+    <string name="date_formatting">MMMM dd, yyyy</string>
+    <string name="update_api_23" translatable="false">CM 13.0 • Android 6.0.1</string>
+    <string name="update_api_24" translatable="false">CM 14.0 • Android 7.0</string>
+    <string name="update_api_unknown" translatable="false">CM %1$s • Android API %2$d</string>
+    <string name="header_cm">CM %1$s</string>
+    <string name="header_info">Android %1$s\n%2$s • %3$s</string>
+    <string name="update_title_downloaded">%1$s • Downloaded</string>
+    <string name="update_title_installed">%1$s • Installed</string>
+    <string name="update_button_download">Download</string>
+    <string name="update_button_downloading">Downloading\u2026</string>
+    <string name="update_button_install">Install</string>
+    <string name="update_button_installed">Installed</string>
 
-    <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Apply update</string>
     <string name="apply_update_dialog_text">You are about to upgrade to <xliff:g id="filename">%s</xliff:g>.\n\nIf you press Update, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>
     <string name="apply_unable_to_reboot_toast">Unable to reboot into recovery</string>
 
-    <!-- deleting -->
-    <string name="confirm_delete_dialog_title">Delete file</string>
-    <string name="confirm_delete_dialog_title_tv">Click to remove all downloaded updates from internal storage</string>
-    <string name="confirm_delete_dialog_message">Delete the selected update file?</string>
-    <string name="confirm_delete_all_dialog_message">Delete all downloaded update files?</string>
-    <string name="delete_single_update_success_message">Update <xliff:g id="filename">%s</xliff:g> deleted</string>
-    <string name="delete_updates_failure_message">There was an error deleting the update file</string>
-    <string name="delete_updates_noFolder_message">Update folder not found</string>
-    <string name="delete_updates_success_message">All downloaded updates deleted</string>
-
-    <!-- System info strings -->
-    <string name="sysinfo_device">Device:</string>
-    <string name="sysinfo_running">Running:</string>
-    <string name="sysinfo_update_channel">Update channel:</string>
-    <string name="sysinfo_last_check">Last check:</string>
-
-    <!-- changelog strings -->
-    <string name="no_changelog_alert">No changelog available</string>
-    <string name="changelog_dialog_title">Changelog</string>
-    <string name="loading_changelog">Loading\u2026</string>
+    <string name="conf_update_server_url_def" translatable="false">https://download.cyanogenmod.org/api</string>
+    <string name="conf_changelog_url" translatable="false">http://localhost/changelog.xml</string>
 </resources>

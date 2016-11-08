@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2014 The CyanogenMod Project
+<resources>
+    <color name="theme_primary">#2fa8e3</color>
+    <color name="theme_primary_dark">#1b6687</color>
+    <color name="theme_accent">#1b6687</color>
+    <color name="theme_detail_primary">@color/white</color>
+    <color name="theme_detail_primary_dark">#cccccc</color>
+    <color name="theme_detail_accent">@color/theme_primary</color>
 
-     Licensed under the GNU GPLv2 license
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="grey">#f1f1f1</color>
+    <color name="red">#ef3c4b</color>
+    <color name="blue">#00b1e5</color>
 
-     The text of the license can be found in the LICENSE file
-     or at https://www.gnu.org/licenses/gpl-2.0.txt
--->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Palette colors referenced by top-level themes. -->
-    <color name="theme_primary">#ff263238</color>
-    <color name="theme_primary_dark">#ff21272b</color>
-    <color name="theme_accent">#ff009688</color>
+    <color name="detail_toolbar_title">#8a000000</color>
+    <color name="detail_title">#42000000</color>
+    <color name="detail_text">#de000000</color>
 
-    <color name="refresh_icon_color">@android:color/white</color>
-    <color name="notification_icon_color">@android:color/white</color>
-    <color name="action_icons_color">@color/theme_accent</color>
+    <color name="card_background">@color/white</color>
+    <color name="title_color">#de000000</color>
+    <color name="secondary_color">#8a000000</color>
+    <color name="background">#fafafa</color>
+
+    <color name="nightly">#78909C</color>
+    <color name="snapshot">@color/blue</color>
 </resources>

@@ -1,0 +1,19 @@
+<!--
+     Copyright (C) 2016 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportHeight="45.0"
+    android:viewportWidth="48.0">
+
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M47.8,19.05L47.8,28.42L47.8,30.85L47.8,33.52C47.8,41.88 39.73,44.34 25.29,44.48L25.22,44.48C24.79,44.49 24.35,44.49 23.9,44.49L23.9,44.48L23.9,44.48L23.9,44.49C23.45,44.49 23.01,44.49 22.57,44.48L21.71,44.48L21.71,44.47C7.78,44.25 0,41.72 0,33.52L0,30.85L0,28.42L0,19.05C0,14.58 2.31,11.8 6.66,10.16L3.38,2.16C3.05,1.36 3.44,0.45 4.24,0.12C5.03,-0.21 5.95,0.17 6.28,0.97L9.67,9.26C12.92,8.52 16.96,8.17 21.71,8.09L21.71,8.09C22.43,8.08 23.15,8.08 23.9,8.08L23.9,8.09L23.9,8.09L23.9,8.08C29.61,8.08 34.39,8.4 38.13,9.26L41.52,0.97C41.85,0.17 42.76,-0.21 43.56,0.12C44.36,0.45 44.74,1.36 44.42,2.16L41.14,10.16C45.49,11.8 47.8,14.58 47.8,19.05L47.8,19.05Z" />
+</vector>

@@ -1,0 +1,19 @@
+<!--
+     Copyright (C) 2016 The CyanogenMod Project
+
+     Licensed under the GNU GPLv2 license
+
+     The text of the license can be found in the LICENSE file
+     or at https://www.gnu.org/licenses/gpl-2.0.txt
+-->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24.0"
+    android:viewportHeight="24.0">
+
+    <path
+        android:fillColor="@color/nightly"
+        android:pathData="M22,13.358C21.316,18.242 17.121,22 12.049,22C6.499,22 2,17.501 2,11.951C2,6.879 5.758,2.684 10.642,2C9.036,3.47 8.029,5.583 8.029,7.932C8.029,12.371 11.629,15.971 16.068,15.971C18.417,15.971 20.53,14.964 22,13.358L22,13.358Z" />
+</vector>
