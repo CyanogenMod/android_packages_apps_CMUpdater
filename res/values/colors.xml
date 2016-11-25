@@ -9,8 +9,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Palette colors referenced by top-level themes. -->
-    <color name="theme_primary">#ff263238</color>
-    <color name="theme_primary_dark">#ff21272b</color>
+    <color name="theme_primary">#ff212121</color>
+    <color name="theme_primary_dark">#ff000000</color>
     <color name="theme_accent">#ff009688</color>
 
     <color name="refresh_icon_color">@android:color/white</color>
