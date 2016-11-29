@@ -21,7 +21,7 @@ import com.cyanogenmod.updater.UpdateApplication;
 import com.cyanogenmod.updater.UpdatesSettings;
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.receiver.DownloadNotifier;
-import com.cyanogenmod.updater.utils.MD5;
+import com.cyanogenmod.updater.utils.Utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,13 +44,11 @@ public class DownloadCompleteIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        if (!intent.hasExtra(Constants.DOWNLOAD_ID) ||
-                !intent.hasExtra(Constants.DOWNLOAD_MD5)) {
+        if (!intent.hasExtra(Constants.DOWNLOAD_ID)) {
             return;
         }
 
         long id = intent.getLongExtra(Constants.DOWNLOAD_ID, -1);
-        String downloadedMD5 = intent.getStringExtra(Constants.DOWNLOAD_MD5);
         String incrementalFor = intent.getStringExtra(Constants.DOWNLOAD_INCREMENTAL_FOR);
 
         Intent updateIntent = new Intent(this, UpdatesSettings.class);
@@ -59,7 +57,7 @@ public class DownloadCompleteIntentService extends IntentService {
 
         int status = fetchDownloadStatus(id);
         if (status == DownloadManager.STATUS_SUCCESSFUL) {
-            // Get the full path name of the downloaded file and the MD5
+            // Get the full path name of the downloaded file
 
             // Strip off the .partial at the end to get the completed file
             String partialFileFullPath = fetchDownloadPartialPath(id);
@@ -89,21 +87,24 @@ public class DownloadCompleteIntentService extends IntentService {
                 mDm.remove(id);
             }
 
-            // Start the MD5 check of the downloaded file
-            if (MD5.checkMD5(downloadedMD5, destFile)) {
-                // We passed. Bring the main app to the foreground and trigger download completed
-                updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_ID, id);
-                updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_PATH,
-                        destPath);
-                updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_INCREMENTAL_FOR,
-                        incrementalFor);
-                displaySuccessResult(updateIntent, destFile);
-            } else {
+            // Check the signature of the downloaded file
+            try {
+                android.os.RecoverySystem.verifyPackage(destFile, null, null);
+            } catch (Exception e) {
                 if (destFile.exists()) {
                     destFile.delete();
                 }
                 displayErrorResult(updateIntent, R.string.md5_verification_failed);
+                return;
             }
+
+            // We passed. Bring the main app to the foreground and trigger download completed
+            updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_ID, id);
+            updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_PATH,
+                    destPath);
+            updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_INCREMENTAL_FOR,
+                    incrementalFor);
+            displaySuccessResult(updateIntent, destFile);
         } else if (status == DownloadManager.STATUS_FAILED) {
             // The download failed, reset
             mDm.remove(id);

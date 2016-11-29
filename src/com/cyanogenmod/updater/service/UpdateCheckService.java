@@ -289,7 +289,6 @@ public class UpdateCheckService extends IntentService
                 .setFileName(obj.getString("filename"))
                 .setDownloadUrl(obj.getString("url"))
                 .setChangelogUrl(obj.getString("changes"))
-                .setMD5Sum(obj.getString("md5sum"))
                 .setApiLevel(obj.getInt("api_level"))
                 .setBuildDate(obj.getLong("timestamp"))
                 .setType(obj.getString("channel"))
