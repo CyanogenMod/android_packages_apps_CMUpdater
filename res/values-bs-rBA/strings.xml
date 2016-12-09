@@ -10,19 +10,14 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
-  <string name="unknown">Nekonata</string>
   <!-- Menu and dialog box strings -->
-  <string name="dialog_cancel">Nuligi</string>
   <!-- Settings strings -->
-  <string name="new_update_summary">Nova</string>
   <!-- Update checking -->
   <!-- Permission check -->
   <!-- Downloads -->
   <!-- MD5 related strings -->
   <!-- Apply update strings -->
   <!-- deleting -->
-  <string name="confirm_delete_dialog_title">Forigi dosieron</string>
   <!-- System info strings -->
-  <string name="sysinfo_device">Aparato:</string>
   <!-- changelog strings -->
 </resources>

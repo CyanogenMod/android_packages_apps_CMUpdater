@@ -46,6 +46,8 @@
   <string name="not_action_download">Lae alla</string>
   <string name="data_connection_required">Andmeühendus on nõutav.</string>
   <!-- Permission check -->
+  <string name="permission_not_granted_dialog_title">Luba ei anta</string>
+  <string name="permission_not_granted_dialog_message">Välisele andmekandjale ei antud kirjutamisõigust.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Katkesta allalaadimine</string>
   <string name="confirm_download_cancelation_dialog_message">Kas katkestame praeguse allalaadimise?</string>

@@ -43,7 +43,7 @@
   <string name="update_check_failed">Не удалось выполнить поиск обновлений. Проверьте подключение к Интернету и повторите попытку.</string>
   <string name="not_new_updates_found_ticker">Доступно обновление системы</string>
   <string name="not_new_updates_found_title">Обновления CyanogenMod</string>
-  <string name="not_action_download">Загрузить</string>
+  <string name="not_action_download">Скачать</string>
   <string name="data_connection_required">Необходимо подключение к Интернету</string>
   <!-- Permission check -->
   <string name="permission_not_granted_dialog_title">Доступ запрещён</string>
