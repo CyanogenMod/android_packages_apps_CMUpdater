@@ -60,7 +60,7 @@
   <string name="md5_verification_failed">A verificação MD5 do ficheiro falhou</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Instalar atualização</string>
-  <string name="apply_update_dialog_text">Está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.\n\nSe carregar em Atualizar, o dispositivo irá reiniciar e atualizar automaticamente.\n\nNota: É necessário um modo de recuperação compatível para que a atualização seja feita automaticamente.</string>
+  <string name="apply_update_dialog_text">Está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.\n\nSe carregar em Atualizar, o dispositivo irá reiniciar e atualizar automaticamente.\n\nNota: É necessário uma Recuperação compatível para que a atualização seja feita automaticamente.</string>
   <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar no modo de recuperação</string>
   <!-- deleting -->
   <string name="confirm_delete_dialog_title">Eliminar ficheiro</string>
