@@ -46,6 +46,8 @@
   <string name="not_action_download">Download</string>
   <string name="data_connection_required">Vyžaduje sa dátové pripojenie.</string>
   <!-- Permission check -->
+  <string name="permission_not_granted_dialog_title">Povolenie neudelené</string>
+  <string name="permission_not_granted_dialog_message">Povolenie na zápis do externého úložiska nebolo udelené. Nemôžem stiahnuť.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Zrušenie preberania</string>
   <string name="confirm_download_cancelation_dialog_message">Zrušiť aktuálne preberanie?</string>
