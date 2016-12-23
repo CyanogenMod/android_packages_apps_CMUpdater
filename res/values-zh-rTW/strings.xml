@@ -12,20 +12,20 @@
   <!-- General strings -->
   <string name="app_name">CM 更新器</string>
   <string name="display_name">更新</string>
-  <string name="unknown">不明</string>
+  <string name="unknown">未知</string>
   <!-- Menu and dialog box strings -->
   <string name="menu_refresh">重新整理</string>
   <string name="menu_delete_all">刪除下載項目</string>
   <string name="menu_system_info">系統資訊</string>
-  <string name="menu_system_info_tv">系統資訊: 按一下重新整理以更新清單</string>
+  <string name="menu_system_info_tv">系統資訊：按下重新整理即可更新清單</string>
   <string name="dialog_ok">確定</string>
   <string name="dialog_cancel">取消</string>
   <string name="dialog_update">更新</string>
   <string name="dialog_close">關閉</string>
   <!-- Settings strings -->
   <string name="available_updates_title">可用更新</string>
-  <string name="no_available_updates_intro">上次檢查並未發現任何可用的更新。輕觸重新整理按鈕即可手動檢查新的更新。</string>
-  <string name="no_available_updates_intro_tv">上次檢查找不到任何可用的更新，要手動檢查更新，請按\'系統資訊\'。</string>
+  <string name="no_available_updates_intro">上次檢查並未發現任何可用的更新。輕觸重新整理按鍵即可手動檢查新的更新。</string>
+  <string name="no_available_updates_intro_tv">上次檢查找不到任何可用的更新，要手動檢查更新，請按「系統資訊」。</string>
   <string name="new_update_summary">新版本</string>
   <string name="downloaded_update_summary">已下載</string>
   <string name="installed_update_summary">已安裝</string>
@@ -47,7 +47,7 @@
   <string name="data_connection_required">需要網路連線。</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">取消下載</string>
-  <string name="confirm_download_cancelation_dialog_message">取消目前的下載？</string>
+  <string name="confirm_download_cancelation_dialog_message">是否取消目前的下載？</string>
   <string name="download_cancelled">下載已取消</string>
   <string name="download_already_running">已有一個正在執行的下載</string>
   <string name="unable_to_download_file">無法下載更新檔案</string>
@@ -64,9 +64,9 @@
   <string name="apply_unable_to_reboot_toast">無法重新啟動進入 Recovery</string>
   <!-- deleting -->
   <string name="confirm_delete_dialog_title">刪除檔案</string>
-  <string name="confirm_delete_dialog_title_tv">按下以從內部儲存空間移除所有已下載的更新</string>
-  <string name="confirm_delete_dialog_message">刪除已選取的更新檔案？</string>
-  <string name="confirm_delete_all_dialog_message">刪除所有已下載的更新檔案？</string>
+  <string name="confirm_delete_dialog_title_tv">按下即可從內部儲存空間移除所有已下載的更新</string>
+  <string name="confirm_delete_dialog_message">是否刪除已選取的更新檔案？</string>
+  <string name="confirm_delete_all_dialog_message">是否刪除所有已下載的更新檔案？</string>
   <string name="delete_single_update_success_message">更新「<xliff:g id="filename">%s</xliff:g>」已刪除</string>
   <string name="delete_updates_failure_message">刪除更新檔案時出現錯誤</string>
   <string name="delete_updates_noFolder_message">找不到更新資料夾</string>
@@ -79,5 +79,5 @@
   <!-- changelog strings -->
   <string name="no_changelog_alert">沒有更新日誌</string>
   <string name="changelog_dialog_title">更新日誌</string>
-  <string name="loading_changelog">載入中\u2026</string>
+  <string name="loading_changelog">正在讀取\u2026</string>
 </resources>
