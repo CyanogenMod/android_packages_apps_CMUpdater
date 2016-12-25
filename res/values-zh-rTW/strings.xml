@@ -50,7 +50,7 @@
   <string name="permission_not_granted_dialog_message">未被授予寫入外部儲存的權限。無法下載。</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">取消下載</string>
-  <string name="confirm_download_cancelation_dialog_message">取消目前的下載？</string>
+  <string name="confirm_download_cancelation_dialog_message">是否取消目前的下載？</string>
   <string name="download_cancelled">下載已取消</string>
   <string name="download_already_running">已有一個正在執行的下載</string>
   <string name="unable_to_download_file">無法下載更新檔案</string>
@@ -68,8 +68,8 @@
   <!-- deleting -->
   <string name="confirm_delete_dialog_title">刪除檔案</string>
   <string name="confirm_delete_dialog_title_tv">按下即可從內部儲存空間移除所有已下載的更新</string>
-  <string name="confirm_delete_dialog_message">刪除已選取的更新檔案？</string>
-  <string name="confirm_delete_all_dialog_message">刪除所有已下載的更新檔案？</string>
+  <string name="confirm_delete_dialog_message">是否刪除已選取的更新檔案？</string>
+  <string name="confirm_delete_all_dialog_message">是否刪除所有已下載的更新檔案？</string>
   <string name="delete_single_update_success_message">更新「<xliff:g id="filename">%s</xliff:g>」已刪除</string>
   <string name="delete_updates_failure_message">刪除更新檔案時出現錯誤</string>
   <string name="delete_updates_noFolder_message">找不到更新資料夾</string>
@@ -82,5 +82,5 @@
   <!-- changelog strings -->
   <string name="no_changelog_alert">沒有更新日誌</string>
   <string name="changelog_dialog_title">更新日誌</string>
-  <string name="loading_changelog">載入中\u2026</string>
+  <string name="loading_changelog">正在讀取\u2026</string>
 </resources>
