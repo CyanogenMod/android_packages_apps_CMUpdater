@@ -36,6 +36,8 @@ import com.cyanogenmod.updater.service.UpdateCheckService;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Utils {
     private Utils() {
@@ -67,6 +69,41 @@ public class Utils {
 
     public static long getInstalledBuildDate() {
         return SystemProperties.getLong("ro.build.date.utc", 0);
+    }
+
+    /**
+     * Extract date from build YYYYMMDD date
+     *
+     * @param mContext for getting localized string
+     *
+     * @return MMMM dd, yyyy formatted date (or localized translation)
+     */
+    public static String getInstalledBuildDateLocalized(Context mContext, String mBuildDate) {
+        if (mBuildDate.length() < 8) {
+            return "";
+        }
+
+        Calendar mCal = Calendar.getInstance();
+        mCal.set(Calendar.YEAR, Integer.parseInt(mBuildDate.substring(0, 4)));
+        mCal.set(Calendar.MONTH, Integer.parseInt(mBuildDate.substring(4, 6)) - 1);
+        mCal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(mBuildDate.substring(6, 8)));
+
+        String mDate = new SimpleDateFormat(mContext.getString(R.string.date_formatting),
+                        mContext.getResources().getConfiguration().locale).format(mCal.getTime());
+
+        int mPosition = 0;
+        boolean mWorking = true;
+        while (mWorking) {
+            if (!Character.isDigit(mDate.charAt(mPosition))) {
+                mWorking = false;
+            } else {
+                mPosition++;
+            }
+        }
+
+        return mDate.substring(0, mPosition) +
+                String.valueOf(mDate.charAt(mPosition)).toUpperCase() +
+                mDate.substring(mPosition + 1, mDate.length());
     }
 
     public static String getUserAgentString(Context context) {
@@ -132,10 +169,5 @@ public class Utils {
         }
 
         return updateType;
-    }
-
-    public static boolean hasLeanback(Context context) {
-        PackageManager packageManager = context.getPackageManager();
-        return packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK);
     }
 }

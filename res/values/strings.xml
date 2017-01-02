@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2012-2015 The CyanogenMod Project
+     Copyright (C) 2017 The LineageOS Project
 
      Licensed under the GNU GPLv2 license
 
@@ -9,15 +10,13 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- General strings -->
-    <string name="app_name">CM Updater</string>
+    <string name="app_name">Updater</string>
     <string name="display_name">Updates</string>
     <string name="unknown">Unknown</string>
 
     <!-- Menu and dialog box strings -->
     <string name="menu_refresh">Refresh</string>
     <string name="menu_delete_all">Delete downloads</string>
-    <string name="menu_system_info">System info</string>
-    <string name="menu_system_info_tv">System information: Click to refresh updates list</string>
 
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Cancel</string>
@@ -26,16 +25,10 @@
 
     <!-- Settings strings -->
     <string name="available_updates_title">Available updates</string>
-    <string name="no_available_updates_intro">The last check did not find any available updates. To manually check for new updates, use the Refresh button.</string>
-    <string name="no_available_updates_intro_tv">The last check did not find any available updates. To manually check for new updates, click \'System information\'.</string>
-    <string name="new_update_summary">New</string>
-    <string name="downloaded_update_summary">Downloaded</string>
-    <string name="installed_update_summary">Installed</string>
+    <string name="no_available_updates_intro">No new updates found. To manually check for new updates, use the Refresh button.</string>
 
     <string name="update_check_title">Check for updates</string>
     <string name="check_manual">Manual</string>
-    <string name="check_on_boot">On every boot</string>
-    <string name="check_twice_daily">Twice daily</string>
     <string name="check_daily">Daily</string>
     <string name="check_weekly">Weekly</string>
     <string name="check_bi_weekly">Bi-weekly</string>
@@ -61,9 +54,7 @@
     <string name="not_download_failure">Update download was unsuccessful</string>
     <string name="not_action_install_update">Reboot and install</string>
     <string name="not_download_install_notice">The update <xliff:g id="filename">%s</xliff:g> was successfully downloaded. When touching \'Reboot and install\', the device will restart itself to install the update.\n\nNote: A compatible Recovery is required for the installation to work automatically.</string>
-
-    <!-- MD5 related strings -->
-    <string name="md5_verification_failed">MD5 verification failed</string>
+    <string name="verification_failed">Verification failed. Corrupted or unsecure download</string>
 
     <!-- Apply update strings -->
     <string name="apply_update_dialog_title">Apply update</string>
@@ -80,14 +71,19 @@
     <string name="delete_updates_noFolder_message">Update folder not found</string>
     <string name="delete_updates_success_message">All downloaded updates deleted</string>
 
-    <!-- System info strings -->
-    <string name="sysinfo_device">Device:</string>
-    <string name="sysinfo_running">Running:</string>
-    <string name="sysinfo_update_channel">Update channel:</string>
-    <string name="sysinfo_last_check">Last check:</string>
+    <!-- Header -->
+    <string name="header_os">LineageOS\n%1$s</string>
+    <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
+    <string name="sysinfo_last_check">Last checked</string>
 
-    <!-- changelog strings -->
-    <string name="no_changelog_alert">No changelog available</string>
-    <string name="changelog_dialog_title">Changelog</string>
-    <string name="loading_changelog">Loading\u2026</string>
+    <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
+    <string name="date_formatting">MMMM dd, yyyy</string>
+
+    <!-- Build item -->
+    <string name="type_installed">• Installed</string>
+    <string name="type_downloaded">• Downloaded</string>
+    <string name="type_downloading">• Downloading</string>
+    <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>
+    <string name="download_button">Download</string>
+    <string name="install_button">Install</string>
 </resources>

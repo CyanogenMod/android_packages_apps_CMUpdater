@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The CyanogenMod Project
+ * Copyright (C) 2017 The LineageOS Project
  *
  * * Licensed under the GNU GPLv2 license
  *
@@ -13,6 +14,7 @@ public class Constants {
     // Download related
     public static final String UPDATES_FOLDER = "updates";
     public static final String DOWNLOAD_ID = "download_id";
+    public static final String DOWNLOAD_NAME = "download_name";
 
     // Preferences
     public static final String ENABLE_PREF = "pref_enable_updates";
@@ -22,9 +24,7 @@ public class Constants {
 
     // Update Check items
     public static final String BOOT_CHECK_COMPLETED = "boot_check_completed";
-    public static final int UPDATE_FREQ_AT_BOOT = -1;
     public static final int UPDATE_FREQ_NONE = -2;
-    public static final int UPDATE_FREQ_TWICE_DAILY = 43200;
     public static final int UPDATE_FREQ_DAILY = 86400;
     public static final int UPDATE_FREQ_WEEKLY = 604800;
     public static final int UPDATE_FREQ_BI_WEEKLY = 1209600;

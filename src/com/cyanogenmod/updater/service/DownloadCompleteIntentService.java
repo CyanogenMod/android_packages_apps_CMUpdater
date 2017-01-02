@@ -13,11 +13,14 @@ import android.app.DownloadManager;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.os.ParcelFileDescriptor;
 
 import com.cyanogenmod.updater.R;
+import com.cyanogenmod.updater.UpdatesActivity;
 import com.cyanogenmod.updater.UpdateApplication;
 import com.cyanogenmod.updater.UpdatesSettings;
 import com.cyanogenmod.updater.misc.Constants;
@@ -32,10 +35,12 @@ import java.nio.channels.FileChannel;
 
 public class DownloadCompleteIntentService extends IntentService {
     private DownloadManager mDm;
+    private SharedPreferences mPrefs;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         mDm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
     }
 
@@ -51,7 +56,7 @@ public class DownloadCompleteIntentService extends IntentService {
 
         long id = intent.getLongExtra(Constants.DOWNLOAD_ID, -1);
 
-        Intent updateIntent = new Intent(this, UpdatesSettings.class);
+        Intent updateIntent = new Intent(this, UpdatesActivity.class);
         updateIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                 Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
 
@@ -60,7 +65,7 @@ public class DownloadCompleteIntentService extends IntentService {
             // Get the full path name of the downloaded file
 
             // Strip off the .partial at the end to get the completed file
-            String partialFileFullPath = fetchDownloadPartialPath(id);
+            String partialFileFullPath = mPrefs.getString(Constants.DOWNLOAD_NAME, null);
 
             if (partialFileFullPath == null) {
                 displayErrorResult(updateIntent, R.string.unable_to_download_file);
@@ -70,6 +75,8 @@ public class DownloadCompleteIntentService extends IntentService {
             String destPath = Utils.makeUpdateFolder(getApplicationContext()).getPath() + "/"
                     + destName;
             File destFile = new File(destPath);
+
+            mPrefs.edit().putString(Constants.DOWNLOAD_NAME, "").commit();
 
             try {
                 FileOutputStream outStream = new FileOutputStream(destFile);
@@ -94,7 +101,7 @@ public class DownloadCompleteIntentService extends IntentService {
                 if (destFile.exists()) {
                     destFile.delete();
                 }
-                displayErrorResult(updateIntent, R.string.md5_verification_failed);
+                displayErrorResult(updateIntent, R.string.verification_failed);
                 return;
             }
 

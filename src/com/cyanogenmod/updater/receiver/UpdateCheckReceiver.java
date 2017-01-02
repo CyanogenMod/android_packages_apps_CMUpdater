@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2012 The CyanogenMod Project
+* Copyright (C) 2012 The CyanogenMod Project
+* Copyright (C) 2017 The LineageOS Project
  *
  * * Licensed under the GNU GPLv2 license
  *
@@ -50,19 +51,7 @@ public class UpdateCheckReceiver extends BroadcastReceiver {
         }
 
         // Handle the actual update check based on the defined frequency
-        if (updateFrequency == Constants.UPDATE_FREQ_AT_BOOT) {
-            boolean bootCheckCompleted = prefs.getBoolean(Constants.BOOT_CHECK_COMPLETED, false);
-            if (!bootCheckCompleted) {
-                Log.i(TAG, "Start an on-boot check");
-                Intent i = new Intent(context, UpdateCheckService.class);
-                i.setAction(UpdateCheckService.ACTION_CHECK);
-                context.startService(i);
-            } else {
-                // Nothing to do
-                Log.i(TAG, "On-boot update check was already completed.");
-                return;
-            }
-        } else if (updateFrequency > 0) {
+        if (updateFrequency > 0) {
             Log.i(TAG, "Scheduling future, repeating update checks.");
             Utils.scheduleUpdateService(context, updateFrequency * 1000);
         }

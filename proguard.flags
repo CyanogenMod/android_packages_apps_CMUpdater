@@ -1,6 +1,8 @@
 -keep class com.cyanogenmod.updater.UpdatesSettings {
   *;
 }
+-keep class android.support.design.widget.** { *; }
+-keep interface android.support.design.widget.** { *; }
 
 # Needed when building against the Marshmallow SDK
 -dontwarn com.android.**

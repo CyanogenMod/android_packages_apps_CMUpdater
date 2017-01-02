@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The CyanogenMod Project (DvTonder)
+ * Copyright (C) 2017 The LineageOS Project
  *
  * * Licensed under the GNU GPLv2 license
  *
@@ -51,14 +52,14 @@ public class UpdateApplication extends Application implements
 
     @Override
     public void onActivityStarted (Activity activity) {
-        if (activity instanceof UpdatesSettings) {
+        if (activity instanceof UpdatesActivity) {
             mMainActivityActive = true;
         }
     }
 
     @Override
     public void onActivityStopped (Activity activity) {
-        if (activity instanceof UpdatesSettings) {
+        if (activity instanceof UpdatesActivity) {
             mMainActivityActive = false;
         }
     }

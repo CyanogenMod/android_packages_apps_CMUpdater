@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2012 The CyanogenMod Project
+     Copyright (C) 2017 The LineageOS Project
 
      Licensed under the GNU GPLv2 license
 
@@ -7,87 +8,88 @@
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:gravity="center_vertical"
-    android:paddingStart="@*android:dimen/preference_item_padding_side">
+    android:background="@color/card_background"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="2dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/updates_pref"
-        android:layout_width="0dip"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingStart="8dip"
-        android:gravity="center_vertical"
-        android:clickable="true"
-        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:baselineAligned="false"
-        android:background="?android:attr/selectableItemBackground">
+        android:gravity="center_vertical"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp">
 
-        <RelativeLayout
-            android:layout_width="0dip"
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_update_build" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:maxLines="1"
+            android:paddingStart="32dp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/summary"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="6dip"
-            android:layout_marginTop="6dip"
-            android:layout_marginBottom="6dip"
-            android:layout_weight="1">
+            android:layout_alignStart="@id/title"
+            android:layout_below="@id/title"
+            android:maxLines="2"
+            android:paddingBottom="20sp"
+            android:paddingStart="32dp"
+            android:textAppearance="@android:style/TextAppearance.Material.Body1"
+            android:textColor="?android:attr/textColorSecondary" />
 
-            <TextView
-                android:id="@+android:id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-                android:textColor="?android:attr/textColorPrimary"
-                android:ellipsize="marquee"
-                android:fadingEdge="horizontal"/>
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@android:id/summary"
+            android:background="@color/theme_accent"
+            android:text="@string/download_button"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@android:id/summary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@android:id/title"
-                android:layout_alignStart="@android:id/title"
-                android:paddingBottom="3dip"
-                android:visibility="gone"
-                android:textAppearance="@android:style/TextAppearance.Material.Body1"
-                android:textColor="?android:attr/textColorSecondary"
-                android:focusable="false"
-                android:maxLines="4" />
+        <ProgressBar
+            android:id="@+id/download_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_alignStart="@id/summary"
+            android:layout_below="@id/summary"
+            android:paddingBottom="3dp"
+            android:paddingEnd="32dp"
+            android:paddingStart="32dp"
+            android:visibility="gone" />
 
-            <ProgressBar
-                android:id="@+id/download_progress_bar"
-                android:layout_below="@android:id/title"
-                android:layout_alignStart="@android:id/title"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:paddingBottom="3dip"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-    </LinearLayout>
-
-    <View
-        android:layout_width="2dip"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dip"
-        android:layout_marginBottom="5dip"
-        android:background="@android:drawable/divider_horizontal_dark" />
-
-    <ImageView
-        android:id="@+id/updates_button"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:paddingStart="15dip"
-        android:paddingEnd="?android:attr/scrollbarSize"
-        android:src="@drawable/ic_tab_download"
-        android:layout_gravity="center"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:attr/selectableItemBackground" />
-
-</LinearLayout>
+        <ImageView
+            android:id="@+id/updates_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignEnd="@id/download_progress_bar"
+            android:layout_below="@id/summary"
+            android:layout_gravity="center"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_tab_cancel"
+            android:visibility="gone" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

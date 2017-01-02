@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The CyanogenMod Project
+ * Copyright (C) 2017 The LineageOS Project
  *
  * * Licensed under the GNU GPLv2 license
  *
@@ -20,13 +21,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.cyanogenmod.updater.misc.FetchChangeLogTask;
 import com.cyanogenmod.updater.misc.UpdateInfo;
+import com.cyanogenmod.updater.utils.Utils;
 
 import java.io.File;
 
@@ -51,14 +52,18 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
     private OnActionListener mOnActionListener;
     private OnReadyListener mOnReadyListener;
 
+    private Context mContext;
     private UpdateInfo mUpdateInfo = null;
     private int mStyle;
 
-    private ImageView mUpdatesButton;
+    private ImageView mStopDownloadButton;
     private TextView mTitleText;
     private TextView mSummaryText;
     private View mUpdatesPref;
     private ProgressBar mProgressBar;
+    private Button mButton;
+
+    private String mBuildName[];
 
     private OnClickListener mButtonClickListener = new OnClickListener() {
         @Override
@@ -81,24 +86,50 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
         }
     };
 
+    private OnClickListener mStopDownloadClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mOnActionListener != null && mStyle == STYLE_DOWNLOADING) {
+                mOnActionListener.onStopDownload(UpdatePreference.this);
+            }
+        }
+    };
+
     public UpdatePreference(Context context, UpdateInfo ui, int style) {
         super(context, null, R.style.UpdatesPreferenceStyle);
         setLayoutResource(R.layout.preference_updates);
         mStyle = style;
         mUpdateInfo = ui;
+        mContext = context;
     }
 
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
 
-        // Store the views from the layout
-        mUpdatesButton = (ImageView)view.findViewById(R.id.updates_button);
-        mUpdatesButton.setOnClickListener(mButtonClickListener);
+        mBuildName = mUpdateInfo.getFileName().split("-");
+        final String mBuildDate = Utils.getInstalledBuildDateLocalized(mContext, mBuildName[2]);
+        String mApi;
+        switch (mBuildName[1]) {
+            case "13.0":
+                mApi = "6.0.1";
+                break;
+            case "14.1":
+                mApi = "7.1.1";
+                break;
+            default:
+                mApi = "???";
+                break;
+        }
 
-        mTitleText = (TextView)view.findViewById(android.R.id.title);
-        mSummaryText = (TextView)view.findViewById(android.R.id.summary);
+        // Store the views from the layout
+        mTitleText = (TextView)view.findViewById(R.id.title);
+        mSummaryText = (TextView)view.findViewById(R.id.summary);
         mProgressBar = (ProgressBar)view.findViewById(R.id.download_progress_bar);
+        mStopDownloadButton = (ImageView)view.findViewById(R.id.updates_button);
+        mButton = (Button) view.findViewById(R.id.button);
+        mStopDownloadButton.setOnClickListener(mButtonClickListener);
+        mButton.setOnClickListener(mButtonClickListener);
 
         mUpdatesPref = view.findViewById(R.id.updates_pref);
         mUpdatesPref.setOnClickListener(this);
@@ -106,6 +137,9 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
 
         // Update the views
         updatePreferenceViews();
+
+        mSummaryText.setText(String.format(mContext.getString(R.string.summary), mBuildDate,
+                mBuildName[1], mApi));
 
         if (mOnReadyListener != null) {
             mOnReadyListener.onReady(this);
@@ -131,8 +165,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
 
     @Override
     public void onClick(View v) {
-        final Context context = getContext();
-        new FetchChangeLogTask(context).execute(mUpdateInfo);
+        // TODO: implement export on sdcard
     }
 
     private void confirmDelete() {
@@ -162,8 +195,6 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
         super.setEnabled(enabled);
         if (enabled) {
             updatePreferenceViews();
-        } else {
-            disablePreferenceViews();
         }
     }
 
@@ -202,22 +233,11 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
     }
 
     public ImageView getUpdatesButton() {
-        return mUpdatesButton;
+        return mStopDownloadButton;
     }
 
     public UpdateInfo getUpdateInfo() {
         return mUpdateInfo;
-    }
-
-    private void disablePreferenceViews() {
-        if (mUpdatesButton != null) {
-            mUpdatesButton.setEnabled(false);
-            mUpdatesButton.setAlpha(DISABLED_ALPHA);
-        }
-        if (mUpdatesPref != null) {
-            mUpdatesPref.setEnabled(false);
-            mUpdatesPref.setBackgroundColor(0);
-        }
     }
 
     private void updatePreferenceViews() {
@@ -232,8 +252,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
             }
 
             // Set the title text
-            mTitleText.setText(mUpdateInfo.getName());
-            mTitleText.setVisibility(View.VISIBLE);
+            mTitleText.setText(mBuildName[0]);
 
             // Show the proper style view
             showStyle();
@@ -244,39 +263,37 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
         // Display the appropriate preference style
         switch (mStyle) {
             case STYLE_DOWNLOADED:
-                // Show the install image and summary of 'Downloaded'
-                mUpdatesButton.setImageResource(R.drawable.ic_tab_install);
-                mUpdatesButton.setEnabled(true);
-                mSummaryText.setText(R.string.downloaded_update_summary);
-                mSummaryText.setVisibility(View.VISIBLE);
+                mStopDownloadButton.setVisibility(View.GONE);
                 mProgressBar.setVisibility(View.GONE);
+                mButton.setVisibility(View.VISIBLE);
+                mTitleText.setText(String.format("%1$s %2$s",
+                        mBuildName[3], mContext.getString(R.string.type_downloaded)));
+                mButton.setText(mContext.getString(R.string.install_button));
                 break;
 
             case STYLE_DOWNLOADING:
-                // Show the cancel button image and progress bar
-                mUpdatesButton.setImageResource(R.drawable.ic_tab_cancel);
-                mUpdatesButton.setEnabled(true);
+                mButton.setVisibility(View.GONE);
+                mStopDownloadButton.setVisibility(View.VISIBLE);
                 mProgressBar.setVisibility(View.VISIBLE);
-                mSummaryText.setVisibility(View.GONE);
+                mTitleText.setText(String.format("%1$s %2$s",
+                        mBuildName[3], mContext.getString(R.string.type_downloading)));
                 break;
 
             case STYLE_INSTALLED:
-                // Show the installed button image and summary of 'Installed'
-                mUpdatesButton.setImageResource(R.drawable.ic_tab_installed);
-                mUpdatesButton.setEnabled(false);
-                mSummaryText.setText(R.string.installed_update_summary);
-                mSummaryText.setVisibility(View.VISIBLE);
+                mStopDownloadButton.setVisibility(View.GONE);
                 mProgressBar.setVisibility(View.GONE);
+                mButton.setVisibility(View.GONE);
+                mTitleText.setText(String.format("%1$s %2$s",
+                        mBuildName[3], mContext.getString(R.string.type_installed)));
                 break;
 
             case STYLE_NEW:
             default:
-                // Show the download button image and summary of 'New'
-                mUpdatesButton.setImageResource(R.drawable.ic_tab_download);
-                mUpdatesButton.setEnabled(true);
-                mSummaryText.setText(R.string.new_update_summary);
-                mSummaryText.setVisibility(View.VISIBLE);
+                mStopDownloadButton.setVisibility(View.GONE);
                 mProgressBar.setVisibility(View.GONE);
+                mButton.setVisibility(View.VISIBLE);
+                mTitleText.setText(mBuildName[3]);
+                mButton.setText(mContext.getString(R.string.download_button));
                 break;
         }
     }
