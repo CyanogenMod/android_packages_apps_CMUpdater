@@ -18,6 +18,7 @@ LOCAL_RESOURCE_DIR := \
     $(LOCAL_PATH)/res
 
 LOCAL_AAPT_FLAGS := --auto-add-overlay --extra-packages android.support.v17.leanback
+LOCAL_AAPT_FLAGS += --rename-manifest-package org.lineageos.updater
 
 LOCAL_PACKAGE_NAME := CMUpdater
 
