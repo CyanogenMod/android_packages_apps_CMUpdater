@@ -69,10 +69,6 @@ public class Utils {
         return SystemProperties.getLong("ro.build.date.utc", 0);
     }
 
-    public static String getIncremental() {
-        return SystemProperties.get("ro.build.version.incremental");
-    }
-
     public static String getUserAgentString(Context context) {
         try {
             PackageManager pm = context.getPackageManager();

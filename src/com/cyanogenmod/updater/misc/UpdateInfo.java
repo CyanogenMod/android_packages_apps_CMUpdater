@@ -23,9 +23,6 @@ import java.util.regex.Pattern;
 
 public class UpdateInfo implements Parcelable, Serializable {
     private static final long serialVersionUID = 5499890003569313403L;
-    private static final Pattern sIncrementalPattern =
-            Pattern.compile("^incremental-(.*)-(.*).zip$");
-
     public static final String CHANGELOG_EXTENSION = ".changelog.html";
 
     public enum Type {
@@ -33,8 +30,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         STABLE,
         RC,
         SNAPSHOT,
-        NIGHTLY,
-        INCREMENTAL
+        NIGHTLY
     };
     private String mUiName;
     private String mFileName;
@@ -43,7 +39,6 @@ public class UpdateInfo implements Parcelable, Serializable {
     private long mBuildDate;
     private String mDownloadUrl;
     private String mChangelogUrl;
-    private String mIncremental;
 
     private Boolean mIsNewerThanInstalled;
 
@@ -115,25 +110,6 @@ public class UpdateInfo implements Parcelable, Serializable {
         return mChangelogUrl;
     }
 
-    /**
-     * Get incremental version
-     */
-    public String getIncremental() {
-        return mIncremental;
-    }
-
-    /**
-     * Whether or not this is an incremental update
-     */
-    public boolean isIncremental() {
-        Matcher matcher = sIncrementalPattern.matcher(getFileName());
-        if (matcher.find() && matcher.groupCount() == 2) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public boolean isNewerThanInstalled() {
         if (mIsNewerThanInstalled != null) {
             return mIsNewerThanInstalled;
@@ -175,8 +151,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         return TextUtils.equals(mFileName, ui.mFileName)
                 && mType.equals(ui.mType)
                 && mBuildDate == ui.mBuildDate
-                && TextUtils.equals(mDownloadUrl, ui.mDownloadUrl)
-                && TextUtils.equals(mIncremental, ui.mIncremental);
+                && TextUtils.equals(mDownloadUrl, ui.mDownloadUrl);
     }
 
     public static final Parcelable.Creator<UpdateInfo> CREATOR = new Parcelable.Creator<UpdateInfo>() {
@@ -202,7 +177,6 @@ public class UpdateInfo implements Parcelable, Serializable {
         out.writeInt(mApiLevel);
         out.writeLong(mBuildDate);
         out.writeString(mDownloadUrl);
-        out.writeString(mIncremental);
     }
 
     private void readFromParcel(Parcel in) {
@@ -212,7 +186,6 @@ public class UpdateInfo implements Parcelable, Serializable {
         mApiLevel = in.readInt();
         mBuildDate = in.readLong();
         mDownloadUrl = in.readString();
-        mIncremental = in.readString();
     }
 
     public static class Builder {
@@ -223,8 +196,6 @@ public class UpdateInfo implements Parcelable, Serializable {
         private long mBuildDate;
         private String mDownloadUrl;
         private String mChangelogUrl;
-        private String mIncremental;
-
 
         public Builder setName(String uiName) {
             mUiName = uiName;
@@ -278,11 +249,6 @@ public class UpdateInfo implements Parcelable, Serializable {
             return this;
         }
 
-        public Builder setIncremental(String incremental) {
-            mIncremental = incremental;
-            return this;
-        }
-
         public UpdateInfo build() {
             UpdateInfo info = new UpdateInfo();
             info.mUiName = mUiName;
@@ -292,7 +258,6 @@ public class UpdateInfo implements Parcelable, Serializable {
             info.mBuildDate = mBuildDate;
             info.mDownloadUrl = mDownloadUrl;
             info.mChangelogUrl = mChangelogUrl;
-            info.mIncremental = mIncremental;
             return info;
         }
 

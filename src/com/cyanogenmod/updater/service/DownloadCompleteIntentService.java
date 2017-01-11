@@ -49,7 +49,6 @@ public class DownloadCompleteIntentService extends IntentService {
         }
 
         long id = intent.getLongExtra(Constants.DOWNLOAD_ID, -1);
-        String incrementalFor = intent.getStringExtra(Constants.DOWNLOAD_INCREMENTAL_FOR);
 
         Intent updateIntent = new Intent(this, UpdatesSettings.class);
         updateIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
@@ -102,8 +101,6 @@ public class DownloadCompleteIntentService extends IntentService {
             updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_ID, id);
             updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_PATH,
                     destPath);
-            updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_INCREMENTAL_FOR,
-                    incrementalFor);
             displaySuccessResult(updateIntent, destFile);
         } else if (status == DownloadManager.STATUS_FAILED) {
             // The download failed, reset

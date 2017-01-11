@@ -75,18 +75,14 @@ public class DownloadReceiver extends BroadcastReceiver{
             return;
         }
 
-        String incrementalFor = prefs.getString(Constants.DOWNLOAD_INCREMENTAL_FOR, null);
-
         // Send off to DownloadCompleteIntentService
         Intent intent = new Intent(context, DownloadCompleteIntentService.class);
         intent.putExtra(Constants.DOWNLOAD_ID, id);
-        intent.putExtra(Constants.DOWNLOAD_INCREMENTAL_FOR, incrementalFor);
         context.startService(intent);
 
         // Clear the shared prefs
         prefs.edit()
                 .remove(Constants.DOWNLOAD_ID)
-                .remove(Constants.DOWNLOAD_INCREMENTAL_FOR)
                 .apply();
     }
 }

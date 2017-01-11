@@ -67,7 +67,6 @@ public class UpdatesSettings extends PreferenceActivity implements
     public static final String EXTRA_UPDATE_LIST_UPDATED = "update_list_updated";
     public static final String EXTRA_FINISHED_DOWNLOAD_ID = "download_id";
     public static final String EXTRA_FINISHED_DOWNLOAD_PATH = "download_path";
-    public static final String EXTRA_FINISHED_DOWNLOAD_INCREMENTAL_FOR = "download_incremental_for";
 
     public static final String KEY_SYSTEM_INFO = "system_info";
     private static final String KEY_DELETE_ALL = "delete_all";
@@ -452,22 +451,11 @@ public class UpdatesSettings extends PreferenceActivity implements
 
         String fileName = new File(fullPathName).getName();
 
-        // If this is an incremental, find matching target and mark it as downloaded.
-        String incrementalFor = intent.getStringExtra(EXTRA_FINISHED_DOWNLOAD_INCREMENTAL_FOR);
-        if (incrementalFor != null) {
-            UpdatePreference pref = (UpdatePreference) mUpdatesList.findPreference(incrementalFor);
-            if (pref != null) {
-                pref.setStyle(UpdatePreference.STYLE_DOWNLOADED);
-                pref.getUpdateInfo().setFileName(fileName);
-                onStartUpdate(pref);
-            }
-        } else {
-            // Find the matching preference so we can retrieve the UpdateInfo
-            UpdatePreference pref = (UpdatePreference) mUpdatesList.findPreference(fileName);
-            if (pref != null) {
-                pref.setStyle(UpdatePreference.STYLE_DOWNLOADED);
-                onStartUpdate(pref);
-            }
+        // Find the matching preference so we can retrieve the UpdateInfo
+        UpdatePreference pref = (UpdatePreference) mUpdatesList.findPreference(fileName);
+        if (pref != null) {
+            pref.setStyle(UpdatePreference.STYLE_DOWNLOADED);
+            onStartUpdate(pref);
         }
 
         resetDownloadState();
@@ -610,9 +598,6 @@ public class UpdatesSettings extends PreferenceActivity implements
         // Convert the installed version name to the associated filename
         String installedZip = "cm-" + Utils.getInstalledVersion() + ".zip";
 
-        // Determine installed incremental
-        String installedIncremental = Utils.getIncremental();
-
         // Convert LinkedList to HashMap, keyed on filename.
         HashMap<String, UpdateInfo> updatesMap = new HashMap<String, UpdateInfo>();
         for (UpdateInfo ui : updates) {
@@ -621,20 +606,6 @@ public class UpdatesSettings extends PreferenceActivity implements
 
         // Add the updates
         for (UpdateInfo ui : updates) {
-            // Skip if this is an incremental
-            if (ui.isIncremental()) {
-                continue;
-            }
-
-            // Check to see if there is an incremental
-            boolean haveIncremental = false;
-            String incrementalFile = "incremental-" + installedIncremental + "-"
-                    + ui.getIncremental() + ".zip";
-            if (updatesMap.containsKey(incrementalFile)) {
-                haveIncremental = true;
-                ui.setFileName(incrementalFile);
-            }
-
             // Determine the preference style and create the preference
             boolean isDownloading = ui.getFileName().equals(mFileName);
             int style;
@@ -642,8 +613,6 @@ public class UpdatesSettings extends PreferenceActivity implements
             if (isDownloading) {
                 // In progress download
                 style = UpdatePreference.STYLE_DOWNLOADING;
-            } else if (haveIncremental) {
-                style = UpdatePreference.STYLE_DOWNLOADED;
             } else if (ui.getFileName().equals(installedZip)) {
                 // This is the currently installed version
                 style = UpdatePreference.STYLE_INSTALLED;
@@ -715,14 +684,6 @@ public class UpdatesSettings extends PreferenceActivity implements
         }
 
         mDownloadingPreference.setStyle(UpdatePreference.STYLE_DOWNLOADING);
-
-        // Set progress bar to indeterminate while incremental check runs
-        ProgressBar progressBar = mDownloadingPreference.getProgressBar();
-        progressBar.setIndeterminate(true);
-
-        // Disable cancel button while incremental check runs
-        ImageView updatesButton = mDownloadingPreference.getUpdatesButton();
-        updatesButton.setEnabled(false);
 
         mFileName = ui.getFileName();
         mDownloading = true;

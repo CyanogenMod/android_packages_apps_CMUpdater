@@ -13,7 +13,6 @@ public class Constants {
     // Download related
     public static final String UPDATES_FOLDER = "updates";
     public static final String DOWNLOAD_ID = "download_id";
-    public static final String DOWNLOAD_INCREMENTAL_FOR = "download_incremental_for";
 
     // Preferences
     public static final String ENABLE_PREF = "pref_enable_updates";
