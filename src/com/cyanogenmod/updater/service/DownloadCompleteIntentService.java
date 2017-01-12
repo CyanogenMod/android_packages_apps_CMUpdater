@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.ParcelFileDescriptor;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.UpdateApplication;
