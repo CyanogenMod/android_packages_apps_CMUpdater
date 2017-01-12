@@ -220,7 +220,8 @@ public class UpdateCheckService extends IntentService
             updateUri = getString(R.string.conf_update_server_url_def);
         }
 
-        updateUri += "/v1/" + Utils.getDeviceType() + "/" + getRomType();
+        String incrementalVersion = SystemProperties.get("ro.build.version.incremental");
+        updateUri += "/v1/" + Utils.getDeviceType() + "/" + getRomType() + "/" + incrementalVersion;
 
         return URI.create(updateUri);
     }
