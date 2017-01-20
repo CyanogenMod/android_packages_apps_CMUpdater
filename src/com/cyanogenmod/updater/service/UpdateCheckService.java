@@ -205,14 +205,23 @@ public class UpdateCheckService extends IntentService
     }
 
     private String getRomType() {
-        int updateType = Utils.getUpdateType();
-        switch(updateType) {
+        String type;
+        switch (Utils.getUpdateType()) {
             case Constants.UPDATE_TYPE_SNAPSHOT:
-                return "snapshot";
+                type = Constants.CM_RELEASETYPE_SNAPSHOT;
+                break;
             case Constants.UPDATE_TYPE_NIGHTLY:
+                type = Constants.CM_RELEASETYPE_NIGHTLY;
+                break;
+            case Constants.UPDATE_TYPE_EXPERIMENTAL:
+                type = Constants.CM_RELEASETYPE_EXPERIMENTAL;
+                break;
+            case Constants.UPDATE_TYPE_UNOFFICIAL:
             default:
-                return "nightly";
+                type = Constants.CM_RELEASETYPE_UNOFFICIAL;
+                break;
         }
+        return type.toLowerCase();
     }
 
     private URI getServerURI() {

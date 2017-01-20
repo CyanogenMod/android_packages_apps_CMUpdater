@@ -33,9 +33,13 @@ public class Constants {
     // Update types
     public static final int UPDATE_TYPE_SNAPSHOT = 0;
     public static final int UPDATE_TYPE_NIGHTLY = 1;
+    public static final int UPDATE_TYPE_EXPERIMENTAL = 2;
+    public static final int UPDATE_TYPE_UNOFFICIAL = 3;
 
     // ro.cm.releasetype values
     public static final String PROPERTY_CM_RELEASETYPE = "ro.cm.releasetype";
     public static final String CM_RELEASETYPE_SNAPSHOT = "SNAPSHOT";
     public static final String CM_RELEASETYPE_NIGHTLY = "NIGHTLY";
+    public static final String CM_RELEASETYPE_EXPERIMENTAL = "EXPERIMENTAL";
+    public static final String CM_RELEASETYPE_UNOFFICIAL = "UNOFFICIAL";
 }
