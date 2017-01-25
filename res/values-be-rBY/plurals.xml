@@ -11,7 +11,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="not_new_updates_found_body">
     <item quantity="one">Даступная <xliff:g id="count">%d</xliff:g> абноўленая версія CyanogenMod</item>
-    <item quantity="few">Даступна <xliff:g id="count">%d</xliff:g> абноўленых версіі CyanogenMod</item>
+    <item quantity="few">Даступна <xliff:g id="count">%d</xliff:g> абноўленыя версіі CyanogenMod</item>
     <item quantity="other">Даступна <xliff:g id="count">%d</xliff:g> абноўленых версій CyanogenMod</item>
   </plurals>
   <plurals name="not_additional_count">
