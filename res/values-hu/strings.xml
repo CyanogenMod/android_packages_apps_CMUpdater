@@ -11,6 +11,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
+  <string name="app_name">Frissítő</string>
   <string name="display_name">Frissítések</string>
   <string name="unknown">Ismeretlen</string>
   <!-- Menu and dialog box strings -->
@@ -61,7 +62,10 @@
   <string name="delete_updates_noFolder_message">Frissítéseket tartalmazó mappa nem található</string>
   <string name="delete_updates_success_message">Az összes letöltött frissítés törölve</string>
   <!-- Header -->
+  <string name="header_os">LineageOS\n%1$s</string>
+  <string name="sysinfo_last_check">Utoljára ellenőrizve</string>
   <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="download_button">Letöltés</string>
+  <string name="install_button">Telepítés</string>
 </resources>

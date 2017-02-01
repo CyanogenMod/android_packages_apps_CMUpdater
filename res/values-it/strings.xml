@@ -11,6 +11,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
+  <string name="app_name">Aggiornamenti</string>
   <string name="display_name">Aggiornamenti</string>
   <string name="unknown">Sconosciuto</string>
   <!-- Menu and dialog box strings -->
@@ -48,6 +49,7 @@
   <string name="not_download_failure">Impossibile scaricare l\'aggiornamento</string>
   <string name="not_action_install_update">Riavvia e installa</string>
   <string name="not_download_install_notice">L\'aggiornamento <xliff:g id="filename">%s</xliff:g> è stato scaricato con successo. Premendo \'Riavvia e installa\', il dispositivo verrà riavviato per installare l\'aggiornamento.\n\nNota: è necessaria una recovery compatibile affinché l\'installazione automatica funzioni.</string>
+  <string name="verification_failed">Verifica fallita. Download danneggiato o non sicuro</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Applica aggiornamento</string>
   <string name="apply_update_dialog_text">Si sta per aggiornare a <xliff:g id="filename">%s</xliff:g>.\n\nPremendo Aggiorna, il dispositivo verrà riavviato in modalità recovery per l\'installazione dell\'aggiornamento\n\nNota: questa caratteristica richiede una recovery compatibile; in caso contrario sarà necessario installare gli aggiornamenti manualmente</string>
@@ -62,8 +64,16 @@
   <string name="delete_updates_noFolder_message">Cartella degli aggiornamenti non trovata</string>
   <string name="delete_updates_success_message">Tutti gli aggiornamenti eliminati</string>
   <!-- Header -->
+  <string name="header_os">LineageOS\n%1$s</string>
+  <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
   <string name="sysinfo_last_check">Ultimo controllo</string>
   <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
+  <string name="date_formatting">dd MMMM yyyy</string>
   <!-- Build item -->
+  <string name="type_installed">• Installato</string>
+  <string name="type_downloaded">• Scaricato</string>
+  <string name="type_downloading">• Scaricando</string>
+  <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>
   <string name="download_button">Scarica</string>
+  <string name="install_button">Installa</string>
 </resources>
