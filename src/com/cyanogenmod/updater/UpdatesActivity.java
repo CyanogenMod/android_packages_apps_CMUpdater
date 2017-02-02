@@ -55,14 +55,6 @@ public class UpdatesActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        if (mSettingsFragment != null) {
-            mSettingsFragment.checkForUpdates();
-        }
-    }
-
-    @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
