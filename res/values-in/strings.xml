@@ -11,6 +11,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
+  <string name="app_name">Pembaruan</string>
   <string name="display_name">Pembaruan</string>
   <string name="unknown">Tidak diketahui</string>
   <!-- Menu and dialog box strings -->
@@ -22,6 +23,7 @@
   <string name="dialog_close">Tutup</string>
   <!-- Settings strings -->
   <string name="available_updates_title">Pembaruan tersedia</string>
+  <string name="no_available_updates_intro">Pembaruan tidak ditemukan. Untuk memeriksa pembaruan secara manual, gunakan tombol Segarkan.</string>
   <string name="update_check_title">Periksa pembaruan</string>
   <string name="check_manual">Manual</string>
   <string name="check_daily">Harian</string>
@@ -47,6 +49,7 @@
   <string name="not_download_failure">Pengunduhan pembaruan tidak berhasil</string>
   <string name="not_action_install_update">Mulai ulang dan instal</string>
   <string name="not_download_install_notice">Pembaruan <xliff:g id="filename">%s</xliff:g> sudah berhasil diunduh. Ketika mengetuk \'Mulai ulang dan instal\', perangkat akan dimulai ulang dan menginstal pembaruan.\n\nCatatan: Diperlukan Recovery yang kompatibel agar pemasangan dapat bekerja secara otomatis.</string>
+  <string name="verification_failed">Verifikasi gagal. Unduhan rusak atau tidak aman</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Terapkan pembaruan</string>
   <string name="apply_update_dialog_text">Anda akan meningkatkan ke <xliff:g id="filename">%s</xliff:g>.\n\nJika Anda menekan Perbarui, perangkat akan dimulai ulang dalam mode recovery untuk memasang pembaruan.\n\nPerhatian: Fitur ini memerlukan Recovery yang kompatibel, jika tidak pembaruan harus diinstal secara manual.</string>
@@ -61,7 +64,16 @@
   <string name="delete_updates_noFolder_message">Folder pembaruan tidak ditemukan</string>
   <string name="delete_updates_success_message">Semua pembaruan yang diunduh dihapus</string>
   <!-- Header -->
+  <string name="header_os">LineageOS\n%1$s</string>
+  <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
+  <string name="sysinfo_last_check">Terakhir diperiksa</string>
   <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
+  <string name="date_formatting">dd MMMM yyyy</string>
   <!-- Build item -->
+  <string name="type_installed">• Terpasang</string>
+  <string name="type_downloaded">• Terunduh</string>
+  <string name="type_downloading">• Mengunduh</string>
+  <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>
   <string name="download_button">Unduh</string>
+  <string name="install_button">Pasang</string>
 </resources>

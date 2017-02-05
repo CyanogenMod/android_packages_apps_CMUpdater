@@ -23,6 +23,7 @@
   <string name="dialog_close">Cerrar</string>
   <!-- Settings strings -->
   <string name="available_updates_title">Actualizaciones disponibles</string>
+  <string name="no_available_updates_intro">No se han encontrado nuevas actualizaciones. Para comprobar manualmente nuevas actualizaciones, usa el botón Refrescar.</string>
   <string name="update_check_title">Comprobar actualizaciones</string>
   <string name="check_manual">Manualmente</string>
   <string name="check_daily">Diariamente</string>
@@ -48,6 +49,7 @@
   <string name="not_download_failure">Actualización no descargada</string>
   <string name="not_action_install_update">Reiniciar e instalar</string>
   <string name="not_download_install_notice">La actualización <xliff:g id="filename">%s</xliff:g> fue descargada correctamente. Pulsando sobre \'Reiniciar e instalar\', el dispositivo se reiniciará para instalar la actualización.\n\nAviso: Será necesario disponer de un Recovery compatible para una instalación desatendida.</string>
+  <string name="verification_failed">Verificación fallida. Descarga corrupta o insegura</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aplicar actualización</string>
   <string name="apply_update_dialog_text">Se va a proceder a actualizar a la versión <xliff:g id="filename">%s</xliff:g>.\n\nPulsando sobre Actualizar, el dispositivo se reiniciará para instalar la actualización.\n\nAviso: Será necesario disponer de un recovery compatible para una instalación desatendida.</string>
@@ -62,7 +64,16 @@
   <string name="delete_updates_noFolder_message">No se encontró la carpeta de actualizaciones</string>
   <string name="delete_updates_success_message">Todas las actualizaciones descargadas fueron borradas</string>
   <!-- Header -->
+  <string name="header_os">LineageOS\n%1$s</string>
+  <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
+  <string name="sysinfo_last_check">Última comprobación</string>
   <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
+  <string name="date_formatting">dd MMMM, yyyy</string>
   <!-- Build item -->
+  <string name="type_installed">• Instalada</string>
+  <string name="type_downloaded">• Descargada</string>
+  <string name="type_downloading">• Descargando</string>
+  <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>
   <string name="download_button">Descargar</string>
+  <string name="install_button">Instalar</string>
 </resources>

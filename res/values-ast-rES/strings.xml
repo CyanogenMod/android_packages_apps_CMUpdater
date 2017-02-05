@@ -49,7 +49,7 @@
   <string name="not_download_install_notice">L\'anovamientu <xliff:g id="filename">%s</xliff:g> descargóse correutamente. Calcando sobre \u00ABReaniciar ya instalar\u00BB, el preséu va reaniciase pa instalar l\'anovamientu.\n\nAvisu: Ye necesario disponer d\'un recovery compatible pa una instalación desatendida.</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aplicar anovamientu</string>
-  <string name="apply_update_dialog_text">Va aniciase\'l procesu d\'anovar a la versión <xliff:g id="filename">%s</xliff:g>.\n\nCalcando sobre \u00ABAnovar\u00BB, el preséu va reaniciase pa instalar l\'anovamientu.\n\nAvisu: Ye necesario disponer d\'un recovery compatible pa una instalación desatendida.</string>
+  <string name="apply_update_dialog_text">Tas a piques d\'anovar a <xliff:g id="filename">%s</xliff:g>.\n\nSi primes ANOVAR, el preséu reaniciaráse solu al recovery pa instalar l\'anovamientu.\n\nNota: Esta carauterística rique un recovery compatible o los anovamientos precisarán instalase a mano.</string>
   <string name="apply_unable_to_reboot_toast">Imposible reaniciar en mou recovery</string>
   <!-- deleting -->
   <string name="confirm_delete_dialog_title">Desaniciar ficheru</string>

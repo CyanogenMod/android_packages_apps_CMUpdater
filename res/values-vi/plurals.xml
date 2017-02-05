@@ -8,4 +8,11 @@
      The text of the license can be found in the LICENSE file
      or at https://www.gnu.org/licenses/gpl-2.0.txt
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="not_new_updates_found_body">
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> cập nhật có sẵn để tải về</item>
+  </plurals>
+  <plurals name="not_additional_count">
+    <item quantity="other">+ <xliff:g id="count">%d</xliff:g> thêm</item>
+  </plurals>
+</resources>

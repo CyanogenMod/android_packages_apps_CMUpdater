@@ -11,6 +11,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
+  <string name="app_name">Atualizador</string>
   <string name="display_name">Atualizações</string>
   <string name="unknown">Desconhecido</string>
   <!-- Menu and dialog box strings -->
@@ -22,6 +23,7 @@
   <string name="dialog_close">Fechar</string>
   <!-- Settings strings -->
   <string name="available_updates_title">Atualizações disponíveis</string>
+  <string name="no_available_updates_intro">Não foram encontradas novas atualizações. Use o botão Atualizar para verificar por novas atualizações manualmente.</string>
   <string name="update_check_title">Verificar atualizações</string>
   <string name="check_manual">Manual</string>
   <string name="check_daily">Diariamente</string>
@@ -47,6 +49,7 @@
   <string name="not_download_failure">Erro ao baixar atualização</string>
   <string name="not_action_install_update">Reiniciar e instalar</string>
   <string name="not_download_install_notice">A atualização <xliff:g id="filename">%s</xliff:g> foi baixada. Ao tocar \'Reiniciar e instalar\', o dispositivo irá reiniciar sozinho e instalar a atualização.\n\nObservação: Uma Recuperação compatível é necessária para a atualização funcionar automaticamente.</string>
+  <string name="verification_failed">Falha na verificação. Download corrompido ou inseguro</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aplicar atualização</string>
   <string name="apply_update_dialog_text">Vocês está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.\n\nSe você pressionar Atualizar, o dispositivo irá reiniciar no modo de Recuperação e instalar a atualização.\n\nObservação: Esta função requer uma Recuperação compatível ou as atualizações terão de ser instaladas manualmente.</string>
@@ -61,7 +64,15 @@
   <string name="delete_updates_noFolder_message">Pasta de atualização não encontrada</string>
   <string name="delete_updates_success_message">Todas as atualizações baixadas foram excluídas</string>
   <!-- Header -->
+  <string name="header_os">LineageOS\n%1$s</string>
+  <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
+  <string name="sysinfo_last_check">Última verificação</string>
   <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
+  <string name="type_installed">• Instalado</string>
+  <string name="type_downloaded">• Baixado</string>
+  <string name="type_downloading">• Baixando</string>
+  <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>
   <string name="download_button">Baixar</string>
+  <string name="install_button">Instalar</string>
 </resources>
