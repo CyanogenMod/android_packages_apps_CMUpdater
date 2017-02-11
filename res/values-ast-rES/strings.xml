@@ -11,6 +11,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
+  <string name="app_name">Anovador</string>
   <string name="display_name">Anovamientos</string>
   <string name="unknown">Desconocíu</string>
   <!-- Menu and dialog box strings -->
@@ -22,6 +23,7 @@
   <string name="dialog_close">Zarrar</string>
   <!-- Settings strings -->
   <string name="available_updates_title">Anovamientos disponibles</string>
+  <string name="no_available_updates_intro">Nun s\'alcontraron anovamientos. Pa comprobalos a mano, usa\'l botón Refrescar.</string>
   <string name="update_check_title">Comprobar anovamientos</string>
   <string name="check_manual">Manualmente</string>
   <string name="check_daily">Caldía</string>
@@ -30,38 +32,45 @@
   <string name="check_monthly">Mensualmente</string>
   <!-- Update checking -->
   <string name="checking_for_updates">Comprobando anovamientos\u2026</string>
-  <string name="no_updates_found">Nun hai anovamientos nuevos</string>
-  <string name="update_check_failed">Falló la comprobación d\'anovamientos. Por favor, verifica la conexón a Internet y inténtalo de nueves.</string>
+  <string name="no_updates_found">Nun s\'alcontraron anovamientos</string>
+  <string name="update_check_failed">Falló la comprobación d\'anovamientos. Comprueba la to conexón a internet y volvi tentalo, por favor.</string>
   <string name="not_new_updates_found_ticker">Hai anovamientos disponibles</string>
   <string name="not_new_updates_found_title">Anovamientos nuevos</string>
-  <string name="not_action_download">Descargar</string>
-  <string name="data_connection_required">Ye necesario una conexón de datos.</string>
+  <string name="not_action_download">Baxar</string>
+  <string name="data_connection_required">Ríquese una conexón de datos.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Encaboxar descarga</string>
   <string name="confirm_download_cancelation_dialog_message">¿Encaboxar la descarga actual?</string>
-  <string name="download_cancelled">Descarga encaboxada</string>
-  <string name="download_already_running">Hai una descarga en cursu</string>
-  <string name="unable_to_download_file">Fallu al descargar l\'anovamientu</string>
-  <string name="download_not_found">Descarga non atopada</string>
-  <string name="not_download_success">Anovamientu descargáu</string>
-  <string name="not_download_failure">Anovamientu non descargáu</string>
+  <string name="download_cancelled">Encaboxóse la descarga</string>
+  <string name="download_already_running">Yá hai una descarga n\'execución</string>
+  <string name="unable_to_download_file">Nun pue baxase\'l ficheru d\'anovamientu</string>
+  <string name="download_not_found">Nun s\'alcontró la descarga</string>
+  <string name="not_download_success">L\'anovamientu baxóse con ésitu</string>
+  <string name="not_download_failure">L\'anovamientu nun se baxó con ésitu</string>
   <string name="not_action_install_update">Reaniciar ya instalar</string>
-  <string name="not_download_install_notice">L\'anovamientu <xliff:g id="filename">%s</xliff:g> descargóse correutamente. Calcando sobre \u00ABReaniciar ya instalar\u00BB, el preséu va reaniciase pa instalar l\'anovamientu.\n\nAvisu: Ye necesario disponer d\'un recovery compatible pa una instalación desatendida.</string>
+  <string name="not_download_install_notice">Baxóse con ésitu l\'anovamientu <xliff:g id="filename">%s</xliff:g>. El preséu reaniciaráse al tocar «Reaniciar ya instalar» pa instalar l\'anovamientu.\n\nNota: Ríquese un recovery compatible pa que la instalación seya desatendida.</string>
+  <string name="verification_failed">Falló la verificación. Descarga toyida o insegura</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aplicar anovamientu</string>
   <string name="apply_update_dialog_text">Tas a piques d\'anovar a <xliff:g id="filename">%s</xliff:g>.\n\nSi primes ANOVAR, el preséu reaniciaráse solu al recovery pa instalar l\'anovamientu.\n\nNota: Esta carauterística rique un recovery compatible o los anovamientos precisarán instalase a mano.</string>
-  <string name="apply_unable_to_reboot_toast">Imposible reaniciar en mou recovery</string>
+  <string name="apply_unable_to_reboot_toast">Nun pue reaniciase nel mou recovery</string>
   <!-- deleting -->
   <string name="confirm_delete_dialog_title">Desaniciar ficheru</string>
-  <string name="confirm_delete_dialog_title_tv">Clic pa desaniciar del almacenamientu int. los anovamientos</string>
-  <string name="confirm_delete_dialog_message">¿Desaniciar l\'anovamientu descargáu?</string>
-  <string name="confirm_delete_all_dialog_message">¿Desaniciar tolos anovamientos descargaos?</string>
-  <string name="delete_single_update_success_message">Anovamientu <xliff:g id="filename">%s</xliff:g> desaniciáu</string>
-  <string name="delete_updates_failure_message">Hebo un fallu al desaniciar l\'anovamientu</string>
-  <string name="delete_updates_noFolder_message">Carpeta d\'anovamientos non atopada</string>
-  <string name="delete_updates_success_message">Desaniciáronse tolos anovamientos</string>
+  <string name="confirm_delete_dialog_title_tv">Primi pa desaniciar tolos anovamientos baxaos nel almacenamientu internu</string>
+  <string name="confirm_delete_dialog_message">¿Desaniciar el ficheru esbilláu d\'anovamientu?</string>
+  <string name="confirm_delete_all_dialog_message">¿Desaniciar tolos anovamientos baxaos?</string>
+  <string name="delete_single_update_success_message">Desanicióse l\'anovamientu <xliff:g id="filename">%s</xliff:g></string>
+  <string name="delete_updates_failure_message">Hebo un fallu desaniciando\'l ficheru d\'anovamientu</string>
+  <string name="delete_updates_noFolder_message">Nun s\'alcontró la carpeta d\'anovamientos</string>
+  <string name="delete_updates_success_message">Desaniciáronse tolos anovamientos baxaos</string>
   <!-- Header -->
+  <string name="header_os">LineageOS\n%1$s</string>
+  <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
+  <string name="sysinfo_last_check">Comprobación cabera\'l</string>
   <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
+  <string name="date_formatting">dd MMMM, yyyy</string>
   <!-- Build item -->
-  <string name="download_button">Descargar</string>
+  <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>
+  <string name="download_button">Baxar</string>
+  <string name="install_button">Instalar</string>
 </resources>
