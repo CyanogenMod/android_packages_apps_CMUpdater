@@ -11,6 +11,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
+  <string name="app_name">עדכונים</string>
   <string name="display_name">עדכונים</string>
   <string name="unknown">לא ידוע</string>
   <!-- Menu and dialog box strings -->
@@ -22,6 +23,7 @@
   <string name="dialog_close">סגור</string>
   <!-- Settings strings -->
   <string name="available_updates_title">עדכונים זמינים</string>
+  <string name="no_available_updates_intro">לא נמצאו עדכונים חדשים. בכדי לבדוק אם יש עדכונים חדשים, לחץ על רענון.</string>
   <string name="update_check_title">בדיקת עדכונים</string>
   <string name="check_manual">ידנית</string>
   <string name="check_daily">יומית</string>
@@ -47,6 +49,7 @@
   <string name="not_download_failure">הורדת העדכון נכשלה</string>
   <string name="not_action_install_update">אתחל והתקן</string>
   <string name="not_download_install_notice">העדכון <xliff:g id="filename">%s</xliff:g> הורד בהצלחה. כאשר תלחץ על \'אתחל והתקן\', המכשיר יאתחל את עצמו ויתקין את העדכון.\n\nשים לב: דרוש שחזור מתאים כדי שההתקנה תעבוד באופן אוטומטי.</string>
+  <string name="verification_failed">האימות נכשל. ההורדה פגומה או לא מאובטחת</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">החל עדכון</string>
   <string name="apply_update_dialog_text">אתה עומד לשדרג ל-<xliff:g id="filename">%s</xliff:g>.\n\nאם תלחץ על \"עדכן\", המכשיר יאתחל את עצמו למצב \"שחזור\" על מנת להתקין את העדכון.\n\nהערה: אפשרות זו דורשת שחזור תואם, או שפעולת התקנת העדכונים תיאלץ להיעשות באופן ידני.</string>
@@ -61,7 +64,16 @@
   <string name="delete_updates_noFolder_message">תיקיית עדכונים לא נמצאה</string>
   <string name="delete_updates_success_message">כל העדכונים שהורדו נמחקו</string>
   <!-- Header -->
+  <string name="header_os">LineageOS\n%1$s</string>
+  <string name="header_summary">%1$s\n%2$s • אנדרואיד %3$s\n%4$s</string>
+  <string name="sysinfo_last_check">בדיקה אחרונה</string>
   <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
+  <string name="date_formatting">MMMM dd, yyyy</string>
   <!-- Build item -->
+  <string name="type_installed">• מותקנות</string>
+  <string name="type_downloaded">• הורדו</string>
+  <string name="type_downloading">• מוריד</string>
+  <string name="summary">%1$s\nLineageOS %2$s • אנדרואיד %3$s</string>
   <string name="download_button">הורדה</string>
+  <string name="install_button">התקן</string>
 </resources>
