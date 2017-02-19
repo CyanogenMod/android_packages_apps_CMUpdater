@@ -22,6 +22,7 @@
   <string name="dialog_close">閉じる</string>
   <!-- Settings strings -->
   <string name="available_updates_title">利用可能なアップデート</string>
+  <string name="no_available_updates_intro">新しい更新はありません。新しい更新を手動で確認するには、更新ボタンを押してください。</string>
   <string name="update_check_title">アップデートの確認</string>
   <string name="check_manual">手動</string>
   <string name="check_daily">毎日</string>
@@ -47,6 +48,7 @@
   <string name="not_download_failure">アップデートをダウンロードできませんでした</string>
   <string name="not_action_install_update">再起動してインストール</string>
   <string name="not_download_install_notice">アップデート<xliff:g id="filename">%s</xliff:g>のダウンロードが完了しました。｢再起動してインストール｣をタップすると、アップデートをインストールするために端末は再起動します。\n\n注意: インストールを自動で行うには、互換性のあるリカバリーが必要です。</string>
+  <string name="verification_failed">検証に失敗しました。破損しているか安全でないダウンロードです</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">アップデートを適用</string>
   <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g>にアップグレードしようとしています。\n\nアップデートを押すと、アップデートをインストールするために端末はリカバリーモードで再起動します。\n\n注意: この機能は互換性のあるリカバリーが必要ですので、互換性がなければ手動でインストールする必要があります。</string>
@@ -61,8 +63,15 @@
   <string name="delete_updates_noFolder_message">アップデートフォルダが見つかりませんでした</string>
   <string name="delete_updates_success_message">ダウンロードしたすべてのアップデートファイルを削除しました</string>
   <!-- Header -->
+  <string name="header_os">LineageOS\n%1$s</string>
+  <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
+  <string name="sysinfo_last_check">前回の確認</string>
   <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
+  <string name="type_installed">• インストール済み</string>
+  <string name="type_downloaded">• ダウンロード済み</string>
+  <string name="type_downloading">• ダウンロード中</string>
+  <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>
   <string name="download_button">ダウンロード</string>
   <string name="install_button">インストール</string>
 </resources>
