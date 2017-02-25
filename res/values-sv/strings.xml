@@ -61,7 +61,12 @@
   <string name="delete_updates_noFolder_message">Uppdateringsmappen kan inte hittas</string>
   <string name="delete_updates_success_message">Alla nedladdade uppdateringar borttagna</string>
   <!-- Header -->
+  <string name="header_os">LineageOS\n%1$s</string>
+  <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
   <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
+  <string name="date_formatting">MMMM dd, yyyy</string>
   <!-- Build item -->
+  <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>
   <string name="download_button">Ladda ned</string>
+  <string name="install_button">Installera</string>
 </resources>
