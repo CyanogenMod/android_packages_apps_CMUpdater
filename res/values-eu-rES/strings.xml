@@ -11,6 +11,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
+  <string name="app_name">Eguneratzailea</string>
   <string name="display_name">Eguneraketak</string>
   <string name="unknown">Ezezaguna</string>
   <!-- Menu and dialog box strings -->

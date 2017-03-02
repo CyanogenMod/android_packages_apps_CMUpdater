@@ -23,6 +23,7 @@
   <string name="dialog_close">닫기</string>
   <!-- Settings strings -->
   <string name="available_updates_title">사용 가능한 업데이트</string>
+  <string name="no_available_updates_intro">새로운 업데이트가 없습니다. 수동으로 새 업데이트를 확인하려면 새로 고침 버튼을 누르세요.</string>
   <string name="update_check_title">업데이트 확인</string>
   <string name="check_manual">수동</string>
   <string name="check_daily">매일</string>
@@ -48,6 +49,7 @@
   <string name="not_download_failure">업데이트 다운로드에 실패하였습니다</string>
   <string name="not_action_install_update">다시 시작 후 설치</string>
   <string name="not_download_install_notice">업데이트 <xliff:g id="filename">%s</xliff:g>(이)가 성공적으로 다운로드 되었습니다. \'다시 시작 후 설치\'를 탭하면 업데이트 설치를 위해 장치가 재시작됩니다.\n\n주의: 설치 과정이 자동으로 진행되기 위해서는 호환되는 복구 모드가 필요합니다.</string>
+  <string name="verification_failed">검증에 실패했습니다. 손상되거나 안전하지 않은 다운로드입니다</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">업데이트 적용</string>
   <string name="apply_update_dialog_text"><xliff:g id="filename">%s</xliff:g>(으)로 업그레이드합니다. \n\n업데이트를 탭하면 업데이트 설치를 위해 장치가 복구 모드로 재시작됩니다.\n\n주의: 이 기능은 호환되는 복구 모드가 필요하며, 그렇지 않을 경우 업데이트를 수동으로 설치해야합니다.</string>

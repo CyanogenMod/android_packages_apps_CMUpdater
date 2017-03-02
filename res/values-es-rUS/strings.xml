@@ -56,7 +56,7 @@
   <string name="apply_unable_to_reboot_toast">No se pudo reiniciar en modo recuperación</string>
   <!-- deleting -->
   <string name="confirm_delete_dialog_title">Borrar archivo</string>
-  <string name="confirm_delete_dialog_title_tv">Pulsa para borrar todas las actualizaciones descargadas en el almacenamiento interno</string>
+  <string name="confirm_delete_dialog_title_tv">Pulsa para quitar todas las actualizaciones descargadas en el almacenamiento interno</string>
   <string name="confirm_delete_dialog_message">¿Borrar el archivo de actualización seleccionado?</string>
   <string name="confirm_delete_all_dialog_message">¿Borrar todos los archivos de actualizaciones descargados?</string>
   <string name="delete_single_update_success_message">Actualización <xliff:g id="filename">%s</xliff:g> borrada</string>
