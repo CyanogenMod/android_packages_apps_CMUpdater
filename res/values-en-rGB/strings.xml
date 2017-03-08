@@ -23,6 +23,7 @@
   <string name="dialog_close">Close</string>
   <!-- Settings strings -->
   <string name="available_updates_title">Available updates</string>
+  <string name="no_available_updates_intro">No new updates found. To manually check for new updates, use the Refresh button.</string>
   <string name="update_check_title">Check for updates</string>
   <string name="check_manual">Manual</string>
   <string name="check_daily">Daily</string>

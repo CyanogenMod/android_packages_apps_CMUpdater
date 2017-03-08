@@ -11,12 +11,12 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
-  <string name="app_name">Обновления</string>
+  <string name="app_name">Обновления системы</string>
   <string name="display_name">Обновления</string>
   <string name="unknown">Неизвестно</string>
   <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Обновить</string>
-  <string name="menu_delete_all">Удалить загруженные</string>
+  <string name="menu_delete_all">Удалить скачанные</string>
   <string name="dialog_ok">OK</string>
   <string name="dialog_cancel">Отмена</string>
   <string name="dialog_update">Обновить</string>
@@ -43,7 +43,7 @@
   <string name="confirm_download_cancelation_dialog_message">Отменить текущую загрузку?</string>
   <string name="download_cancelled">Загрузка отменена</string>
   <string name="download_already_running">Загрузка уже выполняется</string>
-  <string name="unable_to_download_file">Не удалось загрузить файл обновления</string>
+  <string name="unable_to_download_file">Не удалось скачать файл обновления</string>
   <string name="download_not_found">Обновление не найдено</string>
   <string name="not_download_success">Обновление системы скачано</string>
   <string name="not_download_failure">Ошибка загрузки обновления</string>
@@ -52,13 +52,13 @@
   <string name="verification_failed">Не удалось выполнить проверку подлинности. Скачанный файл повреждён или подменён в процессе загрузки.</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Применение обновления</string>
-  <string name="apply_update_dialog_text">Будет выполнено обновление до версии «<xliff:g id="filename">%s</xliff:g>».\n\nПри нажатии кнопки «Обновить» устройство перезагрузится и перейдет в режим восстановления для установки этого обновления. \n\nПримечание: для этой функции необходим совместимый режим восстановления, в противном случае обновление придется установить вручную.</string>
+  <string name="apply_update_dialog_text">Будет выполнено обновление до версии «<xliff:g id="filename">%s</xliff:g>».\n\nПри нажатии кнопки «Обновить» устройство перезагрузится и перейдет в режим восстановления для установки этого обновления. \n\nПримечание: для этой функции необходим совместимый режим восстановления. При возникновении ошибки потребуется установить обновление вручную.</string>
   <string name="apply_unable_to_reboot_toast">Невозможно перезагрузиться в режим восстановления</string>
   <!-- deleting -->
   <string name="confirm_delete_dialog_title">Удалить файл</string>
-  <string name="confirm_delete_dialog_title_tv">Нажмите, чтобы удалить все загруженные обновления из внутренней памяти</string>
+  <string name="confirm_delete_dialog_title_tv">Нажмите, чтобы удалить все скачанные обновления из внутренней памяти</string>
   <string name="confirm_delete_dialog_message">Удалить выбранный файл обновления?</string>
-  <string name="confirm_delete_all_dialog_message">Удалить все загруженные файлы обновлений?</string>
+  <string name="confirm_delete_all_dialog_message">Удалить все файлы обновлений, которые были скачаны на устройство?</string>
   <string name="delete_single_update_success_message">Файл обновления «<xliff:g id="filename">%s</xliff:g>» удалён</string>
   <string name="delete_updates_failure_message">Произошла ошибка при удалении файла обновления</string>
   <string name="delete_updates_noFolder_message">Каталог с обновлениями не найден</string>
@@ -68,11 +68,11 @@
   <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
   <string name="sysinfo_last_check">Последняя проверка</string>
   <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
-  <string name="date_formatting">dd MMMM, yyyy</string>
+  <string name="date_formatting">dd MMMM yyyy г.</string>
   <!-- Build item -->
-  <string name="type_installed">• Установленная версия</string>
-  <string name="type_downloaded">• Готово к установке</string>
-  <string name="type_downloading">• Выполняется скачивание</string>
+  <string name="type_installed">• установленная версия</string>
+  <string name="type_downloaded">• готово к установке</string>
+  <string name="type_downloading">• выполняется скачивание</string>
   <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>
   <string name="download_button">Загрузить</string>
   <string name="install_button">Установить</string>

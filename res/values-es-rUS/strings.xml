@@ -33,7 +33,7 @@
   <!-- Update checking -->
   <string name="checking_for_updates">Buscando actualizaciones</string>
   <string name="no_updates_found">No se encontraron nuevas actualizaciones</string>
-  <string name="update_check_failed">Error en la búsqueda de actualizaciones. Comprueba tu conexión a internet e intenta de nuevo más tarde.</string>
+  <string name="update_check_failed">Error en la búsqueda de actualizaciones. Comprueba la conexión a Internet e intenta de nuevo más tarde.</string>
   <string name="not_new_updates_found_ticker">Hay nuevas actualizaciones disponibles</string>
   <string name="not_new_updates_found_title">Nuevas actualizaciones</string>
   <string name="not_action_download">Descargas</string>
