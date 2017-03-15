@@ -45,7 +45,7 @@
   <string name="download_already_running">Prenos se že izvaja</string>
   <string name="unable_to_download_file">Ni bilo mogoče prenesti posodobitvene datoteke</string>
   <string name="download_not_found">Prenos ni najden</string>
-  <string name="not_download_success">Posodobitev prenesena uspešno</string>
+  <string name="not_download_success">Posodobitev uspešno prenesena</string>
   <string name="not_download_failure">Prenos posodobitve je bil uspešen</string>
   <string name="not_action_install_update">Ponovno zaženi in namesti</string>
   <string name="not_download_install_notice">Posodobitev <xliff:g id="filename">%s</xliff:g> je bila uspešno prenesena. Ko se boste dotaknili \'Ponovno zaženi in namesti\', se bo naprava ponovno zagnala in namestila posodobitev.\n\nOpomba: Za samodejno namestitev je zahtevana združljiva Obnovitev.</string>

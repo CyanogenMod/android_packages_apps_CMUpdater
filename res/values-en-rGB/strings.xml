@@ -49,6 +49,7 @@
   <string name="not_download_failure">Update download was unsuccessful</string>
   <string name="not_action_install_update">Reboot and install</string>
   <string name="not_download_install_notice">The update <xliff:g id="filename">%s</xliff:g> was successfully downloaded. When touching \'Reboot and install\', the device will restart itself to install the update.\n\nNote: A compatible Recovery is required for the installation to work automatically.</string>
+  <string name="verification_failed">Verification failed. Corrupted or unsecure download</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Apply update</string>
   <string name="apply_update_dialog_text">You are about to upgrade to <xliff:g id="filename">%s</xliff:g>.\n\nIf you press Update, the device will restart itself in recovery mode to install the update.\n\nNote: This feature requires a compatible Recovery or updates will need to be installed manually.</string>

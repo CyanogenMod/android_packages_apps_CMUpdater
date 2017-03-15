@@ -23,6 +23,7 @@
   <string name="dialog_close">Bezárás</string>
   <!-- Settings strings -->
   <string name="available_updates_title">Elérhető frissítések</string>
+  <string name="no_available_updates_intro">Nincsenek új frissítések. Az új frissítések kézi ellenőréséhez, használja a Frissítés gombot.</string>
   <string name="update_check_title">Frissítések keresése</string>
   <string name="check_manual">Manuális</string>
   <string name="check_daily">Naponta</string>
@@ -48,6 +49,7 @@
   <string name="not_download_failure">Frissítés letöltése sikertelen</string>
   <string name="not_action_install_update">Újraindítás és telepítés</string>
   <string name="not_download_install_notice"><xliff:g id="filename">%s</xliff:g> nevű frissítés sikeresen letöltve. Amikor az \"Újraindítás és telepítés\" gombra kattint, az eszköz újraindítja magát a frissítés telepítéshez.\n\nMegjegyzés: Az automatikus telepítéshez szükség van egy kompatibilis Recovery módra.</string>
+  <string name="verification_failed">Ellenőrzés sikertelen. Sérült vagy nem biztonságos letöltés</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Frissítés alkalmazása</string>
   <string name="apply_update_dialog_text">Frissítés a következőre: <xliff:g id="filename">%s</xliff:g>.\n\nA telepítéshez koppintson a Frissítés gombra, az eszköz újra fog indulni Recovery módban.</string>
@@ -63,9 +65,15 @@
   <string name="delete_updates_success_message">Az összes letöltött frissítés törölve</string>
   <!-- Header -->
   <string name="header_os">LineageOS\n%1$s</string>
+  <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
   <string name="sysinfo_last_check">Utoljára ellenőrizve</string>
   <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
+  <string name="date_formatting">yyyy. MMMM dd.</string>
   <!-- Build item -->
+  <string name="type_installed">• Telepített</string>
+  <string name="type_downloaded">• Letöltött</string>
+  <string name="type_downloading">• Letöltés</string>
+  <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>
   <string name="download_button">Letöltés</string>
   <string name="install_button">Telepítés</string>
 </resources>
