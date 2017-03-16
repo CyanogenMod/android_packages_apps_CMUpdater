@@ -315,6 +315,10 @@ public class UpdatesSettings extends PreferenceFragment implements
                     mDownloadingPreference.setStyle(UpdatePreference.STYLE_NEW);
                     resetDownloadState();
                     break;
+                case DownloadManager.STATUS_SUCCESSFUL:
+                    progressBar.setIndeterminate(true);
+                    mDownloading = false;
+                    break;
             }
 
             if (cursor != null) {
