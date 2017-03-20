@@ -31,7 +31,7 @@
   <string name="check_bi_weekly">Quinzenalmente</string>
   <string name="check_monthly">Mensalmente</string>
   <!-- Update checking -->
-  <string name="checking_for_updates">Verificando por atualizações</string>
+  <string name="checking_for_updates">Verificando se há atualizações disponíveis</string>
   <string name="no_updates_found">Nenhuma atualização encontrada</string>
   <string name="update_check_failed">Falha ao verificar por atualização. Verifique sua conexão com a internet e tente novamente mais tarde.</string>
   <string name="not_new_updates_found_ticker">Novas atualizações disponíveis</string>
@@ -40,7 +40,7 @@
   <string name="data_connection_required">Uma conexão de dados é necessária.</string>
   <!-- Downloads -->
   <string name="confirm_download_cancelation_dialog_title">Cancelar download</string>
-  <string name="confirm_download_cancelation_dialog_message">Cancelar o download atual?</string>
+  <string name="confirm_download_cancelation_dialog_message">Deseja cancelar o download atual?</string>
   <string name="download_cancelled">Download cancelado</string>
   <string name="download_already_running">Download já está em andamento</string>
   <string name="unable_to_download_file">Não foi possível baixar o arquivo de atualização</string>
@@ -52,7 +52,7 @@
   <string name="verification_failed">Falha na verificação. Download corrompido ou inseguro</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aplicar atualização</string>
-  <string name="apply_update_dialog_text">Vocês está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.\n\nSe você pressionar Atualizar, o dispositivo irá reiniciar no modo de Recuperação e instalar a atualização.\n\nObservação: Esta função requer uma Recuperação compatível ou as atualizações terão de ser instaladas manualmente.</string>
+  <string name="apply_update_dialog_text">Você está prestes a atualizar para <xliff:g id="filename">%s</xliff:g>.\n\nAo clicar em Atualizar, o dispositivo reiniciará no modo de Recuperação e instalará a atualização automaticamente.\n\nObservação: esta função requer uma Recuperação compatível, senão as atualizações terão que ser instaladas manualmente.</string>
   <string name="apply_unable_to_reboot_toast">Não foi possível reiniciar na recuperação</string>
   <!-- deleting -->
   <string name="confirm_delete_dialog_title">Excluir arquivo</string>
@@ -66,7 +66,7 @@
   <!-- Header -->
   <string name="header_os">LineageOS\n%1$s</string>
   <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
-  <string name="sysinfo_last_check">Última verificação</string>
+  <string name="sysinfo_last_check">Última verificação em</string>
   <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <string name="date_formatting">dd \'de\' MMMM \'de\' yyyy</string>
   <!-- Build item -->

@@ -11,6 +11,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- General strings -->
+  <string name="app_name">Bywerker</string>
   <string name="display_name">Opgraderings</string>
   <string name="unknown">Onbekend</string>
   <!-- Menu and dialog box strings -->
@@ -22,6 +23,7 @@
   <string name="dialog_close">Sluit</string>
   <!-- Settings strings -->
   <string name="available_updates_title">Beskikbare opgraderings</string>
+  <string name="no_available_updates_intro">Geen nuwe bywerkings gevind. Kontroleer handmatig vir nuwe bywerkings, gebruik die Verfris-knoppie.</string>
   <string name="update_check_title">Soek vir opgraderings</string>
   <string name="check_manual">Handmatig</string>
   <string name="check_daily">Daagliks</string>
@@ -47,6 +49,7 @@
   <string name="not_download_failure">Opdatering aflaai was onsuksesvol </string>
   <string name="not_action_install_update">Herlaai en installeer</string>
   <string name="not_download_install_notice">Die lêer <xliff:g id="filename">%s</xliff:g> is suksesvol afgelaai. Wanneer jy \'Herlaai en installeer\' raak, sal die toestel self herlaai en die opgradering installeer.\n\nNota:\'n Versoenbare \'Recovery\' is nodig vir die installasie om outomaties te werk.</string>
+  <string name="verification_failed">Verifikasie het misluk. Korrupte of onveilige aflaai</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Pas opgradering toe</string>
   <string name="apply_update_dialog_text">Die toestel gaan opgegradeer word na <xliff:g id="filename">%s</xliff:g>\n\nAs u die Opgradeer knoppie druk sal die toestel self herlaai om die opgradering te installeer.\n\nLet wel: Hierdie funksie vereis \'n versoenbaare \'recovery\' andersins sal die opgradering handmatig geïnstalleer moet word</string>
@@ -61,7 +64,16 @@
   <string name="delete_updates_noFolder_message">Opgradering vouer nie gevind nie</string>
   <string name="delete_updates_success_message">Alle afgelaaide opgraderings geskrap</string>
   <!-- Header -->
+  <string name="header_os">LineageOS\n%1$s</string>
+  <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
+  <string name="sysinfo_last_check">Laas gekontroleer</string>
   <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
+  <string name="date_formatting">dd MMMM, yyyy</string>
   <!-- Build item -->
+  <string name="type_installed">• Geïnstalleer</string>
+  <string name="type_downloaded">• Afgelaai</string>
+  <string name="type_downloading">Laai tans af</string>
+  <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>
   <string name="download_button">Laai af</string>
+  <string name="install_button">Installeer</string>
 </resources>
