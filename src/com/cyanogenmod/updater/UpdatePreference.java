@@ -108,7 +108,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
         super.onBindView(view);
 
         mBuildName = mUpdateInfo.getFileName().split("-");
-        final String mBuildDate = Utils.getInstalledBuildDateLocalized(mContext, mBuildName[2]);
+        final String buildDate = Utils.getInstalledBuildDateLocalized(mContext, mBuildName[2]);
         String mApi;
         switch (mBuildName[1]) {
             case "13.0":
@@ -138,7 +138,7 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
         // Update the views
         updatePreferenceViews();
 
-        mSummaryText.setText(String.format(mContext.getString(R.string.summary), mBuildDate,
+        mSummaryText.setText(String.format(mContext.getString(R.string.summary), buildDate,
                 mBuildName[1], mApi));
 
         if (mOnReadyListener != null) {

@@ -74,36 +74,36 @@ public class Utils {
     /**
      * Extract date from build YYYYMMDD date
      *
-     * @param mContext for getting localized string
+     * @param context for getting localized string
      *
      * @return MMMM dd, yyyy formatted date (or localized translation)
      */
-    public static String getInstalledBuildDateLocalized(Context mContext, String mBuildDate) {
-        if (mBuildDate.length() < 8) {
+    public static String getInstalledBuildDateLocalized(Context context, String buildDate) {
+        if (buildDate.length() < 8) {
             return "";
         }
 
-        Calendar mCal = Calendar.getInstance();
-        mCal.set(Calendar.YEAR, Integer.parseInt(mBuildDate.substring(0, 4)));
-        mCal.set(Calendar.MONTH, Integer.parseInt(mBuildDate.substring(4, 6)) - 1);
-        mCal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(mBuildDate.substring(6, 8)));
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, Integer.parseInt(buildDate.substring(0, 4)));
+        cal.set(Calendar.MONTH, Integer.parseInt(buildDate.substring(4, 6)) - 1);
+        cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(buildDate.substring(6, 8)));
 
-        String mDate = new SimpleDateFormat(mContext.getString(R.string.date_formatting),
-                        mContext.getResources().getConfiguration().locale).format(mCal.getTime());
+        String date = new SimpleDateFormat(context.getString(R.string.date_formatting),
+                        context.getResources().getConfiguration().locale).format(cal.getTime());
 
-        int mPosition = 0;
+        int position = 0;
         boolean mWorking = true;
         while (mWorking) {
-            if (!Character.isDigit(mDate.charAt(mPosition))) {
+            if (!Character.isDigit(date.charAt(position))) {
                 mWorking = false;
             } else {
-                mPosition++;
+                position++;
             }
         }
 
-        return mDate.substring(0, mPosition) +
-                String.valueOf(mDate.charAt(mPosition)).toUpperCase() +
-                mDate.substring(mPosition + 1, mDate.length());
+        return date.substring(0, position) +
+                String.valueOf(date.charAt(position)).toUpperCase() +
+                date.substring(position + 1, date.length());
     }
 
     public static String getUserAgentString(Context context) {
