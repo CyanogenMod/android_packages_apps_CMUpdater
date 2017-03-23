@@ -68,14 +68,7 @@ public class UpdatesSettings extends PreferenceFragment implements
     public static final String EXTRA_FINISHED_DOWNLOAD_ID = "download_id";
     public static final String EXTRA_FINISHED_DOWNLOAD_PATH = "download_path";
 
-    public static final String KEY_SYSTEM_INFO = "system_info";
-    private static final String KEY_DELETE_ALL = "delete_all";
-
     private static final String UPDATES_CATEGORY = "updates_category";
-
-    private static final int MENU_REFRESH = 0;
-    private static final int MENU_DELETE_ALL = 1;
-    private static final int MENU_SYSTEM_INFO = 2;
 
     private SharedPreferences mPrefs;
     private ListPreference mUpdateCheck;
@@ -151,16 +144,6 @@ public class UpdatesSettings extends PreferenceFragment implements
         if (updateTypePref != updateType) {
             updateUpdatesType(updateType);
         }
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == findPreference(KEY_SYSTEM_INFO)) {
-            checkForUpdates();
-        } else if (preference == findPreference(KEY_DELETE_ALL)) {
-            confirmDeleteAll();
-        }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     @Override
@@ -533,20 +516,11 @@ public class UpdatesSettings extends PreferenceFragment implements
         // Convert the installed version name to the associated filename
         String installedZip = "lineage-" + Utils.getInstalledVersion() + ".zip";
 
-        // Convert LinkedList to HashMap, keyed on filename.
-        HashMap<String, UpdateInfo> updatesMap = new HashMap<String, UpdateInfo>();
-        for (UpdateInfo ui : updates) {
-            updatesMap.put(ui.getFileName(), ui);
-        }
-
         // Add the updates
         for (UpdateInfo ui : updates) {
             // Determine the preference style and create the preference
             boolean isDownloading = ui.getFileName().equals(mFileName);
             int style;
-
-            Log.d("OHAI", installedZip);
-            Log.d("OHAI", ui.getFileName());
 
             if (isDownloading) {
                 // In progress download

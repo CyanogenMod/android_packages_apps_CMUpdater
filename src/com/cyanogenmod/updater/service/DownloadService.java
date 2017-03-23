@@ -16,9 +16,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Parcelable;
-import android.os.SystemProperties;
 import android.preference.PreferenceManager;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.volley.Response;
@@ -26,19 +24,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 
 import com.cyanogenmod.updater.R;
-import com.cyanogenmod.updater.UpdateApplication;
 import com.cyanogenmod.updater.misc.Constants;
 import com.cyanogenmod.updater.misc.UpdateInfo;
 import com.cyanogenmod.updater.receiver.DownloadReceiver;
-import com.cyanogenmod.updater.requests.UpdatesJsonObjectRequest;
 import com.cyanogenmod.updater.utils.Utils;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
 
 public class DownloadService extends IntentService
         implements Response.Listener<JSONObject>, Response.ErrorListener {
@@ -72,34 +63,7 @@ public class DownloadService extends IntentService
         downloadFullZip();
     }
 
-    private String getServerUri() {
-        String propertyUri = SystemProperties.get("cm.updater.uri");
-        if (!TextUtils.isEmpty(propertyUri)) {
-            return propertyUri;
-        }
-
-        return getString(R.string.conf_update_server_url_def);
-    }
-
-    private UpdateInfo jsonToInfo(JSONObject obj) {
-        try {
-            if (obj == null || obj.has("errors")) {
-                return null;
-            }
-
-            return new UpdateInfo.Builder()
-                    .setFileName(obj.getString("filename"))
-                    .setDownloadUrl(obj.getString("download_url"))
-                    .setApiLevel(mInfo.getApiLevel())
-                    .setBuildDate(obj.getLong("date_created_unix"))
-                    .build();
-        } catch (JSONException e) {
-            Log.e(TAG, "JSONException", e);
-            return null;
-        }
-    }
-
-    private long enqueueDownload(String downloadUrl, String localFilePath) {
+    private long enqueueDownload(String downloadUrl) {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(downloadUrl));
         String userAgent = Utils.getUserAgentString(this);
         if (userAgent != null) {
@@ -119,12 +83,7 @@ public class DownloadService extends IntentService
     private void downloadFullZip() {
         Log.v(TAG, "Downloading full zip");
 
-        // Build the name of the file to download, adding .partial at the end.  It will get
-        // stripped off when the download completes
-        String fullFilePath = "file://" + getUpdateDirectory().getAbsolutePath() +
-                "/" + mInfo.getFileName() + ".partial";
-
-        long downloadId = enqueueDownload(mInfo.getDownloadUrl(), fullFilePath);
+        long downloadId = enqueueDownload(mInfo.getDownloadUrl());
 
         // Store in shared preferences
         mPrefs.edit()
@@ -136,10 +95,6 @@ public class DownloadService extends IntentService
         Intent intent = new Intent(DownloadReceiver.ACTION_DOWNLOAD_STARTED);
         intent.putExtra(DownloadManager.EXTRA_DOWNLOAD_ID, downloadId);
         sendBroadcast(intent);
-    }
-
-    private File getUpdateDirectory() {
-        return Utils.makeUpdateFolder(getApplicationContext());
     }
 
     @Override

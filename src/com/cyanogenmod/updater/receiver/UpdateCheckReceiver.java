@@ -19,7 +19,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.cyanogenmod.updater.misc.Constants;
-import com.cyanogenmod.updater.service.UpdateCheckService;
 import com.cyanogenmod.updater.utils.Utils;
 
 public class UpdateCheckReceiver extends BroadcastReceiver {

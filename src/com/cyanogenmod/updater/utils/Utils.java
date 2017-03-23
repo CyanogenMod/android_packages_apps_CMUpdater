@@ -19,15 +19,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Environment;
-import android.os.PowerManager;
 import android.os.SystemProperties;
-import android.os.UserHandle;
-import android.os.storage.StorageManager;
-import android.os.storage.StorageVolume;
 import android.preference.PreferenceManager;
-import android.text.TextUtils;
-import android.util.Log;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.misc.Constants;
@@ -35,7 +28,6 @@ import com.cyanogenmod.updater.service.UpdateCheckService;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 

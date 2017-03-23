@@ -13,7 +13,6 @@ import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Parcelable;
@@ -53,10 +52,6 @@ public class UpdateCheckService extends IntentService
         implements Response.ErrorListener, Response.Listener<JSONObject> {
 
     private static final String TAG = "UpdateCheckService";
-
-    // Set this to true if the update service should check for smaller, test updates
-    // This is for internal testing only
-    private static final boolean TESTING_DOWNLOAD = false;
 
     // request actions
     public static final String ACTION_CHECK = "com.cyanogenmod.cmupdater.action.CHECK";

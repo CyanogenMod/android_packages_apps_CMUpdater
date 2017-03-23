@@ -32,7 +32,6 @@ import com.cyanogenmod.updater.utils.Utils;
 import java.io.File;
 
 public class UpdatePreference extends Preference implements OnClickListener, OnLongClickListener {
-    private static final float DISABLED_ALPHA = 0.4f;
     public static final int STYLE_NEW = 1;
     public static final int STYLE_DOWNLOADING = 2;
     public static final int STYLE_DOWNLOADED = 3;
@@ -82,15 +81,6 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
                 case STYLE_NEW:
                     mOnActionListener.onStartDownload(UpdatePreference.this);
                     break;
-            }
-        }
-    };
-
-    private OnClickListener mStopDownloadClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (mOnActionListener != null && mStyle == STYLE_DOWNLOADING) {
-                mOnActionListener.onStopDownload(UpdatePreference.this);
             }
         }
     };

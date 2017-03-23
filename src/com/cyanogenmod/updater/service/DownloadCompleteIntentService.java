@@ -65,13 +65,12 @@ public class DownloadCompleteIntentService extends IntentService {
             // Get the full path name of the downloaded file
 
             // Strip off the .partial at the end to get the completed file
-            String partialFileFullPath = mPrefs.getString(Constants.DOWNLOAD_NAME, null);
+            String destName = mPrefs.getString(Constants.DOWNLOAD_NAME, null);
 
-            if (partialFileFullPath == null) {
+            if (destName == null) {
                 displayErrorResult(updateIntent, R.string.unable_to_download_file);
             }
 
-            String destName = new File(partialFileFullPath).getName().replace(".partial", "");
             String destPath = Utils.makeUpdateFolder(getApplicationContext()).getPath() + "/"
                     + destName;
             File destFile = new File(destPath);
@@ -116,21 +115,6 @@ public class DownloadCompleteIntentService extends IntentService {
             mDm.remove(id);
             displayErrorResult(updateIntent, R.string.unable_to_download_file);
         }
-    }
-
-    private String fetchDownloadPartialPath(long id) {
-        DownloadManager.Query query = new DownloadManager.Query();
-        query.setFilterById(id);
-        Cursor c = mDm.query(query);
-        try {
-            if (c.moveToFirst()) {
-                return Uri.parse(c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)))
-                          .getPath();
-            }
-        } finally {
-            c.close();
-        }
-        return null;
     }
 
     private int fetchDownloadStatus(long id) {
