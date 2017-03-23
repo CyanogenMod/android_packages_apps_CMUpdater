@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.ParcelFileDescriptor;
+import android.util.Log;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.UpdatesActivity;
@@ -31,6 +32,9 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 
 public class DownloadCompleteIntentService extends IntentService {
+
+    private static final String TAG = "DownloadComplete";
+
     private DownloadManager mDm;
 
     @Override
@@ -46,6 +50,7 @@ public class DownloadCompleteIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         if (!intent.hasExtra(Constants.DOWNLOAD_ID) || !intent.hasExtra(Constants.DOWNLOAD_NAME)) {
+            Log.e(TAG, "Missing intent extra data");
             return;
         }
 
@@ -73,6 +78,7 @@ public class DownloadCompleteIntentService extends IntentService {
             ) {
                 inChannel.transferTo(0, inChannel.size(), outChannel);
             } catch (IOException e) {
+                Log.e(TAG, "Copy of download failed", e);
                 displayErrorResult(updateIntent, R.string.unable_to_download_file);
                 return;
             } finally {
@@ -83,6 +89,7 @@ public class DownloadCompleteIntentService extends IntentService {
             try {
                 android.os.RecoverySystem.verifyPackage(destFile, null, null);
             } catch (Exception e) {
+                Log.e(TAG, "Verification failed", e);
                 if (destFile.exists()) {
                     destFile.delete();
                 }
@@ -96,6 +103,7 @@ public class DownloadCompleteIntentService extends IntentService {
                     destPath);
             displaySuccessResult(updateIntent, destFile);
         } else if (status == DownloadManager.STATUS_FAILED) {
+            Log.e(TAG, "Download failed");
             // The download failed, reset
             mDm.remove(id);
             displayErrorResult(updateIntent, R.string.unable_to_download_file);
