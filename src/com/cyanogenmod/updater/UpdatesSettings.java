@@ -610,7 +610,7 @@ public class UpdatesSettings extends PreferenceFragment implements
         mUpdateHandler.post(mUpdateProgress);
     }
 
-    private void confirmDeleteAll() {
+    public void confirmDeleteAll() {
         new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.confirm_delete_dialog_title)
                 .setMessage(R.string.confirm_delete_all_dialog_message)

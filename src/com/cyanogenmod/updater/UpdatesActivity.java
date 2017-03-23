@@ -102,6 +102,11 @@ public class UpdatesActivity extends AppCompatActivity {
                     updateHeader();
                 }
                 break;
+            case R.id.menu_delete_all:
+                if (mSettingsFragment != null) {
+                    mSettingsFragment.confirmDeleteAll();
+                }
+                break;
         }
 
         return super.onOptionsItemSelected(item);
