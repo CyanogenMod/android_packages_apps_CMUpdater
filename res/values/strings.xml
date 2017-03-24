@@ -83,6 +83,7 @@
     <string name="type_installed">• Installed</string>
     <string name="type_downloaded">• Downloaded</string>
     <string name="type_downloading">• Downloading</string>
+    <string name="type_completing">• Completing</string>
     <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>
     <string name="download_button">Download</string>
     <string name="install_button">Install</string>

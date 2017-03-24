@@ -299,15 +299,15 @@ public class UpdatesSettings extends PreferenceFragment implements
                     resetDownloadState();
                     break;
                 case DownloadManager.STATUS_SUCCESSFUL:
-                    progressBar.setIndeterminate(true);
-                    mDownloading = false;
+                    mDownloadingPreference.setStyle(UpdatePreference.STYLE_COMPLETING);
                     break;
             }
 
             if (cursor != null) {
                 cursor.close();
             }
-            if (status != DownloadManager.STATUS_FAILED) {
+            if (status != DownloadManager.STATUS_FAILED
+                    && status != DownloadManager.STATUS_SUCCESSFUL) {
                 mUpdateHandler.postDelayed(this, 1000);
             }
         }
@@ -505,6 +505,10 @@ public class UpdatesSettings extends PreferenceFragment implements
         }.start();
     }
 
+    private boolean isDownloadCompleting(String fileName) {
+        return new File(mUpdateFolder, fileName + Constants.DOWNLOAD_TMP_EXT).isFile();
+    }
+
     private void refreshPreferences(LinkedList<UpdateInfo> updates) {
         if (mUpdatesList == null) {
             return;
@@ -525,6 +529,9 @@ public class UpdatesSettings extends PreferenceFragment implements
             if (isDownloading) {
                 // In progress download
                 style = UpdatePreference.STYLE_DOWNLOADING;
+            } else if (isDownloadCompleting(ui.getFileName())) {
+                style = UpdatePreference.STYLE_COMPLETING;
+                mDownloading = true;
             } else if (ui.getFileName().replace("-signed", "").equals(installedZip)) {
                 // This is the currently installed version
                 style = UpdatePreference.STYLE_INSTALLED;

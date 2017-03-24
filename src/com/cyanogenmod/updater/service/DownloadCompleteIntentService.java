@@ -65,10 +65,10 @@ public class DownloadCompleteIntentService extends IntentService {
         if (status == DownloadManager.STATUS_SUCCESSFUL) {
             String destPath = Utils.makeUpdateFolder(getApplicationContext()).getPath() + "/"
                     + destName;
-            File destFile = new File(destPath);
+            File destFileTmp = new File(destPath + Constants.DOWNLOAD_TMP_EXT);
 
             try (
-                FileOutputStream outStream = new FileOutputStream(destFile);
+                FileOutputStream outStream = new FileOutputStream(destFileTmp);
 
                 ParcelFileDescriptor file = mDm.openDownloadedFile(id);
                 FileInputStream inStream = new FileInputStream(file.getFileDescriptor());
@@ -87,15 +87,21 @@ public class DownloadCompleteIntentService extends IntentService {
 
             // Check the signature of the downloaded file
             try {
-                android.os.RecoverySystem.verifyPackage(destFile, null, null);
+                android.os.RecoverySystem.verifyPackage(destFileTmp, null, null);
             } catch (Exception e) {
                 Log.e(TAG, "Verification failed", e);
-                if (destFile.exists()) {
-                    destFile.delete();
+                if (destFileTmp.exists()) {
+                    destFileTmp.delete();
                 }
                 displayErrorResult(updateIntent, R.string.verification_failed);
                 return;
             }
+
+            File destFile = new File(destPath);
+            if (destFile.exists()) {
+                destFile.delete();
+            }
+            destFileTmp.renameTo(destFile);
 
             // We passed. Bring the main app to the foreground and trigger download completed
             updateIntent.putExtra(UpdatesSettings.EXTRA_FINISHED_DOWNLOAD_ID, id);
