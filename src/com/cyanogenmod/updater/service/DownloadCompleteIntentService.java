@@ -13,10 +13,7 @@ import android.app.DownloadManager;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.os.ParcelFileDescriptor;
 
 import com.cyanogenmod.updater.R;
@@ -35,12 +32,10 @@ import java.nio.channels.FileChannel;
 
 public class DownloadCompleteIntentService extends IntentService {
     private DownloadManager mDm;
-    private SharedPreferences mPrefs;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         mDm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
     }
 
@@ -50,11 +45,12 @@ public class DownloadCompleteIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        if (!intent.hasExtra(Constants.DOWNLOAD_ID)) {
+        if (!intent.hasExtra(Constants.DOWNLOAD_ID) || !intent.hasExtra(Constants.DOWNLOAD_NAME)) {
             return;
         }
 
         long id = intent.getLongExtra(Constants.DOWNLOAD_ID, -1);
+        final String destName = intent.getStringExtra(Constants.DOWNLOAD_NAME);
 
         Intent updateIntent = new Intent(this, UpdatesActivity.class);
         updateIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
@@ -62,20 +58,9 @@ public class DownloadCompleteIntentService extends IntentService {
 
         int status = fetchDownloadStatus(id);
         if (status == DownloadManager.STATUS_SUCCESSFUL) {
-            // Get the full path name of the downloaded file
-
-            // Strip off the .partial at the end to get the completed file
-            String destName = mPrefs.getString(Constants.DOWNLOAD_NAME, null);
-
-            if (destName == null) {
-                displayErrorResult(updateIntent, R.string.unable_to_download_file);
-            }
-
             String destPath = Utils.makeUpdateFolder(getApplicationContext()).getPath() + "/"
                     + destName;
             File destFile = new File(destPath);
-
-            mPrefs.edit().putString(Constants.DOWNLOAD_NAME, "").commit();
 
             try (
                 FileOutputStream outStream = new FileOutputStream(destFile);

@@ -593,7 +593,6 @@ public class UpdatesSettings extends PreferenceFragment implements
 
         mFileName = ui.getFileName();
         mDownloading = true;
-        mPrefs.edit().putString(Constants.DOWNLOAD_NAME, mFileName).commit();
 
         // Start the download
         Intent intent = new Intent(mContext, DownloadReceiver.class);
