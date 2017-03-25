@@ -80,6 +80,9 @@ public class DownloadCompleteIntentService extends IntentService {
             } catch (IOException e) {
                 Log.e(TAG, "Copy of download failed", e);
                 displayErrorResult(updateIntent, R.string.unable_to_download_file);
+                if (destFileTmp.exists()) {
+                    destFileTmp.delete();
+                }
                 return;
             } finally {
                 mDm.remove(id);
