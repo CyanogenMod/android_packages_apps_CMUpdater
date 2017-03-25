@@ -76,7 +76,7 @@ public class DownloadCompleteIntentService extends IntentService {
                 FileChannel inChannel = inStream.getChannel();
                 FileChannel outChannel = outStream.getChannel();
             ) {
-                inChannel.transferTo(0, inChannel.size(), outChannel);
+                inChannel.transferTo(0, file.getStatSize(), outChannel);
             } catch (IOException e) {
                 Log.e(TAG, "Copy of download failed", e);
                 displayErrorResult(updateIntent, R.string.unable_to_download_file);
