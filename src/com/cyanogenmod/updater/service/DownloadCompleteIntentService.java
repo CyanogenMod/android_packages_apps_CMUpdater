@@ -88,6 +88,12 @@ public class DownloadCompleteIntentService extends IntentService {
                 mDm.remove(id);
             }
 
+            if (!destFileTmp.exists()) {
+                // The download was probably stopped. Exit silently
+                Log.d(TAG, "File not found, can't verify it");
+                return;
+            }
+
             // Check the signature of the downloaded file
             try {
                 android.os.RecoverySystem.verifyPackage(destFileTmp, null, null);
@@ -95,14 +101,22 @@ public class DownloadCompleteIntentService extends IntentService {
                 Log.e(TAG, "Verification failed", e);
                 if (destFileTmp.exists()) {
                     destFileTmp.delete();
+                    displayErrorResult(updateIntent, R.string.verification_failed);
+                } else {
+                    // The download was probably stopped. Exit silently
+                    Log.e(TAG, "Error while verifying the file", e);
                 }
-                displayErrorResult(updateIntent, R.string.verification_failed);
                 return;
             }
 
             File destFile = new File(destPath);
             if (destFile.exists()) {
                 destFile.delete();
+            }
+            if (!destFileTmp.exists()) {
+                // The download was probably stopped. Exit silently
+                Log.d(TAG, "File not found, can't rename it");
+                return;
             }
             destFileTmp.renameTo(destFile);
 

@@ -304,6 +304,36 @@ public class UpdatesSettings extends PreferenceFragmentCompat implements
     };
 
     @Override
+    public void onStopCompletingDownload(final UpdatePreference pref) {
+        if (!mDownloading || mFileName == null) {
+            pref.setStyle(UpdatePreference.STYLE_NEW);
+            resetDownloadState();
+            return;
+        }
+
+        final File tmpZip = new File(mUpdateFolder, mFileName + Constants.DOWNLOAD_TMP_EXT);
+        new AlertDialog.Builder(mContext)
+                .setTitle(R.string.confirm_download_cancelation_dialog_title)
+                .setMessage(R.string.confirm_download_cancelation_dialog_message)
+                .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (!tmpZip.isFile() || tmpZip.delete()) {
+                            // Set the preference back to new style
+                            pref.setStyle(UpdatePreference.STYLE_NEW);
+                            resetDownloadState();
+                            showSnack(mContext.getString(R.string.download_cancelled));
+                        } else {
+                            Log.e(TAG, "Could not delete temp zip");
+                            showSnack(mContext.getString(R.string.unable_to_stop_download));
+                        }
+                    }
+                })
+                .setNegativeButton(R.string.dialog_cancel, null)
+                .show();
+    }
+
+    @Override
     public void onStopDownload(final UpdatePreference pref) {
         if (!mDownloading || mFileName == null || mDownloadId < 0) {
             pref.setStyle(UpdatePreference.STYLE_NEW);
@@ -522,6 +552,7 @@ public class UpdatesSettings extends PreferenceFragmentCompat implements
             } else if (isDownloadCompleting(ui.getFileName())) {
                 style = UpdatePreference.STYLE_COMPLETING;
                 mDownloading = true;
+                mFileName = ui.getFileName();
             } else if (ui.getFileName().replace("-signed", "").equals(installedZip)) {
                 // This is the currently installed version
                 style = UpdatePreference.STYLE_INSTALLED;

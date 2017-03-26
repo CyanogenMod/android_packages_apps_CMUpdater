@@ -48,6 +48,7 @@
     <string name="confirm_download_cancelation_dialog_message">Cancel the current download?</string>
     <string name="download_cancelled">Download cancelled</string>
     <string name="download_already_running">A download is already running</string>
+    <string name="unable_to_stop_download">Unable to stop download</string>
     <string name="unable_to_download_file">Unable to download the update file</string>
     <string name="download_not_found">Download not found</string>
     <string name="not_download_success">Update downloaded successfully</string>
