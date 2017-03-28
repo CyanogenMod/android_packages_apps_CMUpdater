@@ -103,10 +103,10 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
         String mApi;
         switch (mBuildName[1]) {
             case "13.0":
-                mApi = "6.0.1";
+                mApi = "6.0";
                 break;
             case "14.1":
-                mApi = "7.1.1";
+                mApi = "7.1";
                 break;
             default:
                 mApi = "???";
