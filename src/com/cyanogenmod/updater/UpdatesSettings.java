@@ -26,13 +26,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,8 +57,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class UpdatesSettings extends PreferenceFragment implements
-        OnPreferenceChangeListener, UpdatePreference.OnReadyListener, UpdatePreference.OnActionListener {
+public class UpdatesSettings extends PreferenceFragmentCompat implements
+        Preference.OnPreferenceChangeListener, UpdatePreference.OnReadyListener,
+        UpdatePreference.OnActionListener {
     private static String TAG = "UpdatesSettings";
 
     // intent extras
@@ -116,15 +115,13 @@ public class UpdatesSettings extends PreferenceFragment implements
     };
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         mContext = getActivity();
 
         mDownloadManager = (DownloadManager) mContext.getSystemService(mContext.DOWNLOAD_SERVICE);
 
         // Load the layouts
-        addPreferencesFromResource(R.xml.main);
+        setPreferencesFromResource(R.xml.main, null);
         mUpdatesList = (PreferenceCategory) findPreference(UPDATES_CATEGORY);
         mUpdateCheck = (ListPreference) findPreference(Constants.UPDATE_CHECK_PREF);
 
@@ -169,6 +166,8 @@ public class UpdatesSettings extends PreferenceFragment implements
     public void onStart() {
         super.onStart();
 
+        getListView().setNestedScrollingEnabled(false);
+
         // Determine if there are any in-progress downloads
         mDownloadId = mPrefs.getLong(Constants.DOWNLOAD_ID, -1);
         if (mDownloadId >= 0) {
@@ -201,15 +200,6 @@ public class UpdatesSettings extends PreferenceFragment implements
 
         checkForDownloadCompleted(getActivity().getIntent());
         getActivity().setIntent(null);
-    }
-
-    @Override
-    public void onViewCreated(View mView, Bundle mSavedInstance) {
-        super.onViewCreated(mView, mSavedInstance);
-        // Hide divider
-        ListView mList = (ListView) mView.findViewById(android.R.id.list);
-        mList.setDividerHeight(0);
-        mView.invalidate();
     }
 
     @Override

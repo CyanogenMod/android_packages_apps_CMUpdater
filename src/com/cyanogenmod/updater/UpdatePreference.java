@@ -14,8 +14,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -95,8 +95,8 @@ public class UpdatePreference extends Preference implements OnClickListener, OnL
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
         mBuildName = mUpdateInfo.getFileName().split("-");
         final String buildDate = Utils.getInstalledBuildDateLocalized(mContext, mBuildName[2]);

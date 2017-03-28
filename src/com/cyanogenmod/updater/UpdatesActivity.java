@@ -11,11 +11,11 @@ package com.cyanogenmod.updater;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.view.Menu;
@@ -47,7 +47,7 @@ public class UpdatesActivity extends AppCompatActivity {
         mInstalled = Utils.getInstalledVersion().split("-");
         headerCm.setText(String.format(getString(R.string.header_os), mInstalled[0]));
 
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, mSettingsFragment).commit();
 
         updateHeader();
