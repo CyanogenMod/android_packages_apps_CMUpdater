@@ -10,6 +10,7 @@ package com.cyanogenmod.updater;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -31,7 +32,6 @@ public class UpdatesActivity extends AppCompatActivity {
 
     private TextView mHeaderInfo;
     private UpdatesSettings mSettingsFragment;
-    private String[] mInstalled;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -44,8 +44,8 @@ public class UpdatesActivity extends AppCompatActivity {
 
         mSettingsFragment = new UpdatesSettings();
 
-        mInstalled = Utils.getInstalledVersion().split("-");
-        headerCm.setText(String.format(getString(R.string.header_os), mInstalled[0]));
+        final String version = Utils.getInstalledVersionName();
+        headerCm.setText(String.format(getString(R.string.header_os), version));
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, mSettingsFragment).commit();
@@ -113,18 +113,9 @@ public class UpdatesActivity extends AppCompatActivity {
     }
 
     private void updateHeader() {
-        String api = String.valueOf(Utils.getInstalledApiLevel());
-        switch (api) {
-            case "25":
-                api = "7.1.1";
-                break;
-            default:
-                api = "API " + api;
-        }
-
         mHeaderInfo.setText(String.format(getString(R.string.header_summary),
-                Utils.getInstalledBuildDateLocalized(this, mInstalled[1]),
-                mInstalled[2], api, getLastCheck()));
+                Utils.getDateLocalized(this, Utils.getInstalledBuildDate()),
+                Utils.getInstalledBuildType(), Build.VERSION.RELEASE, getLastCheck()));
     }
 
     private String getLastCheck() {
