@@ -60,7 +60,6 @@
   <string name="delete_updates_noFolder_message">അപ്ഡേറ്റ് ഫോൾഡർ കണ്ടെത്തിയില്ല</string>
   <string name="delete_updates_success_message">ഡൗൺലോഡ് ചെയ്ത എല്ലാ അപ്ഡേറ്റുകളും ഇല്ലാതാക്കി</string>
   <!-- Header -->
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="download_button">ഡൗൺലോഡുചെയ്യുക</string>
 </resources>

@@ -61,7 +61,6 @@
   <string name="delete_updates_noFolder_message">আধুনিকীকরণ ফোল্ডার খুঁজে পাওয়া যায়নি</string>
   <string name="delete_updates_success_message">সব ডাউনলোড করা আধুনিকীকরণ মুছে ফেলা হয়েছে</string>
   <!-- Header -->
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="download_button">ডাউনলোড</string>
 </resources>

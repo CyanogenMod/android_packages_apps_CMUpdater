@@ -61,7 +61,6 @@
   <string name="delete_updates_noFolder_message">અપડેટ ફોલ્ડર મળ્યું નહીં</string>
   <string name="delete_updates_success_message">તમામ ડાઉનલોડ કરેલ અપડેટ ભૂંસાઇ જશે</string>
   <!-- Header -->
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="download_button">ડાઉનલોડ કરો</string>
 </resources>

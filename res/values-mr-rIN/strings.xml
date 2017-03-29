@@ -61,7 +61,6 @@
   <string name="delete_updates_noFolder_message">अपडेट फोल्डर सापडले नाही</string>
   <string name="delete_updates_success_message">सर्व डाउनलोड केलेली अपडेटस हटवली गेली</string>
   <!-- Header -->
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="download_button">डाउनलोड करा</string>
 </resources>

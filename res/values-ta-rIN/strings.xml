@@ -61,7 +61,6 @@
   <string name="delete_updates_noFolder_message">புதுப்பித்தல் கோப்புறை கிடைக்கவில்லை</string>
   <string name="delete_updates_success_message">அனைத்து பதிவிறக்கப்பட்ட புதுப்பித்தல்களும் நீக்கப்பட்டன.</string>
   <!-- Header -->
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="download_button">இறக்கு</string>
 </resources>

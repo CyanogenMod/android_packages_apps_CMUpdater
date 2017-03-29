@@ -60,7 +60,6 @@
   <string name="delete_updates_noFolder_message">යාවත්කාලීන ෆෝල්ඩරය සොයාගත නොහැක</string>
   <string name="delete_updates_success_message">සියලු භාගතකල යාවත්කාලීනයන් මකා දැමුණි</string>
   <!-- Header -->
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="download_button">බාගන්න</string>
 </resources>

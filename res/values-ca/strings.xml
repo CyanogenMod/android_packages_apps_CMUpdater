@@ -16,7 +16,7 @@
   <string name="unknown">Desconegut</string>
   <!-- Menu and dialog box strings -->
   <string name="menu_refresh">Refresca</string>
-  <string name="menu_delete_all">Esborra descàrregues</string>
+  <string name="menu_delete_all">Esborra baixades</string>
   <string name="dialog_ok">D\'acord</string>
   <string name="dialog_cancel">Cancel·la</string>
   <string name="dialog_update">Actualitza</string>
@@ -36,19 +36,19 @@
   <string name="update_check_failed">No s\'ha pogut verificar si hi ha actualitzacions disponibles. Si us plau verifica la teva connexió d\'internet i intenta-ho una altra vegada més tard.</string>
   <string name="not_new_updates_found_ticker">Noves actualitzacions disponibles</string>
   <string name="not_new_updates_found_title">Noves actualitzacions</string>
-  <string name="not_action_download">Descarrega</string>
+  <string name="not_action_download">Baixa</string>
   <string name="data_connection_required">Fa falta una connexió de dades.</string>
   <!-- Downloads -->
-  <string name="confirm_download_cancelation_dialog_title">Cancel·la descàrrega</string>
-  <string name="confirm_download_cancelation_dialog_message">Cancel·lar la descàrrega actual?</string>
-  <string name="download_cancelled">Descàrrega cancel·lada</string>
-  <string name="download_already_running">Ja s\'està descarregant</string>
-  <string name="unable_to_download_file">Impossible descarregar l\'arxiu d\'actualització</string>
-  <string name="download_not_found">No s\'ha trobat la descàrrega</string>
-  <string name="not_download_success">Actualització descarregada satisfactòriament</string>
-  <string name="not_download_failure">Descàrrega de l\'actualització fallida</string>
+  <string name="confirm_download_cancelation_dialog_title">Cancel·la la baixada</string>
+  <string name="confirm_download_cancelation_dialog_message">Vols cancel·lar la baixada actual?</string>
+  <string name="download_cancelled">S\'ha cancel·lat la baixada</string>
+  <string name="download_already_running">Hi ha una baixada en curs</string>
+  <string name="unable_to_download_file">No s\'ha pogut baixar l\'arxiu d\'actualització</string>
+  <string name="download_not_found">No s\'ha trobat la baixada</string>
+  <string name="not_download_success">L\'actualització s\'ha baixat amb èxit</string>
+  <string name="not_download_failure">Ha fallat la baixada de l\'actualització</string>
   <string name="not_action_install_update">Reinicia i instal·la</string>
-  <string name="not_download_install_notice">L\'actualització <xliff:g id="filename">%s</xliff:g> s\'ha descarregat satisfactòriament. Quan apretis \'Reinicia i instal·la\', el dispositiu es reiniciarà ell mateix per tal d\'instal·lar l\'actualització.\n\nNota: Aquesta característica necessita un sistema de recuperació (Recovery) compatible per a que funcioni la instal·lació automàticament.</string>
+  <string name="not_download_install_notice">L\'actualització <xliff:g id="filename">%s</xliff:g> s\'ha baixat amb èxit. Quan apretis \'Reinicia i instal·la\', el dispositiu es reiniciarà ell mateix per tal d\'instal·lar l\'actualització.\n\nNota: Cal disposar d\'un Recovery compatible per a una instal·lació automàtica.</string>
   <string name="verification_failed">No s\'ha pogut verificar. Baixada corrupta o no segura</string>
   <!-- Apply update strings -->
   <string name="apply_update_dialog_title">Aplica actualització</string>
@@ -56,24 +56,22 @@
   <string name="apply_unable_to_reboot_toast">Impossible reiniciar en mode recuperació</string>
   <!-- deleting -->
   <string name="confirm_delete_dialog_title">Esborra fitxer</string>
-  <string name="confirm_delete_dialog_title_tv">Clica per eliminar totes les actualitzacions descarregades de l\'emmagatzematge intern</string>
+  <string name="confirm_delete_dialog_title_tv">Clica per eliminar totes les actualitzacions baixades de l\'emmagatzematge intern</string>
   <string name="confirm_delete_dialog_message">Vols esborrar el fitxer d\'actualització seleccionat?</string>
-  <string name="confirm_delete_all_dialog_message">Vols esborrar tots els fitxers d\'actualitzacions descarregats?</string>
+  <string name="confirm_delete_all_dialog_message">Vols esborrar tots els fitxers d\'actualitzacions baixats?</string>
   <string name="delete_single_update_success_message">Actualització <xliff:g id="filename">%s</xliff:g> esborrada</string>
   <string name="delete_updates_failure_message">Hi ha hagut un error esborrant l\'arxiu d\'actualització</string>
   <string name="delete_updates_noFolder_message">No s\'ha trobat la carpeta de l\'actualització</string>
-  <string name="delete_updates_success_message">Totes les actualitzacions descarregades s\'han esborrat</string>
+  <string name="delete_updates_success_message">Totes les actualitzacions baixades s\'han esborrat</string>
   <!-- Header -->
   <string name="header_os">LineageOS\n%1$s</string>
   <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
   <string name="sysinfo_last_check">Darrera comprovació</string>
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
-  <string name="date_formatting">dd MMMM, yyyy</string>
   <!-- Build item -->
   <string name="type_installed">• Instal·lat</string>
   <string name="type_downloaded">• Baixat</string>
   <string name="type_downloading">• S\'està baixant</string>
   <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>
-  <string name="download_button">Descarrega</string>
+  <string name="download_button">Baixa</string>
   <string name="install_button">Instal·la</string>
 </resources>

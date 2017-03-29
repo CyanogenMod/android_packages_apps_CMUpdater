@@ -61,7 +61,6 @@
   <string name="delete_updates_noFolder_message">ನವೀಕರಣೆ ಫೋಲ್ಡರ್ ಪತ್ತೆಯಾಗಲಿಲ್ಲ</string>
   <string name="delete_updates_success_message">ಎಲ್ಲಾ ಡೌನ್‍ಲೋಡ್ ಮಾಡಿದ ನವೀಕರಣೆಗಳನ್ನು ಅಳಿಸಲಾಗಿದೆ</string>
   <!-- Header -->
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="download_button">ಡೌನ್‍ಲೋಡ್</string>
 </resources>

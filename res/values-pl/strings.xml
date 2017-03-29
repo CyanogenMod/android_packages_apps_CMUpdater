@@ -69,7 +69,6 @@ Uwaga: Ta funkcja wymaga kompatybilnego recovery. W przeciwnym wypadku aktualiza
   <string name="header_os">LineageOS\n%1$s</string>
   <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
   <string name="sysinfo_last_check">Ostatnio sprawdzono</string>
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="type_downloading">• Pobieranie</string>
   <string name="summary">%1$s\nLineageOS %2$s • Android %3$s</string>

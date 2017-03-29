@@ -61,7 +61,6 @@
   <string name="delete_updates_noFolder_message">నవీకరణ సంచిక కనుగొనబడలేదు</string>
   <string name="delete_updates_success_message">డౌన్లోడ్ చేయబడిన నవీకరణలు అన్నీ తొలిగించబడ్డాయి</string>
   <!-- Header -->
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="download_button">డౌన్‌లోడ్ చేయి</string>
 </resources>

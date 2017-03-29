@@ -61,7 +61,6 @@
   <string name="delete_updates_noFolder_message">আপডেট ফ\'ল্ডাৰ পোৱা নাই</string>
   <string name="delete_updates_success_message">সকলো ডাউনলোড কৰা আপডেট বিলোপ কৰা হ\'ল</string>
   <!-- Header -->
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="download_button">ডাউনলোড</string>
 </resources>

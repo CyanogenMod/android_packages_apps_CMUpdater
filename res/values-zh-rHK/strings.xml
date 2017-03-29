@@ -61,7 +61,6 @@
   <string name="delete_updates_noFolder_message">找不到更新資料夾</string>
   <string name="delete_updates_success_message">已刪除所有已下載的更新</string>
   <!-- Header -->
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="download_button">下載</string>
 </resources>

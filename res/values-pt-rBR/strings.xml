@@ -67,8 +67,6 @@
   <string name="header_os">LineageOS\n%1$s</string>
   <string name="header_summary">%1$s\n%2$s • Android %3$s\n%4$s</string>
   <string name="sysinfo_last_check">Última verificação em</string>
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
-  <string name="date_formatting">dd \'de\' MMMM \'de\' yyyy</string>
   <!-- Build item -->
   <string name="type_installed">• Instalado</string>
   <string name="type_downloaded">• Baixado</string>

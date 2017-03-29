@@ -61,7 +61,6 @@
   <string name="delete_updates_noFolder_message">ଅ୍ଦ୍ୟତନ ଫୋଲ୍‍ଡର୍‍ ପ୍ରାପ୍ତ ହେଲା ନାହିଁ</string>
   <string name="delete_updates_success_message">ସମସ୍ତ ଡାଉନ୍‍ଲୋଡ୍‍ କରାଯାଇଥିବା ଅଦ୍ୟତନଗୁଡିକ ବିଲୋପ କର୍ରାଯାଇଛି</string>
   <!-- Header -->
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="download_button">ଡାଉନ‌ଲୋଡ୍</string>
 </resources>

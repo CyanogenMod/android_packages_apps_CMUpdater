@@ -61,7 +61,6 @@
   <string name="delete_updates_noFolder_message">ไม่พบโฟลเดอร์อัปเดต</string>
   <string name="delete_updates_success_message">การอัปเดตที่ดาวน์โหลดทั้งหมดถูกลบแล้ว</string>
   <!-- Header -->
-  <!-- Just reorder the chars, do not add / remove them (or the app will crash). MMMM = Month, dd = day, yyyy = year. Example: MMMM dd, yyyy -> January 01, 1970 -->
   <!-- Build item -->
   <string name="download_button">ดาวน์โหลด</string>
 </resources>
