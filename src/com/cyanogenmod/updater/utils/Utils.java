@@ -22,6 +22,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.SystemProperties;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.misc.Constants;
@@ -30,11 +31,15 @@ import com.cyanogenmod.updater.service.UpdateCheckService;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
 public class Utils {
+
+    private static final String TAG = "Utils";
+
     private Utils() {
         // this class is not supposed to be instantiated
     }
@@ -79,6 +84,29 @@ public class Utils {
         f.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date date = new Date(unixTimestamp * 1000);
         return f.format(date);
+    }
+
+    public static String getDateLocalizedFromFileName(Context context, String fileName) {
+        return getDateLocalized(context, getTimestampFromFileName(fileName));
+    }
+
+    public static long getTimestampFromFileName(String fileName) {
+        String[] subStrings = fileName.split("-");
+        if (subStrings.length < 3 || subStrings[2].length() < 8) {
+            Log.e(TAG, "The given filename is not valid: " + fileName);
+            return 0;
+        }
+        try {
+            int year = Integer.parseInt(subStrings[2].substring(0, 4));
+            int month = Integer.parseInt(subStrings[2].substring(4, 6)) - 1;
+            int day = Integer.parseInt(subStrings[2].substring(6, 8));
+            Calendar cal = Calendar.getInstance();
+            cal.set(year, month, day);
+            return cal.getTimeInMillis() / 1000;
+        } catch (NumberFormatException e) {
+            Log.e(TAG, "The given filename is not valid: " + fileName);
+            return 0;
+        }
     }
 
     public static String getAndroidVersion(String versionName) {
