@@ -537,9 +537,6 @@ public class UpdatesSettings extends PreferenceFragmentCompat implements
         // Clear the list
         mUpdatesList.removeAll();
 
-        // Convert the installed version name to the associated filename
-        String installedZip = "lineage-" + Utils.getInstalledVersion() + ".zip";
-
         // Add the updates
         for (UpdateInfo ui : updates) {
             // Determine the preference style and create the preference
@@ -553,7 +550,7 @@ public class UpdatesSettings extends PreferenceFragmentCompat implements
                 style = UpdatePreference.STYLE_COMPLETING;
                 mDownloading = true;
                 mFileName = ui.getFileName();
-            } else if (ui.getFileName().replace("-signed", "").equals(installedZip)) {
+            } else if (ui.getDate() == Utils.getInstalledBuildDate()) {
                 // This is the currently installed version
                 style = UpdatePreference.STYLE_INSTALLED;
             } else if (ui.getDownloadUrl() != null) {
