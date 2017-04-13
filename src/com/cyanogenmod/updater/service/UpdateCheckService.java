@@ -275,6 +275,7 @@ public class UpdateCheckService extends IntentService
         UpdateInfo ui = new UpdateInfo.Builder()
                 .setFileName(obj.getString("filename"))
                 .setDownloadUrl(obj.getString("url"))
+                .setMD5Sum(obj.getString("md5sum"))
                 .setApiLevel(Build.VERSION.SDK_INT) // TODO: remove this entirely
                 .setBuildDate(obj.getLong("datetime"))
                 .setType(obj.getString("romtype"))

@@ -14,6 +14,7 @@ public class Constants {
     // Download related
     public static final String UPDATES_FOLDER = "updates";
     public static final String DOWNLOAD_ID = "download_id";
+    public static final String DOWNLOAD_MD5 = "download_md5";
     public static final String DOWNLOAD_NAME = "download_name";
     public static final String DOWNLOAD_TMP_EXT = ".tmp";
 

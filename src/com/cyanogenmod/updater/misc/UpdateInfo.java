@@ -39,6 +39,7 @@ public class UpdateInfo implements Parcelable, Serializable {
     private long mBuildDate;
     private String mDownloadUrl;
     private String mChangelogUrl;
+    private String mMd5Sum;
 
     private Boolean mIsNewerThanInstalled;
 
@@ -87,6 +88,13 @@ public class UpdateInfo implements Parcelable, Serializable {
      */
     public Type getType() {
         return mType;
+    }
+
+   /**
+     * Get MD5
+     */
+    public String getMD5Sum() {
+        return mMd5Sum;
     }
 
     /**
@@ -151,7 +159,8 @@ public class UpdateInfo implements Parcelable, Serializable {
         return TextUtils.equals(mFileName, ui.mFileName)
                 && mType.equals(ui.mType)
                 && mBuildDate == ui.mBuildDate
-                && TextUtils.equals(mDownloadUrl, ui.mDownloadUrl);
+                && TextUtils.equals(mDownloadUrl, ui.mDownloadUrl)
+                && TextUtils.equals(mMd5Sum, ui.mMd5Sum);
     }
 
     public static final Parcelable.Creator<UpdateInfo> CREATOR = new Parcelable.Creator<UpdateInfo>() {
@@ -177,6 +186,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         out.writeInt(mApiLevel);
         out.writeLong(mBuildDate);
         out.writeString(mDownloadUrl);
+        out.writeString(mMd5Sum);
     }
 
     private void readFromParcel(Parcel in) {
@@ -186,6 +196,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         mApiLevel = in.readInt();
         mBuildDate = in.readLong();
         mDownloadUrl = in.readString();
+        mMd5Sum = in.readString();
     }
 
     public static class Builder {
@@ -196,6 +207,7 @@ public class UpdateInfo implements Parcelable, Serializable {
         private long mBuildDate;
         private String mDownloadUrl;
         private String mChangelogUrl;
+        private String mMd5Sum;
 
         public Builder setName(String uiName) {
             mUiName = uiName;
@@ -249,6 +261,11 @@ public class UpdateInfo implements Parcelable, Serializable {
             return this;
         }
 
+        public Builder setMD5Sum(String md5Sum) {
+            mMd5Sum = md5Sum;
+            return this;
+        }
+
         public UpdateInfo build() {
             UpdateInfo info = new UpdateInfo();
             info.mUiName = mUiName;
@@ -258,6 +275,7 @@ public class UpdateInfo implements Parcelable, Serializable {
             info.mBuildDate = mBuildDate;
             info.mDownloadUrl = mDownloadUrl;
             info.mChangelogUrl = mChangelogUrl;
+            info.mMd5Sum = mMd5Sum;
             return info;
         }
 

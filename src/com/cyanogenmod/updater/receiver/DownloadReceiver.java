@@ -76,16 +76,20 @@ public class DownloadReceiver extends BroadcastReceiver{
             return;
         }
 
+        String downloadedMD5 = prefs.getString(Constants.DOWNLOAD_MD5, "");
+
         // Send off to DownloadCompleteIntentService
         Intent intent = new Intent(context, DownloadCompleteIntentService.class);
         intent.putExtra(Constants.DOWNLOAD_ID, id);
         intent.putExtra(Constants.DOWNLOAD_NAME, fileName);
+        intent.putExtra(Constants.DOWNLOAD_MD5, downloadedMD5);
         context.startService(intent);
 
         // Clear the shared prefs
         prefs.edit()
                 .remove(Constants.DOWNLOAD_ID)
                 .remove(Constants.DOWNLOAD_NAME)
+                .remove(Constants.DOWNLOAD_MD5)
                 .apply();
     }
 }
