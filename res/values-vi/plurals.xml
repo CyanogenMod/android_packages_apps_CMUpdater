@@ -10,9 +10,9 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="not_new_updates_found_body">
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> bản cập nhật sẵn có để tải xuống</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> cập nhật có sẵn để tải về</item>
   </plurals>
   <plurals name="not_additional_count">
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> nữa</item>
+    <item quantity="other">+ <xliff:g id="count">%d</xliff:g> thêm</item>
   </plurals>
 </resources>

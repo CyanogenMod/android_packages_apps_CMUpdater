@@ -13,8 +13,8 @@ import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Parcelable;
 import android.os.SystemProperties;
 import android.preference.PreferenceManager;
@@ -29,6 +29,7 @@ import com.android.volley.VolleyLog;
 
 import com.cyanogenmod.updater.R;
 import com.cyanogenmod.updater.UpdateApplication;
+import com.cyanogenmod.updater.UpdatesActivity;
 import com.cyanogenmod.updater.requests.UpdatesJsonObjectRequest;
 import com.cyanogenmod.updater.UpdatesSettings;
 import com.cyanogenmod.updater.misc.Constants;
@@ -51,10 +52,6 @@ public class UpdateCheckService extends IntentService
         implements Response.ErrorListener, Response.Listener<JSONObject> {
 
     private static final String TAG = "UpdateCheckService";
-
-    // Set this to true if the update service should check for smaller, test updates
-    // This is for internal testing only
-    private static final boolean TESTING_DOWNLOAD = false;
 
     // request actions
     public static final String ACTION_CHECK = "com.cyanogenmod.cmupdater.action.CHECK";
@@ -126,7 +123,7 @@ public class UpdateCheckService extends IntentService
         if (realUpdateCount != 0 && !app.isMainActivityActive()) {
             // There are updates available
             // The notification should launch the main app
-            Intent i = new Intent(this, UpdatesSettings.class);
+            Intent i = new Intent(this, UpdatesActivity.class);
             i.putExtra(UpdatesSettings.EXTRA_UPDATE_LIST_UPDATED, true);
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i,
                     PendingIntent.FLAG_ONE_SHOT);
@@ -202,14 +199,33 @@ public class UpdateCheckService extends IntentService
         sendBroadcast(finishedIntent);
     }
 
+    private String getRomType() {
+        String type;
+        switch (Utils.getUpdateType()) {
+            case Constants.UPDATE_TYPE_SNAPSHOT:
+                type = Constants.CM_RELEASETYPE_SNAPSHOT;
+                break;
+            case Constants.UPDATE_TYPE_NIGHTLY:
+                type = Constants.CM_RELEASETYPE_NIGHTLY;
+                break;
+            case Constants.UPDATE_TYPE_EXPERIMENTAL:
+                type = Constants.CM_RELEASETYPE_EXPERIMENTAL;
+                break;
+            case Constants.UPDATE_TYPE_UNOFFICIAL:
+            default:
+                type = Constants.CM_RELEASETYPE_UNOFFICIAL;
+                break;
+        }
+        return type.toLowerCase();
+    }
+
     private URI getServerURI() {
-        String propertyUpdateUri = SystemProperties.get("cm.updater.uri");
-        if (!TextUtils.isEmpty(propertyUpdateUri)) {
-            return URI.create(propertyUpdateUri);
+        String updateUri = SystemProperties.get("cm.updater.uri");
+        if (TextUtils.isEmpty(updateUri)) {
+            updateUri = getString(R.string.conf_update_server_url_def);
         }
 
-        String configUpdateUri = getString(R.string.conf_update_server_url_def);
-        return URI.create(configUpdateUri);
+        return URI.create(updateUri);
     }
 
     private void getAvailableUpdates() {
@@ -219,51 +235,22 @@ public class UpdateCheckService extends IntentService
         // Get the actual ROM Update Server URL
         URI updateServerUri = getServerURI();
         UpdatesJsonObjectRequest request;
-        try {
-            request = new UpdatesJsonObjectRequest(updateServerUri.toASCIIString(),
-                    Utils.getUserAgentString(this), buildUpdateRequest(updateType), this, this);
-            // Improve request error tolerance
-            request.setRetryPolicy(new DefaultRetryPolicy(UPDATE_REQUEST_TIMEOUT,
-                        UPDATE_REQUEST_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-            // Set the tag for the request, reuse logging tag
-            request.setTag(TAG);
-        } catch (JSONException e) {
-            Log.e(TAG, "Could not build request", e);
-            return;
-        }
+        request = new UpdatesJsonObjectRequest(updateServerUri.toASCIIString(),
+                Utils.getUserAgentString(this), null, this, this);
+        // Improve request error tolerance
+        request.setRetryPolicy(new DefaultRetryPolicy(UPDATE_REQUEST_TIMEOUT,
+                    UPDATE_REQUEST_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        // Set the tag for the request, reuse logging tag
+        request.setTag(TAG);
 
         ((UpdateApplication) getApplicationContext()).getQueue().add(request);
-    }
-
-    private JSONObject buildUpdateRequest(int updateType) throws JSONException {
-        JSONArray channels = new JSONArray();
-
-        switch(updateType) {
-            case Constants.UPDATE_TYPE_SNAPSHOT:
-                channels.put("snapshot");
-                break;
-            case Constants.UPDATE_TYPE_NIGHTLY:
-            default:
-                channels.put("nightly");
-                break;
-        }
-        JSONObject params = new JSONObject();
-        params.put("device", TESTING_DOWNLOAD ? "cmtestdevice" : Utils.getDeviceType());
-        params.put("channels", channels);
-        params.put("source_incremental", Utils.getIncremental());
-
-        JSONObject request = new JSONObject();
-        request.put("method", "get_all_builds");
-        request.put("params", params);
-
-        return request;
     }
 
     private LinkedList<UpdateInfo> parseJSON(String jsonString, int updateType) {
         LinkedList<UpdateInfo> updates = new LinkedList<UpdateInfo>();
         try {
-            JSONObject result = new JSONObject(jsonString);
-            JSONArray updateList = result.getJSONArray("result");
+            JSONObject obj = new JSONObject(jsonString);
+            JSONArray updateList = obj.getJSONArray("response");
             int length = updateList.length();
 
             Log.d(TAG, "Got update JSON data with " + length + " entries");
@@ -288,12 +275,10 @@ public class UpdateCheckService extends IntentService
         UpdateInfo ui = new UpdateInfo.Builder()
                 .setFileName(obj.getString("filename"))
                 .setDownloadUrl(obj.getString("url"))
-                .setChangelogUrl(obj.getString("changes"))
                 .setMD5Sum(obj.getString("md5sum"))
-                .setApiLevel(obj.getInt("api_level"))
-                .setBuildDate(obj.getLong("timestamp"))
-                .setType(obj.getString("channel"))
-                .setIncremental(obj.getString("incremental"))
+                .setApiLevel(Build.VERSION.SDK_INT) // TODO: remove this entirely
+                .setBuildDate(obj.getLong("datetime"))
+                .setType(obj.getString("romtype"))
                 .build();
 
         if (!ui.isNewerThanInstalled()) {

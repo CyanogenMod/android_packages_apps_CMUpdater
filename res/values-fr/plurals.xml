@@ -14,7 +14,7 @@
     <item quantity="other"><xliff:g id="count">%d</xliff:g> mises à jour disponibles au téléchargement</item>
   </plurals>
   <plurals name="not_additional_count">
-    <item quantity="one">+ <xliff:g id="count">%d</xliff:g> supplémentaire</item>
-    <item quantity="other">+ <xliff:g id="count">%d</xliff:g> supplémentaires</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> mise à jour supplémentaire</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> mise à jours supplémentaires</item>
   </plurals>
 </resources>

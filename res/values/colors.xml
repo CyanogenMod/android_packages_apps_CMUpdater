@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2017 The LineageOS Project
 
      Licensed under the GNU GPLv2 license
 
@@ -16,4 +17,11 @@
     <color name="refresh_icon_color">@android:color/white</color>
     <color name="notification_icon_color">@android:color/white</color>
     <color name="action_icons_color">@color/theme_accent</color>
+
+    <color name="background">#fafafa</color>
+    <color name="black">#333333</color>
+    <color name="white">#f5f5f5</color>
+    <color name="build">@color/theme_accent</color>
+    <color name="card_background">@android:color/white</color>
+
 </resources>

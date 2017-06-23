@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2012 The CyanogenMod Project
+     Copyright (C) 2017 The LineageOS Project
 
      Licensed under the GNU GPLv2 license
 
@@ -12,6 +13,8 @@
     android:title="@string/display_name"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+    <PreferenceCategory android:key="updates_category"/>
+
      <ListPreference
          android:key="pref_update_check_interval"
          android:persistent="false"
@@ -19,10 +22,4 @@
          android:title="@string/update_check_title"
          android:entries="@array/update_check_entries"
          android:entryValues="@array/update_check_values"/>
-
-    <PreferenceCategory
-        android:key="updates_category"
-        android:title="@string/available_updates_title">
-    </PreferenceCategory>
-
 </PreferenceScreen>
